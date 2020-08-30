@@ -1,0 +1,1717 @@
+﻿####################################################################################
+## ██████╗ ██╗   ██╗██████╗ ██╗██╗  ██╗    ██╗███╗   ███╗██████╗ ███████╗██████╗  ##
+## ██╔══██╗██║   ██║██╔══██╗██║██║ ██╔╝    ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗ ##
+## ██████╔╝██║   ██║██████╔╝██║█████╔╝     ██║██╔████╔██║██████╔╝█████╗  ██████╔╝ ##
+## ██╔══██╗██║   ██║██╔══██╗██║██╔═██╗     ██║██║╚██╔╝██║██╔═══╝ ██╔══╝  ██╔══██╗ ##
+## ██║  ██║╚██████╔╝██║  ██║██║██║  ██╗    ██║██║ ╚═╝ ██║██║     ███████╗██║  ██║ ##
+## ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝    ╚═╝╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝ ##
+####################################################################################
+
+add_namespace = KEM #Regular events
+add_namespace = kemexp #Expansion tree events
+add_namespace = kemreg #Regional tree events
+add_namespace = KEM_yuriy #Yuriy Superregional events
+add_namespace = KEM_lydia #Lydia Superregional events
+
+country_event = { #Intro event - The King in Kemerovo
+	id = KEM.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.1"}
+	title = KEM.1.t
+	desc = KEM.1.desc
+	picture = GFX_report_event_rurik
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #His Majesty's Eccentricities
+	id = KEM.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.2"}
+	title = KEM.2.t
+	desc = KEM.2.desc
+	picture = GFX_report_event_rurik
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.2.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Royal Army
+	id = KEM.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.3"}
+	title = KEM.3.t
+	desc = KEM.3.desc
+	picture = GFX_report_event_soldiers_training
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.3.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+	}
+}
+
+country_event = { #King's Industry
+	id = KEM.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.4"}
+	title = KEM.4.t
+	desc = KEM.4.desc
+	picture = GFX_report_event_india_factory_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.4.a
+		ai_chance = { 
+			factor = 1
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_DESPOTISM
+					}
+			}
+		}
+		KEM_increase_yuriy_influence_1 = yes
+	}
+	option = { #
+		name = KEM.4.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_AUTHDEM
+					}
+			}
+		}
+		KEM_increase_lydia_influence_1 = yes
+	}
+}
+
+country_event = { #King's Society
+	id = KEM.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.5"}
+	title = KEM.5.t
+	desc = KEM.5.desc
+	picture = GFX_report_event_commune_protest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.5.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Prince Yuriy's Ideals - Yuriy holds a speech
+	id = KEM.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.6"}
+	title = KEM.6.t
+	desc = KEM.6.desc
+	picture = GFX_report_event_russian_city
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.6.a
+		ai_chance = { factor = 1 }
+		add_political_power = 15
+	}
+}
+
+country_event = { #Kingdom of Equals
+	id = KEM.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.7"}
+	title = KEM.7.t
+	desc = KEM.7.desc
+	picture = GFX_report_event_iberia_salazar_speech
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.7.a
+		ai_chance = { factor = 1 }
+		SIB_decrease_worker_tension_low = yes
+	}
+}
+
+country_event = { #Zemsky Sobor Reborn
+	id = KEM.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.8"}
+	title = KEM.8.t
+	desc = KEM.8.desc
+	picture = GFX_report_event_court_case_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.8.a
+		ai_chance = { factor = 1 }
+		SIB_decrease_worker_tension_med = yes
+	}
+}
+
+country_event = { #Princess Lydia's Pragmatism
+	id = KEM.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.9"}
+	title = KEM.9.t
+	desc = KEM.9.desc
+	picture = GFX_DEMO_war_crime_4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Fire and Blood
+	id = KEM.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.10"}
+	title = KEM.10.t
+	desc = KEM.10.desc
+	picture = GFX_report_event_iberia_meeting_table
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.10.a
+		ai_chance = { factor = 1 }
+		SIB_increase_worker_tension_low = yes
+	}
+}
+
+country_event = { #And the Power of the King
+	id = KEM.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.11"}
+	title = KEM.11.t
+	desc = KEM.11.desc
+	picture = GFX_report_event_ural_farm
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.11.a
+		ai_chance = { factor = 1 }
+		SIB_decrease_worker_tension_med = yes
+		add_political_power = 35
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Economy for the Modern Age
+	id = KEM.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.12"}
+	title = KEM.12.t
+	desc = KEM.12.desc
+	picture = GFX_report_event_russia_trade_caravan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.12.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Our Realm Secured
+	id = KEM.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.13"}
+	title = KEM.13.t
+	desc = KEM.13.desc
+	picture = GFX_report_event_iberia_guy_paper_meeting
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #On the Warpath
+	id = KEM.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.14"}
+	title = KEM.14.t
+	desc = KEM.14.desc
+	picture = GFX_report_event_soviet_russian_mech_infantry_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.14.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = { tree = KEM_expansion keep_completed = yes }
+		}
+	}
+}
+
+country_event = { #Kingsguard Primacy
+	id = KEM.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.15"}
+	title = KEM.15.t
+	desc = KEM.15.desc
+	picture = GFX_report_event_command_table
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.15.a
+		ai_chance = { factor = 1 }
+		SIB_increase_worker_tension_med = yes
+	}
+}
+
+country_event = { #Wolves in the Throne Room - Event about Yuriy and Lydia arguing about how to run the kingdom. Both of them lament that they are so different at the end.
+	id = KEM.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.16"}
+	title = KEM.16.t
+	desc = KEM.16.desc
+	picture = GFX_report_event_post_apoc_wolf
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = KEM.16.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Expansion tree events ###
+country_event = { #Hail the Season of War
+	id = kemexp.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.1" }
+	title = kemexp.1.t
+	desc = kemexp.1.desc
+	picture = GFX_report_event_russian_irregulars
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.1.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+	}
+}
+
+country_event = { #Raise the Shieldmaidens - Anna Kotsur becomes general
+	id = kemexp.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.2" }
+	title = kemexp.2.t
+	desc = kemexp.2.desc
+	picture = GFX_report_event_italy_female_fascists
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.2.a
+		ai_chance = { factor = 1 }
+		create_corps_commander = {
+			name = "Anna Kotsur"
+			picture = "Portrait_Kemerovo_Anna_Kotsur.dds"
+			traits = {
+				trait_reckless
+				trickster
+				winter_specialist
+				commando
+			}
+			skill = 3
+			attack_skill = 4
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 3
+			female = yes
+			id = 3643
+		}
+	}
+}
+
+country_event = { #Oaths of Loyalty
+	id = kemexp.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.3" }
+	title = kemexp.3.t
+	desc = kemexp.3.desc
+	picture = GFX_report_event_female_soldiers
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.3.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = KEM_oaths_of_loyalty_tt
+		hidden_effect = {
+			SAH = {
+				every_unit_leader = {
+					limit = {
+						OR = {
+							has_id = 3652
+							has_id = 3653
+							has_id = 3654
+						}
+					}
+					set_nationality = KEM
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Trial of Andreev - Duel?
+	id = kemexp.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.4" }
+	title = kemexp.4.t
+	desc = kemexp.4.desc
+	picture = GFX_report_event_court_case_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.4.a
+		ai_chance = { factor = 1 }
+		add_political_power = -20
+		add_stability = 0.05
+	}
+	option = {
+		name = kemexp.4.b
+		ai_chance = { factor = 1 }
+		add_political_power = 20
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Offer to Oyrotia
+	id = kemexp.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.5" }
+	title = kemexp.5.t
+	desc = kemexp.5.desc
+	picture = GFX_report_event_orthodox_bible
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Accept
+		name = kemexp.5.a
+		ai_chance = { factor = 30 }
+		KEM = {
+			country_event = {
+				id = kemexp.6
+				hours = 6
+			}
+		}
+	}
+	option = { #Refuse
+		name = kemexp.5.b
+		ai_chance = { factor = 10 }
+		KEM = {
+			country_event = {
+				id = kemexp.7
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = { #Offer to Oyrotia - They accept
+	id = kemexp.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.6" }
+	title = kemexp.6.t
+	desc = kemexp.6.desc
+	picture = GFX_report_event_orthodox_bible
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.6.a
+		ai_chance = { factor = 1 }
+		annex_country = {
+			target = ALT
+			transfer_troops = no
+		}
+		#Add generals later
+	}
+}
+
+country_event = { #Offer to Oyrotia - They refuse
+	id = kemexp.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.7" }
+	title = kemexp.7.t
+	desc = kemexp.7.desc
+	picture = GFX_report_event_orthodox_bible
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.7.a
+		ai_chance = { factor = 1 }
+		declare_war_on = {
+			target = ALT
+			type = russian_reclaimation
+		}
+	}
+}
+
+country_event = { #The King's Speech
+	id = kemexp.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.8" }
+	title = kemexp.8.t
+	desc = kemexp.8.desc
+	picture = GFX_report_event_rurik
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.8.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.035
+	}
+}
+
+country_event = { #Lessons from Novgorod - Yuriy PoV
+	id = kemexp.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.9" }
+	title = kemexp.9.t
+	desc = kemexp.9.desc
+	picture = GFX_report_event_russian_city
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Iron Crown - Lydia pov
+	id = kemexp.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.10" }
+	title = kemexp.10.t
+	desc = kemexp.10.desc
+	picture = GFX_report_event_russian_city
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.10.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Grand Principality of Siberia
+	id = kemexp.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.11" }
+	title = kemexp.11.t
+	desc = kemexp.11.desc
+	picture = GFX_report_event_rurik
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.11.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = { tree = KEM_regional keep_completed = no }
+		}
+	}
+}
+
+country_event = { #The People's Will focus
+	id = kemexp.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.12" }
+	title = kemexp.12.t
+	desc = kemexp.12.desc
+	picture = GFX_report_event_komi_factory
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.12.a
+		ai_chance = { 
+			factor = 1
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_DESPOTISM
+					}
+			}
+		}
+		KEM_increase_yuriy_influence_1 = yes
+	}
+	option = { #
+		name = kemexp.12.b
+		ai_chance = { 
+			factor = 1
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_AUTHDEM
+					}
+			}
+		}
+		KEM_increase_lydia_influence_1 = yes
+	}
+}
+
+country_event = { #Old Friends
+	id = kemexp.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemexp.13" }
+	title = kemexp.13.t
+	desc = kemexp.13.desc
+	picture = GFX_report_event_iberia_meeting_table
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemexp.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Regional events ###
+country_event = { #Intro to Regional
+	id = kemreg.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.1" }
+	title = kemreg.1.t
+	desc = kemreg.1.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.1.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+	}
+}
+
+country_event = { #A New Capital
+	id = kemreg.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.2" }
+	title = kemreg.2.t
+	desc = kemreg.2.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Move to Novosibirsk
+		name = kemreg.2.a
+		ai_chance = { factor = 1 }
+		set_capital = 570
+	}
+
+	option = { #Move to Krasnoyarsk
+		name = kemreg.2.b
+		ai_chance = { factor = 1 }
+		set_capital = 757
+	}
+
+	option = { #Stay in Kemerovo
+		name = kemreg.2.c
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+	}
+}
+
+country_event = { #Affairs of the Realm
+	id = kemreg.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.3" }
+	title = kemreg.3.t
+	desc = kemreg.3.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Support Yuriy
+		name = kemreg.3.a
+		ai_chance = { 
+			factor = 1
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_DESPOTISM
+					}
+			}
+		}
+		KEM_increase_yuriy_influence_1 = yes
+	}
+	option = { #Support Lydia
+		name = kemreg.3.b
+		ai_chance = { 
+			factor = 1
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_AUTHDEM
+					}
+			}
+		}
+		KEM_increase_lydia_influence_1 = yes
+	}
+}
+
+country_event = { #Clash of Wolves - Yuriy victorious
+	id = kemreg.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.4" }
+	title = kemreg.4.t
+	desc = kemreg.4.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.4.a
+		ai_chance = { factor = 1 }
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+		remove_ideas = KEM_the_two_wolves
+		create_country_leader = {
+			name = "Rurik II"
+			desc = "POLITICS_RURIK_II_DESC"
+			picture = "Portrait_Kemerovo_Rurik_II.dds"
+			expire = "1999.1.1"
+			ideology = authoritarian_democrat_subtype
+			traits = {
+
+			}
+		}
+	}
+}
+
+country_event = { #Clash of Wolves - Lydia Victorious
+	id = kemreg.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.5" }
+	title = kemreg.5.t
+	desc = kemreg.5.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.5.a
+		ai_chance = { factor = 1 }
+		swap_ideas = {
+			remove_idea = KEM_Yuriy_Krylov_hog
+			add_idea = KEM_Lydia_Krylova_hog
+		}
+		remove_ideas = KEM_the_two_wolves
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #The Foundations of a Kingdom
+	id = kemreg.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.6" }
+	title = kemreg.6.t
+	desc = kemreg.6.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.6.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Army of the Rus'
+	id = kemreg.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.7" }
+	title = kemreg.7.t
+	desc = kemreg.7.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.7.a
+		ai_chance = { factor = 1 }
+		army_experience = 25
+	}
+}
+
+country_event = { #Issue Royal Pardons?
+	id = kemreg.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.8" }
+	title = kemreg.8.t
+	desc = kemreg.8.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #No Pardons
+		name = kemreg.8.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
+	option = { #Just Novosibirsk
+		name = kemreg.8.b
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			PAV = {
+				every_unit_leader = {
+					set_nationality = KEM
+				}
+			}
+		}
+	}
+	option = { #Just Tomsk
+		name = kemreg.8.c
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			ERS = {
+				every_unit_leader = {
+					set_nationality = KEM
+				}
+			}
+		}
+	}
+	option = { #Just PRC
+		name = kemreg.8.d
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			SVO = {
+				every_unit_leader = {
+					set_nationality = KEM
+				}
+			}
+		}
+	}
+	option = { #All of them 
+		name = kemreg.8.e
+		ai_chance = { factor = 1 }
+		add_stability = -0.1
+		add_war_support = -0.1
+		hidden_effect = {
+			PAV = {
+				every_unit_leader = {
+					set_nationality = KEM
+				}
+			}
+			ERS = {
+				every_unit_leader = {
+					set_nationality = KEM
+				}
+			}
+			SVO = {
+				every_unit_leader = {
+					set_nationality = KEM
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Rurikid Diplomacy
+	id = kemreg.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.9" }
+	title = kemreg.9.t
+	desc = kemreg.9.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Overtures to Washington
+	id = kemreg.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.10" }
+	title = kemreg.10.t
+	desc = kemreg.10.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Accept Overtures
+		name = kemreg.10.a
+		ai_chance = { factor = 4 }
+		add_opinion_modifier = {
+			target = KEM
+			modifier = TNO_opened_diplomatic_relations
+		}
+		KEM = {
+			country_event = { id = kemreg.11 hours = 6 }
+		}
+	}
+}
+
+country_event = { #Relations with the USA
+	id = kemreg.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.11" }
+	title = kemreg.11.t
+	desc = kemreg.11.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.11.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = USA
+			modifier = TNO_opened_diplomatic_relations
+		}
+	}
+}
+
+country_event = { #The Almight Dollar
+	id = kemreg.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.12" }
+	title = kemreg.12.t
+	desc = kemreg.12.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Invest in Kemerovo
+		name = kemreg.12.a
+		ai_chance = { factor = 1 }
+		add_to_variable = { national_debt = 20 }
+		custom_effect_tooltip = kemreg12_TT
+		hidden_effect = {
+			KEM = {
+				country_event = { id = kemreg.13 hours = 6 }
+			}
+		}
+	}
+	option = { #A poor investment
+		name = kemreg.12.b
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			KEM = {
+				country_event = { id = kemreg.14 hours = 6 }
+			}
+		}
+	}
+}
+
+country_event = { #USA invest in us
+	id = kemreg.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.13" }
+	title = kemreg.13.t
+	desc = kemreg.13.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.13.a
+		ai_chance = { factor = 1 }
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = { #USA doesn't invest in us
+	id = kemreg.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.14" }
+	title = kemreg.14.t
+	desc = kemreg.14.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.14.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Invite American Experts
+	id = kemreg.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.15" }
+	title = kemreg.15.t
+	desc = kemreg.15.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.15.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		KEM = {
+			country_event = { id = kemreg.16 hours = 6 }
+		}
+	}
+	option = { #
+		name = kemreg.15.b
+		ai_chance = { factor = 1 }
+		KEM = {
+			country_event = { id = kemreg.17 hours = 6 }
+		}
+	}
+}
+
+country_event = { #America sends experts
+	id = kemreg.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.16" }
+	title = kemreg.16.t
+	desc = kemreg.16.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.16.a
+		ai_chance = { factor = 1 }
+		TNO_improve_industrial_expertise_med = yes
+	}
+}
+
+country_event = { #America doesn't send experts
+	id = kemreg.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.17" }
+	title = kemreg.17.t
+	desc = kemreg.17.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.17.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Emissaries to the Rising Sun
+	id = kemreg.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.18" }
+	title = kemreg.18.t
+	desc = kemreg.18.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.18.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = KEM
+			modifier = TNO_opened_diplomatic_relations
+		}
+		KEM = {
+			country_event = { id = kemreg.19 hours = 6 }
+		}
+	}
+}
+
+country_event = { #Diplomatic Relations with Japan
+	id = kemreg.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.19" }
+	title = kemreg.19.t
+	desc = kemreg.19.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.19.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = JAP
+			modifier = TNO_opened_diplomatic_relations
+		}
+	}
+}
+
+country_event = { #Zaibatsu Investment
+	id = kemreg.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.20" }
+	title = kemreg.20.t
+	desc = kemreg.20.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Invest in Kemerovo
+		name = kemreg.20.a
+		ai_chance = { factor = 1 }
+		add_to_variable = { national_debt = 20 }
+		custom_effect_tooltip = kemreg12_TT
+		hidden_effect = {
+			KEM = {
+				country_event = { id = kemreg.21 hours = 6 }
+			}
+		}
+	}
+	option = { #A poor investment
+		name = kemreg.20.b
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			KEM = {
+				country_event = { id = kemreg.22 hours = 6 }
+			}
+		}
+	}
+}
+
+country_event = { #Japan invests in us
+	id = kemreg.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.21" }
+	title = kemreg.21.t
+	desc = kemreg.21.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.21.a
+		ai_chance = { factor = 1 }
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = { #Japan doesn't invest in us
+	id = kemreg.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.22" }
+	title = kemreg.22.t
+	desc = kemreg.22.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.22.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Two emperors meet: Kemerovo perspective
+	id = kemreg.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.23" }
+	title = kemreg.23.t
+	desc = kemreg.23.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.23.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Two emperors meet: Japanese perspective
+	id = kemreg.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.24" }
+	title = kemreg.24.t
+	desc = kemreg.24.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.24.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Friends in the Steppes
+	id = kemreg.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.25" }
+	title = kemreg.25.t
+	desc = kemreg.25.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.25.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = KEM
+			modifier = RUS_trade
+		}
+		KEM = {
+			country_event = { id = kemreg.26 hours = 6 }
+		}
+	}
+}
+
+country_event = { #Friends in the Steppes: Khazak friendship
+	id = kemreg.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.26" }
+	title = kemreg.26.t
+	desc = kemreg.26.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.26.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = FROM
+			modifier = TNO_opened_diplomatic_relations
+		}
+	}
+}
+
+country_event = { #The Death of King Rurik II
+	id = kemreg.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.27" }
+	title = kemreg.27.t
+	desc = kemreg.27.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { # F
+		name = kemreg.27.a
+		ai_chance = { factor = 1 }
+		if = {
+			limit = {
+				has_government = authoritarian_democrat
+			}
+			kill_country_leader = yes
+			create_country_leader = {
+				name = "Rurik III"
+				desc = "POLITICS_KING_YURIY_DESC"
+				picture = "Portrait_Kemerovo_Yuriy_Krylov.dds"
+				expire = "1999.1.1"
+				ideology = authoritarian_democrat_subtype
+				traits = {
+	
+				}
+			}
+			every_unit_leader = {
+				limit = { has_id = 3635 }
+				retire = yes
+			}
+			country_event = { id = kemreg.28 days = 7 }
+		}
+		else_if = {
+			limit = {
+				has_government = despotism
+			}
+			kill_country_leader = yes
+			create_country_leader = {
+				name = "Rogneda I"
+				desc = "POLITICS_QUEEN_LYDIA_DESC"
+				picture = "Portrait_Kemerovo_Lydia_Krylova.dds"
+				expire = "1999.1.1"
+				ideology = despotism_subtype
+				traits = {
+	
+				}
+			}
+			every_unit_leader = {
+				limit = { has_id = 3635 }
+				retire = yes
+			}
+			country_event = { id = kemreg.29 days = 7 }
+		}
+	}
+}
+
+country_event = { #Yuriy coronation
+	id = kemreg.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.28" }
+	title = kemreg.28.t
+	desc = kemreg.28.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.28.a
+		ai_chance = { factor = 1 }
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+country_event = { #Lydia coronation
+	id = kemreg.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.29" }
+	title = kemreg.29.t
+	desc = kemreg.29.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.29.a
+		ai_chance = { factor = 1 }
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+country_event = { #Spirit of Rus' Reborn
+	id = kemreg.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.30" }
+	title = kemreg.30.t
+	desc = kemreg.30.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = kemreg.30.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+###### Yuriy Superregional ######
+country_event = { #Rurikid Legacy Preserved
+	id = KEM_yuriy.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.1" }
+	title = KEM_yuriy.1.t
+	desc = KEM_yuriy.1.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_yuriy.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Disbanding the Kingsguard
+	id = KEM_yuriy.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.2" }
+	title = KEM_yuriy.2.t
+	desc = KEM_yuriy.2.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_yuriy.2.a
+		ai_chance = { factor = 1 }
+		add_political_power = 5
+		if = {
+			limit = {
+				has_idea = KEM_kingsguard_supremacy
+			}
+			swap_ideas = {
+				remove_idea = KEM_kingsguard_supremacy
+				add_idea = KEM_the_peoples_guard
+			}
+		}
+		else = {
+			add_ideas = KEM_the_peoples_guard
+		}
+	}
+}
+
+country_event = { #Parliamentary Democracy time
+	id = KEM_yuriy.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.3" }
+	title = KEM_yuriy.3.t
+	desc = KEM_yuriy.3.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_yuriy.3.a
+		ai_chance = { factor = 1 }
+		add_popularity = { ideology = social_democrat popularity = 0.035 }
+		add_popularity = { ideology = social_liberal popularity = 0.035 }
+		add_popularity = { ideology = social_conservative popularity = 0.035 }
+		add_popularity = { ideology = authoritarian_democrat popularity = 0.05 }
+	}
+}
+
+country_event = { #Old Guard
+	id = KEM_yuriy.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.4" }
+	title = KEM_yuriy.4.t
+	desc = KEM_yuriy.4.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_yuriy.4.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Samurai's Treachery
+	id = KEM_yuriy.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.5" }
+	title = KEM_yuriy.5.t
+	desc = KEM_yuriy.5.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = KEM_yuriy.5.a
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = KEM
+		}
+		remove_opinion_modifier = {
+			target = JAP
+			modifier = TNO_opened_diplomatic_relations
+		}
+	}
+	option = { #
+		name = KEM_yuriy.5.b
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = JAP
+		}
+		remove_opinion_modifier = {
+			target = KEM
+			modifier = TNO_opened_diplomatic_relations
+		}
+	}
+}
+
+country_event = { #Guns for China
+	id = KEM_yuriy.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.6" }
+	title = KEM_yuriy.6.t
+	desc = KEM_yuriy.6.desc
+	picture = GFX_report_event_crate_of_guns
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_yuriy.6.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 1000
+			producer = KEM
+		}
+	}
+}
+
+country_event = { #Teuton's Rage
+	id = KEM_yuriy.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.7" }
+	title = KEM_yuriy.7.t
+	desc = KEM_yuriy.7.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = KEM_yuriy.7.a
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = KEM
+		}
+		add_political_power = 25
+	}
+	option = { #
+		name = KEM_yuriy.7.b
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = GER
+		}
+	}
+}
+
+country_event = { #Bizarre Visit
+	id = KEM_yuriy.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.8" }
+	title = KEM_yuriy.8.t
+	desc = KEM_yuriy.8.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = KEM_yuriy.8.a
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = KEM
+		}
+		add_opinion_modifier = {
+			target = USA
+			modifier = RUS_trade
+		}
+	}
+	option = { #
+		name = KEM_yuriy.8.b
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = USA
+		}
+		add_opinion_modifier = {
+			target = KEM
+			modifier = RUS_trade
+		}
+	}
+}
+
+country_event = { #The Modern Alexander Nevsky
+	id = KEM_yuriy.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_yuriy.9" }
+	title = KEM_yuriy.9.t
+	desc = KEM_yuriy.9.desc
+	picture = GFX_report_event_rurik
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_yuriy.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Lydia Superregional ###
+country_event = { #The Glorious Kingdom
+	id = KEM_lydia.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_lydia.1" }
+	title = KEM_lydia.1.t
+	desc = KEM_lydia.1.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_lydia.1.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Force Our Way
+	id = KEM_lydia.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_lydia.2" }
+	title = KEM_lydia.2.t
+	desc = KEM_lydia.2.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_lydia.2.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Preparing the Queensguard
+	id = KEM_lydia.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_lydia.3" }
+	title = KEM_lydia.3.t
+	desc = KEM_lydia.3.desc
+	picture = GFX_report_event_italy_female_fascists
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_lydia.3.a
+		ai_chance = { factor = 1 }
+		army_experience = 5
+	}
+}
+
+country_event = { #A Strong Realm
+	id = KEM_lydia.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_lydia.4" }
+	title = KEM_lydia.4.t
+	desc = KEM_lydia.4.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_lydia.4.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Varyags of Rus
+	id = KEM_lydia.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_lydia.5" }
+	title = KEM_lydia.5.t
+	desc = KEM_lydia.5.desc
+	picture = GFX_report_event_russia_marines
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_lydia.5.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = KEM_the_varyags_of_rus_tt
+		hidden_effect = {
+			load_oob = KEM_Varyags
+		}
+	}
+}
+
+country_event = { #Friends in the Sphere
+	id = KEM_lydia.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_lydia.6" }
+	title = KEM_lydia.6.t
+	desc = KEM_lydia.6.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = KEM_lydia.6.a
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = KEM
+		}
+		custom_effect_tooltip = MAG_made_in_russia_tt
+		add_to_variable = { GDP_growth = 0.005 }
+		add_to_variable = { GDP = 100 }
+		add_opinion_modifier = {
+			target = JAP
+			modifier = RUS_trade
+		}
+	}
+	option = { #
+		name = KEM_lydia.6.b
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = JAP
+		}
+		custom_effect_tooltip = MAG_made_in_russia_tt
+		add_to_variable = { GDP_growth = 0.005 }
+		add_to_variable = { GDP = 100 }
+		add_opinion_modifier = {
+			target = KEM
+			modifier = RUS_trade
+		}
+	}
+}
+
+country_event = { #The Modern Catherine
+	id = KEM_lydia.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event KEM_lydia.7" }
+	title = KEM_lydia.7.t
+	desc = KEM_lydia.7.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = KEM_lydia.7.a
+		ai_chance = { factor = 1 }
+	}
+}

@@ -1,0 +1,305 @@
+KEM_kingdom_of_kemerovo_category = {
+	KEM_unlock_yuriy_decisions = {
+		allowed = {
+			tag = KEM
+		}
+		ai_chance = { 
+			factor = 5 
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_DESPOTISM
+					}
+			}
+		}
+		available = {
+			NOT = {
+				has_country_flag = KEM_increase_lydia_influence
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = KEM_increase_yuriy_influence
+			}
+		}
+
+		cost = 5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_unlock_yuriy_decisions"
+			set_country_flag = KEM_increase_yuriy_influence
+		}
+	}
+	KEM_disable_yuriy_decisions = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			NOT = {
+				has_country_flag = KEM_increase_lydia_influence
+			}
+		}
+
+		visible = {
+			has_country_flag = KEM_increase_yuriy_influence
+		}
+
+		cost = 5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_disable_yuriy_decisions"
+			clr_country_flag = KEM_increase_yuriy_influence
+		}
+	}
+	KEM_meet_with_union_leaders = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		visible = {
+			hidden_trigger = {
+				has_country_flag = KEM_increase_yuriy_influence
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 70
+		
+		modifier = {
+			production_factory_max_efficiency_factor = 0.05
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_meet_with_union_leaders"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove KEM_meet_with_union_leaders"
+			KEM_increase_yuriy_influence_1 = yes
+		}
+	}
+	KEM_sway_sympathetic_generals = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		visible = {
+			hidden_trigger = {
+				has_country_flag = KEM_increase_yuriy_influence
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 70
+		
+		modifier = {
+			experience_gain_army = 0.035
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_sway_sympathetic_generals"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove KEM_sway_sympathetic_generals"
+			KEM_increase_yuriy_influence_1 = yes
+			KEM_decrease_lydia_influence_1 = yes
+		}
+	}
+	KEM_sponsor_cultural_events = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		visible = {
+			hidden_trigger = {
+				has_country_flag = KEM_increase_yuriy_influence
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 70
+		
+		modifier = {
+			stability_factor = 0.1
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_sponsor_cultural_events"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove KEM_sponsor_cultural_events"
+			KEM_increase_yuriy_influence_1 = yes
+		}
+	}
+
+	KEM_unlock_lydia_decisions = {
+		allowed = {
+			tag = KEM
+		}
+		ai_chance = { 
+			factor = 5 
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = KEM_ideology_route
+						option = KEM_IDEOLOGY_ROUTE_AUTHDEM
+					}
+			}
+		}
+		available = {
+			NOT = {
+				has_country_flag = KEM_increase_yuriy_influence
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = KEM_increase_lydia_influence
+			}
+		}
+
+		cost = 5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_unlock_lydia_decisions"
+			set_country_flag = KEM_increase_lydia_influence
+		}
+	}
+	KEM_disable_lydia_decisions = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		available = {
+			NOT = {
+				has_country_flag = KEM_increase_yuriy_influence
+			}
+		}
+
+		visible = {
+			has_country_flag = KEM_increase_lydia_influence
+		}
+
+		cost = 5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_disable_lydia_decisions"
+			clr_country_flag = KEM_increase_lydia_influence
+		}
+	}
+	KEM_meet_with_industrialists = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			NOT = {
+				has_decision = KEM_assert_kingsguard_influence
+				has_decision = KEM_expand_mining_operations
+			}
+		}
+		visible = {
+			hidden_trigger = {
+				has_country_flag = KEM_increase_lydia_influence
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 70
+
+		modifier = {
+			industrial_capacity_factory = 0.05
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_meet_with_industrialists"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove KEM_meet_with_industrialists"
+			KEM_increase_lydia_influence_1 = yes
+		}
+	}
+	KEM_assert_kingsguard_influence = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			NOT = {
+				has_decision = KEM_meet_with_industrialists
+				has_decision = KEM_expand_mining_operations
+			}
+		}
+		visible = {
+			hidden_trigger = {
+				has_country_flag = KEM_increase_lydia_influence
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 70
+		
+		modifier = {
+			army_morale_factor = 0.035
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_assert_kingsguard_influence"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove KEM_assert_kingsguard_influence"
+			KEM_decrease_yuriy_influence_1 = yes
+			KEM_increase_lydia_influence_1 = yes
+		}
+	}
+	KEM_expand_mining_operations = {
+		allowed = {
+			tag = KEM
+		}
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			NOT = {
+				has_decision = KEM_meet_with_industrialists
+				has_decision = KEM_assert_kingsguard_influence
+			}
+		}
+		visible = {
+			hidden_trigger = {
+				has_country_flag = KEM_increase_lydia_influence
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 70
+		
+		modifier = {
+			local_resources_factor = 0.10
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision KEM_expand_mining_operations"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove KEM_expand_mining_operations"
+			KEM_increase_lydia_influence_2 = yes
+		}
+	}
+}

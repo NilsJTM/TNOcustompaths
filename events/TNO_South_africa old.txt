@@ -1,0 +1,4058 @@
+﻿add_namespace = SAF
+
+
+country_event = { #Referendum scheduled
+	id = SAF.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.1"}
+	title = SAF.1.t
+	desc = SAF.1.desc
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.1.a
+		add_political_power = 25
+		hidden_effect = { SAF_initialize_referendum = yes }
+	}
+}
+
+country_event = { #Referendum results- republic
+	id = SAF.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.2"}
+	title = SAF.2.t
+	desc = SAF.2.desc
+	picture = GFX_report_event_South_Africa
+	hidden = yes
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #epic gamer win!
+		name = SAF.2.a
+		remove_ideas = SAF_The_Empty_Throne
+		add_ideas = SAF_Boer_Viet_Cong #not the real name
+		custom_effect_tooltip = SAF_Boer_Resistance
+		hidden_effect = {
+		every_owned_state = {
+		limit = { check_variable = { SAF_monarchy_support < 50 } }
+		damage_building = { type = infrastructure damage = 0.8 }
+		damage_building = { type = arms_factory damage = 0.3 }
+			}
+		}
+	}
+}
+
+country_event = { #Referendum results- monarchy
+	id = SAF.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.3"}
+	title = SAF.3.t
+	desc = SAF.3.desc
+	picture = GFX_report_event_South_Africa
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = { #gamers rise up
+		name = SAF.3.a
+		add_political_power = 100
+		
+		}
+	}
+
+country_event = { #Hidden event triggering the referendum results
+	id = SAF.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.4"}
+	title = SAF.4.t
+	desc = SAF.4.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+	immediate = { SAF_calculate_referendum_winner = yes }
+
+	option = { #
+		name = SAF.4.a
+	}
+}
+
+country_event = { #Flavor event- monarchy - introduces player to support system
+	id = SAF.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.5"}
+	title = SAF.5.t
+	desc = SAF.5.desc
+	picture = GFX_report_event_commune_protest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.5.a
+		custom_effect_tooltip = SAF_increase_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 1.0 }
+				round_variable = SAF_monarchy_support
+				clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+country_event = { #Flavor event- ANC- introduces player to support system
+	id = SAF.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.6"}
+	title = SAF.6.t
+	desc = SAF.6.desc
+	picture = GFX_report_event_ANC_Protests_3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.6.a
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 1.0 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+#country_event = { #ANC yes or no
+	#	id = SAF.7
+	#	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.7"}
+	#	title = SAF.7.t
+	#	desc = SAF.7.desc
+	#	#picture =
+	#
+	#	is_triggered_only = yes
+	#	fire_only_once = yes
+	#
+	#	option = { #yes
+		#		name = SAF.7.a
+		#		ai_chance = { factor = 2 }
+		#		set_country_flag = SAF_pro_anc
+		#	}
+	#	option = { #no
+		#		name = SAF.7.b
+		#		ai_chance = { factor = 1 }
+		#		set_country_flag = SAF_anti_anc
+		#	}
+	#}
+
+country_event = { #Debug load war tree
+	id = SAF.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.8"}
+	title = SAF.8.t
+	desc = SAF.8.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.8.a
+		load_focus_tree = SAF_war_tree
+	}
+}
+
+country_event = { #
+	id = SAF.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.9"}
+	title = SAF.9.t
+	desc = SAF.9.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.9.a
+
+	}
+	option = { #
+		name = SAF.9.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.10"}
+	title = SAF.10.t
+	desc = SAF.10.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.10.a
+
+	}
+	option = { #
+		name = SAF.10.b
+
+	}
+}
+
+#11-25 are for pro-ANC
+country_event = { #Talks with Oliver Tambo
+	id = SAF.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.11"}
+	title = SAF.11.t
+	desc = SAF.11.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #yes epic
+		name = SAF.11.a
+		add_stability = 0.03
+		add_political_power = 25
+	}
+}
+
+country_event = { #Reduced investigations
+	id = SAF.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.12"}
+	title = SAF.12.t
+	desc = SAF.12.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Just a little bit
+		name = SAF.12.a
+		add_stability = 0.03
+		add_war_support = -0.03
+		custom_effect_tooltip = SAF_increase_monarchy_support_tt
+		every_owned_state = {
+			limit = { has_state_flag = SAF_election_state }
+			add_to_variable = { SAF_monarchy_support = 1 }
+			round_variable = SAF_monarchy_support
+						clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+		}
+	}
+	option = { #A lot21
+		name = SAF.12.b
+		add_stability = 0.03
+		add_war_support = 0.03
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 0.9 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+#country_event = { #Ban extremist organizations
+	#	id = SAF.13
+	#	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.13"}
+	#	title = SAF.13.t
+	#	desc = SAF.13.desc
+	#	#picture =
+	#
+	#	is_triggered_only = yes
+	#	fire_only_once = yes
+	#
+	#	option = { #Good riddance
+		#		name = SAF.13.a
+		#		add_popularity = {
+			#			ideology = fascism
+			#			popularity = -0.05
+			#		}
+		#		hidden_effect = {
+			#			country_event = {
+				#				id = SAF.17
+				#				days = 10
+				#			}
+			#		}
+		#	}
+	#}
+
+country_event = { #Africans in the civil service
+	id = SAF.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.14"}
+	title = SAF.14.t
+	desc = SAF.14.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Do it now
+		name = SAF.14.a
+		add_political_power = -50
+		add_stability = -0.05
+		custom_effect_tooltip = SAF_poverty_tt
+		TNO_improve_poverty_high = yes #coded with a script
+		hidden_effect = {
+			1050 = { add_to_variable = {SAF_monarchy_support = 3}}
+			681 = { add_to_variable = {SAF_monarchy_support = 1}}
+			940 = { add_to_variable = {SAF_monarchy_support = -2}}
+		}
+	}
+	option = { #Take it slow
+		name = SAF.14.b
+		TNO_improve_poverty_high = yes #coded with a script
+		custom_effect_tooltip = SAF_poverty_less_tt
+		hidden_effect = { 1050 = { add_to_variable = {SAF_monarchy_support = 2}} }
+					clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+	}
+}
+
+country_event = { #Desegregated military
+	id = SAF.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.15"}
+	title = SAF.15.t
+	desc = SAF.15.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #yay
+		name = SAF.15.a
+		tno_racial_integration_improve = yes
+	}
+}
+
+country_event = { #Education
+	id = SAF.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.16"}
+	title = SAF.16.t
+	desc = SAF.16.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #GO GO GO
+		name = SAF.16.a
+		add_political_power = -100
+		TNO_improve_academic_base_high = yes #coded with a script
+		custom_effect_tooltip = SAF_academic_base_tt
+	}
+	option = { #slow down
+		name = SAF.16.b
+		TNO_improve_academic_base_high = yes #coded with a script
+		custom_effect_tooltip = SAF_academic_base_less_tt
+	}
+}
+
+country_event = { #Boer denunciations
+	id = SAF.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.17"}
+	title = SAF.17.t
+	desc = SAF.17.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #fuck you too
+		name = SAF.17.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { # National party Calls vigil for Hitler
+	id = SAF.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.18"}
+	title = SAF.18.t
+	desc = SAF.18.desc
+	#picture =
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = SAF.19
+				days = 6
+			}
+			275 = {
+				set_demilitarized_zone = yes
+			}
+			939 = {
+				set_demilitarized_zone = yes
+			}
+			940 = {
+				set_demilitarized_zone = yes
+			}
+			938 = {
+				set_demilitarized_zone = yes
+			}
+			937 = {
+				set_demilitarized_zone = yes
+			}
+			936 = {
+				set_demilitarized_zone = yes
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.18.a
+		add_stability = -0.05
+
+	}
+}
+
+country_event = { #Police Refused to crack down
+	id = SAF.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.19"}
+	title = SAF.19.t
+	desc = SAF.19.desc
+	#picture =
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = SAF.37
+				days = 14
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.19.a
+		add_stability = -0.05
+		if = {
+			limit = { NOT = { has_idea = SAF_Cape_Town_Massacre } }
+			add_ideas = SAF_Army_Deployed
+		}
+	}
+}
+
+country_event = { #
+	id = SAF.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.20"}
+	title = SAF.20.t
+	desc = SAF.20.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.20.a
+
+	}
+	option = { #
+		name = SAF.20.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.21"}
+	title = SAF.21.t
+	desc = SAF.21.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.21.a
+
+	}
+	option = { #
+		name = SAF.21.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.22"}
+	title = SAF.22.t
+	desc = SAF.22.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.22.a
+
+	}
+	option = { #
+		name = SAF.22.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.23"}
+	title = SAF.23.t
+	desc = SAF.23.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.23.a
+
+	}
+	option = { #
+		name = SAF.23.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.24"}
+	title = SAF.24.t
+	desc = SAF.24.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.24.a
+
+	}
+	option = { #
+		name = SAF.24.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.25"}
+	title = SAF.25.t
+	desc = SAF.25.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.25.a
+
+	}
+	option = { #
+		name = SAF.25.b
+
+	}
+}
+#26-40 for anti-ANC
+country_event = { #Ramping up our investigations
+	id = SAF.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.26"}
+	title = SAF.26.t
+	desc = SAF.26.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #dab on the africans
+		name = SAF.26.a
+		add_political_power = 50
+	}
+}
+
+country_event = { #Searching for ANC leaders
+	id = SAF.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.27"}
+	title = SAF.27.t
+	desc = SAF.27.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.27.a
+		add_political_power = -25
+		hidden_effect = {
+			random_list = {
+				50 = {
+					country_event = { #success
+						id = SAF.28
+						days = 10
+						random = 480
+					}
+				}
+				50 = {
+					country_event = { #failure
+						id = SAF.29
+						days = 40
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #success
+	id = SAF.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.28"}
+	title = SAF.28.t
+	desc = SAF.28.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.28.a
+		add_stability = 0.05
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.03
+		}
+	}
+}
+
+country_event = { #failure
+	id = SAF.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.29"}
+	title = SAF.29.t
+	desc = SAF.29.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.29.a
+		add_stability = -0.05
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.03
+		}
+	}
+}
+
+country_event = { #Creating lists of notable ANC members
+	id = SAF.31
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.31"}
+	title = SAF.31.t
+	desc = SAF.31.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #A side project
+		name = SAF.31.a
+		hidden_effect = {
+			random_list = {
+				80 = {
+					country_event = { #small success
+						id = SAF.32
+						days = 100
+					}
+				}
+				20 = {
+					country_event = { #small failure
+						id = SAF.33
+						days = 100
+					}
+				}
+			}
+		}
+	}
+	option = { #Dedicate significant resources
+		name = SAF.31.b
+		custom_effect_tooltip = econ_increase_debt_small
+		hidden_effect = {
+			add_to_variable = { national_debt = 10 }
+			random_list = {
+				50 = {
+					country_event = { #large success
+						id = SAF.34
+						days = 100
+					}
+				}
+				50 = {
+					country_event = { #large failure
+						id = SAF.35
+						days = 100
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #small success
+	id = SAF.32
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.32"}
+	title = SAF.32.t
+	desc = SAF.32.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.32.a
+		add_stability = 0.04
+		add_popularity = {
+			ideology = socialist
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #small failure
+	id = SAF.33
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.33"}
+	title = SAF.33.t
+	desc = SAF.33.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.33.a
+		add_stability = -0.02
+	}
+}
+
+country_event = { #large success
+	id = SAF.34
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.34"}
+	title = SAF.34.t
+	desc = SAF.34.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.34.a
+		add_stability = 0.08
+		custom_effect_tooltip = SAF_increase_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 1.1 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+country_event = { #large failure
+	id = SAF.35
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.35"}
+	title = SAF.35.t
+	desc = SAF.35.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.35.a
+		add_stability = -0.1
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 0.9 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+country_event = { #Escape from Robben Island
+	id = SAF.36
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.36"}
+	title = SAF.36.t
+	desc = SAF.36.desc
+	picture = GFX_report_event_SAF_arrest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.36.a
+		ai_chance = { factor = 1 }
+		add_stability = -0.025
+	}
+}
+
+country_event = { #Cape Town Massacre
+	id = SAF.37
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.37"}
+	title = SAF.37.t
+	desc = SAF.37.desc
+	picture = GFX_DEMO_war_crime_5
+
+	immediate = {
+		hidden_effect = {
+
+			if = {
+				limit = { has_country_flag = SAF_anti_anc }
+
+				country_event = {
+					id = SAF.38
+					days = 20
+				}
+
+				country_event = {
+					id = SAF.36
+					days = 14
+				}
+			}
+			country_event = {
+				id = SAF.39
+				days = 10
+			}
+			load_oob = SAF_War_Start
+
+			SAF_calculate_referendum_winner = yes
+			SAF = {
+				SAW_rubberband_effect = yes
+				SAW_update_rubberband = yes
+				log = "[?GetName] SAF.SAW_surrender = [?THIS.SAW_surrender]"
+				add_dynamic_modifier = {
+					modifier = SAW_rubberband_dynmod_SAF
+					#modifier = SAW_demo_USA_support
+				}
+			}
+			USA = {
+				SAW_rubberband_effect = yes
+				SAW_update_rubberband = yes
+				log = "[?GetName] SAF.SAW_surrender = [?THIS.SAW_surrender]"
+				add_dynamic_modifier = {
+					modifier = SAW_rubberband_dynmod_USA
+				}
+			}
+			MZB = {
+				SAW_rubberband_effect = yes
+				SAW_update_rubberband = yes
+				log = "[?GetName] MZB.SAW_surrender = [?THIS.SAW_surrender]"
+				add_dynamic_modifier = {
+					modifier = SAW_rubberband_dynmod_MZB
+				}
+			}
+			ANG = {
+				SAW_rubberband_effect = yes
+				SAW_update_rubberband = yes
+				log = "[?GetName] ANG.SAW_surrender = [?THIS.SAW_surrender]"
+				add_dynamic_modifier = {
+					modifier = SAW_rubberband_dynmod_ANG
+				}
+			}
+			COG = {
+				SAW_rubberband_effect = yes
+				SAW_update_rubberband = yes
+				log = "[?GetName] COG.SAW_surrender = [?THIS.SAW_surrender]"
+				add_dynamic_modifier = {
+					modifier = SAW_rubberband_dynmod_COG
+				}
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #fuck go back
+		name = SAF.37.a
+		add_ideas = SAF_Cape_Town_Massacre
+		remove_ideas = SAF_Army_Deployed
+		custom_effect_tooltip = SAF_monarchy_referendum_calculated_tt
+	}
+}
+
+country_event = { #ANC Revolts
+	id = SAF.38
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.38"}
+	title = SAF.38.t
+	desc = SAF.38.desc
+	picture = GFX_report_event_ANC_Protests_2
+
+	immediate = {
+		hidden_effect = {
+			ANC = {
+				transfer_state = 936
+				transfer_state = 884
+				transfer_state = 719
+				transfer_state = 935
+				transfer_state = 542
+				transfer_state = 1044
+				transfer_state = 1045
+				transfer_state = 1046
+				transfer_state = 1047
+				transfer_state = 1048
+				transfer_state = 1049
+				transfer_state = 1050
+				inherit_technology = PREV
+				load_oob = ANC
+			}
+			936 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			719 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			935 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			542 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			884 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			1044 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			1045 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			1046 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			1047 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			1048 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			1049 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+			1050 = {
+				add_core_of = ANC
+				set_demilitarized_zone = no
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.38.a
+		declare_war_on = {
+			target = ANC
+			type = annex_everything
+		}
+		hidden_effect = {
+			if = {
+				limit = { country_exists = BOR }
+				ANC = {
+					declare_war_on = {
+						target = BOR
+						type = annex_everything
+					}
+				}
+				ANC = {
+					declare_war_on = {
+						target = ANG
+						type = annex_everything
+					}
+				}
+				ANC = {
+					declare_war_on = {
+						target = COG
+						type = annex_everything
+					}
+				}
+				ANC = {
+					declare_war_on = {
+						target = MZB
+						type = annex_everything
+					}
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #Boers Revolt
+	id = SAF.39
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.39"}
+	title = SAF.39.t
+	desc = SAF.39.desc
+	picture = GFX_DEMO_war_crime_2
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = SAF_anti_anc }
+				BOR = {
+					transfer_state = 1050
+				}
+			}
+			BOR = {
+				transfer_state = 275
+				transfer_state = 939
+				transfer_state = 940
+				transfer_state = 938
+				transfer_state = 937
+				inherit_technology = PREV
+				load_oob = BOR
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_0
+					amount = 15000
+					producer = SAF
+				}
+				if = { #armed_NP
+					limit = { has_global_flag = SAF_republic_won }
+					BOR = { load_oob = BOR_Ref_Wins }
+				}
+				if = { #armed_NP
+					limit = { has_global_flag = armed_NP }
+					BOR = {
+						add_offsite_building = {
+							type = arms_factory level = 5
+						}
+					}
+				}
+			}
+			275 = {
+				add_core_of = BOR
+				set_demilitarized_zone = no
+			}
+			939 = {
+				add_core_of = BOR
+				set_demilitarized_zone = no
+			}
+			940 = {
+				add_core_of = BOR
+				set_demilitarized_zone = no
+			}
+			938 = {
+				add_core_of = BOR
+				set_demilitarized_zone = no
+			}
+			937 = {
+				add_core_of = BOR
+				set_demilitarized_zone = no
+			}
+			every_country = {
+				news_event = {
+					id = WORLD.35
+					days = 1
+				}
+			}
+			MZB = {
+				country_event = {
+					id = MZB.9
+					days = 7
+				}
+			}
+			ANG = {
+				country_event = {
+					id = ANG.83
+					days = 8
+				}
+			}
+			SAF = {
+				#country_event = { id = SAF.40 days = 21 }  #Join the South African war?
+				USA = { country_event = { id = USA.40 days = 21 } } #WALKER OF CHAOS WAS HERE AND REPLACED THE ABOVE WITH THIS TO TRY AND FIX SAF TREES LOADING IN PROPERLY
+
+
+				every_unit_leader = {
+					limit = {
+						is_BOR_unit_leader = yes
+					}
+					set_nationality = BOR
+				}
+
+
+				add_timed_idea = {
+					idea = SAF_surprise_attack
+					days = 60
+				}
+				load_focus_tree = SAF_war_tree
+
+				add_named_threat = {
+					threat = 5
+					name = threat.11.t
+				}
+				TNO_World_Tension_add_5 = yes
+			}
+			clr_country_flag = SAF_referendum_decisions
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.39.a
+		declare_war_on = {
+			target = BOR
+			type = annex_everything
+		}
+		hidden_effect = {
+			if = {
+				limit = { country_exists = ANC }
+				ANC = {
+					declare_war_on = {
+						target = BOR
+						type = annex_everything
+					}
+				}
+			}
+			BOR = {
+				country_event = { id = MZB.15 days = 4 }
+			}
+			MZB = {
+				country_event = { id = MZB.16 days = 4 }
+			}
+		}
+	}
+
+}
+
+country_event = { #  US Joins the War
+	id = SAF.40
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.40"}
+	title = SAF.40.t
+	desc = SAF.40.desc
+	picture = GFX_report_event_south_african_war_saf_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = SAF.40.a
+		set_global_flag = south_african_war
+
+		#set_technology = {
+		#	gunship_1966 = 1
+		#}
+		SAF = { set_country_flag = USA_entered_war }
+		SAF = {
+			country_event = {
+				id = SAFWAR.7
+				days = 33
+			}
+		}
+		hidden_effect = {
+			SAF = {
+				add_named_threat = {
+					threat = 25
+					name = threat.10.t
+				}
+				TNO_World_Tension_add_25 = yes
+			}
+		}
+	}
+}
+
+
+country_event = { # OFN Summit Called
+	id = SAF.41
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.41"}
+	title = SAF.41.t
+	desc = SAF.41.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #  We Must Rally the Public
+		name = SAF.41.a
+		add_political_power = 60
+		SAF = {
+			country_event = {
+				id = SAF.42
+				days = 7
+			}
+		}
+		hidden_effect = {
+			send_equipment = {
+				equipment = anti_tank_equipment
+				amount = 100
+				target = SAF
+			}
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = 400
+				target = SAF
+			}
+
+		}
+	}
+}
+
+country_event = { # Pro War Media Campaing
+	id = SAF.42
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.42"}
+	title = SAF.42.t
+	desc = SAF.42.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.42.a
+
+		SAF = {
+			country_event = {
+				id = SAF.43
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { # Report of Boer Atrocities
+	id = SAF.43
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.43"}
+	title = SAF.43.t
+	desc = SAF.43.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.43.a
+
+		SAF = {
+			country_event = {
+				id = SAF.44
+				days = 7
+			}
+			add_war_support = 0.05
+
+		}
+	}
+}
+
+country_event = { # Christians for Freedom
+	id = SAF.44
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.44"}
+	title = SAF.44.t
+	desc = SAF.44.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.44.a
+		add_war_support = 0.05
+		add_political_power = 75
+		add_manpower = 5000
+		SAF = {
+			country_event = {
+				id = SAF.48
+				days = 21
+			}
+			hidden_effect = {
+
+				SAF = {
+					country_event = {
+						id = SAF.45
+						days = 7
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { # 6 Fleet
+	id = SAF.45
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.45"}
+	title = SAF.45.t
+	desc = SAF.45.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # The light at the end?
+		name = SAF.45.a
+		SAF = {
+			country_event = {
+				id = SAF.46
+				days = 10
+			}
+		}
+		ANG = {
+			country_event = {
+				id = SAF.155
+				days = 5
+			}
+		}
+		COG = {
+			country_event = {
+				id = SAF.155
+				days = 5
+			}
+		}
+		MZB = {
+			country_event = {
+				id = SAF.155
+				days = 5
+			}
+		}
+
+
+	}
+}
+
+country_event = { # Humanitarian Aid
+	id = SAF.46
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.46"}
+	title = SAF.46.t
+	desc = SAF.46.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = SAF.46.a
+		add_political_power = -75
+		SAF = {
+			add_offsite_building = { type = arms_factory level = 3 }
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	option = {
+		name = SAF.46.b
+		add_political_power = -25
+		SAF = {
+			add_offsite_building = { type = arms_factory level = 2 }
+		}
+	}
+}
+
+country_event = { # Trucks
+	id = SAF.47
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.47"}
+	title = SAF.47.t
+	desc = SAF.47.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.47.a
+		SAF = {
+			add_equipment_to_stockpile = {
+				type = IFV_equipment_1
+				amount = 200
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment_0
+				amount = 500
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = 500
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 900
+				producer = USA
+			}
+		}
+
+	}
+}
+
+country_event = { # Beacon of Hope
+	id = SAF.48
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.48"}
+	title = SAF.48.t
+	desc = SAF.48.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.48.a
+
+	}
+
+
+}
+
+country_event = { # Iceland Help
+	id = SAF.49
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.49"}
+	title = SAF.49.t
+	desc = SAF.49.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.49.a
+		hidden_effect = {
+
+			SAF = {
+				country_event = {
+					id = SAF.50
+					days = 7
+				}
+			}
+		}
+		SAF = {
+			add_ideas = SAF_icelandic_support_staff
+		}
+	}
+}
+
+country_event = { # Carribean Help
+	id = SAF.50
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.50"}
+	title = SAF.50.t
+	desc = SAF.50.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.50.a
+		SAF = {
+			add_ideas = SAF_Caribbean_support_staff
+		}
+	}
+
+
+}
+
+
+#War stuff
+country_event = { #Sell guns?
+	id = SAF.51
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.51"}
+	title = SAF.51.t
+	desc = SAF.51.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = SAF.51.a
+		ai_chance = { factor = 1 }
+		send_equipment = {
+			equipment = infantry_equipment
+			amount = 2500
+			target = SAF
+		}
+	}
+}
+
+country_event = { #Sell more guns?
+	id = SAF.52
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.52"}
+	title = SAF.52.t
+	desc = SAF.52.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = SAF.52.a
+		ai_chance = { factor = 1 }
+		send_equipment = {
+			equipment = infantry_equipment
+			amount = 2000
+			target = SAF
+		}
+	}
+}
+
+country_event = { # Canadian Troops Arrive
+	id = SAF.53
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.53"}
+	title = SAF.53.t
+	desc = SAF.53.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.53.a
+		load_oob = SAF_CANADA1
+		hidden_effect = {
+
+			SAF = {
+				country_event = {
+					id = SAF.54
+					days = 7
+				}
+				country_event = {
+					id = SAF.56
+					days = 35
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { # Australian Troops Arrive
+	id = SAF.54
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.54"}
+	title = SAF.54.t
+	desc = SAF.54.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.54.a
+		hidden_effect = {
+
+			SAF = {
+				load_oob = SAF_ANZAC
+				country_event = {
+					id = SAF.55
+					days = 7
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { # Nixon Speech
+	id = SAF.55
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.55"}
+	title = SAF.55.t
+	desc = SAF.55.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.55.a
+		country_event = {
+			id = SAFWAR.7
+			days = 4
+		}
+
+	}
+}
+
+country_event = { #  Quebec Troops
+	id = SAF.56
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.56"}
+	title = SAF.56.t
+	desc = SAF.56.desc
+	picture = GFX_report_event_french_canadian_division
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.56.a
+		load_oob = SAF_CANADA1
+	}
+}
+
+country_event = { # Pointless event
+	id = SAF.57
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.57"}
+	title = SAF.57.t
+	desc = SAF.57.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.57.a
+
+	}
+	option = { #
+		name = SAF.57.b
+
+	}
+}
+
+country_event = { # Pointless event
+	id = SAF.58
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.58"}
+	title = SAF.58.t
+	desc = SAF.58.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.58.a
+
+	}
+	option = { #
+		name = SAF.58.b
+
+	}
+}
+
+country_event = { # Pointless event
+	id = SAF.59
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.59"}
+	title = SAF.59.t
+	desc = SAF.59.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.59.a
+
+	}
+	option = { #
+		name = SAF.59.b
+
+	}
+}
+
+country_event = { #   Santa Maria Affair, Start of Iberian Content
+	id = SAF.60
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.60"}
+	title = SAF.60.t
+	desc = SAF.60.desc
+	trigger = { date > 1964.3.1}
+	picture = GFX_report_event_cog_boat
+
+
+	fire_only_once = yes
+
+	option = { # We Will Help them
+		name = SAF.60.a
+		add_political_power = 75
+		add_manpower = -500
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		SAF = {
+			country_event = {
+				id = SAF.61
+				days = 3
+			}
+		}
+
+
+
+	}
+	option = { # We Can't get Distracted
+		name = SAF.60.b
+
+	}
+}
+
+country_event = { # US Marines Assault Santa Maria
+	id = SAF.61
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.61"}
+	title = SAF.61.t
+	desc = SAF.61.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.61.a
+		SAF = {
+			country_event = {
+				id = SAF.62
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { # Calvão is captured
+	id = SAF.62
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.62"}
+	title = SAF.62.t
+	desc = SAF.62.desc
+	picture = GFX_report_event_helicopter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.62.a
+		SAF = {
+			country_event = {
+				id = SAF.63
+				days = 50
+			}
+		}
+	}
+}
+
+country_event = { #  Iberia Proposes the US
+	id = SAF.63
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.63"}
+	title = SAF.63.t
+	desc = SAF.63.desc
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.63.a
+		SAF = {
+			add_political_power = 75
+		}
+
+		SAF = {
+			set_country_flag = SAF_Iberia
+		}
+
+
+	}
+}
+
+country_event = { #  São Tomé
+	id = SAF.64
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.64"}
+	title = SAF.64.t
+	desc = SAF.64.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.64.a
+
+		add_political_power = 75
+
+		add_war_support = 0.1
+	}
+}
+
+country_event = { #  Angola Maps
+	id = SAF.65
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.65"}
+	title = SAF.65.t
+	desc = SAF.65.desc
+	picture = GFX_report_event_cog_afrika
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.65.a
+		SAF = {
+			country_event = {
+				id = SAF.66
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { # Angola Bombing
+	id = SAF.66
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.66"}
+	title = SAF.66.t
+	desc = SAF.66.desc
+	picture = GFX_report_event_generic_bombers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.66.a
+		ANG = {
+			1035 = {
+				damage_building = {
+					type = arms_factory
+					damage = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = { #  Cançao dos Desertores
+	id = SAF.67
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.67"}
+	title = SAF.67.t
+	desc = SAF.67.desc
+	picture = GFX_report_event_cog_merc_casual_time
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.67.a
+		ANG = {
+			add_manpower = -5000
+			add_war_support = -0.05
+		}
+
+		MZB = {
+			add_manpower = -5000
+			add_war_support = -0.05
+		}
+
+	}
+
+
+}
+
+country_event = { #  Nurses rescue someone
+	id = SAF.68
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.68"}
+	title = SAF.68.t
+	desc = SAF.68.desc
+	picture = GFX_report_event_south_african_war_us_helicopter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.68.a
+
+		MZB = {
+			add_manpower = 3000
+			add_war_support = 0.03
+		}
+	}
+}
+
+
+country_event = { # Pointless event
+	id = SAF.70
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.70"}
+	title = SAF.70.t
+	desc = SAF.70.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.70.a
+
+	}
+	option = { #
+		name = SAF.70.b
+
+	}
+}
+
+country_event = { # Pointless event
+	id = SAF.71
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.71"}
+	title = SAF.71.t
+	desc = SAF.71.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.71.a
+
+	}
+	option = { #
+		name = SAF.71.b
+
+	}
+}
+
+country_event = { # Pointless event
+	id = SAF.72
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.72"}
+	title = SAF.72.t
+	desc = SAF.72.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.72.a
+
+	}
+	option = { #
+		name = SAF.72.b
+
+	}
+}
+
+country_event = { # Pointless event
+	id = SAF.73
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.73"}
+	title = SAF.73.t
+	desc = SAF.73.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.73.a
+
+	}
+	option = { #
+		name = SAF.73.b
+
+	}
+}
+
+country_event = { # Pointless event
+	id = SAF.74
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.74"}
+	title = SAF.74.t
+	desc = SAF.74.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.74.a
+
+	}
+	option = { #
+		name = SAF.74.b
+
+	}
+}
+
+country_event = { # Discontent 1
+	id = SAF.75
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.75"}
+	title = SAF.75.t
+	desc = SAF.75.desc
+	picture = GFX_report_event_soldier_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.75.a
+		add_manpower = -100
+
+	}
+
+}
+
+country_event = { #Anti war sentiment grows
+	id = SAF.76
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.76"}
+	title = SAF.76.t
+	desc = SAF.76.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.76.a
+		add_manpower = -500
+	}
+}
+
+country_event = { #Soldiers protest the war and call it a "death factory"
+	id = SAF.77
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.77"}
+	title = SAF.77.t
+	desc = SAF.77.desc
+	picture = GFX_report_event_orenburg_protest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.77.a
+		add_manpower = -1000
+		hidden_effect = {
+			if = {
+				country_event = {
+					id = SAF.80
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Soldiers are shell shocked and want out of the SAW
+	id = SAF.78
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.78"}
+	title = SAF.78.t
+	desc = SAF.78.desc
+	picture = GFX_report_event_soldier_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.78.a
+		add_manpower = -5000
+	}
+
+}
+country_event = { #Loads of desertions in the SAW for the US
+	id = SAF.79
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.79"}
+	title = SAF.79.t
+	desc = SAF.79.desc
+	picture = GFX_report_event_dead_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.79.a
+
+	}
+	option = { #
+		name = SAF.79.b
+		add_manpower = -10000
+	}
+}
+
+country_event = { #American and german troops begin using drugs posing a problem for the OFN and Pakt
+	id = SAF.80
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.80"}
+	title = SAF.80.t
+	desc = SAF.80.desc
+	picture = GFX_report_event_drug_use
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.80.a
+		add_stability = -0.05
+		add_war_support = -0.05
+	}
+}
+
+country_event = { # SOG Event Border
+	id = SAF.81
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.81"}
+	title = SAF.81.t
+	desc = SAF.81.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.81.a
+		add_political_power = 20
+	}
+}
+
+country_event = { #
+	id = SAF.82
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.82"}
+	title = SAF.82.t
+	desc = SAF.82.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.82.a
+		add_political_power = 20
+	}
+}
+
+country_event = { #
+	id = SAF.83
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.83"}
+	title = SAF.83.t
+	desc = SAF.83.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.83.a
+		add_political_power = 20
+	}
+}
+
+country_event = { #
+	id = SAF.84
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.84"}
+	title = SAF.84.t
+	desc = SAF.84.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.84.a
+		add_political_power = 20
+	}
+}
+
+country_event = { #
+	id = SAF.85
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.85"}
+	title = SAF.85.t
+	desc = SAF.85.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.85.a
+		add_political_power = 20
+
+	}
+}
+
+country_event = { #
+	id = SAF.86
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.86"}
+	title = SAF.86.t
+	desc = SAF.86.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.86.a
+		add_political_power = 20
+	}
+}
+
+country_event = { #
+	id = SAF.87
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.87"}
+	title = SAF.87.t
+	desc = SAF.87.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.87.a
+	}
+}
+
+country_event = { #
+	id = SAF.88
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.88"}
+	title = SAF.88.t
+	desc = SAF.88.desc
+	picture =GFX_report_event_SAF_mean_gunmen
+	trigger = {
+		original_tag = SAF
+		OR = {
+			focus_progress = {
+				focus = SAF_the_hidden_war
+				progress > 0.5
+			}
+		}
+	}
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.88.a
+		add_manpower = 5000
+
+	}
+}
+
+country_event = { #
+	id = SAF.89
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.89"}
+	title = SAF.89.t
+	desc = SAF.89.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.89.a
+
+	}
+	option = { #
+		name = SAF.89.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.90
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.90"}
+	title = SAF.90.t
+	desc = SAF.90.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.90.a
+
+	}
+	option = { #
+		name = SAF.90.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.91
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.91"}
+	title = SAF.91.t
+	desc = SAF.91.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.91.a
+
+	}
+	option = { #
+		name = SAF.91.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.92
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.92"}
+	title = SAF.92.t
+	desc = SAF.92.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.92.a
+
+	}
+	option = { #
+		name = SAF.92.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.93
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.93"}
+	title = SAF.93.t
+	desc = SAF.93.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.93.a
+
+	}
+	option = { #
+		name = SAF.93.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.94
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.94"}
+	title = SAF.94.t
+	desc = SAF.94.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.94.a
+
+	}
+	option = { #
+		name = SAF.94.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.95
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.95"}
+	title = SAF.95.t
+	desc = SAF.95.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.95.a
+
+	}
+	option = { #
+		name = SAF.95.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.96
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.96"}
+	title = SAF.96.t
+	desc = SAF.96.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.96.a
+
+	}
+	option = { #
+		name = SAF.96.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.97
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.97"}
+	title = SAF.97.t
+	desc = SAF.97.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.97.a
+
+	}
+	option = { #
+		name = SAF.97.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.98
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.98"}
+	title = SAF.98.t
+	desc = SAF.98.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.98.a
+
+	}
+	option = { #
+		name = SAF.98.b
+
+	}
+}
+
+country_event = { #
+	id = SAF.99
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.99"}
+	title = SAF.99.t
+	desc = SAF.99.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.99.a
+
+	}
+	option = { #
+		name = SAF.99.b
+
+	}
+}
+
+
+############################################################ Start Tree Bellow
+
+
+country_event = {   ##### Intro event
+	id = SAF.101
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.100" }
+	title = SAF.101.t
+	desc = SAF.101.desc
+	picture = GFX_report_event_South_Africa
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.101.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { ##### Quiet Americans
+	id = SAF.102
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.102" }
+	title = SAF.102.t
+	desc = SAF.102.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.102.a
+		ai_chance = { factor = 1 }
+
+		SAF = {
+			set_country_flag = SOG_Arrived
+			set_variable = {
+				var = SOG_Agents
+				value = 1
+			}
+
+			set_variable = {
+				var = Stay_Behind
+				value = 1
+			}
+
+		}
+	}
+
+}
+country_event = { # ###### Mandela is Arrested
+	id = SAF.103
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.103" }
+	title = SAF.103.t
+	desc = SAF.103.desc
+	picture = GFX_report_event_Free_Mandela
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Throw Away the key
+		name = SAF.103.a
+		ai_chance = { factor = 1 }
+		SAF = {
+			add_stability = -0.1
+			add_political_power = 50
+
+		}
+
+	}
+
+}
+
+country_event = { # Hertzog makes a speech against the Monarchy
+	id = SAF.104
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.104" }
+	title = SAF.104.t
+	desc = SAF.104.desc
+	picture = GFX_report_event_SAF_mean_gunmen
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # It's his right
+		name = SAF.104.a
+		ai_chance = { factor = 1 }
+		add_political_power = -10
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.10
+		}
+
+
+
+	}
+	option = { # Denounce
+		name = SAF.104.b
+		ai_chance = { factor = 1 }
+		SAF = {
+			add_political_power = -50
+			add_stability = -0.05
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+		}
+	}
+}
+
+
+
+country_event = { # Boers party on the streets as referendum is called
+	id = SAF.105
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.105" }
+	title = SAF.105.t
+	desc = SAF.105.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Its their right
+		name = SAF.105.a
+		ai_chance = { factor = 1 }
+		SAF = {
+			add_political_power = -110
+			add_stability = 0.05
+		}
+	}
+	option = { # Order Police to disperse
+		name = SAF.105.b
+		ai_chance = { factor = 1 }
+		SAF = {
+			add_political_power = -50
+			add_stability = -0.05
+		}
+	}
+}
+country_event = { # Chose the Path
+	id = SAF.106
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.106" }
+	title = SAF.106.t
+	desc = SAF.106.desc
+	picture = GFX_report_event_ANC_Protests_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #ANC
+		name = SAF.106.a
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = SAF_appeasement_route
+					option = SAF_APPEASEMENT_ROUTE_BOER
+				}
+			}
+		}
+		
+		set_country_flag = SAF_pro_anc
+	}
+	option = { #Crackdown
+		name = SAF.106.b
+		
+		ai_chance = {
+			factor = 2
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = SAF_appeasement_route
+					option = SAF_APPEASEMENT_ROUTE_ANC
+				}
+			}
+		}
+		
+		set_country_flag = SAF_anti_anc
+	}
+}
+
+country_event = { #  Robben Island
+	id = SAF.107
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.107" }
+	title = SAF.107.t
+	desc = SAF.107.desc
+	picture = GFX_report_event_Robben_Island
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.107.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+
+		add_popularity = {
+			ideology = socialist
+			popularity = -0.05
+		}
+
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		custom_effect_tooltip = SAF_increase_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 1.1 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+
+}
+
+country_event = { #  Raid on Bussiness
+	id = SAF.108
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.108" }
+	title = SAF.108.t
+	desc = SAF.108.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #   Raid on Boer Bussiness  ##### Remove Boer Factory
+		name = SAF.108.a
+		ai_chance = { factor = 1 }
+
+	}
+	option = { #   Raid on African Bussiness ##### Remove ANC Factory
+		name = SAF.108.b
+		ai_chance = { factor = 1 }
+			hidden_effect = {
+			country_event = {
+				id = SAF.109
+				days = 5
+			}
+		}
+
+	}
+}
+
+country_event = { #  German Major arrested in ANC Bank Raid
+	id = SAF.109
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.109" }
+	title = SAF.109.t
+	desc = SAF.109.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.109.a
+		ai_chance = { factor = 1 }
+		add_political_power = 80
+		every_owned_state = {
+			limit = { has_state_flag = SAF_election_state }
+			multiply_variable = { SAF_monarchy_support = 1.1 }
+			round_variable = SAF_monarchy_support
+						clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+		}
+	}
+
+}
+
+country_event = { # Prepare Raid on the ANC
+	id = SAF.110
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.110" }
+	title = SAF.110.t
+	desc = SAF.110.desc
+	picture = GFX_report_event_SAF_repression_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Small Scale Raids
+		name = SAF.110.a
+		ai_chance = { factor = 1 }
+		random_list = {
+			80 = {
+				country_event = { #small success
+					id = SAF.111
+					days = 15
+				}
+			}
+			20 = {
+				country_event = { #small failure
+					id = SAF.112
+					days = 15
+				}
+			}
+		}
+
+	}
+
+	option = { # Big raids
+		name = SAF.110.b
+		ai_chance = { factor = 1 }
+		random_list = {
+			50 = {
+				country_event = { #large success
+					id = SAF.113
+					days = 15
+				}
+			}
+			50 = {
+				country_event = { #large failure
+					id = SAF.114
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Small Success
+	id = SAF.111
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.111" }
+	title = SAF.111.t
+	desc = SAF.111.desc
+	picture = GFX_report_event_SAF_repression_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.111.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.04
+		add_popularity = {
+			ideology = socialist
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+
+	}
+}
+
+country_event = { # Small Failure
+	id = SAF.112
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.112" }
+	title = SAF.112.t
+	desc = SAF.112.desc
+	picture = GFX_report_event_SAF_repression_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.112.a
+		ai_chance = { factor = 1 }
+
+		add_stability = -0.02
+		add_popularity = {
+			ideology = socialist
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.02
+		}
+
+	}
+}
+
+country_event = { # Big Success
+	id = SAF.113
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.113" }
+	title = SAF.113.t
+	desc = SAF.113.desc
+	picture = GFX_report_event_SAF_repression_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.113.a
+		ai_chance = { factor = 1 }
+
+
+		add_stability = 0.06
+		add_popularity = {
+			ideology = socialist
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.06
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.1
+		}
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 1.1 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+
+	}
+}
+
+country_event = { # Big Failure
+	id = SAF.114
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.114" }
+	title = SAF.114.t
+	desc = SAF.114.desc
+	picture = GFX_report_event_SAF_repression_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.114.a
+		ai_chance = { factor = 1 }
+
+
+		add_stability = -0.06
+		add_popularity = {
+			ideology = socialist
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.08
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.1
+		}
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 0.9 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+country_event = { #  Bram Fischer is arrested
+	id = SAF.115
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.115" }
+	title = SAF.115.t
+	desc = SAF.115.desc
+	picture = GFX_report_event_bram_fischer
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # The Boers are working with the ANC !!!!!!!!!!!
+		name = SAF.115.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.15
+		}
+		add_stability = -0.05
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 1.1 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+country_event = { # American Journalist arrested in a raid
+	id = SAF.116
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.116" }
+	title = SAF.116.t
+	desc = SAF.116.desc
+	picture = GFX_report_event_SAF_arrest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #  Accept the deal for weapons
+		name = SAF.116.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 1500
+			producer = USA
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 400
+			producer = USA
+		}
+
+	}
+	option = { # Kill him to bring more sog
+		name = SAF.116.b
+		ai_chance = { factor = 1 }
+		add_to_variable = { SOG_Agents = 1 }
+
+	}
+}
+
+country_event = { # Whites start going to shooting ranges
+	id = SAF.117
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.117" }
+	title = SAF.117.t
+	desc = SAF.117.desc
+	picture = GFX_report_event_SAF_mean_gunmen
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Be Prepared
+		name = SAF.117.a
+		ai_chance = { factor = 1 }
+		SAF = {
+			add_manpower = 1000
+		}
+	}
+}
+
+country_event = { #  Church Terror attacks
+	id = SAF.118
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.118" }
+	title = SAF.118.t
+	desc = SAF.118.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.118.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.03
+		}
+		add_stability = -0.05
+		add_war_support = 0.05
+		hidden_effect = {
+			country_event = {
+				id = SAF.119
+				days = 7
+			}
+
+		}
+	}
+
+}
+
+country_event = { # Whites Form Paramilitaries
+	id = SAF.119
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.119" }
+	title = SAF.119.t
+	desc = SAF.119.desc
+	picture = GFX_report_event_SAF_mean_gunmen
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.119.a
+		ai_chance = { factor = 1 }
+		SAF = {
+			set_country_flag = White_CDF
+		}
+
+	}
+}
+
+country_event = { #  CCC Police
+	id = SAF.120
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.120" }
+	title = SAF.120.t
+	desc = SAF.120.desc
+	picture = GFX_report_event_SAF_repression_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.120.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #   Frederik van Zyl Slabbert try to make contact with Tambo and the Conservative Party
+	id = SAF.121
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.121" }
+	title = SAF.121.t
+	desc = SAF.121.desc
+	picture = GFX_report_event_Oliver_Tambo
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.121.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+
+	}
+}
+
+country_event = { # Sit down with Tambo
+	id = SAF.122
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.122" }
+	title = SAF.122.t
+	desc = SAF.122.desc
+	picture = GFX_report_event_Oliver_Tambo
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #  Only talk
+		name = SAF.122.a
+		add_stability = 0.05
+		add_war_support = -0.03
+		add_political_power = -50
+	}
+	option = { #  Form a Compromise
+		name = SAF.122.b
+		add_stability = 0.05
+		add_war_support = 0.03
+		add_political_power = -50
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 0.9 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+	}
+}
+
+
+country_event = { # Nelson Mandela is Free
+	id = SAF.123
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.123" }
+	title = SAF.123.t
+	desc = SAF.123.desc
+	picture = GFX_report_event_freed_mandela
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.123.a
+		ai_chance = { factor = 1 }
+
+		add_stability = 0.1
+		add_political_power = 50
+
+	}
+}
+
+country_event = { #    Robert Sobukwe is killed in prison
+	id = SAF.124
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.124" }
+	title = SAF.124.t
+	desc = SAF.124.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.124.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = communist
+			popularity = -0.1
+		}
+	}
+}
+
+country_event = { # Black Civil Service
+	id = SAF.125
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.125" }
+	title = SAF.125.t
+	desc = SAF.125.desc
+	picture = GFX_report_event_integrated_office
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.125.a
+		ai_chance = { factor = 1 }
+
+		add_stability = 0.1
+
+	}
+}
+
+country_event = { # Royal African Rifles
+
+	id = SAF.126
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.126" }
+	title = SAF.126.t
+	desc = SAF.126.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.126.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_oob = SAF_RAR_Big
+		}
+	}
+	option = { #
+		name = SAF.126.b
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_oob = SAF_RAR_Small
+			add_to_variable = { SOG_Agents = 1 }
+			country_event = {
+				id = SAF.129
+				days = 21
+			}
+		}
+	}
+}
+
+country_event = { #  Buthelezi call
+	id = SAF.127
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.127" }
+	title = SAF.127.t
+	desc = SAF.127.desc
+	picture = GFX_report_event_zulu_filming
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.127.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.1
+		}
+
+	}
+}
+
+country_event = { # Teacher
+	id = SAF.128
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.128" }
+	title = SAF.128.t
+	desc = SAF.128.desc
+	picture = GFX_report_event_integrated_office
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.128.a
+		ai_chance = { factor = 1 }
+		TNO_improve_academic_base_high = yes
+
+	}
+}
+
+country_event = { # BJ Dead
+	id = SAF.129
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.129" }
+	title = SAF.129.t
+	desc = SAF.129.desc
+	picture = GFX_report_event_BJ_dead
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.129.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		add_stability = -0.1
+		hidden_effect = {
+			SAF = {
+				country_event = {
+					id = SAF.87
+					days = 7
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Commando Problem
+	id = SAF.130
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.130" }
+	title = SAF.130.t
+	desc = SAF.130.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.130.a
+		ai_chance = { factor = 1 }
+		add_to_variable = {Stay_Behind = -1}
+		set_country_flag = Commandos_closed
+	}
+	option = { #
+		name = SAF.130.b
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+			producer = SAF
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 400
+			producer = USA
+		}
+
+
+	}
+}
+
+country_event = { # Votes on the Vote
+	id = SAF.131
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.131" }
+	title = SAF.131.t
+	desc = SAF.131.desc
+	picture = GFX_report_event_ANC_Protests_3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.131.a
+		ai_chance = { factor = 1 }
+
+		tno_vote_franchise_clear = yes
+		add_ideas = tno_vote_franchise_universal
+		hidden_effect = {
+			country_event = {
+				id = SAF.132
+				days = 3
+			}
+		}
+
+	}
+}
+
+country_event = { # Siege Starts
+	id = SAF.132
+	immediate = {
+		hidden_effect = {
+			275 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: event SAF.132"
+	}
+
+	title = SAF.132.t
+	desc = SAF.132.desc
+	picture = GFX_report_event_SAF_mean_gunmen
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = { #
+		name = SAF.132.a
+		ai_chance = { factor = 1 }
+
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = Commandos_closed}
+				country_event = {
+					id = SAF.133
+					days = 5
+				}
+				else = {
+					country_event = {
+						id = SAF.134
+						days = 5
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Victory
+	id = SAF.133
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.133" }
+	title = SAF.133.t
+	desc = SAF.133.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.133.a
+		ai_chance = { factor = 1 }
+
+		custom_effect_tooltip = SAF_increase_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 1.5 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+
+	}
+}
+
+
+country_event = { # Defeat
+	id = SAF.134
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.134" }
+	title = SAF.134.t
+	desc = SAF.134.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.133.a
+		ai_chance = { factor = 1 }
+		add_manpower = -36
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = { has_state_flag = SAF_election_state }
+				multiply_variable = { SAF_monarchy_support = 0.8 }
+				round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+			}
+		}
+
+	}
+}
+
+country_event = { # Hetrzog buys arms
+	id = SAF.135
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.135" }
+	title = SAF.135.t
+	desc = SAF.135.desc
+	picture = GFX_report_event_SAF_repression
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.1.a
+	}
+}
+
+add_namespace = fixfixfix
+
+
+
+country_event = { #endslides
+	id = fixfixfix.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fixfixfix.2"}
+	title = fixfixfix.2.t
+	desc = fixfixfix.2.desc
+	#picture = 
+	hidden = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #1
+		name = SAF.2.a
+		set_country_flag = endscreen_flag_open
+		set_variable = { endscrn = 115 }
+	}
+}
+
+country_event = { # Cape town posters
+	id = SAF.136
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.136" }
+	title = SAF.136.t
+	desc = SAF.136.desc
+	picture = GFX_report_event_SAF_arrest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.136.a
+		ai_chance = { factor = 1 }
+		add_political_power = -50
+
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			681 = {
+				if = {
+					limit = { has_state_flag = SAF_election_state }
+					multiply_variable = { SAF_monarchy_support = 0.99 }
+					round_variable = SAF_monarchy_support
+								clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+				}
+			}
+		}
+	}
+}
+
+country_event = { # March Against Imperialism
+	id = SAF.137
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.137" }
+	title = SAF.137.t
+	desc = SAF.137.desc
+	picture = GFX_report_event_SAF_arrest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.137.a
+		ai_chance = { factor = 1 }
+		add_political_power = -50
+
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			940 = { #Transvaal
+				if = {
+					limit = { has_state_flag = SAF_election_state }
+					multiply_variable = { SAF_monarchy_support = 0.99 }
+					round_variable = SAF_monarchy_support
+								clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Activists Harassed
+	id = SAF.138
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.138" }
+	title = SAF.138.t
+	desc = SAF.138.desc
+	picture = GFX_report_event_SAF_mean_gunmen
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.138.a
+		ai_chance = { factor = 1 }
+		add_political_power = -50
+
+		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
+		hidden_effect = {
+			275 = { #Transvaal
+				if = {
+					limit = { has_state_flag = SAF_election_state }
+					multiply_variable = { SAF_monarchy_support = 0.99 }
+					round_variable = SAF_monarchy_support
+							clamp_variable = {
+				var = SAF_monarchy_support
+				min = 1
+				max = 100
+}
+
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Referendum scheduled
+	id = SAF.999999
+	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.1"}
+	title = SAF.1.t
+	desc = SAF.1.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.999999.a
+		load_focus_tree = SAF_war_tree
+	}
+}
+
+
+
+###################################################################
+################################################################## Flavor bellow
+###################################################################
+
+
+country_event = { # Queen's Birthday
+	id = SAF.139
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.139" }
+	title = SAF.139.t
+	desc = SAF.139.desc
+	picture = GFX_report_event_queen_lizzy
+	trigger = { 
+		date > 1964.4.21
+		tag = SAF
+	}
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.139.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+		add_war_support = 0.02
+
+
+	}
+}
+
+country_event = { # Queen's Crowning
+	id = SAF.143
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.143" }
+	title = SAF.143.t
+	desc = SAF.143.desc
+	picture = GFX_report_event_queen_lizzy
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #
+		name = SAF.143.a
+		hidden_effect = {
+			remove_ideas = SAF_The_Empty_Throne
+			news_event = {
+				id = DEMOWORLDEVENT.144
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # Zanu Attack
+	id = SAF.140
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.140" }
+	title = SAF.140.t
+	desc = SAF.140.desc
+	picture = GFX_DEMO_war_crime_3
+	trigger = {
+		original_tag = SAF
+		OR = {
+			focus_progress = {
+				focus = SAF_schedule_a_referendum
+				progress > 0.25
+			}
+		}
+	}
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.140.a
+		add_stability = -0.05
+	}
+}
+
+country_event = { # Death of Horses
+	id = SAF.141
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.141" }
+	title = SAF.141.t
+	desc = SAF.141.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.141.a
+		add_political_power = -50
+	}
+
+}
+
+
+country_event = { # Wandering Soul
+	id = SAF.142
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.142" }
+	title = SAF.142.t
+	desc = SAF.142.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.141.a
+		BOR = {
+			add_manpower = -150
+		}
+	}
+
+}
+
+
+
+country_event = { # Pseudo Gaming
+	id = SAF.144
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.144" }
+	title = SAF.144.t
+	desc = SAF.144.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.144.a
+		hidden_effect = {
+			country_event = {
+				id = SAF.145
+				days = 6
+			}
+
+		}
+	}
+
+}
+
+
+
+country_event = { # Anglo Tricks
+	id = SAF.145
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.145" }
+	title = SAF.145.t
+	desc = SAF.145.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.145.a
+		MZB = {
+			add_manpower = -1000
+		}
+	}
+
+}
+
+country_event = { # Africa Addio SAF
+	id = SAF.146
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.146" }
+	title = SAF.146.t
+	desc = SAF.146.desc
+	picture = GFX_africa_addio
+	trigger = {
+		original_tag = SAF
+		OR = {
+			focus_progress = {
+				focus = SAF_the_african_national_congress
+				progress > 0.25
+			}
+		}
+	}
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.146.a
+		hidden_effect = {
+			MZB = {
+				country_event = {
+					id = SAF.147
+					days = 15
+				}
+			}
+			ANG = {
+				country_event = {
+					id = SAF.147
+					days = 30
+				}
+			}
+			COG = {
+				country_event = {
+					id = SAF.148
+					days = 45
+				}
+			}
+		}
+	}
+}
+
+
+country_event = { # Africa Addio MZB
+	id = SAF.147
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.147" }
+	title = SAF.147.t
+	desc = SAF.147.desc
+	picture = GFX_africa_addio
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.147.a
+	}
+}
+
+
+country_event = { # Africa Addio ANG
+	id = SAF.148
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.145" }
+	title = SAF.148.t
+	desc = SAF.148.desc
+	picture = GFX_africa_addio
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.148.a
+
+	}
+
+}
+
+
+country_event = { # Africa Addio COG
+	id = SAF.149
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.149" }
+	title = SAF.149.t
+	desc = SAF.149.desc
+	picture = GFX_africa_addio
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.149.a
+	}
+}
+
+country_event = { #
+	id = SAF.150
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.150" }
+	title = SAF.150.t
+	desc = SAF.150.desc
+	picture = GFX_report_event_cog_helicopter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.150.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = SAF.151 days = 6 }
+		}
+	}
+}
+
+country_event = { #
+	id = SAF.151
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.151" }
+	title = SAF.151.t
+	desc = SAF.151.desc
+	picture = GFX_report_event_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.151.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = SAF.152 days = 6 }
+		}
+	}
+}
+
+country_event = { #
+	id = SAF.152
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.152" }
+	title = SAF.152.t
+	desc = SAF.152.desc
+	picture = GFX_report_event_soldier_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.152.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = SAF.153 days = 6 }
+		}
+	}
+}
+
+country_event = { #
+	id = SAF.153
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.153" }
+	title = SAF.153.t
+	desc = SAF.153.desc
+	picture = GFX_report_event_south_african_war_us_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.153.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Warriors of the North
+	id = SAF.154
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.154" }
+	title = SAF.154.t
+	desc = SAF.154.desc
+	picture = GFX_report_event_russian_volunteers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = SAF.154.a
+		ai_chance = { factor = 1 }
+		add_manpower = 100
+	}
+
+	option = { #
+		name = SAF.154.b
+		ai_chance = { factor = 1 }
+		add_political_power = 20
+	}
+}
+
+country_event = { #RKs learn of USN presence
+	id = SAF.155
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.155" }
+	title = SAF.155.t
+	desc = SAF.155.desc
+	picture = GFX_report_event_cog_boat
+
+	is_triggered_only = yes
+
+	option = { #
+		name = SAF.155.a
+		ai_chance = { factor = 1 }
+		MZB = {
+			add_ideas = ANG_USN_Blockade
+		}
+		COG = {
+			add_ideas = ANG_USN_Blockade
+		}
+		ANG = {
+			add_ideas = ANG_USN_Blockade
+		}
+	}
+}
+	
+country_event = { #Valor Above All
+	id = SAF.156
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.156" }
+	title = SAF.156.t
+	desc = SAF.156.desc
+	picture = GFX_report_event_cog_helicopter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		has_war = yes
+	}
+
+	option = { #
+		name = SAF.156.a
+		ai_chance = { factor = 1 }
+
+	}
+
+}
