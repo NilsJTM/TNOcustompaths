@@ -11,6 +11,7 @@ add_namespace = sco_elections
 add_namespace = sco_catastrophe
 add_namespace = mayne
 add_namespace = sco_flavor
+add_namespace = sco_debug
 
 country_event = { #ECW tree
 	id = SCO.100
@@ -1960,7 +1961,7 @@ country_event = { #Anglos
 			remove_idea = tno_minorities_equal_rights
 			add_idea = tno_minorities_segregation
 		}
-		SCO_Refugees_Worsen = yes
+		SCO_Decrease_English_Approval_point_two = yes
 	}
 }
 
@@ -2567,6 +2568,7 @@ country_event = { #1962 Election
 		name = SCO.2712.a
 		clr_country_flag = SCO_Election_Campaign_On
 		clr_country_flag = SCO_Election_Campaign_1962
+		clr_country_flag = president_campaign_already_done
 			if = {
 				limit = {
 					AND = {
@@ -2698,7 +2700,7 @@ country_event = { #SNP won the elections
 
 	option = {
 		name = SCO.2713.a
-
+		SCO_Decrease_English_Approval_point_one = yes
 		add_popularity = {
 			ideology = social_liberal
 			popularity = 0.05
@@ -2723,6 +2725,13 @@ country_event = { #ILP won the elections
 	option = {
 		name = SCO.2714.a
 		custom_effect_tooltip = 31_SCO_tt
+		set_variable = {
+			SCO_English_Approval = 45
+		}
+		set_variable = {
+			SCO_English_Approval_c = 0
+		}
+		custom_effect_tooltip = SCO_Change_English_Approval_tt
 		hidden_effect = {
 			set_politics = {
 				ruling_party = social_democrat
@@ -2786,7 +2795,13 @@ country_event = { #UP 1962 election victory
 
 	option = {
 		name = SCO.2718.a
-		SCO_Refugees_Improve = yes
+		set_variable = {
+			SCO_English_Approval = 65
+		}
+		set_variable = {
+			SCO_English_Approval_c = 0.6
+		}
+		custom_effect_tooltip = SCO_Change_English_Approval_tt
 		set_politics = {
 			ruling_party = social_conservative
 			elections_allowed = no
@@ -3179,7 +3194,7 @@ country_event = { #Convincing the Interior
 
 	option = { #Tell them focus on English instead
 		name = SCO.3003.a
-		SCO_Refugees_Improve = yes
+		SCO_Increase_English_Approval_point_one = yes
 		custom_effect_tooltip = SCO_SAS_Prep_tt
 		add_to_variable = {
 			var = SCO_SAS_Power
@@ -4307,7 +4322,7 @@ country_event = { #SAS admin
 	fire_only_once = yes
 
 	option = {
-		name = SCO.283.a
+		name = SCO.284.a
 		set_politics = {
 			ruling_party = despotism
 			elections_allowed = no
@@ -4317,7 +4332,57 @@ country_event = { #SAS admin
 	}
 }
 
+country_event = { #let loose the police
+	id = SCO.292
+	title = SCO.292.t
+	desc = SCO.292.desc
+	picture = GFX_report_event_riot_chaos
 
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.285"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = SCO.292.a
+	}
+}
+
+country_event = { #Assert out position
+	id = SCO.293
+	title = SCO.293.t
+	desc = SCO.293.desc
+	picture = GFX_report_event_riot_chaos
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.286"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = SCO.293.a
+	}
+}
+
+country_event = { #stop repatriation hidden event
+	id = SCO.294
+	title = SCO.294.t
+	desc = SCO.294.desc
+	picture = GFX_report_event_riot_chaos
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.287"}
+	hidden = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = SCO.294.a
+		custom_effect_tooltip = SCO_Increase_English_Population_tt
+		add_to_variable = {
+			SCO_English_Population_Percent_c = 0.42
+		}
+	}
+}
 
 ############################
 #### ####        ##   ######
@@ -4501,10 +4566,20 @@ country_event = { #Organise Things (SCO)
 		name = sco_fen.7.a
 		add_timed_idea = {
 			idea = SCO_Repatriation_of_english
-			days = 720
+			days = 730
 		}
-		SCO_Refugees_Improve = yes
-		FEN = {
+		hidden_effect = {
+			country_event = {
+				id = SCO.294
+				days = 730
+			}
+		}
+		custom_effect_tooltip = SCO_Decrease_English_Population_tt
+		subtract_from_variable = {
+			SCO_English_Population_Percent_c = 0.42
+		}
+		SCO_Increase_English_Approval_point_one = yes
+		ENG = {
 			country_event = {
 				id = sco_fen.8
 
@@ -6711,106 +6786,106 @@ country_event = { #start of election chain
 }
 
 
-country_event = { #ilp position on unionism
-	id = sco_fen.73
-	title = sco_fen.73.t
-	desc = sco_fen.73.desc
-	picture = GFX_report_event_scottish_soldiers
+# country_event = { #ilp position on unionism
+# 	id = sco_fen.73
+# 	title = sco_fen.73.t
+# 	desc = sco_fen.73.desc
+# 	picture = GFX_report_event_scottish_soldiers
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_fen.73"}
+# 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_fen.73"}
 
-	is_triggered_only = yes
-	fire_only_once = yes
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
 
-	option = { #all hail the Union
-		name = sco_fen.73.a
-		set_country_flag = SCO_ILP_Unionists
-		hidden_effect = {
-				country_event =  {
-					id = sco_fen.74
-					days = 5
-				}
+# 	option = { #all hail the Union
+# 		name = sco_fen.73.a
+# 		set_country_flag = SCO_ILP_Unionists
+# 		hidden_effect = {
+# 				country_event =  {
+# 					id = sco_fen.74
+# 					days = 5
+# 				}
 
-		}
+# 		}
 
-	}
-	option = { #Scotland Forever
-		name = sco_fen.73.b
-		hidden_effect = {
-				if = {
-					limit = {
-						has_government = social_liberal
-					}
-					SCO_Refugees_Worsen = yes
-				}
-				country_event =  {
-					id = sco_fen.75
-					days = 5
-				}
+# 	}
+# 	option = { #Scotland Forever
+# 		name = sco_fen.73.b
+# 		hidden_effect = {
+# 				if = {
+# 					limit = {
+# 						has_government = social_liberal
+# 					}
+# 					SCO_Refugees_Worsen = yes
+# 				}
+# 				country_event =  {
+# 					id = sco_fen.75
+# 					days = 5
+# 				}
 
-		}
+# 		}
 
-	}
-}
+# 	}
+# }
 
-country_event = { #SNP Position on england (ILP Supports )
-	id = sco_fen.74
-	title = sco_fen.74.t
-	desc = sco_fen.74.desc
-	picture = GFX_report_event_scottish_soldiers
+# country_event = { #SNP Position on england (ILP Supports )
+# 	id = sco_fen.74
+# 	title = sco_fen.74.t
+# 	desc = sco_fen.74.desc
+# 	picture = GFX_report_event_scottish_soldiers
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_fen.74"}
+# 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_fen.74"}
 
-	is_triggered_only = yes
-	fire_only_once = yes
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
 
-	option = { #england is not our enemy
-		name = sco_fen.74.a
-		set_country_flag = SCO_SNP_Detente
-
-
-	}
-	option = { #we can never trust them
-		name = sco_fen.74.b
-		if = {
-			limit = {
-				has_government = social_liberal
-			}
-			SCO_Refugees_Worsen = yes
-		}
-
-	}
-}
-
-country_event = { #SNP Position on england (ILP does not support )
-	id = sco_fen.75
-	title = sco_fen.75.t
-	desc = sco_fen.75.desc
-	picture = GFX_report_event_scottish_soldiers
-
-	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_fen.75"}
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = { #england is not our enemy
-		name = sco_fen.75.a
-		set_country_flag = SCO_SNP_Detente
+# 	option = { #england is not our enemy
+# 		name = sco_fen.74.a
+# 		set_country_flag = SCO_SNP_Detente
 
 
-	}
-	option = { #we can never trust them
-		name = sco_fen.75.b
-		if = {
-			limit = {
-				has_government = social_liberal
-			}
-			SCO_Refugees_Worsen = yes
-		}
+# 	}
+# 	option = { #we can never trust them
+# 		name = sco_fen.74.b
+# 		if = {
+# 			limit = {
+# 				has_government = social_liberal
+# 			}
+# 			SCO_Refugees_Worsen = yes
+# 		}
+
+# 	}
+# }
+
+# country_event = { #SNP Position on england (ILP does not support )
+# 	id = sco_fen.75
+# 	title = sco_fen.75.t
+# 	desc = sco_fen.75.desc
+# 	picture = GFX_report_event_scottish_soldiers
+
+# 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_fen.75"}
+
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+
+# 	option = { #england is not our enemy
+# 		name = sco_fen.75.a
+# 		set_country_flag = SCO_SNP_Detente
 
 
-	}
-}
+# 	}
+# 	option = { #we can never trust them
+# 		name = sco_fen.75.b
+# 		if = {
+# 			limit = {
+# 				has_government = social_liberal
+# 			}
+# 			SCO_Refugees_Worsen = yes
+# 		}
+
+
+# 	}
+# }
 
 
 country_event = { # 1966 Election Results
@@ -6828,6 +6903,7 @@ country_event = { # 1966 Election Results
 		name = sco_fen.78.a
 		clr_country_flag = SCO_Election_Campaign_On
 		clr_country_flag = SCO_Election_Campaign_1966
+		clr_country_flag = president_campaign_already_done
 		
 		hidden_effect = {
 			if = {
@@ -6947,6 +7023,7 @@ country_event = { # 1966 Election Results
 				}
 				country_event = { id = sco_fen.81 days = 5 }
 			}
+
 		}
 	}
 
@@ -7737,7 +7814,7 @@ country_event = { #UP Victory 1966
 
 	option = {
 		name = sco_fen.81.a
-		SCO_Refugees_Improve = yes
+		SCO_Increase_English_Approval_point_two = yes
 		hidden_effect = {
 			add_stability = -0.1
 			add_war_support = -0.1
@@ -7795,7 +7872,7 @@ country_event = { #English Happy
 	option = {
 		name = sco_fen.82.a
 		add_stability = 0.05
-		SCO_Refugees_Improve = yes
+		SCO_Increase_English_Approval_point_one = yes
 		}
 
 }
@@ -7815,7 +7892,7 @@ country_event = { #English Angry
 		name = sco_fen.83.a
 		add_stability = -0.05
 		add_war_support = -0.05
-		SCO_Refugees_Worsen = yes
+		SCO_Decrease_English_Approval_point_two = yes
 		}
 
 }
@@ -8293,52 +8370,52 @@ country_event = { #BUF member complains
 }
 
 country_event = { #History lesson
-	id = SCO.285
-	title = SCO.285.t
-	desc = SCO.285.desc
+	id = SCO.2850
+	title = SCO.2850.t
+	desc = SCO.2850.desc
 	picture = GFX_report_event_wales_school
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.285" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.2850" }
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
-		name = SCO.285.a
+		name = SCO.2850.a
 		SCO_SNP_AI_Aberdeenshire_Decrease = yes
 	}
 }
 
 country_event = { #Language dispensation
-	id = SCO.286
-	title = SCO.286.t
-	desc = SCO.286.desc
+	id = SCO.2860
+	title = SCO.2860.t
+	desc = SCO.2860.desc
 	picture = GFX_report_event_wales_school
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.286" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.2860" }
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
-		name = SCO.286.a
+		name = SCO.2860.a
 		SCO_UP_AI_Lothian_Decrease = yes
 	}
 }
 
 country_event = { #Lessen Requirements
-	id = SCO.287
-	title = SCO.287.t
-	desc = SCO.287.desc
+	id = SCO.2870
+	title = SCO.2870.t
+	desc = SCO.2870.desc
 	picture = GFX_report_event_wales_school
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.287" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.2870" }
 
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
-		name = SCO.287.a
+		name = SCO.2870.a
 		SCO_UP_AI_Lothian_Decrease = yes
 		SCO_UP_AI_Dumfries_Decrease = yes
 		SCO_UP_AI_Fife_Decrease = yes
@@ -8375,7 +8452,6 @@ country_event = { #Culture Allowances
 
 	option = {
 		name = SCO.289.a
-		SCO_Refugees_Improve = yes
 	}
 }
 
@@ -11930,6 +12006,7 @@ country_event = { # 1970 Election Results
 		name = SCO.1977.a
 		clr_country_flag = SCO_Election_Campaign_On
 		clr_country_flag = SCO_Election_Campaign_1970
+		clr_country_flag = president_campaign_already_done
 		
 		hidden_effect = {
 			random_list = {
@@ -14476,109 +14553,36 @@ country_event = { #USA Forces Attack (ENG)
 	}
 }
 
-country_event = { #random election increase
-	id = SCO.4000
-	title = SCO.4000.t
-	desc = SCO.4000.desc
+country_event = { #hidden 1965 presidential election event
+	id = SCO.40101
+	title = SCO.40101.t
+	desc = SCO.40101.desc
 	picture = GFX_report_event_scottish_soldiers
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.40101"}
 
 	is_triggered_only = yes
+	fire_only_once = yes
 	hidden = yes
 
 	option = {
-		name = SCO.4000.a
+		name = SCO.40101.a
 		if = {
 			limit = {
-				has_country_flag = SCO_Election_Campaign_On
+				NOT = {
+					has_government = despotism
+				}
+				tag = SCO
 			}
 			country_event = {
-				id = SCO.4000
-				days = 10
+				id = SCO.4010
 			}
-			random_list = { #random increase
-			33 = { #SNP
-				random_list = {
-					16 = {
-						SCO_SNP_AI_Highland_Increase = yes
-					}
-					17 = {
-						SCO_SNP_AI_Fife_Increase = yes
-					}
-					17 = {
-						SCO_SNP_AI_Aberdeenshire_Increase = yes
-					}
-					17 = {
-						SCO_SNP_AI_Lanark_Increase = yes
-					}
-					17 = {
-						SCO_SNP_AI_Lothian_Increase = yes
-					}
-					16 = {
-						SCO_SNP_AI_Dumfries_Increase = yes
-					}
-				}
-			}
-			33 = { #ILP
-				random_list = {
-					16 = {
-						SCO_ILP_AI_Highland_Increase = yes
-					}
-					17 = {
-						SCO_ILP_AI_Fife_Increase = yes
-					}
-					17 = {
-						SCO_ILP_AI_Aberdeenshire_Increase = yes
-					}
-					17 = {
-						SCO_ILP_AI_Lanark_Increase = yes
-					}
-					17 = {
-						SCO_ILP_AI_Lothian_Increase = yes
-					}
-					16 = {
-						SCO_ILP_AI_Dumfries_Increase = yes
-					}
-				}
-
-			}
-			34 = { #UP
-				random_list = {
-					16 = {
-						SCO_UP_AI_Highland_Increase = yes
-					}
-					17 = {
-						SCO_UP_AI_Fife_Increase = yes
-					}
-					17 = {
-						SCO_UP_AI_Aberdeenshire_Increase = yes
-					}
-					17 = {
-						SCO_UP_AI_Lanark_Increase = yes
-					}
-					17 = {
-						SCO_UP_AI_Lothian_Increase = yes
-					}
-					16 = {
-						SCO_UP_AI_Dumfries_Increase = yes
-					}
-				}
-
-			}
-		}
-		SCO_Get_Percentage_of_Vote_Highlands = yes
-		SCO_Get_Percentage_of_Vote_Aberdeenshire = yes
-		SCO_Get_Percentage_of_Vote_Lanark = yes
-		SCO_Get_Percentage_of_Vote_Fife = yes
-		SCO_Get_Percentage_of_Vote_Dumfries = yes
-		SCO_Get_Percentage_of_Vote_Lothian = yes
-		SCO_Get_Percentage_of_Vote_National = yes
-		SCO_Get_Turnout_National = yes
 		}
 
 	}
-}
+}  
+
+
 
 country_event = { #Presidential Election 1965 start
 	id = SCO.4010
@@ -14586,16 +14590,10 @@ country_event = { #Presidential Election 1965 start
 	desc = SCO.4010.desc
 	picture = GFX_report_event_scottish_soldiers
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.4010" }
 
 	fire_only_once = yes
-	trigger = {
-		tag = SCO
-		NOT = {
-			has_government = despotism
-		}
-		date > 1965.5.1
-	}
+	is_triggered_only = yes
 
 	option = {
 		name = SCO.4010.a
@@ -14610,18 +14608,75 @@ country_event = { #Presidential Election 1965 start
 		
 		set_country_flag = SCO_Election_Campaign_Presidential_1965
 		set_country_flag = SCO_Election_Campaign_On
-		country_event = {
-			id = SCO.7006
-			hours = 6
-		}
+		set_country_flag = SCO_SNP_Campaign
+		add_political_power = 20
 		hidden_effect = {
 			country_event = {
-				id = SCO.4000
-				days = 1
+				id = SCO.7008
+				days = 3
+			}
+			country_event = {
+				id = SCO.7009
+				days = 6
 			}
 		}
 
 	}
+
+	option = {
+		name = SCO.4010.b
+		SCO_Get_Percentage_of_Vote_Highlands = yes
+		SCO_Get_Percentage_of_Vote_Aberdeenshire = yes
+		SCO_Get_Percentage_of_Vote_Lanark = yes
+		SCO_Get_Percentage_of_Vote_Fife = yes
+		SCO_Get_Percentage_of_Vote_Dumfries = yes
+		SCO_Get_Percentage_of_Vote_Lothian = yes
+		SCO_Get_Percentage_of_Vote_National = yes
+		SCO_Get_Turnout_National = yes
+		
+		set_country_flag = SCO_Election_Campaign_Presidential_1965
+		set_country_flag = SCO_Election_Campaign_On
+		set_country_flag = SCO_ILP_Campaign
+		hidden_effect = {
+			country_event = {
+				id = SCO.7007
+				days = 3
+			}
+			country_event = {
+				id = SCO.7009
+				days = 6
+			}
+		}
+
+	}
+
+	option = {
+		name = SCO.4010.c
+		SCO_Get_Percentage_of_Vote_Highlands = yes
+		SCO_Get_Percentage_of_Vote_Aberdeenshire = yes
+		SCO_Get_Percentage_of_Vote_Lanark = yes
+		SCO_Get_Percentage_of_Vote_Fife = yes
+		SCO_Get_Percentage_of_Vote_Dumfries = yes
+		SCO_Get_Percentage_of_Vote_Lothian = yes
+		SCO_Get_Percentage_of_Vote_National = yes
+		SCO_Get_Turnout_National = yes
+		
+		set_country_flag = SCO_Election_Campaign_Presidential_1965
+		set_country_flag = SCO_Election_Campaign_On
+		set_country_flag = SCO_UP_Campaign
+		hidden_effect = {
+			country_event = {
+				id = SCO.7008
+				days = 3
+			}
+			country_event = {
+				id = SCO.7007
+				days = 6
+			}
+		}
+
+	}
+
 }
 
 country_event = { #Presidential Election 1965 day
@@ -14642,88 +14697,55 @@ country_event = { #Presidential Election 1965 day
 		clr_country_flag = SCO_UP_President
 		clr_country_flag = SCO_Election_Campaign_On
 		clr_country_flag = SCO_Election_Campaign_Presidential_1965
-		hidden_effect = {
-			random_list = {
-				33 = {#snp
-				modifier = {
-					factor = 0
+		clr_country_flag = president_campaign_already_done
+		
+		if = {
+			limit = {
+				AND = {
 					check_variable = {
-						party_popularity@social_liberal	< 20
-
+						SCO_Election_National_SNP_Percentage > SCO_Election_National_ILP_Percentage
 					}
-				}
-				modifier = {
-					factor = 1.7
-						AND = {
-							check_variable = {
-								party_popularity@social_liberal	> party_popularity@social_democrat
-
-							}
-							check_variable = {
-								party_popularity@social_liberal	> party_popularity@social_conservative
-
-							}
-						}
-				}
-					country_event = {
-						id = SCO.4012
-						days = 2
-					}
-				}
-				33 = {#ilp
-				modifier = {
-					factor = 0
 					check_variable = {
-						party_popularity@social_democrat	< 20
-
+						SCO_Election_National_SNP_Percentage > SCO_Election_National_UP_Percentage
 					}
 				}
-				modifier = {
-					factor = 1.7
-						AND = {
-							check_variable = {
-								party_popularity@social_liberal	< party_popularity@social_democrat
 
-							}
-							check_variable = {
-								party_popularity@social_democrat	> party_popularity@social_conservative
-
-							}
-						}
-				}
-				country_event = {
-					id = SCO.4013
-					days = 2
-				}
-
-				}
-				34 = {#up
-				modifier = {
-					factor = 0
-					check_variable = {
-						party_popularity@social_conservative	< 20
-
-					}
-				}
-				modifier = {
-					factor = 1.7
-						AND = {
-							check_variable = {
-								party_popularity@social_conservative	> party_popularity@social_democrat
-
-							}
-							check_variable = {
-								party_popularity@social_liberal	< party_popularity@social_conservative
-
-							}
-						}
-				}
-				country_event = {
-					id = SCO.4014
-					days = 2
-				}
-				}
 			}
+			country_event = { id = SCO.4012 days = 2 }
+		}
+			
+			
+
+
+		if = {
+			limit = {
+				AND = {
+					check_variable = {
+						SCO_Election_National_ILP_Percentage > SCO_Election_National_SNP_Percentage
+					}
+					check_variable = {
+						SCO_Election_National_ILP_Percentage > SCO_Election_National_UP_Percentage
+					}
+				}
+
+			}
+			country_event = { id = SCO.4013 days = 2 }
+		}
+
+		
+		if = {
+			limit = {
+				AND = {
+					check_variable = {
+						SCO_Election_National_UP_Percentage > SCO_Election_National_ILP_Percentage
+					}
+					check_variable = {
+						SCO_Election_National_UP_Percentage > SCO_Election_National_SNP_Percentage
+					}
+				}
+
+			}
+			country_event = { id = SCO.4014 days = 2 }
 		}
 		
 
@@ -14751,7 +14773,7 @@ country_event = { #Presidential Election 1965 SNP Win
 			add_stability = 0.03
 			add_political_power = 40
 			else = {
-				add_political_power = -30
+				add_political_power = -50
 			}
 		}
 
@@ -14779,7 +14801,7 @@ country_event = { #Presidential Election 1965 ILP Win
 			add_stability = 0.03
 			add_political_power = 40
 			else = {
-				add_political_power = -30
+				add_political_power = -50
 			}
 		}
 
@@ -14849,12 +14871,6 @@ country_event = { #Presidential Election 1969 start
 			id = SCO.7006
 			hours = 6
 		}
-		hidden_effect = {
-			country_event = {
-				id = SCO.4000
-				days = 1
-			}
-		}
 
 	}
 }
@@ -14877,89 +14893,55 @@ country_event = { #Presidential Election 1969 day
 		clr_country_flag = SCO_UP_President
 		clr_country_flag = SCO_Election_Campaign_On
 		clr_country_flag = SCO_Election_Campaign_Presidential_1969
+		clr_country_flag = president_campaign_already_done
 		
-		hidden_effect = {
-			random_list = {
-				33 = {#snp
-				modifier = {
-					factor = 0
+		if = {
+			limit = {
+				AND = {
 					check_variable = {
-						party_popularity@social_liberal	< 20
-
+						SCO_Election_National_SNP_Percentage > SCO_Election_National_ILP_Percentage
 					}
-				}
-				modifier = {
-					factor = 1.7
-						AND = {
-							check_variable = {
-								party_popularity@social_liberal	> party_popularity@social_democrat
-
-							}
-							check_variable = {
-								party_popularity@social_liberal	> party_popularity@social_conservative
-
-							}
-						}
-				}
-					country_event = {
-						id = SCO.4017
-						days = 2
-					}
-				}
-				33 = {#ilp
-				modifier = {
-					factor = 0
 					check_variable = {
-						party_popularity@social_democrat	< 20
-
+						SCO_Election_National_SNP_Percentage > SCO_Election_National_UP_Percentage
 					}
 				}
-				modifier = {
-					factor = 1.7
-						AND = {
-							check_variable = {
-								party_popularity@social_liberal	< party_popularity@social_democrat
 
-							}
-							check_variable = {
-								party_popularity@social_democrat	> party_popularity@social_conservative
-
-							}
-						}
-				}
-				country_event = {
-					id = SCO.4018
-					days = 2
-				}
-
-				}
-				34 = {#up
-				modifier = {
-					factor = 0
-					check_variable = {
-						party_popularity@social_conservative	< 20
-
-					}
-				}
-				modifier = {
-					factor = 1.7
-						AND = {
-							check_variable = {
-								party_popularity@social_conservative	> party_popularity@social_democrat
-
-							}
-							check_variable = {
-								party_popularity@social_liberal	< party_popularity@social_conservative
-
-							}
-						}
-				}
-				country_event = {
-					id = SCO.4019
-					days = 2
-				}
-				}
 			}
+			country_event = { id = SCO.4017 days = 2 }
+		}
+			
+			
+
+
+		if = {
+			limit = {
+				AND = {
+					check_variable = {
+						SCO_Election_National_ILP_Percentage > SCO_Election_National_SNP_Percentage
+					}
+					check_variable = {
+						SCO_Election_National_ILP_Percentage > SCO_Election_National_UP_Percentage
+					}
+				}
+
+			}
+			country_event = { id = SCO.4018 days = 2 }
+		}
+
+		
+		if = {
+			limit = {
+				AND = {
+					check_variable = {
+						SCO_Election_National_UP_Percentage > SCO_Election_National_ILP_Percentage
+					}
+					check_variable = {
+						SCO_Election_National_UP_Percentage > SCO_Election_National_SNP_Percentage
+					}
+				}
+
+			}
+			country_event = { id = SCO.4019 days = 2 }
 		}
 
 	}
@@ -15270,6 +15252,14 @@ country_event = { #The Presidents Campaign
 		name = sco_elections.1.a
 		SCO_Highland_Increase = yes
 		SCO_Fife_Increase = yes
+		SCO_Get_Percentage_of_Vote_Highlands = yes
+		SCO_Get_Percentage_of_Vote_Aberdeenshire = yes
+		SCO_Get_Percentage_of_Vote_Lanark = yes
+		SCO_Get_Percentage_of_Vote_Fife = yes
+		SCO_Get_Percentage_of_Vote_Dumfries = yes
+		SCO_Get_Percentage_of_Vote_Lothian = yes
+		SCO_Get_Percentage_of_Vote_National = yes
+		SCO_Get_Turnout_National = yes
 		
 	}
 
@@ -15277,6 +15267,14 @@ country_event = { #The Presidents Campaign
 		name = sco_elections.1.a
 		SCO_Lothian_Increase = yes
 		SCO_Lanark_Increase = yes
+		SCO_Get_Percentage_of_Vote_Highlands = yes
+		SCO_Get_Percentage_of_Vote_Aberdeenshire = yes
+		SCO_Get_Percentage_of_Vote_Lanark = yes
+		SCO_Get_Percentage_of_Vote_Fife = yes
+		SCO_Get_Percentage_of_Vote_Dumfries = yes
+		SCO_Get_Percentage_of_Vote_Lothian = yes
+		SCO_Get_Percentage_of_Vote_National = yes
+		SCO_Get_Turnout_National = yes
 		
 	}
 
@@ -15531,8 +15529,9 @@ country_event = { #Aid English Bill - SNP allies
 	option = {
 		name = SCO.6010.a
 		unlock_national_focus = SCO_It_Passes
-		SCO_ILP_AI_Dumfries_Increase = yes
-		SCO_UP_AI_Dumfries_Increase = yes
+		add_political_power = 20
+		SCO_Decrease_English_Poverty_point_one = yes
+		SCO_Increase_English_Approval_point_zero_five = yes
 
 	}
 }
@@ -15551,7 +15550,8 @@ country_event = { #Aid English Bill - SNP Stands Strong
 	option = {
 		name = SCO.6011.a
 		unlock_national_focus = SCO_It_Fails
-		SCO_SNP_AI_Fife_Increase = yes
+		SCO_Decrease_English_Approval_point_one = yes
+		add_political_power = -10
 		country_event = {
 			id = SCO.6014
 			days = 1
@@ -15726,7 +15726,7 @@ country_event = { #Wimberley is Not Happy
 					days = 5
 				}
 		}
-		add_political_power = 50
+		
 
 	}
 }
@@ -15832,10 +15832,6 @@ country_event = { #Parliament Disarray (1962 election start)
 		hidden_effect = {
 			country_event = {
 				id = SCO.6025
-			}
-			country_event = {
-				id = SCO.4000
-				days = 2
 			}
 		}
 
