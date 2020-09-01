@@ -1,0 +1,94 @@
+add_namespace = custom_TNO_ENG
+
+
+country_event = {
+	id = custom_TNO_ENG.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event custom_TNO_ENG.1"}
+	title = custom_TNO_ENG.1.t
+	desc = custom_TNO_ENG.1.desc
+	picture = GFX_report_event_generic_read_write
+
+	trigger = {
+			has_completed_focus = FEN_start_reconstruction
+			OR = {
+				has_game_rule = {
+						rule = HMMLR_IDEOLOGY_ROUTE
+						option = HMMLR_IDEOLOGY_ROUTE_LIBSOC
+				}
+				has_game_rule = {
+						rule = HMMLR_IDEOLOGY_ROUTE
+						option = HMMLR_IDEOLOGY_ROUTE_SOCCON
+				}
+			}
+		}
+	hidden = yes
+	fire_only_once = yes
+
+	option = { #
+		name = custom_TNO_ENG.1.a
+		if = {
+				limit = { has_game_rule = { rule = HMMLR_IDEOLOGY_ROUTE option = RULE_OPTION_HMMLR_IDEOLOGY_ROUTE_SOCCON } }
+				every_owned_state = {
+					set_variable = { TNO_Britain_ElectionSeason_AP_v = 25 }
+					set_variable = { TNO_Britain_ElectionSeason_AP_pi = 12 }
+					TNO_Britain_ElectionSeason_AddPop_InState = yes
+					custom_effect_tooltip = ENG_ParliamentMechanic_Party_Support_12_add
+				}
+		}
+		else_if = {
+				limit = { has_game_rule = { rule = HMMLR_IDEOLOGY_ROUTE option = RULE_OPTION_HMMLR_IDEOLOGY_ROUTE_LIBSOC } }
+					every_owned_state = {
+					set_variable = { TNO_Britain_ElectionSeason_AP_v = 25 }
+					set_variable = { TNO_Britain_ElectionSeason_AP_pi = 14 }
+					TNO_Britain_ElectionSeason_AddPop_InState = yes
+					custom_effect_tooltip = ENG_ParliamentMechanic_Party_Support_14_add
+				}
+			}
+		}
+} 
+
+country_event = {
+	id = custom_TNO_ENG.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event custom_TNO_ENG.1"}
+	title = custom_TNO_ENG.2.t
+	desc = custom_TNO_ENG.2.desc
+	picture = GFX_report_event_generic_read_write
+
+	trigger = {
+			has_completed_focus = ENG_an_end_of_the_disaster
+			OR = {
+				has_game_rule = {
+						rule = COLLAB_IDEOLOGY_ROUTE
+						option = COLLAB_IDEOLOGY_ROUTE_AUTHDEM
+				}
+				has_game_rule = {
+						rule = COLLAB_IDEOLOGY_ROUTE
+						option = COLLAB_IDEOLOGY_ROUTE_SOCCON
+				}
+			}
+		}
+	hidden = yes
+	fire_only_once = yes
+
+	option = { #
+		name = custom_TNO_ENG.2.a
+		if = {
+				limit = { has_game_rule = { rule = COLLAB_IDEOLOGY_ROUTE option = COLLAB_IDEOLOGY_ROUTE_AUTHDEM } }
+				every_owned_state = {
+					set_variable = { TNO_Britain_ElectionSeason_AP_v = 25 }
+					set_variable = { TNO_Britain_ElectionSeason_AP_pi = 8 }
+					TNO_Britain_ElectionSeason_AddPop_InState = yes
+					custom_effect_tooltip = ENG_ParliamentMechanic_Party_Support_8_add
+				}
+		}
+		else_if = {
+				limit = { has_game_rule = { rule = COLLAB_IDEOLOGY_ROUTE option = COLLAB_IDEOLOGY_ROUTE_SOCCON } }
+					every_owned_state = {
+					set_variable = { TNO_Britain_ElectionSeason_AP_v = 25 }
+					set_variable = { TNO_Britain_ElectionSeason_AP_pi = 6 }
+					TNO_Britain_ElectionSeason_AddPop_InState = yes
+					custom_effect_tooltip = ENG_ParliamentMechanic_Party_Support_6_add
+					}
+				}
+	}
+}

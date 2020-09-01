@@ -1,0 +1,614 @@
+#Goch Nationalizations
+wal_goch_nationalization_category = {
+	wal_goch_nat_steel = {
+		available = {
+			social_democrat > 0.5
+		}
+		cost = 50
+		ai_will_do = {
+			factor = 1
+		}
+		complete_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_steel"
+			custom_effect_tooltip = WAL_Costs200Mil
+			random_owned_controlled_state = {
+				add_resource = {
+    				type = steel
+    				amount = 5
+				}
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 200.00
+  							compare = greater_than_or_equals
+						}
+					}
+					subtract_from_variable = {
+						var = money_reserves
+						value = 200.00
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 200.00
+  							compare = less_than
+						}
+					}
+					add_to_variable = {
+						var = national_debt
+						value = 200.00
+					}
+				}
+			}
+		}
+	}
+	wal_goch_nat_oil_pipes = {
+		available = {
+			social_democrat > 0.5
+		}
+		cost = 50
+		ai_will_do = {
+			factor = 1
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_oil_pipes"
+			custom_effect_tooltip = WAL_Costs200Mil
+			random_owned_controlled_state = {
+				add_resource = {
+    				type = oil
+    				amount = 5
+				}
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 200.00
+  							compare = greater_than_or_equals
+						}
+					}
+					subtract_from_variable = {
+						var = money_reserves
+						value = 200.00
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 200.00
+  							compare = less_than
+						}
+					}
+					add_to_variable = {
+						var = national_debt
+						value = 200.00
+					}
+				}
+			}
+		}
+	}
+	wal_goch_nat_roads = {
+		available = {
+			social_democrat > 0.5
+		}
+		cost = 50
+		ai_will_do = {
+			factor = 1
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_roads"
+			custom_effect_tooltip = WAL_Costs200Mil
+			random_owned_state = {
+				add_building_construction = {
+		    		type = infrastructure
+		    		level = 1
+   		    		instant_build = yes
+				}
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 200.00
+  							compare = greater_than_or_equals
+						}
+					}
+					subtract_from_variable = {
+						var = money_reserves
+						value = 200.00
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 200.00
+  							compare = less_than
+						}
+					}
+					add_to_variable = {
+						var = national_debt
+						value = 200.00
+					}
+				}
+			}
+		}
+	}
+	wal_goch_nat_factories = {
+		available = {
+			social_democrat > 0.5
+		}
+		cost = 75
+		ai_will_do = {
+			factor = 1
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_factories"
+			custom_effect_tooltip = WAL_FactoryCosts500Mil
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+   			 		type = industrial_complex
+    				level = 1
+    				instant_build = yes
+				}
+			}
+			add_timed_idea = {
+				idea = WAL_NatFactoryTemp
+				days = 90
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 500.00
+  							compare = greater_than_or_equals
+						}
+					}
+					subtract_from_variable = {
+						var = money_reserves
+						value = 500.00
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 500.00
+  							compare = less_than
+						}
+					}
+					add_to_variable = {
+						var = national_debt
+						value = 500.00
+					}
+				}
+			}
+		}
+	}
+	wal_goch_nat_promote = {
+		cost = 50
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			social_democrat < 0.50
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_promote"
+			custom_effect_tooltip = WAL_PropCosts50Mil
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 50.00
+  							compare = greater_than_or_equals
+						}
+					}
+					subtract_from_variable = {
+						var = money_reserves
+						value = 50.00
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+  							var = money_reserves
+  							value = 50.00
+  							compare = less_than
+						}
+					}
+					add_to_variable = {
+						var = national_debt
+						value = 50.00
+					}
+				}
+			}
+		}
+	}
+}
+
+
+#Terrorism
+wal_fwa_terrorism_category = {
+	wal_find_fwa_low = {
+		available = {
+			NOT = {
+				has_global_flag = wal_finding_fwa
+			}
+			NOT = {
+				has_country_flag = wal_fwa_terrorism_end
+			}
+		}
+		cost = 25
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = WAL_ELECTIONS_1963
+						option = WAL_ELECTIONS_1963_FREE_WALES_ARMY
+					}
+			}
+		}
+		complete_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision wal_find_fwa_low"
+			custom_effect_tooltip = WAL_Find_The_FWA_low
+			hidden_effect = {
+				set_global_flag = wal_finding_fwa
+				random_list = {
+					30 = {
+						country_event = {
+							id = walunion.24
+							days = 14
+						}
+					}
+					70 = {
+						country_event = {
+							id = walunion.25
+							days = 14
+						}
+					}
+				}
+			}
+		}
+	}
+	wal_find_fwa_medium = {
+		available = {
+			NOT = {
+				has_global_flag = wal_finding_fwa
+			}
+			NOT = {
+				has_country_flag = wal_fwa_terrorism_end
+			}
+		}
+		cost = 50
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = WAL_ELECTIONS_1963
+						option = WAL_ELECTIONS_1963_FREE_WALES_ARMY
+					}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_find_fwa_medium"
+			custom_effect_tooltip = WAL_Find_The_FWA_medium
+			hidden_effect = {
+				set_global_flag = wal_finding_fwa
+				random_list = {
+					55 = {
+						country_event = {
+							id = walunion.24
+							days = 14
+						}
+					}
+					45 = {
+						country_event = {
+							id = walunion.25
+							days = 14
+						}
+					}
+				}
+			}
+		}
+	}
+	wal_find_fwa_high = {
+		available = {
+			NOT = {
+				has_global_flag = wal_finding_fwa
+			}
+			NOT = {
+				has_country_flag = wal_fwa_terrorism_end
+			}
+		}
+		cost = 75
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 0
+					has_game_rule = {
+						rule = WAL_ELECTIONS_1963
+						option = WAL_ELECTIONS_1963_FREE_WALES_ARMY_COUP
+					}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_find_fwa_high"
+			custom_effect_tooltip = WAL_Find_The_FWA_high
+			hidden_effect = {
+				set_global_flag = wal_finding_fwa
+				random_list = {
+					80 = {
+						country_event = {
+							id = walunion.24
+							days = 14
+						}
+					}
+					20 = {
+						country_event = {
+							id = walunion.25
+							days = 14
+						}
+					}
+				}
+			}
+		}
+	}
+	wal_find_fwa_custom_path_cheat = {
+		visible = {
+			has_game_rule = { 
+				rule = WAL_ELECTIONS_1963 option = WAL_ELECTIONS_1963_INDEPENDENTS
+			}
+         }
+		available = {
+			NOT = {
+				has_global_flag = wal_finding_fwa
+			}
+			NOT = {
+				has_country_flag = wal_fwa_terrorism_end
+			}
+		}
+		cost = 0
+		ai_will_do = {
+			factor = 100
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_find_fwa_high"
+			custom_effect_tooltip = WAL_Find_The_FWA_high
+			hidden_effect = {
+				set_global_flag = wal_finding_fwa
+				country_event = {
+							id = walunion.24
+							days = 14
+						}
+			}
+		}
+	}
+}
+
+wal_union_navy_category = {
+	wal_rent_ulster_dockyards = {
+		available = {
+			has_country_flag = WAL_UnionistNavyDream
+			NOT = {
+              has_idea = WAL_RentedUlster
+             }
+		}
+		cost = 25
+		ai_will_do = {
+			factor = 8
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_rent_ulster_dockyards"
+			custom_effect_tooltip = WAL_RentingUlster
+			hidden_effect = {
+
+			ULS = {
+			country_event = {
+                id = WALULS.1
+                hours = 1
+                	}
+				}	
+			}
+		}
+	}
+
+	wal_purchase_submarine = {
+		available = {
+			has_country_flag = WAL_UnionistNavyDream
+			has_idea = WAL_RentedUlster
+		}
+		cost = 100
+		ai_will_do = {
+			factor = 1
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_destroyer"
+			custom_effect_tooltip = Wal_3_mil_please
+			hidden_effect = { 
+
+					add_equipment_production = {
+                    equipment = {
+                        type = ship_hull_submarine_1
+                        creator = "WAL" 
+                        version_name = "S Class"
+                    }
+                    name = "Ulster Submarine"
+                    requested_factories = 1
+                    progress = 1
+                    amount = 1
+                    }
+
+				if = {
+					limit = {
+						WAL = {
+							check_variable = {
+								var = money_reserves
+								value = 14.50
+								compare = greater_than_or_equals
+							}
+						}
+					}
+					WAL = {
+						subtract_from_variable = {
+							var = money_reserves
+							value = 14.50
+						}
+					}
+				}
+				else = {
+					add_to_variable = {
+						var = national_debt
+						value = 14.50
+					}
+				}
+			}
+		}
+	}
+
+	wal_purchase_destroyer = {
+		available = {
+			has_country_flag = WAL_UnionistNavyDream
+			has_idea = WAL_RentedUlster
+		}
+		cost = 125
+		ai_will_do = {
+			factor = 1
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_destroyer"
+			custom_effect_tooltip = Wal_5_mil_please
+			hidden_effect = { 
+
+					add_equipment_production = {
+                    equipment = {
+                        type = ship_hull_light_1
+                        creator = "WAL" 
+                        version_name = "H Class"
+                    }
+                    name = "Ulster Destroyer"
+                    requested_factories = 1
+                    progress = 1
+                    amount = 1
+                    }
+
+				if = {
+					limit = {
+						WAL = {
+							check_variable = {
+								var = money_reserves
+								value = 17.50
+								compare = greater_than_or_equals
+							}
+						}
+					}
+					WAL = {
+						subtract_from_variable = {
+							var = money_reserves
+							value = 17.50
+						}
+					}
+				}
+				else = {
+					add_to_variable = {
+						var = national_debt
+						value = 17.50
+					}
+				}
+			}
+		}
+	}
+
+	wal_purchase_light_cruiser = {
+		available = {
+			has_country_flag = WAL_UnionistNavyDream
+			has_idea = WAL_RentedUlster
+		}
+		cost = 150
+		ai_will_do = {
+			factor = 0
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_light_cruiser"
+			custom_effect_tooltip = Wal_13_mil_please
+			hidden_effect = { #Someone make a light cruiser spawn plz
+
+			add_equipment_production = {
+                    equipment = {
+                        type = ship_hull_cruiser_1
+                        creator = "WAL" 
+                        version_name = "Town Class"
+                    }
+                    name = "Ulster Cruiser"
+                    requested_factories = 1
+                    progress = 1
+                    amount = 1
+                    }
+
+				if = {
+					limit = {
+						WAL = {
+							check_variable = {
+								var = money_reserves
+								value = 27.50
+								compare = greater_than_or_equals
+							}
+						}
+					}
+					WAL = {
+						subtract_from_variable = {
+							var = money_reserves
+							value = 27.50
+						}
+					}
+				}
+				else = {
+					add_to_variable = {
+						var = national_debt
+						value = 27.50
+					}
+				}
+			}
+		}
+	}
+}
+
+
+		
+
+
+	
+				
