@@ -1,0 +1,5158 @@
+﻿###ORENBURG EVENTS###
+
+add_namespace = ORE
+
+
+## ORS Strike at Orenburg - Orenburgs responce
+country_event = {
+	id = ORE.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1"}
+	title = ORE.1.t
+	desc = ORE.1.d
+	picture = GFX_report_event_dirlewanger
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1.a
+		ai_chance = { factor = 20 }
+		add_manpower = -3000
+		add_political_power = 50
+		hidden_effect = {
+		    random_list = {
+                30 = {
+                    ORS = {
+				        country_event = { id = ORS.204 days = 2 }
+                    }
+			    }
+                70 = {
+			        ORS = {
+                        country_event = { id = ORS.203 days = 2 }
+                    }
+			    }	
+            }
+		}
+	}
+	
+	option = {
+	    name = ORE.1.b
+		ai_chance = { factor = 80}
+		add_manpower = -500
+		add_political_power = -25
+		hidden_effect = {
+		    random_list = {
+                10 = {
+                    ORS = {
+				        country_event = { id = ORS.204 days = 2 }
+                    }
+			    }
+                90 = {
+			        ORS = {
+                        country_event = { id = ORS.203 days = 2 }
+                    }
+			    }	
+            }
+		}
+	}
+}
+
+##Deep in the West - We're being raided!
+country_event = {
+	id = ORE.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.2"}
+	title = ORE.2.t
+	desc = ORE.2.d
+	picture = GFX_report_event_ORS_strike_orenburg
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.2.a
+		ai_chance = { factor = 80 }
+		add_timed_idea = { 
+		    idea = ORS_recently_raided
+			days = 90 
+		}
+		hidden_effect = {
+		    ORS = {
+			    country_event = { id = ORS.267 days = 5 }
+		    }
+		}
+	}
+}
+
+##The Pincer - We're being raided!
+country_event = {
+	id = ORE.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.3"}
+	title = ORE.3.t
+	desc = ORE.3.d
+	picture = GFX_report_event_ORS_strike_orenburg
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.3.a
+		ai_chance = { factor = 80 }
+		add_timed_idea = { idea = ORS_recently_raided days = 90 }
+		hidden_effect = {
+		    random_list = {
+                70 = {
+                    ORS = {				         
+						country_event = { id = ORS.271 days = 2 }
+				    }
+                }
+                30 = {
+			        ORS = {
+                        country_event = { id = ORS.272 days = 2 }
+				    }
+                }
+            }
+		}
+	}
+}
+
+##Miscellaneous -at least for now-
+
+country_event = { #something to do with burba i guess
+	id = ORE.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.10"}
+	title = ORE.10.t
+	desc = ORE.10.d
+	picture = GFX_report_event_russia_burba
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ORE.10.a
+		add_popularity = { ideology = authoritarian_democrat popularity = 0.2 }
+	}
+}
+country_event = { #something to do with malenkov i guess
+	id = ORE.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.20"}
+	title = ORE.20.t
+	desc = ORE.20.d
+	picture = GFX_report_event_ORE_malenkov1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ORE.20.a
+		add_popularity = { ideology = communist popularity = 0.2 }
+	}
+}
+
+### Warlord starter pack
+
+country_event = {
+	id = ORE.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.4"}
+ 	title = ORE.4.t
+ 	desc = ORE.4.d
+ 	picture = GFX_report_event_orenburg_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.4.a
+ 	}
+}
+
+country_event = {
+	id = ORE.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.5"}
+ 	title = ORE.5.t
+ 	desc = ORE.5.d
+ 	picture = GFX_report_event_russian_refugees
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #League is our friend, and we need to get closer
+ 		name = ORE.5.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		swap_ideas = {
+			remove_idea = tno_refugees_give_me_your_poor
+			add_idea = tno_refugees_vetted_entry
+		}
+		custom_effect_tooltip = ORE_centralize_med
+		
+ 	}
+	option = { #League can possibly be friendly
+ 		name = ORE.5.b
+		ai_chance = {
+			factor = 70
+		}
+		trigger = {
+			has_political_power > 10
+		}
+		add_political_power = -10
+		add_to_variable = {
+			ORECentralizedPower = 0.5
+		}
+		custom_effect_tooltip = ORE_centralize_little
+ 	}
+	option = { #League is an exploiter
+ 		name = ORE.5.c
+		ai_chance = {
+			factor = 80
+		}
+		add_political_power = 25
+		tno_refugees_worsen = yes
+ 	}
+}
+
+country_event = {
+	id = ORE.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.6"}
+ 	title = ORE.6.t
+ 	desc = ORE.6.d
+ 	picture = GFX_report_event_farm
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #Can we please whip them into shape
+ 		name = ORE.6.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 50
+		}
+		add_political_power = -50
+		add_to_variable = {
+			agriculture_monthly_change = 2
+		}
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		tno_improve_agriculture = yes
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = { #Meh they produce enough food
+ 		name = ORE.6.b
+		ai_chance = {
+			factor = 80
+		}
+		add_political_power = 25
+ 	}
+}
+
+country_event = {
+	id = ORE.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.7"}
+ 	title = ORE.7.t
+ 	desc = ORE.7.d
+ 	picture = GFX_report_event_commune_protest
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #No
+ 		name = ORE.7.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 50
+		}
+		add_to_variable = {
+			ORECentralizedPower = 2
+		}
+		add_political_power = -50
+		custom_effect_tooltip = ORE_centralize_great
+ 	}
+	option = { #Status quo is ok I guess
+ 		name = ORE.7.b
+		ai_chance = {
+			factor = 90
+		}
+		add_political_power = 10
+ 	}
+	option = { #The communes demand more autonomy
+ 		name = ORE.7.c
+		ai_chance = {
+			factor = 50
+		}
+		add_political_power = 50
+		add_to_variable = {
+			ORECentralizedPower = -1
+		}
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = {
+	id = ORE.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.8"}
+ 	title = ORE.8.t
+ 	desc = ORE.8.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #Have Guards protect the caravans	
+ 		name = ORE.8.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		tno_security_improve = yes
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = { #No need
+ 		name = ORE.8.b
+		ai_chance = {
+			factor = 60
+		}
+ 	}
+}
+
+country_event = { #Communes demand we stop funding roads with their taxes
+	id = ORE.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.9"}
+ 	title = ORE.9.t
+ 	desc = ORE.9.d
+ 	picture = GFX_report_event_ural_road
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.9.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+ 	}
+	option = { #No
+ 		name = ORE.9.b
+		ai_chance = {
+			factor = 60
+		}
+		add_to_variable = {
+			ORECentralizedPower = -1
+		}
+		add_political_power = 25
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = { #Communes demand we allow longer times for guest speakers in the Council
+	id = ORE.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.11"}
+ 	title = ORE.11.t
+ 	desc = ORE.11.d
+ 	picture = GFX_report_event_orenburg_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.11.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 10
+		}
+		add_political_power = -10
+ 	}
+	option = { #No
+ 		name = ORE.11.b
+		ai_chance = {
+			factor = 40
+		}
+		add_to_variable = {
+			ORECentralizedPower = -0.5
+		}
+		add_political_power = 10
+		custom_effect_tooltip = ORE_decentralize_some
+ 	}
+}
+
+country_event = { #Communes demand no more interference in their militia training
+	id = ORE.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.12"}
+ 	title = ORE.12.t
+ 	desc = ORE.12.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.12.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		tno_training_improve = yes	
+ 	}
+	option = { #No
+ 		name = ORE.12.b
+		ai_chance = {
+			factor = 60
+		}
+		add_to_variable = {
+			ORECentralizedPower = -1.5
+		}
+		add_political_power = 25
+		army_experience = -10
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = { #Communes demand we limit Ural traders to only Orenburg
+	id = ORE.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.13"}
+ 	title = ORE.13.t
+ 	desc = ORE.13.d
+ 	picture = GFX_report_event_russia_trade_caravan
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.13.b
+		ai_chance = {
+			factor = 80
+		}
+		trigger = {
+			has_political_power > 20
+		}
+		tno_trade_laws_clear = yes
+		add_ideas = tno_trade_laws_closed_economy
+		add_political_power = -20
+ 	}
+	option = { #No
+ 		name = ORE.13.a
+		ai_chance = {
+			factor = 30
+		}
+		add_to_variable = {
+			ORECentralizedPower = -1
+		}
+		add_political_power = 25
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = { #Communes demand a provision for secession
+	id = ORE.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.14"}
+ 	title = ORE.14.t
+ 	desc = ORE.14.d
+ 	picture = GFX_report_event_commune_protest
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.14.a
+		ai_chance = {
+			factor = 200
+		}
+		trigger = {
+			has_political_power > 15
+		}
+		add_political_power = -25
+		add_stability = 0.10
+ 	}
+	option = { #No
+ 		name = ORE.14.b
+		ai_chance = {
+			factor = 10
+		}
+		add_to_variable = {
+			ORECentralizedPower = -3
+		}
+		add_political_power = 50
+		add_stability = -0.05
+		custom_effect_tooltip = ORE_decentralize_great
+		set_country_flag = ORE_secession_legal
+ 	}
+}
+
+country_event = { #Communes demand we let them handle their own education
+	id = ORE.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.15"}
+ 	title = ORE.15.t
+ 	desc = ORE.15.d
+ 	picture = GFX_report_event_orenburg_school
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.15.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 15
+		}
+		add_political_power = -15
+		tno_improve_academic_base = yes
+ 	}
+	option = { #No
+ 		name = ORE.15.b
+		ai_chance = {
+			factor = 80
+		}
+		add_to_variable = {
+			ORECentralizedPower = -0.5
+		}
+		add_political_power = 15
+		custom_effect_tooltip = ORE_decentralize_some
+ 	}
+}
+
+country_event = { #Congress success
+	id = ORE.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.16"}
+ 	title = ORE.16.t
+ 	desc = ORE.16.d
+ 	picture = GFX_report_event_russia_burba2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.16.a
+		add_stability = 0.05
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+ 	}
+}
+
+country_event = { #Congress failed
+	id = ORE.160
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.160"}
+ 	title = ORE.160.t
+ 	desc = ORE.160.d
+ 	picture = GFX_report_event_congress_failure
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.160.a
+		add_stability = -0.05
+ 	}
+}
+
+country_event = {
+	id = ORE.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.17"}
+ 	title = ORE.17.t
+ 	desc = ORE.17.d
+ 	picture = GFX_report_event_ORS_forest_patrol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.17.a
+		trigger = {
+			has_political_power > 50
+		}
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.17.b
+ 	}
+}
+
+country_event = {
+	id = ORE.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.18"}
+ 	title = ORE.18.t
+ 	desc = ORE.18.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.18.a
+ 	}
+	option = {
+ 		name = ORE.18.b
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		country_event = {
+			id = ORE.180
+			days = 1
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.180
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.180"}
+ 	title = ORE.180.t
+ 	desc = ORE.180.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.180.a
+		random_list = {
+			30 = {
+				add_manpower = 1750
+			}
+			20 = {
+				add_manpower = 2500
+			}
+			10 = {
+				add_manpower = 3300
+			}
+			20 = {
+				add_manpower = 1300
+			}
+			20 = {
+				add_manpower = 2100
+			}
+		}
+		hidden_effect = {
+			country_event = { id = ORE.181 days = 6 }
+		}
+ 	}
+}
+
+country_event = { #Council investigates
+	id = ORE.181
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.181"}
+ 	title = ORE.181.t
+ 	desc = ORE.181.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #Cover our tracks
+ 		name = ORE.181.a
+		ai_chance = {
+			factor = 200
+		}
+		trigger = {
+			has_political_power > 10
+		}
+		hidden_effect = {
+			country_event = { id = ORE.182 days = 15 }
+		}
+		add_political_power = -10
+		custom_effect_tooltip = a_orenburg_tt
+	}
+	option = { #Oh crap.
+ 		name = ORE.181.b
+		hidden_effect = {
+			country_event = { id = ORE.183 days = 9 }
+		}
+		custom_effect_tooltip = b_orenburg_tt
+ 	}
+}
+
+country_event = { #Coverup succeeds
+	id = ORE.182
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.182"}
+ 	title = ORE.182.t
+ 	desc = ORE.182.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = { 
+ 		name = ORE.182.a
+		add_political_power = 10
+ 	}
+}
+
+country_event = { #Coverup fails
+	id = ORE.183
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.183"}
+ 	title = ORE.183.t
+ 	desc = ORE.183.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = { 
+ 		name = ORE.183.a
+		add_manpower = -1200
+		add_political_power = -25
+		add_stability = -0.05
+		add_popularity = {
+			ideology = socialist
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.10
+		}
+		custom_effect_tooltip = ORE_decentralize_great
+		subtract_from_variable = {
+			ORECentralizedPower = 4
+		}
+ 	}
+	option = { 
+ 		name = ORE.183.b
+		add_political_power = -50
+		add_stability = -0.05
+		add_popularity = {
+			ideology = socialist
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.10
+		}
+		custom_effect_tooltip = ORE_decentralize_great
+		subtract_from_variable = {
+			ORECentralizedPower = 4
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.19"}
+ 	title = ORE.19.t
+ 	desc = ORE.19.d
+ 	picture = GFX_report_event_soviet_militia2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.19.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		tno_training_improve = yes	
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.19.b
+		ai_chance = {
+			factor = 10
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.21"}
+ 	title = ORE.21.t
+ 	desc = ORE.21.d
+ 	picture = GFX_report_event_ORS_Lysenko
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.21.a
+ 	}
+}
+
+country_event = {
+	id = ORE.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.22"}
+ 	title = ORE.22.t
+ 	desc = ORE.22.d
+ 	picture = GFX_report_event_generic_riot
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.22.a
+ 	}
+}
+
+country_event = {
+	id = ORE.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.23"}
+ 	title = ORE.23.t
+ 	desc = ORE.23.d
+ 	picture = GFX_report_event_congress_failure
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.23.a
+ 	}
+}
+
+country_event = {
+	id = ORE.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.24"}
+ 	title = ORE.24.t
+ 	desc = ORE.24.d
+ 	picture = GFX_report_event_russia_burba_angry
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.24.a
+ 	}
+}
+
+country_event = {
+	id = ORE.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.25"}
+ 	title = ORE.25.t
+ 	desc = ORE.25.d
+ 	picture = GFX_report_event_orenburg_congress2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.25.a
+ 	}
+}
+
+country_event = {
+	id = ORE.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.26"}
+ 	title = ORE.26.t
+ 	desc = ORE.26.d
+ 	picture = GFX_report_event_generic_communist_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.26.a
+ 	}
+}
+
+country_event = {
+	id = ORE.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.27"}
+ 	title = ORE.27.t
+ 	desc = ORE.27.d
+ 	picture = GFX_report_event_orenburg_congress2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.27.a
+		add_political_power = 40
+		add_popularity = {
+			ideology = communist 
+			popularity = 0.07
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat 
+			popularity = 0.07
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.28"}
+ 	title = ORE.28.t
+ 	desc = ORE.28.d
+ 	picture = GFX_report_event_generic_communist_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.28.a
+		ai_chance = {
+			factor = 100
+		}
+		add_political_power = 25
+		add_stability = 0.05
+ 	}
+}
+
+country_event = {
+	id = ORE.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.29"}
+ 	title = ORE.29.t
+ 	desc = ORE.29.d
+ 	picture = GFX_report_event_congress_failure
+	immediate = {
+		hidden_effect = {
+			load_focus_tree = {
+				tree = tno_orenburg_tree_2
+				keep_completed = yes
+			}
+		}
+	}
+	is_triggered_only = yes
+ 	option = {
+ 		name = ORE.29.a #new varible gaming! wait and see who wins!#
+		if = {
+			limit = {
+			    OR = {
+				    has_game_rule = {
+					    rule = ORE_ideology_route
+					    option = ORE_IDEOLOGY_ROUTE_LIBSOC_SUCCESS
+				    }
+				    has_game_rule = {
+					    rule = ORE_ideology_route
+					    option = ORE_IDEOLOGY_ROUTE_LIBSOC_FAIL
+				    }
+			    }
+			}
+			set_global_flag = OREChoseNobody
+			country_event = {
+				id = ORE.30
+				days = 1
+			}
+			complete_national_focus = ORE_the_counter_proposal
+		}
+		else_if = {
+			limit = {
+			    has_game_rule = {
+					rule = ORE_ideology_route
+					option = ORE_IDEOLOGY_ROUTE_AUTHSOC
+				}
+			}
+			set_global_flag = OREChoseMalenkov
+			country_event = {
+				id = ORE.20
+				days = 1
+			}
+			complete_national_focus = ORE_malenkovs_speech
+		}
+		else_if = {
+			limit = {
+			    has_game_rule = {
+					rule = ORE_ideology_route
+					option = ORE_IDEOLOGY_ROUTE_AUTHDEM
+				}
+			}
+			set_global_flag = OREChoseBurba
+			country_event = {
+				id = ORE.10
+				days = 1
+			}
+			complete_national_focus = ORE_burbas_speech
+		}
+		else_if = {
+			limit = {
+				AND = {
+					check_variable = {
+						ORECentralizedPower > 2.999
+					}
+					check_variable = {
+						party_popularity@communist > party_popularity@authoritarian_democrat
+					}
+				}
+			}
+			set_global_flag = OREChoseMalenkov
+			country_event = {
+				id = ORE.20
+				days = 1
+			}
+			complete_national_focus = ORE_malenkovs_speech
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					ORECentralizedPower < 3
+				}
+			}
+			set_global_flag = OREChoseNobody
+			country_event = {
+				id = ORE.30
+				days = 1
+			}
+			complete_national_focus = ORE_the_counter_proposal
+		}
+		else_if = {
+			limit = {
+				AND = {
+					check_variable = {
+						ORECentralizedPower > 2.999
+					}
+					check_variable = {
+						var = party_popularity@authoritarian_democrat
+						value = party_popularity@communist
+						compare = greater_than_or_equals
+					}
+				}
+			}
+			set_global_flag = OREChoseBurba
+			country_event = {
+				id = ORE.10
+				days = 1
+			}
+			complete_national_focus = ORE_burbas_speech
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.30
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.30"}
+ 	title = ORE.30.t
+ 	desc = ORE.30.d
+ 	picture = GFX_report_event_generic_communist_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.30.a
+ 	}
+}
+
+country_event = {
+	id = ORE.31
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.31"}
+ 	title = ORE.31.t
+ 	desc = ORE.31.d
+ 	picture = GFX_report_event_soviet_militia
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.31.a
+ 	}
+}
+
+country_event = {
+	id = ORE.32
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.32"}
+ 	title = ORE.32.t
+ 	desc = ORE.32.d
+ 	picture = GFX_report_event_ORE_malenkov2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.32.a
+ 	}
+}
+
+country_event = {
+	id = ORE.33
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.33"}
+ 	title = ORE.33.t
+ 	desc = ORE.33.d
+ 	picture = GFX_report_event_generic_factory
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.33.a
+ 	}
+}
+
+country_event = {
+	id = ORE.34
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.34"}
+ 	title = ORE.34.t
+ 	desc = ORE.34.d
+ 	picture = GFX_report_event_farm
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.34.a
+ 	}
+}
+
+country_event = {
+	id = ORE.35
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.35"}
+ 	title = ORE.35.t
+ 	desc = ORE.35.d
+ 	picture = GFX_report_event_soviet_train
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.35.a
+ 	}
+}
+
+country_event = {
+	id = ORE.36
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.36"}
+ 	title = ORE.36.t
+ 	desc = ORE.36.d
+ 	picture = GFX_report_event_russian_commissar
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.36.a
+ 	}
+}
+
+country_event = {
+	id = ORE.37
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.37"}
+ 	title = ORE.37.t
+ 	desc = ORE.37.d
+ 	picture = GFX_report_event_russia_nkvd_officer
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.37.a
+ 	}
+}
+
+country_event = {
+	id = ORE.38
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.38"}
+ 	title = ORE.38.t
+ 	desc = ORE.38.d
+ 	picture = GFX_report_event_russian_irregulars
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.38.a
+ 	}
+}
+
+country_event = {
+	id = ORE.39
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.39"}
+ 	title = ORE.39.t
+ 	desc = ORE.39.d
+ 	picture = GFX_report_event_ORS_novotroitsk_industry
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.39.a
+ 	}
+}
+
+country_event = {
+	id = ORE.40
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.40"}
+ 	title = ORE.40.t
+ 	desc = ORE.40.d
+ 	picture = GFX_report_event_russia_court
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.40.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 50
+		}
+		add_political_power = -50
+		add_to_variable = {
+			ORECentralizedPower = 2
+		}
+		custom_effect_tooltip = ORE_centralize_great
+ 	}
+	option = {
+ 		name = ORE.40.b
+		ai_chance = {
+			factor = 80
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.40.c
+		ai_chance = {
+			factor = 50
+		}
+		add_political_power = 25
+ 	}
+}
+
+country_event = {
+	id = ORE.41
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.41"}
+ 	title = ORE.41.t
+ 	desc = ORE.41.d
+ 	picture = GFX_report_event_russia_tribunal
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.41.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 50
+		}
+		add_political_power = -50
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.41.b
+		ai_chance = {
+			factor = 50
+		}
+		add_political_power = 25
+ 	}
+}
+
+country_event = {
+	id = ORE.42
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.42"}
+ 	title = ORE.42.t
+ 	desc = ORE.42.d
+ 	picture = GFX_report_event_russia_orenburg
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.42.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.42.b
+		ai_chance = {
+			factor = 80
+		}
+		add_political_power = 25
+ 	}
+}
+
+country_event = {
+	id = ORE.43
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.43"}
+ 	title = ORE.43.t
+ 	desc = ORE.43.d
+ 	picture = GFX_report_event_russia_orenburg2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.43.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 75
+		}
+		add_political_power = -75
+		add_to_variable = {
+			ORECentralizedPower = 2
+		}
+		custom_effect_tooltip = ORE_centralize_great
+ 	}
+	option = {
+ 		name = ORE.43.b
+		ai_chance = {
+			factor = 75
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.43.c
+		ai_chance = {
+			factor = 50
+		}
+		add_political_power = 25
+ 	}
+}
+
+country_event = {
+	id = ORE.44
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.44"}
+ 	title = ORE.44.t
+ 	desc = ORE.44.d
+ 	picture = GFX_report_event_orenburg_protest
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.44.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 50
+		}
+		add_political_power = -50
+		add_to_variable = {
+			ORECentralizedPower = 2
+		}
+		custom_effect_tooltip = ORE_centralize_great
+ 	}
+	option = {
+ 		name = ORE.44.b
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.44.c
+		ai_chance = {
+			factor = 40
+		}
+		add_political_power = 30
+ 	}
+}
+
+country_event = {
+	id = ORE.45
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.45"}
+ 	title = ORE.45.t
+ 	desc = ORE.45.d
+ 	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.45.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 10
+		}
+		add_political_power = -10
+ 	}
+	option = {
+ 		name = ORE.45.b
+		ai_chance = {
+			factor = 30
+		}
+		add_political_power = 10
+		add_to_variable = {
+			ORECentralizedPower = -1
+		}
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = {
+	id = ORE.46
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.46"}
+ 	title = ORE.46.t
+ 	desc = ORE.46.d
+ 	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.46.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 50
+		}
+		add_political_power = -50
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.46.b
+		ai_chance = {
+			factor = 50
+		}
+		trigger = {
+			has_political_power > 10
+		}
+		add_political_power = -10
+ 	}
+	option = {
+ 		name = ORE.46.c
+		ai_chance = {
+			factor = 20
+		}
+		add_political_power = 10
+		add_to_variable = {
+			ORECentralizedPower = -2
+		}
+		custom_effect_tooltip = ORE_decentralize_great
+ 	}
+}
+
+country_event = {
+	id = ORE.410
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.410"}
+ 	title = ORE.410.t
+ 	desc = ORE.410.d
+ 	picture = GFX_report_event_russia_food_line
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.410.a
+		add_ideas = ORE_famine_1
+		set_country_flag = ORE_Famine_Start
+ 	}
+}
+
+country_event = {
+	id = ORE.420
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.420"}
+ 	title = ORE.420.t
+ 	desc = ORE.420.d
+ 	picture = GFX_report_event_russia_famine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.420.a
+		swap_ideas = {
+			remove_idea = ORE_famine_1
+			add_idea = ORE_famine_2
+		}
+		set_country_flag = ORE_Famine_Start_2
+ 	}
+}
+
+country_event = {
+	id = ORE.430
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.430"}
+ 	title = ORE.430.t
+ 	desc = ORE.430.d
+ 	picture = GFX_report_event_farm
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.430.a
+		swap_ideas = {
+			remove_idea = ORE_famine_2
+			add_idea = ORE_famine_3
+		}
+		hidden_effect = {
+			country_event = {
+				id = ORE.440
+				days = 31
+			}
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.440
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.440"}
+ 	title = ORE.440.t
+ 	desc = ORE.440.d
+ 	picture = GFX_report_event_russia_trade_caravan
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.440.a
+		swap_ideas = {
+			remove_idea = ORE_famine_3
+			add_idea = ORE_famine_2
+		}
+		country_event = {
+			id = ORE.450
+			days = 30
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.450
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.450"}
+ 	title = ORE.450.t
+ 	desc = ORE.450.d
+ 	picture = GFX_report_event_russia_food_line
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.450.a
+		swap_ideas = {
+			remove_idea = ORE_famine_2
+			add_idea = ORE_famine_1
+		}
+		country_event = {
+			id = ORE.460
+			days = 30
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.460
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.460"}
+ 	title = ORE.460.t
+ 	desc = ORE.460.d
+ 	picture = GFX_report_event_russia_orenburg
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.460.a
+		remove_ideas = ORE_famine_1
+ 	}
+}
+
+country_event = {
+	id = ORE.47
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.47"}
+ 	title = ORE.47.t
+ 	desc = ORE.47.d
+ 	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.46.a
+		trigger = {
+			check_variable = {
+				ORECentralizedPower > 7
+			}
+		}
+		add_stability = 0.05
+ 	}
+	option = {
+ 		name = ORE.46.b
+		trigger = {
+			AND = {
+				check_variable = {
+					ORECentralizedPower < 7.001
+				}
+				check_variable = {
+					ORECentralizedPower > 3 
+				}
+			}
+		}
+		add_stability = -0.05
+		add_political_power = 50
+ 	}
+	option = {
+ 		name = ORE.46.c
+		trigger = {
+			check_variable = {
+				ORECentralizedPower < 3.001
+			}
+		}
+		add_stability = -0.15
+		add_political_power = 100
+ 	}
+}
+
+country_event = {
+	id = ORE.48
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.48"}
+ 	title = ORE.48.t
+ 	desc = ORE.48.d
+ 	picture = GFX_report_event_ural_farm
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.48.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 50
+		}
+		
+		add_political_power = -50
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_to_variable = {
+			var = ORECentralizedPower
+			value = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.48.b
+		ai_chance = {
+			factor = 75
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+ 	}
+	option = {
+	
+ 		name = ORE.48.c
+		ai_chance = {
+			factor = 30
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.49
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.49"}
+ 	title = ORE.49.t
+ 	desc = ORE.49.d
+ 	picture = GFX_report_event_russia_court
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.46.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.46.b
+		ai_chance = {
+			factor = 70
+		}
+		trigger = {
+			has_political_power > 10
+		}
+		add_political_power = -10
+ 	}
+	option = {
+ 		name = ORE.46.c
+		ai_chance = {
+			factor = 10
+		}
+		add_to_variable = {
+			ORECentralizedPower = -1
+		}
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = {
+	id = ORE.50
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.50"}
+ 	title = ORE.50.t
+ 	desc = ORE.50.d
+ 	picture = GFX_report_event_generic_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.50.a #The purpose and aims of the 59th congress
+		ai_chance = {
+			factor = 100
+		}
+		country_event = {
+				id = ORE.51
+				days = 5
+			}
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.50.b
+		ai_chance = {
+			factor = 80
+		}
+		country_event = {
+				id = ORE.51
+				days = 5
+			}
+		trigger = {
+			has_political_power > 10
+		}
+		add_political_power = -10
+ 	}
+	option = {
+ 		name = ORE.50.c
+		ai_chance = {
+			factor = 20
+		}
+		country_event = {
+				id = ORE.51
+				days = 5
+			}
+		add_to_variable = {
+			ORECentralizedPower = -1
+		}
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = {
+	id = ORE.51
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.51"}
+ 	title = ORE.51.t
+ 	desc = ORE.51.d
+ 	picture = GFX_report_event_commune_protest
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.51.a #What to do with communes that resist
+		ai_chance = {
+			factor = 100
+		}
+		country_event = {
+				id = ORE.52
+				days = 5
+			}
+		trigger = {
+			has_political_power > 50
+		}
+		add_political_power = -50
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+ 	}
+	option = {
+ 		name = ORE.51.b
+		ai_chance = {
+			factor = 50
+		}
+		country_event = {
+				id = ORE.52
+				days = 5
+			}
+		add_to_variable = {
+			ORECentralizedPower = -1
+		}
+		custom_effect_tooltip = ORE_decentralize_med
+ 	}
+}
+
+country_event = {
+	id = ORE.52
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.52"}
+ 	title = ORE.52.t
+ 	desc = ORE.52.d
+ 	picture = GFX_report_event_ORE_malenkov1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.52.a #We can benefit from this more
+		add_popularity = {
+			ideology = communist
+			popularity = 0.10
+		}
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_med
+		country_event = {
+			id = ORE.53
+			days = 5
+		}
+ 	}
+	option = {
+ 		name = ORE.52.b #Thank you comrade
+		country_event = {
+			id = ORE.53
+			days = 5
+		}
+ 	}
+	
+}
+
+country_event = {
+	id = ORE.53
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.53"}
+ 	title = ORE.53.t
+ 	desc = ORE.53.d
+ 	picture = GFX_report_event_generic_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #The moments of the assembly
+ 		name = ORE.53.a
+		country_event = {
+			id = ORE.54
+			days = 5
+		}
+ 	}
+}
+
+country_event = {
+	id = ORE.54
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.54"}
+ 	title = ORE.54.t
+ 	desc = ORE.54.d
+ 	picture = GFX_report_event_generic_communist_congress
+	
+	is_triggered_only = yes
+ 	option = { #The verdict
+ 		name = ORE.54.a
+ 		if = {
+			limit = {
+				has_game_rule = {
+					rule = ORE_ideology_route
+					option = ORE_IDEOLOGY_ROUTE_LIBSOC_SUCCESS
+				}
+			}
+			country_event = {
+					id = ORE.55
+					days = 5
+			}
+		}
+		else_if = {
+			limit = {
+				has_game_rule = {
+					rule = ORE_ideology_route
+					option = ORE_IDEOLOGY_ROUTE_LIBSOC_FAIL
+				}
+			}
+			country_event = {
+					id = ORE.56
+					days = 5
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					ORECentralizedPower > 5
+				}
+			}
+			country_event = {
+					id = ORE.55
+					days = 5
+			}
+		}
+		else = {
+			country_event = {
+					id = ORE.56
+					days = 5
+			}
+		}
+ 	}
+}
+
+country_event = { #YOU ARE WINNER
+	id = ORE.55
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.55"}
+ 	title = ORE.55.t
+ 	desc = ORE.55.d
+ 	picture = GFX_report_event_generic_factory
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.55.a
+		complete_national_focus = ORE_the_beginning	
+ 	}
+}
+
+country_event = { #FAIL STATE VERY BAD
+	id = ORE.56
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.56"}
+ 	title = ORE.56.t
+ 	desc = ORE.56.d
+ 	picture = GFX_report_event_congress_failure
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.56.a
+		complete_national_focus = ORE_dust_in_the_wind
+ 	}
+}
+
+country_event = {
+	id = ORE.57
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.57"}
+ 	title = ORE.57.t
+ 	desc = ORE.57.d
+ 	picture = GFX_report_event_ural_guard
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.57.a
+		ai_chance = {
+			factor = 200
+		}
+		ORE = {
+			country_event = {
+				id = ORE.58
+				days = 1
+			}
+		}
+ 	}
+	option = {
+ 		name = ORE.57.b
+		ai_chance = {
+			factor = 40
+		}
+		ORE = {
+			country_event = {
+				id = ORE.59
+				days = 1
+			}
+		}
+ 	}
+}
+
+country_event = { #URL will send us trainers
+	id = ORE.58
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.58"}
+ 	title = ORE.58.t
+ 	desc = ORE.58.d
+ 	picture = GFX_report_event_soviet_militia
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.58.a
+		army_experience = 20
+		ORE_upgrade_military = yes
+ 	}
+}
+
+country_event = { #URL will not send us trainers
+	id = ORE.59
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.59"}
+ 	title = ORE.59.t
+ 	desc = ORE.59.d
+ 	picture = GFX_report_event_soviet_militia2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.59.a
+ 	}
+}
+
+country_event = { #Orenburg Is Dead
+	id = ORE.60
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.60"}
+ 	title = ORE.60.t
+ 	desc = ORE.60.d
+ 	picture = GFX_report_event_ORS_strike_orenburg
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.60.a
+		set_country_flag = OREOrenburgDead
+ 	}
+}
+
+#BURBA EVENTS###
+
+country_event = { # Balancing The Council
+	id = ORE.70
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.70"}
+ 	title = ORE.70.t
+ 	desc = ORE.70.d
+ 	picture = GFX_report_event_orenburg_congress2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.70.a
+		 
+		 
+ 	}
+}
+
+country_event = { # An Orenburgian Renaissance
+	id = ORE.71
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.71"}
+ 	title = ORE.71.t
+ 	desc = ORE.71.d
+ 	picture = GFX_report_event_russia_orenburg2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.71.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Reorganizing The Militias
+	id = ORE.72
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.72"}
+ 	title = ORE.72.t
+ 	desc = ORE.72.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.72.a
+		 
+		 
+ 	}
+}
+
+country_event = { # The Urals' Training Program
+	id = ORE.73
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.73"}
+ 	title = ORE.73.t
+ 	desc = ORE.73.d
+ 	picture = GFX_report_event_ural_guard
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.73.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Standardized Armaments
+	id = ORE.74
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.74"}
+ 	title = ORE.74.t
+ 	desc = ORE.74.d
+ 	picture = GFX_report_event_soviet_militia2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.74.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Adapting Their Strategies
+	id = ORE.75
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.75"}
+ 	title = ORE.75.t
+ 	desc = ORE.75.d
+ 	picture = GFX_report_event_russia_red_army_march
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.75.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Securing The Frontier
+	id = ORE.76
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.76"}
+ 	title = ORE.76.t
+ 	desc = ORE.76.d
+ 	picture = GFX_report_event_russia_forest_battle
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.76.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Deregionalization
+	id = ORE.77
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.77"}
+ 	title = ORE.77.t
+ 	desc = ORE.77.d
+ 	picture = GFX_report_event_russian_irregulars
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.77.a
+		tno_security_improve = yes
+		 
+		 
+ 	}
+}
+
+country_event = { # Establish The Planning Commission
+	id = ORE.78
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.78"}
+ 	title = ORE.78.t
+ 	desc = ORE.78.d
+ 	picture = GFX_report_event_russia_burba_angry
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.78.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Mitigate The Council's Influence
+	id = ORE.79
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.79"}
+ 	title = ORE.79.t
+ 	desc = ORE.79.d
+ 	picture = GFX_report_event_congress_failure
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.79.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Members From Every Commune
+	id = ORE.80
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.80"}
+ 	title = ORE.80.t
+ 	desc = ORE.80.d
+ 	picture = GFX_report_event_commune_protest
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.80.a
+		 
+		 
+ 	}
+}
+
+country_event = { # A Scientific Approach
+	id = ORE.81
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.81"}
+ 	title = ORE.81.t
+ 	desc = ORE.81.d
+ 	picture = GFX_report_event_generic_factory
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.81.a
+		 
+		 
+ 	}
+}
+
+country_event = { # The Soviet Land Surveys
+	id = ORE.82
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.82"}
+ 	title = ORE.82.t
+ 	desc = ORE.82.d
+ 	picture = GFX_report_event_russia_kazakh_uranium_mine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.82.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Override The Communes' Zoning
+	id = ORE.83
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.83"}
+ 	title = ORE.83.t
+ 	desc = ORE.83.d
+ 	picture = GFX_report_event_ural_road
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.83.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Uralian Industrial Aid
+	id = ORE.84
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.84"}
+ 	title = ORE.84.t
+ 	desc = ORE.84.d
+ 	picture = GFX_report_event_russian_labor
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.84.a
+		 
+		 
+ 	}
+}
+
+
+country_event = { # No More Closed Factories
+	id = ORE.85
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.85"}
+ 	title = ORE.85.t
+ 	desc = ORE.85.d
+ 	picture = GFX_report_event_generic_factory
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.85.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Re-Ordering Politics
+	id = ORE.86
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.86"}
+ 	title = ORE.86.t
+ 	desc = ORE.86.d
+ 	picture = GFX_report_event_orenburg_protest
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.86.a
+		 
+		 
+ 	}
+}
+
+country_event = { # A More Professional Council
+	id = ORE.87
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.87"}
+ 	title = ORE.87.t
+ 	desc = ORE.87.d
+ 	picture = GFX_report_event_congress_failure
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.87.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Scientific Organization
+	id = ORE.88
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.88"}
+ 	title = ORE.88.t
+ 	desc = ORE.88.d
+ 	picture = GFX_report_event_generic_congress
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.88.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Expanding Relations With The League
+	id = ORE.89
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.89"}
+ 	title = ORE.89.t
+ 	desc = ORE.89.d
+ 	picture = GFX_report_event_russia_trade_caravan
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.89.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Invite Guard Trainers
+	id = ORE.90
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.90"}
+ 	title = ORE.90.t
+ 	desc = ORE.90.d
+ 	picture = GFX_report_event_russia_soldier_weapon_2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.90.a
+		tno_training_improve = yes
+		 
+ 	}
+}
+
+country_event = { # Discuss Further Cooperation
+	id = ORE.91
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.91"}
+ 	title = ORE.91.t
+ 	desc = ORE.91.d
+ 	picture = GFX_report_event_russia_soldier_weapon_1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.91.a
+		 
+		 
+ 	}
+}
+
+country_event = { # A Growing Jewel
+	id = ORE.92
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.92"}
+ 	title = ORE.92.t
+ 	desc = ORE.92.d
+ 	picture = GFX_report_event_russia_orenburg
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.92.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Ready To Fight
+	id = ORE.93
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.93"}
+ 	title = ORE.93.t
+ 	desc = ORE.93.d
+ 	picture = GFX_report_event_soviet_militia_w
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.93.a
+		 
+		 
+ 	}
+}
+
+country_event = { # Propose A Formal Alliance
+	id = ORE.94
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.94"}
+ 	title = ORE.94.t
+ 	desc = ORE.94.d
+ 	picture = GFX_report_event_peace_deal
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.94.a
+		URL = {
+			create_faction = URAL_ALLIANCE
+			add_to_faction = ORE
+			set_country_flag = FACTION_ESTABLISHED
+		}		
+		ORE = {
+			country_event = {
+				id = ORE.96
+				days = 1
+			}
+		}
+ 	}
+	option = {
+ 		name = ORE.94.b	
+		ORE = {
+			country_event = {
+				id = ORE.163
+				days = 1
+			}
+		}		
+ 	}
+}
+
+country_event = { # Orenburg Redefined
+	id = ORE.95
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.95"}
+ 	title = ORE.95.t
+ 	desc = ORE.95.d
+ 	picture = GFX_report_event_russia_burba2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.95.a
+ 	}
+}
+
+country_event = { # Yes Faction
+	id = ORE.163
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.163"}
+ 	title = ORE.163.t
+ 	desc = ORE.163.d
+ 	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.163.a
+ 	}
+}
+
+country_event = { # No Faction
+	id = ORE.97
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.97"}
+ 	title = ORE.97.t
+ 	desc = ORE.97.d
+ 	picture = GFX_report_event_russia_burba_angry
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.97.a
+ 	}
+}
+
+country_event = { # Dizzy With Success
+	id = ORE.98
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.98"}
+ 	title = ORE.98.t
+ 	desc = ORE.98.d
+ 	picture = GFX_report_event_ORE_malenkov2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = ORE.98.a
+		add_political_power = 200
+		hidden_effect = {
+			ORE_upgrade_industry = yes
+			ORE_upgrade_industry = yes
+			ORE_upgrade_industry = yes
+			ORE_upgrade_industry = yes
+			ORE_upgrade_industry = yes
+			ORE_upgrade_politics = yes
+			ORE_upgrade_politics = yes
+			ORE_upgrade_politics = yes
+			ORE_upgrade_politics = yes
+			ORE_upgrade_politics = yes
+			ORE_upgrade_military = yes
+			ORE_upgrade_military = yes
+			ORE_upgrade_military = yes
+			ORE_upgrade_military = yes
+			ORE_upgrade_military = yes
+			ORE_upgrade_military = yes
+		}
+ 	}
+}
+
+country_event = { #NKVD Proposal, autonomy
+	id = ORE.1050
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1050"}
+ 	title = ORE.1050.t
+ 	desc = ORE.1050.d
+ 	picture = GFX_report_event_russia_bunker_command
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #Communes vote yes
+ 		name = ORE.1050.a
+ 		ai_chance = {factor = 20}
+ 		BAS = {country_event = {id = BAS_NKVD.1082 }
+ 	}
+ 	}
+  	option = { #Communes Vote Nay
+ 		name = ORE.1050.b
+ 		ai_chance {factor = 80}
+  		BAS = { country_event = {id = BAS_NKVD.1081 }
+ 	}
+ 	}
+}
+
+country_event = { #NKVD Demand, annexation
+	id = ORE.1051
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1051"}
+ 	title = ORE.1051.t
+ 	desc = ORE.1051.d
+ 	picture = GFX_report_event_russia_red_army_march
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #Communes Vote Nay
+ 		name = ORE.1051.a
+ 		ai_chance = {factor = 95}
+ 		BAS = { country_event = {id = BAS_NKVD.1081 }
+ 		}
+
+ 	}
+ 	option = { #Communes vote Yes
+ 		name = ORE.1051.b
+ 		ai_chance = {factor = 5}
+ 		BAS = { country_event = {id = BAS_NKVD.1083 }
+
+ 	}
+ 	}
+}
+
+country_event = { #NKVD Friendship Agreement
+	id = ORE.1052
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1052"}
+ 	title = ORE.1052.t
+ 	desc = ORE.1052.d
+ 	picture = GFX_report_event_russia_nkvd_officer
+	
+	is_triggered_only = yes
+ 	
+ 	option = { #Communes Vote Nay
+ 		name = ORE.1052.a
+ 		ai_chance = {factor = 10}
+ 		BAS = { country_event = { id = BAS_NKVD.1081 }
+ 		}
+
+ 	}
+ 	option = { #Communes vote Yes
+ 		name = ORE.1052.b
+ 		BAS = {country_event = BAS_NKVD.1084}
+ 		ai_chance = {factor = 90}
+	}
+}
+
+country_event = { # Intro Event
+	id = ORE.100
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.100"}
+	title = ORE.100.t
+	desc = ORE.100.d
+	picture = GFX_report_event_orenburg_congress
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.100.a
+	}
+}
+
+##Victory Events##
+#Orenburg Victory Against Dirlewanger
+country_event = {
+	id = ORE.600
+	title = ORE.600.t
+	desc = ORE.600.desc
+	picture = GFX_report_event_german_pow_russia
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.600"}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # Woooo
+		name = ORE.600.a
+		hidden_effect = {
+			if = {
+				limit = { 
+					BAS = { exists = no }
+				}
+				hidden_effect = {
+					owb_endslide_start = yes
+				}
+			}
+		}
+	}
+}
+
+#Orenburg Victory Against Lysenko
+country_event = {
+	id = ORE.601
+	title = ORE.601.t
+	desc = ORE.601.desc
+	picture = GFX_report_event_russian_military
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.601"}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # Woooo
+		name = ORE.601.a
+		if = {
+			limit = { 
+				ORS = { exists = no }
+			}
+			hidden_effect = {
+				owb_endslide_start = yes
+			}
+		}
+	}
+}
+
+#Orenburg Victory Against NKVD
+country_event = {
+	id = ORE.602
+	title = ORE.602.t
+	desc = ORE.602.desc
+	picture = GFX_report_event_ORS_strike_orenburg
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.602"}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # Woooo
+		name = ORE.602.a
+		if = {
+			limit = { 
+				ORS = { exists = no }
+			}
+			hidden_effect = {
+				owb_endslide_start = yes
+			}
+		}
+	}
+}
+	
+##Random flavour + culture events##
+
+country_event = { #Skirmish between Village militias!
+	id = ORE.101
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.101"}
+	title = ORE.101.t
+	desc = ORE.101.d
+	picture = GFX_report_event_generic_riot
+	
+	trigger = {
+	original_tag = ORE
+    has_government = socialist
+    date > 1963.05.05
+    OR = {
+    original_tag = ORE
+    has_government = authoritarian_democrat
+    date > 1963.05.05
+    	}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.101.a #Let them fight it out
+		add_stability = -0.05
+	}
+	
+	option = {
+		name = ORE.101.b # Intervene diplomatically#
+		trigger = {
+			has_political_power > 49.9
+		}
+		add_political_power = -50
+	}
+	
+	option = {
+		name = ORE.101.c # Ask for help from the Ural League#
+		trigger = {
+			has_political_power > 24.9
+		}
+		add_political_power = -25
+		add_stability = -0.025
+	}
+}
+	
+country_event = { #Border Commune wants to join the Ural League
+	id = ORE.102
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.102"}
+	title = ORE.102.t
+	desc = ORE.102.d
+	picture = GFX_report_event_orenburg_school
+	
+	is_triggered_only = yes
+	
+	option = { # We cant do anything
+		name = ORE.102.a
+		trigger = {
+			has_country_flag = ORE_secession_legal
+		}
+		hidden_effect = {
+			country_event = { id = ORE.111 days = 3 }
+		}
+		custom_effect_tooltip = ORE_allowed_secession
+	}
+	
+	option = { #You cant do that!
+		name = ORE.102.b
+		trigger = {
+			NOT = {
+				has_country_flag = ORE_secession_legal
+			}
+		}
+		hidden_effect = {
+			country_event = { id = ORE.112 days = 3 }
+		}
+		custom_effect_tooltip = ORE_disallowed_secession
+	}
+}
+	
+country_event = { # Burba and Malenkov supporters clash in the market square
+	id = ORE.103
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ORE.103" }
+	title = ORE.103.t
+	desc = ORE.103.d
+	picture = GFX_report_event_generic_riot
+	
+	fire_only_once = yes
+
+	trigger = {
+	original_tag = ORE
+    has_government = socialist
+    date > 1962.03.03
+	}
+	
+	option = {
+		name = ORE.103.a #Malenkov supporters win#
+		add_political_power = -10
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		add_to_variable = { ORECentralizedPower = 0.5 }
+		custom_effect_tooltip = ORE_centralize_some
+	}
+	
+	option = {
+		name = ORE.103.b #Burba supporters win#
+		add_political_power = -10
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		add_to_variable = { ORECentralizedPower = 0.75 }
+		custom_effect_tooltip = ORE_centralize
+	}
+}
+	
+country_event = { # Forbidden Peasant Couples flees to Orenburg city
+	id = ORE.104
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.104"}
+	title = ORE.104.t
+	desc = ORE.104.d
+	picture = GFX_report_event_russian_refugees
+	
+	trigger = {
+	original_tag = ORE
+    date > 1964.04.04
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.104.a #A touching story#
+		add_political_power = 10
+	}
+}
+	
+country_event = { # The Bandits Trial
+	id = ORE.105
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.105"}
+	title = ORE.105.t
+	desc = ORE.105.d
+	picture = GFX_report_generic_prisoners2
+	
+	trigger = {
+	original_tag = ORE
+    has_government = socialist
+    date > 1963.02.05
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.105.a #Lynching#
+		add_political_power = 10
+		subtract_from_variable = { ORECentralizedPower = 0.1 }
+		custom_effect_tooltip = ORE_decentralize_little
+	}
+	
+	option = {
+		name = ORE.105.b #Public Humiliation#
+		add_political_power = 25
+	}
+	
+	option = {
+		name = ORE.105.c #Life Imprisonment#
+		add_political_power = 10
+		add_to_variable = { ORECentralizedPower = 0.1 }
+		custom_effect_tooltip = ORE_centralize_little
+	}
+}
+	
+	
+country_event = { # City mob demands punishment of unpopular councillor
+	id = ORE.106
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.106"}
+	title = ORE.106.t
+	desc = ORE.106.d
+	picture = GFX_report_event_commune_protest
+	
+	trigger = {
+	original_tag = ORE
+    has_government = socialist
+    date > 1963.06.06
+    OR = {
+    original_tag = ORE
+    has_government = communist
+    date > 1963.06.06
+		}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.106.a #No way
+		add_political_power = -10
+		add_to_variable = { ORECentralizedPower = 0.1 }
+		custom_effect_tooltip = ORE_centralize_little
+	}
+	
+	option = {
+		name = ORE.106.b #A reprimand should be sufficient
+	}
+	
+	option = {
+		name = ORE.106.c #Let the mob deal with him
+		add_political_power = -10
+		subtract_from_variable = { ORECentralizedPower = 0.1 }
+		custom_effect_tooltip = ORE_decentralize_little
+	}
+}
+	
+country_event = { # Czechoslovak Bataillon offers services
+	id = ORE.107
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.107"}
+	title = ORE.107.t
+	desc = ORE.107.d
+	picture = GFX_report_event_soviet_militia
+	
+	trigger = {
+	original_tag = ORE
+	date > 1964.07.03
+    has_government = socialist
+    OR = {
+    original_tag = ORE
+	date < 1964.07.03
+    has_government = authoritarian_democrat
+    }
+    OR = {
+    original_tag = ORE
+	date > 1964.07.03
+    has_government = communist
+    	}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.107.a # Yes they should be helpful
+		add_stability = -0.02
+		army_experience = 10
+		add_manpower = 400
+	}
+	
+	option = {
+		name = ORE.107.b # Throw them out and their leader with them!
+		add_political_power = 25
+	}
+	
+	option = {
+		name = ORE.107.c # Maybe the League is a better place
+		add_political_power = 50
+	}
+}
+
+country_event = { # City Commander Stekylar accused of ties to Lysenko!
+	id = ORE.108
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.108"}
+	title = ORE.108.t
+	desc = ORE.108.d
+	picture = GFX_report_event_commune_protest
+
+	trigger = {
+	original_tag = ORE
+    has_government = authoritarian_democrat
+    date > 1964.06.02
+    OR = {
+    original_tag = ORE
+    has_government = communist
+    date > 1964.06.02
+    	}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.108.a #This is nothing but paranoia
+		add_stability = -0.01
+	}
+	
+	option = {
+		name = ORE.108.b #Start an investigation to calm the representatives
+		trigger = {
+			has_political_power > 24.9
+		}
+		add_political_power = -25
+		add_stability = 0.01
+	}
+}
+
+country_event = { # A caravan from Nowa Polska
+	id = ORE.109
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.109"}
+	title = ORE.109.t
+	desc = ORE.109.d
+	picture = GFX_report_event_russia_trade_caravan
+	
+	trigger = {
+	original_tag = ORE
+    has_government = authoritarian_democrat
+    date > 1963.08.08
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.109.a # Come in, Come in
+		add_political_power = 10
+	}
+}
+
+country_event = { # The Great Harvest Feast
+	id = ORE.110
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.110"}
+	title = ORE.110.t
+	desc = ORE.110.d
+	picture = GFX_report_event_orenburg_protest
+
+	trigger = {
+	original_tag = ORE
+    has_government = authoritarian_democrat
+    date > 1964.11.11
+    OR = {
+    original_tag = ORE
+    has_government = socialist
+    date > 1964.11.11
+    	}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ORE.110.a # An oasis of happiness
+		add_political_power = 25
+	}
+}
+
+country_event = { #Malenkov demands action
+	id = ORE.111
+	title = ORE.111.t
+	desc = ORE.111.d
+	picture = GFX_report_event_ORE_malenkov2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.111"}
+
+	option = { #oh
+		name = ORE.111.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		custom_effect_tooltip = ORE_centralize_med
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		hidden_effect = {
+			country_event = { id = ORE.113 days = 6 }
+		}
+	}
+}
+
+country_event = { # Burba pushes for reform
+	id = ORE.112
+	title = ORE.112.t
+	desc = ORE.112.d
+	picture = GFX_report_event_russia_burba
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.112"}
+
+	option = {
+		name = ORE.112.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.04
+		}
+		hidden_effect = {
+			country_event = { id = ORE.113 days = 6 }
+		}
+	}
+}
+
+country_event = { # The reformist party splits
+	id = ORE.113
+	title = ORE.113.t
+	desc = ORE.113.d
+	picture = GFX_report_event_orenburg_congress
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.113"}
+
+	option = {
+		name = ORE.113.a
+		custom_effect_tooltip = ORE_decentralize_great
+		subtract_from_variable = {
+			ORECentralizedPower = 2
+		}
+		hidden_effect = {
+			country_event = { id = ORE.114 days = 5 }
+		}
+	}
+}
+
+country_event = { # Malenkov flirts with border regions
+	id = ORE.114
+	title = ORE.114.t
+	desc = ORE.114.d
+	picture = GFX_report_event_ural_farm
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.114"}
+
+	option = { # for the greater good
+		name = ORE.114.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		custom_effect_tooltip = ORE_centralize_med
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		hidden_effect = {
+			country_event = { id = ORE.119 days = 7 }
+		}
+	}
+	option = { # burba talks with them
+		name = ORE.114.b
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.04
+		}
+		hidden_effect = {
+			country_event = { id = ORE.115 days = 7 }
+		}
+	}
+}
+
+country_event = { # Malenkov accuses Burba of favoring the city
+	id = ORE.115
+	title = ORE.115.t
+	desc = ORE.115.d
+	picture = GFX_report_event_ORE_malenkov1
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.115"}
+
+	option = { #Bribe malenkovs secretary
+		name = ORE.115.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		hidden_effect = {
+			random_list = {
+				20 = {
+					country_event = { id = ORE.116 days = 6 }
+				}
+				80 = {
+					country_event = { id = ORE.117 days = 6 }
+				}
+			}
+		}
+	}
+	option = { # Burba sweet talks border regions
+		name = ORE.115.b
+		hidden_effect = {
+			country_event = { id = ORE.118 days = 4 }
+		}
+	}
+	option = { # Burba stays silent
+		name = ORE.115.c
+		hidden_effect = {
+			country_event = { id = ORE.119 days = 10 }
+		}
+	}
+}
+
+country_event = { # Malenkov conversation leaked
+	id = ORE.116
+	title = ORE.116.t
+	desc = ORE.116.d
+	picture = GFX_report_event_ORE_malenkov2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.116"}
+
+	option = {
+		name = ORE.116.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.04
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = -0.05
+		}
+		hidden_effect = {
+			country_event = { id = ORE.119 days = 6 }
+		}
+	}
+}
+
+country_event = { # Burba is accused of bribery
+	id = ORE.117
+	title = ORE.117.t
+	desc = ORE.117.d
+	picture = GFX_report_event_russia_burba_angry
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.117"}
+
+	option = {
+		name = ORE.117.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.04
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.04
+		}
+		hidden_effect = {
+			country_event = { id = ORE.119 days = 6 }
+		}
+	}
+}
+
+country_event = { # Burba barred from the outer regions
+	id = ORE.118
+	title = ORE.118.t
+	desc = ORE.118.d
+	picture = GFX_report_event_russia_burba_angry
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.118"}
+
+	option = {
+		name = ORE.118.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.04
+		}
+		custom_effect_tooltip = ORE_centralize_little
+		add_to_variable = {
+			ORECentralizedPower = 0.5
+		}
+		hidden_effect = {
+			country_event = { id = ORE.119 days = 6 }
+		}
+	}
+}
+
+country_event = { # The third block forms
+	id = ORE.119
+	title = ORE.119.t
+	desc = ORE.119.d
+	picture = GFX_report_event_orenburg_congress2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.119"}
+
+	option = {
+		name = ORE.119.a
+		add_political_power = -25
+		hidden_effect = {
+			random_list = {
+				20 = {
+					country_event = { id = ORE.120 days = 12 }
+				}
+				20 = {
+					country_event = { id = ORE.121 days = 12 }
+				}
+				60 = {
+					country_event = { id = ORE.122 days = 12 }
+				}
+			}
+		}
+	}
+	option = {
+		name = ORE.119.b
+		custom_effect_tooltip = ORE_centralize_little
+		add_to_variable = {
+			ORECentralizedPower = 0.5
+		}
+		hidden_effect = {
+			country_event = { id = ORE.123 days = 12 }
+		}
+	}
+}
+
+country_event = { # The towns seem fine malenkov is caught
+	id = ORE.120
+	title = ORE.120.t
+	desc = ORE.120.d
+	picture = GFX_report_event_ORE_malenkov2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.120"}
+
+	option = {
+		name = ORE.120.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.04
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = -0.02
+		}
+		ORE_last_issue_check = yes
+	}
+}
+
+country_event = { # The town is fine
+	id = ORE.121
+	title = ORE.121.t
+	desc = ORE.121.d
+	picture = GFX_report_event_farm
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.121"}
+
+	option = {
+		name = ORE.121.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.03
+		}
+		ORE_last_issue_check = yes
+	}
+}
+
+country_event = { # The town flips to burbas bloc
+	id = ORE.122
+	title = ORE.122.t
+	desc = ORE.122.d
+	picture = GFX_report_event_hungary_handshake
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.122"}
+
+	option = {
+		name = ORE.122.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.04
+		}
+		ORE_last_issue_check = yes
+	}
+}
+
+country_event = { # The town goes to Malenkovs bloc
+	id = ORE.123
+	title = ORE.123.t
+	desc = ORE.123.d
+	picture = GFX_report_event_hungary_handshake
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.123"}
+
+	option = {
+		name = ORE.123.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		ORE_last_issue_check = yes
+	}
+}
+
+country_event = { # Burba's dream
+	id = ORE.124
+	title = ORE.124.t
+	desc = ORE.124.d
+	picture = GFX_report_event_russia_burba2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.124"}
+
+	option = { # burba attempts a coup
+		name = ORE.124.a
+		ai_chance = { factor = 0 }
+		add_political_power = 150
+		hidden_effect = {
+			country_event = { id = ORE.125 days = 2 }
+		}
+	}
+	option = {
+		name = ORE.124.b
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # Burba is shot
+	id = ORE.125
+	title = ORE.125.t
+	desc = ORE.125.d
+	picture = GFX_report_event_orenburg_protest
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.125"}
+
+	option = {
+		name = ORE.125.a
+		set_country_flag = OREBurbaArrested
+		add_political_power = -25
+		add_popularity = {
+			ideology = authoritarian_democrat 
+			popularity = -0.9
+		}
+		add_popularity = {
+			ideology = communist 
+			popularity = 0.1
+		}
+		custom_effect_tooltip = ORE_decentralize_great
+		subtract_from_variable = {
+			ORECentralizedPower = 2
+		}
+	}
+}
+
+country_event = { # Malenkovs last ploy
+	id = ORE.126
+	title = ORE.126.t
+	desc = ORE.126.d
+	picture = GFX_report_event_orenburg_protest
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.126"}
+
+	option = { #send in the militia
+		name = ORE.126.a
+		hidden_effect = {
+			country_event = { id = ORE.127 days = 4 }
+		}
+	}
+	option = { #wait it out
+		name = ORE.126.b
+		hidden_effect = {
+			country_event = { id = ORE.130 days = 4 }
+		}
+	}
+}
+
+country_event = { # Leader captured of riots, what do
+	id = ORE.127
+	title = ORE.127.t
+	desc = ORE.127.d
+	picture = GFX_report_event_generic_riot
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.127"}
+
+	option = { #pardon him
+		name = ORE.127.a
+		hidden_effect = {
+			country_event = { id = ORE.128 days = 7 }
+		}
+	}
+	option = {
+		name = ORE.127.b
+		hidden_effect = {
+			country_event = { id = ORE.129 days = 7 }
+		}
+	}
+}
+
+country_event = { # Burba support grows
+	id = ORE.128
+	title = ORE.128.t
+	desc = ORE.128.d
+	picture = GFX_report_event_russia_burba
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.128"}
+
+	option = {
+		name = ORE.128.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.04
+		}
+	}
+}
+
+country_event = { # Centralisation support grows
+	id = ORE.129
+	title = ORE.129.t
+	desc = ORE.129.d
+	picture = GFX_report_event_orenburg_school
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.129"}
+
+	option = {
+		name = ORE.129.a
+		custom_effect_tooltip = ORE_centralize_med
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+	}
+}
+
+country_event = { # Parliament is burned down
+	id = ORE.130
+	title = ORE.130.t
+	desc = ORE.130.d
+	picture = GFX_report_event_german_city_burning
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.130"}
+
+	option = { #blame burba
+		name = ORE.130.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.06
+		}
+		custom_effect_tooltip = ORE_centralize_med
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+	}
+	option = { # blame malenkov
+		name = ORE.130.b
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.04
+		}
+	}
+}
+
+country_event = { # Malenkovs mad dash
+	id = ORE.131
+	title = ORE.131.t
+	desc = ORE.131.d
+	picture = GFX_report_event_soviet_militia
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.131"}
+
+	option = {
+		name = ORE.131.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.03
+		}
+		hidden_effect = {
+			country_event = { id = ORE.132 days = 5 }
+		}
+	}
+}
+
+country_event = { # Towns surrender instantly
+	id = ORE.132
+	title = ORE.132.t
+	desc = ORE.132.d
+	picture = GFX_report_event_soviet_militia2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.132"}
+
+	option = {
+		name = ORE.132.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.08
+		}
+		custom_effect_tooltip = ORE_centralize_med
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+	}
+}
+
+country_event = { # Malenkov begins altering history
+	id = ORE.140
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.140"}
+	title = ORE.140.t
+	desc = ORE.140.d
+	picture = GFX_report_event_CHI_education6
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.140.a 
+	}
+}
+
+country_event = { #Anti-religious vanguard 
+	id = ORE.141
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.141"}
+	title = ORE.141.t
+	desc = ORE.141.d
+	picture = GFX_report_event_orenburg_protest
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.141.a 
+	}
+}
+
+country_event = { #The conversion
+	id = ORE.142
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.142"}
+	title = ORE.142.t
+	desc = ORE.142.d
+	picture = GFX_report_event_russian_commissar
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.142.a 
+	}
+}
+
+country_event = { #A villager discusses the difficulty they face
+	id = ORE.143
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.143"}
+	title = ORE.143.t
+	desc = ORE.143.d
+	picture = GFX_report_event_ural_farm
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = ORE.143.a 
+	}
+}
+
+country_event = { #Hypocrisy manifest
+	id = ORE.144
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.144"}
+	title = ORE.144.t
+	desc = ORE.144.d
+	picture = GFX_report_event_orenburg_congress2
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.144.a 
+	}
+}	
+country_event = { #Scientist arrive
+	id = ORE.145
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.145"}
+	title = ORE.145.t
+	desc = ORE.145.d
+	picture = GFX_report_event_lysenko_experiment
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = ORE
+		OR = {
+			
+			focus_progress = {
+				focus = ORE_an_orenburgian_renaissance
+				progress > 0.20
+			}
+		}
+	}
+	
+	option = {
+		name = ORE.145.a
+	}	
+	
+	}
+country_event = { #Army attacks Riot
+	id = ORE.146
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.146"}
+	title = ORE.146.t
+	desc = ORE.146.d
+	picture = GFX_report_event_german_communists_riot
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = ORE
+		OR = {
+			
+			focus_progress = {
+				focus = ORE_no_more_closed_factories
+				progress > 0.35
+			}
+		}
+	}
+	
+	option = {
+		name = ORE.146.a
+		ORE = {
+		add_political_power = -50
+		}
+	}	
+	
+}
+
+country_event = { #Homeless Shelter
+	id = ORE.147
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.147"}
+	title = ORE.147.t
+	desc = ORE.147.d
+	picture = GFX_report_event_orenburg_school
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = ORE
+		OR = {
+			focus_progress = {
+				focus = ORE_establish_the_planning_commission
+				progress > 0.20
+			}
+		}
+		NOT = { has_country_flag = homeless_shelter_fired }
+	}
+	
+	option = {
+		name = ORE.147.a
+		ORE = {
+			add_political_power = 10
+		}
+		hidden_effect = { #event was being stubborn and firing twice
+			set_country_flag = homeless_shelter_fired 
+		}
+	}		
+	
+}
+	
+country_event = { #New Deal
+	id = ORE.148
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.148"}
+	title = ORE.148.t
+	desc = ORE.148.d
+	picture = GFX_report_event_CHI_Industry_Civ_2
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = ORE
+		OR = {
+			
+			focus_progress = {
+				focus = ORE_an_orenburgian_renaissance
+				progress > 0.9
+			}
+		}
+	}
+	
+	option = {
+		name = ORE.148.a
+		ORE = {
+		    add_political_power = 30
+		}
+	}		
+}	
+	
+country_event = { #Coup
+	id = ORE.149
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.149"}
+	title = ORE.149.t
+	desc = ORE.149.d
+	picture = GFX_report_event_iberian_wars_6
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = ORE
+		OR = {
+			
+			focus_progress = {
+				focus = ORE_ready_to_fight
+				progress > 0.20
+			}
+		}
+	}
+	
+	option = {
+		name = ORE.149.a
+		ORE = {
+		add_political_power = 100
+		}
+	}	
+}	
+
+country_event = { #Election
+	id = ORE.150
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.150"}
+	title = ORE.150.t
+	desc = ORE.150.d
+	picture = GFX_report_event_russia_burba
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = ORE
+		OR = {
+			
+			focus_progress = {
+				focus = ORE_a_more_professional_council
+				progress > 0.70
+			}
+		}
+	}
+	
+	option = {
+		name = ORE.150.a
+		ORE = {
+		add_political_power = 100
+		}
+	}		
+	
+}		
+	
+country_event = { #Pacifica Writes Gay Romance - Part One
+	id = ORE.151
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.151"}
+	title = ORE.151.t
+	desc = ORE.151.d
+	picture = GFX_report_event_russian_refugees
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.151.a
+		hidden_effect = {
+			country_event = { id = ORE.152 days = 12 }
+		}
+	}
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Two
+	id = ORE.152
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.152"}
+	title = ORE.152.t
+	desc = ORE.152.d
+	picture = GFX_report_event_russia_burba
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.152.a
+		
+		trigger = {
+			OR = {
+				has_political_power > 25
+				AND = {
+					is_ai = yes
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_ACCEPT
+					}
+				}
+				AND = {
+					is_ai = yes
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY
+					}
+				}
+				AND = {
+					is_ai = yes
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY_URL
+					}
+				}
+			}
+		}
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_REJECT
+				}
+			}
+		}
+		
+		add_political_power = -25
+		hidden_effect = {
+			country_event = { id = ORE.153 days = 5 }
+		}
+	}
+	
+	option = {
+		name = ORE.152.b
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_ACCEPT
+					}
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY
+					}
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY_URL
+					}
+				}
+			}
+		}
+		
+		hidden_effect = {
+			country_event = { id = ORE.154 days = 2 }
+		}
+	}		
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Three
+	id = ORE.153
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.153"}
+	title = ORE.153.t
+	desc = ORE.153.d
+	picture = GFX_report_event_russia_court
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.153.a
+		add_stability = -0.02
+		tno_lgbt_rights_improve = yes
+		hidden_effect = {
+			country_event = { id = ORE.155 days = 172 }
+		}
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Four
+	id = ORE.154
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.154"}
+	title = ORE.154.t
+	desc = ORE.154.d
+	picture = GFX_report_event_ural_farm
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.154.a
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Five
+	id = ORE.155
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.155"}
+	title = ORE.155.t
+	desc = ORE.155.d
+	picture = GFX_report_event_russia_orenburg2
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.155.a
+		hidden_effect = {
+			country_event = { id = ORE.156 days = 13 }
+		}
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Six
+	id = ORE.156
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.156"}
+	title = ORE.156.t
+	desc = ORE.156.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.156.a
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY
+					}
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY_URL
+					}
+				}
+			}
+		}
+		
+		add_stability = -0.02
+		add_to_variable = {
+			ORECentralizedPower = -0.5
+		}
+		custom_effect_tooltip = ORE_decentralize_some
+		hidden_effect = {
+			country_event = { id = ORE.1561 days = 9 }
+		}
+	}		
+	option = {
+		name = ORE.156.b
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_ACCEPT
+				}
+			}
+		}
+		
+		add_political_power = 25
+		tno_lgbt_rights_worsen = yes
+		hidden_effect = {
+			country_event = { id = ORE.1562 days = 17 }
+		}
+	}		
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Seven
+	id = ORE.1561
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1561"}
+	title = ORE.1561.t
+	desc = ORE.1561.d
+	picture = GFX_report_event_afghanistan_women
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1561.a
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Eight
+	id = ORE.1562
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1562"}
+	title = ORE.1562.t
+	desc = ORE.1562.d
+	picture = GFX_report_event_commune_protest
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1562.a
+		
+		if = {
+			limit = {
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_BETRAY_URL
+				}
+			}
+			hidden_effect = {
+				country_event = { id = ORE.1563 days = 41 }
+			}
+		}
+		else_if = {
+			limit = {
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_BETRAY
+				}
+			}
+			hidden_effect = {
+				country_event = { id = ORE.1566 days = 41 }
+			}
+		}
+		else = {
+			random_list = {
+				30 = {
+					hidden_effect = {
+						country_event = { id = ORE.1563 days = 41 }
+					}
+				}
+				70 = {
+					hidden_effect = {
+						country_event = { id = ORE.1566 days = 41 }
+					}
+				}
+			}
+		}
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Nine
+	id = ORE.1563
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1563"}
+	title = ORE.1563.t
+	desc = ORE.1563.d
+	picture = GFX_report_event_american_police
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1563.a
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_BETRAY_URL
+				}
+			}
+		}
+		
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = -1
+			producer = ORE
+		}
+		hidden_effect = {
+			country_event = { id = ORE.1564 days = 11 }
+		}
+	}		
+	option = {
+		name = ORE.1563.b
+		
+		ai_chance = {
+			factor = 1
+		}
+		
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = -1
+			producer = ORE
+		}
+		hidden_effect = {
+			country_event = { id = ORE.1565 days = 12 }
+		}
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Ten
+	id = ORE.1564
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1564"}
+	title = ORE.1564.t
+	desc = ORE.1564.d
+	picture = GFX_report_event_ORS_forest_patrol
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1564.a
+		add_manpower = -1
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Eleven
+	id = ORE.1565
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1565"}
+	title = ORE.1565.t
+	desc = ORE.1565.d
+	picture = GFX_report_event_russia_soldier_weapon_2
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1565.a
+		URL = {
+			add_manpower = 1
+		}
+	}			
+}
+
+country_event = { #Pacifica Writes Gay Romance - Part Twelve
+	id = ORE.1566
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1566"}
+	title = ORE.1566.t
+	desc = ORE.1566.d
+	picture = GFX_report_event_russia_hunters
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1566.a
+	}			
+}
+
+country_event = { #Pollution Chain - Initial
+	id = ORE.157
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.157"}
+	title = ORE.157.t
+	desc = ORE.157.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.157.a
+		hidden_effect = {
+			country_event = { id = ORE.158 days = 12 }
+		}
+	}				
+}
+
+country_event = { #Pollution Chain - Decision
+	id = ORE.158
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.158"}
+	title = ORE.158.t
+	desc = ORE.158.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.158.a
+		trigger = {
+			has_political_power > 25
+		}
+		add_political_power = -25
+		hidden_effect = {
+			country_event = { id = ORE.159 days = 35 }
+		}
+		add_to_variable = {
+			ORECentralizedPower = 1
+		}
+		custom_effect_tooltip = ORE_centralize_some
+		add_popularity = {
+			ideology = authoritarian_democrat 
+			popularity = 0.03
+		}
+	}	
+	option = {
+		name = ORE.158.b
+		hidden_effect = {
+			country_event = { id = ORE.1600 days = 35 }
+		}
+		add_to_variable = {
+			ORECentralizedPower = -0.5
+		}
+		custom_effect_tooltip = ORE_decentralize_little
+		add_stability = 0.03
+		tno_pollution_improve = yes
+	}				
+}
+
+country_event = { #Pollution Chain - Boneyard
+	id = ORE.159
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.159"}
+	title = ORE.159.t
+	desc = ORE.159.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.159.a
+		add_stability = -0.02
+	}				
+}
+
+country_event = { #Pollution Chain - Peasant Victory
+	id = ORE.1600
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1600"}
+	title = ORE.1600.t
+	desc = ORE.1600.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.1600.a
+		add_political_power = 10
+	}				
+}
+
+#Thermal plant chain
+country_event = { #Thermal Plant Chain - Initial
+	id = ORE.161
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.161"}
+	title = ORE.161.t
+	desc = ORE.161.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.161.a
+		hidden_effect = {
+		country_event = { id = ORE.162 days = 5	}
+		}
+	}				
+}
+
+country_event = { #Thermal Plant Chain - Discovery
+	id = ORE.162
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.162"}
+	title = ORE.162.t
+	desc = ORE.162.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.162.a
+		add_stability = -0.02
+		add_to_variable = {	
+			ORECentralizedPower = 0.3
+		}
+		custom_effect_tooltip = ORE_centralize_little
+	}		
+	option = {
+		name = ORE.162.b
+		add_political_power = 10
+	}			
+}
+
+###Corruption Chain - There Is No God
+country_event = { 
+	id = ORE.900
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.900"}
+	title = ORE.900.t
+	desc = ORE.900.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.900.a
+		trigger = {
+			has_government = socialist
+		}
+	}
+	option = {
+		name = ORE.900.b
+		trigger = {
+			has_government = communist
+		}
+		hidden_effect = {
+		country_event = {
+			id = ORE.901
+			days = 4
+		}
+		}
+	}
+	option = {
+		name = ORE.900.c
+		trigger = {
+			has_government = authoritarian_democrat
+		}
+	}
+}
+
+country_event = { 
+	id = ORE.901
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.901"}
+	title = ORE.901.t
+	desc = ORE.901.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.901.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.902
+			days = 4
+		}
+		}
+	}
+	option = {
+		name = ORE.901.b
+		hidden_effect = {
+		country_event = {
+			id = ORE.903
+			days = 4
+		}
+		}
+	}		
+}
+
+country_event = { 
+	id = ORE.902
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.902"}
+	title = ORE.902.t
+	desc = ORE.902.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.902.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.905
+			days = 4
+		}
+		}
+	}		
+}
+
+country_event = { 
+	id = ORE.903
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.903"}
+	title = ORE.903.t
+	desc = ORE.903.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.903.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.904
+			days = 4
+		}
+		}
+	}
+}
+
+country_event = { 
+	id = ORE.904
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.904"}
+	title = ORE.904.t
+	desc = ORE.904.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.904.a
+		add_political_power = 100
+	}				
+}
+
+country_event = { 
+	id = ORE.905
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.905"}
+	title = ORE.905.t
+	desc = ORE.905.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.905.a
+		add_manpower = -12
+		add_political_power = 50
+		add_stability = -0.02
+	}				
+}
+
+country_event = { 
+	id = ORE.906
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.906"}
+	title = ORE.906.t
+	desc = ORE.906.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.906.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.907
+			days = 4
+		}
+		}
+	}	
+	option = {
+		name = ORE.906.b
+		hidden_effect = {
+		country_event = {
+			id = ORE.909
+			days = 4
+		}
+		}
+	}		
+}
+
+country_event = { 
+	id = ORE.907
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.907"}
+	title = ORE.907.t
+	desc = ORE.907.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.907.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.908
+			days = 4
+		}
+		}
+	}				
+}
+
+country_event = { 
+	id = ORE.908
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.908"}
+	title = ORE.908.t
+	desc = ORE.908.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.908.a
+		add_political_power =-25
+	}				
+}
+
+country_event = { 
+	id = ORE.909
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.909"}
+	title = ORE.909.t
+	desc = ORE.909.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.909.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.910
+			days = 4
+		}
+		}
+	}				
+}
+
+country_event = { 
+	id = ORE.910
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.910"}
+	title = ORE.910.t
+	desc = ORE.910.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.910.a
+		add_stability = 0.05
+	}				
+}
+
+country_event = { 
+	id = ORE.911
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.911"}
+	title = ORE.911.t
+	desc = ORE.911.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.911.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.912
+			days = 4
+		}
+		}
+	}
+	option = {
+		name = ORE.911.b
+		hidden_effect = {
+		country_event = {
+			id = ORE.914
+			days = 4
+		}
+		}
+	}		
+}
+
+country_event = { 
+	id = ORE.912
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.912"}
+	title = ORE.912.t
+	desc = ORE.912.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.912.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.913
+			days = 4
+		}
+		}
+	}		
+}
+
+country_event = { 
+	id = ORE.913
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.913"}
+	title = ORE.913.t
+	desc = ORE.913.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.913.a
+		add_stability = -0.05
+	}
+}
+
+country_event = { 
+	id = ORE.914
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.914"}
+	title = ORE.914.t
+	desc = ORE.914.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.914.a
+		hidden_effect = {
+		country_event = {
+			id = ORE.915
+			days = 4
+		}
+		}
+	}
+}
+
+country_event = { 
+	id = ORE.915
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.915"}
+	title = ORE.915.t
+	desc = ORE.915.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.915.a
+		add_political_power = 25
+	}	
+}
+
+country_event = { 
+	id = ORE.500
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.500"}
+	title = ORE.500.t
+	desc = ORE.500.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.500.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.501
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.501"}
+	title = ORE.501.t
+	desc = ORE.501.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.501.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.502
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.502"}
+	title = ORE.502.t
+	desc = ORE.502.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.502.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.503
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.503"}
+	title = ORE.503.t
+	desc = ORE.503.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.503.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.504
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.504"}
+	title = ORE.504.t
+	desc = ORE.504.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.504.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.505
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.505"}
+	title = ORE.505.t
+	desc = ORE.505.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.505.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.506
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.506"}
+	title = ORE.506.t
+	desc = ORE.506.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.506.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.507
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.507"}
+	title = ORE.507.t
+	desc = ORE.507.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.507.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.508
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.508"}
+	title = ORE.508.t
+	desc = ORE.508.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.508.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.509
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.509"}
+	title = ORE.509.t
+	desc = ORE.509.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.509.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.510
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.510"}
+	title = ORE.510.t
+	desc = ORE.510.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.510.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.511
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.511"}
+	title = ORE.511.t
+	desc = ORE.511.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.511.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.512
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.512"}
+	title = ORE.512.t
+	desc = ORE.512.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.512.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.513
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.513"}
+	title = ORE.513.t
+	desc = ORE.513.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.513.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.514
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.514"}
+	title = ORE.514.t
+	desc = ORE.514.d
+	picture = GFX_report_event_ORE_malenkov1
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.514.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.515
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.515"}
+	title = ORE.515.t
+	desc = ORE.515.d
+	picture = GFX_report_event_peasant_council
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.515.a
+		add_political_power = 10
+	}	
+}
+
+country_event = { 
+	id = ORE.516
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.516"}
+	title = ORE.516.t
+	desc = ORE.516.d
+	picture = GFX_report_event_peasant_council
+	hidden = yes
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = ORE.516.a
+		if = {
+			limit = {
+				ORE = {
+					has_government = socialist
+				}
+			}
+			country_event = {
+				id = ORE.517
+				days = 12
+			}
+		}
+		else_if = {
+			limit = {
+			}
+		}
+	}	
+}
+
+country_event = { 
+	id = ORE.517
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.517"}
+	title = ORE.517.t
+	desc = ORE.517.d
+	picture = GFX_report_event_peasant_council
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ORE.517.a
+		army_experience = 10
+		country_event = {
+			id = ORE.518
+			days = 12
+		}
+	}	
+}
+
+country_event = { 
+	id = ORE.518
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.518"}
+	title = ORE.518.t
+	desc = ORE.518.d
+	picture = GFX_report_event_peasant_council
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ORE.518.a
+		army_experience = 10
+		country_event = {
+			id = ORE.519
+			days = 12
+		}
+	}	
+}
+
+country_event = { 
+	id = ORE.519
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.519"}
+	title = ORE.519.t
+	desc = ORE.519.d
+	picture = GFX_report_event_peasant_council
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ORE.519.a
+		add_ideas = ORE_commune_armament
+	}	
+}
+
+
+country_event = { #Call in Ural League yes or no
+	id = ORE.1000
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1000"}
+	title = ORE.1000.t
+	desc = ORE.1000.d
+	picture = GFX_report_event_russian_refugees
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #yes
+		name = ORE.1000.a
+		ai_chance = { factor = 90 }
+		URL = { country_event = { id = ORE.1001 days = 10 } }
+	}
+	option = { #no
+		name = ORE.1000.b
+		ai_chance = { factor = 20 }
+	}	
+}
+
+country_event = { #Join Ore against Dirly?
+	id = ORE.1001
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1001"}
+	title = ORE.1001.t
+	desc = ORE.1001.d
+	picture = GFX_report_event_russian_refugees
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #Yes
+		name = ORE.1001.a
+		ai_chance = { factor = 95 }
+		URL = {
+			create_faction = URAL_ALLIANCE
+			add_to_faction = ORE
+			set_country_flag = FACTION_ESTABLISHED
+		}	
+		ORE = { country_event = { id = ORE.1002 days = 5 } }
+	}
+
+	option = { #No
+		name = ORE.1001.b
+		ai_chance = { factor = 5 }
+		ORE = { country_event = { id = ORE.1003 days = 5 } }
+	}	
+}
+
+country_event = { #URal League accept!
+	id = ORE.1002
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1002"}
+	title = ORE.1002.t
+	desc = ORE.1002.d
+	picture = GFX_report_event_russian_refugees
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #thats nice
+		name = ORE.1002.a
+	}
+}
+
+country_event = { #URal League deny!
+	id = ORE.1003
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1003"}
+	title = ORE.1003.t
+	desc = ORE.1003.d
+	picture = GFX_report_event_russian_refugees
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #how unfortunate
+		name = ORE.1003.a
+	}
+}
+
+#Survivors
+country_event = { 
+	id = ORE.2500
+	title = ORE.2500.t
+	desc = ORE.2500.desc
+	picture = GFX_report_event_russian_refugees
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.2500"}
+
+	fire_only_once = yes
+	trigger = {
+		URL = {
+			exists = no
+		}
+		tag = ORE
+	}
+
+	option = { #Send it
+		name = ORE.2500.a
+		add_timed_idea = {
+		idea = ORE_ural_guard_survivors
+		days = 180
+		}
+		load_oob = ORE_guard_survivors
+	}
+}
