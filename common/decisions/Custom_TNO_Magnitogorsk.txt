@@ -1,0 +1,33 @@
+nkvd_loyalty_category = {
+    BAS_custom_rule_tank_sanity = {
+        visible = {
+            ai = yes
+        }
+        allowed = {
+            tag = BAS
+            OR = {
+                has_game_rule = {
+                    rule = BAS_leader_route
+					option = BAS_LEADER_ROUTE_BAD_NKVD
+                }
+                has_game_rule = {
+                    rule = BAS_leader_route
+					option = BAS_LEADER_ROUTE_GOOD_NKVD
+                }
+            }
+        }
+        available = {
+            date > 1962.10.01
+        }
+        ai_will_do = {
+            factor = 1000
+        }
+        fire_only_once = yes
+
+        complete_effect = {
+            set_variable {
+                lysenko_sanity = 0
+            }
+        }
+    }
+}
