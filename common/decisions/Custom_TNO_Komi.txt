@@ -2,11 +2,11 @@ NIK_horrifying_politics_category = {
 	NIK_custom_rule_influence = {
 			
 			visible = { 
-				ai = yes
+				is_ai = yes
 			}
 			allowed = { 
 				tag = NIK
-				has_completed_focus = NIK_something_wicked_this_way_comes
+				has_completed_focus = NIK_the_interlude
 			}
 
 			ai_will_do = {
@@ -105,8 +105,12 @@ NIK_horrifying_politics_category = {
 							}	
 							has_game_rule = {
 								rule = NIK_LEADER_ROUTE
-								option = NIK_LEADER_ROUTE_STALINA
+								option = NIK_LEADER_ROUTE_STALINA_AUTHDEM
 							}	
+							has_game_rule = {
+								rule = NIK_LEADER_ROUTE
+								option = NIK_LEADER_ROUTE_STALINA_DESPOTISM
+							}
 							has_game_rule = {
 								rule = NIK_LEADER_ROUTE
 								option = NIK_LEADER_ROUTE_VOZNESENSKY
@@ -142,10 +146,14 @@ NIK_horrifying_politics_category = {
 					}
 					if = {
 						limit = {
-							has_game_rule = {
-								rule = NIK_LEADER_ROUTE
-								option = NIK_LEADER_ROUTE_STALINA
-							}
+								has_game_rule = {
+									rule = NIK_LEADER_ROUTE
+									option = NIK_LEADER_ROUTE_STALINA_AUTHDEM
+								}
+								has_game_rule = {
+									rule = NIK_LEADER_ROUTE
+									option = NIK_LEADER_ROUTE_STALINA_DESPOTISM
+								}
 						}
 						set_variable = {
 							NIKKosyginInfluence = 0
@@ -285,7 +293,7 @@ NIK_fascist_politics_category = {
 	NIK_custom_rule_influence_fascist = {
 			
 			visible = { 
-				ai = yes
+				is_ai = yes
 			}
 			allowed = { 
 				tag = NIK
@@ -333,11 +341,38 @@ NIK_fascist_politics_category = {
 	} 
 }
 
+NIK_coups_category = {
+	NIK_custom_stalina_coup = {
+			
+			visible = { 
+				is_ai = yes
+			}
+			allowed = { 
+				tag = NIK
+				has_game_rule = {
+					rule = NIK_LEADER_ROUTE
+					option = NIK_LEADER_ROUTE_STALINA_DESPOTISM
+				}
+			}
+
+			ai_will_do = {
+				factor = 100
+			}
+			fire_only_once = yes
+
+
+			complete_effect = {
+				country_event = { #STALINA COUP
+					id = komicoup.6
+			}
+	} 
+}
+
 nkvd_loyalty_category = {
     BAS_custom_rule_tank_sanity = {
-        #visible = {
-        #    ai = yes
-        #}
+        visible = {
+            ai = yes
+        }
         allowed = {
             tag = BAS
             OR = {
@@ -352,7 +387,7 @@ nkvd_loyalty_category = {
             }
         }
         available = {
-            date > 1962.01.01
+            date > 1962.10.01
         }
         ai_will_do = {
             factor = 1000
@@ -366,4 +401,3 @@ nkvd_loyalty_category = {
         }
     }
 }
-
