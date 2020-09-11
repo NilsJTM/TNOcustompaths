@@ -1,7 +1,7 @@
 custom_debug_category = {
 	NIK_custom_rule_influence = {
 			
-			allowed = { 
+			available  = { 
 				NIK = { 
 					has_completed_focus = NIK_the_interlude 
 				}
@@ -314,7 +314,7 @@ custom_debug_category = {
 	
 	NIK_custom_rule_influence_fascist = {
 			
-			allowed = { 
+			available  = { 
 				NIK = { 
 					has_completed_focus = NIK_fashexpansion_the_final_words
 				}
@@ -366,10 +366,7 @@ custom_debug_category = {
 
 	NIK_custom_stalina_coup = {
 			
-			visible = { 
-				is_ai = yes
-			}
-			allowed = { 
+			available  = { 
 				NIK = { 
 					has_country_flag = NIK_POST_ELECTION 
 				}
@@ -390,6 +387,34 @@ custom_debug_category = {
 					country_event = { #STALINA COUP
 						id = komicoup.6
 					}
+				}
+			}
+	} 
+	
+	NIK_custom_anti_coup_measures = {
+	
+			available  = { 
+				NIK = { 
+					has_country_flag = NIK_COUP_TICKER_RUN
+					check_variable = { NIKCoupRisk < 50 }
+				}
+				NOT = {
+					has_game_rule = {
+						rule = NIK_LEADER_ROUTE
+						option = DEFAULT
+					}
+				}
+			}
+
+			ai_will_do = {
+				factor = 100
+			}
+
+
+			complete_effect = {
+				NIK = {
+					set_variable = { NIKCoupRisk = 100 }
+					set_variable = { NIKCoupTicker = -5 }
 				}
 			}
 	} 
