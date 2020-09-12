@@ -1,0 +1,446 @@
+
+IME_war_for_the_levant_category = {
+
+	IME_decrease_irgun = {
+		cost = 150
+		fixed_random_seed = no
+		fire_only_once = no
+		days_re_enable = 15
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = IME_DISSOLUTION
+					option = IME_DISSOLUTION_IRGUN
+				}
+			}
+		}
+		
+		visible = {
+			original_tag = IME
+			has_country_flag = IME_operation_masada_activated
+		}
+		available = {
+			tag = IME
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision IME_decrease_irgun"
+			
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_IRGUN
+					}
+				}
+				country_event = ime.10
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_COMMUNIST
+					}
+				}
+				country_event = ime.9
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_BLESSED
+					}
+				}
+				country_event = ime.9
+			}
+			else = {
+				random_list = {
+					33 = {
+						country_event = ime.8
+					}
+					33 = {
+						country_event = ime.9
+					}
+					33 = {
+						country_event = ime.10
+					}
+				}
+			}
+		}
+	}
+
+	IME_decrease_anm = {
+		cost = 150
+		fixed_random_seed = no
+		fire_only_once = no
+		days_re_enable = 15
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = IME_DISSOLUTION
+					option = IME_DISSOLUTION_COMMUNIST
+				}
+			}
+		}
+		
+		visible = {
+			original_tag = IME
+			has_country_flag = IME_operation_masada_activated
+		}
+		available = {
+			tag = IME
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision IME_decrease_anm"
+			
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_IRGUN
+					}
+				}
+				country_event = ime.12
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_COMMUNIST
+					}
+				}
+				country_event = ime.13
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_BLESSED
+					}
+				}
+				country_event = ime.12
+			}
+			else = {
+				random_list = {
+					33 = {
+						country_event = ime.11
+					}
+					33 = {
+						country_event = ime.12
+					}
+					33 = {
+						country_event = ime.13
+					}
+				}
+			}
+		}
+	}
+
+	irgun_coup = {
+		allowed = { tag = IME }
+		available = {
+			check_variable = { IME_irgun_strength < 40 }
+		}
+		activation = {
+			check_variable = { IME_irgun_strength > 39 }
+			has_global_flag = IME_TUR_peace_deal
+			NOT = { has_country_flag = ime_jerusalem_conference_ongoing }
+			
+			NOT = {
+				IME = { is_ai = yes }
+				has_game_rule = {
+					rule = IME_DISSOLUTION
+					option = IME_DISSOLUTION_BLESSED
+				}
+			}
+		}
+		is_good = no
+		days_mission_timeout = 50
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision irgun_coup"
+			if = {
+				limit = {
+					IME = {
+				  	is_ai = yes
+					}
+				}
+				ITA = {
+					country_event = {id = empiremanagement_IME.6}
+				}
+			}	
+			else_if = {
+				limit = {
+					IME = {
+				  	is_ai = no
+					}
+				}
+				IME = {
+					country_event = {id = impurita.39}
+				}
+			}	
+		}
+		complete_effect = {
+			add_political_power = 50
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	anm_coup = {
+		allowed = { tag = IME }
+		available = {
+			check_variable = { IME_anm_strength < 40 }
+		}
+		activation = {
+			check_variable = { IME_anm_strength > 39 }
+			has_global_flag = IME_TUR_peace_deal
+			NOT = {has_country_flag = ime_jerusalem_conference_ongoing}
+			
+			NOT = {
+				IME = { is_ai = yes }
+				has_game_rule = {
+					rule = IME_DISSOLUTION
+					option = IME_DISSOLUTION_BLESSED
+				}
+			}
+		}
+		is_good = no
+		days_mission_timeout = 50
+		complete_effect = {
+			add_political_power = 50
+			if = {
+				limit = {
+					IME = {
+					  is_ai = yes
+					}
+				}
+				ITA = {
+					country_event = {id = empiremanagement_IME.6}
+				}
+			}	
+			else_if = {
+				limit = {
+					IME = {
+					  is_ai = no
+					}
+				}
+				IME = {
+					country_event = {id = impurita.36}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	irgun_jerusalem_conference = {
+		allowed = { tag = IME }
+		visible = {
+			has_country_flag = ime_invisible_flag
+		}
+		available = {
+			has_country_flag = ime_jerusalem_conference_ongoing
+			check_variable = { IME_irgun_strength < 35 }
+		}
+		activation = {
+			has_country_flag = ime_jerusalem_conference_ongoing
+			check_variable = { ime_irgun_strength > 34 }
+		}
+		is_good = no
+		days_mission_timeout = 7
+		timeout_effect = {
+			IME = {
+				country_event = { id = jercon.22 }
+			}
+		}
+		complete_effect = {
+			add_political_power = 5
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	anm_jerusalem_conference = {
+		allowed = { tag = IME }
+		visible = {
+			has_country_flag = ime_invisible_flag
+		}
+		available = {
+			has_country_flag = ime_jerusalem_conference_ongoing
+			check_variable = { IME_irgun_strength < 35 }
+		}
+		activation = {
+			has_country_flag = ime_jerusalem_conference_ongoing
+			check_variable = { ime_anm_strength > 34 }
+		}
+		is_good = no
+		days_mission_timeout = 7
+		timeout_effect = {
+			IME = {
+				country_event = { id = jercon.23 }
+			}
+		}
+		complete_effect = {
+			add_political_power = 5
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	IME_stage_street_battle = {
+		cost = 75
+		fixed_random_seed = no
+		fire_only_once = yes
+		days_re_enable = 15
+		ai_will_do = {
+			factor = 1
+		}
+		visible = {
+			original_tag = IME
+			has_country_flag = IME_operation_masada_activated
+		}
+		available = {
+			tag = IME
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision IME_decrease_irgun"
+			
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_IRGUN
+					}
+				}
+				country_event = ime.50
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_COMMUNIST
+					}
+				}
+				country_event = ime.51
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = IME_DISSOLUTION
+						option = IME_DISSOLUTION_BLESSED
+					}
+				}
+				country_event = ime.52
+			}
+			else = {
+				random_list = {
+					33 = {
+						country_event = ime.50
+					}
+					33 = {
+						country_event = ime.51
+					}
+					33 = {
+						country_event = ime.52
+					}
+				}
+			}
+		}
+	}
+
+	IME_sow_discord= {
+		cost = 75
+		fixed_random_seed = no
+		fire_only_once = yes
+		days_re_enable = 15
+		ai_will_do = {
+			factor = 1
+		}
+		visible = {
+			original_tag = IME
+			has_country_flag = IME_operation_masada_activated
+		}
+		available = {
+			tag = IME
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision IME_decrease_irgun"
+			country_event = { id = ime.53 }
+		}
+	}
+
+	IME_false_flag_operation = {
+		cost = 75
+		fixed_random_seed = no
+		fire_only_once = yes
+		days_re_enable = 15
+		ai_will_do = {
+			factor = 1
+		}
+		visible = {
+			original_tag = IME
+			has_country_flag = IME_operation_masada_activated
+		}
+		available = {
+			tag = IME
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision IME_decrease_irgun"
+			country_event = { id = ime.58 }
+		}
+	}
+
+	IME_assassinate_terrorist_leader = {
+		cost = 75
+		fixed_random_seed = no
+		fire_only_once = yes
+		days_re_enable = 15
+		ai_will_do = {
+			factor = 1
+		}
+		visible = {
+			original_tag = IME
+			has_country_flag = IME_operation_masada_activated
+		}
+		available = {
+			tag = IME
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision IME_decrease_irgun"
+			country_event = { id = ime.63 }
+		}
+	}
+
+	IME_leak_target_information = {
+		cost = 75
+		fixed_random_seed = no
+		fire_only_once = yes
+		days_re_enable = 15
+		ai_will_do = {
+			factor = 1
+		}
+		visible = {
+			original_tag = IME
+			has_country_flag = IME_operation_masada_activated
+		}
+		available = {
+			tag = IME
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision IME_decrease_irgun"
+			country_event = { id = ime.68 }
+		}
+	}
+
+}
