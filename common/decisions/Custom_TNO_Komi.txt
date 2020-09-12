@@ -370,15 +370,17 @@ custom_debug_category = {
 			} 
 	} 
 
-	NIK_custom_stalina_coup = {
+	NIK_custom_ensured_coups = {
 			
 			available  = { 
 				NIK = { 
 					has_country_flag = NIK_POST_ELECTION 
 				}
-				has_game_rule = {
-					rule = NIK_LEADER_ROUTE
-					option = NIK_LEADER_ROUTE_STALINA_DESPOTISM
+				NOT = {
+					has_game_rule = {
+						rule = NIK_LEADER_ROUTE
+						option = DEFAULT
+					}
 				}
 			}
 
@@ -389,9 +391,108 @@ custom_debug_category = {
 
 
 			complete_effect = {
-				NIK = {
-					country_event = { #STALINA COUP
-						id = komicoup.6
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = NIK_LEADER_ROUTE
+							option = NIK_LEADER_ROUTE_SUSLOV
+						}		
+	
+					}
+					NIK = {
+						country_event = {
+							id = komicoup.1
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = NIK_LEADER_ROUTE
+							option = NIK_LEADER_ROUTE_ZHADNOV
+						}		
+	
+					}
+					NIK = {
+						country_event = {
+							id = komicoup.2
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = NIK_LEADER_ROUTE
+							option = NIK_LEADER_ROUTE_BUKHARINA
+						}		
+	
+					}
+					NIK = {
+						country_event = {
+							id = komicoup.3
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = NIK_LEADER_ROUTE
+							option = NIK_LEADER_ROUTE_SEROV
+						}		
+	
+					}
+					NIK = {
+						country_event = {
+							id = komicoup.4
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = NIK_LEADER_ROUTE
+							option = NIK_LEADER_ROUTE_TABORISTKY
+						}		
+	
+					}
+					NIK = {
+						country_event = {
+							id = komicoup.5
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = NIK_LEADER_ROUTE
+							option = NIK_LEADER_ROUTE_STALINA
+						}		
+	
+					}
+					NIK = {
+						country_event = {
+							id = komicoup.6
+						}
+					}
+				}
+				if = {
+					limit = {
+						OR = {
+							has_game_rule = {
+								rule = NIK_LEADER_ROUTE
+								option = NIK_LEADER_ROUTE_GUMILYOV
+							}		
+							has_game_rule = {
+								rule = NIK_LEADER_ROUTE
+								option = NIK_LEADER_ROUTE_SHAFEREVICH
+							}
+						}
+	
+					}
+					NIK = {
+						country_event = {
+							id = komicoup.8
+						}
 					}
 				}
 			}
