@@ -1,0 +1,1155 @@
+GreatGame_Category = {
+
+	GreatGame_GER_game_1_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_1_turn_1_mission
+				has_active_mission = GreatGame_game_1_turn_2_mission
+				has_active_mission = GreatGame_game_1_turn_3_mission
+				has_active_mission = GreatGame_game_1_turn_4_mission
+				has_active_mission = GreatGame_game_1_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = GER
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_GERMANY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_1_turn_1_mission
+					has_active_mission = GreatGame_game_1_turn_2_mission
+					has_active_mission = GreatGame_game_1_turn_3_mission
+					has_active_mission = GreatGame_game_1_turn_4_mission
+					has_active_mission = GreatGame_game_1_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { GER.great_game_number > ITA.great_game_number }
+					check_variable = { GER.great_game_number = 10 }
+					check_variable = { ITA.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_GER_game_1_turn_x_decision_cheat"
+			if = {
+				limit = { tag = GER }
+				hidden_effect = {
+					ITA = { activate_decision = GreatGame_GER_game_1_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_GER_game_1_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_GERMANY
+					}
+				}
+				set_variable = { GER.great_game_number = 10 }
+				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_NEITHER
+					}
+				}
+				set_variable = { GER.great_game_number = 15 }
+				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_GER_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	GreatGame_ITA_game_1_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_1_turn_1_mission
+				has_active_mission = GreatGame_game_1_turn_2_mission
+				has_active_mission = GreatGame_game_1_turn_3_mission
+				has_active_mission = GreatGame_game_1_turn_4_mission
+				has_active_mission = GreatGame_game_1_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = ITA
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_ITALY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_1_turn_1_mission
+					has_active_mission = GreatGame_game_1_turn_2_mission
+					has_active_mission = GreatGame_game_1_turn_3_mission
+					has_active_mission = GreatGame_game_1_turn_4_mission
+					has_active_mission = GreatGame_game_1_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { ITA.great_game_number > GER.great_game_number }
+					check_variable = { ITA.great_game_number = 10 }
+					check_variable = { GER.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_ITA_game_1_turn_x_decision_cheat"
+			if = {
+				limit = { tag = ITA }
+				hidden_effect = {
+					GER = { activate_decision = GreatGame_GER_game_1_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_ITA_game_1_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_ITALY
+					}
+				}
+				set_variable = { ITA.great_game_number = 10 }
+				GER = { set_variable = { GER.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_NEITHER
+					}
+				}
+				set_variable = { ITA.great_game_number = 15 }
+				GER = { set_variable = { GER.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_ITA_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	
+	
+#################################################################################################################################
+	
+	
+	
+	
+		
+	GreatGame_GER_game_2_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_2_turn_1_mission
+				has_active_mission = GreatGame_game_2_turn_2_mission
+				has_active_mission = GreatGame_game_2_turn_3_mission
+				has_active_mission = GreatGame_game_2_turn_4_mission
+				has_active_mission = GreatGame_game_2_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = GER
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_GERMANY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_2_turn_1_mission
+					has_active_mission = GreatGame_game_2_turn_2_mission
+					has_active_mission = GreatGame_game_2_turn_3_mission
+					has_active_mission = GreatGame_game_2_turn_4_mission
+					has_active_mission = GreatGame_game_2_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { GER.great_game_number > ITA.great_game_number }
+					check_variable = { GER.great_game_number = 10 }
+					check_variable = { ITA.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_GER_game_2_turn_x_decision_cheat"
+			if = {
+				limit = { tag = GER }
+				hidden_effect = {
+					ITA = { activate_decision = GreatGame_GER_game_2_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_GER_game_2_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_GERMANY
+					}
+				}
+				set_variable = { GER.great_game_number = 10 }
+				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_NEITHER
+					}
+				}
+				set_variable = { GER.great_game_number = 15 }
+				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_GER_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	GreatGame_ITA_game_2_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_2_turn_1_mission
+				has_active_mission = GreatGame_game_2_turn_2_mission
+				has_active_mission = GreatGame_game_2_turn_3_mission
+				has_active_mission = GreatGame_game_2_turn_4_mission
+				has_active_mission = GreatGame_game_2_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = ITA
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_ITALY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_2_turn_1_mission
+					has_active_mission = GreatGame_game_2_turn_2_mission
+					has_active_mission = GreatGame_game_2_turn_3_mission
+					has_active_mission = GreatGame_game_2_turn_4_mission
+					has_active_mission = GreatGame_game_2_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { ITA.great_game_number > GER.great_game_number }
+					check_variable = { ITA.great_game_number = 10 }
+					check_variable = { GER.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_ITA_game_2_turn_x_decision_cheat"
+			if = {
+				limit = { tag = ITA }
+				hidden_effect = {
+					GER = { activate_decision = GreatGame_GER_game_2_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_ITA_game_2_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_ITALY
+					}
+				}
+				set_variable = { ITA.great_game_number = 10 }
+				GER = { set_variable = { GER.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_NEITHER
+					}
+				}
+				set_variable = { ITA.great_game_number = 15 }
+				GER = { set_variable = { GER.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_ITA_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	
+	
+#################################################################################################################################
+	
+	
+	
+	
+	
+	GreatGame_GER_game_3_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_3_turn_1_mission
+				has_active_mission = GreatGame_game_3_turn_2_mission
+				has_active_mission = GreatGame_game_3_turn_3_mission
+				has_active_mission = GreatGame_game_3_turn_4_mission
+				has_active_mission = GreatGame_game_3_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = GER
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_GERMANY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_3_turn_1_mission
+					has_active_mission = GreatGame_game_3_turn_2_mission
+					has_active_mission = GreatGame_game_3_turn_3_mission
+					has_active_mission = GreatGame_game_3_turn_4_mission
+					has_active_mission = GreatGame_game_3_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { GER.great_game_number > ITA.great_game_number }
+					check_variable = { GER.great_game_number = 10 }
+					check_variable = { ITA.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_GER_game_3_turn_x_decision_cheat"
+			if = {
+				limit = { tag = GER }
+				hidden_effect = {
+					ITA = { activate_decision = GreatGame_GER_game_3_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_GER_game_3_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_GERMANY
+					}
+				}
+				set_variable = { GER.great_game_number = 10 }
+				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_NEITHER
+					}
+				}
+				set_variable = { GER.great_game_number = 15 }
+				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_GER_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	GreatGame_ITA_game_3_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_3_turn_1_mission
+				has_active_mission = GreatGame_game_3_turn_2_mission
+				has_active_mission = GreatGame_game_3_turn_3_mission
+				has_active_mission = GreatGame_game_3_turn_4_mission
+				has_active_mission = GreatGame_game_3_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = ITA
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_ITALY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_3_turn_1_mission
+					has_active_mission = GreatGame_game_3_turn_2_mission
+					has_active_mission = GreatGame_game_3_turn_3_mission
+					has_active_mission = GreatGame_game_3_turn_4_mission
+					has_active_mission = GreatGame_game_3_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { ITA.great_game_number > GER.great_game_number }
+					check_variable = { ITA.great_game_number = 10 }
+					check_variable = { GER.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_ITA_game_3_turn_x_decision_cheat"
+			if = {
+				limit = { tag = ITA }
+				hidden_effect = {
+					GER = { activate_decision = GreatGame_GER_game_3_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_ITA_game_3_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_ITALY
+					}
+				}
+				set_variable = { ITA.great_game_number = 10 }
+				GER = { set_variable = { GER.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_NEITHER
+					}
+				}
+				set_variable = { ITA.great_game_number = 15 }
+				GER = { set_variable = { GER.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_ITA_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	
+	
+#################################################################################################################################
+	
+	
+	
+	
+	
+	GreatGame_GER_game_4_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_4_turn_1_mission
+				has_active_mission = GreatGame_game_4_turn_2_mission
+				has_active_mission = GreatGame_game_4_turn_3_mission
+				has_active_mission = GreatGame_game_4_turn_4_mission
+				has_active_mission = GreatGame_game_4_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = GER
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_GERMANY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_4_turn_1_mission
+					has_active_mission = GreatGame_game_4_turn_2_mission
+					has_active_mission = GreatGame_game_4_turn_3_mission
+					has_active_mission = GreatGame_game_4_turn_4_mission
+					has_active_mission = GreatGame_game_4_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { GER.great_game_number > ITA.great_game_number }
+					check_variable = { GER.great_game_number = 10 }
+					check_variable = { ITA.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_GER_game_4_turn_x_decision_cheat"
+			if = {
+				limit = { tag = GER }
+				hidden_effect = {
+					ITA = { activate_decision = GreatGame_GER_game_4_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_GER_game_4_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_GERMANY
+					}
+				}
+				set_variable = { GER.great_game_number = 10 }
+				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_NEITHER
+					}
+				}
+				set_variable = { GER.great_game_number = 15 }
+				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_GER_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	GreatGame_ITA_game_4_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_4_turn_1_mission
+				has_active_mission = GreatGame_game_4_turn_2_mission
+				has_active_mission = GreatGame_game_4_turn_3_mission
+				has_active_mission = GreatGame_game_4_turn_4_mission
+				has_active_mission = GreatGame_game_4_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = ITA
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_ITALY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_4_turn_1_mission
+					has_active_mission = GreatGame_game_4_turn_2_mission
+					has_active_mission = GreatGame_game_4_turn_3_mission
+					has_active_mission = GreatGame_game_4_turn_4_mission
+					has_active_mission = GreatGame_game_4_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { ITA.great_game_number > GER.great_game_number }
+					check_variable = { ITA.great_game_number = 10 }
+					check_variable = { GER.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_ITA_game_4_turn_x_decision_cheat"
+			if = {
+				limit = { tag = ITA }
+				hidden_effect = {
+					GER = { activate_decision = GreatGame_GER_game_4_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_ITA_game_4_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_ITALY
+					}
+				}
+				set_variable = { ITA.great_game_number = 10 }
+				GER = { set_variable = { GER.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_NEITHER
+					}
+				}
+				set_variable = { ITA.great_game_number = 15 }
+				GER = { set_variable = { GER.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_ITA_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	
+	
+#################################################################################################################################
+	
+	
+	
+	
+	
+	GreatGame_GER_game_5_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_5_turn_1_mission
+				has_active_mission = GreatGame_game_5_turn_2_mission
+				has_active_mission = GreatGame_game_5_turn_3_mission
+				has_active_mission = GreatGame_game_5_turn_4_mission
+				has_active_mission = GreatGame_game_5_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = GER
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_GERMANY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_5_turn_1_mission
+					has_active_mission = GreatGame_game_5_turn_2_mission
+					has_active_mission = GreatGame_game_5_turn_3_mission
+					has_active_mission = GreatGame_game_5_turn_4_mission
+					has_active_mission = GreatGame_game_5_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { GER.great_game_number > ITA.great_game_number }
+					check_variable = { GER.great_game_number = 10 }
+					check_variable = { ITA.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_GER_game_5_turn_x_decision_cheat"
+			if = {
+				limit = { tag = GER }
+				hidden_effect = {
+					ITA = { activate_decision = GreatGame_GER_game_5_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_GER_game_5_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_GERMANY
+					}
+				}
+				set_variable = { GER.great_game_number = 10 }
+				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = GER
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_NEITHER
+					}
+				}
+				set_variable = { GER.great_game_number = 15 }
+				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_GER_decision_tt
+			}
+		}
+	}
+	
+	
+	
+	GreatGame_ITA_game_5_turn_x_decision_cheat = {
+		visible = {
+			OR = {
+				has_active_mission = GreatGame_game_5_turn_1_mission
+				has_active_mission = GreatGame_game_5_turn_2_mission
+				has_active_mission = GreatGame_game_5_turn_3_mission
+				has_active_mission = GreatGame_game_5_turn_4_mission
+				has_active_mission = GreatGame_game_5_turn_5_mission
+			}
+			hidden_trigger = {
+				tag = ITA
+				OR = {
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_ITALY
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_NEITHER
+					}
+				}
+			}
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = GreatGame_decision_taken
+					has_country_flag = GreatGame_round_lost
+				}
+			}
+		}
+		
+		fire_only_once = no
+		days_remove = 10
+		days_re_enable = 5
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_active_mission = GreatGame_game_5_turn_1_mission
+					has_active_mission = GreatGame_game_5_turn_2_mission
+					has_active_mission = GreatGame_game_5_turn_3_mission
+					has_active_mission = GreatGame_game_5_turn_4_mission
+					has_active_mission = GreatGame_game_5_turn_5_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 999
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { ITA.great_game_number > GER.great_game_number }
+					check_variable = { ITA.great_game_number = 10 }
+					check_variable = { GER.great_game_number > 10 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GreatGame_ITA_game_5_turn_x_decision_cheat"
+			if = {
+				limit = { tag = ITA }
+				hidden_effect = {
+					GER = { activate_decision = GreatGame_GER_game_5_turn_x_decision_cheat }
+				}
+				set_country_flag = GreatGame_decision_taken
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GreatGame_ITA_game_5_turn_x_decision_cheat"
+			
+			if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_ITALY
+					}
+				}
+				set_variable = { ITA.great_game_number = 10 }
+				GER = { set_variable = { GER.great_game_number = 20 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else_if = {
+				limit = {
+					tag = ITA
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_NEITHER
+					}
+				}
+				set_variable = { ITA.great_game_number = 15 }
+				GER = { set_variable = { GER.great_game_number = 15 } }
+				great_game_add_points = yes
+				great_game_round_loss_check = yes
+				clr_country_flag = GreatGame_decision_taken
+				
+				custom_effect_tooltip = great_game_cheat_decision_tt
+			}
+			else = {
+				custom_effect_tooltip = great_game_ITA_decision_tt
+			}
+		}
+	}
+	
+}
