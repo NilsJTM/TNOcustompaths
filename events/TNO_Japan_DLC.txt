@@ -166,6 +166,15 @@ country_event = { #The Beginning Of The Conspiracy
 		name = japdlc.9.a
 		set_country_flag = JAP_dlc_investigation_activated
 		add_ideas = JAP_Dai_Li_conspiracy
+		if = {
+		    limit = {
+		        has_game_rule = {
+				    rule = JAP_dai_li_conspiracy
+				    option = JAP_DAI_LI_CONSPIRACY_SUCCESS
+			    }
+		    }
+		    country_event = { id = japdlc.307 days = 30}
+		}
 		hidden_effect = {
 			set_variable = {
 				var = JAP_Green_Card
@@ -2794,6 +2803,16 @@ country_event = { # Nishi Under Siege
 	option = {
 		name = japdlc.742.a
 		hidden_effect = {
+		if = {
+		    limit = {
+		        has_game_rule = {
+				    rule = JAP_dai_li_conspiracy
+				    option = JAP_DAI_LI_CONSPIRACY_FAIL
+			    }
+		    }
+		    country_event = { id = japdlc.746 days = 2}
+		}
+		else = {
 		random_list = {
 			30 = { # Nishi Lives
 				country_event = { id = japdlc.746 days = 2 }
@@ -2802,6 +2821,7 @@ country_event = { # Nishi Under Siege
 				country_event = { id = japdlc.743 days = 2 }
 				}
 			}
+		}
 		}
 	}
 }
