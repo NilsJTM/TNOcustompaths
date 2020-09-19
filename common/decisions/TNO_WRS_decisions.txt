@@ -1,0 +1,1222 @@
+WRS_power_struggle_tukha_category = {
+	WRS_zhukov_influence_ticker = {
+		allowed = {
+			always = no
+		}
+
+		visible = {
+			hidden_trigger = {
+				tag = WRS
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_if_not_visible = yes
+		is_good = yes
+
+		days_mission_timeout = 25
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout WRS_zhukov_influence_ticker"
+			if = {
+				limit = {
+					is_ai = yes
+					has_game_rule = {
+						rule = WRS_LEADER_ROUTE
+						option = WRS_LEADER_ROUTE_TUKHACHEVSKY
+					}
+				}
+				hidden_effect = {
+					set_variable = { global.WRSZhukovInfluence = 0 }
+					set_variable = { global.WRSFactionalism = 0 }
+					activate_mission = WRS_zhukov_influence_ticker
+				}
+			}
+			else = {
+				custom_effect_tooltip = WRS_zhukov_influence_ticker_tt
+				hidden_effect = {
+					add_to_variable = { global.WRSZhukovInfluence = 2.75 }
+					add_to_variable = { global.WRSFactionalism = 2 }
+					activate_mission = WRS_zhukov_influence_ticker
+				}
+			}
+		}
+	}
+	WRS_appease_zhukov = {
+	
+		icon = GFX_decision_generic_civil_support
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 10
+		days_remove = 10
+		fire_only_once = no
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_appease_zhukov"
+			WRS_decrease_factionalism_low = yes
+			WRS_increase_zhukov_influence_med = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	WRS_work_against_zhukov = {
+	
+		icon = decision_generic_use_force
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 10
+		days_remove = 10
+		fire_only_once = no
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_work_against_zhukov"
+			WRS_increase_factionalism_low = yes
+			WRS_decrease_zhukov_influence_low = yes
+			add_stability = -0.02
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	WRS_tukha_meet_with_veterans = {
+	
+		icon = decision_humanitarian_aid_increase
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 10
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_meet_with_veterans"
+			WRS_decrease_factionalism_low = yes
+			WRS_increase_tukha_influence_low = yes
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	WRS_tukha_military_parade = {
+	
+		icon = decision_generic_military_parade
+	
+		allowed = {
+			tag = WRS
+		}
+		days_remove = 2
+		fire_only_once = no
+		days_re_enable = 180
+		custom_cost_trigger = {
+			has_equipment = {infantry_equipment >  250}
+			has_manpower > 100
+		}
+		custom_cost_text = WRS_military_parade_cost
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_military_parade"
+			WRS_increase_tukha_influence_med = yes
+			TNO_improve_army_professionalism_low = yes
+			add_war_support = 0.05
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -50
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	WRS_tukha_publish_theory = {
+	
+		icon = decision_generic_political_action
+
+		allowed = {
+			tag = WRS
+		}
+		cost = 15
+		days_remove = 10
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_publish_theory"
+			custom_effect_tooltip = WRS_tukha_publish_theory_tt
+			country_event = { id = WRS_power_struggle.2 days = 1 }
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	WRS_tukha_meet_with_voroshilov = {
+	
+		icon = decision_generic_phone_call
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 25
+		days_remove = 30
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_meet_with_voroshilov"
+			custom_effect_tooltip = WRS_tukha_meet_with_voroshilov_tt
+			country_event = { id = WRS_power_struggle.3 days = 3 }
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	WRS_tukha_test_their_mettle = {
+	
+		icon = GFX_decision_border_war
+		
+		allowed = {
+			tag = WRS
+		}
+		days_remove = 30
+		fire_only_once = yes
+		custom_cost_trigger = {
+			has_equipment = {infantry_equipment >  500}
+			has_manpower > 1000
+		}
+		custom_cost_text = WRS_test_their_mettle_cost
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_test_their_mettle"
+			custom_effect_tooltip = WRS_tukha_test_their_mettle_tt
+			start_border_war = {
+			change_state_after_war = no
+				attacker = {
+					state = 214
+					num_provinces = 2
+					on_win = WRS_power_struggle.4
+					on_lose = WRS_power_struggle.5
+					on_cancel = WRS_power_struggle.6
+				}
+
+				defender = {
+					state = 859
+					num_provinces = 2
+					on_win = WRS.13
+					on_lose = WRS.14
+					on_cancel = raiding.5
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	WRS_tukha_operation_firebird = {
+	
+		icon = decision_generic_assault
+		
+		allowed = {
+			tag = WRS
+		}
+		cost = 100
+		days_remove = 30
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_operation_firebird"
+			custom_effect_tooltip = WRS_tukha_operation_firebird_tt
+			country_event = { id = WRS_power_struggle.7 days = 1 }
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+}
+
+WRS_power_struggle_zhukov_category = {
+	WRS_tukha_influence_ticker = {
+		allowed = {
+			always = no
+		}
+
+		visible = {
+			hidden_trigger = {
+				tag = WRS
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_if_not_visible = yes
+		is_good = yes
+
+		days_mission_timeout = 25
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout WRS_tukha_influence_ticker"
+			
+			if = {
+				limit = {
+					is_ai = yes
+					OR = {
+						has_game_rule = {
+							rule = WRS_LEADER_ROUTE
+							option = WRS_LEADER_ROUTE_ZHUKOV_AUTHSOC
+						}
+						has_game_rule = {
+							rule = WRS_LEADER_ROUTE
+							option = WRS_LEADER_ROUTE_ZHUKOV_LIBSOC
+						}
+						has_game_rule = {
+							rule = WRS_LEADER_ROUTE
+							option = WRS_LEADER_ROUTE_ZHUKOV_SOCDEM
+						}
+					}
+				}
+				hidden_effect = {
+					set_variable = { global.WRSTukhaInfluence = 0 }
+					set_variable = { global.WRSFactionalism = 0 }
+					activate_mission = WRS_tukha_influence_ticker
+				}
+			}
+			else = {
+				custom_effect_tooltip = WRS_tukha_influence_ticker_tt
+				hidden_effect = {
+					add_to_variable = { global.WRSTukhaInfluence = 2.75 }
+					add_to_variable = { global.WRSFactionalism = 2 }
+					activate_mission = WRS_tukha_influence_ticker
+				}
+			}
+		}
+	}
+	WRS_appease_tukha = {
+	
+		icon = GFX_decision_generic_civil_support
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 10
+		days_remove = 10
+		fire_only_once = no
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_appease_tukha"
+			WRS_decrease_factionalism_low = yes
+			WRS_increase_tukha_influence_med = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	WRS_work_against_tukha = {
+	
+		icon = decision_generic_use_force
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 10
+		days_remove = 10
+		fire_only_once = no
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_work_against_tukha"
+			WRS_increase_factionalism_low = yes
+			WRS_decrease_tukha_influence_low = yes
+			add_stability = -0.02
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	WRS_zhukov_meet_with_veterans = {
+	
+		icon = decision_humanitarian_aid_increase
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 10
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_meet_with_veterans"
+			WRS_decrease_factionalism_low = yes
+			WRS_increase_zhukov_influence_low = yes
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	WRS_zhukov_military_parade = {
+	
+		icon = decision_generic_military_parade
+	
+		allowed = {
+			tag = WRS
+		}
+		days_remove = 2
+		fire_only_once = no
+		days_re_enable = 180
+		custom_cost_trigger = {
+			has_equipment = {infantry_equipment >  250}
+			has_manpower > 100
+		}
+		custom_cost_text = WRS_military_parade_cost
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_military_parade"
+			WRS_increase_zhukov_influence_med = yes
+			TNO_improve_army_professionalism_low = yes
+			add_war_support = 0.05
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -50
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	WRS_zhukov_meet_with_voroshilov = {
+	
+		icon = decision_generic_phone_call
+	
+		allowed = {
+			tag = WRS
+		}
+		cost = 25
+		days_remove = 30
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_meet_with_voroshilov"
+			custom_effect_tooltip = WRS_zhukov_meet_with_voroshilov_tt
+			country_event = { id = WRS_power_struggle.101 days = 3 }
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	WRS_zhukov_increase_oil_quotas = {
+	
+		icon = decision_drug_trade_increase
+		
+		allowed = {
+			tag = WRS
+		}
+
+		days_remove = 240
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		
+		custom_cost_text = WRS_indrik_civ_fact_cost_1
+
+		fire_only_once = yes
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_increase_oil_quotas"
+			WRS_increase_zhukov_influence_high = yes
+			add_resource = {
+				type = oil
+				amount = 5
+				state = 869
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	
+	WRS_zhukov_deploy_red_army_labour_battalions = {
+	
+		icon = GFX_decision_generic_industry
+		
+		allowed = {
+			tag = WRS
+		}
+
+		days_remove = 120
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		
+		custom_cost_text = WRS_indrik_civ_fact_cost_1
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_deploy_red_army_labour_battalions"
+			WRS_increase_zhukov_influence_high = yes
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							infrastructure > 9
+						}
+					}
+				}
+				random_owned_state = {
+					add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	
+	WRS_zhukov_compile_evidence = {
+	
+		icon = decision_generic_political_action
+		
+		allowed = {
+			tag = WRS
+		}
+		cost = 100
+		days_remove = 30
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_compile_evidence"
+			custom_effect_tooltip = WRS_zhukov_compile_evidence_tt
+			country_event = { id = WRS_power_struggle.102 days = 1 }
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+}
+
+WRS_project_indrik_category = {
+	WRS_OBT_program = {
+		
+		icon = decision_black_market_armor_purchase
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = WRS_doing_indrik_project_tt
+				NOT = {
+					has_country_flag = WRS_doing_indrik_project
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 120
+
+		cost = 15
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_OBT_program"
+			set_country_flag = WRS_doing_indrik_project
+			set_country_flag = WRS_INDRIK_1_IN_PROGRESS
+			custom_effect_tooltip = WRS_OBT_program_cost_tt
+			add_to_variable = { national_debt = 12000 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_OBT_program"
+			clr_country_flag = WRS_doing_indrik_project
+			clr_country_flag = WRS_INDRIK_1_IN_PROGRESS
+			custom_effect_tooltip = WRS_indrik_project_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = indrik.10
+					}
+				}
+			}
+		}
+	}
+	WRS_izhevsk_experimental_constructor_works = {
+		
+		icon = decision_black_market_arms_trade_increase
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = WRS_doing_indrik_project_tt
+				NOT = {
+					has_country_flag = WRS_doing_indrik_project
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 120
+
+		cost = 15
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_izhevsk_experimental_constructor_works"
+			set_country_flag = WRS_doing_indrik_project
+			set_country_flag = WRS_INDRIK_2_IN_PROGRESS
+			custom_effect_tooltip = WRS_izhevsk_experimental_constructor_works_tt
+			add_to_variable = { national_debt = 50000 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_izhevsk_experimental_constructor_works"
+			clr_country_flag = WRS_doing_indrik_project
+			clr_country_flag = WRS_INDRIK_2_IN_PROGRESS
+			custom_effect_tooltip = WRS_indrik_project_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = indrik.20
+					}
+				}
+			}
+		}
+	}
+	WRS_project_uragan = {
+	
+		icon = decision_black_market_sp_artillery_purchase
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = WRS_doing_indrik_project_tt
+				NOT = {
+					has_country_flag = WRS_doing_indrik_project
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 180
+
+		cost = 30
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_project_uragan"
+			set_country_flag = WRS_doing_indrik_project
+			set_country_flag = WRS_INDRIK_3_IN_PROGRESS
+			custom_effect_tooltip = WRS_project_uragan_cost_tt
+			add_to_variable = { national_debt = 25000 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_project_uragan"
+			clr_country_flag = WRS_doing_indrik_project
+			clr_country_flag = WRS_INDRIK_3_IN_PROGRESS
+			custom_effect_tooltip = WRS_indrik_project_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = indrik.30
+					}
+				}
+			}
+		}
+	}
+	WRS_project_tsysklon = {
+
+		icon = decision_rockets
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = WRS_doing_indrik_project_tt
+				NOT = {
+					has_country_flag = WRS_doing_indrik_project
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 180
+
+		cost = 30
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_project_tsysklon"
+			set_country_flag = WRS_doing_indrik_project
+			set_country_flag = WRS_INDRIK_4_IN_PROGRESS
+			custom_effect_tooltip = WRS_project_tsysklon_cost_tt
+			add_to_variable = { national_debt = 30000 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_project_tsysklon"
+			clr_country_flag = WRS_doing_indrik_project
+			clr_country_flag = WRS_INDRIK_4_IN_PROGRESS
+			custom_effect_tooltip = WRS_indrik_project_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = indrik.40
+					}
+				}
+			}
+		}
+	}
+	
+	WRS_project_shchuka = {
+	
+		icon = decision_submarines
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = WRS_doing_indrik_project_tt
+				NOT = {
+					has_country_flag = WRS_doing_indrik_project
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 180
+
+		cost = 30
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_project_shchuka"
+			set_country_flag = WRS_doing_indrik_project
+			set_country_flag = WRS_INDRIK_5_IN_PROGRESS
+			custom_effect_tooltip = WRS_project_shchuka_cost_tt
+			add_to_variable = { national_debt = 27500 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_project_shchuka"
+			clr_country_flag = WRS_doing_indrik_project
+			clr_country_flag = WRS_INDRIK_5_IN_PROGRESS
+			custom_effect_tooltip = WRS_indrik_project_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = indrik.50
+					}
+				}
+			}
+		}
+	}
+	WRS_project_leshiy = {
+	
+		icon = decision_chemicals
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = WRS_doing_indrik_project_tt
+				NOT = {
+					has_country_flag = WRS_doing_indrik_project
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 240
+
+		cost = 100
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_project_leshiy"
+			set_country_flag = WRS_doing_indrik_project
+			set_country_flag = WRS_INDRIK_6_IN_PROGRESS
+			custom_effect_tooltip = WRS_project_leshiy_cost_tt
+			add_to_variable = { national_debt = 35000 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_project_leshiy"
+			clr_country_flag = WRS_doing_indrik_project
+			clr_country_flag = WRS_INDRIK_6_IN_PROGRESS
+			custom_effect_tooltip = WRS_indrik_project_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = indrik.60
+					}
+				}
+			}
+		}
+	}
+	WRS_project_ferment = {
+
+		icon = decision_bioweapons
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = WRS_doing_indrik_project_tt
+				NOT = {
+					has_country_flag = WRS_doing_indrik_project
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 240		
+		
+		cost = 100
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_project_ferment"
+			set_country_flag = WRS_doing_indrik_project
+			set_country_flag = WRS_INDRIK_7_IN_PROGRESS
+			custom_effect_tooltip = WRS_project_ferment_cost_tt
+			add_to_variable = { national_debt = 40000 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_project_ferment"
+			clr_country_flag = WRS_doing_indrik_project
+			clr_country_flag = WRS_INDRIK_7_IN_PROGRESS
+			custom_effect_tooltip = WRS_indrik_project_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = indrik.70
+					}
+				}
+			}
+		}
+	}
+}
+
+WRS_Tangle_Decisions_Category = {
+	WRS_appease_akhromeyev = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			check_variable = { WRS_Akhromeyev_Balance < 33.33 }
+
+		}
+		visible = {
+			check_variable = { WRS_Akhromeyev_Balance < 33.33 }
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_appease_akhromeyev"
+			WRS_zhukovregional_increase_akhromeyev_influence_low = yes
+			WRRFTangle_calcXY = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 0
+			
+		}
+	}
+	WRS_appease_ryzhkov = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			check_variable = { WRS_Ryzhkov_Balance < 33.33 }
+		}
+		visible = {
+			check_variable = { WRS_Ryzhkov_Balance < 33.33 }
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_appease_ryzhkov"
+			WRS_zhukovregional_increase_ryzhkov_influence_low = yes
+			WRRFTangle_calcXY = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 0
+			
+		}
+	}
+	WRS_appease_yakovlev = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			check_variable = { WRS_Yakovelev_Balance < 33.33 }
+		}
+		visible = {
+			check_variable = { WRS_Yakovelev_Balance < 33.33 }
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_appease_yakovlev"
+			WRS_zhukovregional_increase_yakovlev_influence_low = yes
+			WRRFTangle_calcXY = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 0
+			
+		}
+	}
+	
+	WRS_persuade_others_akhromeyev = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			check_variable = { WRS_Akhromeyev_Balance > 33.33 }
+
+		}
+		visible = {
+			check_variable = { WRS_Akhromeyev_Balance > 33.33 }
+		}
+		cost = 30
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_persuade_others_akhromeyev"
+			WRS_zhukovregional_increase_akhromeyev_influence_low = yes
+			WRRFTangle_calcXY = yes
+			add_stability = -0.03
+		}
+		ai_will_do = {
+			factor = 0
+			
+		}
+	}
+	WRS_persuade_others_ryzhkov = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			check_variable = { WRS_Ryzhkov_Balance > 33.33 }
+		}
+		visible = {
+			check_variable = { WRS_Ryzhkov_Balance > 33.33 }
+		}
+		cost = 30
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_persuade_others_ryzhkov"
+			WRS_zhukovregional_increase_ryzhkov_influence_low = yes
+			WRRFTangle_calcXY = yes
+			add_stability = -0.03
+		}
+		ai_will_do = {
+			factor = 0
+			
+		}
+	}
+	WRS_persuade_others_yakovlev = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			check_variable = { WRS_Yakovelev_Balance > 33.33 }
+		}
+		visible = {
+			check_variable = { WRS_Yakovelev_Balance > 33.33 }
+		}
+		cost = 30
+		fire_only_once = no
+		days_re_enable = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_persuade_others_yakovlev"
+			WRS_zhukovregional_increase_yakovlev_influence_low = yes
+			WRRFTangle_calcXY = yes
+			add_stability = -0.03
+		}
+		ai_will_do = {
+			factor = 0
+			
+		}
+	}
+	
+	###AKHROMEYEV REFORMS###
+	
+	WRS_akhromeyev_draw_closer_to_USA = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = { WRS_Akhromeyev_Balance > 35 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				NOT = {
+					has_idea = IRK_reformed
+				}
+			}
+		}
+		visible = {
+			check_variable = { WRS_Akhromeyev_Balance > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_akhromeyev_draw_closer_to_USA"
+			custom_effect_tooltip = WRS_akhromeyev_draw_closer_to_USA_tt
+			WRS_zhukovregional_increase_akhromeyev_influence_med = yes
+			WRRFTangle_calcXY = yes
+			TNO_improve_industrial_expertise_low = yes
+			TNO_improve_industrial_equipment_med = yes
+			add_to_variable = { misc_costs = 150 }
+			hidden_effect = {
+				add_timed_idea = { idea = IRK_reformed days = 365 }
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	
+	WRS_akhromeyev_widen_smersh_powers = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = { WRS_Akhromeyev_Balance > 40 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				NOT = {
+					has_idea = IRK_reformed
+				}
+			}
+		}
+		visible = {
+			check_variable = { WRS_Akhromeyev_Balance > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_akhromeyev_widen_smersh_powers"
+			custom_effect_tooltip = WRS_akhromeyev_widen_smersh_powers_tt
+			WRS_zhukovregional_increase_akhromeyev_influence_high = yes
+			WRRFTangle_calcXY = yes
+			add_ideas = tno_security_security_service
+			hidden_effect = {
+				add_timed_idea = { idea = IRK_reformed days = 365 }
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	
+	###RYZHKOV REFORMS###
+	
+	WRS_ryzhkov_agricultural_mechanization = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = { WRS_Ryzhkov_Balance > 35 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				NOT = {
+					has_idea = IRK_reformed
+				}
+			}
+		}
+		visible = {
+			check_variable = { WRS_Ryzhkov_Balance > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_ryzhkov_agricultural_mechanization"
+			custom_effect_tooltip = WRS_ryzhkov_agricultural_mechanization_tt
+			WRS_zhukovregional_increase_ryzhkov_influence_med = yes
+			WRRFTangle_calcXY = yes
+			TNO_improve_agriculture_high = yes
+			add_to_variable = { misc_costs = 175 }
+			hidden_effect = {
+				add_timed_idea = { idea = IRK_reformed days = 365 }
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	
+	WRS_ryzhkov_establish_the_kgb = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = { WRS_Ryzhkov_Balance > 40 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				NOT = {
+					has_idea = IRK_reformed
+				}
+			}
+		}
+		visible = {
+			check_variable = { WRS_Ryzhkov_Balance > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_ryzhkov_establish_the_kgb"
+			custom_effect_tooltip = WRS_ryzhkov_establish_the_kgb_tt
+			WRS_zhukovregional_increase_ryzhkov_influence_high = yes
+			WRRFTangle_calcXY = yes
+			add_ideas = tno_security_security_service
+			hidden_effect = {
+				add_timed_idea = { idea = IRK_reformed days = 365 }
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	
+	###YAKOVLEV REFORMS###
+	
+	WRS_yakovlev_eliminate_ofn_tariffs = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = { WRS_Yakovlev_Balance > 35 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				NOT = {
+					has_idea = IRK_reformed
+				}
+			}
+		}
+		visible = {
+			check_variable = { WRS_Yakovlev_Balance > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_yakovlev_eliminate_ofn_tariffs"
+			custom_effect_tooltip = WRS_yakovlev_eliminate_ofn_tariffs_tt
+			WRS_zhukovregional_increase_yakovlev_influence_med = yes
+			WRRFTangle_calcXY = yes
+			add_opinion_modifier = {
+				target = USA
+				modifier = RUS_trade
+			}
+			USA = {
+				add_opinion_modifier = {
+					target = WRS
+					modifier = RUS_trade
+				}
+			}
+			hidden_effect = {
+				add_timed_idea = { idea = IRK_reformed days = 365 }
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	
+	WRS_yakovlev_abolish_gulag = {
+		allowed = {
+			tag = WRS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = { WRS_Yakovlev_Balance > 40 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				NOT = {
+					has_idea = IRK_reformed
+				}
+			}
+		}
+		visible = {
+			check_variable = { WRS_Yakovlev_Balance > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision WRS_yakovlev_abolish_gulag"
+			custom_effect_tooltip = WRS_yakovlev_abolish_gulag_tt
+			WRS_zhukovregional_increase_yakovlev_influence_high = yes
+			WRRFTangle_calcXY = yes
+			add_ideas = tno_penal_system_incarceration
+			hidden_effect = {
+				add_timed_idea = { idea = IRK_reformed days = 365 }
+			}
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	
+}
