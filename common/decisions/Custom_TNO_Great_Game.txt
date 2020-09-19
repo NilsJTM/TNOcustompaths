@@ -24,6 +24,16 @@ GreatGame_Category = {
 			}
 		}
 		available = {
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_BULGARIA
+					option = GREAT_GAME_BULGARIA_GERMANY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_BULGARIA
+					option = GREAT_GAME_BULGARIA_NEITHER
+				}
+			}
 			NOT = {
 				OR = {
 					has_country_flag = GreatGame_decision_taken
@@ -52,9 +62,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { GER.great_game_number > ITA.great_game_number }
-					check_variable = { GER.great_game_number = 10 }
-					check_variable = { ITA.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_BULGARIA
+							option = GREAT_GAME_BULGARIA_GERMANY
+						}
+						OR = {
+							check_variable = { GER.great_game_number > ITA.great_game_number }
+							check_variable = { GER.great_game_number = 10 }
+							check_variable = { ITA.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_BULGARIA
+								option = GREAT_GAME_BULGARIA_GERMANY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_BULGARIA
+								option = GREAT_GAME_BULGARIA_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -80,8 +110,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_BULGARIA_GERMANY
 					}
 				}
-				set_variable = { GER.great_game_number = 10 }
-				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				set_variable = { GER.great_game_number = 9 }
+				ITA = { set_variable = { ITA.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -96,8 +126,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_BULGARIA_NEITHER
 					}
 				}
-				set_variable = { GER.great_game_number = 15 }
-				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				set_variable = { GER.great_game_number = 5 }
+				ITA = { set_variable = { ITA.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -144,6 +174,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_BULGARIA
+					option = GREAT_GAME_BULGARIA_ITALY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_BULGARIA
+					option = GREAT_GAME_BULGARIA_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -166,9 +206,28 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { ITA.great_game_number > GER.great_game_number }
-					check_variable = { ITA.great_game_number = 10 }
-					check_variable = { GER.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_BULGARIA
+							option = GREAT_GAME_BULGARIA_ITALY
+						}
+						OR = {
+							check_variable = { ITA.great_game_number > GER.great_game_number }
+							check_variable = { ITA.great_game_number = 10 }
+							check_variable = { GER.great_game_number > 10 }
+						}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_BULGARIA
+								option = GREAT_GAME_BULGARIA_ITALY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_BULGARIA
+								option = GREAT_GAME_BULGARIA_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -194,8 +253,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_BULGARIA_ITALY
 					}
 				}
-				set_variable = { ITA.great_game_number = 10 }
-				GER = { set_variable = { GER.great_game_number = 20 } }
+				set_variable = { ITA.great_game_number = 9 }
+				GER = { set_variable = { GER.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -210,8 +269,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_BULGARIA_NEITHER
 					}
 				}
-				set_variable = { ITA.great_game_number = 15 }
-				GER = { set_variable = { GER.great_game_number = 15 } }
+				set_variable = { ITA.great_game_number = 5 }
+				GER = { set_variable = { GER.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -264,6 +323,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_HUNGARY
+					option = GREAT_GAME_HUNGARY_GERMANY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_HUNGARY
+					option = GREAT_GAME_HUNGARY_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -286,9 +355,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { GER.great_game_number > ITA.great_game_number }
-					check_variable = { GER.great_game_number = 10 }
-					check_variable = { ITA.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_HUNGARY
+							option = GREAT_GAME_HUNGARY_GERMANY
+						}
+						OR = {
+							check_variable = { GER.great_game_number > ITA.great_game_number }
+							check_variable = { GER.great_game_number = 10 }
+							check_variable = { ITA.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_HUNGARY
+								option = GREAT_GAME_HUNGARY_GERMANY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_HUNGARY
+								option = GREAT_GAME_HUNGARY_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -314,8 +403,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_HUNGARY_GERMANY
 					}
 				}
-				set_variable = { GER.great_game_number = 10 }
-				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				set_variable = { GER.great_game_number = 9 }
+				ITA = { set_variable = { ITA.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -330,8 +419,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_HUNGARY_NEITHER
 					}
 				}
-				set_variable = { GER.great_game_number = 15 }
-				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				set_variable = { GER.great_game_number = 5 }
+				ITA = { set_variable = { ITA.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -376,6 +465,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_HUNGARY
+					option = GREAT_GAME_HUNGARY_ITALY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_HUNGARY
+					option = GREAT_GAME_HUNGARY_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -398,9 +497,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { ITA.great_game_number > GER.great_game_number }
-					check_variable = { ITA.great_game_number = 10 }
-					check_variable = { GER.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_BULGARIA
+							option = GREAT_GAME_BULGARIA_GERMANY
+						}
+						OR = {
+							check_variable = { ITA.great_game_number > GER.great_game_number }
+							check_variable = { ITA.great_game_number = 10 }
+							check_variable = { GER.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_HUNGARY
+								option = GREAT_GAME_HUNGARY_ITALY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_HUNGARY
+								option = GREAT_GAME_HUNGARY_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -426,8 +545,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_HUNGARY_ITALY
 					}
 				}
-				set_variable = { ITA.great_game_number = 10 }
-				GER = { set_variable = { GER.great_game_number = 20 } }
+				set_variable = { ITA.great_game_number = 9 }
+				GER = { set_variable = { GER.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -442,8 +561,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_HUNGARY_NEITHER
 					}
 				}
-				set_variable = { ITA.great_game_number = 15 }
-				GER = { set_variable = { GER.great_game_number = 15 } }
+				set_variable = { ITA.great_game_number = 5 }
+				GER = { set_variable = { GER.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -496,6 +615,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_ROMANIA
+					option = GREAT_GAME_ROMANIA_GERMANY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_ROMANIA
+					option = GREAT_GAME_ROMANIA_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -518,9 +647,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { GER.great_game_number > ITA.great_game_number }
-					check_variable = { GER.great_game_number = 10 }
-					check_variable = { ITA.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_ROMANIA
+							option = GREAT_GAME_ROMANIA_GERMANY
+						}
+						OR = {
+							check_variable = { GER.great_game_number > ITA.great_game_number }
+							check_variable = { GER.great_game_number = 10 }
+							check_variable = { ITA.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_ROMANIA
+								option = GREAT_GAME_ROMANIA_GERMANY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_ROMANIA
+								option = GREAT_GAME_ROMANIA_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -546,8 +695,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_ROMANIA_GERMANY
 					}
 				}
-				set_variable = { GER.great_game_number = 10 }
-				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				set_variable = { GER.great_game_number = 9 }
+				ITA = { set_variable = { ITA.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -562,8 +711,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_ROMANIA_NEITHER
 					}
 				}
-				set_variable = { GER.great_game_number = 15 }
-				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				set_variable = { GER.great_game_number = 5 }
+				ITA = { set_variable = { ITA.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -608,6 +757,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_ROMANIA
+					option = GREAT_GAME_ROMANIA_ITALY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_ROMANIA
+					option = GREAT_GAME_ROMANIA_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -630,9 +789,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { ITA.great_game_number > GER.great_game_number }
-					check_variable = { ITA.great_game_number = 10 }
-					check_variable = { GER.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_ROMANIA
+							option = GREAT_GAME_ROMANIA_ITALY
+						}
+						OR = {
+							check_variable = { ITA.great_game_number > GER.great_game_number }
+							check_variable = { ITA.great_game_number = 10 }
+							check_variable = { GER.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_ROMANIA
+								option = GREAT_GAME_ROMANIA_ITALY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_ROMANIA
+								option = GREAT_GAME_ROMANIA_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -658,8 +837,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_ROMANIA_ITALY
 					}
 				}
-				set_variable = { ITA.great_game_number = 10 }
-				GER = { set_variable = { GER.great_game_number = 20 } }
+				set_variable = { ITA.great_game_number = 9 }
+				GER = { set_variable = { GER.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -674,8 +853,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_ROMANIA_NEITHER
 					}
 				}
-				set_variable = { ITA.great_game_number = 15 }
-				GER = { set_variable = { GER.great_game_number = 15 } }
+				set_variable = { ITA.great_game_number = 5 }
+				GER = { set_variable = { GER.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -728,6 +907,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_FRANCE
+					option = GREAT_GAME_FRANCE_GERMANY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_FRANCE
+					option = GREAT_GAME_FRANCE_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -750,9 +939,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { GER.great_game_number > ITA.great_game_number }
-					check_variable = { GER.great_game_number = 10 }
-					check_variable = { ITA.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_FRANCE
+							option = GREAT_GAME_FRANCE_GERMANY
+						}
+						OR = {
+							check_variable = { GER.great_game_number > ITA.great_game_number }
+							check_variable = { GER.great_game_number = 10 }
+							check_variable = { ITA.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_FRANCE
+								option = GREAT_GAME_FRANCE_GERMANY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_FRANCE
+								option = GREAT_GAME_FRANCE_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -778,8 +987,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_FRANCE_GERMANY
 					}
 				}
-				set_variable = { GER.great_game_number = 10 }
-				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				set_variable = { GER.great_game_number = 9 }
+				ITA = { set_variable = { ITA.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -794,8 +1003,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_FRANCE_NEITHER
 					}
 				}
-				set_variable = { GER.great_game_number = 15 }
-				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				set_variable = { GER.great_game_number = 5 }
+				ITA = { set_variable = { ITA.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -840,6 +1049,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_FRANCE
+					option = GREAT_GAME_FRANCE_ITALY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_FRANCE
+					option = GREAT_GAME_FRANCE_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -862,9 +1081,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { ITA.great_game_number > GER.great_game_number }
-					check_variable = { ITA.great_game_number = 10 }
-					check_variable = { GER.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_FRANCE
+							option = GREAT_GAME_FRANCE_ITALY
+						}
+						OR = {
+							check_variable = { ITA.great_game_number > GER.great_game_number }
+							check_variable = { ITA.great_game_number = 10 }
+							check_variable = { GER.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_FRANCE
+								option = GREAT_GAME_FRANCE_ITALY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_FRANCE
+								option = GREAT_GAME_FRANCE_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -890,8 +1129,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_FRANCE_ITALY
 					}
 				}
-				set_variable = { ITA.great_game_number = 10 }
-				GER = { set_variable = { GER.great_game_number = 20 } }
+				set_variable = { ITA.great_game_number = 9 }
+				GER = { set_variable = { GER.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -906,8 +1145,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_FRANCE_NEITHER
 					}
 				}
-				set_variable = { ITA.great_game_number = 15 }
-				GER = { set_variable = { GER.great_game_number = 15 } }
+				set_variable = { ITA.great_game_number = 5 }
+				GER = { set_variable = { GER.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -960,6 +1199,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_SERBIA
+					option = GREAT_GAME_SERBIA_GERMANY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_SERBIA
+					option = GREAT_GAME_SERBIA_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -982,9 +1231,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { GER.great_game_number > ITA.great_game_number }
-					check_variable = { GER.great_game_number = 10 }
-					check_variable = { ITA.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_SERBIA
+							option = GREAT_GAME_SERBIA_GERMANY
+						}
+						OR = {
+							check_variable = { GER.great_game_number > ITA.great_game_number }
+							check_variable = { GER.great_game_number = 10 }
+							check_variable = { ITA.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_SERBIA
+								option = GREAT_GAME_SERBIA_GERMANY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_SERBIA
+								option = GREAT_GAME_SERBIA_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -1010,8 +1279,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_SERBIA_GERMANY
 					}
 				}
-				set_variable = { GER.great_game_number = 10 }
-				ITA = { set_variable = { ITA.great_game_number = 20 } }
+				set_variable = { GER.great_game_number = 9 }
+				ITA = { set_variable = { ITA.great_game_number = 0 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -1026,8 +1295,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_SERBIA_NEITHER
 					}
 				}
-				set_variable = { GER.great_game_number = 15 }
-				ITA = { set_variable = { ITA.great_game_number = 15 } }
+				set_variable = { GER.great_game_number = 5 }
+				ITA = { set_variable = { ITA.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
@@ -1072,6 +1341,16 @@ GreatGame_Category = {
 					has_country_flag = GreatGame_round_lost
 				}
 			}
+			OR = {
+				has_game_rule = {
+					rule = GREAT_GAME_SERBIA
+					option = GREAT_GAME_SERBIA_ITALY
+				}
+				has_game_rule = {
+					rule = GREAT_GAME_SERBIA
+					option = GREAT_GAME_SERBIA_NEITHER
+				}
+			}
 		}
 		
 		fire_only_once = no
@@ -1094,9 +1373,29 @@ GreatGame_Category = {
 			modifier = {
 				factor = 0
 				OR = {
-					check_variable = { ITA.great_game_number > GER.great_game_number }
-					check_variable = { ITA.great_game_number = 10 }
-					check_variable = { GER.great_game_number > 10 }
+					AND = {
+						has_game_rule = {
+							rule = GREAT_GAME_SERBIA
+							option = GREAT_GAME_SERBIA_ITALY
+						}
+						OR = {
+							check_variable = { ITA.great_game_number > GER.great_game_number }
+							check_variable = { ITA.great_game_number = 10 }
+							check_variable = { GER.great_game_number > 10 }
+						}
+					}
+					NOT = {
+						OR = {
+							has_game_rule = {
+								rule = GREAT_GAME_SERBIA
+								option = GREAT_GAME_SERBIA_ITALY
+							}
+							has_game_rule = {
+								rule = GREAT_GAME_SERBIA
+								option = GREAT_GAME_SERBIA_NEITHER
+							}
+						}
+					}
 				}
 			}
 		}
@@ -1138,8 +1437,8 @@ GreatGame_Category = {
 						option = GREAT_GAME_SERBIA_NEITHER
 					}
 				}
-				set_variable = { ITA.great_game_number = 15 }
-				GER = { set_variable = { GER.great_game_number = 15 } }
+				set_variable = { ITA.great_game_number = 5 }
+				GER = { set_variable = { GER.great_game_number = 5 } }
 				great_game_add_points = yes
 				great_game_round_loss_check = yes
 				clr_country_flag = GreatGame_decision_taken
