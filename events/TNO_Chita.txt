@@ -1,0 +1,2460 @@
+﻿add_namespace = WCH
+add_namespace = WCH_regional
+add_namespace = WCH_superregional
+
+country_event = { #Intro event
+	id = WCH.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.1"}
+	title = WCH.1.t
+	desc = WCH.1.desc
+	picture = GFX_report_event_russia_imperial_standard
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.1.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Death of Semyonov
+	id = WCH.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.2"}
+	title = WCH.2.t
+	desc = WCH.2.desc
+	picture = GFX_report_event_cossack_picture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.2.a
+		ai_chance = { factor = 1 }
+		if = {
+			limit = { has_unit_leader = 3741 }
+			remove_unit_leader = 3741
+		}
+		add_ideas = WCH_Boris_Shepunov_hog
+		add_ideas = WCH_Nikolay_Kossov_sec
+		hidden_effect = {
+			set_country_flag = WCH_semyonov_death
+			country_event = { id = WCH.31 days = 7 }
+		}
+	}
+}
+
+country_event = { #Import Reform Bureaucrats
+	id = WCH.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.3"}
+	title = WCH.3.t
+	desc = WCH.3.desc
+	picture = GFX_report_event_CHI_Industry_Synth_Refine
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.3.a
+		ai_chance = { factor = 5 }
+		add_political_power = 15
+		WCH = {
+			country_event = { id = WCH.4 days = 1 }
+		}
+	}
+	option = { #
+		name = WCH.3.b
+		ai_chance = { factor = 1 }
+		WCH = {
+			country_event = { id = WCH.5 days = 1 }
+		}
+	}
+}
+
+country_event = { #Yes
+	id = WCH.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.4"}
+	title = WCH.4.t
+	desc = WCH.4.desc
+	picture = GFX_report_event_CHI_Industry_Hunan
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.4.a
+		ai_chance = { factor = 1 }
+		add_timed_idea = { idea = WCH_manchurian_aid days = 1080 }
+	}
+}
+
+country_event = { #No
+	id = WCH.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.5"}
+	title = WCH.5.t
+	desc = WCH.5.desc
+	picture = GFX_report_event_CHI_Industry_Bad_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.5.a
+		ai_chance = { factor = 1 }
+		add_political_power = -25
+	}
+}
+
+country_event = { #Reclamation Act
+	id = WCH.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.6"}
+	title = WCH.6.t
+	desc = WCH.6.desc
+	picture = GFX_report_event_russia_siberian_worker
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.6.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+	}
+}
+
+country_event = { #Making Our Play - load tree to take down Rodzaevsky and whatshisname
+	id = WCH.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.7"}
+	title = WCH.7.t
+	desc = WCH.7.desc
+	picture = GFX_report_event_russia_white_army_poster
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.7.a
+		ai_chance = { factor = 1 }
+		load_focus_tree = WCH_consolidation
+	}
+}
+
+country_event = { #Settlings ACoounts
+	id = WCH.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.8"}
+	title = WCH.8.t
+	desc = WCH.8.desc
+	picture = GFX_report_event_russia_white_propaganda
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.8.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+	}
+}
+
+country_event = { #Shooting Rodzaevsky
+	id = WCH.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.9"}
+	title = WCH.9.t
+	desc = WCH.9.desc
+	picture = GFX_report_event_rodzaevsky
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.9.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = national_socialism
+			popularity = -0.10
+		}
+	}
+}
+
+country_event = { #Tearing down the banners
+	id = WCH.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.10"}
+	title = WCH.10.t
+	desc = WCH.10.desc
+	picture = GFX_report_event_russian_royal_guard
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.10.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.01
+	}
+}
+
+country_event = { #Yakut Autonomy
+	id = WCH.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.11"}
+	title = WCH.11.t
+	desc = WCH.11.desc
+	picture = GFX_report_event_soviet_russian_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Yes
+		name = WCH.11.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.1
+		add_political_power = -35
+	}
+	option = { #Lol no
+		name = WCH.11.b
+		ai_chance = { factor = 1 }
+		add_stability = -0.05
+		add_political_power = 75
+	}
+}
+
+country_event = { #IMPORTANT DO NOT TOUCH
+	id = WCH.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.12"}
+	title = WCH.12.t
+	desc = WCH.12.desc
+	picture = GFX_report_event_soviet_russian_tank_factory_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Civilian flavoured
+		name = WCH.12.a
+		ai_chance = { factor = 1 }
+		add_ideas = WCH_base_economic_bonus_civilian_bias
+	}
+	option = { #Military flavoured
+		name = WCH.12.b
+		ai_chance = { factor = 1 }
+		add_ideas = WCH_base_economic_bonus_military_bias
+	}
+}
+
+country_event = { #shootting sbblob
+	id = WCH.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.13"}
+	title = WCH.13.t
+	desc = WCH.13.desc
+	picture = GFX_report_event_buryatia
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.13.a
+		ai_chance = { factor = 1 }
+		add_war_support = -0.01
+		add_political_power = 10
+	}
+}
+
+country_event = { #Sabotage!
+	id = WCH.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.14"}
+	title = WCH.14.t
+	desc = WCH.14.desc
+	picture = GFX_report_event_iberia_railroad_sabotage
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.14.a
+		ai_chance = { factor = 1 }
+		add_stability = -0.025
+	}
+}
+
+country_event = { #Tsars New Groove
+	id = WCH.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.15"}
+	title = WCH.15.t
+	desc = WCH.15.desc
+	picture = GFX_report_event_russia_imperial_standard
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.15.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = { tree = WCH_chita_regional }
+			country_event = { id = WCH.22 days = 6 random = 24 }
+			country_event = { id = WCH.21 days = 14 random = 24 }
+		}
+	}
+}
+
+country_event = { #Take their Place - taking over Amur contacts in Japan to get equipment
+	id = WCH.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.16"}
+	title = WCH.16.t
+	desc = WCH.16.desc
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.16.a
+		ai_chance = { factor = 1 }
+		AMR_increase_JAP_support_high = yes
+	}
+}
+
+country_event = { #Trial of Matkovsky
+	id = WCH.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.17"}
+	title = WCH.17.t
+	desc = WCH.17.desc
+	picture = GFX_report_event_far_right_rally
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Exile
+		name = WCH.17.a
+		ai_chance = { factor = 1 }
+		add_political_power = 15
+	}
+	option = { #Death
+		name = WCH.17.b
+		ai_chance = { factor = 1 }
+		add_stability = 0.025
+		add_war_support = 0.025
+	}
+}
+
+country_event = { #Letter 1
+	id = WCH.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.18"}
+	title = WCH.18.t
+	desc = WCH.18.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.18.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = WCH.19 days = 121 random = 24 }
+		}
+	}
+}
+
+country_event = { #Letter 2
+	id = WCH.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.19"}
+	title = WCH.19.t
+	desc = WCH.19.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.19.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = WCH.20 days = 273 random = 24 }
+		}
+	}
+}
+
+country_event = { #Letter 3
+	id = WCH.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.20"}
+	title = WCH.20.t
+	desc = WCH.20.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.20.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Letter 4 - triggered at start of regional
+	id = WCH.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.21"}
+	title = WCH.21.t
+	desc = WCH.21.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.21.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = WCH.23 days = 3 random = 24 }
+		}
+	}
+}
+
+country_event = { #Mikhailov event 1 - A Morning Chat
+	id = WCH.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.22"}
+	title = WCH.22.t
+	desc = WCH.22.desc
+	picture = GFX_report_event_komi_house
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.22.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Mikhailov event 2 - An Evening Dinner
+	id = WCH.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.23"}
+	title = WCH.23.t
+	desc = WCH.23.desc
+	picture = GFX_report_event_iberia_empty_plate
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.23.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #An Eye for an Eye
+	id = WCH.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.24"}
+	title = WCH.24.t
+	desc = WCH.24.desc
+	picture = GFX_report_event_firing_squad
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.24.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Heretic's Trial
+	id = WCH.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH.25"}
+	title = WCH.25.t
+	desc = WCH.25.desc
+	picture = GFX_GFX_report_event_court_case_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.25.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.26" }
+	title = WCH.26.t
+	desc = WCH.26.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.26.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.27" }
+	title = WCH.27.t
+	desc = WCH.27.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.27.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.28" }
+	title = WCH.28.t
+	desc = WCH.28.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.28.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.29" }
+	title = WCH.29.t
+	desc = WCH.29.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.29.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Passing the Torch
+	id = WCH.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.30" }
+	title = WCH.30.t
+	desc = WCH.30.desc
+	picture = GFX_report_event_iberia_guy_paper_meeting
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.30.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Changing of the Guard
+	id = WCH.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.31" }
+	title = WCH.31.t
+	desc = WCH.31.desc
+	picture = GFX_report_event_generic_funeral
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.31.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = WCH.32 days = 4 random = 24 }
+		}
+	}
+}
+
+country_event = { #The Tsar and the General
+	id = WCH.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.32" }
+	title = WCH.32.t
+	desc = WCH.32.desc
+	picture = GFX_report_event_generic_office
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.32.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Tsar's Finest
+	id = WCH.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.33" }
+	title = WCH.33.t
+	desc = WCH.33.desc
+	picture = GFX_report_event_russian_royal_guard
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.33.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Dread Riders
+	id = WCH.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.34" }
+	title = WCH.34.t
+	desc = WCH.34.desc
+	picture = GFX_report_event_cossacks_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.34.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Money Makes the War Go 'Round
+	id = WCH.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.35" }
+	title = WCH.35.t
+	desc = WCH.35.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.35.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Show of Good Faith
+	id = WCH.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.36" }
+	title = WCH.36.t
+	desc = WCH.36.desc
+	picture = GFX_report_event_russia_vyatka
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.36.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Little Slice of Hell
+	id = WCH.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.37" }
+	title = WCH.37.t
+	desc = WCH.37.desc
+	picture = GFX_report_event_bengal_concentration_camp
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.37.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Same Job, Different Faces
+	id = WCH.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.38" }
+	title = WCH.38.t
+	desc = WCH.38.desc
+	picture = GFX_report_event_mercenary
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.38.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.39" }
+	title = WCH.39.t
+	desc = WCH.39.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.39.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.40" }
+	title = WCH.40.t
+	desc = WCH.40.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.40.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.41" }
+	title = WCH.41.t
+	desc = WCH.41.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.41.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.42" }
+	title = WCH.42.t
+	desc = WCH.42.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.42.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.43" }
+	title = WCH.43.t
+	desc = WCH.43.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.43.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.44" }
+	title = WCH.44.t
+	desc = WCH.44.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.44.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.45" }
+	title = WCH.45.t
+	desc = WCH.45.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.45.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.46" }
+	title = WCH.46.t
+	desc = WCH.46.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.46.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.47" }
+	title = WCH.47.t
+	desc = WCH.47.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.47.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.48" }
+	title = WCH.48.t
+	desc = WCH.48.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.48.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.49" }
+	title = WCH.49.t
+	desc = WCH.49.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.49.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH.50" }
+	title = WCH.50.t
+	desc = WCH.50.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH.50.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+### Regional events ###
+country_event = { #Intro Regional Tree Event
+	id = WCH_regional.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.1"}
+	title = WCH_regional.1.t
+	desc = WCH_regional.1.desc
+	picture = GFX_report_event_russia_imperial_standard
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.1.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Imperial Governing Commmittee
+	id = WCH_regional.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.2"}
+	title = WCH_regional.2.t
+	desc = WCH_regional.2.desc
+	picture = GFX_report_event_komi_committee
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Civilian
+		name = WCH_regional.2.a
+		ai_chance = { factor = 1 }
+		WHC_tax_conflict_towards_civilians = yes
+		WHC_tax_conflict_towards_civilians = yes
+		custom_effect_tooltip = WHC_Civil_very_favoured
+		add_ideas = WCH_imperial_governing_committee_civilian
+		WCH_military_influence_decrease_low = yes
+	}
+	option = { #Military
+		name = WCH_regional.2.b
+		ai_chance = { factor = 1 }
+		WHC_tax_conflict_towards_military = yes
+		WHC_tax_conflict_towards_military = yes
+		custom_effect_tooltip = WHC_Army_very_favoured
+		add_ideas = WCH_imperial_governing_committee_military
+		WCH_military_influence_increase_low = yes
+	}
+}
+
+country_event = { #Extend Land Grants
+	id = WCH_regional.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.3"}
+	title = WCH_regional.3.t
+	desc = WCH_regional.3.desc
+	picture = GFX_report_event_komi_committee
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Civlian
+		name = WCH_regional.3.a
+		ai_chance = { factor = 1 }
+		WHC_tax_conflict_towards_civilians = yes
+		custom_effect_tooltip = WHC_Civil_very_favoured
+		add_ideas = WCH_land_grants_civilian
+		WCH_military_influence_decrease_low = yes
+	}
+	option = { #Military
+		name = WCH_regional.3.b
+		ai_chance = { factor = 1 }
+		WHC_tax_conflict_towards_military = yes
+		custom_effect_tooltip = WHC_Army_very_favoured
+		add_ideas = WCH_land_grants_military
+		WCH_military_influence_increase_low = yes
+	}
+}
+
+country_event = { #The Cultists, the Fascists, the Reds
+	id = WCH_regional.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.4"}
+	title = WCH_regional.4.t
+	desc = WCH_regional.4.desc
+	picture = GFX_report_event_russia_partisan
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.4.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = communist
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		hidden_effect = {
+			country_event = { id = WCH_regional.19 days = 7 random = 24 }
+		}
+	}
+}
+
+country_event = { #Shoring up Support
+	id = WCH_regional.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.5"}
+	title = WCH_regional.5.t
+	desc = WCH_regional.5.desc
+	picture = GFX_report_event_russia_white_army_poster
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.5.a
+		ai_chance = { factor = 1 }
+		WCH_military_influence_increase_medium = yes
+	}
+	option = { #
+		name = WCH_regional.5.b
+		ai_chance = { factor = 1 }
+		WCH_military_influence_decrease_medium = yes
+	}
+}
+
+country_event = { #A Quiet Dinner: Military Victory - Support + Influence
+	id = WCH_regional.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.6"}
+	title = WCH_regional.6.t
+	desc = WCH_regional.6.desc
+	picture = GFX_report_event_russian_military
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.6.a
+		ai_chance = { factor = 1 }
+		set_country_flag = WCH_shepunov_victorious
+		add_ideas = WCH_Alexey_Abaza_eco
+	}
+}
+
+country_event = { #A Quiet Dinner: Mikhail Victory - Support + Influence
+	id = WCH_regional.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.7"}
+	title = WCH_regional.7.t
+	desc = WCH_regional.7.desc
+	picture = GFX_report_event_russian_monarchy
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.7.a
+		ai_chance = { factor = 1 }
+		remove_country_leader_trait = the_reluctant_tsar
+		set_country_flag = WCH_mikhail_victorious
+		add_ideas = WCH_Anatoly_Sobchak_hog
+		add_ideas = WCH_Dmitry_Volkogonov_sec
+		remove_unit_leader = 3742
+	}
+}
+
+country_event = { #Clearing a Path
+	id = WCH_regional.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.8"}
+	title = WCH_regional.8.t
+	desc = WCH_regional.8.desc
+	picture = GFX_report_event_Flatcap_Worker
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.8.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Exploit the Prisoners
+	id = WCH_regional.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.9"}
+	title = WCH_regional.9.t
+	desc = WCH_regional.9.desc
+	picture = GFX_report_generic_prisoners3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.9.a
+		ai_chance = { factor = 1 }
+		add_political_power = 15
+		add_manpower = 500
+	}
+}
+
+country_event = { #A Quiet Dinner: Shepunov Victory - No Support but Higher influence
+	id = WCH_regional.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.10"}
+	title = WCH_regional.10.t
+	desc = WCH_regional.10.desc
+	picture = GFX_report_event_russian_military
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.10.a
+		ai_chance = { factor = 1 }
+		set_country_flag = WCH_shepunov_victorious
+		add_ideas = WCH_Alexey_Abaza_eco
+		add_political_power = -25
+	}
+}
+
+country_event = { #A Quiet Dinner: Mikhail Victory - No Support but Higher influence
+	id = WCH_regional.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.11"}
+	title = WCH_regional.11.t
+	desc = WCH_regional.11.desc
+	picture = GFX_report_event_russian_monarchy
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.11.a
+		ai_chance = { factor = 1 }
+		remove_country_leader_trait = the_reluctant_tsar
+		set_country_flag = WCH_mikhail_victorious
+		add_ideas = WCH_Anatoly_Sobchak_hog
+		add_ideas = WCH_Dmitry_Volkogonov_sec
+		remove_unit_leader = 3742
+		
+	}
+}
+
+country_event = { #Prince Nikita comes over from London
+	id = WCH_regional.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.12"}
+	title = WCH_regional.12.t
+	desc = WCH_regional.12.desc
+	picture = GFX_report_event_cog_plane
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.12.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Japan: Envoys from Chita
+	id = WCH_regional.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.13"}
+	title = WCH_regional.13.t
+	desc = WCH_regional.13.desc
+	picture = GFX_report_event_japan_tokyo_port
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = WCH_regional.13.a
+		ai_chance = { factor = 10 }
+		trigger = {
+			tag = WCH
+		}
+		add_opinion_modifier = {
+			target = JAP
+			modifier = TNO_opened_diplomatic_relations
+		}
+		AMR_increase_JAP_support_med = yes
+	}
+	option = { #
+		name = WCH_regional.13.b
+		ai_chance = { factor = 1 }
+		trigger = {
+			tag = JAP
+		}
+		add_opinion_modifier = {
+			target = WCH
+			modifier = TNO_opened_diplomatic_relations
+		}
+	}
+}
+
+country_event = { #WCH_a_new_white_army
+	id = WCH_regional.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.14"}
+	title = WCH_regional.14.t
+	desc = WCH_regional.14.desc
+	picture = GFX_report_event_generic_military_parade
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.14.a
+		ai_chance = { factor = 1 }
+		army_experience = 15
+	}
+}
+
+country_event = { #Reignite the Movement
+	id = WCH_regional.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.15"}
+	title = WCH_regional.15.t
+	desc = WCH_regional.15.desc
+	picture = GFX_report_event_russia_white_army_poster
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.15.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #USA: Chita wants us to support them
+	id = WCH_regional.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.16"}
+	title = WCH_regional.16.t
+	desc = WCH_regional.16.desc
+	picture = GFX_report_event_russian_monarchy
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #yes
+		name = WCH_regional.16.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = USA
+			modifier = TNO_opened_diplomatic_relations
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = WCH
+				modifier = TNO_opened_diplomatic_relations
+			}
+		}
+	}
+}
+
+country_event = { #Japanese Investments
+	id = WCH_regional.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.17"}
+	title = WCH_regional.17.t
+	desc = WCH_regional.17.desc
+	picture = GFX_report_event_japan_ministry_of_finance
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.17.a
+		ai_chance = { factor = 1 }
+		add_political_power = -5
+	}
+}
+
+country_event = { #Start of Something Special
+	id = WCH_regional.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.18"}
+	title = WCH_regional.18.t
+	desc = WCH_regional.18.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.18.a
+		ai_chance = { factor = 1 }
+		add_political_power = -10
+	}
+}
+
+country_event = { #They Just Won't Give Up
+	id = WCH_regional.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.19"}
+	title = WCH_regional.19.t
+	desc = WCH_regional.19.desc
+	picture = GFX_report_event_iberian_wars_6
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.19.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A Quiet Dinner
+	id = WCH_regional.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_regional.20"}
+	title = WCH_regional.20.t
+	desc = WCH_regional.20.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.20.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = WCH_supported_shepunov
+						check_variable = {
+							var = WCH_military_influence
+							value = WCH_civilian_influence
+							compare = greater_than
+						}
+					}
+				}
+				country_event = { id = WCH_regional.6 hours = 3 }
+			}
+			else_if = {
+				limit = {
+					AND = {
+						has_country_flag = WCH_supported_mikhail
+						check_variable = {
+							var = WCH_civilian_influence
+							value = WCH_military_influence
+							compare = greater_than
+						}
+					}
+				}
+				country_event = { id = WCH_regional.7 hours = 3 }
+			}
+			else_if = {
+				limit = {
+					AND = {
+						has_country_flag = WCH_supported_mikhail
+						check_variable = {
+							var = WCH_military_influence
+							value = WCH_civilian_influence
+							compare = greater_than
+						}
+					}
+				}
+				country_event = { id = WCH_regional.10 hours = 3 }
+			}
+			else_if = {
+				limit = {
+					AND = {
+						has_country_flag = WCH_supported_shepunov
+						check_variable = {
+							var = WCH_civilian_influence
+							value = WCH_military_influence
+							compare = greater_than
+						}
+					}
+				}
+				country_event = { id = WCH_regional.11 hours = 3 }
+			}
+		}
+	}
+}
+
+country_event = { #
+	id = WCH_regional.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.21" }
+	title = WCH_regional.21.t
+	desc = WCH_regional.21.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.21.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.22" }
+	title = WCH_regional.22.t
+	desc = WCH_regional.22.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.22.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.23" }
+	title = WCH_regional.23.t
+	desc = WCH_regional.23.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.23.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.24" }
+	title = WCH_regional.24.t
+	desc = WCH_regional.24.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.24.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.25" }
+	title = WCH_regional.25.t
+	desc = WCH_regional.25.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.25.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.26" }
+	title = WCH_regional.26.t
+	desc = WCH_regional.26.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.26.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.27" }
+	title = WCH_regional.27.t
+	desc = WCH_regional.27.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.27.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.28" }
+	title = WCH_regional.28.t
+	desc = WCH_regional.28.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.28.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.29" }
+	title = WCH_regional.29.t
+	desc = WCH_regional.29.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.29.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.30" }
+	title = WCH_regional.30.t
+	desc = WCH_regional.30.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.30.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.31" }
+	title = WCH_regional.31.t
+	desc = WCH_regional.31.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.31.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.32" }
+	title = WCH_regional.32.t
+	desc = WCH_regional.32.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.32.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.33" }
+	title = WCH_regional.33.t
+	desc = WCH_regional.33.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.33.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.34" }
+	title = WCH_regional.34.t
+	desc = WCH_regional.34.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.34.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.35" }
+	title = WCH_regional.35.t
+	desc = WCH_regional.35.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.35.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.36" }
+	title = WCH_regional.36.t
+	desc = WCH_regional.36.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.36.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.37" }
+	title = WCH_regional.37.t
+	desc = WCH_regional.37.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.37.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.38" }
+	title = WCH_regional.38.t
+	desc = WCH_regional.38.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.38.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.39" }
+	title = WCH_regional.39.t
+	desc = WCH_regional.39.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.39.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.40" }
+	title = WCH_regional.40.t
+	desc = WCH_regional.40.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.40.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Steel Riders
+	id = WCH_regional.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.41" }
+	title = WCH_regional.41.t
+	desc = WCH_regional.41.desc
+	picture = GFX_report_event_soviet_russian_tank_factory
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.41.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #All in a Day's Work
+	id = WCH_regional.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.42" }
+	title = WCH_regional.42.t
+	desc = WCH_regional.42.desc
+	picture = GFX_report_event_russia_hunter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.42.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Different Kind of Prison
+	id = WCH_regional.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.43" }
+	title = WCH_regional.43.t
+	desc = WCH_regional.43.desc
+	picture = GFX_report_event_russia_siberian_worker
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.43.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.44" }
+	title = WCH_regional.44.t
+	desc = WCH_regional.44.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.44.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Comeback Tour
+	id = WCH_regional.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.45" }
+	title = WCH_regional.45.t
+	desc = WCH_regional.45.desc
+	picture = GFX_report_event_iberian_wars_6
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.45.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Trouble on the Waters
+	id = WCH_regional.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.46" }
+	title = WCH_regional.46.t
+	desc = WCH_regional.46.desc
+	picture = GFX_report_event_river
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.46.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.47" }
+	title = WCH_regional.47.t
+	desc = WCH_regional.47.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.47.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.48" }
+	title = WCH_regional.48.t
+	desc = WCH_regional.48.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.48.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.49" }
+	title = WCH_regional.49.t
+	desc = WCH_regional.49.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.49.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_regional.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_regional.50" }
+	title = WCH_regional.50.t
+	desc = WCH_regional.50.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_regional.50.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+### Superregional events ###
+country_event = { #The Tsar's Speech
+	id = WCH_superregional.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_superregional.1"}
+	title = WCH_superregional.1.t
+	desc = WCH_superregional.1.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.1.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Depoliticize the Army
+	id = WCH_superregional.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_superregional.2"}
+	title = WCH_superregional.2.t
+	desc = WCH_superregional.2.desc
+	picture = GFX_report_event_soviet_russian_officers_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.2.a
+		ai_chance = { factor = 1 }
+		army_experience = 15
+	}
+}
+
+country_event = { #USA: Chita wants to strengthen relations
+	id = WCH_superregional.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_superregional.3"}
+	title = WCH_superregional.3.t
+	desc = WCH_superregional.3.desc
+	picture = GFX_report_event_russian_monarchy
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.3.a
+		ai_chance = { 
+			factor = 2 
+			modifier = {
+				factor = 50
+				has_relation_modifier = {
+					target = WCH
+					modifier = TNO_opened_diplomatic_relations
+				}
+			}
+		}
+		add_opinion_modifier = {
+			target = WCH
+			modifier = TNO_good_diplomatic_relations
+		}
+		WCH = {
+			add_opinion_modifier = {
+				target = USA
+				modifier = TNO_good_diplomatic_relations
+			}
+		}
+	}
+}
+
+country_event = { #Death and state funeral of Mikhailov
+	id = WCH_superregional.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_superregional.4"}
+	title = WCH_superregional.4.t
+	desc = WCH_superregional.4.desc
+	picture = GFX_report_event_generic_funeral
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.4.a
+		ai_chance = { factor = 1 }
+		add_ideas = WCH_Alexey_Abaza_eco
+	}
+}
+
+country_event = { #A New Beginning
+	id = WCH_superregional.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_superregional.5"}
+	title = WCH_superregional.5.t
+	desc = WCH_superregional.5.desc
+	picture = GFX_report_event_russian_democracy
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.5.a
+		ai_chance = { factor = 1 }
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		add_political_power = 25
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.035
+		}
+		create_country_leader = {
+			name = "Mikhail II"
+			desc = "POLITICS_TSAR_MIKHAIL_DESC"
+			picture = "Portrait_Chita_Mikhail.dds"
+			expire = "1999.1.1"
+			ideology = authoritarian_democrat_subtype
+			traits = {  }
+		}
+	}
+}
+
+country_event = { #The New White Order
+	id = WCH_superregional.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WCH_superregional.6"}
+	title = WCH_superregional.6.t
+	desc = WCH_superregional.6.desc
+	picture = GFX_report_event_russia_white_propaganda
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.6.a
+		ai_chance = { factor = 1 }
+		create_country_leader = {
+			name = "Boris Shepunov"
+			desc = "POLITICS_BORIS_SHEPUNOV_DESC"
+			picture = "Portrait_Chita_Boris_Shepunov.dds"
+			expire = "1999.1.1"
+			ideology = despotism_subtype
+			traits = { the_general }
+		}
+	}
+}
+
+country_event = { #Militarized Society
+	id = WCH_superregional.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.7" }
+	title = WCH_superregional.7.t
+	desc = WCH_superregional.7.desc
+	picture = GFX_report_event_russian_royal_guard
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.7.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Demand Their Loyalty
+	id = WCH_superregional.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.8" }
+	title = WCH_superregional.8.t
+	desc = WCH_superregional.8.desc
+	picture = GFX_report_event_russian_military
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.8.a
+		ai_chance = { factor = 1 }
+		army_experience = 5
+	}
+}
+
+country_event = { #Follow the Trail
+	id = WCH_superregional.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.9" }
+	title = WCH_superregional.9.t
+	desc = WCH_superregional.9.desc
+	picture = GFX_report_event_soviet_russian_officers_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.9.a
+		ai_chance = { factor = 1 }
+		add_political_power = 15
+	}
+}
+
+country_event = { #Stake Our Claim
+	id = WCH_superregional.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.10" }
+	title = WCH_superregional.10.t
+	desc = WCH_superregional.10.desc
+	picture = GFX_report_event_iberia_australia_canberra1960
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.10.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		hidden_effect = {
+			country_event = { id = WCH_superregional.11 days = 14 random = 48 }
+		}
+	}
+}
+
+country_event = { #A Cruel Mercy
+	id = WCH_superregional.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.11" }
+	title = WCH_superregional.11.t
+	desc = WCH_superregional.11.desc
+	picture = GFX_report_event_iberia_prison_jail_cell
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.11.a
+		ai_chance = { factor = 1 }
+		add_political_power = -5
+	}
+}
+
+country_event = { #Reap the Rewards
+	id = WCH_superregional.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.12" }
+	title = WCH_superregional.12.t
+	desc = WCH_superregional.12.desc
+	picture = GFX_report_event_japan_business
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.12.a
+		ai_chance = { factor = 1 }
+		set_country_flag = WCH_japan_delegation_not_sent
+	}
+	option = { #
+		name = WCH_superregional.12.b
+		ai_chance = { factor = 1 }
+		set_country_flag = WCH_japan_delegation_sent
+	}
+}
+
+country_event = { #A New Tsar
+	id = WCH_superregional.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.13" }
+	title = WCH_superregional.13.t
+	desc = WCH_superregional.13.desc
+	picture = GFX_report_event_russian_monarchy
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.13.a
+		ai_chance = { factor = 1 }
+		create_country_leader = {
+			name = "Nikita I"
+			desc = "POLITICS_NIKITA_ROMANOV_DESC"
+			picture = "Portrait_Chita_Nikita_Romanov.dds"
+			expire = "1999.1.1"
+			ideology = despotism_subtype
+			traits = {  }
+		}
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #A New Tsar
+	id = WCH_superregional.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.14" }
+	title = WCH_superregional.14.t
+	desc = WCH_superregional.14.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.14.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A New Sheriff in Town
+	id = WCH_superregional.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.15" }
+	title = WCH_superregional.15.t
+	desc = WCH_superregional.15.desc
+	picture = GFX_report_event_russian_city
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.15.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The General's Fate
+	id = WCH_superregional.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.16" }
+	title = WCH_superregional.16.t
+	desc = WCH_superregional.16.desc
+	picture = GFX_report_event_iberia_prison_jail_cell
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.16.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Man with a Plan
+	id = WCH_superregional.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.17" }
+	title = WCH_superregional.17.t
+	desc = WCH_superregional.17.desc
+	picture = GFX_report_event_russia_war_planning
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.17.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Siberian Divorce
+	id = WCH_superregional.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.18" }
+	title = WCH_superregional.18.t
+	desc = WCH_superregional.18.desc
+	picture = GFX_report_event_MAD_phone_call
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.18.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = WCH_jap_relations_tt
+		clr_country_flag = AMR_JAP_relations
+		add_political_power = 100
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Such is Capitalism
+	id = WCH_superregional.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.19" }
+	title = WCH_superregional.19.t
+	desc = WCH_superregional.19.desc
+	picture = GFX_report_event_komi_syktyvkar_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.19.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.20" }
+	title = WCH_superregional.20.t
+	desc = WCH_superregional.20.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.20.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Democracy 101
+	id = WCH_superregional.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.21" }
+	title = WCH_superregional.21.t
+	desc = WCH_superregional.21.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.21.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		add_stability = 0.03
+		add_political_power = 20
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.22" }
+	title = WCH_superregional.22.t
+	desc = WCH_superregional.22.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.22.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Old Dogs, New Tricks
+	id = WCH_superregional.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.23" }
+	title = WCH_superregional.23.t
+	desc = WCH_superregional.23.desc
+	picture = GFX_report_event_russia_war_planning
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.23.a
+		ai_chance = { factor = 1 }
+		army_experience = 5
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.24" }
+	title = WCH_superregional.24.t
+	desc = WCH_superregional.24.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.24.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Back to Work
+	id = WCH_superregional.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.25" }
+	title = WCH_superregional.25.t
+	desc = WCH_superregional.25.desc
+	picture = GFX_report_event_russia_siberian_worker
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.25.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.26" }
+	title = WCH_superregional.26.t
+	desc = WCH_superregional.26.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.26.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.27" }
+	title = WCH_superregional.27.t
+	desc = WCH_superregional.27.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.27.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.28" }
+	title = WCH_superregional.28.t
+	desc = WCH_superregional.28.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.28.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.29" }
+	title = WCH_superregional.29.t
+	desc = WCH_superregional.29.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.29.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = WCH_superregional.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WCH_superregional.30" }
+	title = WCH_superregional.30.t
+	desc = WCH_superregional.30.desc
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = WCH_superregional.30.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
