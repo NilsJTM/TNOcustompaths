@@ -1319,7 +1319,25 @@ country_event = { #A Quiet Dinner
 		name = WCH_regional.20.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			if = {
+		    if = {
+			    limit = {
+			        has_game_rule = {
+					    rule = WCH_ideology_route
+					    option = WCH_IDEOLOGY_ROUTE_AUTHDEM
+				    }
+			    }
+			    country_event = { id = WCH_regional.7 hours = 3 } 
+		    }
+		    else_if = {
+			    limit = {
+			        has_game_rule = {
+					    rule = WCH_ideology_route
+					    option = WCH_IDEOLOGY_ROUTE_DESPOTISM
+				    }
+			    }
+			    country_event = { id = WCH_regional.6 hours = 3 } 
+		    }		    
+			else_if = {
 				limit = {
 					AND = {
 						has_country_flag = WCH_supported_shepunov
