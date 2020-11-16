@@ -1141,14 +1141,12 @@ country_event = { #Boers Revolt
 				#country_event = { id = SAF.40 days = 21 }  #Join the South African war?
 				USA = { country_event = { id = USA.40 days = 21 } } #WALKER OF CHAOS WAS HERE AND REPLACED THE ABOVE WITH THIS TO TRY AND FIX SAF TREES LOADING IN PROPERLY
 
-
 				every_unit_leader = {
 					limit = {
 						is_BOR_unit_leader = yes
 					}
 					set_nationality = BOR
 				}
-
 
 				add_timed_idea = {
 					idea = SAF_surprise_attack
@@ -1193,10 +1191,10 @@ country_event = { #Boers Revolt
 			}
 		}
 	}
-
 }
 
-country_event = { #  US Joins the War
+# OUTDATED DEMO EVENT DON'T USE
+country_event = { # US Joins the War
 	id = SAF.40
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.40"}
 	title = SAF.40.t
@@ -1212,15 +1210,15 @@ country_event = { #  US Joins the War
 	option = {
 		name = SAF.40.a
 		set_global_flag = south_african_war
-
-		#set_technology = {
-		#	gunship_1966 = 1
-		#}
-		SAF = { set_country_flag = USA_entered_war }
 		SAF = {
+			set_country_flag = USA_entered_war
 			country_event = {
 				id = SAFWAR.7
 				days = 33
+			}
+			country_event = {
+				id = SAF.41
+				days = 7
 			}
 		}
 		hidden_effect = {
@@ -1234,8 +1232,9 @@ country_event = { #  US Joins the War
 		}
 	}
 }
+# OUTDATED DEMO EVENT DON'T USE
 
-
+# Fired from USA.40 instead of SAF.40
 country_event = { # OFN Summit Called
 	id = SAF.41
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.41"}
@@ -1266,7 +1265,6 @@ country_event = { # OFN Summit Called
 				amount = 400
 				target = SAF
 			}
-
 		}
 	}
 }
@@ -1283,7 +1281,6 @@ country_event = { # Pro War Media Campaing
 
 	option = { #
 		name = SAF.42.a
-
 		SAF = {
 			country_event = {
 				id = SAF.43
@@ -1312,7 +1309,6 @@ country_event = { # Report of Boer Atrocities
 				days = 7
 			}
 			add_war_support = 0.05
-
 		}
 	}
 }
@@ -1337,13 +1333,12 @@ country_event = { # Christians for Freedom
 				id = SAF.48
 				days = 21
 			}
-			hidden_effect = {
-
-				SAF = {
-					country_event = {
-						id = SAF.45
-						days = 7
-					}
+		}
+		hidden_effect = {
+			SAF = {
+				country_event = {
+					id = SAF.45
+					days = 7
 				}
 			}
 		}
@@ -1386,8 +1381,6 @@ country_event = { # 6 Fleet
 				days = 5
 			}
 		}
-
-
 	}
 }
 
@@ -1453,7 +1446,6 @@ country_event = { # Trucks
 				producer = USA
 			}
 		}
-
 	}
 }
 
@@ -1469,10 +1461,7 @@ country_event = { # Beacon of Hope
 
 	option = { #
 		name = SAF.48.a
-
 	}
-
-
 }
 
 country_event = { # Iceland Help
@@ -1488,7 +1477,6 @@ country_event = { # Iceland Help
 	option = { #
 		name = SAF.49.a
 		hidden_effect = {
-
 			SAF = {
 				country_event = {
 					id = SAF.50
@@ -1518,8 +1506,6 @@ country_event = { # Carribean Help
 			add_ideas = SAF_Caribbean_support_staff
 		}
 	}
-
-
 }
 
 
@@ -1867,7 +1853,11 @@ country_event = { # Angola Bombing
 
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	trigger = {
+		1035 = {
+			is_controlled_by = ANG
+		}
+	}
 	option = { #
 		name = SAF.66.a
 		ANG = {
