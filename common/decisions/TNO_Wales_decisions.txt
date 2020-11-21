@@ -273,6 +273,10 @@ wal_fwa_terrorism_category = {
 		cost = 25
 		ai_will_do = {
 			factor = 2
+			modifier = { 
+				factor = 0 
+				has_country_flag = WAL_AI_smart_union_flag 
+			}
 			modifier = {
 				factor = 0
 					has_game_rule = {
@@ -315,6 +319,10 @@ wal_fwa_terrorism_category = {
 		cost = 50
 		ai_will_do = {
 			factor = 5
+			modifier = { 
+				factor = 0 
+				has_country_flag = WAL_AI_smart_union_flag 
+			}
 			modifier = {
 				factor = 0
 					has_game_rule = {
@@ -389,6 +397,7 @@ wal_fwa_terrorism_category = {
 	}
 	wal_find_fwa_custom_path_cheat = {
 		visible = {
+			is_ai = yes
 			has_game_rule = { 
 				rule = WAL_ELECTIONS_1963 option = WAL_ELECTIONS_1963_INDEPENDENTS
 			}
@@ -424,24 +433,29 @@ wal_union_navy_category = {
 		available = {
 			has_country_flag = WAL_UnionistNavyDream
 			NOT = {
-              has_idea = WAL_RentedUlster
-             }
+				has_idea = WAL_RentedUlster
+            }
 		}
 		cost = 25
 		ai_will_do = {
 			factor = 8
+			modifier = { 
+				factor = 0 
+				has_country_flag = WAL_AI_smart_union_flag 
+				NOT = {	has_country_flag = wal_fwa_terrorism_end }
+			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_rent_ulster_dockyards"
 			custom_effect_tooltip = WAL_RentingUlster
 			hidden_effect = {
 
-			ULS = {
-			country_event = {
-                id = WALULS.1
-                hours = 1
-                	}
-				}	
+				ULS = {
+					country_event = {
+						id = WALULS.1
+						hours = 1
+					}
+				}
 			}
 		}
 	}
@@ -454,23 +468,30 @@ wal_union_navy_category = {
 		cost = 100
 		ai_will_do = {
 			factor = 1
+
+			modifier = {
+				add = -1
+				has_political_power < 125
+			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_destroyer"
 			custom_effect_tooltip = Wal_3_mil_please
-			hidden_effect = { 
-
-					add_equipment_production = {
-                    equipment = {
-                        type = ship_hull_submarine_1
-                        creator = "WAL" 
-                        version_name = "S Class"
-                    }
-                    name = "Ulster Submarine"
-                    requested_factories = 1
-                    progress = 1
-                    amount = 1
-                    }
+			hidden_effect = {
+				ULS = {
+					create_equipment_variant = {
+						name = "S Class"
+						type = ship_hull_submarine_1
+						name_group = WAL_SS_Ulster
+						parent_version = 0
+						modules = {
+							fixed_ship_engine_slot = light_ship_engine_1
+							fixed_ship_torpedo_slot = ship_torpedo_sub_1
+							rear_1_custom_slot = ship_torpedo_sub_1
+    					}
+    				}
+				}
+				create_ship = { type = ship_hull_submarine_1 equipment_variant = "S Class" creator = ULS }
 
 				if = {
 					limit = {
@@ -511,19 +532,26 @@ wal_union_navy_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_destroyer"
 			custom_effect_tooltip = Wal_5_mil_please
-			hidden_effect = { 
-
-					add_equipment_production = {
-                    equipment = {
-                        type = ship_hull_light_1
-                        creator = "WAL" 
-                        version_name = "H Class"
-                    }
-                    name = "Ulster Destroyer"
-                    requested_factories = 1
-                    progress = 1
-                    amount = 1
-                    }
+			hidden_effect = {
+				ULS = {
+					create_equipment_variant = {
+						name = "H Class"
+						type = ship_hull_light_1
+						name_group = WAL_DD_Ulster
+						parent_version = 0
+						modules = {
+							fixed_ship_battery_slot = ship_light_battery_1
+							fixed_ship_anti_air_slot = ship_anti_air_2
+							fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+							fixed_ship_radar_slot = ship_radar_2
+							fixed_ship_engine_slot = light_ship_engine_1
+							fixed_ship_torpedo_slot = ship_torpedo_1
+							mid_1_custom_slot = ship_light_battery_1
+							rear_1_custom_slot = ship_anti_air_2
+    					}
+					}
+				}
+				create_ship = { type = ship_hull_light_1 equipment_variant = "H Class" creator = ULS }
 
 				if = {
 					limit = {
@@ -565,18 +593,26 @@ wal_union_navy_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_light_cruiser"
 			custom_effect_tooltip = Wal_13_mil_please
 			hidden_effect = { #Someone make a light cruiser spawn plz
-
-			add_equipment_production = {
-                    equipment = {
-                        type = ship_hull_cruiser_1
-                        creator = "WAL" 
-                        version_name = "Town Class"
-                    }
-                    name = "Ulster Cruiser"
-                    requested_factories = 1
-                    progress = 1
-                    amount = 1
-                    }
+				ULS = {
+					create_equipment_variant = {
+						name = "Town Class"
+						type = ship_hull_cruiser_1
+						name_group = WAL_CL_Ulster
+						parent_version = 0
+						modules = {
+							fixed_ship_battery_slot = ship_light_battery_2
+							fixed_ship_anti_air_slot = ship_anti_air_2
+							fixed_ship_fire_control_system_slot = ship_fire_control_system_3
+							fixed_ship_radar_slot = ship_radar_3
+							fixed_ship_engine_slot = cruiser_ship_engine_2
+							fixed_ship_secondaries_slot = ship_secondaries_2
+							fixed_ship_armor_slot = ship_armor_cruiser_2
+							mid_1_custom_slot = ship_light_battery_2
+							rear_1_custom_slot = ship_anti_air_2
+    					}
+					}
+				}
+				create_ship = { type = ship_hull_cruiser_1 equipment_variant = "Town Class" creator = ULS }
 
 				if = {
 					limit = {
@@ -605,10 +641,3 @@ wal_union_navy_category = {
 		}
 	}
 }
-
-
-		
-
-
-	
-				
