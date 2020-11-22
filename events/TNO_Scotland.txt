@@ -56,7 +56,6 @@ country_event = { #Paranoia event
 
 	option = {
 		name = SCO.1.a
-
 	}
 }
 
@@ -109,6 +108,7 @@ country_event = { #Collab Victory
 	option = {
 		name = SCO.202.a
 		SCO_Paranoia_Increase = yes
+		SCO_Decrease_English_Approval_point_two = yes
 		if = {
 			limit = {
 				OR = {
@@ -870,7 +870,7 @@ country_event = { #ECW guns hmmlr
 			amount = -250
 			producer = SCO
 		}
-		FEN = {
+		FEN =  {
 			country_event = {
 				id = SCO.222
 				days = 7
@@ -917,7 +917,7 @@ country_event = { #ECW guns hmmlr
 			amount = -500
 			producer = SCO
 		}
-		FEN = {
+		FEN =  {
 			country_event = {
 				id = SCO.224
 				days = 7
@@ -964,7 +964,7 @@ country_event = { #ECW tanks hmmlr
 			amount = -50
 			producer = SCO
 		}
-		FEN = {
+		FEN =  {
 			country_event = {
 				id = SCO.226
 				days = 7
@@ -2703,6 +2703,14 @@ country_event = { #SNP won the elections
 		hidden_effect = {
 			load_focus_tree = SCO_SNP_Victory
 		}
+		hidden_effect = {
+            every_country = {
+                news_event = {
+                    id = WORLD.60102
+                    hours = 12
+                }
+            }
+        }
 	}
 }
 
@@ -2747,6 +2755,14 @@ country_event = { #ILP won the elections
 			add_ideas = SCO_george_wallis
 			add_ideas = SCO_Malcom_MacPherson
 		}
+		hidden_effect = {
+            every_country = {
+                news_event = {
+                    id = WORLD.60103
+                    hours = 12
+                }
+            }
+        }
 	}
 }
 
@@ -2818,6 +2834,14 @@ country_event = { #UP 1962 election victory
 		add_ideas = SCO_Iain_Sproat
 		add_ideas = SCO_Kate_Losinska
 		add_ideas = SCO_Michael_Noble
+		hidden_effect = {
+            every_country = {
+                news_event = {
+                    id = WORLD.60104
+                    hours = 12
+                }
+            }
+        }
 	}
 }
 
@@ -3198,6 +3222,7 @@ country_event = { #Convincing the Interior
 	option = { #Tell them to weaken army instead
 		name = SCO.3003.b
 		SCO_Happiness_Decrease = yes
+
 		custom_effect_tooltip = SCO_SAS_Prep2_tt
 		add_to_variable = {
 			var = SCO_SAS_Power
@@ -3563,7 +3588,7 @@ country_event = { #dumb debug evet
 
 	option = { #Fuck yes!
 		name = SCO.3102.a
-		ENG = {
+		ENG =  {
 			transfer_state = 131
 			declare_war_on = {
 				target = ENG
@@ -3674,6 +3699,12 @@ country_event = { #SAS Coup Success Pt. 1
 				id = SCO.1745
 				days = 7
 			}
+			every_country = {
+				country_event = {
+					id = WORLD.60105
+					days = 1
+				}
+			}
 		}
 	}
 }
@@ -3743,6 +3774,12 @@ country_event = { #SAS Coup Failure Finale
 			add_ideas = SCO_Alexander_Boswell
 			load_focus_tree = { tree = SCO_Wimberly_UP_Countercoup }
 			unlock_national_focus = SCO_Wimberlys_Countercoup
+			every_country = {
+				country_event = {
+					id = WORLD.1993
+					days = 1
+				}
+			}
 		}
 	}
 }
@@ -4455,7 +4492,7 @@ country_event = { #northumberland county (SCO) post_ecw
 		delete_unit_template_and_units = {
 			division_template = "Northumberland County Division"
 		}
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.2
 			}
@@ -4497,7 +4534,7 @@ country_event = { #northumberland county (SCO)
 		delete_unit_template_and_units = {
 			division_template = "Northumberland County Division"
 		}
-		FEN = {
+		FEN =  {
 			country_event = {
 				id = sco_fen.4
 			}
@@ -5170,7 +5207,7 @@ country_event = { #US calls for negotiations (SCO)
 
 	option = {
 		name = sco_fen.32.a
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.33
 			}
@@ -5279,7 +5316,7 @@ country_event = { #scotland sends demands (USA)
 
 	option = {
 		name = sco_fen.67.a
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.35
 			}
@@ -5404,7 +5441,7 @@ country_event = { #England accepts (SCO)
 
 		}
 		custom_effect_tooltip = SCO_join_UK_tt
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.38
 			}
@@ -5451,6 +5488,8 @@ country_event = { #Scotland joins the UK (FEN)
 				id = sco_fen.41
 			}
 		}
+		set_country_flag = ENG_Scotland_Peace
+		ENG_scotland_setup = yes
 	}
 
 }
@@ -5474,7 +5513,7 @@ country_event = { #Scotland rejects deal (USA)
 			factor = 90
 		}
 
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.68
 			}
@@ -5490,7 +5529,7 @@ country_event = { #Scotland rejects deal (USA)
 		ai_chance = {
 			factor = 10
 		}
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.61
 			}
@@ -5533,7 +5572,7 @@ country_event = { #USA pressures us (SCO)
 			factor = 60
 			modifier = {
 				factor = 1.5
-				ENG = {
+				ENG =  {
 					is_in_faction_with = USA
 				}
 			}
@@ -5549,14 +5588,14 @@ country_event = { #USA pressures us (SCO)
 				}
 
 			}
-			ENG = {
+			ENG =  {
 				country_event = {
 					id = sco_fen.65
 				}
 			}
 		}
 		else = {
-			ENG = {
+			ENG =  {
 				country_event = {
 					id = sco_fen.38
 				}
@@ -5615,7 +5654,7 @@ country_event = { #Scotland further refuses (USA)
 			factor = 60
 			modifier = {
 				factor = 1.5
-				ENG = {
+				ENG =  {
 					is_in_faction_with = USA
 				}
 			}
@@ -5632,7 +5671,7 @@ country_event = { #Scotland further refuses (USA)
 		ai_chance = {
 			factor = 40
 		}
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.61
 			}
@@ -5643,7 +5682,7 @@ country_event = { #Scotland further refuses (USA)
 	option = { #if they want a war, we'll give them a war
 		name = sco_fen.42.c
 		USA_decrease_ruling_party_popularity_1 = yes
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.599
 			}
@@ -5669,7 +5708,7 @@ country_event = { #USA Threatens to kick us out of the OFN
 			factor = 30
 			modifier = {
 				factor = 2
-				ENG = {
+				ENG =  {
 					is_in_faction_with = USA
 				}
 			}
@@ -5685,14 +5724,14 @@ country_event = { #USA Threatens to kick us out of the OFN
 				}
 
 			}
-			ENG = {
+			ENG =  {
 				country_event = {
 					id = sco_fen.65
 				}
 			}
 		}
 		else = {
-			ENG = {
+			ENG =  {
 				country_event = {
 					id = sco_fen.38
 				}
@@ -5731,7 +5770,7 @@ country_event = { #Scotland decides to stand alone (USA)
 		SCO = {
 			leave_faction = yes
 		}
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.44
 			}
@@ -6000,7 +6039,7 @@ country_event = { #Scotland Compromises (USA)
 
 	option = {
 		name = sco_fen.50.a
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.53
 			}
@@ -6165,7 +6204,7 @@ country_event = { #England Wants more Compromise (USA)
 	option = { #tell england to take the deal
 		name = sco_fen.54.f
 
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.56
 			}
@@ -6196,7 +6235,7 @@ country_event = { #Scotland refuses to compromise
 			factor = 80
 			modifier = {
 				factor = 1.2
-				ENG = {
+				ENG =  {
 					is_in_faction_with = USA
 				}
 			}
@@ -6210,7 +6249,7 @@ country_event = { #Scotland refuses to compromise
 			factor = 20
 
 		}
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.56
 			}
@@ -6385,7 +6424,7 @@ country_event = { #England Rejects (USA)
 
 	option = { #another category
 		name = sco_fen.57.a
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.71
 			}
@@ -6490,7 +6529,7 @@ country_event = { #England Rejects Last Chance (USA)
 
 	option = { #let them fight
 		name = sco_fen.58.a
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.59
 			}
@@ -6500,7 +6539,7 @@ country_event = { #England Rejects Last Chance (USA)
 	option = { #if they want a war, we'll give them a war
 		name = sco_fen.58.b
 		USA_decrease_ruling_party_popularity_1 = yes
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.599
 			}
@@ -6668,7 +6707,7 @@ country_event = { #England Accepts Compromise Deal (SCO)
 			}
 		}
 		custom_effect_tooltip = SCO_join_UK_tt
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_fen.65
 			}
@@ -6709,6 +6748,8 @@ country_event = { #Scotland joins the Union (compromise, FEN)
 				id = sco_fen.66
 			}
 		}
+		set_country_flag = ENG_Scotland_Peace
+		ENG_scotland_setup = yes
 	}
 }
 
@@ -8840,7 +8881,7 @@ country_event = { #informing the english (SCO)
 	is_triggered_only = yes
 	option = {
 		name = sco_ilp.6.a
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_ilp.6
 			}
@@ -9206,7 +9247,7 @@ country_event = { #LMS want their shit back
 	option = {
 		name = sco_ilp.23.a
 		hidden_effect = {
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_ilp.24
 				days = 5
@@ -9232,7 +9273,7 @@ country_event = { #LMS want their shit back (SNP/UP)
 	option = {
 		name = sco_ilp.2323.a
 		hidden_effect = {
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_ilp.24
 				days = 5
@@ -9258,7 +9299,7 @@ country_event = { #LMS want their shit back (fenland)
 	option = { #sure
 		name = sco_ilp.24.a
 		hidden_effect = {
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_ilp.25
 				days = 5
@@ -9271,7 +9312,7 @@ country_event = { #LMS want their shit back (fenland)
 	option = { #nah
 		name = sco_ilp.24.a
 		hidden_effect = {
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_ilp.26
 				days = 5
@@ -9298,7 +9339,7 @@ country_event = { #big three go to courts
 	option = {
 		name = sco_ilp.25.a
 		hidden_effect = {
-			ENG = {
+			ENG =  {
 
 				country_event = {
 					id = sco_ilp.27
@@ -9331,7 +9372,7 @@ country_event = { #LMS go to courts
 	option = {
 		name = sco_ilp.26.a
 		hidden_effect = {
-			ENG = {
+			ENG =  {
 
 				country_event = {
 					id = sco_ilp.27
@@ -9363,7 +9404,7 @@ country_event = { #LMS present case
 	option = {
 		name = sco_ilp.27.a
 		hidden_effect = {
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_ilp.29
 				days = 5
@@ -9407,7 +9448,7 @@ country_event = { #Precedent
 	option = { #side with LMS
 		name = sco_ilp.29.a
 		hidden_effect = {
-			ENG = {
+			ENG =  {
 				country_event = {
 					id = sco_ilp.30
 					days = 5
@@ -9420,7 +9461,7 @@ country_event = { #Precedent
 	option = { #side with big three
 		name = sco_ilp.29.b
 		hidden_effect = {
-			ENG = {
+			ENG =  {
 				country_event = {
 					id = sco_ilp.31
 					days = 5
@@ -9515,7 +9556,7 @@ country_event = { #interlock our trade, england says yes
 
 	option = {
 		name = sco_ilp.3222.a
-		ENG = {
+		ENG =  {
 			add_to_variable = {
 				GDP_Growth = 0.0002
 			}
@@ -9579,7 +9620,7 @@ country_event = { #steafast freinds
 
 	option = {
 		name = sco_ilp.33.a
-		ENG = {
+		ENG =  {
 			add_stability = 0.03
 		}
 
@@ -9951,7 +9992,7 @@ country_event = { #English Citizenship Law (SCO)
 
 	option = {
 		name = sco_snp.9.a
-		ENG = {
+		ENG =  {
 			country_event = {
 				id = sco_snp.10
 				days = 2
@@ -10512,7 +10553,7 @@ country_event = { #UK side wins
 		name = sco_snp.28.a
 		if = {
 			limit = {country_exists = FEN}
-			ENG = {
+			ENG =  {
 				country_event = {
 					id = sco_snp.29
 				}
@@ -10547,7 +10588,8 @@ country_event = { #UK side wins (FEN)
 			target = SCO
 			transfer_troops = yes
 		}
-
+		set_country_flag = ENG_Scotland_Peace
+		ENG_scotland_setup = yes
 	}
 
 }
@@ -10569,7 +10611,8 @@ country_event = { #UK side wins (ENG)
 			target = SCO
 			transfer_troops = yes
 		}
-
+		set_country_flag = ENG_Scotland_Peace
+		ENG_scotland_setup = yes
 	}
 
 }
@@ -11616,6 +11659,23 @@ country_event = { #Scotland declares UK
 	}
 }
 
+country_event = { #The Scots are using collaborators, peak irony (for collab eng)
+	id = sco_up.52
+	title = sco_up.52.t
+	desc = sco_up.52.desc
+
+	picture = GFX_report_event_edinburgh
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event sco_up.51"}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = sco_up.52.a
+		add_ideas = SCO_ENG_English_Collaborators
+	}
+}
+
 
 #country_event = { #Catastrophe Unlocks
 #	id = sco_up.99
@@ -11647,7 +11707,7 @@ country_event = { #Catastrophe: Mayne goes to Stirling land, choose a successor
 	is_triggered_only = yes
 	option = { #Eyton-Jones
 		name = sco_up.100.a
-		ENG = { country_event = { id = sco_up.101 days = 1 } }
+		ENG =  { country_event = { id = sco_up.101 days = 1 } }
 		retire_country_leader = yes
 		effect_tooltip = {
 			remove_unit_leader = 686
@@ -11664,7 +11724,7 @@ country_event = { #Catastrophe: Mayne goes to Stirling land, choose a successor
 	}
 	option = { #Woodhouse
 		name = sco_up.100.b
-		ENG = { country_event = { id = sco_up.101 days = 1 } }
+		ENG =  { country_event = { id = sco_up.101 days = 1 } }
 		retire_country_leader = yes
 		effect_tooltip = {
 			remove_unit_leader = 686
@@ -11949,6 +12009,8 @@ country_event = { #Scottish Integration (Stirling)
 			add_core_of = ROOT
 		}
 		set_country_flag = stir_mayne_merger
+		set_country_flag = ENG_Scotland_Peace
+		ENG_scotland_setup = yes
 	}
 }
 
@@ -13497,6 +13559,8 @@ country_event = { #The Isle is Ours (ENG)
 			target = SCO
 			transfer_troops = yes
 		}
+		set_country_flag = ENG_Scotland_Peace
+		ENG_scotland_setup = yes
 	}
 }
 
@@ -15065,7 +15129,6 @@ country_event = { #Player Campaign does very well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4020.a
@@ -15082,7 +15145,6 @@ country_event = { #Player Campaign does well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4021.a
@@ -15099,7 +15161,6 @@ country_event = { #Player Campaign does badly
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4022.a
@@ -15116,7 +15177,6 @@ country_event = { #SNP Campaign does very well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4023.a
@@ -15133,7 +15193,6 @@ country_event = { #SNP Campaign does well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4024.a
@@ -15150,7 +15209,6 @@ country_event = { #SNP Campaign does badly
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4025.a
@@ -15168,7 +15226,6 @@ country_event = { #ILP Campaign does very well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4026.a
@@ -15185,7 +15242,6 @@ country_event = { #ILP Campaign does well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4027.a
@@ -15202,7 +15258,6 @@ country_event = { #ILP Campaign does badly
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4028.a
@@ -15219,7 +15274,6 @@ country_event = { #UP Campaign does very well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4029.a
@@ -15236,7 +15290,6 @@ country_event = { #UP Campaign does well
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4030.a
@@ -15253,7 +15306,6 @@ country_event = { #UP Campaign does badly
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.4031.a
@@ -15461,11 +15513,10 @@ country_event = { #Scottish Training for HMMLR
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.6006" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.6006.a
-		ENG = { add_manpower = 250 }
+		ENG =  { add_manpower = 250 }
 	}
 }
 
@@ -15479,7 +15530,6 @@ country_event = { #Scottish guns for HMMLR
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.6007" }
 
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = SCO.6007.a
@@ -19993,5 +20043,107 @@ country_event = { #debug for minorities
 			SCO_English_Approval = 100
 		}
 		SCO_English_Minority_CALC = yes	
+	}
+}
+
+country_event = { #ILP Scotland beating Britain
+	id = SCO.80000
+	title = SCO.80000.t
+	desc = SCO.80000.desc
+	picture = GFX_report_event_generic_soldiers_scouting
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.70882" }
+	hidden = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #SNP Campaign
+		name = SCO.80000.a
+		set_cosmetic_tag = SCO_UoB
+		release_puppet = WAL
+		release_puppet = ENG
+		ENG = {
+			set_cosmetic_tag = ENG_ILP_UoB_start
+			load_focus_tree = ENG_blankfocus
+			set_country_flag = ENG_Parliament_Disabled
+		}
+		WAL = {
+			set_cosmetic_tag = WAL_ILP_UoB_start
+			load_focus_tree = ENG_blankfocus
+		}
+		every_country = {
+			country_event = {
+				id = WORLD.50011
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #SNP Scotland beating Britain
+	id = SCO.80001
+	title = SCO.80001.t
+	desc = SCO.80001.desc
+	picture = GFX_report_event_generic_soldiers_scouting
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.70882" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+	option = { #SNP Campaign
+		name = SCO.80001.a
+		set_cosmetic_tag = SCO_UoB
+		release_puppet = WAL
+		release_puppet = ENG
+		ENG = {
+			set_cosmetic_tag = ENG_SNP_UoB_start
+			load_focus_tree = ENG_blankfocus
+			set_country_flag = ENG_Parliament_Disabled
+		}
+		WAL = {
+			set_cosmetic_tag = WAL_SNP_UoB_start
+			load_focus_tree = ENG_blankfocus
+		}
+		every_country = {
+			country_event = {
+				id = WORLD.50011
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Doug Scotland beating Britain
+	id = SCO.80002
+	title = SCO.80002.t
+	desc = SCO.80002.desc
+	picture = GFX_report_event_generic_soldiers_scouting
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SCO.70882" }
+	hidden = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #SNP Campaign
+		name = SCO.80002.a
+		set_cosmetic_tag = SCO_UoB
+		release_puppet = WAL
+		release_puppet = ENG
+		ENG = {
+			set_cosmetic_tag = ENG_Doug_UoB_start
+			load_focus_tree = ENG_blankfocus
+			set_country_flag = ENG_Parliament_Disabled
+		}
+		WAL = {
+			set_cosmetic_tag = WAL_Doug_UoB_start
+			load_focus_tree = ENG_blankfocus
+		}
+		every_country = {
+			country_event = {
+				id = WORLD.50011
+				days = 1
+			}
+		}
 	}
 }

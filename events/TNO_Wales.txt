@@ -2581,16 +2581,8 @@ country_event = { #The Police Join the Protest
     is_triggered_only = yes
     fire_only_once = yes
     
-    option = { #Remain neutral
-        name = cardiffmarch.28.a
-        custom_effect_tooltip = WAL_NeutralPoliceProtest
-        hidden_effect = {
-        	country_event = { id = cardiffmarch.29 hours = 6 }
-        }
-        ai_chance = { factor = 1 }
-    }
     option = { #Send in the Army
-        name = cardiffmarch.28.b
+        name = cardiffmarch.28.a
         custom_effect_tooltip = WAL_SendArmyPoliceProtest
         hidden_effect = {
         	country_event = { id = cardiffmarch.31 hours = 6 }
@@ -2598,10 +2590,18 @@ country_event = { #The Police Join the Protest
         ai_chance = { factor = 1 }
     }
     option = { #Reprimand the Police
-        name = cardiffmarch.28.c
-        custom_effect_tooltip = WAL_ReprimandPoliceProtest
+        name = cardiffmarch.28.b
+        custom_effect_tooltip = tWAL_ReprimandPoliceProtest
         hidden_effect = {
-        	country_event = { id = cardiffmarch.30 hours = 6 }
+        	country_event = { id = cardiffmarch.29 hours = 6 }
+        }
+        ai_chance = { factor = 1 }
+    }
+    option = { #Remain neutral
+        name = cardiffmarch.28.c
+        custom_effect_tooltip = WAL_NeutralPoliceProtes
+        hidden_effect = {
+        	country_event = { id = cardiffmarch.29 hours = 6 }
         }
         ai_chance = { factor = 1 }
     }
@@ -2902,6 +2902,14 @@ country_event = { #Cymru Goch wins!
     option = { #Oo yeah woo yeah o yeah
         name = goch.1.a
         add_political_power = 10
+        hidden_effect = {
+            every_country = {
+                news_event = {
+                    id = WORLD.60101
+                    days = 1
+                }
+            }
+        }
     }
 }
 
@@ -3731,10 +3739,12 @@ country_event = { #How to deal with le coal indsutry collapse?
     is_triggered_only = yes
     fire_only_once = yes
    
-    option = {  #Save the Coal Industry
+    option = {  #Save the Coal Industry # Put tooltips PLEASE
         name = walunion.3.a
         add_stability = 0.05
-        add_to_variable = {
+        custom_effect_tooltip = econ_misc_expenses_add_small_increase
+		custom_effect_tooltip = econ_increase_GDP_growth_small
+		add_to_variable = {
             var = misc_costs
             value = 0.30
         }
@@ -3746,6 +3756,8 @@ country_event = { #How to deal with le coal indsutry collapse?
     option = { #Meh Cut it
         name = walunion.3.b
         add_stability = -0.05
+        custom_effect_tooltip = econ_misc_expenses_add_small_decrease
+		custom_effect_tooltip = econ_decrease_GDP_growth_small
         add_to_variable = {
             var = misc_costs
             value = -0.25
@@ -3835,8 +3847,7 @@ country_event = { #Welsh Culture has been suppressed
                 	days = 31
                 }
          }
-
-                ENG = {
+            ENG = {
                 add_opinion_modifier = {
                 target = WAL
                 modifier = WAL_EnglishSociety
@@ -3900,9 +3911,17 @@ country_event = { #FWA Starts going ham
     		remove_ideas = WAL_Free_Welsh_Army
             add_ideas = WAL_FWA_Low
             add_popularity = {
-            ideology = despotism
-            popularity = 0.10
-            }   
+				ideology = despotism
+				popularity = 0.10
+			}   
+			## AI Code by Fedacking
+			random_list = {
+				25 = { 
+					set_country_flag = WAL_AI_smart_union_flag
+					log = "[GetDateText]: [Root.GetName]: set country flag WAL_AI_smart_union_flag, the AI will try to tryhard the FWA."
+				}
+				75 = {}
+			}
     	}
     }
 }
@@ -4369,6 +4388,8 @@ country_event = { #Wales wants to join us
                 target = WAL
                 transfer_troops = yes
             }
+            set_country_flag = ENG_Wales_Peace
+            ENG_wales_setup = yes
         }
     }
 }
@@ -4420,12 +4441,14 @@ country_event = { #Wales wants to join us
     fire_only_once = yes
    
     option = { #Sure
-       name = walunion.48.a
-       ENG = {
+        name = walunion.48.a
+        ENG = {
             annex_country = {
                 target = WAL
                 transfer_troops = yes
             }
+            set_country_flag = ENG_Wales_Peace
+            ENG_wales_setup = yes
         }
     }
 }
@@ -4802,7 +4825,6 @@ country_event = { #Getting rid of Unionist Military Leaders
     	remove_unit_leader = 628 #Morgan Llewellyn
         remove_unit_leader = 629 #Meredith Thomas
         remove_unit_leader = 633 #Jock Lewes
-        remove_unit_leader = 634 #Hugh Stockwell
     }
 }
 
