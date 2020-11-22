@@ -1800,6 +1800,307 @@ country_event = { #On the Threshold
 	}
 }
 
+country_event = { #The True Heir
+	id = BRY.85
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.85" }
+	title = BRY.85.t
+	desc = BRY.85.desc
+	picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.85.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #An American Proposition
+	id = BRY.86
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.86" }
+	title = BRY.86.t
+	desc = BRY.86.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.86.a
+		ai_chance = { factor = 1 }
+		country_event = { id = BRY.87 days = 7 }
+	}
+}
+
+country_event = { #The American National Exhibition
+	id = BRY.87
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.87" }
+	title = BRY.87.t
+	desc = BRY.87.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.87.a
+		ai_chance = { factor = 1 }
+		country_event = { id = BRY.88 days = 7 }
+	}
+}
+
+country_event = { #The Far Eastern Exhibition
+	id = BRY.88
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.88" }
+	title = BRY.88.t
+	desc = BRY.88.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.88.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A Visit from Havana
+	id = BRY.89
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.89" }
+	title = BRY.89.t
+	desc = BRY.89.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.89.a
+		ai_chance = { factor = 1 }
+		country_event = { id = BRY.90 days = 7 }
+	}
+}
+
+country_event = { #A Visit to London
+	id = BRY.90
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.90" }
+	title = BRY.90.t
+	desc = BRY.90.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.90.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Communal Blues
+	id = BRY.91
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.91" }
+	title = BRY.91.t
+	desc = BRY.91.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.91.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #What More Do They Need?
+	id = BRY.92
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.92" }
+	title = BRY.92.t
+	desc = BRY.92.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.92.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The World Moves On
+	id = BRY.93
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.93" }
+	title = BRY.93.t
+	desc = BRY.93.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.93.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Red Tide
+	id = BRY.94
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.94" }
+	title = BRY.94.t
+	desc = BRY.94.desc
+	#picture = GFX_report_event_soviet_russian_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = BRY.94.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+#BRY.95, BRY.96, BRY.97, and BRY.98 are part of an event chain
+#where a generator in the power plant brakes and a team goes to Mengjiang to buy parts for it's repair
+country_event = { #Keeping the Lights On
+	id = BRY.95
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.95" }
+	title = BRY.95.t
+	desc = BRY.95.desc
+	picture = GFX_report_event_dam_generic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			tag = BRY
+			tag = IRK
+		}
+		has_war = no
+		country_exists = MEN
+	}
+	
+	option = { #
+		name = BRY.95.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			MEN = {
+				country_event = {
+					id = BRY.96
+					days = 6
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Russians from the North (for Mengjiang)
+	id = BRY.96
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.96" }
+	title = BRY.96.t
+	desc = BRY.96.desc
+	picture = GFX_report_event_dam_generic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #yes
+		name = BRY.96.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		hidden_effect = {
+			if = {
+				limit = {
+					country_exists = IRK
+				}
+				IRK = {
+					country_event = {
+						id = BRY.97
+						days = 10
+					}
+				}
+			}
+			if = {
+				limit = {
+					country_exists = BRY
+				}
+				BRY = {
+					country_event = {
+						id = BRY.97
+						days = 10
+					}
+				}
+			}
+		}
+	}
+	option = { #no
+		name = BRY.96.b
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			if = {
+				limit = {
+					country_exists = IRK
+				}
+				IRK = {
+					country_event = {
+						id = BRY.98
+						days = 10
+					}
+				}
+			}
+			if = {
+				limit = {
+					country_exists = BRY
+				}
+				BRY = {
+					country_event = {
+						id = BRY.98
+						days = 10
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #A Message from Mengjiang (Success)
+	id = BRY.97
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.97" }
+	title = BRY.97.t
+	desc = BRY.97.desc
+	picture = GFX_report_event_dam_generic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #
+		name = BRY.97.a
+		ai_chance = { factor = 1 }
+		add_political_power = -25
+	}
+}
+
+country_event = { #A Message from Mengjiang (Failure)
+	id = BRY.98
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BRY.98" }
+	title = BRY.98.t
+	desc = BRY.98.desc
+	picture = GFX_report_event_dam_generic
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #
+		name = BRY.98.a
+		ai_chance = { factor = 1 }
+		add_manpower = -750
+	}
+}
+
+###############################################################################
 country_event = { #
 	id = BRY.5555
 	immediate = {log = "[GetDateText]: [Root.GetName]: event BRY.5555"}
@@ -1827,3 +2128,4 @@ country_event = { #
 		}
 	}
 }
+#what the actual fuck have I come across

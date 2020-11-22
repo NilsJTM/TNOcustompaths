@@ -1,0 +1,659 @@
+
+
+add_namespace = BFI
+
+country_event = { #Dem Italy in JAabn
+	id = BFI.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.1"}
+	title = BFI.1.t
+	desc = BFI.1.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.1.a
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = BFI.2
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Dem Italy in USA
+	id = BFI.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.2"}
+	title = BFI.2.t
+	desc = BFI.2.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.2.a
+		hidden_effect = {
+			JAP = {
+				country_event = {
+					id = BFI.3
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Jaabn says Dem Italy is useful
+	id = BFI.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.3"}
+	title = BFI.3.t
+	desc = BFI.3.d
+	picture = GFX_report_event_italy_right_wing_students2
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.3.a
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = BFI.4
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #US says Dem Italy is useful
+	id = BFI.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.4"}
+	title = BFI.4.t
+	desc = BFI.4.d
+	picture = GFX_report_event_italy_right_wing_students1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.4.a
+		hidden_effect = {
+			JAP = {
+				country_event = {
+					id = BFI.5
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Jaabn sees US Interests in Italy, Jaabn gets decisions
+	id = BFI.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.5"}
+	title = BFI.5.t
+	desc = BFI.5.d
+	picture = GFX_report_event_italy_left_wing_students
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.5.a
+		ITA = {
+			set_variable = {
+				var = ITA_Japan_Support
+				value = 1
+			}
+		}
+		JAP = {
+			set_country_flag = ita_Japan_is_in
+		}
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = BFI.6
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #US sees Jaabn Interests in Italy, USA gets decisions
+	id = BFI.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.6"}
+	title = BFI.6.t
+	desc = BFI.6.d
+	picture = GFX_report_event_italy_blackshirts1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.6.a
+		ITA = {
+			set_variable = {
+				var = ITA_USA_Support
+				value = 0
+			}
+		}
+		USA = {
+			set_country_flag = ita_USA_is_in
+		}
+		hidden_effect = {
+			ITA = {
+				country_event = {
+					id = BFI.7
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Italy sees competition between 2, Italy gets decisions
+	id = BFI.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.7"}
+	title = BFI.7.t
+	desc = BFI.7.d
+	picture = GFX_report_event_italy_right_rally
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.7.a
+		set_variable = {
+			var = ITA_isolation_support
+			value = 0
+		}
+		ITA = {
+			set_country_flag = ita_ready_for_battle_ita
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.930
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #skip decision 1
+	id = BFI.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.8"}
+	title = BFI.8.t
+	desc = BFI.8.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.8.a
+		set_global_flag = ITA_goods_finished
+		JAP = {
+			set_country_flag = ita_Japan_is_in
+		}
+		USA = {
+			set_country_flag = ita_USA_is_in
+		}
+		ITA = {
+			set_country_flag = ita_ready_for_battle_ita
+		}
+	}
+}
+
+country_event = { #Italy joins the OFN! (ITA)
+	id = BFI.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.9"}
+	title = BFI.9.t
+	desc = BFI.9.d
+	picture = GFX_report_event_BFI_signing_treaty
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.9.a
+		USA = { add_to_faction = ITA }
+		hidden_effect = {
+			USA = {
+				country_event = { id = BFI.10 days = 2 }
+			}
+			JAP = {
+				country_event = { id = BFI.11 days = 2 }
+			}
+			JAP = {
+				clr_country_flag = ita_Japan_is_in
+			}
+			USA = {
+				clr_country_flag = ita_USA_is_in
+			}
+			ITA = {
+				clr_country_flag = ita_ready_for_battle_ita
+			}
+			every_country = {
+				news_event = {
+					id = WORLD.931
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Italy joins the OFN! (USA)
+	id = BFI.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.10"}
+	title = BFI.10.t
+	desc = BFI.10.d
+	picture = GFX_report_event_BFI_signing_treaty
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.10.a
+
+	}
+}
+
+country_event = { #Italy joins the OFN! (JAP)
+	id = BFI.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.11"}
+	title = BFI.11.t
+	desc = BFI.11.d
+	picture = GFX_report_event_BFI_signing_treaty
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.11.a
+	}
+}
+
+country_event = { #Italy joins the CPS! (ITA)
+	id = BFI.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.12"}
+	title = BFI.12.t
+	desc = BFI.12.d
+	picture = GFX_report_event_italy_left_wing_students
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.12.a
+		BFI_italy_joins_CPS = yes
+		hidden_effect = {
+			JAP = {
+				clr_country_flag = ita_Japan_is_in
+			}
+			USA = {
+				clr_country_flag = ita_USA_is_in
+			}
+			ITA = {
+				clr_country_flag = ita_ready_for_battle_ita
+			}
+			USA = {
+				country_event = { id = BFI.13 days = 2 }
+			}
+			JAP = {
+				country_event = { id = BFI.14 days = 2 }
+			}
+			every_country = {
+				news_event = {
+					id = WORLD.932
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Italy joins the CPS! (USA)
+	id = BFI.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.13"}
+	title = BFI.13.t
+	desc = BFI.13.d
+	picture = GFX_report_event_italy_right_rally
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.13.a
+	}
+}
+
+country_event = { #Italy joins the CPS! (JAP)
+	id = BFI.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.14"}
+	title = BFI.14.t
+	desc = BFI.14.d
+	picture = GFX_report_event_italy_right_wing_students1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.14.a
+	}
+}
+
+country_event = { #Italy joins the no one (ITA)
+	id = BFI.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.15"}
+	title = BFI.15.t
+	desc = BFI.15.d
+	picture = GFX_report_event_italy_blackshirts1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.15.a
+		BFI_italy_keeps_to_itself = yes
+		hidden_effect = {
+			JAP = {
+				clr_country_flag = ita_Japan_is_in
+			}
+			USA = {
+				clr_country_flag = ita_USA_is_in
+			}
+			ITA = {
+				clr_country_flag = ita_ready_for_battle_ita
+			}
+			USA = {
+				country_event = { id = BFI.16 days = 2 }
+			}
+			JAP = {
+				country_event = { id = BFI.17 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { #Italy joins the no one (USA)
+	id = BFI.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.16"}
+	title = BFI.16.t
+	desc = BFI.16.d
+	picture = GFX_report_event_generic_election
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.16.a
+	}
+}
+
+country_event = { #Italy joins the no one (JAP)
+	id = BFI.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.17"}
+	title = BFI.17.t
+	desc = BFI.17.d
+	picture = GFX_report_event_italy_blackshirts1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.17.a
+	}
+}
+
+country_event = { # END OF BFI
+	id = BFI.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.23"}
+	title = BFI.23.t
+	desc = BFI.23.d
+	picture = GFX_report_event_italy_right_wing_students1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.23.a
+		if = {
+			limit = {
+			    has_game_rule = {
+					rule = ITA_battle_for_italy
+					option = ITA_BATTLE_FOR_ITALY_ALONE
+				}
+			}
+			country_event = { id = BFI.15 days = 2 } #No one
+		}
+		else_if = {
+			limit = {
+			    has_game_rule = {
+					rule = ITA_battle_for_italy
+					option = ITA_BATTLE_FOR_ITALY_OFN
+				}
+			}
+			country_event = { id = BFI.9 days = 2 } #OFN
+		}
+		else_if = {
+			limit = {
+			    has_game_rule = {
+					rule = ITA_battle_for_italy
+					option = ITA_BATTLE_FOR_ITALY_CPS
+				}
+			}
+			country_event = { id = BFI.12 days = 2 } #CPS
+		}
+		else_if = {
+			limit = {
+				check_variable = { ITA_USA_Support > ITA_Japan_Support }
+			}
+			country_event = { id = BFI.9 days = 2 } #OFN
+		}
+		else_if = {
+			limit = {
+				check_variable = { ITA_Japan_Support > ITA_USA_Support }
+			}
+			country_event = { id = BFI.12 days = 2 } #CPS
+		}
+		else_if = {
+			limit = {
+				OR = {
+					check_variable = { ITA_USA_Support = ITA_Japan_Support }
+					AND = {
+						check_variable = { ITA_isolation_support > ITA_Japan_Support }
+						check_variable = { ITA_isolation_support > ITA_USA_Support }
+					}
+				}
+			}
+			country_event = { id = BFI.15 days = 2 } #No one
+		}
+		clr_country_flag = ita_USA_is_in_IN_CIANOS_BIZZ
+		set_global_flag = ITA_ciano_appeal_2
+	}
+}
+
+country_event = { #Start of the battle for Italy
+	id = BFI.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.19"}
+	title = BFI.19.t
+	desc = BFI.19.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.19.a
+		hidden_effect = {
+			JAP = {
+				country_event = {
+					id = BFI.1
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = { #DEBUG PEAK JAPAN POINTS
+	id = BFI.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.20"}
+	title = BFI.20.t
+	desc = BFI.20.d
+	picture = GFX_report_event_generic_election
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.20.a
+		add_to_variable = {
+			var = ITA_Japan_Support
+			value = 30
+		}
+	}
+}
+country_event = { #DEBUG PEAK USA POINTS
+	id = BFI.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.21"}
+	title = BFI.21.t
+	desc = BFI.21.d
+	picture = GFX_report_event_italy_right_wing_students1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.21.a
+		add_to_variable = {
+			var = ITA_USA_Support
+			value = 30
+		}
+	}
+}
+country_event = { #DEBUG PEAK ITALY POINTS
+	id = BFI.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.22"}
+	title = BFI.22.t
+	desc = BFI.22.d
+	picture = GFX_report_event_italy_right_wing_students1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.22.a
+		add_to_variable = {
+			var = ITA_isolation_support
+			value = 30
+		}
+	}
+}
+
+country_event = { #DEBUG FINALE BFI
+	id = BFI.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.24"}
+	title = BFI.24.t
+	desc = BFI.24.d
+	picture = GFX_report_event_italy_blackshirts1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.24.a
+		set_global_flag = ITA_recognition_jai_hind
+	}
+}
+
+country_event = { #DEBUG REDO
+	id = BFI.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event BFI.25"}
+	title = BFI.25.t
+	desc = BFI.25.d
+	picture = GFX_report_event_italy_right_wing_students2
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.25.a
+		clr_global_flag = ITA_ciano_appeal_2
+		set_global_flag = ITA_ciano_appeal_1
+	}
+}
+
+### 30-89 Issue Ended Reminder with BFI 
+#reserved 50 events due to 15 issues * 3 winners
+
+country_event = { # Italy winz issue
+	id = BFI.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BFI.30" }
+	title = BFI.30.t
+	desc = BFI.30.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.30.a
+		trigger = { tag = ITA }
+	}
+	option = {
+		name = BFI.30.b
+		trigger = { tag = USA }
+	}
+	option = {
+		name = BFI.30.c
+		trigger = { tag = JAP }
+	}
+}
+
+country_event = { # America winz issue
+	id = BFI.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BFI.31" }
+	title = BFI.31.t
+	desc = BFI.31.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.31.a
+		trigger = { tag = ITA }
+	}
+	option = {
+		name = BFI.31.b
+		trigger = { tag = USA }
+	}
+	option = {
+		name = BFI.31.c
+		trigger = { tag = JAP }
+	}
+}
+
+country_event = { # America winz issue
+	id = BFI.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BFI.32" }
+	title = BFI.32.t
+	desc = BFI.32.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.32.a
+		trigger = { tag = ITA }
+	}
+	option = {
+		name = BFI.32.b
+		trigger = { tag = USA }
+	}
+	option = {
+		name = BFI.32.c
+		trigger = { tag = JAP }
+	}
+}
+
+### 90-99 BFI explanations 
+
+country_event = { # Italy select issue explanation
+	id = BFI.90
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BFI.90" }
+	title = BFI.90.t
+	desc = BFI.90.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.90.a
+	}
+}
+
+country_event = { # Select level of investment
+	id = BFI.91
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BFI.91" }
+	title = BFI.91.t
+	desc = BFI.91.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.91.a
+	}
+}
+
+country_event = { # Influence decisions
+	id = BFI.92
+	immediate = { log = "[GetDateText]: [Root.GetName]: event BFI.92" }
+	title = BFI.92.t
+	desc = BFI.92.desc
+	picture = GFX_report_event_generic_sign_treaty3
+	is_triggered_only = yes
+
+	option = {
+		name = BFI.92.a
+	}
+}
+
+
