@@ -1,0 +1,357 @@
+
+USA_can_support_sphere_country = {
+	OR = {
+		AND = {
+			tag = VIN
+			USA = { has_country_flag = USA_support_VIN }
+			OR = {
+				has_government = communist
+				has_government = socialist
+			}
+		}
+		AND = {
+			tag = FRI
+			USA = { has_country_flag = USA_support_FRI }
+			country_exists = FRI
+		}
+		AND = {
+			tag = PHI
+			USA = { has_country_flag = USA_support_PHI }
+			always = no
+		}
+	}
+}
+
+#send them more of that good shit
+USA_can_support_sphere_country_2 = {
+	OR = {
+		AND = {
+			tag = VIN
+			USA = { has_country_flag = USA_support_VIN_2 }
+			OR = {
+				has_government = communist
+				has_government = socialist
+			}
+		}
+		AND = {
+			tag = FRI
+			USA = { has_country_flag = USA_support_FRI_2 }
+			country_exists = FRI
+		}
+		AND = {
+			tag = PHI
+			USA = { has_country_flag = USA_support_PHI_2 }
+			always = no
+		}
+	}
+}
+
+USA_has_arms_shipment = {
+	AND = {
+        has_equipment = { infantry_equipment > 999 }
+        has_equipment = { anti_tank_equipment > 399 }
+    }
+}
+
+USA_has_fighter_shipment = {
+    has_equipment = { fighter_equipment > 29 }
+}
+
+USA_RD_ruling_party = {
+	OR = {
+		has_government = social_liberal
+		has_government = social_conservative
+	}
+}
+
+USA_NPP_ruling_party = {
+	OR = {
+		has_government = authoritarian_democrat
+		has_government = social_democrat
+		has_government = national_socialism
+		has_government = communist
+	}
+}
+
+USA_WFB_CRA_has_senate_majority = {
+	set_temp_variable = { total_senators_half = total_senators }
+	divide_temp_variable = { total_senators_half = 2 }
+	subtract_from_temp_variable = { total_senators_half = 1 }
+	check_variable = { WFB_CRA_supporting_senators > total_senators_half }
+}
+
+USA_has_congress_majority_vote = {
+	OR = {
+		AND = {
+			set_temp_variable = { total_senators_half = total_senators }
+			divide_temp_variable = { total_senators_half = 2 }
+			subtract_from_temp_variable = { total_senators_half = 1 }
+
+			set_temp_variable = { total_votes_available = total_congress_votes }
+			add_to_temp_variable = { total_votes_available = temporary_congress_votes }
+			add_to_temp_variable = { total_votes_available = temporary_congress_votes_next_bill }
+			check_variable = { total_votes_available > total_senators_half }
+		}
+		has_country_flag = USA_signed_executive_order	
+		AND = {
+			has_game_rule = {
+				rule = USA_BILL_PASS_CHEAT_1964
+				option = USA_BILL_PASS_CHEAT_1964_YES
+			}
+			date < 1968.11.03
+		}
+	}
+}
+
+USA_has_southern_riots = {
+	OR = {
+		has_idea = USA_South_Discontent_1
+		has_idea = USA_South_Discontent_2
+		has_idea = USA_South_Discontent_3
+		has_idea = USA_South_Discontent_4
+		has_idea = USA_South_Discontent_5
+	}
+}
+
+USA_has_northern_riots = {
+	OR = {
+		has_idea = USA_North_Discontent_1
+		has_idea = USA_North_Discontent_2
+		has_idea = USA_North_Discontent_3
+		has_idea = USA_North_Discontent_4
+		has_idea = USA_North_Discontent_5
+	}
+}
+
+USA_has_civil_rights = {
+	OR = {
+		has_country_flag = USA_civil_rights_passed #Nixon #LeMay too, #Wallace response flag
+		has_country_flag = RFK_CRA_Passed #RFK
+		has_country_flag = USA_voting_rights_act #LBJ
+		#Harrington
+		#Wallace Response tree
+	}
+}
+
+#SUPREME COURT
+USA_has_very_liberal_supreme_court = {
+	OR = {
+		AND = {		#NO STACKING
+			NOT = {
+				OR = {
+					has_country_flag = USj_stacked11
+					has_country_flag = USj_stacked13
+					has_country_flag = USj_stacked15
+				}
+			}
+			OR = {
+				check_variable = { US_supreme_court = 18 }
+				check_variable = { US_supreme_court = 17 }
+				check_variable = { US_supreme_court = 16 }
+				check_variable = { US_supreme_court = 15 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked11
+			OR = {
+				check_variable = { US_supreme_court = 22 }
+				check_variable = { US_supreme_court = 21 }
+				check_variable = { US_supreme_court = 20 }
+				check_variable = { US_supreme_court = 19 }
+				check_variable = { US_supreme_court = 18 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked13
+			OR = {
+				check_variable = { US_supreme_court = 26 }
+				check_variable = { US_supreme_court = 25 }
+				check_variable = { US_supreme_court = 24 }
+				check_variable = { US_supreme_court = 23 }
+				check_variable = { US_supreme_court = 22 }
+				check_variable = { US_supreme_court = 21 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked15
+			OR = {
+				check_variable = { US_supreme_court = 30 }
+				check_variable = { US_supreme_court = 29 }
+				check_variable = { US_supreme_court = 28 }
+				check_variable = { US_supreme_court = 27 }
+				check_variable = { US_supreme_court = 26 }
+				check_variable = { US_supreme_court = 25 }
+				check_variable = { US_supreme_court = 24 }
+			}
+		}
+	}
+}
+
+USA_has_liberal_supreme_court = { #14
+	OR = {
+		AND = {		#NO STACKING
+			NOT = {
+				OR = {
+					has_country_flag = USj_stacked11
+					has_country_flag = USj_stacked13
+					has_country_flag = USj_stacked15
+				}
+			}
+			OR = {
+				check_variable = { US_supreme_court = 14 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked11
+			OR = {
+				check_variable = { US_supreme_court = 17 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked13
+			OR = {
+				check_variable = { US_supreme_court = 20 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked15
+			OR = {
+				check_variable = { US_supreme_court = 23 }
+			}
+		}
+	}
+}
+
+USA_has_conservative_supreme_court = { #13
+	OR = {
+		AND = {		#NO STACKING
+			NOT = {
+				OR = {
+					has_country_flag = USj_stacked11
+					has_country_flag = USj_stacked13
+					has_country_flag = USj_stacked15
+				}
+			}
+			OR = {
+				check_variable = { US_supreme_court = 13 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked11
+			OR = {
+				check_variable = { US_supreme_court = 16 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked13
+			OR = {
+				check_variable = { US_supreme_court = 19 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked15
+			OR = {
+				check_variable = { US_supreme_court = 22 }
+			}
+		}
+	}
+}
+
+USA_has_very_conservative_supreme_court = { #11 10 9
+	OR = {
+		AND = {		#NO STACKING
+			NOT = {
+				OR = {
+					has_country_flag = USj_stacked11
+					has_country_flag = USj_stacked13
+					has_country_flag = USj_stacked15
+				}
+			}
+			OR = {
+				check_variable = { US_supreme_court = 12 }
+				check_variable = { US_supreme_court = 11 }
+				check_variable = { US_supreme_court = 10 }
+				check_variable = { US_supreme_court = 9 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked11
+			OR = {
+				check_variable = { US_supreme_court = 15 }
+				check_variable = { US_supreme_court = 14 }
+				check_variable = { US_supreme_court = 13 }
+				check_variable = { US_supreme_court = 12 }
+				check_variable = { US_supreme_court = 11 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked13
+			OR = {
+				check_variable = { US_supreme_court = 18 }
+				check_variable = { US_supreme_court = 17 }
+				check_variable = { US_supreme_court = 16 }
+				check_variable = { US_supreme_court = 15 }
+				check_variable = { US_supreme_court = 14 }
+				check_variable = { US_supreme_court = 13 }
+			}
+		}
+		AND = {
+			has_country_flag = USj_stacked15
+			OR = {
+				check_variable = { US_supreme_court = 21 }
+				check_variable = { US_supreme_court = 20 }
+				check_variable = { US_supreme_court = 19 }
+				check_variable = { US_supreme_court = 18 }
+				check_variable = { US_supreme_court = 17 }
+				check_variable = { US_supreme_court = 16 }
+				check_variable = { US_supreme_court = 15 }
+			}
+		}
+	}
+}
+OFN_voting_opinion_check_low = {
+	if = {
+		limit = { check_variable = { USA.OFN_candidate = SCO.id } }
+		has_opinion = {
+			target = SCO
+			value < 40
+		}
+	}
+	else_if = {
+		limit = { check_variable = { USA.OFN_candidate = FEN.id } }
+		has_opinion = {
+			target = FEN
+			value < 40
+		}
+	}
+	else_if = {
+		limit = { check_variable = { USA.OFN_candidate = BRT.id } }
+		has_opinion = {
+			target = BRT
+			value < 40
+		}
+	}
+}
+OFN_voting_opinion_check_high = {
+	if = {
+		limit = { check_variable = { USA.OFN_candidate = SCO.id } }
+		has_opinion = {
+			target = SCO
+			value > 69
+		}
+	}
+	else_if = {
+		limit = { check_variable = { USA.OFN_candidate = FEN.id } }
+		has_opinion = {
+			target = FEN
+			value > 69
+		}
+	}
+	else_if = {
+		limit = { check_variable = { USA.OFN_candidate = BRT.id } }
+		has_opinion = {
+			target = BRT
+			value > 69
+		}
+	}
+}
