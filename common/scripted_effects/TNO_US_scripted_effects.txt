@@ -2870,12 +2870,13 @@ USA_WFB_pass_civil_rights = {
 		}
 		
 		if = {
-			limit = {
-				has_idea = tno_minorities_segregation
-			}
+			limit = { has_idea = tno_minorities_segregation }
 			tno_minorities_improve = yes
 		}
-		USA_increase_civil_rights = yes
+		if = {
+			limit = { NOT = { has_idea = USA_civil_rights_1 } }
+			USA_increase_civil_rights = yes
+		}
 		hidden_effect = {
 			add_to_variable = { USA_South_Discontent_ticker = 4 }
 			every_owned_state = {
@@ -2922,7 +2923,10 @@ USA_WFB_pass_civil_rights = {
 		}
 		USA_increase_civil_rights = yes
 		hidden_effect = {
-			USA_increase_civil_rights = yes
+			if = {
+				limit = { NOT = { has_idea = USA_civil_rights_1 } }
+				USA_increase_civil_rights = yes
+			}
 			add_to_variable = { USA_South_Discontent_ticker = 2 }
 			every_owned_state = {
 				limit = {
@@ -2954,7 +2958,10 @@ USA_WFB_pass_civil_rights = {
 		}
 		USA_increase_civil_rights = yes
 		hidden_effect = {
-			USA_increase_civil_rights = yes
+			if = {
+				limit = { NOT = { has_idea = USA_civil_rights_1 } }
+				USA_increase_civil_rights = yes
+			}
 			USA_increase_civil_rights = yes
 			every_owned_state = {
 				limit = {
@@ -3050,6 +3057,8 @@ USA_WFB_monthly_pulse = {
 		subtract_from_variable = { WFB_R_SA_Support = 2 }
 		subtract_from_variable = { WFB_C_SA_Support = 3}
 
+		USA_WFB_Clamp = yes
+		
 		#DIXIECRAT STUFF
 		if = {
 			limit = {
@@ -3093,39 +3102,27 @@ USA_WFB_monthly_pulse = {
 		}
 
 			#####REPUBLICAN RELATIONS#####
+			# In memory of my friend tex
 		if = {
 			limit = {
-				check_variable = { WFB_Republican_Relationship > 50 }
 				NOT = { has_country_flag = WFB_NO_REPUBLICANS }
 				has_completed_focus = USA_wfb_64_bennett_presidency
 			}
-			set_temp_variable = { WFB_Republican_Relationship_Effect = WFB_Republican_Relationship }
-			divide_temp_variable = { WFB_Republican_Relationship_Effect = 4 }
-			set_variable = { USA_RD_Unity = WFB_Republican_Relationship_Effect }
-		}
-
-		if = {
-			limit = {
-				check_variable = { WFB_Republican_Relationship < 50 }
-				NOT = { has_country_flag = WFB_NO_REPUBLICANS }
-				has_completed_focus = USA_wfb_64_bennett_presidency
-			}
-			set_temp_variable = { WFB_Republican_Relationship_Effect = WFB_Republican_Relationship }
-
-			divide_temp_variable = { WFB_Republican_Relationship_Effect = 6 }
-			set_variable = { USA_RD_Unity = WFB_Republican_Relationship_Effect }
-			every_owned_state = {
-				limit = {
-					can_have_elections_in_state = yes
-					OR = {
-						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
-						check_variable = { nationality = 88 } #Pacific
-					}
-				}
-				add_to_variable = { NPP_C_bonus_popularity = 0.025 }
-				add_to_variable = { NPP_popularity = 0.025 }
-				US_underdog_RD_5_5 = yes
+			set_variable = { WFB_Republican_Relationship_Effect = WFB_Republican_Relationship }
+			subtract_from_variable = { WFB_Republican_Relationship_Effect = WFB_Republican_Relationship_last_month }
+			divide_variable = { WFB_Republican_Relationship_Effect = 5 }
+			add_to_variable = { USA_RD_Unity = WFB_Republican_Relationship_Effect }
+			
+			#Sets up nex month 
+			set_variable = { WFB_Republican_Relationship_last_month = WFB_Republican_Relationship }
+			
+			if = { 
+				limit = { check_variable = { WFB_Republican_Relationship_Effect < 50 } }
+				set_temp_variable = { WFB_Republican_Relationship_Effect_1 = -50 }
+				add_to_temp_variable = { WFB_Republican_Relationship_Effect_1 = WFB_Republican_Relationship }
+				divide_temp_variable = { WFB_Republican_Relationship_Effect_1 = 100 }
+				subtract_from_variable = { WFB_Republican_Relationship_Effect_1 = 0.25 }
+				add_to_variable = { USA_RD_Unity = WFB_Republican_Relationship_Effect_1 }
 			}
 		}
 
@@ -4139,10 +4136,16 @@ RFK_Count_CRA_Votes = {
 
 	if = { # Passes
 		limit = {
-			check_variable = {
-				var = RFK_CRA_Final_Vote_Count
-				value = 50
-				compare = greater_than
+			OR = {
+				check_variable = {
+					var = RFK_CRA_Final_Vote_Count
+					value = 50
+					compare = greater_than
+				}
+				has_game_rule = {
+					rule = USA_BILL_PASS_CHEAT_1964
+					option = USA_BILL_PASS_CHEAT_1964_YES
+				}
 			}
 		}
 		country_event = { id = bobby.cra.14 }
@@ -4154,6 +4157,12 @@ RFK_Count_CRA_Votes = {
 				var = RFK_CRA_Final_Vote_Count
 				value = 50
 				compare = less_than
+			}
+			NOT = {
+				has_game_rule = {
+					rule = USA_BILL_PASS_CHEAT_1964
+					option = USA_BILL_PASS_CHEAT_1964_YES
+				}
 			}
 		}
 		country_event = { id = bobby.cra.15 }

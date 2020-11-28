@@ -13473,6 +13473,16 @@ country_event = {
 			}
 		}
 		name = USA_elec_prim.11.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = USA_LEADER_ROUTE_1972
+					option = USA_LEADER_ROUTE_1972_MCOGVERN
+				}
+			}
+		}
 		set_variable = { RD_candidate_party = 2 }
 		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 RD primaries: McNamara"
@@ -13505,6 +13515,16 @@ country_event = {
 			}
 		}
 		name = USA_elec_prim.11.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = USA_LEADER_ROUTE_1972
+					option = USA_LEADER_ROUTE_1972_MCNAMARA
+				}
+			}
+		}
 		set_variable = { RD_candidate_party = 1 }
 		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 RD primaries: McGovern"
@@ -13667,6 +13687,23 @@ country_event = {
 				factor = 0
 				has_country_flag = USA_guarantee_ai_yockey_choice
 			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_KIRKPATRICK
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_HALL
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_YOCKEY
+					}
+				}
+			}
 		}
 	}
 	option = { #Jeane Kirkpatrick
@@ -13706,6 +13743,23 @@ country_event = {
 				factor = 0
 				has_country_flag = USA_guarantee_ai_yockey_choice
 			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_JACKSON
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_HALL
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_YOCKEY
+					}
+				}
+			}
 		}
 	}
 	option = { #Francis Parker Yockey :SSSSS
@@ -13717,9 +13771,21 @@ country_event = {
 						has_country_flag = USA_68_C_NPP
 						}
 					}
-			check_variable = { ROOT.party_popularity@national_socialism > 0.24 }
+			OR = {
+				check_variable = { ROOT.party_popularity@national_socialism > 0.24 }
+				has_game_rule = {
+							rule = USA_LEADER_ROUTE_1972
+							option = USA_LEADER_ROUTE_1972_YOCKEY
+				}
 			}
-			check_variable = { ROOT.party_popularity@national_socialism > 0.19 }
+			}
+			OR = {
+				check_variable = { ROOT.party_popularity@national_socialism > 0.19 }
+				has_game_rule = {
+							rule = USA_LEADER_ROUTE_1972
+							option = USA_LEADER_ROUTE_1972_YOCKEY
+				}
+			}
 		}
 		name = USA_elec_prim.12.c
 		set_variable = { NPP_candidate_party = 5 }
@@ -13743,7 +13809,28 @@ country_event = {
 				clr_country_flag = USA_completed_first_primary
 			}
 		}
-		ai_chance = { factor = 1 }
+		ai_chance = { 
+			factor = 1  
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_KIRKPATRICK
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_HALL
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_JACKSON
+					}
+				}
+			}
+		
+		}
+		
 	}
 	option = { #Gus Hall
 		trigger = {
@@ -13754,9 +13841,21 @@ country_event = {
 						has_country_flag = USA_68_C_NPP
 						}
 					}
-				check_variable = { ROOT.party_popularity@communist > 0.24}
+				OR = {
+					check_variable = { ROOT.party_popularity@communist > 0.24}
+					has_game_rule = {
+								rule = USA_LEADER_ROUTE_1972
+								option = USA_LEADER_ROUTE_1972_HALL
+					}
+				}
 			}
-			check_variable = { ROOT.party_popularity@communist > 0.19 }
+			OR = {
+				check_variable = { ROOT.party_popularity@communist > 0.19}
+				has_game_rule = {
+					rule = USA_LEADER_ROUTE_1972
+					option = USA_LEADER_ROUTE_1972_HALL
+				}
+			}
 		}
 		name = USA_elec_prim.12.d
 		set_variable = { NPP_candidate_party = 3 }
@@ -13785,6 +13884,23 @@ country_event = {
 			modifier = {
 				factor = 0
 				has_country_flag = USA_guarantee_ai_yockey_choice
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_KIRKPATRICK
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_YOCKEY
+					}
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_JACKSON
+					}
+				}
 			}
 		}
 	}
@@ -15506,6 +15622,9 @@ country_event = { #War crime - killed kids
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #
 		name = USA.saf.effects.4.a
@@ -15528,6 +15647,9 @@ country_event = { #War crime - bombed the wrong village
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #
 		name = USA.saf.effects.5.a
@@ -15549,6 +15671,9 @@ country_event = { #War crimes - burned villages napalm
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #
 		name = USA.saf.effects.6.a
@@ -15570,6 +15695,9 @@ country_event = { #War crime - massacared a native village - Dai Lai part 2
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #
 		name = USA.saf.effects.7.a
@@ -15592,6 +15720,9 @@ country_event = { #War crime - tore a German SS dude apart limb for limb
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #WTF is this shit?
 		name = USA.saf.effects.8.a
@@ -15614,6 +15745,9 @@ country_event = { #War crime - CIA interegation gone wrong
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #
 		name = USA.saf.effects.9.a
@@ -15636,6 +15770,9 @@ country_event = { #War crime - Units using captured german gas equipment without
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #
 		name = USA.saf.effects.10.a
@@ -15658,6 +15795,9 @@ country_event = { #The US bombs a highway from a helicopter, causes explosions
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #
 		name = USA.saf.effects.11.a
@@ -15678,6 +15818,9 @@ country_event = { #Minor protests aint looking good on TV
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #Shit
 		name = USA.saf.effects.12.a
@@ -15765,6 +15908,9 @@ country_event = { #Common Protests, people are getting jumpy about this thing...
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #Shit shit shit
 		name = USA.saf.effects.13.a
@@ -15885,6 +16031,9 @@ country_event = { #Huge protests seem to be happening every day now, our elector
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #Fuck
 		name = USA.saf.effects.14.a
@@ -16034,6 +16183,9 @@ country_event = { #Even out base is starting to get nervous and our fringe is in
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #Fuck fuck fuck!
 		name = USA.saf.effects.15.a
@@ -16216,6 +16368,9 @@ country_event = { #Cities are starting to burn down and people are starting to m
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #FUCK FUCK FUCK!!!
 		name = USA.saf.effects.16.a
@@ -16398,6 +16553,9 @@ country_event = { #Our fringe is 100% with the enemy, we are totally fucked, and
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	option = { #Where's the gun...
 		name = USA.saf.effects.17.a
