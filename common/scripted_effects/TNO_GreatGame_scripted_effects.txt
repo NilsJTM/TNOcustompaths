@@ -1,0 +1,793 @@
+GreatGame_game_1_effect = {
+	GER = {
+		activate_mission = GreatGame_game_1_turn_1_mission
+	}
+	ITA = {
+		activate_mission = GreatGame_game_1_turn_1_mission
+	}
+	great_game_var_setup = yes
+	clear_array = global.great_game_array
+	set_variable = { global.great_game_game = 1 }
+	add_to_array = { global.great_game_array = 1 } 
+	set_variable = { global.great_game_turn = 1 }
+}
+
+GreatGame_game_2_effect = {
+	GER = {
+		activate_mission = GreatGame_game_2_turn_1_mission
+	}
+	ITA = {
+		activate_mission = GreatGame_game_2_turn_1_mission
+	}
+	great_game_var_setup = yes
+	clear_array = global.great_game_array
+	set_variable = { global.great_game_game = 2 }
+	add_to_array = { global.great_game_array = 1 }
+	set_variable = { global.great_game_turn = 1 }
+}
+
+GreatGame_game_3_effect = {
+	GER = {
+		set_country_flag = GreatGame_debug_flag
+		activate_mission = GreatGame_game_3_turn_1_mission
+	}
+	ITA = {
+		set_country_flag = GreatGame_debug_flag
+		activate_mission = GreatGame_game_3_turn_1_mission
+	}
+	great_game_var_setup = yes
+	clear_array = global.great_game_array
+	set_variable = { global.great_game_game = 3 }
+	add_to_array = { global.great_game_array = 1 }
+	set_variable = { global.great_game_turn = 1 }
+}
+
+GreatGame_game_4_effect = {
+	GER = {
+		activate_mission = GreatGame_game_4_turn_1_mission
+	}
+	ITA = {
+		activate_mission = GreatGame_game_4_turn_1_mission
+	}
+	great_game_var_setup = yes
+	clear_array = global.great_game_array
+	set_variable = { global.great_game_game = 4 }
+	add_to_array = { global.great_game_array = 1 }
+	set_variable = { global.great_game_turn = 1 }
+}
+
+GreatGame_game_5_effect = {
+	GER = {
+		activate_mission = GreatGame_game_5_turn_1_mission
+	}
+	ITA = {
+		activate_mission = GreatGame_game_5_turn_1_mission
+	}
+	great_game_var_setup = yes
+	clear_array = global.great_game_array
+	set_variable = { global.great_game_game = 5 }
+	add_to_array = { global.great_game_array = 1 }
+	set_variable = { global.great_game_turn = 1 }
+}
+
+great_game_var_setup = {
+	GER = {
+		randomize_variable = {
+			var = great_game_number
+			distribution = uniform
+			min = 0
+			max = 9
+		}
+		round_variable = great_game_number
+	}
+	ITA = {
+		randomize_variable = {
+			var = great_game_number
+			distribution = uniform
+			min = 0
+			max = 9
+		}
+		round_variable = great_game_number
+	}
+}
+
+great_game_add_points = {
+	custom_effect_tooltip = great_game_add_points_tt
+	meta_effect = {
+		text = {
+			randomize_temp_variable = {
+				var = great_game_add_var
+				distribution = uniform
+				min = [LOW]
+				max = [HIGH]
+			}
+		}
+		LOW = "[?temp_low]"
+		HIGH = "[?temp_high]"
+	}
+	round_temp_variable = great_game_add_var
+	add_to_variable = { great_game_number = great_game_add_var }
+}
+
+great_game_round_loss_check = {
+	if = {
+		limit = {
+			check_variable = { great_game_number > 10 }
+			meta_trigger = {
+				text = {
+					has_active_mission = GreatGame_game_[GAME]_turn_[TURN]_mission
+				}
+				GAME = "[?global.great_game_game]"
+				TURN = "[?global.great_game_turn]"
+			}
+		}
+		set_country_flag = GreatGame_round_lost
+	}
+}
+
+great_game_end_turn = {
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					OR = {
+						GER = { has_active_mission = GreatGame_game_1_turn_1_mission }
+						GER = { has_active_mission = GreatGame_game_1_turn_2_mission }
+						GER = { has_active_mission = GreatGame_game_1_turn_3_mission }
+						GER = { has_active_mission = GreatGame_game_1_turn_4_mission }
+						GER = { has_active_mission = GreatGame_game_1_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_GERMANY
+					}
+				}
+				AND = {
+					OR = {
+						GER = { has_active_mission = GreatGame_game_2_turn_1_mission }
+						GER = { has_active_mission = GreatGame_game_2_turn_2_mission }
+						GER = { has_active_mission = GreatGame_game_2_turn_3_mission }
+						GER = { has_active_mission = GreatGame_game_2_turn_4_mission }
+						GER = { has_active_mission = GreatGame_game_2_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_GERMANY
+					}
+				}
+				AND = {
+					OR = {
+						GER = { has_active_mission = GreatGame_game_3_turn_1_mission }
+						GER = { has_active_mission = GreatGame_game_3_turn_2_mission }
+						GER = { has_active_mission = GreatGame_game_3_turn_3_mission }
+						GER = { has_active_mission = GreatGame_game_3_turn_4_mission }
+						GER = { has_active_mission = GreatGame_game_3_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_GERMANY
+					}
+				}
+				AND = {
+					OR = {
+						GER = { has_active_mission = GreatGame_game_4_turn_1_mission }
+						GER = { has_active_mission = GreatGame_game_4_turn_2_mission }
+						GER = { has_active_mission = GreatGame_game_4_turn_3_mission }
+						GER = { has_active_mission = GreatGame_game_4_turn_4_mission }
+						GER = { has_active_mission = GreatGame_game_4_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_GERMANY
+					}
+				}
+				AND = {
+					OR = {
+						GER = { has_active_mission = GreatGame_game_5_turn_1_mission }
+						GER = { has_active_mission = GreatGame_game_5_turn_2_mission }
+						GER = { has_active_mission = GreatGame_game_5_turn_3_mission }
+						GER = { has_active_mission = GreatGame_game_5_turn_4_mission }
+						GER = { has_active_mission = GreatGame_game_5_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_GERMANY
+					}
+				}
+			}
+		}
+		add_to_variable = { GER.great_game_turn_win = 1 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					OR = {
+						ITA = { has_active_mission = GreatGame_game_1_turn_1_mission }
+						ITA = { has_active_mission = GreatGame_game_1_turn_2_mission }
+						ITA = { has_active_mission = GreatGame_game_1_turn_3_mission }
+						ITA = { has_active_mission = GreatGame_game_1_turn_4_mission }
+						ITA = { has_active_mission = GreatGame_game_1_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_ITALY
+					}
+				}
+				AND = {
+					OR = {
+						ITA = { has_active_mission = GreatGame_game_2_turn_1_mission }
+						ITA = { has_active_mission = GreatGame_game_2_turn_2_mission }
+						ITA = { has_active_mission = GreatGame_game_2_turn_3_mission }
+						ITA = { has_active_mission = GreatGame_game_2_turn_4_mission }
+						ITA = { has_active_mission = GreatGame_game_2_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_ITALY
+					}
+				}
+				AND = {
+					OR = {
+						ITA = { has_active_mission = GreatGame_game_3_turn_1_mission }
+						ITA = { has_active_mission = GreatGame_game_3_turn_2_mission }
+						ITA = { has_active_mission = GreatGame_game_3_turn_3_mission }
+						ITA = { has_active_mission = GreatGame_game_3_turn_4_mission }
+						ITA = { has_active_mission = GreatGame_game_3_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_ITALY
+					}
+				}
+				AND = {
+					OR = {
+						ITA = { has_active_mission = GreatGame_game_4_turn_1_mission }
+						ITA = { has_active_mission = GreatGame_game_4_turn_2_mission }
+						ITA = { has_active_mission = GreatGame_game_4_turn_3_mission }
+						ITA = { has_active_mission = GreatGame_game_4_turn_4_mission }
+						ITA = { has_active_mission = GreatGame_game_4_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_ITALY
+					}
+				}
+				AND = {
+					OR = {
+						ITA = { has_active_mission = GreatGame_game_5_turn_1_mission }
+						ITA = { has_active_mission = GreatGame_game_5_turn_2_mission }
+						ITA = { has_active_mission = GreatGame_game_5_turn_3_mission }
+						ITA = { has_active_mission = GreatGame_game_5_turn_4_mission }
+						ITA = { has_active_mission = GreatGame_game_5_turn_5_mission }
+					}
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_ITALY
+					}
+				}
+			}
+		}
+		add_to_variable = { ITA.great_game_turn_win = 1 }
+	}
+	
+	else_if = {
+		limit = {
+			GER = { has_country_flag = GreatGame_round_lost }
+			ITA = { has_country_flag = GreatGame_round_lost }
+		}
+		if = {
+			limit = {
+				check_variable = { GER.great_game_number > ITA.great_game_number }
+			}
+			add_to_variable = { GER.great_game_turn_win = 1 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { GER.great_game_number < ITA.great_game_number }
+			}
+			add_to_variable = { ITA.great_game_turn_win = 1 }
+		}
+	}
+	else_if = {
+		limit = {
+			GER = { has_country_flag = GreatGame_round_lost }
+		}
+		add_to_variable = { ITA.great_game_turn_win = 1 }
+	}
+	else_if = {
+		limit = {
+			ITA = { has_country_flag = GreatGame_round_lost }
+		}
+		add_to_variable = { GER.great_game_turn_win = 1 }
+	}
+	else = {
+		if = {
+			limit = {
+				check_variable = { GER.great_game_number > ITA.great_game_number }
+			}
+			add_to_variable = { GER.great_game_turn_win = 1 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { GER.great_game_number < ITA.great_game_number }
+			}
+			add_to_variable = { ITA.great_game_turn_win = 1 }
+		}
+	}
+	GER = {
+		clr_country_flag = GreatGame_decision_taken
+		clr_country_flag = GreatGame_round_lost
+	}
+	ITA = {
+		clr_country_flag = GreatGame_decision_taken
+		clr_country_flag = GreatGame_round_lost
+	}
+}
+
+great_game_get_winner = {
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { global.great_game_game = 1 }
+					has_game_rule = {
+						rule = GREAT_GAME_BULGARIA
+						option = GREAT_GAME_BULGARIA_NEITHER
+					}
+				}
+				AND = {
+					check_variable = { global.great_game_game = 2 }
+					has_game_rule = {
+						rule = GREAT_GAME_HUNGARY
+						option = GREAT_GAME_HUNGARY_NEITHER
+					}
+				}
+				AND = {
+					check_variable = { global.great_game_game = 3 }
+					has_game_rule = {
+						rule = GREAT_GAME_ROMANIA
+						option = GREAT_GAME_ROMANIA_NEITHER
+					}
+				}
+				AND = {
+					check_variable = { global.great_game_game = 4 }
+					has_game_rule = {
+						rule = GREAT_GAME_FRANCE
+						option = GREAT_GAME_FRANCE_NEITHER
+					}
+				}
+				AND = {
+					check_variable = { global.great_game_game = 5 }
+					has_game_rule = {
+						rule = GREAT_GAME_SERBIA
+						option = GREAT_GAME_SERBIA_NEITHER
+					}
+				}
+				AND = {
+					set_temp_variable = { ties_total = 5 }
+					subtract_from_temp_variable = { ties_total = GER.great_game_turn_win }
+					subtract_from_temp_variable = { ties_total = ITA.great_game_turn_win }
+					check_variable = { ties_total > 2 }
+				}
+			}
+		}
+		# tie
+		if = {
+			limit = {
+				check_variable = { global.great_game_game = 1 }
+			}
+			clr_global_flag = GER_great_game_bulgaria
+			set_global_flag = GreatGame_game_1_tie
+			if = {
+				limit = {
+					BUL = { is_in_faction_with = GER }
+				}
+				BUL = {
+					leave_faction = yes
+					remove_ideas = Pakt_Bundnispartner
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.656 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 2 }
+			}
+			clr_global_flag = GER_great_game_hungary
+			set_global_flag = GreatGame_game_2_tie
+			every_country = {
+				news_event = { id = WORLD.659 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 3 }
+			}
+			clr_global_flag = GER_great_game_romania
+			set_global_flag = GreatGame_game_3_tie
+			every_country = {
+				news_event = { id = WORLD.662 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 4 }
+			}
+			clr_global_flag = GER_great_game_france
+			set_global_flag = GreatGame_game_4_tie
+			every_country = {
+				news_event = { id = WORLD.665 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 5 }
+			}
+			clr_global_flag = GER_great_game_serbia
+			set_global_flag = GreatGame_game_5_tie
+			every_country = {
+				news_event = { id = WORLD.668 days = 1 }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { GER.great_game_turn_win > ITA.great_game_turn_win }
+		}
+		# german victory
+		if = {
+			limit = {
+				check_variable = { global.great_game_game = 1 }
+			}
+			clr_global_flag = GER_great_game_bulgaria
+			set_global_flag = GreatGame_game_1_GER_victory
+			every_country = {
+				news_event = { id = WORLD.654 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 2 }
+			}
+			clr_global_flag = GER_great_game_hungary
+			set_global_flag = GreatGame_game_2_GER_victory
+			GER = { add_to_faction = HUN }
+			HUN = {
+				add_ideas = Pakt_Bundnispartner
+				if = {
+					limit = { has_global_flag = german_civil_war_speervic }
+					join_zollverein = yes
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.657 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 3 }
+			}
+			clr_global_flag = GER_great_game_romania
+			set_global_flag = GreatGame_game_3_GER_victory
+			GER = { add_to_faction = ROM }
+			ROM = {
+				every_state = {
+					limit = {
+						has_resources_amount = { resource = oil amount > 0 }
+					}
+					ROM = {
+						give_resource_rights = { receiver = GER state = PREV }
+					}
+				}
+				add_ideas = Pakt_Bundnispartner
+				if = {
+					limit = { has_global_flag = german_civil_war_speervic }
+					join_zollverein = yes
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.660 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 4 }
+			}
+			clr_global_flag = GER_great_game_france
+			set_global_flag = GreatGame_game_4_GER_victory
+			if = {
+				limit = { has_global_flag = german_civil_war_bormannvic }
+				GER = { add_to_faction = FRA }
+				FRA = { add_ideas = Pakt_Bundnispartner }
+			}
+			every_country = {
+				news_event = { id = WORLD.663 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 5 }
+			}
+			clr_global_flag = GER_great_game_serbia
+			set_global_flag = GreatGame_game_5_GER_victory
+			GER = {
+				if = {
+					limit = { has_dlc = "Together for Victory" }
+					set_autonomy = { target = SER autonomy_state = autonomy_occupied_territory }
+				}
+				else = {
+					puppet = SER
+				}
+			}
+			SER = {
+				if = {
+					limit = { has_global_flag = german_civil_war_speervic }
+					add_ideas = Pakt_Marionettenstaat
+					join_zollverein = yes
+					country_event = { id = serbia.35 }
+				}
+				else = {
+					add_ideas = Pakt_Reichsland
+					country_event = { id = serbia.36 }
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.666 days = 1 }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { GER.great_game_turn_win < ITA.great_game_turn_win }
+		}
+		# italian victory
+		if = {
+			limit = {
+				check_variable = { global.great_game_game = 1 }
+			}
+			clr_global_flag = GER_great_game_bulgaria
+			set_global_flag = GreatGame_game_1_ITA_victory
+			BUL = {
+				country_event = { id = ita.1001 }
+				if = {
+					limit = {
+						USA = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = USA }
+					}
+					add_ideas = OFN_Independent_Member
+				}
+				else_if = {
+					limit = {
+						JAP = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = JAP }
+					}
+					add_ideas = Sphere_Coequal
+				}
+				else_if = {
+					limit = {
+						ITA = { is_faction_leader = yes }
+					}
+					add_ideas = TRI_Member_Client
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.655 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 2 }
+			}
+			clr_global_flag = GER_great_game_hungary
+			set_global_flag = GreatGame_game_2_ITA_victory
+			HUN = {
+				country_event = { id = ita.1001 }
+				if = {
+					limit = {
+						USA = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = USA }
+					}
+					add_ideas = OFN_Independent_Member
+				}
+				else_if = {
+					limit = {
+						JAP = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = JAP }
+					}
+					add_ideas = Sphere_Coequal
+				}
+				else_if = {
+					limit = {
+						ITA = { is_faction_leader = yes }
+					}
+					add_ideas = TRI_Member_Client
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.658 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 3 }
+			}
+			clr_global_flag = GER_great_game_romania
+			set_global_flag = GreatGame_game_3_ITA_victory
+			ROM = {
+				every_state = {
+					limit = {
+						has_resources_amount = { resource = oil amount > 0 }
+					}
+					ROM = {
+						give_resource_rights = { receiver = ITA state = PREV }
+					}
+				}
+				country_event = { id = ita.1001 }
+				if = {
+					limit = {
+						USA = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = USA }
+					}
+					add_ideas = OFN_Independent_Member
+				}
+				else_if = {
+					limit = {
+						JAP = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = JAP }
+					}
+					add_ideas = Sphere_Coequal
+				}
+				else_if = {
+					limit = {
+						ITA = { is_faction_leader = yes }
+					}
+					add_ideas = TRI_Member_Client
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.661 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 4 }
+			}
+			clr_global_flag = GER_great_game_france
+			set_global_flag = GreatGame_game_4_ITA_victory
+			FRA = {
+				country_event = { id = ita.1001 }
+				if = {
+					limit = {
+						USA = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = USA }
+					}
+					add_ideas = OFN_Independent_Member
+				}
+				else_if = {
+					limit = {
+						JAP = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = JAP }
+					}
+					add_ideas = Sphere_Coequal
+				}
+				else_if = {
+					limit = {
+						ITA = { is_faction_leader = yes }
+					}
+					add_ideas = TRI_Member_Client
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.664 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 5 }
+			}
+			clr_global_flag = GER_great_game_serbia
+			set_global_flag = GreatGame_game_5_ITA_victory
+			SER = {
+				add_ideas = SER_Anti_German_Resistance
+				country_event = { id = ita.1001 }
+				if = {
+					limit = {
+						USA = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = USA }
+					}
+					add_ideas = OFN_Independent_Member
+				}
+				else_if = {
+					limit = {
+						JAP = { is_faction_leader = yes }
+						ITA = { is_in_faction_with = JAP }
+					}
+					add_ideas = Sphere_Coequal
+				}
+				else_if = {
+					limit = {
+						ITA = { is_faction_leader = yes }
+					}
+					add_ideas = TRI_Member_Client
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.667 days = 1 }
+			}
+		}
+	}
+	else = {
+		# tie
+		if = {
+			limit = {
+				check_variable = { global.great_game_game = 1 }
+			}
+			clr_global_flag = GER_great_game_bulgaria
+			set_global_flag = GreatGame_game_1_tie
+			if = {
+				limit = {
+					BUL = { is_in_faction_with = GER }
+				}
+				BUL = {
+					leave_faction = yes
+					remove_ideas = Pakt_Bundnispartner
+				}
+			}
+			every_country = {
+				news_event = { id = WORLD.656 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 2 }
+			}
+			clr_global_flag = GER_great_game_hungary
+			set_global_flag = GreatGame_game_2_tie
+			every_country = {
+				news_event = { id = WORLD.659 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 3 }
+			}
+			clr_global_flag = GER_great_game_romania
+			set_global_flag = GreatGame_game_3_tie
+			every_country = {
+				news_event = { id = WORLD.662 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 4 }
+			}
+			clr_global_flag = GER_great_game_france
+			set_global_flag = GreatGame_game_4_tie
+			every_country = {
+				news_event = { id = WORLD.665 days = 1 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { global.great_game_game = 5 }
+			}
+			clr_global_flag = GER_great_game_serbia
+			set_global_flag = GreatGame_game_5_tie
+			every_country = {
+				news_event = { id = WORLD.668 days = 1 }
+			}
+		}
+	}
+	GER = {
+		clear_variable = great_game_number
+		clear_variable = great_game_turn_win
+	}
+	ITA = {
+		clear_variable = great_game_number
+		clear_variable = great_game_turn_win
+	}
+	clear_array = global.great_game_array
+}
