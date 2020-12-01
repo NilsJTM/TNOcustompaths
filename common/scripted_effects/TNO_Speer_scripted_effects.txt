@@ -1,0 +1,2071 @@
+
+#███████╗██████╗ ███████╗███████╗██████╗ 
+#██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗
+#███████╗██████╔╝█████╗  █████╗  ██████╔╝
+#╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██╔══██╗
+#███████║██║     ███████╗███████╗██║  ██║
+#╚══════╝╚═╝     ╚══════╝╚══════╝╚═╝  ╚═╝
+                                        
+
+
+
+
+######################
+# Focus Tree Reloads #
+######################
+
+reload_GER_speer_post_cw_tree = {
+	custom_effect_tooltip = GER_new_options_focus_tree
+	hidden_effect = {
+		if = {
+			limit = { NOT = { has_focus_tree = GER_speer_post_cw_tree } }
+			load_focus_tree = GER_speer_post_cw_tree
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+##############
+# Oil Crisis #
+##############
+
+#Oil Crisis Speer econ setter
+
+SGR_initialize_oil_crisis = {
+
+	custom_effect_tooltip = SGR_initialize_oilcrisis_tt
+
+	add_ideas = {
+		SGR_OC_protests
+	}
+
+	add_dynamic_modifier = { modifier = GER_SGR_student_protests_dynamic_modifier }
+
+	every_country = {
+		limit = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+		set_variable = { preOC_GDP_growth = THIS.GDP_growth }
+		multiply_variable = { preOC_GDP_growth = 0.5 }
+		multiply_variable = { THIS.GDP_growth = 0.01 }
+	}
+
+	set_variable = { SGR_OC_mission_var = 200 }
+
+	set_variable = { SGR_OC_social_tension = 41 }
+
+	set_variable = { SGR_OC_social_tension_tick = 1 }
+
+	set_variable = { SGR_OC_economic_status = 4 }
+
+	set_variable = { SGR_OC_stability_factor = 0.7 }
+
+	#Part for the dynamic modifier
+
+	SGR_OC_update_idea = yes
+
+}
+
+SGR_OC_update_idea = {
+
+	set_temp_variable = { tempPP = 100 }
+
+	subtract_from_temp_variable = { tempPP = SGR_OC_social_tension }
+
+	multiply_temp_variable = { tempPP = -0.001 }
+
+	multiply_temp_variable = { tempPP = 2 }
+
+	set_variable = { SGR_protests_severity_pp = tempPP }
+
+	set_temp_variable = { tempStab = 100 }
+
+	subtract_from_temp_variable = { tempStab = SGR_OC_economic_status }
+	
+	multiply_temp_variable = { tempStab = -0.001 }
+
+	multiply_temp_variable = { tempStab = SGR_OC_stability_factor }
+
+	set_variable = { SGR_protests_severity_stab = tempStab }
+
+	#Social Outlook
+
+	set_temp_variable = { tempSoc = 100 }
+	
+	subtract_from_temp_variable = { tempSoc = SGR_OC_social_tension }
+
+	multiply_temp_variable = { tempSoc = 0.1}
+
+	multiply_temp_variable = { tempSoc = 2 }
+
+	multiply_temp_variable = { tempSoc = SGR_OC_stability_factor }
+
+	set_variable = { SGR_OC_SocOutlook_display = tempSoc }
+	
+}
+
+SGR_OC_tension_growth = {
+
+	set_temp_variable = { tempRandom = 1 }
+
+	randomize_temp_variable = {
+		var = tempRandom
+		distribution = uniform
+		min = 0.75
+		max = 2
+	}
+
+	set_temp_variable = { tempSocialTensionTick = SGR_OC_social_tension_tick }
+
+	multiply_temp_variable = { tempSocialTensionTick = tempRandom }
+
+	subtract_from_variable = { SGR_OC_social_tension = tempSocialTensionTick }
+
+	clamp_variable = {
+		var = SGR_OC_social_tension
+		min = 0
+		max = 100
+	}
+
+	SGR_OC_update_idea = yes 
+
+}
+
+
+SGR_OC_tension_tick_increase_small = {
+
+	custom_effect_tooltip = SGR_OC_tick_increase_small_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 1
+		max = 2
+	}
+
+	round_variable = tempVar
+
+	add_to_variable = { SGR_OC_social_tension_tick = tempVar }
+}
+
+SGR_OC_tension_tick_increase_med = {
+
+	custom_effect_tooltip = SGR_OC_tick_increase_med_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 2
+		max = 4
+	}
+
+	round_variable = tempVar
+
+	add_to_variable = { SGR_OC_social_tension_tick = tempVar }
+}
+
+SGR_OC_tension_tick_increase_big = {
+
+	custom_effect_tooltip = SGR_OC_tick_increase_big_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 4
+		max = 6
+	}
+
+	round_variable = tempVar
+
+	add_to_variable = { SGR_OC_social_tension_tick = tempVar }
+}
+
+SGR_OC_economic_upgrade = {
+
+	custom_effect_tooltip = SGR_OC_economic_improvement_tt
+
+	set_temp_variable = { tempVar = 20 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 18
+		max = 22
+	}
+
+	round_variable = tempVar
+
+	add_to_variable = { SGR_OC_economic_status = tempVar }
+ 
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 15
+		max = 25
+	}
+
+	round_variable = tempVar
+
+	subtract_from_variable = { SGR_OC_social_tension = tempVar }
+
+	hidden_effect = {
+		TNO_Oil_Crisis_reduce_effects = yes
+	}
+
+	#In order to preserve pre-OC GDP growth to some degree, this function adds back a fifth of 50% of pre-OC GDP growth. 
+
+	set_temp_variable = { tempGDPGrowth = preOC_GDP_growth }
+	multiply_temp_variable = { tempGDPGrowth = 0.2 }
+	add_to_variable = { THIS.GDP_growth = tempGDPGrowth }
+
+	#As well as some of the econ growth
+
+	set_temp_variable = { tempOGGrowth = skilled_labour_Growth_OG }
+	multiply_temp_variable = { tempOGGrowth = 0.025 }
+	add_to_variable = { skilled_labour_Growth = tempOGGrowth }
+
+	custom_effect_tooltip = SGR_OC_gdp_bonus_tt
+}
+
+SGR_OC_social_tension_better_small = {
+
+	custom_effect_tooltip = SGR_OC_social_tension_small_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 2
+		max = 4
+	}
+
+	round_variable = tempVar
+
+	add_to_variable = { SGR_OC_social_tension = tempVar }
+}
+
+SGR_OC_social_tension_better_med = {
+
+	custom_effect_tooltip = SGR_OC_social_tension_med_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 4
+		max = 8
+	}
+
+	round_variable = tempVar
+
+	add_to_variable = { SGR_OC_social_tension = tempVar }
+}
+
+SGR_OC_social_tension_better_big = {
+
+	custom_effect_tooltip = SGR_OC_social_tension_big_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 10
+		max = 14
+	}
+
+	round_variable = tempVar
+
+	add_to_variable = { SGR_OC_social_tension = tempVar }
+}
+
+SGR_OC_social_tension_worsen_small = {
+
+	custom_effect_tooltip = SGR_OC_social_tension_worse_small_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 2
+		max = 4
+	}
+
+	round_variable = tempVar
+
+	subtract_from_variable = { SGR_OC_social_tension = tempVar }
+}
+
+SGR_OC_social_tension_worsen_med = {
+
+	custom_effect_tooltip = SGR_OC_social_tension_worse_med_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 4
+		max = 8
+	}
+
+	round_variable = tempVar
+
+	subtract_from_variable = { SGR_OC_social_tension = tempVar }
+}
+
+SGR_OC_social_tension_worsen_big = {
+
+	custom_effect_tooltip = SGR_OC_social_tension_worse_big_tt
+
+	set_temp_variable = { tempVar = 1 }
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 10
+		max = 14
+	}
+
+	round_variable = tempVar
+
+	subtract_from_variable = { SGR_OC_social_tension = tempVar }
+}
+
+SGR_OC_econ_status_better_small = {
+
+	custom_effect_tooltip = SGR_OC_econ_status_better_small_tt
+
+	add_to_variable = { SGR_OC_economic_status = 5 }
+}
+
+SGR_OC_econ_status_better_med = {
+
+	custom_effect_tooltip = SGR_OC_econ_status_better_med_tt
+
+	add_to_variable = { SGR_OC_economic_status = 10 }
+}
+
+SGR_OC_econ_status_better_big = {
+
+	custom_effect_tooltip = SGR_OC_econ_status_better_big_tt
+
+	add_to_variable = { SGR_OC_economic_status = 15 }
+}
+
+SGR_OC_stab_decrease_factor = {
+
+	custom_effect_tooltip = SGR_OC_stability_factor_decrease_tt
+
+	subtract_from_variable = { SGR_OC_stability_factor = 0.015 }
+
+	clamp_variable = {
+		var = SGR_OC_stability_factor
+		min = 0.3
+		max = 1
+	}
+
+}
+
+SGR_OC_clear_all = {
+
+	remove_ideas = SGR_OC_protests
+
+	remove_dynamic_modifier = { modifier = GER_SGR_student_protests_dynamic_modifier }
+
+	clear_variable = SGR_OC_stability_factor
+
+	clear_variable = SGR_OC_economic_status
+
+	clear_variable = SGR_OC_social_tension_tick
+	
+	clear_variable = SGR_OC_social_tension
+
+	clear_variable = SGR_OC_mission_var
+
+}
+
+
+################
+# Slave Revolt #
+################
+
+SGR_initialize_SR = {
+
+	hidden_effect = {
+		country_event = {
+			id = speer.10006
+			days = 56
+		}
+	}
+
+	custom_effect_tooltip = SGR_slave_revolt_tt
+
+	set_variable = {SGR_go4_pp_var = 10}
+
+	set_variable = {SGR_intervention_preparedness = 0}
+
+	set_variable = {SGR_escalation_social_agitation = 70}
+
+	if = {
+		limit = {
+			OR = {
+				check_variable = {LeaningPivot = 50}
+				check_variable = {LeaningPivot = 100}
+			}
+		}
+		add_to_variable = {SGR_escalation_social_agitation = 10}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				check_variable = {LeaningPivot = -50}
+				check_variable = {LeaningPivot = -100}
+			}
+		}
+		subtract_from_variable = {SGR_escalation_social_agitation = 10}
+	}
+
+	if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_speer_two
+		}
+		set_variable = { SGR_escalation_decision_timer = 110 }
+	}
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_speer_one
+		}
+		set_variable = { SGR_escalation_decision_timer = 150 }
+	}
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_neutral
+		}
+		set_variable = { SGR_escalation_decision_timer = 170 }
+	}
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_one
+		}
+		set_variable = { SGR_escalation_decision_timer = 190 }
+	}
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_two
+		}
+		set_variable = { SGR_escalation_decision_timer = 210 }
+	}
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_three
+		}
+		set_variable = { SGR_escalation_decision_timer = 230 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_idea = GER_SGR_tresckows_heer
+				has_idea = GER_SGR_tresckows_heer_two
+			}
+		}
+		set_variable = { SGR_escalation_decision_timer = 250 }
+	}
+	else = {
+		set_variable = { SGR_escalation_decision_timer = 100 }
+	}
+
+	if = {
+		limit = {
+			check_variable = {SGR_Alignment > 0}
+		}
+		subtract_from_variable = {SGR_escalation_decision_timer = 20}
+	}
+	else_if = {
+		limit = {
+			check_variable = {SGR_Alignment < 0}
+		}
+		add_to_variable = {SGR_escalation_decision_timer = 20}
+	}
+
+	clamp_variable = {
+		var = SGR_escalation_decision_timer
+		min = 100
+		max = 300
+	}
+
+	clamp_variable = {
+		var = SGR_intervention_preparedness
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_escalation_social_agitation
+		min = 0
+		max = 100
+	}
+}
+
+SGR_conclude_SR = {
+
+	clear_variable = SGR_escalation_decision_timer
+	clear_variable = SGR_escalation_social_agitation
+	clear_variable = SGR_intervention_preparedness
+
+	clr_global_flag = SGR_Slave_Revolt
+
+	set_country_flag = SGR_Slave_Revolt_Concluded
+
+}
+
+SGR_tick_SR = {
+
+	set_temp_variable = {tempVar = 1}
+
+	randomize_temp_variable = {
+		var = tempVar
+		distribution = uniform
+		min = 2
+		max = 5
+	}
+
+	clamp_temp_variable = {
+		var = tempVar
+		min = 2
+		max = 5
+	}
+
+	add_to_variable = {SGR_escalation_social_agitation = tempVar}
+}
+
+SGR_SR_intervention_increase_small = {
+
+	custom_effect_tooltip = SGR_SR_intervention_increase_small_tt
+
+	add_to_variable = {SGR_intervention_preparedness = 5}
+	add_to_variable = {SGR_escalation_social_agitation = 2.5}
+
+	clamp_variable = {
+		var = SGR_intervention_preparedness
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_escalation_social_agitation
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SR_intervention_increase_med = {
+
+	custom_effect_tooltip = SGR_SR_intervention_increase_med_tt
+
+	add_to_variable = {SGR_intervention_preparedness = 15}
+	add_to_variable = {SGR_escalation_social_agitation = 7.5}
+
+	clamp_variable = {
+		var = SGR_intervention_preparedness
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_escalation_social_agitation
+		min = 0
+		max = 100
+	}
+
+}
+
+SGR_SR_intervention_increase_big = {
+
+	custom_effect_tooltip = SGR_SR_intervention_increase_big_tt
+
+	add_to_variable = {SGR_intervention_preparedness = 25}
+	add_to_variable = {SGR_escalation_social_agitation = 12.5}
+
+	clamp_variable = {
+		var = SGR_intervention_preparedness
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_escalation_social_agitation
+		min = 0
+		max = 100
+	}
+
+}
+
+SGR_SR_agitation_decrease_small = {
+
+	custom_effect_tooltip = SGR_SR_agitation_decrease_small_tt
+
+	subtract_from_variable = {SGR_escalation_social_agitation = 5}
+
+	clamp_variable = {
+		var = SGR_intervention_preparedness
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_escalation_social_agitation
+		min = 0
+		max = 100
+	}
+
+}
+
+SGR_SR_agitation_decrease_med = {
+
+	custom_effect_tooltip = SGR_SR_agitation_decrease_med_tt
+
+	subtract_from_variable = {SGR_escalation_social_agitation = 10}
+
+	clamp_variable = {
+		var = SGR_intervention_preparedness
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_escalation_social_agitation
+		min = 0
+		max = 100
+	}
+	
+}
+
+SGR_SR_agitation_decrease_big = {
+
+	custom_effect_tooltip = SGR_SR_agitation_decrease_big_tt
+
+	subtract_from_variable = {SGR_escalation_social_agitation = 15}
+
+	clamp_variable = {
+		var = SGR_intervention_preparedness
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_escalation_social_agitation
+		min = 0
+		max = 100
+	}
+	
+}
+
+#####################
+# South African War #
+#####################
+
+SGR_initialize_SAW = {
+
+	custom_effect_tooltip = SGR_SAW_entry_tt
+
+	hidden_effect = {
+		add_dynamic_modifier = { modifier = GER_SGR_student_protests_dynamic_modifier }
+		add_ideas = GER_SGR_student_protests
+	
+		set_variable = {SGR_SAW_involvement = 15}
+		set_variable = {SGR_SAW_civilian_protest = 10}
+		set_variable = {SGR_SAW_civilian_protest_growth_base = 0.5}
+		set_variable = {SGR_SAW_involvement_check = SGR_SAW_involvement}
+		set_variable = {GER_advisor_level = 0}
+	
+		set_variable = {SGR_SAW_max_stab_hit = 0.05}
+		set_variable = {SGR_SAW_max_pp_hit = 0.1}
+
+		activate_mission = SGR_SAW_war_report
+
+		set_country_flag = GER_SAW_intervention
+	
+		SGR_SAW_protest_growth = yes
+	}
+}
+
+SGR_conclude_SAW = {
+
+	remove_mission = SGR_SAW_war_report
+
+	set_country_flag = SGR_SAW_withdrawal
+
+	clr_country_flag = GER_SAW_intervention
+
+	custom_effect_tooltip = SGR_SAW_conclude_tt
+
+	remove_ideas = GER_SGR_student_protests
+	remove_dynamic_modifier = { modifier = GER_SGR_student_protests_dynamic_modifier }
+	hidden_effect = {
+		remove_ideas = {
+			advisor_level_1
+			advisor_level_2
+			advisor_level_3
+			advisor_level_4
+			advisor_level_5
+		}
+	}
+	MZB_REICHSTAAT_calculate_cabal_power = yes
+	clear_variable = SGR_SAW_involvement
+	clear_variable = SGR_SAW_civilian_protest
+	clear_variable = SGR_SAW_civilian_protest_growth_base
+	clear_variable = SGR_civ_protest_soc_impact
+
+	#Calculating how many soldiers end up returning
+
+	set_temp_variable = {tempSoldiers = 1}
+
+	randomize_temp_variable = {
+		var = tempSoldiers
+		distribution = uniform
+		min = 0.5
+		max = 0.8
+	}
+
+	multiply_variable = {SGR_SAW_manpower = tempSoldiers}
+
+	round_variable = SGR_SAW_manpower
+
+}
+
+SGR_SAW_protest_growth = {
+
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest_growth_base
+		min = 0
+		max = 10
+	}
+	
+	add_to_variable = {SGR_SAW_civilian_protest = SGR_SAW_civilian_protest_growth_base}
+	multiply_variable = {SGR_SAW_civilian_protest_growth_base = 1.5}
+
+	SGR_SAW_calculate_idea_values = yes
+
+	custom_effect_tooltip = SGR_SAW_war_report_predic_tt
+
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+
+	#Calculating the Social Outlook impact
+
+	set_temp_variable = {tempProtest = SGR_SAW_civilian_protest}
+
+	multiply_temp_variable = {tempProtest = 0.1}
+	
+	set_variable = {SGR_civ_protest_soc_impact = tempProtest}
+
+	#Events
+
+	if = {
+		limit = {
+			check_variable = {SGR_SAW_civilian_protest > 30}
+		}
+		country_event = {
+			id = SpeerSAW.14
+			days = 17
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {SGR_SAW_civilian_protest > 50}
+		}
+		country_event = {
+			id = SpeerSAW.15
+			days = 8
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {SGR_SAW_civilian_protest > 70}
+		}
+		country_event = {
+			id = SpeerSAW.16
+			days = 20
+		}
+	}
+}
+
+SGR_SAW_calculate_idea_values = {
+	
+	set_temp_variable = {tempStab = SGR_SAW_max_stab_hit}
+	set_temp_variable = {tempPP = SGR_SAW_max_pp_hit}
+	set_temp_variable = {tempProtest = SGR_SAW_civilian_protest}
+	
+	multiply_temp_variable = {tempProtest = 0.01}
+	divide_temp_variable = {tempProtest = 2}
+
+	multiply_temp_variable = {tempStab = tempProtest}
+	multiply_temp_variable = {tempStab = -1}
+	multiply_temp_variable = {tempPP = tempProtest}
+	multiply_temp_variable = {tempPP = -1}
+
+	set_variable = {SGR_protests_severity_pp = tempPP}
+	set_variable = {SGR_protests_severity_stab = tempStab}
+}
+
+SGR_SAW_robbery_policy = {
+	set_country_flag = SGR_SAW_strat_rob
+	custom_effect_tooltip = SGR_SAW_strat_rob_tt
+}
+
+SGR_SAW_victory_policy = {
+	set_country_flag = SGR_SAW_strat_win
+	custom_effect_tooltip = SGR_SAW_strat_win_tt
+}
+
+SGR_SAW_involvement_increase_small = {
+	custom_effect_tooltip = SGR_SAW_involvement_increase_small_tt
+	add_to_variable = {SGR_SAW_involvement = 2.5}
+	add_to_variable = {SGR_SAW_civilian_protest = 2.5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_involvement_increase_med = {
+	custom_effect_tooltip = SGR_SAW_involvement_increase_med_tt
+	add_to_variable = {SGR_SAW_involvement = 5}
+	add_to_variable = {SGR_SAW_civilian_protest = 5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_involvement_increase_big = {
+	custom_effect_tooltip = SGR_SAW_involvement_increase_big_tt
+	add_to_variable = {SGR_SAW_involvement = 10}
+	add_to_variable = {SGR_SAW_civilian_protest = 10}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_involvement_decrease_small = {
+	custom_effect_tooltip = SGR_SAW_involvement_decrease_small_tt
+	subtract_from_variable = {SGR_SAW_involvement = 2.5}
+	subtract_from_variable = {SGR_SAW_civilian_protest = 2.5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_involvement_decrease_med = {
+	custom_effect_tooltip = SGR_SAW_involvement_decrease_med_tt
+	subtract_from_variable = {SGR_SAW_involvement = 5}
+	subtract_from_variable = {SGR_SAW_civilian_protest = 5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_involvement_decrease_big = {
+	custom_effect_tooltip = SGR_SAW_involvement_decrease_big_tt
+	subtract_from_variable = {SGR_SAW_involvement = 10}
+	subtract_from_variable = {SGR_SAW_civilian_protest = 10}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_protest_increase_small = {
+	custom_effect_tooltip = SGR_SAW_protests_increase_small_tt
+	add_to_variable = {SGR_SAW_civilian_protest = 2.5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_protest_increase_med = {
+	custom_effect_tooltip = SGR_SAW_protests_increase_med_tt
+	add_to_variable = {SGR_SAW_civilian_protest = 5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_protest_increase_big = {
+	custom_effect_tooltip = SGR_SAW_protests_increase_big_tt
+	add_to_variable = {SGR_SAW_civilian_protest = 10}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_protest_decrease_small = {
+	custom_effect_tooltip = SGR_SAW_protests_decrease_small_tt
+	subtract_from_variable = {SGR_SAW_civilian_protest = 2.5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_protest_decrease_med = {
+	custom_effect_tooltip = SGR_SAW_protests_decrease_med_tt
+	subtract_from_variable = {SGR_SAW_civilian_protest = 5}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+SGR_SAW_protest_decrease_big = {
+	custom_effect_tooltip = SGR_SAW_protests_decrease_big_tt
+	subtract_from_variable = {SGR_SAW_civilian_protest = 10}
+	clamp_variable = {
+		var = SGR_SAW_civilian_protest
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = SGR_SAW_involvement
+		min = 0
+		max = 100
+	}
+}
+
+#######################
+# Poland Negotiations #
+#######################
+
+initialize_poland_negotiations = {
+	set_variable = {
+		poland_approval = -3
+	}
+	set_country_flag = SGR_poland_agreed
+}
+
+increase_poland_approval_small = {
+	add_to_variable = {poland_approval = 1}
+	custom_effect_tooltip = SGR_poland_approval_tt
+}
+
+increase_poland_approval_big = {
+	add_to_variable = {poland_approval = 2}
+	custom_effect_tooltip = SGR_poland_approval_big_tt
+}
+
+decrease_poland_approval_small = {
+	subtract_from_variable = {poland_approval = 1}
+	custom_effect_tooltip = SGR_poland_disapprove_tt
+}
+
+decrease_poland_approval_big = {
+	subtract_from_variable = {poland_approval = 2}
+	custom_effect_tooltip = SGR_poland_disapprove_big_tt
+}
+
+#######################
+# France Negotiations #
+#######################
+
+initialize_france_negotiations = {
+	set_variable = {france_approval = 0}
+}
+
+increase_france_approval_small = {
+	add_to_variable = {france_approval = 1}
+	custom_effect_tooltip = SGR_france_approval_tt
+}
+
+increase_france_approval_big = {
+	add_to_variable = {france_approval = 2}
+	custom_effect_tooltip = SGR_france_approval_big_tt
+}
+
+decrease_france_approval_small = {
+	subtract_from_variable = {france_approval = 1}
+	custom_effect_tooltip = SGR_france_disapprove_tt
+}
+
+decrease_france_approval_big = {
+	subtract_from_variable = {france_approval = 2}
+	custom_effect_tooltip = SGR_france_disapprove_big_tt
+}
+
+#######################
+#   Fate of RK stuff  #
+#######################
+
+divide_ostland = {
+	BLR = {
+		transfer_state = 96
+		transfer_state = 207
+		transfer_state = 206
+		transfer_state = 95
+		transfer_state = 204
+		transfer_state = 94
+		transfer_state = 194
+		add_state_core = 96
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = BLR_collab_authoritarian_democrat_long
+			name = BLR_collab_authoritarian_democrat
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = BLR_collab_social_conservative_long
+			name = BLR_collab_social_conservative
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = BLR_collab_fascism_long
+			name = BLR_collab_fascism
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = BLR_collab_fascism_long
+			name = BLR_collab_national_socialism
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Radaslau Astrouski"
+			# name = "Radasłaŭ Astroŭski" # game can't display this name
+			picture = "Portrait_Belarus_Radasau_Astrouski.dds"
+			desc = "POLITICS_RADASAU_ASTROUSKI_DESC"
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}
+	}
+	OST = { # Just to make sure that the OST tag actually exists
+		transfer_state = 11
+		transfer_state = 189
+		transfer_state = 190
+		transfer_state = 12
+		transfer_state = 943
+		transfer_state = 13
+		transfer_state = 191
+	}
+	
+	puppet = OST
+	puppet = BLR
+
+	OST = {
+		set_politics = {	
+			ruling_party = authoritarian_democrat
+			last_election = "1933.3.5"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		
+		set_popularities = {
+			authoritarian_democrat = 50
+			fascism = 35
+			national_socialism = 15
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = OST_collab_national_socialismm_long
+			name = OST_collab_national_socialism
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = OST_collab_national_socialism_long
+			name = OST_collab_national_socialism
+		}		
+		set_cosmetic_tag = OST_BLT	
+		join_zollverein = yes
+		remove_ideas = {
+			OST_model_colony
+			OST_unusual_quiet
+			OST_United_for_Ostland
+			OST_Defend_Riga_idea
+			OST_Haste_Makes_Waste
+			OST_Prussian_Values
+			Pakt_Integrated_Reichskommissariat
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Frank Theiß"
+			picture = "Portrait_Ostland_Frank_Theiss.dds"
+			desc = "POLITICS_FRANK_THEISS_DESC"
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}	
+		add_ideas = Pakt_Mitstreiter	
+		load_focus_tree = OST_empty
+	}		
+	BLR = {
+		set_capital = 96
+		set_politics = {	
+			ruling_party = authoritarian_democrat
+			last_election = "1933.3.5"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_popularities = {
+			authoritarian_democrat = 30
+			social_conservative = 20
+			fascism = 35
+			national_socialism = 15
+		}
+		set_cosmetic_tag = BLR_SGR
+		join_zollverein = yes
+		add_ideas = Pakt_Mitstreiter
+		remove_ideas = {
+			BLR_Bring_on_the_Youth
+			BLR_This_is_Our_Land
+			BLR_For_Belarus
+			BLR_The_Black_Cat_Spirit
+			BLR_We_Are_Like_Vipers
+			BLR_For_Ostland
+		}
+		load_focus_tree = OST_empty
+	}
+}
+
+collab_regime_in_poland = {
+	puppet = POL
+	POL = {
+		set_cosmetic_tag = POL_SGR
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Stanisław Wachowiak"
+			picture = "Portrait_Poland_Stanislaw_Wachowiak.dds"
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = POL_authoritarian_democrat_party_long
+			name = POL_authoritarian_democrat_party
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = POL_collab_fascism_long
+			name = POL_collab_fascism
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = POL_collab_national_socialism_long
+			name = POL_collab_national_socialism
+		}
+		remove_ideas = Pakt_Marionettenstaat
+		add_ideas = Pakt_Mitstreiter
+		set_popularities = {
+			authoritarian_democrat = 40
+			social_conservative = 5
+			social_democrat = 5
+			fascism = 35
+			national_socialism = 15
+		}
+		join_zollverein = yes
+		remove_ideas = POL_home_Defense
+	}	
+}
+
+collab_regime_in_ukraine = {
+	puppet = UKR
+	UKR = {
+		set_cosmetic_tag = UKR_SGR
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Volodymyr Kubiyovych"
+			picture = "Portrait_UKR_Volodymyr_Kubiyovych.dds"
+			desc = "POLITICS_VOLODYMYR_KUBIYOVYCH_DESC"
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		remove_all_ministers = yes
+		remove_ideas = {
+			UKR_breadbasket_of_the_reich
+			UKR_partyzanschyna
+			UKR_shroud_of_generalplan_ost
+			UKR_land_of_contrasts
+			Pakt_Autonomous_Reichskommissariat
+		}
+		add_ideas = {
+			UKR_Ivan_Teslya_hog
+			UKR_Mykhailo_Krat_for_1
+			UKR_Roman_Mytsyk_eco
+			UKR_Pavlo_Shandrukeco_sec
+			Pakt_Mitstreiter
+		}
+		join_zollverein = yes
+		set_popularities = {
+			fascism = 30
+			national_socialism = 20
+			authoritarian_democrat = 34
+			social_conservative = 16
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = UKR_collab_national_socialism_long
+			name = UKR_collab_national_socialism
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = UKR_collab_fascism_long
+			name = UKR_collab_fascism
+		}	
+	}
+
+	GOT = {
+		transfer_state = 196
+		transfer_state = 200
+		GER = { puppet = GOT }
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		add_ideas = {
+			Pakt_Reichsland
+		}
+		every_owned_state = {
+			add_core_of = GOT
+		}
+		join_zollverein = yes
+		set_popularities = {
+			fascism = 35
+			authoritarian_democrat = 65
+		}
+	}
+}
+
+collab_regime_in_kaukasien = {
+	CAU = {
+		set_cosmetic_tag = CAU_SGR
+		retire_country_leader = yes
+		GER = { puppet = CAU }
+		create_country_leader = {
+			name = "Irakli Bagration"
+			picture = "Portrait_Caucasus_Irakli_Bagration.dds"
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}
+		remove_all_ministers = yes
+		remove_ideas = {
+			CAU_tiflis_three
+			CAU_bergbaureich
+			CAU_shipments_to_ger
+			CAU_stratified
+			Pakt_Autonomous_Reichskommissariat
+		}
+		set_popularities = {
+			fascism = 40
+			national_socialism = 10
+			authoritarian_democrat = 25
+			social_conservative = 10
+			social_liberal = 15
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		add_ideas = {
+			CAU_Zviad_Gamsakhurdia_hog
+			Pakt_Marionettenstaat
+		}
+		join_zollverein = yes
+	}
+}
+
+partition_kaukasien = {
+	CAU = {
+		set_cosmetic_tag = CAU_SGR
+		retire_country_leader = yes
+		GER = { puppet = CAU }
+		create_country_leader = {
+			name = "kaukasien man :)"
+			picture = ""
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.2
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+	}					
+	AZR = {
+		transfer_state = 229
+		retire_country_leader = yes
+		GER = { puppet = AZR }
+		create_country_leader = {
+			name = ""
+			picture = ""
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.2
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+	}			
+	GEO = {
+		transfer_state = 231
+		retire_country_leader = yes
+		GER = { puppet = GEO }
+		create_country_leader = {
+			name = ""
+			picture = ""
+			expire = "1999.3.4"
+			ideology = authoritarian_democrat_subtype
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.2
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+	}	
+}
+
+##REICHSLANDER
+divide_ostland2 = {
+	OST = {
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.8
+		}
+	}
+	BLR = {
+		transfer_state = 96
+		transfer_state = 207
+		transfer_state = 206
+		transfer_state = 95
+		transfer_state = 204
+		transfer_state = 94
+		transfer_state = 194
+		add_state_core = 96			
+	}
+		
+	puppet = BLR
+	
+	OST = {
+		set_politics = {	
+			ruling_party = fascism
+			last_election = "1933.3.5"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Harald Riipalu"
+			picture = "Portrait_Ostland_Harald_Riipalu.dds"
+			expire = "1999.3.4"
+			ideology = fascism_subtype
+		}
+		remove_all_ministers = yes
+		set_cosmetic_tag = OST_BLT2
+		join_zollverein = yes
+		set_party_name = {
+			ideology = fascism
+			long_name = OST_collab_national_socialismm_long
+			name = OST_collab_national_socialism
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = OST_collab_national_socialism_long
+			name = OST_collab_national_socialism
+		}
+		remove_ideas = {
+			OST_model_colony
+			OST_unusual_quiet
+			OST_United_for_Ostland
+			OST_Defend_Riga_idea
+			OST_Haste_Makes_Waste
+			OST_Prussian_Values
+			Pakt_Integrated_Reichskommissariat
+		}
+		set_popularities = {
+			fascism = 60
+			national_socialism = 10
+			authoritarian_democrat = 20
+			social_conservative = 10
+		}
+		add_ideas = Pakt_Reichsland
+		load_focus_tree = OST_empty
+	}
+	
+	BLR = {
+		set_capital = 96
+		set_politics = {	
+			ruling_party = fascism
+			last_election = "1933.3.5"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_popularities = {
+			fascism = 50
+			national_socialism = 10
+			authoritarian_democrat = 20
+			social_conservative = 10
+			despotism = 10
+		}
+		set_cosmetic_tag = BLR_SGR2
+		join_zollverein = yes
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = BLR_collab_authoritarian_democrat_long
+			name = BLR_collab_authoritarian_democrat
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = BLR_collab_social_conservative_long
+			name = BLR_collab_social_conservative
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = BLR_collab_fascism_long
+			name = BLR_collab_fascism
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = BLR_collab_national_socialism_long
+			name = BLR_collab_national_socialism
+		}
+		kill_country_leader = yes # bye bye vituska
+		create_country_leader = {
+			name = "Andrei Andreeovich Sawoniuk"
+			picture = "Portrait_Ostland_Anthony_Sawoniuk.dds"
+			expire = "1995.1.1"
+			ideology = fascism_subtype
+			traits = {	
+						
+			}
+		}
+		remove_ideas = {
+			BLR_Bring_on_the_Youth
+			BLR_This_is_Our_Land
+			BLR_For_Belarus
+			BLR_The_Black_Cat_Spirit
+			BLR_We_Are_Like_Vipers
+			BLR_For_Ostland
+		}
+		add_ideas = Pakt_Reichsland
+		load_focus_tree = OST_empty
+	}
+}
+
+reichsland_in_poland = {	
+	puppet = POL
+	POL = {
+		create_country_leader = {
+			name = "Adam Baworowski"
+			picture = "Portrait_Poland_Adam_Baworowski.dds"
+			expire = "1999.3.4"
+			ideology = fascism_subtype
+		}
+		set_cosmetic_tag = POL_SGR2
+		set_popularities = {
+			fascism = 60
+			national_socialism = 10
+			authoritarian_democrat = 30
+		}
+		set_politics = {
+			ruling_party = fascism
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = POL_collab_fascism_long
+			name = POL_collab_fascism
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = POL_collab_national_socialism_long
+			name = POL_collab_national_socialism
+		}
+		add_ideas = Pakt_Reichsland
+		join_zollverein = yes
+		remove_ideas = POL_home_Defense
+	}	
+	
+}
+
+reichsland_in_ukraine = {
+	puppet = UKR
+	UKR = {
+		set_cosmetic_tag = UKR_SGR2
+		set_politics = {
+			ruling_party = fascism
+		}
+		create_country_leader = {
+			name = "Yuryi Tys"
+			picture = "Portrait_UKR_Yuryi_Tys.dds"
+			expire = "1999.3.4"
+			ideology = fascism_subtype
+		}
+		set_popularities = {
+			fascism = 50
+			national_socialism = 15
+			authoritarian_democrat = 20
+			social_conservative = 15
+		}
+		remove_all_ministers = yes
+		set_party_name = {
+			ideology = national_socialism
+			long_name = UKR_collab_national_socialism_long
+			name = UKR_collab_national_socialism
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = UKR_collab_fascism_long
+			name = UKR_collab_fascism
+		}
+		remove_ideas = {
+			UKR_breadbasket_of_the_reich
+			UKR_partyzanschyna
+			UKR_shroud_of_generalplan_ost
+			UKR_land_of_contrasts
+			Pakt_Autonomous_Reichskommissariat
+		}
+		add_ideas = {
+			UKR_Anatoliy_Kabayda_hog
+			UKR_Mykhailo_Krat_for
+			UKR_Sava_Yaskevich_eco
+			UKR_Arkhip_Kmeta_sec
+		}
+		add_ideas = Pakt_Reichsland	
+		join_zollverein = yes
+	}	
+	
+}
+
+reichsprotektorat_in_kaukasia = {
+		
+	puppet = CAU
+	CAU = {
+		set_cosmetic_tag = CAU_SGR2
+		set_politics = {
+			ruling_party = fascism
+		}
+		remove_ideas = {
+			CAU_tiflis_three
+			CAU_bergbaureich
+			CAU_shipments_to_ger
+			CAU_stratified
+			Pakt_Autonomous_Reichskommissariat
+		}
+		add_ideas = Pakt_Protektorat
+		set_popularities = {
+			fascism = 50
+			national_socialism = 35
+			authoritarian_democrat = 15
+		}
+		join_zollverein = yes
+	}	
+	
+}
+
+##################
+#Wehrmacht Reform#
+##################
+
+tno_sgr_increase_heer_reform = {
+
+	if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_speer_two
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_speer_two
+			add_idea = GER_SGR_heer_reform_speer_one
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_speer_one
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_speer_one
+			add_idea = GER_SGR_heer_reform_neutral
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_neutral
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_neutral
+			add_idea = GER_SGR_heer_reform_tresckow_one
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_one
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_tresckow_one
+			add_idea = GER_SGR_heer_reform_tresckow_two
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_two
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_tresckow_two
+			add_idea = GER_SGR_heer_reform_tresckow_three
+		}
+	}
+	
+}
+
+tno_sgr_decrease_heer_reform = {
+
+	if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_three
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_tresckow_three
+			add_idea = GER_SGR_heer_reform_tresckow_two
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_two
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_tresckow_two
+			add_idea = GER_SGR_heer_reform_tresckow_one
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_one
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_tresckow_one
+			add_idea = GER_SGR_heer_reform_neutral
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_neutral
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_neutral
+			add_idea = GER_SGR_heer_reform_speer_one
+		}
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_speer_one
+		}
+		swap_ideas = {
+			remove_idea = GER_SGR_heer_reform_speer_one
+			add_idea = GER_SGR_heer_reform_speer_two
+		}
+	}
+	
+}
+
+tno_sgr_finish_heer_reform = {
+
+	if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_three
+		}
+		remove_ideas = GER_SGR_heer_reform_tresckow_three
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_two
+		}
+		remove_ideas = GER_SGR_heer_reform_tresckow_two
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_tresckow_one
+		}
+		remove_ideas = GER_SGR_heer_reform_tresckow_one
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_neutral
+		}
+		remove_ideas = GER_SGR_heer_reform_neutral
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_speer_one
+		}
+		remove_ideas = GER_SGR_heer_reform_speer_one
+	}
+	
+	else_if = {
+		limit = {
+			has_idea = GER_SGR_heer_reform_speer_two
+		}
+		remove_ideas = GER_SGR_heer_reform_speer_two
+	}
+	
+}
+
+###########################################
+# Germany's Fate/Reichsbanner Negotiation #
+###########################################
+
+SGR_increase_RSRG_bonus_small = {
+	custom_effect_tooltip = SGR_RSRG_bonus_small
+	add_to_variable = {SGR_RSRG_bonus = 0.25}
+}
+
+SGR_increase_RSRG_bonus_big = {
+	custom_effect_tooltip = SGR_RSRG_bonus_big
+	add_to_variable = {SGR_RSRG_bonus = 0.334}
+}
+
+SGR_determine_germanys_fate = {
+
+	custom_effect_tooltip = SGR_RSRG_germanys_fate_tt
+
+	hidden_effect = {
+		if = {
+			limit = {
+				check_variable = {SGR_Alignment > 0}
+			}
+			add_to_variable = {SGR_fate = 1}
+		}
+	
+		if = {
+			limit = {
+				check_variable = {LeaningPivot > 0}
+			}
+			add_to_variable = {SGR_fate = 1}
+		}
+		
+		if = {
+			limit = {
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_REFORMER
+				}
+			}
+			add_to_variable = {SGR_fate = 2}
+		}
+		
+		if = {
+			limit = {
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_CONSERVATIVE
+				}
+			}
+			subtract_from_variable = {SGR_fate = 2}
+		}
+	
+		add_to_variable = {SGR_fate = SGR_RSRG_bonus}
+	
+		if = {
+			limit = {
+				NOT = {check_variable = {SGR_fate < 2}}
+			}
+			country_event = {
+				id = speerreichsbanner.20
+				days = 5
+			}
+			else = {
+				country_event = {
+					id = speerreichsbanner.19
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+SGR_authdem_fate = {
+
+	custom_effect_tooltip = SGR_outcome_tt
+	
+	hidden_effect = {
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Albert Speer"
+			desc = "POLITICS_AUTHDEM_SPEER_DESC"
+			picture = "Portrait_Germany_Albert_Speer_authdem.dds"
+			expire = "1973.11.9"
+			ideology = authoritarian_democrat_subtype
+			traits = {
+				schattenregierung
+			}
+		}
+		set_country_flag = SGR_SR_authdem_outcome
+	}
+
+	SGR_RSRG_conclude_SR = yes
+}
+
+SGR_fash_fate = {
+
+	custom_effect_tooltip = SGR_outcome_tt
+	
+	hidden_effect = {
+		set_politics = {
+			ruling_party = fascism
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Albert Speer"
+			desc = "POLITICS_FASH_SPEER_DESC"
+			picture = "Portrait_Germany_Albert_Speer_fascist.dds"
+			expire = "1981.9.1"
+			ideology = fascism_subtype
+			traits = {
+				in_his_footsteps
+			}
+		}
+		set_country_flag = SGR_SR_fash_outcome
+	}
+
+	SGR_RSRG_conclude_SR = yes
+}
+
+SGR_RSRG_conclude_SR = {
+
+	swap_ideas = {
+		remove_idea = tno_slavery_allowed
+		add_idea = tno_slavery_outlawed
+	}
+
+	hidden_effect = {
+		SGR_conclude_SR = yes
+		#For the Fash Outcome
+		if = {
+			limit = {
+				has_country_flag = SGR_SR_fash_outcome
+			}
+			tno_minorities_improve = yes
+		}
+		#For the Authdem outcome
+		else_if = {
+			limit = {
+				has_country_flag = SGR_SR_authdem_outcome
+			}
+			tno_minorities_improve = yes
+			#Individual decisions
+			if = { #3rd Round
+				limit = {
+					OR = {
+						has_country_flag = SGR_RSRG_freedom_protest_full
+						has_country_flag = SGR_RSRG_freedom_protest_partial
+					}
+				}
+				tno_public_meetings_improve = yes
+			}
+			if = { #4th Round
+				limit = {
+					has_country_flag = SGR_RSRG_gleichschaltung_full
+				}
+				tno_political_parties_improve = yes
+				tno_vote_franchise_improve = yes
+			}
+		}
+		abolish_slavery = yes
+		SRT = {
+			#Ukraine
+			every_controlled_state = {
+				limit = { is_core_of = UKR }
+				UKR = { transfer_state = PREV }
+			}
+			#Baltikum
+			every_controlled_state = {
+				limit = { is_core_of = OST NOT = {is_core_of = BLR} }
+				OST = { transfer_state = PREV }
+			}
+			#Belarus
+			every_controlled_state = {
+				limit = { is_core_of = BLR NOT = {is_core_of = OST} }
+				BLR = { transfer_state = PREV }
+			}
+			#Poland
+			every_controlled_state = {
+				limit = { is_core_of = POL }
+				POL = { transfer_state = PREV }
+			}
+			#Kaukasien
+			every_controlled_state = {
+				limit = { is_core_of = CAU }
+				CAU = { transfer_state = PREV }
+			}
+		}
+		CAU = { # Give DFK states back to Kaukasien
+			transfer_state = 232
+			transfer_state = 229
+		}
+		if = { #5th round
+			limit = {
+				has_country_flag = SGR_RSRG_elections_full
+			}
+			every_country = {
+				limit = {
+					is_in_faction_with = GER
+					NOT = {tag = GER}
+				}
+				tno_political_parties_improve = yes
+				tno_vote_franchise_improve = yes
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SGR_RSRG_elections_partial
+			}
+			every_country = {
+				limit = {
+					is_in_faction_with = GER
+					NOT = {tag = GER}
+				}
+				tno_political_parties_improve = yes
+			}
+		}
+		GER = {
+			puppet = UKR
+			puppet = POL
+			puppet = BLR
+			puppet = CAU
+			if = {
+				limit = {
+					has_country_flag = SGR_collab_regimes
+				}
+				divide_ostland = yes
+				collab_regime_in_poland = yes
+				collab_regime_in_ukraine = yes
+				collab_regime_in_kaukasien = yes
+				else = {
+					divide_ostland2 = yes
+					reichsland_in_poland = yes
+					reichsland_in_ukraine = yes
+					reichsprotektorat_in_kaukasia = yes
+				}
+			}
+			VLG = {
+				save_party_popularities = yes
+			}
+			puppet = VLG
+			VLG = {
+				apply_party_popularities = yes
+			}
+			country_event = { 
+				id = speer_rnd.75
+				days = 14
+			}
+			USA = {			
+				country_event = { 
+					id = USA.1915
+					days = 30
+				}
+			}
+		}
+	}
+}
