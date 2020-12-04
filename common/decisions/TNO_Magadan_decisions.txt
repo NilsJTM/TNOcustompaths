@@ -574,15 +574,27 @@ MAG_regional_factions_category = {
 
 		visible = {
 			has_country_flag = MAG_will_of_the_people
-			check_variable = {
-				var = MAG_reformers_influence
-				value = MAG_labourist_influence
-				compare = greater_than
-			}
-		}
-
+			OR = {
+			    check_variable = {
+				    var = MAG_reformers_influence
+				    value = MAG_labourist_influence
+				    compare = greater_than
+			    }
+			    has_game_rule = { 
+			        rule = MAG_IDEOLOGY_ROUTE 
+			        option = MAG_IDEOLOGY_ROUTE_AUTHDEM_PETLIN 
+			    }
+		    }
+        }
 		ai_will_do = {
 			factor = 10
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = MAG_IDEOLOGY_ROUTE
+					option = MAG_IDEOLOGY_ROUTE_DESPOTISM
+				}
+			}
 		}
 
 		complete_effect = {
@@ -593,14 +605,27 @@ MAG_regional_factions_category = {
 	MAG_labourists_victorious = {
 		visible = {
 			has_country_flag = MAG_will_of_the_people
-			check_variable = {
-				var = MAG_labourist_influence
-				value = MAG_reformers_influence
-				compare = greater_than
-			}
+			OR = {
+			    check_variable = {
+				    var = MAG_labourist_influence
+				    value = MAG_reformers_influence
+				    compare = greater_than
+			    }
+			    has_game_rule = { 
+			        rule = MAG_IDEOLOGY_ROUTE 
+			        option = MAG_IDEOLOGY_ROUTE_DESPOTISM 
+			    }
+		    }
 		}
 		ai_will_do = {
 			factor = 10
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = MAG_IDEOLOGY_ROUTE
+					option = MAG_IDEOLOGY_ROUTE_AUTHDEM_PETLIN
+				}
+			}
 		}
 
 		complete_effect = {

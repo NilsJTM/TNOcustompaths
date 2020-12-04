@@ -205,7 +205,16 @@ country_event = { #The Mercenary Coup
 
 	option = { #Matkovsky wins
 		name = MAG.9.a
-		ai_chance = { factor = 10000 }
+		ai_chance = {
+			factor = 10000
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = MAG_IDEOLOGY_ROUTE
+					option = MAG_IDEOLOGY_ROUTE_AUTHDEM_WERBELL
+				}
+			}
+		}
 		set_country_flag = MAG_matkovsky_prevails
 		MAG_remove_west_alaska_generals = yes
 		add_popularity = {
@@ -231,7 +240,23 @@ country_event = { #The Mercenary Coup
 	}
 	option = { #WerBell time
 		name = MAG.9.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = MAG_IDEOLOGY_ROUTE
+					option = MAG_IDEOLOGY_ROUTE_DESPOTISM
+				}
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = MAG_IDEOLOGY_ROUTE
+					option = MAG_IDEOLOGY_ROUTE_AUTHDEM_PETLIN
+				}
+			}
+		}
 		trigger = {
 			has_country_flag = MAG_werbell_influence_strengthened
 		}
