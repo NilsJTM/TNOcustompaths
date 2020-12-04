@@ -1,0 +1,2914 @@
+MAG_USA_market_category = {
+	MAG_USA_influence_ticker = {
+		allowed = {
+			always = no
+		}
+
+		visible = {
+			hidden_trigger = {
+				tag = MAG
+				NOT = {
+					has_country_flag = MAG_merc
+				}
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	
+		cancel_if_not_visible = yes
+		is_good = no
+	
+		days_mission_timeout = 365
+	
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_USA_influence_ticker"
+			MAG_decrease_USA_support_low = yes
+			hidden_effect = {
+				activate_mission = MAG_USA_influence_ticker
+			}
+		}
+	}
+	MAG_USA_improve_relations = {
+		icon = decision_black_market_presence_increase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_re_enable = 60
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_improve_relations"
+			MAG_increase_USA_support_low = yes
+		}
+	}
+
+	MAG_USA_purchase_guns = {
+		icon = decision_black_market_infantry_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_20_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 19 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_purchase_guns"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_purchase_guns"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+				producer = USA
+			}
+		}
+	}
+
+	MAG_USA_purchase_trucks = {
+		icon = decision_black_market_motorized_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_40_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 39 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_purchase_trucks"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_purchase_trucks"
+			add_equipment_to_stockpile = {
+				type = motorized_equipment_0
+				amount = 200
+				producer = USA
+			}
+		}
+	}
+
+	MAG_USA_purchase_artillery = {
+		icon = decision_black_market_towed_artillery_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			has_country_flag = MAG_kamchatka_port
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_60_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 59 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_purchase_artillery"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_purchase_artillery"
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_2
+				amount = 150
+				producer = USA
+			}
+		}
+	}
+
+	MAG_USA_industrial_experts = {
+		icon = decision_generic_industry
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_60_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 59 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 365
+		cost = 75
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_industrial_experts"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_industrial_experts"
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.75
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	MAG_USA_electronics_experts = {
+		icon = decision_generic_decision
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_60_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 59 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 365
+		cost = 75
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_electronics_experts"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_electronics_experts"
+			add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 0.75
+				uses = 1
+				category = electronics
+			}
+		}
+	}
+
+	MAG_USA_purchase_tanks = {
+		icon = decision_black_market_armor_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			has_country_flag = MAG_kamchatka_port
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_80_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 79 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_purchase_tanks"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_purchase_tanks"
+			add_equipment_to_stockpile = {
+				type = MBT_equipment_1
+				amount = 75
+				producer = USA
+			}
+		}
+	}
+
+	MAG_USA_purchase_jets = {
+		icon = decision_black_market_helicopter_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			has_country_flag = MAG_kamchatka_port
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_80_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 79 }
+				}
+			}
+			any_controlled_state = {
+				air_base > 2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 365
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_USA_purchase_jets"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_purchase_jets"
+			add_equipment_to_stockpile = {
+				type = jet_fighter_equipment_1
+				amount = 35
+				producer = USA
+			}
+		}
+	}
+}
+
+MAG_regional_factions_category = {
+	MAG_sway_the_corporations = {
+		icon = decision_black_market_money
+
+		allowed = {
+			tag = MAG
+		}
+
+		available = {
+			NOT = {
+				has_decision = MAG_investigate_the_reform_wing
+				has_decision = MAG_purge_the_old_guard
+				has_decision = MAG_seek_foreign_support
+				has_decision = MAG_meet_with_emigres
+				has_decision = MAG_investigate_corruption
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = MAG_will_of_the_people
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		days_remove = 25
+
+		days_re_enable = 75
+
+		cost = 20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_sway_the_corporations"
+
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_sway_the_corporations"
+			MAG_strengthen_labourists = yes
+		}
+	}
+	MAG_investigate_the_reform_wing = {
+		icon = GFX_decision_generic_decision
+
+		allowed = {
+			tag = MAG
+		}
+
+		available = {
+			NOT = {
+				has_decision = MAG_sway_the_corporations
+				has_decision = MAG_purge_the_old_guard
+				has_decision = MAG_seek_foreign_support
+				has_decision = MAG_meet_with_emigres
+				has_decision = MAG_investigate_corruption
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = MAG_will_of_the_people
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				USA = { has_country_flag = USA_CIA_Magadan_Increased_Presence }
+				add = -5
+			}
+		}
+
+		days_remove = 25
+
+		days_re_enable = 75
+
+		cost = 20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_investigate_the_reform_wing"
+
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_investigate_the_reform_wing"
+			MAG_weaken_reformers = yes
+		}
+	}
+	MAG_purge_the_old_guard = {
+		icon = decision_generic_use_force
+
+		allowed = {
+			tag = MAG
+		}
+
+		available = {
+			NOT = {
+				has_decision = MAG_sway_the_corporations
+				has_decision = MAG_investigate_the_reform_wing
+				has_decision = MAG_seek_foreign_support
+				has_decision = MAG_meet_with_emigres
+				has_decision = MAG_investigate_corruption
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = MAG_will_of_the_people
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		days_remove = 25
+
+		days_re_enable = 75
+
+		cost = 20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_purge_the_old_guard"
+
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_purge_the_old_guard"
+			MAG_strengthen_labourists = yes
+			add_popularity = { ideology = fascism popularity = -0.015 }
+		}
+	}
+	MAG_seek_foreign_support = {
+		icon = decision_generic_propaganda
+
+		allowed = {
+			tag = MAG
+		}
+
+		available = {
+			NOT = {
+				has_decision = MAG_sway_the_corporations
+				has_decision = MAG_investigate_the_reform_wing
+				has_decision = MAG_purge_the_old_guard
+				has_decision = MAG_meet_with_emigres
+				has_decision = MAG_investigate_corruption
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = MAG_will_of_the_people
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				USA = { has_country_flag = USA_CIA_Magadan_Increased_Presence }
+				add = 5
+			}
+		}
+
+		days_remove = 25
+
+		days_re_enable = 75
+
+		cost = 20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_seek_foreign_support"
+
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_seek_foreign_support"
+			MAG_strengthen_reformers = yes
+		}
+	}
+	MAG_meet_with_emigres = {
+		icon = GFX_decision_generic_civil_support
+
+		allowed = {
+			tag = MAG
+		}
+
+		available = {
+			NOT = {
+				has_decision = MAG_sway_the_corporations
+				has_decision = MAG_investigate_the_reform_wing
+				has_decision = MAG_purge_the_old_guard
+				has_decision = MAG_seek_foreign_support
+				has_decision = MAG_investigate_corruption
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = MAG_will_of_the_people
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		days_remove = 25
+
+		days_re_enable = 75
+
+		cost = 20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_meet_with_emigres"
+
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_meet_with_emigres"
+			MAG_strengthen_reformers = yes
+		}
+	}
+	MAG_investigate_corruption = {
+		icon = decision_generic_use_force
+
+		allowed = {
+			tag = MAG
+		}
+
+		available = {
+			NOT = {
+				has_decision = MAG_sway_the_corporations
+				has_decision = MAG_investigate_the_reform_wing
+				has_decision = MAG_purge_the_old_guard
+				has_decision = MAG_seek_foreign_support
+				has_decision = MAG_meet_with_emigres
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = MAG_will_of_the_people
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		days_remove = 25
+
+		days_re_enable = 75
+
+		cost = 20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_investigate_corruption"
+
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_investigate_corruption"
+			MAG_weaken_labourists = yes
+		}
+	}
+	MAG_reformist_takeover = {
+		icon = decision_generic_use_force
+
+		visible = {
+			has_country_flag = MAG_will_of_the_people
+			check_variable = {
+				var = MAG_reformers_influence
+				value = MAG_labourist_influence
+				compare = greater_than
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_reformist_takeover"
+			country_event = { id = magreg.4 days = 1 }
+		}
+	}
+	MAG_labourists_victorious = {
+		visible = {
+			has_country_flag = MAG_will_of_the_people
+			check_variable = {
+				var = MAG_labourist_influence
+				value = MAG_reformers_influence
+				compare = greater_than
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_labourists_victorious"
+			country_event = { id = magreg.5 days = 1 }
+		}
+	}
+}
+
+MAG_WA_a_government_of_personalities_category = {
+	
+	MAG_WA_minister_cooldown = {
+		activation = {
+			has_country_flag = MAG_WA_minister_cooldown_flag
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		is_good = yes
+		days_mission_timeout = 180
+		
+		timeout_effect = {
+			clr_country_flag = MAG_WA_minister_cooldown_flag
+		}
+	}
+	
+	MAG_WA_OSS_ministers_effigy = {
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			
+		}
+	}
+	
+	MAG_WA_OSS_Boris_Pash = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Boris_Pash_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Boris_Pash_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_intel_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_intel_sec
+		}
+	}
+	
+	MAG_WA_OSS_Serge_Obolensky = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Serge_Obolensky_eco
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Serge_Obolensky_eco
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_intel_chosen
+			MAG_WA_gov_reset_eco = yes
+			set_country_flag = MAG_WA_intel_eco
+		}
+	}
+	
+	MAG_WA_OSS_Chiyoki_Ikeda = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Chiyoki_Ikeda_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Chiyoki_Ikeda_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_intel_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_intel_sec
+		}
+	}
+	
+	MAG_WA_OSS_Bernardo_De_Torres = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Bernardo_De_Torres_for
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Bernardo_De_Torres_for
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_intel_chosen
+			MAG_WA_gov_reset_for = yes
+			set_country_flag = MAG_WA_intel_for
+		}
+	}
+	
+	MAG_WA_OSS_Gordon_Ingram = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Gordon_Ingram_hog
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Gordon_Ingram_hog
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_intel_chosen
+			MAG_WA_gov_reset_hog = yes
+			set_country_flag = MAG_WA_intel_hog
+		}
+	}
+
+	MAG_WA_mercenary_ministers_effigy = {
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+	
+		}
+	}
+	
+	MAG_WA_mercenary_Gerry_Patrick_Hemming = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Gerry_Patrick_Hemming_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Gerry_Patrick_Hemming_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_merc_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_merc_sec
+		}
+	}
+	
+	MAG_WA_mercenary_John_Peters = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_John_Peters_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_John_Peters_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_merc_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_merc_sec
+		}
+	}
+	
+	MAG_WA_mercenary_Roger_Faulques = {
+		visible = {
+			has_country_flag = MAG_WA_Roger_Faulques_available
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Roger_Faulques_hog
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Roger_Faulques_hog
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_merc_chosen
+			MAG_WA_gov_reset_hog = yes
+			set_country_flag = MAG_WA_merc_hog
+		}
+	}
+	
+	MAG_WA_mercenary_Fernando_Calistrat = {
+		visible = {
+			has_completed_focus = MAG_WA_heia_safari
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Fernando_Calistrat_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Fernando_Calistrat_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_merc_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_merc_sec
+		}
+	}
+	
+	MAG_WA_mercenary_Gerry_Moggach = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Gerry_Moggach_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Gerry_Moggach_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_merc_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_merc_sec
+		}
+	}
+	
+	MAG_WA_mercenary_Roy_Larsen = {
+		visible = {
+			has_completed_focus = MAG_WA_heia_safari
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Roy_Larsen_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Roy_Larsen_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_merc_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_merc_sec
+		}
+	}
+	
+	MAG_WA_collaborator_ministers_effigy = {
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+	
+		}
+	}
+	
+	MAG_WA_collaborator_Nikolay_Kossov = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = WCH_Nikolay_Kossov_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = WCH_Nikolay_Kossov_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_collab_sec
+		}
+	}
+	
+	MAG_WA_collaborator_Georgy_Dzhakelli = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Georgy_Dzhakelli_hog
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Georgy_Dzhakelli_hog
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_hog = yes
+			set_country_flag = MAG_WA_collab_hog
+		}
+	}
+	
+	MAG_WA_collaborator_Alexander_Pavlov = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Alexander_Pavlov_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Alexander_Pavlov_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_collab_sec
+		}
+	}
+	
+	MAG_WA_collaborator_Gurgen_Aseryants = {
+		visible = {
+			has_completed_focus = MAG_WA_integrating_the_nkvd
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Gurgen_Aseryants_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Gurgen_Aseryants_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_collab_sec
+		}
+	}
+	
+	MAG_WA_collaborator_Genrikh_Lyushkov = {
+		visible = {
+			has_completed_focus = MAG_WA_integrating_the_nkvd
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Genrikh_Lyushkov_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Genrikh_Lyushkov_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_collab_sec
+		}
+	}
+	
+	MAG_WA_collaborator_Andrey_Vrastil = {
+		visible = {
+			has_completed_focus = MAG_WA_encourage_local_recruitment
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Andrey_Vrastil_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Andrey_Vrastil_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_collab_sec
+		}
+	}
+	
+	MAG_WA_collaborator_Yuri_Vitvitsky = {
+		visible = {
+			has_completed_focus = MAG_WA_make_use_of_the_blackshirts
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Yuri_Vitvitsky_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Yuri_Vitvitsky_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_collab_sec
+		}
+	}
+	
+	MAG_WA_collaborator_Georgy_Shekerev = {
+		visible = {
+			has_completed_focus = MAG_WA_make_use_of_the_blackshirts
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Georgy_Shekerev_sec
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Georgy_Shekerev_sec
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_collab_chosen
+			MAG_WA_gov_reset_sec = yes
+			set_country_flag = MAG_WA_collab_sec
+		}
+	}
+	
+	MAG_WA_local_ministers_effigy = {
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+	
+		}
+	}
+	
+	MAG_WA_local_Valentin_Abramov = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Valentin_Abramov_eco
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Valentin_Abramov_eco
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_local_chosen
+			MAG_WA_gov_reset_eco = yes
+			set_country_flag = MAG_WA_local_eco
+		}
+	}
+	
+	MAG_WA_local_Igor_Kovalchuk_Koval = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Igor_Kovalchuk_Koval_for
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Igor_Kovalchuk_Koval_for
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_local_chosen
+			MAG_WA_gov_reset_for = yes
+			set_country_flag = MAG_WA_local_for
+		}
+	}
+	
+	MAG_WA_local_Anatoly_Sobchak = {
+		visible = {
+			has_completed_focus = MAG_WA_a_legal_path_to_collaboration
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = WCH_Anatoly_Sobchak_hog
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = WCH_Anatoly_Sobchak_hog
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_local_chosen
+			MAG_WA_gov_reset_hog = yes
+			set_country_flag = MAG_WA_local_hog
+		}
+	}
+	
+	MAG_WA_local_Leonid_Chernykh = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = MAG_Leonid_Chernykh_for
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = MAG_Leonid_Chernykh_for
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_local_chosen
+			MAG_WA_gov_reset_for = yes
+			set_country_flag = MAG_WA_local_for
+		}
+	}
+	
+	MAG_WA_local_Yakov_Malik = {
+		visible = {
+			always = yes
+		}
+		available = {
+			NOT = {
+				has_country_flag = MAG_WA_minister_cooldown_flag
+				has_idea = IRK_Yakov_Malik_for
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 50
+		complete_effect = {
+			add_ideas = IRK_Yakov_Malik_for
+			activate_mission = MAG_WA_minister_cooldown
+			set_country_flag = MAG_WA_minister_cooldown_flag
+			set_country_flag = MAG_WA_local_chosen
+			MAG_WA_gov_reset_for = yes
+			set_country_flag = MAG_WA_local_for
+		}
+	}
+}
+
+MAG_WA_USA_market_category = {
+	MAG_WA_USA_influence_ticker = {
+		allowed = {
+			always = no
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_country_flag = MAG_merc
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	
+		cancel_if_not_visible = yes
+		is_good = no
+	
+		days_mission_timeout = 365
+	
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_USA_influence_ticker"
+			MAG_decrease_USA_support_low = yes
+			hidden_effect = {
+				activate_mission = MAG_WA_USA_influence_ticker
+			}
+		}
+	}
+	MAG_WA_USA_improve_relations = {
+		icon = decision_black_market_presence_increase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_re_enable = 60
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_improve_relations"
+			MAG_increase_USA_support_low = yes
+		}
+	}
+
+	MAG_WA_USA_purchase_guns = {
+		icon = decision_black_market_infantry_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_20_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 19 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_purchase_guns"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_WA_USA_purchase_guns"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+				producer = USA
+			}
+		}
+	}
+
+	MAG_WA_USA_purchase_trucks = {
+		icon = decision_black_market_motorized_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_40_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 39 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_purchase_trucks"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_WA_USA_purchase_trucks"
+			add_equipment_to_stockpile = {
+				type = motorized_equipment_0
+				amount = 200
+				producer = USA
+			}
+		}
+	}
+
+	MAG_WA_USA_purchase_artillery = {
+		icon = decision_black_market_towed_artillery_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			has_country_flag = MAG_kamchatka_port
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_60_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 59 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_purchase_artillery"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_WA_USA_purchase_artillery"
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_2
+				amount = 150
+				producer = USA
+			}
+		}
+	}
+
+	MAG_WA_USA_industrial_experts = {
+		icon = decision_generic_industry
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_60_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 59 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 365
+		cost = 75
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_industrial_experts"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_WA_USA_industrial_experts"
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.75
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	MAG_WA_USA_electronics_experts = {
+		icon = decision_generic_decision
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_60_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 59 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 365
+		cost = 75
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_electronics_experts"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_WA_USA_electronics_experts"
+			add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 0.75
+				uses = 1
+				category = electronics
+			}
+		}
+	}
+
+	MAG_WA_USA_purchase_tanks = {
+		icon = decision_black_market_armor_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			has_country_flag = MAG_kamchatka_port
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_80_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 79 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 180
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_purchase_tanks"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_WA_USA_purchase_tanks"
+			add_equipment_to_stockpile = {
+				type = MBT_equipment_1
+				amount = 75
+				producer = USA
+			}
+		}
+	}
+
+	MAG_WA_USA_purchase_jets = {
+		icon = decision_black_market_helicopter_purchase
+		visible = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			has_country_flag = MAG_kamchatka_port
+			custom_trigger_tooltip = {
+				tooltip = MAG_USA_80_support_tp
+				MAG = {
+					check_variable = { MAG_USA_support > 79 }
+				}
+			}
+			any_controlled_state = {
+				air_base > 2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		days_remove = 30
+		days_re_enable = 365
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision MAG_WA_USA_purchase_jets"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_WA_USA_purchase_jets"
+			add_equipment_to_stockpile = {
+				type = jet_fighter_equipment_1
+				amount = 35
+				producer = USA
+			}
+		}
+	}
+}
+MAG_WA_mercenary_contracts_category = {
+	### Yemeni Civil War ###
+	MAG_yemeni_civil_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			NYM = { has_war_with = YEM }
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_yemeni_civil_war_effigy"
+		}
+	}
+	MAG_WA_support_yemeni_republicans = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			NYM = { has_war_with = YEM }
+			NOT = {
+				OR = {
+					NYM = { has_idea = MAG_WA_mercenary_contract_idea }
+					YEM = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_yemeni_republicans"
+			NYM = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_yemeni_monarchists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			NYM = { has_war_with = YEM }
+			NOT = {
+				OR = {
+					NYM = { has_idea = MAG_WA_mercenary_contract_idea }
+					YEM = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_yemeni_monarchists"
+			YEM = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+
+	### Yemeni-Saudi War ###
+	MAG_yemeni_saudi_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			NYM = { has_war_with = SAU }
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_yemeni_saudi_war_effigy"
+		}
+	}
+	MAG_WA_support_yemen = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			NYM = { has_war_with = SAU }
+			NOT = {
+				OR = {
+					NYM = { has_idea = MAG_WA_mercenary_contract_idea }
+					SAU = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_yemen"
+			NYM = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_saudis = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			NYM = { has_war_with = SAU }
+			NOT = {
+				OR = {
+					NYM = { has_idea = MAG_WA_mercenary_contract_idea }
+					SAU = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_saudis"
+			SAU = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+
+	### Egyptian Civil War ###
+	MAG_egyptian_civil_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			OR = {
+				EGB = { has_war_with = EGY }
+				EGQ = { has_war_with = EGY }
+				EGQ = { has_war_with = EGB }
+			}
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_egyptian_civil_war_effigy"
+		}
+	}
+	MAG_WA_support_egyptian_nasserists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OR = {
+				EGB = { has_war_with = EGY }
+				EGQ = { has_war_with = EGY }
+				EGQ = { has_war_with = EGB }
+			}
+			NOT = {
+				OR = {
+					EGB = { has_idea = MAG_WA_mercenary_contract_idea }
+					EGY = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_egyptian_nasserists"
+			EGB = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_egyptian_monarchists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OR = {
+				EGB = { has_war_with = EGY }
+				EGQ = { has_war_with = EGY }
+				EGQ = { has_war_with = EGB }
+			}
+			NOT = {
+				OR = {
+					EGB = { has_idea = MAG_WA_mercenary_contract_idea }
+					EGY = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_egyptian_monarchists"
+			EGY = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+
+	### Sudanese Civil War ###
+	MAG_sudanese_civil_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			OR = {
+				RPS = { has_war_with = SDS }
+				SDF = { has_war_with = SDS }
+				RPS = { has_war_with = SDF }
+			}
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_sudanese_civil_war_effigy"
+		}
+	}
+	MAG_WA_support_sudanese_baathists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OR = {
+				RPS = { has_war_with = SDS }
+				SDF = { has_war_with = SDS }
+				RPS = { has_war_with = SDF }
+			}
+			NOT = {
+				OR = {
+					SDS = { has_idea = MAG_WA_mercenary_contract_idea }
+					SDF = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPS = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_sudanese_baathists"
+			SDS = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_sudanese_republicans = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OR = {
+				RPS = { has_war_with = SDS }
+				SDF = { has_war_with = SDS }
+				RPS = { has_war_with = SDF }
+			}
+			NOT = {
+				OR = {
+					SDS = { has_idea = MAG_WA_mercenary_contract_idea }
+					SDF = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPS = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_sudanese_republicans"
+			RPS = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_sudanese_junta = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OR = {
+				RPS = { has_war_with = SDS }
+				SDF = { has_war_with = SDS }
+				RPS = { has_war_with = SDF }
+			}
+			NOT = {
+				OR = {
+					SDS = { has_idea = MAG_WA_mercenary_contract_idea }
+					SDF = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPS = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_sudanese_junta"
+			SDF = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	### South Sudanese Civil War ###
+	MAG_south_sudanese_civil_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			AZA = { has_war_with = AYA }
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_south_sudanese_civil_war_effigy"
+		}
+	}
+	MAG_WA_support_azania = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			AZA = {
+				exists = yes
+			}
+			AZA = { has_war_with = AYA }
+			NOT = {
+				OR = {
+					AZA = { has_idea = MAG_WA_mercenary_contract_idea }
+					AYA = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_azania"
+			AZA = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_anyanya = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			AYA = {
+				exists = yes
+			}
+			AZA = { has_war_with = AYA }
+			NOT = {
+				OR = {
+					AZA = { has_idea = MAG_WA_mercenary_contract_idea }
+					AYA = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_anyanya"
+			AYA = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+
+	### Iraqi Civil War ###
+	MAG_iraqi_civil_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			OR = {
+				IRQ = { has_war_with = SNI }
+				IRQ = { has_war_with = IRP }
+				IRQ = { has_war_with = BIR }
+				IRQ = { has_war_with = KUR }
+				KUR = { has_war_with = SNI }
+				KUR = { has_war_with = IRP }
+				KUR = { has_war_with = BIR }
+				BIR = { has_war_with = SNI }
+				BIR = { has_war_with = IRP }
+				IRP = { has_war_with = SNI }
+			}
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_iraqi_civil_war_effigy"
+		}
+	}
+	MAG_WA_support_iraqi_baathists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			BIR = {
+				exists = yes
+			}
+			OR = {
+				IRQ = { has_war_with = SNI }
+				IRQ = { has_war_with = IRP }
+				IRQ = { has_war_with = BIR }
+				IRQ = { has_war_with = KUR }
+				KUR = { has_war_with = SNI }
+				KUR = { has_war_with = IRP }
+				KUR = { has_war_with = BIR }
+				BIR = { has_war_with = SNI }
+				BIR = { has_war_with = IRP }
+				IRP = { has_war_with = SNI }
+			}
+			NOT = {
+				OR = {
+					BIR = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRP = { has_idea = MAG_WA_mercenary_contract_idea }
+					SNI = { has_idea = MAG_WA_mercenary_contract_idea }
+					KUR = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iraqi_baathists"
+			BIR = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_iraqi_saddamists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			IRP = {
+				exists = yes
+			}
+			OR = {
+				IRQ = { has_war_with = SNI }
+				IRQ = { has_war_with = IRP }
+				IRQ = { has_war_with = BIR }
+				IRQ = { has_war_with = KUR }
+				KUR = { has_war_with = SNI }
+				KUR = { has_war_with = IRP }
+				KUR = { has_war_with = BIR }
+				BIR = { has_war_with = SNI }
+				BIR = { has_war_with = IRP }
+				IRP = { has_war_with = SNI }
+			}
+			NOT = {
+				OR = {
+					BIR = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRP = { has_idea = MAG_WA_mercenary_contract_idea }
+					SNI = { has_idea = MAG_WA_mercenary_contract_idea }
+					KUR = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iraqi_saddamists"
+			IRP = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_iraqi_italians = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			IRQ = {
+				exists = yes
+			}
+			OR = {
+				IRQ = { has_war_with = SNI }
+				IRQ = { has_war_with = IRP }
+				IRQ = { has_war_with = BIR }
+				IRQ = { has_war_with = KUR }
+				KUR = { has_war_with = SNI }
+				KUR = { has_war_with = IRP }
+				KUR = { has_war_with = BIR }
+				BIR = { has_war_with = SNI }
+				BIR = { has_war_with = IRP }
+				IRP = { has_war_with = SNI }
+			}
+			NOT = {
+				OR = {
+					BIR = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRP = { has_idea = MAG_WA_mercenary_contract_idea }
+					SNI = { has_idea = MAG_WA_mercenary_contract_idea }
+					KUR = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iraqi_italians"
+			IRQ = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_iraqi_islamists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			SNI = {
+				exists = yes
+			}
+			OR = {
+				IRQ = { has_war_with = SNI }
+				IRQ = { has_war_with = IRP }
+				IRQ = { has_war_with = BIR }
+				IRQ = { has_war_with = KUR }
+				KUR = { has_war_with = SNI }
+				KUR = { has_war_with = IRP }
+				KUR = { has_war_with = BIR }
+				BIR = { has_war_with = SNI }
+				BIR = { has_war_with = IRP }
+				IRP = { has_war_with = SNI }
+			}
+			NOT = {
+				OR = {
+					BIR = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRP = { has_idea = MAG_WA_mercenary_contract_idea }
+					SNI = { has_idea = MAG_WA_mercenary_contract_idea }
+					KUR = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iraqi_islamists"
+			SNI = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+
+	MAG_WA_support_kurdistan = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			KUR = {
+				exists = yes
+			}
+			OR = {
+				IRQ = { has_war_with = SNI }
+				IRQ = { has_war_with = IRP }
+				IRQ = { has_war_with = BIR }
+				IRQ = { has_war_with = KUR }
+				KUR = { has_war_with = SNI }
+				KUR = { has_war_with = IRP }
+				KUR = { has_war_with = BIR }
+				BIR = { has_war_with = SNI }
+				BIR = { has_war_with = IRP }
+				IRP = { has_war_with = SNI }
+			}
+			NOT = {
+				OR = {
+					BIR = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRP = { has_idea = MAG_WA_mercenary_contract_idea }
+					SNI = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iraqi_islamists"
+			KUR = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+
+	### Omani Civil War ###
+	MAG_omani_civil_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			OR = {
+				OMB = { has_war_with = OMI }
+				OMB = { has_war_with = OMA }
+				OMA = { has_war_with = OMI }
+			}
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_omani_civil_war_effigy"
+		}
+	}
+	MAG_WA_support_omani_baathists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OMB = {
+				exists = yes
+			}
+			OR = {
+				OMB = { has_war_with = OMI }
+				OMB = { has_war_with = OMA }
+				OMA = { has_war_with = OMI }
+			}
+			NOT = {
+				OR = {
+					OMB = { has_idea = MAG_WA_mercenary_contract_idea }
+					OMI = { has_idea = MAG_WA_mercenary_contract_idea }
+					OMA = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_omani_baathists"
+			OMB = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_omani_islamists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OMI = {
+				exists = yes
+			}
+			OR = {
+				OMB = { has_war_with = OMI }
+				OMB = { has_war_with = OMA }
+				OMA = { has_war_with = OMI }
+			}
+			NOT = {
+				OR = {
+					OMB = { has_idea = MAG_WA_mercenary_contract_idea }
+					OMI = { has_idea = MAG_WA_mercenary_contract_idea }
+					OMA = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_omani_islamists"
+			OMI = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_omani_sultanate = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			OMA = {
+				exists = yes
+			}
+			OR = {
+				OMB = { has_war_with = OMI }
+				OMB = { has_war_with = OMA }
+				OMA = { has_war_with = OMI }
+			}
+			NOT = {
+				OR = {
+					OMB = { has_idea = MAG_WA_mercenary_contract_idea }
+					OMI = { has_idea = MAG_WA_mercenary_contract_idea }
+					OMA = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_omani_sultanate"
+			OMA = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+
+	### Iranian Civil War ###
+	MAG_iranian_civil_war_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			OR = {
+				IRA = { has_war_with = PER }
+				IRA = { has_war_with = IRL }
+				IRA = { has_war_with = IRI }
+				IRA = { has_war_with = IRC }
+				IRC = { has_war_with = PER }
+				IRC = { has_war_with = IRL }
+				IRC = { has_war_with = IRI }
+				IRI = { has_war_with = PER }
+				IRI = { has_war_with = IRL }
+				IRL = { has_war_with = PER }
+			}
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_iranian_civil_war_effigy"
+		}
+	}
+	MAG_WA_support_iranian_communists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			IRA = {
+				exists = yes
+			}
+			OR = {
+				IRA = { has_war_with = PER }
+				IRA = { has_war_with = IRL }
+				IRA = { has_war_with = IRI }
+				IRA = { has_war_with = IRC }
+				IRC = { has_war_with = PER }
+				IRC = { has_war_with = IRL }
+				IRC = { has_war_with = IRI }
+				IRI = { has_war_with = PER }
+				IRI = { has_war_with = IRL }
+				IRL = { has_war_with = PER }
+			}
+			NOT = {
+				OR = {
+					IRA = { has_idea = MAG_WA_mercenary_contract_idea }
+					PER = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRL = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRI = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRC = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iranian_communists"
+			IRA = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_iranian_monarchists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			PER = {
+				exists = yes
+			}
+			OR = {
+				IRA = { has_war_with = PER }
+				IRA = { has_war_with = IRL }
+				IRA = { has_war_with = IRI }
+				IRA = { has_war_with = IRC }
+				IRC = { has_war_with = PER }
+				IRC = { has_war_with = IRL }
+				IRC = { has_war_with = IRI }
+				IRI = { has_war_with = PER }
+				IRI = { has_war_with = IRL }
+				IRL = { has_war_with = PER }
+			}
+			NOT = {
+				OR = {
+					IRA = { has_idea = MAG_WA_mercenary_contract_idea }
+					PER = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRL = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRI = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRC = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iranian_monarchists"
+			PER = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_iranian_liberals = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			IRL = {
+				exists = yes
+			}
+			OR = {
+				IRA = { has_war_with = PER }
+				IRA = { has_war_with = IRL }
+				IRA = { has_war_with = IRI }
+				IRA = { has_war_with = IRC }
+				IRC = { has_war_with = PER }
+				IRC = { has_war_with = IRL }
+				IRC = { has_war_with = IRI }
+				IRI = { has_war_with = PER }
+				IRI = { has_war_with = IRL }
+				IRL = { has_war_with = PER }
+			}
+			NOT = {
+				OR = {
+					IRA = { has_idea = MAG_WA_mercenary_contract_idea }
+					PER = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRL = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRI = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRC = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iranian_liberals"
+			IRL = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_iranian_islamists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			IRI = {
+				exists = yes
+			}
+			OR = {
+				IRA = { has_war_with = PER }
+				IRA = { has_war_with = IRL }
+				IRA = { has_war_with = IRI }
+				IRA = { has_war_with = IRC }
+				IRC = { has_war_with = PER }
+				IRC = { has_war_with = IRL }
+				IRC = { has_war_with = IRI }
+				IRI = { has_war_with = PER }
+				IRI = { has_war_with = IRL }
+				IRL = { has_war_with = PER }
+			}
+			NOT = {
+				OR = {
+					IRA = { has_idea = MAG_WA_mercenary_contract_idea }
+					PER = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRL = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRI = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRC = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iranian_islamists"
+			IRI = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_iranian_constitutionalists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			IRC = {
+				exists = yes
+			}
+			OR = {
+				IRA = { has_war_with = PER }
+				IRA = { has_war_with = IRL }
+				IRA = { has_war_with = IRI }
+				IRA = { has_war_with = IRC }
+				IRC = { has_war_with = PER }
+				IRC = { has_war_with = IRL }
+				IRC = { has_war_with = IRI }
+				IRI = { has_war_with = PER }
+				IRI = { has_war_with = IRL }
+				IRL = { has_war_with = PER }
+			}
+			NOT = {
+				OR = {
+					IRA = { has_idea = MAG_WA_mercenary_contract_idea }
+					PER = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRL = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRI = { has_idea = MAG_WA_mercenary_contract_idea }
+					IRC = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_iranian_constitutionalists"
+			IRC = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	
+	### Iberian Wars ###
+	MAG_iberian_wars_effigy = {
+		icon = decision_generic_assault
+		visible = {
+			MAG_WA_iberian_wars_active = yes
+		}
+		available = {
+			always = no
+		}
+	
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_iberian_wars_effigy"
+		}
+	}
+	MAG_WA_support_union_remnants = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			IBR = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					BSQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_union_remnants"
+			IBR = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_spanish_republicans = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			SPR = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					BSQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_spanish_republicans"
+			SPR = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_spanish_falangists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			SPS = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					BSQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_spanish_falangists"
+			SPS = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_catalan_republicans = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			CTL = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					BSQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_catalan_republicans"
+			CTL = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_cnt = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			CNT = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					BSQ = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_cnt"
+			CNT = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_basques = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			BSQ = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_basques"
+			BSQ = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_gns = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			GNS = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_gns"
+			GNS = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_portuguese_salazarists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			POR = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_portuguese_salazarists"
+			POR = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_portuguese_communists = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			PPR = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_portuguese_communists"
+			PPR = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_portuguese_republicans = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			RPP = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_portuguese_republicans"
+			RPP = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_galicia = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			GAL = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_galicia"
+			GAL = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_andalusia = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			ADL = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_andalusia"
+			ADL = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_morocco = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			MOR = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_morocco"
+			MOR = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_the_rif_republic = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			RIF = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					TRZ = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_the_rif_republic"
+			RIF = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+	MAG_WA_support_trarza = {
+		icon = decision_black_market_arms_trade_increase
+		visible = {
+			TRZ = {
+				exists = yes
+			}
+			MAG_WA_iberian_wars_active = yes
+			NOT = {
+				OR = {
+					IBR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					SPS = { has_idea = MAG_WA_mercenary_contract_idea }
+					CTL = { has_idea = MAG_WA_mercenary_contract_idea }
+					CNT = { has_idea = MAG_WA_mercenary_contract_idea }
+					GNS = { has_idea = MAG_WA_mercenary_contract_idea }
+					POR = { has_idea = MAG_WA_mercenary_contract_idea }
+					PPR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RPP = { has_idea = MAG_WA_mercenary_contract_idea }
+					GAL = { has_idea = MAG_WA_mercenary_contract_idea }
+					ADL = { has_idea = MAG_WA_mercenary_contract_idea }
+					MOR = { has_idea = MAG_WA_mercenary_contract_idea }
+					RIF = { has_idea = MAG_WA_mercenary_contract_idea }
+				}
+			}
+		}
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout MAG_WA_support_trarza"
+			TRZ = {
+				country_event = { id = westalaska.100 }
+			}
+		}
+	}
+}

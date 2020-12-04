@@ -1,0 +1,4297 @@
+﻿####################################################################################################
+
+add_namespace = MAG #Regular events
+add_namespace = magexp #Fash expansion tree events
+add_namespace = magreg #Regional events
+add_namespace = petlin #Petlin superregional events
+add_namespace = matkovsky #Matkovsky superregional events
+add_namespace = westalaska #West Alaska events
+add_namespace = wa_superregional #West Alaska superregional events
+add_namespace = MAGCIA #CIA events
+
+####################################################################################################
+
+country_event = { #The Last Of The True - Intro event
+	id = MAG.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.1"}
+	title = MAG.1.t
+	desc = MAG.1.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MAG.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Sitting Out The Winter focus
+	id = MAG.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.2"}
+	title = MAG.2.t
+	desc = MAG.2.desc
+	picture = GFX_report_event_radio_magadan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MAG.2.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #The Tsar focus
+	id = MAG.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.3"}
+	title = MAG.3.t
+	desc = MAG.3.desc
+	picture = GFX_report_event_russia_imperial_standard
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.3.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		WCH = {
+			country_event = { id = MAG.38 days = 2 }
+		}
+	}
+}
+
+country_event = { #Divide and Conquer - Amur perspective
+	id = MAG.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.4"}
+	title = MAG.4.t
+	desc = MAG.4.desc
+	picture = GFX_report_event_russia_forest_battle
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.4.a
+		ai_chance = { factor = 1 }
+		561 = {
+			damage_building = {
+				type = infrastructure
+				damage = 0.50
+			}
+			damage_building = {
+				type = arms_factory
+				damage = 1.00
+			}
+		}
+		886 = {
+			damage_building = {
+				type = infrastructure
+				damage = 1.00
+			}
+			damage_building = {
+				type = industrial_complex
+				damage = 1.00
+			}
+		}
+		add_stability = -0.1
+	}
+}
+
+country_event = { #The President focus
+	id = MAG.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.5"}
+	title = MAG.5.t
+	desc = MAG.5.desc
+	picture = GFX_report_event_potus
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.5.a
+		ai_chance = { factor = 1 }
+		MAG_increase_USA_support_low = yes
+	}
+}
+
+country_event = { #The Vozhd focus
+	id = MAG.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.6"}
+	title = MAG.6.t
+	desc = MAG.6.desc
+	picture = GFX_report_event_vonsiatsky
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.6.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+	}
+}
+
+country_event = { #Welcoming WerBell
+	id = MAG.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.7"}
+	title = MAG.7.t
+	desc = MAG.7.desc
+	picture = GFX_report_event_werbell
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.7.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = MAG_WA_authoritarian_democrat_party_long
+			name = MAG_WA_authoritarian_democrat_party
+		}
+		create_country_leader = {
+			name = "Mitchell WerBell III"
+			desc = "POLITICS_MITCHELL_WERBELL_DESC"
+			picture = "Portrait_West_Alaska_Mitchell_WerBell_III.dds"
+			expire = "1999.1.1"
+			ideology = authoritarian_democrat_subtype
+			traits = {
+
+			}
+		}
+	}
+}
+
+country_event = { #Ready At Last focus - Death of Vonsiatsky
+	id = MAG.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.8"}
+	title = MAG.8.t
+	desc = MAG.8.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.8.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = MAG.9 days = 1 }
+		}
+	}
+}
+
+country_event = { #The Mercenary Coup
+	id = MAG.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.9"}
+	title = MAG.9.t
+	desc = MAG.9.desc
+	picture = GFX_report_event_cog_merc_6
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Matkovsky wins
+		name = MAG.9.a
+		ai_chance = { factor = 10000 }
+		set_country_flag = MAG_matkovsky_prevails
+		MAG_remove_west_alaska_generals = yes
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.1
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = MAG_authoritarian_democrat_party_long
+			name = MAG_authoritarian_democrat_party
+		}
+		retire_ideology_leader = authoritarian_democrat
+		if = {
+			limit = {
+				has_idea = MAG_soldiers_without_borders_idea
+			}
+			remove_ideas = MAG_soldiers_without_borders_idea
+		}
+		hidden_effect = {
+			set_country_flag = MAG_merc_coup_done
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	option = { #WerBell time
+		name = MAG.9.b
+		ai_chance = { factor = 1 }
+		trigger = {
+			has_country_flag = MAG_werbell_influence_strengthened
+		}
+		retire_country_leader  = yes
+		retire_ideology_leader = fascism
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.15
+		}
+		remove_ideas = RUS_heirs_of_harbin
+		MAG_add_west_alaska_ministers = yes
+		hidden_effect = {
+			add_ideas = tno_army_professionalism_cronyism
+			add_ideas = tno_vote_franchise_elite_voting
+			set_country_flag = MAG_werbell_prevails
+			set_country_flag = MAG_merc
+			set_cosmetic_tag = MAG_merc
+			set_country_flag = MAG_merc_coup_done
+			clr_country_flag = MAG_market_unlock
+			MAG_remove_magadan_generals = yes
+			mark_focus_tree_layout_dirty = yes
+			country_event = { id = magreg.38 days = 1460 }
+			country_event = { id = MAG.40 days = 3 }
+		}
+	}
+}
+
+country_event = { #Put aside our differences
+	id = MAG.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.10"}
+	title = MAG.10.t
+	desc = MAG.10.desc
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.10.a
+		ai_chance = { factor = 1 }
+		diplomatic_relation = {
+			country = WCH
+			relation = non_aggression_pact
+			active = yes
+		}
+	}
+}
+
+country_event = { #Integrate the Mercs
+	id = MAG.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.11"}
+	title = MAG.11.t
+	desc = MAG.11.desc
+	picture = GFX_report_event_russia_special_forces
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.11.a
+		ai_chance = { factor = 1 }
+		army_experience = 5
+	}
+}
+
+country_event = { #Our Secured Position
+	id = MAG.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.12"}
+	title = MAG.12.t
+	desc = MAG.12.desc
+	picture = GFX_report_event_radio_magadan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.12.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.1
+	}
+}
+
+country_event = { #Siberian School - rangers
+	id = MAG.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.13"}
+	title = MAG.13.t
+	desc = MAG.13.desc
+	picture = GFX_report_event_ural_guard
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.13.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+		#Add more Siberian Rangers events later
+	}
+}
+
+country_event = { #The Trial Of Rodzaevsky
+	id = MAG.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.14"}
+	title = MAG.14.t
+	desc = MAG.14.desc
+	picture = GFX_report_event_rodzaevsky
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #The penalty is death!
+		name = MAG.14.a
+		ai_chance = { factor = 5 }
+		add_stability = 0.1
+		add_political_power = 35
+		add_popularity = {
+			ideology = national_socialism
+			popularity = -0.15
+		}
+	}
+}
+
+country_event = { #Matkovsky Secured
+	id = MAG.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.15"}
+	title = MAG.15.t
+	desc = MAG.15.desc
+	picture = GFX_report_event_russia_bunker_command
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.15.a
+		ai_chance = { factor = 1 }
+		add_ideas = MAG_fascist_renewal
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #Deal With Rodzaevsky - WerBell
+	id = MAG.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.16"}
+	title = MAG.16.t
+	desc = MAG.16.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.16.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.1
+		add_political_power = 35
+		add_popularity = {
+			ideology = national_socialism
+			popularity = -0.15
+		}
+	}
+}
+
+country_event = { #Maneuver Warfare
+	id = MAG.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.17"}
+	title = MAG.17.t
+	desc = MAG.17.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.17.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Soldiers without Borders
+	id = MAG.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.18"}
+	title = MAG.18.t
+	desc = MAG.18.desc
+	picture = GFX_report_event_cog_merc_casual_time
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.18.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Man Who Sold the Vozhd
+	id = MAG.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.19"}
+	title = MAG.19.t
+	desc = MAG.19.desc
+	picture = GFX_report_event_the_man_who_sold_the_world
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.19.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #West Alaska tree
+	id = MAG.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.20"}
+	title = MAG.20.t
+	desc = MAG.20.desc
+	picture = GFX_report_event_cog_merc_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.20.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = { tree = MAG_merc_tree keep_completed = no }
+		}
+	}
+}
+
+country_event = { #Expansion tree - Matkovsky won over Rodzaevsky
+	id = MAG.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.21"}
+	title = MAG.21.t
+	desc = MAG.21.desc
+	picture = GFX_report_event_far_right_rally
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.21.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = {
+				tree = MAG_matkovsky_tree
+				keep_completed = no
+			}
+		}
+	}
+}
+
+country_event = { #Siberian Bill of Rights
+	id = MAG.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.22"}
+	title = MAG.22.t
+	desc = MAG.22.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.22.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Operation Intrude
+	id = MAG.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.23"}
+	title = MAG.23.t
+	desc = MAG.23.desc
+	picture = GFX_report_event_crate_of_guns
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.23.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 350
+			producer = USA
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 350
+			producer = USA
+		}
+	}
+}
+
+country_event = { #Building the Wastes - there's nothing there chief
+	id = MAG.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.24"}
+	title = MAG.24.t
+	desc = MAG.24.desc
+	picture = GFX_report_event_siberia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.24.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Try Something Else - event about the shitty "army" of Magadan
+	id = MAG.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.25"}
+	title = MAG.25.t
+	desc = MAG.25.desc
+	picture = GFX_report_event_russia_tank_crew
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.25.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Siberian Army - we're starting to see some improvements
+	id = MAG.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.26"}
+	title = MAG.26.t
+	desc = MAG.26.desc
+	picture = GFX_report_event_soldiers_training
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.26.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Ready at Last - Radio event about the new changes, new and improved armed forces and how Rodzaevsky's time is nigh
+	id = MAG.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.27"}
+	title = MAG.27.t
+	desc = MAG.27.desc
+	picture = GFX_report_event_radio_magadan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.27.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Our Way Forward - Radio event about beating both the mercs and Rodzaevsky
+	id = MAG.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.28"}
+	title = MAG.28.t
+	desc = MAG.28.desc
+	picture = GFX_report_event_radio_magadan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.28.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Trading Faces - "John Wayne" shows up
+	id = MAG.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.29"}
+	title = MAG.29.t
+	desc = MAG.29.desc
+	picture = GFX_report_event_vodka
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.29.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A trader gets extorted by local RFP thugs
+	id = MAG.30
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.30"}
+	title = MAG.30.t
+	desc = MAG.30.desc
+	picture = GFX_report_event_russia_advertisements
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG.30.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A democratic dissident (Sergei Dmitrievich Solovyov) writes pamphlets denouncing Matkovsky as a tyrant
+	id = MAG.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.31" }
+	title = MAG.31.t
+	desc = MAG.31.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.31.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Smuggled American movies are playing in a newly opened theater in Magadan
+	id = MAG.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.32" }
+	title = MAG.32.t
+	desc = MAG.32.desc
+	picture = GFX_report_event_captain_america
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.32.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A hunter/Siberian person wanders into a town for supplies, notice the town is busier than before as more mercs show up
+	id = MAG.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.33" }
+	title = MAG.33.t
+	desc = MAG.33.desc
+	picture = GFX_report_event_russia_hunter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.33.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Some guys are drinking and playing cards at a local tavern and they get in trouble after heckling some soldiers
+	id = MAG.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.34" }
+	title = MAG.34.t
+	desc = MAG.34.desc
+	picture = GFX_report_event_mercenary
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.34.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #An RFP thug goes home after a long day of being a prick and expresses doubts about his duties to his family
+	id = MAG.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.35" }
+	title = MAG.35.t
+	desc = MAG.35.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.35.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Report for the President - USA PERSPECTIVE
+	id = MAG.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.36" }
+	title = MAG.36.t
+	desc = MAG.36.desc
+	picture = GFX_report_event_potus
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.36.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Night Terrors
+	id = MAG.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.37" }
+	title = MAG.37.t
+	desc = MAG.37.desc
+	picture = GFX_report_event_russian_fascists_harbin
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.37.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Chita ceasefire
+	id = MAG.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.38" }
+	title = MAG.38.t
+	desc = MAG.38.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.38.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #All in a Days Work
+	id = MAG.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.39" }
+	title = MAG.39.t
+	desc = MAG.39.desc
+	picture = GFX_report_event_iberian_wars_6
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.39.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Local Muscle
+	id = MAG.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.40" }
+	title = MAG.40.t
+	desc = MAG.40.desc
+	picture = GFX_report_event_pub
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.40.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.41" }
+	title = MAG.41.t
+	desc = MAG.41.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.41.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.42" }
+	title = MAG.42.t
+	desc = MAG.42.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.42.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.43" }
+	title = MAG.43.t
+	desc = MAG.43.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.43.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.44" }
+	title = MAG.44.t
+	desc = MAG.44.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.44.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.45" }
+	title = MAG.45.t
+	desc = MAG.45.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.45.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.46" }
+	title = MAG.46.t
+	desc = MAG.46.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.46.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.47" }
+	title = MAG.47.t
+	desc = MAG.47.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.47.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.48" }
+	title = MAG.48.t
+	desc = MAG.48.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.48.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.49" }
+	title = MAG.49.t
+	desc = MAG.49.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.49.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = MAG.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG.50" }
+	title = MAG.50.t
+	desc = MAG.50.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = MAG.50.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Fash expansion tree events ###
+country_event = { #The Matter of the Tsar
+	id = magexp.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.1" }
+	title = magexp.1.t
+	desc = magexp.1.desc
+	picture = GFX_report_event_russia_imperial_standard
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #House arrest
+		name = magexp.1.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		hidden_effect = {
+			country_event = { id = magexp.13 hours = 6 }
+		}
+	}
+
+	option = { #Exile
+		name = magexp.1.b
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+		hidden_effect = {
+			country_event = { id = magexp.12 hours = 6 }
+		}
+	}
+}
+
+country_event = { #Old Front restored - Matkovsky reminisces on times past
+	id = magexp.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.2" }
+	title = magexp.2.t
+	desc = magexp.2.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.2.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Matkovsky wonders where WerBell slipped off to and what he might be doing
+	id = magexp.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.3" }
+	title = magexp.3.t
+	desc = magexp.3.desc
+	picture = GFX_report_event_werbell
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.3.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Far East Theater
+	id = magexp.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.4" }
+	title = magexp.4.t
+	desc = magexp.4.desc
+	picture = GFX_report_event_cia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.4.a
+		ai_chance = { factor = 1 }
+		add_political_power = 15
+	}
+}
+
+country_event = { #The Old Enemy
+	id = magexp.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.5" }
+	title = magexp.5.t
+	desc = magexp.5.desc
+	picture = GFX_report_event_soviet_propoganda
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.5.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.035
+	}
+}
+
+country_event = { #Siberian Intelligence Bureau
+	id = magexp.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.6" }
+	title = magexp.6.t
+	desc = magexp.6.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.6.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Grim Reality - Fate of Sablin
+	id = magexp.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.7" }
+	title = magexp.7.t
+	desc = magexp.7.desc
+	picture = GFX_report_event_siberia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.7.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The People's Vozhd
+	id = magexp.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.8" }
+	title = magexp.8.t
+	desc = magexp.8.desc
+	picture = GFX_report_event_radio_magadan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.8.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.035
+		}
+	}
+}
+
+country_event = { #Sins of the Father
+	id = magexp.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.9" }
+	title = magexp.9.t
+	desc = magexp.9.desc
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Fate of Yagoda and the Presidium
+	id = magexp.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.10" }
+	title = magexp.10.t
+	desc = magexp.10.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.10.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Charter of Magadan
+	id = magexp.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.11" }
+	title = magexp.11.t
+	desc = magexp.11.desc
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.11.a
+		ai_chance = { factor = 1 }
+		set_party_name = {
+			ideology = fascism
+			long_name = "Russkaya Natsionalnaya Trudovaya Partiya"
+			name = "RNTP"
+		}
+		hidden_effect = {
+			load_focus_tree = { tree = MAG_matkovsky_regional_tree keep_completed = no }
+		}
+	}
+}
+
+country_event = { #Mikhail - Exile
+	id = magexp.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.12" }
+	title = magexp.12.t
+	desc = magexp.12.desc
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.12.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Mikhail - House Arrest
+	id = magexp.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magexp.13" }
+	title = magexp.13.t
+	desc = magexp.13.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magexp.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Regional events ###
+country_event = { #National Republican Armed Forces
+	id = magreg.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.1"}
+	title = magreg.1.t
+	desc = magreg.1.desc
+	picture = GFX_report_event_russia_white_propaganda
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.1.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.1
+		add_manpower = 7500
+	}
+}
+
+country_event = { #From the Taiga to the Seas
+	id = magreg.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.2"}
+	title = magreg.2.t
+	desc = magreg.2.desc
+	picture = GFX_report_event_river_boat
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.2.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Subsidize Radio Free Magadan
+	id = magreg.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.3"}
+	title = magreg.3.t
+	desc = magreg.3.desc
+	picture = GFX_report_event_radio_magadan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.3.a
+		ai_chance = { factor = 1 }
+		MAG_strengthen_reformers = yes
+		hidden_effect = {
+			country_event = { id = magreg.29 days = 7 }
+		}
+	}
+	option = { #
+		name = magreg.3.b
+		ai_chance = { factor = 1 }
+		MAG_strengthen_labourists = yes
+		hidden_effect = {
+			country_event = { id = magreg.30 days = 7 }
+		}
+	}
+}
+
+country_event = { #Reformists take-over
+	id = magreg.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.4"}
+	title = magreg.4.t
+	desc = magreg.4.desc
+	picture = GFX_report_event_komi_committee
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.4.a
+		ai_chance = { factor = 1 }
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		add_ideas = {
+			MAG_Sergey_Solovyev_hog
+			MAG_Yuriy_Vlasov_for
+			MAG_Andrey_Starostin_eco
+ 			MAG_Lev_Netto_sec
+		}
+		retire_ideology_leader = despotism
+		clr_country_flag = MAG_regional_factions
+		clr_country_flag = MAG_will_of_the_people
+		hidden_effect = {
+			country_event = { id = magreg.32 days = 7 }
+		}
+	}
+}
+
+country_event = { #Reformists arrested
+	id = magreg.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.5"}
+	title = magreg.5.t
+	desc = magreg.5.desc
+	picture = GFX_report_event_iberia_pide_arrest
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.5.a
+		ai_chance = { factor = 1 }
+		clr_country_flag = MAG_regional_factions
+		clr_country_flag = MAG_will_of_the_people
+		set_country_flag = MAG_reformists_arrested
+		add_ideas = MAG_Igor_Kovalchuk_Koval_for
+		hidden_effect = {
+			country_event = { id = magreg.33 days = 7 }
+		}
+	}
+}
+
+country_event = { #"Merchant" Fleet
+	id = magreg.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.6"}
+	title = magreg.6.t
+	desc = magreg.6.desc
+	picture = GFX_report_event_russia_republic_navy
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.6.a
+		ai_chance = { factor = 1 }
+		navy_experience = 5
+		create_navy_leader = {
+			name = "Nikolai Abramov"
+			picture = "Portrait_Magadan_Nikolai_Abramov.dds"
+			traits = { spotter }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			maneuvering_skill = 1
+			coordination_skill = 1
+			id = 7642
+		}
+		hidden_effect = {
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				load_oob = MAG_Kamchatka_fleet_mtg
+			}
+			else = {
+				load_oob = MAG_Kamchatka_fleet
+			}
+		}
+	}
+}
+
+country_event = { #Foreign Intelligence status report
+	id = magreg.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.7"}
+	title = magreg.7.t
+	desc = magreg.7.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.7.a
+		ai_chance = { factor = 1 }
+		add_political_power = 10
+	}
+}
+
+country_event = { #Connections with the Diaspora
+	id = magreg.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.8"}
+	title = magreg.8.t
+	desc = magreg.8.desc
+	picture = GFX_report_event_russia_kazakh_crowd
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.8.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = MAG
+			modifier = RUS_emigre_connections
+		}
+		MAG = {
+			add_opinion_modifier = {
+				target = USA
+				modifier = RUS_emigre_connections
+			}
+		}
+	}
+}
+
+country_event = { #A Free Haven - US event
+	id = magreg.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.9"}
+	title = magreg.9.t
+	desc = magreg.9.desc
+	picture = GFX_report_event_india_migration
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.9.a
+		ai_chance = { factor = 1 }
+		FST = {
+			country_event = { id = magreg.10 days = 14	}
+		}
+	}
+}
+
+country_event = { #A Free Haven - Magadan event
+	id = magreg.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.10"}
+	title = magreg.10.t
+	desc = magreg.10.desc
+	picture = GFX_report_event_india_migration
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.10.a
+		ai_chance = { factor = 1 }
+		TNO_improve_academic_base_low = yes
+	}
+}
+
+country_event = { #A Free Haven - Magadan event II
+	id = magreg.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.11"}
+	title = magreg.11.t
+	desc = magreg.11.desc
+	picture = GFX_report_event_india_migration
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.11.a
+		ai_chance = { factor = 1 }
+		random_owned_controlled_state = {
+			limit = {
+				NOT = {
+					has_state_category = wasteland
+				}
+			}
+			add_manpower = 12500
+		}
+		random_owned_controlled_state = {
+			limit = {
+				NOT = {
+					has_state_category = wasteland
+					has_state_category = pastoral
+					has_state_category = rural
+				}
+			}
+			add_manpower = 32780
+		}
+		random_owned_controlled_state = {
+			limit = {
+				NOT = {
+					has_state_category = wasteland
+				}
+			}
+			add_manpower = 21420
+		}
+	}
+}
+
+country_event = { #A City Upon a Hill 1 - Magadan event
+	id = magreg.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.12"}
+	title = magreg.12.t
+	desc = magreg.12.desc
+	picture = GFX_report_event_cog_plane
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.12.a
+		ai_chance = { factor = 1 }
+		USA = {
+			country_event = { id = magreg.13 days = 3 }
+		}
+		hidden_effect = {
+			MAG = {
+				country_event = { id = magreg.131 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { #A City Upon a Hill 2 - USA event - Matkovsky
+	id = magreg.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.13"}
+	title = magreg.13.t
+	desc = magreg.13.desc
+	picture = GFX_report_event_capitol_building1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes (D or FR)
+		name = magreg.13.a
+		ai_chance = { factor = 120 }
+		trigger = {
+			OR = {
+				has_government = social_conservative
+				has_government = authoritarian_democrat
+			}
+		}
+		MAG = {
+			country_event = { id = magreg.15 days = 1 }
+		}
+	}
+	option = { #No (R or C)
+		name = magreg.13.b
+		ai_chance = { factor = 75 }
+		MAG = {
+			country_event = { id = magreg.16 days = 1 }
+		}
+	}
+}
+
+country_event = { #A City Upon a Hill 2 - USA event - Petlin
+	id = magreg.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.14"}
+	title = magreg.14.t
+	desc = magreg.14.desc
+	picture = GFX_report_event_capitol_building1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = magreg.14.a
+		ai_chance = { factor = 120 }
+		MAG = {
+			country_event = { id = magreg.15 days = 1 }
+		}
+	}
+	option = { #No 
+		name = magreg.14.b
+		ai_chance = { factor = 30 }
+		MAG = {
+			country_event = { id = magreg.16 days = 1 }
+		}
+	}
+}
+
+country_event = { #A City Upon a Hill 2 - Magadan event - Matkovsky
+	id = magreg.131
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.131"}
+	title = magreg.131.t
+	desc = magreg.131.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.131.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A City Upon a Hill 2 - Magadan event - Petlin
+	id = magreg.141
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.141"}
+	title = magreg.141.t
+	desc = magreg.141.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.141.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A City Upon a Hill 3 - Magadan event - Success
+	id = magreg.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.15"}
+	title = magreg.15.t
+	desc = magreg.15.desc
+	picture = GFX_report_event_russia_advertisements
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.15.a
+		ai_chance = { factor = 1 }
+		add_political_power = 100
+		add_opinion_modifier = {
+			target = USA
+			modifier = TNO_opened_diplomatic_relations
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = MAG
+				modifier = TNO_opened_diplomatic_relations
+			}
+		}
+		set_country_flag = USA_FST_SUCCESS
+	}
+}
+
+country_event = { #A City Upon a Hill 3 - Magadan event - Failed
+	id = magreg.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.16"}
+	title = magreg.16.t
+	desc = magreg.16.desc
+	picture = GFX_report_event_iberia_big_meeting
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.16.a
+		ai_chance = { factor = 1 }
+		add_political_power = -50
+		set_country_flag = USA_FST_FAILURE
+	}
+}
+
+country_event = { #Expanded trade with USA - Magadan
+	id = magreg.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.17"}
+	title = magreg.17.t
+	desc = magreg.17.desc
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.17.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = USA
+			modifier = TNO_opened_diplomatic_relations
+		}
+		add_to_variable = { GDP = 4250 }
+		custom_effect_tooltip = MAG_the_american_siberian_trade_act_tt
+	}
+}
+
+country_event = { #Expanded trade with USA - USA
+	id = magreg.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.18"}
+	title = magreg.18.t
+	desc = magreg.18.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.18.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = MAG
+			modifier = TNO_opened_diplomatic_relations
+		}
+		add_to_variable = { GDP = 1250 }
+		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+	}
+}
+
+country_event = { #USA doesn't love us fucc
+	id = magreg.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.19"}
+	title = magreg.19.t
+	desc = magreg.19.desc
+	picture = GFX_report_event_iberia_guy_paper_meeting
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.19.a
+		ai_chance = { factor = 1 }
+		add_to_variable = { GDP = 500 }
+		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+		add_stability = -0.05
+	}
+}
+
+country_event = { #Magadan appeals to us
+	id = magreg.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.20"}
+	title = magreg.20.t
+	desc = magreg.20.desc
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { #
+		name = magreg.20.a
+		ai_chance = { factor = 75 }
+		MAG = {
+			country_event = { id = magreg.21 days = 5 }
+		}
+		add_opinion_modifier = {
+			target = MAG
+			modifier = TNO_opened_diplomatic_relations
+		}
+		add_to_variable = { GDP = 1000 }
+		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+	}
+	option = { #
+		name = magreg.20.b
+		ai_chance = { factor = 30 }
+		MAG = {
+			country_event = { id = magreg.22 days = 5 }
+		}
+	}
+}
+
+country_event = { #[Country] quite approves of us
+	id = magreg.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.21"}
+	title = magreg.21.t
+	desc = magreg.21.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.21.a
+		ai_chance = { factor = 75 }
+		add_political_power = 25
+		add_opinion_modifier = {
+			target = FROM
+			modifier = TNO_opened_diplomatic_relations
+		}
+		add_to_variable = { GDP = 1500 }
+		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+	}
+}
+
+country_event = { #[Country] tells us to fuck off
+	id = magreg.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.22"}
+	title = magreg.22.t
+	desc = magreg.22.desc
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.22.a
+		ai_chance = { factor = 75 }
+		add_political_power = -10
+	}
+}
+
+country_event = { #Russian Liberation Front
+	id = magreg.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.23"}
+	title = magreg.23.t
+	desc = magreg.23.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.23.a
+		ai_chance = { factor = 75 }
+		MAN = {
+			add_stability = -0.1
+		}
+		add_political_power = 40
+	}
+}
+
+country_event = { #The World Beckons
+	id = magreg.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.24"}
+	title = magreg.24.t
+	desc = magreg.24.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = magreg.24.a
+		ai_chance = { factor = 75 }
+		add_stability = 0.025
+	}
+}
+
+country_event = { #Dalstroy is founded; Solovyev and co get sent to labor camps
+	id = magreg.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.25" }
+	title = magreg.25.t
+	desc = magreg.25.desc
+	picture = GFX_report_event_russia_vorkutlag
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.25.a
+		ai_chance = { factor = 1 }
+		add_ideas = tno_penal_system_penal_labor
+	}
+}
+
+country_event = { #Fresh Coat of Paint
+	id = magreg.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.26" }
+	title = magreg.26.t
+	desc = magreg.26.desc
+	picture = GFX_report_event_komi_congress_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.26.a
+		ai_chance = { factor = 1 }
+		set_politics = {
+			ruling_party = despotism
+		}
+		add_popularity = { ideology = despotism popularity = 0.25 }
+		add_popularity = { ideology = authoritarian_democrat popularity = 0.2 }
+		create_country_leader = {
+			name = "Mikhail Matkovsky"
+			desc = "POLITICS_MIKHAIL_MATKOVSKY_DESC"
+			picture = "Portrait_Magadan_Mikhail_Matkovsky.dds"
+			expire = "1999.1.1"
+			ideology = despotism_subtype
+			traits = { the_knyaz }
+		}
+		create_country_leader = {
+			name = "Nikolay Petlin"
+			desc = "POLITICS_NIKOLAY_PETLIN_DESC"
+			picture = "Portrait_Magadan_Nikolay_Petlin.dds"
+			expire = "1999.1.1"
+			ideology = authoritarian_democrat_subtype
+			traits = { }
+		}
+		create_country_leader = {
+			name = "Gennady Taradanov"
+			desc = "POLITICS_GENNADY_TARADANOV_DESC"
+			#picture = "Portrait_Magadan_Mikhail_Matkovsky.dds"
+			expire = "1999.1.1"
+			ideology = fascism_subtype
+			traits = {  }
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = MAG_reg_fascism_party_long
+			name = MAG_reg_fascism_party
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = MAG_reg_despotism_party_long
+			name = MAG_reg_despotism_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = MAG_reg_authoritatian_democrat_party_long
+			name = MAG_reg_authoritatian_democrat_party
+		}
+		set_country_flag = MAG_regional_factions
+		unlock_decision_category_tooltip = MAG_regional_factions_category
+		add_ideas = tno_political_parties_controlled_opposition
+		hidden_effect = {
+			country_event = { id = magreg.31 days = 5 }
+		}
+	}
+}
+
+country_event = { #Grand Sobor
+	id = magreg.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.27" }
+	title = magreg.27.t
+	desc = magreg.27.desc
+	picture = GFX_report_event_generic_congress
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.27.a
+		ai_chance = { factor = 1 }
+		add_popularity = { ideology = authoritarian_democrat popularity = 0.035	}
+	}
+}
+
+country_event = { #Will of the Vozhd
+	id = magreg.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.28" }
+	title = magreg.28.t
+	desc = magreg.28.desc
+	picture = GFX_report_event_congress_failure
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.28.a
+		ai_chance = { factor = 1 }
+		add_popularity = { ideology = despotism popularity = 0.035	}
+		add_popularity = { ideology = fascism popularity = 0.015	}
+	}
+}
+
+country_event = { #Radio Free Magadan is given more freedom
+	id = magreg.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.29" }
+	title = magreg.29.t
+	desc = magreg.29.desc
+	picture = GFX_report_event_radio_magadan
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.29.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Radio Free Magadan spouts pro-Matkovsky propaganda
+	id = magreg.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.30" }
+	title = magreg.30.t
+	desc = magreg.30.desc
+	picture = GFX_report_event_radio_magadan
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.30.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Long Road
+	id = magreg.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.31" }
+	title = magreg.31.t
+	desc = magreg.31.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.31.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Post-Matkovsky coup
+	id = magreg.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.32" }
+	title = magreg.32.t
+	desc = magreg.32.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.32.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #After arresting Petlin
+	id = magreg.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.33" }
+	title = magreg.33.t
+	desc = magreg.33.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.33.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Petlin prepares to go to the US
+	id = magreg.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.34" }
+	title = magreg.34.t
+	desc = magreg.34.desc
+	picture = GFX_report_event_cog_plane
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.34.a
+		ai_chance = { factor = 1 }
+		USA = {
+			country_event = { id = magreg.14 days = 3 }
+		}
+		hidden_effect = {
+			MAG = {
+				country_event = { id = magreg.141 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { #Medals of Dishonor
+	id = magreg.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.35" }
+	title = magreg.35.t
+	desc = magreg.35.desc
+	picture = GFX_report_event_soviet_russian_soldiers_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.35.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Reform the Blackshirts
+	id = magreg.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.36" }
+	title = magreg.36.t
+	desc = magreg.36.desc
+	picture = GFX_report_event_iberia_detective_desk
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.36.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Way the Wind Blows
+	id = magreg.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.37" }
+	title = magreg.37.t
+	desc = magreg.37.desc
+	picture = GFX_report_event_river_boat
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.37.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Starting Fresh
+	id = magreg.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.38" }
+	title = magreg.38.t
+	desc = magreg.38.desc
+	picture = GFX_report_event_vodka
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.38.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.39" }
+	title = magreg.39.t
+	desc = magreg.39.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.39.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.40" }
+	title = magreg.40.t
+	desc = magreg.40.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.40.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.41" }
+	title = magreg.41.t
+	desc = magreg.41.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.41.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.42" }
+	title = magreg.42.t
+	desc = magreg.42.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.42.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.43" }
+	title = magreg.43.t
+	desc = magreg.43.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.43.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.44" }
+	title = magreg.44.t
+	desc = magreg.44.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.44.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.45" }
+	title = magreg.45.t
+	desc = magreg.45.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.45.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.46" }
+	title = magreg.46.t
+	desc = magreg.46.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.46.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.47" }
+	title = magreg.47.t
+	desc = magreg.47.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.47.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.48" }
+	title = magreg.48.t
+	desc = magreg.48.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.48.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.49" }
+	title = magreg.49.t
+	desc = magreg.49.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.49.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = magreg.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event magreg.50" }
+	title = magreg.50.t
+	desc = magreg.50.desc
+	#picture = GFX_
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = magreg.50.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Superregional events ###
+
+#Petlin
+country_event = { #New Dawn
+	id = petlin.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.1" }
+	title = petlin.1.t
+	desc = petlin.1.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.1.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+		add_stability = 0.035
+	}
+}
+
+country_event = { #Bond the Eagles - USA
+	id = petlin.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.2" }
+	title = petlin.2.t
+	desc = petlin.2.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.2.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+		add_to_variable = { GDP = 500 }
+		add_opinion_modifier = {
+			target = MAG
+			modifier = RUS_trade
+		}
+		MAG = {
+			country_event = { id = petlin.3 }
+		}
+	}
+}
+
+country_event = { #Bond the Eagles - Magadan
+	id = petlin.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.3" }
+	title = petlin.3.t
+	desc = petlin.3.desc
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.3.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+		add_to_variable = { GDP = 500 }
+		add_opinion_modifier = {
+			target = USA
+			modifier = RUS_trade
+		}
+
+		hidden_effect = { #I randomly chose this as the trigger for a flavour event
+			MAG = { 
+				country_event = {
+					id = petlin.13
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Shadow of the Vozhd
+	id = petlin.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.4" }
+	title = petlin.4.t
+	desc = petlin.4.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.4.a
+		ai_chance = { factor = 1 }
+		add_political_power = -15
+		add_popularity = { ideology = authoritarian_democrat popularity = 0.05 }
+	}
+}
+
+country_event = { #Disband Dalstroy
+	id = petlin.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.5" }
+	title = petlin.5.t
+	desc = petlin.5.desc
+	picture = GFX_report_event_russian_crowd
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.5.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Redemption of Harbin
+	id = petlin.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.6" }
+	title = petlin.6.t
+	desc = petlin.6.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.6.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.075
+		add_war_support = 0.05
+		add_political_power = 75
+	}
+}
+
+country_event = { #Assembly of Novosibirsk 1
+	id = petlin.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.7" }
+	title = petlin.7.t
+	desc = petlin.7.desc
+	picture = GFX_report_event_komi_congress_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.7.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = petlin.8 days = 7 }
+		}
+	}
+}
+
+country_event = { #Assembly of Novosibirsk 2
+	id = petlin.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.8" }
+	title = petlin.8.t
+	desc = petlin.8.desc
+	picture = GFX_report_event_komi_congress_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.8.a
+		ai_chance = { factor = 1 }
+		set_capital = 570
+		RUS_integration_cost_days_decrease = yes
+		add_popularity = { ideology = social_liberal popularity = 0.035 }
+		add_popularity = { ideology = social_conservative popularity = 0.025 }
+		add_popularity = { ideology = authoritarian_democrat popularity = 0.025 }
+		add_political_power = -50
+		tno_political_parties_improve = yes
+	}
+}
+
+country_event = { #Drafting a Constitution
+	id = petlin.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.9" }
+	title = petlin.9.t
+	desc = petlin.9.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.9.a
+		ai_chance = { factor = 1 }
+		add_political_power = 35
+	}
+}
+
+country_event = { #Towards Freedom and Unity
+	id = petlin.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.10" }
+	title = petlin.10.t
+	desc = petlin.10.desc
+	picture = GFX_report_event_komi_syktyvkar_5
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.10.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Home Again
+	id = petlin.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.11" }
+	title = petlin.11.t
+	desc = petlin.11.desc
+	picture = GFX_report_event_komi_house_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.11.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Epilogue
+	id = petlin.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.12" }
+	title = petlin.12.t
+	desc = petlin.12.desc
+	picture = GFX_report_event_komi_syktyvkar_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.12.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			create_country_leader = {
+				name = "Mitchell WerBell III"
+				desc = "POLITICS_MITCHELL_WERBELL_DESC"
+				picture = "Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
+				expire = "1999.1.1"
+				ideology = authoritarian_democrat_subtype
+				traits = {
+	
+				}
+			}
+			TNO_russia_ending_screen = yes
+		}
+	}
+}
+
+country_event = { #Siberian Sports (a flavour event)
+	id = petlin.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.13" }
+	title = petlin.13.t
+	desc = petlin.13.desc
+	picture = GFX_report_event_hockey
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.13.a
+		ai_chance = { factor = 1 }
+		add_political_power = 10
+	}
+}
+
+country_event = { #The Old Admiral
+	id = petlin.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event petlin.14" }
+	title = petlin.14.t
+	desc = petlin.14.desc
+	picture = GFX_report_event_river_boat
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = petlin.14.a
+		ai_chance = { factor = 1 }
+		navy_experience = 5
+	}
+}
+
+#Matkovsky
+country_event = { #The Vozhd Marches On
+	id = matkovsky.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.1" }
+	title = matkovsky.1.t
+	desc = matkovsky.1.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = matkovsky.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.2" }
+	title = matkovsky.2.t
+	desc = matkovsky.2.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.2.a
+		ai_chance = { factor = 1 }
+		add_popularity = { ideology = despotism popularity = 0.015 }
+	}
+}
+
+country_event = { #Qualify Votes and Districts
+	id = matkovsky.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.3" }
+	title = matkovsky.3.t
+	desc = matkovsky.3.desc
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.3.a
+		ai_chance = { factor = 1 }
+		add_popularity = { ideology = despotism popularity = 0.015 }
+	}
+}
+
+country_event = { #The Ideological Quagmire
+	id = matkovsky.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.4" }
+	title = matkovsky.4.t
+	desc = matkovsky.4.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.4.a
+		ai_chance = { factor = 1 }
+		RUS_integration_cost_days_decrease = yes
+	}
+}
+
+country_event = { #The Consciousness of Law
+	id = matkovsky.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.5" }
+	title = matkovsky.5.t
+	desc = matkovsky.5.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.5.a
+		ai_chance = { factor = 1 }
+		tno_security_improve = yes
+	}
+}
+
+country_event = { #Peace Preservation Act
+	id = matkovsky.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.6" }
+	title = matkovsky.6.t
+	desc = matkovsky.6.desc
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.6.a
+		ai_chance = { factor = 1 }
+		add_ideas = tno_political_parties_one_party_state
+		add_ideas = MAG_peace_preservation_act_idea
+	}
+}
+
+country_event = { #No Partisanship, No Problem
+	id = matkovsky.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.7" }
+	title = matkovsky.7.t
+	desc = matkovsky.7.desc
+	picture = GFX_report_event_usa_election_generic
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.7.a
+		ai_chance = { factor = 1 }
+		add_political_power = 5
+		add_popularity = { ideology = despotism popularity = 0.01 }
+	}
+}
+
+country_event = { #Sensible Concessions
+	id = matkovsky.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.8" }
+	title = matkovsky.8.t
+	desc = matkovsky.8.desc
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.8.a
+		ai_chance = { factor = 1 }
+		add_opinion_modifier = {
+			target = MAG
+			modifier = TNO_good_diplomatic_relations
+		}
+		MAG = {
+			add_opinion_modifier = {
+				target = USA
+				modifier = TNO_good_diplomatic_relations
+			}
+		}
+	}
+}
+
+country_event = { #An Army to be Proud Of
+	id = matkovsky.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.9" }
+	title = matkovsky.9.t
+	desc = matkovsky.9.desc
+	picture = GFX_report_event_soldiers_training
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.9.a
+		ai_chance = { factor = 1 }
+		army_experience = 5
+	}
+}
+
+country_event = { #The Struggle for the National Russia
+	id = matkovsky.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.10" }
+	title = matkovsky.10.t
+	desc = matkovsky.10.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.10.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Epilogue
+	id = matkovsky.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event matkovsky.11" }
+	title = matkovsky.11.t
+	desc = matkovsky.11.desc
+	picture = GFX_report_event_record_player
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = matkovsky.11.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = MAG_matkovsky_70s_tt
+		hidden_effect = {
+			create_country_leader = {
+				name = "Mikhail Matkovsky"
+				desc = "POLITICS_MIKHAIL_MATKOVSKY_70S_DESC"
+				picture = "Portrait_Magadan_Mikhail_Matkovsky_70s.dds"
+				expire = "1999.1.1"
+				ideology = despotism_subtype
+				traits = { the_knyaz }
+			}
+			TNO_russia_ending_screen = yes
+		}
+	}
+}
+
+### West Alaska events ###
+country_event = { #The Republic of West Alaska
+	id = westalaska.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.1"}
+	title = westalaska.1.t
+	desc = westalaska.1.desc
+	picture = GFX_report_event_radio_magadan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.1.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.035
+		add_political_power = 25
+	}
+}
+
+country_event = { #Fate of the Tsar
+	id = westalaska.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.2"}
+	title = westalaska.2.t
+	desc = westalaska.2.desc
+	picture = GFX_report_event_russia_imperial_standard
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.2.a
+		ai_chance = { factor = 1 }
+		add_political_power = 15
+	}
+}
+
+country_event = { #Reports from Moses
+	id = westalaska.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.3"}
+	title = westalaska.3.t
+	desc = westalaska.3.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.3.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.035
+	}
+}
+
+country_event = { #The World Calls for Wetwork
+	id = westalaska.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.4"}
+	title = westalaska.4.t
+	desc = westalaska.4.desc
+	picture = GFX_report_event_west_alaska_mercs
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.4.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.035
+		add_manpower = 5000
+		hidden_effect = {
+			country_event = { id = westalaska.58 days = 21 }
+		}
+	}
+}
+
+country_event = { #The Reds
+	id = westalaska.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.5"}
+	title = westalaska.5.t
+	desc = westalaska.5.desc
+	picture = GFX_report_event_the_man_who_sold_the_world
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.5.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Rules of Nature - dealing with Yagoda
+	id = westalaska.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.6"}
+	title = westalaska.6.t
+	desc = westalaska.6.desc
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.6.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Lessons Learned - dealing with Sablin
+	id = westalaska.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.7"}
+	title = westalaska.7.t
+	desc = westalaska.7.desc
+	picture = GFX_report_event_iberia_meeting_table
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.7.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Proclaim the Soldier's Republic - Drafting a constitution
+	id = westalaska.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.8"}
+	title = westalaska.8.t
+	desc = westalaska.8.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.8.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+	}
+}
+
+country_event = { #Face the Father
+	id = westalaska.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.9"}
+	title = westalaska.9.t
+	desc = westalaska.9.desc
+	picture = GFX_report_event_orthodox_bible
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Best is yet to Come
+	id = westalaska.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event westalaska.10"}
+	title = westalaska.10.t
+	desc = westalaska.10.desc
+	picture = GFX_report_event_werbell_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = westalaska.10.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = MAG_west_alaska_regional_trees
+			country_event = { id = westalaska.48 days = 14 random = 24 }
+		}
+	}
+}
+
+country_event = { #In Defense of the Republic
+	id = westalaska.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.11" }
+	title = westalaska.11.t
+	desc = westalaska.11.desc
+	picture = GFX_report_event_iberia_detective_desk
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.11.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+	}
+}
+
+country_event = { #Modernization and Standardization
+	id = westalaska.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.12" }
+	title = westalaska.12.t
+	desc = westalaska.12.desc
+	picture = GFX_report_event_west_alaska_werbell_training
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.12.a
+		ai_chance = { factor = 1 }
+		TNO_improve_army_professionalism_low = yes
+	}
+}
+
+country_event = { #Encourage Local Recruitment
+	id = westalaska.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.13" }
+	title = westalaska.13.t
+	desc = westalaska.13.desc
+	picture = GFX_report_event_west_alaska_mercs
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Heia Safari!
+	id = westalaska.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.14" }
+	title = westalaska.14.t
+	desc = westalaska.14.desc
+	picture = GFX_report_event_radio_magadan
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.14.a
+		ai_chance = { factor = 1 }
+		create_corps_commander = {
+			name = "Fernando Calistrat"
+			picture = "Portrait_West_Alaska_Fernando_Calistrat.dds"
+			skill = 3
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 4
+			logistics_skill = 1
+			traits = { foreign_mercenary media_personality organizer skilled_staffer }
+			id = 3781
+		}
+		create_corps_commander = {
+			name = "Roy Larsen"
+			picture = "Portrait_West_Alaska_Roy_Larsen.dds"
+			skill = 2
+			attack_skill = 1
+			defense_skill = 3
+			planning_skill = 1
+			logistics_skill = 2
+			traits = { foreign_mercenary infantry_officer trickster winter_specialist }
+			id = 3782
+		}
+	}
+}
+
+country_event = { #The Man of a Thousand Lives
+	id = westalaska.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.15" }
+	title = westalaska.15.t
+	desc = westalaska.15.desc
+	picture = GFX_report_event_west_alaska_faulques
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.15.a
+		ai_chance = { factor = 1 }
+		set_country_flag = MAG_WA_Roger_Faulques_available
+		custom_effect_tooltip = MAG_WA_Roger_Faulques_available_tt
+		create_corps_commander = {
+			name = "Roger Faulques"
+			desc = "MILITARY_ROGER_FAULQUES_DESC"
+			picture = "Portrait_West_Alaska_Roger_Faulques.dds"
+			skill = 3
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 3
+			logistics_skill = 3
+			traits = { foreign_mercenary harsh_leader commando }
+			id = 3783
+		}
+	}
+}
+
+country_event = { #Hotline America
+	id = westalaska.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.16" }
+	title = westalaska.16.t
+	desc = westalaska.16.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.16.a
+		ai_chance = { factor = 1 }
+		unlock_decision_category_tooltip = MAG_WA_USA_market_category
+		set_country_flag = MAG_WA_USA_relations
+		hidden_effect = {
+			activate_mission = MAG_WA_USA_influence_ticker
+			set_variable = { var = MAG_USA_support value = 10 }
+		}
+	}
+}
+
+country_event = { #Military Armaments Corporation
+	id = westalaska.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.17" }
+	title = westalaska.17.t
+	desc = westalaska.17.desc
+	picture = GFX_report_event_arms_dealers
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.17.a
+		ai_chance = { factor = 1 }
+		add_ideas = MAG_WA_MAC
+		hidden_effect = {
+			country_event = { id = westalaska.50 days = 28 random = 72 }
+		}
+	}
+}
+
+country_event = { #Construct New Training Centers
+	id = westalaska.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.18" }
+	title = westalaska.18.t
+	desc = westalaska.18.desc
+	picture = GFX_report_event_soldiers_training
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.18.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A New Haven
+	id = westalaska.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.19" }
+	title = westalaska.19.t
+	desc = westalaska.19.desc
+	picture = GFX_report_event_iberia_home_office_desk
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.19.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.075
+	}
+}
+
+country_event = { #Illiberalism By Necessity
+	id = westalaska.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.20" }
+	title = westalaska.20.t
+	desc = westalaska.20.desc
+	picture = GFX_report_event_russia_advertisements
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.20.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Integrating the NKVD
+	id = westalaska.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.21" }
+	title = westalaska.21.t
+	desc = westalaska.21.desc
+	picture = GFX_report_event_russia_nkvd_officer
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.21.a
+		ai_chance = { factor = 1 }
+		IRK = {
+			every_unit_leader = {
+				limit = {
+					OR = {
+						has_id = 3702
+						has_id = 3707
+					}
+				}
+				set_nationality = MAG
+			}
+		}
+	}
+}
+
+country_event = { #Make Use of the Blackshirts
+	id = westalaska.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.22" }
+	title = westalaska.22.t
+	desc = westalaska.22.desc
+	picture = GFX_report_event_russia_roa_soldier
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.22.a
+		ai_chance = { factor = 1 }
+		AMR = {
+			every_unit_leader = {
+				limit = {
+					has_id = 3757
+				}
+				set_nationality = MAG
+			}
+		}
+		MAG = {
+			every_unit_leader = {
+				limit = {
+					has_id = 3773
+				}
+				set_nationality = MAG
+			}
+		}
+	}
+}
+
+country_event = { #Executive Orders
+	id = westalaska.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.23" }
+	title = westalaska.23.t
+	desc = westalaska.23.desc
+	picture = GFX_report_event_the_man_who_sold_the_world
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.23.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Velvet-Gloved Iron Fist
+	id = westalaska.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.24" }
+	title = westalaska.24.t
+	desc = westalaska.24.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.24.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #The Carrot and the Stick
+	id = westalaska.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.25" }
+	title = westalaska.25.t
+	desc = westalaska.25.desc
+	picture = GFX_report_event_russia_siberian_worker
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.25.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #With Us or Against Us
+	id = westalaska.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.26" }
+	title = westalaska.26.t
+	desc = westalaska.26.desc
+	picture = GFX_report_event_russia_west_alaska_report
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.26.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Assign Regional Commanders
+	id = westalaska.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.27" }
+	title = westalaska.27.t
+	desc = westalaska.27.desc
+	picture = GFX_report_event_russia_orenburg
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.27.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Representation through Service
+	id = westalaska.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.28" }
+	title = westalaska.28.t
+	desc = westalaska.28.desc
+	picture = GFX_report_event_russia_food_line
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.28.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #By the Dawn's Early Light
+	id = westalaska.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.29" }
+	title = westalaska.29.t
+	desc = westalaska.29.desc
+	picture = GFX_report_event_russia_magadan_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.29.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Woe to the Vanquished
+	id = westalaska.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.30" }
+	title = westalaska.30.t
+	desc = westalaska.30.desc
+	picture = GFX_report_event_russia_tsarist_treasure
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.30.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Open for Business
+	id = westalaska.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.31" }
+	title = westalaska.31.t
+	desc = westalaska.31.desc
+	picture = GFX_report_event_winter_soldiers
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.31.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Cautious Reinvestment
+	id = westalaska.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.32" }
+	title = westalaska.32.t
+	desc = westalaska.32.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.32.a
+		ai_chance = { factor = 1 }
+		set_country_flag = MAG_WA_american_economy_flag
+		MAG_increase_USA_support_med = yes
+		custom_effect_tooltip = MAG_WA_american_economy_tt
+	}
+	option = { #
+		name = westalaska.32.b
+		ai_chance = { factor = 1 }
+		set_country_flag = MAG_WA_russian_economy_flag
+		add_political_power = 25
+		custom_effect_tooltip = MAG_WA_russian_economy_tt
+	}
+}
+
+country_event = { #Invite American Companies
+	id = westalaska.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.33" }
+	title = westalaska.33.t
+	desc = westalaska.33.desc
+	picture = GFX_report_event_truck_logging
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.33.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Contracts and Connections
+	id = westalaska.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.34" }
+	title = westalaska.34.t
+	desc = westalaska.34.desc
+	picture = GFX_report_event_usa_wfb_subcommittees
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.34.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Taste of American Capitalism
+	id = westalaska.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.35" }
+	title = westalaska.35.t
+	desc = westalaska.35.desc
+	picture = GFX_report_event_coca_cola_ad
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.35.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #And the Locals to Work
+	id = westalaska.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.36" }
+	title = westalaska.36.t
+	desc = westalaska.36.desc
+	picture = GFX_report_event_Flatcap_Worker
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.36.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Information Trade
+	id = westalaska.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.37" }
+	title = westalaska.37.t
+	desc = westalaska.37.desc
+	picture = GFX_report_event_iberia_guy_paper_meeting
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.37.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Respectable Distance
+	id = westalaska.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.38" }
+	title = westalaska.38.t
+	desc = westalaska.38.desc
+	picture = GFX_report_event_free_france_shipments
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.38.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Brand New Market
+	id = westalaska.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.39" }
+	title = westalaska.39.t
+	desc = westalaska.39.desc
+	picture = GFX_report_event_river_boat
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.39.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Back in the Game
+	id = westalaska.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.40" }
+	title = westalaska.40.t
+	desc = westalaska.40.desc
+	picture = GFX_report_event_usa_wfb_silver_bars
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.40.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Appeal USA for recognition
+	id = westalaska.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.41" }
+	title = westalaska.41.t
+	desc = westalaska.41.desc
+	picture = GFX_report_event_russia_west_alaska_flag_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Accept
+		name = westalaska.41.a
+		ai_chance = { factor = 5 }
+		add_opinion_modifier = {
+			target = MAG
+			modifier = RUS_recognition
+		}
+		MAG = {
+			country_event = { id = westalaska.42 }
+		}
+	}
+	option = { #Decline
+		name = westalaska.41.b
+		ai_chance = {
+			base = 5
+			modifier = { check_variable = { MAG_USA_support > 60 } factor = 0 }
+			modifier = { check_variable = { MAG_USA_support > 40 } factor = 3 }
+		}
+		MAG = {
+			country_event = { id = westalaska.43 }
+		}
+	}
+}
+
+country_event = { #USA accepts
+	id = westalaska.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.42" }
+	title = westalaska.42.t
+	desc = westalaska.42.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.42.a
+		ai_chance = { factor = 1 }
+		set_country_flag = MAG_WA_USA_recognition
+		add_opinion_modifier = {
+			target = USA
+			modifier = RUS_recognition
+		}
+	}
+}
+
+country_event = { #USA declines
+	id = westalaska.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.43" }
+	title = westalaska.43.t
+	desc = westalaska.43.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.43.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Trade with OFN minors
+	id = westalaska.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.44" }
+	title = westalaska.44.t
+	desc = westalaska.44.desc
+	picture = GFX_report_event_usa_wfb_pegged_currency_meeting
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.44.a
+		ai_chance = { factor = 5 }
+		add_opinion_modifier = {
+			target = MAG
+			modifier = RUS_trade
+		}
+		MAG = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = RUS_trade
+			}
+		}
+	}
+	option = { #
+		name = westalaska.44.b
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Denouncing Japan
+	id = westalaska.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.45" }
+	title = westalaska.45.t
+	desc = westalaska.45.desc
+	picture = GFX_report_event_werbell_suit
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.45.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #America has recognised us, how much do we cooperate with them?
+	id = westalaska.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.46" }
+	title = westalaska.46.t
+	desc = westalaska.46.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #eh just a bit of cia support
+		name = westalaska.46.a
+		ai_chance = { factor = 1 }
+		set_country_flag = MAG_WA_USA_under
+	}
+	option = { #BAH GAWD DID SOMEONE MENTION THE GOD-BLESSED UNITED STATES OF AMERICA?
+		name = westalaska.46.b
+		ai_chance = { factor = 1 }
+		set_country_flag = MAG_WA_USA_over
+	}
+}
+
+country_event = { #America has not recognised us, but are still willing to support us covertly
+	id = westalaska.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.47" }
+	title = westalaska.47.t
+	desc = westalaska.47.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.47.a
+		ai_chance = { factor = 1 }
+		set_country_flag = MAG_WA_USA_under
+	}
+}
+
+country_event = { #Nancy leaves
+	id = westalaska.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.48" }
+	title = westalaska.48.t
+	desc = westalaska.48.desc
+	picture = GFX_report_event_river_boat
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.48.a
+		ai_chance = { factor = 1 }
+		swap_ideas = {
+			remove_idea = MAG_Nancy_Wake_hog
+			add_idea = MAG_Gordon_Ingram_hog
+		}
+		remove_unit_leader = 3777
+	}
+}
+
+country_event = { #New Haven
+	id = westalaska.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.49" }
+	title = westalaska.49.t
+	desc = westalaska.49.desc
+	picture = GFX_report_event_russia_magadan_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.49.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Gun that Conquered Russia
+	id = westalaska.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.50" }
+	title = westalaska.50.t
+	desc = westalaska.50.desc
+	picture = GFX_report_event_arms_dealers
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.50.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Supplying Wetwork
+	id = westalaska.51
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.51" }
+	title = westalaska.51.t
+	desc = westalaska.51.desc
+	picture = GFX_report_event_russia_west_alaska_flag_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.51.a
+		ai_chance = { factor = 1 }
+		unlock_decision_category_tooltip = MAG_WA_mercenary_contracts_category
+		set_country_flag = MAG_WA_mercenary_contracts_flag
+	}
+}
+
+country_event = { #Legal Path to Collaboration
+	id = westalaska.52
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.52" }
+	title = westalaska.52.t
+	desc = westalaska.52.desc
+	picture = GFX_report_event_iberia_home_office_desk
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.52.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Prioritize the Mercenary State
+	id = westalaska.53
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.53" }
+	title = westalaska.53.t
+	desc = westalaska.53.desc
+	picture = GFX_report_event_iberia_guy_paper_meeting
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.53.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Bad News
+	id = westalaska.54
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.54" }
+	title = westalaska.54.t
+	desc = westalaska.54.desc
+	picture = GFX_report_event_russia_west_alaska_report
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.54.a
+		ai_chance = { factor = 1 }
+		add_stability = -0.075
+	}
+}
+
+country_event = { #Under the Table
+	id = westalaska.55
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.55" }
+	title = westalaska.55.t
+	desc = westalaska.55.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.55.a
+		ai_chance = { factor = 1 }
+		add_ideas = MAG_WA_covert_support
+	}
+}
+
+country_event = { #A Group Above Nations
+	id = westalaska.56
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.56" }
+	title = westalaska.56.t
+	desc = westalaska.56.desc
+	picture = GFX_report_event_werbell_suit
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.56.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Over the Table
+	id = westalaska.57
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.57" }
+	title = westalaska.57.t
+	desc = westalaska.57.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.57.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Blackbear Special Activities Unit ###
+country_event = { #Boot Camp
+	id = westalaska.58
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.58" }
+	title = westalaska.58.t
+	desc = westalaska.58.desc
+	picture = GFX_report_event_west_alaska_mercs
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.58.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = westalaska.59 days = 21 }
+		}
+	}
+}
+
+country_event = { #Field Training
+	id = westalaska.59
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.59" }
+	title = westalaska.59.t
+	desc = westalaska.59.desc
+	picture = GFX_report_event_winter_soldiers
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.59.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Squad Patrol
+	id = westalaska.60
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.60" }
+	title = westalaska.60.t
+	desc = westalaska.60.desc
+	picture = GFX_report_event_west_alaska_merc_unit
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.60.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = MAG_special_activities_unit_tt
+		hidden_effect = {
+			load_oob = MAG_blackbears
+		}
+	}
+}
+
+country_event = { #
+	id = westalaska.61
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.61" }
+	title = westalaska.61.t
+	desc = westalaska.61.desc
+	picture = GFX_report_event_west_alaska_merc_unit
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.61.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = westalaska.62
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.62" }
+	title = westalaska.62.t
+	desc = westalaska.62.desc
+	picture = GFX_report_event_west_alaska_merc_unit
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = westalaska.62.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Mercenary Contract events ###
+country_event = { #WA offers mercenary contract
+	id = westalaska.100
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.100" }
+	title = westalaska.100.t
+	desc = westalaska.100.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	option = { #Accept contract
+		name = westalaska.100.a
+		ai_chance = { factor = 9 }
+		add_to_variable = { national_debt = 10 }
+		add_ideas = MAG_WA_mercenary_contract_idea
+		MAG = {
+			country_event = { id = westalaska.101 }
+		}
+	}
+	option = { #Decline contract
+		name = westalaska.100.b
+		ai_chance = { factor = 1 }
+		MAG = {
+			country_event = { id = westalaska.102 }
+		}
+	}
+}
+country_event = { #Contract accepted
+	id = westalaska.101
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.101" }
+	title = westalaska.101.t
+	desc = westalaska.101.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = westalaska.101.a
+		ai_chance = { factor = 1 }
+		add_to_variable = { money_reserves = 10 }
+	}
+}
+country_event = { #Contract declined
+	id = westalaska.102
+	immediate = { log = "[GetDateText]: [Root.GetName]: event westalaska.102" }
+	title = westalaska.102.t
+	desc = westalaska.102.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = westalaska.102.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+### West Alaska superregional events ###
+
+country_event = { #Fortis Fortuna Adiuvat
+	id = wa_superregional.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.1" }
+	title = wa_superregional.1.t
+	desc = wa_superregional.1.desc
+	picture = GFX_report_event_the_man_who_sold_the_world
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.1.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Pacification of the Great Giant
+	id = wa_superregional.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.2" }
+	title = wa_superregional.2.t
+	desc = wa_superregional.2.desc
+	picture = GFX_report_event_russia_tomsk_protests_color
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.2.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Spreading Our Network
+	id = wa_superregional.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.3" }
+	title = wa_superregional.3.t
+	desc = wa_superregional.3.desc
+	picture = GFX_report_event_ffr_female_aviators
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.3.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #A Rejuvenated Civil Service
+	id = wa_superregional.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.4" }
+	title = wa_superregional.4.t
+	desc = wa_superregional.4.desc
+	picture = GFX_report_event_cog_merc_9
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.4.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Employment Opportunities
+	id = wa_superregional.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.5" }
+	title = wa_superregional.5.t
+	desc = wa_superregional.5.desc
+	picture = GFX_report_event_soviet_russian_soldiers_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.5.a
+		ai_chance = { factor = 1 }
+		PAV = {
+			every_unit_leader = {
+				limit = {
+					OR = {
+						has_id = 3616
+						has_id = 3619
+						has_id = 3622
+					}
+				}
+				set_nationality = MAG
+			}
+		}
+	}
+}
+
+country_event = { #Towards a Sovereign State
+	id = wa_superregional.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.6" }
+	title = wa_superregional.6.t
+	desc = wa_superregional.6.desc
+	picture = GFX_report_event_werbell_suit
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.6.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #From a Rabble to an Army
+	id = wa_superregional.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.7" }
+	title = wa_superregional.7.t
+	desc = wa_superregional.7.desc
+	picture = GFX_report_event_cog_merc_car_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.7.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Wagons Westward!
+	id = wa_superregional.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.8" }
+	title = wa_superregional.8.t
+	desc = wa_superregional.8.desc
+	picture = GFX_report_event_west_alaska_werbell_training
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.8.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Expanding the Federal System
+	id = wa_superregional.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.9" }
+	title = wa_superregional.9.t
+	desc = wa_superregional.9.desc
+	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.9.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Epilogue
+	id = wa_superregional.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.10" }
+	title = wa_superregional.10.t
+	desc = wa_superregional.10.desc
+	picture = GFX_report_event_werbell_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.10.a
+		ai_chance = { factor = 1 }
+		TNO_russia_ending_screen = yes
+	}
+}
+
+country_event = { #The Art of Living Dangerously
+	id = wa_superregional.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.11" }
+	title = wa_superregional.11.t
+	desc = wa_superregional.11.desc
+	picture = GFX_report_event_russia_west_alaska_report
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.11.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A Call to Uncle Sam
+	id = wa_superregional.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.12" }
+	title = wa_superregional.12.t
+	desc = wa_superregional.12.desc
+	picture = GFX_report_event_generic_office
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.12.a
+		ai_chance = { factor = 1 }
+		MAG_increase_USA_support_med = yes
+	}
+}
+
+country_event = { #Watership Down
+	id = wa_superregional.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wa_superregional.13" }
+	title = wa_superregional.13.t
+	desc = wa_superregional.13.desc
+	picture = GFX_report_event_river_boat
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = wa_superregional.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+##########################################################################################################
+country_event = { #debug event for US relations
+	id = MAG.1000
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.1000"}
+	title = MAG.1000.t
+	desc = MAG.1000.desc
+	picture = GFX_report_event_south_african_war_us_soldier4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MAG.1000.a
+		ai_chance = { factor = 1 }
+		MAG_increase_USA_support_very_high = yes
+	}
+	option = {
+		name = MAG.1000.b
+		ai_chance = { factor = 1 }
+		MAG_decrease_USA_support_very_high = yes
+	}
+}
+
+country_event = { #Debug event for merc army dynmod
+	id = MAG.1001
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAG.1001"}
+	title = MAG.1001.t
+	desc = MAG.1001.desc
+	picture = GFX_report_event_south_african_war_us_soldier4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MAG.1001.a
+		ai_chance = { factor = 1 }
+		add_dynamic_modifier = { modifier = MAG_WA_a_mercenary_army }
+		set_variable = { MAG_WA_merc_army_conscription_factor = -0.15 }
+		set_variable = { MAG_WA_merc_army_army_org_factor = 0.1 }
+		set_variable = { MAG_WA_merc_army_army_attack_factor = 0.1 }
+		set_variable = { MAG_WA_merc_army_army_defence_factor = 0.1 }
+		set_variable = { MAG_WA_merc_army_army_morale_factor = 0.025 }
+		set_variable = { MAG_WA_merc_army_production_factory_max_efficiency_factor = -0.10 }
+		set_variable = { MAG_WA_merc_army_trade_opinion_factor = 0.40 }
+	}
+}
