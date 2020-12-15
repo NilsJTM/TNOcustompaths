@@ -2,7 +2,7 @@ version="RC1"
 tags={
 	"Ideologies"
 }
-name="The New Order: Custom Country Paths"
+name="The New Order: Custom Country Paths GitHub Version"
 picture="thumbnail.png"
 dependencies={
 	"The New Order: Last Days of Europe"
