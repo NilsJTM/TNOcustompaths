@@ -3488,6 +3488,7 @@ country_event = {
 		ai_chance = { factor = 1 }
 		hidden_effect = {
 			set_variable = { NPP_candidate_party = 6 }
+			USA_debate_64_effect = yes #fires a sequence of debate events
 			log = "[GetDateText]: [Root.GetName]: 1964 NPP primaries: Wallace"
 			367 = { #Wallace home state bonus for Alabama
 				set_temp_variable = { popularity_bonus = 0.15 }
@@ -3507,6 +3508,7 @@ country_event = {
 		ai_chance = { factor = 1 }
 		hidden_effect = {
 			set_variable = { NPP_candidate_party = 4 }
+			USA_debate_64_effect = yes #fires a sequence of debate events
 			log = "[GetDateText]: [Root.GetName]: 1964 RD primaries: Kennedy"
 			949 = { #RFK home state bonus for Massachusetts
 				set_temp_variable = { popularity_bonus = 0.15 }
@@ -3559,7 +3561,6 @@ country_event = {
 		set_country_flag = USA_bennett_primary_64
 		hidden_effect = {
 			set_variable = { RD_candidate_party = 2 }
-			USA_debate_64_effect = yes #fires a sequence of debate events
 			log = "[GetDateText]: [Root.GetName]: 1964 RD primaries: Bennett"
 			380 = { #Bennett home state bonus for Utah
 				set_temp_variable = { popularity_bonus = 0.15 }
@@ -3583,7 +3584,6 @@ country_event = {
 		set_country_flag = USA_johnson_primary_64
 		hidden_effect = {
 			set_variable = { RD_candidate_party = 1 }
-			USA_debate_64_effect = yes #fires a sequence of debate events
 			log = "[GetDateText]: [Root.GetName]: 1964 RD primaries: Johnson"
 			375 = { #LBJ home state bonus for Texas
 				set_temp_variable = { popularity_bonus = 0.15 }
@@ -4532,8 +4532,8 @@ country_event = { #angolan refugee urges NPP to action
  				limit = {
  					can_have_elections_in_state = yes
  					OR = {
- 						check_variable = { nationality = 83}
- 						check_variable = { nationality = 84}
+ 						check_variable = { nationality = 83} #Dixie
+ 						check_variable = { nationality = 84} #African American
  					}
  				}
  				subtract_from_variable = { NPP_popularity = 0.05}
@@ -4541,7 +4541,7 @@ country_event = { #angolan refugee urges NPP to action
  			every_owned_state = {
  				limit = {
  					can_have_elections_in_state = yes
- 					check_variable = { RD_D_bonus_popularity > RD_R_bonus_popularity}
+ 					check_variable = { RD_D_bonus_popularity > RD_R_bonus_popularity }
  				}
  				add_to_variable = { RD_D_bonus_popularity = 0.05}
  				add_to_variable = { RD_popularity = 0.05 }
@@ -4562,7 +4562,7 @@ country_event = { #angolan refugee urges NPP to action
  				limit = {
  					can_have_elections_in_state = yes
  				}
- 				subtract_from_variable = { NPP_popularity = 0.05}
+ 				add_to_variable = { NPP_popularity = 0.05}
  			}
  		}
  	}
@@ -10019,7 +10019,7 @@ country_event = { #Glenn Second Inauguration
 	id = USA.1742
 	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1742"}
 	title = USA.1742.t
-	desc = USA.1742.d
+	desc = USA.1742.desc
 	picture = GFX_report_event_us_presidential_podium
 
 	is_triggered_only = yes
@@ -14865,8 +14865,8 @@ country_event = { #The situation... It's kinda shit
 	option = { #We gotta fix this
 		name = USA.oilcrisis.1.a
 		ai_chance = { factor = 1 }
-    add_political_power = -125
-	add_stability = -0.05
+		add_political_power = -125
+		add_stability = -0.05
 	
 	}
 }
@@ -14885,8 +14885,8 @@ country_event = { #Setting prices time
 		name = USA.oilcrisis.2.a
 		ai_chance = { factor = 1 }
 		TNO_Oil_Crisis_reduce_effects_USA = yes
-    add_political_power = 25
-    add_to_variable = { misc_costs = 50 }
+		add_political_power = 25
+		add_to_variable = { misc_costs = 50 }
 	}
 }
 
@@ -21549,6 +21549,9 @@ country_event = { #Moratorium to End the War in South Africa
 	title = USA.flavor.2.t
 	desc = USA.flavor.2.desc
 	picture = GFX_report_event_USA_SAW_protest
+	trigger = {
+		has_global_flag = south_african_war_happening
+	}
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -21667,6 +21670,150 @@ country_event = { #Growing Y-NPP 3
 
 	option = {
 		name = USA.flavor.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Greenland Flavor
+	id = USA.flavor.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.10" }
+	title = USA.flavor.10.t
+	desc = USA.flavor.10.desc
+	picture = GFX_report_event_american_police
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.10.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Argentina Flavor
+	id = USA.flavor.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.11" }
+	title = USA.flavor.11.t
+	desc = USA.flavor.11.desc
+	picture = GFX_report_event_wharf
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.11.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Puerto Rico Flavor
+	id = USA.flavor.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.12" }
+	title = USA.flavor.12.t
+	desc = USA.flavor.12.desc
+	picture = GFX_report_event_iberia_arritera_beach
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.12.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Bermuda Flavor
+	id = USA.flavor.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.13" }
+	title = USA.flavor.13.t
+	desc = USA.flavor.13.desc
+	picture = GFX_report_event_1980s_us_soldier
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #DC Flavor
+	id = USA.flavor.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.14" }
+	title = USA.flavor.14.t
+	desc = USA.flavor.14.desc
+	picture = GFX_report_event_american_police
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.14a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #SS United States
+	id = USA.flavor.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.15" }
+	title = USA.flavor.15.t
+	desc = USA.flavor.15.desc
+	picture = GFX_IRE_event_docks
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.15.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #American teacher forced to explain Russia
+	id = USA.flavor.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.16" }
+	title = USA.flavor.16.t
+	desc = USA.flavor.16.desc
+	picture = GFX_report_event_wales_school
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.16.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = USA.flavor.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.17" }
+	title = USA.flavor.17.t
+	desc = USA.flavor.17.desc
+	picture = GFX_report_event_american_police
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.17.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = USA.flavor.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.18" }
+	title = USA.flavor.18.t
+	desc = USA.flavor.18.desc
+	picture = GFX_report_event_american_police
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.18.a
 		ai_chance = { factor = 1 }
 	}
 }

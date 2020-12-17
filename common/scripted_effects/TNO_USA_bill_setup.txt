@@ -554,22 +554,22 @@ USA_mcs_americare_bill_setup = {
 	USA_bill_setup = yes
 	clamp_variable = { #make sure to clamp any support variable that can change! 
    		var = USA_RD_R_bill_support
-    		min = 0 
+    	min = 0 
    		max = 1 
 	}
 	clamp_variable = { #make sure to clamp any support variable that can change! 
    		var = RD_R_flip_cost 
-    		min = 0 
+    	min = 0 
    		max = 300 
 	}
 	clamp_variable = { #make sure to clamp any support variable that can change! 
    		var = USA_FR_NPP_bill_support
-    		min = 0 
+    	min = 0 
    		max = 1 
 	}
 	clamp_variable = { #make sure to clamp any support variable that can change! 
    		var = NPP_FR_flip_cost 
-    		min = 0 
+    	min = 0 
    		max = 300 
 	}	
 }
@@ -2813,6 +2813,33 @@ kirk_war_powers_act = {
 	USA_clamp_flip_cost = yes
 }
 
+#McGovern
+
+USA_mcgovern_withdrawal_setup = {
+	set_variable = { bill_id = 331 }
+	log = "[GetDateText]: [Root.GetName]: bill setup active"
+	set_variable = {RD_R_flip_cost = 10} 
+	set_variable = {RD_D_flip_cost = 20} 
+	set_variable = {NPP_C_flip_cost = 15} 
+	set_country_flag = RD_R_discussing
+	set_country_flag = RD_D_discussing
+	set_country_flag = C_NPP_discussing
+	set_country_flag = USA_BILL_EVENTLESS_NEGOTIATION
+	set_variable = {USA_RD_R_bill_support = 0.75}
+	set_variable = {USA_RD_D_bill_support = 0.2}
+	set_variable = {USA_C_NPP_bill_support = 0.2} 
+	set_variable = {USA_L_NPP_bill_support = 1}
+	set_variable = {USA_FR_NPP_bill_support = 0}
+	set_variable = {USA_Y_NPP_bill_support = 0} 
+	set_variable = {average_boost_RD_R = 0.25} 
+	set_variable = {average_boost_RD_D = 0.40} 
+	set_variable = {average_boost_C_NPP = 0.35} 
+	
+	USA_bill_setup = yes
+	USA_setup_bill_support_clamper = yes
+	USA_clamp_flip_cost = yes
+}
+
 USA_initialize_bill_support = {
 	set_country_flag = USA_discussing_bill
 	set_variable = {supporting_senators = 0}
@@ -3056,8 +3083,8 @@ check_if_bill_passed = {
 		limit = {
 			OR = {
 				check_variable = {
-					var = percent_support
-					value = votes_needed
+				var = percent_support
+				value = votes_needed
 					compare = greater_than_or_equals
 				}
 				AND = {
@@ -3510,26 +3537,4 @@ USA_Dynamic_Bill_Support = {
 		subtract_from_variable = { supporting_senators = new_bill_support }
 		}
 	}
-}
-
-USA_mcgovern_withdrawal_setup = {
-	set_variable = { bill_id = 331 }
-	log = "[GetDateText]: [Root.GetName]: bill setup active"
-	set_variable = {RD_R_flip_cost = 10} 
-	set_variable = {RD_D_flip_cost = 20} 
-	set_variable = {NPP_C_flip_cost = 15} 
-	set_country_flag = RD_R_discussing
-	set_country_flag = RD_D_discussing
-	set_country_flag = C_NPP_discussing
-	set_country_flag = USA_BILL_EVENTLESS_NEGOTIATION
-	set_variable = {USA_RD_R_bill_support = 0.75}
-	set_variable = {USA_RD_D_bill_support = 0.2}
-	set_variable = {USA_C_NPP_bill_support = 0.2} 
-	set_variable = {USA_L_NPP_bill_support = 1}
-	set_variable = {USA_FR_NPP_bill_support = 0}
-	set_variable = {USA_Y_NPP_bill_support = 0} 
-	
-	USA_bill_setup = yes
-	USA_setup_bill_support_clamper = yes
-	USA_clamp_flip_cost = yes
 }

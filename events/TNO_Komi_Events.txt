@@ -3203,6 +3203,7 @@ country_event = { #Suslov eats the loss, to rely on Ponomaryov
 		}
 		#NIK_increase_Ponomaryov_influence_high = yes
 		NIK_decrease_Suslov_influence_med = yes
+		set_country_flag = SUS_NO_BUKHARINA
 	}
 }
 
@@ -3215,11 +3216,11 @@ country_event = { #Bukharina makes a play
 
 	is_triggered_only = yes
 
-	option = { #TO PONOMARYOV
+	option = { #TO ANDROPOV
 		name = NIK.120.a
 		hidden_effect = {
 			country_event = {
-				id = NIK.121
+				id = NIK.122
 				days = 1
 			}
 		}
@@ -3231,7 +3232,7 @@ country_event = { #Bukharina makes a play
 		name = NIK.120.b
 		hidden_effect = {
 			country_event = {
-				id = NIK.124
+				id = NIK.122
 				days = 1
 			}
 		}
@@ -3241,7 +3242,7 @@ country_event = { #Bukharina makes a play
 	}
 }
 
-country_event = { #Ponomaryov wins out, and Suslov loses him.
+country_event = { #Andropov wins out, and Suslov loses him.
 	id = NIK.121
 	immediate = {log = "[GetDateText]: [Root.GetName]: event NIK.121"}
 	title = NIK.121.t
@@ -3273,14 +3274,18 @@ country_event = { #Suslov hunts for another puppet.
 
 	option = {
 		name = NIK.122.a
+		trigger = {
+			NOT = {
+				has_country_flag = SUS_NO_BUKHARINA
+			}
+		}
 		hidden_effect = {
 			country_event = {
 				id = NIK.123
 				days = 1
 			}
 		}
-		NIK_decrease_left_power_high = yes
-		NIK_decrease_Zhdanov_influence_med = yes
+		NIK_increase_Bukharina_influence_med = yes
 	}
 	option = {
 		name = NIK.122.b
@@ -3294,7 +3299,7 @@ country_event = { #Suslov hunts for another puppet.
 	}
 }
 
-country_event = { #A no-namer is chosen
+country_event = { #Bukharina is chosen
 	id = NIK.123
 	immediate = {log = "[GetDateText]: [Root.GetName]: event NIK.123"}
 	title = NIK.123.t
@@ -3305,7 +3310,14 @@ country_event = { #A no-namer is chosen
 
 	option = {
 		name = NIK.123.a
-
+		clr_country_flag = ZHDANOV_NOMINEE
+		set_country_flag = BUKHARINA_NOMINEE
+		hidden_effect = {
+			country_event = {
+				id = NIK.126
+				days = 1
+			}
+		}
 	}
 }
 
@@ -3320,6 +3332,8 @@ country_event = { #Zhdanov is chosen
 
 	option = {
 		name = NIK.124.a
+		clr_country_flag = BUKHARINA_NOMINEE
+		set_country_flag = ZHDANOV_NOMINEE
 		hidden_effect = {
 			country_event = {
 				id = NIK.125
@@ -3479,7 +3493,7 @@ country_event = { #The deciding attempt.
 				days = 3
 			}
 		}
-		NIK_decrease_left_power_high = yes
+		NIK_decrease_left_power_med = yes
 		NIK_increase_Bukharina_influence_med = yes
 		NIK_increase_Zhdanov_influence_med = yes
 		NIK_decrease_Suslov_influence_high = yes
@@ -3501,6 +3515,8 @@ country_event = { #Zhdanov gets backstabbed and buried in a shallow grave. Suslo
 		custom_effect_tooltip = NIK_zhdanov_kill_tt
 		set_variable = { NIKZhdanovInfluence = 0 }
 		NIK_eliminate_left_leader = yes
+		clr_country_flag = ZHDANOV_NOMINEE
+		set_country_flag = BUKHARINA_NOMINEE
 		create_country_leader = {
 			name = "Svetlana Bukharina"
 			desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
@@ -3509,6 +3525,12 @@ country_event = { #Zhdanov gets backstabbed and buried in a shallow grave. Suslo
 			ideology = socialist_subtype
 			traits = {
 				daughter_of_soviet_union
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = NIK.13102
+				days = 3
 			}
 		}
 	}
@@ -3525,20 +3547,6 @@ country_event = { #Success! Suslov is disgraced, Bukharina and Zhdanov are the s
 
 	option = {
 		name = NIK.131.a
-		set_country_flag = NIK_Suslov_Retired
-		set_variable = { NIKSuslovInfluence = 0 }
-		NIK_eliminate_left_leader = yes
-		hidden_effect = {
-			UKH = {
-				country_event = {
-					id = NIK.13102
-					days = 12
-				}
-			}
-		}
-	}
-	option = {
-		name = NIK.131.b
 		country_event = {
 			id = NIK.13101
 			days = 3
@@ -3546,45 +3554,36 @@ country_event = { #Success! Suslov is disgraced, Bukharina and Zhdanov are the s
 	}
 }
 
-country_event = { #The Death Of Suslov
+country_event = { #Suslov gets fucked
 	id = NIK.13101
 	immediate = {log = "[GetDateText]: [Root.GetName]: event NIK.13101"}
 	title = NIK.13101.t
 	desc = NIK.13101.d
-	picture = GFX_report_event_ORS_forest_patrol
+	picture = GFX_report_event_suslov_3
 
 	is_triggered_only = yes
 
 	option = {
 		name = NIK.13101.a
-		set_country_flag = NIK_Suslov_Dead
-		custom_effect_tooltip = NIK_suslov_kill_tt
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_NIK_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = communist_subtype
-			traits = {
-			}
+		NIK_decrease_Suslov_influence_high = yes
+		hidden_effect = {
+			NIK_decrease_Suslov_influence_high = yes
 		}
+		add_political_power = 10
 	}
 }
 
-country_event = { #Suslov shows up the WRRF
+country_event = { #Bukharina feels guilty
 	id = NIK.13102
 	immediate = {log = "[GetDateText]: [Root.GetName]: event NIK.13102"}
 	title = NIK.13102.t
 	desc = NIK.13102.d
-	picture = GFX_report_event_russia_novotroitsk
+	picture = GFX_report_event_zhdanov_purged
 
 	is_triggered_only = yes
 
 	option = {
 		name = NIK.13102.a
-	}
-	option = {
-		name = NIK.13102.b
 	}
 }
 
@@ -4382,8 +4381,6 @@ country_event = { #The election process begins - violence at the polls
 					id = NIK.173
 					hours = 2
 				}
-				NIK_elect_the_president = yes
-				set_variable = { NIKCoupRisk = 3 }
 			}
 			else_if = {
 				limit = {
@@ -4394,8 +4391,6 @@ country_event = { #The election process begins - violence at the polls
 					id = NIK.174
 					hours = 2
 				}
-				NIK_elect_the_president = yes
-				set_variable = { NIKCoupRisk = 6 }
 			}
 			else_if = {
 				limit = {
@@ -4414,8 +4409,6 @@ country_event = { #The election process begins - violence at the polls
 					id = NIK.173
 					hours = 2
 				}
-				set_variable = { NIKCoupRisk = 3 }
-				NIK_elect_the_president = yes
 			}
 		}
 	}
@@ -4482,7 +4475,6 @@ country_event = { #Reports of rightist activity
 				days = 5
 			}
 		}
-		add_to_variable = { NIKCoupRisk = 1 }
 	}
 }
 
@@ -4497,10 +4489,6 @@ country_event = { #We win yay
 
 	option = {
 		name = NIK.176.a
-		set_country_flag = NIK_POST_ELECTION
-		add_stability = 0.10
-		add_political_power = 50
-		load_focus_tree = NIK_democratic_expansion
 		hidden_effect = {
 			country_event = {
 				id = komi_friendship.18
@@ -4615,7 +4603,7 @@ country_event = { #Inauguration of Kosygin
 	}
 }
 
-country_event = { #Inauguration of Kantorovich
+country_event = { #Inauguration of Bukharina
 	id = NIK.17804
 	immediate = {log = "[GetDateText]: [Root.GetName]: event NIK.17804"}
 	title = NIK.17804.t
@@ -4629,19 +4617,61 @@ country_event = { #Inauguration of Kantorovich
 		add_political_power = 15
 		hidden_effect = {
 			create_country_leader = {
-				name = "Leonid Kantorovich"
-				desc = "POLITICS_LEONID_KANTOROVICH_DESC"
-				picture = "Portrait_NIK_Leonid_Kantorovich.dds"
+				name = "Svetlana Bukharina"
+				desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
+				picture = "Portrait_NIK_Svetlana_Bukharina.dds"
 				expire = "1999.1.1"
-				ideology = social_democrat_subtype
+				ideology = socialist_subtype
 				traits = {
-					the_prefect
+					daughter_of_soviet_union
 				}
 			}
 			set_politics = {
-				ruling_party = social_democrat
+				ruling_party = socialist
 			}
-			NIK_assign_socdem_ministers = yes
+			NIK_assign_bukharina_ministers = yes
+		}
+	}
+}
+
+country_event = { #Inauguration of Zhdanov
+	id = NIK.17805
+	immediate = {log = "[GetDateText]: [Root.GetName]: event NIK.17805"}
+	title = NIK.17805.t
+	desc = NIK.17805.d
+	picture = GFX_report_event_komi_congress_4
+
+	is_triggered_only = yes
+
+	option = {
+		name = NIK.17805.a
+		add_political_power = 15
+		hidden_effect = {
+			set_politics = {
+				ruling_party = socialist
+			}
+			NIK_assign_zhdanov_ministers = yes
+		}
+	}
+}
+
+country_event = { #Inauguration of Shafarevich
+	id = NIK.17806
+	immediate = {log = "[GetDateText]: [Root.GetName]: event NIK.17806"}
+	title = NIK.17806.t
+	desc = NIK.17806.d
+	picture = GFX_report_event_komi_congress_4
+
+	is_triggered_only = yes
+
+	option = {
+		name = NIK.17806.a
+		add_political_power = 15
+		hidden_effect = {
+			set_politics = {
+				ruling_party = social_conservative
+			}
+			NIK_assign_fascist_ministers = yes
 		}
 	}
 }
@@ -4820,6 +4850,15 @@ country_event = { #Ponomaryov coup, appeal for united party
 	}
 	option = { #Make a stronger alliance with Zhdanov
 		name = NIK.181.b
+		trigger = {
+			NOT = {
+				OR = {
+					has_country_flag = NIK_Zhdanov_Dead
+					has_country_flag = NIK_Zhdanov_Retired
+					has_country_flag = NIK_Zhdanov_Arrested
+				}
+			}
+		}
 		NIK_increase_left_power_med = yes
 		NIK_decrease_coup_risk_static_low = yes
 		NIK_increase_Zhdanov_influence_med = yes
@@ -5311,7 +5350,7 @@ country_event = { #Serov is dead - raid
 	option = {
 		name = NIK.202.a
 		set_country_flag = NIK_serov_Dead
-		set_variable = { NIKserovInfluence = 0 }
+		set_variable = { NIKSerovInfluence = 0 }
 		NIK_decrease_coup_risk_static_med = yes
 		create_country_leader = {
 			name = "Power Vacuum"
@@ -7014,6 +7053,15 @@ country_event = {
 	}
 	option = { #Ally with Zhdanov
 		name = NIK.278.b
+		trigger = {
+			NOT = {
+				OR = {
+					has_country_flag = NIK_Zhdanov_Dead
+					has_country_flag = NIK_Zhdanov_Retired
+					has_country_flag = NIK_Zhdanov_Arrested
+				}
+			}
+		}
 		NIK_increase_Bukharina_influence_low = yes
 		NIK_increase_Zhdanov_influence_med = yes
 	}
@@ -8740,15 +8788,6 @@ country_event = {
 
 	option = {
 		name = NIK.335.a
-		trigger = {
-			NOT = {
-				OR = {
-					has_country_flag = NIK_Suslov_Dead
-					has_country_flag = NIK_Suslov_Arrested
-					has_country_flag = NIK_Suslov_Retired
-				}
-			}
-		}
 		NIK_increase_Suslov_influence_med = yes
 	}
 	option = {
@@ -9009,6 +9048,25 @@ country_event = {
 
 	option = {
 		name = NIK.349.a
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_country_flag = NIK_Zhdanov_Dead
+						has_country_flag = NIK_Zhdanov_Retired
+						has_country_flag = NIK_Zhdanov_Arrested
+					}
+				}
+			}
+			country_event = {
+				id = NIK.348
+				days = 3
+			}
+		}
+		country_event = {
+			id = NIK.346
+			days = 7
+		}
 		custom_effect_tooltip = NIK_expel_revisionists
 		set_country_flag = NIK_communism_politicking_done
 		set_country_flag = NIK_Bukharina_Retired
@@ -9017,14 +9075,6 @@ country_event = {
 		set_variable = { NIKZhdanovInfluence = 0 }
 		NIK_eliminate_left_leader = yes
 		NIK_eliminate_left_leader = yes
-		country_event = {
-			id = NIK.348
-			days = 3
-		}
-		country_event = {
-			id = NIK.346
-			days = 7
-		}
 	}
 }
 
@@ -9152,7 +9202,6 @@ country_event = { #The Manifesto of Ordosocialism
 
 	option = {
 		name = NIK.358.a
-		add_political_power = -15
 		hidden_effect = {
 			country_event = {
 				id = NIK.359
@@ -9193,7 +9242,6 @@ country_event = { #Serov submits his Marxist analysis
 
 	option = {
 		name = NIK.360.a
-		add_political_power = -50
 		hidden_effect = {
 			country_event = {
 				id = NIK.361
@@ -9218,7 +9266,7 @@ country_event = { #Serov booted from the party
 		hidden_effect = {
 			country_event = {
 				id = NIK.362
-				days = 112
+				days = 61
 			}
 		}
 	}
@@ -12258,7 +12306,7 @@ country_event = { #Over Troubled Water
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.8"}
  	title = komi.8.t
  	desc = komi.8.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_river
 	
 	is_triggered_only = yes
  	
@@ -12272,7 +12320,7 @@ country_event = { #The Warrior Monk
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.9"}
  	title = komi.9.t
  	desc = komi.9.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_orthodox_bible
 	
 	is_triggered_only = yes
  	
@@ -12286,7 +12334,7 @@ country_event = { #Memories of Home
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.10"}
  	title = komi.10.t
  	desc = komi.10.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_reichsbanner
 	
 	is_triggered_only = yes
  	
@@ -12300,7 +12348,7 @@ country_event = { #A Midnight Stroll
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.11"}
  	title = komi.11.t
  	desc = komi.11.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_iberia_madrid_phonebooth_dark
 	
 	is_triggered_only = yes
  	
@@ -12309,12 +12357,12 @@ country_event = { #A Midnight Stroll
  	}
 }
 
-country_event = {
+country_event = { #Where Did Our Love Go?
 	id = komi.12
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.12"}
  	title = komi.12.t
  	desc = komi.12.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russian_letter
 	
 	is_triggered_only = yes
  	
@@ -12323,12 +12371,12 @@ country_event = {
  	}
 }
 
-country_event = {
+country_event = { #From Warrior to Beggar
 	id = komi.13
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.13"}
  	title = komi.13.t
  	desc = komi.13.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_omsk_redemption_brigade
 	
 	is_triggered_only = yes
  	
@@ -12337,12 +12385,12 @@ country_event = {
  	}
 }
 
-country_event = {
+country_event = { #A Shared Legacy
 	id = komi.14
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.14"}
  	title = komi.14.t
  	desc = komi.14.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_kazakh_riders_4
 	
 	is_triggered_only = yes
  	
@@ -12351,12 +12399,12 @@ country_event = {
  	}
 }
 
-country_event = {
+country_event = { #Why We Fight
 	id = komi.15
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.15"}
  	title = komi.15.t
  	desc = komi.15.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_kazakh_riders_2
 	
 	is_triggered_only = yes
  	
@@ -12365,12 +12413,12 @@ country_event = {
  	}
 }
 
-country_event = {
+country_event = { #Out of the Frying Pan
 	id = komi.16
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.16"}
  	title = komi.16.t
  	desc = komi.16.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russian_refugees
 	
 	is_triggered_only = yes
  	
@@ -12384,7 +12432,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.17"}
  	title = komi.17.t
  	desc = komi.17.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_komi_execution
 	
 	is_triggered_only = yes
  	
@@ -12398,7 +12446,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.18"}
  	title = komi.18.t
  	desc = komi.18.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_partisan
 	
 	is_triggered_only = yes
  	
@@ -12412,7 +12460,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.19"}
  	title = komi.19.t
  	desc = komi.19.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_IRE_event_congress
 	
 	is_triggered_only = yes
  	
@@ -12441,7 +12489,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.21"}
  	title = komi.21.t
  	desc = komi.21.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_yekaterina_furtseva_1
 	
 	is_triggered_only = yes
  	
@@ -12455,7 +12503,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.22"}
  	title = komi.22.t
  	desc = komi.22.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_yekaterina_furtseva_3
 	
 	is_triggered_only = yes
  	
@@ -12477,7 +12525,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.23"}
  	title = komi.23.t
  	desc = komi.23.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_pub
 	
 	is_triggered_only = yes
  	
@@ -12491,7 +12539,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.24"}
  	title = komi.24.t
  	desc = komi.24.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_iberia_iberian_classroom
 	
 	is_triggered_only = yes
  	
@@ -12505,7 +12553,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.25"}
  	title = komi.25.t
  	desc = komi.25.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_cog_boat
 	
 	is_triggered_only = yes
  	
@@ -12519,7 +12567,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.26"}
  	title = komi.26.t
  	desc = komi.26.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_GER_germania_snow
 	
 	is_triggered_only = yes
  	
@@ -12533,7 +12581,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.27"}
  	title = komi.27.t
  	desc = komi.27.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_pub
 	
 	is_triggered_only = yes
  	
@@ -12547,7 +12595,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.28"}
  	title = komi.28.t
  	desc = komi.28.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_vyatka
 	
 	is_triggered_only = yes
  	
@@ -12561,7 +12609,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.29"}
  	title = komi.29.t
  	desc = komi.29.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_komi_syktyvkar_2
 	
 	is_triggered_only = yes
  	
@@ -12575,7 +12623,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.30"}
  	title = komi.30.t
  	desc = komi.30.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_math
 	
 	is_triggered_only = yes
  	
@@ -12592,7 +12640,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.31"}
  	title = komi.31.t
  	desc = komi.31.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_math
 	
 	is_triggered_only = yes
  	
@@ -12606,12 +12654,15 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.32"}
  	title = komi.32.t
  	desc = komi.32.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_iberia_intensive_care_hospital
 	
 	is_triggered_only = yes
  	
  	option = {
  		name = komi.32.a
+		 hidden_effect = {
+			 country_event = { id = komi.33 days = 90 random = 380 }
+		 }
  	}
 }
 
@@ -12620,7 +12671,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.33"}
  	title = komi.33.t
  	desc = komi.33.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_novotroitsk_cemetary
 	
 	is_triggered_only = yes
  	
@@ -12634,12 +12685,15 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.34"}
  	title = komi.34.t
  	desc = komi.34.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_iberia_detective_desk
 	
 	is_triggered_only = yes
  	
  	option = {
  		name = komi.34.a
+		 hidden_effect = {
+			 country_event = { id = komi.35 days = 7 random = 380 }
+		 }
  	}
 }
 
@@ -12648,12 +12702,15 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.35"}
  	title = komi.35.t
  	desc = komi.35.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_iberia_home_office_desk
 	
 	is_triggered_only = yes
  	
  	option = {
  		name = komi.35.a
+		 hidden_effect = {
+			 country_event = { id = komi.36 days = 7 random = 380 }
+		 }
  	}
 }
 
@@ -12662,7 +12719,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.36"}
  	title = komi.36.t
  	desc = komi.36.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_iberia_detective_desk
 	
 	is_triggered_only = yes
  	
@@ -12676,7 +12733,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.37"}
  	title = komi.37.t
  	desc = komi.37.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_IRE_event_peace
 	
 	is_triggered_only = yes
  	
@@ -12690,7 +12747,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.38"}
  	title = komi.38.t
  	desc = komi.38.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_orenburg
 	
 	is_triggered_only = yes
  	
@@ -12704,7 +12761,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event komi.39"}
  	title = komi.39.t
  	desc = komi.39.d
- 	picture = GFX_report_event_komi_bombing_2
+ 	picture = GFX_report_event_russia_orenburg
 	
 	is_triggered_only = yes
  	

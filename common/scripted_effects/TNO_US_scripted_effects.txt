@@ -2911,7 +2911,7 @@ USA_WFB_pass_civil_rights = {
 		
 		custom_effect_tooltip = USA_decrease_south_discontent_tt
 	}
-	if = {
+	else_if = {
 		limit = {
 			has_country_flag = USA_WFB_moderate_civil_rights
 		}
@@ -2921,12 +2921,12 @@ USA_WFB_pass_civil_rights = {
 			}
 			tno_minorities_improve = yes
 		}
+		if = {
+			limit = { NOT = { has_idea = USA_civil_rights_1 } }
+			USA_increase_civil_rights = yes
+		}
 		USA_increase_civil_rights = yes
 		hidden_effect = {
-			if = {
-				limit = { NOT = { has_idea = USA_civil_rights_1 } }
-				USA_increase_civil_rights = yes
-			}
 			add_to_variable = { USA_South_Discontent_ticker = 2 }
 			every_owned_state = {
 				limit = {
@@ -2945,7 +2945,7 @@ USA_WFB_pass_civil_rights = {
 		}
 		custom_effect_tooltip = USA_decrease_south_discontent_tt
 	}
-	if = {
+	else_if = {
 		limit = {
 			has_country_flag = USA_WFB_liberal_civil_rights
 		}
@@ -2956,12 +2956,12 @@ USA_WFB_pass_civil_rights = {
 			}
 			tno_minorities_improve = yes
 		}
+		if = {
+			limit = { NOT = { has_idea = USA_civil_rights_1 } }
+			USA_increase_civil_rights = yes
+		}
 		USA_increase_civil_rights = yes
 		hidden_effect = {
-			if = {
-				limit = { NOT = { has_idea = USA_civil_rights_1 } }
-				USA_increase_civil_rights = yes
-			}
 			USA_increase_civil_rights = yes
 			every_owned_state = {
 				limit = {
@@ -3739,7 +3739,7 @@ USA_RFK_Count_Up_The_Votes = {
 }
 
 USA_RFK_Assassination = {
-	log = "[GetDateText]: [Root.GetName]: USA_RFK_Assassination assassination level [?RFK_Assassination_Level]"
+	log = "[GetDateText]: [Root.GetName]: RFK_Assassination_Level assassination level [?RFK_Assassination_Level]"
 
 	if = {
 		limit = {
