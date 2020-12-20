@@ -3421,7 +3421,27 @@ shared_focus = {
 		custom_effect_tooltip = RUS_unlock_race_to_urals_tt
 		set_country_flag = RUS_REGIONAL_POLITICAL_TREE_DONE
 		hidden_effect = {
-			if = {
+		    if = {
+				limit = {
+					has_game_rule = {
+					    rule = PRM_ideology_route
+					    option = PRM_IDEOLOGY_ROUTE_ULTNAT
+				    }
+				}
+				set_country_flag = yemelyanov_in_power
+				country_event = { id = PRM_regional.5 hours = 6 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+					    rule = PRM_ideology_route
+					    option = PRM_IDEOLOGY_ROUTE_NATSOC
+				    }
+				}
+				set_country_flag = vagnar_in_power
+				country_event = { id = PRM_regional.4 hours = 6 }
+			}
+			else_if = {
 				limit = {
 					check_variable = { yemelyanov_power > 2 }
 				}
