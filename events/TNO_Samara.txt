@@ -309,8 +309,13 @@ country_event = {
 	option = {
 		name = SAM.17.a
 		trigger = {
+		    OR = {
+            has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_AUTHDEM }
+            AND = {
 			check_variable = {party_popularity@authoritarian_democrat > party_popularity@despotism}
 			check_variable = {party_popularity@authoritarian_democrat > party_popularity@fascism}
+			}
+		    }
 		}
 		load_focus_tree = { tree = SAM_Economic_Tree_and_Zykov_Tree keep_completed = yes }
 		set_country_flag = SAM_Zykov
@@ -335,8 +340,13 @@ country_event = {
 	option = {
 		name = SAM.17.b
 		trigger = {
+		    OR = {
+            has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_DESPOTISM }
+            AND = {
 			check_variable = {party_popularity@despotism > party_popularity@authoritarian_democrat}
 			check_variable = {party_popularity@despotism > party_popularity@fascism}
+			}
+		    }
 		}
 		load_focus_tree = { tree = SAM_Economic_Tree_and_Bunyachenko_Tree keep_completed = yes }
 		set_country_flag = SAM_Bunyachenko
@@ -355,8 +365,13 @@ country_event = {
 	option = {
 		name = SAM.17.c
 		trigger = {
+		    OR = {
+            has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_FASCISM }
+            AND = {
 			check_variable = {party_popularity@fascism > party_popularity@authoritarian_democrat}
 			check_variable = {party_popularity@fascism > party_popularity@despotism}
+			}
+		    }
 		}
 		load_focus_tree = { tree = SAM_Economic_Tree_and_Maltsev_Tree keep_completed = yes }
 		set_country_flag = SAM_Oktan
@@ -905,7 +920,18 @@ country_event = { #Event that launches the regional samara tree! Death of vlasov
 		trigger = {
 			has_country_flag = SAM_Bunyachenko
 		}
-		if = { #No problem, proceed as normal
+		if = { #No problem, has gamerule
+			limit = {
+				has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_DESPOTISM }
+			}
+			country_event = { id = SAM.38 hours = 6	}
+			load_focus_tree = SAM_Regional_Tree_Bunyachenko
+			SAM_decrease_civilian_morale_succession = yes
+			SAM_change_civilian_spirit = yes
+			SAM_decrease_military_morale_succession = yes
+			SAM_change_military_spirit = yes
+		}
+		else_if = { #No problem, proceed as normal
 			limit = {
 				check_variable = { SAM_smuggling_network < 76 }
 				check_variable = { SAM_civilian_morale > 25 }
@@ -983,7 +1009,18 @@ country_event = { #Event that launches the regional samara tree! Death of vlasov
 		trigger = {
 			has_country_flag = SAM_Zykov
 		}
-		if = { #No problem, proceed as normal
+		if = { #No problem, has gamerule
+			limit = {
+				has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_AUTHDEM }
+			}
+			load_focus_tree = SAM_Regional_Tree_Zykov
+			country_event = { id = SAM.36 hours = 6	}
+			SAM_decrease_civilian_morale_succession = yes
+			SAM_change_civilian_spirit = yes
+			SAM_decrease_military_morale_succession = yes
+			SAM_change_military_spirit = yes
+		}
+		else_if = { #No problem, proceed as normal
 			limit = {
 				check_variable = { SAM_smuggling_network < 76 }
 				check_variable = { SAM_military_morale > 25 }
@@ -1061,7 +1098,18 @@ country_event = { #Event that launches the regional samara tree! Death of vlasov
 		trigger = {
 			has_country_flag = SAM_Oktan
 		}
-		if = { #No problem, proceed as normal
+		if = { #No problem, has gamerule
+			limit = {
+				has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_FASCISM }
+			}
+			country_event = { id = SAM.40 hours = 6 }
+			load_focus_tree = SAM_Regional_Tree_Oktan
+			SAM_decrease_civilian_morale_succession = yes
+			SAM_change_civilian_spirit = yes
+			SAM_decrease_military_morale_succession = yes
+			SAM_change_military_spirit = yes
+		}
+		else_if = { #No problem, proceed as normal
 			limit = {
 				check_variable = { SAM_civilian_morale > 25 }
 				check_variable = { SAM_military_morale > 25 }
