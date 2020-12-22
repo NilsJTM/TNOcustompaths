@@ -1211,8 +1211,33 @@ USA_decrease_depression = {
 			add_idea = USA_the_american_depression_1
 		}
 	}
-	else = {
+	else_if = {
+		limit = { has_idea = USA_the_american_depression_1 }
 		remove_ideas = USA_the_american_depression_1
+	}
+	else = {	
+		if = {
+			limit = {
+				has_government = social_liberal
+				has_government = social_conservative 
+			}
+			custom_effect_tooltip = USA_favor_rd
+			hidden_effect = {
+				every_owned_state = {
+					limit ={ can_have_elections_in_state = yes }
+					add_to_variable = { RD_popularity = 0.1 }
+				}
+			}
+		}
+		else = {
+			custom_effect_tooltip = USA_favor_npp
+			hidden_effect = {
+				every_owned_state = {
+					limit ={ can_have_elections_in_state = yes }
+					add_to_variable = { NPP_popularity = 0.1 }
+				}
+			}
+		}
 	}
 }
 
@@ -1391,7 +1416,7 @@ USA_increase_government_popularity_dotnull5 = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes}
 				add_to_variable = { NPP_popularity = 0.05}
-				add_to_variable = { NPP_R_bonus_popularity = 0.05}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.05}
 			}
 		}
 	}
@@ -1455,7 +1480,7 @@ USA_decrease_government_popularity_dotnull5 = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes}
 				add_to_variable = { NPP_popularity = -0.05}
-				add_to_variable = { NPP_R_bonus_popularity = -0.05}
+				add_to_variable = { NPP_Y_bonus_popularity = -0.05}
 			}
 		}
 	}
@@ -1479,11 +1504,13 @@ USA_reevaluate_CR_discontent = {
 		limit = { check_variable = { USA_South_Discontent_ticker > 20 } }
 		country_event = { id = USA.1801 days = 1 }
 		subtract_from_variable = { USA_South_Discontent_ticker = 20 }
+		set_variable = { USA_South_Discontent_change = 0 }
 	}
 	if = {
 		limit = { check_variable = { USA_North_Discontent_ticker > 20 } }
 		country_event = { id = USA.1802 days = 1 }
 		subtract_from_variable = { USA_North_Discontent_ticker = 20 }
+		set_variable = { USA_North_Discontent_change = 0 }
 	}
 }
 
@@ -1993,17 +2020,17 @@ USA_lbj_strengthen_education_large = {
 }
 USA_lbj_strengthen_enviroment_small = {
 	custom_effect_tooltip = LBJ_boost_enviroment
-	add_to_variable = { LBJ_enviroment_strength = 1 }
+	add_to_variable = { LBJ_environment_strength = 1 }
 	USA_LBJ_african_american_outreach = yes
 }
 USA_lbj_strengthen_enviroment_medium = {
 	custom_effect_tooltip = LBJ_boost_enviroment
-	add_to_variable = { LBJ_enviroment_strength = 3 }
+	add_to_variable = { LBJ_environment_strength = 3 }
 	USA_LBJ_african_american_outreach = yes
 }
 USA_lbj_strengthen_enviroment_large = {
 	custom_effect_tooltip = LBJ_boost_enviroment
-	add_to_variable = { LBJ_enviroment_strength = 5 }
+	add_to_variable = { LBJ_environment_strength = 5 }
 	USA_LBJ_african_american_outreach = yes
 }
 USA_lbj_strengthen_civil_rights_small = {
@@ -2042,11 +2069,33 @@ USA_LBJ_african_american_outreach = {
 		set_temp_variable = { great_society_progress = LBJ_civil_rights_strength }
 		add_to_temp_variable = { great_society_progress = LBJ_education_strength }
 		add_to_temp_variable = { great_society_progress = LBJ_welfare_strength }
-		add_to_temp_variable = { great_society_progress = LBJ_enviroment_strength }
 		add_to_temp_variable = { great_society_progress = LBJ_healthcare_strength }
+
 		if = {
 			limit = {
-				check_variable = { great_society_progress > 14 }
+				NOT = { has_country_flag = LBJ_saved_planet }
+				check_variable = { LBJ_environment_strength > 19 } #LBJ SAVED THE PLANET, COOL
+			}
+			country_event = { id = LBJ.143 days = 14 }
+		}
+
+		if = {
+			limit = {
+				NOT = { has_country_flag = LBJ_GS_done }
+				check_variable = { LBJ_civil_rights_strength > 19 }
+				check_variable = { LBJ_education_strength > 19 }
+				check_variable = { LBJ_welfare_strength > 19 }
+				check_variable = { LBJ_environment_strength > 19 }
+				check_variable = { LBJ_healthcare_strength > 19 }
+				has_country_flag = LBJ_completed_civil_rights_reforms
+			}
+			country_event = { id = LBJ.144 days = 14 } #You did it champ, We now live in a great society
+		}
+
+		if = {
+			limit = {
+				check_variable = { great_society_progress > 11 }
+				check_variable = { LBJ_civil_rights_strength > 4 }
 				has_country_flag = LBJ_winning_the_aa_vote_1
 				NOT = { has_country_flag = LBJ_FHA_betrayal }
 			}
@@ -2054,7 +2103,8 @@ USA_LBJ_african_american_outreach = {
 		}
 		else_if = {
 			limit = {
-				check_variable = { great_society_progress > 34 }
+				check_variable = { great_society_progress > 29 }
+				check_variable = { LBJ_civil_rights_strength > 9 }
 				has_country_flag = LBJ_winning_the_aa_vote_2
 				NOT = { has_country_flag = LBJ_FHA_betrayal }
 			}
@@ -2062,7 +2112,8 @@ USA_LBJ_african_american_outreach = {
 		}
 		else_if = {
 			limit = {
-				check_variable = { great_society_progress > 54 }
+				check_variable = { great_society_progress > 44 }
+				check_variable = { LBJ_civil_rights_strength > 14 }
 				has_country_flag = LBJ_winning_the_aa_vote_3
 				OR = {
 					has_country_flag = LBJ_FHA_strong
@@ -2073,7 +2124,8 @@ USA_LBJ_african_american_outreach = {
 		}
 		else_if = {
 			limit = {
-				check_variable = { great_society_progress > 79 }
+				check_variable = { great_society_progress > 64 }
+				check_variable = { LBJ_civil_rights_strength > 19 }
 				has_country_flag = LBJ_winning_the_aa_vote_4
 			}
 			country_event = { id = LBJ.139 days = 14 }
@@ -2619,7 +2671,7 @@ USA_WFB_CRA_TEST = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes
 					OR = {
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { RD_popularity = 0.1 }
@@ -2663,7 +2715,7 @@ USA_WFB_CRA_TEST = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes
 					OR = {
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				subtract_from_variable = { NPP_popularity = 0.05 }
@@ -2709,7 +2761,7 @@ USA_WFB_CRA_TEST = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes
 					OR = {
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { NPP_popularity = 0.05 }
@@ -2757,7 +2809,7 @@ USA_WFB_CRA_TEST = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes
 					OR = {
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { NPP_popularity = 0.1 }
@@ -2898,7 +2950,7 @@ USA_WFB_pass_civil_rights = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -2982,7 +3034,7 @@ USA_WFB_pass_civil_rights = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -3350,8 +3402,8 @@ USA_RFK_flavor1 = { #days = 0 is 20th jan 1964
 		country_event = { id = bobby.f.1 days = 669 } #Henry Wallace's funeral
 	}
 }
-USA_RFK_Union_Happiness_Check = {
 
+USA_RFK_Union_Happiness_Check = {
 	if = {
 		limit = {
 			check_variable = { RFK_Union_Satisfaction > 19 }
@@ -3367,27 +3419,34 @@ USA_RFK_Union_Happiness_Check = {
 		every_owned_state = {
 			limit = {
 				can_have_elections_in_state = yes
-				check_variable = { nationality = 82 } #Yankee
+				OR = {
+					check_variable = { nationality = 82 } #Yankee
+					check_variable = { nationality = 85 } #Steel belt
+				}
 			}
-			add_to_variable = { NPP_C_bonus_popularity = 0.1 }
-			add_to_variable = { NPP_popularity = 0.1 }
-			subtract_from_variable = { NPP_L_bonus_popularity = 0.05 }
+			add_to_variable = { NPP_C_bonus_popularity = 0.04 } #Happy unionists support you more
+			add_to_variable = { NPP_popularity = 0.04 }
+			subtract_from_variable = { NPP_L_bonus_popularity = 0.02 } #and gus less
 		}
 		every_owned_state = {
 			limit = {
 				can_have_elections_in_state = yes
-				check_variable = { nationality = 85 } #Midwestern
+				OR = {
+					check_variable = { nationality = 83 } #Dixie
+					check_variable = { nationality = 84 } #African American
+					check_variable = { nationality = 86 } #Southwestern
+					check_variable = { nationality = 337 } #Unchanging Corn
+				}
 			}
-			subtract_from_variable = { GDP_growth = 0.0002 }
-			subtract_from_variable = { NPP_C_bonus_popularity = 0.1 }
-			subtract_from_variable = { NPP_popularity = 0.2 }
-			add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
+			subtract_from_variable = { NPP_C_bonus_popularity = 0.02 } #rest of the country isnt too happy
+			subtract_from_variable = { NPP_popularity = 0.02 }
+			add_to_variable = { NPP_Y_bonus_popularity = 0.01 } #gamer points since you went all in
 		}
 	}
 
 	if = {
 		limit = {
-			check_variable = { RFK_Union_Satisfaction > 15 }
+			check_variable = { RFK_Union_Satisfaction > 14 }
 			check_variable = { RFK_Union_Satisfaction < 20 }
 		}
 		random_list = {
@@ -3401,21 +3460,27 @@ USA_RFK_Union_Happiness_Check = {
 		every_owned_state = {
 			limit = {
 				can_have_elections_in_state = yes
-				check_variable = { nationality = 82 } #Yankee
+				OR = {
+					check_variable = { nationality = 82 } #Yankee
+					check_variable = { nationality = 85 } #Steel belt
+				}
 			}
-			add_to_variable = { NPP_C_bonus_popularity = 0.1 }
-			add_to_variable = { NPP_popularity = 0.1 }
-			subtract_from_variable = { NPP_L_bonus_popularity = 0.05 }
+			add_to_variable = { NPP_C_bonus_popularity = 0.02 }
+			add_to_variable = { NPP_popularity = 0.02 }
+			subtract_from_variable = { NPP_L_bonus_popularity = 0.01 }
 		}
 		every_owned_state = {
 			limit = {
 				can_have_elections_in_state = yes
-				check_variable = { nationality = 85 } #Midwestern
+				OR = {
+					check_variable = { nationality = 83 } #Dixie
+					check_variable = { nationality = 84 } #African American
+					check_variable = { nationality = 86 } #Southwestern
+					check_variable = { nationality = 337 } #Unchanging Corn
+				}
 			}
-			subtract_from_variable = { GDP_growth = 0.0002 }
-			subtract_from_variable = { NPP_C_bonus_popularity = 0.1 }
-			subtract_from_variable = { NPP_popularity = 0.1 }
-			add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
+			subtract_from_variable = { NPP_C_bonus_popularity = 0.01 }
+			subtract_from_variable = { NPP_popularity = 0.01 }
 		}
 	}
 
@@ -3429,7 +3494,7 @@ USA_RFK_Union_Happiness_Check = {
 	if = {
 		limit = {
 			check_variable = { RFK_Union_Satisfaction > 4 }
-			check_variable = { RFK_Union_Satisfaction < 9 }
+			check_variable = { RFK_Union_Satisfaction < 10 }
 		}
 		random_list = {
 			25 = {
@@ -3444,16 +3509,21 @@ USA_RFK_Union_Happiness_Check = {
 				can_have_elections_in_state = yes
 				OR = {
 					check_variable = { nationality = 82 } #Yankee
-					check_variable = { nationality = 85 } #Midwestern
+					check_variable = { nationality = 85 } #steel belt
 				}
 			}
-			add_to_variable = { NPP_L_bonus_popularity = 0.05 }
+			add_to_variable = { NPP_L_bonus_popularity = 0.02 } #Radicalization
+			subtract_from_variable = { NPP_C_bonus_popularity = 0.025 }
+
+			add_to_variable = { RD_popularity = 0.01 } #And unionists going to the reps
+			subtract_from_variable = { NPP_popularity = 0.01 }
+			add_to_variable = { RD_R_bonus_popularity = 0.01 }
 		}
 	}
 	
 	if = {
 		limit = {
-			check_variable = { RFK_Union_Satisfaction < 4 }
+			check_variable = { RFK_Union_Satisfaction < 5 }
 		}
 		add_to_variable = { USA_NPP_Unity = 1 }
 		random_list = {
@@ -3469,11 +3539,15 @@ USA_RFK_Union_Happiness_Check = {
 			can_have_elections_in_state = yes
 			OR = {
 				check_variable = { nationality = 82 } #Yankee
-				check_variable = { nationality = 85 } #Midwestern
+				check_variable = { nationality = 85 } #steel belt
 				}
 			}
-			add_to_variable = { NPP_L_bonus_popularity = 0.1 }
-			add_to_variable = { NPP_popularity = 0.1 }
+			add_to_variable = { NPP_L_bonus_popularity = 0.04 } #Radicalization
+			subtract_from_variable = { NPP_C_bonus_popularity = 0.05 }
+
+			add_to_variable = { RD_popularity = 0.02 } #And unionists going to the reps
+			subtract_from_variable = { NPP_popularity = 0.02 }
+			add_to_variable = { RD_R_bonus_popularity = 0.02 }
 		}
 	}
 }
@@ -3491,22 +3565,21 @@ USA_RFK_Liberalism_Check = {
 			#
 			}
 		}
-		
 		# Commented out and the will talk with Other Guy and Walker
 		# add_to_variable = { RFK_Assassination_Level = 2.5 }
-
-		add_to_variable = { RFK_Union_Satisfaction = 2 }
+		add_to_variable = { USA_NPP_Unity = -1 }
 		every_owned_state = {
 			limit = {
 				can_have_elections_in_state = yes
 				OR = {
 					check_variable = { nationality = 82 } #Yankee
-					check_variable = { nationality = 85 } #Midwestern
+					check_variable = { nationality = 85 } #Steel Belt
 					check_variable = { nationality = 84 } #African American
 				}
 			}
-			add_to_variable = { NPP_C_bonus_popularity = 0.075 }
-			add_to_variable = { NPP_popularity = 0.075 }
+			add_to_variable = { NPP_C_bonus_popularity = 0.05 } #Happy for CR
+			add_to_variable = { NPP_popularity = 0.05 }
+			add_to_variable = { NPP_L_bonus_popularity = -0.01 } #why vote LNPP lol, RFK is the man
 			US_underdog_RD_2_2 = yes
 		}
 		
@@ -3518,8 +3591,10 @@ USA_RFK_Liberalism_Check = {
 					check_variable = { nationality = 88 } #Pacific
 				}
 			}
-			subtract_from_variable = { NPP_FR_bonus_popularity = 0.075 }
-			subtract_from_variable = { NPP_popularity = 0.075 }
+			subtract_from_variable = { NPP_FR_bonus_popularity = 0.05 } #Pissed with CR, moved to Dems
+			add_to_variable = { NPP_Y_bonus_popularity = 0.01 } #radicalized FRNPP
+			add_to_variable = { RD_D_bonus_popularity = 0.035 }
+			subtract_from_variable = { NPP_popularity = 0.05 }
 			US_underdog_RD_2_2 = yes
 		}
 		
@@ -3530,15 +3605,17 @@ USA_RFK_Liberalism_Check = {
 				check_variable = { nationality = 83 } #Dixies
 				}
 			}
-			subtract_from_variable = { NPP_FR_bonus_popularity = 0.1 }
-			subtract_from_variable = { NPP_popularity = 0.1 }
+			subtract_from_variable = { NPP_FR_bonus_popularity = 0.075 } #same but more in dixieland
+			add_to_variable = { NPP_Y_bonus_popularity = 0.015 } #radicalized FRNPP
+			add_to_variable = { RD_D_bonus_popularity = 0.065 }
+			subtract_from_variable = { NPP_popularity = 0.075 }
 			US_underdog_RD_2_2 = yes
 		}
 	}
 	
 	if = {
 		limit = {
-			check_variable = { RFK_Liberalism > 15 }
+			check_variable = { RFK_Liberalism > 14 }
 			check_variable = { RFK_Liberalism < 20 }
 		}
 		random_list = {
@@ -3556,9 +3633,9 @@ USA_RFK_Liberalism_Check = {
 					check_variable = { nationality = 82 } #Yankee
 				}
 			}
-			add_to_variable = { NPP_C_bonus_popularity = 0.05 }
+			add_to_variable = { NPP_C_bonus_popularity = 0.025 }
 			add_to_variable = { NPP_popularity = 0.025 }
-			US_underdog_RD_2_2 = yes
+			#No underdog effect, it would be stronger then the actual change
 		}
 		every_owned_state = {
 			limit = {
@@ -3568,9 +3645,10 @@ USA_RFK_Liberalism_Check = {
 					check_variable = { nationality = 88 } #Pacific
 				}
 			}
-			subtract_from_variable = { NPP_FR_bonus_popularity = 0.05 }
+			subtract_from_variable = { NPP_FR_bonus_popularity = 0.025 }
+			add_to_variable = { RD_D_bonus_popularity = 0.025 }
 			subtract_from_variable = { NPP_popularity = 0.025 }
-			US_underdog_RD_2_2 = yes
+			#No underdog effect, it would be stronger then the actual change
 		}
 		every_owned_state = {
 			limit = {
@@ -3579,15 +3657,16 @@ USA_RFK_Liberalism_Check = {
 					check_variable = { nationality = 83 } #Dixies
 				}
 			}
-			subtract_from_variable = { NPP_FR_bonus_popularity = 0.1 }
-			subtract_from_variable = { NPP_popularity = 0.1 }
-			US_underdog_RD_2_2 = yes
+			subtract_from_variable = { NPP_FR_bonus_popularity = 0.05 }
+			add_to_variable = { RD_D_bonus_popularity = 0.05 }
+			subtract_from_variable = { NPP_popularity = 0.05 }
+			#No underdog effect, it would be stronger then the actual change
 		}
 	}
 	if = {
 		limit = {
 			check_variable = { RFK_Liberalism > 9 }
-			check_variable = { RFK_Liberalism < 16 }
+			check_variable = { RFK_Liberalism < 15 }
 		}
 		random_list = {
 			25 = {
@@ -3597,37 +3676,14 @@ USA_RFK_Liberalism_Check = {
 				# Nothing Happens
 			}
 		}
-		add_to_variable = { RFK_Assassination_Level = -2.0 }
-		every_owned_state = {
-			limit = {
-				can_have_elections_in_state = yes
-				OR = {
-					check_variable = { nationality = 82 } #Yankee
-
-					check_variable = { nationality = 85 } #Steelbelt
-				}
-			}
-			add_to_variable = { NPP_C_bonus_popularity = -0.05 }
-			add_to_variable = { NPP_popularity = -0.05 }
-			US_underdog_RD_2_2 = yes
-		}
-		every_owned_state = {
-			limit = {
-				can_have_elections_in_state = yes
-				OR = {
-					check_variable = { nationality = 85 } #Midwestern
-				}
-			}
-			add_to_variable = { NPP_popularity = 0.05 }
-			US_underdog_RD_2_2 = yes
-		}
+		#add_to_variable = { RFK_Assassination_Level = -2.0 } #WHY? still lib
+		#NEUTRAL
 	}
 
 	if = {
 		limit = {
 			check_variable = { RFK_Liberalism > 4 }
 			check_variable = { RFK_Liberalism < 10 }
-			check_variable = { RFK_Liberalism > RFK_Union_Satisfaction }
 		}
 		random_list = {
 			25 = {
@@ -3637,7 +3693,7 @@ USA_RFK_Liberalism_Check = {
 				# Nothing Happens
 			}
 		}
-		add_to_variable = { RFK_Assassination_Level = -2.5 }
+		add_to_variable = { RFK_Assassination_Level = -1 }
 		every_owned_state = {
 			limit = {
 				can_have_elections_in_state = yes
@@ -3645,17 +3701,20 @@ USA_RFK_Liberalism_Check = {
 					check_variable = { nationality = 82 } #Yankee
 					check_variable = { nationality = 85 } #Steelbelt
 				}
-			}
-			add_to_variable = { NPP_popularity = -0.075 }
-			add_to_variable = { NPP_L_bonus_popularity = 0.075 }
-			US_underdog_RD_2_2 = yes
+			}	
+			add_to_variable = { RD_popularity = 0.025 } 
+			add_to_variable = { NPP_popularity = -0.025 }
+			add_to_variable = { RD_R_bonus_popularity = 0.01 } #Party switches to the more liberal republicans
+
+			add_to_variable = { NPP_L_bonus_popularity = 0.01 } #Radicalization
+			add_to_variable = { NPP_C_bonus_popularity = -0.025 } #Loss of pop
+			#No underdog effect, it would be stronger then the actual change
 		}
 	}
 	
 	if = {
 		limit = {
 			check_variable = { RFK_Liberalism < 5 }
-			check_variable = { RFK_Liberalism > RFK_Union_Satisfaction }
 		}
 		add_to_variable = { USA_NPP_Unity = 1 }
 		random_list = {
@@ -3666,7 +3725,7 @@ USA_RFK_Liberalism_Check = {
 				#
 			}
 		}
-		add_to_variable = { RFK_Assassination_Level = -2.5 }
+		add_to_variable = { RFK_Assassination_Level = -2 }
 		every_owned_state = {
 			limit = {
 				can_have_elections_in_state = yes
@@ -3675,59 +3734,14 @@ USA_RFK_Liberalism_Check = {
 					check_variable = { nationality = 85 } #Steelbelt
 				}
 			}
-			add_to_variable = { RD_R_bonus_popularity = 0.075 }
-			add_to_variable = { RD_popularity = 0.075 }
+			add_to_variable = { RD_popularity = 0.05 } 
+			add_to_variable = { NPP_popularity = -0.05 }
+			add_to_variable = { RD_R_bonus_popularity = 0.025 } #Party switches to the more liberal republicans
+
+			add_to_variable = { NPP_L_bonus_popularity = 0.025 } #Radicalization
+			add_to_variable = { NPP_C_bonus_popularity = -0.05 } #Loss of pop
 			US_underdog_RD_2_2 = yes
 		}
-		every_owned_state = {
-			limit = {
-				can_have_elections_in_state = yes
-				OR = {
-					check_variable = { nationality = 85 } #Midwestern
-				}
-			}
-			add_to_variable = { NPP_popularity = 0.05 }
-			US_underdog_RD_2_2 = yes
-		}
-	}
-	if = {
-		limit = {
-			check_variable = { RFK_Liberalism < RFK_Union_Satisfaction }
-		}
-		country_event = { id = bobby.210 days = 5 }
-		every_owned_state = {
-			limit = {
-			can_have_elections_in_state = yes
-			check_variable = { nationality = 85 } #Midwestern
-			check_variable = { nationality = 83 } #Dixie
-			check_variable = { nationality = 85 } #Steelbelt
-			check_variable = { nationality = 88 } #Pacific
-			}
-			subtract_from_variable = { NPP_popularity = 0.05 }
-			add_to_variable = { RD_popularity = 0.05 }
-			US_underdog_RD_2_2 = yes
-		}
-	}
-	if = {
-		limit = {
-			check_variable = { RFK_Liberalism < 5 }
-			check_variable = { RFK_Liberalism < RFK_Union_Satisfaction }
-		}
-		country_event = { id = bobby.211 days = 5 }
-		every_owned_state = {
-			limit = {
-				can_have_elections_in_state = yes
-				OR = {
-					check_variable = { nationality = 82 } #Yankee
-					check_variable = { nationality = 85 } #Midwestern
-					check_variable = { nationality = 85 } #Steelbelt
-				}
-			}
-			subtract_from_variable = { NPP_C_bonus_popularity = 0.075 }
-			add_to_variable = { NPP_L_bonus_popularity = 0.075 }
-			US_underdog_RD_2_2 = yes
-		}
-		add_to_variable = { RFK_Assassination_Level = -2.5 }
 	}
 }
 
@@ -3739,160 +3753,12 @@ USA_RFK_Count_Up_The_Votes = {
 }
 
 USA_RFK_Assassination = {
-	log = "[GetDateText]: [Root.GetName]: RFK_Assassination_Level assassination level [?RFK_Assassination_Level]"
+	log = "[GetDateText]: [Root.GetName]: RFK_Assassination_Level assassination level [?USA.RFK_Assassination_Level] RFK_Assassination_Target [?USA.RFK_Assassination_Target]"
 
+	add_to_variable = { RFK_Assassination_Target = RFK_Assassination_Level }
 	if = {
-		limit = {
-			check_variable = { RFK_Assassination_Level < 5}
-			#Nothing happens, you haven't reached the limit yet.
-		}
-	}
-
-	#Level 1 - Very unlikely
-	if = {
-		limit = {
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 5
-				compare = greater_than_or_equals
-			}
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 10
-				compare = less_than_or_equals
-			}
-			NOT = { has_game_rule = { rule = USA_DISABLE_RFK_ASSASSINATION option = USA_DISABLE_RFK_ASSASSINATION_YES } } 
-		}
-		random_list = {
-			10 = {
-				country_event = { id = bobby.84 days = 1 }
-				modifier = {
-					factor = 1.25
-					has_country_flag = BRG_laying_in_wait_flag
-				}
-			}
-			90 = { } #Nothing happens
-		}
-	}
-
-	#Level 2 - Unlikely
-	if = {
-		limit = {
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 11
-				compare = greater_than_or_equals
-			}
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 15
-				compare = less_than_or_equals
-			}
-			NOT = { has_game_rule = { rule = USA_DISABLE_RFK_ASSASSINATION option = USA_DISABLE_RFK_ASSASSINATION_YES } } 
-		}
-		random_list = {
-			20 = {
-				country_event = {
-					id = bobby.84
-					days = 1
-				}
-				modifier = {
-					factor = 1.2
-					has_country_flag = BRG_laying_in_wait_flag
-				}
-			}
-			80 = {
-				 #Nothing happens
-			}
-		}
-	}
-
-	#Level 3 - Getting Closer
-	if = {
-		limit = {
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 16
-				compare = greater_than_or_equals
-			}
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 20
-				compare = less_than_or_equals
-			}
-			NOT = { has_game_rule = { rule = USA_DISABLE_RFK_ASSASSINATION option = USA_DISABLE_RFK_ASSASSINATION_YES } } 
-		}
-		add_to_variable = { RFK_Assassination_Level = -1 }
-		random_list = {
-			30 = {
-				country_event = { id = bobby.84 days = 1}
-				modifier = {
-					factor = 1.2
-					has_country_flag = BRG_laying_in_wait_flag
-				}
-			}
-			70 = {
-				#Nothing happens
-			}
-		}
-	}
-
-	#Level 4 - Any Day Now
-	if = {
-		limit = {
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 21
-				compare = greater_than_or_equals
-			}
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 25
-				compare = less_than_or_equals
-			}
-			NOT = { has_game_rule = { rule = USA_DISABLE_RFK_ASSASSINATION option = USA_DISABLE_RFK_ASSASSINATION_YES } } 
-		}
-		add_to_variable = { RFK_Assassination_Level = -1 }
-		random_list = {
-			40 = {
-				country_event = { id = bobby.84 days = 1 }
-				modifier = {
-					factor = 1.2
-					has_country_flag = BRG_laying_in_wait_flag
-				}
-			}
-			60 = { } #Nothing happens
-		}
-	}
-
-	#Level 5 - Inevitable
-	if = {
-		limit = {
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 26
-				compare = greater_than_or_equals
-			}
-			check_variable = {
-				var = RFK_Assassination_Level
-				value = 100
-				compare = less_than_or_equals
-			}
-			NOT = { has_game_rule = { rule = USA_DISABLE_RFK_ASSASSINATION option = USA_DISABLE_RFK_ASSASSINATION_YES } } 
-		}
-		add_to_variable = { RFK_Assassination_Level = -2 }
-		random_list = {
-			60 = {
-				country_event = { id = bobby.84 days = 1}
-				modifier = {
-					factor = 1.2
-					has_country_flag = BRG_laying_in_wait_flag
-				}
-			}
-			40 = {
-				#Nothing happens
-			}
-		}
+		limit = { check_variable = { RFK_Assassination_Target > 250 } NOT = { has_game_rule = { rule = USA_DISABLE_RFK_ASSASSINATION option = USA_DISABLE_RFK_ASSASSINATION_YES } }  }
+		country_event = { id = bobby.84 days = 10 random_days = 9 }
 	}
 }
 
@@ -4171,6 +4037,10 @@ RFK_Count_CRA_Votes = {
 
 
 USA_RFK_fails_civil_rights = {
+	
+	custom_effect_tooltip = RFK_Subtract_Liberalism
+	add_to_variable = { RFK_Liberalism = -10 } #failure here means no CRA, needs to be harsh (RFK presidency is fucked from here on anyways). Trust is destroyed, will need a lot to rebuild
+	#set_variable = { RFK_Assassination_Level = 2 } #no need for that lol
 
 	### Regular Effects:
 
@@ -4192,7 +4062,9 @@ USA_RFK_fails_civil_rights = {
 	}
 
 	### Goodbye South And African Americans!
-	USA_RFK_cra_0 = yes
+	hidden_effect = {
+		USA_RFK_cra_0 = yes
+	}
 }
 
 USA_RFK_pass_civil_rights = {
@@ -4202,7 +4074,9 @@ USA_RFK_pass_civil_rights = {
 		limit = {check_variable = { RFK_CRA_Power_Var = 5 } }
 		USA_decrease_depression = yes
 		#Variable Effects
-		add_to_variable = { RFK_Liberalism = 5 }
+		custom_effect_tooltip = RFK_Add_Liberalism
+		add_to_variable = { RFK_Liberalism = 7 }
+
 		USA_increase_civil_rights = yes
 		hidden_effect = { USA_increase_civil_rights = yes }
 		hidden_effect = { USA_increase_civil_rights = yes }
@@ -4212,19 +4086,21 @@ USA_RFK_pass_civil_rights = {
 
 
 		### Change Military Integration
-		remove_ideas = tno_racial_integration_integrated_military
-		add_ideas = tno_racial_integration_enforced_integration
-
+		swap_ideas = {
+			remove_idea = tno_racial_integration_integrated_military
+			add_idea = tno_racial_integration_enforced_integration
+		}
 		### Change Voting Rights
-		remove_ideas = tno_vote_franchise_universal
-		add_ideas = tno_vote_franchise_support_disenfranchised
-
+		swap_ideas = {
+			remove_idea = tno_vote_franchise_universal
+			add_idea = tno_vote_franchise_support_disenfranchised
+		}
 		### Change Minority Rights
-		remove_ideas = tno_minorities_segregation
-		add_ideas = tno_minorities_affirmative_action
-		hidden_effect = { remove_ideas = USA_bloody_jim_crow }
-		hidden_effect = { remove_ideas = USA_bloody_jim_crow }
-		remove_ideas = USA_jim_crow
+		swap_ideas = {
+			remove_idea = tno_minorities_segregation
+			add_idea = tno_minorities_affirmative_action
+		}
+
 		### Regular Effects:
 
 		add_stability = 0.1
@@ -4245,34 +4121,40 @@ USA_RFK_pass_civil_rights = {
 		}
 
 		### Goodbye South! Hello African Americans!
-		USA_RFK_cra_4 = yes
+		hidden_effect = {
+			USA_RFK_cra_4 = yes
+		}
 	}
+
 	if = { #Civil Rights Act Passes Mostly
 		log = "[GetDateText]: [Root.GetName]: Mostly RFK Civil Rights"
-		limit = {check_variable = { RFK_CRA_Power_Var = 4 } }
+		limit = { check_variable = { RFK_CRA_Power_Var = 4 } }
 		USA_decrease_depression = yes
-		add_to_variable = { RFK_Liberalism = 3 }
-		set_variable = { RFK_Assassination_Level = 5 }
-		### Change Military Integration
-		remove_ideas = tno_racial_integration_integrated_military
-		add_ideas = tno_racial_integration_enforced_integration
+		custom_effect_tooltip = RFK_Add_Liberalism
+		add_to_variable = { RFK_Liberalism = 5 }
 
-		hidden_effect = { remove_ideas = USA_bloody_jim_crow }
-		remove_ideas = USA_jim_crow
-		### Change Voting Rights
-		remove_ideas = tno_vote_franchise_universal
-		add_ideas = tno_vote_franchise_support_disenfranchised
-
-		### Change Minority Rights
-		remove_ideas = tno_minorities_segregation
-		add_ideas = tno_minorities_equal_rights
-
-		### Regular Effects:
 		USA_increase_civil_rights = yes
 		hidden_effect = { USA_increase_civil_rights = yes }
 		hidden_effect = { USA_increase_civil_rights = yes }
 		hidden_effect = { USA_increase_civil_rights = yes }
+		set_variable = { RFK_Assassination_Level = 5 }
 
+		### Change Military Integration
+		swap_ideas = {
+			remove_idea = tno_racial_integration_integrated_military
+			add_idea = tno_racial_integration_enforced_integration
+		}
+		### Change Voting Rights
+		swap_ideas = {
+			remove_idea = tno_vote_franchise_universal
+			add_idea = tno_vote_franchise_support_disenfranchised
+		}
+		### Change Minority Rights
+		swap_ideas = {
+			remove_idea = tno_minorities_segregation
+			add_idea = tno_minorities_equal_rights
+		}
+		### Regular Effects:
 
 		add_stability = 0.7
 
@@ -4292,31 +4174,31 @@ USA_RFK_pass_civil_rights = {
 		}
 
 		### Goodbye South! Hello African Americans!
-		USA_RFK_cra_4 = yes
-
-
-
+		hidden_effect = {
+			USA_RFK_cra_4 = yes
+		}
 	}
 
 	if = { #Civil Rights Act Passes
 		log = "[GetDateText]: [Root.GetName]: Passes RFK Civil Rights"
 		limit = {check_variable = { RFK_CRA_Power_Var = 3 } }
 		USA_decrease_depression = yes
-		add_to_variable = { RFK_Liberalism = 2 }
-		subtract_from_variable = { RFK_Union_Satisfaction = 1 }
-		### Change Military Integration
-		remove_ideas = tno_racial_integration_integrated_military
-		add_ideas = tno_racial_integration_enforced_integration
-
-		### Change Minority Rights
-		remove_ideas = tno_minorities_segregation
-		add_ideas = tno_minorities_equal_rights
-
-		hidden_effect = { remove_ideas = USA_bloody_jim_crow }
+		custom_effect_tooltip = RFK_Add_Liberalism
+		add_to_variable = { RFK_Liberalism = 3 }
 
 		USA_increase_civil_rights = yes
 		hidden_effect = { USA_increase_civil_rights = yes }
 		set_variable = { RFK_Assassination_Level = 4 }
+		### Change Military Integration
+		swap_ideas = {
+			remove_idea = tno_racial_integration_integrated_military
+			add_idea = tno_racial_integration_enforced_integration
+		}
+		### Change Minority Rights
+		swap_ideas = {
+			remove_idea = tno_minorities_segregation
+			add_idea = tno_minorities_equal_rights
+		}
 		### Regular Effects:
 
 		add_stability = 0.05
@@ -4336,23 +4218,26 @@ USA_RFK_pass_civil_rights = {
 			popularity = -0.02
 		}
 
-
 		### Goodbye South! Hello African Americans!
-		USA_RFK_cra_23 = yes
+		hidden_effect = {
+			USA_RFK_cra_23 = yes
+		}
 	}
 
 
 	if = { #Civil Rights Act Passes, sorta
 		log = "[GetDateText]: [Root.GetName]: sorta RFK Civil Rights"
 		limit = {check_variable = { RFK_CRA_Power_Var = 2 } }
+		custom_effect_tooltip = RFK_Add_Liberalism
 		add_to_variable = { RFK_Liberalism = 1 }
-		subtract_from_variable = { RFK_Union_Satisfaction = 2 }
-		### Change Minority Rights
-		remove_ideas = tno_minorities_segregation
-		add_ideas = tno_minorities_equal_rights
 
 		USA_increase_civil_rights = yes
 		set_variable = { RFK_Assassination_Level = 3 }
+		### Change Minority Rights
+		swap_ideas = {
+			remove_idea = tno_minorities_segregation
+			add_idea = tno_minorities_equal_rights
+		}
 
 		### Regular Effects:
 
@@ -4374,13 +4259,14 @@ USA_RFK_pass_civil_rights = {
 		}
 
 		### Goodbye South! Hello African Americans! (sorta...)
-		USA_RFK_cra_1 = yes
+		hidden_effect = {
+			USA_RFK_cra_1 = yes
+		}
 	}
 }
 
 
 USA_RFK_cra_0 = {
-	set_variable = { RFK_Assassination_Level = 2 }
 	every_owned_state = { #CRA positive
 		limit = {
 			can_have_elections_in_state = yes
@@ -5011,7 +4897,7 @@ USA_RFK_cra_4 = {
 			}
 			add_to_variable = { RD_D_bonus_popularity = 0.5}
 			add_to_variable = { RD_popularity = 0.5}
-			add_to_variable = { NPP_R_bonus_popularity = 0.1}
+			add_to_variable = { NPP_Y_bonus_popularity = 0.1}
 			subtract_from_variable = { NPP_C_bonus_popularity = 0.25}
 		}
 		#RD largest - R
@@ -5447,7 +5333,7 @@ USA_WAL_failed_bill = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 86 } #Southwestern
 						check_variable = { nationality = 87 } #Rockies
 						check_variable = { nationality = 88 } #Pacific
@@ -5568,180 +5454,6 @@ USA_WAL_clamp_senator_vars = {
 	}
 }
 
-USA_WAL_Business_test ={
-	hidden_effect ={
-		if ={
-		limit = {check_variable = {WAL64_Business < 1}}
-		country_event = {id = wallace.201 days = 3 random = 60}
-			}
-		if ={
-		limit = {check_variable = {WAL64_Business < 7}}
-		country_event = {id = wallace.202 days = 3 random = 60}
-			}
-		if ={
-		limit = {check_variable = {WAL64_Business < 9}}
-		country_event = {id = wallace.203 days = 3 random = 60}
-			}
-		if ={
-		limit = {check_variable = {WAL64_Business < 11}}
-		country_event = {id = wallace.204 days = 3 random = 60}
-			}
-		if ={
-		limit = {check_variable = {WAL64_Business > 14}}
-		country_event = {id = wallace.205 days = 3 random = 60}
-			}
-		if ={
-		limit = {check_variable = {WAL64_Business > 16}}
-		country_event = {id = wallace.206 days = 3 random = 60}
-			}
-		if ={
-		limit = {check_variable = {WAL64_Business > 17}}
-		country_event = {id = wallace.207 days = 3 random = 60}
-			}
-					}
-						}
-
-USA_WAL_States_Rights_test ={
-	hidden_effect ={
-		if ={
-			limit = {check_variable = {WAL_STATES_RIGHTS = WAL_STATES_RIGHTS_expectation}}
-			country_event = {id = wallace.211 days = 3 random = 60}
-		}
-		else_if ={
-			limit = {check_variable = {WAL_STATES_RIGHTS > WAL_STATES_RIGHTS_expectation}}
-			country_event = {id = wallace.212 days = 3 random = 60}
-		}
-		else_if = {
-			limit = {check_variable = {WAL_STATES_RIGHTS < 1}}
-			country_event = {id = wallace.215 days = 3 random = 60}
-		}
-		else_if = {
-			limit = {check_variable = {WAL_STATES_RIGHTS < 5}}
-			country_event = {id = wallace.213 days = 3 random = 60}
-		}
-		else_if = {
-			limit = {check_variable = {WAL_STATES_RIGHTS < 3}}
-			country_event = {id = wallace.214 days = 3 random = 60}
-		}
-	}
-}
-USA_WAL_Mini_Racism_check ={
-	hidden_effect ={
-
-		if ={
-			limit = {
-			check_variable ={ WAL_SEGREGATION < 3 }
-			}
-			hidden_effect ={
-			every_owned_state = {
-				limit = {
-					can_have_elections_in_state = yes
-					OR = {
-						check_variable = { nationality = 86 } #Southwestern
-
-						check_variable = { nationality = 84 } #African American
-						NOT = { state = 367 }
-					}
-				}
-				subtract_from_variable = { NPP_popularity = 0.05 }
-
-						}
-					}
-				}
-			}
-
-		add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			}
-
-USA_WAL_Racism_check ={
-	hidden_effect ={
-		if ={
-			limit = {AND ={check_variable ={WAL_SEGREGATION <WAL_SEGREGATION_expectation} check_variable ={WAL_extremist_dissatisfaction >-1} check_variable={WAL_extremist_dissatisfaction_counter=0}}}
-			country_event = {id = wallace.231 days = 3 random = 60}
-			add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
-			}
-		else_if ={
-			limit = {AND ={check_variable ={WAL_SEGREGATION <WAL_SEGREGATION_expectation} check_variable ={WAL_extremist_dissatisfaction >0} check_variable={WAL_extremist_dissatisfaction_counter=1}}}
-			country_event = {id = wallace.232 days = 3 random = 60}
-			add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
-			}
-		else_if ={
-			limit = {AND ={check_variable ={WAL_SEGREGATION <WAL_SEGREGATION_expectation} check_variable ={WAL_extremist_dissatisfaction >1} check_variable={WAL_extremist_dissatisfaction_counter=2}}}
-			country_event = {id = wallace.233 days = 3 random = 60}
-			add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
-			}
-		else_if ={
-			limit = {AND ={check_variable ={WAL_SEGREGATION <WAL_SEGREGATION_expectation} check_variable ={WAL_extremist_dissatisfaction >2} check_variable={WAL_extremist_dissatisfaction_counter=3}}}
-			country_event = {id = wallace.234 days = 3 random = 60}
-			add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
-			}
-		else_if ={
-			limit = {AND ={check_variable ={WAL_SEGREGATION <WAL_SEGREGATION_expectation} check_variable ={WAL_extremist_dissatisfaction >3} check_variable={WAL_extremist_dissatisfaction_counter=4}}}
-			country_event = {id = wallace.235 days = 3 random = 60}
-			add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
-			}
-		else_if ={
-			limit = {AND ={check_variable ={WAL_SEGREGATION < WAL_SEGREGATION_expectation} check_variable ={WAL_extremist_dissatisfaction >4} check_variable={WAL_extremist_dissatisfaction_counter=5}}}
-			country_event = {id = wallace.236 days = 3 random = 60}
-			add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
-			}
-		else_if ={
-			limit = {AND ={check_variable ={WAL_SEGREGATION < WAL_SEGREGATION_expectation} check_variable ={WAL_extremist_dissatisfaction >5} check_variable={WAL_extremist_dissatisfaction_counter=6}}}
-			country_event = {id = wallace.237 days = 3 random = 60}
-			add_to_variable = {WAL_SEGREGATION_expectation = 1}
-			add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
-			}
-		}
-	}
-
-USA_WAL_Segregation_check ={
-	hidden_effect ={
-		if = {
-			limit = {AND ={check_variable ={WAL_SEGREGATION > 14} check_variable ={WAL_segregation_counter = 7}}} #if it has't already, this is where the proverbial shit hits the fan. Riots all over America, how will President Wallace recover from this one? He probably won't.
-			##USA_WAL_nullification_check = yes
-			USA_WAL_Crisis_At_Central_High = yes
-			add_to_variable ={WAL_segregation_counter = 1}
-		}
-		else_if = {
-			limit = {AND ={check_variable ={WAL_SEGREGATION > 10} check_variable ={WAL_segregation_counter = 6}}} #probably some falvor events just now with promise of future escalation
-			##USA_WAL_nullification_check = yes
-			USA_WAL_Crisis_At_Central_High = yes
-			add_to_variable ={WAL_segregation_counter = 1}
-		}
-		else_if = {
-			limit = {AND ={check_variable ={WAL_SEGREGATION > 7} check_variable ={WAL_segregation_counter = 5}}} #shit's getting out of hand now
-			##USA_WAL_nullification_check = yes
-			add_to_variable ={WAL_segregation_counter = 1}
-		}
-		else_if = {
-			limit = {AND ={check_variable ={WAL_SEGREGATION > 5} check_variable ={WAL_segregation_counter = 4}}} #this is where the damn school event chain starts happening
-			USA_WAL_Crisis_At_Central_High = yes
-			add_to_variable ={WAL_segregation_counter = 1}
-		}
-		else_if = {
-			limit = {AND ={check_variable ={WAL_SEGREGATION > 4} check_variable ={WAL_segregation_counter = 2}}} ##major portests start
-			USA_WAL_Crisis_At_Central_High = yes
-			add_to_variable ={WAL_segregation_counter = 1}
-		}
-		else_if = {
-			limit = {AND ={check_variable ={WAL_SEGREGATION > 2} check_variable ={WAL_segregation_counter = 1}}}
-			USA_WAL_Crisis_At_Central_High = yes
-			add_to_variable ={WAL_segregation_counter = 1}
-		}
-		else_if = {
-			limit = {AND ={check_variable ={WAL_SEGREGATION > 0} check_variable ={WAL_segregation_counter = 0}}}
-			USA_WAL_Crisis_At_Central_High = yes
-			add_to_variable ={WAL_segregation_counter = 1}
-		}
-	}
-}
-
 USA_WAL_NPP_radicalizes = {
 	custom_effect_tooltip = USA_wal64_NPP_Radicalizes
 	hidden_effect ={
@@ -5782,7 +5494,7 @@ USA_WAL_NPP_radicalizes = {
 						check_variable = { nationality = 84 } #African American
 					}
 				}
-				add_to_variable = { NPP_R_bonus_popularity = 0.1}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.1}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.1}
 		}
 	}
@@ -5827,8 +5539,8 @@ USA_WAL_NPP_radicalizes_Y = {
 		popularity = -0.01
 		}
 		every_owned_state = {
-			limit = { check_variable = { NPP_R_bonus_popularity < 0.1 } }
-			set_variable = { NPP_R_bonus_popularity = 0.1 }
+			limit = { check_variable = { NPP_Y_bonus_popularity < 0.1 } }
+			set_variable = { NPP_Y_bonus_popularity = 0.1 }
 			}
 			every_owned_state = {
 				limit = {
@@ -5839,7 +5551,7 @@ USA_WAL_NPP_radicalizes_Y = {
 						check_variable = { nationality = 84 } #African American
 					}
 				}
-				add_to_variable = { NPP_R_bonus_popularity = 0.1}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.1}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.1}
 			}
 	}
@@ -5857,8 +5569,8 @@ USA_WAL_NPP_radicalizes_Y_2 = {
 		popularity = -0.03
 		}
 		every_owned_state = {
-			limit = { check_variable = { NPP_R_bonus_popularity < 0.1 } }
-			set_variable = { NPP_R_bonus_popularity = 0.1 }
+			limit = { check_variable = { NPP_Y_bonus_popularity < 0.1 } }
+			set_variable = { NPP_Y_bonus_popularity = 0.1 }
 			}
 
 		every_owned_state = {
@@ -5870,13 +5582,13 @@ USA_WAL_NPP_radicalizes_Y_2 = {
 						check_variable = { nationality = 84 } #African American
 					}
 				}
-				add_to_variable = { NPP_R_bonus_popularity = 0.2}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.2}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.2}
 		}
 	}
 }
 
-USA_WAL_Crisis_At_Central_High = {
+USA_WAL_Crisis_At_Central_High = { #KEPT, up for rework
 	if = {
 		limit = {
 			check_variable = { WAL_SEGREGATION < 2 }
@@ -6022,11 +5734,534 @@ USA_WAL_Crisis_At_Central_High = {
 		}
 }
 
+USA_wal_new_segregation_expectation = {
+	set_variable = { wal_seg_minus_expect = WAL_SEGREGATION }
+	subtract_from_variable = { wal_seg_minus_expect = WAL_SEGREGATION_expectation }
+	hidden_effect = {
+		USA_WAL_Crisis_At_Central_High = yes #should be moved later
+		if = {
+			limit = { #VERY ANGERY SOUTH, runs to the dems. YOCKEY TIME. Happy north
+				check_variable = { wal_seg_minus_expect < -5 }
+			}
+			every_owned_state = { #South runs to the dems in droves
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { RD_D_bonus_popularity = 0.05 }
+				subtract_from_variable = { NPP_FR_bonus_popularity = 0.05 }
 
+				add_to_variable = { RD_popularity = 0.05 }
+				subtract_from_variable = { NPP_popularity = 0.05 }
+			}
+			add_to_variable = { USA_NPP_Unity = 1 } #happy npp
+			every_owned_state = {
+				limit = { 
+					can_have_elections_in_state = yes
+					NOT = { #Literaly everyone else is happy
+						OR = {
+							check_variable = { nationality = 83 } #Dixie
+							check_variable = { nationality = 86 } #Southwestern
+							check_variable = { nationality = 84 } #African American
+						}
+					}
+				}
+				add_to_variable = { NPP_popularity = 0.025 }
+			}
+			if ={
+				limit = { check_variable = { WAL_extremist_dissatisfaction_counter < 7 } }
+				USA_wal_vh_segr_yockey = yes #Yockey rise events. BASED
+			}
+			else = { #you already fucked up hard, should have gotten the point. maybe.
+				every_owned_state = {
+					limit = {
+						can_have_elections_in_state = yes
+						OR = {
+							check_variable = { nationality = 83 } #Dixie
+							check_variable = { nationality = 86 } #Southwestern
+							check_variable = { nationality = 84 } #African American
+						}
+					}
+					add_to_variable = { NPP_Y_bonus_popularity = 0.05}
+					subtract_from_variable = { NPP_FR_bonus_popularity = 0.05}
+				}
+			}
+		}
+
+		else_if = {
+			limit = {
+				check_variable = { wal_seg_minus_expect > -6  }
+				check_variable = { wal_seg_minus_expect < 1 }
+			}
+			#South expects more
+			every_owned_state = { #South goes dem
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { RD_D_bonus_popularity = 0.02 }
+				subtract_from_variable = { NPP_FR_bonus_popularity = 0.02 }
+
+				add_to_variable = { RD_popularity = 0.02 }
+				subtract_from_variable = { NPP_popularity = 0.02 }
+			}
+		}
+
+		else_if = {
+			limit = {
+				check_variable = { wal_seg_minus_expect > 0  }
+				check_variable = { wal_seg_minus_expect < 7 }
+			}
+			#Happy south, quite pissed north
+			every_owned_state = { #South goes fr
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { NPP_FR_bonus_popularity = 0.02 }
+				subtract_from_variable = { RD_D_bonus_popularity = 0.02 }
+
+				add_to_variable = { NPP_popularity = 0.02 }
+				subtract_from_variable = { RD_popularity = 0.02 }
+			}
+			subtract_from_variable = { USA_NPP_Unity = 0.75 }
+			every_owned_state = { #north pissed
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 82 } #Yankee
+						check_variable = { nationality = 85 } #Steel Belt
+						check_variable = { nationality = 88 } #Pacific
+					}
+				}
+				add_to_variable = { RD_R_bonus_popularity = 0.02 }
+				subtract_from_variable = { NPP_C_bonus_popularity = 0.02 }
+
+				add_to_variable = { RD_popularity = 0.02 }
+				subtract_from_variable = { NPP_popularity = 0.02 }
+			}
+		}
+		else ={
+			#Very happy south, lost north forever. LEMAY TIME
+			every_owned_state = { #South goes fr A LOT
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { NPP_FR_bonus_popularity = 0.05 }
+				subtract_from_variable = { RD_D_bonus_popularity = 0.05 }
+				subtract_from_variable = { NPP_Y_bonus_popularity = 0.05 } #why go yockey lol, wallace is the man
+
+				add_to_variable = { NPP_popularity = 0.05 }
+				subtract_from_variable = { RD_popularity = 0.05 }
+			}
+			subtract_from_variable = { USA_NPP_Unity = 1.5 }
+			every_owned_state = { #north pissed (everyone else really) BEGONE
+				limit = { 
+					can_have_elections_in_state = yes
+					NOT = { #Literaly everyone else is happy
+						OR = {
+							check_variable = { nationality = 83 } #Dixie
+							check_variable = { nationality = 86 } #Southwestern
+							check_variable = { nationality = 84 } #African American
+						}
+					}
+				}
+				add_to_variable = { RD_R_bonus_popularity = 0.05 }
+				subtract_from_variable = { NPP_C_bonus_popularity = 0.05 }
+
+				add_to_variable = { RD_popularity = 0.05 }
+				subtract_from_variable = { NPP_popularity = 0.05 }
+			}
+			every_owned_state = { #LNPP
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 82 } #Yankee
+						check_variable = { nationality = 85 } #Steel Belt
+						check_variable = { nationality = 88 } #Pacific
+					}
+				}
+				subtract_from_variable = { NPP_C_bonus_popularity = 0.05 }
+				add_to_variable = { NPP_L_popularity = 0.05 }
+			}
+		}
+	}
+}
+
+USA_wal_new_states_rights_expectation = {
+	set_variable = { wal_sr_minus_expect = WAL_STATES_RIGHTS }
+	subtract_from_variable = { wal_sr_minus_expect = WAL_STATES_RIGHTS_expectation }
+	hidden_effect = {
+		if = {
+			limit = {
+				check_variable = { wal_sr_minus_expect < -5 }
+			}
+			hidden_effect = {
+				random_list = {
+					50 = { country_event = { id = wallace.213 days = 3 random = 15 } }
+				    50 = { country_event = { id = wallace.214 days = 3 random = 15 } }
+				}
+			}
+			every_owned_state = { #South runs to the dems in droves
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { RD_D_bonus_popularity = 0.05 }
+				subtract_from_variable = { NPP_FR_bonus_popularity = 0.05 }
+
+				add_to_variable = { RD_popularity = 0.05 }
+				subtract_from_variable = { NPP_popularity = 0.05 }
+			}
+			#VERY ANGERY SOUTH, runs to the dems
+		}
+
+		else_if = {
+			limit = {
+				check_variable = { wal_sr_minus_expect > -6  }
+				check_variable = { wal_sr_minus_expect < 1 }
+			}
+			hidden_effect = {
+				country_event = { id = wallace.215 days = 3 random = 15 }
+			}
+			#South expects more
+			every_owned_state = { #South runs to the dems in droves
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { RD_D_bonus_popularity = 0.02 }
+				subtract_from_variable = { NPP_FR_bonus_popularity = 0.02 }
+
+				add_to_variable = { RD_popularity = 0.02 }
+				subtract_from_variable = { NPP_popularity = 0.02 }
+			}
+		}
+
+		else_if = {
+			limit = {
+				check_variable = { wal_sr_minus_expect > 0  }
+				check_variable = { wal_sr_minus_expect < 7 }
+			}
+			hidden_effect = {
+				country_event = { id = wallace.212 days = 3 random = 15 }
+			}
+			every_owned_state = { #South goes fr
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { NPP_FR_bonus_popularity = 0.01 }
+				subtract_from_variable = { RD_D_bonus_popularity = 0.01 }
+
+				add_to_variable = { NPP_popularity = 0.01 }
+				subtract_from_variable = { RD_popularity = 0.01 }
+			}
+			#Happy south, slightly pissed north
+			subtract_from_variable = { USA_NPP_Unity = 0.25 }
+			every_owned_state = { #north pissed
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 82 } #Yankee
+						check_variable = { nationality = 85 } #Steel Belt
+						check_variable = { nationality = 88 } #Pacific
+					}
+				}
+				add_to_variable = { RD_R_bonus_popularity = 0.01 }
+				subtract_from_variable = { NPP_C_bonus_popularity = 0.01 }
+
+				add_to_variable = { RD_popularity = 0.01 }
+				subtract_from_variable = { NPP_popularity = 0.01 }
+			}
+		}
+		else ={
+			hidden_effect = {
+				country_event = { id = wallace.211 days = 3 random = 15 }
+			}
+			every_owned_state = { #South goes fr
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				add_to_variable = { NPP_FR_bonus_popularity = 0.025 }
+				subtract_from_variable = { RD_D_bonus_popularity = 0.025 }
+
+				add_to_variable = { NPP_popularity = 0.025 }
+				subtract_from_variable = { RD_popularity = 0.025 }
+			}
+			#Slightly happier south, pissed north
+			subtract_from_variable = { USA_NPP_Unity = 0.75 }
+			every_owned_state = { #north pissed
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 82 } #Yankee
+						check_variable = { nationality = 85 } #Steel Belt
+						check_variable = { nationality = 88 } #Pacific
+					}
+				}
+				add_to_variable = { RD_R_bonus_popularity = 0.025 }
+				subtract_from_variable = { NPP_C_bonus_popularity = 0.025 }
+
+				add_to_variable = { RD_popularity = 0.025 }
+				subtract_from_variable = { NPP_popularity = 0.025 }
+			}
+		}
+	}
+}
+
+USA_wal_new_business_test ={
+	USA_WAL_Business_flavor = yes
+	hidden_effect ={
+		if = {
+			limit = {
+				check_variable = { WAL64_Business < 3 }
+			}
+			every_owned_state = { #west coast pissed
+				limit = { 
+					can_have_elections_in_state = yes
+					check_variable = { nationality = 88 } #Pacific
+				}
+				add_to_variable = { NPP_popularity = 0.05 }
+			}
+			#very pissed business, very happy npp
+			add_to_variable = { USA_NPP_Unity = 0.75 }
+			every_owned_state = { #Populist economics ftw
+				limit = { 
+					can_have_elections_in_state = yes
+					NOT = { check_variable = { nationality = 88 } } #Pacific
+				}
+				add_to_variable = { NPP_popularity = 0.01 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { WAL64_Business > 2 }
+				check_variable = { WAL64_Business < 8 }
+			}
+			#Pissed business, happy npp
+			every_owned_state = { #west coast pissed
+				limit = { 
+					can_have_elections_in_state = yes
+					check_variable = { nationality = 88 } #Pacific
+				}
+				add_to_variable = { NPP_popularity = 0.025 }
+			}
+			add_to_variable = { USA_NPP_Unity = 0.25 }
+			every_owned_state = { #Populist economics ftw
+				limit = { 
+					can_have_elections_in_state = yes
+					NOT = { check_variable = { nationality = 88 } } #Pacific
+				}
+				add_to_variable = { NPP_popularity = 0.005 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { WAL64_Business > 7 }
+				check_variable = { WAL64_Business < 13 }
+			}
+			#Neutral business
+		}
+		else_if = {
+			limit = {
+				check_variable = { WAL64_Business > 12 }
+				check_variable = { WAL64_Business < 18 }
+			}
+			#Happy big business, unhappy NPP
+			every_owned_state = { #South leaves fr
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				subtract_from_variable = { NPP_FR_bonus_popularity = 0.01 }
+				subtract_from_variable = { NPP_popularity = 0.01 }
+			}
+			subtract_from_variable = { USA_NPP_Unity = 0.5 } #ANGERY PARTY
+			every_owned_state = { #northern FR growing
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 82 } #Yankee
+						check_variable = { nationality = 85 } #Steel Belt
+						check_variable = { nationality = 88 } #Pacific
+					}
+				}
+				add_to_variable = { NPP_FR_bonus_popularity = 0.025 }
+				add_to_variable = { NPP_popularity = 0.01 }
+			}
+		}
+		else = {
+			#Very happy big business, very unhappy NPP
+			every_owned_state = { #South goes fr
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 83 } #Dixie
+						check_variable = { nationality = 86 } #Southwestern
+						check_variable = { nationality = 84 } #African American
+					}
+				}
+				subtract_from_variable = { NPP_FR_bonus_popularity = 0.025 }
+				subtract_from_variable = { NPP_popularity = 0.025 }
+			}
+			subtract_from_variable = { USA_NPP_Unity = 1 } #ANGERY PARTY
+			every_owned_state = { #northern FR growing
+				limit = { 
+					can_have_elections_in_state = yes
+					OR = {
+						check_variable = { nationality = 82 } #Yankee
+						check_variable = { nationality = 85 } #Steel Belt
+						check_variable = { nationality = 88 } #Pacific
+					}
+				}
+				add_to_variable = { NPP_FR_bonus_popularity = 0.05 }
+				add_to_variable = { NPP_popularity = 0.025 }
+			}
+		}
+	}
+}
+
+USA_wal_vh_segr_yockey ={ #chain for very low segregation wallace
+	if ={
+		limit = { check_variable = { WAL_extremist_dissatisfaction_counter = 0 } }
+		country_event = {id = wallace.231 days = 3 random = 60}
+		add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
+	}
+	else_if ={
+		limit = { check_variable = { WAL_extremist_dissatisfaction_counter = 1 } }
+		country_event = {id = wallace.232 days = 3 random = 60}
+		add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
+	}
+	else_if ={
+		limit = { check_variable = { WAL_extremist_dissatisfaction_counter = 2 } }
+		country_event = {id = wallace.233 days = 3 random = 60}
+		add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
+	}
+	else_if ={
+		limit = { check_variable = { WAL_extremist_dissatisfaction_counter = 3 } }
+		country_event = {id = wallace.234 days = 3 random = 60}
+		add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
+	}
+	else_if ={
+		limit = { check_variable = { WAL_extremist_dissatisfaction_counter = 4 } }
+		country_event = {id = wallace.235 days = 3 random = 60}
+		add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
+	}
+	else_if ={
+		limit = { check_variable = { WAL_extremist_dissatisfaction_counter = 5 } }
+		country_event = {id = wallace.236 days = 3 random = 60}
+		add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
+	}
+	else_if ={
+		limit = { check_variable = { WAL_extremist_dissatisfaction_counter = 6 } }
+		country_event = {id = wallace.237 days = 3 random = 60}
+		add_to_variable = {WAL_extremist_dissatisfaction_counter = 1}
+	}
+}
+
+USA_WAL_Business_flavor = { #better reuse what worked before, right?
+	hidden_effect = {
+		if ={
+			limit = {check_variable = {WAL64_Business < 1}}
+			country_event = {id = wallace.201 days = 3 random = 60}
+		}
+		if ={
+			limit = {check_variable = {WAL64_Business < 7}}
+			country_event = {id = wallace.202 days = 3 random = 60}
+		}
+		if ={
+			limit = {check_variable = {WAL64_Business < 9}}
+			country_event = {id = wallace.203 days = 3 random = 60}
+		}
+		if ={
+			limit = {check_variable = {WAL64_Business < 11}}
+			country_event = {id = wallace.204 days = 3 random = 60}
+		}
+		if ={
+			limit = {check_variable = {WAL64_Business > 14}}
+			country_event = {id = wallace.205 days = 3 random = 60}
+		}
+		if ={
+			limit = {check_variable = {WAL64_Business > 16}}
+			country_event = {id = wallace.206 days = 3 random = 60}
+		}
+		if ={
+			limit = {check_variable = {WAL64_Business > 17}}
+			country_event = {id = wallace.207 days = 3 random = 60}
+		}
+	}
+}
+
+USA_WAL_unrelated_expectations_increase = { #increases expectations if you are doing FP tree or Perth tree
+	add_to_variable = { WAL_SEGREGATION_expectation = 0.5 }
+	add_to_variable = { WAL_STATES_RIGHTS_expectation = 0.5 }
+
+	set_variable = { wal_sr_minus_expect = WAL_STATES_RIGHTS }
+	subtract_from_variable = { wal_sr_minus_expect = WAL_STATES_RIGHTS_expectation }
+
+	set_variable = { wal_seg_minus_expect = WAL_SEGREGATION }
+	subtract_from_variable = { wal_seg_minus_expect = WAL_SEGREGATION_expectation }
+
+	random_list = {
+		33 = { USA_wal_new_segregation_expectation = yes }
+		33 = { USA_wal_new_states_rights_expectation = yes }
+		33 = {}
+	}
+}
 
 ##############################################
-### GLENN
+### GLENN !
 ##############################################
+
+GLN_NASA_recalculate_budget_left = {
+    set_variable = { USA_GLN_NASA_Budget_Leftover = USA_GLN_NASA_Funding }
+    subtract_from_variable = { USA_GLN_NASA_Budget_Leftover = USA_GLN_NASA_Mission_Investment }
+    if = {
+        limit = { check_variable = { USA_GLN_NASA_Budget_Leftover < 0 } }
+        log = "[GetDateText]: [USA.GetName]: Glenn Negative NASA Budget"
+        add_to_variable = { USA_GLN_NASA_Mission_Investment = USA_GLN_NASA_Budget_Leftover }
+        set_variable = { USA_GLN_NASA_Budget_Leftover = 0 }
+    }
+}
 
 GLN_NASA_Unmanned_Mission = {
 
@@ -6548,37 +6783,14 @@ GLN_NASA_Mission_Rewards = {
 	##### Unique Reward - Base Prep up
 
 
-		if = { limit = { check_variable = { USA_GLN_Daedulus_Counter = 1 }}
-			add_to_variable = { USA_GLN_NASA_Manned_Mission_Boost = 1 }
-			add_to_variable = { USA_GLN_NASA_Unmanned_Mission_Boost = 1}
+	if = { 
+		limit = { 
+			check_variable = { USA_GLN_Daedulus_Counter > 0 }
+			check_variable = { USA_GLN_Daedulus_Counter < 7 }
 		}
-
-		if = { limit = { check_variable = { USA_GLN_Daedulus_Counter = 2 }}
-			add_to_variable = { USA_GLN_NASA_Manned_Mission_Boost = 1 }
-			add_to_variable = { USA_GLN_NASA_Unmanned_Mission_Boost = 1}
-		}
-
-		if = { limit = { check_variable = { USA_GLN_Daedulus_Counter = 3 }}
-			add_to_variable = { USA_GLN_NASA_Manned_Mission_Boost = 1 }
-			add_to_variable = { USA_GLN_NASA_Unmanned_Mission_Boost = 1}
-		}
-
-		if = { limit = { check_variable = { USA_GLN_Daedulus_Counter = 4 }}
-			add_to_variable = { USA_GLN_NASA_Manned_Mission_Boost = 1 }
-			add_to_variable = { USA_GLN_NASA_Unmanned_Mission_Boost = 1}
-		}
-
-		if = { limit = { check_variable = { USA_GLN_Daedulus_Counter = 5 }}
-			add_to_variable = { USA_GLN_NASA_Manned_Mission_Boost = 1 }
-			add_to_variable = { USA_GLN_NASA_Unmanned_Mission_Boost = 1}
-		}
-
-		if = { limit = { check_variable = { USA_GLN_Daedulus_Counter = 6 }}
-			add_to_variable = { USA_GLN_NASA_Manned_Mission_Boost = 1 }
-			add_to_variable = { USA_GLN_NASA_Unmanned_Mission_Boost = 1}
-			}
-		}
-
+		add_to_variable = { USA_GLN_NASA_Manned_Mission_Boost = 1 }
+		add_to_variable = { USA_GLN_NASA_Unmanned_Mission_Boost = 1}
+	}
 
 
 	###############################
@@ -6588,105 +6800,106 @@ GLN_NASA_Mission_Rewards = {
 	if =  {
 		limit = { has_country_flag = USA_GLN_Diana_Program_Activated }
 
-	##### Science Points
-	random_list = {
-		45 = {
-			set_variable = { USA_GLN_Mission_Science_Points_Reward = 15 }
+		##### Science Points
+		random_list = {
+			45 = {
+				set_variable = { USA_GLN_Mission_Science_Points_Reward = 15 }
 
-			set_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = 0 }
-			add_to_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = USA_GLN_NASA_Manned_Missions_Rewards_Boost }
-			multiply_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_Diana_Mission_Science_Rewards_Boost }
-			add_to_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_NASA_Manned_Mission_Boost }
+				set_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = 0 }
+				add_to_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = USA_GLN_NASA_Manned_Missions_Rewards_Boost }
+				multiply_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_Diana_Mission_Science_Rewards_Boost }
+				add_to_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_NASA_Manned_Mission_Boost }
 
-			round_variable = USA_GLN_Mission_Science_Points_Reward
-		}
-
-		35 = {
-			set_variable = { USA_GLN_Mission_Science_Points_Reward = 20 }
-
-			set_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = 0 }
-			add_to_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = USA_GLN_NASA_Manned_Missions_Rewards_Boost }
-			multiply_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_Diana_Mission_Science_Rewards_Boost }
-			add_to_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_NASA_Manned_Mission_Boost }
-
-			round_variable =  USA_GLN_Mission_Science_Points_Reward
-		}
-
-		20 = {
-			set_variable = { USA_GLN_Mission_Science_Points_Reward = 25 }
-
-			set_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = 0 }
-			add_to_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = USA_GLN_NASA_Manned_Missions_Rewards_Boost }
-			multiply_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_Diana_Mission_Science_Rewards_Boost }
-			add_to_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_NASA_Manned_Mission_Boost }
-
-			round_variable =  USA_GLN_Mission_Science_Points_Reward
-		}
-	}
-
-	##### Public Support
-	random_list = {
-		50 = {
-			set_variable = { USA_GLN_Mission_Public_Support_Reward = 15 }
-			add_stability = 0.01
-			add_political_power = 50
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.005
+				round_variable = USA_GLN_Mission_Science_Points_Reward
 			}
 
-			every_owned_state = { #National
-						limit = { can_have_elections_in_state = yes }
-				set_temp_variable = { popularity_bonus = 0.005 }
-				add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
-				add_to_variable = { RD_popularity = popularity_bonus }
-				subtract_from_variable = { NPP_popularity = popularity_bonus }
+			35 = {
+				set_variable = { USA_GLN_Mission_Science_Points_Reward = 20 }
+
+				set_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = 0 }
+				add_to_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = USA_GLN_NASA_Manned_Missions_Rewards_Boost }
+				multiply_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_Diana_Mission_Science_Rewards_Boost }
+				add_to_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_NASA_Manned_Mission_Boost }
+
+				round_variable =  USA_GLN_Mission_Science_Points_Reward
+			}
+
+			20 = {
+				set_variable = { USA_GLN_Mission_Science_Points_Reward = 25 }
+
+				set_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = 0 }
+				add_to_temp_variable = { USA_GLN_Diana_Mission_Science_Rewards_Boost = USA_GLN_NASA_Manned_Missions_Rewards_Boost }
+				multiply_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_Diana_Mission_Science_Rewards_Boost }
+				add_to_variable = { USA_GLN_Mission_Science_Points_Reward = USA_GLN_NASA_Manned_Mission_Boost }
+
+				round_variable =  USA_GLN_Mission_Science_Points_Reward
 			}
 		}
 
-		30 = {
-			set_variable = { USA_GLN_Mission_Public_Support_Reward = 18 }
-			add_stability = 0.01
-			add_political_power = 40
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.01
+		##### Public Support
+		random_list = {
+			50 = {
+				set_variable = { USA_GLN_Mission_Public_Support_Reward = 15 }
+				add_stability = 0.01
+				add_political_power = 50
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.005
+				}
+
+				every_owned_state = { #National
+							limit = { can_have_elections_in_state = yes }
+					set_temp_variable = { popularity_bonus = 0.005 }
+					add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
+					add_to_variable = { RD_popularity = popularity_bonus }
+					subtract_from_variable = { NPP_popularity = popularity_bonus }
+				}
 			}
 
-			every_owned_state = { #National
-						limit = { can_have_elections_in_state = yes }
-				set_temp_variable = { popularity_bonus = 0.005 }
-				add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
-				add_to_variable = { RD_popularity = popularity_bonus }
-				subtract_from_variable = { NPP_popularity = popularity_bonus }
+			30 = {
+				set_variable = { USA_GLN_Mission_Public_Support_Reward = 18 }
+				add_stability = 0.01
+				add_political_power = 40
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.01
+				}
+
+				every_owned_state = { #National
+							limit = { can_have_elections_in_state = yes }
+					set_temp_variable = { popularity_bonus = 0.005 }
+					add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
+					add_to_variable = { RD_popularity = popularity_bonus }
+					subtract_from_variable = { NPP_popularity = popularity_bonus }
+				}
+			}
+
+			20 = {
+				set_variable = { USA_GLN_Mission_Public_Support_Reward = 24 }
+				add_stability = 0.015
+				add_political_power = 50
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.015
+				}
+
+				every_owned_state = { #National
+							limit = { can_have_elections_in_state = yes }
+					set_temp_variable = { popularity_bonus = 0.005 }
+					add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
+					add_to_variable = { RD_popularity = popularity_bonus }
+					subtract_from_variable = { NPP_popularity = popularity_bonus }
+				}
 			}
 		}
 
-		20 = {
-			set_variable = { USA_GLN_Mission_Public_Support_Reward = 24 }
-			add_stability = 0.015
-			add_political_power = 50
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.015
-			}
+		##### Moon landing idea
 
-			every_owned_state = { #National
-						limit = { can_have_elections_in_state = yes }
-				set_temp_variable = { popularity_bonus = 0.005 }
-				add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
-				add_to_variable = { RD_popularity = popularity_bonus }
-				subtract_from_variable = { NPP_popularity = popularity_bonus }
-			}
-		}
-	}
-
-	##### Moon landing idea
-
-		if = { limit = { check_variable = { USA_GLN_Succsefull_Diana_Missions = 3 } }
+		if = { 
+			limit = { check_variable = { USA_GLN_Succsefull_Diana_Missions = 3 } }
 			country_event = { id = glenn.space.9 days = 7 }
-			}
 		}
+	}
 
 	###############################
 	######### ARES
@@ -6732,71 +6945,72 @@ GLN_NASA_Mission_Rewards = {
 
 		}
 
-	##### Public Support
-	random_list = {
-		50 = {
-			set_variable = { USA_GLN_Mission_Public_Support_Reward = 20 }
-			add_stability = 0.015
-			add_political_power = 40
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.005
+		##### Public Support
+		random_list = {
+			50 = {
+				set_variable = { USA_GLN_Mission_Public_Support_Reward = 20 }
+				add_stability = 0.015
+				add_political_power = 40
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.005
+				}
+
+				every_owned_state = { #National
+							limit = { can_have_elections_in_state = yes }
+					set_temp_variable = { popularity_bonus = 0.005 }
+					add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
+					add_to_variable = { RD_popularity = popularity_bonus }
+					subtract_from_variable = { NPP_popularity = popularity_bonus }
+				}
 			}
 
-			every_owned_state = { #National
-						limit = { can_have_elections_in_state = yes }
-				set_temp_variable = { popularity_bonus = 0.005 }
-				add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
-				add_to_variable = { RD_popularity = popularity_bonus }
-				subtract_from_variable = { NPP_popularity = popularity_bonus }
+			30 = {
+				set_variable = { USA_GLN_Mission_Public_Support_Reward = 24 }
+				add_stability = 0.02
+				add_political_power = 50
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.01
+				}
+
+				every_owned_state = { #National
+							limit = { can_have_elections_in_state = yes }
+					set_temp_variable = { popularity_bonus = 0.005 }
+					add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
+					add_to_variable = { RD_popularity = popularity_bonus }
+					subtract_from_variable = { NPP_popularity = popularity_bonus }
+				}
+			}
+
+			20 = {
+				set_variable = { USA_GLN_Mission_Public_Support_Reward = 27 }
+				add_stability = 0.025
+				add_political_power = 75
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.015
+				}
+
+				every_owned_state = { #National
+							limit = { can_have_elections_in_state = yes }
+					set_temp_variable = { popularity_bonus = 0.005 }
+					add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
+					add_to_variable = { RD_popularity = popularity_bonus }
+					subtract_from_variable = { NPP_popularity = popularity_bonus }
+				}
 			}
 		}
 
-		30 = {
-			set_variable = { USA_GLN_Mission_Public_Support_Reward = 24 }
-			add_stability = 0.02
-			add_political_power = 50
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.01
-			}
+		##### Mars landing idea
 
-			every_owned_state = { #National
-						limit = { can_have_elections_in_state = yes }
-				set_temp_variable = { popularity_bonus = 0.005 }
-				add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
-				add_to_variable = { RD_popularity = popularity_bonus }
-				subtract_from_variable = { NPP_popularity = popularity_bonus }
-			}
-		}
-
-		20 = {
-			set_variable = { USA_GLN_Mission_Public_Support_Reward = 27 }
-			add_stability = 0.025
-			add_political_power = 75
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.015
-			}
-
-			every_owned_state = { #National
-						limit = { can_have_elections_in_state = yes }
-				set_temp_variable = { popularity_bonus = 0.005 }
-				add_to_variable = { RD_R_bonus_popularity = popularity_bonus }
-				add_to_variable = { RD_popularity = popularity_bonus }
-				subtract_from_variable = { NPP_popularity = popularity_bonus }
+		if = {
+			limit = { check_variable = { USA_GLN_Succsefull_Ares_Missions = 4 } }
+				country_event = { id = glenn.space.10 days = 2 }
 			}
 		}
 	}
-
-	##### Mars landing idea
-
-		if = { limit = { check_variable = { USA_GLN_Succsefull_Ares_Missions = 4 } }
-			country_event = { id = glenn.space.10 days = 2 }
-			}
-		}
-	}
-
+}
 
 
 	GLN_increase_nuclear_spending = {
@@ -6880,11 +7094,11 @@ USA_LEMAY_LEGACY_OF_WALLACE_INTEGRATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.2 }
-				add_to_variable = { NPP_R_bonus_popularity = 0.2}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.2}
 			}
 			add_popularity = {
 						ideology = national_socialism
@@ -6912,11 +7126,11 @@ USA_LEMAY_LEGACY_OF_WALLACE_INTEGRATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.2 }
-				add_to_variable = { NPP_R_bonus_popularity = 0.15}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.15}
 				add_to_variable = { RD_D_bonus_popularity = 0.05 }
 				subtract_from_variable = { NPP_popularity = 0.05 }
 			}
@@ -6965,11 +7179,11 @@ USA_LEMAY_LEGACY_OF_WALLACE_INTEGRATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.2 }
-				add_to_variable = { NPP_R_bonus_popularity = 0.1}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.1}
 				add_to_variable = { RD_D_bonus_popularity = 0.1 }
 				subtract_from_variable = { NPP_popularity = 0.1 }
 			}
@@ -7016,11 +7230,11 @@ USA_LEMAY_LEGACY_OF_WALLACE_INTEGRATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.15 }
-				add_to_variable = { NPP_R_bonus_popularity = 0.05}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.05}
 				add_to_variable = { RD_D_bonus_popularity = 0.1 }
 				subtract_from_variable = { NPP_popularity = 0.1 }
 			}
@@ -7067,11 +7281,11 @@ USA_LEMAY_LEGACY_OF_WALLACE_INTEGRATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.2 }
-				add_to_variable = { NPP_R_bonus_popularity = 0.05}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.05}
 				add_to_variable = { RD_D_bonus_popularity = 0.15 }
 				subtract_from_variable = { NPP_popularity = 0.15 }
 			}
@@ -7106,7 +7320,7 @@ USA_LEMAY_LEGACY_OF_WALLACE_INTEGRATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				subtract_from_variable = { NPP_FR_bonus_popularity = 0.2 }
@@ -7199,7 +7413,7 @@ USA_LEMAY_LEGACY_OF_WALLACE_SEGREGATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { NPP_FR_bonus_popularity = 0.15}
@@ -7251,7 +7465,7 @@ USA_LEMAY_LEGACY_OF_WALLACE_SEGREGATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { NPP_FR_bonus_popularity = 0.1}
@@ -7301,7 +7515,7 @@ USA_LEMAY_LEGACY_OF_WALLACE_SEGREGATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { NPP_FR_bonus_popularity = 0.1}
@@ -7352,7 +7566,7 @@ USA_LEMAY_LEGACY_OF_WALLACE_SEGREGATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { NPP_FR_bonus_popularity = 0.1}
@@ -7404,7 +7618,7 @@ USA_LEMAY_LEGACY_OF_WALLACE_SEGREGATION = {
 					OR = {
 						check_variable = { nationality = 83 } #Dixie
 						check_variable = { nationality = 84 } #African American
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 					}
 				}
 				add_to_variable = { NPP_FR_bonus_popularity = 0.1}
@@ -7857,7 +8071,7 @@ USA_GLD_discovery_backlash = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -7878,7 +8092,7 @@ USA_GLD_discovery_backlash = {
 					NOT = {
 						OR = {
 							check_variable = { nationality = 82 } #Yankee
-							check_variable = { nationality = 85 } #Midwestern
+							check_variable = { nationality = 85 } #Steel Belt
 							check_variable = { nationality = 88 } #Pacific
 						}
 					}
@@ -7912,7 +8126,7 @@ USA_GLD_discovery_backlash = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -7933,7 +8147,7 @@ USA_GLD_discovery_backlash = {
 					NOT = {
 						OR = {
 							check_variable = { nationality = 82 } #Yankee
-							check_variable = { nationality = 85 } #Midwestern
+							check_variable = { nationality = 85 } #Steel Belt
 							check_variable = { nationality = 88 } #Pacific
 						}
 					}
@@ -7947,7 +8161,7 @@ USA_GLD_discovery_backlash = {
 				subtract_from_temp_variable = { popularity_bonus = 0.03 }
 				add_to_variable = { NPP_FR_bonus_popularity = popularity_bonus } #Look we are the true conservatives here
 				subtract_from_temp_variable = { popularity_bonus = 0.01 }
-				add_to_variable = { NPP_R_bonus_popularity = popularity_bonus } #Small Yockeyite gains amidst the general chaos
+				add_to_variable = { NPP_Y_bonus_popularity = popularity_bonus } #Small Yockeyite gains amidst the general chaos
 			}
 		}
 	}
@@ -7968,7 +8182,7 @@ USA_GLD_discovery_backlash = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -7988,7 +8202,7 @@ USA_GLD_discovery_backlash = {
 					NOT = {
 						OR = {
 							check_variable = { nationality = 82 } #Yankee
-							check_variable = { nationality = 85 } #Midwestern
+							check_variable = { nationality = 85 } #Steel Belt
 							check_variable = { nationality = 88 } #Pacific
 						}
 					}
@@ -8002,7 +8216,7 @@ USA_GLD_discovery_backlash = {
 				subtract_from_temp_variable = { popularity_bonus = 0.03 }
 				add_to_variable = { NPP_FR_bonus_popularity = popularity_bonus } #Look we are the true conservatives here
 				subtract_from_temp_variable = { popularity_bonus = 0.01 }
-				add_to_variable = { NPP_R_bonus_popularity = popularity_bonus } #Small Yockeyite gains amidst the general chaos
+				add_to_variable = { NPP_Y_bonus_popularity = popularity_bonus } #Small Yockeyite gains amidst the general chaos
 			}
 		}
 	}
@@ -8020,7 +8234,7 @@ USA_GLD_discovery_backlash = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -8041,7 +8255,7 @@ USA_GLD_discovery_backlash = {
 					NOT = {
 						OR = {
 							check_variable = { nationality = 82 } #Yankee
-							check_variable = { nationality = 85 } #Midwestern
+							check_variable = { nationality = 85 } #Steel Belt
 							check_variable = { nationality = 88 } #Pacific
 						}
 					}
@@ -8055,7 +8269,7 @@ USA_GLD_discovery_backlash = {
 				subtract_from_temp_variable = { popularity_bonus = 0.04 }
 				add_to_variable = { NPP_FR_bonus_popularity = popularity_bonus } #Look we are the true conservatives here
 				subtract_from_temp_variable = { popularity_bonus = 0.02 }
-				add_to_variable = { NPP_R_bonus_popularity = popularity_bonus } #Small Yockeyite gains amidst the general chaos
+				add_to_variable = { NPP_Y_bonus_popularity = popularity_bonus } #Small Yockeyite gains amidst the general chaos
 			}
 		}
 	}
@@ -8206,19 +8420,19 @@ USA_WAL_response_pass_civil_rights = { #Effect for passing CRA after a Wallace p
 					limit = { USA = { has_country_flag = USA_68_D_RD } }
 					subtract_from_variable = {RD_D_bonus_popularity = popularity_bonus }
 					add_to_variable = { NPP_popularity = 0.1 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.1 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.1 }
 				}
 				else_if = {
 					limit = { USA = { has_country_flag = USA_68_R_RD } }
 					subtract_from_variable = {RD_R_bonus_popularity = popularity_bonus }
 					add_to_variable = { NPP_popularity = 0.1 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.1 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.1 }
 				}
 				else_if = {
 					limit = { USA = { has_country_flag = USA_68_C_NPP } }
 					subtract_from_variable = {NPP_C_bonus_popularity = popularity_bonus }
 					add_to_variable = { NPP_popularity = 0.1 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.1 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.1 }
 				}
 				add_to_variable = { NPP_FR_bonus_popularity = popularity_bonus }
 			}
@@ -8232,19 +8446,19 @@ USA_WAL_response_pass_civil_rights = { #Effect for passing CRA after a Wallace p
 					limit = { USA = { has_country_flag = USA_68_D_RD } }
 					subtract_from_variable = {RD_D_bonus_popularity = popularity_bonus }
 					add_to_variable = { NPP_popularity = 0.05}
-					add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 				}
 				else_if = {
 					limit = { USA = { has_country_flag = USA_68_R_RD } }
 					subtract_from_variable = {RD_R_bonus_popularity = popularity_bonus }
 					add_to_variable = { NPP_popularity = 0.05}
-					add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 				}
 				else_if = {
 					limit = { USA = { has_country_flag = USA_68_C_NPP } }
 					subtract_from_variable = {NPP_C_bonus_popularity = popularity_bonus }
 					add_to_variable = { NPP_popularity = 0.05}
-					add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 				}
 				add_to_variable = { NPP_FR_bonus_popularity = popularity_bonus }
 			}
@@ -8363,7 +8577,7 @@ USA_WAL_response_veto_civil_rights = { #Effects for vetoeing the civil rights ac
 				can_have_elections_in_state = yes
 				OR = {
 					check_variable = { nationality = 82 } #Yankee
-					check_variable = { nationality = 85 } #Midwestern
+					check_variable = { nationality = 85 } #Steel Belt
 					check_variable = { nationality = 88 } #Pacific
 				}
 			}
@@ -8419,7 +8633,7 @@ USA_WAL_response_veto_civil_rights = { #Effects for vetoeing the civil rights ac
 				can_have_elections_in_state = yes
 				OR = {
 					check_variable = { nationality = 82 } #Yankee
-					check_variable = { nationality = 85 } #Midwestern
+					check_variable = { nationality = 85 } #Steel Belt
 					check_variable = { nationality = 88 } #Pacific
 				}
 			}
@@ -8505,7 +8719,7 @@ USA_response_anger_north = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -8522,7 +8736,7 @@ USA_response_anger_north = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -8539,7 +8753,7 @@ USA_response_anger_north = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -8556,7 +8770,7 @@ USA_response_anger_north = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -8573,7 +8787,7 @@ USA_response_anger_north = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
@@ -8590,12 +8804,12 @@ USA_response_anger_north = {
 					can_have_elections_in_state = yes
 					OR = {
 						check_variable = { nationality = 82 } #Yankee
-						check_variable = { nationality = 85 } #Midwestern
+						check_variable = { nationality = 85 } #Steel Belt
 						check_variable = { nationality = 88 } #Pacific
 					}
 				}
 				set_temp_variable = { popularity_bonus = 0.1 }
-				subtract_from_variable = { NPP_R_bonus_popularity = popularity_bonus }
+				subtract_from_variable = { NPP_Y_bonus_popularity = popularity_bonus }
 				multiply_temp_variable = { popularity_bonus = 0.5 }
 				subtract_from_variable = { NPP_popularity = popularity_bonus }
 			}
@@ -8701,7 +8915,7 @@ USA_response_anger_south = {
 					}
 				}
 				set_temp_variable = { popularity_bonus = 0.1 }
-				subtract_from_variable = { NPP_R_bonus_popularity = popularity_bonus }
+				subtract_from_variable = { NPP_Y_bonus_popularity = popularity_bonus }
 				multiply_temp_variable = { popularity_bonus = 0.5 }
 				subtract_from_variable = { NPP_popularity = popularity_bonus }
 			}
@@ -8960,7 +9174,7 @@ mcs_influence_calculation = {
 		set_temp_variable = { local_center_popularity = NPP_C_bonus_popularity }
 		set_temp_variable = { local_business_popularity = NPP_FR_bonus_popularity }
 		set_temp_variable = { local_racist_popularity = NPP_FR_bonus_popularity }
-		set_temp_variable = { local_fascist_popularity = NPP_R_bonus_popularity }
+		set_temp_variable = { local_fascist_popularity = NPP_Y_bonus_popularity }
 
 		# This block calculates how much of the local population is supporting the FR-NPP becaus they're racist
 		if = {
@@ -10660,10 +10874,7 @@ USA_SAF_WAR_Insurgency_war_crime_event_chooser = {
 
 }
 
-
-USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
-
-	clr_country_flag = USA_SAF_WAR_Insurgency_Activated
+USA_SAF_remove_insurgency_discontent = {
 	remove_ideas = USA_SAF_WAR_Insurgency_Domestic_Discontent_1
 	remove_ideas = USA_SAF_WAR_Insurgency_Domestic_Discontent_2
 	remove_ideas = USA_SAF_WAR_Insurgency_Domestic_Discontent_3
@@ -10674,6 +10885,14 @@ USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
 	remove_ideas = USA_SAF_WAR_Insurgency_Domestic_Discontent_8
 	remove_ideas = USA_SAF_WAR_Insurgency_Domestic_Discontent_9
 	remove_ideas = USA_SAF_WAR_Insurgency_Domestic_Discontent_10
+}
+
+USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
+
+	set_country_flag = USA_SAF_WAR_Insurgency_Pulled_Out
+	clr_country_flag = USA_SAF_WAR_Insurgency_Activated
+
+	USA_SAF_remove_insurgency_discontent = yes
 
 	set_variable = { USA_Pulled_Out_Backlash_Effect_Base = 3 }
 	set_variable = { USA_Pulled_Out_Backlash_Effect_Political_Power = 0 }
@@ -10803,21 +11022,6 @@ USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
 			subtract_from_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 		}
 
-		add_popularity = {
-			ideology = social_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-
-		add_popularity = {
-			ideology = social_liberal
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-
-		add_popularity = {
-			ideology = communist
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
-		}
-
 	}
 
 	if = {
@@ -10825,21 +11029,6 @@ USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
 		every_owned_state = {
 			add_to_variable = { NPP_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 			subtract_from_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
-		}
-
-		add_popularity = {
-			ideology = authoritarian_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-
-		add_popularity = {
-			ideology = social_conservative
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-
-		add_popularity = {
-			ideology = national_socialism
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
 		}
 	}
 
@@ -10849,39 +11038,12 @@ USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
 			subtract_from_variable = { NPP_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 			add_to_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 		}
-
-		add_popularity = {
-			ideology = social_liberal
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-
-		add_popularity = {
-			ideology = social_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-
-		add_popularity = {
-			ideology = national_socialism
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
-		}
 	}
 	if = {
 		limit = { has_country_flag = USA_64_FR_NPP }
 		every_owned_state = {
 			subtract_from_variable = { NPP_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 			add_to_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
-		}
-		add_popularity = {
-			ideology = social_conservative
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-		add_popularity = {
-			ideology = authoritarian_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-		add_popularity = {
-			ideology = communist
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
 		}
 	}
 	
@@ -10892,21 +11054,6 @@ USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
 			subtract_from_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 		}
 
-		add_popularity = {
-			ideology = social_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-
-		add_popularity = {
-			ideology = social_liberal
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-
-		add_popularity = {
-			ideology = communist
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
-		}
-
 	}
 
 	if = {
@@ -10914,21 +11061,6 @@ USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
 		every_owned_state = {
 			add_to_variable = { NPP_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 			subtract_from_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
-		}
-
-		add_popularity = {
-			ideology = authoritarian_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-
-		add_popularity = {
-			ideology = social_conservative
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-
-		add_popularity = {
-			ideology = national_socialism
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
 		}
 	}
 
@@ -10938,39 +11070,12 @@ USA_SAF_WAR_Insurgency_Pulling_Out_Effect = {
 			subtract_from_variable = { NPP_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 			add_to_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 		}
-
-		add_popularity = {
-			ideology = social_liberal
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-
-		add_popularity = {
-			ideology = social_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-
-		add_popularity = {
-			ideology = national_socialism
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
-		}
 	}
 	if = {
 		limit = { has_country_flag = USA_68_FR_NPP }
 		every_owned_state = {
 			subtract_from_variable = { NPP_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
 			add_to_variable = { RD_popularity = USA_Pulled_Out_Backlash_Effect_Popularity }
-		}
-		add_popularity = {
-			ideology = social_conservative
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat
-		}
-		add_popularity = {
-			ideology = authoritarian_democrat
-			popularity = var:USA_Pulled_Out_Backlash_Effect_Popularity_But_Pie_Chat_Subtract
-		}
-		add_popularity = {
-			ideology = communist
-			popularity = var:USA_Pulled_Out_Extremist_Popularity_Pie_Chart_Addition
 		}
 	}
 }
@@ -11434,7 +11539,7 @@ USA_ICW_scripted_effect = {
 					limit = { can_have_elections_in_state = yes }
 					add_to_variable = { NPP_popularity = 0.005 }
 					add_to_variable = { NPP_L_bonus_popularity = 0.005 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.005 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.005 }
 				}
 			}
 			if = {
@@ -11486,7 +11591,7 @@ USA_1970_ICW_check = {
 					limit = { can_have_elections_in_state = yes }
 					subtract_from_variable = { NPP_popularity = 0.02 }
 					add_to_variable = { NPP_L_bonus_popularity = 0.02 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.02 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.02 }
 				}
 			}
 		}
@@ -11509,7 +11614,7 @@ USA_1970_ICW_check = {
 					limit = { can_have_elections_in_state = yes }
 					add_to_variable = { NPP_popularity = -0.05 }
 					add_to_variable = { NPP_L_bonus_popularity = 0.05 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 					if = {
 						limit = {
 							OR = {
@@ -11522,8 +11627,8 @@ USA_1970_ICW_check = {
 						add_to_variable = { NPP_popularity = -0.025 }
 					}
 					if = {
-						limit = { check_variable = { NPP_R_bonus_popularity > 0.15 } }
-						add_to_variable = {NPP_R_bonus_popularity = 0.05 }
+						limit = { check_variable = { NPP_Y_bonus_popularity > 0.15 } }
+						add_to_variable = {NPP_Y_bonus_popularity = 0.05 }
 					}
 					if = {
 						limit = { check_variable = { NPP_L_bonus_popularity > 0.15 } }
@@ -11559,7 +11664,7 @@ USA_1970_ICW_check = {
 					limit = { can_have_elections_in_state = yes }
 					subtract_from_variable = { RD_popularity = 0.02 }
 					add_to_variable = { NPP_L_bonus_popularity = 0.02 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.02 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.02 }
 				}
 			}
 		}
@@ -11582,7 +11687,7 @@ USA_1970_ICW_check = {
 					limit = { can_have_elections_in_state = yes }
 					subtract_from_variable = { RD_popularity = 0.025 }
 					add_to_variable = { NPP_L_bonus_popularity = 0.05 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 					if = {
 						limit = {
 							OR = {
@@ -11595,8 +11700,8 @@ USA_1970_ICW_check = {
 						subtract_from_variable = { RD_popularity = 0.025 }
 					}
 					if = {
-						limit = { check_variable = { NPP_R_bonus_popularity > 0.15 } }
-						add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+						limit = { check_variable = { NPP_Y_bonus_popularity > 0.15 } }
+						add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 					}
 					if = {
 						limit = { check_variable = { NPP_L_bonus_popularity > 0.15 } }
@@ -11635,7 +11740,7 @@ USA_1972_ICW_check = {
 					limit = { can_have_elections_in_state = yes }
 					subtract_from_variable = { NPP_popularity = 0.05 }
 					add_to_variable = { NPP_L_bonus_popularity = 0.05 }
-					add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+					add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 					if = {
 						limit = {
 							OR = {
@@ -11648,8 +11753,8 @@ USA_1972_ICW_check = {
 						subtract_from_variable = { NPP_popularity = 0.025 }
 					}
 					if = {
-						limit = { check_variable = { NPP_R_bonus_popularity > 0.15 } }
-						add_to_variable = {NPP_R_bonus_popularity = 0.1 }
+						limit = { check_variable = { NPP_Y_bonus_popularity > 0.15 } }
+						add_to_variable = {NPP_Y_bonus_popularity = 0.1 }
 					}
 					if = {
 						limit = { check_variable = { NPP_L_bonus_popularity > 0.15 } }
@@ -11684,7 +11789,7 @@ USA_1972_ICW_check = {
 				limit = { can_have_elections_in_state = yes }
 				subtract_from_variable = { RD_popularity = 0.05 }
 				add_to_variable = { NPP_L_bonus_popularity = 0.05 }
-				add_to_variable = { NPP_R_bonus_popularity = 0.05 }
+				add_to_variable = { NPP_Y_bonus_popularity = 0.05 }
 				if = {
 					limit = {
 						OR = {
@@ -11697,8 +11802,8 @@ USA_1972_ICW_check = {
 					subtract_from_variable = { RD_popularity = 0.025 }
 				}
 				if = {
-					limit = { check_variable = { NPP_R_bonus_popularity > 0.15 } }
-					add_to_variable = {NPP_R_bonus_popularity = 0.1 }
+					limit = { check_variable = { NPP_Y_bonus_popularity > 0.15 } }
+					add_to_variable = {NPP_Y_bonus_popularity = 0.1 }
 				}
 				if = {
 					limit = { check_variable = { NPP_L_bonus_popularity > 0.15 } }
@@ -11841,7 +11946,7 @@ US_adjust_pie_state = {
 	set_temp_variable = { RD_D_popularity  = RD_D_bonus_popularity }
 	set_temp_variable = { NPP_L_popularity  = NPP_L_bonus_popularity }
 	set_temp_variable = { NPP_C_popularity  = NPP_C_bonus_popularity }
-	set_temp_variable = { NPP_R_popularity  = NPP_R_bonus_popularity }
+	set_temp_variable = { NPP_R_popularity  = NPP_Y_bonus_popularity }
 	set_temp_variable = { NPP_FR_popularity = NPP_FR_bonus_popularity }
 
 	################################################################
@@ -12026,7 +12131,7 @@ US_eco_expectation_win = {
 		limit = { check_variable = { ROOT.presidents_party = 5 } } #YOCKEY
 		every_owned_state = {
 			limit  = { can_have_elections_in_state = yes}
-			add_to_variable = { NPP_R_bonus_popularity = 0.03}
+			add_to_variable = { NPP_Y_bonus_popularity = 0.03}
 			add_to_variable = { NPP_popularity = 0.03}
 		}
 	}
@@ -12076,7 +12181,7 @@ US_eco_expectation_fail = {
 		limit = { check_variable = { ROOT.presidents_party = 5 } } #YOCKEY
 		every_owned_state = {
 			limit  = { can_have_elections_in_state = yes}
-			add_to_variable = { NPP_R_bonus_popularity = -0.03}
+			add_to_variable = { NPP_Y_bonus_popularity = -0.03}
 			add_to_variable = { NPP_popularity = -0.03}
 		}
 	}
@@ -12136,7 +12241,7 @@ US_check_debt_expectations = {
 			limit = { check_variable = { ROOT.presidents_party = 5 } } #YOCKEY
 			every_owned_state = {
 				limit  = { can_have_elections_in_state = yes}
-				add_to_variable = { NPP_R_bonus_popularity = 0.03}
+				add_to_variable = { NPP_Y_bonus_popularity = 0.03}
 				add_to_variable = { NPP_popularity = 0.03}
 			}
 		}
@@ -12187,7 +12292,7 @@ US_check_debt_expectations = {
 				limit = { check_variable = { ROOT.presidents_party = 5 } } #YOCKEY
 				every_owned_state = {
 					limit  = { can_have_elections_in_state = yes}
-					add_to_variable = { NPP_R_bonus_popularity = -0.03}
+					add_to_variable = { NPP_Y_bonus_popularity = -0.03}
 					add_to_variable = { NPP_popularity = -0.03}
 				}
 			}
@@ -12260,7 +12365,7 @@ USA_NPP_rally_effect = {
 					add_to_variable = { NPP_FR_bonus_popularity = 0.005 }
 					subtract_from_variable = { NPP_L_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_C_bonus_popularity = 0.005}
-					subtract_from_variable = { NPP_R_bonus_popularity = 0.005}
+					subtract_from_variable = { NPP_Y_bonus_popularity = 0.005}
 				}
 			}
 		else_if = {
@@ -12270,14 +12375,14 @@ USA_NPP_rally_effect = {
 					add_to_variable = { NPP_C_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_L_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_FR_bonus_popularity = 0.005}
-					subtract_from_variable = { NPP_R_bonus_popularity = 0.005}
+					subtract_from_variable = { NPP_Y_bonus_popularity = 0.005}
 				}
 			}
 		else_if = {
 			limit = { has_government = national_socialism }
 				every_owned_state = {
 					limit = { can_have_elections_in_state = yes }
-					add_to_variable = { NPP_R_bonus_popularity = 0.005}
+					add_to_variable = { NPP_Y_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_L_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_C_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_FR_bonus_popularity = 0.005}
@@ -12290,7 +12395,7 @@ USA_NPP_rally_effect = {
 					add_to_variable = { NPP_L_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_C_bonus_popularity = 0.005}
 					subtract_from_variable = { NPP_FR_bonus_popularity = 0.005}
-					subtract_from_variable = { NPP_R_bonus_popularity = 0.005}
+					subtract_from_variable = { NPP_Y_bonus_popularity = 0.005}
 				}
 			}
 
@@ -12299,40 +12404,37 @@ USA_NPP_rally_effect = {
 
 USA_societal_unity_pulse = {
 	log = "[GetDateText]: [Root.GetName]: USA_societal_unity_pulse; Executing"
-	set_temp_variable = { USA_societal_unity_mult = USA_unity }
+	set_temp_variable = { USA_societal_unity_mult = USA_unity } #between around 5 and 15 (extremes)
 	subtract_from_temp_variable = { USA_societal_unity_mult = 10 }
-	divide_temp_variable = { USA_societal_unity_mult = 100 }
-	if = {
+	divide_temp_variable = { USA_societal_unity_mult = 100 } #Between around -0.05 and +0.05
+	#No need to run only for presidential elections
+	every_owned_state = {
 		limit = {
-			has_country_flag = USA_presidential_elections
+			can_have_elections_in_state = yes
 		}
-		every_owned_state = {
+		if = {
 			limit = {
-				can_have_elections_in_state = yes
-			}
-			if = {
-				limit = {
-					OR = {
-						check_variable = { USA.presidents_party = 1 }
-						check_variable = { USA.presidents_party = 2 }
-					}
+				OR = {
+					check_variable = { USA.presidents_party = 1 }
+					check_variable = { USA.presidents_party = 2 }
 				}
-				add_to_variable = { RD_popularity = USA_societal_unity_mult }
 			}
-			else_if = {
-				limit = {
-					OR = {
-						check_variable = { USA.presidents_party = 3 }
-						check_variable = { USA.presidents_party = 4 }
-						check_variable = { USA.presidents_party = 5 }
-						check_variable = { USA.presidents_party = 6 }
-					}
+			add_to_variable = { RD_popularity = USA_societal_unity_mult }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					check_variable = { USA.presidents_party = 3 }
+					check_variable = { USA.presidents_party = 4 }
+					check_variable = { USA.presidents_party = 5 }
+					check_variable = { USA.presidents_party = 6 }
 				}
-				add_to_variable = { NPP_popularity = USA_societal_unity_mult }
 			}
+			add_to_variable = { NPP_popularity = USA_societal_unity_mult }
 		}
 	}
-	divide_temp_variable = { USA_societal_unity_mult = -4 }
+	#divide_temp_variable = { USA_societal_unity_mult = -4 } #Lol, why?
+	divide_temp_variable = { USA_societal_unity_mult = -2 }
 	every_owned_state = {
 		add_to_variable = { NPP_L_bonus_popularity = USA_societal_unity_mult }
 		clamp_variable = {
@@ -12340,9 +12442,9 @@ USA_societal_unity_pulse = {
 			min = 0
 			max = 1000
 		}
-		add_to_variable = { NPP_R_bonus_popularity = USA_societal_unity_mult }
+		add_to_variable = { NPP_Y_bonus_popularity = USA_societal_unity_mult }
 		clamp_variable = {
-			var = NPP_R_bonus_popularity
+			var = NPP_Y_bonus_popularity
 			min = 0
 			max = 1000
 		}

@@ -542,7 +542,7 @@ USA_mcs_americare_bill_setup = {
 	set_variable = {RD_R_flip_cost = 25} 
 	set_country_flag = FR_NPP_discussing
 	set_variable = {FR_NPP_flip_cost = 50}
-	
+	set_country_flag = USA_BILL_EVENTLESS_NEGOTIATION
 	set_variable = {USA_RD_R_bill_support = 0.4}	
 	set_variable = {USA_RD_D_bill_support = 0}
 	set_variable = {USA_C_NPP_bill_support = 1}
@@ -552,26 +552,8 @@ USA_mcs_americare_bill_setup = {
 	set_variable = {average_boost_RD_R = .50} 
 	set_variable = {average_boost_FR_NPP = .50} 
 	USA_bill_setup = yes
-	clamp_variable = { #make sure to clamp any support variable that can change! 
-   		var = USA_RD_R_bill_support
-    	min = 0 
-   		max = 1 
-	}
-	clamp_variable = { #make sure to clamp any support variable that can change! 
-   		var = RD_R_flip_cost 
-    	min = 0 
-   		max = 300 
-	}
-	clamp_variable = { #make sure to clamp any support variable that can change! 
-   		var = USA_FR_NPP_bill_support
-    	min = 0 
-   		max = 1 
-	}
-	clamp_variable = { #make sure to clamp any support variable that can change! 
-   		var = NPP_FR_flip_cost 
-    	min = 0 
-   		max = 300 
-	}	
+	USA_setup_bill_support_clamper = yes
+	USA_clamp_flip_cost = yes	
 }
 USA_MCS_Power_to_the_States_setup = {
 	set_variable = {bill_id = 15}
@@ -1720,7 +1702,7 @@ USA_Goldwater_balanced_budget_setup = {
 	set_variable = {USA_C_NPP_bill_support = 0 }
 	set_variable = {USA_L_NPP_bill_support = 0 }
 	set_variable = {USA_FR_NPP_bill_support = 0.3 }
-	set_variable = {USA_Y_NPP_bill_support = 1 }
+	set_variable = {USA_Y_NPP_bill_support = 0.25 } #Y-D alliance is over now
 	
 	set_variable = {average_boost_RD_R = 0.5} 
 	set_variable = {average_boost_FR_NPP = 0.9} 
@@ -1894,7 +1876,7 @@ USA_clean_water_act_setup = { #BLESSED GOLDWATER SAVES THE ENVIRONMENT
 	}
 	clamp_variable = { #make sure to clamp any support variable that can change! 
    		var = FR_NPP_flip_cost 
-    		min = 0 
+    	min = 0 
    		max = 1000 
 	}
 }
