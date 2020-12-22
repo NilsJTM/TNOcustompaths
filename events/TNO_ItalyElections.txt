@@ -1,0 +1,1528 @@
+﻿##TNO ITALY ELECTIONS##
+##MADE BY TIBERIUM##
+##THIS ISNT A WASTE OF TIME##
+
+add_namespace = itaelections66
+
+#1966#
+
+country_event = {
+	id = itaelections66.1 #1966 election begins - first ever political debate
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.1"}
+	title = itaelections66.1.t
+	desc = itaelections66.1.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = ITA
+		NOT = {
+			has_country_flag = ITA_no_elections #set on_action defining this country_flag at start
+		}
+	}
+
+	option = { #moro is based!!
+		name = itaelections66.1.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.2
+				days = 2
+			}
+			ITA_reset_election_pop = yes
+		}
+	}
+	option = { #can nenni go libsoc
+		name = itaelections66.1.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.2
+				days = 2
+			}
+			ITA_reset_election_pop = yes
+		}
+	}
+	option = { #i am a fascist haha xd
+		name = itaelections66.1.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.2
+				days = 2
+			}
+			ITA_reset_election_pop = yes
+		}
+	}
+}
+
+country_event = {
+	id = itaelections66.2 #Women in politics
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.2"}
+	title = itaelections66.2.t
+	desc = italelection66.2.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #le epic tradcath!!!
+		name = itaelections66.2.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.3
+				days = 7
+			}
+		}
+	}
+
+	option = { #WOMEN'S RIGHTS BAYBEEEE WOOOO
+		name = itaelections66.2.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.3
+				days = 7
+			}
+		}
+	}
+
+	option = { #women's rights woo but it's good for everyone guys
+		name = itaelections66.2.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.3
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #damn young people in my politics
+	id = itaelections66.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.3"}
+	title = itaelections66.3.t
+	desc = itaelections66.3.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #damn commies in my colleges....,,...,.
+		name = itaelections66.3.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.4
+				days = 10
+			}
+		}
+	}
+
+	option = { #neofascist teenagers are based!
+		name = itaelections66.3.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.4
+				days = 10
+			}
+		}
+	}
+
+	option = { #ameno dori me
+		name = itaelections66.3.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.4
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #minorities good or bad
+	id = itaelections66.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.4"}
+	title = itaelections66.4.t
+	desc = itaelections66.4.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #minorities are based
+		name = itaelections66.4.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.5
+				days = 10
+			}
+		}
+	}
+
+	option = { #minorities are pretty cool
+		name = itaelections66.4.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.5
+				days = 10
+			}
+		}
+	}
+
+	option = { #i fucking hate minorities
+		name = itaelections66.4.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.5
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #military in politics good?
+	id = itaelections66.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.5"}
+	title = itaelections66.5.t
+	desc = itaelections66.5.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #haha yes!
+		name = itaelections66.5.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.6
+				days = 10
+			}
+		}
+	}
+
+	option = { #uhh no
+		name = itaelections66.5.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.6
+				days = 10
+			}
+		}
+	}
+
+	option = { #wtf no
+		name = itaelections66.5.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.6
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #hello do you like workers rights?
+	id = itaelections66.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.6"}
+	title = itaelections66.6.t
+	desc = itaelections66.6.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #pretty based bro!
+		name = itaelections66.6.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.7
+				days = 10
+			}
+		}
+	}
+
+	option = { #eh ok i guess
+		name = itaelections66.6.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.7
+				days = 10
+			}
+		}
+	}
+
+	option = { #union bad
+		name = itaelections66.6.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.7
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #church gaming yes or no
+	id = itaelections66.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.7"}
+	title = itaelections66.7.t
+	desc = itaelections66.7.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #based religion; fuck you
+		name = itaelections66.7.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.8
+				days = 10
+			}
+		}
+	}
+
+	option = { #i love jesus but i love marx too
+		name = itaelections66.7.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.8
+				days = 10
+			}
+		}
+	}
+
+	option = { #jesus was a fascist, love him
+		name = itaelections66.7.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.8
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #smol parties
+	id = itaelections66.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.8"}
+	title = itaelections66.8.t
+	desc = itaelections66.8.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #no fuck you
+		name = itaelections66.8.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.9
+				days = 10
+			}
+		}
+	}
+
+	option = { #mazzini moment
+		name = itaelections66.8.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.9
+				days = 10
+			}
+		}
+	}
+
+	option = { #sure lol
+		name = itaelections66.8.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 1
+			}
+			country_event = {
+				id = itaelections66.9
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = {
+	id = itaelections66.9 #who you gonna vote for
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.9"}
+	title = itaelections66.9.t
+	desc = itaelections66.9.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #DC gaming
+		name = itaelections66.9.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_DC_popularity
+				value = 2
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+						check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+					}
+				}
+				country_event = { #DC win
+					id = itaelections66.10
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+						check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #FD win
+					id = itaelections66.11
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+						check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #BN win
+					id = itaelections66.12
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							AND = {
+								check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+								check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+							}
+							AND = {
+								check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+								check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+							}
+							AND = {
+								check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+								check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+							}
+						}
+					}
+				}
+				country_event = { #DC win, canonically most successful, possibly hung parliament code later
+					id = itaelections66.10
+					days = 2
+				}
+			}
+		}
+	}
+
+	option = { #FD gang
+		name = itaelections66.9.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_BN
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_FD_popularity
+				value = 2
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+						check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+					}
+				}
+				country_event = { #DC win
+					id = itaelections66.10
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+						check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #FD win
+					id = itaelections66.11
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+						check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #BN win
+					id = itaelections66.12
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							AND = {
+								check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+								check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+							}
+							AND = {
+								check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+								check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+							}
+							AND = {
+								check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+								check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+							}
+						}
+					}
+				}
+				country_event = { #DC win, canonically most successful, possibly hung parliament code later
+					id = itaelections66.10
+					days = 2
+				}
+			}
+		}
+	}
+
+	option = { #i am an incel
+		name = itaelections66.9.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_DC
+					}
+					has_game_rule = {
+						rule = ITA_DEMOCRATIC_ELECTION
+                        option = ITA_DEMOCRATIC_ELECTION_FD
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = ITA_BN_popularity
+				value = 2
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+						check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+					}
+				}
+				country_event = { #DC win
+					id = itaelections66.10
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+						check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #FD win
+					id = itaelections66.11
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+						check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #BN win
+					id = itaelections66.12
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							AND = {
+								check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+								check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+							}
+							AND = {
+								check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+								check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+							}
+							AND = {
+								check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+								check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+							}
+						}
+					}
+				}
+				country_event = { #DC win, canonically most successful, possibly hung parliament code later
+					id = itaelections66.10
+					days = 2
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = itaelections66.10 #1966 DC win
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.10"}
+	title = itaelections66.10.t
+	desc = itaelections66.10.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #ok this is epic
+		name = itaelections66.10.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.900
+					days = 1
+				}
+			}
+			set_politics = {
+				ruling_party = social_liberal
+				last_election = "1966.6.23"
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 6
+				social_democrat = 19
+				social_liberal = 32
+				market_liberal = 8
+				social_conservative = 12
+				authoritarian_democrat = 20
+				despotism = 0
+				fascism = 3
+				ultranational_socialism = 0
+				burgundian_system = 0
+			}
+			set_party_name = {
+				ideology = communist
+				long_name = ITA_communist_party_dem_long
+				name = ITA_communist_party_dem
+			}
+			set_party_name = {
+				ideology = socialist
+				long_name = ITA_socialist_party_dem_long
+				name = ITA_socialist_party_dem
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = ITA_social_democrat_party_dem_long
+				name = ITA_social_democrat_party_dem
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = ITA_social_liberal_party_dem_long
+				name = ITA_social_liberal_party_dem
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = ITA_social_conservative_party_dem_long
+				name = ITA_social_conservative_party_dem
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = ITA_market_liberal_party_dem_long
+				name = ITA_market_liberal_party_dem
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = ITA_authoritarian_democrat_party_dem_long
+				name = ITA_authoritarian_democrat_party_dem
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = "Partito Popolare Monarchico"
+				name = PMP
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = ITA_fascist_party_dem_long
+				name = ITA_fascist_party_dem
+			}
+
+			create_country_leader = {
+				name = "Aldo Moro"
+				desc = "POLITICS_ALDO_MORO_DESC"
+				picture = "Portrait_Italy_Aldo_Moro.dds"
+				expire = "1999.1.1"
+				ideology = social_liberal_subtype
+				traits = {
+				}
+			}
+			set_country_flag = ita_i_love_democracy
+			country_event = {
+				id = itaelections66.13
+				days = 1460
+			}
+			load_focus_tree = ita_moro_victory
+			complete_national_focus = ita_a_victory_for_democrazia_cristiana
+			ITA = {
+				country_event = { id = impurita.1 days = 365 }
+				country_event = { id = itapartyunity.1}
+				country_event = { id = BFI.19 days = 80 }
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				ITA_Mariano_Rumor_hog
+				ITA_Emilio_Colombo_eco
+				ITA_Giulio_Andreotti_sec
+				ITA_Amintore_Fanfani_for
+			}
+		}
+	}
+}
+
+country_event = {
+	id = itaelections66.11 #1966 FD win
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.11"}
+	title = itaelections66.11.t
+	desc = itaelections66.11.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #ok this is epic
+		name = itaelections66.11.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.901
+					days = 1
+				}
+			}
+			set_politics = {
+				ruling_party = social_democrat
+				last_election = "1966.6.23"
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 11
+				social_democrat = 33
+				social_liberal = 13
+				market_liberal = 3
+				social_conservative = 10
+				authoritarian_democrat = 22
+				despotism = 0
+				fascism = 8
+				ultranational_socialism = 0
+				burgundian_system = 0
+			}
+			set_party_name = {
+				ideology = communist
+				long_name = ITA_communist_party_dem_long
+				name = ITA_communist_party_dem
+			}
+			set_party_name = {
+				ideology = socialist
+				long_name = ITA_socialist_party_dem_long
+				name = ITA_socialist_party_dem
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = ITA_social_democrat_party_dem_long
+				name = ITA_social_democrat_party_dem
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = ITA_social_liberal_party_dem_long
+				name = ITA_social_liberal_party_dem
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = ITA_social_conservative_party_dem_long
+				name = ITA_social_conservative_party_dem
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = ITA_market_liberal_party_dem_long
+				name = ITA_market_liberal_party_dem
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = ITA_authoritarian_democrat_party_dem_long
+				name = ITA_authoritarian_democrat_party_dem
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = "Partito Popolare Monarchico"
+				name = PMP
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = ITA_fascist_party_dem_long
+				name = ITA_fascist_party_dem
+			}
+
+			create_country_leader = {
+				name = "Pietro Nenni"
+				desc = "POLITICS_PIETRO_NENNI_DESC"
+				picture = "Portrait_Italy_Pietro_Nenni_portrait.dds"
+				expire = "1999.1.1"
+				ideology = social_democrat_subtype
+				traits = {
+				}
+			}
+			set_country_flag = ita_i_love_democracy
+			country_event = {
+				id = itaelections66.13
+				days = 1460
+			}
+			load_focus_tree = ita_socdem_intro
+			complete_national_focus = ita_a_victory_for_fronte_democratico
+			ITA = {
+				country_event = { id = impurita.1 days = 365 }
+				country_event = { id = itapartyunity.1}
+				country_event = { id = BFI.19 days = 80 }
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				ITA_Giuseppe_Saragat_hog
+				ITA_Emilio_Lussu_sec
+				ITA_Cesare_bensi_for
+				ITA_Ugo_Law_Malfa_eco
+			}
+		}
+	}
+}
+
+country_event = {
+	id = itaelections66.12 #1966 BN win
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.12"}
+	title = itaelections66.12.t
+	desc = itaelections66.12.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #ok this is epic
+		name = itaelections66.12.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.902
+					days = 1
+				}
+			}
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				last_election = "1966.6.23"
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 8
+				social_democrat = 11
+				social_liberal = 18
+				market_liberal = 3
+				social_conservative = 15
+				authoritarian_democrat = 29
+				despotism = 6
+				fascism = 10
+				ultranational_socialism = 0
+				burgundian_system = 0
+			}
+			set_party_name = {
+				ideology = communist
+				long_name = ITA_communist_party_dem_long
+				name = ITA_communist_party_dem
+			}
+			set_party_name = {
+				ideology = socialist
+				long_name = ITA_socialist_party_dem_long
+				name = ITA_socialist_party_dem
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = ITA_social_democrat_party_dem_long
+				name = ITA_social_democrat_party_dem
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = ITA_social_liberal_party_dem_long
+				name = ITA_social_liberal_party_dem
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = ITA_social_conservative_party_dem_long
+				name = ITA_social_conservative_party_dem
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = ITA_market_liberal_party_dem_long
+				name = ITA_market_liberal_party_dem
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = ITA_authoritarian_democrat_party_dem_long
+				name = ITA_authoritarian_democrat_party_dem
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = "Partito Popolare Monarchico"
+				name = PMP
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = ITA_fascist_party_dem_long
+				name = ITA_fascist_party_dem
+			}
+
+			create_country_leader = {
+				name = "Giorgio Almirante"
+				desc = "POLITICS_GIORGIO_ALMIRANTE_DESC"
+				picture = "Portrait_Italy_Giorgio_Almirante_portrait.dds"
+				expire = "1999.1.1"
+				ideology = authoritarian_democrat_subtype
+				traits = {
+				}
+			}
+			set_country_flag = ita_i_love_democracy
+			country_event = {
+				id = itaelections66.13
+				days = 1460
+			}
+			load_focus_tree = ita_social_conservative_victory
+			complete_national_focus = ita_a_victory_for_blocchi_nazionali
+			ITA = {
+				country_event = { id = impurita.1 days = 365 }
+				country_event = { id = itapartyunity.1}
+				country_event = { id = BFI.19 days = 80 }
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				ITA_Augusto_De_Marsanich_hog
+				ITA_Gino_Birindelli_sec
+				ITA_Arturo_Michelini_for
+				ITA_Gaetano_Rasi_eco
+			}
+		}
+	}
+}
+
+country_event = {
+	id = itaelections66.13 #1970 election - voting time
+	immediate = {log = "[GetDateText]: [Root.GetName]: event itaelections66.13"}
+	title = itaelections66.13.t
+	desc = itaelections66.13.desc
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = itaelections66.13.a
+		hidden_effect = {
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+						check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+					}
+				}
+				country_event = { #DC win
+					id = christdem.35
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+						check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #FD win
+					id = saragat.1
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+						check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+					}
+				}
+				country_event = { #BN win
+					id = marsanich.1
+					days = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							AND = {
+								check_variable = { ITA_DC_popularity > ITA_BN_popularity }
+								check_variable = { ITA_DC_popularity > ITA_FD_popularity }
+							}
+							AND = {
+								check_variable = { ITA_FD_popularity > ITA_BN_popularity }
+								check_variable = { ITA_FD_popularity > ITA_DC_popularity }
+							}
+							AND = {
+								check_variable = { ITA_BN_popularity > ITA_DC_popularity }
+								check_variable = { ITA_BN_popularity > ITA_FD_popularity }
+							}
+						}
+					}
+				}
+				country_event = { #DC win
+					id = christdem.35
+					days = 2
+				}
+			}
+		}
+	}
+}
