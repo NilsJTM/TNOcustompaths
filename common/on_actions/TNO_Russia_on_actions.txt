@@ -299,16 +299,37 @@ on_actions = {
 				country_event = { id = WRS.89 days = 2555 random = 24 } #
 			}
 
-			IRK = {
-				random_list = {
-					25 = {
-						set_country_flag = IRK_AI_REFORM
-					}
-					75 = {
-						set_country_flag = IRK_AI_YAGODA
-					}
-				}
+			if = { #
+			limit = {
+				has_game_rule = { rule = IRK_leader_route option = DEFAULT }
 			}
+			    IRK = {
+				    random_list = {
+					    25 = {
+						    set_country_flag = IRK_AI_REFORM
+					    }
+					    75 = {
+						    set_country_flag = IRK_AI_YAGODA
+					    }
+				    }
+			    }
+		    }
+			else_if = { #
+			    limit = {
+				    has_game_rule = { rule = IRK_leader_route option = IRK_LEADER_ROUTE_AUTHSOC_YAGODA }
+			    }
+			    IRK = {
+				    set_country_flag = IRK_AI_YAGODA
+			    }
+		    }
+		    else_if = { #
+			    limit = {
+				    has_game_rule = { rule = IRK_leader_route option = IRK_LEADER_ROUTE_AUTHSOC_BESSONOV }
+			    }
+			    IRK = {
+				    set_country_flag = IRK_AI_REFORM
+			    }
+		    }
 
 			every_country = {
 				limit = {
