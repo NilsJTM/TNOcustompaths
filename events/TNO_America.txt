@@ -2728,7 +2728,7 @@ news_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.103"}
  	title = USA.103.t
  	desc = USA.103.desc
-	picture = GFX_report_event_iberia_meeting_table
+	picture = GFX_report_event_usa_nixon_v_for_victory
 
 	is_triggered_only = yes
 
@@ -3849,11 +3849,15 @@ country_event = {
 			set_country_flag = USA_mil_64_tree_available
 			if = {
 				limit = { has_country_flag = USA_In_The_SAF_WAR }
-					 set_country_flag = USA_show_south_africa_tree
-						  }
+				set_country_flag = USA_show_south_africa_tree
+			}
 			load_focus_tree = {
   				tree = USA_WAL_64
   				keep_completed = yes
+			}
+			country_event = { ## Reload bennett CRA calculator
+				id = wallace.630
+				days = 660
 			}
 			# country_event = { id = wallace.1 days = 1 }
 			retire_country_leader = yes
@@ -3894,6 +3898,7 @@ country_event = {
 			add_ideas = USA_J_William_Fulbright_pol
 			add_ideas = USA_Wilbur_Mills_eco
 			add_ideas = USA_Robert_Byrd_mil
+			
 		}
 	}
 
@@ -4250,7 +4255,7 @@ country_event = { #Glenn Inauguration
 	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.162"}
 	title = USA.162.t
 	desc = USA.162.d
-	picture = GFX_report_event_us_congress
+	picture = GFX_report_event_USA_gln_inauguration
 
 	is_triggered_only = yes
  	fire_only_once = yes
@@ -4296,9 +4301,10 @@ country_event = { #Glenn Inauguration
 						has_country_flag = USA_64_FR_NPP_Past
 						has_country_flag = USA_THURMOND_FR_NPP_Past
 					}
-				 }
+				}
 				set_country_flag = USA_begin_response
 			}
+			add_to_variable = { misc_costs = USA_GLN_NASA_Funding_Annual }
 			#if = {
 			#	limit = { has_country_flag = USA_THURMOND_FR_NPP_Past }
 			#	country_event = { id = glenn.152 days = 30 } 

@@ -91,6 +91,7 @@ country_event = {
 		trigger = { has_country_flag = ENG_Player_HMMLR }
 		randomize_temp_variable = {
 			var = debuff
+			distribution = binomial
 			min = 7
 			max = 10
 		}
@@ -102,7 +103,7 @@ country_event = {
 	}
 
 	option = {
-		name = ENG_ForShip.4.b
+		name = ENG_ForShip.3.b
 		trigger = { NOT = { has_country_flag = ENG_Player_HMMLR } }
 	}
 }
@@ -150,7 +151,7 @@ country_event = {
 			set_country_flag = ENG_HMMLR_Speakers_3
 			country_event = { id = ENG_ForShip.4 days = 15 }
 		}
-		else_if = {
+		else = {
 			clr_country_flag = ENG_HMMLR_Speakers_1
 			set_country_flag = ENG_HMMLR_Speakers_2
 			country_event = { id = ENG_ForShip.4 days = 15 }
@@ -520,6 +521,7 @@ country_event = {
 		trigger = { has_country_flag = ENG_Player_Collab }
 		randomize_temp_variable = {
 			var = debuff
+			distribution = binomial
 			min = 7
 			max = 10
 		}
@@ -571,6 +573,7 @@ country_event = {
 			#Getting unemployment of 20-25%
 			randomize_temp_variable = {
 				var = unemploymentTemp
+				distribution = uniform
 				min = 20
 				max = 25
 			}
@@ -6229,7 +6232,7 @@ country_event = {
 
 	option = { #yes
 		name = ENG_thatcher.143.a
-		GER = {
+		USA = {
 			country_event = {
 				id = ENG_thatcher.144
 			}
@@ -9388,7 +9391,10 @@ country_event = { #Wilson Kicks out Birch
 	option = {
 		name = FEN_SLP_political.8.a
 		ai_chance = { factor = 1 }
+		hidden_effect = {
 		set_country_flag = Birch_Removed
+		remove_ideas = ENG_Reg_Birch_hog
+		}
 	}
 }
 
@@ -9429,7 +9435,7 @@ country_event = { #Birch Kicks out Wilson
 				FEN_kim_philby_sec
 			}
 			every_country = {
-				country_event = {
+				news_event = {
 					id = WORLD.1980
 					days = 1
 				}
@@ -9748,16 +9754,11 @@ country_event = { # thorn to the south
 	option = {
 		name = ENG_Corn_crisis.1.a
 		ai_chance = { factor = 1 }
-		hidden_effect = {
-			add_state_core = 1375
-			add_state_core = 123
-			add_state_core = 1296
-		}
 		if = {
 			limit = { has_global_flag = german_civil_war }
 			country_event = { id = ENG_Corn_crisis.2 days = 3 }
 		}
-		if = {
+		else_if = {
 			limit = { has_global_flag = german_civil_war_goeringvic }
 			country_event = { id = ENG_Corn_crisis.9 days = 3 }
 		}
@@ -9850,22 +9851,16 @@ country_event = { # sword and the eagle
 		name = ENG_Corn_crisis.6.a
 		ai_chance = { factor = 1 }
 		#add_equipment_to_stockpile = { type = infantry_equipment amount = 1200 producer = ENG }
-				hidden_effect = {
+		hidden_effect = {
 			end_puppet = CRN
 			CRN = {
 				leave_faction = yes
 			}
-			
 		}
 
 		set_country_flag = ENG_Thatcher_Calm_Day_in_Plymouth
 		custom_effect_tooltip = ENG_Cornwall_Invasion_Decisions_tt
-		hidden_effect = {
-			add_to_variable = {
-				var = ENG_MIL_EFF
-				value = 5
-			}
-		}
+		add_to_variable = { ENG_MIL_EFF = 5 }
 	}
 }
 
@@ -9881,14 +9876,8 @@ country_event = { # quiet night in plymouth
 	option = {
 		name = ENG_Corn_crisis.7.a
 		ai_chance = { factor = 1 }
-		add_to_variable = {
-			var = ENG_MIL_LOY
-			value = 15
-		}
-		add_to_variable = {
-			var = ENG_MIL_LOY_LFR
-			value = 5
-		}
+		add_to_variable = { ENG_MIL_LOY = 15 }
+		add_to_variable = { ENG_MIL_LOY_LFR = 5 }
 		annex_country = {
 				target = CRN
 				transfer_troops = no
@@ -10023,10 +10012,7 @@ country_event = { #  the clock ticks, america says yes, do you give green light
 		name = ENG_Corn_crisis.14.b
 		ai_chance = { factor = 0.5 }
 		country_event = { id = ENG_Corn_crisis.17 days = 3 }
-		add_to_variable = {
-			var = ENG_MIL_LOY
-			value = -10
-		}
+		add_to_variable = { ENG_MIL_LOY = -10 }
 	}
 }
 
@@ -10049,15 +10035,11 @@ country_event = { # there is no time
 			CRN = {
 				leave_faction = yes
 			}
-		
 		}
 		
 		set_country_flag = ENG_Thatcher_Calm_Day_in_Plymouth
 		custom_effect_tooltip = ENG_Cornwall_Invasion_Decisions_tt
-		add_to_variable = {
-			var = ENG_MIL_EFF
-			value = 5
-		}
+		add_to_variable = { ENG_MIL_EFF = 5 }
 	}
 }
 
@@ -10073,18 +10055,12 @@ country_event = { # cornwall blitz
 	option = {
 		name = ENG_Corn_crisis.16.a
 		ai_chance = { factor = 1 }
-		add_to_variable = {
-			var = ENG_MIL_LOY
-			value = 15
-		}
-		add_to_variable = {
-			var = ENG_MIL_LOY_LFR
-			value = 5
-		}
+		add_to_variable = { ENG_MIL_LOY = 15 }
+		add_to_variable = { ENG_MIL_LOY_LFR = 5 }
 		annex_country = {
-				target = CRN
-				transfer_troops = no
-			}
+			target = CRN
+			transfer_troops = no
+		}
 		ENG_cornwall_setup = yes
 		country_event = { id = ENG_Corn_crisis.8 days = 3 }
 		country_event = { id = ENG_Corn_crisis.25 days = 3 }
@@ -10104,10 +10080,7 @@ country_event = { # a moment to breathe
 		name = ENG_Corn_crisis.17.a
 		ai_chance = { factor = 1 }
 		country_event = { id = ENG_Corn_crisis.18 days = 3 }
-		add_to_variable = {
-			var = ENG_MIL_LOY
-			value = -10
-		}
+		add_to_variable = { ENG_MIL_LOY = -10 }
 	}
 }
 
@@ -10129,10 +10102,7 @@ country_event = { #  the tanks are ready
 		name = ENG_Corn_crisis.18.b
 		ai_chance = { factor = 0.5 }
 		country_event = { id = ENG_Corn_crisis.19 days = 3 }
-		add_to_variable = {
-			var = ENG_MIL_LOY
-			value = -10
-		}
+		add_to_variable = { ENG_MIL_LOY = -10 }
 		air_experience = 15
 	}
 }
@@ -10155,10 +10125,7 @@ country_event = { #  what about the air
 		name = ENG_Corn_crisis.19.b
 		ai_chance = { factor = 0.1 }
 		country_event = { id = ENG_Corn_crisis.20 days = 3 }
-		add_to_variable = {
-			var = ENG_MIL_LOY
-			value = -10
-		}
+		add_to_variable = { ENG_MIL_LOY = -10 }
 	}
 }
 
@@ -10174,8 +10141,10 @@ country_event = { # shipments in plymouth
 	option = {
 		name = ENG_Corn_crisis.20.a
 		ai_chance = { factor = 1 }
-		country_event = { id = ENG_Corn_crisis.21
-			days = 1 }
+		country_event = {
+			id = ENG_Corn_crisis.21
+			days = 1
+		}
 	}
 }
 
@@ -10250,8 +10219,10 @@ country_event = { # left alone
 	option = {
 		name = ENG_Corn_crisis.22.a
 		ai_chance = { factor = 1 }
-		country_event = { id = ENG_Corn_crisis.23
-			days = 1 }
+		country_event = {
+			id = ENG_Corn_crisis.23
+			days = 1
+		}
 	}
 }
 
@@ -10267,12 +10238,11 @@ country_event = { # fortify the border
 	option = {
 		name = ENG_Corn_crisis.23.a
 		ai_chance = { factor = 1 }
-		country_event = { id = ENG_Corn_crisis.24
-			days = 1 }
-		add_to_variable = {
-			var = ENG_MIL_EFF
-			value = 5
+		country_event = {
+			id = ENG_Corn_crisis.24
+			days = 1
 		}
+		add_to_variable = { ENG_MIL_EFF = 5 }
 	}
 }
 
@@ -10364,22 +10334,15 @@ country_event = { #Macmillan Invades Cornwall(temporary).
 	option = {
 		name = ENG_Corn_crisis.28.a
 		ai_chance = { factor = 1 }
-		add_to_variable = {
-			var = ENG_MIL_LOY
-			value = 15
-		}
-		add_to_variable = {
-			var = ENG_MIL_LOY_LFR
-			value = 5
-		}
+		add_to_variable = { ENG_MIL_LOY = 15 }
+		add_to_variable = { ENG_MIL_LOY_LFR = 5 }
 		custom_effect_tooltip = loyalty_boost_medium.tt
 		annex_country = {
-				target = CRN
-				transfer_troops = no
-			}
-
-		add_manpower = -2000
+			target = CRN
+			transfer_troops = no
+		}
 		ENG_cornwall_setup = yes
+		add_manpower = -2000
 	}
 }
 
@@ -10603,8 +10566,8 @@ country_event = { #
 		add_popularity = {
 			ideology = socialist
 			popularity = 0.01
-			ENG_NDL_MEC_Conservatives_gain_power = yes
 		}
+		ENG_NDL_MEC_Conservatives_gain_power = yes
 		every_owned_state = {
 			set_variable = { TNO_Britain_ElectionSeason_AP_v = 3 }
 			set_variable = { TNO_Britain_ElectionSeason_AP_pi = 14 }
@@ -11060,8 +11023,8 @@ country_event = { #
 		add_popularity = {
 			ideology = communist
 			popularity = 0.02
-			ENG_SLP_Add_Hardliner_Love_3 = yes
 		}
+		ENG_SLP_Add_Hardliner_Love_3 = yes
 		every_owned_state = {
 			set_variable = { TNO_Britain_ElectionSeason_AP_v = 2 }
 			set_variable = { TNO_Britain_ElectionSeason_AP_pi = 15 }
@@ -13010,7 +12973,7 @@ country_event = { #the end
 			ENG_wales_setup = yes
 			hidden_effect = {
 				every_country = {
-					country_event = {
+					news_event = {
 						id = WORLD.50005
 						days = 1
 					}
@@ -13063,7 +13026,7 @@ country_event = { #wales defies us
 		set_country_flag = ENG_Wales_War
 		hidden_effect = {
 			every_country = {
-				country_event = {
+				news_event = {
 					id = WORLD.50007
 					days = 1
 				}
@@ -13324,7 +13287,7 @@ country_event = { #england declaring war after border war
 		set_country_flag = ENG_Wales_War
 		hidden_effect = {
 			every_country = {
-				country_event = {
+				news_event = {
 					id = WORLD.50007
 					days = 1
 				}
@@ -13694,7 +13657,7 @@ country_event = { #ENG - Launch the Raid
 		name = ENG_Scotland_unification.13.a
 		hidden_effect = {
 			every_country = {
-				country_event = {
+				news_event = {
 					id = WORLD.50008
 					days = 1
 				}
@@ -13726,7 +13689,7 @@ country_event = { #ENG - war with scotland
 		ENG_Kick_from_faction_balance = yes
 		hidden_effect = {
 			every_country = {
-				country_event = {
+				news_event = {
 					id = WORLD.50008
 					days = 1
 				}
@@ -14290,7 +14253,7 @@ country_event = { #ENG - scotland war
 		ENG_Kick_from_faction_balance = yes
 		hidden_effect = {
 			every_country = {
-				country_event = {
+				news_event = {
 					id = WORLD.50008
 					days = 1
 				}
@@ -14617,7 +14580,7 @@ country_event = { #NDL 1st Election Victory
 			create_country_leader = {
 				name = "Enoch Powell"
 				desc = "POLITICS_ENOCH_POWELL_DESC"
-				picture = ""
+				picture = "Portrait_Enoch_Powell.dds"
 				expire = "1990.1.1"
 				ideology = authoritarian_democrat_subtype
 			}
@@ -14728,7 +14691,7 @@ country_event = { #SLP 1st Election Victory
 			create_country_leader = {
 				name = "Enoch Powell"
 				desc = "POLITICS_ENOCH_POWELL_DESC"
-				picture = ""
+				picture = "Portrait_Enoch_Powell.dds"
 				expire = "1990.1.1"
 				ideology = authoritarian_democrat_subtype
 			}
@@ -15115,7 +15078,7 @@ country_event = { #Thatcher 2nd Election Victory
 			create_country_leader = {
 				name = "Margaret Thatcher"
 				desc = "POLITICS_MARGARET_THATCHER_DESC"
-				picture = "Portrait_England_Margaret Thatcher_70s.dds"
+				picture = "Portrait_England_Margaret_Thatcher_70s.dds"
 				expire = "1990.1.1"
 				ideology = authoritarian_democrat_subtype
 				traits = { }
@@ -15457,7 +15420,7 @@ country_event = { #Thatcher Post-other Party 2nd Election Victory
 			create_country_leader = {
 				name = "Margaret Thatcher"
 				desc = "POLITICS_MARGARET_THATCHER_DESC"
-				picture = "Portrait_England_Margaret Thatcher_70s.dds"
+				picture = "Portrait_England_Margaret_Thatcher_70s.dds"
 				expire = "1990.1.1"
 				ideology = authoritarian_democrat_subtype
 				traits = { }
@@ -15612,7 +15575,7 @@ country_event = {
 			}
 			create_country_leader = {
 				name = "Rab Butler"
-				desc = "POLITICS_YOUNG_DEMOCRACY_LAW_GOVERNMENT_DESC"
+				desc = "POLITICS_RAB_BUTLER_DESC"
 				picture = "Portrait_England_Rab_Butler.dds"
 				expire = "1990.1.1"
 				ideology = authoritarian_democrat_subtype
@@ -16260,8 +16223,12 @@ country_event = { #ohgodohfuck the germans have dowed COLLAB
 
 country_event = { #america says "take some guns lol" COLLAB
 	id = ENG_sealion.2
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_sealion.2" 
-	set_country_flag = ENG_sealion_guns
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ENG_sealion.2"
+		set_country_flag = ENG_sealion_guns
+		hidden_effect = {
+			activate_mission = ENG_DEC_USA_equipment_sealion
+		}
 	}
 	title = ENG_sealion.2.t
 	desc = ENG_sealion.2.desc
@@ -16461,8 +16428,12 @@ country_event = { #ohgodohfuck the germans have dowed HMMLR
 
 country_event = { #america says "take some guns lol HMMLR
 	id = ENG_sealion.102
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_sealion.102" 
-	set_country_flag = ENG_sealion_guns
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ENG_sealion.102" 
+		set_country_flag = ENG_sealion_guns
+		hidden_effect = {
+			activate_mission = ENG_DEC_USA_equipment_sealion
+		}
 	}
 	title = ENG_sealion.102.t
 	desc = ENG_sealion.102.desc
@@ -16651,78 +16622,63 @@ country_event = {
 			}
 		}
 		else = {
+			add_to_variable = { cornwall_started_demand = 1 }
 			hidden_effect = {
-				add_to_variable = { cornwall_started_demand = 1 }
-				random_list = {
-					30 = {
-						activate_mission = demand_german_officers
-						set_country_flag = demand_german_officers
-						set_variable = { cornwall_demand_swap = 1 }
-						modifier = {
-							factor = 0
-							OR = {
+				if = {
+					limit = { check_variable = { cornwall_demand_swap = 0 } }
+					set_variable = { cornwall_demand_swap = 1 }
+					random_list = {
+						30 = {
+							activate_mission = demand_german_officers
+							set_country_flag = demand_german_officers
+							modifier = {
+								factor = 0
 								has_country_flag = demand_german_officers
-								check_variable = { cornwall_demand_swap = 1 }
 							}
 						}
-					}
-					30 = {
-						activate_mission = demand_german_influence
-						set_country_flag = demand_german_influence
-						set_variable = { cornwall_demand_swap = 1 }
-						modifier = {
-							factor = 0
-							OR = {
+						30 = {
+							activate_mission = demand_german_influence
+							set_country_flag = demand_german_influence
+							modifier = {
+								factor = 0
 								has_country_flag = demand_german_influence
-								check_variable = { cornwall_demand_swap = 1 }
 							}
 						}
-					}
-					30 = {
-						activate_mission = demand_german_propaganda
-						set_country_flag = demand_german_propaganda
-						set_variable = { cornwall_demand_swap = 1 }
-						modifier = {
-							factor = 0
-							OR = {
+						30 = {
+							activate_mission = demand_german_propaganda
+							set_country_flag = demand_german_propaganda
+							modifier = {
+								factor = 0
 								has_country_flag = demand_german_propaganda
-								check_variable = { cornwall_demand_swap = 1 }
 							}
 						}
 					}
-					30 = {
-						activate_mission = demand_more_guns
-						set_country_flag = demand_more_guns
-						set_variable = { cornwall_demand_swap = 0 }
-						modifier = {
-							factor = 0
-							OR = {
+				}
+				else = {
+					set_variable = { cornwall_demand_swap = 0 }
+					random_list = {
+						30 = {
+							activate_mission = demand_more_guns
+							set_country_flag = demand_more_guns
+							modifier = {
+								factor = 0
 								has_country_flag = demand_more_guns
-								check_variable = { cornwall_demand_swap = 0 }
 							}
 						}
-					}
-					30 = {
-						activate_mission = demand_more_artillery
-						set_country_flag = demand_more_artillery
-						set_variable = { cornwall_demand_swap = 0 }
-						modifier = {
-							factor = 0
-							OR = {
+						30 = {
+							activate_mission = demand_more_artillery
+							set_country_flag = demand_more_artillery
+							modifier = {
+								factor = 0
 								has_country_flag = demand_more_artillery
-								check_variable = { cornwall_demand_swap = 0 }
 							}
 						}
-					}
-					30 = {
-						activate_mission = demand_more_motorized
-						set_country_flag = demand_more_motorized
-						set_variable = { cornwall_demand_swap = 0 }
-						modifier = {
-							factor = 0
-							OR = {
+						30 = {
+							activate_mission = demand_more_motorized
+							set_country_flag = demand_more_motorized
+							modifier = {
+								factor = 0
 								has_country_flag = demand_more_motorized
-								check_variable = { cornwall_demand_swap = 0 }
 							}
 						}
 					}
@@ -16749,15 +16705,14 @@ country_event = { #failure
 		add_to_variable = { ENG_CRN_Attack = Cornwall_Happiness }
 		add_to_variable = { ENG_CRN_Defense = Cornwall_Happiness }
 		add_to_variable = { ENG_CRN_Speed = Cornwall_Happiness }
-		ENG = {
-			set_country_flag = {
-				flag = ENG_cornwall_mechanic
-				value = 1
-				days = 10
-			}
+		set_country_flag = {
+			flag = ENG_cornwall_mechanic
+			value = 1
+			days = 10
 		}
 	}
 }
+
 country_event = { #success
 	id = ENG_Cornwall.5
 	immediate = { log = "[GetDateText]: [Root.GetName] event ENG_Cornwall.5"}
@@ -16775,12 +16730,10 @@ country_event = { #success
 		add_to_variable = { ENG_CRN_Attack = Cornwall_Happiness }
 		add_to_variable = { ENG_CRN_Defense = Cornwall_Happiness }
 		add_to_variable = { ENG_CRN_Speed = Cornwall_Happiness }
-		ENG = {
-			set_country_flag = {
-				flag = ENG_cornwall_mechanic
-				value = 1
-				days = 10
-			}
+		set_country_flag = {
+			flag = ENG_cornwall_mechanic
+			value = 1
+			days = 10
 		}
 	}
 }
