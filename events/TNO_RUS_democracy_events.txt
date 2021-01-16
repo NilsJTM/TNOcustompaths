@@ -1,0 +1,1190 @@
+add_namespace = russian_democracy_helpers
+
+country_event = { #Run a generic election, display results, for debug purposes.
+	id = russian_democracy_helpers.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.1"}
+	title = russian_democracy_helpers.1.t
+	desc = russian_democracy_helpers.1.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.1.a
+		RUS_run_election = yes
+		set_country_flag = RUS_ELECTION_RESULTS_SHOW
+		country_event = {
+			id = russian_democracy_helpers.2
+			days = 60
+		}
+	}
+}
+
+country_event = { #Hide election results
+	id = russian_democracy_helpers.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.2"}
+	title = russian_democracy_helpers.2.t
+	desc = russian_democracy_helpers.2.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.2.a
+		RUS_clear_election_variables = yes
+		clr_country_flag = RUS_ELECTION_RESULTS_SHOW
+	}
+}
+
+country_event = { #Make polling available
+	id = russian_democracy_helpers.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.3"}
+	title = russian_democracy_helpers.3.t
+	desc = russian_democracy_helpers.3.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			every_owned_state = {
+				RUS_calculate_polling_averages = yes
+			}
+			set_country_flag = RUS_POLLS_ENABLE
+			RUS_polls_effect = yes
+		}
+	}
+
+	option = { #DSNP
+		name = russian_democracy_helpers.3.a
+		trigger = {
+			tag = NIK
+		}
+		set_country_flag = RUS_campaigning_for_socdem
+		custom_effect_tooltip = NIK_socdem_campaign_tt
+	}
+	option = { #SMR
+		name = russian_democracy_helpers.3.b
+		trigger = {
+			tag = NIK
+		}
+		set_country_flag = RUS_campaigning_for_liberal
+		custom_effect_tooltip = NIK_liberal_campaign_tt
+	}
+	option = { #PSD
+		name = russian_democracy_helpers.3.c
+		trigger = {
+			tag = NIK
+		}
+		set_country_flag = RUS_campaigning_for_authdem
+		custom_effect_tooltip = NIK_auth_campaign_tt
+	}
+	option = { #Vyatka Liberals
+		name = russian_democracy_helpers.3.e
+		trigger = {
+			tag = KIR
+		}
+		set_country_flag = RUS_campaigning_for_liberal
+		custom_effect_tooltip = KIR_liberal_campaign_tt
+	}
+	option = { #Vyatka Conservatives
+		name = russian_democracy_helpers.3.f
+		trigger = {
+			tag = KIR
+		}
+		set_country_flag = RUS_campaigning_for_conservative
+		custom_effect_tooltip = KIR_conservative_campaign_tt
+	}
+	option = { #Vyatka AuthDems
+		name = russian_democracy_helpers.3.g
+		trigger = {
+			tag = KIR
+		}
+		set_country_flag = RUS_campaigning_for_authdem
+		custom_effect_tooltip = KIR_authdem_campaign_tt
+	}
+	option = { #Sverdlovsk Conservatives
+		name = russian_democracy_helpers.3.h
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = TOB_ideology_route
+					option = TOB_IDEOLOGY_ROUTE_AUTHDEM
+				}
+			}
+		}
+		trigger = {
+			tag = TOB
+		}
+		set_country_flag = RUS_campaigning_for_conservative
+		custom_effect_tooltip = TOB_conservative_campaign_tt
+	}
+	option = { #Sverdlovsk AuthDems
+		name = russian_democracy_helpers.3.i
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = TOB_ideology_route
+					option = TOB_IDEOLOGY_ROUTE_SOCCON
+				}
+			}
+		}
+		trigger = {
+			tag = TOB
+		}
+		set_country_flag = RUS_campaigning_for_authdem
+		custom_effect_tooltip = TOB_authdem_campaign_tt
+	}
+}
+
+country_event = { #Update poll averages
+	id = russian_democracy_helpers.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.4"}
+	title = russian_democracy_helpers.4.t
+	desc = russian_democracy_helpers.4.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.4.a
+		every_owned_state = {
+			RUS_calculate_polling_averages = yes
+		}
+	}
+}
+
+country_event = { #Hide polls
+	id = russian_democracy_helpers.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.5"}
+	title = russian_democracy_helpers.5.t
+	desc = russian_democracy_helpers.5.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.5.a
+		RUS_clear_polling_variables = yes
+		clr_country_flag = RUS_POLLS_ENABLE
+		clr_country_flag = RUS_campaigning_for_socdem
+		clr_country_flag = RUS_campaigning_for_liberal
+		clr_country_flag = RUS_campaigning_for_conservative
+		clr_country_flag = RUS_campaigning_for_authdem
+		clr_country_flag = RUS_AUTHDEM_AI_ENABLE
+		clr_country_flag = RUS_SOCDEM_AI_ENABLE
+		clr_country_flag = RUS_LIBERAL_AI_ENABLE
+	}
+}
+
+country_event = { #first Komi presidential election
+	id = russian_democracy_helpers.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.6"}
+	title = russian_democracy_helpers.6.t
+	desc = russian_democracy_helpers.6.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.6.a
+		RUS_run_election = yes
+		set_country_flag = RUS_ELECTION_RESULTS_SHOW
+		country_event = { id = russian_democracy_helpers.2 days = 60 }
+		country_event = { id = russian_democracy_helpers.5 days = 30 }
+		if = { #Stalina victory stuff
+			limit = {
+				has_country_flag = RUS_ELECTION_AUTH_VICTORY
+			}
+			country_event = { id = komi_election_results.1 days = 1 }
+		}
+		if = { #Kosygin victory stuff
+			limit = {
+				has_country_flag = RUS_ELECTION_LIBERAL_VICTORY
+			}
+			country_event = { id = komi_election_results.2 days = 1 }
+		}
+		if = { #SocDem victory stuff
+			limit = {
+				has_country_flag = RUS_ELECTION_SOCDEM_VICTORY
+			}
+			country_event = { id = komi_election_results.3 days = 1 }
+		}
+	}
+}
+
+country_event = { #second Komi presidential election
+	id = russian_democracy_helpers.61
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.6"}
+	title = russian_democracy_helpers.61.t
+	desc = russian_democracy_helpers.61.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.61.a
+		RUS_run_election = yes
+		set_country_flag = RUS_ELECTION_RESULTS_SHOW
+		country_event = { id = russian_democracy_helpers.2 days = 60 }
+		country_event = { id = russian_democracy_helpers.5 days = 30 }
+		if = { #Stalina victory stuff
+			limit = {
+				has_country_flag = RUS_ELECTION_AUTH_VICTORY
+			}
+			country_event = { id = komi_election_results.4 days = 1 }
+		}
+		if = { #Katusehv victory stuff
+			limit = {
+				has_country_flag = RUS_ELECTION_LIBERAL_VICTORY
+			}
+			country_event = { id = komi_election_results.5 days = 1 }
+		}
+		if = { #Yakovlev victory stuff
+			limit = {
+				has_country_flag = RUS_ELECTION_SOCDEM_VICTORY
+			}
+			country_event = { id = komi_election_results.6 days = 1 }
+		}
+	}
+}
+
+country_event = { #AI region determiner - SocDem
+	id = russian_democracy_helpers.7
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.7"
+		FROM = {
+			random_list = {
+				log = yes
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 150 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Arctic Russia"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 150
+								region = 132
+								region = 12
+							}
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 133 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Central Russia"
+					every_owned_state = {
+						limit = {
+							region = 133
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 138 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Ural Region"
+					every_owned_state = {
+						limit = {
+							region = 138
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 40 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Transvolga"
+					every_owned_state = {
+						limit = {
+							region = 40
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 209 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Southern Urals"
+					every_owned_state = {
+						limit = {
+							region = 209
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 14 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Trans Urais"
+					every_owned_state = {
+						limit = {
+							region = 14
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 151 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Western Siberia"
+					every_owned_state = {
+						limit = {
+							region = 151
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 147 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Northern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 147
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 207 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Central Siberia"
+					every_owned_state = {
+						limit = {
+							region = 207
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 149 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Eastern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 149
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 211 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Trans Baikal"
+					every_owned_state = {
+						limit = {
+							region = 211
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 148 }
+					}
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Far East"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 148
+								region = 213
+							}
+						}
+						RUS_socdem_campaign_effects = yes
+					}
+				}
+			}
+		}
+	}
+	title = russian_democracy_helpers.7.t
+	desc = russian_democracy_helpers.7.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Ok."
+
+	}
+}
+
+country_event = { #AI region determiner - Liberal
+	id = russian_democracy_helpers.8
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.8"
+		FROM = {
+			random_list = {
+				log = yes
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 150 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Arctic Russia"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 150
+								region = 132
+								region = 12
+							}
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 133 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Central Russia"
+					every_owned_state = {
+						limit = {
+							region = 133
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 138 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Ural Region"
+					every_owned_state = {
+						limit = {
+							region = 138
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 40 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Transvolga"
+					every_owned_state = {
+						limit = {
+							region = 40
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 209 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Southern Urals"
+					every_owned_state = {
+						limit = {
+							region = 209
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 14 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Trans Urais"
+					every_owned_state = {
+						limit = {
+							region = 14
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 151 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Western Siberia"
+					every_owned_state = {
+						limit = {
+							region = 151
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 147 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Northern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 147
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 207 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Central Siberia"
+					every_owned_state = {
+						limit = {
+							region = 207
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 149 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Eastern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 149
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 211 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Trans Baikal"
+					every_owned_state = {
+						limit = {
+							region = 211
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 148 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Far East"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 148
+								region = 213
+							}
+						}
+						RUS_liberal_campaign_effects = yes
+					}
+				}
+			}
+		}
+	}
+	title = russian_democracy_helpers.8.t
+	desc = russian_democracy_helpers.8.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = "Ok."
+
+	}
+}
+
+country_event = { #AI region determiner - AuthDem
+	id = russian_democracy_helpers.9
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.9"
+		FROM = {
+			random_list = {
+				log = yes
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 150 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Arctic Russia"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 150
+								region = 132
+								region = 12
+							}
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 133 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Central Russia"
+					every_owned_state = {
+						limit = {
+							region = 133
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 138 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Ural Region"
+					every_owned_state = {
+						limit = {
+							region = 138
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 40 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Transvolga"
+					every_owned_state = {
+						limit = {
+							region = 40
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 209 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Southern Urals"
+					every_owned_state = {
+						limit = {
+							region = 209
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 14 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Trans Urais"
+					every_owned_state = {
+						limit = {
+							region = 14
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 151 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Western Siberia"
+					every_owned_state = {
+						limit = {
+							region = 151
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 147 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Northern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 147
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 207 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Central Siberia"
+					every_owned_state = {
+						limit = {
+							region = 207
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 149 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Eastern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 149
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 211 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Trans Baikal"
+					every_owned_state = {
+						limit = {
+							region = 211
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 148 }
+					}
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Far East"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 148
+								region = 213
+							}
+						}
+						RUS_authdem_campaign_effects = yes
+					}
+				}
+			}
+		}
+	}
+	title = russian_democracy_helpers.9.t
+	desc = russian_democracy_helpers.9.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = "Ok."
+
+	}
+}
+
+country_event = { #AI region determiner - Conservatives
+	id = russian_democracy_helpers.10
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.10"
+		FROM = {
+			random_list = {
+				log = yes
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 150 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Arctic Russia"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 150
+								region = 132
+								region = 12
+							}
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 133 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Central Russia"
+					every_owned_state = {
+						limit = {
+							region = 133
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 138 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Ural Region"
+					every_owned_state = {
+						limit = {
+							region = 138
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 40 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Transvolga"
+					every_owned_state = {
+						limit = {
+							region = 40
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 209 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Southern Urals"
+					every_owned_state = {
+						limit = {
+							region = 209
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 14 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Trans Urais"
+					every_owned_state = {
+						limit = {
+							region = 14
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 151 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Western Siberia"
+					every_owned_state = {
+						limit = {
+							region = 151
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 147 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Northern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 147
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 207 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Central Siberia"
+					every_owned_state = {
+						limit = {
+							region = 207
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 149 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Eastern Siberia"
+					every_owned_state = {
+						limit = {
+							region = 149
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 211 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Trans Baikal"
+					every_owned_state = {
+						limit = {
+							region = 211
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+
+				0 = {
+					modifier = {
+						add = 10
+						any_owned_state = { region = 148 }
+					}
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Far East"
+					every_owned_state = {
+						limit = {
+							OR = {
+								region = 148
+								region = 213
+							}
+						}
+						RUS_conservative_campaign_effects = yes
+					}
+				}
+			}
+		}
+	}
+	title = russian_democracy_helpers.10.t
+	desc = russian_democracy_helpers.10.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = "Ok."
+
+	}
+}
+
+country_event = { #Start SocDem AI Campaign
+	id = russian_democracy_helpers.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.11"}
+	title = russian_democracy_helpers.11.t
+	desc = russian_democracy_helpers.11.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = russian_democracy_helpers.11.a
+		set_country_flag = RUS_SOCDEM_AI_ENABLE
+	}
+}
+
+country_event = { #Start Liberal AI Campaign
+	id = russian_democracy_helpers.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.12"}
+	title = russian_democracy_helpers.12.t
+	desc = russian_democracy_helpers.12.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = russian_democracy_helpers.12.a
+		set_country_flag = RUS_LIBERAL_AI_ENABLE
+	}
+}
+
+country_event = { #Start AuthDem AI Campaign
+	id = russian_democracy_helpers.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.13"}
+	title = russian_democracy_helpers.13.t
+	desc = russian_democracy_helpers.13.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = russian_democracy_helpers.13.a
+		set_country_flag = RUS_AUTHDEM_AI_ENABLE
+
+	}
+}
+
+country_event = { #Start conservative AI Campaign
+	id = russian_democracy_helpers.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.14"}
+	title = russian_democracy_helpers.14.t
+	desc = russian_democracy_helpers.14.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = russian_democracy_helpers.14.a
+		set_country_flag = RUS_CONSERVATIVE_AI_ENABLE
+	}
+}
+
+country_event = {
+	id = russian_democracy_helpers.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.15"}
+	title = russian_democracy_helpers.15.t
+	desc = russian_democracy_helpers.15.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.15.a
+	}
+}
+
+country_event = {
+	id = russian_democracy_helpers.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.16"}
+	title = russian_democracy_helpers.16.t
+	desc = russian_democracy_helpers.16.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.16.a
+	}
+}
+
+country_event = {
+	id = russian_democracy_helpers.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.17"}
+	title = russian_democracy_helpers.17.t
+	desc = russian_democracy_helpers.17.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.17.a
+	}
+}
+
+country_event = {
+	id = russian_democracy_helpers.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.18"}
+	title = russian_democracy_helpers.18.t
+	desc = russian_democracy_helpers.18.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.18.a
+	}
+}
+
+country_event = {
+	id = russian_democracy_helpers.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.19"}
+	title = russian_democracy_helpers.19.t
+	desc = russian_democracy_helpers.19.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.19.a
+	}
+}
+
+country_event = {
+	id = russian_democracy_helpers.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event russian_democracy_helpers.20"}
+	title = russian_democracy_helpers.20.t
+	desc = russian_democracy_helpers.20.d
+	picture = GFX_report_event_komi_bombing_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russian_democracy_helpers.20.a
+		country_event = russian_democracy_helpers.8
+	}
+}
