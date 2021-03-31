@@ -6599,7 +6599,10 @@ country_event = { #Russia - Defeat
 
 country_event = { #Opponent launches general military intervention
 	id = RUS_race_to_kazakhstan.36
-	immediate = {log = "[GetDateText]: [Root.GetName]: event RUS_race_to_kazakhstan.36"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event RUS_race_to_kazakhstan.36"
+		set_country_flag = RUS_kazakhstan_choice
+		}
 	title = RUS_race_to_kazakhstan.36.t
 	desc = RUS_race_to_kazakhstan.36.d
 	picture = GFX_report_event_generic_sign_treaty2
@@ -8826,12 +8829,16 @@ country_event = { #Opponent launches military intervention in Orsk
 
 country_event = { #Opponent launches general military intervention
 	id = russiadiplo.68
-	immediate = {log = "[GetDateText]: [Root.GetName]: event russiadiplo.68"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russiadiplo.68"
+		set_country_flag = RUS_southern_urals_choice
+	}
 	title = russiadiplo.68.t
 	desc = russiadiplo.68.d
 	picture = GFX_report_event_generic_sign_treaty2
 
 	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = { #Defend Southern Urals
 		name = russiadiplo.68.a
@@ -9041,6 +9048,7 @@ country_event = { #Orenburg resists!
 	option = {
 		name = russiadiplo.76.a
 		add_war_support = 0.05
+		set_country_flag = RUS_CANNOT_NEGOTIATE_ORE
 	}
 }
 
@@ -9056,6 +9064,7 @@ country_event = { #Ural League resists!
 	option = {
 		name = russiadiplo.77.a
 		add_war_support = 0.05
+		set_country_flag = RUS_CANNOT_NEGOTIATE_URL
 	}
 }
 
@@ -9071,6 +9080,7 @@ country_event = { #Magnitogorsk resists!
 	option = {
 		name = russiadiplo.78.a
 		add_war_support = 0.05
+		set_country_flag = RUS_CANNOT_NEGOTIATE_BAS
 	}
 }
 
@@ -9219,8 +9229,6 @@ country_event = { #Ceasefire - West leaning - accepted
 		name = russiadiplo.85.a
 		WSR = {
 			white_peace = WSB
-			transfer_state = 863
-			transfer_state = 754
 			transfer_state = 582
 			transfer_state = 846
 			transfer_state = 852
@@ -9228,18 +9236,6 @@ country_event = { #Ceasefire - West leaning - accepted
 			transfer_state = 652
 			transfer_state = 847
 			transfer_state = 848
-			add_state_core = 863
-			add_state_core = 754
-			add_state_core = 582
-			add_state_core = 846
-			add_state_core = 852
-			add_state_core = 849
-			add_state_core = 652
-			add_state_core = 847
-			add_state_core = 848
-		}
-		WSB = {
-			white_peace = WSR
 		}
 	}
 }
@@ -9257,8 +9253,6 @@ country_event = { #Ceasefire - East leaning - accepted
 		name = russiadiplo.86.a
 		WSB = {
 			white_peace = WSR
-			transfer_state = 863
-			transfer_state = 754
 			transfer_state = 582
 			transfer_state = 846
 			transfer_state = 852
@@ -9266,18 +9260,6 @@ country_event = { #Ceasefire - East leaning - accepted
 			transfer_state = 652
 			transfer_state = 847
 			transfer_state = 848
-			add_state_core = 863
-			add_state_core = 754
-			add_state_core = 582
-			add_state_core = 846
-			add_state_core = 852
-			add_state_core = 849
-			add_state_core = 652
-			add_state_core = 847
-			add_state_core = 848
-		}
-		WSR = {
-			white_peace = WSB
 		}
 	}
 }
@@ -9295,27 +9277,15 @@ country_event = { #Ceasefire - Neutral - accepted
 		name = russiadiplo.87.a
 		WSR = {
 			white_peace = WSB
-			transfer_state = 863
 			transfer_state = 852
 			transfer_state = 849
 			transfer_state = 652
 			transfer_state = 847
 			transfer_state = 848
-			add_state_core = 863
-			add_state_core = 852
-			add_state_core = 849
-			add_state_core = 652
-			add_state_core = 847
-			add_state_core = 848
 		}
 		WSB = {
-			white_peace = WSR
-			transfer_state = 754
 			transfer_state = 582
 			transfer_state = 846
-			add_state_core = 754
-			add_state_core = 582
-			add_state_core = 846
 		}
 	}
 }
@@ -10865,6 +10835,9 @@ country_event = { #
 					ideology = social_democrat
 					popularity = 0.05
 				}
+				remove_ideas = {
+				ARL_national_renewal
+				}
 			}
 			KAZ = {
 				set_politics = {
@@ -10873,7 +10846,7 @@ country_event = { #
 				create_country_leader = {
 					name = "Isatai Abdukarimov"
 					desc = "POLITICS_ISATAI_ABDUKARIMOV_DESC"
-					picture = "Portrait_Kazakhstan_Isatai_Abdukarimov"
+					picture = "gfx/leaders/KAZ/Portrait_Kazakhstan_Isatai_Abdukarimov.dds"
 					expire = "1999.1.1"
 					ideology = social_democrat_subtype
 					traits = { }
@@ -10895,6 +10868,12 @@ country_event = { #
 				add_popularity = {
 					ideology = authoritarian_democrat
 					popularity = 0.15
+				}
+				remove_ideas = {
+				KAZ_kaz_red_army	
+				}
+				remove_ideas = {
+				KAZ_bandit_plague
 				}
 				save_global_event_target_as = RUS_kazakhstan_unifier
 			}

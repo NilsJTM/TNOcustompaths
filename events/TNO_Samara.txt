@@ -327,12 +327,12 @@ country_event = {
 		}
 		trigger = {
 		    OR = {
-            has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_AUTHDEM }
+            	has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_AUTHDEM }
+            }
             AND = {
-			check_variable = {party_popularity@authoritarian_democrat > party_popularity@despotism}
-			check_variable = {party_popularity@authoritarian_democrat > party_popularity@fascism}
+				check_variable = {party_popularity@authoritarian_democrat > party_popularity@despotism}
+				check_variable = {party_popularity@authoritarian_democrat > party_popularity@fascism}
 			}
-		    }
 		}
 		load_focus_tree = { tree = SAM_Economic_Tree_and_Zykov_Tree keep_completed = yes }
 		set_country_flag = SAM_Zykov
@@ -375,11 +375,11 @@ country_event = {
 		}
 		trigger = {
 		    OR = {
-            has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_DESPOTISM }
+            	has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_DESPOTISM }
+            }
             AND = {
-			check_variable = {party_popularity@despotism > party_popularity@authoritarian_democrat}
-			check_variable = {party_popularity@despotism > party_popularity@fascism}
-			}
+				check_variable = {party_popularity@despotism > party_popularity@authoritarian_democrat}
+				check_variable = {party_popularity@despotism > party_popularity@fascism}
 		    }
 		}
 		load_focus_tree = { tree = SAM_Economic_Tree_and_Bunyachenko_Tree keep_completed = yes }
@@ -417,11 +417,11 @@ country_event = {
 		}
 		trigger = {
 		    OR = {
-            has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_FASCISM }
+            	has_game_rule = { rule = SAM_ideology_route option = SAM_IDEOLOGY_ROUTE_FASCISM }
+            }
             AND = {
 			check_variable = {party_popularity@fascism > party_popularity@authoritarian_democrat}
 			check_variable = {party_popularity@fascism > party_popularity@despotism}
-			}
 		    }
 		}
 		load_focus_tree = { tree = SAM_Economic_Tree_and_Maltsev_Tree keep_completed = yes }
@@ -1356,7 +1356,7 @@ country_event = { #Money...
 }
 
 country_event = { #... And power
-	#POV of one of the civillian revolters against the ROA. Turns out, a lot of the revolts after vlasov's death were maltsevite agents provocateur, and the revolts are bought off or squashed.
+	#POV of one of the civilian revolters against the ROA. Turns out, a lot of the revolts after vlasov's death were maltsevite agents provocateur, and the revolts are bought off or squashed.
 	id = SAM.48
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SAM.48" }
 	title = SAM.48.t
@@ -1543,7 +1543,7 @@ country_event = { #A constitutional convention - Bunyachenko
 }
 
 country_event = { #A constitutional convention - Maltsev
-	#Maltsev and his cronies have decided on a constitutional convention to help create a legal framework for their empire. Prominent civillian partners of the regime are also attending.
+	#Maltsev and his cronies have decided on a constitutional convention to help create a legal framework for their empire. Prominent civilian partners of the regime are also attending.
 	id = SAM.58
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SAM.58" }
 	title = SAM.58.t
@@ -1561,7 +1561,7 @@ country_event = { #A constitutional convention - Maltsev
 }
 
 country_event = { #Judiciary - Zykov
-	#Continuation of his mixture of civillian and military judges, with military judges being a third or less of the pool of jurors.
+	#Continuation of his mixture of civilian and military judges, with military judges being a third or less of the pool of jurors.
 	id = SAM.59
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SAM.59" }
 	title = SAM.59.t
@@ -1679,7 +1679,7 @@ country_event = { #Legislative - Maltsev
 }
 
 country_event = { #Industrial policy - Zykov
-	#Zykov's industrial policy is mostly civillian driven, with state ran military factories
+	#Zykov's industrial policy is mostly civilian driven, with state ran military factories
 	id = SAM.65
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SAM.65" }
 	title = SAM.65.t
@@ -1697,7 +1697,7 @@ country_event = { #Industrial policy - Zykov
 }
 
 country_event = { #Industrial policy - Bunyachenko
-	#Beginning of the "chaebols/zaibatsus". A few civillian companies with trustworthy leaders are given massive amount of ressources to expand horizontally and vertically, and their boards are intermeshing and filled with bunyachenko friends.
+	#Beginning of the "chaebols/zaibatsus". A few civilian companies with trustworthy leaders are given massive amount of ressources to expand horizontally and vertically, and their boards are intermeshing and filled with bunyachenko friends.
 	id = SAM.66
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SAM.66" }
 	title = SAM.66.t
@@ -2317,7 +2317,7 @@ country_event = { #
 		unlock_decision_category_tooltip = SAM_web_of_tensions_category
 		set_country_flag = SAM_web_of_tensions
 		hidden_effect = {
-			add_ideas = SAM_civilian_med_high
+			add_ideas = SAM_inner_circle_med_high
 			add_ideas = SAM_civilian_med
 			add_ideas = SAM_military_med
 		}
@@ -3763,7 +3763,7 @@ country_event = { #The Golden Throne - Oktan epilogue/final event
 	option = { #
 		name = SAM_oktan.9.a
 		ai_chance = { factor = 1 }
-		set_country_flag = TNO_closing_screen_show
+		TNO_russia_ending_screen = yes
 	}
 }
 
@@ -3949,6 +3949,22 @@ country_event = { #Uncaring Careerist
 	
 	option = { #
 		name = SAM_oktan.20.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #?
+	id = SAM_oktan.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAM_oktan.21" }
+	title = SAM_oktan.21.t
+	desc = SAM_oktan.21.desc
+	picture = GFX_report_event_generic_office
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = SAM_oktan.21.a
 		ai_chance = { factor = 1 }
 	}
 }

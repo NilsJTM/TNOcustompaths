@@ -135,6 +135,20 @@ country_event = { #Event for Komi - WRS buys food
 	}
 }
 
+country_event = {
+	id = WRS.601
+	immediate = {log = "[GetDateText]: [Root.GetName]: event WRS.6"}
+	title = WRS.601.t
+	desc = WRS.601.d
+	picture = GFX_report_event_MAN_truck
+
+	is_triggered_only = yes
+
+	option = {
+		name = WRS.601.a
+	}
+}
+
 country_event = { #Event for Vorkuta - WRS buys food
 	id = WRS.7
 	immediate = {log = "[GetDateText]: [Root.GetName]: event WRS.7"}
@@ -567,7 +581,17 @@ country_event = { #failures of wrw
 
 country_event = { #explain power struggle
 	id = WRS.37
-	immediate = {log = "[GetDateText]: [Root.GetName]: event WRS.37"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WRS.37"
+		hidden_effect = {
+			random_list = {
+				1 = {
+					set_country_flag = WRS_appease
+				}
+				3 = { }
+			}
+		}
+	}
 	title = WRS.37.t
 	desc = WRS.37.d
 	picture = GFX_report_event_russian_letter
@@ -1464,19 +1488,23 @@ country_event = { #time to illegally sabotage Zhukov
 
 	option = {#forged Ukhta papers
 		name = WRS_power_struggle.7.a
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.8
-				days = 3
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.8
+					days = 3
+				}
 			}
 		}
 	}
 	option = {#ROA papers
 		name = WRS_power_struggle.7.b
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.9
-				days = 3
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.9
+					days = 3
+				}
 			}
 		}
 	}
@@ -1492,10 +1520,12 @@ country_event = { #saboteurs cross into Ukhta on forged papers
 
 	option = {#blow it up
 		name = WRS_power_struggle.8.a
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.10
-				days = 3
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.10
+					days = 3
+				}
 			}
 		}
 	}
@@ -1511,10 +1541,12 @@ country_event = { #saboteurs cross into Ukhta on ROA papers
 
 	option = {#blow it up
 		name = WRS_power_struggle.9.a
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.10
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.10
+					days = 1
+				}
 			}
 		}
 	}
@@ -1530,10 +1562,19 @@ country_event = { #rip oil wells
 
 	option = {#motherfucker
 		name = WRS_power_struggle.10.a
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.11
-				days = 1
+		869 = {
+			add_to_variable = { sabotaged_oil = -7 }
+			add_dynamic_modifier = {
+				modifier = sabotaged_resources
+				days = 90
+			}
+		}
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.11
+					days = 1
+				}
 			}
 		}
 	}
@@ -1551,10 +1592,12 @@ country_event = { #zhukov notices
 	option = {#motherfucker
 		name = WRS_power_struggle.11.a
 		WRS_increase_factionalism_low = yes
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.12
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.12
+					days = 1
+				}
 			}
 		}
 	}
@@ -1571,14 +1614,14 @@ country_event = { #manhunt
 	option = {#rip
 		name = WRS_power_struggle.12.a
 		trigger = {
-			AND = {
-				check_variable = { global.WRSFactionalism < 10 }
-			}
+			check_variable = { global.WRSFactionalism < 11 }
 		}
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.13
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.13
+					days = 1
+				}
 			}
 		}
 	}
@@ -1586,14 +1629,14 @@ country_event = { #manhunt
 	option = {#we found you motherfucker
 		name = WRS_power_struggle.12.b
 		trigger = {
-			AND = {
-				check_variable = { global.WRSFactionalism > 30 }
-			}
+			check_variable = { global.WRSFactionalism > 30 }
 		}
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.14
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.14
+					days = 1
+				}
 			}
 		}
 	}
@@ -1603,12 +1646,15 @@ country_event = { #manhunt
 		trigger = {
 			AND = {
 				check_variable = { global.WRSFactionalism > 10 }
+				check_variable = { global.WRSFactionalism < 31 }
 			}
 		}
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.15
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.15
+					days = 1
+				}
 			}
 		}
 	}
@@ -1700,10 +1746,12 @@ country_event = { #investigation
 	option = {#motherfucker
 		name = WRS_power_struggle.102.a
 		WRS_increase_factionalism_low = yes
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.103
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.103
+					days = 1
+				}
 			}
 		}
 	}
@@ -1720,14 +1768,14 @@ country_event = { #time to dig into Tukhas past
 	option = {#found a lot
 		name = WRS_power_struggle.103.a
 		trigger = {
-			AND = {
-				check_variable = { global.WRSFactionalism < 10 }
-			}
+			check_variable = { global.WRSFactionalism < 11 }
 		}
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.104
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.104
+					days = 1
+				}
 			}
 		}
 	}
@@ -1735,9 +1783,7 @@ country_event = { #time to dig into Tukhas past
 	option = {#found nothing - motherfucker covered it up
 		name = WRS_power_struggle.103.b
 		trigger = {
-			AND = {
-				check_variable = { global.WRSFactionalism > 30 }
-			}
+			check_variable = { global.WRSFactionalism > 30 }
 		}
 		
 		ai_chance = {
@@ -1774,12 +1820,15 @@ country_event = { #time to dig into Tukhas past
 		trigger = {
 			AND = {
 				check_variable = { global.WRSFactionalism > 10 }
+				check_variable = { global.WRSFactionalism < 31 }
 			}
 		}
-		WRS = {
-			country_event = {
-				id = WRS_power_struggle.106
-				days = 1
+		hidden_effect = {
+			WRS = {
+				country_event = {
+					id = WRS_power_struggle.106
+					days = 1
+				}
 			}
 		}
 	}
@@ -5394,41 +5443,6 @@ country_event = { #Solemn Vow
 
 add_namespace = indrik
 
-country_event = { #FOR ANARCHY - NO LOC - OBT PROGRAM
-	id = indrik.10
-	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.10"}
-	title = indrik.10.t
-	desc = indrik.10.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = { #SUCCESS
-		name = indrik.10.a
-		ai_chance = {
-			factor = 75
-		}
-		WRS = {
-			country_event = {
-				id = indrik.11
-				days = 1
-			}
-		}
-	}
-	option = { #PARTIAL SUCCESS
-		name = indrik.10.b
-		ai_chance = {
-			factor = 50-
-		}
-		WRS = {
-			country_event = {
-				id = indrik.12
-				days = 1
-			}
-		}
-	}
-}
-
 country_event = { #OBT PROGRAM - SUCCESS
 	id = indrik.11
 	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.11"}
@@ -5470,41 +5484,6 @@ country_event = { #OBT PROGRAM - PARTIAL SUCCESS
 			bonus = 1
 			uses = 1
 			category = armor
-		}
-	}
-}
-
-country_event = { #FOR ANARCHY - NO LOC - IZHEVSK EXPERIMENTAL-CONSTRUCTOR WORKS
-	id = indrik.20
-	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.20"}
-	title = indrik.20.t
-	desc = indrik.20.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = { # SUCCESS
-		name = indrik.20.a
-		ai_chance = {
-			factor = 75
-		}
-		WRS = {
-			country_event = {
-				id = indrik.21
-				days = 1
-			}
-		}
-	}
-	option = { # PARTIAL SUCCESS
-		name = indrik.20.b
-		ai_chance = {
-			factor = 25
-		}
-		WRS = {
-			country_event = {
-				id = indrik.22
-				days = 1
-			}
 		}
 	}
 }
@@ -5555,52 +5534,6 @@ country_event = { #IZHEVSK EXPERIMENTAL-CONSTRUCTOR WORKS - PARTIAL SUCCESS
 	}
 }
 
-country_event = { #FOR ANARCHY - NO LOC - PROJECT URAGAN
-	id = indrik.30
-	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.30"}
-	title = indrik.30.t
-	desc = indrik.30.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = { # SUCCESS
-		name = indrik.30.a
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.31
-				days = 1
-			}
-		}
-	}
-	option = { # PARTIAL SUCCESS
-		name = indrik.30.b
-		ai_chance = {
-			factor = 75
-		}
-		WRS = {
-			country_event = {
-				id = indrik.32
-				days = 1
-			}
-		}
-	}
-	option = { # INCONCLUSIVE
-		name = indrik.30.c
-		ai_chance = {
-			factor = 25
-		}
-		WRS = {
-			country_event = {
-				id = indrik.33
-				days = 1
-			}
-		}
-	}
-}
 #TODO: request an event report GFX which is a photo of a BM-21
 country_event = { #PROJECT URAGAN - SUCCESS
 	id = indrik.31
@@ -5669,53 +5602,6 @@ country_event = { #PROJECT URAGAN - INCONCLUSIVE
 	}
 }
 
-
-country_event = { #FOR ANARCHY - NO LOC - PROJECT TSYSKLON
-	id = indrik.40
-	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.40"}
-	title = indrik.40.t
-	desc = indrik.40.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = { # SUCCESS
-		name = indrik.40.a
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.41
-				days = 1
-			}
-		}
-	}
-	option = { # INCONCLUSIVE
-		name = indrik.40.b
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.42
-				days = 1
-			}
-		}
-	}
-	option = { # FAILURE
-		name = indrik.40.c
-		ai_chance = {
-			factor = 25
-		}
-		WRS = {
-			country_event = {
-				id = indrik.43
-				days = 1
-			}
-		}
-	}
-}
 #TODO: request correction of "GFX_report_event_missle" (incorrect size) file: report_event_missile.dds
 #
 country_event = { #PROJECT TSYSKLON - SUCCESS
@@ -5766,53 +5652,6 @@ country_event = { #PROJECT TSYSKLON - FAILURE
 		name = indrik.43.a
 		set_country_flag = WRS_INDRIK_4_FAILURE
 		add_political_power = -25
-	}
-}
-
-country_event = { #FOR ANARCHY - NO LOC - PROJECT SHCHUKA
-	id = indrik.50
-	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.50"}
-	title = indrik.50.t
-	desc = indrik.50.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = { # PARTIAL SUCCESS
-		name = indrik.50.a
-		ai_chance = {
-			factor = 25
-		}
-		WRS = {
-			country_event = {
-				id = indrik.51
-				days = 1
-			}
-		}
-	}
-	option = { # INCONCLUSIVE
-		name = indrik.50.b
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.42
-				days = 1
-			}
-		}
-	}
-	option = { # FAILURE
-		name = indrik.50.c
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.53
-				days = 1
-			}
-		}
 	}
 }
 
@@ -5879,53 +5718,6 @@ country_event = { #PROJECT SHCHUKA - FAILURE
 	}
 }
 
-country_event = { #FOR ANARCHY - NO LOC - PROJECT LESHIY
-	id = indrik.60
-	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.60"}
-	title = indrik.60.t
-	desc = indrik.60.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = { # SUCCESS
-		name = indrik.60.a
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.61
-				days = 1
-			}
-		}
-	}
-	option = { # PARTIAL SUCCESS
-		name = indrik.60.b
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.62
-				days = 1
-			}
-		}
-	}
-	option = { # FAILURE
-		name = indrik.60.c
-		ai_chance = {
-			factor = 10
-		}
-		WRS = {
-			country_event = {
-				id = indrik.63
-				days = 1
-			}
-		}
-	}
-}
-
 country_event = { #PROJECT LESHIY - SUCCESS
 	id = indrik.61
 	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.61"}
@@ -5974,53 +5766,6 @@ country_event = { #PROJECT LESHIY - FAILURE
 		name = indrik.63.a
 		set_country_flag = WRS_INDRIK_6_FAILURE
 		add_political_power = -50
-	}
-}
-
-country_event = { #FOR ANARCHY - NO LOC - PROJECT FERMENT
-	id = indrik.70
-	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.70"}
-	title = indrik.70.t
-	desc = indrik.70.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = { # SUCCESS
-		name = indrik.70.a
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.71
-				days = 1
-			}
-		}
-	}
-	option = { # PARTIAL SUCCESS
-		name = indrik.70.b
-		ai_chance = {
-			factor = 50
-		}
-		WRS = {
-			country_event = {
-				id = indrik.72
-				days = 1
-			}
-		}
-	}
-	option = { # FAILURE
-		name = indrik.70.c
-		ai_chance = {
-			factor = 10
-		}
-		WRS = {
-			country_event = {
-				id = indrik.73
-				days = 1
-			}
-		}
 	}
 }
 

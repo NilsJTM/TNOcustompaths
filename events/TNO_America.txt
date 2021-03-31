@@ -1405,7 +1405,7 @@ country_event = {#Form the CAR?
 			set_cosmetic_tag = USA_CAR
 			load_focus_tree = ofn_car
 			USA_AFRICA_CAR_set_start_stability = yes
-		}
+			}
 		}
 	}
 	option = { #Keep the three administrations
@@ -2750,6 +2750,7 @@ news_event = {
 
 		subtract_from_variable = { USA_RD_Unity = 5 }
 
+		clr_country_flag = USA_60_R_RD
 		set_country_flag = USA_nixon_impeached
 		set_country_flag = USA_JFK_is_president
 		USA_reload_nixon_tree = yes
@@ -4500,12 +4501,22 @@ country_event = { #CR passed
 	fire_only_once = yes
 
  	option = { #Such an important piece of legislation
- 		name = USA.166.a
- 		#R and C up
- 		#FR down
+		name = USA.166.a
+		custom_effect_tooltip = USA_favor_progressivism
+		hidden_effect = {
+			every_owned_state = {
+				limit = { can_have_elections_in_state = yes }
+				add_to_variable = { NPP_C_bonus_popularity = 0.02}
+				add_to_variable = { NPP_FR_bonus_popularity = -0.02}
+				add_to_variable = { RD_R_bonus_popularity = 0.01}
+				add_to_variable = { RD_D_bonus_popularity = -0.01}
+			   US_underdog_1_1 = yes
+			}
+		}
  	}
  	option = { # A ridicouls overstep
- 		name = USA.166.b
+		name = USA.166.b
+		custom_effect_tooltip = USA_favor_conservatism
  		hidden_effect = {
  			every_owned_state = {
  				limit = { can_have_elections_in_state = yes }
@@ -4513,11 +4524,7 @@ country_event = { #CR passed
  				add_to_variable = { NPP_FR_bonus_popularity = 0.02}
  				add_to_variable = { RD_R_bonus_popularity = -0.01}
  				add_to_variable = { RD_D_bonus_popularity = 0.01}
-				if = {
-					limit = { check_variable = { NPP_popularity < RD_popularity}}
-					add_to_variable = { NPP_popularity = 0.01}
-				}
-				else = { add_to_variable = { RD_popularity = 0.01}}
+				US_underdog_1_1 = yes
  			}
  		}
  	}
@@ -12969,7 +12976,6 @@ country_event = {
 			}
 		}
 		set_variable = { RD_candidate_party = 2 }
-		USA_debate_68_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1968 RD primaries: Goldwater"
 		hidden_effect = {
 			377 = { #AUH2O home state bonus for Arizona
@@ -12987,6 +12993,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_68_effect = yes
 			}
 		}
 	}
@@ -13011,7 +13018,6 @@ country_event = {
 			}
 		}
 		set_variable = { RD_candidate_party = 1 }
-		USA_debate_68_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1968 RD primaries: Glenn"
 		hidden_effect = {
 			261 = { #Glenn home state bonus for Ohio
@@ -13029,6 +13035,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_68_effect = yes
 			}
 		}
 	}
@@ -13038,7 +13045,6 @@ country_event = {
 		}
 		name = USA_elec_prim.1.c
 		set_variable = { RD_candidate_party = 2 }
-		USA_debate_68_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1968 RD primaries: Bennett"
 		hidden_effect = {
 			if = {
@@ -13051,6 +13057,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_68_effect = yes
 			}
 		}
 	}
@@ -13060,7 +13067,6 @@ country_event = {
 		}
 		name = USA_elec_prim.1.d
 		set_variable = { RD_candidate_party = 1 }
-		USA_debate_68_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1968 RD primaries: Johnson"
 		hidden_effect = {
 			if = {
@@ -13073,6 +13079,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_68_effect = yes
 			}
 		}
 	}
@@ -13306,6 +13313,12 @@ country_event = {
 					NOT = { has_country_flag = USA_64_FR_NPP }
 				}
 				country_event = { id = USA.160 days = 75 }
+				if = {
+					limit = {
+						has_country_flag = USA_64_D_RD
+					}
+					country_event = { id = USA.USA.flavor.17 days = 65 } #10 days before inauguration, MCS bennett meeting
+				}
 				log = "[GetDateText]: [Root.GetName]: 1968 elections: Smith"
 			}
 			else_if = {
@@ -13318,6 +13331,12 @@ country_event = {
 				divide_variable = { USA_HAR_win_margin = 269 }
 				country_event = { id = USA.163 days = 75 }
 				log = "[GetDateText]: [Root.GetName]: 1968 elections: Harrington"
+				if = {
+					limit = {
+						has_country_flag = USA_64_R_RD #LBJ 1 term
+					}
+					country_event = { id = USA.USA.flavor.19 days = 35 } #LBJ Harry transition
+				}
 			}
 			else_if = {
 				limit = {
@@ -13490,7 +13509,6 @@ country_event = {
 			}
 		}
 		set_variable = { RD_candidate_party = 2 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 RD primaries: McNamara"
 		hidden_effect = {
 			378 = { #McNamara home state bonus for California
@@ -13508,6 +13526,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 	}
@@ -13532,7 +13551,6 @@ country_event = {
 			}
 		}
 		set_variable = { RD_candidate_party = 1 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 RD primaries: McGovern"
 		hidden_effect = {
 			390 = { #McGovern home state bonus for South Dakota
@@ -13550,6 +13568,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 	}
@@ -13559,7 +13578,6 @@ country_event = {
 		}
 		name = USA_elec_prim.11.c
 		set_variable = { RD_candidate_party = 2 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 RD primaries: Goldwater"
 		hidden_effect = {
 			if = {
@@ -13572,6 +13590,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 	}
@@ -13581,7 +13600,6 @@ country_event = {
 		}
 		name = USA_elec_prim.11.d
 		set_variable = { RD_candidate_party = 1 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 RD primaries: Glenn"
 		hidden_effect = {
 			if = {
@@ -13594,6 +13612,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 	}
@@ -13667,7 +13686,6 @@ country_event = {
 		}
 		name = USA_elec_prim.12.a
 		set_variable = { NPP_candidate_party = 4 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 NPP primaries: Jackson"
 		hidden_effect = {
 			386 = { #Scoop home state bonus for Washington
@@ -13685,6 +13703,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 		ai_chance = {
@@ -13723,7 +13742,6 @@ country_event = {
 		}
 		name = USA_elec_prim.12.b
 		set_variable = { NPP_candidate_party = 6 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 NPP primaries: Kirkpatrick"
 		hidden_effect = {
 			361 = { #Kirkpatrick home state bonus for Maryland
@@ -13741,6 +13759,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 		ai_chance = {
@@ -13795,7 +13814,6 @@ country_event = {
 		}
 		name = USA_elec_prim.12.c
 		set_variable = { NPP_candidate_party = 5 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 NPP primaries: Yockey"
 		hidden_effect = {
 			395 = { #Yockey home state bonus for Illinois
@@ -13813,6 +13831,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 		ai_chance = { 
@@ -13865,7 +13884,6 @@ country_event = {
 		}
 		name = USA_elec_prim.12.d
 		set_variable = { NPP_candidate_party = 3 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 NPP primaries: Hall"
 		hidden_effect = {
 			391 = { #Hall home state bonus for Minnesota
@@ -13883,6 +13901,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 		ai_chance = {
@@ -13916,7 +13935,6 @@ country_event = {
 		}
 		name = USA_elec_prim.12.e
 		set_variable = { NPP_candidate_party = 6 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 NPP primaries: Smith"
 		hidden_effect = {
 			if = {
@@ -13929,6 +13947,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 		ai_chance = {
@@ -13945,7 +13964,6 @@ country_event = {
 		}
 		name = USA_elec_prim.12.f
 		set_variable = { NPP_candidate_party = 4 }
-		USA_debate_72_effect = yes
 		log = "[GetDateText]: [Root.GetName]: 1972 NPP primaries: Harrington"
 		hidden_effect = {
 			if = {
@@ -13958,6 +13976,7 @@ country_event = {
 			}
 			else = {
 				clr_country_flag = USA_completed_first_primary
+				USA_debate_72_effect = yes
 			}
 		}
 		ai_chance = {
@@ -14025,6 +14044,18 @@ country_event = {
 				}
 				country_event = { id = USA.1704 days = 75 }
 				log = "[GetDateText]: [Root.GetName]: 1972 elections: Kirkpatrick"
+				if = {
+					limit = {
+						has_country_flag = USA_64_D_RD #Bennett 2 term
+					}
+					country_event = { id = USA.USA.flavor.18 days = 15 } #Bennett-NPP transition
+				}
+				if = {
+					limit = {
+						has_country_flag = USA_64_R_RD #LBJ 2 term
+					}
+					country_event = { id = USA.USA.flavor.20 days = 30 } #LBJ-NPP transition
+				}
 			}
 			else_if = {
 				limit = {
@@ -14033,6 +14064,18 @@ country_event = {
 				}
 				country_event = { id = USA.1703 days = 75 }
 				log = "[GetDateText]: [Root.GetName]: 1972 elections: Jackson"
+				if = {
+					limit = {
+						has_country_flag = USA_64_D_RD #Bennett 2 term
+					}
+					country_event = { id = USA.USA.flavor.18 days = 15 } #Bennett-NPP transition
+				}
+				if = {
+					limit = {
+						has_country_flag = USA_64_R_RD #LBJ 2 term
+					}
+					country_event = { id = USA.USA.flavor.20 days = 30 } #LBJ-NPP transition
+				}
 			}
 			else_if = {
 				limit = { check_variable = { US_election_winner = 5 } }
@@ -14665,14 +14708,14 @@ country_event = { #Debug RD
 	option = { #
 		name = USA.senate.9.a
 		ai_chance = { factor = 1 }
-    set_country_flag = USA_campaigning_for_RD
-    add_to_array = { USA_campaign_states = 357 } #Connecticut
-    add_to_array = { USA_campaign_states = 952 } #Maine
-    add_to_array = { USA_campaign_states = 949 } #Massachusetts
-    add_to_array = { USA_campaign_states = 951 } #New Hampshire
-    add_to_array = { USA_campaign_states = 948 } #Rhode Island
-    add_to_array = { USA_campaign_states = 950 } #Vermont
-    USA_campaigning_state_boost = yes
+		set_country_flag = USA_campaigning_for_RD
+		add_to_array = { USA_campaign_states = 357 } #Connecticut
+		add_to_array = { USA_campaign_states = 952 } #Maine
+		add_to_array = { USA_campaign_states = 949 } #Massachusetts
+		add_to_array = { USA_campaign_states = 951 } #New Hampshire
+		add_to_array = { USA_campaign_states = 948 } #Rhode Island
+		add_to_array = { USA_campaign_states = 950 } #Vermont
+		USA_campaigning_state_boost = yes
 	}
 }
 
@@ -21312,9 +21355,9 @@ country_event = { #civil war is about to break out
 		ai_chance = { factor = 1 }
 		MAD = {
 			add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = 2500
-			producer = USA
+				type = infantry_equipment
+				amount = 2500
+				producer = USA
 			}
 		}
 	}
@@ -21324,9 +21367,9 @@ country_event = { #civil war is about to break out
 		custom_effect_tooltip = econ_decrease_money_reserves
 		add_to_variable = { money_reserves = -10 }
 		MAD = {
-		add_stability = 0.05
-		custom_effect_tooltip = econ_increase_money_reserves
-		add_to_variable = { money_reserves = 10 }
+			add_stability = 0.05
+			custom_effect_tooltip = econ_increase_money_reserves_other
+			add_to_variable = { money_reserves = 10 }
 		}
 	}
 }
@@ -21525,6 +21568,7 @@ country_event = { #Glenn Politics
 		ai_chance = { factor = 1 }
 	}
 }
+
 country_event = { #Flavor
 	id = USA.early_flavor.8
 	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.early_flavor.8" }
@@ -21557,6 +21601,22 @@ country_event = { #JBS Endorses Wallace
 	}
 	option = { #
 		name = USA.early_flavor.9.b
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Goldwater says he'll vote against the CRA
+	id = USA.early_flavor.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.early_flavor.10" }
+	title = USA.early_flavor.10.t
+	desc = USA.early_flavor.10.desc
+	picture = GFX_report_event_USA_Goldwater1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = USA.early_flavor.10.a
 		ai_chance = { factor = 1 }
 	}
 }
@@ -21783,7 +21843,7 @@ country_event = { #DC Flavor
 	fire_only_once = yes
 
 	option = {
-		name = USA.flavor.14a
+		name = USA.flavor.14.a
 		ai_chance = { factor = 1 }
 	}
 }
@@ -21820,12 +21880,12 @@ country_event = { #American teacher forced to explain Russia
 	}
 }
 
-country_event = { #
+country_event = { #bennett to smith transition
 	id = USA.flavor.17
 	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.17" }
 	title = USA.flavor.17.t
 	desc = USA.flavor.17.desc
-	picture = GFX_report_event_american_police
+	picture = GFX_report_event_usa_mcs_4
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -21836,12 +21896,12 @@ country_event = { #
 	}
 }
 
-country_event = { #
+country_event = { #bennett loses to npp in 72 (not Y or L)
 	id = USA.flavor.18
 	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.18" }
 	title = USA.flavor.18.t
 	desc = USA.flavor.18.desc
-	picture = GFX_report_event_american_police
+	picture = GFX_report_event_whitehouse_bnw
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -21849,5 +21909,149 @@ country_event = { #
 	option = {
 		name = USA.flavor.18.a
 		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #68 johnson-harrington transition
+	id = USA.flavor.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.19" }
+	title = USA.flavor.19.t
+	desc = USA.flavor.19.desc
+	picture = GFX_report_event_USA_LBJ_Wallace2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.19.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #72 johnson-npp transition
+	id = USA.flavor.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.20" }
+	title = USA.flavor.20.t
+	desc = USA.flavor.20.desc
+	picture = GFX_report_event_USA_LBJ_Wallace2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.20.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #some kid writes a letter to harrington about education
+	id = USA.flavor.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.21" }
+	title = USA.flavor.21.t
+	desc = USA.flavor.21.desc
+	picture = GFX_report_event_Generic_Papers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.21.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #malcom X
+	id = USA.flavor.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.22" }
+	title = USA.flavor.22.t
+	desc = USA.flavor.22.desc
+	picture = GFX_report_event_civil_rights2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.22.a
+		ai_chance = { factor = 1 }
+		country_event = { id = USA.USA.flavor.26 days = 365 }
+	}
+}
+
+country_event = { #GLD goes after commies
+	id = USA.flavor.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.23" }
+	title = USA.flavor.23.t
+	desc = USA.flavor.23.desc
+	picture = GFX_report_event_goldwater_anti_leftism
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.23.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #malcom X mecca 
+	id = USA.flavor.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.24" }
+	title = USA.flavor.24.t
+	desc = USA.flavor.24.desc
+	picture = GFX_report_event_islamist_rally
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.24.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #malcom X radical
+	id = USA.flavor.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.25" }
+	title = USA.flavor.25.t
+	desc = USA.flavor.25.desc
+	picture = GFX_report_event_civil_rights2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.25.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #malcom X flavor choice
+	id = USA.flavor.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.26" }
+	title = USA.flavor.26.t
+	desc = USA.flavor.26.desc
+	picture = GFX_report_event_civil_rights2
+
+	hidden = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.25.a
+		ai_chance = { factor = 1 }
+		if = {
+			limit = { #has shitty/no CRA
+				OR = {
+					has_idea = USA_civil_rights_2
+					has_idea = USA_civil_rights_1
+					has_idea = USA_jim_crow
+					has_idea = USA_bloody_jim_crow
+				}
+			}
+			country_event = { id = USA.USA.flavor.25 } 
+		}
+		else = {
+			country_event = { id = USA.USA.flavor.24 } 	
+		}
 	}
 }
