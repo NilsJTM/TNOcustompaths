@@ -72,6 +72,11 @@ on_actions = {
 
 			ISH = {
 				country_event = { id = ISH.1 days = 1 } #The Ghost of Stalin
+				country_event = { id = ISH.103 days = 5 random = 5}
+				country_event = { id = ISH.104 days = 7 random = 5}
+				country_event = { id = ISH.105 days = 12 random = 5 }
+				country_event = { id = ISH.106 days = 30 random = 10}
+				country_event = { id = ISH.107 days = 370 random = 60}
 				country_event = { id = ISH.71 days = 90 } #The Aviators over the People's Republic
 			}
 
@@ -115,7 +120,6 @@ on_actions = {
 				country_event = { id = MAG.30 days = 50 random = 48 } #The Vozhd's Due
 				country_event = { id = MAG.31 days = 125 random = 48 } #Sic Semper Tyrannis
 				country_event = { id = MAG.32 days = 175 random = 48 } #Movie Night
-				country_event = { id = MAG.34 days = 100 random = 48 } #Bar Fight
 				country_event = { id = MAG.35 days = 75 random = 48 } #Second Thoughts
 				country_event = { id = MAG.37 days = 30 random = 48 } #Night Terrors
 				country_event = { id = MAG.39 days = 25 random = 48 } #All in a Days Work
@@ -424,34 +428,34 @@ on_actions = {
 			}
 
 			WRS = {
-				set_variable = { RUS_integration_cost_days = 45 }
+				set_variable = { RUS_integration_cost_days = 60 }
 			}
 			NIK = {
-				set_variable = { RUS_integration_cost_days = 55 }
+				set_variable = { RUS_integration_cost_days = 70 }
 			}
 			KIR = {
 				set_variable = { RUS_integration_cost_days = 75 }
 			}
 			SAM = {
-				set_variable = { RUS_integration_cost_days = 150 }
+				set_variable = { RUS_integration_cost_days = 90 }
 			}
 			PRM = {
-				set_variable = { RUS_integration_cost_days = 270 }
+				set_variable = { RUS_integration_cost_days = 120 }
 			}
 			OMS = {
 				set_variable = { RUS_integration_cost_days = 85 }
 			}
 			TOB = {
-				set_variable = { RUS_integration_cost_days = 55 }
+				set_variable = { RUS_integration_cost_days = 60 }
 			}
 			ISH = {
-				set_variable = { RUS_integration_cost_days = 70 }
+				set_variable = { RUS_integration_cost_days = 75 }
 			}
 			UDM = {
-				set_variable = { RUS_integration_cost_days = 55 }
+				set_variable = { RUS_integration_cost_days = 65 }
 			}
 			PAV = {
-				set_variable = { RUS_integration_cost_days = 70 }
+				set_variable = { RUS_integration_cost_days = 60 }
 			}
 			ERS = {
 				set_variable = { RUS_integration_cost_days = 55 }
@@ -466,7 +470,7 @@ on_actions = {
 				set_variable = { RUS_integration_cost_days = 90 }
 			}
 			WCH = {
-				set_variable = { RUS_integration_cost_days = 60 }
+				set_variable = { RUS_integration_cost_days = 70 }
 			}
 			IRK = {
 				set_variable = { RUS_integration_cost_days = 60 }
@@ -475,14 +479,16 @@ on_actions = {
 				set_variable = { RUS_integration_cost_days = 50 }
 			}
 			BRY = {
-				set_variable = { RUS_integration_cost_days = 45 }
+				set_variable = { RUS_integration_cost_days = 70 }
 			}
 			MAG = {
 				set_variable = { RUS_integration_cost_days = 75 }
 			}
 			AMR = {
-				set_variable = { RUS_integration_cost_days = 120 }
+				set_variable = { RUS_integration_cost_days = 90 }
 			}
+
+			#Not a point right now. But one day...one day...
 			KAZ = {
 				set_variable = { RUS_integration_cost_days = 55 }
 			}
@@ -1030,6 +1036,12 @@ on_actions = {
 		}
 	}
 
+	on_monthly_ISH = {
+		effect = {
+			ISH_Coup_Check = yes
+		}
+	}
+
 	#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1038,9 +1050,17 @@ on_actions = {
 
 	#MISC
 
-	on_ruling_party_change = {
+	on_government_change = {
 		effect = {
-			
+			if = {
+				limit = {
+					is_russian_nation = yes
+				}
+				every_owned_state = {
+					VP_change_outman = yes
+					VP_change_rus = yes
+				}
+			}
 		}
 	}
 	
@@ -1655,12 +1675,12 @@ on_actions = {
 
 	on_capitulation = {
 		effect = {
-			if = {
+			if = { # Please fix your code :thatchernice: - Fetti
 				limit = {
-					tag = AMR
-					FROM = { tag = WCH }
+					FROM = { tag = AMR }
+					ROOT = { tag = WCH }
 				}
-				country_event = { id = amur.4 days = 1 }
+				AMR = { country_event = { id = amur.4 days = 1 }}
 			}
 			if = {
 				limit = {
@@ -1897,6 +1917,49 @@ on_actions = {
 					country_event = ORS.2500
 				}
 			}
+			if = {
+				limit = {
+					FROM = { tag = ISH }
+					ROOT = { tag = UDM }
+				}
+				ISH = {
+					country_event = { id = ISH.156 days = 5 random = 5 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = { tag = ISH }
+					ROOT = { tag = TOB }
+				}
+				ISH = {
+					country_event = { id = ISH.158 days = 1 random = 3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = { tag = ISH }
+					ROOT = { tag = OMS
+							has_country_leader = {
+								name = "Dmitry Yazov"
+								ruling_only = yes
+						} 
+					}
+				}
+				ISH = { country_event = { id = ISH.159  days = 2 random = 3  } }
+			}
+
+			if = {
+				limit = {
+					FROM = { tag = ISH }
+					ROOT = { tag = OMS
+							has_country_leader = {
+								name = "Collapsed Authority"
+								ruling_only = yes
+						} 
+					}
+				}
+				ISH = { country_event = { id = ISH.160  days = 2 random = 3  } }
+			} 
 		}
 	}
 
@@ -2461,6 +2524,10 @@ on_actions = {
 				}
 			}
 		}
-
+	}
+	on_monthly_KMC = {
+		effect = {
+			KMC_AM_monthly_manpower_idea = yes
+		}
 	}
 }

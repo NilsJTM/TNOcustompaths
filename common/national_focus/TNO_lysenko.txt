@@ -1254,7 +1254,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus_BAS_let_slip_the_hounds_of_war"
-		set_country_flag = target_aquired
+		set_country_flag = target_acquired
 		custom_effect_tooltip = "Will unlock warlord decisions"
 	}
 }
@@ -1573,6 +1573,11 @@ shared_focus = {
 	cost = 4.00
 	prerequisite = {
 		focus = BAS_but_rabid_dogs_must_be_put_down
+	}
+	available = {
+		NOT = {
+			country_exists = ORS
+		}
 	}
 	x = 11
 	y = 18
@@ -1951,7 +1956,7 @@ shared_focus = {
 
 shared_focus = {
 	id = BAS_NKVD_reunite_loved_ones
-	icon = GFX_VIN_Families
+	icon = GFX_ISH_family_building
 	cost = 5.00
 	prerequisite = {
 		focus = BAS_NKVD_justice_for_dead
@@ -2123,6 +2128,11 @@ shared_focus = {
 	prerequisite = {
 		focus = BAS_NKVD_remind_them_about_lysenko
 	}
+	bypass = {
+		NOT = {
+			country_exists = ORS
+		}
+	}
 	x = -2
 	y = 4
 	relative_position_id = BAS_NKVD_pushback_from_locals
@@ -2139,6 +2149,11 @@ shared_focus = {
 	cost = 3.00
 	prerequisite = {
 		focus = BAS_NKVD_remind_them_about_lysenko
+	}
+	bypass = {
+		NOT = {
+			country_exists = URL
+		}	
 	}
 	x = -4
 	y = 4
@@ -2549,6 +2564,11 @@ shared_focus = {
 	prerequisite = {
 		focus = BAS_NKVD_the_dirlewanger_issue
 	}
+	bypass = {
+		NOT = { 
+			country_exists = ORE
+		}
+	}
 	x = 0
 	y = 4
 	relative_position_id = BAS_NKVD_A_Beacon_of_Progress
@@ -2899,10 +2919,11 @@ shared_focus = {
 	}
 	available = {
 		NOT = {
-
+			OR = {
 			country_exists = ORE
+			has_war_with = ORE
+			}
 		}
-		NOT = {has_war_with = ORE}
 	}
 	mutually_exclusive = {
 		focus = BAS_NKVD_wanna_hear_the_soldier_sing
@@ -2933,9 +2954,12 @@ shared_focus = {
 		focus = BAS_NKVD_the_fate_of_orenburg
 	}
 	available = {
-		NOT = {has_war_with = ORE}
-		country_exists = ORE
-
+		NOT = {
+			OR = {
+			has_war_with = ORE
+			country_exists = ORE
+			}
+		}
 	}
 	mutually_exclusive = {
 		focus = BAS_NKVD_walking_with_your_hand_in_a_sling

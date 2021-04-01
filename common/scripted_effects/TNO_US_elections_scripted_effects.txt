@@ -250,6 +250,25 @@ US_hold_presidential_election = {
 	}
 
 	log = "US Presidential Election: NPP: [?NPP_electoral_votes] || RD: [?RD_electoral_votes]"
+	
+	divide_variable = { RD_actual_votes = 1000 }
+	divide_variable = { NPP_actual_votes = 1000 }
+	
+	set_temp_variable = { total_votes = RD_actual_votes }
+	add_to_temp_variable = { total_votes = NPP_actual_votes }
+	
+	divide_temp_variable = { total_votes = 4 }
+	divide_variable = { RD_actual_votes = 2 }
+	divide_variable = { NPP_actual_votes = 2 }
+	
+	add_to_variable = { RD_actual_votes = total_votes }
+	add_to_variable = { NPP_actual_votes = total_votes }
+	
+	set_variable = { RD_random_votes = random }
+	multiply_variable = { RD_random_votes = 1000 }
+	set_variable = { NPP_random_votes = random }
+	multiply_variable = { NPP_random_votes = 1000 }
+
 
 	#Add in a check for ties later
 	USA_check_presidential_landslide = yes
@@ -611,26 +630,86 @@ US_update_presidential_election_race_in_state = {
 	#################################################################
 
 	#5 Split votes from factions between parties, based on presidential candidates and party unity
+	
 	#log = "[This.GetName] Pre split: RD faction pops: RD_R_popularity [?RD_R_popularity] | RD_D_popularity [?RD_D_popularity] "
 	#log = "[This.GetName] Pre split: NPP faction pops: NPP_L_popularity [?NPP_L_popularity] | NPP_C_popularity [?NPP_C_popularity] | NPP_FR_popularity [?NPP_FR_popularity] | NPP_R_popularity [?NPP_R_popularity]"
 	#log = "[This.GetName] Real Party popularities: RD_popularity [?RD_popularity] | NPP_popularity [?NPP_popularity]   "
+	
 	USA_NPP_splitting_votes = yes
 	USA_RD_splitting_votes = yes
+	
 	#log = "[This.GetName] Post split: NPP faction pops: NPP_L_popularity [?NPP_L_popularity] | NPP_C_popularity [?NPP_C_popularity] | NPP_FR_popularity [?NPP_FR_popularity] | NPP_R_popularity [?NPP_R_popularity]"
 	#log = "[This.GetName] Pres elec final RD_temp_pop [?RD_temp_pop] | NPP_temp_pop [?NPP_temp_pop] final"
+	
 	set_variable = { RD_election_pop = RD_temp_pop }
 	set_variable = { NPP_election_pop = NPP_temp_pop }
+	
 	#log = "[This.GetName]NPP_election_pop is [?NPP_election_pop]  ||  RD_election_pop is [?RD_election_pop] update"
 	#log = "[This.GetName] NPP_temp_pop is [?NPP_temp_pop] || RD_temp_pop is [?RD_temp_pop]  |"
 }
 
 
 US_hold_presidential_election_in_state = {
-	#5
 	#check which party is largest
-	#log = "[This.GetName] Post split: RD faction pops: RD_R_popularity [?RD_R_popularity] | RD_D_popularity [?RD_D_popularity] "
-	log = "[This.GetName] NPP_election_pop is [?NPP_election_pop]  ||  RD_election_pop is [?RD_election_pop] held election"
 	#ADD CHECK FOR TIES
+	
+	# Actual voting results Texas California and New York need special code
+	# normalizer
+	set_temp_variable = { total_election_pop = RD_election_pop }
+	add_to_temp_variable = { total_election_pop = NPP_election_pop }
+	
+	set_temp_variable = { actual_votes = state_population_k }
+	
+	if = { # California
+		limit = { check_variable = { THIS.id = 378.id } }
+		add_to_temp_variable = { actual_votes = 990.state_population_k }
+	}
+	
+	if = { # Texas
+		limit = { check_variable = { THIS.id = 375.id } }
+		add_to_temp_variable = { actual_votes = 989.state_population_k }
+	}
+	
+	if = { # New York
+		limit = { check_variable = { THIS.id = 358.id } }
+		add_to_temp_variable = { actual_votes = 991.state_population_k }
+	}
+	
+	if = { # Maryland DC
+		limit = { check_variable = { THIS.id = 361.id } }
+		add_to_temp_variable = { actual_votes = 992.state_population_k }
+	}
+	
+	if = {
+		limit = {
+			USA = { has_country_flag = USA_voting_rights_act }
+			OR = {
+				check_variable = { nationality = 84 }
+				check_variable = { THIS.id = 362.id }
+				check_variable = { THIS.id = 364.id }
+				check_variable = { THIS.id = 365.id }
+			}
+		}
+		set_temp_variable = { voter_turnout_vra = voter_turnout }
+		add_to_temp_variable = { voter_turnout_vra = 0.108 } #Magic Number VRA
+		
+		multiply_temp_variable = { actual_votes = voter_turnout_vra }
+	} else = {
+		multiply_temp_variable = { actual_votes = voter_turnout }
+	}
+	
+	set_temp_variable = { rd_temp_actual_votes = actual_votes }
+	multiply_temp_variable = { rd_temp_actual_votes = RD_election_pop }
+	divide_temp_variable = { rd_temp_actual_votes = total_election_pop }
+	add_to_variable = { ROOT.RD_actual_votes = rd_temp_actual_votes }
+	
+	set_temp_variable = { npp_temp_actual_votes = actual_votes }
+	multiply_temp_variable = { npp_temp_actual_votes = NPP_election_pop }
+	divide_temp_variable = { npp_temp_actual_votes = total_election_pop }
+	add_to_variable = { ROOT.NPP_actual_votes = npp_temp_actual_votes }
+	
+	log = "[GetDateText] [PREV.GetName] [This.GetName] NPP_election_pop is [?NPP_election_pop] actual_votes [?npp_temp_actual_votes] ||  RD_election_pop is [?RD_election_pop] actual_votes [?rd_temp_actual_votes] held election"
+
 	if = {
 		limit = { check_variable = { RD_election_pop > NPP_election_pop } }
 		add_to_variable = { ROOT.RD_electoral_votes = electoral_votes }
@@ -1208,9 +1287,9 @@ USA_update_senator_1_in_state = {
 	set_temp_variable = { NPP_FR_primary_popularity = NPP_FR_popularity }
 	set_temp_variable = { NPP_R_primary_popularity = NPP_R_popularity }
 
-	incumbency_bonus_2_primary = yes
+	incumbency_bonus_1_primary = yes
 	presidential_penalty_primary = yes
-	opposition_bonus_2_primary = yes
+	opposition_bonus_1_primary = yes
 
 	if = {
 		limit = {
@@ -1374,8 +1453,8 @@ USA_update_senator_1_in_state = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 5 }
 			}
-			add_to_variable = { NPP_senate_final_popularity = RD_D_defectors }
-			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { RD_senate_final_popularity = RD_D_defectors }
+			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
@@ -1384,8 +1463,8 @@ USA_update_senator_1_in_state = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 6 }
 			}
-			add_to_variable = { RD_senate_final_popularity = RD_D_defectors }
-			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { NPP_senate_final_popularity = RD_D_defectors }
+			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
@@ -1422,7 +1501,7 @@ USA_update_senator_1_in_state = {
 				check_variable = { NPP_senate_candidate = 5 }
 			}
 			add_to_variable = { RD_senate_final_popularity = RD_R_defectors }
-			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
@@ -1432,7 +1511,7 @@ USA_update_senator_1_in_state = {
 				check_variable = { NPP_senate_candidate = 6 }
 			}
 			add_to_variable = { RD_senate_final_popularity = RD_R_defectors }
-			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
@@ -1643,9 +1722,9 @@ USA_update_senator_2_in_state = {
 	set_temp_variable = { NPP_FR_primary_popularity = NPP_FR_popularity }
 	set_temp_variable = { NPP_R_primary_popularity = NPP_R_popularity }
 
-	incumbency_bonus_1_primary = yes
+	incumbency_bonus_2_primary = yes
 	presidential_penalty_primary = yes
-	opposition_bonus_1_primary = yes
+	opposition_bonus_2_primary = yes
 
 	if = {
 		limit = {
@@ -1768,9 +1847,9 @@ USA_update_senator_2_in_state = {
 	multiply_temp_variable = { NPP_L_popularity = temp_NPP_pop }
 
 	#etcetera boni
-	incumbency_bonus_1 = yes
+	incumbency_bonus_2 = yes
 	presidential_penalty = yes
-	opposition_bonus_1 = yes
+	opposition_bonus_2 = yes
 	####################################################################################
 
 	#pick final winner
@@ -1809,8 +1888,8 @@ USA_update_senator_2_in_state = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 5 }
 			}
-			add_to_variable = { NPP_senate_final_popularity = RD_D_defectors }
-			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { RD_senate_final_popularity = RD_D_defectors }
+			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
@@ -1819,8 +1898,8 @@ USA_update_senator_2_in_state = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 6 }
 			}
-			add_to_variable = { RD_senate_final_popularity = RD_D_defectors }
-			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { NPP_senate_final_popularity = RD_D_defectors }
+			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
@@ -1854,20 +1933,20 @@ USA_update_senator_2_in_state = {
 		}
 		else_if = {
 			limit = {
-				check_variable = { NPP_senate_candidate = 5 }
+				check_variable = { NPP_senate_candidate = 5 } # NPP-Yockey
 			}
 			add_to_variable = { RD_senate_final_popularity = RD_R_defectors }
-			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
 		}
 		else_if = {
 			limit = {
-				check_variable = { NPP_senate_candidate = 6 }
+				check_variable = { NPP_senate_candidate = 6 } # NPP-FR
 			}
 			add_to_variable = { RD_senate_final_popularity = RD_R_defectors }
-			add_to_variable = { RD_senate_final_popularity = NPP_FR_defectors }
+			add_to_variable = { NPP_senate_final_popularity = NPP_FR_defectors }
 			add_to_variable = { NPP_senate_final_popularity = NPP_R_popularity }
 			add_to_variable = { RD_senate_final_popularity = NPP_C_defectors }
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }

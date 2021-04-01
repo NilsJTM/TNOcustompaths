@@ -1,13 +1,11 @@
 WRS_power_struggle_tukha_category = {
 	WRS_zhukov_influence_ticker = {
 		allowed = {
-			always = no
+			tag = WRS
 		}
 
-		visible = {
-			hidden_trigger = {
-				tag = WRS
-			}
+		activation = {
+			always = no
 		}
 
 		available = {
@@ -17,7 +15,6 @@ WRS_power_struggle_tukha_category = {
 		}
 
 		cancel_if_not_visible = yes
-		is_good = yes
 
 		days_mission_timeout = 25
 
@@ -38,7 +35,8 @@ WRS_power_struggle_tukha_category = {
 				}
 			}
 			else = {
-				custom_effect_tooltip = WRS_zhukov_influence_ticker_tt
+				custom_effect_tooltip = WRS_increase_tukha_influence_low_tt
+				custom_effect_tooltip = WRS_increase_factionalism_low_tt
 				hidden_effect = {
 					add_to_variable = { global.WRSZhukovInfluence = 2.75 }
 					add_to_variable = { global.WRSFactionalism = 2 }
@@ -58,14 +56,26 @@ WRS_power_struggle_tukha_category = {
 		days_remove = 10
 		fire_only_once = no
 		days_re_enable = 30
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_appease_zhukov"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_appease_zhukov"
 			WRS_decrease_factionalism_low = yes
 			WRS_increase_zhukov_influence_med = yes
 			add_stability = 0.02
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 0
+
+			modifier = {
+				add = 5
+					set_temp_variable = { WRS_Diff = global.WRSZhukovInfluence }
+					subtract_from_temp_variable = { WRS_Diff = global.WRSTukhaInfluence }
+					check_variable = { WRS_Diff < -10 }
+			}
+
+			modifier = {
+				add = 30
+				has_country_flag = WRS_appease
+			}
 		}
 	}
 	WRS_work_against_zhukov = {
@@ -79,14 +89,22 @@ WRS_power_struggle_tukha_category = {
 		days_remove = 10
 		fire_only_once = no
 		days_re_enable = 30
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_work_against_zhukov"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_work_against_zhukov"
 			WRS_increase_factionalism_low = yes
 			WRS_decrease_zhukov_influence_low = yes
 			add_stability = -0.02
 		}
 		ai_will_do = {
-			factor = 30
+			factor = 0
+
+			modifier = {
+				add = 30
+				set_temp_variable = { WRS_Diff = global.WRSZhukovInfluence }
+				subtract_from_temp_variable = { WRS_Diff = global.WRSTukhaInfluence }
+				check_variable = { WRS_Diff > 0 }
+				NOT = { has_country_flag = WRS_appease }
+			}
 		}
 	}
 	WRS_tukha_meet_with_veterans = {
@@ -99,13 +117,13 @@ WRS_power_struggle_tukha_category = {
 		cost = 10
 		fire_only_once = no
 		days_re_enable = 60
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_meet_with_veterans"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_tukha_meet_with_veterans"
 			WRS_decrease_factionalism_low = yes
 			WRS_increase_tukha_influence_low = yes
 		}
 		ai_will_do = {
-			factor = 15
+			factor = 60
 		}
 	}
 	WRS_tukha_military_parade = {
@@ -119,11 +137,11 @@ WRS_power_struggle_tukha_category = {
 		fire_only_once = no
 		days_re_enable = 180
 		custom_cost_trigger = {
-			has_equipment = {infantry_equipment > 250}
-			has_manpower > 100
+			has_equipment = {infantry_equipment > 249}
+			has_manpower > 99
 		}
 		custom_cost_text = WRS_military_parade_cost
-		complete_effect = {
+		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_military_parade"
 			WRS_increase_tukha_influence_med = yes
 			TNO_improve_army_professionalism_low = yes
@@ -147,8 +165,8 @@ WRS_power_struggle_tukha_category = {
 		cost = 15
 		days_remove = 10
 		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_publish_theory"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_tukha_publish_theory"
 			custom_effect_tooltip = WRS_tukha_publish_theory_tt
 			country_event = { id = WRS_power_struggle.2 days = 1 }
 		}
@@ -166,8 +184,8 @@ WRS_power_struggle_tukha_category = {
 		cost = 25
 		days_remove = 30
 		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_meet_with_voroshilov"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_tukha_meet_with_voroshilov"
 			custom_effect_tooltip = WRS_tukha_meet_with_voroshilov_tt
 			country_event = { id = WRS_power_struggle.3 days = 3 }
 		}
@@ -185,12 +203,12 @@ WRS_power_struggle_tukha_category = {
 		days_remove = 30
 		fire_only_once = yes
 		custom_cost_trigger = {
-			has_equipment = {infantry_equipment >  500}
-			has_manpower > 1000
+			has_equipment = {infantry_equipment > 499}
+			has_manpower > 999
 		}
 		custom_cost_text = WRS_test_their_mettle_cost
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_test_their_mettle"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_tukha_test_their_mettle"
 			custom_effect_tooltip = WRS_tukha_test_their_mettle_tt
 			start_border_war = {
 			change_state_after_war = no
@@ -225,13 +243,18 @@ WRS_power_struggle_tukha_category = {
 		cost = 100
 		days_remove = 30
 		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_tukha_operation_firebird"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_tukha_operation_firebird"
 			custom_effect_tooltip = WRS_tukha_operation_firebird_tt
 			country_event = { id = WRS_power_struggle.7 days = 1 }
 		}
 		ai_will_do = {
-			factor = 15
+			factor = 150
+
+			modifier = {
+				factor = 0
+				check_variable = { global.WRSFactionalism > 28 }
+			}
 		}
 	}
 }
@@ -253,9 +276,7 @@ WRS_power_struggle_zhukov_category = {
 				always = no
 			}
 		}
-
 		cancel_if_not_visible = yes
-		is_good = yes
 
 		days_mission_timeout = 25
 
@@ -287,7 +308,8 @@ WRS_power_struggle_zhukov_category = {
 				}
 			}
 			else = {
-				custom_effect_tooltip = WRS_tukha_influence_ticker_tt
+				custom_effect_tooltip = WRS_increase_tukha_influence_low_tt
+			custom_effect_tooltip = WRS_increase_factionalism_low_tt
 				hidden_effect = {
 					add_to_variable = { global.WRSTukhaInfluence = 2.75 }
 					add_to_variable = { global.WRSFactionalism = 2 }
@@ -307,14 +329,26 @@ WRS_power_struggle_zhukov_category = {
 		days_remove = 10
 		fire_only_once = no
 		days_re_enable = 30
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_appease_tukha"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_appease_tukha"
 			WRS_decrease_factionalism_low = yes
 			WRS_increase_tukha_influence_med = yes
 			add_stability = 0.02
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 0
+
+			modifier = {
+				add = 5
+				set_temp_variable = { WRS_Diff = global.WRSZhukovInfluence }
+				subtract_from_temp_variable = { WRS_Diff = global.WRSTukhaInfluence }
+				check_variable = { WRS_Diff > 10 }
+			}
+
+			modifier = {
+				add = 30
+				has_country_flag = WRS_appease
+			}
 		}
 	}
 	WRS_work_against_tukha = {
@@ -326,16 +360,23 @@ WRS_power_struggle_zhukov_category = {
 		}
 		cost = 10
 		days_remove = 10
-		fire_only_once = no
 		days_re_enable = 30
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_work_against_tukha"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_work_against_tukha"
 			WRS_increase_factionalism_low = yes
 			WRS_decrease_tukha_influence_low = yes
 			add_stability = -0.02
 		}
 		ai_will_do = {
-			factor = 30
+			factor = 0
+
+			modifier = {
+				add = 30
+				set_temp_variable = { WRS_Diff = global.WRSZhukovInfluence }
+				subtract_from_temp_variable = { WRS_Diff = global.WRSTukhaInfluence }
+				check_variable = { WRS_Diff < 0 }
+				NOT = { has_country_flag = WRS_appease }
+			}
 		}
 	}
 	WRS_zhukov_meet_with_veterans = {
@@ -346,15 +387,15 @@ WRS_power_struggle_zhukov_category = {
 			tag = WRS
 		}
 		cost = 10
-		fire_only_once = no
+
 		days_re_enable = 60
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_meet_with_veterans"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_zhukov_meet_with_veterans"
 			WRS_decrease_factionalism_low = yes
 			WRS_increase_zhukov_influence_low = yes
 		}
 		ai_will_do = {
-			factor = 15
+			factor = 60
 		}
 	}
 	WRS_zhukov_military_parade = {
@@ -365,15 +406,15 @@ WRS_power_struggle_zhukov_category = {
 			tag = WRS
 		}
 		days_remove = 2
-		fire_only_once = no
+
 		days_re_enable = 180
 		custom_cost_trigger = {
-			has_equipment = {infantry_equipment >  250}
-			has_manpower > 100
+			has_equipment = {infantry_equipment > 249}
+			has_manpower > 99
 		}
 		custom_cost_text = WRS_military_parade_cost
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_military_parade"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_zhukov_military_parade"
 			WRS_increase_zhukov_influence_med = yes
 			TNO_improve_army_professionalism_low = yes
 			add_war_support = 0.05
@@ -396,8 +437,8 @@ WRS_power_struggle_zhukov_category = {
 		cost = 25
 		days_remove = 30
 		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_meet_with_voroshilov"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_zhukov_meet_with_voroshilov"
 			custom_effect_tooltip = WRS_zhukov_meet_with_voroshilov_tt
 			country_event = { id = WRS_power_struggle.101 days = 3 }
 		}
@@ -414,17 +455,15 @@ WRS_power_struggle_zhukov_category = {
 		}
 
 		days_remove = 240
-
-		custom_cost_trigger = {
-			num_of_civilian_factories_available_for_projects > 1
-		}
 		
-		custom_cost_text = WRS_indrik_civ_fact_cost_1
+		modifier = {
+			civilian_factory_use = 2
+		}
 
 		fire_only_once = yes
 		
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_increase_oil_quotas"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_zhukov_increase_oil_quotas"
 			WRS_increase_zhukov_influence_high = yes
 			add_resource = {
 				type = oil
@@ -445,28 +484,21 @@ WRS_power_struggle_zhukov_category = {
 			tag = WRS
 		}
 
-		days_remove = 120
+		cost = 25
+		days_remove = 180
 
-		custom_cost_trigger = {
-			num_of_civilian_factories_available_for_projects > 1
+		modifier = {
+			civilian_factory_use = 1
 		}
 		
-		custom_cost_text = WRS_indrik_civ_fact_cost_1
-		
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_deploy_red_army_labour_battalions"
-			WRS_increase_zhukov_influence_high = yes
-			if = {
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_zhukov_deploy_red_army_labour_battalions"
+			WRS_increase_zhukov_influence_low = yes
+			random_owned_controlled_state = {
 				limit = {
-					NOT = {
-						any_owned_state = {
-							infrastructure > 9
-						}
-					}
+					infrastructure < 9
 				}
-				random_owned_state = {
-					add_building_construction = { type = infrastructure level = 1 instant_build = yes }
-				}
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
 			}
 		}
 		ai_will_do = {
@@ -484,13 +516,18 @@ WRS_power_struggle_zhukov_category = {
 		cost = 100
 		days_remove = 30
 		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision WRS_zhukov_compile_evidence"
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WRS_zhukov_compile_evidence"
 			custom_effect_tooltip = WRS_zhukov_compile_evidence_tt
 			country_event = { id = WRS_power_struggle.102 days = 1 }
 		}
 		ai_will_do = {
-			factor = 15
+			factor = 150
+
+			modifier = {
+				factor = 0
+				check_variable = { global.WRSFactionalism > 28 }
+			}
 		}
 	}
 }
@@ -537,14 +574,24 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_1_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				ZZZ = {
-					country_event = {
-						id = indrik.10
+				random_list = {
+					75 = { #SUCCESS
+						country_event = {
+							id = indrik.11
+							days = 1
+						}
+					}
+					50 = { #PARTIAL SUCCESS
+						country_event = {
+							id = indrik.12
+							days = 1
+						}
 					}
 				}
 			}
 		}
 	}
+
 	WRS_izhevsk_experimental_constructor_works = {
 		
 		icon = decision_black_market_arms_trade_increase
@@ -586,14 +633,24 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_2_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				ZZZ = {
-					country_event = {
-						id = indrik.20
+				random_list = {
+					75 = { # SUCCESS
+						country_event = {
+							id = indrik.21
+							days = 1
+						}
+					}
+					25 = { # PARTIAL SUCCESS
+						country_event = {
+							id = indrik.22
+							days = 1
+						}
 					}
 				}
 			}
 		}
 	}
+
 	WRS_project_uragan = {
 	
 		icon = decision_black_market_sp_artillery_purchase
@@ -635,14 +692,30 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_3_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				ZZZ = {
-					country_event = {
-						id = indrik.30
+				random_list = {
+					50 = { #SUCCESS
+						country_event = {
+							id = indrik.31
+							days = 1
+						}
+					}
+					75 = { #PARTIAL SUCCESS
+						country_event = {
+							id = indrik.32
+							days = 1
+						}
+					}
+					25 = { #INCONCLUSIVE
+						country_event = {
+							id = indrik.33
+							days = 1
+						}
 					}
 				}
 			}
 		}
 	}
+
 	WRS_project_tsysklon = {
 
 		icon = decision_rockets
@@ -684,9 +757,28 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_4_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				ZZZ = {
-					country_event = {
-						id = indrik.40
+				50 = { #SUCCESS
+					WRS = {
+						country_event = {
+							id = indrik.41
+							days = 1
+						}
+					}
+				}
+				50 = { #INCONCLUSIVE
+					WRS = {
+						country_event = {
+							id = indrik.42
+							days = 1
+						}
+					}
+				}
+				25 = { #FAILURE
+					WRS = {
+						country_event = {
+							id = indrik.43
+							days = 1
+						}
 					}
 				}
 			}
@@ -734,9 +826,24 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_5_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				ZZZ = {
-					country_event = {
-						id = indrik.50
+				random_list = {
+					25 = { #PARTIAL SUCCESS
+						country_event = {
+							id = indrik.51
+							days = 1
+						}
+					}
+					50 = { #INCONCLUSIVE
+						country_event = {
+							id = indrik.52
+							days = 1
+						}
+					}
+					50 = { #FAILURE
+						country_event = {
+							id = indrik.53
+							days = 1
+						}
 					}
 				}
 			}
@@ -783,9 +890,24 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_6_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				ZZZ = {
-					country_event = {
-						id = indrik.60
+				random_list = {
+					50 = { #SUCCESS
+						country_event = {
+							id = indrik.61
+							days = 1
+						}
+					}
+					50 = { #PARTIAL SUCCESS
+						country_event = {
+							id = indrik.62
+							days = 1
+						}
+					}
+					10 = { #FAILURE
+						country_event = {
+							id = indrik.63
+							days = 1
+						}
 					}
 				}
 			}
@@ -832,9 +954,24 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_7_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				ZZZ = {
-					country_event = {
-						id = indrik.70
+				random_list = {
+					50 = { #SUCCESS
+						country_event = {
+							id = indrik.71
+							days = 1
+						}
+					}
+					50 = { #PARTIAL SUCCESS
+						country_event = {
+							id = indrik.72
+							days = 1
+						}
+					}
+					10 = { #FAILURE
+						country_event = {
+							id = indrik.73
+							days = 1
+						}
 					}
 				}
 			}
@@ -897,10 +1034,10 @@ WRS_Tangle_Decisions_Category = {
 			tag = WRS
 		}
 		available = {
-			check_variable = { WRS_Yakovelev_Balance < 33.33 }
+			check_variable = { WRS_Yakovlev_Balance < 33.33 }
 		}
 		visible = {
-			check_variable = { WRS_Yakovelev_Balance < 33.33 }
+			check_variable = { WRS_Yakovlev_Balance < 33.33 }
 		}
 		cost = 25
 		fire_only_once = no
@@ -971,10 +1108,10 @@ WRS_Tangle_Decisions_Category = {
 			tag = WRS
 		}
 		available = {
-			check_variable = { WRS_Yakovelev_Balance > 33.33 }
+			check_variable = { WRS_Yakovlev_Balance > 33.33 }
 		}
 		visible = {
-			check_variable = { WRS_Yakovelev_Balance > 33.33 }
+			check_variable = { WRS_Yakovlev_Balance > 33.33 }
 		}
 		cost = 30
 		fire_only_once = no
