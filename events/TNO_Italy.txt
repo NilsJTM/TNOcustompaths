@@ -19956,6 +19956,24 @@ country_event = { # XXV Congress, decision on SocDem or LibSoc empowering
 
 	option = { # SocDem
 		name = FD.1.a
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+							rule = ITA_FD_socdem_or_libsoc
+							option = ITA_FD_ROUTE_LIBSOC_DEMOCRATIC
+					}
+					has_game_rule = {
+							rule = ITA_FD_socdem_or_libsoc
+							option = ITA_FD_ROUTE_LIBSOC_COUP
+					}
+				}
+			}
+		}
+		
 		hidden_effect = {
 			add_popularity = {
 				ideology = socialist
@@ -19980,6 +19998,24 @@ country_event = { # XXV Congress, decision on SocDem or LibSoc empowering
 	}
 	option = { # LibSoc
 		name = FD.1.b
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+							rule = ITA_FD_socdem_or_libsoc
+							option = ITA_FD_ROUTE_SOCDEM_LEFT
+					}
+					has_game_rule = {
+							rule = ITA_FD_socdem_or_libsoc
+							option = ITA_FD_ROUTE_SOCDEM_CENTER
+					}
+				}
+			}
+		}
+		
 		hidden_effect = {
 			add_popularity = {
 				ideology = socialist
@@ -20033,6 +20069,18 @@ country_event = { # Prima la Democrazia
 
 	option = { # Empower Strength, low reelection, meh terror
 		name = FD.2.a
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+						rule = ITA_FD_socdem_or_libsoc
+						option = ITA_FD_ROUTE_SOCDEM_LEFT
+				}
+			}
+		}
+		
 		hidden_effect = {
 			complete_national_focus = ita_the_red_and_white
 		}
@@ -20042,6 +20090,18 @@ country_event = { # Prima la Democrazia
 	}
 	option = { # Strengthen Party, high reelection, strong terror
 		name = FD.2.b
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = ITA_FD_socdem_or_libsoc
+					option = ITA_FD_ROUTE_SOCDEM_CENTER
+				}
+			}
+		}
+		
 		hidden_effect = {
 			complete_national_focus = ita_unita_socialista
 		}
@@ -20327,6 +20387,18 @@ country_event = { # Prima il Socialismo
 
 	option = { # Socialismo strength
 		name = FD.20.a
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = ITA_FD_socdem_or_libsoc
+					option = ITA_FD_ROUTE_LIBSOC_COUP
+				}
+			}
+		}
+		
 		hidden_effect = {
 			complete_national_focus = ita_via_italiana_al_socialism
 			set_country_flag = IS_follow
@@ -20336,6 +20408,18 @@ country_event = { # Prima il Socialismo
 	}
 	option = { # Revolution via ballot
 		name = FD.20.b
+		
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = ITA_FD_socdem_or_libsoc
+					option = ITA_FD_ROUTE_LIBSOC_DEMOCRATIC
+				}
+			}
+		}
+		
 		hidden_effect = {
 			complete_national_focus = ita_revolution_by_ballot
 		}
