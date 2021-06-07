@@ -35,7 +35,7 @@ WRS_power_struggle_tukha_category = {
 				}
 			}
 			else = {
-				custom_effect_tooltip = WRS_increase_tukha_influence_low_tt
+				custom_effect_tooltip = WRS_increase_zhukov_influence_low_tt
 				custom_effect_tooltip = WRS_increase_factionalism_low_tt
 				hidden_effect = {
 					add_to_variable = { global.WRSZhukovInfluence = 2.75 }
@@ -262,13 +262,11 @@ WRS_power_struggle_tukha_category = {
 WRS_power_struggle_zhukov_category = {
 	WRS_tukha_influence_ticker = {
 		allowed = {
-			always = no
+			tag = WRS
 		}
 
-		visible = {
-			hidden_trigger = {
-				tag = WRS
-			}
+		activation = {
+			always = no
 		}
 
 		available = {
@@ -310,11 +308,10 @@ WRS_power_struggle_zhukov_category = {
 			else = {
 				custom_effect_tooltip = WRS_increase_tukha_influence_low_tt
 			custom_effect_tooltip = WRS_increase_factionalism_low_tt
-				hidden_effect = {
-					add_to_variable = { global.WRSTukhaInfluence = 2.75 }
-					add_to_variable = { global.WRSFactionalism = 2 }
-					activate_mission = WRS_tukha_influence_ticker
-				}
+			hidden_effect = {
+				add_to_variable = { global.WRSTukhaInfluence = 2.75 }
+				add_to_variable = { global.WRSFactionalism = 2 }
+				activate_mission = WRS_tukha_influence_ticker
 			}
 		}
 	}
@@ -757,24 +754,20 @@ WRS_project_indrik_category = {
 			clr_country_flag = WRS_INDRIK_4_IN_PROGRESS
 			custom_effect_tooltip = WRS_indrik_project_results_tt
 			hidden_effect = {
-				50 = { #SUCCESS
-					WRS = {
+				random_list = {
+					50 = { #SUCCESS
 						country_event = {
 							id = indrik.41
 							days = 1
 						}
 					}
-				}
-				50 = { #INCONCLUSIVE
-					WRS = {
+					50 = { #INCONCLUSIVE
 						country_event = {
 							id = indrik.42
 							days = 1
 						}
 					}
-				}
-				25 = { #FAILURE
-					WRS = {
+					25 = { #FAILURE
 						country_event = {
 							id = indrik.43
 							days = 1

@@ -3201,12 +3201,6 @@ country_event = {
 	option = {
 		name = speer.9999.a
 		perform_natsoc_collapse = yes
-		hidden_effect = {
-			country_event = {
-				id = speer_natsoc.1
-				days = 12
-			}
-		}
 	}
 }
 
@@ -3907,7 +3901,7 @@ country_event = { #FOR POLAND: Telegram from Schmidt arrives, promises a diploma
 	option = { #Refuse
 		name = speerpoland.9.b
 		ai_chance = {
-			factor = 
+			factor = 5
 			modifier = {
 				factor = 0
 				has_game_rule = {
@@ -4863,15 +4857,15 @@ country_event = {
 country_event = {
 	id = speer_moskowien.30
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer_moskowien.28"}
-	title = speer_moskowien.28.t
-	desc = speer_moskowien.28.d
+	title = speer_moskowien.30.t
+	desc = speer_moskowien.30.d
 	picture = GFX_report_event_german_firing_squad
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = { 
-		name = speer_moskowien.28.a
+		name = speer_moskowien.30.a
 		  country_event = { id = speer_moskowien.34 days = 10 }
 		  increase_conservative_leaning_small = yes
 		   
@@ -5513,6 +5507,20 @@ country_event = {
 			}
 			join_zollverein = yes
 		}
+		add_to_faction = OST
+		if = {
+			limit = {
+				OR = {
+					has_dlc = "Together for Victory"
+					has_dlc = "Man the Guns"
+				}
+			}
+			set_autonomy = {
+				target = OST
+				autonomy_state = autonomy_integrated_reichskommissariat
+			}
+		}
+		else = { puppet = OST }
 	}
 }
 
@@ -21502,7 +21510,7 @@ country_event = { #IF SPEER DOESN'T BACKTRACK FROM SCHÖRNER: Draft is lowered, 
 		ai_chance = { factor = 1 }
 		add_political_power = 75
 		add_stability = -0.05
-		
+		tno_conscription_improve = yes
 		
 		add_to_variable = {SGR_reforms_requested = 1}
 	}
