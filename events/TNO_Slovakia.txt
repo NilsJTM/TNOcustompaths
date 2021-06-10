@@ -1,0 +1,129 @@
+﻿############################
+## Slovakia Events
+############################
+
+add_namespace = slo
+
+country_event = { #Tiso dies during the GCW, Štefan takes over
+	id = slo.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event slo.1" }
+	title = slo.1.t 
+	desc = slo.1.desc
+	picture = GFX_report_event_SLO_Tiso
+
+    is_triggered_only = yes
+    fire_only_once = yes
+ 
+	option = { 
+        name = slo.1.a
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Štefan Tiso"
+			desc = "POLITICS_STEFAN_TISO_DESC"
+			picture = "Portrait_Slovakia_Stefan_Tiso.dds"
+			expire = "1965.1.1"
+			ideology = fascism_subtype
+		}
+		add_ideas = SLO_tiso_dead
+		add_ideas = SLO_Pavol_Carnogursky_hog
+		set_country_flag = SLO_josef_tiso_dead
+		hidden_effect = { country_event = { id = slo.2 days = 90 } }
+	}
+}
+
+country_event = { #Popular revolt, Jan Golian takes over
+	id = slo.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event slo.2" }
+	title = slo.2.t 
+	desc = slo.2.desc
+	picture = GFX_report_event_revolt
+
+    is_triggered_only = yes
+    fire_only_once = yes
+ 
+	option = { 
+        name = slo.2.a
+		set_politics = { ruling_party = authoritarian_democrat }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.3
+		}
+		add_ideas = {
+			SLO_Augustin_Malar_hog
+			SLO_Imrich_Karvas_eco
+			SLO_Tido_J_Gaspar_for
+			SLO_Ferdinand_Catlos_sec
+		}
+		hidden_effect = { country_event = { id = slo.3 days = 21 } }
+	}
+}
+
+country_event = { #Golian's Reforms
+	id = slo.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event slo.3" }
+	title = slo.3.t 
+	desc = slo.3.desc
+	picture = GFX_report_event_bratislava_clean
+
+    is_triggered_only = yes
+    fire_only_once = yes
+ 
+	option = { 
+		name = slo.3.a
+		remove_ideas = SLO_tiso_dead
+		swap_ideas = {
+			remove_idea = SLO_Chained_Minds
+			add_idea = SLO_Social_Liberalization
+		}
+		swap_ideas = {
+			remove_idea = SLO_Political_Tensions
+			add_idea = SLO_Political_Liberalization
+		}
+		swap_ideas = {
+			remove_idea = SLO_Uncompetitive_Economy
+			add_idea = SLO_Economical_Liberalization
+		}
+	}
+}
+
+country_event = { #Goering's Ultimatum
+	id = slo.74
+	immediate = { log = "[GetDateText]: [Root.GetName]: event slo.74" }
+	title = slo.74.t
+	desc = slo.74.desc
+	picture = GFX_report_event_bratislava_bloody
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = slo.74.a
+		ai_chance = { 
+		    factor = 60
+		    modifier = {
+		        factor = 10000
+		        has_game_rule = { rule = SLO_ULTIMATUM option = SLO_ULTIMATUM_ACCEPT }
+		    }
+		    modifier = {
+		        factor = 0
+		        has_game_rule = { rule = SLO_ULTIMATUM option = SLO_ULTIMATUM_REFUSE }
+		    }
+		}
+		GER = { country_event = { id = goering.915 } }
+	}
+	option = {
+		name = slo.74.b
+		ai_chance = { 
+		    factor = 40
+		    modifier = {
+		        factor = 10000
+		        has_game_rule = { rule = SLO_ULTIMATUM option = SLO_ULTIMATUM_REFUSE }
+		    }
+		    modifier = {
+		        factor = 0
+		        has_game_rule = { rule = SLO_ULTIMATUM option = SLO_ULTIMATUM_ACCEPT }
+		    }
+		}
+		GER = { country_event = { id = goering.914 } }
+	}
+}

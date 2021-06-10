@@ -1,0 +1,231 @@
+add_namespace = den
+
+country_event = { #LORE
+	id = den.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event den.1"}
+	title = den.1.t
+	desc = den.1.desc
+	picture = GFX_report_event_capitol_building1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = den.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A victor is chosen
+	id = den.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event den.2" }
+	title = den.2.t
+	desc = den.2.desc
+	picture = GFX_report_event_capitol_building1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { # Best
+		name = den.2.a
+		ai_chance = { 
+		    factor = 35 
+            modifier = {
+                factor = 10000
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_AUTHORITARIAN_DEMOCRACY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_NATIONAL_SOCIALISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_DESPOTISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_CONSERVATIVE_DEMOCRACY }
+            }
+		}
+	}
+
+	option = { # Hanneken
+		name = den.2.b
+		ai_chance = { 
+		    factor = 30 
+            modifier = {
+                factor = 10000
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_DESPOTISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_NATIONAL_SOCIALISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_AUTHORITARIAN_DEMOCRACY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_CONSERVATIVE_DEMOCRACY }
+            }
+		}
+		set_politics = { ruling_party = despotism }
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.25
+		}
+		remove_ideas = DEN_threat_from_silkeborg
+	}
+
+	option = { # Martinsen
+		name = den.2.c
+		ai_chance = { 
+		    factor = 25
+		    modifier = {
+                factor = 10000
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_NATIONAL_SOCIALISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_DESPOTISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_AUTHORITARIAN_DEMOCRACY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_CONSERVATIVE_DEMOCRACY }
+            } 
+		}
+		set_politics = { ruling_party = national_socialism }
+		add_popularity = {
+			ideology = national_socialism
+			popularity = 0.25
+		}
+		remove_ideas = {
+			DEN_permanent_secretaries
+			DEN_threat_from_silkeborg
+		}
+	}
+	option = { # Svenningsen
+		name = den.2.d
+		ai_chance = { 
+		    factor = 10
+		    modifier = {
+                factor = 10000
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_CONSERVATIVE_DEMOCRACY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_NATIONAL_SOCIALISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_DESPOTISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = DEN_PATH option = DEN_PATH_AUTHORITARIAN_DEMOCRACY }
+            } 
+		}
+		set_politics = { ruling_party = social_conservative }
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.2
+		}
+		country_event = { id = den.3 days = 90 }
+	}
+}
+
+country_event = { #Hanneken coups Svenningsen
+	id = den.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event den.3" }
+	title = den.3.t
+	desc = den.3.desc
+	picture = GFX_report_event_capitol_building1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = den.3.a
+		set_politics = { ruling_party = despotism }
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.25
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.2
+		}
+		remove_ideas = DEN_threat_from_silkeborg
+	}
+}
+
+country_event = { #Speer Sends Ultimatum
+	id = den.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event den.4" }
+	title = den.4.t
+	desc = den.4.desc
+	picture = GFX_report_event_capitol_building1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Not Fuck You Speer
+		name = den.4.a
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = speerdenmark.4
+					days = 5
+				}
+			}
+		}
+	}	
+	option = { #Fuck You Speer
+		name = den.4.b
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = speerdenmark.11
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = { #choose tree
+	id = den.50
+	immediate = {log = "[GetDateText]: [Root.GetName]: event den.50"}
+	title = den.50.t
+	desc = den.50.desc
+	picture = GFX_report_event_generic_rally
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Best
+		name = den.50.a
+		ai_chance = { factor = 100 }
+		add_political_power = 50
+		#load_focus_tree = den_gcw_dcs
+	}
+
+	option = { #Best
+		name = den.50.b
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+		#load_focus_tree = den_gcw_sc
+	}
+
+	option = { #Best
+		name = den.50.c
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+		#load_focus_tree = den_gcw_wh
+	}
+}
