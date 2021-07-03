@@ -1,0 +1,2433 @@
+PAV_narodnik_investigation_category = {
+	PAV_infiltrate_narodnik_cells = {
+
+		icon = decision_generic_assault
+
+		allowed = {
+			original_tag = PAV
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PAV_operation_in_progress
+			}
+		}
+
+		ai_will_do = {
+			factor = 4
+		}
+
+		days_remove = 21
+
+		fire_only_once = yes
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_infiltrate_narodnik_cells"
+			set_country_flag = PAV_operation_in_progress
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV.31 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_infiltrate_narodnik_cells"
+			clr_country_flag = PAV_operation_in_progress
+			country_event = { id = PAV.33 }
+		}
+	}
+
+	PAV_investigate_factories_in_novosibirsk = {
+
+		icon = GFX_decision_revolt
+
+		allowed = {
+			original_tag = PAV
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PAV_operation_in_progress
+			}
+		}
+
+		ai_will_do = {
+			factor = 4
+		}
+
+		days_remove = 21
+
+		fire_only_once = yes
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		highlight_states = { state = 570 }
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_investigate_factories_in_novosibirsk"
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV.34 }
+			}
+			set_country_flag = PAV_operation_in_progress
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_investigate_factories_in_novosibirsk"
+			clr_country_flag = PAV_operation_in_progress
+			country_event = { id = PAV.36 }
+		}
+	}
+
+	PAV_increase_patrols_in_altay = {
+
+		icon = GFX_decision_revolt
+
+		allowed = {
+			original_tag = PAV
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PAV_operation_in_progress
+			}
+		}
+
+		ai_will_do = {
+			factor = 4
+		}
+
+		days_remove = 21
+
+		fire_only_once = yes
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		highlight_states = { state = 40 }
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_increase_patrols_in_altay"
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV.18 }
+			}
+			set_country_flag = PAV_operation_in_progress
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_increase_patrols_in_altay"
+			clr_country_flag = PAV_operation_in_progress
+			country_event = { id = PAV.20 }
+		}
+	}
+
+	PAV_conduct_an_internal_investigation = {
+
+		icon = GFX_decision_revolt
+
+		allowed = {
+			original_tag = PAV
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PAV_operation_in_progress
+			}
+		}
+
+		ai_will_do = {
+			factor = 4
+		}
+
+		days_remove = 21
+
+		fire_only_once = yes
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_conduct_an_internal_investigation"
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV.15 }
+			}
+			set_country_flag = PAV_operation_in_progress
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_conduct_an_internal_investigation"
+			clr_country_flag = PAV_operation_in_progress
+			country_event = { id = PAV.17 }
+		}
+	}
+
+	PAV_the_final_raid = {
+
+		icon = decision_chess_knight_rook_bishop_pawn
+
+		allowed = {
+			original_tag = PAV
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_the_final_raid_req_tt
+				check_variable = { PAV_investigation_progress = 100 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 4
+		}
+
+		days_remove = 7
+
+		fire_only_once = yes
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_the_final_raid"
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV.40 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_the_final_raid"
+			country_event = { id = PAV.41 }
+		}
+	}
+
+	PAV_crush_the_agitators = {
+
+		icon = GFX_decision_revolt
+
+		allowed = {
+			tag = PAV
+		}
+
+		visible = {
+			has_country_flag = PAV_narodnik_investigation_flag
+		}
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_narodnik_investigation_trigger
+				NOT = {
+					has_country_flag = PAV_narodnik_investigation_active
+				}
+			}
+		}
+
+		days_mission_timeout = 200
+
+		is_good = no
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision Timeout PAV_crush_the_agitators"
+			custom_effect_tooltip = PAV_narodnik_investigation_failure_tt
+			hidden_effect = {
+				country_event = { id = PAV.42 }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_crush_the_agitators"
+			custom_effect_tooltip = PAV_narodnik_investigation_success_tt
+			hidden_effect = {
+				country_event = { id = PAV.45 }
+			}
+		}
+	}
+}
+
+PAV_siberian_expansion_category = {
+	PAV_operation_homecoming = {
+		icon = decision_generic_assault
+
+		available = {
+			AND = {
+				has_war = no
+				NOT = { has_country_flag = PAV_operation_active }
+			}
+		}
+
+		modifier = {
+			political_power_gain = -0.05
+			war_support_factor = 0.1
+			experience_gain_army_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			country_exists = ERS
+			is_neighbor_of = ERS
+		}
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		war_with_on_remove = ERS
+		days_remove = 21
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision  PAV_operation_homecoming"
+			set_country_flag = PAV_operation_active
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV_expansion.0 days = 84 } #Event to clear PAV_operation_active
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_homecoming"
+			declare_war_on = {
+				target = ERS
+				type = annex_everything
+			}
+		}
+	}
+
+	PAV_operation_homecoming_disband_the_salons = {
+		icon = GFX_decision_generic_break_treaty
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = ERS }
+			owns_state = 570
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_homecoming_disband_the_salons"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_homecoming_disband_the_salons"
+			country_event = { id = PAV_expansion.1 }
+		}
+	}
+
+	PAV_operation_homecoming_absorb_their_design_bureau = {
+		icon = decision_generic_political_action
+
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = ERS }
+			owns_state = 570
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_homecoming_absorb_their_design_bureau"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_homecoming_absorb_their_design_bureau"
+			country_event = { id = PAV_expansion.2 }
+		}
+	}
+
+	PAV_operation_kingbreaker = {
+		icon = decision_generic_assault
+
+		available = {
+			AND = {
+				has_war = no
+				NOT = { has_country_flag = PAV_operation_active }
+			}
+		}
+
+		modifier = {
+			war_support_factor = 0.1
+			experience_gain_army_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			country_exists = KEM
+			is_neighbor_of = KEM
+		}
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		days_remove = 21
+		war_with_on_remove = KEM
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_kingbreaker"
+			set_country_flag = PAV_operation_active
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV_expansion.0 days = 84 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_kingbreaker"
+			declare_war_on = {
+				target = KEM
+				type = annex_everything
+			}
+		}
+	}
+
+	PAV_operation_kingbreaker_the_coal_of_kemerovo = {
+		icon = GFX_decision_generic_industry
+
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = KEM }
+			owns_state = 569
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_kingbreaker_the_coal_of_kemerovo"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_kingbreaker_the_coal_of_kemerovo"
+			SIB_increase_resources_med = yes
+		}
+	}
+
+	PAV_operation_kingbreaker_fate_of_the_sobor = {
+		icon = decision_generic_construction
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+
+		visible = {
+			NOT = { country_exists = KEM }
+			owns_state = 569
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_kingbreaker_fate_of_the_sobor"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_kingbreaker_fate_of_the_sobor"
+			country_event = { id = PAV_expansion.3 }
+		}
+	}
+
+	PAV_operation_raskol = {
+		icon = decision_generic_assault
+
+		available = {
+			AND = {
+				has_war = no
+				NOT = { has_country_flag = PAV_operation_active }
+			}
+		}
+
+		modifier = {
+			war_support_factor = 0.1
+			experience_gain_army_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			country_exists = ALT
+			is_neighbor_of = ALT
+		}
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		days_remove = 21
+		war_with_on_remove = ALT
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_raskol"
+			set_country_flag = PAV_operation_active
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV_expansion.0 days = 84 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_raskol"
+			declare_war_on = {
+				target = ALT
+				type = annex_everything
+			}
+		}
+	}
+
+	PAV_operation_raskol_institute_secular_authority = {
+		icon = decision_generic_use_force
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = ALT }
+			owns_state = 654
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_raskol_institute_secular_authority"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_raskol_institute_secular_authority"
+			country_event = { id = PAV_expansion.4 }
+		}
+	}
+
+	PAV_operation_empty_words = {
+		icon = decision_generic_assault
+
+		available = {
+			AND = {
+				has_war = no
+				NOT = { has_country_flag = PAV_operation_active }
+			}
+		}
+
+		modifier = {
+			war_support_factor = 0.1
+			experience_gain_army_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			country_exists = SAH
+			is_neighbor_of = SAH
+		}
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		days_remove = 21
+		war_with_on_remove = SAH
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_empty_words"
+			set_country_flag = PAV_operation_active
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV_expansion.0 days = 84 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_empty_words"
+			declare_war_on = {
+				target = SAH
+				type = annex_everything
+			}
+		}
+	}
+
+	PAV_operation_empty_words_seize_the_abakan_arsenal = {
+		icon = GFX_decision_generic_industry
+
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = SAH }
+			owns_state = 757
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_empty_words_seize_the_abakan_arsenal"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_empty_words_seize_the_abakan_arsenal"
+			757 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	PAV_operation_empty_words_welcome_the_willing = {
+		icon = decision_generic_political_action
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = SAH }
+			owns_state = 757
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_empty_words_welcome_the_willing"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_empty_words_welcome_the_willing"
+			country_event = { id = PAV_expansion.5 }
+		}
+	}
+
+	PAV_operation_tachanka = {
+		icon = decision_generic_assault
+
+		available = {
+			AND = {
+				has_war = no
+				NOT = { has_country_flag = PAV_operation_active }
+			}
+		}
+
+		modifier = {
+			war_support_factor = 0.1
+			experience_gain_army_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			country_exists = KHA
+			is_neighbor_of = KHA
+		}
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		days_remove = 21
+
+		war_with_on_remove = KHA
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_tachanka"
+			set_country_flag = PAV_operation_active
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV_expansion.0 days = 84 }
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_tachanka"
+			declare_war_on = {
+				target = KHA
+				type = annex_everything
+			}
+		}
+	}
+
+	PAV_operation_tachanka_enforce_order_upon_anarchy = {
+		icon = GFX_decision_revolt
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = KHA }
+			owns_state = 568
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_tachanka_enforce_order_upon_anarchy"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_tachanka_enforce_order_upon_anarchy"
+			country_event = { id = PAV_expansion.6 }
+		}
+	}
+
+	PAV_operation_tachanka_disband_the_workers_councils = {
+		icon = decision_generic_use_force
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = KHA }
+			owns_state = 568
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_tachanka_disband_the_workers_councils"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_tachanka_disband_the_workers_councils"
+			country_event = { id = PAV_expansion.7 }
+		}
+	}
+
+
+	PAV_operation_sole_survivor = {
+		icon = decision_generic_assault
+
+		available = {
+			AND = {
+				has_war = no
+				NOT = { has_country_flag = PAV_operation_active }
+			}
+		}
+
+		modifier = {
+			war_support_factor = 0.1
+			experience_gain_army_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			country_exists = SVO
+			is_neighbor_of = SVO
+		}
+
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+
+		days_remove = 21
+
+		war_with_on_remove = SVO
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_sole_survivor"
+			set_country_flag = PAV_operation_active
+			hidden_effect = {
+				add_command_power = -15
+				country_event = { id = PAV_expansion.0 days = 84 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_sole_survivor"
+			declare_war_on = {
+				target = SVO
+				type = annex_everything
+			}
+		}
+	}
+
+	PAV_operation_sole_survivor_the_red_armys_finest = {
+		icon = decision_generic_military_parade
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = SVO }
+			owns_state = 329
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_sole_survivor_the_red_armys_finest"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_sole_survivor_the_red_armys_finest"
+			country_event = { id = PAV_expansion.8 }
+		}
+	}
+
+	PAV_operation_sole_propose_the_tuvan_federal_republic = {
+		icon = GFX_decision_generic_form_nation
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		visible = {
+			NOT = { country_exists = SVO }
+			owns_state = 329
+		}
+
+		cost = 25
+
+		days_remove = 14
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_operation_sole_propose_the_tuvan_federal_republic"
+			country_event = { id = PAV_expansion.9 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_operation_sole_propose_the_tuvan_federal_republic"
+			custom_effect_tooltip = PAV_tuvan_federal_republic_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = PAV_tuva_republic_proposal_shukshin
+					}
+					country_event = { id = PAV_expansion.10 }
+				}
+				else_if = {
+					limit = {
+						has_country_flag = PAV_tuva_republic_proposal_pokryshkin
+					}
+					country_event = { id = PAV_expansion.11 }
+				}
+			}
+		}
+	}
+}
+
+PAV_research_and_development_category = {
+	PAV_project_bichevatel = { #MiG-23
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_doing_experiment_tt
+				NOT = {
+					has_country_flag = PAV_doing_rnd_experiment
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		days_remove = 270
+
+		cost = 15
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_project_bichevatel"
+			set_country_flag = PAV_doing_rnd_experiment
+			set_country_flag = PAV_RND_PROJECT_1_IN_PROGRESS
+			custom_effect_tooltip = PAV_project_bichevatel_cost_tt
+			add_to_variable = { national_debt = 125 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_project_bichevatel"
+			clr_country_flag = PAV_doing_rnd_experiment
+			clr_country_flag = PAV_RND_PROJECT_1_IN_PROGRESS
+			custom_effect_tooltip = PAV_experiment_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = PAV_rnd.1
+					}
+				}
+			}
+		}
+	}
+	PAV_project_2 = { #S-25 Berkut - surface-to-air guided missile
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_doing_experiment_tt
+				NOT = {
+					has_country_flag = PAV_doing_rnd_experiment
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		days_remove = 270
+
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_project_2"
+			set_country_flag = PAV_doing_rnd_experiment
+			set_country_flag = PAV_RND_PROJECT_2_IN_PROGRESS
+			custom_effect_tooltip = PAV_project_2_cost_tt
+			add_to_variable = { national_debt = 37.5 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_project_2"
+			clr_country_flag = PAV_doing_rnd_experiment
+			clr_country_flag = PAV_RND_PROJECT_2_IN_PROGRESS
+			custom_effect_tooltip = PAV_experiment_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = PAV_rnd.2
+					}
+				}
+			}
+		}
+	}
+	PAV_project_3 = { #Myasishchev M-50 strategic bomber
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_doing_experiment_tt
+				NOT = {
+					has_country_flag = PAV_doing_rnd_experiment
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 25
+		}
+
+		days_remove = 180
+
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_project_3"
+			set_country_flag = PAV_doing_rnd_experiment
+			set_country_flag = PAV_RND_PROJECT_3_IN_PROGRESS
+			custom_effect_tooltip = PAV_project_3_cost_tt
+			add_to_variable = { national_debt = 275 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_project_3"
+			clr_country_flag = PAV_doing_rnd_experiment
+			clr_country_flag = PAV_RND_PROJECT_3_IN_PROGRESS
+			custom_effect_tooltip = PAV_experiment_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = PAV_rnd.3
+					}
+				}
+			}
+		}
+	}
+	PAV_project_4 = { #MiG-25 interceptor 
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_doing_experiment_tt
+				NOT = {
+					has_country_flag = PAV_doing_rnd_experiment
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		days_remove = 365
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_project_4"
+			set_country_flag = PAV_doing_rnd_experiment
+			set_country_flag = PAV_RND_PROJECT_4_IN_PROGRESS
+			custom_effect_tooltip = PAV_project_4_cost_tt
+			add_to_variable = { national_debt = 240 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_project_4"
+			clr_country_flag = PAV_doing_rnd_experiment
+			clr_country_flag = PAV_RND_PROJECT_4_IN_PROGRESS
+			custom_effect_tooltip = PAV_experiment_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = PAV_rnd.4
+					}
+				}
+			}
+		}
+	}
+	PAV_project_5 = { #Mi-24 attack helicopter
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_doing_experiment_tt
+				NOT = {
+					has_country_flag = PAV_doing_rnd_experiment
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		days_remove = 270
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_project_5"
+			set_country_flag = PAV_doing_rnd_experiment
+			set_country_flag = PAV_RND_PROJECT_5_IN_PROGRESS
+			custom_effect_tooltip = PAV_project_5_cost_tt
+			add_to_variable = { national_debt = 145 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_project_5"
+			clr_country_flag = PAV_doing_rnd_experiment
+			clr_country_flag = PAV_RND_PROJECT_5_IN_PROGRESS
+			custom_effect_tooltip = PAV_experiment_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = PAV_rnd.5
+					}
+				}
+			}
+		}
+	}
+	PAV_project_fuck_pindosi = { #TKB-011 
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAV_doing_experiment_tt
+				NOT = {
+					has_country_flag = PAV_doing_rnd_experiment
+				}
+			}
+		}
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		days_remove = 365
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_project_fuck_pindosi"
+			set_country_flag = PAV_doing_rnd_experiment
+			set_country_flag = PAV_RND_PROJECT_6_IN_PROGRESS
+			custom_effect_tooltip = PAV_project_fuck_pindosi_cost_tt
+			add_to_variable = { national_debt = 20 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_project_fuck_pindosi"
+			clr_country_flag = PAV_doing_rnd_experiment
+			clr_country_flag = PAV_RND_PROJECT_6_IN_PROGRESS
+			custom_effect_tooltip = PAV_experiment_results_tt
+			hidden_effect = {
+				ZZZ = {
+					country_event = {
+						id = PAV_rnd.6
+					}
+				}
+			}
+		}
+	}
+}
+
+PAV_USA_vs_Japan_category = {
+	PAV_japan_effigy = {
+
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_japan_effigy"
+		}
+	}
+
+	PAV_USA_increase_sphere_influence = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_remove = 12
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_USA_increase_sphere_influence"
+			PAV_JAP_gain_low_influence = yes
+			PAV_Feniks_ADD_Sibir_Power_Low = yes
+		}
+	}
+
+	PAV_USA_decrease_sphere_influence = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 15
+		days_remove = 12
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_USA_decrease_sphere_influence"
+			PAV_JAP_lose_low_influence = yes
+			PAV_Feniks_SUBTRACT_Feniks_Loyalty_Low = yes
+		}
+	}
+
+	PAV_JAP_korean_agriculture = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		available = {
+			has_manpower > 1500
+		}
+
+		fire_only_once = yes
+		cost = 55
+		days_remove = 24
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_JAP_korean_agriculture"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_JAP_korean_agriculture"
+			add_manpower = -1000
+			PAV_JAP_gain_high_influence = yes
+			PAV_Feniks_ADD_Sibir_Power_Med = yes
+			PAV_Feniks_SUBTRACT_Feniks_Loyalty_Med = yes
+		}
+	}
+
+	PAV_JAP_imports_to_tokyo = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		cost = 60
+
+		days_remove = 15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_JAP_imports_to_tokyo"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_JAP_imports_to_tokyo"
+			PAV_JAP_gain_mid_influence = yes
+			PAV_Feniks_ADD_Sibir_Power_High = yes
+			PAV_Feniks_SUBTRACT_Feniks_Loyalty_High = yes
+		}
+	}
+
+	PAV_USA_effigy = {
+
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_USA_effigy"
+		}
+	}
+
+	PAV_USA_increase_ofn_influence = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_remove = 12
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_USA_increase_ofn_influence"
+			PAV_USA_gain_low_influence = yes
+			PAV_Feniks_ADD_Feniks_Power_Low = yes
+		}
+	}
+
+	PAV_USA_decrease_ofn_influence = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 15
+		days_remove = 12
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_USA_decrease_ofn_influence"
+			PAV_Feniks_SUBTRACT_Feniks_Loyalty_Low = yes
+			PAV_USA_lose_low_influence = yes
+		}
+	}
+
+	PAV_USA_sign_military_contracts = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = {
+			has_equipment = { infantry_equipment >  250 }
+			has_manpower > 100
+		}
+		custom_cost_text = WRS_military_parade_cost
+
+		days_remove = 20
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_USA_sign_military_contracts"
+			PAV_USA_gain_mid_influence = yes
+			PAV_Feniks_ADD_Feniks_Power_Low = yes
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+	}
+
+	PAV_USA_build_factories = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		available = {
+			num_of_available_civilian_factories > 0
+		}
+
+		days_remove = 30
+		modifier = {
+			consumer_goods_factor = 0.1
+			political_power_gain = -0.1
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_USA_build_factories"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_USA_build_factories"
+			PAV_USA_gain_mid_influence = yes
+			PAV_Feniks_ADD_Feniks_Power_Med = yes
+			PAV_Feniks_ADD_Feniks_Loyalty_Low = yes
+			USA = {
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	PAV_USA_build_ports_in_aus = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		available = {
+			num_of_available_civilian_factories > 0
+		}
+
+		fire_only_once = yes
+		days_remove = 30
+
+		modifier = {
+			consumer_goods_factor = 0.15
+			political_power_gain = -0.15
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_USA_build_ports_in_aus"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_USA_build_ports_in_aus"
+			PAV_JAP_lose_high_influence = yes
+			AST = {
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	PAV_neutral_effigy = {
+
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_neutral_effigy"
+		}
+	}
+
+	PAV_NEU_China_Investments_1 = {
+
+		visible = {
+			has_completed_focus = PAV_partnerships_in_china
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		fire_only_once = yes
+		days_remove = 14
+
+		modifier = {
+			consumer_goods_factor = 0.15
+			political_power_gain = -0.15
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_NEU_China_Investments_1"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_NEU_China_Investments_1"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+			add_political_power = 90
+		}
+	}
+
+	PAV_NEU_China_Investments_2 = {
+
+		visible = {
+			has_completed_focus = PAV_partnerships_in_china
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		fire_only_once = yes
+		days_remove = 14
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_NEU_China_Investments_2"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_NEU_China_Investments_2"
+			custom_effect_tooltip = PAV_NEU_China_Investments_2_tt
+			subtract_from_variable = { PAV_equalizer_effect = 1 }
+		}
+	}
+
+	PAV_NEU_Kazakh_Investments_1 = {
+
+		visible = {
+			has_completed_focus = PAV_a_khazakh_consulate
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		fire_only_once = yes
+		days_remove = 14
+
+		modifier = {
+			consumer_goods_factor = 0.15
+			political_power_gain = -0.15
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_NEU_Kazakh_Investments_1"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_NEU_Kazakh_Investments_1"
+			add_political_power = 90
+		}
+	}
+
+	PAV_NEU_Kazakh_Investments_2 = {
+
+		visible = {
+			has_completed_focus = PAV_a_khazakh_consulate
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		fire_only_once = yes
+		days_remove = 14
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_NEU_Kazakh_Investments_2"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_NEU_Kazakh_Investments_2"
+			custom_effect_tooltip = PAV_NEU_China_Investments_2_tt
+			subtract_from_variable = { PAV_equalizer_effect = 1 }
+		}
+	}
+
+	PAV_NEU_Mongol_Investments_1 = {
+
+		visible = {
+			has_completed_focus = PAV_connections_with_mongolia
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		fire_only_once = yes
+		days_remove = 14
+
+		modifier = {
+			consumer_goods_factor = 0.15
+			political_power_gain = -0.15
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_NEU_Mongol_Investments_1"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_NEU_Mongol_Investments_1"
+			add_political_power = 90
+		}
+	}
+
+	PAV_NEU_Mongol_Investments_2 = {
+
+		visible = {
+			has_completed_focus = PAV_connections_with_mongolia
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		fire_only_once = yes
+		days_remove = 14
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_NEU_Mongol_Investments_2"
+			custom_effect_tooltip = PAV_USAvsJapan_cost_tt
+			add_to_variable = { national_debt = 1 }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_NEU_Mongol_Investments_2"
+			custom_effect_tooltip = PAV_NEU_China_Investments_2_tt
+			subtract_from_variable = { PAV_equalizer_effect = 1 }
+		}
+	}
+
+	PAV_feniks_effigy = {
+
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_feniks_effigy"
+		}
+	}
+
+	PAV_sabotage_feniks = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 30
+		days_remove = 7
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_sabotage_feniks"
+			PAV_Feniks_SUBTRACT_Feniks_Power_Low = yes
+			PAV_Feniks_ADD_Sibir_Loyalty_Low = yes
+		}
+	}
+
+	PAV_sibir_effigy = {
+
+		visible = {
+			always = yes
+		}
+		available = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_sibir_effigy"
+		}
+	}
+
+	PAV_sabotage_sibir = {
+
+		visible = {
+			always = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 30
+		days_remove = 7
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_sabotage_sibir"
+			PAV_Feniks_SUBTRACT_Sibir_Power_Low = yes
+			PAV_Feniks_ADD_Feniks_Loyalty_Low = yes
+		}
+	}
+
+	PAV_economic_end = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = PAV
+		}
+
+		visible = {
+			original_tag = PAV
+		}
+
+		activation = {
+			has_country_flag = PAV_active_JAPvsUSA
+		}
+		available = {
+			always = no
+		}
+		is_good = yes
+		days_mission_timeout = 365
+		#fire_only_once = yes
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout PAV_economic_end"
+			custom_effect_tooltip = PAV_economic_end_tt
+			hidden_effect = {
+				clr_country_flag = PAV_active_JAPvsUSA
+				if = {
+					limit = {
+						check_variable = { PAV_OFN_Influence > PAV_Sphere_Influence }
+					}
+					PAV = { set_country_flag = PAV_active_JAPvsUSA_picked_usa }
+					add_opinion_modifier = { target = JAP modifier = embargo }
+					every_country = { news_event = { id = PAV_regional.23 } }
+				}
+				if = {
+					limit = {
+						check_variable = { PAV_Sphere_Influence > PAV_OFN_Influence }
+					}
+					PAV = { set_country_flag = PAV_active_JAPvsUSA_picked_japan }
+					add_opinion_modifier = { target = USA modifier = embargo }
+					every_country = { news_event = { id = PAV_regional.22 } }
+				}
+				if = {
+					limit = {
+						check_variable = { PAV_Sphere_Influence = PAV_OFN_Influence }
+					}
+					add_opinion_modifier = { target = USA modifier = embargo }
+					add_opinion_modifier = { target = JAP modifier = embargo }
+					PAV = { country_event = { id = PAV_regional.25 days = 2 } }
+					every_country = { news_event = { id = PAV_regional.24 } }
+				}
+
+			}
+		}
+	}
+
+	PAV_equalizers = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = PAV
+		}
+		visible = {
+			has_country_flag = PAV_active_JAPvsUSA
+		}
+		available = {
+			NOT = { has_country_flag = PAV_active_JAPvsUSA }
+		}
+		activation = {
+			has_country_flag = PAV_active_JAPvsUSA
+
+		}
+		cancel_trigger = {
+			NOT = { has_country_flag = PAV_active_JAPvsUSA }
+		}
+		is_good = no
+		days_mission_timeout = 7
+		cancel_if_not_visible = yes
+
+		days_re_enable = 0
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout PAV_equalizers"
+			PAV_FP_scripted_effect = yes
+		}
+	}
+}
+
+PAV_The_Election_category = {
+	PAV_pokryshkin_effigy = { #Add Pokryshkin supporting decisions below
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_pokryshkin_campaigning
+			}
+		}
+
+		available = {
+			always = no
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+
+		}
+	}
+	PAV_shukshin_influence_ticker = {
+		allowed = {
+			always = no
+		}
+	
+		visible = {
+			hidden_trigger = {
+				tag = PAV
+				has_country_flag = PAV_pokryshkin_campaigning
+			}
+		}
+	
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	
+		cancel_if_not_visible = yes
+		is_good = yes
+	
+		days_mission_timeout = 28
+	
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout PAV_shukshin_influence_ticker"
+			PAV_raise_shukshin_support_low = yes
+			hidden_effect = {
+				activate_mission = PAV_shukshin_influence_ticker
+			}
+		}
+	}
+	PAV_meet_with_industrialists = {
+		icon = GFX_decision_generic_industry
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_pokryshkin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+		
+		cost = 10
+		days_remove = 5
+		fire_only_once = no
+		days_re_enable = 21
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_meet_with_industrialists"
+			set_country_flag = PAV_election_action_in_progress
+			PAV_raise_pokryshkin_support_low = yes
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_meet_with_industrialists"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_encourage_infighting_among_opposition = {
+		icon = decision_generic_use_force
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_pokryshkin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		cost = 10
+		days_remove = 5
+		fire_only_once = no
+		days_re_enable = 21
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_encourage_infighting_among_opposition"
+			set_country_flag = PAV_election_action_in_progress
+			PAV_lower_shukshin_support_low = yes
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_encourage_infighting_among_opposition"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_hold_military_parade = {
+		icon = decision_generic_military_parade
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_pokryshkin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		custom_cost_trigger = {
+			has_equipment = { infantry_equipment > 249 }
+			has_manpower > 99
+			command_power > 19.99
+		}
+		custom_cost_text = PAV_military_parade_cost
+		
+		fire_only_once = no
+		
+		days_remove = 2
+		days_re_enable = 35
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_hold_military_parade"
+			set_country_flag = PAV_election_action_in_progress
+			PAV_raise_pokryshkin_support_mid = yes
+			add_stability = 0.015
+			army_experience = 5
+			hidden_effect = {
+				add_political_power = -20
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -50
+					producer = PAV
+				}
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_hold_military_parade"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_utilize_the_sb = {
+		icon = decision_generic_assault
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_pokryshkin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		days_remove = 10
+		fire_only_once = yes
+		
+		custom_cost_trigger = {
+			has_political_power > 49
+			command_power > 24.99
+		}
+		custom_cost_text = decision_cost_50_pp_25_cp
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_utilize_the_sb"
+			set_country_flag = PAV_election_action_in_progress
+			country_event = { id = PAV_elections.5 }
+			hidden_effect = {
+				add_command_power = -30
+				add_political_power = -30
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_utilize_the_sb"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_promote_national_unity = {
+		icon = decision_generic_political_action
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_pokryshkin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		cost = 50
+		days_remove = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_promote_national_unity"
+			set_country_flag = PAV_election_action_in_progress
+			country_event = { id = PAV_elections.6 }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_promote_national_unity"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_shukshin_effigy = { #Add Shukshin supporting decisions below
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_shukshin_campaigning
+			}
+		}
+
+		available = {
+			always = no
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		complete_effect = {
+
+		}
+	}
+	PAV_pokryshkin_influence_ticker = {
+		allowed = {
+			always = no
+		}
+	
+		visible = {
+			hidden_trigger = {
+				tag = PAV
+				has_country_flag = PAV_shukshin_campaigning
+			}
+		}
+	
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	
+		cancel_if_not_visible = yes
+		is_good = yes
+	
+		days_mission_timeout = 28
+	
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout PAV_pokryshkin_influence_ticker"
+			PAV_raise_pokryshkin_support_low = yes
+			hidden_effect = {
+				activate_mission = PAV_pokryshkin_influence_ticker
+			}
+		}
+	}
+	PAV_meet_with_democratic_activists = {
+		icon = GFX_decision_generic_civil_support
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_shukshin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+		
+		cost = 10
+		days_remove = 5
+		fire_only_once = no
+		days_re_enable = 21
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_meet_with_democratic_activists"
+			set_country_flag = PAV_election_action_in_progress
+			PAV_raise_shukshin_support_low = yes
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_meet_with_democratic_activists"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_denounce_corruption = {
+		icon = GFX_decision_generic_decision
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_shukshin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		cost = 10
+		days_remove = 5
+		fire_only_once = no
+		days_re_enable = 21
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_denounce_corruption"
+			set_country_flag = PAV_election_action_in_progress
+			PAV_lower_pokryshkin_support_low = yes
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_denounce_corruption"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_appeal_to_the_common_people = {
+		icon = GFX_decision_industrial_farm
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_shukshin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		cost = 20
+		
+		fire_only_once = no
+		
+		days_remove = 2
+		days_re_enable = 30
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_appeal_to_the_common_people"
+			set_country_flag = PAV_election_action_in_progress
+			PAV_raise_shukshin_support_mid = yes
+			add_stability = 0.015
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_appeal_to_the_common_people"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_talk_to_sympathetic_officers = {
+		icon = decision_generic_military_parade
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_shukshin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		days_remove = 10
+		fire_only_once = yes
+		
+		custom_cost_trigger = {
+			has_political_power > 29
+			command_power > 29.99
+		}
+		custom_cost_text = decision_cost_30_cp_30_pp
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_talk_to_sympathetic_officers"
+			set_country_flag = PAV_election_action_in_progress
+			country_event = { id = PAV_elections.3 }
+			hidden_effect = {
+				add_command_power = -30
+				add_political_power = -30
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_talk_to_sympathetic_officers"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_hold_speech_in_barnaul = {
+		icon = decision_generic_propaganda
+	
+		allowed = {
+			tag = PAV
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = PAV_election_action_in_progress
+			}
+		}
+		
+		visible = {
+			hidden_trigger = {
+				has_country_flag = PAV_shukshin_campaigning
+			}
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+		
+		cost = 50
+		days_remove = 10
+		fire_only_once = yes
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PAV_hold_speech_in_barnaul"
+			set_country_flag = PAV_election_action_in_progress
+			country_event = { id = PAV_elections.4 }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove PAV_hold_speech_in_barnaul"
+			clr_country_flag = PAV_election_action_in_progress
+		}
+	}
+	PAV_election_results = {
+
+		icon = decision_generic_propaganda
+
+		allowed = {
+			tag = PAV
+		}
+
+		visible = {
+			has_country_flag = PAV_elections_season
+		}
+
+		activation = {
+			has_completed_focus = PAV_election_season
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = PAV_elections_season
+				}
+			}
+		}
+
+		days_mission_timeout = 182
+
+		is_good = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision Timeout PAV_election_results"
+			custom_effect_tooltip = PAV_election_results_tt
+			hidden_effect = {
+			    if = {
+			        limit = {
+			            has_game_rule = {
+					        rule = PAV_ideology_route
+					        option = PAV_IDEOLOGY_ROUTE_AUTHORITARIAN_DEMOCRAT
+				       }
+			        }
+			        country_event = { id = PAV_elections.2 } 
+		        }
+		        else_if = {
+			        limit = {
+			            has_game_rule = {
+					        rule = PAV_ideology_route
+					        option = PAV_IDEOLOGY_ROUTE_SOCIAL_CONSERVATIVE
+				        }
+			        }
+			        country_event = { id = PAV_elections.1 }
+		        }
+				else_if = {
+					limit = { check_variable = { PAV_shukshin_support > PAV_pokryshkin_support } }
+					country_event = { id = PAV_elections.1 }
+				}
+				else_if = {
+					limit = { check_variable = { PAV_shukshin_support < PAV_pokryshkin_support } }
+					country_event = { id = PAV_elections.2 }
+				}
+				
+			}
+		}
+	}
+}
