@@ -1,0 +1,2111 @@
+﻿############################
+## Kaukasia Events
+############################
+
+add_namespace = cau
+
+## Debug ###
+
+#country_event = { 
+#	id = cau.69420
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.69420"}
+# 	title = cau.69420.t
+# 	desc = cau.69420.desc
+# 	picture = GFX_report_event_pet_sounds
+#	
+#	is_triggered_only = yes
+# 	
+# 	option = {
+# 		name = cau.69420.a
+# 		hidden_effect = {
+#			load_focus_tree = kaukasia_i
+#		}
+# 	}
+#	option = {
+# 		name = cau.69420.b
+# 		hidden_effect = {
+#			load_focus_tree = kaukasia_j
+#		}
+# 	}
+#	option = {
+# 		name = cau.69420.c
+# 		hidden_effect = {
+#			load_focus_tree = kaukasia_k
+#		}
+# 	}
+#	option = {
+# 		name = cau.69420.d
+# 		hidden_effect = {
+#			load_focus_tree = kaukasia_l
+#		}
+# 	}
+#	option = {
+#		name = cau.69420.e
+#		hidden_effect = {
+#			country_event = {
+#				id = cau.300
+#			}
+#		}
+#	}
+# }
+
+### SKELTON EVENTS ###
+
+country_event = { #What are you still doing here? The movie's over. Go home!
+	id = cau.10000
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10000"}
+	title = cau.10000.t
+	desc = cau.10000.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.10000.a
+	}
+}
+
+country_event = { #Josias is betrayed!
+	id = cau.10001
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10001"}
+	title = cau.10001.t
+	desc = cau.10001.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.10001.a
+		BRG = { 
+			country_event = { 
+				id = BRG.1004 
+				days = 1 
+			} 
+		}
+	}
+}
+
+country_event = { #Josias goes monarchist
+	id = cau.10002
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10002"}
+	title = cau.10002.t
+	desc = cau.10002.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = cau.10002.a #stays Burgsys
+		ai_chance = {
+			factor = 7
+			modifier = {
+				factor = 100000
+				GER = { has_country_flag = heydrich_for_germany }
+			}
+			modifier = {
+				factor = 0
+				GER = { NOT = { has_country_flag = heydrich_for_germany } } 
+				has_game_rule = {
+					rule = CAU_IDEOLOGY_ROUTE
+					option = CAU_IDEOLOGY_ROUTE_DESPOT
+				}
+			}
+		}
+	}
+
+	option = { #goes monarchist
+		name = cau.10002.b
+		clr_country_flag = CAU_policy_josias_burgsys
+		set_country_flag = CAU_policy_josias_crowned
+		ai_chance = {
+			factor = 3
+		    modifier = {
+                factor = 0
+               	has_game_rule = { 
+                   	rule = CAU_IDEOLOGY_ROUTE 
+                    option = CAU_IDEOLOGY_ROUTE_NATIONALSOCIALISM
+			 	}
+			}
+			modifier = {
+                factor = 0 
+                has_game_rule = { 
+                   	rule = CAU_IDEOLOGY_ROUTE 
+                   	option = CAU_IDEOLOGY_ROUTE_BURGSYS
+         	    }
+			}
+		}
+	}
+}
+
+country_event = { #business plot
+	id = cau.10003
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10003"}
+	title = cau.10003.t
+	desc = cau.10003.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #nothing happens
+		name = cau.10003.a
+		ai_chance = {
+			factor = 7
+			modifier = {
+				factor = 100000
+				GER = { has_country_flag = heydrich_for_germany }
+			}
+			modifier = {
+		        factor = 0
+		        	has_game_rule = { rule = CAU_IDEOLOGY_ROUTE option = CAU_IDEOLOGY_ROUTE_NATIONALSOCIALISM }
+		        	GER = { NOT = { has_country_flag = heydrich_for_germany } }
+			}
+		}
+	}		
+	
+	option = { #plot happens
+		name = cau.10003.b
+		set_politics = {
+			ruling_party = national_socialism
+		}
+		swap_ideas = {
+			remove_idea = CAU_Herbert_Backe_hog
+			add_idea = CAU_Karl_Blessing_hog
+		}
+		swap_ideas = {
+			remove_idea = CAU_Paul_Pleiger_for
+			add_idea = CAU_Eugen_Ott_for
+		}
+		swap_ideas = {
+			remove_idea = CAU_KarlHeinz_Burger_sec
+			add_idea = CAU_Otto_Stapf_sec
+		}
+		swap_ideas = {
+			remove_idea = CAU_stratified
+			add_idea = CAU_stratified_less
+		}
+		clr_country_flag = CAU_policy_josias_burgsys
+		clr_country_flag = CAU_policy_josias_crowned
+		set_country_flag = CAU_policy_business_plot
+		add_popularity = {
+			ideology = national_socialism
+			popularity = 0.4
+		}
+		ai_chance = {
+			factor = 3
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = CAU_IDEOLOGY_ROUTE
+					option = CAU_IDEOLOGY_ROUTE_BURGSYS
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = cau.10004
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10004"}
+	title = cau.10004.t
+	desc = cau.10004.desc
+	picture = GFX_report_event_kaukasus_soccer
+	
+	trigger = {
+		has_country_flag = CAU_policy_josias_crowned
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.10004.a
+		set_politics = {
+			ruling_party = despotism
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.4
+		}
+		every_country = {
+		    news_event = {
+				id = WORLD.1997
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = cau.10005
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10005"}
+	title = cau.10005.t
+	desc = cau.10005.desc
+	picture = GFX_report_event_kaukasus_soccer
+	
+	trigger = {
+		has_country_flag = CAU_policy_business_plot
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.10005.a
+		set_country_flag = CAU_policy_business_bormann
+#		country_event = { 
+#			days = 60 
+#				id = cau.10006 
+#		}
+		give_resource_rights = { 
+			receiver = BGR 
+			state = 229 
+		}
+		ai_chance = {
+			factor = 5
+		}
+		BGR = { 
+			country_event = { 
+				id = bormann.103
+				days = 1 
+			} 
+		}
+	}
+	option = {
+		name = cau.10005.b 
+		set_country_flag = CAU_policy_business_goering
+#		country_event = { 
+#			days = 60 
+#				id = cau.10007 
+#		}
+		give_resource_rights = { 
+			receiver = GGR 
+			state = 229 
+		}
+		ai_chance = {
+			factor = 5
+		}
+		GGR = { 
+			country_event = { 
+				id = goering.57
+				days = 1 
+			} 
+		}
+	}
+}
+
+#country_event = {
+#	id = cau.10006
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10006"}
+#	title = cau.10006.t
+#	desc = cau.10006.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	trigger = {
+#		has_country_flag = CAU_policy_business_bormann
+#	}
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.10006.a
+#		create_faction = Black_Sea_Pact
+#		CAU = {
+#			add_to_faction = CRI
+#		}
+#	}
+#}
+
+#country_event = {
+#	id = cau.10007
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10007"}
+#	title = cau.10007.t
+#	desc = cau.10007.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	trigger = {
+#		has_country_flag = CAU_policy_business_goering
+#	}
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.10007.a
+#		declare_war_on = {
+#			target = CRI
+#			type = annex_everything
+#		}
+#	}
+#}
+
+country_event = {
+	id = cau.10008
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10008"}
+	title = cau.10008.t
+	desc = cau.10008.desc
+	picture = GFX_report_event_kaukasus_soccer
+	trigger = {
+		has_country_flag = CAU_policy_josias_burgsys
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.10008.a
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Herbert Backe"
+			desc = "POLITICS_HERBERT_BACKE_DESC"
+			picture = "Portrait_Caucasus_Herbert_Backe.dds"
+			expire = "1990.1.1"
+			ideology = burgundian_system_subtype
+			traits = { terrorizer }	
+		}
+	}
+}
+
+country_event = {
+	id = cau.10009
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10009"}
+	title = cau.10009.t
+	desc = cau.10009.desc
+	picture = GFX_report_event_kaukasus_soccer
+	trigger = {
+		has_country_flag = CAU_policy_josias_crowned
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.10009.a
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Wittekind I"
+			desc = "POLITICS_WITTEKIND_DESC"
+			picture = "Portrait_Caucasus_Wittekind_Kaiser.dds"
+			expire = "1990.1.1"
+			ideology = despotism_subtype
+		}
+	}
+}
+
+country_event = { #Great Caucasian Revolt
+	id = cau.10010
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10010"}
+	title = cau.10010.t
+	desc = cau.10010.desc
+	picture = GFX_report_event_kaukasus_soccer
+	trigger = {
+		NOT = {
+			has_country_flag = CAU_policy_josias_burgsys
+			AND = {
+				OR = {
+					has_global_flag = german_civil_war_speervic
+					has_global_flag = german_civil_war_bormannvic
+				}
+				CAU = { is_in_faction_with = GER }
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			CAU = {
+				add_named_threat = {
+					threat = 5
+					name = threat.44.t
+				}
+			}
+			TNO_World_Tension_add_5 = yes
+		}
+	}
+
+	option = {
+		name = cau.10010.a
+		set_country_flag = CAU_caucasian_revolt
+		country_event = {
+			id = cau.10012
+			days = 365
+		}
+		GEO = {
+			transfer_state = 231
+			load_oob = GEO_1967
+			random_list = {
+				50 = {
+					set_politics = {
+						ruling_party = fascism
+					}
+				}
+				50 = {
+					set_politics = {
+						ruling_party = socialist
+					}
+				}
+			}
+		}
+		ADY = {
+			transfer_state = 233
+			load_oob = ADY_1967
+		}
+		declare_war_on = {
+			target = GEO
+			type = annex_everything
+		}
+		declare_war_on = {
+			target = ADY
+			type = annex_everything
+		}
+		every_country = {
+		    news_event = {
+				id = WORLD.1998
+				days = 1
+			}
+		}
+		every_country = {
+		    news_event = {
+				id = WORLD.1999
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = cau.10011
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10011"}
+	title = cau.10011.t
+	desc = cau.10011.desc
+	picture = GFX_report_event_kaukasus_soccer
+	trigger = {
+		has_country_flag = CAU_policy_josias_burgsys
+		NOT = {
+			AND = {
+				OR = {
+					has_global_flag = german_civil_war_speervic
+					has_global_flag = german_civil_war_bormannvic
+				}
+				CAU = { is_in_faction_with = GER }
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			CAU = {
+				add_named_threat = {
+					threat = 5
+					name = threat.44.t
+				}
+			}
+			TNO_World_Tension_add_5 = yes
+		}
+	}
+
+	option = {
+		name = cau.10011.a
+		set_country_flag = CAU_caucasian_anarchy
+		country_event = {
+			id = cau.10012
+			days = 365
+		}
+		create_country_leader = {
+			name = "No Authority"
+			desc = "POLITICS_KAUKASIEN_COLLAPSE_DESC"
+			picture = "Portrait_Caucasus_No_Authority.dds"
+			expire = "1990.1.1"
+			ideology = burgundian_system_subtype
+			traits = { utterly_abandoned_CAU }	
+		}
+		AZR = {
+			transfer_state = 229
+			load_oob = "AZR_1967"
+		}
+		declare_war_on = {
+			target = AZR
+			type = annex_everything
+		}
+		GEO = {
+			transfer_state = 231
+			load_oob = GEO_1967
+			random_list = {
+				50 = {
+					set_politics = {
+						ruling_party = fascism
+					}
+				}
+				50 = {
+					set_politics = {
+						ruling_party = socialist
+					}
+				}
+			}
+		}
+		declare_war_on = {
+			target = GEO
+			type = annex_everything
+		}
+		DAG = {
+			transfer_state = 232
+			load_oob = "DAG_1967"
+		}
+		declare_war_on = {
+			target = DAG
+			type = annex_everything
+		}
+		ADY = {
+			transfer_state = 233
+			load_oob = "ADY_1967"
+		}
+		declare_war_on = {
+			target = ADY
+			type = annex_everything
+		}
+		every_country = {
+		    news_event = {
+				id = WORLD.2000
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = cau.10012
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.10012"}
+	title = cau.10012.t
+	desc = cau.10012.desc
+	picture = GFX_report_event_kaukasus_soccer
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.10012.a
+		clr_country_flag = CAU_caucasian_anarchy
+		clr_country_flag = CAU_caucasian_revolt
+		set_country_flag = CAU_rebel_victory
+		white_peace = GEO
+		white_peace = DAG
+		white_peace = ADY
+		white_peace = AZR
+	}
+}
+
+### INTRO EVENTS ###
+## Kaukasia intro
+
+#country_event = { #intro event
+#	id = cau.1
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.1"}
+# 	title = cau.1.t
+# 	desc = cau.1.desc
+# 	picture = GFX_report_event_kaukasus_fear_and_loathing
+#	
+#	is_triggered_only = yes
+# 	
+# 	option = {
+# 		name = cau.1.a
+# 		#hidden_effect = {
+#		#	set_country_flag = cau_occultic_adventures
+# 		#	load_focus_tree = kaukasia_a
+#		#	
+# 		#	
+# 		#	country_event = { days = 316 id = cau.2}
+# 		#	country_event = { days = 83 id = cau.3}
+# 		#}
+# 	}
+# }
+ 
+ country_event = { # Lost Legion Event - Intergrate into events properly at some point love Debbel <3
+	id = cau.789
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.789"}
+ 	title = cau.789.t
+ 	desc = cau.789.desc
+ 	picture = GFX_report_event_kaukasus_fear_and_loathing
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = cau.789.a
+ 		hidden_effect = {
+            country_event = { 
+			    id = SPQR.50
+				days = 2
+		    }
+			every_country = {
+			limit = {
+				NOT = {
+					tag = RMN
+				}
+			}
+			country_event = { 
+			    id = cau.790
+				days = 4
+		    }
+		    }
+ 		}
+ 	}
+	option = {
+ 		name = cau.789.b
+ 	}
+ }
+ 
+ country_event = { # Lost Legion Event 2 - Intergrate into events properly at some point love Debbel <3
+	id = cau.788
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.788"}
+ 	title = cau.788.t
+ 	desc = cau.788.desc
+ 	picture = GFX_report_event_ROM_legion
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = cau.788.a
+ 		hidden_effect = {
+            country_event = { 
+			    id = cau.789
+				days = 1
+		    }
+ 		}
+ 	}
+ }
+ 
+ country_event = { # Lost Legion Event 2 - Intergrate into events properly at some point love Debbel <3
+	id = cau.790
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.790"}
+ 	title = cau.790.t
+ 	desc = cau.790.desc
+ 	picture = GFX_report_event_ROM_guns
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = cau.790.a
+ 		hidden_effect = {
+
+ 		}
+ 	}
+ }
+
+ country_event = { #ambasassador murdered
+	id = cau.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.2"}
+ 	title = cau.2.t
+ 	desc = cau.2.desc
+ 	picture = GFX_report_event_kaukasus_fear_and_loathing
+	
+	is_triggered_only = yes
+ 	fire_only_once = yes
+ 	
+ 	option = {
+ 		name = cau.2.a
+ 	}
+ }
+
+ country_event = { #georgian football
+	id = cau.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.3"}
+ 	title = cau.3.t
+ 	desc = cau.3.desc
+ 	picture = GFX_report_event_kaukasus_soccer
+	
+	is_triggered_only = yes
+ 	fire_only_once = yes
+ 	
+ 	option = {
+ 		name = cau.3.a
+ 	}
+ }
+ 
+###Black Meeting focus events
+
+#country_event = {
+#	id = cau.100
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.100"}
+#	title = cau.100.t
+#	desc = cau.100.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.100.a
+#	}
+#} 	
+ 	
+#country_event = {
+#	id = cau.101
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.101"}
+#	title = cau.101.t
+#	desc = cau.101.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.101.a
+#		set_country_flag = CAU_venue_tiflis_chosen
+#		set_country_flag = CAU_policy_josias_burgsys
+#	}
+#	option = {
+#		name = cau.101.b
+#		set_country_flag = CAU_venue_katharinastadt_chosen
+#		set_country_flag = CAU_policy_josias_burgsys
+#	}
+#}
+
+country_event = {
+	id = cau.102
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.102"}
+	title = cau.102.t
+	desc = cau.102.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.102.a
+	}
+}
+
+country_event = {
+	id = cau.103
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.103"}
+	title = cau.103.t
+	desc = cau.103.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.103.a
+	}
+}
+
+country_event = {
+	id = cau.104
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.104"}
+	title = cau.104.t
+	desc = cau.104.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.104.a
+	}
+}
+
+country_event = {
+	id = cau.105
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.105"}
+	title = cau.105.t
+	desc = cau.105.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.105.a
+	}
+}
+
+country_event = {
+	id = cau.106
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.106"}
+	title = cau.106.t
+	desc = cau.106.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.106.a
+	}
+}
+
+country_event = {
+	id = cau.107
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.107"}
+	title = cau.107.t
+	desc = cau.107.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.107.a
+	}
+}
+
+#country_event = {
+#	id = cau.108
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.108"}
+#	title = cau.108.t
+#	desc = cau.108.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.108.a
+#		custom_effect_tooltip = CAU_108_a
+#	}
+#	option = {
+#		name = cau.108.b
+#		custom_effect_tooltip = CAU_108_b
+#	}
+#	option = {
+#		name = cau.108.c
+#		custom_effect_tooltip = CAU_108_c
+#	}
+#}
+
+country_event = {
+	id = cau.109
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.109"}
+	title = cau.109.t
+	desc = cau.109.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.109.a
+	}
+	option = {
+		name = cau.109.b
+	}
+}
+
+country_event = {
+	id = cau.110
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.110"}
+	title = cau.110.t
+	desc = cau.110.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.110.a
+	}
+	option = {
+		name = cau.110.b
+	}
+}
+
+#country_event = {
+#	id = cau.111
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.111"}
+#	title = cau.111.t
+#	desc = cau.111.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.111.a
+#		custom_effect_tooltip = CAU_schedule_another_visit_tooltip
+#		hidden_effect = {
+#			country_event = {
+#				id = cau.112
+#				hours = 12
+#			}
+#		}	
+#	}
+#}
+
+#Reconciliation tree events
+
+#country_event = {
+#	id = cau.112
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.112"}
+#	title = cau.112.t
+#	desc = cau.112.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.112.a
+#		custom_effect_tooltip = CAU_schedule_another_visit_tooltip
+#		hidden_effect = {
+#			country_event = {
+#				id = cau.113
+#				hours = 4
+#			}
+#		}	
+#	}
+#}
+
+#country_event = {
+#	id = cau.113
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.113"}
+#	title = cau.113.t
+#	desc = cau.113.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.113.a
+#		custom_effect_tooltip = CAU_schedule_another_visit_tooltip
+#		hidden_effect = {
+#			country_event = {
+#				id = cau.114
+#				hours = 4
+#			}
+#		}
+#	}
+#}
+
+#country_event = {
+#	id = cau.114
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.114"}
+#	title = cau.114.t
+#	desc = cau.114.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.114.a
+#		hidden_effect = {
+#			load_focus_tree = {
+#				tree = kaukasia_i
+#				keep_completed = yes
+#			}
+#		}
+#	}
+#}
+
+country_event = {
+	id = cau.115
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.115"}
+	title = cau.115.t
+	desc = cau.115.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.115.a
+	
+	}
+}
+
+country_event = {
+	id = cau.116
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.116"}
+	title = cau.116.t
+	desc = cau.116.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.116.a
+	}
+}
+
+country_event = {
+	id = cau.117
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.117"}
+	title = cau.117.t
+	desc = cau.117.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.117.a
+	}
+}
+
+#country_event = {
+#	id = cau.118
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.118"}
+#	title = cau.118.t
+#	desc = cau.118.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.118.a
+#		hidden_effect = {
+#			load_focus_tree = kaukasia_j
+#		}
+#	}
+#}
+
+#Betrayed & Black State tree events
+
+country_event = {
+	id = cau.119
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.119"}
+	title = cau.119.t
+	desc = cau.119.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.119.a
+	}
+}
+
+country_event = {
+	id = cau.120
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.120"}
+	title = cau.120.t
+	desc = cau.120.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.120.a
+	}
+}
+
+country_event = {
+	id = cau.121
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.121"}
+	title = cau.121.t
+	desc = cau.121.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.121.a
+	}
+}
+
+country_event = {
+	id = cau.122
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.122"}
+	title = cau.122.t
+	desc = cau.122.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.122.a
+	}
+}
+
+country_event = {
+	id = cau.123
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.123"}
+	title = cau.123.t
+	desc = cau.123.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.123.a
+	}
+}
+
+country_event = {
+	id = cau.124
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.124"}
+	title = cau.124.t
+	desc = cau.124.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.124.a
+	}
+}
+
+country_event = {
+	id = cau.125
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.125"}
+	title = cau.125.t
+	desc = cau.125.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.125.a
+	}
+}
+
+country_event = {
+	id = cau.126
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.126"}
+	title = cau.126.t
+	desc = cau.126.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.126.a
+	}
+}
+
+country_event = {
+	id = cau.127
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.127"}
+	title = cau.127.t
+	desc = cau.127.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.127.a
+	}
+}
+
+country_event = {
+	id = cau.128
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.128"}
+	title = cau.128.t
+	desc = cau.128.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.128.a
+	}
+}
+
+country_event = {
+	id = cau.129
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.129"}
+	title = cau.129.t
+	desc = cau.129.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.129.a
+	}
+}
+
+country_event = {
+	id = cau.130
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.130"}
+	title = cau.130.t
+	desc = cau.130.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.130.a
+	}
+}
+
+country_event = {
+	id = cau.131
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.131"}
+	title = cau.131.t
+	desc = cau.131.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.131.a
+	}
+}
+
+country_event = {
+	id = cau.132
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.132"}
+	title = cau.132.t
+	desc = cau.132.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.132.a
+	}
+}
+
+country_event = {
+	id = cau.133
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.133"}
+	title = cau.133.t
+	desc = cau.133.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.133.a
+	}
+}
+
+country_event = {
+	id = cau.134
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.134"}
+	title = cau.134.t
+	desc = cau.134.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.134.a
+	}
+}
+
+country_event = {
+	id = cau.135
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.135"}
+	title = cau.135.t
+	desc = cau.135.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.135.a
+	}
+}
+
+country_event = {
+	id = cau.136
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.136"}
+	title = cau.136.t
+	desc = cau.136.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.136.a
+	}
+}
+
+#country_event = {
+#	id = cau.137
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.137"}
+#	title = cau.137.t
+#	desc = cau.137.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.137.a
+#		hidden_effect = {
+#			load_focus_tree = kaukasia_k
+#		}
+#	}
+#}
+
+country_event = {
+	id = cau.138
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.138"}
+	title = cau.138.t
+	desc = cau.138.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.138.a
+	}
+}
+
+country_event = {
+	id = cau.139
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.139"}
+	title = cau.139.t
+	desc = cau.139.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.139.a
+	}
+}
+
+country_event = {
+	id = cau.140
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.140"}
+	title = cau.140.t
+	desc = cau.140.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.140.a
+	}
+}
+
+country_event = {
+	id = cau.141
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.141"}
+	title = cau.141.t
+	desc = cau.141.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.141.a
+	}
+}
+
+country_event = {
+	id = cau.142
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.142"}
+	title = cau.142.t
+	desc = cau.142.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.142.a
+	}
+}
+
+country_event = {
+	id = cau.143
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.143"}
+	title = cau.143.t
+	desc = cau.143.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.143.a
+	}
+}
+
+country_event = {
+	id = cau.144
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.144"}
+	title = cau.144.t
+	desc = cau.144.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.144.a
+	}
+}
+
+country_event = {
+	id = cau.145
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.145"}
+	title = cau.145.t
+	desc = cau.145.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.145.a
+	}
+}
+
+country_event = {
+	id = cau.146
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.146"}
+	title = cau.146.t
+	desc = cau.146.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.146.a
+	}
+}
+
+country_event = {
+	id = cau.147
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.147"}
+	title = cau.147.t
+	desc = cau.147.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.147.a #adds 1 to CAU_bankers_pissed varriable
+	}
+	option = {
+		name = cau.147.b
+	}
+}
+
+country_event = {
+	id = cau.148
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.148"}
+	title = cau.148.t
+	desc = cau.148.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.148.a #adds 1 to CAU_bankers_pissed varriable
+	}
+	option = {
+		name = cau.148.b
+	}
+}
+
+country_event = {
+	id = cau.149
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.149"}
+	title = cau.149.t
+	desc = cau.149.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.149.a #adds 1 to CAU_bankers_pissed varriable
+	}
+	option = {
+		name = cau.149.b
+	}
+}
+
+country_event = {
+	id = cau.150
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.150"}
+	title = cau.150.t
+	desc = cau.150.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.150.a #adds 1 to CAU_bankers_pissed varriable
+	}
+	option = {
+		name = cau.150.b
+	}
+}
+
+country_event = {
+	id = cau.151
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.151"}
+	title = cau.151.t
+	desc = cau.151.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.151.a #adds a natspirit called The Reichskommissar's Watch
+	}
+}
+
+country_event = {
+	id = cau.152
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.152"}
+	title = cau.152.t
+	desc = cau.152.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.152.a
+	}
+}
+
+country_event = {
+	id = cau.153
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.153"}
+	title = cau.153.t
+	desc = cau.153.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.153.a
+	}
+}
+
+country_event = {
+	id = cau.154
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.154"}
+	title = cau.154.t
+	desc = cau.154.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.154.a
+	}
+}
+
+country_event = {
+	id = cau.155
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.155"}
+	title = cau.155.t
+	desc = cau.155.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.155.a
+	}
+}
+
+country_event = {
+	id = cau.156
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.156"}
+	title = cau.156.t
+	desc = cau.156.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.156.a
+	}
+}
+
+country_event = {
+	id = cau.157
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.157"}
+	title = cau.157.t
+	desc = cau.157.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.157.a
+	}
+}
+
+#Betrayed & Black Throne events
+
+country_event = {
+	id = cau.200
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.200"}
+	title = cau.200.t
+	desc = cau.200.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.200.a
+	}
+}
+
+country_event = {
+	id = cau.201
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.201"}
+	title = cau.201.t
+	desc = cau.201.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.201.a
+	}
+}
+
+
+country_event = {
+	id = cau.202
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.202"}
+	title = cau.202.t
+	desc = cau.202.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.202.a
+	}
+}
+
+
+country_event = {
+	id = cau.203
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.203"}
+	title = cau.203.t
+	desc = cau.203.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.203.a
+	}
+}
+
+
+country_event = {
+	id = cau.204
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.204"}
+	title = cau.204.t
+	desc = cau.204.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.204.a
+	}
+}
+
+
+country_event = {
+	id = cau.205
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.205"}
+	title = cau.205.t
+	desc = cau.205.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.205.a
+	}
+}
+
+
+#country_event = {
+#	id = cau.206
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.206"}
+#	title = cau.206.t
+#	desc = cau.206.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.206.a
+#		hidden_effect = {
+#			clr_country_flag = CAU_policy_josias_burgsys
+#			set_country_flag = CAU_policy_josias_crowned
+#			load_focus_tree = kaukasia_l
+#		}
+#	}
+#}
+
+
+country_event = {
+	id = cau.207
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.207"}
+	title = cau.207.t
+	desc = cau.207.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.207.a
+	}
+}
+
+
+country_event = {
+	id = cau.208
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.208"}
+	title = cau.208.t
+	desc = cau.208.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.208.a
+	}
+}
+
+
+country_event = {
+	id = cau.209
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.209"}
+	title = cau.209.t
+	desc = cau.209.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.209.a
+	}
+}
+
+
+country_event = {
+	id = cau.210
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.210"}
+	title = cau.210.t
+	desc = cau.210.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.210.a
+	}
+}
+
+
+country_event = {
+	id = cau.211
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.211"}
+	title = cau.211.t
+	desc = cau.211.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.211.a
+	}
+}
+
+
+country_event = {
+	id = cau.212
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.212"}
+	title = cau.212.t
+	desc = cau.212.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.212.a
+	}
+}
+
+
+country_event = {
+	id = cau.213
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.213"}
+	title = cau.213.t
+	desc = cau.213.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.213.a
+	}
+}
+
+
+country_event = {
+	id = cau.214
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.214"}
+	title = cau.214.t
+	desc = cau.214.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.214.a
+	}
+}
+
+
+country_event = {
+	id = cau.215
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.215"}
+	title = cau.215.t
+	desc = cau.215.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.215.a
+	}
+}
+
+
+country_event = {
+	id = cau.216
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.216"}
+	title = cau.216.t
+	desc = cau.216.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.216.a
+	}
+}
+
+
+country_event = {
+	id = cau.217
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.217"}
+	title = cau.217.t
+	desc = cau.217.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.217.a #adds 1 to CAU_bankers_pissed varriable
+	}
+	option = {
+		name = cau.217.b
+	}
+}
+
+
+country_event = {
+	id = cau.218
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.218"}
+	title = cau.218.t
+	desc = cau.218.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.218.a #adds 1 to CAU_bankers_pissed varriable
+	}
+	option = {
+		name = cau.218.b
+	}
+}
+
+
+country_event = {
+	id = cau.219
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.219"}
+	title = cau.219.t
+	desc = cau.219.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.219.a #adds 1 to CAU_bankers_pissed varriable
+	}
+	option = {
+		name = cau.219.b
+	}
+}
+
+
+country_event = {
+	id = cau.220
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.220"}
+	title = cau.220.t
+	desc = cau.220.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.220.a
+	}
+}
+
+
+country_event = {
+	id = cau.221
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.221"}
+	title = cau.221.t
+	desc = cau.221.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.221.a
+	}
+}
+
+
+country_event = {
+	id = cau.222
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.222"}
+	title = cau.222.t
+	desc = cau.222.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.222.a
+	}
+}
+
+
+country_event = {
+	id = cau.223
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.223"}
+	title = cau.223.t
+	desc = cau.223.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.223.a
+	}
+}
+
+country_event = {
+	id = cau.224
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.224"}
+	title = cau.224.t
+	desc = cau.224.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.224.a
+	}
+}
+
+#country_event = {
+#	id = cau.300
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.399"}
+#	title = cau.300.t
+#	desc = cau.300.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.300.a 
+#		hidden_effect = {
+#			set_politics = {
+#				ruling_party = national_socialism
+#			}
+#			swap_ideas = {
+#				remove_idea = CAU_Herbert_Backe_hog
+#				add_idea = CAU_Karl_Blessing_hog
+#			}
+#			clr_country_flag = CAU_policy_josias_burgsys
+#			clr_country_flag = CAU_policy_josias_crowned
+#			set_country_flag = CAU_policy_business_plot
+#			load_focus_tree = kaukasia_m
+#			complete_national_focus = CAU_hostile_takeover
+#		}
+#	}
+#}
+
+country_event = {
+	id = cau.301
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.301"}
+	title = cau.301.t
+	desc = cau.301.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.301.a
+	}
+}
+
+country_event = {
+	id = cau.302
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.302"}
+	title = cau.302.t
+	desc = cau.302.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.302.a
+	}
+}
+
+country_event = {
+	id = cau.303
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.303"}
+	title = cau.303.t
+	desc = cau.303.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.303.a #no more rights for you, shut the fuck up
+		add_stability = -0.05
+	}
+}
+
+country_event = {
+	id = cau.304
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.304"}
+	title = cau.304.t
+	desc = cau.304.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.304.a #riot in Tiflis
+	}
+}
+
+country_event = {
+	id = cau.305
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.305"}
+	title = cau.305.t
+	desc = cau.305.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.305.a
+		add_political_power = -15
+		add_manpower = -100
+	}
+}
+
+country_event = {
+	id = cau.306
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.306"}
+	title = cau.306.t
+	desc = cau.306.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.306.a
+		add_stability = -0.1
+	}
+}
+
+#country_event = {
+#	id = cau.307
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.307"}
+#	title = cau.307.t
+#	desc = cau.307.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.307.a
+#		add_popularity = {
+#			ideology = national_socialism
+#			popularity = -0.05
+#		}
+#		swap_ideas = {
+#			remove_idea = CAU_stratified
+#			add_idea = CAU_stratified_less
+#		}
+#	}
+#}
+
+country_event = {
+	id = cau.308
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.308"}
+	title = cau.308.t
+	desc = cau.308.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.308.a
+	}
+}
+
+country_event = {
+	id = cau.309
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.309"}
+	title = cau.309.t
+	desc = cau.309.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.309.a
+	}
+}
+
+country_event = {
+	id = cau.310
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.310"}
+	title = cau.310.t
+	desc = cau.310.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.310.a
+	}
+}
+
+country_event = {
+	id = cau.311
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.31"}
+	title = cau.311.t
+	desc = cau.311.desc
+	picture = GFX_report_event_kaukasus_soccer
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = cau.311.a
+	}
+}
+
+###EXAMPLE EVENT###
+#country_event = {
+#	id = cau. #
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau."}
+#title = cau.#.t
+#	desc = cau.#.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.#.a
+#	}
+#}
+#country_event = { #event used temporarily
+#	id = cau.599
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.599"}
+#title = cau.599.t
+#	desc = cau.599.desc
+#	picture = GFX_report_event_kaukasus_soccer
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	option = {
+#		name = cau.599.a
+#			229 = { add_manpower = -1000000 }
+#			231 = { add_manpower =  1000000 }
+#	}
+#}
