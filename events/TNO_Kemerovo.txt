@@ -85,6 +85,8 @@ country_event = { #King's Industry
 			}
 		}
 		KEM_increase_yuriy_influence_1 = yes
+		TNO_improve_trade_unions_policy_effectiveness_med = yes
+		set_country_flag = KEM_chose_econ_Y
 	}
 	option = { #
 		name = KEM.4.b
@@ -99,6 +101,9 @@ country_event = { #King's Industry
 			}
 		}
 		KEM_increase_lydia_influence_1 = yes
+		TNO_worsen_safety_policy_effectiveness_low = yes
+		TNO_improve_health_care_policy_effectiveness_low = yes
+		set_country_flag = KEM_chose_econ_L
 	}
 }
 
@@ -174,7 +179,7 @@ country_event = { #Princess Lydia's Pragmatism
 	immediate = {log = "[GetDateText]: [Root.GetName]: event KEM.9"}
 	title = KEM.9.t
 	desc = KEM.9.desc
-	picture = GFX_report_event_war_crime_4
+	picture = GFX_KEM_wolf
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -524,7 +529,7 @@ country_event = { #Oaths of Loyalty
 		ai_chance = { factor = 1 }
 		custom_effect_tooltip = KEM_oaths_of_loyalty_tt
 		hidden_effect = {
-			SAH = {
+			KRS = {
 				every_unit_leader = {
 					limit = {
 						OR = {
@@ -632,7 +637,7 @@ country_event = { #Offer to Oyrotia - They refuse
 		ai_chance = { factor = 1 }
 		declare_war_on = {
 			target = ALT
-			type = russian_reclaimation
+			type = russian_reclamation
 		}
 	}
 }
@@ -728,6 +733,10 @@ country_event = { #The People's Will focus
 			}
 		}
 		KEM_increase_yuriy_influence_1 = yes
+		
+		TNO_improve_trade_unions_policy_effectiveness_low = yes
+		
+		add_stability = 0.01
 	}
 	option = { #
 		name = kemexp.12.b
@@ -742,6 +751,19 @@ country_event = { #The People's Will focus
 			}
 		}
 		KEM_increase_lydia_influence_1 = yes
+		
+		custom_effect_tooltip = kemexp.12_tt
+		
+		hidden_effect = {
+			570 = { 
+				add_state_modifier = { modifier = { state_GDP_growth_modifier = 2 } }
+			}
+		}
+		
+		570 = {
+			set_temp_variable = { state_value_multiplier_temp = 1.03 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
 	}
 }
 
@@ -841,10 +863,12 @@ country_event = { #The Novosibirsk Trials
 	option = { #Exile
 		name = kemexp.18.a
 		ai_chance = { factor = 1 }
+		add_stability = 0.02
 	}
 	option = { #Prison
 		name = kemexp.18.b
 		ai_chance = { factor = 1 }
+		add_political_power = 10
 	}
 }
 
@@ -900,7 +924,7 @@ country_event = { #Affairs of the Realm
 	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.3" }
 	title = kemreg.3.t
 	desc = kemreg.3.desc
-	picture = report_event_building
+	picture = GFX_KEM_boyar
 	
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -918,6 +942,8 @@ country_event = { #Affairs of the Realm
 			}
 		}
 		KEM_increase_yuriy_influence_1 = yes
+		TNO_improve_public_meetings_policy_effectiveness_low = yes
+		TNO_improve_trade_laws_policy_effectiveness_low = yes
 	}
 	option = { #Support Lydia
 		name = kemreg.3.b
@@ -932,6 +958,8 @@ country_event = { #Affairs of the Realm
 			}
 		}
 		KEM_increase_lydia_influence_1 = yes
+		TNO_worsen_public_meetings_policy_effectiveness_low = yes
+		TNO_worsen_trade_laws_policy_effectiveness_low = yes
 	}
 }
 
@@ -949,10 +977,10 @@ country_event = { #Clash of Wolves - Yuriy victorious
 		name = kemreg.4.a
 		ai_chance = { factor = 1 }
 		set_politics = {
-			ruling_party = authoritarian_democrat
+			ruling_party = authoritarian_democracy
 		}
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.1
 		}
 		remove_ideas = KEM_the_two_wolves
@@ -961,7 +989,7 @@ country_event = { #Clash of Wolves - Yuriy victorious
 			desc = "POLITICS_RURIK_II_DESC"
 			picture = "Portrait_Kemerovo_Rurik_II.dds"
 			expire = "1999.1.1"
-			ideology = authoritarian_democrat_subtype
+			ideology = authoritarian_democracy_social_nationalism_subtype
 			traits = {
 
 			}
@@ -1047,7 +1075,7 @@ country_event = { #Issue Royal Pardons?
 		name = kemreg.8.b
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			PAV = {
+			NOV = {
 				every_unit_leader = {
 					set_nationality = KEM
 				}
@@ -1058,7 +1086,7 @@ country_event = { #Issue Royal Pardons?
 		name = kemreg.8.c
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			ERS = {
+			TOM = {
 				every_unit_leader = {
 					set_nationality = KEM
 				}
@@ -1069,7 +1097,7 @@ country_event = { #Issue Royal Pardons?
 		name = kemreg.8.d
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			SVO = {
+			PRC = {
 				every_unit_leader = {
 					set_nationality = KEM
 				}
@@ -1082,17 +1110,17 @@ country_event = { #Issue Royal Pardons?
 		add_stability = -0.1
 		add_war_support = -0.1
 		hidden_effect = {
-			PAV = {
+			NOV = {
 				every_unit_leader = {
 					set_nationality = KEM
 				}
 			}
-			ERS = {
+			TOM = {
 				every_unit_leader = {
 					set_nationality = KEM
 				}
 			}
-			SVO = {
+			PRC = {
 				every_unit_leader = {
 					set_nationality = KEM
 				}
@@ -1173,7 +1201,7 @@ country_event = { #The Almight Dollar
 	option = { #Invest in Kemerovo
 		name = kemreg.12.a
 		ai_chance = { factor = 1 }
-		add_to_variable = { national_debt = 20 }
+		add_to_variable = { national_debt = 0.020 }
 		custom_effect_tooltip = kemreg12_TT
 		hidden_effect = {
 			KEM = {
@@ -1205,19 +1233,12 @@ country_event = { #USA invest in us
 	option = { #
 		name = kemreg.13.a
 		ai_chance = { factor = 1 }
-		random_owned_controlled_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-			}
-		}
+		
+		set_temp_variable = { money_reserves_temp = 0.09 } 
+		econ_money_reserves_change_raw_money = yes
+		
+		set_temp_variable = { gdp_growth_temp = 0.3 }
+		econ_gdp_growth_change = yes
 	}
 }
 
@@ -1353,7 +1374,7 @@ country_event = { #Zaibatsu Investment
 	option = { #Invest in Kemerovo
 		name = kemreg.20.a
 		ai_chance = { factor = 1 }
-		add_to_variable = { national_debt = 20 }
+		add_to_variable = { national_debt = 0.020 }
 		custom_effect_tooltip = kemreg12_TT
 		hidden_effect = {
 			KEM = {
@@ -1385,19 +1406,12 @@ country_event = { #Japan invests in us
 	option = { #
 		name = kemreg.21.a
 		ai_chance = { factor = 1 }
-		random_owned_controlled_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-			}
-		}
+		
+		set_temp_variable = { money_reserves_temp = 0.06 } 
+		econ_money_reserves_change_raw_money = yes
+		
+		set_temp_variable = { gdp_growth_temp = 0.2 }
+		econ_gdp_growth_change = yes
 	}
 }
 
@@ -1462,10 +1476,8 @@ country_event = { #Friends in the Steppes
 	option = { #
 		name = kemreg.25.a
 		ai_chance = { factor = 1 }
-		add_opinion_modifier = {
-			target = KEM
-			modifier = RUS_trade
-		}
+		set_temp_variable = { temp_modifier = 25 }
+		KEM = { add_to_trade_modifier_PREV = yes }
 		KEM = {
 			country_event = { id = kemreg.26 hours = 6 }
 		}
@@ -1507,7 +1519,7 @@ country_event = { #The Death of King Rurik II
 		ai_chance = { factor = 1 }
 		if = {
 			limit = {
-				has_government = authoritarian_democrat
+				has_government = authoritarian_democracy
 			}
 			kill_country_leader = yes
 			create_country_leader = {
@@ -1515,7 +1527,7 @@ country_event = { #The Death of King Rurik II
 				desc = "POLITICS_KING_YURIY_DESC"
 				picture = "Portrait_Kemerovo_Yuriy_Krylov.dds"
 				expire = "1999.1.1"
-				ideology = authoritarian_democrat_subtype
+				ideology = authoritarian_democracy_social_nationalism_subtype
 				traits = {
 	
 				}
@@ -1536,7 +1548,7 @@ country_event = { #The Death of King Rurik II
 				desc = "POLITICS_QUEEN_LYDIA_DESC"
 				picture = "Portrait_Kemerovo_Lydia_Krylova.dds"
 				expire = "1999.1.1"
-				ideology = despotism_subtype
+				ideology = despotism_aristocratic_conservatism_subtype
 				traits = {
 	
 				}
@@ -1589,7 +1601,7 @@ country_event = { #Spirit of Rus' Reborn
 	immediate = { log = "[GetDateText]: [Root.GetName]: event kemreg.30" }
 	title = kemreg.30.t
 	desc = kemreg.30.desc
-	#picture = GFX_
+	picture = GFX_KEM_rurik_II_mural
 	
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1649,11 +1661,15 @@ country_event = { #Administrative Grumbles
 		name = kemreg.33.a
 		ai_chance = { factor = 1 }
 		KEM_increase_yuriy_influence_1 = yes
+		TNO_improve_poverty_low = yes
+		set_country_flag = KEM_chose_admin_Y
 	}
 	option = { #Lydia
 		name = kemreg.33.b
 		ai_chance = { factor = 1 }
 		KEM_increase_lydia_influence_1 = yes
+		TNO_improve_admin_efficiency_low = yes
+		set_country_flag = KEM_chose_admin_L
 	}
 }
 
@@ -1842,6 +1858,8 @@ country_event = { #The Arteries of a Nation
 	option = { #
 		name = kemreg.44.a
 		ai_chance = { factor = 1 }
+		set_temp_variable = { temp_econ_spending_amount = 0.075 }
+		econ_spend_money_once_effect_modal = yes
 		569 = {
 			add_building_construction = {
 				type = infrastructure
@@ -1879,7 +1897,7 @@ country_event = { #Back to Work
 	option = { #
 		name = kemreg.45.a
 		ai_chance = { factor = 1 }
-		
+		TNO_improve_safety_policy_effectiveness_med = yes
 	}
 }
 
@@ -2115,7 +2133,6 @@ country_event = { #Sanity Slippage
 	picture = GFX_report_event_vodka
 	
 	is_triggered_only = yes
-	fire_only_once = yes
 	
 	option = { #
 		name = kemreg.59.a
@@ -2198,10 +2215,10 @@ country_event = { #Parliamentary Democracy time
 	option = { #
 		name = KEM_yuriy.3.a
 		ai_chance = { factor = 1 }
-		add_popularity = { ideology = social_democrat popularity = 0.035 }
-		add_popularity = { ideology = social_liberal popularity = 0.035 }
-		add_popularity = { ideology = social_conservative popularity = 0.035 }
-		add_popularity = { ideology = authoritarian_democrat popularity = 0.05 }
+		add_popularity = { ideology = social_democracy popularity = 0.035 }
+		add_popularity = { ideology = liberal_democracy popularity = 0.035 }
+		add_popularity = { ideology = conservative_democracy popularity = 0.035 }
+		add_popularity = { ideology = authoritarian_democracy popularity = 0.05 }
 	}
 }
 
@@ -2319,10 +2336,8 @@ country_event = { #Bizarre Visit
 		trigger = {
 			tag = KEM
 		}
-		add_opinion_modifier = {
-			target = USA
-			modifier = RUS_trade
-		}
+		set_temp_variable = { temp_modifier = 25 }
+		USA = { add_to_trade_modifier_PREV = yes }
 	}
 	option = { #
 		name = KEM_yuriy.8.b
@@ -2330,10 +2345,8 @@ country_event = { #Bizarre Visit
 		trigger = {
 			tag = USA
 		}
-		add_opinion_modifier = {
-			target = KEM
-			modifier = RUS_trade
-		}
+		set_temp_variable = { temp_modifier = 25 }
+		KEM = { add_to_trade_modifier_PREV = yes }
 	}
 }
 
@@ -2543,13 +2556,13 @@ country_event = { #Friends in the Sphere
 		trigger = {
 			tag = KEM
 		}
-		custom_effect_tooltip = MAG_made_in_russia_tt
-		add_to_variable = { GDP_growth = 0.005 }
-		add_to_variable = { GDP = 100 }
-		add_opinion_modifier = {
-			target = JAP
-			modifier = RUS_trade
-		}
+		#custom_effect_tooltip = MAG_made_in_russia_tt
+		
+		set_temp_variable = { gdp_growth_temp = 0.5 } #already converted to percent
+		econ_gdp_growth_change = yes
+		
+		set_temp_variable = { temp_modifier = 25 }
+		JAP = { add_to_trade_modifier_PREV = yes }
 	}
 	option = { #
 		name = KEM_lydia.6.b
@@ -2557,13 +2570,13 @@ country_event = { #Friends in the Sphere
 		trigger = {
 			tag = JAP
 		}
-		custom_effect_tooltip = MAG_made_in_russia_tt
-		add_to_variable = { GDP_growth = 0.005 }
-		add_to_variable = { GDP = 100 }
-		add_opinion_modifier = {
-			target = KEM
-			modifier = RUS_trade
-		}
+		#custom_effect_tooltip = MAG_made_in_russia_tt
+		
+		set_temp_variable = { gdp_growth_temp = 0.5 } #already converted to percent
+		econ_gdp_growth_change = yes
+		
+		set_temp_variable = { temp_modifier = 25 }
+		KEM = { add_to_trade_modifier_PREV = yes }
 	}
 }
 

@@ -7,6 +7,7 @@ add_namespace = petlin #Petlin superregional events
 add_namespace = matkovsky #Matkovsky superregional events
 add_namespace = westalaska #West Alaska events
 add_namespace = wa_superregional #West Alaska superregional events
+add_namespace = MAG_WA_journalist #West Alaska Journalist Chain
 add_namespace = MAGCIA #CIA events
 
 ####################################################################################################
@@ -61,7 +62,7 @@ country_event = { #The Tsar focus
 		name = MAG.3.a
 		ai_chance = { factor = 1 }
 		add_political_power = 25
-		WCH = {
+		CHT = {
 			country_event = { id = MAG.38 days = 2 }
 		}
 	}
@@ -80,26 +81,6 @@ country_event = { #Divide and Conquer - Amur perspective
 	option = { #
 		name = MAG.4.a
 		ai_chance = { factor = 1 }
-		561 = {
-			damage_building = {
-				type = infrastructure
-				damage = 0.50
-			}
-			damage_building = {
-				type = arms_factory
-				damage = 1.00
-			}
-		}
-		886 = {
-			damage_building = {
-				type = infrastructure
-				damage = 1.00
-			}
-			damage_building = {
-				type = industrial_complex
-				damage = 1.00
-			}
-		}
 		add_stability = -0.1
 	}
 }
@@ -153,20 +134,20 @@ country_event = { #Welcoming WerBell
 		ai_chance = { factor = 1 }
 		army_experience = 10
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.05
 		}
 		set_party_name = {
-			ideology = authoritarian_democrat
-			long_name = MAG_WA_authoritarian_democrat_party_long
-			name = MAG_WA_authoritarian_democrat_party
+			ideology = authoritarian_democracy
+			long_name = MAG_WA_authoritarian_democracy_party_long
+			name = MAG_WA_authoritarian_democracy_party
 		}
 		create_country_leader = {
 			name = "Mitchell WerBell III"
 			desc = "POLITICS_MITCHELL_WERBELL_DESC"
 			picture = "Portrait_West_Alaska_Mitchell_WerBell_III.dds"
 			expire = "1999.1.1"
-			ideology = authoritarian_democrat_subtype
+			ideology = authoritarian_democracy_stratocracy_subtype
 			traits = { }
 		}
 	}
@@ -185,6 +166,8 @@ country_event = { #Ready At Last focus - Death of Vonsiatsky
 	option = { #
 		name = MAG.8.a
 		ai_chance = { factor = 1 }
+		set_temp_variable = { debt_temp = 0.05 }
+		econ_national_debt_change = yes	
 		hidden_effect = {
 			country_event = { id = MAG.9 days = 1 }
 		}
@@ -220,11 +203,11 @@ country_event = { #The Mercenary Coup
 			popularity = 0.1
 		}
 		set_party_name = {
-			ideology = authoritarian_democrat
-			long_name = MAG_authoritarian_democrat_party_long
-			name = MAG_authoritarian_democrat_party
+			ideology = authoritarian_democracy
+			long_name = MAG_authoritarian_democracy_party_long
+			name = MAG_authoritarian_democracy_party
 		}
-		retire_ideology_leader = authoritarian_democrat
+		retire_ideology_leader = authoritarian_democracy
 		if = {
 			limit = {
 				has_idea = MAG_soldiers_without_borders_idea
@@ -261,12 +244,15 @@ country_event = { #The Mercenary Coup
 		retire_country_leader  = yes
 		retire_ideology_leader = fascism
 		set_politics = {
-			ruling_party = authoritarian_democrat
+			ruling_party = authoritarian_democracy
 		}
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.15
 		}
+		set_temp_variable = { TNO_economy_type_temp = 1 }
+		econ_type_change = yes
+		set_variable = {economy_centralization = 35}
 		hidden_effect = {
 			MAG_add_west_alaska_ministers = yes
 			remove_ideas = RUS_heirs_of_harbin
@@ -284,6 +270,8 @@ country_event = { #The Mercenary Coup
 			mark_focus_tree_layout_dirty = yes
 			country_event = { id = magreg.38 days = 1460 }
 			country_event = { id = MAG.40 days = 3 }
+			country_event = { id = MAG_WA_journalist.1 days = 17 } #Journalist chain start
+			USA = { country_event = { id = MAG_WA_journalist.1 days = 17 } } #Journalist chain start
 		}
 	}
 }
@@ -302,7 +290,7 @@ country_event = { #Put aside our differences
 		name = MAG.10.a
 		ai_chance = { factor = 1 }
 		diplomatic_relation = {
-			country = WCH
+			country = CHT
 			relation = non_aggression_pact
 			active = yes
 		}
@@ -358,6 +346,7 @@ country_event = { #Siberian School - rangers
 		ai_chance = { factor = 1 }
 		army_experience = 10
 		#Add more Siberian Rangers events later
+		TNO_improve_training_policy_effectiveness_low = yes
 	}
 }
 
@@ -375,6 +364,7 @@ country_event = { #The Trial Of Rodzaevsky
 		name = MAG.14.a
 		ai_chance = { factor = 5 }
 		add_stability = 0.1
+		TNO_improve_political_parties_policy_effectiveness_med = yes
 		add_political_power = 35
 		add_popularity = {
 			ideology = national_socialism
@@ -439,6 +429,7 @@ country_event = { #Maneuver Warfare
 	option = { #
 		name = MAG.17.a
 		ai_chance = { factor = 1 }
+		TNO_improve_training_policy_effectiveness_low = yes
 	}
 }
 
@@ -472,7 +463,7 @@ country_event = { #The Man Who Sold the Vozhd
 		name = MAG.19.a
 		ai_chance = { factor = 1 }
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.05
 		}
 	}
@@ -606,6 +597,7 @@ country_event = { #The Siberian Army - we're starting to see some improvements
 	option = { #
 		name = MAG.26.a
 		ai_chance = { factor = 1 }
+		TNO_improve_training_policy_effectiveness_med = yes
 	}
 }
 
@@ -679,13 +671,14 @@ country_event = { #A democratic dissident (Sergei Dmitrievich Solovyov) writes p
 	title = MAG.31.t
 	desc = MAG.31.desc
 	picture = GFX_report_event_russian_letter
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.31.a
 		ai_chance = { factor = 1 }
+		TNO_worsen_press_rights_policy_effectiveness_med = yes
 	}
 }
 
@@ -695,10 +688,10 @@ country_event = { #Smuggled American movies are playing in a newly opened theate
 	title = MAG.32.t
 	desc = MAG.32.desc
 	picture = GFX_report_event_captain_america
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.32.a
 		ai_chance = { factor = 1 }
@@ -711,10 +704,10 @@ country_event = { #A hunter/Siberian person wanders into a town for supplies, no
 	title = MAG.33.t
 	desc = MAG.33.desc
 	picture = GFX_report_event_russia_hunter
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.33.a
 		ai_chance = { factor = 1 }
@@ -727,13 +720,14 @@ country_event = { #Some guys are drinking and playing cards at a local tavern an
 	title = MAG.34.t
 	desc = MAG.34.desc
 	picture = GFX_report_event_mercenary
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.34.a
 		ai_chance = { factor = 1 }
+		TNO_worsen_security_policy_effectiveness_med = yes
 	}
 }
 
@@ -743,10 +737,10 @@ country_event = { #An RFP thug goes home after a long day of being a prick and e
 	title = MAG.35.t
 	desc = MAG.35.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.35.a
 		ai_chance = { factor = 1 }
@@ -759,10 +753,10 @@ country_event = { #Report for the President - USA PERSPECTIVE
 	title = MAG.36.t
 	desc = MAG.36.desc
 	picture = GFX_report_event_potus
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.36.a
 		ai_chance = { factor = 1 }
@@ -775,10 +769,10 @@ country_event = { #Night Terrors
 	title = MAG.37.t
 	desc = MAG.37.desc
 	picture = GFX_report_event_russian_fascists_harbin
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.37.a
 		ai_chance = { factor = 1 }
@@ -791,10 +785,10 @@ country_event = { #Chita ceasefire
 	title = MAG.38.t
 	desc = MAG.38.desc
 	picture = GFX_report_event_generic_sign_treaty1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.38.a
 		ai_chance = { factor = 1 }
@@ -807,13 +801,14 @@ country_event = { #All in a Days Work
 	title = MAG.39.t
 	desc = MAG.39.desc
 	picture = GFX_report_event_iberian_wars_6
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.39.a
 		ai_chance = { factor = 1 }
+		TNO_improve_security_policy_effectiveness_med = yes
 	}
 }
 
@@ -823,10 +818,10 @@ country_event = { #Local Muscle
 	title = MAG.40.t
 	desc = MAG.40.desc
 	picture = GFX_report_event_pub
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.40.a
 		ai_chance = { factor = 1 }
@@ -839,10 +834,10 @@ country_event = { #
 	title = MAG.41.t
 	desc = MAG.41.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.41.a
 		ai_chance = { factor = 1 }
@@ -855,10 +850,10 @@ country_event = { #
 	title = MAG.42.t
 	desc = MAG.42.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.42.a
 		ai_chance = { factor = 1 }
@@ -871,10 +866,10 @@ country_event = { #
 	title = MAG.43.t
 	desc = MAG.43.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.43.a
 		ai_chance = { factor = 1 }
@@ -887,10 +882,10 @@ country_event = { #
 	title = MAG.44.t
 	desc = MAG.44.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.44.a
 		ai_chance = { factor = 1 }
@@ -903,10 +898,10 @@ country_event = { #
 	title = MAG.45.t
 	desc = MAG.45.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.45.a
 		ai_chance = { factor = 1 }
@@ -919,10 +914,10 @@ country_event = { #
 	title = MAG.46.t
 	desc = MAG.46.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.46.a
 		ai_chance = { factor = 1 }
@@ -935,10 +930,10 @@ country_event = { #
 	title = MAG.47.t
 	desc = MAG.47.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.47.a
 		ai_chance = { factor = 1 }
@@ -951,10 +946,10 @@ country_event = { #
 	title = MAG.48.t
 	desc = MAG.48.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.48.a
 		ai_chance = { factor = 1 }
@@ -967,10 +962,10 @@ country_event = { #
 	title = MAG.49.t
 	desc = MAG.49.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.49.a
 		ai_chance = { factor = 1 }
@@ -983,10 +978,10 @@ country_event = { #
 	title = MAG.50.t
 	desc = MAG.50.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = MAG.50.a
 		ai_chance = { factor = 1 }
@@ -1186,6 +1181,7 @@ country_event = { #The Charter of Magadan
 	option = { #
 		name = magexp.11.a
 		ai_chance = { factor = 1 }
+		TNO_improve_political_parties_policy_effectiveness_med = yes
 		set_party_name = {
 			ideology = fascism
 			long_name = "Russkaya Natsionalnaya Trudovaya Partiya"
@@ -1261,7 +1257,7 @@ country_event = { #From the Taiga to the Seas
 	option = { #
 		name = magreg.2.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -1307,13 +1303,13 @@ country_event = { #Reformists take-over
 		name = magreg.4.a
 		ai_chance = { factor = 1 }
 		set_politics = {
-			ruling_party = authoritarian_democrat
+			ruling_party = authoritarian_democracy
 		}
 		add_ideas = {
 			MAG_Sergey_Solovyev_hog
 			MAG_Yuriy_Vlasov_for
 			MAG_Andrey_Starostin_eco
- 			MAG_Lev_Netto_sec
+			MAG_Lev_Netto_sec
 		}
 		retire_ideology_leader = despotism
 		clr_country_flag = MAG_regional_factions
@@ -1343,8 +1339,17 @@ country_event = { #Reformists arrested
 		clr_country_flag = MAG_will_of_the_people
 		set_country_flag = MAG_reformists_arrested
 		add_ideas = MAG_Igor_Kovalchuk_Koval_for
+		retire_ideology_leader = authoritarian_democracy
 		hidden_effect = {
 			country_event = { id = magreg.33 days = 7 }
+			create_country_leader = {
+				name = "No Leader"
+				desc = ""
+				picture = ""
+				expire = "1999.1.1"
+				ideology = authoritarian_democracy_controlled_democracy_subtype
+				traits = { }
+			}
 		}
 	}
 }
@@ -1478,29 +1483,22 @@ country_event = { #A Free Haven - Magadan event II
 	option = { #
 		name = magreg.11.a
 		ai_chance = { factor = 1 }
+		TNO_improve_immigration_policy_effectiveness_med = yes
 		random_owned_controlled_state = {
 			limit = {
-				NOT = {
-					has_state_category = wasteland
-				}
+				state = 637
 			}
 			add_manpower = 12500
 		}
 		random_owned_controlled_state = {
 			limit = {
-				NOT = {
-					has_state_category = wasteland
-					has_state_category = pastoral
-					has_state_category = rural
-				}
+				state = 562
 			}
 			add_manpower = 32780
 		}
 		random_owned_controlled_state = {
 			limit = {
-				NOT = {
-					has_state_category = wasteland
-				}
+				state = 566
 			}
 			add_manpower = 21420
 		}
@@ -1546,8 +1544,8 @@ country_event = { #A City Upon a Hill 2 - USA event - Matkovsky
 		ai_chance = { factor = 120 }
 		trigger = {
 			OR = {
-				has_government = social_conservative
-				has_government = authoritarian_democrat
+				has_government = conservative_democracy
+				has_government = authoritarian_democracy
 			}
 		}
 		MAG = {
@@ -1580,7 +1578,7 @@ country_event = { #A City Upon a Hill 2 - USA event - Petlin
 			country_event = { id = magreg.15 days = 1 }
 		}
 	}
-	option = { #No 
+	option = { #No
 		name = magreg.14.b
 		ai_chance = { factor = 30 }
 		MAG = {
@@ -1680,12 +1678,14 @@ country_event = { #Expanded trade with USA - Magadan
 	option = { #
 		name = magreg.17.a
 		ai_chance = { factor = 1 }
+		TNO_improve_trade_laws_policy_effectiveness_med = yes
 		add_opinion_modifier = {
 			target = USA
 			modifier = TNO_opened_diplomatic_relations
 		}
-		add_to_variable = { GDP = 4250 }
-		custom_effect_tooltip = MAG_the_american_siberian_trade_act_tt
+		econ_join_sphere_USA = yes
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.05 }
+		econ_GDP_boost_once_percentage = yes
 	}
 }
 
@@ -1706,8 +1706,8 @@ country_event = { #Expanded trade with USA - USA
 			target = MAG
 			modifier = TNO_opened_diplomatic_relations
 		}
-		add_to_variable = { GDP = 1250 }
-		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
+		econ_GDP_boost_once_percentage = yes
 	}
 }
 
@@ -1724,8 +1724,8 @@ country_event = { #USA doesn't love us fucc
 	option = { #
 		name = magreg.19.a
 		ai_chance = { factor = 1 }
-		add_to_variable = { GDP = 500 }
-		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
+		econ_GDP_boost_once_percentage = yes
 		add_stability = -0.05
 	}
 }
@@ -1749,8 +1749,8 @@ country_event = { #Magadan appeals to us
 			target = MAG
 			modifier = TNO_opened_diplomatic_relations
 		}
-		add_to_variable = { GDP = 1000 }
-		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+		set_temp_variable = { temp_econ_GDP_boost_flat = 0.02 }
+		econ_GDP_boost_once_flat = yes
 	}
 	option = { #
 		name = magreg.20.b
@@ -1774,12 +1774,13 @@ country_event = { #[Country] quite approves of us
 		name = magreg.21.a
 		ai_chance = { factor = 75 }
 		add_political_power = 25
+		TNO_improve_trade_laws_policy_effectiveness_med = yes
 		add_opinion_modifier = {
 			target = FROM
 			modifier = TNO_opened_diplomatic_relations
 		}
-		add_to_variable = { GDP = 1500 }
-		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
+		set_temp_variable = { temp_econ_GDP_boost_flat = 0.125 }
+		econ_GDP_boost_once_flat = yes
 	}
 }
 
@@ -1796,6 +1797,7 @@ country_event = { #[Country] tells us to fuck off
 		name = magreg.22.a
 		ai_chance = { factor = 75 }
 		add_political_power = -10
+		TNO_worsen_trade_laws_policy_effectiveness_med = yes
 	}
 }
 
@@ -1812,6 +1814,8 @@ country_event = { #Russian Liberation Front
 	option = { #
 		name = magreg.23.a
 		ai_chance = { factor = 75 }
+		set_temp_variable = { debt_temp = 0.1 }
+		econ_national_debt_change = yes
 		MAN = {
 			add_stability = -0.1
 		}
@@ -1842,14 +1846,16 @@ country_event = { #Dalstroy is founded; Solovyev and co get sent to labor camps
 	title = magreg.25.t
 	desc = magreg.25.desc
 	picture = GFX_report_event_russia_vorkutlag
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.25.a
 		ai_chance = { factor = 1 }
 		add_ideas = tno_penal_system_penal_labor
+		TNO_worsen_penal_system_policy_effectiveness_med = yes
+		TNO_improve_penal_system_policy_effectiveness_monthly_low = yes
 	}
 }
 
@@ -1859,24 +1865,26 @@ country_event = { #Fresh Coat of Paint
 	title = magreg.26.t
 	desc = magreg.26.desc
 	picture = GFX_report_event_komi_congress_4
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.26.a
 		ai_chance = { factor = 1 }
+		TNO_worsen_political_parties_policy_effectiveness_med = yes
+		TNO_improve_political_parties_policy_effectiveness_monthly_low = yes
 		set_politics = {
 			ruling_party = despotism
 		}
-		add_popularity = { ideology = despotism popularity = 0.25 }
-		add_popularity = { ideology = authoritarian_democrat popularity = 0.2 }
+		add_popularity = { ideology = despotism popularity = 0.45 }
+		add_popularity = { ideology = authoritarian_democracy popularity = 0.2 }
 		create_country_leader = {
 			name = "Mikhail Matkovsky"
 			desc = "POLITICS_MIKHAIL_MATKOVSKY_DESC"
 			picture = "Portrait_Magadan_Mikhail_Matkovsky.dds"
 			expire = "1999.1.1"
-			ideology = despotism_subtype
+			ideology = despotism_civilian_dictatorship_subtype
 			traits = { the_knyaz }
 		}
 		create_country_leader = {
@@ -1884,7 +1892,7 @@ country_event = { #Fresh Coat of Paint
 			desc = "POLITICS_NIKOLAY_PETLIN_DESC"
 			picture = "Portrait_Magadan_Nikolay_Petlin.dds"
 			expire = "1999.1.1"
-			ideology = authoritarian_democrat_subtype
+			ideology = authoritarian_democracy_dominant_party_democracy_subtype
 			traits = { }
 		}
 		create_country_leader = {
@@ -1892,7 +1900,7 @@ country_event = { #Fresh Coat of Paint
 			desc = "POLITICS_VLADIMIR_KIBARDIN_DESC"
 			picture = "Portrait_Magadan_Vladimir_Kibardin.dds"
 			expire = "1999.1.1"
-			ideology = fascism_subtype
+			ideology = fascism_national_syndicalism_subtype
 			traits = {  }
 		}
 		set_party_name = {
@@ -1906,7 +1914,7 @@ country_event = { #Fresh Coat of Paint
 			name = MAG_reg_despotism_party
 		}
 		set_party_name = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			long_name = MAG_reg_authoritatian_democrat_party_long
 			name = MAG_reg_authoritatian_democrat_party
 		}
@@ -1925,14 +1933,14 @@ country_event = { #Grand Sobor
 	title = magreg.27.t
 	desc = magreg.27.desc
 	picture = GFX_report_event_generic_congress
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.27.a
 		ai_chance = { factor = 1 }
-		add_popularity = { ideology = authoritarian_democrat popularity = 0.035	}
+		add_popularity = { ideology = authoritarian_democracy popularity = 0.035	}
 	}
 }
 
@@ -1942,15 +1950,16 @@ country_event = { #Will of the Vozhd
 	title = magreg.28.t
 	desc = magreg.28.desc
 	picture = GFX_report_event_congress_failure
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.28.a
 		ai_chance = { factor = 1 }
 		add_popularity = { ideology = despotism popularity = 0.035	}
 		add_popularity = { ideology = fascism popularity = 0.015	}
+		TNO_worsen_political_parties_policy_effectiveness_med = yes
 	}
 }
 
@@ -1960,13 +1969,16 @@ country_event = { #Radio Free Magadan is given more freedom
 	title = magreg.29.t
 	desc = magreg.29.desc
 	picture = GFX_report_event_radio_magadan
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.29.a
 		ai_chance = { factor = 1 }
+		tno_press_rights_improve = yes
+		TNO_worsen_press_rights_policy_effectiveness_med = yes
+		TNO_improve_press_rights_policy_effectiveness_monthly_low = yes
 	}
 }
 
@@ -1976,10 +1988,10 @@ country_event = { #Radio Free Magadan spouts pro-Matkovsky propaganda
 	title = magreg.30.t
 	desc = magreg.30.desc
 	picture = GFX_report_event_radio_magadan
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.30.a
 		ai_chance = { factor = 1 }
@@ -1992,10 +2004,10 @@ country_event = { #The Long Road
 	title = magreg.31.t
 	desc = magreg.31.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.31.a
 		ai_chance = { factor = 1 }
@@ -2008,10 +2020,10 @@ country_event = { #Post-Matkovsky coup
 	title = magreg.32.t
 	desc = magreg.32.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.32.a
 		ai_chance = { factor = 1 }
@@ -2024,10 +2036,10 @@ country_event = { #After arresting Petlin
 	title = magreg.33.t
 	desc = magreg.33.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.33.a
 		ai_chance = { factor = 1 }
@@ -2040,10 +2052,10 @@ country_event = { #Petlin prepares to go to the US
 	title = magreg.34.t
 	desc = magreg.34.desc
 	picture = GFX_report_event_cog_plane
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.34.a
 		ai_chance = { factor = 1 }
@@ -2064,10 +2076,10 @@ country_event = { #Medals of Dishonor
 	title = magreg.35.t
 	desc = magreg.35.desc
 	picture = GFX_report_event_soviet_russian_soldiers_3
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.35.a
 		ai_chance = { factor = 1 }
@@ -2080,10 +2092,10 @@ country_event = { #Reform the Blackshirts
 	title = magreg.36.t
 	desc = magreg.36.desc
 	picture = GFX_report_event_iberia_detective_desk
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.36.a
 		ai_chance = { factor = 1 }
@@ -2096,10 +2108,10 @@ country_event = { #Way the Wind Blows
 	title = magreg.37.t
 	desc = magreg.37.desc
 	picture = GFX_report_event_river_boat
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.37.a
 		ai_chance = { factor = 1 }
@@ -2112,10 +2124,10 @@ country_event = { #Starting Fresh
 	title = magreg.38.t
 	desc = magreg.38.desc
 	picture = GFX_report_event_vodka
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.38.a
 		ai_chance = { factor = 1 }
@@ -2128,10 +2140,10 @@ country_event = { #
 	title = magreg.39.t
 	desc = magreg.39.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.39.a
 		ai_chance = { factor = 1 }
@@ -2144,10 +2156,10 @@ country_event = { #
 	title = magreg.40.t
 	desc = magreg.40.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.40.a
 		ai_chance = { factor = 1 }
@@ -2160,10 +2172,10 @@ country_event = { #
 	title = magreg.41.t
 	desc = magreg.41.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.41.a
 		ai_chance = { factor = 1 }
@@ -2176,10 +2188,10 @@ country_event = { #
 	title = magreg.42.t
 	desc = magreg.42.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.42.a
 		ai_chance = { factor = 1 }
@@ -2192,10 +2204,10 @@ country_event = { #
 	title = magreg.43.t
 	desc = magreg.43.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.43.a
 		ai_chance = { factor = 1 }
@@ -2208,10 +2220,10 @@ country_event = { #
 	title = magreg.44.t
 	desc = magreg.44.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.44.a
 		ai_chance = { factor = 1 }
@@ -2224,10 +2236,10 @@ country_event = { #
 	title = magreg.45.t
 	desc = magreg.45.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.45.a
 		ai_chance = { factor = 1 }
@@ -2240,10 +2252,10 @@ country_event = { #
 	title = magreg.46.t
 	desc = magreg.46.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.46.a
 		ai_chance = { factor = 1 }
@@ -2256,10 +2268,10 @@ country_event = { #
 	title = magreg.47.t
 	desc = magreg.47.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.47.a
 		ai_chance = { factor = 1 }
@@ -2272,10 +2284,10 @@ country_event = { #
 	title = magreg.48.t
 	desc = magreg.48.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.48.a
 		ai_chance = { factor = 1 }
@@ -2288,10 +2300,10 @@ country_event = { #
 	title = magreg.49.t
 	desc = magreg.49.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.49.a
 		ai_chance = { factor = 1 }
@@ -2304,10 +2316,10 @@ country_event = { #
 	title = magreg.50.t
 	desc = magreg.50.desc
 	#picture = GFX_
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = magreg.50.a
 		ai_chance = { factor = 1 }
@@ -2323,10 +2335,10 @@ country_event = { #New Dawn
 	title = petlin.1.t
 	desc = petlin.1.desc
 	picture = GFX_report_event_russian_letter
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.1.a
 		ai_chance = { factor = 1 }
@@ -2341,19 +2353,17 @@ country_event = { #Bond the Eagles - USA
 	title = petlin.2.t
 	desc = petlin.2.desc
 	picture = GFX_report_event_generic_sign_treaty2
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.2.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
-		add_to_variable = { GDP = 500 }
-		add_opinion_modifier = {
-			target = MAG
-			modifier = RUS_trade
-		}
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
+		econ_GDP_boost_once_percentage = yes
+		set_temp_variable = { temp_modifier = 25 }
+		MAG = { add_to_trade_modifier_PREV = yes }
 		MAG = {
 			country_event = { id = petlin.3 }
 		}
@@ -2366,22 +2376,20 @@ country_event = { #Bond the Eagles - Magadan
 	title = petlin.3.t
 	desc = petlin.3.desc
 	picture = GFX_report_event_generic_sign_treaty3
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.3.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = USA_the_american_siberian_trade_act_tt
-		add_to_variable = { GDP = 500 }
-		add_opinion_modifier = {
-			target = USA
-			modifier = RUS_trade
-		}
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
+		econ_GDP_boost_once_percentage = yes
+		set_temp_variable = { temp_modifier = 25 }
+		USA = { add_to_trade_modifier_PREV = yes }
 
 		hidden_effect = { #I randomly chose this as the trigger for a flavour event
-			MAG = { 
+			MAG = {
 				country_event = {
 					id = petlin.13
 					days = 30
@@ -2397,15 +2405,16 @@ country_event = { #Shadow of the Vozhd
 	title = petlin.4.t
 	desc = petlin.4.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.4.a
 		ai_chance = { factor = 1 }
 		add_political_power = -15
-		add_popularity = { ideology = authoritarian_democrat popularity = 0.05 }
+		add_popularity = { ideology = authoritarian_democracy popularity = 0.05 }
+		remove_unit_leader = 3771
 	}
 }
 
@@ -2415,10 +2424,10 @@ country_event = { #Disband Dalstroy
 	title = petlin.5.t
 	desc = petlin.5.desc
 	picture = GFX_report_event_russian_crowd
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.5.a
 		ai_chance = { factor = 1 }
@@ -2431,10 +2440,10 @@ country_event = { #Redemption of Harbin
 	title = petlin.6.t
 	desc = petlin.6.desc
 	picture = GFX_report_event_russian_letter
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.6.a
 		ai_chance = { factor = 1 }
@@ -2450,10 +2459,10 @@ country_event = { #Assembly of Novosibirsk 1
 	title = petlin.7.t
 	desc = petlin.7.desc
 	picture = GFX_report_event_komi_congress_4
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.7.a
 		ai_chance = { factor = 1 }
@@ -2469,20 +2478,22 @@ country_event = { #Assembly of Novosibirsk 2
 	title = petlin.8.t
 	desc = petlin.8.desc
 	picture = GFX_report_event_komi_congress_3
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.8.a
 		ai_chance = { factor = 1 }
 		set_capital = 570
 		RUS_integration_cost_days_decrease = yes
-		add_popularity = { ideology = social_liberal popularity = 0.035 }
-		add_popularity = { ideology = social_conservative popularity = 0.025 }
-		add_popularity = { ideology = authoritarian_democrat popularity = 0.025 }
+		add_popularity = { ideology = liberal_democracy popularity = 0.035 }
+		add_popularity = { ideology = conservative_democracy popularity = 0.025 }
+		add_popularity = { ideology = authoritarian_democracy popularity = 0.025 }
 		add_political_power = -50
 		tno_political_parties_improve = yes
+		TNO_worsen_political_parties_policy_effectiveness_med = yes
+		TNO_improve_political_parties_policy_effectiveness_monthly_low = yes
 	}
 }
 
@@ -2492,10 +2503,10 @@ country_event = { #Drafting a Constitution
 	title = petlin.9.t
 	desc = petlin.9.desc
 	picture = GFX_report_event_generic_sign_treaty1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.9.a
 		ai_chance = { factor = 1 }
@@ -2509,10 +2520,10 @@ country_event = { #Towards Freedom and Unity
 	title = petlin.10.t
 	desc = petlin.10.desc
 	picture = GFX_report_event_komi_syktyvkar_5
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.10.a
 		ai_chance = { factor = 1 }
@@ -2525,10 +2536,10 @@ country_event = { #Home Again
 	title = petlin.11.t
 	desc = petlin.11.desc
 	picture = GFX_report_event_komi_house_2
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.11.a
 		ai_chance = { factor = 1 }
@@ -2541,13 +2552,14 @@ country_event = { #Epilogue
 	title = petlin.12.t
 	desc = petlin.12.desc
 	picture = GFX_report_event_komi_syktyvkar_4
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.12.a
 		ai_chance = { factor = 1 }
+		#ideology = authoritarian_democracy_oligarchy_subtype
 		TNO_russia_ending_screen = yes
 	}
 }
@@ -2558,10 +2570,10 @@ country_event = { #Siberian Sports (a flavour event)
 	title = petlin.13.t
 	desc = petlin.13.desc
 	picture = GFX_report_event_hockey
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.13.a
 		ai_chance = { factor = 1 }
@@ -2575,10 +2587,10 @@ country_event = { #The Old Admiral
 	title = petlin.14.t
 	desc = petlin.14.desc
 	picture = GFX_report_event_river_boat
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = petlin.14.a
 		ai_chance = { factor = 1 }
@@ -2593,10 +2605,10 @@ country_event = { #The Vozhd Marches On
 	title = matkovsky.1.t
 	desc = matkovsky.1.desc
 	picture = GFX_report_event_russian_letter
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.1.a
 		ai_chance = { factor = 1 }
@@ -2609,10 +2621,10 @@ country_event = { #
 	title = matkovsky.2.t
 	desc = matkovsky.2.desc
 	picture = GFX_report_event_generic_sign_treaty1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.2.a
 		ai_chance = { factor = 1 }
@@ -2626,14 +2638,15 @@ country_event = { #Qualify Votes and Districts
 	title = matkovsky.3.t
 	desc = matkovsky.3.desc
 	picture = GFX_report_event_generic_sign_treaty3
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.3.a
 		ai_chance = { factor = 1 }
 		add_popularity = { ideology = despotism popularity = 0.015 }
+		TNO_worsen_vote_franchise_policy_effectiveness_med = yes
 	}
 }
 
@@ -2643,10 +2656,10 @@ country_event = { #The Ideological Quagmire
 	title = matkovsky.4.t
 	desc = matkovsky.4.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.4.a
 		ai_chance = { factor = 1 }
@@ -2660,14 +2673,15 @@ country_event = { #The Consciousness of Law
 	title = matkovsky.5.t
 	desc = matkovsky.5.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.5.a
 		ai_chance = { factor = 1 }
 		tno_security_improve = yes
+		TNO_worsen_security_policy_effectiveness_low = yes
 	}
 }
 
@@ -2677,10 +2691,10 @@ country_event = { #Peace Preservation Act
 	title = matkovsky.6.t
 	desc = matkovsky.6.desc
 	picture = GFX_report_event_generic_sign_treaty3
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.6.a
 		ai_chance = { factor = 1 }
@@ -2695,10 +2709,10 @@ country_event = { #No Partisanship, No Problem
 	title = matkovsky.7.t
 	desc = matkovsky.7.desc
 	picture = GFX_report_event_usa_election_generic
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.7.a
 		ai_chance = { factor = 1 }
@@ -2713,10 +2727,10 @@ country_event = { #Sensible Concessions
 	title = matkovsky.8.t
 	desc = matkovsky.8.desc
 	picture = GFX_report_event_generic_sign_treaty3
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.8.a
 		ai_chance = { factor = 1 }
@@ -2739,14 +2753,15 @@ country_event = { #An Army to be Proud Of
 	title = matkovsky.9.t
 	desc = matkovsky.9.desc
 	picture = GFX_report_event_soldiers_training
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.9.a
 		ai_chance = { factor = 1 }
 		army_experience = 5
+		TNO_improve_training_policy_effectiveness_med = yes
 	}
 }
 
@@ -2756,10 +2771,10 @@ country_event = { #The Struggle for the National Russia
 	title = matkovsky.10.t
 	desc = matkovsky.10.desc
 	picture = GFX_report_event_russian_letter
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.10.a
 		ai_chance = { factor = 1 }
@@ -2772,10 +2787,10 @@ country_event = { #Epilogue
 	title = matkovsky.11.t
 	desc = matkovsky.11.desc
 	picture = GFX_report_event_record_player
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = matkovsky.11.a
 		ai_chance = { factor = 1 }
@@ -2786,7 +2801,7 @@ country_event = { #Epilogue
 				desc = "POLITICS_MIKHAIL_MATKOVSKY_70S_DESC"
 				picture = "Portrait_Magadan_Mikhail_Matkovsky_70s.dds"
 				expire = "1999.1.1"
-				ideology = despotism_subtype
+				ideology = despotism_civilian_dictatorship_subtype
 				traits = { the_knyaz }
 			}
 			TNO_russia_ending_screen = yes
@@ -2930,7 +2945,7 @@ country_event = { #Proclaim the Soldier's Republic - Drafting a constitution
 		name = westalaska.8.a
 		ai_chance = { factor = 1 }
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.1
 		}
 	}
@@ -2978,10 +2993,10 @@ country_event = { #In Defense of the Republic
 	title = westalaska.11.t
 	desc = westalaska.11.desc
 	picture = GFX_report_event_iberia_detective_desk
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.11.a
 		ai_chance = { factor = 1 }
@@ -2995,10 +3010,10 @@ country_event = { #Modernization and Standardization
 	title = westalaska.12.t
 	desc = westalaska.12.desc
 	picture = GFX_report_event_west_alaska_werbell_training
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.12.a
 		ai_chance = { factor = 1 }
@@ -3012,10 +3027,10 @@ country_event = { #Encourage Local Recruitment
 	title = westalaska.13.t
 	desc = westalaska.13.desc
 	picture = GFX_report_event_west_alaska_mercs
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.13.a
 		ai_chance = { factor = 1 }
@@ -3028,10 +3043,10 @@ country_event = { #Heia Safari!
 	title = westalaska.14.t
 	desc = westalaska.14.desc
 	picture = GFX_report_event_radio_magadan
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.14.a
 		ai_chance = { factor = 1 }
@@ -3066,10 +3081,10 @@ country_event = { #The Man of a Thousand Lives
 	title = westalaska.15.t
 	desc = westalaska.15.desc
 	picture = GFX_report_event_west_alaska_faulques
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.15.a
 		ai_chance = { factor = 1 }
@@ -3096,10 +3111,10 @@ country_event = { #Hotline America
 	title = westalaska.16.t
 	desc = westalaska.16.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.16.a
 		ai_chance = { factor = 1 }
@@ -3118,14 +3133,16 @@ country_event = { #Military Armaments Corporation
 	title = westalaska.17.t
 	desc = westalaska.17.desc
 	picture = GFX_report_event_arms_dealers
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.17.a
 		ai_chance = { factor = 1 }
 		add_ideas = MAG_WA_MAC
+		set_temp_variable = { gdp_growth_temp = 0.03 }
+		econ_gdp_growth_change = yes
 		hidden_effect = {
 			country_event = { id = westalaska.50 days = 28 random = 72 }
 		}
@@ -3138,10 +3155,10 @@ country_event = { #Construct New Training Centers
 	title = westalaska.18.t
 	desc = westalaska.18.desc
 	picture = GFX_report_event_soldiers_training
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.18.a
 		ai_chance = { factor = 1 }
@@ -3155,10 +3172,10 @@ country_event = { #A New Haven
 	title = westalaska.19.t
 	desc = westalaska.19.desc
 	picture = GFX_report_event_iberia_home_office_desk
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.19.a
 		ai_chance = { factor = 1 }
@@ -3172,14 +3189,14 @@ country_event = { #Illiberalism By Necessity
 	title = westalaska.20.t
 	desc = westalaska.20.desc
 	picture = GFX_report_event_russia_advertisements
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.20.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3189,10 +3206,10 @@ country_event = { #Integrating the NKVD
 	title = westalaska.21.t
 	desc = westalaska.21.desc
 	picture = GFX_report_event_russia_nkvd_officer
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.21.a
 		ai_chance = { factor = 1 }
@@ -3216,10 +3233,10 @@ country_event = { #Make Use of the Blackshirts
 	title = westalaska.22.t
 	desc = westalaska.22.desc
 	picture = GFX_report_event_russia_roa_soldier
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.22.a
 		ai_chance = { factor = 1 }
@@ -3248,14 +3265,14 @@ country_event = { #Executive Orders
 	title = westalaska.23.t
 	desc = westalaska.23.desc
 	picture = GFX_report_event_the_man_who_sold_the_world
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.23.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3265,14 +3282,14 @@ country_event = { #A Velvet-Gloved Iron Fist
 	title = westalaska.24.t
 	desc = westalaska.24.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.24.a
 		ai_chance = { factor = 1 }
-		
+		TNO_improve_security_policy_effectiveness_med = yes
 	}
 }
 
@@ -3282,14 +3299,14 @@ country_event = { #The Carrot and the Stick
 	title = westalaska.25.t
 	desc = westalaska.25.desc
 	picture = GFX_report_event_russia_siberian_worker
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.25.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3299,14 +3316,14 @@ country_event = { #With Us or Against Us
 	title = westalaska.26.t
 	desc = westalaska.26.desc
 	picture = GFX_report_event_russia_west_alaska_report
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.26.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3316,14 +3333,14 @@ country_event = { #Assign Regional Commanders
 	title = westalaska.27.t
 	desc = westalaska.27.desc
 	picture = GFX_report_event_russia_orenburg
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.27.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3333,14 +3350,14 @@ country_event = { #Representation through Service
 	title = westalaska.28.t
 	desc = westalaska.28.desc
 	picture = GFX_report_event_russia_food_line
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.28.a
 		ai_chance = { factor = 1 }
-		
+		TNO_improve_conscription_policy_effectiveness_low = yes
 	}
 }
 
@@ -3350,14 +3367,14 @@ country_event = { #By the Dawn's Early Light
 	title = westalaska.29.t
 	desc = westalaska.29.desc
 	picture = GFX_report_event_russia_magadan_1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.29.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3367,14 +3384,14 @@ country_event = { #Woe to the Vanquished
 	title = westalaska.30.t
 	desc = westalaska.30.desc
 	picture = GFX_report_event_russia_tsarist_treasure
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.30.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3384,14 +3401,14 @@ country_event = { #Open for Business
 	title = westalaska.31.t
 	desc = westalaska.31.desc
 	picture = GFX_report_event_winter_soldiers
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.31.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3401,10 +3418,10 @@ country_event = { #Cautious Reinvestment
 	title = westalaska.32.t
 	desc = westalaska.32.desc
 	picture = GFX_report_event_generic_sign_treaty1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.32.a
 		ai_chance = { factor = 1 }
@@ -3427,14 +3444,14 @@ country_event = { #Invite American Companies
 	title = westalaska.33.t
 	desc = westalaska.33.desc
 	picture = GFX_report_event_truck_logging
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.33.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3444,14 +3461,14 @@ country_event = { #Contracts and Connections
 	title = westalaska.34.t
 	desc = westalaska.34.desc
 	picture = GFX_report_event_usa_wfb_subcommittees
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.34.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3461,14 +3478,14 @@ country_event = { #A Taste of American Capitalism
 	title = westalaska.35.t
 	desc = westalaska.35.desc
 	picture = GFX_report_event_coca_cola_ad
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.35.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3478,14 +3495,15 @@ country_event = { #And the Locals to Work
 	title = westalaska.36.t
 	desc = westalaska.36.desc
 	picture = GFX_report_event_Flatcap_Worker
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.36.a
 		ai_chance = { factor = 1 }
-		
+		set_temp_variable = {econ_centralization_temp = 5}
+		econ_centralization_change = yes 
 	}
 }
 
@@ -3495,14 +3513,14 @@ country_event = { #Information Trade
 	title = westalaska.37.t
 	desc = westalaska.37.desc
 	picture = GFX_report_event_iberia_guy_paper_meeting
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.37.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3512,14 +3530,14 @@ country_event = { #A Respectable Distance
 	title = westalaska.38.t
 	desc = westalaska.38.desc
 	picture = GFX_report_event_free_france_shipments
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.38.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3529,14 +3547,14 @@ country_event = { #A Brand New Market
 	title = westalaska.39.t
 	desc = westalaska.39.desc
 	picture = GFX_report_event_river_boat
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.39.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3546,14 +3564,14 @@ country_event = { #Back in the Game
 	title = westalaska.40.t
 	desc = westalaska.40.desc
 	picture = GFX_report_event_usa_wfb_silver_bars
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.40.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3563,10 +3581,10 @@ country_event = { #Appeal USA for recognition
 	title = westalaska.41.t
 	desc = westalaska.41.desc
 	picture = GFX_report_event_russia_west_alaska_flag_1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #Accept
 		name = westalaska.41.a
 		ai_chance = { factor = 5 }
@@ -3597,10 +3615,10 @@ country_event = { #USA accepts
 	title = westalaska.42.t
 	desc = westalaska.42.desc
 	picture = GFX_report_event_generic_sign_treaty2
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.42.a
 		ai_chance = { factor = 1 }
@@ -3618,14 +3636,14 @@ country_event = { #USA declines
 	title = westalaska.43.t
 	desc = westalaska.43.desc
 	picture = GFX_report_event_generic_sign_treaty2
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.43.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3635,28 +3653,24 @@ country_event = { #Trade with OFN minors
 	title = westalaska.44.t
 	desc = westalaska.44.desc
 	picture = GFX_report_event_usa_wfb_pegged_currency_meeting
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.44.a
 		ai_chance = { factor = 5 }
-		add_opinion_modifier = {
-			target = MAG
-			modifier = RUS_trade
-		}
+		set_temp_variable = { temp_modifier = 25 }
+		MAG = { add_to_trade_modifier_PREV = yes }
 		MAG = {
-			add_opinion_modifier = {
-				target = ROOT
-				modifier = RUS_trade
-			}
+			set_temp_variable = { temp_modifier = 25 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 	}
 	option = { #
 		name = westalaska.44.b
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3666,14 +3680,14 @@ country_event = { #Denouncing Japan
 	title = westalaska.45.t
 	desc = westalaska.45.desc
 	picture = GFX_report_event_werbell_suit
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.45.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -3683,10 +3697,10 @@ country_event = { #America has recognised us, how much do we cooperate with them
 	title = westalaska.46.t
 	desc = westalaska.46.desc
 	picture = GFX_report_event_generic_sign_treaty1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #eh just a bit of cia support
 		name = westalaska.46.a
 		ai_chance = { factor = 1 }
@@ -3705,10 +3719,10 @@ country_event = { #America has not recognised us, but are still willing to suppo
 	title = westalaska.47.t
 	desc = westalaska.47.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.47.a
 		ai_chance = { factor = 1 }
@@ -3722,10 +3736,10 @@ country_event = { #Nancy leaves
 	title = westalaska.48.t
 	desc = westalaska.48.desc
 	picture = GFX_report_event_river_boat
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.48.a
 		ai_chance = { factor = 1 }
@@ -3745,10 +3759,10 @@ country_event = { #New Haven
 	title = westalaska.49.t
 	desc = westalaska.49.desc
 	picture = GFX_report_event_russia_magadan_1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.49.a
 		ai_chance = { factor = 1 }
@@ -3761,13 +3775,15 @@ country_event = { #The Gun that Conquered Russia
 	title = westalaska.50.t
 	desc = westalaska.50.desc
 	picture = GFX_report_event_arms_dealers
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.50.a
 		ai_chance = { factor = 1 }
+		set_temp_variable = { gdp_growth_temp = 0.06 }
+		econ_gdp_growth_change = yes
 	}
 }
 
@@ -3777,10 +3793,10 @@ country_event = { #Supplying Wetwork
 	title = westalaska.51.t
 	desc = westalaska.51.desc
 	picture = GFX_report_event_russia_west_alaska_flag_1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.51.a
 		ai_chance = { factor = 1 }
@@ -3795,10 +3811,10 @@ country_event = { #Legal Path to Collaboration
 	title = westalaska.52.t
 	desc = westalaska.52.desc
 	picture = GFX_report_event_iberia_home_office_desk
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.52.a
 		ai_chance = { factor = 1 }
@@ -3811,10 +3827,10 @@ country_event = { #Prioritize the Mercenary State
 	title = westalaska.53.t
 	desc = westalaska.53.desc
 	picture = GFX_report_event_iberia_guy_paper_meeting
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.53.a
 		ai_chance = { factor = 1 }
@@ -3827,10 +3843,10 @@ country_event = { #Bad News
 	title = westalaska.54.t
 	desc = westalaska.54.desc
 	picture = GFX_report_event_russia_west_alaska_report
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.54.a
 		ai_chance = { factor = 1 }
@@ -3844,10 +3860,10 @@ country_event = { #Under the Table
 	title = westalaska.55.t
 	desc = westalaska.55.desc
 	picture = GFX_report_event_secret_squirrel_stuff
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.55.a
 		ai_chance = { factor = 1 }
@@ -3861,10 +3877,10 @@ country_event = { #A Group Above Nations
 	title = westalaska.56.t
 	desc = westalaska.56.desc
 	picture = GFX_report_event_werbell_suit
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.56.a
 		ai_chance = { factor = 1 }
@@ -3877,10 +3893,10 @@ country_event = { #Over the Table
 	title = westalaska.57.t
 	desc = westalaska.57.desc
 	picture = GFX_report_event_generic_sign_treaty1
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.57.a
 		ai_chance = { factor = 1 }
@@ -3894,10 +3910,10 @@ country_event = { #Boot Camp
 	title = westalaska.58.t
 	desc = westalaska.58.desc
 	picture = GFX_report_event_west_alaska_mercs
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.58.a
 		ai_chance = { factor = 1 }
@@ -3913,10 +3929,10 @@ country_event = { #Field Training
 	title = westalaska.59.t
 	desc = westalaska.59.desc
 	picture = GFX_report_event_winter_soldiers
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.59.a
 		ai_chance = { factor = 1 }
@@ -3929,10 +3945,10 @@ country_event = { #Squad Patrol
 	title = westalaska.60.t
 	desc = westalaska.60.desc
 	picture = GFX_report_event_west_alaska_merc_unit
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.60.a
 		ai_chance = { factor = 1 }
@@ -3949,10 +3965,10 @@ country_event = { #
 	title = westalaska.61.t
 	desc = westalaska.61.desc
 	picture = GFX_report_event_west_alaska_merc_unit
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.61.a
 		ai_chance = { factor = 1 }
@@ -3965,10 +3981,10 @@ country_event = { #
 	title = westalaska.62.t
 	desc = westalaska.62.desc
 	picture = GFX_report_event_west_alaska_merc_unit
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = westalaska.62.a
 		ai_chance = { factor = 1 }
@@ -3982,13 +3998,14 @@ country_event = { #WA offers mercenary contract
 	title = westalaska.100.t
 	desc = westalaska.100.desc
 	picture = GFX_report_event_generic_sign_treaty2
-	
+
 	is_triggered_only = yes
-	
+
 	option = { #Accept contract
 		name = westalaska.100.a
 		ai_chance = { factor = 9 }
-		add_to_variable = { national_debt = 10 }
+		set_temp_variable = { temp_econ_spending_amount = 0.01 }
+		econ_spend_money_once_effect_raw_money = yes
 		add_ideas = MAG_WA_mercenary_contract_idea
 		MAG = {
 			country_event = { id = westalaska.101 }
@@ -4008,13 +4025,22 @@ country_event = { #Contract accepted
 	title = westalaska.101.t
 	desc = westalaska.101.desc
 	picture = GFX_report_event_generic_sign_treaty2
-	
+
 	is_triggered_only = yes
-	
+
 	option = { #
 		name = westalaska.101.a
 		ai_chance = { factor = 1 }
-		add_to_variable = { money_reserves = 10 }
+		
+		set_temp_variable = { target = FROM }
+		TNO_increase_volunteer_cap_2 = yes
+		if = {	
+			limit = { has_idea = MAG_WA_international_redoubt_idea }
+			TNO_increase_volunteer_cap_1 = yes
+		}
+		#These volunteers get cleared in the on_remove block of the MAG_WA_mercenary_contract_idea idea
+
+		add_to_variable = { money_reserves = 0.010 }
 	}
 }
 country_event = { #Contract declined
@@ -4023,13 +4049,13 @@ country_event = { #Contract declined
 	title = westalaska.102.t
 	desc = westalaska.102.desc
 	picture = GFX_report_event_generic_sign_treaty1
-	
+
 	is_triggered_only = yes
-	
+
 	option = { #
 		name = westalaska.102.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4041,14 +4067,14 @@ country_event = { #Fortis Fortuna Adiuvat
 	title = wa_superregional.1.t
 	desc = wa_superregional.1.desc
 	picture = GFX_report_event_the_man_who_sold_the_world
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.1.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4058,14 +4084,14 @@ country_event = { #Pacification of the Great Giant
 	title = wa_superregional.2.t
 	desc = wa_superregional.2.desc
 	picture = GFX_report_event_russia_tomsk_protests_color
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.2.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4075,14 +4101,14 @@ country_event = { #Spreading Our Network
 	title = wa_superregional.3.t
 	desc = wa_superregional.3.desc
 	picture = GFX_report_event_ffr_female_aviators
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.3.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4092,14 +4118,14 @@ country_event = { #A Rejuvenated Civil Service
 	title = wa_superregional.4.t
 	desc = wa_superregional.4.desc
 	picture = GFX_report_event_cog_merc_9
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.4.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4109,14 +4135,14 @@ country_event = { #Employment Opportunities
 	title = wa_superregional.5.t
 	desc = wa_superregional.5.desc
 	picture = GFX_report_event_soviet_russian_soldiers_2
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.5.a
 		ai_chance = { factor = 1 }
-		PAV = {
+		NOV = {
 			every_unit_leader = {
 				limit = {
 					OR = {
@@ -4137,14 +4163,14 @@ country_event = { #Towards a Sovereign State
 	title = wa_superregional.6.t
 	desc = wa_superregional.6.desc
 	picture = GFX_report_event_werbell_suit
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.6.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4154,14 +4180,14 @@ country_event = { #From a Rabble to an Army
 	title = wa_superregional.7.t
 	desc = wa_superregional.7.desc
 	picture = GFX_report_event_cog_merc_car_2
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.7.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4171,14 +4197,14 @@ country_event = { #Wagons Westward!
 	title = wa_superregional.8.t
 	desc = wa_superregional.8.desc
 	picture = GFX_report_event_west_alaska_werbell_training
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.8.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4188,14 +4214,14 @@ country_event = { #Expanding the Federal System
 	title = wa_superregional.9.t
 	desc = wa_superregional.9.desc
 	picture = GFX_report_event_omsk_building
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.9.a
 		ai_chance = { factor = 1 }
-		
+
 	}
 }
 
@@ -4205,23 +4231,48 @@ country_event = { #Epilogue
 	title = wa_superregional.10.t
 	desc = wa_superregional.10.desc
 	picture = GFX_report_event_werbell_2
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.10.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			create_country_leader = {
-				name = "Mitchell WerBell III"
-				desc = "POLITICS_MITCHELL_WERBELL_70S_DESC"
-				picture = "Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
-				expire = "1999.1.1"
-				ideology = authoritarian_democrat_subtype
-				traits = { }
+			if = {
+				limit = {
+					has_country_flag = MAG_WA_cincinnatus_route
+				}
+				create_country_leader = {
+					name = "Mitchell WerBell III"
+					desc = "POLITICS_MITCHELL_WERBELL_70S_DESC"
+					picture = "Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
+					expire = "1999.1.1"
+					ideology = authoritarian_democracy_stratocracy_subtype
+					traits = {
+						MAG_WA_cincinnatus
+						bolshoy_boss
+					}
+				}
+				TNO_russia_ending_screen = yes
 			}
-			TNO_russia_ending_screen = yes
+			else_if = {
+				limit = {
+					has_country_flag = MAG_WA_caesar_route
+				}
+				create_country_leader = {
+					name = "Mitchell WerBell III"
+					desc = "POLITICS_MITCHELL_WERBELL_70S_DESC"
+					picture = "Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
+					expire = "1999.1.1"
+					ideology = authoritarian_democracy_stratocracy_subtype
+					traits = {
+						MAG_WA_caesar
+						bolshoy_boss
+					}
+				}
+				TNO_russia_ending_screen = yes
+			}
 		}
 	}
 }
@@ -4232,10 +4283,10 @@ country_event = { #The Art of Living Dangerously
 	title = wa_superregional.11.t
 	desc = wa_superregional.11.desc
 	picture = GFX_report_event_russia_west_alaska_report
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.11.a
 		ai_chance = { factor = 1 }
@@ -4248,10 +4299,10 @@ country_event = { #A Call to Uncle Sam
 	title = wa_superregional.12.t
 	desc = wa_superregional.12.desc
 	picture = GFX_report_event_generic_office
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.12.a
 		ai_chance = { factor = 1 }
@@ -4265,13 +4316,133 @@ country_event = { #Watership Down
 	title = wa_superregional.13.t
 	desc = wa_superregional.13.desc
 	picture = GFX_report_event_river_boat
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #
 		name = wa_superregional.13.a
 		ai_chance = { factor = 1 }
+	}
+}
+
+#### West Alaska Journalist Chain ###
+country_event = { #A New Assignment - Fires one week after WerBell's coup (USA and MAG)
+	id = MAG_WA_journalist.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG_WA_journalist.1" }
+	title = MAG_WA_journalist.1.t
+	desc = MAG_WA_journalist.1.desc
+	picture = GFX_event_pic_office_1960
+
+	is_triggered_only = yes
+
+	option = { #
+		name = MAG_WA_journalist.1.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = MAG_WA_journalist.2 days = 7 }
+		}
+	}
+}
+
+country_event = { #Welcome to Russia - Fires one week after "A New Assignment"
+	id = MAG_WA_journalist.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG_WA_journalist.2" }
+	title = MAG_WA_journalist.2.t
+	desc = MAG_WA_journalist.2.desc
+	picture = GFX_report_event_cog_merc_9
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG_WA_journalist.2.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #The Man Himself - Fires when WerBell's MAG owns Zeya
+	id = MAG_WA_journalist.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG_WA_journalist.3" }
+	title = MAG_WA_journalist.3.t
+	desc = MAG_WA_journalist.3.desc
+	picture = GFX_report_event_west_alaska_werbell_training
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG_WA_journalist.3.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Adrenaline - Fires when WerBell's MAG is at war with either IRK or BRY
+	id = MAG_WA_journalist.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG_WA_journalist.4" }
+	title = MAG_WA_journalist.4.t
+	desc = MAG_WA_journalist.4.desc
+	picture = GFX_report_event_DRL_novotroitsk_city
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG_WA_journalist.4.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Heaven's Ruins - Fires when WerBell's MAG owns Omolon
+	id = MAG_WA_journalist.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG_WA_journalist.5" }
+	title = MAG_WA_journalist.5.t
+	desc = MAG_WA_journalist.5.desc
+	picture = GFX_report_event_vodka
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG_WA_journalist.5.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Dear Mary - Fires when WerBell's MAG owns Tomsk
+	id = MAG_WA_journalist.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG_WA_journalist.6" }
+	title = MAG_WA_journalist.6.t
+	desc = MAG_WA_journalist.6.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = MAG_WA_journalist.6.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Home - Fires after United States of Russia form (MAG and USA)
+	id = MAG_WA_journalist.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAG_WA_journalist.7" }
+	title = MAG_WA_journalist.7.t
+	desc = MAG_WA_journalist.7.desc
+	picture = GFX_report_event_cog_plane
+
+	is_triggered_only = yes
+
+	option = { #
+		name = MAG_WA_journalist.7.a
+		ai_chance = { factor = 1 }
+
 	}
 }
 

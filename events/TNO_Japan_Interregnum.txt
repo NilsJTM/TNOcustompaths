@@ -17,6 +17,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.1.a
+
+		add_stability = -0.20
+		add_political_power = -150
+
 		retire_country_leader = yes
 		set_country_flag = JAP_Ino_deposed
 		create_country_leader = {
@@ -265,13 +269,13 @@ country_event = {
 	option = {
 		name = jap_interregnum.14.a
 		retire_country_leader = yes
+		set_politics = { ruling_party = fascism }
 		create_country_leader = {
 			name = "Aichi Kiichi"
 			desc = "POLITICS_AICHI_KIICHI_DESC"
 			picture = "Portrait_Japan_Aichi_Kiichi.tga"
 			expire = "1983.1.1"
-			ideology = fascism_subtype
-			traits = {}
+			ideology = fascism_corporatism_subtype
 		}
 		remove_all_ministers = yes
 		add_ideas = {
@@ -280,6 +284,7 @@ country_event = {
 			JAP_Ichimada_Hisado_eco
 			JAP_Ueki_Koshiro_sec
 		}
+		country_event = { id = jap_interregnum.15 days = 4}
 		country_event = { id = japyasuda.1 days = 28}
 		if = {
 			limit = {
@@ -333,7 +338,8 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.15.a
-		country_event = { id = jap_interregnum.16 days = 4}	
+		country_event = { id = jap_interregnum.16 days = 2}
+		set_country_flag = JAP_in_interregnum
 		hidden_effect = {
 			set_variable = { takagi_loss = 0 }
 			set_variable = { ikeda_loss = 0 }
@@ -355,11 +361,7 @@ country_event = {
 
 	option = { #The die is cast - Takagi, then Ikeda, then Kaya
 		name = jap_interregnum.16.a
-		country_event = { id = jap_interregnum.17 days = 4 }
-		hidden_effect = {
-			country_event = { id = jap_interregnum.27 days = 15}
-			country_event = { id = jap_interregnum.38 days = 30}
-		}
+		country_event = { id = jap_interregnum.17 days = 3 }
 	}
 }
 
@@ -377,10 +379,12 @@ country_event = {
 	option = { #censure Ino
 		name = jap_interregnum.17.a
 		country_event = { id = jap_interregnum.18 days = 2}
+		custom_effect_tooltip = JAP_interregnum_takagi_v_ikeda_tt
 	}
 	option = { #Navy contacts
 		name = jap_interregnum.17.b
 		country_event = { id = jap_interregnum.23 days = 2}
+		custom_effect_tooltip = JAP_interregnum_takagi_v_kaya_tt
 	}
 }
 
@@ -398,10 +402,12 @@ country_event = {
 	option = { #pull in Ino's allies
 		name = jap_interregnum.18.a
 		country_event = { id = jap_interregnum.19 days = 2}
+		custom_effect_tooltip = JAP_interregnum_weaken_ikeda_tt
 	}
 	option = { #Bribe and threaten
 		name = jap_interregnum.18.b
 		country_event = { id = jap_interregnum.21 days = 2}
+		custom_effect_tooltip = JAP_interregnum_weaken_takagi_tt
 	}
 }
 
@@ -437,9 +443,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.20.a
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
 		hidden_effect = {
 			add_to_variable = { ikeda_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 6 }
+			country_event = { id = jap_interregnum.27 days = 2 }
 		}
 	}
 }
@@ -476,9 +483,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.22.a
+		custom_effect_tooltip = JAP_interregnum_weakened_takagi_tt
 		hidden_effect = {
 			add_to_variable = { takagi_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 4 }
+			country_event = { id = jap_interregnum.27 days = 2 }
 		}
 	}
 }
@@ -506,19 +514,21 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_interregnum.24"}
 	title = jap_interregnum.24.t
 	desc = jap_interregnum.24.d
-	picture = GFX_report_Event_german_Army
+	picture = GFX_report_event_german_army
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = { #scapegoat
 		name = jap_interregnum.24.a
+		custom_effect_tooltip = JAP_interregnum_weaken_kaya_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.25 days = 2}
 		}
 	}
 	option = { #tit for tat
 		name = jap_interregnum.24.b
+		custom_effect_tooltip = JAP_interregnum_weaken_takagi_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.26 days = 2}
 		}
@@ -538,9 +548,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.25.a
+		custom_effect_tooltip = JAP_interregnum_weakened_kaya_tt
 		hidden_effect = {
 			add_to_variable = { kaya_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 4 }
+			country_event = { id = jap_interregnum.27 days = 2 }
 		}
 	}
 }
@@ -558,9 +569,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.26.a
+		custom_effect_tooltip = JAP_interregnum_weakened_takagi_tt
 		hidden_effect = {
 			add_to_variable = { takagi_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 4 }
+			country_event = { id = jap_interregnum.27 days = 2 }
 		}
 	}
 }
@@ -579,10 +591,12 @@ country_event = {
 	option = { #shore up Inoite support
 		name = jap_interregnum.27.a
 		country_event = { id = jap_interregnum.28 days = 4}
+		custom_effect_tooltip = JAP_interregnum_takagi_v_ikeda_tt
 	}
 	option = { #Ino is a sinking ship
 		name = jap_interregnum.27.b
 		country_event = { id = jap_interregnum.33 days = 2}
+		custom_effect_tooltip = JAP_interregnum_ikeda_v_kaya_tt
 	}
 }
 
@@ -600,10 +614,12 @@ country_event = {
 	option = { #Bribes and Threats
 		name = jap_interregnum.28.a
 		country_event = { id = jap_interregnum.29 days = 3}
+		custom_effect_tooltip = JAP_interregnum_weaken_ikeda_tt
 	}
 	option = { #Discredit the Upstarts
 		name = jap_interregnum.28.b
 		country_event = { id = jap_interregnum.31 days = 3}
+		custom_effect_tooltip = JAP_interregnum_weaken_takagi_tt
 	}
 }
 
@@ -640,9 +656,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.30.a
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
 		hidden_effect = {
 			add_to_variable = { ikeda_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 1 }
+			country_event = { id = jap_interregnum.38 days = 2 }
 		}
 	}
 }
@@ -679,9 +696,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.32.a
+		custom_effect_tooltip = JAP_interregnum_weakened_takagi_tt
 		hidden_effect = {
 			add_to_variable = { takagi_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 1 }
+			country_event = { id = jap_interregnum.38 days = 2 }
 		}
 	}
 }
@@ -733,12 +751,14 @@ country_event = {
 
 	option = { #Rise From the Ashes
 		name = jap_interregnum.35.a
+		custom_effect_tooltip = JAP_interregnum_weaken_kaya_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.36 days = 2}
 		}
 	}
 	option = { #Diet Deadlock
 		name = jap_interregnum.35.b
+		custom_effect_tooltip = JAP_interregnum_weaken_ikeda_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.37 days = 2}
 		}
@@ -758,9 +778,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.36.a
+		custom_effect_tooltip = JAP_interregnum_weakened_kaya_tt
 		hidden_effect = {
 			add_to_variable = { kaya_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 4 }
+			country_event = { id = jap_interregnum.38 days = 2 }
 		}
 	}
 }
@@ -778,9 +799,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.37.a
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
 		hidden_effect = {
 			add_to_variable = { ikeda_loss = 1 }
-			country_event = { id = jap_interregnum.48 days = 4 }
+			country_event = { id = jap_interregnum.38 days = 2 }
 		}
 	}
 }
@@ -816,10 +838,12 @@ country_event = {
 	option = { #Army backing
 		name = jap_interregnum.39.a
 		country_event = { id = jap_interregnum.40 days = 2}
+		custom_effect_tooltip = JAP_interregnum_ikeda_v_kaya_tt
 	}
 	option = { #the Representatives
 		name = jap_interregnum.39.b
 		country_event = { id = jap_interregnum.44 days = 2}
+		custom_effect_tooltip = JAP_interregnum_takagi_v_kaya_tt
 	}
 }
 
@@ -829,19 +853,21 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_interregnum.40"}
 	title = jap_interregnum.40.t
 	desc = jap_interregnum.40.d
-	picture = GFX_report_Event_german_Army
+	picture = GFX_report_event_german_army
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = { #tit for tat
 		name = jap_interregnum.40.a
+		custom_effect_tooltip = JAP_interregnum_weaken_kaya_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.41 days = 2}
 		}
 	}
 	option = { #army scrutiny
 		name = jap_interregnum.40.b
+		custom_effect_tooltip = JAP_interregnum_weaken_ikeda_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.42 days = 2}
 		}
@@ -861,6 +887,7 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.41.a
+		custom_effect_tooltip = JAP_interregnum_weakened_kaya_tt
 		hidden_effect = {
 			add_to_variable = { kaya_loss = 1 }
 			country_event = { id = jap_interregnum.48 days = 4 }
@@ -901,6 +928,8 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.43.a
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
+		custom_effect_tooltip = JAP_interregnum_weakened_kaya_tt
 		hidden_effect = {
 			add_to_variable = { takagi_loss = 1 }
 			add_to_variable = { kaya_loss = 1 }
@@ -939,12 +968,14 @@ country_event = {
 
 	option = { #Diet Deadlock
 		name = jap_interregnum.45.a
+		custom_effect_tooltip = JAP_interregnum_weaken_kaya_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.46 days = 2}
 		}
 	}
 	option = { #Anti-Corruption Act
 		name = jap_interregnum.45.b
+		custom_effect_tooltip = JAP_interregnum_weaken_ikeda_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.47 days = 2}
 		}
@@ -964,6 +995,7 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.46.a
+		custom_effect_tooltip = JAP_interregnum_weakened_kaya_tt
 		hidden_effect = {
 			add_to_variable = { kaya_loss = 1 }
 			country_event = { id = jap_interregnum.48 days = 1 }
@@ -984,9 +1016,10 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.47.a
-			hidden_effect = {
-				add_to_variable = { ikeda_loss = 1 }
-				country_event = { id = jap_interregnum.48 days = 4 }
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
+		hidden_effect = {
+			add_to_variable = { ikeda_loss = 1 }
+			country_event = { id = jap_interregnum.48 days = 4 }
 		}
 	}
 }
@@ -1004,6 +1037,7 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.48.a
+		set_country_flag = JAP_interregnum_final_stage
 		hidden_effect = {
 			if = {
 				limit = {
@@ -1013,6 +1047,7 @@ country_event = {
 					}
 				}
 				country_event = { id = jap_interregnum.50 days = 4 }
+				set_variable = { candidate_knocked_out = 1 }
 			}
 			if = {
 				limit = {
@@ -1021,7 +1056,8 @@ country_event = {
 						check_variable = { ikeda_loss > kaya_loss }
 					}
 				}
-				country_event = { id = jap_interregnum.51 days = 4 }				
+				country_event = { id = jap_interregnum.51 days = 4 }
+				set_variable = { candidate_knocked_out = 2 }
 			}
 			if = {
 				limit = {
@@ -1031,6 +1067,7 @@ country_event = {
 					}
 				}
 				country_event = { id = jap_interregnum.52 days = 4 }
+				set_variable = { candidate_knocked_out = 3 }
 			}
 			if = {
 				limit = {
@@ -1043,12 +1080,15 @@ country_event = {
 				random_list = {
 					33 = {
 						country_event = { id = jap_interregnum.50 days = 4 }
+						set_variable = { candidate_knocked_out = 1 }
 					}
 					33 = {
 						country_event = { id = jap_interregnum.51 days = 4 }
+						set_variable = { candidate_knocked_out = 2 }
 					}
 					33 = {
 						country_event = { id = jap_interregnum.52 days = 4 }
+						set_variable = { candidate_knocked_out = 3 }
 					}
 				}
 			}
@@ -1138,6 +1178,8 @@ country_event = {
 	option = { #Corporate espionage
 		name = jap_interregnum.66.a
 		country_event = { id = jap_interregnum.67 days = 4}
+		custom_effect_tooltip = JAP_interregnum_strengthened_ikeda
+		add_to_variable = { ikeda_power = 1 }
 	}
 	option = { #Kiichi gambit
 		name = jap_interregnum.66.b
@@ -1216,29 +1258,32 @@ country_event = {
 			desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
 			picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
 			expire = "1983.1.1"
-			ideology = fascism_subtype
+			ideology = fascism_corporatism_subtype
 			traits = {
 				hotheaded_firebrand
 			}
 		}
+		set_politics = { ruling_party = fascism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Ikeda_Prime_Minister
 		JAP_InoIkeda_PM_initialize = yes
+		#JAP_set_base_faction_approval = yes
 		set_variable = {JAP_ikeda_conservative_support = 0.30}
 		set_variable = {JAP_ikeda_liberal_support = 0.30}
 		JAP_ikeda_start_mechanic = yes
+		clr_country_flag = JAP_in_interregnum
 		hidden_effect = {
 			#load_focus_tree = { tree = Japan_ikeda_main keep_completed = yes }
 			JAP_tree_swap = yes
-        	complete_national_focus = JAP_prime_minister_ikeda
-        	remove_all_ministers = yes
-        	add_ideas = {
-        		JAP_Hatoyama_Ichiro_dep
-        		JAP_Sakurauchi_Yoshio_for
-        		JAP_Sato_Eisaku_eco
-        		JAP_Ezaki_Masumi_sec
-        	}
-        }
+			complete_national_focus = JAP_prime_minister_ikeda
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Hatoyama_Ichiro_dep
+				JAP_Sakurauchi_Yoshio_for
+				JAP_Sato_Eisaku_eco
+				JAP_Ezaki_Masumi_sec
+			}
+		}
 		hidden_effect = {
 			every_country = { news_event = WORLD.2065 }
 		}
@@ -1312,6 +1357,8 @@ country_event = {
 	option = { #Military veto
 		name = jap_interregnum.74.a
 		country_event = { id = jap_interregnum.75 days = 2}
+		custom_effect_tooltip = JAP_interregnum_strengthened_kaya
+		add_to_variable = { kaya_power = 1 }
 	}
 	option = { #The Firebrand
 		name = jap_interregnum.74.b
@@ -1325,7 +1372,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_interregnum.75"}
 	title = jap_interregnum.75.t
 	desc = jap_interregnum.75.d
-	picture = GFX_report_Event_german_Army
+	picture = GFX_report_event_german_army
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -1397,26 +1444,40 @@ country_event = {
 			desc = "POLITICS_KAYA_OKINORI_DESC"
 			picture = "Portrait_Japan_Kaya_Okinori.dds"
 			expire = "1983.1.1"
-			ideology = national_socialism_subtype
+			ideology = despotism_interim_government_subtype
 			traits = {
 				committed_bureaucrat
 			}
 		}
-		set_politics = { ruling_party = national_socialism }
+		set_politics = { ruling_party = despotism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Kaya_Prime_Minister
 		JAP_Kaya_PM_initialize = yes
+		JAP_set_base_faction_approval = yes
 		hidden_effect = {
+			create_country_leader = {
+				name = "Ikeda Masanosuke"
+				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
+				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
+				expire = "1983.1.1"
+				ideology = fascism_corporatism_subtype
+				traits = {
+					hotheaded_firebrand
+				}
+			}
 			#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
 			JAP_tree_swap = yes
-        	remove_all_ministers = yes
-	    	add_ideas = {
-	    		JAP_Akao_Satoshi_dep
-	    		JAP_Eto_Takami_for
-	    		JAP_Suzuki_Teiichi_eco
-	    		JAP_Nakagaki_Kunio_sec
-	    	}
-        }
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Aoki_Kazuo_hog
+				Generic_Vacant_eco
+				Generic_Vacant_for
+				Generic_Vacant_sec
+			}
+			clr_country_flag = JAP_in_interregnum
+			clr_country_flag = JAP_interregnum_final_stage
+			clear_variable = candidate_knocked_out
+		}
 		hidden_effect = {
 			JAP_kaya_start_mechanic = yes
 			every_country = { news_event = WORLD.2066 }
@@ -1496,25 +1557,29 @@ country_event = {
 					desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
 					picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
 					expire = "1983.1.1"
-					ideology = fascism_subtype
+					ideology = fascism_corporatism_subtype
 					traits = {
 						hotheaded_firebrand
 					}
 				}
+				set_politics = { ruling_party = fascism }
 				JAP_clear_PM_flags = yes
 				set_country_flag = JAP_Ikeda_Prime_Minister
 				JAP_InoIkeda_PM_initialize = yes
 				hidden_effect = {
 					#load_focus_tree = { tree = Japan_ikeda_main keep_completed = yes }
 					JAP_tree_swap = yes
-        			complete_national_focus = JAP_prime_minister_ikeda
+					complete_national_focus = JAP_prime_minister_ikeda
 					remove_all_ministers = yes
-		        	add_ideas = {
-		        		JAP_Hatoyama_Ichiro_dep
-		        		JAP_Sakurauchi_Yoshio_for
-		        		JAP_Sato_Eisaku_eco
-		        		JAP_Ezaki_Masumi_sec
-		        	}
+					add_ideas = {
+						JAP_Hatoyama_Ichiro_dep
+						JAP_Sakurauchi_Yoshio_for
+						JAP_Sato_Eisaku_eco
+						JAP_Ezaki_Masumi_sec
+					}
+					clr_country_flag = JAP_in_interregnum
+					clr_country_flag = JAP_interregnum_final_stage
+					clear_variable = candidate_knocked_out
 				}
 				hidden_effect = {
 					every_country = { news_event = WORLD.2065 }
@@ -1532,25 +1597,39 @@ country_event = {
 					desc = "POLITICS_KAYA_OKINORI_DESC"
 					picture = "Portrait_Japan_Kaya_Okinori.dds"
 					expire = "1983.1.1"
-					ideology = national_socialism_subtype
+					ideology = despotism_interim_government_subtype
 					traits = {
 						committed_bureaucrat
 					}
 				}
-				set_politics = { ruling_party = national_socialism }
+				set_politics = { ruling_party = despotism }
 				JAP_clear_PM_flags = yes
 				set_country_flag = JAP_Kaya_Prime_Minister
 				JAP_Kaya_PM_initialize = yes
+				JAP_set_base_faction_approval = yes
 				hidden_effect = {
+					create_country_leader = {
+						name = "Ikeda Masanosuke"
+						desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
+						picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
+						expire = "1983.1.1"
+						ideology = fascism_corporatism_subtype
+						traits = {
+							hotheaded_firebrand
+						}
+					}
 					#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
 					JAP_tree_swap = yes
 					remove_all_ministers = yes
-			    	add_ideas = {
-			    		JAP_Akao_Satoshi_dep
-			    		JAP_Eto_Takami_for
-			    		JAP_Suzuki_Teiichi_eco
-			    		JAP_Nakagaki_Kunio_sec
-			    	}
+					add_ideas = {
+						JAP_Aoki_Kazuo_hog
+						Generic_Vacant_eco
+						Generic_Vacant_for
+						Generic_Vacant_sec
+					}
+					clr_country_flag = JAP_in_interregnum
+					clr_country_flag = JAP_interregnum_final_stage
+					clear_variable = candidate_knocked_out
 				}
 				hidden_effect = {
 					JAP_kaya_start_mechanic = yes
@@ -1575,8 +1654,8 @@ country_event = {
 	option = { #The Vultures
 		name = jap_interregnum.83.a
 		hidden_effect = {
-			set_variable = { kaya_influence = 0 }
-			set_variable = { takagi_influence = 0 }
+			set_variable = { kaya_power = 0 }
+			set_variable = { takagi_power = 0 }
 			country_event = { id = jap_interregnum.84 days = 2}
 		}
 	}
@@ -1595,15 +1674,17 @@ country_event = {
 
 	option = { # The Military Chose Kaya
 		name = jap_interregnum.84.a
+		custom_effect_tooltip = JAP_interregnum_strengthened_kaya
 		hidden_effect = {
-			add_to_variable = { kaya_influence = 1 }
+			add_to_variable = { kaya_power = 1 }
 			country_event = { id = jap_interregnum.85 days = 2 }
 		}
 	}
 	option = { # The Military Chose Takagi
 		name = jap_interregnum.84.b
+		custom_effect_tooltip = JAP_interregnum_strengthened_takagi
 		hidden_effect = {
-			add_to_variable = { takagi_influence = 1 }
+			add_to_variable = { takagi_power = 1 }
 			country_event = { id = jap_interregnum.85 days = 2 }
 		}
 	}
@@ -1622,16 +1703,18 @@ country_event = {
 
 	option = { # The Deputies of the Yokusankai Chose Kaya
 		name = jap_interregnum.85.a
+		custom_effect_tooltip = JAP_interregnum_strengthened_kaya
 		hidden_effect = {
-			add_to_variable = { kaya_influence = 1 }
+			add_to_variable = { kaya_power = 1 }
 			country_event = { id = jap_interregnum.86 days = 2 }
 		}
 	}
 	option = { # The Deputies of the Yokusankai Chose Takagi
 		name = jap_interregnum.85.b
+		custom_effect_tooltip = JAP_interregnum_strengthened_takagi
 		hidden_effect = {
-		add_to_variable = { takagi_influence = 1 }
-		country_event = { id = jap_interregnum.86 days = 2 }
+			add_to_variable = { takagi_power = 1 }
+			country_event = { id = jap_interregnum.86 days = 2 }
 		}
 	}
 }
@@ -1648,35 +1731,37 @@ country_event = {
 
 	option = { # Kido recommends Kaya
 		name = jap_interregnum.86.a
+		custom_effect_tooltip = JAP_interregnum_strengthened_kaya
 		hidden_effect = {
-			add_to_variable = { kaya_influence = 1 }
+			add_to_variable = { kaya_power = 1 }
 			if = {
 				limit = {
-					check_variable = { takagi_influence > kaya_influence }
+					check_variable = { takagi_power > kaya_power }
 				}
 				country_event = { id = jap_interregnum.87 days = 2 }
 			}
 			if = {
 				limit = {
-					check_variable = { takagi_influence < kaya_influence }
+					check_variable = { takagi_power < kaya_power }
 				}
 				country_event = { id = jap_interregnum.88 days = 2}
-			}		
+			}
 		}
 	}
 	option = { # Kido Recommends Takagi
 		name = jap_interregnum.86.b
-		hidden_effect = { 
-			add_to_variable = { takagi_influence = 1 }
+		custom_effect_tooltip = JAP_interregnum_strengthened_takagi
+		hidden_effect = {
+			add_to_variable = { takagi_power = 1 }
 			if = {
 				limit = {
-					check_variable = { takagi_influence > kaya_influence }
+					check_variable = { takagi_power > kaya_power }
 				}
 				country_event = { id = jap_interregnum.87 days = 2 }
 			}
 			if = {
 				limit = {
-					check_variable = { takagi_influence < kaya_influence }
+					check_variable = { takagi_power < kaya_power }
 				}
 				country_event = { id = jap_interregnum.88 days = 2}
 			}
@@ -1704,36 +1789,50 @@ country_event = {
 			remove_ideas = JAP_anti_corruption_protests
 		}
 		retire_country_leader = yes
-		create_country_leader = {								
+		create_country_leader = {
 			name = "Soukichi Takagi"
 			desc = "POLITICS_TAKAGI_SOUKICHI_DESC"
 			picture = "Portrait_Japan_Takagi_Soukichi.dds"
 			expire = "1989.1.1"
-			ideology = authoritarian_democrat_subtype
+			ideology = conservative_democracy_paternalistic_conservatism_subtype
 			traits = {
 				the_reformist_admiral
 			}
 		}
-		set_politics = { ruling_party = authoritarian_democrat }
+		set_politics = { ruling_party = conservative_democracy }
 		JAP_clear_PM_flags = yes
 		hidden_effect = {
-			remove_all_ministers = yes
-        	add_ideas = {
-        		JAP_Kouichi_Kido_dep
-        		JAP_Kuranari_Tadashi_for
-        		JAP_Nakasone_Yasuhiro_eco
-        		JAP_Hokiriki_Zenjiro_sec
-        	}
-			hidden_effect = {
-			every_country = { news_event = WORLD.2067 }
-		}
-		set_country_flag = JAP_Takagi_Prime_Minister
-		JAP_Takagi_PM_initialize = yes
-		hidden_effect = {
-			#load_focus_tree = { tree = japan_takagi_5_years keep_completed = yes }
-			JAP_tree_swap = yes
+			create_country_leader = {
+				name = "Ikeda Masanosuke"
+				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
+				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
+				expire = "1983.1.1"
+				ideology = fascism_corporatism_subtype
+				traits = {
+					hotheaded_firebrand
+				}
 			}
-        }
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Kouichi_Kido_dep
+				JAP_Kuranari_Tadashi_for
+				JAP_Nakasone_Yasuhiro_eco
+				JAP_Hokiriki_Zenjiro_sec
+			}
+			hidden_effect = {
+				every_country = { news_event = WORLD.2067 }
+			}
+			set_country_flag = JAP_Takagi_Prime_Minister
+			JAP_Takagi_PM_initialize = yes
+			JAP_set_base_faction_approval = yes
+			hidden_effect = {
+			#load_focus_tree = { tree = japan_takagi_5_years keep_completed = yes }
+				JAP_tree_swap = yes
+			}
+			clr_country_flag = JAP_in_interregnum
+			clr_country_flag = JAP_interregnum_final_stage
+			clear_variable = candidate_knocked_out
+		}
 	}
 }
 
@@ -1762,26 +1861,40 @@ country_event = {
 			desc = "POLITICS_KAYA_OKINORI_DESC"
 			picture = "Portrait_Japan_Kaya_Okinori.dds"
 			expire = "1989.1.1"
-			ideology = national_socialism_subtype
+			ideology = despotism_interim_government_subtype
 			traits = {
 				committed_bureaucrat
 			}
 		}
-		set_politics = { ruling_party = national_socialism }
+		set_politics = { ruling_party = despotism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Kaya_Prime_Minister
 		JAP_Kaya_PM_initialize = yes
+		JAP_set_base_faction_approval = yes
 		hidden_effect = {
+			create_country_leader = {
+				name = "Ikeda Masanosuke"
+				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
+				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
+				expire = "1983.1.1"
+				ideology = fascism_corporatism_subtype
+				traits = {
+					hotheaded_firebrand
+				}
+			}
 			#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
 			JAP_tree_swap = yes
-        	remove_all_ministers = yes
-	    	add_ideas = {
-	    		JAP_Akao_Satoshi_dep
-	    		JAP_Eto_Takami_for
-	    		JAP_Suzuki_Teiichi_eco
-	    		JAP_Nakagaki_Kunio_sec
-	    	}
-        }
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Aoki_Kazuo_hog
+				Generic_Vacant_eco
+				Generic_Vacant_for
+				Generic_Vacant_sec
+			}
+			clr_country_flag = JAP_in_interregnum
+			clr_country_flag = JAP_interregnum_final_stage
+			clear_variable = candidate_knocked_out
+		}
 		hidden_effect = {
 			JAP_kaya_start_mechanic = yes
 			every_country = { news_event = WORLD.2066 }
@@ -1842,18 +1955,21 @@ country_event = {
 
 	option = { #1 power for ikeda
 		name = jap_interregnum.101.a
+		custom_effect_tooltip = JAP_interregnum_strengthened_ikeda
 		hidden_effect = {
 			add_to_variable = { var = ikeda_power value = 1 }
 		}
 	}
 	option = { #-1 power for ikeda
 		name = jap_interregnum.101.b
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
 		hidden_effect = {
 			subtract_from_variable = { var = ikeda_power value = 1 }
 		}
 	}
 	option = { #2 power for ikeda
 		name = jap_interregnum.101.c
+		custom_effect_tooltip = JAP_interregnum_strengthened_big_ikeda
 		hidden_effect = {
 			add_to_variable = { var = ikeda_power value = 2 }
 		}
@@ -1891,18 +2007,21 @@ country_event = {
 
 	option = { #-1 power for ikeda
 		name = jap_interregnum.103.a
+		custom_effect_tooltip = JAP_interregnum_strengthened_ikeda
 		hidden_effect = {
 			subtract_from_variable = { var = ikeda_power value = 1 }
 		}
 	}
 	option = { #1 power for ikeda
 		name = jap_interregnum.103.b
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
 		hidden_effect = {
 			add_to_variable = { var = ikeda_power value = 1 }
 		}
 	}
 	option = { #2 power for ikeda
 		name = jap_interregnum.103.c
+		custom_effect_tooltip = JAP_interregnum_strengthened_big_ikeda
 		hidden_effect = {
 			add_to_variable = { var = ikeda_power value = 2 }
 		}
@@ -1940,18 +2059,21 @@ country_event = {
 
 	option = { #-1 power for ikeda
 		name = jap_interregnum.105.a
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
 		hidden_effect = {
 			subtract_from_variable = { var = ikeda_power value = 1 }
 		}
 	}
 	option = { #2 power for ikeda
 		name = jap_interregnum.105.b
+		custom_effect_tooltip = JAP_interregnum_strengthened_big_ikeda
 		hidden_effect = {
 			add_to_variable = { var = ikeda_power value = 2 }
 		}
 	}
 	option = { #1 power for ikeda
 		name = jap_interregnum.105.c
+		custom_effect_tooltip = JAP_interregnum_strengthened_ikeda
 		hidden_effect = {
 			add_to_variable = { var = ikeda_power value = 1 }
 		}
@@ -1989,18 +2111,21 @@ country_event = {
 
 	option = { #-1 power for takagi
 		name = jap_interregnum.107.a
+		custom_effect_tooltip = JAP_interregnum_weakened_takagi_tt
 		hidden_effect = {
 			subtract_from_variable = { var = takagi_power value = 1 }
 		}
 	}
 	option = { #2 power for takagi
 		name = jap_interregnum.107.b
+		custom_effect_tooltip = JAP_interregnum_strengthened_big_takagi
 		hidden_effect = {
 			add_to_variable = { var = takagi_power value = 2 }
 		}
 	}
 	option = { #1 power for takagi
 		name = jap_interregnum.107.c
+		custom_effect_tooltip = JAP_interregnum_strengthened_takagi
 		hidden_effect = {
 			add_to_variable = { var = takagi_power value = 1 }
 		}
@@ -2038,18 +2163,21 @@ country_event = {
 
 	option = { #2 power for takagi
 		name = jap_interregnum.109.a
+		custom_effect_tooltip = JAP_interregnum_strengthened_big_takagi
 		hidden_effect = {
 			add_to_variable = { var = takagi_power value = 2 }
 		}
 	}
 	option = { #1 power for takagi
 		name = jap_interregnum.109.b
+		custom_effect_tooltip = JAP_interregnum_strengthened_takagi
 		hidden_effect = {
 			add_to_variable = { var = takagi_power value = 1 }
 		}
 	}
 	option = { #-1 power for takagi
 		name = jap_interregnum.109.c
+		custom_effect_tooltip = JAP_interregnum_weakened_takagi_tt
 		hidden_effect = {
 			subtract_from_variable = { var = takagi_power value = 1 }
 		}
@@ -2086,6 +2214,7 @@ country_event = {
 
 	option = { #-1 power for takagi
 		name = jap_interregnum.111.a
+		custom_effect_tooltip = JAP_interregnum_weakened_takagi_tt
 		hidden_effect = {
 			subtract_from_variable = { var = takagi_power value = 1 }
 			country_event = { id = jap_interregnum.112 days = 2 }
@@ -2093,6 +2222,7 @@ country_event = {
 	}
 	option = { #1 power for takagi
 		name = jap_interregnum.111.b
+		custom_effect_tooltip = JAP_interregnum_strengthened_takagi
 		hidden_effect = {
 			add_to_variable = { var = takagi_power value = 1 }
 			country_event = { id = jap_interregnum.112 days = 2 }
@@ -2100,6 +2230,7 @@ country_event = {
 	}
 	option = { #2 power for takagi
 		name = jap_interregnum.111.c
+		custom_effect_tooltip = JAP_interregnum_strengthened_big_takagi
 		hidden_effect = {
 			add_to_variable = { var = takagi_power value = 2 }
 			country_event = { id = jap_interregnum.112 days = 2 }
@@ -2123,15 +2254,15 @@ country_event = {
 		hidden_effect = {
 			if = {
 				limit = {
-						check_variable = { ikeda_power > takagi_power }
+					check_variable = { ikeda_power > takagi_power }
 				}
 				country_event = { id = jap_interregnum.113 days = 2 }
 			}
 			if = {
 				limit = {
-						check_variable = {  ikeda_power < takagi_power }
+					check_variable = {  ikeda_power < takagi_power }
 				}
-				country_event = { id = jap_interregnum.114 days = 2 }				
+				country_event = { id = jap_interregnum.114 days = 2 }
 			}
 			if = {
 				limit = {
@@ -2169,11 +2300,12 @@ country_event = {
 			desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
 			picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
 			expire = "1983.1.1"
-			ideology = fascism_subtype
+			ideology = fascism_corporatism_subtype
 			traits = {
 				hotheaded_firebrand
 			}
 		}
+		set_politics = { ruling_party = fascism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Ikeda_Prime_Minister
 		JAP_InoIkeda_PM_initialize = yes
@@ -2183,17 +2315,20 @@ country_event = {
 		hidden_effect = {
 			#load_focus_tree = { tree = Japan_ikeda_main keep_completed = yes }
 			JAP_tree_swap = yes
-        	complete_national_focus = JAP_prime_minister_ikeda
-        	remove_all_ministers = yes
-        	add_ideas = {
-        		JAP_Hatoyama_Ichiro_dep
-        		JAP_Sakurauchi_Yoshio_for
-        		JAP_Sato_Eisaku_eco
-        		JAP_Ezaki_Masumi_sec
-        	}
-        }
+			complete_national_focus = JAP_prime_minister_ikeda
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Hatoyama_Ichiro_dep
+				JAP_Sakurauchi_Yoshio_for
+				JAP_Sato_Eisaku_eco
+				JAP_Ezaki_Masumi_sec
+			}
+		}
 		hidden_effect = {
 			every_country = { news_event = WORLD.2065 }
+			clr_country_flag = JAP_in_interregnum
+			clr_country_flag = JAP_interregnum_final_stage
+			clear_variable = candidate_knocked_out
 		}
 	}
 }
@@ -2223,26 +2358,40 @@ country_event = {
 			desc = "POLITICS_TAKAGI_SOUKICHI_DESC"
 			picture = "Portrait_Japan_Takagi_Soukichi.dds"
 			expire = "1983.1.1"
-			ideology = authoritarian_democrat_subtype
+			ideology = conservative_democracy_paternalistic_conservatism_subtype
 			traits = {
 				the_reformist_admiral
 			}
 		}
-		set_politics = { ruling_party = authoritarian_democrat }
+		set_politics = { ruling_party = conservative_democracy }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Takagi_Prime_Minister
 		JAP_Takagi_PM_initialize = yes
+		JAP_set_base_faction_approval = yes
 		hidden_effect = {
+			create_country_leader = {
+				name = "Ikeda Masanosuke"
+				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
+				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
+				expire = "1983.1.1"
+				ideology = fascism_corporatism_subtype
+				traits = {
+					hotheaded_firebrand
+				}
+			}
 			#load_focus_tree = { tree = japan_takagi_5_years keep_completed = yes }
 			JAP_tree_swap = yes
-        	remove_all_ministers = yes
-        	add_ideas = {
-        		JAP_Kouichi_Kido_dep
-        		JAP_Kuranari_Tadashi_for
-        		JAP_Nakasone_Yasuhiro_eco
-        		JAP_Hokiriki_Zenjiro_sec
-        	}
-        }
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Kouichi_Kido_dep
+				JAP_Kuranari_Tadashi_for
+				JAP_Nakasone_Yasuhiro_eco
+				JAP_Hokiriki_Zenjiro_sec
+			}
+			clr_country_flag = JAP_in_interregnum
+			clr_country_flag = JAP_interregnum_final_stage
+			clear_variable = candidate_knocked_out
+		}
 		hidden_effect = {
 			every_country = { news_event = WORLD.2067 }
 		}

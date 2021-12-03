@@ -2,26 +2,6 @@ add_namespace = release_dummy
 
 ###CENTRAL ASIA
 
-country_event = { #Uzbekistan invades Karakalpakstan
-	id = release_dummy.1
-	immediate = {log = "[GetDateText]: [Root.GetName]: event release_dummy.1"}
-	title = release_dummy.1.t
-	desc = release_dummy.1.d
-	picture = GFX_report_event_komi_bombing_2
-
-	is_triggered_only = yes
-
-	option = {
-		name = release_dummy.1.a
-		UZB = {
-			declare_war_on = {
-				target = KRK
-				type = annex_everything
-			}
-		}
-	}
-}
-
 country_event = { #Finland military government defeat - fascist
 	id = release_dummy.2
 	immediate = {log = "[GetDateText]: [Root.GetName]: event release_dummy.2"}
@@ -41,6 +21,8 @@ country_event = { #Finland military government defeat - fascist
 		set_politics = {
 			ruling_party = fascism
 		}
+		set_temp_variable = {TNO_economy_type_temp = 2 }
+		econ_type_change = yes 
 		add_ideas = FIN_Paavo_Talvela_hog
 		add_ideas = FIN_Rolf_Nevanlinna_eco
 		add_ideas = FIN_Bruno_Salmiala_sec
@@ -75,6 +57,10 @@ country_event = { #Finland military government defeat - communist
 		set_politics = {
 			ruling_party = communist
 		}
+		remove_ideas = Pakt_Observer
+		econ_leave_sphere = yes
+		set_temp_variable = {TNO_economy_type_temp = 3 }
+		econ_type_change = yes 
 		add_ideas = FIN_Aarne_Saarinen_hog
 		add_ideas = FIN_Erkki_Salomaa_eco
 		add_ideas = FIN_Tuure_Lehen_sec
@@ -103,10 +89,10 @@ country_event = { #Finland military government defeat - democratic
 		name = release_dummy.4.a
 		add_stability = -0.15
 		set_politics = {
-			ruling_party = social_liberal
+			ruling_party = liberal_democracy
 		}
 		add_popularity = {
-			ideology = social_liberal
+			ideology = liberal_democracy
 			popularity = 0.07
 		}
 		add_ideas = FIN_Johannes_Virolainen_hog
@@ -126,10 +112,10 @@ country_event = { #Finland military government defeat - democratic
 		name = release_dummy.4.b
 		add_stability = -0.15
 		set_politics = {
-			ruling_party = social_conservative
+			ruling_party = conservative_democracy
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.07
 		}
 		add_ideas = FIN_Paivio_Hetemaki_hog
@@ -149,10 +135,10 @@ country_event = { #Finland military government defeat - democratic
 		name = release_dummy.4.c
 		add_stability = -0.15
 		set_politics = {
-			ruling_party = social_democrat
+			ruling_party = social_democracy
 		}
 		add_popularity = {
-			ideology = social_democrat
+			ideology = social_democracy
 			popularity = 0.07
 		}
 		add_ideas = FIN_Rafael_Paasio_hog
@@ -193,7 +179,7 @@ country_event = {
 				limit = {
 					is_kazakh_nation = yes
 					NOT = {
-						tag = DON
+						tag = NPL
 					}
 					is_neighbor_of = PREV
 					NOT = {
@@ -227,7 +213,7 @@ country_event = {
 #			limit = {
 #				is_kazakh_nation = yes
 #				NOT = {
-#					tag = DON
+#					tag = NPL
 #				}
 #			}
 #			hidden_effect = {
@@ -238,7 +224,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -272,7 +258,7 @@ country_event = {
 #			limit = {
 #				is_kazakh_nation = yes
 #				NOT = {
-#					tag = DON
+#					tag = NPL
 #				}
 #			}
 #			hidden_effect = {
@@ -283,7 +269,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -317,7 +303,7 @@ country_event = {
 #			limit = {
 #				is_kazakh_nation = yes
 #				NOT = {
-#					tag = DON
+#					tag = NPL
 #				}
 #			}
 #			hidden_effect = {
@@ -328,7 +314,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -362,7 +348,7 @@ country_event = {
 #			limit = {
 #				is_kazakh_nation = yes
 #				NOT = {
-#					tag = DON
+#					tag = NPL
 #				}
 #			}
 #			hidden_effect = {
@@ -373,7 +359,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -407,7 +393,7 @@ country_event = {
 #			limit = {
 #				is_kazakh_nation = yes
 #				NOT = {
-#					tag = DON
+#					tag = NPL
 #				}
 #			}
 #			hidden_effect = {
@@ -418,7 +404,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -455,37 +441,17 @@ country_event = { #Nehru dies
 			name = "Gulzarilal Nanda"
 			picture = "Portrait_India_Gulzarilal_Nanda.dds"
 			expire = "1999.1.1"
-			ideology = social_democrat_subtype
+			ideology = social_democracy_progressivism_subtype
 			traits = {
 			}
-		}
-		set_party_name = {
-			ideology = social_liberal
-			long_name = RAJ_liberal_party_long
-			name = RAJ_liberal_party
-		}
-		set_party_name = {
-			ideology = social_conservative
-			long_name = RAJ_conservative_party_long
-			name = RAJ_conservative_party
-		}
-		set_party_name = {
-			ideology = social_democrat
-			long_name = RAJ_INC_party_long
-			name = RAJ_INC_party
-		}
-		set_party_name = {
-			ideology = socialist
-			long_name = RAJ_libsoc_party_long
-			name = RAJ_libsoc_party
 		}
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_LB_Shastri_hog
-				RAJ_Yashwantrao_Chavan_eco
-				RAJ_MC_Chagla_for
-				RAJ_Uma_Dikshit_sec
+				IND_LB_Shastri_hog
+				IND_Yashwantrao_Chavan_eco
+				IND_MC_Chagla_for
+				IND_Uma_Dikshit_sec
 			}
 		}
 		country_event = {
@@ -525,7 +491,6 @@ country_event = { #Indian Election of 1964
                 has_game_rule = { rule = RAJ_1964_election option = RAJ_1964_ELECTION_LIBERTARIAN_SOCIALISM }
             }
 		}
-               
 		country_event = {
 			id = release_dummy.13
 			days = 1
@@ -548,7 +513,6 @@ country_event = { #Indian Election of 1964
                 has_game_rule = { rule = RAJ_1964_election option = RAJ_1964_ELECTION_LIBERTARIAN_SOCIALISM }
             }
 		}
-
 		country_event = {
 			id = release_dummy.14
 			days = 1
@@ -571,7 +535,6 @@ country_event = { #Indian Election of 1964
                 has_game_rule = { rule = RAJ_1964_election option = RAJ_1964_ELECTION_LIBERTARIAN_SOCIALISM }
             }
 		}
-
 		country_event = {
 			id = release_dummy.15
 			days = 1
@@ -613,13 +576,13 @@ country_event = { #INC Wins
 	option = {
 		name = release_dummy.13.a
 		set_politics = {
-			ruling_party = social_democrat
+			ruling_party = social_democracy
 			last_election = "1964.6.1"
 			election_frequency = 57
 			elections_allowed = yes
 		}
 		add_popularity = {
-			ideology = social_democrat
+			ideology = social_democracy
 			popularity = 0.13
 		}
 		# every_country = {
@@ -643,21 +606,21 @@ country_event = { #Libs win
 	option = {
 		name = release_dummy.14.a
 		set_politics = {
-			ruling_party = social_liberal
+			ruling_party = liberal_democracy
 			last_election = "1964.6.1"
 			election_frequency = 57
 			elections_allowed = yes
 		}
 		add_popularity = {
-			ideology = social_liberal
+			ideology = liberal_democracy
 			popularity = 0.16
 		}
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_Minoo_Masani_hog
-				RAJ_NG_Ranga_for
-				RAJ_KM_Munshi_sec
+				IND_Minoo_Masani_hog
+				IND_NG_Ranga_for
+				IND_KM_Munshi_sec
 			}
 		}
 		# every_country = {
@@ -681,22 +644,22 @@ country_event = { #Conservatives win
 	option = {
 		name = release_dummy.15.a
 		set_politics = {
-			ruling_party = social_conservative
+			ruling_party = conservative_democracy
 			last_election = "1964.6.1"
 			election_frequency = 57
 			elections_allowed = yes
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.08
 		}
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_Mohammad_Hidayatullah_hog
-				RAJ_Hirubhai_M_Patel_eco
-				RAJ_Shyam_Nandan_Prasad_Mishra_for
-				RAJ_Yashwantrao_Chavan_sec
+				IND_Mohammad_Hidayatullah_hog
+				IND_Hirubhai_M_Patel_eco
+				IND_Shyam_Nandan_Prasad_Mishra_for
+				IND_Yashwantrao_Chavan_sec
 			}
 		}
 		# every_country = {
@@ -730,7 +693,7 @@ country_event = { #LibSocs win
 			popularity = 0.08
 		}
 		add_popularity = {
-			ideology = social_democrat
+			ideology = social_democracy
 			popularity = 0.08
 		}
 		add_popularity = {
@@ -740,10 +703,10 @@ country_event = { #LibSocs win
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_Raj_Narain_hog
-				RAJ_VP_Singh_eco
-				RAJ_IK_Gujral_for
-				RAJ_Jagjivan_Ram_sec
+				IND_Raj_Narain_hog
+				IND_VP_Singh_eco
+				IND_IK_Gujral_for
+				IND_Jagjivan_Ram_sec
 			}
 		}
 		# every_country = {
@@ -866,19 +829,19 @@ country_event = { #INC Wins
 	option = {
 		name = release_dummy.18.a
 		set_politics = {
-			ruling_party = social_democrat
+			ruling_party = social_democracy
 		}
 		add_popularity = {
-			ideology = social_democrat
+			ideology = social_democracy
 			popularity = 0.05
 		}
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_K_Kamaraj_hog
-				RAJ_Yashwantrao_Chavan_eco
-				RAJ_MC_Chagla_for
-				RAJ_Uma_Dikshit_sec
+				IND_K_Kamaraj_hog
+				IND_Yashwantrao_Chavan_eco
+				IND_MC_Chagla_for
+				IND_Uma_Dikshit_sec
 			}
 		}
 		# every_country = {
@@ -902,19 +865,19 @@ country_event = { #Libs Win
 	option = {
 		name = release_dummy.19.a
 		set_politics = {
-			ruling_party = social_liberal
+			ruling_party = liberal_democracy
 		}
 		add_popularity = {
-			ideology = social_liberal
+			ideology = liberal_democracy
 			popularity = 0.05
 		}
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_Minoo_Masani_hog
-				RAJ_SV_Raju_eco
-				RAJ_NG_Ranga_for
-				RAJ_KM_Munshi_sec
+				IND_Minoo_Masani_hog
+				IND_SV_Raju_eco
+				IND_NG_Ranga_for
+				IND_KM_Munshi_sec
 			}
 		}
 		# every_country = {
@@ -938,19 +901,19 @@ country_event = { #Cons Win
 	option = {
 		name = release_dummy.20.a
 		set_politics = {
-			ruling_party = social_conservative
+			ruling_party = conservative_democracy
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.05
 		}
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_Mohammad_Hidayatullah_hog
-				RAJ_Hirubhai_M_Patel_eco
-				RAJ_Shyam_Nandan_Prasad_Mishra_for
-				RAJ_Yashwantrao_Chavan_sec
+				IND_Mohammad_Hidayatullah_hog
+				IND_Hirubhai_M_Patel_eco
+				IND_Shyam_Nandan_Prasad_Mishra_for
+				IND_Yashwantrao_Chavan_sec
 			}
 		}
 		# every_country = {
@@ -983,10 +946,10 @@ country_event = { #LibSocs Win
 		hidden_effect = {
 			remove_all_ministers = yes
 			add_ideas = {
-				RAJ_Raj_Narain_hog
-				RAJ_VP_Singh_eco
-				RAJ_IK_Gujral_for
-				RAJ_Jagjivan_Ram_sec
+				IND_Raj_Narain_hog
+				IND_VP_Singh_eco
+				IND_IK_Gujral_for
+				IND_Jagjivan_Ram_sec
 			}
 		}
 		# every_country = {
@@ -998,257 +961,233 @@ country_event = { #LibSocs Win
 	}
 }
 
-country_event = {
-	id = release_dummy.22
-	immediate = {log = "[GetDateText]: [Root.GetName]: event release_dummy.22"}
-	title = release_dummy.22.t
-	desc = release_dummy.22.d
-	picture = GFX_report_event_komi_bombing_2
-
-	is_triggered_only = yes
-
-	option = { #No Pakistan
-		name = release_dummy.22.a
-		ai_chance = {
-			factor = 5
-			modifier = {
-			    factor = 0
-			    has_game_rule = { rule = RAJ_Pakistan_issue option = RAJ_PAKISTAN_ISSUE_LITTLE_PAKISTAN }
-			}
-			modifier = {
-			    factor = 0
-			    has_game_rule = { rule = RAJ_Pakistan_issue option = RAJ_PAKISTAN_ISSUE_BIG_PAKISTAN }
-			}
-		}
-		add_stability = -0.25
-	}
-	option = { #Smol Pakistan
-		name = release_dummy.22.b
-		ai_chance = {
-			factor = 100
-			modifier = {
-			    factor = 0
-			    has_game_rule = { rule = RAJ_Pakistan_issue option = RAJ_PAKISTAN_ISSUE_NO_PAKISTAN }
-			}
-			modifier = {
-			    factor = 0
-			    has_game_rule = { rule = RAJ_Pakistan_issue option = RAJ_PAKISTAN_ISSUE_BIG_PAKISTAN }
-			}
-		}
-		hidden_effect = {
-			AFG = {
-				country_event = {
-					id = release_dummy.42
-					days = 90
-				}
-			}
-		}
-		PAK = {
-			transfer_state = 749
-			transfer_state = 1316
-			transfer_state = 1317
-			transfer_state = 1318
-			transfer_state = 440
-			transfer_state = 443
-		}
-		PAK = {
-			load_oob = PAK_Independence
-		}
-		if = {
-			limit = {
-				has_government = socialist
-			}
-			PAK = {
-				set_politics = {
-					ruling_party = social_democrat
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Nusrat_Bhutto_hog
-					PAK_Mubashir_Hassan_eco
-					PAK_Aziz_Ahmed_for
-					PAK_Abdul_Qayyum_Khan_sec
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				has_government = social_democrat
-			}
-			PAK = {
-				set_politics = {
-					ruling_party = social_liberal
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Allah_Bakhsh_Gabol_hog
-					PAK_Fazal_Ilahi_Chaudhry_eco
-					PAK_Chaudhry_Muhammad_Ali_for
-					PAK_Fazlur_Rahman_Malik_sec
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				OR = {
-					has_government = social_liberal
-					has_government = social_conservative
-				}
-			}
-			PAK = {
-				set_politics = {
-					ruling_party = social_conservative
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Muhammad_Khan_Junejo_hog
-					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
-					PAK_Manzur_Qadir_for
-					PAK_Jalal_Baba_sec
-				}
-			}
-		}
-		else = {
-			PAK = {
-				set_politics = {
-					ruling_party = social_conservative
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Muhammad_Khan_Junejo_hog
-					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
-					PAK_Manzur_Qadir_for
-					PAK_Jalal_Baba_sec
-				}
-			}
-		}
-		every_country = {
-			news_event = {
-				id = WORLD.462
-				hours = 1
-			}
-		}
-	}
-	option = { #Bige Pakistan
-		name = release_dummy.22.b
-		ai_chance = {
-			factor = 65
-			modifier = {
-				has_government = social_conservative
-				factor = -0.5
-			}
-			modifier = {
-				has_government = social_liberal
-				factor = -0.5
-			}
-			modifier = {
-				has_government = socialist
-				factor = 2
-			}
-			modifier = {
-			    factor = 0
-			    has_game_rule = { rule = RAJ_Pakistan_issue option = RAJ_PAKISTAN_ISSUE_NO_PAKISTAN }
-			}
-			modifier = {
-			    factor = 0
-			    has_game_rule = { rule = RAJ_Pakistan_issue option = RAJ_PAKISTAN_ISSUE_LITTLE_PAKISTAN }
-			}
-		}
-		hidden_effect = {
-			AFG = {
-				country_event = {
-					id = release_dummy.42
-					days = 90
-				}
-			}
-		}
-		PAK = {
-			transfer_state = 749
-			transfer_state = 1316
-			transfer_state = 1317
-			transfer_state = 440
-			transfer_state = 895
-			transfer_state = 1318
-		}
-		PAK = {
-			load_oob = PAK_Independence
-		}
-		if = {
-			limit = {
-				has_government = socialist
-			}
-			PAK = {
-				set_politics = {
-					ruling_party = social_democrat
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Nusrat_Bhutto_hog
-					PAK_Mubashir_Hassan_eco
-					PAK_Aziz_Ahmed_for
-					PAK_Abdul_Qayyum_Khan_sec
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				has_government = social_democrat
-			}
-			PAK = {
-				set_politics = {
-					ruling_party = social_liberal
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Allah_Bakhsh_Gabol_hog
-					PAK_Fazal_Ilahi_Chaudhry_eco
-					PAK_Chaudhry_Muhammad_Ali_for
-					PAK_Fazlur_Rahman_Malik_sec
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				OR = {
-					has_government = social_liberal
-					has_government = social_conservative
-				}
-			}
-			PAK = {
-				set_politics = {
-					ruling_party = social_conservative
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Muhammad_Khan_Junejo_hog
-					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
-					PAK_Manzur_Qadir_for
-					PAK_Jalal_Baba_sec
-				}
-			}
-		}
-		else = {
-			PAK = {
-				set_politics = {
-					ruling_party = social_conservative
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					PAK_Muhammad_Khan_Junejo_hog
-					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
-					PAK_Manzur_Qadir_for
-					PAK_Jalal_Baba_sec
-				}
-			}
-		}
-		every_country = {
-			news_event = {
-				id = WORLD.462
-				hours = 1
-			}
-		}
-	}
-}
+#country_event = {
+#	id = release_dummy.22
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event release_dummy.22"}
+#	title = release_dummy.22.t
+#	desc = release_dummy.22.d
+#	picture = GFX_report_event_komi_bombing_2
+#
+#	is_triggered_only = yes
+#
+#	option = { #No Pakistan
+#		name = release_dummy.22.a
+#		ai_chance = {
+#			factor = 5
+#		}
+#		add_stability = -0.25
+#	}
+#	option = { #Smol Pakistan
+#		name = release_dummy.22.b
+#		ai_chance = {
+#			factor = 100
+#		}
+#		hidden_effect = {
+#			AFG = {
+#				country_event = {
+#					id = release_dummy.42
+#					days = 90
+#				}
+#			}
+#		}
+#		PAK = {
+#			transfer_state = 749
+#			transfer_state = 1316
+#			transfer_state = 1317
+#			transfer_state = 1318
+#			transfer_state = 440
+#			transfer_state = 443
+#		}
+#		PAK = {
+#			load_oob = PAK_Independence
+#		}
+#		if = {
+#			limit = {
+#				has_government = socialist
+#			}
+#			PAK = {
+#				set_politics = {
+#					ruling_party = social_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Nusrat_Bhutto_hog
+#					PAK_Mubashir_Hassan_eco
+#					PAK_Aziz_Ahmed_for
+#					PAK_Abdul_Qayyum_Khan_sec
+#				}
+#			}
+#		}
+#		else_if = {
+#			limit = {
+#				has_government = social_democracy
+#			}
+#			PAK = {
+#				set_politics = {
+#					ruling_party = liberal_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Allah_Bakhsh_Gabol_hog
+#					PAK_Fazal_Ilahi_Chaudhry_eco
+#					PAK_Chaudhry_Muhammad_Ali_for
+#					PAK_Fazlur_Rahman_Malik_sec
+#				}
+#			}
+#		}
+#		else_if = {
+#			limit = {
+#				OR = {
+#					has_government = liberal_democracy
+#					has_government = conservative_democracy
+#				}
+#			}
+#			PAK = {
+#				set_politics = {
+#					ruling_party = conservative_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Muhammad_Khan_Junejo_hog
+#					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
+#					PAK_Manzur_Qadir_for
+#					PAK_Jalal_Baba_sec
+#				}
+#			}
+#		}
+#		else = {
+#			PAK = {
+#				set_politics = {
+#					ruling_party = conservative_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Muhammad_Khan_Junejo_hog
+#					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
+#					PAK_Manzur_Qadir_for
+#					PAK_Jalal_Baba_sec
+#				}
+#			}
+#		}
+#		every_country = {
+#			news_event = {
+#				id = WORLD.462
+#				hours = 1
+#			}
+#		}
+#	}
+#	option = { #Bige Pakistan
+#		name = release_dummy.22.b
+#		ai_chance = {
+#			factor = 65
+#			modifier = {
+#				has_government = conservative_democracy
+#				factor = -0.5
+#			}
+#			modifier = {
+#				has_government = liberal_democracy
+#				factor = -0.5
+#			}
+#			modifier = {
+#				has_government = socialist
+#				factor = 2
+#			}
+#		}
+#		hidden_effect = {
+#			AFG = {
+#				country_event = {
+#					id = release_dummy.42
+#					days = 90
+#				}
+#			}
+#		}
+#		PAK = {
+#			transfer_state = 749
+#			transfer_state = 1316
+#			transfer_state = 1317
+#			transfer_state = 440
+#			transfer_state = 895
+#			transfer_state = 1318
+#		}
+#		PAK = {
+#			load_oob = PAK_Independence
+#		}
+#		if = {
+#			limit = {
+#				has_government = socialist
+#			}
+#			PAK = {
+#				set_politics = {
+#					ruling_party = social_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Nusrat_Bhutto_hog
+#					PAK_Mubashir_Hassan_eco
+#					PAK_Aziz_Ahmed_for
+#					PAK_Abdul_Qayyum_Khan_sec
+#				}
+#			}
+#		}
+#		else_if = {
+#			limit = {
+#				has_government = social_democracy
+#			}
+#			PAK = {
+#				set_politics = {
+#					ruling_party = liberal_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Allah_Bakhsh_Gabol_hog
+#					PAK_Fazal_Ilahi_Chaudhry_eco
+#					PAK_Chaudhry_Muhammad_Ali_for
+#					PAK_Fazlur_Rahman_Malik_sec
+#				}
+#			}
+#		}
+#		else_if = {
+#			limit = {
+#				OR = {
+#					has_government = liberal_democracy
+#					has_government = conservative_democracy
+#				}
+#			}
+#			PAK = {
+#				set_politics = {
+#					ruling_party = conservative_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Muhammad_Khan_Junejo_hog
+#					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
+#					PAK_Manzur_Qadir_for
+#					PAK_Jalal_Baba_sec
+#				}
+#			}
+#		}
+#		else = {
+#			PAK = {
+#				set_politics = {
+#					ruling_party = conservative_democracy
+#				}
+#				remove_all_ministers = yes
+#				add_ideas = {
+#					PAK_Muhammad_Khan_Junejo_hog
+#					PAK_Muzaffar_Ali_Khan_Qizilbash_eco
+#					PAK_Manzur_Qadir_for
+#					PAK_Jalal_Baba_sec
+#				}
+#			}
+#		}
+#		every_country = {
+#			news_event = {
+#				id = WORLD.462
+#				hours = 1
+#			}
+#		}
+#	}
+#}
 
 #country_event = {  #Steppe Wars VII - The Force Awakens
 #	id = release_dummy.23
@@ -1273,7 +1212,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -1315,7 +1254,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -1357,7 +1296,7 @@ country_event = {
 #				limit = {
 #					is_kazakh_nation = yes
 #					NOT = {
-#						tag = DON
+#						tag = NPL
 #					}
 #					is_neighbor_of = PREV
 #					NOT = {
@@ -1452,7 +1391,7 @@ country_event = { #Bose Elected President or whatever
 
 	immediate = {
 		country_event = {
-			id = release_dummy.30
+			id = release_dummy.29
 			days = 1095
 		}
 	}
@@ -1461,23 +1400,18 @@ country_event = { #Bose Elected President or whatever
 		name = release_dummy.27.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = authoritarian_democrat
+				ruling_party = authoritarian_democracy
 				last_election = "1964.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			remove_all_ministers = yes
 			add_ideas = {
-				BEN_VK_Krishna_Menon_hog
-				BEN_Jagdish_Bhagwati_eco
-				BEN_Kewal_Singh_for
-				#BEN_AC_Chatterji_sec
+				AZH_VK_Krishna_Menon_hog
+				AZH_Jagdish_Bhagwati_eco
+				AZH_Kewal_Singh_for
+				#AZH_AC_Chatterji_sec
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.427
-			# 	}
-			# }
 		}
 	}
 }
@@ -1502,23 +1436,18 @@ country_event = { #Saghal wins
 		name = release_dummy.28.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = social_democrat
+				ruling_party = communist
 				last_election = "1964.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			remove_all_ministers = yes
 			add_ideas = {
-				BEN_Prem_Sahgal_hog
-				BEN_Triguna_Sen_eco
-				BEN_Vijaya_Lakshmi_Pandit_for
-				BEN_PV_Narasimha_Rao_sec
+				AZH_Prem_Sahgal_hog
+				AZH_Triguna_Sen_eco
+				AZH_Vijaya_Lakshmi_Pandit_for
+				AZH_PV_Narasimha_Rao_sec
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.428
-			# 	}
-			# }
 		}
 	}
 }
@@ -1550,16 +1479,11 @@ country_event = { #Singh wins
 			}
 			remove_all_ministers = yes
 			add_ideas = {
-				BEN_Gurbachan_Singh_Salaria_hog
-				BEN_Shah_Nawaz_Khan_eco
-				BEN_Gurbaksh_Singh_Dhillon_for
-				BEN_Bal_Thackeray_sec
+				AZH_Gurbachan_Singh_Salaria_hog
+				AZH_Shah_Nawaz_Khan_eco
+				AZH_Gurbaksh_Singh_Dhillon_for
+				AZH_Bal_Thackeray_sec
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.429
-			# 	}
-			# }
 		}
 	}
 }
@@ -2008,20 +1932,15 @@ country_event = { #1967 - Bose
 		name = release_dummy.33.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = authoritarian_democrat
+				ruling_party = authoritarian_democracy
 				last_election = "1967.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			add_popularity = {
-				ideology = authoritarian_democrat
+				ideology = authoritarian_democracy
 				popularity = 0.1
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.434
-			# 	}
-			# }
 		}
 	}
 }
@@ -2039,27 +1958,22 @@ country_event = { #1967 - Saghal
 		name = release_dummy.34.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = social_democrat
+				ruling_party = communist
 				last_election = "1967.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			add_popularity = {
-				ideology = social_democrat
+				ideology = communist
 				popularity = 0.1
 			}
 			remove_all_ministers = yes
 			add_ideas = {
-				BEN_Prem_Sahgal_hog
-				BEN_Triguna_Sen_eco
-				BEN_Vijaya_Lakshmi_Pandit_for
-				BEN_PV_Narasimha_Rao_sec
+				AZH_Prem_Sahgal_hog
+				AZH_Triguna_Sen_eco
+				AZH_Vijaya_Lakshmi_Pandit_for
+				AZH_PV_Narasimha_Rao_sec
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.436
-			# 	}
-			# }
 		}
 	}
 }
@@ -2086,11 +2000,6 @@ country_event = { #1967 - Pratap
 				ideology = socialist
 				popularity = 0.1
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.435
-			# 	}
-			# }
 		}
 	}
 }
@@ -2108,13 +2017,13 @@ country_event = { #1967 - Awami
 		name = release_dummy.36.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = social_democrat
+				ruling_party = social_democracy
 				last_election = "1967.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			add_popularity = {
-				ideology = social_democrat
+				ideology = social_democracy
 				popularity = 0.1
 			}
 			create_country_leader = {
@@ -2122,7 +2031,7 @@ country_event = { #1967 - Awami
 				desc = "POLITICS_SHEIKH_MUJIBUR_RAHMAN_DESC"
 				expire = "1999.1.1"
 				picture = "Portrait_Azad_Hind_Sheikh_Mujibur_Rahman.dds"
-				ideology = social_democrat_subtype
+				ideology = social_democracy_subtype
 				traits = {
 				}
 			}
@@ -2157,11 +2066,6 @@ country_event = { #1967 - Singh
 				ideology = despotism
 				popularity = 0.1
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.431
-			# 	}
-			# }
 		}
 	}
 }
@@ -2188,11 +2092,6 @@ country_event = { #1967 - BJS
 				ideology = fascism
 				popularity = 0.1
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.433
-			# 	}
-			# }
 		}
 	}
 }
@@ -2210,20 +2109,15 @@ country_event = { #1967 - Liberals
 		name = release_dummy.39.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = social_liberal
+				ruling_party = liberal_democracy
 				last_election = "1967.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			add_popularity = {
-				ideology = social_liberal
+				ideology = liberal_democracy
 				popularity = 0.1
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.437
-			# 	}
-			# }
 		}
 	}
 }
@@ -2241,20 +2135,15 @@ country_event = { #1967 - Regional Nationalists
 		name = release_dummy.40.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = social_conservative
+				ruling_party = conservative_democracy
 				last_election = "1967.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			add_popularity = {
-				ideology = social_conservative
+				ideology = conservative_democracy
 				popularity = 0.1
 			}
-			# every_country = {
-			# 	news_event = {
-			# 		id = WORLD.432
-			# 	}
-			# }
 		}
 	}
 }
@@ -2272,21 +2161,21 @@ country_event = { #1967 - Thackeray
 		name = release_dummy.41.a
 		hidden_effect = {
 			set_politics = {
-				ruling_party = ultranational_socialism
+				ruling_party = ultranationalism
 				last_election = "1967.5.23"
 				election_frequency = 36
 				elections_allowed = yes
 			}
 			add_popularity = {
-				ideology = ultranational_socialism
+				ideology = ultranationalism
 				popularity = 0.1
 			}
 			remove_all_ministers = yes
 			add_ideas = {
-				BEN_Bal_Thackeray_hog
-				BEN_Bal_Thackeray_eco
-				BEN_Bal_Thackeray_for
-				BEN_Bal_Thackeray_sec
+				AZH_Bal_Thackeray_hog
+				AZH_Bal_Thackeray_eco
+				AZH_Bal_Thackeray_for
+				AZH_Bal_Thackeray_sec
 			}
 			every_country = {
 				news_event = {

@@ -3,7 +3,7 @@
 add_namespace = ORE
 
 
-## ORS Strike at Orenburg - Orenburgs responce
+## DRL Strike at Orenburg - Orenburgs response
 country_event = {
 	id = ORE.1
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1"}
@@ -21,13 +21,13 @@ country_event = {
 		hidden_effect = {
 			random_list = {
 				30 = {
-					ORS = {
-						country_event = { id = ORS.204 days = 2 }
+					DRL = {
+						country_event = { id = DRL.204 days = 2 }
 					}
 				}
 				70 = {
-					ORS = {
-						country_event = { id = ORS.203 days = 2 }
+					DRL = {
+						country_event = { id = DRL.203 days = 2 }
 					}
 				}
 			}
@@ -42,13 +42,13 @@ country_event = {
 		hidden_effect = {
 			random_list = {
 				10 = {
-					ORS = {
-						country_event = { id = ORS.204 days = 2 }
+					DRL = {
+						country_event = { id = DRL.204 days = 2 }
 					}
 				}
 				90 = {
-					ORS = {
-						country_event = { id = ORS.203 days = 2 }
+					DRL = {
+						country_event = { id = DRL.203 days = 2 }
 					}
 				}
 			}
@@ -62,7 +62,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.2"}
 	title = ORE.2.t
 	desc = ORE.2.d
-	picture = GFX_report_event_ORS_strike_orenburg
+	picture = GFX_report_event_DRL_strike_orenburg
 
 	is_triggered_only = yes
 
@@ -70,12 +70,12 @@ country_event = {
 		name = ORE.2.a
 		ai_chance = { factor = 80 }
 		add_timed_idea = {
-			idea = ORS_recently_raided
+			idea = DRL_recently_raided
 			days = 90
 		}
 		hidden_effect = {
-			ORS = {
-				country_event = { id = ORS.267 days = 5 }
+			DRL = {
+				country_event = { id = DRL.267 days = 5 }
 			}
 		}
 	}
@@ -87,24 +87,24 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.3"}
 	title = ORE.3.t
 	desc = ORE.3.d
-	picture = GFX_report_event_ORS_strike_orenburg
+	picture = GFX_report_event_DRL_strike_orenburg
 
 	is_triggered_only = yes
 
 	option = {
 		name = ORE.3.a
 		ai_chance = { factor = 80 }
-		add_timed_idea = { idea = ORS_recently_raided days = 90 }
+		add_timed_idea = { idea = DRL_recently_raided days = 90 }
 		hidden_effect = {
 			random_list = {
 				70 = {
-					ORS = {
-						country_event = { id = ORS.271 days = 2 }
+					DRL = {
+						country_event = { id = DRL.271 days = 2 }
 					}
 				}
 				30 = {
-					ORS = {
-						country_event = { id = ORS.272 days = 2 }
+					DRL = {
+						country_event = { id = DRL.272 days = 2 }
 					}
 				}
 			}
@@ -126,7 +126,7 @@ country_event = { #something to do with burba i guess
 
 	option = {
 		name = ORE.10.a
-		add_popularity = { ideology = authoritarian_democrat popularity = 0.2 }
+		add_popularity = { ideology = authoritarian_democracy popularity = 0.2 }
 	}
 }
 country_event = { #something to do with malenkov i guess
@@ -175,33 +175,22 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
-		trigger = {
-			has_political_power > 25
-		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
+		TNO_improve_refugees_policy_effectiveness_med = yes
 		swap_ideas = {
 			remove_idea = tno_refugees_give_me_your_poor
 			add_idea = tno_refugees_vetted_entry
 		}
-		custom_effect_tooltip = ORE_centralize_med
-
+		ORE_centralization_med = yes
 	}
 	option = { #League can possibly be friendly
 		name = ORE.5.b
 		ai_chance = {
 			factor = 70
 		}
-		trigger = {
-			has_political_power > 10
-		}
 		add_political_power = -10
-		add_to_variable = {
-			ORECentralizedPower = 0.5
-		}
-		custom_effect_tooltip = ORE_centralize_little
+		ORE_centralization_little = yes
+		TNO_improve_refugees_policy_effectiveness_med = yes
 	}
 	option = { #League is an exploiter
 		name = ORE.5.c
@@ -210,6 +199,7 @@ country_event = {
 		}
 		add_political_power = 25
 		tno_refugees_worsen = yes
+		TNO_improve_refugees_policy_effectiveness_med = yes
 	}
 }
 
@@ -230,15 +220,9 @@ country_event = {
 		trigger = {
 			has_political_power > 50
 		}
-		add_political_power = -50
-		add_to_variable = {
-			agriculture_monthly_change = 2
-		}
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		tno_improve_agriculture = yes
-		custom_effect_tooltip = ORE_centralize_med
+		add_political_power = -20
+		TNO_improve_agriculture_med = yes
+		ORE_centralization_med = yes
 	}
 	option = { #Meh they produce enough food
 		name = ORE.6.b
@@ -266,11 +250,8 @@ country_event = {
 		trigger = {
 			has_political_power > 50
 		}
-		add_to_variable = {
-			ORECentralizedPower = 2
-		}
 		add_political_power = -50
-		custom_effect_tooltip = ORE_centralize_great
+		ORE_centralization_great = yes
 	}
 	option = { #Status quo is ok I guess
 		name = ORE.7.b
@@ -284,11 +265,8 @@ country_event = {
 		ai_chance = {
 			factor = 50
 		}
-		add_political_power = 50
-		add_to_variable = {
-			ORECentralizedPower = -1
-		}
-		custom_effect_tooltip = ORE_decentralize_med
+		add_political_power = 25
+		ORE_centralization_med = yes
 	}
 }
 
@@ -310,11 +288,9 @@ country_event = {
 			has_political_power > 25
 		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
 		tno_security_improve = yes
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
+		TNO_improve_security_policy_effectiveness_high = yes
 	}
 	option = { #No need
 		name = ORE.8.b
@@ -355,11 +331,8 @@ country_event = { #Communes demand we stop funding roads with their taxes
 		ai_chance = {
 			factor = 60
 		}
-		add_to_variable = {
-			ORECentralizedPower = -1
-		}
 		add_political_power = 25
-		custom_effect_tooltip = ORE_decentralize_med
+		ORE_decentralization_med = yes
 	}
 }
 
@@ -387,11 +360,7 @@ country_event = { #Communes demand we allow longer times for guest speakers in t
 		ai_chance = {
 			factor = 40
 		}
-		add_to_variable = {
-			ORECentralizedPower = -0.5
-		}
-		add_political_power = 10
-		custom_effect_tooltip = ORE_decentralize_some
+		ORE_centralization_some = yes
 	}
 }
 
@@ -414,18 +383,17 @@ country_event = { #Communes demand no more interference in their militia trainin
 		}
 		add_political_power = -25
 		tno_training_improve = yes
+		TNO_improve_training_policy_effectiveness_med = yes
 	}
 	option = { #No
 		name = ORE.12.b
 		ai_chance = {
 			factor = 60
 		}
-		add_to_variable = {
-			ORECentralizedPower = -1.5
-		}
 		add_political_power = 25
 		army_experience = -10
-		custom_effect_tooltip = ORE_decentralize_med
+		ORE_decentralization_med = yes
+		TNO_worsen_training_policy_effectiveness_med = yes
 	}
 }
 
@@ -449,17 +417,16 @@ country_event = { #Communes demand we limit Ural traders to only Orenburg
 		tno_trade_laws_clear = yes
 		add_ideas = tno_trade_laws_closed_economy
 		add_political_power = -20
+		TNO_improve_trade_laws_policy_effectiveness_med = yes
 	}
 	option = { #No
 		name = ORE.13.a
 		ai_chance = {
 			factor = 30
 		}
-		add_to_variable = {
-			ORECentralizedPower = -1
-		}
 		add_political_power = 25
-		custom_effect_tooltip = ORE_decentralize_med
+		ORE_decentralization_med = yes
+		TNO_worsen_poverty_med = yes
 	}
 }
 
@@ -488,12 +455,9 @@ country_event = { #Communes demand a provision for secession
 		ai_chance = {
 			factor = 10
 		}
-		add_to_variable = {
-			ORECentralizedPower = -3
-		}
 		add_political_power = 50
 		add_stability = -0.05
-		custom_effect_tooltip = ORE_decentralize_great
+		ORE_decentralization_great = yes
 		set_country_flag = ORE_secession_legal
 	}
 }
@@ -517,17 +481,16 @@ country_event = { #Communes demand we let them handle their own education
 		}
 		add_political_power = -15
 		tno_improve_academic_base = yes
+		TNO_improve_education_policy_effectiveness_med = yes
 	}
 	option = { #No
 		name = ORE.15.b
 		ai_chance = {
 			factor = 80
 		}
-		add_to_variable = {
-			ORECentralizedPower = -0.5
-		}
 		add_political_power = 15
-		custom_effect_tooltip = ORE_decentralize_some
+		ORE_decentralization_some = yes
+		TNO_worsen_education_policy_effectiveness_med = yes
 	}
 }
 
@@ -548,9 +511,10 @@ country_event = { #Congress success
 			popularity = 0.05
 		}
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.05
 		}
+		TNO_improve_admin_efficiency_low = yes
 	}
 }
 
@@ -566,6 +530,7 @@ country_event = { #Congress failed
 	option = {
 		name = ORE.160.a
 		add_stability = -0.05
+		TNO_worsen_admin_efficiency_low = yes
 	}
 }
 
@@ -574,7 +539,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.17"}
 	title = ORE.17.t
 	desc = ORE.17.d
-	picture = GFX_report_event_ORS_forest_patrol
+	picture = GFX_report_event_DRL_forest_patrol
 
 	is_triggered_only = yes
 
@@ -583,10 +548,7 @@ country_event = {
 		trigger = {
 			has_political_power > 50
 		}
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.17.b
@@ -629,6 +591,7 @@ country_event = {
 
 	option = {
 		name = ORE.180.a
+		TNO_improve_conscription_policy_effectiveness_med = yes
 		random_list = {
 			30 = {
 				add_manpower = 1750
@@ -710,7 +673,6 @@ country_event = { #Coverup fails
 
 	option = {
 		name = ORE.183.a
-		add_manpower = -1200
 		add_political_power = -25
 		add_stability = -0.05
 		add_popularity = {
@@ -718,13 +680,10 @@ country_event = { #Coverup fails
 			popularity = 0.10
 		}
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = -0.10
 		}
-		custom_effect_tooltip = ORE_decentralize_great
-		subtract_from_variable = {
-			ORECentralizedPower = 4
-		}
+		ORE_decentralization_great = yes
 	}
 	option = {
 		name = ORE.183.b
@@ -735,13 +694,10 @@ country_event = { #Coverup fails
 			popularity = 0.10
 		}
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = -0.10
 		}
-		custom_effect_tooltip = ORE_decentralize_great
-		subtract_from_variable = {
-			ORECentralizedPower = 4
-		}
+		ORE_decentralization_great = yes
 	}
 }
 
@@ -764,10 +720,7 @@ country_event = {
 		}
 		add_political_power = -25
 		tno_training_improve = yes
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.19.b
@@ -782,7 +735,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.21"}
 	title = ORE.21.t
 	desc = ORE.21.d
-	picture = GFX_report_event_ORS_Lysenko
+	picture = GFX_report_event_DRL_Lysenko
 
 	is_triggered_only = yes
 
@@ -878,7 +831,7 @@ country_event = {
 			popularity = 0.07
 		}
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.07
 		}
 	}
@@ -899,7 +852,8 @@ country_event = {
 			factor = 100
 		}
 		add_political_power = 25
-		add_stability = 0.05
+		ORE_centralization_some = yes
+		TNO_improve_admin_efficiency_low = yes
 	}
 }
 
@@ -970,7 +924,7 @@ country_event = {
 						ORECentralizedPower > 2.999
 					}
 					check_variable = {
-						party_popularity@communist > party_popularity@authoritarian_democrat
+						party_popularity@communist > party_popularity@authoritarian_democracy
 					}
 				}
 			}
@@ -1003,7 +957,7 @@ country_event = {
 						ORECentralizedPower > 2.999
 					}
 					check_variable = {
-						var = party_popularity@authoritarian_democrat
+						var = party_popularity@authoritarian_democracy
 						value = party_popularity@communist
 						compare = greater_than_or_equals
 					}
@@ -1118,7 +1072,7 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = {	#missold was here
 	id = ORE.37
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.37"}
 	title = ORE.37.t
@@ -1129,6 +1083,7 @@ country_event = {
 
 	option = {
 		name = ORE.37.a
+		TNO_worsen_army_professionalism_low = yes
 	}
 }
 
@@ -1151,7 +1106,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.39"}
 	title = ORE.39.t
 	desc = ORE.39.d
-	picture = GFX_report_event_ORS_novotroitsk_industry
+	picture = GFX_report_event_DRL_novotroitsk_industry
 
 	is_triggered_only = yes
 
@@ -1178,10 +1133,7 @@ country_event = {
 			has_political_power > 50
 		}
 		add_political_power = -50
-		add_to_variable = {
-			ORECentralizedPower = 2
-		}
-		custom_effect_tooltip = ORE_centralize_great
+		ORE_centralization_great = yes
 	}
 	option = {
 		name = ORE.40.b
@@ -1192,10 +1144,7 @@ country_event = {
 			has_political_power > 25
 		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.40.c
@@ -1224,10 +1173,7 @@ country_event = {
 			has_political_power > 50
 		}
 		add_political_power = -50
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.41.b
@@ -1256,10 +1202,9 @@ country_event = {
 			has_political_power > 25
 		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		set_temp_variable = { income_tax_temp = -0.03 }
+		econ_income_tax_rate_change = yes
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.42.b
@@ -1288,10 +1233,8 @@ country_event = {
 			has_political_power > 75
 		}
 		add_political_power = -75
-		add_to_variable = {
-			ORECentralizedPower = 2
-		}
-		custom_effect_tooltip = ORE_centralize_great
+		TNO_improve_income_taxation_policy_effectiveness_low = yes
+		ORE_centralization_great = yes
 	}
 	option = {
 		name = ORE.43.b
@@ -1302,10 +1245,7 @@ country_event = {
 			has_political_power > 25
 		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.43.c
@@ -1313,6 +1253,7 @@ country_event = {
 			factor = 50
 		}
 		add_political_power = 25
+		TNO_worsen_admin_efficiency_low = yes
 	}
 }
 
@@ -1334,10 +1275,7 @@ country_event = {
 			has_political_power > 50
 		}
 		add_political_power = -50
-		add_to_variable = {
-			ORECentralizedPower = 2
-		}
-		custom_effect_tooltip = ORE_centralize_great
+		ORE_centralization_great = yes
 	}
 	option = {
 		name = ORE.44.b
@@ -1348,10 +1286,7 @@ country_event = {
 			has_political_power > 25
 		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.44.c
@@ -1380,6 +1315,7 @@ country_event = {
 			has_political_power > 10
 		}
 		add_political_power = -10
+		TNO_improve_admin_efficiency_med = yes
 	}
 	option = {
 		name = ORE.45.b
@@ -1387,10 +1323,7 @@ country_event = {
 			factor = 30
 		}
 		add_political_power = 10
-		add_to_variable = {
-			ORECentralizedPower = -1
-		}
-		custom_effect_tooltip = ORE_decentralize_med
+		ORE_decentralization_med = yes
 	}
 }
 
@@ -1412,10 +1345,7 @@ country_event = {
 			has_political_power > 50
 		}
 		add_political_power = -50
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.46.b
@@ -1433,10 +1363,7 @@ country_event = {
 			factor = 20
 		}
 		add_political_power = 10
-		add_to_variable = {
-			ORECentralizedPower = -2
-		}
-		custom_effect_tooltip = ORE_decentralize_great
+		ORE_decentralization_great = yes
 	}
 }
 
@@ -1453,6 +1380,7 @@ country_event = {
 		name = ORE.410.a
 		add_ideas = ORE_famine_1
 		set_country_flag = ORE_Famine_Start
+		TNO_worsen_poverty_med = yes
 	}
 }
 
@@ -1472,6 +1400,7 @@ country_event = {
 			add_idea = ORE_famine_2
 		}
 		set_country_flag = ORE_Famine_Start_2
+		TNO_worsen_poverty_med = yes
 	}
 }
 
@@ -1490,6 +1419,7 @@ country_event = {
 			remove_idea = ORE_famine_2
 			add_idea = ORE_famine_3
 		}
+		TNO_worsen_poverty_med = yes
 		hidden_effect = {
 			country_event = {
 				id = ORE.440
@@ -1514,6 +1444,7 @@ country_event = {
 			remove_idea = ORE_famine_3
 			add_idea = ORE_famine_2
 		}
+		TNO_improve_poverty_low = yes
 		country_event = {
 			id = ORE.450
 			days = 30
@@ -1536,6 +1467,7 @@ country_event = {
 			remove_idea = ORE_famine_2
 			add_idea = ORE_famine_1
 		}
+		TNO_improve_poverty_low = yes
 		country_event = {
 			id = ORE.460
 			days = 30
@@ -1555,6 +1487,7 @@ country_event = {
 	option = {
 		name = ORE.460.a
 		remove_ideas = ORE_famine_1
+		TNO_improve_poverty_low = yes
 	}
 }
 
@@ -1575,6 +1508,8 @@ country_event = {
 			}
 		}
 		add_stability = 0.05
+		tno_safety_improve = yes
+		tno_minimum_wage_improve = yes
 	}
 	option = {
 		name = ORE.47.b
@@ -1590,6 +1525,7 @@ country_event = {
 		}
 		add_stability = -0.05
 		add_political_power = 50
+		tno_minimum_wage_improve = yes
 	}
 	option = {
 		name = ORE.47.c
@@ -1629,11 +1565,7 @@ country_event = {
 				instant_build = yes
 			}
 		}
-		add_to_variable = {
-			var = ORECentralizedPower
-			value = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.48.b
@@ -1679,10 +1611,7 @@ country_event = {
 			has_political_power > 25
 		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.49.b
@@ -1699,10 +1628,7 @@ country_event = {
 		ai_chance = {
 			factor = 10
 		}
-		add_to_variable = {
-			ORECentralizedPower = -1
-		}
-		custom_effect_tooltip = ORE_decentralize_med
+		ORE_decentralization_med = yes
 	}
 }
 
@@ -1724,14 +1650,8 @@ country_event = {
 			id = ORE.51
 			days = 5
 		}
-		trigger = {
-			has_political_power > 25
-		}
 		add_political_power = -25
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.50.b
@@ -1741,9 +1661,6 @@ country_event = {
 		country_event = {
 			id = ORE.51
 			days = 5
-		}
-		trigger = {
-			has_political_power > 10
 		}
 		add_political_power = -10
 	}
@@ -1756,10 +1673,7 @@ country_event = {
 			id = ORE.51
 			days = 5
 		}
-		add_to_variable = {
-			ORECentralizedPower = -1
-		}
-		custom_effect_tooltip = ORE_decentralize_med
+		ORE_decentralization_med = yes
 	}
 }
 
@@ -1785,10 +1699,7 @@ country_event = {
 			has_political_power > 50
 		}
 		add_political_power = -50
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.51.b
@@ -1799,10 +1710,7 @@ country_event = {
 			id = ORE.52
 			days = 5
 		}
-		add_to_variable = {
-			ORECentralizedPower = -1
-		}
-		custom_effect_tooltip = ORE_decentralize_med
+		ORE_decentralization_med = yes
 	}
 }
 
@@ -1821,14 +1729,11 @@ country_event = {
 			ideology = communist
 			popularity = 0.10
 		}
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_med
 		country_event = {
 			id = ORE.53
 			days = 5
 		}
+		ORE_centralization_med = yes
 	}
 	option = {
 		name = ORE.52.b #Thank you comrade
@@ -2012,7 +1917,7 @@ country_event = { #Orenburg Is Dead
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.60"}
 	title = ORE.60.t
 	desc = ORE.60.d
-	picture = GFX_report_event_ORS_strike_orenburg
+	picture = GFX_report_event_DRL_strike_orenburg
 
 	is_triggered_only = yes
 
@@ -2067,8 +1972,7 @@ country_event = { # Reorganizing The Militias
 
 	option = {
 		name = ORE.72.a
-
-
+		TNO_improve_army_professionalism_low = yes
 	}
 }
 
@@ -2083,8 +1987,7 @@ country_event = { # The Urals' Training Program
 
 	option = {
 		name = ORE.73.a
-
-
+		TNO_improve_training_policy_effectiveness_low = yes
 	}
 }
 
@@ -2115,8 +2018,7 @@ country_event = { # Adapting Their Strategies
 
 	option = {
 		name = ORE.75.a
-
-
+		TNO_improve_training_policy_effectiveness_med = yes
 	}
 }
 
@@ -2164,8 +2066,8 @@ country_event = { # Establish The Planning Commission
 
 	option = {
 		name = ORE.78.a
-
-
+		set_temp_variable = {econ_centralization_temp = 5}
+		econ_centralization_change = yes
 	}
 }
 
@@ -2180,8 +2082,8 @@ country_event = { # Mitigate The Council's Influence
 
 	option = {
 		name = ORE.79.a
-
-
+		set_temp_variable = {econ_centralization_temp = 8}
+		econ_centralization_change = yes 
 	}
 }
 
@@ -2196,8 +2098,7 @@ country_event = { # Members From Every Commune
 
 	option = {
 		name = ORE.80.a
-
-
+        TNO_improve_public_meetings_policy_effectiveness_med = yes
 	}
 }
 
@@ -2228,8 +2129,18 @@ country_event = { # The Soviet Land Surveys
 
 	option = {
 		name = ORE.82.a
-
-
+		652 = {
+			add_resource = {
+				type = oil
+				amount = 10
+			}
+		}
+		852 = {
+			add_resource = {
+				type = oil
+				amount = 6
+			}
+		}
 	}
 }
 
@@ -2244,8 +2155,7 @@ country_event = { # Override The Communes' Zoning
 
 	option = {
 		name = ORE.83.a
-
-
+		TNO_improve_agriculture_low = yes
 	}
 }
 
@@ -2309,7 +2219,7 @@ country_event = { # A More Professional Council
 
 	option = {
 		name = ORE.87.a
-
+        TNO_worsen_political_parties_policy_effectiveness_med = yes
 
 	}
 }
@@ -2325,8 +2235,7 @@ country_event = { # Scientific Organization
 
 	option = {
 		name = ORE.88.a
-
-
+        TNO_improve_admin_efficiency_med = yes
 	}
 }
 
@@ -2405,6 +2314,7 @@ country_event = { # Ready To Fight
 
 	option = {
 		name = ORE.93.a
+		TNO_improve_training_policy_effectiveness_med = yes
 	}
 }
 
@@ -2453,6 +2363,7 @@ country_event = { # Orenburg Redefined
 
 	option = {
 		name = ORE.95.a
+		TNO_russia_ending_screen = yes
 	}
 }
 
@@ -2510,6 +2421,7 @@ country_event = { # Dizzy With Success
 	option = {
 		name = ORE.98.a
 		add_political_power = 200
+		TNO_russia_ending_screen = yes
 		hidden_effect = {
 			ORE_upgrade_industry = yes
 			ORE_upgrade_industry = yes
@@ -2543,13 +2455,13 @@ country_event = { #NKVD Proposal, autonomy
 	option = { #Communes vote yes
 		name = ORE.1050.a
 		ai_chance = {factor = 20}
-		BAS = {country_event = {id = BAS_NKVD.1082 }
+		MGN = {country_event = {id = MGN_NKVD.1082 }
 		}
 	}
 	option = { #Communes Vote Nay
 		name = ORE.1050.b
 		ai_chance = {factor = 80}
-		BAS = { country_event = {id = BAS_NKVD.1081 }
+		MGN = { country_event = {id = MGN_NKVD.1081 }
 		}
 	}
 }
@@ -2566,14 +2478,14 @@ country_event = { #NKVD Demand, annexation
 	option = { #Communes Vote Nay
 		name = ORE.1051.a
 		ai_chance = {factor = 95}
-		BAS = { country_event = {id = BAS_NKVD.1081 }
+		MGN = { country_event = {id = MGN_NKVD.1081 }
 		}
 
 	}
 	option = { #Communes vote Yes
 		name = ORE.1051.b
 		ai_chance = {factor = 5}
-		BAS = { country_event = {id = BAS_NKVD.1083 }
+		MGN = { country_event = {id = MGN_NKVD.1083 }
 
 		}
 	}
@@ -2591,13 +2503,13 @@ country_event = { #NKVD Friendship Agreement
 	option = { #Communes Vote Nay
 		name = ORE.1052.a
 		ai_chance = {factor = 10}
-		BAS = { country_event = { id = BAS_NKVD.1081 }
+		MGN = { country_event = { id = MGN_NKVD.1081 }
 		}
 
 	}
 	option = { #Communes vote Yes
 		name = ORE.1052.b
-		BAS = {country_event = BAS_NKVD.1084}
+		MGN = {country_event = MGN_NKVD.1084}
 		ai_chance = {factor = 90}
 	}
 }
@@ -2634,10 +2546,10 @@ country_event = {
 		hidden_effect = {
 			if = {
 				limit = {
-					BAS = { exists = no }
+					MGN = { exists = no }
 				}
 				hidden_effect = {
-					owb_endslide_start = yes
+					#owb_endslide_start = yes
 				}
 			}
 		}
@@ -2660,10 +2572,10 @@ country_event = {
 		name = ORE.601.a
 		if = {
 			limit = {
-				ORS = { exists = no }
+				DRL = { exists = no }
 			}
 			hidden_effect = {
-				owb_endslide_start = yes
+				#owb_endslide_start = yes
 			}
 		}
 	}
@@ -2674,7 +2586,7 @@ country_event = {
 	id = ORE.602
 	title = ORE.602.t
 	desc = ORE.602.desc
-	picture = GFX_report_event_ORS_strike_orenburg
+	picture = GFX_report_event_DRL_strike_orenburg
 
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.602"}
 
@@ -2685,10 +2597,10 @@ country_event = {
 		name = ORE.602.a
 		if = {
 			limit = {
-				ORS = { exists = no }
+				DRL = { exists = no }
 			}
 			hidden_effect = {
-				owb_endslide_start = yes
+				#owb_endslide_start = yes
 			}
 		}
 	}
@@ -2709,7 +2621,7 @@ country_event = { #Skirmish between Village militias!
 		date > 1963.05.05
 		OR = {
 			original_tag = ORE
-			has_government = authoritarian_democrat
+			has_government = authoritarian_democracy
 			date > 1963.05.05
 		}
 	}
@@ -2719,6 +2631,7 @@ country_event = { #Skirmish between Village militias!
 	option = {
 		name = ORE.101.a #Let them fight it out
 		add_stability = -0.05
+		TNO_worsen_security_policy_effectiveness_med = yes
 	}
 
 	option = {
@@ -2727,6 +2640,7 @@ country_event = { #Skirmish between Village militias!
 			has_political_power > 49.9
 		}
 		add_political_power = -50
+		TNO_improve_security_policy_effectiveness_med = yes
 	}
 
 	option = {
@@ -2792,11 +2706,10 @@ country_event = { # Burba and Malenkov supporters clash in the market square
 		name = ORE.103.a #Malenkov supporters win#
 		add_political_power = -10
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.05
 		}
-		add_to_variable = { ORECentralizedPower = 0.5 }
-		custom_effect_tooltip = ORE_centralize_some
+		ORE_centralization_some = yes
 	}
 
 	option = {
@@ -2806,8 +2719,7 @@ country_event = { # Burba and Malenkov supporters clash in the market square
 			ideology = communist
 			popularity = 0.05
 		}
-		add_to_variable = { ORECentralizedPower = 0.75 }
-		custom_effect_tooltip = ORE_centralize
+		ORE_centralization_med = yes
 	}
 }
 
@@ -2849,8 +2761,7 @@ country_event = { # The Bandits Trial
 	option = {
 		name = ORE.105.a #Lynching#
 		add_political_power = 10
-		subtract_from_variable = { ORECentralizedPower = 0.1 }
-		custom_effect_tooltip = ORE_decentralize_little
+		ORE_decentralization_little = yes
 	}
 
 	option = {
@@ -2860,9 +2771,9 @@ country_event = { # The Bandits Trial
 
 	option = {
 		name = ORE.105.c #Life Imprisonment#
-		add_political_power = 10
-		add_to_variable = { ORECentralizedPower = 0.1 }
-		custom_effect_tooltip = ORE_centralize_little
+		add_political_power = -10
+		ORE_centralization_little = yes
+		TNO_improve_penal_system_policy_effectiveness_med = yes
 	}
 }
 
@@ -2890,8 +2801,7 @@ country_event = { # City mob demands punishment of unpopular councillor
 	option = {
 		name = ORE.106.a #No way
 		add_political_power = -10
-		add_to_variable = { ORECentralizedPower = 0.1 }
-		custom_effect_tooltip = ORE_centralize_little
+		ORE_centralization_little = yes
 	}
 
 	option = {
@@ -2901,8 +2811,7 @@ country_event = { # City mob demands punishment of unpopular councillor
 	option = {
 		name = ORE.106.c #Let the mob deal with him
 		add_political_power = -10
-		subtract_from_variable = { ORECentralizedPower = 0.1 }
-		custom_effect_tooltip = ORE_decentralize_little
+		ORE_decentralization_little = yes
 	}
 }
 
@@ -2920,7 +2829,7 @@ country_event = { # Czechoslovak Bataillon offers services
 		OR = {
 			original_tag = ORE
 			date < 1964.07.03
-			has_government = authoritarian_democrat
+			has_government = authoritarian_democracy
 		}
 		OR = {
 			original_tag = ORE
@@ -2958,7 +2867,7 @@ country_event = { # City Commander Stekylar accused of ties to Lysenko!
 
 	trigger = {
 		original_tag = ORE
-		has_government = authoritarian_democrat
+		has_government = authoritarian_democracy
 		date > 1964.06.02
 		OR = {
 			original_tag = ORE
@@ -2993,7 +2902,7 @@ country_event = { # A caravan from Nowa Polska
 
 	trigger = {
 		original_tag = ORE
-		has_government = authoritarian_democrat
+		has_government = authoritarian_democracy
 		date > 1963.08.08
 	}
 
@@ -3014,7 +2923,7 @@ country_event = { # The Great Harvest Feast
 
 	trigger = {
 		original_tag = ORE
-		has_government = authoritarian_democrat
+		has_government = authoritarian_democracy
 		date > 1964.11.11
 		OR = {
 			original_tag = ORE
@@ -3048,10 +2957,7 @@ country_event = { #Malenkov demands action
 			ideology = communist
 			popularity = 0.05
 		}
-		custom_effect_tooltip = ORE_centralize_med
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
+		ORE_centralization_med = yes
 		hidden_effect = {
 			country_event = { id = ORE.113 days = 6 }
 		}
@@ -3072,7 +2978,7 @@ country_event = { # Burba pushes for reform
 	option = {
 		name = ORE.112.a
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.04
 		}
 		hidden_effect = {
@@ -3094,10 +3000,7 @@ country_event = { # The reformist party splits
 
 	option = {
 		name = ORE.113.a
-		custom_effect_tooltip = ORE_decentralize_great
-		subtract_from_variable = {
-			ORECentralizedPower = 2
-		}
+		ORE_decentralization_great = yes
 		hidden_effect = {
 			country_event = { id = ORE.114 days = 5 }
 		}
@@ -3121,10 +3024,7 @@ country_event = { # Malenkov flirts with border regions
 			ideology = communist
 			popularity = 0.05
 		}
-		custom_effect_tooltip = ORE_centralize_med
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
+		ORE_centralization_med = yes
 		hidden_effect = {
 			country_event = { id = ORE.119 days = 7 }
 		}
@@ -3132,7 +3032,7 @@ country_event = { # Malenkov flirts with border regions
 	option = { # burba talks with them
 		name = ORE.114.b
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.04
 		}
 		hidden_effect = {
@@ -3155,7 +3055,7 @@ country_event = { # Malenkov accuses Burba of favoring the city
 	option = { #Bribe malenkovs secretary
 		name = ORE.115.a
 		add_popularity = {
-			ideology = communist
+			ideology = authoritarian_democracy
 			popularity = 0.02
 		}
 		hidden_effect = {
@@ -3197,7 +3097,7 @@ country_event = { # Malenkov conversation leaked
 	option = {
 		name = ORE.116.a
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.04
 		}
 		add_popularity = {
@@ -3228,7 +3128,7 @@ country_event = { # Burba is accused of bribery
 			popularity = 0.04
 		}
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = -0.04
 		}
 		hidden_effect = {
@@ -3254,10 +3154,7 @@ country_event = { # Burba barred from the outer regions
 			ideology = communist
 			popularity = 0.04
 		}
-		custom_effect_tooltip = ORE_centralize_little
-		add_to_variable = {
-			ORECentralizedPower = 0.5
-		}
+		ORE_centralization_some = yes
 		hidden_effect = {
 			country_event = { id = ORE.119 days = 6 }
 		}
@@ -3294,10 +3191,8 @@ country_event = { # The third block forms
 	}
 	option = {
 		name = ORE.119.b
-		custom_effect_tooltip = ORE_centralize_little
-		add_to_variable = {
-			ORECentralizedPower = 0.5
-		}
+		ORE_centralization_some = yes
+		TNO_worsen_admin_efficiency_med = yes
 		hidden_effect = {
 			country_event = { id = ORE.123 days = 12 }
 		}
@@ -3318,7 +3213,7 @@ country_event = { # The towns seem fine malenkov is caught
 	option = {
 		name = ORE.120.a
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.04
 		}
 		add_popularity = {
@@ -3343,7 +3238,7 @@ country_event = { # The town is fine
 	option = {
 		name = ORE.121.a
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = -0.03
 		}
 		ORE_last_issue_check = yes
@@ -3364,7 +3259,7 @@ country_event = { # The town flips to burbas bloc
 	option = {
 		name = ORE.122.a
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.04
 		}
 		ORE_last_issue_check = yes
@@ -3433,17 +3328,14 @@ country_event = { # Burba is shot
 		set_country_flag = OREBurbaArrested
 		add_political_power = -25
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = -0.9
 		}
 		add_popularity = {
 			ideology = communist
 			popularity = 0.1
 		}
-		custom_effect_tooltip = ORE_decentralize_great
-		subtract_from_variable = {
-			ORECentralizedPower = 2
-		}
+		ORE_decentralization_great = yes
 	}
 }
 
@@ -3511,7 +3403,7 @@ country_event = { # Burba support grows
 	option = {
 		name = ORE.128.a
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.04
 		}
 	}
@@ -3530,9 +3422,10 @@ country_event = { # Centralisation support grows
 
 	option = {
 		name = ORE.129.a
-		custom_effect_tooltip = ORE_centralize_med
-		add_to_variable = {
-			ORECentralizedPower = 1
+		ORE_centralization_med = yes
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.03
 		}
 	}
 }
@@ -3554,15 +3447,12 @@ country_event = { # Parliament is burned down
 			ideology = communist
 			popularity = 0.06
 		}
-		custom_effect_tooltip = ORE_centralize_med
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
+		ORE_centralization_med = yes
 	}
 	option = { # blame malenkov
 		name = ORE.130.b
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.04
 		}
 	}
@@ -3608,10 +3498,7 @@ country_event = { # Towns surrender instantly
 			ideology = communist
 			popularity = 0.08
 		}
-		custom_effect_tooltip = ORE_centralize_med
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
+		ORE_centralization_med = yes
 	}
 }
 
@@ -3689,7 +3576,7 @@ country_event = { #Scientist arrive
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.145"}
 	title = ORE.145.t
 	desc = ORE.145.d
-	picture = GFX_report_event_lysenko_experiment
+	picture = GFX_report_event_generic_research_lab
 
 	fire_only_once = yes
 	trigger = {
@@ -3705,6 +3592,7 @@ country_event = { #Scientist arrive
 
 	option = {
 		name = ORE.145.a
+		TNO_improve_research_facilities_med = yes
 	}
 
 }
@@ -3731,6 +3619,8 @@ country_event = { #Army attacks Riot
 		name = ORE.146.a
 		ORE = {
 			add_political_power = -50
+			set_temp_variable = {econ_centralization_temp = 10}
+			econ_centralization_change = yes 
 		}
 	}
 
@@ -3757,6 +3647,7 @@ country_event = { #Homeless Shelter
 
 	option = {
 		name = ORE.147.a
+		TNO_improve_poverty_med = yes
 		ORE = {
 			add_political_power = 10
 		}
@@ -3788,6 +3679,7 @@ country_event = { #New Deal
 
 	option = {
 		name = ORE.148.a
+		TNO_improve_poverty_high = yes
 		ORE = {
 			add_political_power = 30
 		}
@@ -3818,6 +3710,7 @@ country_event = { #Coup
 		ORE = {
 			add_political_power = 100
 		}
+		TNO_worsen_political_parties_policy_effectiveness_low = yes
 	}
 }
 
@@ -3842,9 +3735,11 @@ country_event = { #Election
 
 	option = {
 		name = ORE.150.a
+		TNO_improve_admin_efficiency_med = yes
 		ORE = {
 			add_political_power = 100
 		}
+		TNO_worsen_political_parties_policy_effectiveness_low = yes
 	}
 
 }
@@ -4032,10 +3927,8 @@ country_event = { #Pacifica Writes Gay Romance - Part Six
 		}
 		
 		add_stability = -0.02
-		add_to_variable = {
-			ORECentralizedPower = -0.5
-		}
-		custom_effect_tooltip = ORE_decentralize_some
+		ORE_decentralization_some = yes
+		TNO_worsen_admin_efficiency_med = yes
 		hidden_effect = {
 			country_event = { id = ORE.1561 days = 9 }
 		}
@@ -4056,6 +3949,7 @@ country_event = { #Pacifica Writes Gay Romance - Part Six
 		
 		add_political_power = 25
 		tno_lgbt_rights_worsen = yes
+		TNO_worsen_lgbt_rights_policy_effectiveness_med = yes
 		hidden_effect = {
 			country_event = { id = ORE.1562 days = 17 }
 		}
@@ -4089,7 +3983,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Eight
 
 	option = {
 		name = ORE.1562.a
-		
 		if = {
 			limit = {
 				has_game_rule = {
@@ -4185,7 +4078,7 @@ country_event = { #Pacifica Writes Gay Romance - Part Ten
 	immediate = {log = "[GetDateText]: [Root.GetName]: event ORE.1564"}
 	title = ORE.1564.t
 	desc = ORE.1564.d
-	picture = GFX_report_event_ORS_forest_patrol
+	picture = GFX_report_event_DRL_forest_patrol
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -4266,12 +4159,9 @@ country_event = { #Pollution Chain - Decision
 		hidden_effect = {
 			country_event = { id = ORE.159 days = 35 }
 		}
-		add_to_variable = {
-			ORECentralizedPower = 1
-		}
-		custom_effect_tooltip = ORE_centralize_some
+		ORE_centralization_med = yes
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.03
 		}
 	}
@@ -4280,12 +4170,10 @@ country_event = { #Pollution Chain - Decision
 		hidden_effect = {
 			country_event = { id = ORE.1600 days = 35 }
 		}
-		add_to_variable = {
-			ORECentralizedPower = -0.5
-		}
-		custom_effect_tooltip = ORE_decentralize_little
+		ORE_decentralization_some = yes
 		add_stability = 0.03
 		tno_pollution_improve = yes
+		TNO_improve_pollution_policy_effectiveness_high = yes
 	}
 }
 
@@ -4334,6 +4222,11 @@ country_event = { #Thermal Plant Chain - Initial
 
 	option = {
 		name = ORE.161.a
+		add_resource = {
+        type = power
+        amount = 1
+        state = 652
+        }
 		hidden_effect = {
 			country_event = { id = ORE.162 days = 5	}
 		}
@@ -4353,10 +4246,12 @@ country_event = { #Thermal Plant Chain - Discovery
 	option = {
 		name = ORE.162.a
 		add_stability = -0.02
-		add_to_variable = {
-			ORECentralizedPower = 0.3
-		}
-		custom_effect_tooltip = ORE_centralize_little
+		ORE_decentralization_little = yes
+		add_resource = {
+        type = power
+        amount = 1
+        state = 849
+        }
 	}
 	option = {
 		name = ORE.162.b
@@ -4396,7 +4291,7 @@ country_event = {
 	option = {
 		name = ORE.900.c
 		trigger = {
-			has_government = authoritarian_democrat
+			has_government = authoritarian_democracy
 		}
 	}
 }

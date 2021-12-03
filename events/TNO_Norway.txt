@@ -4,224 +4,270 @@
 
 add_namespace = norway
 
-country_event = { ## The Status of Reichskommissariat Norwegen
+country_event = { ## Intro to Lunde
 	id = norway.1
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.1" }
- 	title = norway.1.t
- 	desc = norway.1.desc
- 	picture = GFX_report_event_generic_mountain
-	
+	title = norway.1.t
+	desc = norway.1.desc
+	picture = GFX_report_event_generic_mountain
+
 	is_triggered_only = yes
- 	
- 	option = {
-		 name = norway.1.a
-		 country_event = { id = norway.59 days = 1 }
- 	}
+
+	option = {
+		name = norway.1.a
+		country_event = { id = norway.59 days = 1 }
+		add_war_support = 0.05
+	}
 }
 
 country_event = { ## Civil Disobedience Within Reichskommissariat Norwegen
 	id = norway.2
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.2" }
- 	title = norway.2.t
- 	desc = norway.2.desc
- 	picture = GFX_report_event_generic_people
-	
+	title = norway.2.t
+	desc = norway.2.desc
+	picture = GFX_report_event_generic_people
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.2.a
- 	}
+
+	option = {
+		name = norway.2.a
+		TNO_improve_press_rights_policy_effectiveness_low = yes
+		TNO_improve_security_policy_effectiveness_low = yes
+	}
 }
 
 country_event = { ## Milorg Armory Bust
 	id = norway.3
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.3" }
- 	title = norway.3.t
- 	desc = norway.3.desc
- 	picture = GFX_report_event_guns_crate_mosin
-	
+	title = norway.3.t
+	desc = norway.3.desc
+	picture = GFX_report_event_guns_crate_mosin
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
- 		name = norway.3.a
- 		add_equipment_to_stockpile = {
+
+	option = {
+		name = norway.3.a
+		add_equipment_to_stockpile = {
 			type = infantry_equipment_1
-			amount = 500
+			amount = -500
 			producer = NOR
 		}
- 	}
+		add_stability = -0.05
+	}
 }
 
 country_event = { ## Hard crackdown on the sweedish border or only a light crackdown
 	id = norway.4
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.4" }
- 	title = norway.4.t
- 	desc = norway.4.desc
- 	picture = GFX_report_Event_german_Army3
-	
+	title = norway.4.t
+	desc = norway.4.desc
+	picture = GFX_report_event_german_army3
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = { # light
- 		name = norway.4.a
- 		add_to_variable = { nor_demlove = 1 }
- 	}
- 	option = { # hard
- 		name = norway.4.b
- 		add_to_variable = { nor_gerlove = 1 }
- 	}
+
+	option = { # light
+		name = norway.4.a
+		add_to_variable = { nor_demlove = 1 }
+	}
+	option = { # hard
+		name = norway.4.b
+		add_to_variable = { nor_gerlove = 1 }
+	}
 }
 
 country_event = { ## Enforcing German Literacy
 	id = norway.5
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.5" }
- 	title = norway.5.t
- 	desc = norway.5.desc
- 	picture = GFX_report_event_german_police
-	
+	title = norway.5.t
+	desc = norway.5.desc
+	picture = GFX_report_event_german_police
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.5.a
- 	}
+
+	option = {
+		name = norway.5.a
+		TNO_improve_education_policy_effectiveness_monthly_low = yes
+		set_temp_variable = { civilian_costs_temp = 0.01 }
+		econ_civilian_costs_change = yes
+	}
 }
 
 country_event = { ## How much are you going to screw over the norwegian speakers? A lot or just a bit
 	id = norway.6
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.6" }
- 	title = norway.6.t
- 	desc = norway.6.desc
- 	picture = GFX_report_event_generic_people
-	
+	title = norway.6.t
+	desc = norway.6.desc
+	picture = GFX_report_event_generic_people
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = { # a bit
- 		name = norway.6.a
- 		add_to_variable = { nor_demlove = 1 }
- 	}
- 	option = { # a lot
- 		name = norway.6.b
- 		add_to_variable = { nor_gerlove = 1 }
- 	}
+
+	option = { # a bit
+		name = norway.6.a
+		add_to_variable = { nor_demlove = 1 }
+		TNO_worsen_admin_efficiency_low = yes
+
+	}
+	option = { # a lot
+		name = norway.6.b
+		add_to_variable = { nor_gerlove = 1 }
+		TNO_worsen_admin_efficiency_med = yes
+		TNO_improve_education_policy_effectiveness_low = yes
+		TNO_improve_security_policy_effectiveness_low = yes
+	}
 }
 
 country_event = { ## The Norwegian Economy
 	id = norway.7
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.7" }
- 	title = norway.7.t
- 	desc = norway.7.desc
- 	picture = GFX_report_event_generic_office
-	
+	title = norway.7.t
+	desc = norway.7.desc
+	picture = GFX_report_event_generic_office
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.7.a
- 	}
+
+	option = {
+		name = norway.7.a
+		set_temp_variable = { gdp_growth_temp = 0.5	 }
+		econ_gdp_growth_change = yes
+		TNO_improve_poverty_low = yes
+	}
 }
 
 country_event = { ## how much will we watch the workers?
 	id = norway.8
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.8" }
- 	title = norway.8.t
- 	desc = norway.8.desc
- 	picture = GFX_report_event_generic_people
-	
+	title = norway.8.t
+	desc = norway.8.desc
+	picture = GFX_report_event_generic_people
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = { # enough
- 		name = norway.8.a
- 		add_to_variable = { nor_demlove = 1 }
- 	}
- 	option = { # a lot
- 		name = norway.8.b
- 		add_to_variable = { nor_gerlove = 1 }
- 	}
+
+	option = { # enough
+		name = norway.8.a
+		add_to_variable = { nor_demlove = 1 }
+		TNO_improve_security_policy_effectiveness_monthly_low = yes
+		add_timed_idea = { idea = norway_8_a_misc_costs days = 90 }
+	}
+	option = { # a lot
+		name = norway.8.b
+		add_to_variable = { nor_gerlove = 1 }
+		TNO_improve_security_policy_effectiveness_monthly_high = yes
+		add_timed_idea = { idea = norway_8_b_misc_costs days = 90 }
+	}
 }
 
 country_event = { ## Media in Reichskommissariat Norwegen
 	id = norway.9
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.9" }
- 	title = norway.9.t
- 	desc = norway.9.desc
- 	picture = GFX_report_event_generic_newspaper
-	
+	title = norway.9.t
+	desc = norway.9.desc
+	picture = GFX_report_event_generic_newspaper
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.9.a
- 	}
+
+	option = {
+		name = norway.9.a
+		TNO_worsen_public_meetings_policy_effectiveness_med = yes
+		TNO_worsen_security_policy_effectiveness_med = yes
+		TNO_worsen_press_rights_policy_effectiveness_med = yes
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = .03
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = .03
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = .03
+		}
+	}
 }
 
 country_event = { ## Milorg propaganda crackdown
 	id = norway.10
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.10" }
- 	title = norway.10.t
- 	desc = norway.10.desc
- 	picture = GFX_report_Event_german_Army3
-	
+	title = norway.10.t
+	desc = norway.10.desc
+	picture = GFX_report_event_german_army3
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.10.a
- 	}
+
+	option = {
+		name = norway.10.a
+		NOR = {
+			army_funding_minimal_increase_med = yes
+			TNO_improve_press_rights_policy_effectiveness_monthly_med = yes
+		}
+	}
 }
 
 country_event = { ## Forces redistributed
 	id = norway.11
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.11" }
- 	title = norway.11.t
- 	desc = norway.11.desc
- 	picture = GFX_report_event_german_Army
-	
+	title = norway.11.t
+	desc = norway.11.desc
+	picture = GFX_report_event_german_army
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.11.a
- 	}
+
+	option = {
+		name = norway.11.a
+	}
 }
 
 country_event = { ## Industry in Reichskommissariat Norwegen
 	id = norway.12
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.12" }
- 	title = norway.12.t
- 	desc = norway.12.desc
- 	picture = GFX_report_event_CHI_Industry_Synth_Refine
-	
+	title = norway.12.t
+	desc = norway.12.desc
+	picture = GFX_report_event_CHI_Industry_Synth_Refine
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.12.a
- 	}
+
+	option = {
+		name = norway.12.a
+	}
 }
 
 country_event = { ## Focus on industry
 	id = norway.13
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.13" }
- 	title = norway.13.t
- 	desc = norway.13.desc
- 	picture = GFX_report_event_BRG_industry_1
-	
+	title = norway.13.t
+	desc = norway.13.desc
+	picture = GFX_report_event_BRG_industry_1
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.13.a
- 	}
+
+	option = {
+		name = norway.13.a
+		NOR = {
+			set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
+			econ_GDP_boost_once_percentage = yes
+		}
+	}
 }
 
 country_event = { ## Focus on agricultureal supremcy
 	id = norway.14
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.14" }
- 	title = norway.14.t
- 	desc = norway.14.desc
- 	picture = GFX_report_event_ural_farm
-	
+	title = norway.14.t
+	desc = norway.14.desc
+	picture = GFX_report_event_ural_farm
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.14.a
+
+	option = {
+		name = norway.14.a
+		NOR = {
+			set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
+			econ_GDP_boost_once_percentage = yes
+		}
 	}
 }
 
@@ -230,16 +276,18 @@ country_event = { ## Focus on agricultureal supremcy
 country_event = { ## The Results of Our Changes
 	id = norway.15
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.15" }
- 	title = norway.15.t
- 	desc = norway.15.desc
- 	picture = GFX_report_event_generic_sign_treaty1
-	
+	title = norway.15.t
+	desc = norway.15.desc
+	picture = GFX_report_event_generic_sign_treaty1
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
- 		name = norway.15.a
- 		hidden_effect = {
+
+
+	option = {
+		name = norway.15.a
+		hidden_effect = {
+			econ_leave_sphere = yes
 			remove_ideas = NOR_the_overstayed_occupation
 			if = { ##custom milorg
 				limit = {
@@ -356,24 +404,14 @@ country_event = { ## The Results of Our Changes
 country_event = { #Milorg Coup
 	id = norway.16
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.16" }
- 	title = norway.16.t
- 	desc = norway.16.desc
- 	picture = GFX_report_event_generic_revolution_colour
-	
+	title = norway.16.t
+	desc = norway.16.desc
+	picture = GFX_report_event_generic_revolution_colour
+
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	immediate = {
-		hidden_effect = {
-			set_party_name = { 
-				ideology = authoritarian_democrat 
-				name = "Milorg"
-				long_name = "Militær Organisasjon"
-			}
-		}
-	}
- 	
- 	option = {
+	option = {
 		name = norway.16.a
 		hidden_effect = {
 			every_unit_leader = { retire = yes }
@@ -393,30 +431,30 @@ country_event = { #Milorg Coup
 			}
 		}
 		remove_ideas = NOR_Milorg
-		set_politics = { ruling_party = authoritarian_democrat }
- 		add_popularity = {
-   			ideology = authoritarian_democrat
-    		popularity = .35
+		set_politics = { ruling_party = authoritarian_democracy }
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = .35
 		}
 		add_popularity = {
-   			ideology = social_conservative
-    		popularity = .07
+			ideology = conservative_democracy
+			popularity = .07
 		}
 		add_popularity = {
-   			ideology = social_liberal
-    		popularity = .07
+			ideology = liberal_democracy
+			popularity = .07
 		}
 		add_popularity = {
-   			ideology = social_democrat
-    		popularity = .1
+			ideology = social_democracy
+			popularity = .1
 		}
 		add_popularity = {
 			ideology = socialist
-		 	popularity = .04
-	 	}
+			popularity = .04
+		}
 		add_popularity = {
-   			ideology = communist
-    		popularity = .02
+			ideology = communist
+			popularity = .02
 		}
 		143 = { set_demilitarized_zone = no }
 		144 = { set_demilitarized_zone = no }
@@ -425,9 +463,9 @@ country_event = { #Milorg Coup
 		load_focus_tree = NOR_milorg_tree
 		remove_all_ministers = yes
 		add_ideas = {
-			NOR_Minister_jens_christian_hauge_hog
-			NOR_Minister_Johan_Beichmann_for
-			NOR_Minister_Erling_Lorentzen_eco
+			NOR_minister_jens_christian_hauge_hog
+			NOR_minister_Johan_Beichmann_for
+			NOR_minister_Erling_Lorentzen_eco
 			NOR_Sven_Arntzen_sec
 		}
 		create_field_marshal = {
@@ -474,33 +512,35 @@ country_event = { #Milorg Coup
 			logistics_skill = 4
 			id = 783
 		}
+		set_temp_variable = { TNO_economy_type_temp = 1 }
+		econ_type_change = yes
 		GER_drop_embargos = yes
- 	}
+	}
 }
 
 country_event = { #Moderate NS Take Over
 	id = norway.17
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.17" }
- 	title = norway.17.t
- 	desc = norway.17.desc
- 	picture = GFX_report_event_generic_congress
-	
+	title = norway.17.t
+	desc = norway.17.desc
+	picture = GFX_report_event_generic_congress
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
- 		name = norway.17.a
- 		set_politics = { ruling_party = despotism }
- 		add_popularity = {
-   			ideology = despotism
-    		popularity = .15
+
+	option = {
+		name = norway.17.a
+		set_politics = { ruling_party = despotism }
+		add_popularity = {
+			ideology = despotism
+			popularity = .15
 		}
 		remove_all_ministers = yes
 		add_ideas = {
-			NOR_Minister_Egil_Aarvik_hog
-			GFX_NOR_Minister_Svenn_Stray_for
-			NOR_Minister_Ole_Myrvoll_eco
-			NOR_Minister_Otto_Grieg_Tidemand_sec
+			NOR_minister_Egil_Aarvik_hog
+			GFX_NOR_minister_Svenn_Stray_for
+			NOR_minister_Ole_Myrvoll_eco
+			NOR_minister_Otto_Grieg_Tidemand_sec
 		}
 		set_global_flag = NOR_moderates
 		hidden_effect = {
@@ -516,66 +556,66 @@ country_event = { #Moderate NS Take Over
 				ideology = fascism_subtype
 			}
 		}
- 	}
+	}
 }
 
 country_event = { #Mainstream NS Take Over
 	id = norway.18
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.18" }
- 	title = norway.18.t
- 	desc = norway.18.desc
- 	picture = GFX_report_event_generic_congress
-	
+	title = norway.18.t
+	desc = norway.18.desc
+	picture = GFX_report_event_generic_congress
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
- 		name = norway.18.a
- 		create_country_leader = {
+
+	option = {
+		name = norway.18.a
+		create_country_leader = {
 			name = "Gulbrand Lunde"
 			desc = "POLITICS_GULBRAND_LUNDE_DESC"
 			picture = "Portrait_Norway_Gulbrand_Lunde.dds"
 			expire = "1980.1.1"
 			ideology = fascism_subtype
 		}
- 		add_popularity = {
-   			ideology = fascism
-    		popularity = .15
+		add_popularity = {
+			ideology = fascism
+			popularity = .15
 		}
 		remove_all_ministers = yes
 		add_ideas = {
-			NOR_Minister_Rolf_Jrgen_Fuglesang_hog
-			NOR_minister_Minister_Finn_Thrana_for
-			NOR_minister_Minister_Per_von_Hirsch_eco
-			NOR_Minister_Arnvid_Vasbotten_sec
+			NOR_minister_Rolf_Jrgen_Fuglesang_hog
+			NOR_minister_Finn_Thrana_for
+			NOR_minister_Per_von_Hirsch_eco
+			NOR_minister_Arnvid_Vasbotten_sec
 		}
 		set_global_flag = NOR_mainstream
- 	}
+	}
 }
 
 country_event = { #Radical NS Take Over
 	id = norway.19
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.19" }
- 	title = norway.19.t
- 	desc = norway.19.desc
- 	picture = GFX_report_event_german_march
-	
+	title = norway.19.t
+	desc = norway.19.desc
+	picture = GFX_report_event_german_march
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
- 		name = norway.19.a
- 		set_politics = { ruling_party = national_socialism }
- 		add_popularity = {
-   			ideology = national_socialism
-    		popularity = .15
+
+	option = {
+		name = norway.19.a
+		set_politics = { ruling_party = national_socialism }
+		add_popularity = {
+			ideology = national_socialism
+			popularity = .15
 		}
 		remove_all_ministers = yes
 		add_ideas = {
-			NOR_Minister_Sverre_Riisns_hog
-			NOR_Minister_Henrik_Rogstad_for
-			NOR_Minister_Axel_Heiberg_Stang_eco
-			NOR_Minister_Karl_Marthinsen_sec
+			NOR_minister_Sverre_Riisns_hog
+			NOR_minister_Henrik_Rogstad_for
+			NOR_minister_Axel_Heiberg_Stang_eco
+			NOR_minister_Karl_Marthinsen_sec
 		}
 		set_global_flag = NOR_radicals
 		hidden_effect = {
@@ -587,7 +627,7 @@ country_event = { #Radical NS Take Over
 				ideology = fascism_subtype
 			}
 		}
- 	}
+	}
 }
 
 ## Milorg Antics Pre GCW
@@ -595,99 +635,96 @@ country_event = { #Radical NS Take Over
 country_event = { ## Military Factory attack
 	id = norway.20
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.20" }
- 	title = norway.20.t
- 	desc = norway.20.desc
- 	picture = GFX_report_event_german_city_burning
-	
+	title = norway.20.t
+	desc = norway.20.desc
+	picture = GFX_report_event_german_city_burning
+
 	is_triggered_only = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.20.a
-		# add_stability = -0.01
+		add_stability = -0.025
 		random_owned_state = {
-			limit = { arms_factory > 0 }
-			damage_building = {
-				type = arms_factory
-				damage = 0.3
-			}
+			set_temp_variable = { state_value_multiplier_temp = 0.95 }
+			econ_state_value_change_multiply_specified_state = yes
 		}
- 	}
+	}
 }
 
 country_event = { ## Infastrcuture attack
 	id = norway.21
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.21" }
- 	title = norway.21.t
- 	desc = norway.21.desc
- 	picture = GFX_report_event_german_city_burning
-	
+	title = norway.21.t
+	desc = norway.21.desc
+	picture = GFX_report_event_german_city_burning
+
 	is_triggered_only = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.21.a
-		# add_stability = -0.01
+		add_stability = -0.025
 		random_owned_state = {
 			limit = { infrastructure > 0 }
 			damage_building = {
 				type = infrastructure
 				damage = 0.3
 			}
+			set_temp_variable = { state_value_multiplier_temp = 0.97 }
+			econ_state_value_change_multiply_specified_state = yes
 		}
- 	}
+	}
 }
 
 country_event = { ## Civilian Factory attack
 	id = norway.22
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.22" }
- 	title = norway.22.t
- 	desc = norway.22.desc
- 	picture = GFX_report_event_german_city_burning
-	
+	title = norway.22.t
+	desc = norway.22.desc
+	picture = GFX_report_event_german_city_burning
+
 	is_triggered_only = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.22.a
-		# add_stability = -0.01
+		add_stability = -0.025
 		random_owned_state = {
-			limit = { industrial_complex > 0 }
-			damage_building = {
-				type = industrial_complex
-				damage = 0.3
-			}
+			set_temp_variable = { state_value_multiplier_temp = 0.995 }
+			econ_state_value_change_multiply_specified_state = yes
 		}
- 	}
+	}
 }
 
 country_event = { ## Discarded Milorg Prop Found
 	id = norway.23
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.23" }
- 	title = norway.23.t
- 	desc = norway.23.desc
- 	picture = GFX_report_event_german_arms
-	
+	title = norway.23.t
+	desc = norway.23.desc
+	picture = GFX_report_event_german_arms
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.23.a
 		add_political_power = 15
 		add_stability = 0.01
- 	}
+		TNO_worsen_army_professionalism_low = yes
+	}
 }
- 
+
 country_event = { ## Terboven resigns
 	id = norway.25
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.25" }
- 	title = norway.25.t
- 	desc = norway.25.desc
- 	picture = GFX_report_event_germany_court
-	
+	title = norway.25.t
+	desc = norway.25.desc
+	picture = GFX_report_event_germany_court
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.25.a
-		retire_country_leader = yes 
+		retire_country_leader = yes
 		country_event = {
 			id = norway.15
 			days = 2
@@ -764,20 +801,20 @@ country_event = { ## Terboven resigns
 country_event = { ## Staus of trade unions
 	id = norway.26
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.26" }
- 	title = norway.26.t
- 	desc = norway.26.desc
- 	picture = GFX_report_event_generic_congress
-	
+	title = norway.26.t
+	desc = norway.26.desc
+	picture = GFX_report_event_generic_congress
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
+
 	option = {
-	   name = norway.26.a
-	   add_ideas = tno_trade_unions_nonsocialist_allowed
-	   add_political_power = -20
-	   ai_chance = { factor = 70 }
-   }
- 	option = {
+		name = norway.26.a
+		add_ideas = tno_trade_unions_nonsocialist_allowed
+		add_political_power = -20
+		ai_chance = { factor = 70 }
+	}
+	option = {
 		name = norway.26.b
 		add_ideas = tno_trade_unions_state_controlled
 		add_political_power = -30
@@ -786,46 +823,65 @@ country_event = { ## Staus of trade unions
 }
 
 country_event = { ## 1964 elections
-    id = norway.27
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.27" }
-    title = norway.27.t
+	id = norway.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.27" }
+	title = norway.27.t
 	desc = { text = norway.27.desc_sfp_allowed trigger = { has_country_flag = NOR_worked_with_left } }
 	desc = { text = norway.27.desc_sfp_banned trigger = { NOT = { has_country_flag = NOR_worked_with_left } } }
-    picture = GFX_report_event_generic_election
-    
+	picture = GFX_report_event_generic_election
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	immediate = {
+		hidden_effect = {
+			set_party_name = {
+				ideology = authoritarian_democracy
+				name = "Bondepartiet"
+				long_name = "Bondepartiet"
+			}
+		}
+	}
+
+	option = {
 		name = norway.27.a
 		set_politics = {
-			ruling_party = social_democrat
+			ruling_party = social_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		hidden_effect = { drop_cosmetic_tag = yes }
+		hidden_effect = {
+			drop_cosmetic_tag = yes
+			#country_event = { id = norway.28 days = 1500 }
+		}
 		ai_chance = { factor = 40 }
-    }
-    option = {
+	}
+	option = {
 		name = norway.27.b
 		set_politics = {
-			ruling_party = social_liberal
+			ruling_party = liberal_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		hidden_effect = { drop_cosmetic_tag = yes }
+		hidden_effect = {
+			drop_cosmetic_tag = yes
+			#country_event = { id = norway.28 days = 1500 }
+		}
 		ai_chance = { factor = 25 }
-    }
-    option = {
+	}
+	option = {
 		name = norway.27.c
 		set_politics = {
-			ruling_party = social_conservative
+			ruling_party = conservative_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		hidden_effect = { drop_cosmetic_tag = yes }
+		hidden_effect = {
+			drop_cosmetic_tag = yes
+			#country_event = { id = norway.28 days = 1500 }
+		}
 		ai_chance = { factor = 35 }
-    }
+	}
 	option = {
 		name = norway.27.d
 		trigger = {
@@ -836,35 +892,43 @@ country_event = { ## 1964 elections
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		hidden_effect = { drop_cosmetic_tag = yes }
+		hidden_effect = {
+			drop_cosmetic_tag = yes
+			#country_event = { id = norway.28 days = 1500 }
+		}
 		ai_chance = { factor = 0 }
-    }
+	}
 }
 
 country_event = { ## 1968 elections
-    id = norway.28
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.28" }
-    title = norway.28.t
-    desc = norway.28.desc
-    picture = GFX_report_event_generic_election
-    
+	id = norway.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.28" }
+	title = norway.28.t
+	desc = norway.28.desc
+	picture = GFX_report_event_generic_election
+
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	trigger = {
-		tag = NOR
-		has_elected_government = yes
-		date < 1969.1.1
+		OR = {
+			has_government = socialist
+			has_government = social_democracy
+			has_government = liberal_democracy
+			has_government = conservative_democracy
+			has_government = authoritarian_democracy
+		}
 	}
-    
-    option = {
+
+	option = {
 		name = norway.28.a
 		set_politics = {
-			ruling_party = social_democrat
+			ruling_party = social_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
+		hidden_effect = { country_event = { id = norway.41 days = 1500 } }
+		ai_chance = {
 			factor = 40
 			modifier = {
 				factor = 0
@@ -874,16 +938,17 @@ country_event = { ## 1968 elections
 				}
 			}
 		}
-    }
-    option = {
+	}
+	option = {
 		name = norway.28.b
 		set_politics = {
-			ruling_party = social_liberal
+			ruling_party = liberal_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
-			factor = 25 
+		hidden_effect = { country_event = { id = norway.41 days = 1500 } }
+		ai_chance = {
+			factor = 25
 			modifier = {
 				factor = 0
 				OR = {
@@ -892,18 +957,19 @@ country_event = { ## 1968 elections
 				}
 			}
 		}
-    }
-    option = {
+	}
+	option = {
 		name = norway.28.c
 		set_politics = {
-			ruling_party = social_conservative
+			ruling_party = conservative_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
+		hidden_effect = { country_event = { id = norway.41 days = 1500 } }
+		ai_chance = {
 			factor = 35
 		}
-    }
+	}
 	option = {
 		name = norway.28.d
 		trigger = {
@@ -914,14 +980,15 @@ country_event = { ## 1968 elections
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
+		hidden_effect = { country_event = { id = norway.41 days = 1500 } }
+		ai_chance = {
 			factor = 0
 		}
-    }
+	}
 	# option = {
 	# 	name = norway.28.e
 	# 	set_politics = {
-	# 		ruling_party = authoritarian_democrat
+	# 		ruling_party = authoritarian_democracy
 	# 		elections_allowed = yes
 	# 		election_frequency = 48
 	# 	}
@@ -930,64 +997,66 @@ country_event = { ## 1968 elections
 }
 
 country_event = { ## Extend the draft
-    id = norway.29
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.29" }
-    title = norway.29.t
-    desc = norway.29.desc
-    picture = GFX_report_Event_german_Army
-    
+	id = norway.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.29" }
+	title = norway.29.t
+	desc = norway.29.desc
+	picture = GFX_report_event_german_army
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = { # No need
+
+	option = { # No need
 		name = norway.29.a
 		add_political_power = -25
 		swap_ideas = {
 			remove_idea = tno_conscription_two_year_draft
 			add_idea = tno_conscription_one_year_draft
 		}
-		ai_chance = { 
-			factor = 80 
+		ai_chance = {
+			factor = 80
 			modifier = {
 				factor = 0
 				has_global_flag = german_civil_war_goeringvic
 			}
 		}
-    }
-    option = { # Oh god oh fuck the Germans can come at any minute
+	}
+	option = { # Oh god oh fuck the Germans can come at any minute
 		name = norway.29.b
 		add_war_support = -0.03
 		add_stability = -0.03
 		ai_chance = { factor = 20 }
-    }
+		TNO_worsen_army_professionalism_low = yes
+		TNO_worsen_conscription_policy_effectiveness_med = yes
+	}
 }
 
 country_event = { ## The role of women in the armed forces
-    id = norway.30
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.30" }
-    title = norway.30.t
-    desc = norway.30.desc
-    picture = GFX_report_event_female_soldiers
-    
+	id = norway.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.30" }
+	title = norway.30.t
+	desc = norway.30.desc
+	picture = GFX_report_event_female_soldiers
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.30.a
 		swap_ideas = {
 			remove_idea = tno_women_banned
 			add_idea = tno_women_noncombat_only
 		}
 		add_political_power = -20
-		ai_chance = { 
+		ai_chance = {
 			factor = 35
 			modifier = {
 				factor = 0
 				has_global_flag = german_civil_war_goeringvic
 			}
 		}
-    }
-    option = {
+	}
+	option = {
 		name = norway.30.b
 		swap_ideas = {
 			remove_idea = tno_women_banned
@@ -995,22 +1064,22 @@ country_event = { ## The role of women in the armed forces
 		}
 		add_political_power = -40
 		ai_chance = { factor = 50 }
-    }
-    option = {
+	}
+	option = {
 		name = norway.30.c
 		swap_ideas = {
 			remove_idea = tno_women_banned
 			add_idea = tno_women_total_equality
 		}
 		add_political_power = -60
-		ai_chance = { 
+		ai_chance = {
 			factor = 15
 			modifier = {
 				factor = 6
 				has_global_flag = german_civil_war_goeringvic
 			}
 		}
-    }
+	}
 }
 
 # country_event = { ## Disband the National Militia
@@ -1019,7 +1088,7 @@ country_event = { ## The role of women in the armed forces
 #     title = norway.31.t
 #     desc = norway.31.desc
 #     picture = 
-	
+
 # 	trigger = {
 # 		has_country_flag = NOR_raised_national_militia
 # 		has_war = no
@@ -1028,7 +1097,7 @@ country_event = { ## The role of women in the armed forces
 #     mean_time_to_happen = {
 # 		days = 3
 # 	}
-    
+
 #     option = {
 # 		name = norway.31.a
 # 		clr_country_flag = NOR_raised_national_militia
@@ -1039,19 +1108,19 @@ country_event = { ## The role of women in the armed forces
 # }
 
 country_event = { ## Norway approaches the US
-    id = norway.32
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.32" }
-    title = norway.32.t
-    desc = norway.32.desc
-    picture = GFX_report_event_generic_usa_treaty
-    
+	id = norway.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.32" }
+	title = norway.32.t
+	desc = norway.32.desc
+	picture = GFX_report_event_generic_usa_treaty
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = { # Yes
+
+	option = { # Yes
 		name = norway.32.a
 		add_political_power = 10
-		NOR = { 
+		NOR = {
 			country_event = {
 				id = norway.33
 				days = 3
@@ -1059,11 +1128,11 @@ country_event = { ## Norway approaches the US
 		}
 		clr_country_flag = NOR_sweden_said_no
 		ai_chance = { factor = 80 }
-    }
-    option = { # Nah
+	}
+	option = { # Nah
 		name = norway.32.b
 		add_political_power = -10
-		NOR = { 
+		NOR = {
 			country_event = {
 				id = norway.34
 				days = 3
@@ -1077,60 +1146,65 @@ country_event = { ## Norway approaches the US
 				NOR = { has_country_flag = NOR_sweden_said_no }
 			}
 		}
-    }
+	}
 }
 
 country_event = { ## America says yes
-    id = norway.33
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.33" }
-    title = norway.33.t
-    desc = norway.33.desc
-    picture = GFX_report_event_generic_usa_treaty
-    
+	id = norway.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.33" }
+	title = norway.33.t
+	desc = norway.33.desc
+	picture = GFX_report_event_generic_usa_treaty
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.33.a
 		add_stability = 0.03
 		# USA = { give_guarantee = NOR }
 		# give_military_access = USA
 		set_country_flag = NOR_america_said_yes
-    }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 1000
+			producer = USA
+		}
+	}
 }
 
 country_event = { ## America says no
-    id = norway.34
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.34" }
-    title = norway.34.t
-    desc = norway.34.desc
-    picture = GFX_report_event_generic_usa_treaty
-    
+	id = norway.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.34" }
+	title = norway.34.t
+	desc = norway.34.desc
+	picture = GFX_report_event_generic_usa_treaty
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.34.a
 		add_stability = -0.03
 		add_political_power = -10
 		set_country_flag = NOR_america_said_no
-    }
+	}
 }
 
 country_event = { ## Norway approaches Sweden
-    id = norway.35
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.35" }
-    title = norway.35.t
-    desc = norway.35.desc
-    picture = GFX_report_event_generic_sign_treaty3
-    
+	id = norway.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.35" }
+	title = norway.35.t
+	desc = norway.35.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = { # Yes
+
+	option = { # Yes
 		name = norway.35.a
 		add_political_power = 10
-		NOR = { 
+		NOR = {
 			country_event = {
 				id = norway.36
 				days = 3
@@ -1138,11 +1212,11 @@ country_event = { ## Norway approaches Sweden
 		}
 		clr_country_flag = NOR_america_said_no
 		ai_chance = { factor = 65 }
-    }
-    option = { # Nah
+	}
+	option = { # Nah
 		name = norway.35.b
 		add_political_power = -10
-		NOR = { 
+		NOR = {
 			country_event = {
 				id = norway.37
 				days = 3
@@ -1156,134 +1230,142 @@ country_event = { ## Norway approaches Sweden
 				NOR = { has_country_flag = NOR_america_said_no }
 			}
 		}
-    }
+	}
 }
 
 country_event = { ## Sweden says yes
-    id = norway.36
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.36" }
-    title = norway.36.t
-    desc = norway.36.desc
-    picture = GFX_report_event_generic_sign_treaty3
-    
+	id = norway.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.36" }
+	title = norway.36.t
+	desc = norway.36.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.36.a
 		add_stability = 0.02
 		set_country_flag = NOR_sweden_said_yes
-    }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 200
+			producer = SWE
+		}
+	}
 }
 
 country_event = { ## Sweden says no
-    id = norway.37
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.37" }
-    title = norway.37.t
-    desc = norway.37.desc
-    picture = GFX_report_event_generic_sign_treaty3
-    
+	id = norway.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.37" }
+	title = norway.37.t
+	desc = norway.37.desc
+	picture = GFX_report_event_generic_sign_treaty3
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.37.a
 		add_stability = -0.02
 		add_political_power = -10
 		set_country_flag = NOR_sweden_said_no
-    }
+	}
 }
 
 country_event = { ## Joint exercises with Sweden
-    id = norway.38
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.38" }
-    title = norway.38.t
-    desc = norway.38.desc
-    picture = GFX_report_Event_german_Army3
-    
+	id = norway.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.38" }
+	title = norway.38.t
+	desc = norway.38.desc
+	picture = GFX_report_event_german_army3
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.38.a
 		add_war_support = 0.03
 		army_experience = 25
 		air_experience = 10
 		SWE = { country_event = norway.39 }
-    }
+	}
 }
 
 country_event = { ## Joint exercises with Norway
-    id = norway.39
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.39" }
-    title = norway.39.t
-    desc = norway.39.desc
-    picture = GFX_report_Event_german_Army3
-    
+	id = norway.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.39" }
+	title = norway.39.t
+	desc = norway.39.desc
+	picture = GFX_report_event_german_army3
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.39.a
 		add_war_support = 0.03
 		army_experience = 25
 		air_experience = 10
-    }
+	}
 }
 
 country_event = { ## The Coronation of Olav V
-    id = norway.40
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.40" }
-    title = norway.40.t
-    desc = norway.40.desc
-    picture = GFX_report_event_norway_coronation
-    
+	id = norway.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.40" }
+	title = norway.40.t
+	desc = norway.40.desc
+	picture = GFX_report_event_norway_coronation
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.40.a
 		add_ideas = NOR_Olav_V
 		add_manpower = 2000
 		create_corps_commander = {
 			name = "Arne Dagfin Dahl"
-			picture = "Portrait_Norway_Arne_Dagfin_Dahl_.dds"
+			picture = "Portrait_Norway_Arne_Dagfin_Dahl.dds"
 			traits = { war_hero trait_mountaineer infantry_officer }
-			skill = 5
+			skill = 4
 			attack_skill = 3
 			defense_skill = 5
 			planning_skill = 3
 			logistics_skill = 3
 			id = 789
 		}
-    }
+	}
 }
 
 country_event = { ## 1972 elections
-    id = norway.41
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.41" }
-    title = norway.41.t
-    desc = norway.41.desc
-    picture = GFX_report_event_usa_election_generic
-    
+	id = norway.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.41" }
+	title = norway.41.t
+	desc = norway.41.desc
+	picture = GFX_report_event_usa_election_generic
+
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	trigger = {
-		tag = NOR
-		has_elected_government = yes
-		date > 1969.12.31
-		date < 1973.1.1
+		OR = {
+			has_government = socialist
+			has_government = social_democracy
+			has_government = liberal_democracy
+			has_government = conservative_democracy
+			has_government = authoritarian_democracy
+		}
 	}
 
 	option = {
 		name = norway.41.a
 		set_politics = {
-			ruling_party = social_democrat
+			ruling_party = social_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
+		ai_chance = {
 			factor = 40
 			modifier = {
 				factor = 0
@@ -1293,16 +1375,16 @@ country_event = { ## 1972 elections
 				}
 			}
 		}
-    }
-    option = {
+	}
+	option = {
 		name = norway.41.b
 		set_politics = {
-			ruling_party = social_liberal
+			ruling_party = liberal_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
-			factor = 25 
+		ai_chance = {
+			factor = 25
 			modifier = {
 				factor = 0
 				OR = {
@@ -1311,18 +1393,18 @@ country_event = { ## 1972 elections
 				}
 			}
 		}
-    }
-    option = {
+	}
+	option = {
 		name = norway.41.c
 		set_politics = {
-			ruling_party = social_conservative
+			ruling_party = conservative_democracy
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
+		ai_chance = {
 			factor = 35
 		}
-    }
+	}
 	option = {
 		name = norway.41.d
 		trigger = {
@@ -1333,14 +1415,14 @@ country_event = { ## 1972 elections
 			elections_allowed = yes
 			election_frequency = 48
 		}
-		ai_chance = { 
+		ai_chance = {
 			factor = 0
 		}
-    }
+	}
 	# option = {
 	# 	name = norway.41.e
 	# 	set_politics = {
-	# 		ruling_party = authoritarian_democrat
+	# 		ruling_party = authoritarian_democracy
 	# 		elections_allowed = yes
 	# 		election_frequency = 48
 	# 	}
@@ -1349,76 +1431,76 @@ country_event = { ## 1972 elections
 }
 
 country_event = { ## Formation of the Gerhardsen cabinet
-    id = norway.42
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.42" }
-    title = norway.42.t
-    desc = norway.42.desc
+	id = norway.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.42" }
+	title = norway.42.t
+	desc = norway.42.desc
     # picture = 
-    
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
-        name = norway.42.a
-    }
+
+	option = {
+		name = norway.42.a
+	}
 }
 
 country_event = { ## How the Norwegian population has gotten poorer as a result of the german occupation
-    id = norway.43
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.43" }
-    title = norway.43.t
-    desc = norway.43.desc
+	id = norway.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.43" }
+	title = norway.43.t
+	desc = norway.43.desc
     # picture = 
-    
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
-        name = norway.43.a
-    }
+
+	option = {
+		name = norway.43.a
+	}
 }
 
 country_event = { ## How the German education system they put in Norway sucks
-    id = norway.44
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.44" }
-    title = norway.44.t
-    desc = norway.44.desc
+	id = norway.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.44" }
+	title = norway.44.t
+	desc = norway.44.desc
     # picture = 
-    
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
-        name = norway.44.a
-    }
+
+	option = {
+		name = norway.44.a
+	}
 }
 
 country_event = { ## How Germany has fucked Norway's economy
-    id = norway.45
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.45" }
-    title = norway.45.t
-    desc = norway.45.desc
+	id = norway.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.45" }
+	title = norway.45.t
+	desc = norway.45.desc
     # picture = 
-    
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
-        name = norway.45.a
-    }
+
+	option = {
+		name = norway.45.a
+	}
 }
 
 country_event = { ## Speer renationalizes Norwegian education and brings back public education
-    id = norway.46
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.46" }
-    title = norway.46.t
-    desc = norway.46.desc
-    picture = GFX_report_event_woman_books
-    
+	id = norway.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.46" }
+	title = norway.46.t
+	desc = norway.46.desc
+	picture = GFX_report_event_woman_books
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.46.a
 		if = {
 			limit = { has_idea = tno_education_elite_only }
@@ -1428,64 +1510,64 @@ country_event = { ## Speer renationalizes Norwegian education and brings back pu
 			}
 		}
 		else = { TNO_improve_academic_base_med = yes }
-    }
+	}
 }
 
 country_event = { ## Speer withdraws german advisors from independent norway
-    id = norway.47
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.47" }
-    title = norway.47.t
-    desc = norway.47.desc
-    picture = GFX_report_event_germany_court
-    
+	id = norway.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.47" }
+	title = norway.47.t
+	desc = norway.47.desc
+	picture = GFX_report_event_germany_court
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
-        name = norway.47.a
+
+	option = {
+		name = norway.47.a
 		add_stability = 0.05
 		army_experience = -5
-    }
+	}
 }
 
 country_event = { ## Choice to purge the moderates or not
-    id = norway.48
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.48" }
-    title = norway.48.t
-    desc = norway.48.desc
-    picture = GFX_report_event_generic_congress
-    
+	id = norway.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.48" }
+	title = norway.48.t
+	desc = norway.48.desc
+	picture = GFX_report_event_generic_congress
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = { # Purge 'em
-        name = norway.48.a
+
+	option = { # Purge 'em
+		name = norway.48.a
 		add_political_power = 50
-		add_popularity = { 
+		add_popularity = {
 			ideology = despotism
 			popularity = -0.1
 		}
 		ai_chance = { factor = 60 }
-    }
-    option = { # Nah
-        name = norway.48.b
+	}
+	option = { # Nah
+		name = norway.48.b
 		add_stability = 0.1
 		add_political_power = -30
 		ai_chance = { factor = 40 }
-    }
+	}
 }
 
 country_event = { ## German settlers are deported from Norway
-    id = norway.49
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.49" }
-    title = norway.49.t
-    desc = norway.49.desc
-    picture = GFX_report_event_generic_people
-    
+	id = norway.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.49" }
+	title = norway.49.t
+	desc = norway.49.desc
+	picture = GFX_report_event_generic_people
+
 	is_triggered_only = yes
-    
-    option = { 
-        name = norway.49.a
+
+	option = {
+		name = norway.49.a
 		trigger = { tag = GER }
 		add_stability = -0.02
 		56 = { add_manpower = 30000 }
@@ -1516,8 +1598,8 @@ country_event = { ## German settlers are deported from Norway
 	}
 	option = {
 		name = norway.49.b
-		trigger = { 
-			tag = SCO 
+		trigger = {
+			tag = SCO
 			NOT =  { has_global_flag = ECW_Finished }
 		}
 		add_stability = -0.02
@@ -1527,8 +1609,8 @@ country_event = { ## German settlers are deported from Norway
 	}
 	option = {
 		name = norway.49.b
-		trigger = { 
-			tag = SCO 
+		trigger = {
+			tag = SCO
 			has_global_flag = ECW_Finished
 		}
 		add_stability = -0.02
@@ -1554,29 +1636,29 @@ country_event = { ## German settlers are deported from Norway
 }
 
 country_event = { ## Borten's party coup
-    id = norway.50
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.50" }
-    title = norway.50.t
-    desc = norway.50.desc
-    picture = GFX_report_event_generic_congress
-    
+	id = norway.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.50" }
+	title = norway.50.t
+	desc = norway.50.desc
+	picture = GFX_report_event_generic_congress
+
 	is_triggered_only = yes
 	fire_only_once = yes
-    
-    option = {
+
+	option = {
 		name = norway.50.a
 		GER = { end_puppet = NOR }
 		set_politics = { ruling_party = despotism }
- 		add_popularity = {
-   			ideology = despotism
-    		popularity = .25
+		add_popularity = {
+			ideology = despotism
+			popularity = .25
 		}
 		remove_all_ministers = yes
 		add_ideas = {
-			NOR_Minister_Egil_Aarvik_hog
-			GFX_NOR_Minister_Svenn_Stray_for
-			NOR_Minister_Ole_Myrvoll_eco
-			NOR_Minister_Otto_Grieg_Tidemand_sec
+			NOR_minister_Egil_Aarvik_hog
+			GFX_NOR_minister_Svenn_Stray_for
+			NOR_minister_Ole_Myrvoll_eco
+			NOR_minister_Otto_Grieg_Tidemand_sec
 		}
 		set_global_flag = NOR_moderates
 		clr_global_flag = NOR_mainstream
@@ -1584,160 +1666,200 @@ country_event = { ## Borten's party coup
 			country_event = { id = norway.51 days = 45 }
 			GER = { country_event = { id = norway.51 days = 45 } }
 		}
-    }
+	}
 }
 
 country_event = { ## Borten's economic reforms
-    id = norway.51
-    immediate = { log = "[GetDateText]: [Root.GetName]: event norway.51" }
-    title = norway.51.t
-    desc = norway.51.desc
-    picture = GFX_report_event_generic_congress
-    
+	id = norway.51
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.51" }
+	title = norway.51.t
+	desc = norway.51.desc
+	picture = GFX_report_event_generic_congress
+
 	is_triggered_only = yes
-    
-    option = {
+
+	option = {
 		name = norway.51.a
 		trigger = { tag = NOR }
-		add_to_variable = { GDP = 1000 }
-		custom_effect_tooltip = econ_increase_GDP_large
-		add_to_variable = { GDP_growth = 0.025 }
-		custom_effect_tooltip = econ_increase_GDP_growth
+		set_temp_variable = { temp_econ_GDP_boost_flat  = 1.0 }
+		econ_GDP_boost_once_flat = yes
+		set_temp_variable = { gdp_growth_temp = 2.5 }
+		econ_gdp_growth_change = yes
 	}
 	option = {
 		name = norway.51.b
 		trigger = { tag = GER }
-		add_to_variable = { GDP = 200 }
-		custom_effect_tooltip = econ_increase_GDP_small
-		add_to_variable = { GDP_growth = 0.0015 }
-		custom_effect_tooltip = econ_increase_GDP_growth_small
+		set_temp_variable = { temp_econ_GDP_boost_flat  = 0.200 }
+		econ_GDP_boost_once_flat = yes
+		set_temp_variable = { gdp_growth_temp = 1.5 }
+		econ_gdp_growth_change = yes
 	}
 }
 
 country_event = { ## Quisling death chain, part 1 - The Beginning
 	id = norway.52
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.52" }
- 	title = norway.52.t
- 	desc = norway.52.desc
- 	picture = GFX_report_event_boats
-	
+	title = norway.52.t
+	desc = norway.52.desc
+	picture = GFX_report_event_boats
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.52.a
 		hidden_effect = { country_event = { id = norway.53 hours = 8 } }
- 	}
+	}
 }
 
 country_event = { ## Quisling death chain, part 2 - Infiltration
 	id = norway.53
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.53" }
- 	title = norway.53.t
- 	desc = norway.53.desc
- 	picture = GFX_report_event_quislings_villa
-	
+	title = norway.53.t
+	desc = norway.53.desc
+	picture = GFX_report_event_quislings_villa
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.53.a
 		hidden_effect = { country_event = { id = norway.54 hours = 8 } }
- 	}
+	}
 }
 
 country_event = { ## Quisling death chain, part 3 - On Their Way
 	id = norway.54
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.54" }
- 	title = norway.54.t
- 	desc = norway.54.desc
- 	picture = GFX_report_event_quislings_villa
-	
+	title = norway.54.t
+	desc = norway.54.desc
+	picture = GFX_report_event_quislings_villa
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.54.a
 		hidden_effect = { country_event = { id = norway.55 hours = 8 } }
- 	}
+	}
 }
 
 country_event = { ## Quisling death chain, part 4 - Quisling
 	id = norway.55
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.55" }
- 	title = norway.55.t
- 	desc = norway.55.desc
- 	picture = GFX_report_event_quisling
-	
+	title = norway.55.t
+	desc = norway.55.desc
+	picture = GFX_report_event_quisling
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.55.a
 		hidden_effect = { country_event = { id = norway.56 hours = 8 } }
- 	}
+	}
 }
 
 country_event = { ## Quisling death chain, part 5 - Dishonored referens???
 	id = norway.56
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.56" }
- 	title = norway.56.t
- 	desc = norway.56.desc
- 	picture = GFX_report_event_quislings_villa
-	
+	title = norway.56.t
+	desc = norway.56.desc
+	picture = GFX_report_event_quislings_villa
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.56.a
 		hidden_effect = { country_event = { id = norway.57 hours = 8 } }
- 	}
+	}
 }
 
 country_event = { ## Quisling death chain, part 6 - Quisling is dead 🦀
 	id = norway.57
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.57" }
- 	title = norway.57.t
- 	desc = norway.57.desc
- 	picture = GFX_report_event_quisling_dead
-	
+	title = norway.57.t
+	desc = norway.57.desc
+	picture = GFX_report_event_quisling_dead
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.57.a
 		hidden_effect = { country_event = { id = norway.58 days = 1 } }
- 	}
+	}
 }
 
 country_event = { ## Quisling death chain, part 7 - The Aftermath
 	id = norway.58
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.58" }
- 	title = norway.58.t
- 	desc = norway.58.desc
- 	picture = GFX_report_event_quisling
-	
+	title = norway.58.t
+	desc = norway.58.desc
+	picture = GFX_report_event_quisling
+
 	is_triggered_only = yes
 	fire_only_once = yes
- 	
- 	option = {
+
+	option = {
 		name = norway.58.a
 		add_stability = -0.03
 		add_popularity = { ideology = fascism popularity = -0.04 }
 		add_popularity = { ideology = national_socialism popularity = -0.03 }
- 	}
+	}
 }
 
-country_event = { ## Norway intro, part 2
+country_event = { ## Intro to Lie
 	id = norway.59
 	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.59" }
- 	title = norway.59.t
- 	desc = norway.59.desc
- 	picture = GFX_report_event_generic_mountain
-	
+	title = norway.59.t
+	desc = norway.59.desc
+	picture = GFX_report_event_generic_mountain
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = norway.59.a
- 	}
+
+	option = {
+		name = norway.59.a
+		country_event = { id = norway.60 days = 1 }
+		add_manpower = -200
+		TNO_improve_public_meetings_policy_effectiveness_med = yes
+		army_funding_maximal_increase_med = yes
+	}
+}
+
+country_event = { ## Intro to Borten
+	id = norway.60
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.60" }
+	title = norway.60.t
+	desc = norway.60.desc
+	picture = GFX_report_event_generic_mountain
+
+	is_triggered_only = yes
+
+	option = {
+		name = norway.60.a
+		country_event = { id = norway.61 days = 1 }
+		add_political_power = 10
+		TNO_worsen_political_parties_policy_effectiveness_high = yes
+		TNO_improve_admin_efficiency_low = yes
+	}
+}
+
+country_event = { ## Intro to Moyen
+	id = norway.61
+	immediate = { log = "[GetDateText]: [Root.GetName]: event norway.61" }
+	title = norway.61.t
+	desc = norway.61.desc
+	picture = GFX_report_event_generic_mountain
+
+	is_triggered_only = yes
+
+	option = {
+		name = norway.61.a
+		add_manpower = -1
+		add_stability = -0.05
+		TNO_worsen_press_rights_policy_effectiveness_med = yes
+		TNO_worsen_security_policy_effectiveness_med = yes
+	}
 }

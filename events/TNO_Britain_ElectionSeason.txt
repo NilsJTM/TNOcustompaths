@@ -23,6 +23,28 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
+		name = "HMMLR Elections"
+		country_event = ENG_ElectionSeason_dbg.2
+	}
+	option = {
+		name = "Collab Elections"
+		country_event = ENG_ElectionSeason_dbg.3
+	}
+	option = {
+		name = "Clear election counter"
+		clear_variable = TNO_Britain_ElectionSeason_ElectionCounter
+	}
+}
+
+country_event = {
+	id = ENG_ElectionSeason_dbg.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason_dbg.2" }
+	title = "England Elections - HMMLR"
+	desc = "aaaa"
+
+	is_triggered_only = yes
+
+	option = {
 		name = "HMMLR Elections - SLP"
 		clear_array = ElectionSeason_ActiveStates
 		TNO_Britain_ElectionSeason_Initialize_Post_ECW_HMMLR = yes
@@ -40,6 +62,25 @@ country_event = {
 		set_variable = { TNO_Britain_ElectionSeason_ActorID = 12 }
 		TNO_Britain_ElectionSeason_Begin = yes
 	}
+	option = {
+		name = "HMMLR Elections - MSA"
+		clear_array = ElectionSeason_ActiveStates
+		TNO_Britain_ElectionSeason_Initialize_Post_ECW_HMMLR = yes
+		TNO_Britain_ElectionSeason_Initialize_Cornwall_HMMLR = yes
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 16 }
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 16 }
+		TNO_Britain_ElectionSeason_Begin = yes
+	}
+}
+
+country_event = {
+	id = ENG_ElectionSeason_dbg.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason_dbg.3" }
+	title = "England Elections - Collab"
+	desc = "aaaa"
+
+	is_triggered_only = yes
+
 	option = {
 		name = "Collab Elections - UE"
 		clear_array = ElectionSeason_ActiveStates
@@ -59,8 +100,13 @@ country_event = {
 		TNO_Britain_ElectionSeason_Begin = yes
 	}
 	option = {
-		name = "Clear election counter"
-		clear_variable = TNO_Britain_ElectionSeason_ElectionCounter
+		name = "Collab Elections - NF"
+		clear_array = ElectionSeason_ActiveStates
+		TNO_Britain_ElectionSeason_Initialize_Post_ECW_Collab = yes
+		TNO_Britain_ElectionSeason_Initialize_Cornwall_Collab = yes
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 9 }
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 9 }
+		TNO_Britain_ElectionSeason_Begin = yes
 	}
 }
 
@@ -79,14 +125,16 @@ country_event = {
 }
 
 #### HMMLR Elections ####
-	# Election - NDL v SLP 
-	country_event = {
-		id = ENG_ElectionSeason.1
-		immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.1" }
-		title = ENG_ElectionSeason.1.t
-		desc = ENG_ElectionSeason.1.desc
+	# Election - NDL v SLP v MSA
+country_event = {
+	id = ENG_ElectionSeason.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.1" }
+	title = ENG_ElectionSeason.1.t
+	desc = ENG_ElectionSeason.1.desc
 
-		is_triggered_only = yes
+	picture = GFX_report_event_iberia_election_line_inside
+
+	is_triggered_only = yes
 
 		# NDL
 		option = {
@@ -106,9 +154,9 @@ country_event = {
 			set_variable = { TNO_Britain_ElectionSeason_ActorID = 12 }
 			TNO_Britain_ElectionSeason_Begin = yes
 			TotalPopCalc = yes
-			custom_effect_tooltip = NDL_election_start
-			}
 		}
+		custom_effect_tooltip = NDL_election_start
+	}
 
 		# SLP
 		option = {
@@ -129,9 +177,21 @@ country_event = {
 			TNO_Britain_ElectionSeason_Begin = yes
 			# country_event = { id = ENG_ElectionSeason.3 }
 			TotalPopCalc = yes
-			}
-			custom_effect_tooltip = SLP_election_start
 		}
+		custom_effect_tooltip = SLP_election_start
+	}
+
+		# MSA
+	option = {
+		name = ENG_ElectionSeason.1.o_msa
+		hidden_effect = {
+			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 16 }
+			set_variable = { TNO_Britain_ElectionSeason_ActorID = 16 }
+			TNO_Britain_ElectionSeason_Begin = yes
+			TotalPopCalc = yes
+		}
+		custom_effect_tooltip = MSA_election_start
+	}
 
 		# # Debug
 		# option = {
@@ -140,157 +200,168 @@ country_event = {
 
 		# 	country_event = { id = ENG_ElectionSeason.0 days = 100 }
 		# }
-	}
+}
 
 	# Election Victor - NDL?
-	country_event = {
-		id = ENG_ElectionSeason.2
-		immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.2" }
-		title = ENG_ElectionSeason.2.t
-		desc = ENG_ElectionSeason.2.desc
+country_event = {
+	id = ENG_ElectionSeason.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.2" }
+	title = ENG_ElectionSeason.2.t
+	desc = ENG_ElectionSeason.2.desc
 
-		is_triggered_only = yes
+	is_triggered_only = yes
 
 		# NDL - New Whigs
-		option = {
-			name = ENG_ElectionSeason.2.o_ndl_newwhigs
-			set_variable = { TNO_Britain_ElectionSeason_ActorID = 11 }
-			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 11 }
-			TNO_Britain_ElectionSeason_Begin = yes
-		}
+	option = {
+		name = ENG_ElectionSeason.2.o_ndl_newwhigs
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 11 }
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 11 }
+		TNO_Britain_ElectionSeason_Begin = yes
+	}
 
 		# NDL - Democrats
-		option = {
-			name = ENG_ElectionSeason.2.o_ndl_democrats
-			set_variable = { TNO_Britain_ElectionSeason_ActorID = 12 }
-			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 12 }
-			TNO_Britain_ElectionSeason_Begin = yes
-		}
+	option = {
+		name = ENG_ElectionSeason.2.o_ndl_democrats
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 12 }
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 12 }
+		TNO_Britain_ElectionSeason_Begin = yes
+	}
 
 		# NDL - Patriots
-		option = {
-			name = ENG_ElectionSeason.2.o_ndl_patriots
-			set_variable = { TNO_Britain_ElectionSeason_ActorID = 13 }
-			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 13 }
-			TNO_Britain_ElectionSeason_Begin = yes
-		}
+	option = {
+		name = ENG_ElectionSeason.2.o_ndl_patriots
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 13 }
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 13 }
+		TNO_Britain_ElectionSeason_Begin = yes
 	}
+}
 
 	# Election - SLP?
-	country_event = {
-		id = ENG_ElectionSeason.3
-		immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.3" }
-		title = ENG_ElectionSeason.3.t
-		desc = ENG_ElectionSeason.3.desc
+country_event = {
+	id = ENG_ElectionSeason.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.3" }
+	title = ENG_ElectionSeason.3.t
+	desc = ENG_ElectionSeason.3.desc
 
-		is_triggered_only = yes
+	is_triggered_only = yes
 
 		# SLP - Progress
-		option = {
-			name = ENG_ElectionSeason.3.o_slp_progress
-			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 14 }
-			set_variable = { TNO_Britain_ElectionSeason_ActorID = 14 }
-			TNO_Britain_ElectionSeason_Begin = yes
-		}
+	option = {
+		name = ENG_ElectionSeason.3.o_slp_progress
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 14 }
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 14 }
+		TNO_Britain_ElectionSeason_Begin = yes
+	}
 
 		# SLP - Pollitites
-		option = {
-			name = ENG_ElectionSeason.3.o_slp_pollitites
-			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 15 }
-			set_variable = { TNO_Britain_ElectionSeason_ActorID = 15 }
-			TNO_Britain_ElectionSeason_Begin = yes
-		}
+	option = {
+		name = ENG_ElectionSeason.3.o_slp_pollitites
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 15 }
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 15 }
+		TNO_Britain_ElectionSeason_Begin = yes
 	}
+}
 
 	# Election - Close
-	country_event = {
-		id = ENG_ElectionSeason.4
-		immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.4" }
-		title = ENG_ElectionSeason.4.t
-		desc = ENG_ElectionSeason.4.desc
-		picture = GFX_report_event_generic_election
+country_event = {
+	id = ENG_ElectionSeason.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.4" }
+	title = ENG_ElectionSeason.4.t
+	desc = ENG_ElectionSeason.4.desc
+	picture = GFX_report_event_generic_election
 
-		is_triggered_only = yes
+	is_triggered_only = yes
 
-		option = { # NDL victory
-			name = ENG_ElectionSeason.4.a
-			trigger = {
-				OR = {
-					check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 11 }
-					check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 12 }
-					check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 13 }
-				}
-			}
-			if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
-				country_event = { id = ENG_Government_Changes.1 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					has_country_flag = NDL_victorious
-				}
-				country_event = { id = ENG_Government_Changes.5 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they didn't won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					NOT = { has_country_flag = NDL_victorious }
-				}
-				country_event = { id = ENG_Government_Changes.10 days = 1 }
+	option = { # NDL victory
+		name = ENG_ElectionSeason.4.a
+		trigger = {
+			OR = {
+				check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 11 }
+				check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 12 }
+				check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 13 }
 			}
 		}
-		option = { # SLP victory
-			name = ENG_ElectionSeason.4.b
-			trigger = {
-				OR = {
-					check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 14 }
-					check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 15 }
-				}
-			}
-			if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
-				country_event = { id = ENG_Government_Changes.2 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					has_country_flag = SLP_victorious
-				}
-				country_event = { id = ENG_Government_Changes.6 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they didn't won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					NOT = { has_country_flag = SLP_victorious }
-				}
-				country_event = { id = ENG_Government_Changes.11 days = 1 }
-			}
+		if = {
+			limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
+			country_event = { id = ENG_Government_Changes.1 days = 1 }
 		}
-		option = { # MSA victory
-			name = ENG_ElectionSeason.4.c
-			trigger = { check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 16 } }
-			if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
-				# country_event = { id = ENG_Government_Changes. days = 1 }
+		else_if = {
+			limit = { # Second election, they won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				has_country_flag = NDL_victorious
 			}
-			else_if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 } } # Second election
-				# country_event = { id = ENG_Government_Changes. days = 1 }
+			country_event = { id = ENG_Government_Changes.5 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they didn't won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				NOT = { has_country_flag = NDL_victorious }
 			}
+			country_event = { id = ENG_Government_Changes.10 days = 1 }
 		}
 	}
+	option = { # SLP victory
+		name = ENG_ElectionSeason.4.b
+		trigger = {
+			OR = {
+				check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 14 }
+				check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 15 }
+			}
+		}
+		if = {
+			limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
+			country_event = { id = ENG_Government_Changes.2 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				has_country_flag = SLP_victorious
+			}
+			country_event = { id = ENG_Government_Changes.6 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they didn't won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				NOT = { has_country_flag = SLP_victorious }
+			}
+			country_event = { id = ENG_Government_Changes.11 days = 1 }
+		}
+	}
+	option = { # MSA victory
+		name = ENG_ElectionSeason.4.c
+		trigger = { check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 16 } }
+		if = {
+			limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
+				country_event = { id = ENG_Government_Changes.17 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				has_country_flag = MSA_victorious
+			}
+			country_event = { id = ENG_Government_Changes.18 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they didn't won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				NOT = { has_country_flag = MSA_victorious }
+			}
+			country_event = { id = ENG_Government_Changes.19 days = 1 }
+		}
+	}
+}
 #### HMMLR Elections ####
 
 #### Collab Elections ####
 	# Election - UE v RP v NF
-	country_event = {
-		id =  ENG_ElectionSeason.5
-		immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.5" }
-		title = ENG_ElectionSeason.5.t
-		desc = ENG_ElectionSeason.5.desc
+country_event = {
+	id =  ENG_ElectionSeason.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.5" }
+	title = ENG_ElectionSeason.5.t
+	desc = ENG_ElectionSeason.5.desc
+	picture = GFX_report_event_generic_election
 
-		is_triggered_only = yes
+	is_triggered_only = yes
 
 		# UE
 		option = {
@@ -309,7 +380,7 @@ country_event = {
 			set_variable = { TNO_Britain_ElectionSeason_ActorID = 6 }
 			TNO_Britain_ElectionSeason_Begin = yes
 			# country_event = { id = ENG_ElectionSeason.6 }
-		}
+	}
 
 		# RP
 		option = {
@@ -329,13 +400,13 @@ country_event = {
 			TNO_Britain_ElectionSeason_Begin = yes
 		}
 
-		# # NF
-		# option = {
-		# 	name = ENG_ElectionSeason.5.o_nf
-
-		# 	set_variable = { TNO_Britain_ElectionSeason_ActorID = 9 }
-		# 	TNO_Britain_ElectionSeason_Begin = yes
-		# }
+	# NF
+	option = {
+		name = ENG_ElectionSeason.5.o_nf
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 9 }
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 9 }
+		TNO_Britain_ElectionSeason_Begin = yes
+	}
 
 		# # Debug
 		# option = {
@@ -344,110 +415,120 @@ country_event = {
 
 		# 	country_event = { id = ENG_ElectionSeason.0 days = 500 }
 		# }
-	}
+}
 
 	# Election - UE?
-	country_event = {
-		id = ENG_ElectionSeason.6
-		immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.6" }
-		title = ENG_ElectionSeason.6.t
-		desc = ENG_ElectionSeason.6.desc
+country_event = {
+	id = ENG_ElectionSeason.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.6" }
+	title = ENG_ElectionSeason.6.t
+	desc = ENG_ElectionSeason.6.desc
 
-		is_triggered_only = yes
+	is_triggered_only = yes
 
 		# UE
-		option = {
-			name = ENG_ElectionSeason.6.o_ue_macmillanists
-			
-			set_variable = { TNO_Britain_ElectionSeason_ActorID = 6 }
-			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 6 }
-			TNO_Britain_ElectionSeason_Begin = yes
-		}
+	option = {
+		name = ENG_ElectionSeason.6.o_ue_macmillanists
+
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 6 }
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 6 }
+		TNO_Britain_ElectionSeason_Begin = yes
+	}
 
 		# NDL - Democrats
-		option = {
-			name = ENG_ElectionSeason.6.o_ue_liberals
-			
-			set_variable = { TNO_Britain_ElectionSeason_ActorID = 7 }
-			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 7 }
-			TNO_Britain_ElectionSeason_Begin = yes
-		}
+	option = {
+		name = ENG_ElectionSeason.6.o_ue_liberals
+
+		set_variable = { TNO_Britain_ElectionSeason_ActorID = 7 }
+		set_variable = { TNO_Britain_ElectionSeason_Running_Party = 7 }
+		TNO_Britain_ElectionSeason_Begin = yes
 	}
+}
 
 	# Election - Close
-	country_event = {
-		id = ENG_ElectionSeason.7
-		immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.7" }
-		title = ENG_ElectionSeason.7.t
-		desc = ENG_ElectionSeason.7.desc
-		picture = GFX_report_event_generic_election
+country_event = {
+	id = ENG_ElectionSeason.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.7" }
+	title = ENG_ElectionSeason.7.t
+	desc = ENG_ElectionSeason.7.desc
+	picture = GFX_report_event_generic_election
 
-		is_triggered_only = yes
+	is_triggered_only = yes
 
-		option = { # RP victory
-			name = ENG_ElectionSeason.7.a
-			trigger = { check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 8 } }
-			if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
-				country_event = { id = ENG_Government_Changes.3 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					has_country_flag = ENG_Thatcher_victorious
-				}
-				country_event = { id = ENG_Government_Changes.7 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they didn't won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					NOT = { has_country_flag = ENG_Thatcher_victorious }
-				}
-				country_event = { id = ENG_Government_Changes.12 days = 1 }
-			}
+	option = { # RP victory
+		name = ENG_ElectionSeason.7.a
+		trigger = { check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 8 } }
+		if = {
+			limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
+			country_event = { id = ENG_Government_Changes.3 days = 1 }
 		}
-		option = { # UE victory
-			name = ENG_ElectionSeason.7.b
-			trigger = {
-				OR = {
-					check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 6 }
-					check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 7 }
-				}
+		else_if = {
+			limit = { # Second election, they won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				has_country_flag = ENG_Thatcher_victorious
 			}
-			if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
-				country_event = { id = ENG_Government_Changes.4 days = 1 }
-			}
-			else_if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 } } # Second election
-				country_event = { id = ENG_Government_Changes.8 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					has_country_flag = ENG_macmillan_victorious
-				}
-				country_event = { id = ENG_Government_Changes.8 days = 1 }
-			}
-			else_if = {
-				limit = { # Second election, they didn't won the first
-					check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
-					NOT = { has_country_flag = ENG_macmillan_victorious }
-				}
-				country_event = { id = ENG_Government_Changes.13 days = 1 }
-			}
+			country_event = { id = ENG_Government_Changes.7 days = 1 }
 		}
-		option = { # NF victory
-			name = ENG_ElectionSeason.7.c
-			trigger = { check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 9 } }
-			if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
-				# country_event = { id = ENG_Government_Changes. days = 1 }
+		else_if = {
+			limit = { # Second election, they didn't won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				NOT = { has_country_flag = ENG_Thatcher_victorious }
 			}
-			else_if = {
-				limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 } } # Second election
-				# country_event = { id = ENG_Government_Changes. days = 1 }
-			}
+			country_event = { id = ENG_Government_Changes.12 days = 1 }
 		}
 	}
+	option = { # UE victory
+		name = ENG_ElectionSeason.7.b
+		trigger = {
+			OR = {
+				check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 6 }
+				check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 7 }
+			}
+		}
+		if = {
+			limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
+			country_event = { id = ENG_Government_Changes.4 days = 1 }
+		}
+		else_if = {
+			limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 } } # Second election
+			country_event = { id = ENG_Government_Changes.8 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				has_country_flag = ENG_macmillan_victorious
+			}
+			country_event = { id = ENG_Government_Changes.8 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they didn't won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				NOT = { has_country_flag = ENG_macmillan_victorious }
+			}
+			country_event = { id = ENG_Government_Changes.13 days = 1 }
+		}
+	}
+	option = { # NF victory
+		name = ENG_ElectionSeason.7.c
+		trigger = { check_variable = { TNO_Britain_ElectionSeason_Victor_Party = 9 } }
+		if = {
+			limit = { check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 1 } } # First election
+				country_event = { id = ENG_Government_Changes.20 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				has_country_flag = ENG_NF_victorious
+			}
+			country_event = { id = ENG_Government_Changes.21 days = 1 }
+		}
+		else_if = {
+			limit = { # Second election, they didn't won the first
+				check_variable = { TNO_Britain_ElectionSeason_ElectionCounter = 2 }
+				NOT = { has_country_flag = ENG_NF_victorious }
+			}
+			country_event = { id = ENG_Government_Changes.22 days = 1 }
+		}
+	}
+}
 #### Collab Elections ####

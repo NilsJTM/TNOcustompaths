@@ -11,11 +11,13 @@ country_event = { #Run a generic election, display results, for debug purposes.
 
 	option = {
 		name = russian_democracy_helpers.1.a
-		RUS_run_election = yes
+		hidden_effect = {
+			RUS_run_election = yes
+		}
 		set_country_flag = RUS_ELECTION_RESULTS_SHOW
 		country_event = {
 			id = russian_democracy_helpers.2
-			days = 60
+			days = 45
 		}
 	}
 }
@@ -31,7 +33,9 @@ country_event = { #Hide election results
 
 	option = {
 		name = russian_democracy_helpers.2.a
-		RUS_clear_election_variables = yes
+		hidden_effect = {
+			RUS_clear_election_variables = yes
+		}
 		clr_country_flag = RUS_ELECTION_RESULTS_SHOW
 	}
 }
@@ -57,50 +61,50 @@ country_event = { #Make polling available
 	option = { #DSNP
 		name = russian_democracy_helpers.3.a
 		trigger = {
-			tag = NIK
+			tag = KOM
 		}
 		set_country_flag = RUS_campaigning_for_socdem
-		custom_effect_tooltip = NIK_socdem_campaign_tt
+		custom_effect_tooltip = KOM_socdem_campaign_tt
 	}
 	option = { #SMR
 		name = russian_democracy_helpers.3.b
 		trigger = {
-			tag = NIK
+			tag = KOM
 		}
 		set_country_flag = RUS_campaigning_for_liberal
-		custom_effect_tooltip = NIK_liberal_campaign_tt
+		custom_effect_tooltip = KOM_liberal_campaign_tt
 	}
 	option = { #PSD
 		name = russian_democracy_helpers.3.c
 		trigger = {
-			tag = NIK
+			tag = KOM
 		}
 		set_country_flag = RUS_campaigning_for_authdem
-		custom_effect_tooltip = NIK_auth_campaign_tt
+		custom_effect_tooltip = KOM_auth_campaign_tt
 	}
 	option = { #Vyatka Liberals
 		name = russian_democracy_helpers.3.e
 		trigger = {
-			tag = KIR
+			tag = VYT
 		}
 		set_country_flag = RUS_campaigning_for_liberal
-		custom_effect_tooltip = KIR_liberal_campaign_tt
+		custom_effect_tooltip = VYT_liberal_campaign_tt
 	}
 	option = { #Vyatka Conservatives
 		name = russian_democracy_helpers.3.f
 		trigger = {
-			tag = KIR
+			tag = VYT
 		}
 		set_country_flag = RUS_campaigning_for_conservative
-		custom_effect_tooltip = KIR_conservative_campaign_tt
+		custom_effect_tooltip = VYT_conservative_campaign_tt
 	}
 	option = { #Vyatka AuthDems
 		name = russian_democracy_helpers.3.g
 		trigger = {
-			tag = KIR
+			tag = VYT
 		}
 		set_country_flag = RUS_campaigning_for_authdem
-		custom_effect_tooltip = KIR_authdem_campaign_tt
+		custom_effect_tooltip = VYT_authdem_campaign_tt
 	}
 	option = { #Vyatka Conservatives
 		name = russian_democracy_helpers.3.h
@@ -115,10 +119,10 @@ country_event = { #Make polling available
 			}
 		}
 		trigger = {
-			tag = TOB
+			tag = SVR
 		}
 		set_country_flag = RUS_campaigning_for_conservative
-		custom_effect_tooltip = TOB_conservative_campaign_tt
+		custom_effect_tooltip = SVR_conservative_campaign_tt
 	}
 	option = { #Vyatka AuthDems
 		name = russian_democracy_helpers.3.i
@@ -133,10 +137,10 @@ country_event = { #Make polling available
 			}
 		}
 		trigger = {
-			tag = TOB
+			tag = SVR
 		}
 		set_country_flag = RUS_campaigning_for_authdem
-		custom_effect_tooltip = TOB_authdem_campaign_tt
+		custom_effect_tooltip = SVR_authdem_campaign_tt
 	}
 }
 
@@ -151,8 +155,10 @@ country_event = { #Update poll averages
 
 	option = {
 		name = russian_democracy_helpers.4.a
-		every_owned_state = {
-			RUS_calculate_polling_averages = yes
+		hidden_effect = {
+			every_owned_state = {
+				RUS_calculate_polling_averages = yes
+			}
 		}
 	}
 }
@@ -168,7 +174,9 @@ country_event = { #Hide polls
 
 	option = {
 		name = russian_democracy_helpers.5.a
-		RUS_clear_polling_variables = yes
+		hidden_effect = {
+			RUS_clear_polling_variables = yes
+		}
 		clr_country_flag = RUS_POLLS_ENABLE
 		clr_country_flag = RUS_campaigning_for_socdem
 		clr_country_flag = RUS_campaigning_for_liberal
@@ -191,7 +199,9 @@ country_event = { #first Komi presidential election
 
 	option = {
 		name = russian_democracy_helpers.6.a
-		RUS_run_election = yes
+		hidden_effect = {
+			RUS_run_election = yes
+		}
 		set_country_flag = RUS_ELECTION_RESULTS_SHOW
 		country_event = { id = russian_democracy_helpers.2 days = 60 }
 		country_event = { id = russian_democracy_helpers.5 days = 30 }
@@ -227,7 +237,9 @@ country_event = { #second Komi presidential election
 
 	option = {
 		name = russian_democracy_helpers.61.a
-		RUS_run_election = yes
+		hidden_effect = {
+			RUS_run_election = yes
+		}
 		set_country_flag = RUS_ELECTION_RESULTS_SHOW
 		country_event = { id = russian_democracy_helpers.2 days = 60 }
 		country_event = { id = russian_democracy_helpers.5 days = 30 }
@@ -338,7 +350,7 @@ country_event = { #AI region determiner - SocDem
 						add = 10
 						any_owned_state = { region = 14 }
 					}
-					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Trans Urais"
+					log = "[GetDateText]: [Root.GetName]: SocDem Party campaigns in Trans Urals"
 					every_owned_state = {
 						limit = {
 							region = 14
@@ -428,6 +440,7 @@ country_event = { #AI region determiner - SocDem
 							OR = {
 								region = 148
 								region = 213
+								region = 236
 							}
 						}
 						RUS_socdem_campaign_effects = yes
@@ -534,7 +547,7 @@ country_event = { #AI region determiner - Liberal
 						add = 10
 						any_owned_state = { region = 14 }
 					}
-					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Trans Urais"
+					log = "[GetDateText]: [Root.GetName]: Liberal Party campaigns in Trans Urals"
 					every_owned_state = {
 						limit = {
 							region = 14
@@ -624,6 +637,7 @@ country_event = { #AI region determiner - Liberal
 							OR = {
 								region = 148
 								region = 213
+								region = 236
 							}
 						}
 						RUS_liberal_campaign_effects = yes
@@ -731,7 +745,7 @@ country_event = { #AI region determiner - AuthDem
 						add = 10
 						any_owned_state = { region = 14 }
 					}
-					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Trans Urais"
+					log = "[GetDateText]: [Root.GetName]: AuthDem Party campaigns in Trans Urals"
 					every_owned_state = {
 						limit = {
 							region = 14
@@ -821,6 +835,7 @@ country_event = { #AI region determiner - AuthDem
 							OR = {
 								region = 148
 								region = 213
+								region = 236
 							}
 						}
 						RUS_authdem_campaign_effects = yes
@@ -928,7 +943,7 @@ country_event = { #AI region determiner - Conservatives
 						add = 10
 						any_owned_state = { region = 14 }
 					}
-					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Trans Urais"
+					log = "[GetDateText]: [Root.GetName]: Conservative Party campaigns in Trans Urals"
 					every_owned_state = {
 						limit = {
 							region = 14
@@ -1018,6 +1033,7 @@ country_event = { #AI region determiner - Conservatives
 							OR = {
 								region = 148
 								region = 213
+								region = 236
 							}
 						}
 						RUS_conservative_campaign_effects = yes

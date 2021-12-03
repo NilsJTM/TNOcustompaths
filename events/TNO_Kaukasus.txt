@@ -74,11 +74,11 @@ country_event = { #Josias is betrayed!
 	fire_only_once = yes
 	option = {
 		name = cau.10001.a
-		BRG = { 
-			country_event = { 
-				id = BRG.1004 
-				days = 1 
-			} 
+		BRG = {
+			country_event = {
+				id = BRG.1004
+				days = 1
+			}
 		}
 	}
 }
@@ -91,7 +91,7 @@ country_event = { #Josias goes monarchist
 	picture = GFX_report_event_kaukasus_soccer
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = {
 		name = cau.10002.a #stays Burgsys
 		ai_chance = {
@@ -143,7 +143,7 @@ country_event = { #business plot
 	picture = GFX_report_event_kaukasus_soccer
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #nothing happens
 		name = cau.10003.a
 		ai_chance = {
@@ -158,8 +158,8 @@ country_event = { #business plot
 		        	GER = { NOT = { has_country_flag = heydrich_for_germany } }
 			}
 		}
-	}		
-	
+	}
+
 	option = { #plot happens
 		name = cau.10003.b
 		set_politics = {
@@ -207,11 +207,11 @@ country_event = {
 	title = cau.10004.t
 	desc = cau.10004.desc
 	picture = GFX_report_event_kaukasus_soccer
-	
+
 	trigger = {
 		has_country_flag = CAU_policy_josias_crowned
 	}
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
@@ -224,7 +224,7 @@ country_event = {
 			popularity = 0.4
 		}
 		every_country = {
-		    news_event = {
+			news_event = {
 				id = WORLD.1997
 				days = 1
 			}
@@ -238,11 +238,11 @@ country_event = {
 	title = cau.10005.t
 	desc = cau.10005.desc
 	picture = GFX_report_event_kaukasus_soccer
-	
+
 	trigger = {
 		has_country_flag = CAU_policy_business_plot
 	}
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
@@ -252,39 +252,45 @@ country_event = {
 #			days = 60 
 #				id = cau.10006 
 #		}
-		give_resource_rights = { 
-			receiver = BGR 
-			state = 229 
+		give_resource_rights = {
+			receiver = BGR
+			state = 229
 		}
+		give_resource_rights = { receiver = BGR state = 1552 }
+		give_resource_rights = { receiver = BGR state = 1553 }
+		give_resource_rights = { receiver = BGR state = 1554 }
 		ai_chance = {
 			factor = 5
 		}
-		BGR = { 
-			country_event = { 
+		BGR = {
+			country_event = {
 				id = bormann.103
-				days = 1 
-			} 
+				days = 1
+			}
 		}
 	}
 	option = {
-		name = cau.10005.b 
+		name = cau.10005.b
 		set_country_flag = CAU_policy_business_goering
 #		country_event = { 
 #			days = 60 
 #				id = cau.10007 
 #		}
-		give_resource_rights = { 
-			receiver = GGR 
-			state = 229 
+		give_resource_rights = {
+			receiver = GGR
+			state = 229
 		}
+		give_resource_rights = { receiver = GGR state = 1552 }
+		give_resource_rights = { receiver = GGR state = 1553 }
+		give_resource_rights = { receiver = GGR state = 1554 }
 		ai_chance = {
 			factor = 5
 		}
-		GGR = { 
-			country_event = { 
+		GGR = {
+			country_event = {
 				id = goering.57
-				days = 1 
-			} 
+				days = 1
+			}
 		}
 	}
 }
@@ -348,8 +354,8 @@ country_event = {
 			desc = "POLITICS_HERBERT_BACKE_DESC"
 			picture = "Portrait_Caucasus_Herbert_Backe.dds"
 			expire = "1990.1.1"
-			ideology = burgundian_system_subtype
-			traits = { terrorizer }	
+			ideology = esoteric_nazism_agrarian_spartanism_subtype
+			traits = { terrorizer }
 		}
 	}
 }
@@ -373,7 +379,7 @@ country_event = {
 			desc = "POLITICS_WITTEKIND_DESC"
 			picture = "Portrait_Caucasus_Wittekind_Kaiser.dds"
 			expire = "1990.1.1"
-			ideology = despotism_subtype
+			ideology = despotism_absolute_monarchy_subtype
 		}
 	}
 }
@@ -399,18 +405,6 @@ country_event = { #Great Caucasian Revolt
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	immediate = {
-		hidden_effect = {
-			CAU = {
-				add_named_threat = {
-					threat = 5
-					name = threat.44.t
-				}
-			}
-			TNO_World_Tension_add_5 = yes
-		}
-	}
-
 	option = {
 		name = cau.10010.a
 		set_country_flag = CAU_caucasian_revolt
@@ -426,10 +420,18 @@ country_event = { #Great Caucasian Revolt
 					set_politics = {
 						ruling_party = fascism
 					}
+					hidden_effect = {
+						set_temp_variable = { TNO_economy_type_temp = 3 }
+						econ_type_change = yes
+					}
 				}
 				50 = {
 					set_politics = {
 						ruling_party = socialist
+					}
+					hidden_effect = {
+						set_temp_variable = { TNO_economy_type_temp = 3 }
+						econ_type_change = yes
 					}
 				}
 			}
@@ -437,6 +439,10 @@ country_event = { #Great Caucasian Revolt
 		ADY = {
 			transfer_state = 233
 			load_oob = ADY_1967
+			hidden_effect = {
+				set_temp_variable = { TNO_economy_subtype_temp = 2 }
+				econ_subtype_change = yes
+			}
 		}
 		declare_war_on = {
 			target = GEO
@@ -447,13 +453,13 @@ country_event = { #Great Caucasian Revolt
 			type = annex_everything
 		}
 		every_country = {
-		    news_event = {
+			news_event = {
 				id = WORLD.1998
 				days = 1
 			}
 		}
 		every_country = {
-		    news_event = {
+			news_event = {
 				id = WORLD.1999
 				days = 1
 			}
@@ -482,18 +488,6 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	immediate = {
-		hidden_effect = {
-			CAU = {
-				add_named_threat = {
-					threat = 5
-					name = threat.44.t
-				}
-			}
-			TNO_World_Tension_add_5 = yes
-		}
-	}
-
 	option = {
 		name = cau.10011.a
 		set_country_flag = CAU_caucasian_anarchy
@@ -506,12 +500,16 @@ country_event = {
 			desc = "POLITICS_KAUKASIEN_COLLAPSE_DESC"
 			picture = "Portrait_Caucasus_No_Authority.dds"
 			expire = "1990.1.1"
-			ideology = burgundian_system_subtype
-			traits = { utterly_abandoned_CAU }	
+			ideology = esoteric_nazism_subtype
+			traits = { utterly_abandoned_CAU }
 		}
 		AZR = {
 			transfer_state = 229
 			load_oob = "AZR_1967"
+			hidden_effect = {
+				set_temp_variable = { TNO_economy_type_temp = 3 }
+				econ_type_change = yes
+			}
 		}
 		declare_war_on = {
 			target = AZR
@@ -525,10 +523,18 @@ country_event = {
 					set_politics = {
 						ruling_party = fascism
 					}
+					hidden_effect = {
+						set_temp_variable = { TNO_economy_type_temp = 3 }
+						econ_type_change = yes
+					}
 				}
 				50 = {
 					set_politics = {
 						ruling_party = socialist
+					}
+					hidden_effect = {
+						set_temp_variable = { TNO_economy_type_temp = 3 }
+						econ_type_change = yes
 					}
 				}
 			}
@@ -540,6 +546,10 @@ country_event = {
 		DAG = {
 			transfer_state = 232
 			load_oob = "DAG_1967"
+			hidden_effect = {
+				set_temp_variable = { TNO_economy_type_temp = 3 }
+				econ_type_change = yes
+			}
 		}
 		declare_war_on = {
 			target = DAG
@@ -548,13 +558,17 @@ country_event = {
 		ADY = {
 			transfer_state = 233
 			load_oob = "ADY_1967"
+			hidden_effect = {
+				set_temp_variable = { TNO_economy_subtype_temp = 2 }
+				econ_subtype_change = yes
+			}
 		}
 		declare_war_on = {
 			target = ADY
 			type = annex_everything
 		}
 		every_country = {
-		    news_event = {
+			news_event = {
 				id = WORLD.2000
 				days = 1
 			}
@@ -568,7 +582,7 @@ country_event = {
 	title = cau.10012.t
 	desc = cau.10012.desc
 	picture = GFX_report_event_kaukasus_soccer
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
@@ -607,108 +621,108 @@ country_event = {
 # 		#}
 # 	}
 # }
- 
- country_event = { # Lost Legion Event - Intergrate into events properly at some point love Debbel <3
+
+country_event = { # Lost Legion Event - Intergrate into events properly at some point love Debbel <3
 	id = cau.789
 	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.789"}
- 	title = cau.789.t
- 	desc = cau.789.desc
- 	picture = GFX_report_event_kaukasus_fear_and_loathing
-	
+	title = cau.789.t
+	desc = cau.789.desc
+	picture = GFX_report_event_kaukasus_fear_and_loathing
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = cau.789.a
- 		hidden_effect = {
-            country_event = { 
-			    id = SPQR.50
+
+	option = {
+		name = cau.789.a
+		hidden_effect = {
+			country_event = {
+				id = SPQR.50
 				days = 2
-		    }
+			}
 			every_country = {
-			limit = {
-				NOT = {
-					tag = RMN
+				limit = {
+					NOT = {
+						tag = RMN
+					}
+				}
+				country_event = {
+					id = cau.790
+					days = 4
 				}
 			}
-			country_event = { 
-			    id = cau.790
-				days = 4
-		    }
-		    }
- 		}
- 	}
+		}
+	}
 	option = {
- 		name = cau.789.b
- 	}
- }
- 
- country_event = { # Lost Legion Event 2 - Intergrate into events properly at some point love Debbel <3
+		name = cau.789.b
+	}
+}
+
+country_event = { # Lost Legion Event 2 - Intergrate into events properly at some point love Debbel <3
 	id = cau.788
 	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.788"}
- 	title = cau.788.t
- 	desc = cau.788.desc
- 	picture = GFX_report_event_ROM_legion
-	
+	title = cau.788.t
+	desc = cau.788.desc
+	picture = GFX_report_event_ROM_legion
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = cau.788.a
- 		hidden_effect = {
-            country_event = { 
-			    id = cau.789
+
+	option = {
+		name = cau.788.a
+		hidden_effect = {
+			country_event = {
+				id = cau.789
 				days = 1
-		    }
- 		}
- 	}
- }
- 
- country_event = { # Lost Legion Event 2 - Intergrate into events properly at some point love Debbel <3
+			}
+		}
+	}
+}
+
+country_event = { # Lost Legion Event 2 - Intergrate into events properly at some point love Debbel <3
 	id = cau.790
 	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.790"}
- 	title = cau.790.t
- 	desc = cau.790.desc
- 	picture = GFX_report_event_ROM_guns
-	
+	title = cau.790.t
+	desc = cau.790.desc
+	picture = GFX_report_event_ROM_guns
+
 	is_triggered_only = yes
- 	
- 	option = {
- 		name = cau.790.a
- 		hidden_effect = {
 
- 		}
- 	}
- }
+	option = {
+		name = cau.790.a
+		hidden_effect = {
 
- country_event = { #ambasassador murdered
+		}
+	}
+}
+
+country_event = { #ambasassador murdered
 	id = cau.2
 	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.2"}
- 	title = cau.2.t
- 	desc = cau.2.desc
- 	picture = GFX_report_event_kaukasus_fear_and_loathing
-	
-	is_triggered_only = yes
- 	fire_only_once = yes
- 	
- 	option = {
- 		name = cau.2.a
- 	}
- }
+	title = cau.2.t
+	desc = cau.2.desc
+	picture = GFX_report_event_kaukasus_fear_and_loathing
 
- country_event = { #georgian football
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = cau.2.a
+	}
+}
+
+country_event = { #georgian football
 	id = cau.3
 	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.3"}
- 	title = cau.3.t
- 	desc = cau.3.desc
- 	picture = GFX_report_event_kaukasus_soccer
-	
+	title = cau.3.t
+	desc = cau.3.desc
+	picture = GFX_report_event_kaukasus_soccer
+
 	is_triggered_only = yes
- 	fire_only_once = yes
- 	
- 	option = {
- 		name = cau.3.a
- 	}
- }
- 
+	fire_only_once = yes
+
+	option = {
+		name = cau.3.a
+	}
+}
+
 ###Black Meeting focus events
 
 #country_event = {
@@ -723,7 +737,7 @@ country_event = {
 #		name = cau.100.a
 #	}
 #} 	
- 	
+
 #country_event = {
 #	id = cau.101
 #	immediate = {log = "[GetDateText]: [Root.GetName]: event cau.101"}
@@ -967,7 +981,7 @@ country_event = {
 	fire_only_once = yes
 	option = {
 		name = cau.115.a
-	
+
 	}
 }
 

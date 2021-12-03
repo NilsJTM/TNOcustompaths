@@ -2,58 +2,40 @@
 wal_goch_nationalization_category = {
 	wal_goch_nat_steel = {
 		available = {
-			social_democrat > 0.5
+			social_democracy > 0.5
 		}
 		cost = 50
 		ai_will_do = {
 			factor = 1
 		}
-		complete_effect = {	
+		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_steel"
-			custom_effect_tooltip = WAL_Costs200Mil
+
 			random_owned_controlled_state = {
 				add_resource = {
-    				type = steel
-    				amount = 5
+					type = steel
+					amount = 5
 				}
 			}
+
+			set_temp_variable = {
+				debt_temp = 0.1
+			}
+			econ_national_debt_change = yes
 			add_popularity = {
-				ideology = social_democrat
+				ideology = social_democracy
 				popularity = -0.05
 			}
-			hidden_effect = {
-				if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 200.00
-  							compare = greater_than_or_equals
-						}
-					}
-					subtract_from_variable = {
-						var = money_reserves
-						value = 200.00
-					}
-				}
-				else_if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 200.00
-  							compare = less_than
-						}
-					}
-					add_to_variable = {
-						var = national_debt
-						value = 200.00
-					}
-				}
+			set_temp_variable = {
+				gdp_growth_temp = -0.01
 			}
+			econ_gdp_growth_change = yes
+
 		}
 	}
 	wal_goch_nat_oil_pipes = {
 		available = {
-			social_democrat > 0.5
+			social_democracy > 0.5
 		}
 		cost = 50
 		ai_will_do = {
@@ -61,50 +43,30 @@ wal_goch_nationalization_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_oil_pipes"
-			custom_effect_tooltip = WAL_Costs200Mil
+
 			random_owned_controlled_state = {
 				add_resource = {
-    				type = oil
-    				amount = 5
+					type = oil
+					amount = 3
 				}
 			}
 			add_popularity = {
-				ideology = social_democrat
+				ideology = social_democracy
 				popularity = -0.05
 			}
-			hidden_effect = {
-				if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 200.00
-  							compare = greater_than_or_equals
-						}
-					}
-					subtract_from_variable = {
-						var = money_reserves
-						value = 200.00
-					}
-				}
-				else_if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 200.00
-  							compare = less_than
-						}
-					}
-					add_to_variable = {
-						var = national_debt
-						value = 200.00
-					}
-				}
+			set_temp_variable = {
+				debt_temp = 0.15
 			}
+			econ_national_debt_change = yes
+			set_temp_variable = {
+				gdp_growth_temp = -0.01
+			}
+			econ_gdp_growth_change = yes
 		}
 	}
 	wal_goch_nat_roads = {
 		available = {
-			social_democrat > 0.5
+			social_democracy > 0.5
 		}
 		cost = 50
 		ai_will_do = {
@@ -115,48 +77,28 @@ wal_goch_nationalization_category = {
 			custom_effect_tooltip = WAL_Costs200Mil
 			random_owned_state = {
 				add_building_construction = {
-		    		type = infrastructure
-		    		level = 1
-   		    		instant_build = yes
+					type = infrastructure
+					level = 1
+					instant_build = yes
 				}
 			}
 			add_popularity = {
-				ideology = social_democrat
+				ideology = social_democracy
 				popularity = -0.05
 			}
-			hidden_effect = {
-				if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 200.00
-  							compare = greater_than_or_equals
-						}
-					}
-					subtract_from_variable = {
-						var = money_reserves
-						value = 200.00
-					}
-				}
-				else_if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 200.00
-  							compare = less_than
-						}
-					}
-					add_to_variable = {
-						var = national_debt
-						value = 200.00
-					}
-				}
+			set_temp_variable = {
+				debt_temp = 0.05
 			}
+			econ_national_debt_change = yes
+			set_temp_variable = {
+				gdp_growth_temp = -0.01
+			}
+			econ_gdp_growth_change = yes
 		}
 	}
 	wal_goch_nat_factories = {
 		available = {
-			social_democrat > 0.5
+			social_democracy > 0.5
 		}
 		cost = 75
 		ai_will_do = {
@@ -165,50 +107,28 @@ wal_goch_nationalization_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_factories"
 			custom_effect_tooltip = WAL_FactoryCosts500Mil
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-   			 		type = industrial_complex
-    				level = 1
-    				instant_build = yes
-				}
-			}
 			add_timed_idea = {
 				idea = WAL_NatFactoryTemp
 				days = 90
 			}
 			add_popularity = {
-				ideology = social_democrat
+				ideology = social_democracy
 				popularity = -0.05
 			}
-			hidden_effect = {
-				if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 500.00
-  							compare = greater_than_or_equals
-						}
-					}
-					subtract_from_variable = {
-						var = money_reserves
-						value = 500.00
-					}
+			random_owned_controlled_state = {
+				set_temp_variable = {
+					temp_state_value_addition = 0.5
 				}
-				else_if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 500.00
-  							compare = less_than
-						}
-					}
-					add_to_variable = {
-						var = national_debt
-						value = 500.00
-					}
-				}
+				econ_state_value_change_addition = yes
 			}
+			set_temp_variable = {
+				debt_temp = 0.2
+			}
+			econ_national_debt_change = yes
+			set_temp_variable = {
+				gdp_growth_temp = -0.01
+			}
+			econ_gdp_growth_change = yes
 		}
 	}
 	wal_goch_nat_promote = {
@@ -217,43 +137,19 @@ wal_goch_nationalization_category = {
 			factor = 1
 		}
 		available = {
-			social_democrat < 0.50
+			social_democracy < 0.50
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_goch_nat_promote"
 			custom_effect_tooltip = WAL_PropCosts50Mil
 			add_popularity = {
-				ideology = social_democrat
+				ideology = social_democracy
 				popularity = 0.05
 			}
-			hidden_effect = {
-				if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 50.00
-  							compare = greater_than_or_equals
-						}
-					}
-					subtract_from_variable = {
-						var = money_reserves
-						value = 50.00
-					}
-				}
-				else_if = {
-					limit = {
-						check_variable = {
-  							var = money_reserves
-  							value = 50.00
-  							compare = less_than
-						}
-					}
-					add_to_variable = {
-						var = national_debt
-						value = 50.00
-					}
-				}
+			set_temp_variable = {
+				debt_temp = 0.05
 			}
+			econ_national_debt_change = yes
 		}
 	}
 }
@@ -285,7 +181,7 @@ wal_fwa_terrorism_category = {
 					}
 			}
 		}
-		complete_effect = {	
+		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_find_fwa_low"
 			custom_effect_tooltip = WAL_Find_The_FWA_low
 			hidden_effect = {
@@ -395,64 +291,35 @@ wal_fwa_terrorism_category = {
 			}
 		}
 	}
-	wal_find_fwa_custom_path_cheat = {
-		visible = {
-			is_ai = yes
-			has_game_rule = { 
-				rule = WAL_ELECTIONS_1963 option = WAL_ELECTIONS_1963_INDEPENDENTS
-			}
-         }
-		available = {
-			NOT = {
-				has_global_flag = wal_finding_fwa
-			}
-			NOT = {
-				has_country_flag = wal_fwa_terrorism_end
-			}
-		}
-		cost = 0
-		ai_will_do = {
-			factor = 100
-		}
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision wal_find_fwa_high"
-			custom_effect_tooltip = WAL_Find_The_FWA_high
-			hidden_effect = {
-				set_global_flag = wal_finding_fwa
-				country_event = {
-							id = walunion.24
-							days = 14
-						}
-			}
-		}
-	}
 }
 
 wal_union_navy_category = {
-	wal_rent_ulster_dockyards = {
+	wal_rent_scottish_dockyards = {
+		icon = GFX_decision_shipyard
+		visible = {
+			NOT = {
+				has_idea = WAL_RentedScotland
+			}
+		}
 		available = {
 			has_country_flag = WAL_UnionistNavyDream
-			NOT = {
-				has_idea = WAL_RentedUlster
-            }
 		}
 		cost = 25
 		ai_will_do = {
 			factor = 8
-			modifier = { 
-				factor = 0 
-				has_country_flag = WAL_AI_smart_union_flag 
+			modifier = {
+				factor = 0
+				has_country_flag = WAL_AI_smart_union_flag
 				NOT = {	has_country_flag = wal_fwa_terrorism_end }
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision wal_rent_ulster_dockyards"
-			custom_effect_tooltip = WAL_RentingUlster
+			log = "[GetDateText]: [Root.GetName]: Decision wal_rent_scottish_dockyards"
+			custom_effect_tooltip = WAL_RentingScotland
 			hidden_effect = {
-
-				ULS = {
+				SCO = {
 					country_event = {
-						id = WALULS.1
+						id = WALSCO.1
 						hours = 1
 					}
 				}
@@ -461,9 +328,10 @@ wal_union_navy_category = {
 	}
 
 	wal_purchase_submarine = {
+		icon = GFX_decision_generic_battleship
 		available = {
 			has_country_flag = WAL_UnionistNavyDream
-			has_idea = WAL_RentedUlster
+			has_idea = WAL_RentedScotland
 		}
 		cost = 100
 		ai_will_do = {
@@ -476,9 +344,8 @@ wal_union_navy_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_destroyer"
-			custom_effect_tooltip = Wal_3_mil_please
 			hidden_effect = {
-				ULS = {
+				SCO = {
 					create_equipment_variant = {
 						name = "S Class"
 						type = ship_hull_submarine_1
@@ -488,42 +355,29 @@ wal_union_navy_category = {
 							fixed_ship_engine_slot = light_ship_engine_1
 							fixed_ship_torpedo_slot = ship_torpedo_sub_1
 							rear_1_custom_slot = ship_torpedo_sub_1
-    					}
-    				}
-				}
-				create_ship = { type = ship_hull_submarine_1 equipment_variant = "S Class" creator = ULS }
-
-				if = {
-					limit = {
-						WAL = {
-							check_variable = {
-								var = money_reserves
-								value = 14.50
-								compare = greater_than_or_equals
-							}
-						}
-					}
-					WAL = {
-						subtract_from_variable = {
-							var = money_reserves
-							value = 14.50
 						}
 					}
 				}
-				else = {
-					add_to_variable = {
-						var = national_debt
-						value = 14.50
-					}
+				create_ship = { type = ship_hull_submarine_1 equipment_variant = "S Class" creator = SCO name = "S Class Submarine" }
+			}
+			set_temp_variable = {
+				debt_temp = 0.015
+			}
+			econ_national_debt_change = yes
+			SCO = {
+				set_temp_variable = {
+					money_reserves_temp = 0.015
 				}
+				econ_money_reserves_change_raw_money = yes
 			}
 		}
 	}
 
 	wal_purchase_destroyer = {
+		icon = GFX_decision_generic_battleship
 		available = {
 			has_country_flag = WAL_UnionistNavyDream
-			has_idea = WAL_RentedUlster
+			has_idea = WAL_RentedScotland
 		}
 		cost = 125
 		ai_will_do = {
@@ -531,9 +385,8 @@ wal_union_navy_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_destroyer"
-			custom_effect_tooltip = Wal_5_mil_please
 			hidden_effect = {
-				ULS = {
+				SCO = {
 					create_equipment_variant = {
 						name = "H Class"
 						type = ship_hull_light_1
@@ -548,42 +401,29 @@ wal_union_navy_category = {
 							fixed_ship_torpedo_slot = ship_torpedo_1
 							mid_1_custom_slot = ship_light_battery_1
 							rear_1_custom_slot = ship_anti_air_2
-    					}
-					}
-				}
-				create_ship = { type = ship_hull_light_1 equipment_variant = "H Class" creator = ULS }
-
-				if = {
-					limit = {
-						WAL = {
-							check_variable = {
-								var = money_reserves
-								value = 17.50
-								compare = greater_than_or_equals
-							}
-						}
-					}
-					WAL = {
-						subtract_from_variable = {
-							var = money_reserves
-							value = 17.50
 						}
 					}
 				}
-				else = {
-					add_to_variable = {
-						var = national_debt
-						value = 17.50
-					}
+				create_ship = { type = ship_hull_light_1 equipment_variant = "H Class" creator = SCO name = "H Class Destroyer" }
+			}
+			set_temp_variable = {
+				debt_temp = 0.018
+			}
+			econ_national_debt_change = yes
+			SCO = {
+				set_temp_variable = {
+					money_reserves_temp = 0.018
 				}
+				econ_money_reserves_change_raw_money = yes
 			}
 		}
 	}
 
 	wal_purchase_light_cruiser = {
+		icon = GFX_decision_generic_battleship
 		available = {
 			has_country_flag = WAL_UnionistNavyDream
-			has_idea = WAL_RentedUlster
+			has_idea = WAL_RentedScotland
 		}
 		cost = 150
 		ai_will_do = {
@@ -591,9 +431,8 @@ wal_union_navy_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision wal_purchase_light_cruiser"
-			custom_effect_tooltip = Wal_13_mil_please
 			hidden_effect = { #Someone make a light cruiser spawn plz
-				ULS = {
+				SCO = {
 					create_equipment_variant = {
 						name = "Town Class"
 						type = ship_hull_cruiser_1
@@ -609,35 +448,70 @@ wal_union_navy_category = {
 							fixed_ship_armor_slot = ship_armor_cruiser_2
 							mid_1_custom_slot = ship_light_battery_2
 							rear_1_custom_slot = ship_anti_air_2
-    					}
-					}
-				}
-				create_ship = { type = ship_hull_cruiser_1 equipment_variant = "Town Class" creator = ULS }
-
-				if = {
-					limit = {
-						WAL = {
-							check_variable = {
-								var = money_reserves
-								value = 27.50
-								compare = greater_than_or_equals
-							}
-						}
-					}
-					WAL = {
-						subtract_from_variable = {
-							var = money_reserves
-							value = 27.50
 						}
 					}
 				}
-				else = {
-					add_to_variable = {
-						var = national_debt
-						value = 27.50
-					}
-				}
+				create_ship = { type = ship_hull_cruiser_1 equipment_variant = "Town Class" creator = SCO name = "Town Class Cruiser" }
 			}
+			set_temp_variable = {
+				debt_temp = 0.028
+			}
+			econ_national_debt_change = yes
+			SCO = {
+				set_temp_variable = {
+					money_reserves_temp = 0.028
+				}
+				econ_money_reserves_change_raw_money = yes
+			}
+		}
+	}
+}
+
+#debug decisions why didnt these exist before
+wal_debug_category = {
+	load_initial_tree = {
+		complete_effect = {
+			load_focus_tree = WAL_Initial_Tree
+		}
+	}
+	load_coal_crisis_tree = {
+		complete_effect = {
+			load_focus_tree = WAL_Coal_Crisis
+		}
+	}
+	load_goch_victory_tree = {
+		complete_effect = {
+			load_focus_tree = WAL_Goch_Victory
+		}
+	}
+	load_cayo_victory_tree = {
+		complete_effect = {
+			load_focus_tree = WAL_Cayos_Coup
+		}
+	}
+	load_cayo_tree_pt2 = {
+		complete_effect = {
+			load_focus_tree = WAL_Cayo_RunsCountry
+		}
+	}
+	load_unionist_victory_tree = {
+		complete_effect = {
+			load_focus_tree = WAL_Unionist_Victory
+		}
+	}
+	load_unionist_dem_england = {
+		complete_effect = {
+			load_focus_tree = WAL_Unionist_Democratic_England
+		}
+	}
+	load_unionist_red_england = {
+		complete_effect = {
+			load_focus_tree = WAL_Unionist_Red_England
+		}
+	}
+	load_unionist_collab_england = {
+		complete_effect = {
+			load_focus_tree = WAL_Unionist_Fascist_England
 		}
 	}
 }

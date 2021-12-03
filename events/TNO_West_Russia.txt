@@ -90,6 +90,7 @@ country_event = { #Ration Calculations
 
 	option = {
 		name = WRS.3.a
+		TNO_improve_admin_efficiency_really_low = yes
 	}
 }
 
@@ -235,7 +236,7 @@ country_event = { #WRS - defeat against Onega
 	}
 }
 
-country_event = { #VTY - victory against WRS
+country_event = { #ONG - victory against WRS
 	id = WRS.13
 	immediate = {log = "[GetDateText]: [Root.GetName]: event WRS.13"}
 	title = WRS.13.t
@@ -249,7 +250,7 @@ country_event = { #VTY - victory against WRS
 	}
 }
 
-country_event = { #VTY - defeat against WRS
+country_event = { #ONG - defeat against WRS
 	id = WRS.14
 	immediate = {log = "[GetDateText]: [Root.GetName]: event WRS.14"}
 	title = WRS.14.t
@@ -359,7 +360,9 @@ country_event = { #Forward Unto Dawn
 
 	option = {
 		name = WRS.22.a
-		load_focus_tree = WRS_bombings_end
+		hidden_effect = {
+			load_focus_tree = WRS_bombings_end
+		}
 	}
 }
 
@@ -389,13 +392,6 @@ country_event = { #Industry uncovered, for Zhukov
 
 	option = {
 		name = WRS.24.a
-		869 = {
-			add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-			}
-		}
 	}
 }
 
@@ -456,6 +452,7 @@ country_event = { #war communism oof
 	option = {
 		name = WRS.28.a
 		add_stability = -0.05
+		TNO_worsen_public_meetings_policy_effectiveness_low = yes
 	}
 }
 
@@ -588,7 +585,7 @@ country_event = { #explain power struggle
 				1 = {
 					set_country_flag = WRS_appease
 				}
-				3 = { }
+				4 = { }
 			}
 		}
 	}
@@ -623,6 +620,8 @@ country_event = { #explain power struggle
 		}
 		
 		complete_national_focus = WRS_the_red_bonaparte
+		set_country_flag = WRS_power_struggle_tukha
+		WRS_power_struggle_pulse = yes
 	}
 	option = {#ZHUKOV
 		name = WRS.37.b
@@ -639,6 +638,8 @@ country_event = { #explain power struggle
 		}
 		
 		complete_national_focus = WRS_the_peoples_marshal
+		set_country_flag = WRS_power_struggle_zhukov
+		WRS_power_struggle_pulse = yes
 	}
 }
 
@@ -709,16 +710,14 @@ country_event = { #Death of Voroshilov
 			remove_mission = WRS_zhukov_influence_ticker
 			remove_mission = WRS_tukha_influence_ticker
 			end_puppet = UKH
-			end_puppet = MIR
+			end_puppet = PLS
 			add_state_core = 870
 			add_state_core = 860
 			add_state_core = 861
 			add_state_core = 869
 			set_country_flag = POWER_STRUGGLE_ENDED
-			clr_country_flag = WRS_power_struggle_tukha
-			clr_country_flag = WRS_power_struggle_zhukov
-			VTY = {
-				country_event = { id = VTY.21 days = 1 } #Old Comrades
+			ONG = {
+				country_event = { id = ONG.21 days = 1 } #Old Comrades
 			}
 		}
 		if = {
@@ -733,20 +732,28 @@ country_event = { #Death of Voroshilov
 		trigger = {
 			check_variable = { global.WRSTukhaInfluence > global.WRSZhukovInfluence }
 		}
-		set_country_flag = POWER_STRUGGLE_ENDED
 		set_country_flag = tukha_in_power
-		load_focus_tree = WRS_tukhachevsky_warlord
-		MIR = {
-			country_event = {
-				id = MIR.100
-				days = 1
+		hidden_effect = {
+			load_focus_tree = WRS_tukhachevsky_warlord
+			PLS = {
+				country_event = {
+					id = PLS.100
+					days = 1
+				}
+			}
+			UKH = {
+				country_event = {
+					id = UKH.100
+					days = 1
+				}
 			}
 		}
-		UKH = {
-			country_event = {
-				id = UKH.100
-				days = 1
+		if = {
+			limit = {
+				has_country_flag = WRS_power_struggle_zhukov
 			}
+			add_political_power = -100
+			add_stability = -0.05
 		}
 	}
 	option = { #ZHUK
@@ -754,20 +761,28 @@ country_event = { #Death of Voroshilov
 		trigger = {
 			check_variable = { global.WRSZhukovInfluence > global.WRSTukhaInfluence }
 		}
-		set_country_flag = POWER_STRUGGLE_ENDED
 		set_country_flag = zhukov_in_power
-		load_focus_tree = WRS_zhukov_warlord
-		MIR = {
-			country_event = {
-				id = MIR.101
-				days = 1
+		hidden_effect = {
+			load_focus_tree = WRS_zhukov_warlord
+			PLS = {
+				country_event = {
+					id = PLS.101
+					days = 1
+				}
+			}
+			UKH = {
+				country_event = {
+					id = UKH.101
+					days = 1
+				}
 			}
 		}
-		UKH = {
-			country_event = {
-				id = UKH.101
-				days = 1
+		if = {
+			limit = {
+				has_country_flag = WRS_power_struggle_tukha
 			}
+			add_political_power = -100
+			add_stability = -0.05
 		}
 	}
 	option = { #tie - Voroshilov picks Zhukov
@@ -777,19 +792,23 @@ country_event = { #Death of Voroshilov
 		}
 		set_country_flag = POWER_STRUGGLE_ENDED
 		set_country_flag = zhukov_in_power
-		load_focus_tree = WRS_zhukov_warlord
-		MIR = {
-			country_event = {
-				id = MIR.101
-				days = 1
+		hidden_effect = {
+			load_focus_tree = WRS_zhukov_warlord
+			PLS = {
+				country_event = {
+					id = PLS.101
+					days = 1
+				}
+			}
+			UKH = {
+				country_event = {
+					id = UKH.101
+					days = 1
+				}
 			}
 		}
-		UKH = {
-			country_event = {
-				id = UKH.101
-				days = 1
-			}
-		}
+		add_political_power = -50
+		add_stability = -0.025
 	}
 }
 
@@ -832,42 +851,41 @@ country_event = {
 			transfer_state = 750
 		}
 		WRS = {
-			annex_country = { target = MIR transfer_troops = yes }
+			annex_country = { target = PLS transfer_troops = yes }
 			annex_country = { target = UKH transfer_troops = yes }
-			annex_country = { target = NIK transfer_troops = yes }
+			annex_country = { target = KOM transfer_troops = yes }
 			annex_country = { target = GAY transfer_troops = yes }
 			annex_country = { target = VOL transfer_troops = yes }
-			annex_country = { target = MAR transfer_troops = yes }
-			annex_country = { target = KIR transfer_troops = yes }
+			annex_country = { target = VYT transfer_troops = yes }
 			annex_country = { target = TAR transfer_troops = yes }
 			annex_country = { target = BKR transfer_troops = yes }
 			annex_country = { target = PRM transfer_troops = yes }
 			annex_country = { target = ORE transfer_troops = yes }
 			annex_country = { target = URL transfer_troops = yes }
-			annex_country = { target = BAS transfer_troops = yes }
-			annex_country = { target = ORS transfer_troops = yes }
+			annex_country = { target = MGN transfer_troops = yes }
+			annex_country = { target = DRL transfer_troops = yes }
 			annex_country = { target = SKH transfer_troops = yes }
 			annex_country = { target = FAV transfer_troops = yes }
 			annex_country = { target = VOR transfer_troops = yes }
 		}
-		ISH = {
+		TYM = {
 			annex_country = { target = OMS transfer_troops = yes }
-			annex_country = { target = TOB transfer_troops = yes }
-			annex_country = { target = UDM transfer_troops = yes }
-			annex_country = { target = KOM transfer_troops = yes }
-			set_cosmetic_tag = ISH_regional_unifier
+			annex_country = { target = SVR transfer_troops = yes }
+			annex_country = { target = ZLT transfer_troops = yes }
+			annex_country = { target = YGR transfer_troops = yes }
+			set_cosmetic_tag = TYM_regional_unifier
 		}
-		ERS = {
+		TOM = {
 			annex_country = { target = KEM transfer_troops = yes }
-			annex_country = { target = KHA transfer_troops = yes }
+			annex_country = { target = SBA transfer_troops = yes }
 			transfer_state = 758
 			transfer_state = 568
-			set_cosmetic_tag = ERS_regional_unifier
+			set_cosmetic_tag = TOM_regional_unifier
 		}
 		IRK = {
 			transfer_state = 567
 			transfer_state = 565
-			annex_country = { target = SEV transfer_troops = yes }
+			annex_country = { target = ALD transfer_troops = yes }
 			annex_country = { target = YAK transfer_troops = yes }
 			set_cosmetic_tag = IRK_wrw_cosmetic
 		}
@@ -883,8 +901,8 @@ country_event = {
 			annex_country = { target = CHK transfer_troops = yes }
 			annex_country = { target = KMC transfer_troops = yes }
 		}
-		PAV = {
-			set_cosmetic_tag = PAV_wrw_cosmetic
+		NOV = {
+			set_cosmetic_tag = NOV_wrw_cosmetic
 		}
 		ALT = {
 			set_cosmetic_tag = ALT_wrw_cosmetic
@@ -892,8 +910,8 @@ country_event = {
 		BRY = {
 			set_cosmetic_tag = BRY_wrw_cosmetic
 		}
-		SVO = {
-			set_cosmetic_tag = SVO_wrw_cosmetic
+		PRC = {
+			set_cosmetic_tag = PRC_wrw_cosmetic
 		}
 	}
 }
@@ -951,6 +969,7 @@ country_event = {
 			transfer_state = 147
 			transfer_state = 722
 			transfer_state = 137
+			transfer_state = 1532
 			transfer_state = 234
 			transfer_state = 235
 			transfer_state = 232
@@ -981,12 +1000,12 @@ country_event = {
 				set_nationality = WRS
 			}
 		}
-		MIR = {
+		PLS = {
 			every_unit_leader = {
 				set_nationality = WRS
 			}
 		}
-		CHU = {
+		GOR = {
 			every_unit_leader = {
 				set_nationality = WRS
 			}
@@ -1001,7 +1020,7 @@ country_event = {
 				set_nationality = WRS
 			}
 		}
-		ISH = {
+		TYM = {
 			every_unit_leader = {
 				set_nationality = WRS
 			}
@@ -1011,7 +1030,7 @@ country_event = {
 				set_nationality = WRS
 			}
 		}
-		SVO = {
+		PRC = {
 			every_unit_leader = {
 				set_nationality = WRS
 			}
@@ -1059,8 +1078,8 @@ country_event = {
 
 	option = {
 		name = WRS.1003.a
-		tno_improve_poverty = yes
-		tno_improve_poverty = yes
+		TNO_improve_poverty_low = yes
+		TNO_improve_poverty_low = yes
 		tno_improve_academic_base = yes
 		tno_improve_academic_base = yes
 		tno_improve_research_facilities = yes
@@ -1090,7 +1109,7 @@ country_event = {
 	option = {
 		name = USSR.1917.a
 		hidden_effect = {
-			create_faction = "Fourth International"
+			create_faction = Fourth_International
 			WRS = {
 				transfer_state = 657
 				transfer_state = 409
@@ -1103,6 +1122,7 @@ country_event = {
 				transfer_state = 147
 				transfer_state = 722
 				transfer_state = 137
+				transfer_state = 1532
 				transfer_state = 234
 				transfer_state = 235
 				transfer_state = 232
@@ -1110,8 +1130,8 @@ country_event = {
 				unite_russia = yes
 				set_cosmetic_tag = RUS_sfsr
 			}
-			VTY = {
-				set_cosmetic_tag = VTY_ssr
+			ONG = {
+				set_cosmetic_tag = ONG_ssr
 				transfer_state = 146
 				transfer_state = 216
 				transfer_state = 215
@@ -1122,7 +1142,7 @@ country_event = {
 				}
 			}
 			WRS = {
-				puppet = VTY
+				puppet = ONG
 				puppet = CAU
 				puppet = BLR
 				puppet = EST
@@ -1133,7 +1153,7 @@ country_event = {
 				puppet = UZB
 				puppet = TRK
 				puppet = UKR
-				puppet = VLG
+				puppet = PAU
 				puppet = KAZ
 				annex_country = {
 					target = MCW
@@ -1234,8 +1254,8 @@ country_event = {
 					ruling_party = communist
 				}
 			}
-			VLG = {
-				set_cosmetic_tag = VLG_ssr
+			PAU = {
+				set_cosmetic_tag = PAU_ssr
 				transfer_state = 401
 				transfer_state = 239
 				set_politics = {
@@ -1999,16 +2019,7 @@ country_event = { #Vologda - accept white flag
 			}
 		}
 		WRS = {
-			annex_country = {
-				target = KST
-				transfer_troops = no
-			}
-		}
-		WRS = {
 			change_tag_from = VOL
-		}
-		WRS = {
-			change_tag_from = KST
 		}
 	}
 }
@@ -2107,11 +2118,7 @@ country_event = { #Vologda - accept red flag
 			annex_country = { target = VOL transfer_troops = no }
 		}
 		WRS = {
-			annex_country = { target = KST transfer_troops = no }
-		}
-		WRS = {
 			change_tag_from = VOL
-			change_tag_from = KST
 		}
 	}
 }
@@ -2130,10 +2137,6 @@ country_event = { #Vologa - BLACK FLAG
 		WRS = {
 			declare_war_on = {
 				target = VOL
-				type = annex_everything
-			}
-			declare_war_on = {
-				target = KST
 				type = annex_everything
 			}
 		}
@@ -2210,7 +2213,7 @@ country_event = { #Komi - refuse white flag
 
 	option = {
 		name = tukha.9.a
-		NIK = {
+		KOM = {
 			country_event = {
 				id = tukha.11
 				days = 2
@@ -2233,12 +2236,12 @@ country_event = { #Komi - accept white flag
 		add_manpower = 25000
 		WRS = {
 			annex_country = {
-				target = NIK
+				target = KOM
 				transfer_troops = no
 			}
 		}
 		WRS = {
-			change_tag_from = NIK
+			change_tag_from = KOM
 		}
 	}
 }
@@ -2313,7 +2316,7 @@ country_event = {  #Komi - refuse red flag
 
 	option = {
 		name = tukha.12.a
-		NIK = {
+		KOM = {
 			country_event = {
 				id = tukha.14
 				days = 2
@@ -2334,11 +2337,11 @@ country_event = { #Komi - accept red flag
 	option = {
 		name = tukha.13.a
 		WRS = {
-			annex_country = { target = NIK
+			annex_country = { target = KOM
 				transfer_troops = no }
 		}
 		WRS = {
-			change_tag_from = NIK
+			change_tag_from = KOM
 		}
 	}
 }
@@ -2356,7 +2359,7 @@ country_event = { #Komi - BLACK FLAG
 		name = tukha.14.a
 		WRS = {
 			declare_war_on = {
-				target = NIK
+				target = KOM
 				type = annex_everything
 			}
 		}
@@ -2571,7 +2574,7 @@ country_event = { #Viatka - refuse white flag
 
 	option = {
 		name = tukha.23.a
-		KIR= {
+		VYT= {
 			country_event = {
 				id = tukha.25
 				days = 2
@@ -2592,11 +2595,11 @@ country_event = { #Viatka - accept white flag
 	option = {
 		name = tukha.24.a
 		WRS = {
-			annex_country = { target = KIR
+			annex_country = { target = VYT
 				transfer_troops = yes }
 		}
 		WRS = {
-			change_tag_from = KIR
+			change_tag_from = VYT
 		}
 	}
 }
@@ -2636,7 +2639,7 @@ country_event = { #Viatka - refuse red flag
 	option = {
 		name = tukha.26.a
 		hidden_effect = {
-			KIR= {
+			VYT= {
 				country_event = {
 					id = tukha.28
 					days = 2
@@ -2658,11 +2661,11 @@ country_event = { #Viatka - accept red flag
 	option = {
 		name = tukha.27.a
 		WRS = {
-			annex_country = { target = KIR
+			annex_country = { target = VYT
 				transfer_troops = no }
 		}
 		WRS = {
-			change_tag_from = KIR
+			change_tag_from = VYT
 		}
 	}
 }
@@ -2680,235 +2683,236 @@ country_event = { #Viatka - BLACK FLAG
 		name = tukha.28.a
 		WRS = {
 			declare_war_on = {
-				target = KIR
+				target = VYT
 				type = annex_everything
 			}
 		}
 	}
 }
 
-country_event = { #Berezniki - WHITE FLAG
-	id = tukha.29
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.29"}
-	title = tukha.29.t
-	desc = tukha.29.d
-	picture = GFX_report_event_russia_red_army_march
+#country_event = { #Berezniki - WHITE FLAG - Deprecated because Berezniki ded
+#	id = tukha.29
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.29"}
+#	title = tukha.29.t
+#	desc = tukha.29.d
+#	picture = GFX_report_event_russia_red_army_march
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = tukha.29.a
+#		ai_chance = {
+#			factor = 5
+#			modifier = {
+#				factor = 0.5
+#				strength_ratio = { tag = WRS ratio > 1.5 }
+#			}
+#			modifier = {
+#				factor = 0.2
+#				strength_ratio = { tag = WRS ratio > 3 }
+#			}
+#			modifier = {
+#				factor = 0
+#				strength_ratio = { tag = WRS ratio > 5 }
+#			}
+#		}
+#		WRS = {
+#			country_event = {
+#				id = tukha.31
+#				days = 2
+#			}
+#		}
+#	}
+#	option = {
+#		name = tukha.29.b
+#		ai_chance = {
+#			factor = 200
+#			modifier = {
+#				factor = 0.5
+#				strength_ratio = { tag = WRS ratio < 1 }
+#			}
+#			modifier = {
+#				factor = 0.2
+#				strength_ratio = { tag = WRS ratio < 0.5 }
+#			}
+#			modifier = {
+#				factor = 0
+#				strength_ratio = { tag = WRS ratio < 0.2 }
+#			}
+#		}
+#		WRS = {
+#			country_event = {
+#				id = tukha.30
+#				days = 2
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Berezniki - refuse white flag - Deprecated because Berezniki ded
+#	id = tukha.30
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.30"}
+#	title = tukha.30.t
+#	desc = tukha.30.d
+#	picture = GFX_report_event_Generic_Papers
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = tukha.30.a
+#		MAR = {
+#			country_event = {
+#				id = tukha.32
+#				days = 2
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Berezniki - accept white flag - Deprecated because Berezniki ded
+#	id = tukha.31
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.31"}
+#	title = tukha.31.t
+#	desc = tukha.31.d
+#	picture = GFX_report_event_generic_sign_treaty1
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = tukha.31.a
+#		add_manpower = 5000
+#		WRS = {
+#			annex_country = { target = MAR
+#				transfer_troops = no
+#			}
+#		}
+#		WRS = {
+#			change_tag_from = MAR
+#		}
+#	}
+#}
 
-	is_triggered_only = yes
-
-	option = {
-		name = tukha.29.a
-		ai_chance = {
-			factor = 5
-			modifier = {
-				factor = 0.5
-				strength_ratio = { tag = WRS ratio > 1.5 }
-			}
-			modifier = {
-				factor = 0.2
-				strength_ratio = { tag = WRS ratio > 3 }
-			}
-			modifier = {
-				factor = 0
-				strength_ratio = { tag = WRS ratio > 5 }
-			}
-		}
-		WRS = {
-			country_event = {
-				id = tukha.31
-				days = 2
-			}
-		}
-	}
-	option = {
-		name = tukha.29.b
-		ai_chance = {
-			factor = 200
-			modifier = {
-				factor = 0.5
-				strength_ratio = { tag = WRS ratio < 1 }
-			}
-			modifier = {
-				factor = 0.2
-				strength_ratio = { tag = WRS ratio < 0.5 }
-			}
-			modifier = {
-				factor = 0
-				strength_ratio = { tag = WRS ratio < 0.2 }
-			}
-		}
-		WRS = {
-			country_event = {
-				id = tukha.30
-				days = 2
-			}
-		}
-	}
-}
-
-country_event = { #Berezniki - refuse white flag
-	id = tukha.30
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.30"}
-	title = tukha.30.t
-	desc = tukha.30.d
-	picture = GFX_report_event_Generic_Papers
-
-	is_triggered_only = yes
-
-	option = {
-		name = tukha.30.a
-		MAR= {
-			country_event = {
-				id = tukha.32
-				days = 2
-			}
-		}
-	}
-}
-
-country_event = { #Berezniki - accept white flag
-	id = tukha.31
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.31"}
-	title = tukha.31.t
-	desc = tukha.31.d
-	picture = GFX_report_event_generic_sign_treaty1
-
-	is_triggered_only = yes
-
-	option = {
-		name = tukha.31.a
-		add_manpower = 5000
-		WRS = {
-			annex_country = { target = MAR
-				transfer_troops = no }
-		}
-		WRS = {
-			change_tag_from = MAR
-		}
-	}
-}
-
-country_event = { #Berezniki - RED FLAG
-	id = tukha.32
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.32"}
-	title = tukha.32.t
-	desc = tukha.32.d
-	picture = GFX_report_event_russia_soldier_weapon_1
-
-	is_triggered_only = yes
-
-	option = {
-		name = tukha.32.a
-		ai_chance = {
-			factor = 5
-			modifier = {
-				factor = 0.5
-				strength_ratio = { tag = WRS ratio > 1.5 }
-			}
-			modifier = {
-				factor = 0.2
-				strength_ratio = { tag = WRS ratio > 3 }
-			}
-			modifier = {
-				factor = 0
-				strength_ratio = { tag = WRS ratio > 5 }
-			}
-		}
-		WRS = {
-			country_event = {
-				id = tukha.34
-				days = 2
-			}
-		}
-	}
-	option = {
-		name = tukha.32.b
-		ai_chance = {
-			factor = 180
-			modifier = {
-				factor = 0.5
-				strength_ratio = { tag = WRS ratio < 1 }
-			}
-			modifier = {
-				factor = 0.2
-				strength_ratio = { tag = WRS ratio < 0.5 }
-			}
-			modifier = {
-				factor = 0
-				strength_ratio = { tag = WRS ratio < 0.2 }
-			}
-		}
-		WRS = {
-			country_event = {
-				id = tukha.33
-				days = 2
-			}
-		}
-	}
-}
-
-country_event = { #Berezniki - refuse red flag
-	id = tukha.33
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.33"}
-	title = tukha.33.t
-	desc = tukha.33.d
-	picture = GFX_report_event_Generic_Papers
-
-	is_triggered_only = yes
-
-	option = {
-		name = tukha.33.a
-		hidden_effect = {
-			MAR= {
-				country_event = {
-					id = tukha.35
-					days = 2
-				}
-			}
-		}
-	}
-}
-
-country_event = { #Berezniki - accept red flag
-	id = tukha.34
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.34"}
-	title = tukha.34.t
-	desc = tukha.34.d
-	picture = GFX_report_event_generic_sign_treaty1
-
-	is_triggered_only = yes
-
-	option = {
-		name = tukha.34.a
-		WRS = {
-			annex_country = { target = MAR
-				transfer_troops = no }
-		}
-		WRS = {
-			change_tag_from = MAR
-		}
-	}
-}
-
-country_event = { #Berezniki - BLACK FLAG
-	id = tukha.35
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.35"}
-	title = tukha.35.t
-	desc = tukha.35.d
-	picture = GFX_report_event_russia_soldiers_bombed_city
-
-	is_triggered_only = yes
-
-	option = {
-		name = tukha.35.a
-		WRS = {
-			declare_war_on = {
-				target = MAR
-				type = annex_everything
-			}
-		}
-	}
-}
+#country_event = { #Berezniki - RED FLAG - Deprecated because Berezniki ded
+#	id = tukha.32
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.32"}
+#	title = tukha.32.t
+#	desc = tukha.32.d
+#	picture = GFX_report_event_russia_soldier_weapon_1
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = tukha.32.a
+#		ai_chance = {
+#			factor = 5
+#			modifier = {
+#				factor = 0.5
+#				strength_ratio = { tag = WRS ratio > 1.5 }
+#			}
+#			modifier = {
+#				factor = 0.2
+#				strength_ratio = { tag = WRS ratio > 3 }
+#			}
+#			modifier = {
+#				factor = 0
+#				strength_ratio = { tag = WRS ratio > 5 }
+#			}
+#		}
+#		WRS = {
+#			country_event = {
+#				id = tukha.34
+#				days = 2
+#			}
+#		}
+#	}
+#	option = {
+#		name = tukha.32.b
+#		ai_chance = {
+#			factor = 180
+#			modifier = {
+#				factor = 0.5
+#				strength_ratio = { tag = WRS ratio < 1 }
+#			}
+#			modifier = {
+#				factor = 0.2
+#				strength_ratio = { tag = WRS ratio < 0.5 }
+#			}
+#			modifier = {
+#				factor = 0
+#				strength_ratio = { tag = WRS ratio < 0.2 }
+#			}
+#		}
+#		WRS = {
+#			country_event = {
+#				id = tukha.33
+#				days = 2
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Berezniki - refuse red flag - Deprecated because Berezniki ded
+#	id = tukha.33
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.33"}
+#	title = tukha.33.t
+#	desc = tukha.33.d
+#	picture = GFX_report_event_Generic_Papers
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = tukha.33.a
+#		hidden_effect = {
+#			MAR= {
+#				country_event = {
+#					id = tukha.35
+#					days = 2
+#				}
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Berezniki - accept red flag - Deprecated because Berezniki ded
+#	id = tukha.34
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.34"}
+#	title = tukha.34.t
+#	desc = tukha.34.d
+#	picture = GFX_report_event_generic_sign_treaty1
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = tukha.34.a
+#		WRS = {
+#			annex_country = { target = MAR
+#				transfer_troops = no }
+#		}
+#		WRS = {
+#			change_tag_from = MAR
+#		}
+#	}
+#}
+#
+#country_event = { #Berezniki - BLACK FLAG - Deprecated because Berezniki ded
+#	id = tukha.35
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event tukha.35"}
+#	title = tukha.35.t
+#	desc = tukha.35.d
+#	picture = GFX_report_event_russia_soldiers_bombed_city
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = tukha.35.a
+#		WRS = {
+#			declare_war_on = {
+#				target = MAR
+#				type = annex_everything
+#			}
+#		}
+#	}
+#}
 
 country_event = { #Perm - WHITE FLAG
 	id = tukha.36
@@ -3142,7 +3146,7 @@ country_event = { #Gorki - refuse white flag
 
 	option = {
 		name = tukha.44.a
-		CHU= {
+		GOR= {
 			country_event = {
 				id = tukha.46
 				days = 2
@@ -3163,11 +3167,11 @@ country_event = { #Gorki - accept white flag
 	option = {
 		name = tukha.45.a
 		WRS = {
-			annex_country = { target = CHU
+			annex_country = { target = GOR
 				transfer_troops = yes }
 		}
 		WRS = {
-			change_tag_from = CHU
+			change_tag_from = GOR
 		}
 	}
 }
@@ -3243,7 +3247,7 @@ country_event = { #Gorki - refuse red flag
 	option = {
 		name = tukha.47.a
 		hidden_effect = {
-			CHU= {
+			GOR= {
 				country_event = {
 					id = tukha.49
 					days = 2
@@ -3265,11 +3269,11 @@ country_event = { #Gorki - accept red flag
 	option = {
 		name = tukha.48.a
 		WRS = {
-			annex_country = { target = CHU
+			annex_country = { target = GOR
 				transfer_troops = no }
 		}
 		WRS = {
-			change_tag_from = CHU
+			change_tag_from = GOR
 		}
 	}
 }
@@ -3287,7 +3291,7 @@ country_event = { #Gorki - BLACK FLAG
 		name = tukha.49.a
 		WRS = {
 			declare_war_on = {
-				target = CHU
+				target = GOR
 				type = annex_everything
 			}
 		}
@@ -3925,8 +3929,8 @@ country_event = { #Ten Minute Trials
 	option = {
 		name = tukha.71.a
 		add_stability = -0.05
-		set_country_flag = NIK_Suslov_Dead
-		set_country_flag = NIK_Zhdanov_Dead
+		set_country_flag = KOM_Suslov_Dead
+		set_country_flag = KOM_Zhdanov_Dead
 	}
 }
 
@@ -4138,7 +4142,7 @@ country_event = { #fucking purge the AB and everyone associated with it
 		name = tukha.84.a
 		add_popularity = {
 			ideology = national_socialism
-			popularity = -0.5
+			popularity = -0.2
 		}
 	}
 }
@@ -4271,7 +4275,7 @@ country_event = {
 		ai_chance = {
 			factor = 50
 			modifier = {
-				NIK = {
+				KOM = {
 					NOT = {
 						OR = {
 							has_government = socialist
@@ -4339,7 +4343,7 @@ country_event = { #Invite Suslov?
 	option = { #Yes
 		name = zhukov.7.a
 		set_country_flag = WRS_HAS_SUSLOV
-		add_ideas = NIK_Mikhail_Suslov_hog
+		add_ideas = KOM_Mikhail_Suslov_hog
 	}
 	option = { #No
 		name = zhukov.7.b
@@ -4401,7 +4405,7 @@ country_event = {
 
 	option = {
 		name = zhukov.10.a
-		NIK = {
+		KOM = {
 			every_unit_leader = {
 				limit = {
 					OR = {
@@ -4447,12 +4451,12 @@ country_event = {
 				set_nationality = WRS
 			}
 		}
-		MIR = {
+		PLS = {
 			every_unit_leader = {
 				set_nationality = WRS
 			}
 		}
-		CHU = {
+		GOR = {
 			every_unit_leader = {
 				set_nationality = WRS
 			}
@@ -4462,12 +4466,11 @@ country_event = {
 				set_nationality = WRS
 			}
 		}
-		annex_country = { target = NIK transfer_troops = yes }
+		annex_country = { target = KOM transfer_troops = yes }
 		annex_country = { target = VOL transfer_troops = yes }
 		annex_country = { target = UKH transfer_troops = yes }
-		annex_country = { target = MIR transfer_troops = yes }
-		annex_country = { target = CHU transfer_troops = yes }
-		annex_country = { target = KST transfer_troops = yes }
+		annex_country = { target = PLS transfer_troops = yes }
+		annex_country = { target = GOR transfer_troops = yes }
 	}
 }
 
@@ -4616,7 +4619,7 @@ country_event = { #Gorki yes
 	option = {
 		name = zhukov.18.a
 		set_country_flag = zhukov_approach_averin
-		CHU = {
+		GOR = {
 			every_unit_leader = {
 				limit = {
 					OR = {
@@ -4798,14 +4801,32 @@ country_event = {
 	option = { #Keep it in Arkhangelsk
 		name = zhukov.27.a
 		add_political_power = 15
+		214 = {
+			set_temp_variable = { state_value_multiplier_temp = 1.05 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
 	}
 	option = { #Syktyvkar
 		name = zhukov.27.b
+		trigger = {
+			owns_state = 397
+		}
 		set_capital = 397
+		397 = {
+			set_temp_variable = { state_value_multiplier_temp = 1.05 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
 	}
 	option = { #Kirov
 		name = zhukov.27.c
+		trigger = {
+			owns_state = 400
+		}
 		set_capital = 400
+		400 = {
+			set_temp_variable = { state_value_multiplier_temp = 1.05 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
 	}
 }
 
@@ -4910,7 +4931,9 @@ country_event = { #presidium stacked with civilian bureaucrats
 
 	option = {
 		name = tukharegional.2.a
-		add_political_power = 50
+		add_political_power = 25
+		set_temp_variable = { gdp_growth_temp = 1 }
+		econ_gdp_growth_change = yes
 	}
 }
 
@@ -4926,6 +4949,7 @@ country_event = { #presidium stacked with red army generals
 	option = {
 		name = tukharegional.3.a
 		add_stability = 0.005
+		TNO_improve_pensions_policy_effectiveness_med = yes
 	}
 }
 
@@ -5192,6 +5216,7 @@ country_event = { #Run The Gauntlet
 
 	option = {
 		name = tukharegional.32.a
+		TNO_improve_training_policy_effectiveness_med = yes
 	}
 }
 
@@ -5455,9 +5480,9 @@ country_event = { #OBT PROGRAM - SUCCESS
 	option = {
 		name = indrik.11.a
 		set_country_flag = WRS_INDRIK_1_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_armor_speed = 0.1 }
-		add_to_variable = { NIK_experimental_weapons_armor_defence = 0.075 }
-		add_to_variable = { NIK_experimental_weapons_general_attack = 0.1 }
+		add_to_variable = { KOM_experimental_weapons_armor_speed = 0.1 }
+		add_to_variable = { KOM_experimental_weapons_armor_defence = 0.075 }
+		add_to_variable = { KOM_experimental_weapons_general_attack = 0.1 }
 		add_tech_bonus = {
 			bonus = 1
 			uses = 2
@@ -5478,8 +5503,8 @@ country_event = { #OBT PROGRAM - PARTIAL SUCCESS
 	option = {
 		name = indrik.12.a
 		set_country_flag = WRS_INDRIK_1_PARTIAL_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_armor_speed = 0.05 }
-		add_to_variable = { NIK_experimental_weapons_armor_defence = 0.025 }
+		add_to_variable = { KOM_experimental_weapons_armor_speed = 0.05 }
+		add_to_variable = { KOM_experimental_weapons_armor_defence = 0.025 }
 		add_tech_bonus = {
 			bonus = 1
 			uses = 1
@@ -5500,9 +5525,9 @@ country_event = { #IZHEVSK EXPERIMENTAL-CONSTRUCTOR WORKS - SUCCESS
 	option = {
 		name = indrik.21.a
 		set_country_flag = WRS_INDRIK_2_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_general_attack = 0.075 }
-		add_to_variable = { NIK_experimental_weapons_infantry_attack = 0.075 }
-		add_to_variable = { NIK_experimental_weapons_supply_consumption = 0.05 }
+		add_to_variable = { KOM_experimental_weapons_general_attack = 0.075 }
+		add_to_variable = { KOM_experimental_weapons_infantry_attack = 0.075 }
+		add_to_variable = { KOM_experimental_weapons_supply_consumption = 0.05 }
 		add_tech_bonus = {
 			bonus = 0.75
 			uses = 1
@@ -5523,9 +5548,9 @@ country_event = { #IZHEVSK EXPERIMENTAL-CONSTRUCTOR WORKS - PARTIAL SUCCESS
 	option = {
 		name = indrik.22.a
 		set_country_flag = WRS_INDRIK_2_PARTIAL_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_general_attack = 0.05 }
-		add_to_variable = { NIK_experimental_weapons_infantry_attack = 0.05 }
-		add_to_variable = { NIK_experimental_weapons_supply_consumption = 0.025 }
+		add_to_variable = { KOM_experimental_weapons_general_attack = 0.05 }
+		add_to_variable = { KOM_experimental_weapons_infantry_attack = 0.05 }
+		add_to_variable = { KOM_experimental_weapons_supply_consumption = 0.025 }
 		add_tech_bonus = {
 			bonus = 0.25
 			uses = 1
@@ -5548,8 +5573,8 @@ country_event = { #PROJECT URAGAN - SUCCESS
 	option = {
 		name = indrik.31.a
 		set_country_flag = WRS_INDRIK_3_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_general_attack = 0.075 }
-		add_to_variable = { NIK_experimental_weapons_supply_consumption = 0.05 }
+		add_to_variable = { KOM_experimental_weapons_general_attack = 0.075 }
+		add_to_variable = { KOM_experimental_weapons_supply_consumption = 0.05 }
 		add_tech_bonus = {
 			bonus = 1
 			uses = 2
@@ -5571,8 +5596,8 @@ country_event = { #PROJECT URAGAN - PARTIAL SUCCESS
 	option = {
 		name = indrik.32.a
 		set_country_flag = WRS_INDRIK_3_PARTIAL_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_general_attack = 0.025 }
-		add_to_variable = { NIK_experimental_weapons_supply_consumption = 0.05 }
+		add_to_variable = { KOM_experimental_weapons_general_attack = 0.025 }
+		add_to_variable = { KOM_experimental_weapons_supply_consumption = 0.05 }
 		add_tech_bonus = {
 			bonus = 1
 			uses = 1
@@ -5608,7 +5633,7 @@ country_event = { #PROJECT TSYSKLON - SUCCESS
 	id = indrik.41
 	immediate = {log = "[GetDateText]: [Root.GetName]: event indrik.41"}
 	title = indrik.41.t
-	desc = indrik.41.d 
+	desc = indrik.41.d
 	#picture = GFX_report_event_missle
 
 	is_triggered_only = yes
@@ -5666,9 +5691,9 @@ country_event = { #PROJECT SHCHUKA - PARTIAL SUCCESS
 	option = {
 		name = indrik.51.a
 		set_country_flag = WRS_INDRIK_5_PARTIAL_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_naval_speed = 0.1 }
-		add_to_variable = { NIK_experimental_weapons_naval_targeting = 0.15 }
-		add_to_variable = { NIK_experimental_weapons_submarine_searching = 0.15 }
+		add_to_variable = { KOM_experimental_weapons_naval_speed = 0.1 }
+		add_to_variable = { KOM_experimental_weapons_naval_targeting = 0.15 }
+		add_to_variable = { KOM_experimental_weapons_submarine_searching = 0.15 }
 		add_tech_bonus = {
 			bonus = 0.5
 			uses = 1
@@ -5749,7 +5774,7 @@ country_event = { #PROJECT LESHIY - PARTIAL SUCCESS
 	option = {
 		name = indrik.62.a
 		set_country_flag = WRS_INDRIK_6_PARTIAL_SUCCESS
-		add_to_variable = { NIK_experimental_weapons_general_attack = 0.05 }
+		add_to_variable = { KOM_experimental_weapons_general_attack = 0.05 }
 	}
 }
 
@@ -5816,18 +5841,6 @@ country_event = { #PROJECT FERMENT - FAILURE
 		add_political_power = -100
 		TNO_worsen_poverty_low = yes
 		WRS = {
-			865 = {
-				damage_building = {
-					type = arms_factory
-					damage = 1
-				}
-			}
-			865 = {
-				damage_building = {
-					type = infrastructure
-					damage = 1
-				}
-			}
 		}
 	}
 }
@@ -6027,7 +6040,7 @@ country_event = { #Apply for OFN aid - USA
 	option = {
 		name = zhukovregional.12.a
 		ai_chance = { factor = 2 }
-		add_to_variable = { misc_costs = 400 }
+		set_variable = { WRS_diplomatic_income = 0.4 }
 		diplomatic_relation = {
 			country = WSR
 			relation = docking_rights
@@ -6064,7 +6077,10 @@ country_event = { #Apply for OFN aid - Accepted
 
 	option = {
 		name = zhukovregional.13.a
-		add_to_variable = { misc_income = 400 }
+		hidden_effect = {
+			add_ideas = WRS_ofn_aid
+		}
+		custom_effect_tooltip = WRS_ofn_aid_add_tt
 		USA = { #Yes this has no effect because the US already has docking rights, this is just to show the player the effects
 			diplomatic_relation = {
 				country = WSR
@@ -6343,7 +6359,9 @@ country_event = { #Phasing out War Communism
 
 	option = {
 		name = zhukovregional.32.a
-		tno_economic_focus_worsen = yes
+		set_temp_variable = { gdp_growth_temp = 0.5 }
+		econ_gdp_growth_change = yes
+		#tno_economic_focus_worsen = yes
 	}
 }
 
@@ -6469,9 +6487,9 @@ country_event = { #Epilogue - Sacred War
 				picture = "Portrait_WRS_Mikhail_Tukhachevsky_70s.dds"
 				expire = "1999.1.1"
 				desc = "POLITICS_MIKHAIL_TUKHACHEVSKY_70S_DESC"
-				ideology = communist_subtype
+				ideology = communist_stratocratic_communism_subtype
 				traits = {
-					
+					the_red_bonaparte
 				}
 			}
 			TNO_russia_ending_screen = yes
@@ -6562,7 +6580,7 @@ country_event = { #Our Soviet Lineage
 
 	option = {
 		name = zhukovsuperregional.5.a
-		army_experience = 10
+		TNO_improve_training_policy_effectiveness_monthly_low = yes
 	}
 }
 
@@ -6628,7 +6646,7 @@ country_event = { #Delegate the Powers
 			popularity = 0.03
 		}
 		add_popularity = {
-			ideology = social_democrat
+			ideology = social_democracy
 			popularity = 0.03
 		}
 	}
@@ -6666,9 +6684,9 @@ country_event = { #Epilogue
 				picture = "Portrait_WRRF_Georgy_Zhukov_70s.dds"
 				expire = "1999.1.1"
 				desc = "POLITICS_GEORGY_ZHUKOV_70S_DESC"
-				ideology = communist_subtype
+				ideology = communist_bukharinism_subtype
 				traits = {
-					
+
 				}
 			}
 			TNO_russia_ending_screen = yes

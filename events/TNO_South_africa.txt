@@ -14,7 +14,7 @@ country_event = { #Referendum scheduled
 	option = { #
 		name = SAF.1.a
 		add_political_power = 25
-		hidden_effect = { SAF_initialize_referendum = yes }
+		#hidden_effect = { SAF_initialize_referendum = yes }
 	}
 }
 
@@ -35,10 +35,9 @@ country_event = { #Referendum results- republic
 		add_ideas = SAF_Boer_Viet_Cong #not the real name
 		custom_effect_tooltip = SAF_Boer_Resistance
 		hidden_effect = {
-		every_owned_state = {
-		limit = { check_variable = { SAF_monarchy_support < 50 } }
-		damage_building = { type = infrastructure damage = 0.8 }
-		damage_building = { type = arms_factory damage = 0.3 }
+			every_owned_state = {
+				limit = { check_variable = { SAF_monarchy_support < 50 } }
+				damage_building = { type = infrastructure damage = 0.8 }
 			}
 		}
 	}
@@ -58,9 +57,9 @@ country_event = { #Referendum results- monarchy
 	option = { #gamers rise up
 		name = SAF.3.a
 		add_political_power = 100
-		
-		}
+
 	}
+}
 
 country_event = { #Hidden event triggering the referendum results
 	id = SAF.4
@@ -72,7 +71,7 @@ country_event = { #Hidden event triggering the referendum results
 	is_triggered_only = yes
 	fire_only_once = yes
 	hidden = yes
-	immediate = { SAF_calculate_referendum_winner = yes }
+	#immediate = { SAF_calculate_referendum_winner = yes }
 
 	option = { #
 		name = SAF.4.a
@@ -91,20 +90,6 @@ country_event = { #Flavor event- monarchy - introduces player to support system
 
 	option = { #
 		name = SAF.5.a
-		custom_effect_tooltip = SAF_increase_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 1.0 }
-				round_variable = SAF_monarchy_support
-				clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
 	}
 }
 
@@ -120,44 +105,8 @@ country_event = { #Flavor event- ANC- introduces player to support system
 
 	option = { #
 		name = SAF.6.a
-		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 1.0 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
 	}
 }
-
-#country_event = { #ANC yes or no
-	#	id = SAF.7
-	#	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.7"}
-	#	title = SAF.7.t
-	#	desc = SAF.7.desc
-	#	#picture =
-	#
-	#	is_triggered_only = yes
-	#	fire_only_once = yes
-	#
-	#	option = { #yes
-		#		name = SAF.7.a
-		#		ai_chance = { factor = 2 }
-		#		set_country_flag = SAF_pro_anc
-		#	}
-	#	option = { #no
-		#		name = SAF.7.b
-		#		ai_chance = { factor = 1 }
-		#		set_country_flag = SAF_anti_anc
-		#	}
-	#}
 
 country_event = { #Debug load war tree
 	id = SAF.8
@@ -247,64 +196,17 @@ country_event = { #Reduced investigations
 		name = SAF.12.a
 		add_stability = 0.03
 		add_war_support = -0.03
-		custom_effect_tooltip = SAF_increase_monarchy_support_tt
-		every_owned_state = {
-			limit = { has_state_flag = SAF_election_state }
-			add_to_variable = { SAF_monarchy_support = 1 }
-			round_variable = SAF_monarchy_support
-						clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = 0.02 }
+		SAF_monarchy_support_change = yes
 	}
 	option = { #A lot21
 		name = SAF.12.b
 		add_stability = 0.03
 		add_war_support = 0.03
-		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 0.9 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.02 }
+		SAF_monarchy_support_change = yes
 	}
 }
-
-#country_event = { #Ban extremist organizations
-	#	id = SAF.13
-	#	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.13"}
-	#	title = SAF.13.t
-	#	desc = SAF.13.desc
-	#	#picture =
-	#
-	#	is_triggered_only = yes
-	#	fire_only_once = yes
-	#
-	#	option = { #Good riddance
-		#		name = SAF.13.a
-		#		add_popularity = {
-			#			ideology = fascism
-			#			popularity = -0.05
-			#		}
-		#		hidden_effect = {
-			#			country_event = {
-				#				id = SAF.17
-				#				days = 10
-				#			}
-			#		}
-		#	}
-	#}
 
 country_event = { #Africans in the civil service
 	id = SAF.14
@@ -322,23 +224,15 @@ country_event = { #Africans in the civil service
 		add_stability = -0.05
 		custom_effect_tooltip = SAF_poverty_tt
 		TNO_improve_poverty_high = yes #coded with a script
-		hidden_effect = {
-			1050 = { add_to_variable = {SAF_monarchy_support = 3}}
-			681 = { add_to_variable = {SAF_monarchy_support = 1}}
-			940 = { add_to_variable = {SAF_monarchy_support = -2}}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = 0.01 }
+		SAF_monarchy_support_change = yes
 	}
 	option = { #Take it slow
 		name = SAF.14.b
 		TNO_improve_poverty_high = yes #coded with a script
 		custom_effect_tooltip = SAF_poverty_less_tt
-		hidden_effect = { 1050 = { add_to_variable = {SAF_monarchy_support = 2}} }
-					clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
+		set_temp_variable = { SAF_monarchy_support_temp = 0.01 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -394,7 +288,7 @@ country_event = { #Boer denunciations
 	option = { #fuck you too
 		name = SAF.17.a
 		add_popularity = {
-			ideology = authoritarian_democrat
+			ideology = authoritarian_democracy
 			popularity = 0.05
 		}
 	}
@@ -656,7 +550,7 @@ country_event = { #success
 		name = SAF.28.a
 		add_stability = 0.05
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.03
 		}
 	}
@@ -676,7 +570,7 @@ country_event = { #failure
 		name = SAF.29.a
 		add_stability = -0.05
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = -0.03
 		}
 	}
@@ -715,7 +609,7 @@ country_event = { #Creating lists of notable ANC members
 		name = SAF.31.b
 		custom_effect_tooltip = econ_increase_debt_small
 		hidden_effect = {
-			add_to_variable = { national_debt = 10 }
+			add_to_variable = { national_debt = 0.010 }
 			random_list = {
 				50 = {
 					country_event = { #large success
@@ -756,7 +650,7 @@ country_event = { #small success
 			popularity = -0.03
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.05
 		}
 	}
@@ -791,20 +685,8 @@ country_event = { #large success
 	option = { #
 		name = SAF.34.a
 		add_stability = 0.08
-		custom_effect_tooltip = SAF_increase_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 1.1 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = 0.01 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -821,20 +703,8 @@ country_event = { #large failure
 	option = { #
 		name = SAF.35.a
 		add_stability = -0.1
-		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 0.9 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.05 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -864,7 +734,6 @@ country_event = { #Cape Town Massacre
 
 	immediate = {
 		hidden_effect = {
-
 			if = {
 				limit = { has_country_flag = SAF_anti_anc }
 
@@ -884,14 +753,13 @@ country_event = { #Cape Town Massacre
 			}
 			load_oob = SAF_War_Start
 
-			SAF_calculate_referendum_winner = yes
+			SAF_referendum_results = yes
 			SAF = {
 				SAW_rubberband_effect = yes
 				SAW_update_rubberband = yes
 				log = "[?GetName] SAF.SAW_surrender = [?THIS.SAW_surrender]"
 				add_dynamic_modifier = {
 					modifier = SAW_rubberband_dynmod_SAF
-					#modifier = SAW_demo_USA_support
 				}
 			}
 			USA = {
@@ -902,12 +770,12 @@ country_event = { #Cape Town Massacre
 					modifier = SAW_rubberband_dynmod_USA
 				}
 			}
-			MZB = {
+			GRO = {
 				SAW_rubberband_effect = yes
 				SAW_update_rubberband = yes
-				log = "[?GetName] MZB.SAW_surrender = [?THIS.SAW_surrender]"
+				log = "[?GetName] GRO.SAW_surrender = [?THIS.SAW_surrender]"
 				add_dynamic_modifier = {
-					modifier = SAW_rubberband_dynmod_MZB
+					modifier = SAW_rubberband_dynmod_GRO
 				}
 			}
 			ANG = {
@@ -963,7 +831,34 @@ country_event = { #ANC Revolts
 				transfer_state = 1049
 				transfer_state = 1050
 				inherit_technology = PREV
-				load_oob = ANC
+				add_dynamic_modifier = {modifier = ANC_SAW_buff}
+				SAF = {
+					if = {
+						limit = {
+							check_variable = { var = SAF_ANC_power < 25 }
+						}
+						ANC = { load_oob = ANC_strength_min }
+						else_if = {
+							limit = {
+								check_variable = { SAF_ANC_power < 50 }
+							}
+							ANC = { load_oob = ANC_strength_low }
+						}
+						else_if = {
+							limit = {
+								check_variable = { SAF_ANC_power < 75 }
+							}
+							ANC = { load_oob = ANC_strength_high }
+						}
+						else = {
+							ANC = { load_oob = ANC_strength_max }
+						}
+					}
+				}
+				hidden_effect = {
+					set_temp_variable = { TNO_economy_subtype_temp = 2 }
+					econ_subtype_change = yes
+				}
 			}
 			936 = {
 				add_core_of = ANC
@@ -1048,7 +943,7 @@ country_event = { #ANC Revolts
 				}
 				ANC = {
 					declare_war_on = {
-						target = MZB
+						target = GRO
 						type = annex_everything
 					}
 				}
@@ -1073,30 +968,77 @@ country_event = { #Boers Revolt
 					transfer_state = 1050
 				}
 			}
+			if = {
+				limit = { has_country_flag = SAF_pro_anc }
+				SAF = {
+					if = {
+						limit = {
+							check_variable = { SAF_ANC_power < 25 }
+						}
+						SAF = { load_oob = ANC_strength_min }
+						else_if = {
+							limit = {
+								check_variable = { SAF_ANC_power < 50 }
+							}
+							SAF = { load_oob = ANC_strength_low }
+						}
+						else_if = {
+							limit = {
+								check_variable = { SAF_ANC_power < 75 }
+							}
+							SAF = { load_oob = ANC_strength_high }
+						}
+						else = {
+							SAF = { load_oob = ANC_strength_max }
+						}
+					}
+				}
+			}
 			BOR = {
+				
 				transfer_state = 275
 				transfer_state = 939
 				transfer_state = 940
 				transfer_state = 938
 				transfer_state = 937
 				inherit_technology = PREV
-				load_oob = BOR
 				add_equipment_to_stockpile = {
 					type = infantry_equipment_0
 					amount = 15000
 					producer = SAF
 				}
+				add_dynamic_modifier = {modifier = BOR_SAW_buff}
+				add_dynamic_modifier = {modifier = BOR_RK_interference_dynamic_modifier}
+				SAF = {
+					if = {
+						limit = {
+							check_variable = { SAF_Boers_power < 25 }
+						}
+						BOR = { load_oob = BOR_strength_min }
+						else_if = {
+							limit = {
+								check_variable = { SAF_Boers_power < 50 }
+							}
+							BOR = { load_oob = BOR_strength_low }
+						}
+						else_if = {
+							limit = {
+								check_variable = { SAF_Boers_power < 75 }
+							}
+							BOR = { load_oob = BOR_strength_high }
+						}
+						else = {
+							BOR = { load_oob = BOR_strength_max }
+						}
+					}
+				}
 				if = { #armed_NP
 					limit = { has_global_flag = SAF_republic_won }
 					BOR = { load_oob = BOR_Ref_Wins }
 				}
-				if = { #armed_NP
-					limit = { has_global_flag = armed_NP }
-					BOR = {
-						add_offsite_building = {
-							type = arms_factory level = 5
-						}
-					}
+				hidden_effect = {
+					set_temp_variable = { TNO_economy_type_temp = 2 }
+					econ_type_change = yes
 				}
 			}
 			275 = {
@@ -1125,21 +1067,17 @@ country_event = { #Boers Revolt
 					days = 1
 				}
 			}
-			MZB = {
+			GRO = {
 				country_event = {
-					id = MZB.9
+					id = GRO.9
 					days = 7
 				}
-			}
-			ANG = {
-				country_event = {
-					id = ANG.83
-					days = 8
-				}
+				add_dynamic_modifier = {modifier = GRO_SAW_buff}
 			}
 			SAF = {
-				#country_event = { id = SAF.40 days = 21 }  #Join the South African war?
 				USA = { country_event = { id = USA.40 days = 21 } } #WALKER OF CHAOS WAS HERE AND REPLACED THE ABOVE WITH THIS TO TRY AND FIX SAF TREES LOADING IN PROPERLY
+
+				add_dynamic_modifier = {modifier = SAF_SAW_buff}
 
 				every_unit_leader = {
 					limit = {
@@ -1148,19 +1086,27 @@ country_event = { #Boers Revolt
 					set_nationality = BOR
 				}
 
+				country_lock_all_division_template = no
+
 				add_timed_idea = {
 					idea = SAF_surprise_attack
 					days = 60
 				}
 				load_focus_tree = SAF_war_tree
 
-				add_named_threat = {
-					threat = 5
-					name = threat.11.t
-				}
-				TNO_World_Tension_add_5 = yes
+				#add_named_threat = {
+				#	threat = 5
+				#	name = threat.11.t
+				#}
+			}
+			ANG = {
+				add_dynamic_modifier = {modifier = ANG_SAW_buff}
+			}
+			COG = {
+				add_dynamic_modifier = {modifier = COG_SAW_buff}
 			}
 			clr_country_flag = SAF_referendum_decisions
+			remove_ideas = SAF_Desperate_Neutrality
 		}
 	}
 
@@ -1184,10 +1130,10 @@ country_event = { #Boers Revolt
 				}
 			}
 			BOR = {
-				country_event = { id = MZB.15 days = 4 }
+				country_event = { id = GRO.15 days = 4 }
 			}
-			MZB = {
-				country_event = { id = MZB.16 days = 4 }
+			GRO = {
+				country_event = { id = GRO.16 days = 4 }
 			}
 		}
 	}
@@ -1222,20 +1168,19 @@ country_event = { # US Joins the War
 			}
 		}
 		hidden_effect = {
-			SAF = {
-				add_named_threat = {
-					threat = 25
-					name = threat.10.t
-				}
-				TNO_World_Tension_add_25 = yes
-			}
+			#SAF = {
+			#	add_named_threat = {
+			#		threat = 25
+			#		name = threat.10.t
+			#	}
+			#}
 			ANG = {
 				add_ideas = ANG_USN_Blockade
 			}
 			COG = {
 				add_ideas = ANG_USN_Blockade
 			}
-			MZB = {
+			GRO = {
 				add_ideas = ANG_USN_Blockade
 			}
 		}
@@ -1249,7 +1194,7 @@ country_event = { # OFN Summit Called
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.41"}
 	title = SAF.41.t
 	desc = SAF.41.desc
-	#picture =
+		#picture =
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1384,7 +1329,7 @@ country_event = { # 6 Fleet
 				days = 5
 			}
 		}
-		MZB = {
+		GRO = {
 			country_event = {
 				id = SAF.155
 				days = 5
@@ -1407,8 +1352,6 @@ country_event = { # Humanitarian Aid
 		name = SAF.46.a
 		add_political_power = -75
 		SAF = {
-			add_offsite_building = { type = arms_factory level = 3 }
-			add_offsite_building = { type = industrial_complex level = 1 }
 		}
 	}
 
@@ -1416,7 +1359,6 @@ country_event = { # Humanitarian Aid
 		name = SAF.46.b
 		add_political_power = -25
 		SAF = {
-			add_offsite_building = { type = arms_factory level = 2 }
 		}
 	}
 }
@@ -1524,7 +1466,7 @@ country_event = { #Sell guns?
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.51"}
 	title = SAF.51.t
 	desc = SAF.51.desc
-	#picture =
+	picture = GFX_report_event_guns_rifles_fal
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1713,41 +1655,6 @@ country_event = { # Pointless event
 	}
 }
 
-country_event = { #   Santa Maria Affair, Start of Iberian Content
-	id = SAF.60
-	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.60"}
-	title = SAF.60.t
-	desc = SAF.60.desc
-	trigger = { date > 1964.3.1}
-	picture = GFX_report_event_cog_boat
-
-
-	fire_only_once = yes
-
-	option = { # We Will Help them
-		name = SAF.60.a
-		add_political_power = 75
-		add_manpower = -500
-		add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = -500
-		}
-		SAF = {
-			country_event = {
-				id = SAF.61
-				days = 3
-			}
-		}
-
-
-
-	}
-	option = { # We Can't get Distracted
-		name = SAF.60.b
-
-	}
-}
-
 country_event = { # US Marines Assault Santa Maria
 	id = SAF.61
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.61"}
@@ -1869,14 +1776,7 @@ country_event = { # Angola Bombing
 	}
 	option = { #
 		name = SAF.66.a
-		ANG = {
-			1035 = {
-				damage_building = {
-					type = arms_factory
-					damage = 3
-				}
-			}
-		}
+
 	}
 }
 
@@ -1897,7 +1797,7 @@ country_event = { #  Cançao dos Desertores
 			add_war_support = -0.05
 		}
 
-		MZB = {
+		GRO = {
 			add_manpower = -5000
 			add_war_support = -0.05
 		}
@@ -1920,7 +1820,7 @@ country_event = { #  Nurses rescue someone
 	option = { #
 		name = SAF.68.a
 
-		MZB = {
+		GRO = {
 			add_manpower = 3000
 			add_war_support = 0.03
 		}
@@ -2559,12 +2459,9 @@ country_event = { # ###### Mandela is Arrested
 	option = { # Throw Away the key
 		name = SAF.103.a
 		ai_chance = { factor = 1 }
-		SAF = {
-			add_stability = -0.1
-			add_political_power = 50
-
-		}
-
+		add_stability = -0.1
+		add_political_power = 50
+		TNO_improve_minorities_policy_effectiveness_low = yes
 	}
 
 }
@@ -2699,23 +2596,11 @@ country_event = { #  Robben Island
 		}
 
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.05
 		}
-		custom_effect_tooltip = SAF_increase_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 1.1 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = 0.01 }
+		SAF_monarchy_support_change = yes
 	}
 
 }
@@ -2738,7 +2623,7 @@ country_event = { #  Raid on Bussiness
 	option = { #   Raid on African Bussiness ##### Remove ANC Factory
 		name = SAF.108.b
 		ai_chance = { factor = 1 }
-			hidden_effect = {
+		hidden_effect = {
 			country_event = {
 				id = SAF.109
 				days = 5
@@ -2766,11 +2651,11 @@ country_event = { #  German Major arrested in ANC Bank Raid
 			limit = { has_state_flag = SAF_election_state }
 			multiply_variable = { SAF_monarchy_support = 1.1 }
 			round_variable = SAF_monarchy_support
-						clamp_variable = {
+			clamp_variable = {
 				var = SAF_monarchy_support
 				min = 1
 				max = 100
-}
+			}
 
 		}
 	}
@@ -2850,7 +2735,7 @@ country_event = { # Small Success
 			popularity = -0.03
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.05
 		}
 
@@ -2881,7 +2766,7 @@ country_event = { # Small Failure
 			popularity = 0.01
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = -0.02
 		}
 
@@ -2913,23 +2798,11 @@ country_event = { # Big Success
 			popularity = -0.06
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.1
 		}
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 1.1 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
-
+		set_temp_variable = { SAF_monarchy_support_temp = 0.03 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -2958,22 +2831,11 @@ country_event = { # Big Failure
 			popularity = 0.08
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = -0.1
 		}
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 0.9 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.05 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -2995,23 +2857,12 @@ country_event = { #  Bram Fischer is arrested
 			popularity = -0.1
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.15
 		}
 		add_stability = -0.05
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 1.1 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = 0.02 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -3085,7 +2936,7 @@ country_event = { #  Church Terror attacks
 			popularity = 0.1
 		}
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.03
 		}
 		add_stability = -0.05
@@ -3171,26 +3022,16 @@ country_event = { # Sit down with Tambo
 		add_stability = 0.05
 		add_war_support = -0.03
 		add_political_power = -50
+		TNO_worsen_minorities_policy_effectiveness_low = yes
 	}
 	option = { #  Form a Compromise
 		name = SAF.122.b
 		add_stability = 0.05
 		add_war_support = 0.03
 		add_political_power = -50
-		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 0.9 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.025 }
+		SAF_monarchy_support_change = yes
+		TNO_worsen_minorities_policy_effectiveness_med = yes
 	}
 }
 
@@ -3211,7 +3052,7 @@ country_event = { # Nelson Mandela is Free
 
 		add_stability = 0.1
 		add_political_power = 50
-
+		TNO_worsen_minorities_policy_effectiveness_low = yes
 	}
 }
 
@@ -3265,14 +3106,14 @@ country_event = { # Royal African Rifles
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	option = { #
+	option = { # conventional warfare
 		name = SAF.126.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
 			load_oob = SAF_RAR_Big
 		}
 	}
-	option = { #
+	option = { # counter-insurgency warfare
 		name = SAF.126.b
 		ai_chance = { factor = 1 }
 		hidden_effect = {
@@ -3300,10 +3141,10 @@ country_event = { #  Buthelezi call
 		name = SAF.127.a
 		ai_chance = { factor = 1 }
 		add_popularity = {
-			ideology = social_conservative
+			ideology = conservative_democracy
 			popularity = 0.1
 		}
-
+		TNO_improve_minorities_policy_effectiveness_low = yes
 	}
 }
 
@@ -3369,6 +3210,7 @@ country_event = { # Commando Problem
 		ai_chance = { factor = 1 }
 		add_to_variable = {Stay_Behind = -1}
 		set_country_flag = Commandos_closed
+		add_war_support = -0.02
 	}
 	option = { #
 		name = SAF.130.b
@@ -3383,8 +3225,7 @@ country_event = { # Commando Problem
 			amount = 400
 			producer = USA
 		}
-
-
+		add_stability = -0.02
 	}
 }
 
@@ -3404,13 +3245,13 @@ country_event = { # Votes on the Vote
 
 		tno_vote_franchise_clear = yes
 		add_ideas = tno_vote_franchise_universal
+		set_variable = { tno_vote_franchise_effectiveness = 60 }
 		hidden_effect = {
 			country_event = {
 				id = SAF.132
 				days = 3
 			}
 		}
-
 	}
 }
 
@@ -3469,20 +3310,8 @@ country_event = { # Victory
 		name = SAF.133.a
 		ai_chance = { factor = 1 }
 
-		custom_effect_tooltip = SAF_increase_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 1.5 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = 0.05 }
+		SAF_monarchy_support_change = yes
 
 	}
 }
@@ -3503,19 +3332,8 @@ country_event = { # Defeat
 		ai_chance = { factor = 1 }
 		add_manpower = -36
 		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			every_owned_state = {
-				limit = { has_state_flag = SAF_election_state }
-				multiply_variable = { SAF_monarchy_support = 0.8 }
-				round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.075 }
+		SAF_monarchy_support_change = yes
 
 	}
 }
@@ -3571,22 +3389,8 @@ country_event = { # Cape town posters
 		ai_chance = { factor = 1 }
 		add_political_power = -50
 
-		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			681 = {
-				if = {
-					limit = { has_state_flag = SAF_election_state }
-					multiply_variable = { SAF_monarchy_support = 0.99 }
-					round_variable = SAF_monarchy_support
-								clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-				}
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.01 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -3605,22 +3409,8 @@ country_event = { # March Against Imperialism
 		ai_chance = { factor = 1 }
 		add_political_power = -50
 
-		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			940 = { #Transvaal
-				if = {
-					limit = { has_state_flag = SAF_election_state }
-					multiply_variable = { SAF_monarchy_support = 0.99 }
-					round_variable = SAF_monarchy_support
-								clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-				}
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.01 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
@@ -3638,26 +3428,12 @@ country_event = { # Activists Harassed
 		ai_chance = { factor = 1 }
 		add_political_power = -50
 
-		custom_effect_tooltip = SAF_decrease_monarchy_support_tt
-		hidden_effect = {
-			275 = { #Transvaal
-				if = {
-					limit = { has_state_flag = SAF_election_state }
-					multiply_variable = { SAF_monarchy_support = 0.99 }
-					round_variable = SAF_monarchy_support
-							clamp_variable = {
-				var = SAF_monarchy_support
-				min = 1
-				max = 100
-}
-
-				}
-			}
-		}
+		set_temp_variable = { SAF_monarchy_support_temp = -0.01 }
+		SAF_monarchy_support_change = yes
 	}
 }
 
-country_event = { #Referendum scheduled
+country_event = { #DEBUG EVENT
 	id = SAF.999999
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SAF.1"}
 	title = SAF.1.t
@@ -3670,10 +3446,10 @@ country_event = { #Referendum scheduled
 	option = { #
 		name = SAF.999999.a
 		load_focus_tree = SAF_war_tree
+		set_temp_variable = { SAF_Boers_power_temp = -0.05 }
+		SAF_Boers_power_change = yes
 	}
 }
-
-
 
 ###################################################################
 ################################################################## Flavor bellow
@@ -3686,7 +3462,7 @@ country_event = { # Queen's Birthday
 	title = SAF.139.t
 	desc = SAF.139.desc
 	picture = GFX_report_event_queen_lizzy
-	trigger = { 
+	trigger = {
 		date > 1964.4.21
 		tag = SAF
 	}
@@ -3715,10 +3491,24 @@ country_event = { # Queen's Crowning
 		name = SAF.143.a
 		hidden_effect = {
 			remove_ideas = SAF_The_Empty_Throne
-			news_event = {
-				id = DEMOWORLDEVENT.144
-				days = 1
-			}
+			set_country_flag = TNO_closing_screen_show
+		}
+	}
+}
+
+country_event = { # Republic Epilogue
+	id = SAF.157
+	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.157" }
+	title = SAF.157.t
+	desc = SAF.157.desc
+	picture = GFX_Radio_Mic
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #
+		name = SAF.157.a
+		hidden_effect = {
+			set_country_flag = TNO_closing_screen_show
 		}
 	}
 }
@@ -3818,7 +3608,7 @@ country_event = { # Anglo Tricks
 
 	option = { #
 		name = SAF.145.a
-		MZB = {
+		GRO = {
 			add_manpower = -1000
 		}
 	}
@@ -3845,7 +3635,7 @@ country_event = { # Africa Addio SAF
 	option = { #
 		name = SAF.146.a
 		hidden_effect = {
-			MZB = {
+			GRO = {
 				country_event = {
 					id = SAF.147
 					days = 15
@@ -3868,7 +3658,7 @@ country_event = { # Africa Addio SAF
 }
 
 
-country_event = { # Africa Addio MZB
+country_event = { # Africa Addio GRO
 	id = SAF.147
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.147" }
 	title = SAF.147.t
@@ -4023,7 +3813,7 @@ country_event = { #RKs learn of USN presence
 	option = { #
 		name = SAF.155.a
 		ai_chance = { factor = 1 }
-		MZB = {
+		GRO = {
 			add_ideas = ANG_USN_Blockade
 		}
 		COG = {
@@ -4034,7 +3824,7 @@ country_event = { #RKs learn of USN presence
 		}
 	}
 }
-	
+
 country_event = { #Valor Above All
 	id = SAF.156
 	immediate = { log = "[GetDateText]: [Root.GetName]: event SAF.156" }
@@ -4054,4 +3844,179 @@ country_event = { #Valor Above All
 
 	}
 
+}
+
+country_event = {
+	id = SAF.200
+	title = SAF.200.t
+	desc = SAF.200.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = SAF_GUI_first_button_cooldown
+	}
+
+	option = {
+		name = SAF.200.a
+		country_event = { id = SAF.201 days = 120 }
+	}
+}
+
+country_event = {
+	id = SAF.201
+	title = SAF.201.t
+	desc = SAF.201.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = SAF_GUI_first_button_cooldown
+	}
+
+	option = {
+		name = SAF.201.a
+	}
+}
+
+country_event = {
+	id = SAF.202
+	title = SAF.202.t
+	desc = SAF.202.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = SAF_GUI_second_button_cooldown
+	}
+
+	option = {
+		name = SAF.202.a
+		country_event = { id = SAF.203 days = 200 }
+	}
+}
+
+country_event = {
+	id = SAF.203
+	title = SAF.203.t
+	desc = SAF.203.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = SAF_GUI_second_button_cooldown
+	}
+
+	option = {
+		name = SAF.203.a
+	}
+}
+
+country_event = {
+	id = SAF.204
+	title = SAF.204.t
+	desc = SAF.204.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = SAF_GUI_third_button_cooldown
+	}
+
+	option = {
+		name = SAF.204.a
+		country_event = { id = SAF.205 days = 240 }
+	}
+}
+
+country_event = {
+	id = SAF.205
+	title = SAF.205.t
+	desc = SAF.205.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = SAF_GUI_third_button_cooldown
+	}
+
+	option = {
+		name = SAF.205.a
+	}
+}
+
+country_event = {
+	id = SAF.206
+	title = SAF.206.t
+	desc = SAF.206.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = SAF_GUI_ANC_button_cooldown
+	}
+
+	option = {
+		name = SAF.206.a
+		country_event = { id = SAF.207 days = 60 }
+	}
+}
+
+country_event = {
+	id = SAF.207
+	title = SAF.207.t
+	desc = SAF.207.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = SAF_GUI_ANC_button_cooldown
+	}
+
+	option = {
+		name = SAF.207.a
+	}
+}
+
+country_event = {
+	id = SAF.208
+	title = SAF.208.t
+	desc = SAF.208.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = SAF_GUI_Boers_button_cooldown
+	}
+
+	option = {
+		name = SAF.208.a
+		country_event = { id = SAF.209 days = 60 }
+	}
+}
+
+country_event = {
+	id = SAF.209
+	title = SAF.209.t
+	desc = SAF.209.d
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = SAF_GUI_Boers_button_cooldown
+	}
+
+	option = {
+		name = SAF.209.a
+	}
 }
