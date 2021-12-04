@@ -1,0 +1,2800 @@
+### Stolen from the BattleForItaly :heart: ###
+
+BFI_setup_influence = {
+	ITA = {
+		set_variable = { BFI_italy_Balance = 33 }
+		set_variable = { BFI_usa_Balance = 33 }
+		set_variable = { BFI_japan_Balance = 33 }
+		BattleForItalyTangle_calcXY = yes
+		set_variable = { bfi_issues_complete = 0 }
+		set_country_flag = bfi_active
+		set_country_flag = bfi_ita_select_issue_flag
+	}
+	USA = {	set_variable = { bfi_points_available = 3 } }
+	JAP = {	set_variable = { bfi_points_available = 3 } }
+	USA = {	set_variable = { bfi_point_next_issue = 2 } }
+	JAP = {	set_variable = { bfi_point_next_issue = 2 } }
+	set_variable = { global.bfi_issues_resolved = 0 }
+	set_variable = { global.bfi_us_commitment = 0 }
+	set_variable = { global.bfi_japan_commitment = 0 }
+	USA = {set_variable = { bfi_negotiation_level = -1 } }
+	JAP = {set_variable = { bfi_negotiation_level = -1 } }
+	ITA = {set_variable = { bfi_negotiation_level = -1 } }
+	ITA = {set_variable = { bfi_current_issue = 0 } }
+
+	ITA = { activate_mission = bfi_pick_issue_mission }
+	ITA = {
+		add_to_array = {
+			array = BFI_investment_selected
+			value = -1
+			index = 0
+		}
+		resize_array = {
+			array = BFI_investment_selected
+			value = -1
+			size = 16
+		}
+	}
+	USA = {
+		add_to_array = {
+			array = BFI_investment_selected
+			value = -1
+			index = 0
+		}
+		resize_array = {
+			array = BFI_investment_selected
+			value = -1
+			size = 16
+		}
+	}
+	JAP = {
+		add_to_array = {
+			array = BFI_investment_selected
+			value = -1
+			index = 0
+		}
+		resize_array = {
+			array = BFI_investment_selected
+			value = -1
+			size = 16
+		}
+	}
+}
+
+BFI_increase_italy_influence_low = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = 1 }
+		add_to_variable = { BFI_usa_Balance = -0.5 }
+		add_to_variable = { BFI_japan_Balance = -0.5 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+BFI_increase_italy_influence_med = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = 2 }
+		add_to_variable = { BFI_usa_Balance = -1 }
+		add_to_variable = { BFI_japan_Balance = -1 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+BFI_increase_italy_influence_high = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = 5 }
+		add_to_variable = { BFI_usa_Balance = -2.5 }
+		add_to_variable = { BFI_japan_Balance = -2.5 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+
+BFI_increase_japan_influence_low = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = -0.5 }
+		add_to_variable = { BFI_usa_Balance = -0.5 }
+		add_to_variable = { BFI_japan_Balance = 1 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+BFI_increase_japan_influence_med = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = -1 }
+		add_to_variable = { BFI_usa_Balance = -1 }
+		add_to_variable = { BFI_japan_Balance = 2 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+BFI_increase_japan_influence_high = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = -2.5 }
+		add_to_variable = { BFI_usa_Balance = -2.5 }
+		add_to_variable = { BFI_japan_Balance = 5 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+
+BFI_increase_usa_influence_low = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = -0.5 }
+		add_to_variable = { BFI_usa_Balance = 1 }
+		add_to_variable = { BFI_japan_Balance = -0.5 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+BFI_increase_usa_influence_med = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = -1 }
+		add_to_variable = { BFI_usa_Balance = 2 }
+		add_to_variable = { BFI_japan_Balance = -1 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+BFI_increase_usa_influence_high = {
+	ITA = {
+		add_to_variable = { BFI_italy_Balance = -2.5 }
+		add_to_variable = { BFI_usa_Balance = 5 }
+		add_to_variable = { BFI_japan_Balance = -2.5 }
+		BattleForItalyTangle_calcXY = yes
+	}
+}
+
+# This normalizes the variables
+BFI_clamp_influences = {
+	ITA = {
+		if = {
+			limit = { check_variable = { BFI_usa_Balance < 0 } }
+			set_variable = { BFI_usa_Balance = 0 }
+		}
+		if = {
+			limit = { check_variable = { BFI_japan_Balance < 0 } }
+			set_variable = { BFI_japan_Balance = 0 }
+		}
+		if = {
+			limit = { check_variable = { BFI_italy_Balance < 0 } }
+			set_variable = { BFI_italy_Balance = 0 }
+		}
+
+		## Temp Variable Definition
+		# ABC = A+B+C
+		set_temp_variable = { ABC = BFI_usa_Balance }
+		add_to_temp_variable = { ABC = BFI_japan_Balance }
+		add_to_temp_variable = { ABC = BFI_italy_Balance }
+
+		divide_temp_variable = { ABC = 99 }
+		divide_variable = { BFI_usa_Balance = ABC }
+		divide_variable = { BFI_japan_Balance = ABC }
+		divide_variable = { BFI_italy_Balance = ABC }
+	}
+}
+
+# BattleForItalyTangle calcXY
+#  - Calculates the x & y values used by BattleForItalyTangle to set the location of it's point
+#  - The Equation is the following;
+
+BattleForItalyTangle_calcXY = {
+	ITA = {
+		BFI_clamp_influences = yes
+
+		## Temp Variable Definition
+		# Done to make life a bit easier
+		set_temp_variable = { A = BFI_usa_Balance }
+		set_temp_variable = { B = BFI_japan_Balance }
+		set_temp_variable = { C = BFI_italy_Balance }
+		# ABC = A+B+C
+		set_temp_variable = { ABC = A }
+		add_to_temp_variable = { ABC = B }
+		add_to_temp_variable = { ABC = C }
+
+		## Calc X
+		# 1/2 * ((B-A)/(A+B+C))
+		set_variable = { BattleForItalyTangle_X = B }
+		subtract_from_variable = { BattleForItalyTangle_X = A }
+		divide_variable = { BattleForItalyTangle_X = ABC }	#A+B+C
+
+		## Calc Y
+		# sqrt(3)/2 * ((C)/(A+B+C))
+		set_variable = { BattleForItalyTangle_Y = C }
+		divide_variable = { BattleForItalyTangle_Y = ABC }	#A+B+C
+
+		## Scaling
+		# The above calculates the x and y values for a triangle contained in a 1x1 square,
+		# that's not per se how large the end triangle will be.
+		# So, we scale it up. We can do so by just multiplying x & y by some scale.
+		multiply_variable = { BattleForItalyTangle_X = 217 }
+		multiply_variable = { BattleForItalyTangle_Y = 375 }
+		multiply_variable = { BattleForItalyTangle_Y = -1 }
+		add_to_variable = { BattleForItalyTangle_Y = 395 } # Account for initial Y-pos
+		add_to_variable = { BattleForItalyTangle_X = 250 } # Account for initial X-pos
+	}
+}
+
+BFI_issue_winner_usa = {
+	if = { # Italy drifts towards independence, but closer to your faction
+		limit = {
+			check_variable = { USA.bfi_negotiation_level = 1 }
+		}
+		set_temp_variable = { double_negotiation_level = bfi_negotiation_level } # Effect depends on how much italy put value
+		multiply_temp_variable = { double_negotiation_level = 2 }
+
+		add_to_variable = { BFI_italy_Balance = bfi_negotiation_level }
+		add_to_variable = { BFI_usa_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_japan_Balance = double_negotiation_level }
+	}
+	else_if = { # Italy's independence does not chance, but drifts closer to your faction.
+		limit = {
+			check_variable = { USA.bfi_negotiation_level = 2 }
+		}
+		add_to_variable = { BFI_usa_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_japan_Balance = bfi_negotiation_level }
+	}
+	else_if = { # Italy's independence goes down at a fantastic rate, only so it can drift closer to your faction.
+		limit = { # Both 3 and 5 do the smae
+			OR = {
+				check_variable = { USA.bfi_negotiation_level = 3 }
+				check_variable = { USA.bfi_negotiation_level = 5 }
+			}
+		}
+		set_temp_variable = { double_negotiation_level = bfi_negotiation_level } # Effect depends on how much italy put value
+		multiply_temp_variable = { double_negotiation_level = 2 }
+
+		add_to_variable = { BFI_usa_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_japan_Balance = bfi_negotiation_level }
+
+		add_to_variable = { BFI_usa_Balance = double_negotiation_level }
+		subtract_from_variable = { BFI_italy_Balance = double_negotiation_level }
+	}
+	else_if = {
+		limit = {
+			check_variable = { USA.bfi_negotiation_level = 4 } # Italy's independence goes down at a fantastic rate, only so it can drift closer to your faction.
+		}
+		set_temp_variable = { double_negotiation_level = bfi_negotiation_level } # Effect depends on how much italy put value
+		multiply_temp_variable = { double_negotiation_level = 2 }
+
+		add_to_variable = { BFI_usa_Balance = double_negotiation_level }
+		subtract_from_variable = { BFI_japan_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_italy_Balance = bfi_negotiation_level }
+	}
+}
+
+BFI_issue_winner_jap = {
+	if = { # Italy drifts towards independence, but closer to your faction
+		limit = {
+			check_variable = { JAP.bfi_negotiation_level = 1 }
+		}
+		set_temp_variable = { double_negotiation_level = bfi_negotiation_level } # Effect depends on how much italy put value
+		multiply_temp_variable = { double_negotiation_level = 2 }
+
+		add_to_variable = { BFI_italy_Balance = bfi_negotiation_level }
+		add_to_variable = { BFI_japan_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_usa_Balance = double_negotiation_level }
+	}
+	else_if = { # Italy's independence does not chance, but drifts closer to your faction.
+		limit = {
+			check_variable = { JAP.bfi_negotiation_level = 2 }
+		}
+		add_to_variable = { BFI_japan_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_usa_Balance = bfi_negotiation_level }
+	}
+	else_if = { # Italy's independence goes down at a fantastic rate, only so it can drift closer to your faction.
+		limit = { # Both 3 and 5 do the smae
+			OR = {
+				check_variable = { JAP.bfi_negotiation_level = 3 }
+				check_variable = { JAP.bfi_negotiation_level = 5 }
+			}
+		}
+		set_temp_variable = { double_negotiation_level = bfi_negotiation_level } # Effect depends on how much italy put value
+		multiply_temp_variable = { double_negotiation_level = 2 }
+
+		add_to_variable = { BFI_japan_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_usa_Balance = bfi_negotiation_level }
+
+		add_to_variable = { BFI_japan_Balance = double_negotiation_level }
+		subtract_from_variable = { BFI_italy_Balance = double_negotiation_level }
+	}
+	else_if = {
+		limit = {
+			check_variable = { JAP.bfi_negotiation_level = 4 } # Italy's independence goes down at a fantastic rate, only so it can drift closer to your faction.
+		}
+		set_temp_variable = { double_negotiation_level = bfi_negotiation_level } # Effect depends on how much italy put value
+		multiply_temp_variable = { double_negotiation_level = 2 }
+
+		add_to_variable = { BFI_japan_Balance = double_negotiation_level }
+		subtract_from_variable = { BFI_usa_Balance = bfi_negotiation_level }
+		subtract_from_variable = { BFI_italy_Balance = bfi_negotiation_level }
+	}
+}
+
+BFI_issue_winner_ita = {
+	set_temp_variable = { double_negotiation_level = bfi_negotiation_level } # Effect depends on how much italy put value
+	multiply_temp_variable = { double_negotiation_level = 2 }
+
+	add_to_variable = { BFI_italy_Balance = double_negotiation_level }
+	subtract_from_variable = { BFI_usa_Balance = bfi_negotiation_level }
+	subtract_from_variable = { BFI_japan_Balance = bfi_negotiation_level }
+}
+
+#this code checks who won by figuring out if the point falls within either the US or Japan triangles
+BFI_calculate_issue_winner = {
+	add_to_variable = { bfi_negotiation_level = 1 } #Makes the range of results bigger, from 1-5 to 2-6
+	if = {
+		limit = {
+			check_variable = { USA.bfi_negotiation_level > JAP.bfi_negotiation_level }
+		}
+		BFI_issue_winner_usa = yes
+		ITA = { country_event = BFI.31 }
+		USA = { country_event = BFI.31 }
+		JAP = { country_event = BFI.31 }
+		} else_if = {
+		limit = {
+			check_variable = { JAP.bfi_negotiation_level > USA.bfi_negotiation_level }
+		}
+		BFI_issue_winner_jap = yes
+		ITA = { country_event = BFI.32 }
+		USA = { country_event = BFI.32 }
+		JAP = { country_event = BFI.32 }
+		} else = {
+		BFI_issue_winner_ita = yes
+		ITA = { country_event = BFI.30 }
+		USA = { country_event = BFI.30 }
+		JAP = { country_event = BFI.30 }
+	}
+	BattleForItalyTangle_calcXY = yes
+}
+
+BFI_Italy_joins_winner = {
+    if = {
+		limit = {
+			has_game_rule = {
+				rule = ITA_battle_for_italy
+				option = ITA_BATTLE_FOR_ITALY_OFN
+			}
+		}
+		country_event = { id = BFI.9 days = 2 } #OFN
+	}
+	else_if = {
+		limit = {
+			has_game_rule = {
+				rule = ITA_battle_for_italy
+				option = ITA_BATTLE_FOR_ITALY_CPS
+			}
+		}
+		country_event = { id = BFI.12 days = 2 } #CPS
+	}
+	else_if = {
+		limit = {
+			has_game_rule = {
+				rule = ITA_battle_for_italy
+				option = ITA_BATTLE_FOR_ITALY_ALONE
+			}
+		}
+		country_event = { id = BFI.15 days = 2 } #No one
+	}
+	else_if = {
+		limit = { has_global_flag = BFI_USA_Winning }
+		country_event = { id = BFI.9 days = 2 } #OFN
+	}
+	else_if = {
+		limit = { has_global_flag = BFI_Japan_Winning }
+		country_event = { id = BFI.12 days = 2 } #CPS
+	}
+	else = {
+		country_event = { id = BFI.15 days = 2 } #No one
+	}
+}
+
+BattleForItaly_checkWinner = {
+	if = {
+		limit = { check_variable = { BFI_usa_Balance > 50 } }
+		set_global_flag = BFI_USA_Winning
+		} else_if = {
+		limit = { check_variable = { BFI_japan_Balance > 50 } }
+		set_global_flag = BFI_Japan_Winning
+		} else = {
+		set_global_flag = BFI_No_One_Winning
+	}
+}
+
+# Independent from scopes
+BFI_italian_american_party_boost = {
+	if = {
+		limit = {
+			ITA = {
+				OR = {
+					has_government = socialist
+					has_government = social_democracy
+					has_government = authoritarian_democracy
+				}
+			}
+		}
+		USA = {
+			hidden_effect = {
+				every_owned_state = {
+					limit = { can_have_elections_in_state = yes }
+
+					subtract_from_variable = { RD_popularity = 0.02}
+					add_to_variable = { NPP_popularity = 0.02}
+				}
+				every_owned_state = {
+					limit = {
+						can_have_elections_in_state = yes
+						check_variable = { nationality = 82 }
+					}
+
+					subtract_from_variable = { RD_popularity = 0.02}
+					add_to_variable = { NPP_popularity = 0.02}
+				}
+			}
+			custom_effect_tooltip = BFI_USA_NPP_popularity_italians_increase_tt
+		}
+	}
+	if = {
+		limit = {
+			ITA = {
+				has_government = liberal_democracy
+				has_government = conservative_democracy
+			}
+		}
+		USA = {
+			hidden_effect = {
+				every_owned_state = {
+					limit = { can_have_elections_in_state = yes }
+
+					add_to_variable = { RD_popularity = 0.02}
+					subtract_from_variable = { NPP_popularity = 0.02}
+				}
+				every_owned_state = {
+					limit = {
+						can_have_elections_in_state = yes
+						check_variable = { nationality = 82 }
+					}
+
+					add_to_variable = { RD_popularity = 0.02}
+					subtract_from_variable = { NPP_popularity = 0.02}
+				}
+			}
+		}
+		custom_effect_tooltip = BFI_USA_RD_popularity_italians_increase_tt
+	}
+}
+
+# Must be called from ITA scope
+BFI_italy_joins_OFN = {
+	USA = { add_to_faction = ITA }
+	add_to_array = { global.OFN_members = ITA }
+	add_ideas = OFN_Independent_Member
+
+	every_country = {
+		limit = {
+			is_subject_of = ITA
+		}
+		add_to_array = { global.OFN_members = THIS }
+		remove_faction_status = yes
+		add_ideas = OFN_Independent_Member
+	}
+
+	USA = {
+		set_temp_variable = { Victory_ID = 6 }
+		set_temp_variable = { Victory_Outcome = 4 }
+		set_temp_variable = { Victory_Points = 100 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+	JAP = {
+		set_temp_variable = { Victory_ID = 6 }
+		set_temp_variable = { Victory_Outcome = 2 }
+		set_temp_variable = { Victory_Points = -100 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+
+	# Italian econ sphere will still be kept
+	
+	# Italy Variables
+	set_variable = { BFI_OFN_stability = 0 }
+	set_variable = { BFI_OFN_pp_gain = 0 }
+	set_variable = { BFI_OFN_trade_opinion = 0 }
+	set_variable = { BFI_OFN_unit_defence = 0 }
+	set_variable = { BFI_OFN_war_support = 0 }
+	set_variable = { BFI_OFN_entrenchment = 0 }
+	set_variable = { BFI_OFN_research_speed = 0 }
+	set_variable = { BFI_OFN_xp_gain_factor = 0 }
+	set_variable = { BFI_OFN_army_org = 0 }
+	set_variable = { BFI_OFN_xp_gain = 0 }
+	set_variable = { BFI_OFN_attrition = 0 }
+	set_variable = { BFI_OFN_encryption_factor = 0 }
+	set_variable = { BFI_OFN_decryption_factor = 0 }
+	set_variable = { BFI_OFN_industrial_equipment = 0 }
+	set_variable = { BFI_OFN_industrial_expertise = 0 }
+	set_variable = { BFI_OFN_research_facilities = 0 }
+	set_variable = { BFI_OFN_academic_base = 0 }
+	set_variable = { BFI_OFN_agriculture = 0 }
+	set_variable = { BFI_OFN_poverty = 0 }
+	set_variable = { BFI_OFN_nuclear_stockpile = 0 }
+
+	# USA variables
+	set_variable = { USA.BFI_USA_stability = 0 }
+	set_variable = { USA.BFI_USA_pp_gain = 0 }
+	set_variable = { USA.BFI_USA_fuel_gain = 0 }
+	set_variable = { USA.BFI_USA_war_support = 0 }
+	set_variable = { USA.BFI_USA_air_range = 0 }
+	set_variable = { USA.BFI_USA_research_speed = 0 }
+	set_variable = { USA.BFI_USA_xp_gain_factor = 0 }
+	set_variable = { USA.BFI_USA_army_org = 0 }
+	set_variable = { USA.BFI_USA_xp_gain = 0 }
+	set_variable = { USA.BFI_USA_attrition = 0 }
+	set_variable = { USA.BFI_USA_research_facilities = 0 }
+	set_variable = { USA.BFI_USA_industrial_equipment = 0 }
+	set_variable = { USA.BFI_USA_industrial_expertise = 0 }
+	set_variable = { USA.BFI_USA_poverty = 0 }
+
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^1 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^1 = 1 } }
+			add_to_variable = { BFI_OFN_stability = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^1 = 2 } }
+			add_to_variable = { BFI_OFN_stability = 0.025 }
+			add_to_variable = { BFI_OFN_pp_gain  = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^1 = 3 } }
+			add_to_variable = { BFI_OFN_stability = 0.05 }
+			add_to_variable = { BFI_OFN_pp_gain  = 0.05 }
+			add_to_variable = { USA.BFI_USA_stability  = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^1 = 4 } }
+			add_to_variable = { BFI_OFN_stability = 0.075 }
+			add_to_variable = { BFI_OFN_pp_gain  = 0.05 }
+			add_to_variable = { USA.BFI_USA_stability  = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^1 = 5 } }
+			add_to_variable = { BFI_OFN_stability = 0.075 }
+			add_to_variable = { BFI_OFN_pp_gain  = 0.1 }
+			add_to_variable = { USA.BFI_USA_stability  = 0.05 }
+			add_to_variable = { USA.BFI_USA_pp_gain  = 0.05 }
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^2 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^2 = 1 } }
+			add_to_variable = { BFI_OFN_trade_opinion = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^2 = 2 } }
+			add_to_variable = { BFI_OFN_trade_opinion = 0.1 }
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^2 = 3 } }
+			add_to_variable = { BFI_OFN_trade_opinion = 0.2 }
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+			USA = {
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP_small
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^2 = 4 } }
+			add_to_variable = { BFI_OFN_trade_opinion = 0.4 }
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+			USA = {
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^2 = 5 } }
+			add_to_variable = { BFI_OFN_trade_opinion = 0.6 }
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+			USA = {
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^3 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^3 = 1 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			USA = {
+				add_to_variable = { misc_income = 0.05 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^3 = 2 } }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			USA = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_2
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_2
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^3 = 3 } }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			USA = {
+				add_to_variable = { misc_income = 0.15 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_5
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_5
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^3 = 4 } }
+			add_to_variable = { misc_income = 0.2 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			USA = {
+				add_to_variable = { misc_income = 0.2 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_10
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_10
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^3 = 5 } }
+			add_to_variable = { misc_income = 0.25 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			USA = {
+				add_to_variable = { misc_income = 0.25 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_10
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_tourism_relations_10
+			}
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^4 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^4 = 1 } }
+			add_to_variable = { BFI_OFN_industrial_equipment = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^4 = 2 } }
+			add_to_variable = { BFI_OFN_industrial_equipment = 1 }
+			USA = {
+				add_to_variable = { misc_costs = 0.05 } #already converted to billion
+				custom_effect_tooltip = econ_misc_expenses_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^4 = 3 } }
+			add_to_variable = { BFI_OFN_industrial_equipment = 1 }
+			add_to_variable = { BFI_OFN_industrial_expertise = 0.5 }
+			USA = {
+				add_to_variable = { misc_costs = 0.05 } #already converted to billion
+				custom_effect_tooltip = econ_misc_expenses_add_small_increase
+				add_to_variable = { BFI_USA_industrial_expertise = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^4 = 4 } }
+			add_to_variable = { BFI_OFN_industrial_equipment = 1.5 }
+			add_to_variable = { BFI_OFN_industrial_expertise = 1 }
+			USA = {
+				add_to_variable = { misc_costs = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_expenses_add_medium_increase
+				add_to_variable = { BFI_USA_industrial_expertise = 1 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^4 = 5 } }
+			add_to_variable = { BFI_OFN_industrial_equipment = 2 }
+			add_to_variable = { BFI_OFN_industrial_expertise = 1 }
+			USA = {
+				add_to_variable = { misc_costs = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_expenses_add_medium_increase
+				add_to_variable = { BFI_USA_industrial_expertise = 1 }
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP_small
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^5 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^5 = 1 } }
+			add_to_variable = { BFI_OFN_research_facilities = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^5 = 2 } }
+			add_to_variable = { BFI_OFN_research_facilities = 1 }
+			add_to_variable = { BFI_OFN_academic_base = 0.5 }
+			USA = {
+				add_to_variable = { BFI_USA_research_facilities = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^5 = 3 } }
+			add_to_variable = { BFI_OFN_research_facilities = 1.5 }
+			add_to_variable = { BFI_OFN_academic_base = 0.5 }
+			USA = {
+				add_to_variable = { BFI_USA_research_facilities = 0.5 }
+				add_to_variable = { BFI_USA_pp_gain  = 0.05 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^5 = 4 } }
+			add_to_variable = { BFI_OFN_research_facilities = 1.5 }
+			add_to_variable = { BFI_OFN_academic_base = 1 }
+			USA = {
+				add_to_variable = { BFI_USA_research_facilities = 1 }
+				add_to_variable = { BFI_USA_pp_gain  = 0.05 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^5 = 5 } }
+			add_to_variable = { BFI_OFN_research_facilities = 2 }
+			add_to_variable = { BFI_OFN_academic_base = 1 }
+			USA = {
+				add_to_variable = { BFI_USA_research_facilities = 1 }
+				add_to_variable = { BFI_USA_pp_gain  = 0.1 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^6 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^6 = 1 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^6 = 2 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			add_to_variable = { BFI_OFN_agriculture = 0.5 }
+			USA = {
+				add_to_variable = { misc_income = 0.075 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^6 = 3 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			add_to_variable = { BFI_OFN_agriculture = 1 }
+			USA = {
+				add_to_variable = { misc_income = 0.15 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^6 = 4 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			add_to_variable = { BFI_OFN_agriculture = 1.5 }
+			add_to_variable = { BFI_OFN_poverty = 0.025 }
+			USA = {
+				add_to_variable = { misc_income = 0.225 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^6 = 5 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			add_to_variable = { BFI_OFN_agriculture = 2 }
+			add_to_variable = { BFI_OFN_poverty = 0.05 }
+			USA = {
+				add_to_variable = { misc_income = 0.3 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^7 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^7 = 1 } }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^7 = 2 } }
+			add_to_variable = { misc_income = 0.2 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			add_to_variable = { USA.BFI_USA_fuel_gain = 0.04 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^7 = 3 } }
+			add_to_variable = { misc_income = 0.3 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			add_to_variable = { BFI_OFN_industrial_equipment = 0.5 }
+			add_to_variable = { USA.BFI_USA_fuel_gain = 0.08 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^7 = 4 } }
+			add_to_variable = { misc_income = 0.4 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+			add_to_variable = { BFI_OFN_industrial_equipment = 0.5 }
+			add_to_variable = { USA.BFI_USA_fuel_gain = 0.12 }
+			USA = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^7 = 5 } }
+			add_to_variable = { misc_income = 0.5 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+			add_to_variable = { BFI_OFN_industrial_equipment = 1 }
+			add_to_variable = { USA.BFI_USA_fuel_gain = 0.16 }
+			USA = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP_small
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^8 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^8 = 1 } }
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_15
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_15
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^8 = 2 } }
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_20
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_20
+			}
+			add_to_variable = { BFI_OFN_stability = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^8 = 3 } }
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_30
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_30
+			}
+			add_to_variable = { BFI_OFN_stability = 0.075 }
+			BFI_italian_american_party_boost = yes
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^8 = 4 } }
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_30
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_30
+			}
+			add_to_variable = { BFI_OFN_stability = 0.1 }
+			add_to_variable = { BFI_OFN_pp_gain = 0.05 }
+			BFI_italian_american_party_boost = yes
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^8 = 5 } }
+			add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_30
+			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = BFI_diplo_accords_30
+			}
+			add_to_variable = { BFI_OFN_stability = 0.1 }
+			add_to_variable = { BFI_OFN_pp_gain = 0.1 }
+			add_to_variable = { USA.BFI_USA_stability = 0.05 }
+			BFI_italian_american_party_boost = yes
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^9 > 0 } }
+		every_country = {
+			limit = { is_subject_of = ITA }
+			add_dynamic_modifier = { modifier = BFI_USA_italosphere_in_the_OFN }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^9 = 1 } }
+			every_country = {
+				limit = { is_subject_of = ITA }
+				subtract_from_variable = { BFI_OFN_consumer_goods = 0.01 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^9 = 2 } }
+			every_country = {
+				limit = { is_subject_of = ITA }
+				subtract_from_variable = { BFI_OFN_consumer_goods = 0.03 }
+			}
+			USA = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^9 = 3 } }
+			every_country = {
+				limit = { is_subject_of = ITA }
+				subtract_from_variable = { BFI_OFN_consumer_goods = 0.05 }
+				add_to_variable = { BFI_OFN_industrial_equipment = 0.5 }
+				custom_effect_tooltip = improve_industrial_equipment_small
+			}
+			USA = {
+				add_to_variable = { misc_income = 0.2 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_medium_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^9 = 4 } }
+			every_country = {
+				limit = { is_subject_of = ITA }
+				subtract_from_variable = { BFI_OFN_consumer_goods = 0.05 }
+				add_to_variable = { BFI_OFN_industrial_equipment = 0.5 }
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP_small
+			}
+			USA = {
+				add_to_variable = { misc_income = 0.2 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_medium_increase
+				add_to_variable = { BFI_USA_industrial_equipment = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^9 = 5 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				subtract_from_variable = { BFI_OFN_consumer_goods = 0.05 }
+				add_to_variable = { BFI_OFN_industrial_equipment = 1 }
+				add_to_variable = { BFI_OFN_agriculture = 1 }
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP_small
+			}
+			USA = {
+				add_to_variable = { misc_income = 0.3 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_large_increase
+				add_to_variable = { BFI_USA_industrial_equipment = 1 }
+				add_to_variable = { BFI_USA_agriculture = 0.5 }
+				multiply_variable = { GDP = 1.005 } #already converted to billion
+				custom_effect_tooltip = econ_increase_GDP_small
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^10 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^10 = 1 } }
+			add_to_variable = { BFI_OFN_unit_defence = 0.025 }
+			add_to_variable = { BFI_OFN_war_support = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^10 = 2 } }
+			add_to_variable = { BFI_OFN_unit_defence = 0.05 }
+			add_to_variable = { BFI_OFN_war_support = 0.05 }
+			add_to_variable = { USA.BFI_USA_war_support = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^10 = 3 } }
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			add_to_variable = { BFI_OFN_unit_defence = 0.05 }
+			add_to_variable = { BFI_OFN_war_support = 0.05 }
+			add_to_variable = { BFI_OFN_entrenchment = 0.03 }
+			add_to_variable = { USA.BFI_USA_war_support = 0.05 }
+			USA = {
+				add_tech_bonus = {
+					bonus = 0.5
+					uses = 1
+					category = land_doctrine
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^10 = 4 } }
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			add_to_variable = { BFI_OFN_unit_defence = 0.075 }
+			add_to_variable = { BFI_OFN_war_support = 0.075 }
+			add_to_variable = { BFI_OFN_entrenchment = 0.05 }
+			add_to_variable = { USA.BFI_USA_war_support = 0.05 }
+			add_to_variable = { USA.BFI_USA_air_range = 0.05 }
+			USA = {
+				add_tech_bonus = {
+					bonus = 0.5
+					uses = 2
+					category = land_doctrine
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^10 = 5 } }
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			add_to_variable = { BFI_OFN_unit_defence = 0.075 }
+			add_to_variable = { BFI_OFN_war_support = 0.075 }
+			add_to_variable = { BFI_OFN_entrenchment = 0.1 }
+			add_to_variable = { USA.BFI_USA_war_support = 0.05 }
+			add_to_variable = { USA.BFI_USA_air_range = 0.1 }
+			USA = {
+				add_tech_bonus = {
+					bonus = 0.5
+					uses = 2
+					category = land_doctrine
+				}
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^11 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^11 = 1 } }
+			add_ideas = BFI_OFN_engines_of_war_1
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^11 = 2 } }
+			add_ideas = BFI_OFN_engines_of_war_2
+			USA = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^11 = 3 } }
+			add_ideas = BFI_OFN_engines_of_war_2
+			USA = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+				add_ideas = BFI_OFN_engines_of_war_2
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^11 = 4 } }
+			add_ideas = BFI_OFN_engines_of_war_3
+			add_to_variable = { BFI_OFN_industrial_equipment = 0.5 }
+			USA = {
+				add_ideas = BFI_OFN_engines_of_war_3
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^11 = 5 } }
+			add_ideas = BFI_OFN_engines_of_war_4
+			add_to_variable = { BFI_OFN_industrial_equipment = 0.5 }
+			USA = {
+				add_ideas = BFI_OFN_engines_of_war_4
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^12 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^12 = 1 } }
+			set_temp_variable = { temp_modifier = 15 }
+			USA = { add_to_trade_modifier_PREV = yes }
+			USA = { ITA = { add_to_trade_modifier_PREV = yes } }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^12 = 2 } }
+			set_temp_variable = { temp_modifier = 20 }
+			USA = { add_to_trade_modifier_PREV = yes }
+			USA = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_OFN_poverty = 0.025 }
+			USA = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^12 = 3 } }
+			set_temp_variable = { temp_modifier = 30 }
+			USA = { add_to_trade_modifier_PREV = yes }
+			USA = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_OFN_poverty = 0.025 }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			USA = {
+				add_to_variable = { misc_income = 0.2 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_medium_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^12 = 4 } }
+			set_temp_variable = { temp_modifier = 40 }
+			USA = { add_to_trade_modifier_PREV = yes }
+			USA = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_OFN_poverty = 0.025 }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			USA = {
+				add_to_variable = { misc_income = 0.3 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_large_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^12 = 5 } }
+			set_temp_variable = { temp_modifier = 60 }
+			USA = { add_to_trade_modifier_PREV = yes }
+			USA = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_OFN_poverty = 0.05 }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+			USA = {
+				add_to_variable = { misc_income = 0.3 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_large_increase
+				add_to_variable = { BFI_USA_poverty = 0.025 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^13 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^13 = 1 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_expenses_add_small_decrease
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^13 = 2 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_expenses_add_small_decrease
+			add_to_variable = { BFI_OFN_research_speed = 0.01 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^13 = 3 } }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_expenses_add_medium_decrease
+			add_to_variable = { BFI_OFN_research_speed = 0.03 }
+			USA = {
+				add_to_variable = { BFI_USA_research_speed = 0.01 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^13 = 4 } }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_expenses_add_medium_decrease
+			add_to_variable = { BFI_OFN_research_speed = 0.03 }
+			add_to_variable = { BFI_OFN_research_facilities = 0.5 }
+			add_to_variable = { BFI_OFN_nuclear_stockpile = 1 }
+			USA = {
+				add_to_variable = { BFI_USA_research_speed = 0.03 }
+				add_to_variable = { BFI_USA_research_facilities = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^13 = 5 } }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_expenses_add_large_decrease
+			add_to_variable = { BFI_OFN_research_speed = 0.05 }
+			add_to_variable = { BFI_OFN_research_facilities = 1 }
+			add_to_variable = { BFI_OFN_nuclear_stockpile = 2 }
+			USA = {
+				add_to_variable = { BFI_USA_research_speed = 0.03 }
+				add_to_variable = { BFI_USA_research_facilities = 1 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^14 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^14 = 1 } }
+			add_to_variable = { BFI_OFN_xp_gain_factor = 0.1 }
+			add_to_variable = { USA.BFI_USA_xp_gain_factor = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^14 = 2 } }
+			add_to_variable = { BFI_OFN_xp_gain_factor = 0.1 }
+			add_to_variable = { BFI_OFN_army_org = 0.025 }
+			add_to_variable = { USA.BFI_USA_xp_gain_factor = 0.1 }
+			add_to_variable = { USA.BFI_USA_army_org = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^14 = 3 } }
+			add_to_variable = { BFI_OFN_xp_gain_factor = 0.1 }
+			add_to_variable = { BFI_OFN_xp_gain = 0.02 }
+			add_to_variable = { BFI_OFN_army_org = 0.05 }
+			add_to_variable = { USA.BFI_USA_xp_gain_factor = 0.1 }
+			add_to_variable = { USA.BFI_USA_xp_gain = 0.02 }
+			add_to_variable = { USA.BFI_USA_army_org = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^14 = 4 } }
+			add_to_variable = { BFI_OFN_xp_gain_factor = 0.1 }
+			add_to_variable = { BFI_OFN_xp_gain = 0.02 }
+			add_to_variable = { BFI_OFN_army_org = 0.05 }
+			subtract_from_variable = { BFI_OFN_attrition = 0.025 }
+			add_to_variable = { USA.BFI_USA_xp_gain_factor = 0.1 }
+			add_to_variable = { USA.BFI_USA_xp_gain = 0.02 }
+			add_to_variable = { USA.BFI_USA_army_org = 0.05 }
+			subtract_from_variable = { USA.BFI_USA_attrition = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^14 = 5 } }
+			add_to_variable = { BFI_OFN_xp_gain_factor = 0.1 }
+			add_to_variable = { BFI_OFN_xp_gain = 0.02 }
+			add_to_variable = { BFI_OFN_army_org = 0.05 }
+			subtract_from_variable = { BFI_OFN_attrition = 0.05 }
+			add_to_variable = { BFI_OFN_army_professionalism = 0.5 }
+			add_to_variable = { USA.BFI_USA_xp_gain_factor = 0.1 }
+			add_to_variable = { USA.BFI_USA_xp_gain = 0.02 }
+			add_to_variable = { USA.BFI_USA_army_org = 0.05 }
+			subtract_from_variable = { USA.BFI_USA_attrition = 0.05 }
+			add_to_variable = { USA.BFI_USA_army_professionalism = 0.5 }
+		}
+	}
+	if = {
+		limit = { check_variable = { USA.BFI_investment_selected^15 > 0 } }
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^15 = 1 } }
+			add_to_variable = { BFI_OFN_encryption_factor = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^15 = 2 } }
+			add_to_variable = { BFI_OFN_encryption_factor = 0.04 }
+			add_to_variable = { BFI_OFN_decryption_factor = 0.03 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^15 = 3 } }
+			add_to_variable = { BFI_OFN_encryption_factor = 0.03 }
+			add_to_variable = { BFI_OFN_decryption_factor = 0.06 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^15 = 4 } }
+			add_to_variable = { BFI_OFN_encryption_factor = 0.02 }
+			add_to_variable = { BFI_OFN_decryption_factor = 0.09 }
+			subtract_from_variable = { USA.USA_Regional_Encryption^1 = 1 }
+		}
+		if = {
+			limit = { check_variable = { USA.BFI_investment_selected^15 = 5 } }
+			add_to_variable = { BFI_OFN_encryption_factor = 0.01 }
+			add_to_variable = { BFI_OFN_decryption_factor = 0.12 }
+			subtract_from_variable = { USA.USA_Regional_Encryption^1 = 1 }
+			add_to_variable = { USA_CIA_expertise = 10 }
+		}
+	}
+
+	add_dynamic_modifier = { modifier = BFI_italy_in_the_OFN }
+	USA = { add_dynamic_modifier = { modifier = BFI_USA_italy_in_the_OFN } }
+}
+
+# Must be called from ITA scope
+BFI_italy_joins_CPS = {
+	JAP = { add_to_faction = ITA }
+	add_ideas = {
+		Sphere_Coequal
+	}
+	# Italian econ sphere will still be kept
+
+	every_country = {
+		limit = {
+			is_subject_of = ITA
+		}
+		remove_faction_status = yes
+		add_ideas = Sphere_Coequal
+	}
+
+	USA = {
+		set_temp_variable = { Victory_ID = 6 }
+		set_temp_variable = { Victory_Outcome = 2 }
+		set_temp_variable = { Victory_Points = -100 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+	JAP = {
+		set_temp_variable = { Victory_ID = 6 }
+		set_temp_variable = { Victory_Outcome = 4 }
+		set_temp_variable = { Victory_Points = 100 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+
+	# Italy Vars 
+	set_variable = { BFI_CPS_pp_gain = 0 }
+	set_variable = { BFI_CPS_stability = 0 }
+
+	# Japan Vars
+	set_variable = { BFI_JAP_pp_gain = 0 }
+	set_variable = { BFI_JAP_stability = 0 }
+
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^1 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^1 = 1 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^1 = 2 } }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			add_to_variable = { BFI_CPS_pp_gain = 0.03 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.01 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^1 = 3 } }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			add_to_variable = { BFI_CPS_pp_gain = 0.06 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.03 }
+				add_to_variable = { BFI_JAP_stability = 0.025 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^1 = 4 } }
+			add_to_variable = { misc_income = 0.2 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			add_to_variable = { BFI_CPS_pp_gain = 0.09 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.05 }
+				add_to_variable = { BFI_JAP_stability = 0.05 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^1 = 5 } }
+			add_to_variable = { misc_income = 0.25 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+			add_to_variable = { BFI_CPS_pp_gain = 0.12 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.07 }
+				add_to_variable = { BFI_JAP_stability = 0.075 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^2 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^2 = 1 } }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			set_temp_variable = { temp_modifier = 10 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^2 = 2 } }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			set_temp_variable = { temp_modifier = 20 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_industrial_expertise = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^2 = 3 } }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			set_temp_variable = { temp_modifier = 30 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_industrial_expertise = 1 }
+			JAP = {
+				subtract_from_variable = { BFI_JAP_consumer_goods = 0.01 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^2 = 4 } }
+			add_to_variable = { misc_income = 0.2 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+			set_temp_variable = { temp_modifier = 45 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_industrial_expertise = 1 }
+			JAP = {
+				subtract_from_variable = { BFI_JAP_consumer_goods = 0.02 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^2 = 5 } }
+			add_to_variable = { misc_income = 0.25 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+			set_temp_variable = { temp_modifier = 60 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_industrial_expertise = 1.5 }
+			JAP = {
+				subtract_from_variable = { BFI_JAP_consumer_goods = 0.03 }
+				add_to_variable = { BFI_JAP_poverty = 0.025 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^3 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^3 = 1 } }
+			add_to_variable = { misc_income = 0.075 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^3 = 2 } }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_5
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_5
+			}
+			add_to_variable = { BFI_CPS_stability = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^3 = 3 } }
+			add_to_variable = { misc_income = 0.225 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_10
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_10
+			}
+			add_to_variable = { BFI_CPS_stability = 0.05 }
+			add_to_variable = { BFI_CPS_pp_gain = 0.025 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.025 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^3 = 4 } }
+			add_to_variable = { misc_income = 0.3 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_20
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_20
+			}
+			add_to_variable = { BFI_CPS_stability = 0.075 }
+			add_to_variable = { BFI_CPS_pp_gain = 0.05 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.05 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^3 = 5 } }
+			add_to_variable = { misc_income = 0.375 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_30
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_tourism_relations_30
+			}
+			add_to_variable = { BFI_CPS_stability = 0.1 }
+			add_to_variable = { BFI_CPS_pp_gain = 0.075 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.075 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^4 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^4 = 1 } }
+			add_to_variable = { BFI_CPS_industrial_equipment = 1 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^4 = 2 } }
+			add_to_variable = { BFI_CPS_industrial_equipment = 1.5 }
+			JAP = {
+				add_to_variable = { BFI_JAP_industrial_expertise = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^4 = 3 } }
+			add_to_variable = { BFI_CPS_industrial_equipment = 2 }
+			add_to_variable = { BFI_CPS_efficency_growth = 0.025 }
+			JAP = {
+				add_to_variable = { BFI_JAP_industrial_expertise = 1 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^4 = 4 } }
+			add_to_variable = { BFI_CPS_industrial_equipment = 2.5 }
+			add_to_variable = { BFI_CPS_efficency_growth = 0.05 }
+			JAP = {
+				add_to_variable = { BFI_JAP_industrial_expertise = 1.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^4 = 5 } }
+			add_to_variable = { BFI_CPS_industrial_equipment = 3 }
+			add_to_variable = { BFI_CPS_efficency_growth = 0.075 }
+			JAP = {
+				add_to_variable = { BFI_JAP_industrial_expertise = 2 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^5 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^5 = 1 } }
+			add_to_variable = { BFI_CPS_research_facilities = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^5 = 2 } }
+			add_to_variable = { BFI_CPS_research_facilities = 1 }
+			JAP = {
+				add_to_variable = { BFI_JAP_research_speed = 0.01 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^5 = 3 } }
+			add_to_variable = { BFI_CPS_research_facilities = 1 }
+			add_to_variable = { BFI_CPS_academic_base = 0.5 }
+			JAP = {
+				add_to_variable = { BFI_JAP_research_speed = 0.03 }
+				add_to_variable = { BFI_JAP_academic_base = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^5 = 4 } }
+			add_to_variable = { BFI_CPS_research_facilities = 1.5 }
+			add_to_variable = { BFI_CPS_academic_base = 1 }
+			JAP = {
+				add_to_variable = { BFI_JAP_research_speed = 0.03 }
+				add_to_variable = { BFI_JAP_academic_base = 1 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^5 = 5 } }
+			add_to_variable = { BFI_CPS_research_facilities = 2 }
+			add_to_variable = { BFI_CPS_academic_base = 2 }
+			JAP = {
+				add_to_variable = { BFI_JAP_research_speed = 0.03 }
+				add_to_variable = { BFI_JAP_academic_base = 1.5 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^6 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^6 = 1 } }
+			add_to_variable = { BFI_CPS_monthly_population = 0.02 }
+			JAP = {
+				add_to_variable = { misc_income = 0.075 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^6 = 2 } }
+			add_to_variable = { BFI_CPS_monthly_population = 0.04 }
+			add_to_variable = { BFI_CPS_agriculture = 0.5 }
+			JAP = {
+				add_to_variable = { misc_income = 0.15 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^6 = 3 } }
+			add_to_variable = { BFI_CPS_monthly_population = 0.06 }
+			add_to_variable = { BFI_CPS_agriculture = 1 }
+			JAP = {
+				add_to_variable = { misc_income = 0.225 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^6 = 4 } }
+			add_to_variable = { BFI_CPS_monthly_population = 0.08 }
+			add_to_variable = { BFI_CPS_agriculture = 1.5 }
+			JAP = {
+				add_to_variable = { misc_income = 0.3 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+				add_to_variable = { BFI_JAP_agriculture = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^6 = 5 } }
+			add_to_variable = { BFI_CPS_monthly_population = 0.1 }
+			add_to_variable = { BFI_CPS_agriculture = 2 }
+			JAP = {
+				add_to_variable = { misc_income = 0.375 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+				add_to_variable = { BFI_JAP_agriculture = 1 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^7 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^7 = 1 } }
+			add_to_variable = { BFI_CPS_min_export = 0.04 }
+			add_to_variable = { BFI_CPS_resources_gain = 0.04 }
+			add_to_variable = { money_reserves = 0.2 } #already converted to billion
+			custom_effect_tooltip = econ_increase_money_reserves_small
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^7 = 2 } }
+			add_to_variable = { BFI_CPS_min_export = 0.08 }
+			add_to_variable = { BFI_CPS_resources_gain = 0.08 }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^7 = 3 } }
+			add_to_variable = { BFI_CPS_min_export = 0.12 }
+			add_to_variable = { BFI_CPS_resources_gain = 0.12 }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			JAP = {
+				add_to_variable = { BFI_JAP_fuel_gain = 0.05 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^7 = 4 } }
+			add_to_variable = { BFI_CPS_min_export = 0.16 }
+			add_to_variable = { BFI_CPS_resources_gain = 0.16 }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+			JAP = {
+				add_to_variable = { BFI_JAP_fuel_gain = 0.1 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^7 = 5 } }
+			add_to_variable = { BFI_CPS_min_export = 0.20 }
+			add_to_variable = { BFI_CPS_resources_gain = 0.20 }
+			add_to_variable = { misc_income = 0.2 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+			JAP = {
+				add_to_variable = { BFI_JAP_fuel_gain = 0.15 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^8 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^8 = 1 } }
+			add_to_variable = { BFI_CPS_pp_gain = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^8 = 2 } }
+			add_to_variable = { BFI_CPS_pp_gain = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^8 = 3 } }
+			add_to_variable = { BFI_CPS_pp_gain = 0.1 }
+			add_to_variable = { BFI_CPS_stability = 0.05 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.02 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^8 = 4 } }
+			add_to_variable = { BFI_CPS_pp_gain = 0.1 }
+			add_to_variable = { BFI_CPS_stability = 0.1 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.04 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^8 = 5 } }
+			add_to_variable = { BFI_CPS_pp_gain = 0.1 }
+			add_to_variable = { BFI_CPS_stability = 0.1 }
+			add_to_variable = { BFI_CPS_war_support = 0.1 }
+			JAP = {
+				add_to_variable = { BFI_JAP_pp_gain = 0.06 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^9 > 0 } }
+		every_country = {
+			limit = {
+				is_subject_of = ITA
+			}
+			add_dynamic_modifier = { modifier = BFI_JAP_italosphere_in_the_OFN }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^9 = 1 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				subtract_from_variable = { BFI_CPS_consumer_goods = 0.01 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^9 = 2 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				subtract_from_variable = { BFI_CPS_consumer_goods = 0.02 }
+				add_to_variable = { BFI_CPS_construction_speed = 0.05 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^9 = 3 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				subtract_from_variable = { BFI_CPS_consumer_goods = 0.03 }
+				add_to_variable = { BFI_CPS_construction_speed = 0.1 }
+			}
+			JAP = {
+				add_to_variable = { misc_income = 0.1 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^9 = 4 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				subtract_from_variable = { BFI_CPS_consumer_goods = 0.04 }
+				add_to_variable = { BFI_CPS_construction_speed = 0.15 }
+			}
+			JAP = {
+				add_to_variable = { misc_income = 0.2 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_medium_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^9 = 5 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				subtract_from_variable = { BFI_CPS_consumer_goods = 0.05 }
+				add_to_variable = { BFI_CPS_construction_speed = 0.2 }
+			}
+			JAP = {
+				add_to_variable = { misc_income = 0.2 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_large_increase
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^10 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^10 = 1 } }
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_10
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_10
+			}
+			add_to_variable = { BFI_CPS_defence = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^10 = 2 } }
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_20
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_20
+			}
+			add_to_variable = { BFI_CPS_defence = 0.05 }
+			add_to_variable = { BFI_CPS_org = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^10 = 3 } }
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_30
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_30
+			}
+			add_to_variable = { BFI_CPS_defence = 0.075 }
+			add_to_variable = { BFI_CPS_org = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^10 = 4 } }
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_40
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_40
+			}
+			add_to_variable = { BFI_CPS_defence = 0.1 }
+			add_to_variable = { BFI_CPS_org = 0.075 }
+			add_to_variable = { BFI_CPS_army_professionalism = 0.5 }
+			JAP = {
+				add_to_variable = { BFI_JAP_army_professionalism = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^10 = 5 } }
+			add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_50
+			}
+			reverse_add_opinion_modifier = {
+				target = JAP
+				modifier = BFI_enemy_of_enemy_50
+			}
+			add_to_variable = { BFI_CPS_defence = 0.1 }
+			add_to_variable = { BFI_CPS_org = 0.1 }
+			add_to_variable = { BFI_CPS_army_professionalism = 1 }
+			add_to_variable = { BFI_CPS_entrenchment_speed = 0.05 }
+			JAP = {
+				add_to_variable = { BFI_JAP_army_professionalism = 1 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^11 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^11 = 1 } }
+			add_to_variable = { BFI_CPS_industrial_capacity = 0.02 }
+			JAP = {
+				add_to_variable = { misc_income = 0.075 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_small_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^11 = 2 } }
+			add_to_variable = { BFI_CPS_industrial_capacity = 0.04 }
+			JAP = {
+				add_to_variable = { misc_income = 0.15 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_medium_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^11 = 3 } }
+			add_to_variable = { BFI_CPS_industrial_capacity = 0.06 }
+			JAP = {
+				add_to_variable = { misc_income = 0.225 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_medium_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^11 = 4 } }
+			add_to_variable = { BFI_CPS_industrial_capacity = 0.08 }
+			add_to_variable = { BFI_CPS_industrial_equipment = 0.5 }
+			JAP = {
+				add_to_variable = { misc_income = 0.3 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_large_increase
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^11 = 5 } }
+			add_to_variable = { BFI_CPS_industrial_capacity = 0.1 }
+			add_to_variable = { BFI_CPS_industrial_equipment = 1 }
+			JAP = {
+				add_to_variable = { misc_income = 0.375 } #already converted to billion
+				custom_effect_tooltip = econ_misc_income_add_large_increase
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^12 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^12 = 1 } }
+			set_temp_variable = { temp_modifier = 20 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^12 = 2 } }
+			set_temp_variable = { temp_modifier = 30 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_poverty = 0.025 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^12 = 3 } }
+			set_temp_variable = { temp_modifier = 40 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_poverty = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^12 = 4 } }
+			set_temp_variable = { temp_modifier = 50 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_poverty = 0.075 }
+			JAP = {
+				add_to_variable = { BFI_JAP_poverty = 0.025 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^12 = 5 } }
+			set_temp_variable = { temp_modifier = 60 }
+			JAP = { add_to_trade_modifier_PREV = yes }
+			JAP = { ITA = { add_to_trade_modifier_PREV = yes } }
+			add_to_variable = { BFI_CPS_poverty = 0.1 }
+			JAP = {
+				add_to_variable = { BFI_JAP_poverty = 0.05 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^13 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^13 = 1 } }
+			add_to_variable = { BFI_CPS_research_speed = 0.01 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^13 = 2 } }
+			add_to_variable = { BFI_CPS_research_speed = 0.02 }
+			add_to_variable = { BFI_CPS_research_facilities = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^13 = 3 } }
+			add_to_variable = { BFI_CPS_research_speed = 0.03 }
+			add_to_variable = { BFI_CPS_research_facilities = 1 }
+			random_state = {
+				limit = { nuclear_reactor < 5 }
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^13 = 4 } }
+			add_to_variable = { BFI_CPS_research_speed = 0.04 }
+			add_to_variable = { BFI_CPS_research_facilities = 1.5 }
+			random_state = {
+				limit = { nuclear_reactor < 5 }
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { nuclear_reactor < 5 }
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+			JAP = {
+				add_to_variable = { BFI_JAP_research_facilities = 0.5 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^13 = 5 } }
+			add_to_variable = { BFI_CPS_research_speed = 0.05 }
+			add_to_variable = { BFI_CPS_research_facilities = 2 }
+			random_state = {
+				limit = { nuclear_reactor < 5 }
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { nuclear_reactor < 5 }
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { nuclear_reactor < 5 }
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+			JAP = {
+				add_to_variable = { BFI_JAP_research_facilities = 1 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^14 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^14 = 1 } }
+			add_to_variable = { BFI_CPS_xp_gain = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^14 = 2 } }
+			add_to_variable = { BFI_CPS_xp_gain = 0.2 }
+			add_to_variable = { BFI_CPS_navy_org = 0.05 }
+			JAP = {
+				add_to_variable = { BFI_JAP_navy_org = 0.05 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^14 = 3 } }
+			add_to_variable = { BFI_CPS_xp_gain = 0.3 }
+			add_to_variable = { BFI_CPS_navy_org = 0.1 }
+			JAP = {
+				add_to_variable = { BFI_JAP_navy_org = 0.1 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^14 = 4 } }
+			add_to_variable = { BFI_CPS_xp_gain = 0.4 }
+			add_to_variable = { BFI_CPS_navy_org = 0.15 }
+			JAP = {
+				add_to_variable = { BFI_JAP_navy_org = 0.15 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^14 = 5 } }
+			add_to_variable = { BFI_CPS_xp_gain = 0.5 }
+			add_to_variable = { BFI_CPS_navy_org = 0.2 }
+			JAP = {
+				add_to_variable = { BFI_JAP_navy_org = 0.2 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { JAP.BFI_investment_selected^15 > 0 } }
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^15 = 1 } }
+			add_to_variable = { BFI_CPS_encryption_factor = 0.02 }
+			add_to_variable = { BFI_CPS_decryption_factor = 0.02 }
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^15 = 2 } }
+			add_to_variable = { BFI_CPS_encryption_factor = 0.04 }
+			add_to_variable = { BFI_CPS_decryption_factor = 0.04 }
+			add_to_variable = { BFI_CPS_recon = 0.05 }
+			JAP = {
+				add_to_variable = { BFI_CPS_encryption_factor = 0.02 }
+				add_to_variable = { BFI_CPS_decryption_factor = 0.01 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^15 = 3 } }
+			add_to_variable = { BFI_CPS_encryption_factor = 0.06 }
+			add_to_variable = { BFI_CPS_decryption_factor = 0.06 }
+			add_to_variable = { BFI_CPS_recon = 0.1 }
+			JAP = {
+				add_to_variable = { BFI_CPS_encryption_factor = 0.04 }
+				add_to_variable = { BFI_CPS_decryption_factor = 0.02 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^15 = 4 } }
+			add_to_variable = { BFI_CPS_encryption_factor = 0.08 }
+			add_to_variable = { BFI_CPS_decryption_factor = 0.08 }
+			add_to_variable = { BFI_CPS_recon = 0.15 }
+			JAP = {
+				add_to_variable = { BFI_CPS_encryption_factor = 0.06 }
+				add_to_variable = { BFI_CPS_decryption_factor = 0.03 }
+			}
+		}
+		if = {
+			limit = { check_variable = { JAP.BFI_investment_selected^15 = 5 } }
+			add_to_variable = { BFI_CPS_encryption_factor = 0.1 }
+			add_to_variable = { BFI_CPS_decryption_factor = 0.1 }
+			add_to_variable = { BFI_CPS_recon = 0.2 }
+			JAP = {
+				add_to_variable = { BFI_CPS_encryption_factor = 0.08 }
+				add_to_variable = { BFI_CPS_decryption_factor = 0.04 }
+			}
+		}
+	}
+
+	add_dynamic_modifier = { modifier = BFI_italy_in_the_CPS }
+}
+
+# Must be called from ITA scope
+BFI_italy_keeps_to_itself = {
+	USA = {
+		set_temp_variable = { Victory_ID = 6 }
+		set_temp_variable = { Victory_Outcome = 3 }
+		set_temp_variable = { Victory_Points = 0 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+	JAP = {
+		set_temp_variable = { Victory_ID = 6 }
+		set_temp_variable = { Victory_Outcome = 3 }
+		set_temp_variable = { Victory_Points = 0 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+	set_variable = { BFI_ITA_pp_gain = 0 }
+	set_variable = { BFI_ITA_opinion_gain = 0 }
+	set_variable = { BFI_ITA_min_export = 0 }
+	set_variable = { BFI_ITA_monthly_population = 0 }
+	set_variable = { BFI_ITA_trade_opinion = 0 }
+	set_variable = { BFI_ITA_research_speed = 0 }
+	set_variable = { BFI_ITA_consumer_goods = 0 }
+	set_variable = { BFI_ITA_drift_defence = 0 }
+	set_variable = { BFI_ITA_encryption_factor = 0 }
+	set_variable = { BFI_ITA_max_planning = 0 }
+	set_variable = { BFI_ITA_planning_speed = 0 }
+	set_variable = { BFI_ITA_invasion_preparation = 0 }
+	set_variable = { BFI_ITA_xp_gain = 0 }
+	if = {
+		limit = { check_variable = { BFI_investment_selected^1 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^1 = 1 } }
+			subtract_from_variable = { BFI_ITA_pp_gain = 0.1 }
+			subtract_from_variable = { BFI_ITA_opinion_gain = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^1 = 2 } }
+			add_to_variable = { BFI_ITA_opinion_gain = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^1 = 3 } }
+			add_to_variable = { BFI_ITA_pp_gain = 0.1 }
+			add_to_variable = { BFI_ITA_opinion_gain = 0.3 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^1 = 4 } }
+			add_to_variable = { BFI_ITA_pp_gain = 0.2 }
+			add_to_variable = { BFI_ITA_opinion_gain = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^1 = 5 } }
+			add_to_variable = { BFI_ITA_pp_gain = 0.3 }
+			add_to_variable = { BFI_ITA_opinion_gain = 0.7 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^2 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^2 = 1 } }
+			subtract_from_variable = { BFI_ITA_min_export = 0.05 }
+			subtract_from_variable = { industrial_equipment_monthly_change = 0.5 }
+			custom_effect_tooltip = worsen_industrial_equipment_small
+			subtract_from_variable = { industrial_expertise_monthly_change = 0.5 }
+			custom_effect_tooltip = worsen_industrial_expertise_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^2 = 2 } }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^2 = 3 } }
+			add_to_variable = { BFI_ITA_min_export = 0.05 }
+			add_to_variable = { industrial_equipment_monthly_change = 0.5 }
+			custom_effect_tooltip = improve_industrial_equipment_small
+			subtract_from_variable = { industrial_expertise_monthly_change = 0.5 }
+			custom_effect_tooltip = improve_industrial_expertise_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^2 = 4 } }
+			add_to_variable = { BFI_ITA_min_export = 0.10 }
+			add_to_variable = { industrial_equipment_monthly_change = 1 }
+			custom_effect_tooltip = improve_industrial_equipment_small
+			subtract_from_variable = { industrial_expertise_monthly_change = 1 }
+			custom_effect_tooltip = improve_industrial_expertise_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^2 = 5 } }
+			add_to_variable = { BFI_ITA_min_export = 0.15 }
+			add_to_variable = { industrial_equipment_monthly_change = 2 }
+			custom_effect_tooltip = improve_industrial_equipment_medium
+			subtract_from_variable = { industrial_expertise_monthly_change = 2 }
+			custom_effect_tooltip = improve_industrial_expertise_medium
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^3 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^3 = 1 } }
+			subtract_from_variable = { BFI_ITA_monthly_population = 0.01 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^3 = 2 } }
+			add_to_variable = { BFI_ITA_monthly_population = 0.005 }
+			add_to_variable = { misc_income = 0.05 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_small_increase
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^3 = 3 } }
+			add_to_variable = { BFI_ITA_monthly_population = 0.02 }
+			add_to_variable = { misc_income = 0.1 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^3 = 4 } }
+			add_to_variable = { BFI_ITA_monthly_population = 0.035 }
+			add_to_variable = { misc_income = 0.15 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_medium_increase
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^3 = 5 } }
+			add_to_variable = { BFI_ITA_monthly_population = 0.05 }
+			add_to_variable = { misc_income = 0.2 } #already converted to billion
+			custom_effect_tooltip = econ_misc_income_add_large_increase
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^4 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^4 = 1 } }
+			custom_effect_tooltip = worsen_industrial_expertise_small
+			subtract_from_variable = { industrial_expertise_monthly_change = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^4 = 2 } }
+			# https://www.youtube.com/watch?v=M5QGkOGZubQ
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^4 = 3 } }
+			TNO_improve_industrial_expertise_low = yes
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^4 = 4 } }
+			TNO_improve_industrial_expertise_low = yes
+			multiply_variable = { GDP = 1.005 } #already converted to billion
+			custom_effect_tooltip = econ_increase_GDP_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^4 = 5 } }
+			TNO_improve_industrial_expertise_med = yes
+			add_to_variable = { GDP_growth = 0.001 }
+			custom_effect_tooltip = econ_increase_GDP_growth_small
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^5 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^5 = 1 } }
+			subtract_from_variable = { BFI_ITA_research_speed = 0.03 }
+			add_to_variable = { BFI_ITA_pp_gain = 0.1 }
+			TNO_worsen_academic_base_low = yes
+			TNO_worsen_research_facilities_low = yes
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^5 = 2 } }
+			add_to_variable = { BFI_ITA_pp_gain = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^5 = 3 } }
+			add_to_variable = { BFI_ITA_research_speed = 0.03 }
+			custom_effect_tooltip = improve_academic_base_small
+			add_to_variable = { academic_base_monthly_change = 0.5 }
+			custom_effect_tooltip = improve_research_facilities_small
+			add_to_variable = { research_facilities_monthly_change = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^5 = 4 } }
+			subtract_from_variable = { BFI_ITA_pp_gain = 0.05 }
+			add_to_variable = { BFI_ITA_research_speed = 0.06 }
+			TNO_improve_academic_base_low = yes
+			TNO_improve_research_facilities_low = yes
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^5 = 5 } }
+			subtract_from_variable = { BFI_ITA_pp_gain = 0.1 }
+			add_to_variable = { BFI_ITA_research_speed = 0.09 }
+			custom_effect_tooltip = improve_academic_base_small
+			add_to_variable = { academic_base_monthly_change = 1.5 }
+			custom_effect_tooltip = improve_research_facilities_small
+			add_to_variable = { research_facilities_monthly_change = 1.5 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^6 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^6 = 1 } }
+			TNO_worsen_agriculture_med = yes
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^6 = 2 } }
+			TNO_worsen_agriculture_low = yes
+			add_to_variable = { poverty_monthly_change = 0.02 }
+			custom_effect_tooltip = improve_poverty_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^6 = 3 } }
+			add_to_variable = { poverty_monthly_change = 0.02 }
+			custom_effect_tooltip = improve_poverty_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^6 = 4 } }
+			TNO_improve_agriculture_low = yes
+			add_to_variable = { poverty_monthly_change = 0.04 }
+			custom_effect_tooltip = improve_poverty_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^6 = 5 } }
+			TNO_improve_agriculture_med = yes
+			add_to_variable = { poverty_monthly_change = 0.06 }
+			custom_effect_tooltip = improve_poverty_medium
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^7 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^7 = 1 } }
+			subtract_from_variable = { BFI_ITA_min_export = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^7 = 2 } }
+			subtract_from_variable = { BFI_ITA_consumer_goods = 0.01 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^7 = 3 } }
+			subtract_from_variable = { BFI_ITA_consumer_goods = 0.02 }
+			add_to_variable = { BFI_ITA_min_export = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^7 = 4 } }
+			subtract_from_variable = { BFI_ITA_consumer_goods = 0.03 }
+			add_to_variable = { BFI_ITA_min_export = 0.10 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^7 = 5 } }
+			subtract_from_variable = { BFI_ITA_consumer_goods = 0.05 }
+			add_to_variable = { BFI_ITA_min_export = 0.20 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^8 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^8 = 1 } }
+			subtract_from_variable = { BFI_ITA_trade_opinion = 0.1 }
+			add_to_variable = { BFI_ITA_drift_defence = 0.25 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^8 = 2 } }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^8 = 3 } }
+			add_to_variable = { BFI_ITA_trade_opinion = 0.1 }
+			subtract_from_variable = { BFI_ITA_drift_defence = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^8 = 4 } }
+			add_to_variable = { BFI_ITA_trade_opinion = 0.2 }
+			subtract_from_variable = { BFI_ITA_drift_defence = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^8 = 5 } }
+			add_to_variable = { BFI_ITA_trade_opinion = 0.25 }
+			subtract_from_variable = { BFI_ITA_drift_defence = 0.25 } 
+			add_to_variable = { BFI_ITA_pp_gain = 0.1 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^9 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^9 = 1 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				subtract_from_variable = { GDP_growth = 0.001 }
+				custom_effect_tooltip = econ_decrease_GDP_growth_small
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^9 = 2 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				custom_effect_tooltip = improve_industrial_expertise_small
+				add_to_variable = { industrial_expertise_monthly_change = 0.5 }
+				custom_effect_tooltip = improve_industrial_equipment_small
+				add_to_variable = { industrial_equipment_monthly_change = 0.5 }
+				custom_effect_tooltip = improve_poverty_small
+				add_to_variable = { poverty_monthly_change = 0.02 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^9 = 3 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				custom_effect_tooltip = improve_industrial_expertise_small
+				add_to_variable = { industrial_expertise_monthly_change = 1 }
+				custom_effect_tooltip = improve_industrial_equipment_small
+				add_to_variable = { industrial_equipment_monthly_change = 1 }
+				custom_effect_tooltip = improve_poverty_small
+				add_to_variable = { poverty_monthly_change = 0.04 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^9 = 4 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				custom_effect_tooltip = improve_industrial_expertise_small
+				add_to_variable = { industrial_expertise_monthly_change = 1.5 }
+				custom_effect_tooltip = improve_industrial_equipment_small
+				add_to_variable = { industrial_equipment_monthly_change = 1.5 }
+				custom_effect_tooltip = improve_poverty_small
+				add_to_variable = { poverty_monthly_change = 0.04 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^9 = 5 } }
+			every_country = {
+				limit = {
+					is_subject_of = ITA
+				}
+				custom_effect_tooltip = improve_industrial_expertise_medium
+				add_to_variable = { industrial_expertise_monthly_change = 2 }
+				custom_effect_tooltip = improve_industrial_equipment_medium
+				add_to_variable = { industrial_equipment_monthly_change = 2 }
+				custom_effect_tooltip = improve_poverty_medium
+				add_to_variable = { poverty_monthly_change = 0.05 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^10 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^10 = 1 } }
+			add_to_variable = { BFI_ITA_encryption_factor = 0.05 }
+			subtract_from_variable = { BFI_ITA_max_planning = 0.04 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^10 = 2 } }
+			add_to_variable = { BFI_ITA_planning_speed = 0.03 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^10 = 3 } }
+			subtract_from_variable = { BFI_ITA_encryption_factor = 0.05 }
+			add_to_variable = { BFI_ITA_max_planning = 0.04 }
+			add_to_variable = { BFI_ITA_planning_speed = 0.06 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^10 = 4 } }
+			subtract_from_variable = { BFI_ITA_encryption_factor = 0.1 }
+			add_to_variable = { BFI_ITA_max_planning = 0.08 }
+			add_to_variable = { BFI_ITA_planning_speed = 0.09 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^10 = 5 } }
+			subtract_from_variable = { BFI_ITA_encryption_factor = 0.15 }
+			add_to_variable = { BFI_ITA_max_planning = 0.12 }
+			add_to_variable = { BFI_ITA_planning_speed = 0.12 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^11 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^11 = 1 } }
+			add_to_variable = { BFI_ITA_heat_attrition = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^11 = 2 } }
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^11 = 3 } }
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = MBT
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^11 = 4 } }
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = MBT
+			}
+			add_to_variable = { BFI_ITA_industrial_capacity = 0.05 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^11 = 5 } }
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = MBT
+			}
+			add_to_variable = { BFI_ITA_industrial_capacity = 0.1 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^12 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^12 = 1 } }
+			subtract_from_variable = { BFI_ITA_min_export = 0.2 }
+			subtract_from_variable = { BFI_ITA_trade_opinion = 0.2 }
+			subtract_from_variable = { GDP_growth = 0.001 }
+			custom_effect_tooltip = econ_decrease_GDP_growth_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^12 = 2 } }
+			subtract_from_variable = { BFI_ITA_min_export = 0.1 }
+			subtract_from_variable = { BFI_ITA_trade_opinion = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^12 = 3 } }
+			add_to_variable = { GDP_growth = 0.001 }
+			custom_effect_tooltip = econ_increase_GDP_growth_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^12 = 4 } }
+			add_to_variable = { BFI_ITA_min_export = 0.1 }
+			add_to_variable = { BFI_ITA_trade_opinion = 0.2 }
+			add_to_variable = { GDP_growth = 0.001 }
+			custom_effect_tooltip = econ_increase_GDP_growth_small
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^12 = 5 } }
+			add_to_variable = { GDP_growth = 0.001 }
+			custom_effect_tooltip = econ_increase_GDP_growth_small
+			add_to_variable = { BFI_ITA_min_export = 0.2 }
+			add_to_variable = { BFI_ITA_trade_opinion = 0.25 }
+			TNO_improve_poverty_low = yes
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^13 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^13 = 1 } }
+			subtract_from_variable = { BFI_ITA_research_speed = 0.01 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^13 = 2 } }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^13 = 3 } }
+			add_to_variable = { BFI_ITA_research_speed = 0.01 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^13 = 4 } }
+			add_to_variable = { BFI_ITA_research_speed = 0.02 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^13 = 5 } }
+			add_to_variable = { BFI_ITA_research_speed = 0.03 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^14 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^14 = 1 } }
+			add_to_variable = { BFI_ITA_invasion_preparation = 0.5 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^14 = 2 } }
+			add_to_variable = { BFI_ITA_invasion_preparation = 0.25 }
+			add_to_variable = { BFI_ITA_xp_gain = 0.01 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^14 = 3 } }
+			add_to_variable = { BFI_ITA_xp_gain = 0.03 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^14 = 4 } }
+			subtract_from_variable = { BFI_ITA_invasion_preparation = 0.25 }
+			add_to_variable = { BFI_ITA_xp_gain = 0.04 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^14 = 5 } }
+			subtract_from_variable = { BFI_ITA_invasion_preparation = 0.5 }
+			add_to_variable = { BFI_ITA_xp_gain = 0.05 }
+		}
+	}
+	if = {
+		limit = { check_variable = { BFI_investment_selected^15 > 0 } }
+		if = {
+			limit = { check_variable = { BFI_investment_selected^15 = 1 } }
+			add_to_variable = { BFI_ITA_encryption_factor = 0.1 }
+			subtract_from_variable = { BFI_ITA_decryption_factor = 0.1 }
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^15 = 2 } }
+			add_to_variable = { BFI_ITA_encryption_factor = 0.05 }
+			subtract_from_variable = { BFI_ITA_decryption_factor = 0.05 }
+			965 = { # Suez
+				if = {
+					limit = { radar_station < 6 }
+					add_building_construction = {
+						type = radar_station
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^15 = 3 } }
+			965 = { # Suez
+				if = {
+					limit = { radar_station < 6 }
+					add_building_construction = {
+						type = radar_station
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			656 = { # Kuwait
+				if = {
+					limit = { radar_station < 6 }
+					add_building_construction = {
+						type = radar_station
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			39 = { # Trent
+				if = {
+					limit = { radar_station < 6 }
+					add_building_construction = {
+						type = radar_station
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^15 = 4 } }
+			subtract_from_variable = { BFI_ITA_encryption_factor = 0.05 }
+			add_to_variable = { BFI_ITA_decryption_factor = 0.05 }
+			965 = { # Suez
+				if = {
+					limit = { radar_station < 5 }
+					add_building_construction = {
+						type = radar_station
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			656 = { # Kuwait
+				if = {
+					limit = { radar_station < 5 }
+					add_building_construction = {
+						type = radar_station
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			39 = { # Trent
+				if = {
+					limit = { radar_station < 5 }
+					add_building_construction = {
+						type = radar_station
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+		if = {
+			limit = { check_variable = { BFI_investment_selected^15 = 5 } }
+			subtract_from_variable = { BFI_ITA_encryption_factor = 0.1 }
+			add_to_variable = { BFI_ITA_decryption_factor = 0.1 }
+			965 = { # Suez
+				if = {
+					limit = { radar_station < 4 }
+					add_building_construction = {
+						type = radar_station
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+			656 = { # Kuwait
+				if = {
+					limit = { radar_station < 4 }
+					add_building_construction = {
+						type = radar_station
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+			39 = { # Trent
+				if = {
+					limit = { radar_station < 4 }
+					add_building_construction = {
+						type = radar_station
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	add_dynamic_modifier = { modifier = BFI_italy_all_alone }
+}
+

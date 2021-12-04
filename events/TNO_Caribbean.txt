@@ -1,0 +1,1452 @@
+﻿add_namespace = wif_crisis
+add_namespace = wif_crisis
+add_namespace = jamaican_crisis_jap
+
+
+###### WIF Constitution Change, Crisis Lead-up ########
+
+# Fishing Dispute
+country_event = {
+	id = wif_crisis.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.4" }
+	title = wif_crisis.4.t
+	desc = wif_crisis.4.desc
+	picture = GFX_report_event_MAD_phone_call
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.4.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = {
+				id = wif_crisis.5
+				days = 14
+			}
+		}
+	}
+}
+
+# Manley's Proposal
+country_event = {
+	id = wif_crisis.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.5" }
+	title = wif_crisis.5.t
+	desc = wif_crisis.5.desc
+	picture = GFX_report_event_jamaica_norman_manley
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.5.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = {
+				id = wif_crisis.6
+				days = 14
+			}
+			USA = {
+				country_event = {
+					id = wif_crisis.304
+					days = 45
+				}
+			}
+		}
+	}
+}
+
+# Constitutional Convention
+country_event = {
+	id = wif_crisis.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.6" }
+	title = wif_crisis.6.t
+	desc = wif_crisis.6.desc
+	picture = GFX_report_event_jamaica_bustamante_meeting
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.6.a
+		ai_chance = { factor = 1 }
+		WIN = {
+			swap_ideas = {
+				remove_idea = WIN_unnatural_union
+				add_idea = WIN_dreams_of_unity
+			}
+		}
+	}
+}
+
+###### WIF 1963 Referendum ########
+country_event = { # Manley asks for help in stopping the Referendum
+	id = wif_crisis.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.1" }
+	title = wif_crisis.1.t
+	desc = wif_crisis.1.desc
+	picture = GFX_report_event_jamaica_norman_manley
+
+	is_triggered_only = yes
+
+	option = { # No Referendum what could possibly go wrong
+		name = wif_crisis.1.a
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = jamaican_independence_referendum_question
+					option = JAMAICAN_INDEPENDENCE_REFERENDUM_QUESTION_ALLOW
+				}
+			}
+		}
+		custom_effect_tooltip = wif_crisis.1.a.tt
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = wif_crisis.3
+					days = 5
+				}
+			}
+		}
+	}
+
+	option = { # Jamaica will decide, it's not like anybody will try to dunk us in our own continent, right? Right?
+		name = wif_crisis.1.b
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = jamaican_independence_referendum_question
+					option = JAMAICAN_INDEPENDENCE_REFERENDUM_QUESTION_REJECT
+				}
+			}
+		}
+		custom_effect_tooltip = wif_crisis.1.b.tt
+		hidden_effect = {
+			country_event = {
+				id = wif_crisis.2
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { # The referendum goes ahead. We must be ready
+	id = wif_crisis.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.2"
+
+		# Set up the referendum mechanic
+		WIN = {
+			hidden_effect = {
+				TNO_setup_jamaica_referendum = yes
+			}
+		}
+	}
+	title = wif_crisis.2.t
+	desc = wif_crisis.2.desc
+	picture = GFX_report_event_jamaica_voting
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.2.a
+		ai_chance = { factor = 1 }
+
+		custom_effect_tooltip = TNO_jamaica_referendum_category_enabled_tooltip
+		hidden_effect = {
+			TNO_fopo_add_jamaican_referendum_tab = yes
+			JAP = {
+				country_event = {
+					id = wif_crisis.11
+					days = 1
+				}
+			}
+			GER = {
+				country_event = {
+					id = wif_crisis.12
+					days = 1
+				}
+			}
+			USA = {
+				country_event = {
+					id = wif_crisis.200
+					days = 16
+				}
+			}
+			USA = { #Flavor events
+				country_event = {
+					id = wif_crisis.300
+					days = 20
+				}
+				country_event = {
+					id = wif_crisis.305
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+news_event = { # No Referendum. Sure hope the 1967 got his shit set straight.
+	id = wif_crisis.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.3" }
+	title = wif_crisis.3.t
+	desc = wif_crisis.3.desc
+	picture = GFX_news_event_jamaica_alexander_bustamante
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.3.a
+		ai_chance = { factor = 1 }
+
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = wif_crisis.100
+					days = 1260
+				}
+				country_event = {
+					id = wif_crisis.303
+					days = 50
+				}
+			}
+		}
+	}
+}
+
+
+country_event = { # GER - Jamaican Referendum. Let's dunk in the US on their own territory.
+	id = wif_crisis.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.10" }
+	title = wif_crisis.10.t
+	desc = wif_crisis.10.desc
+	#picture = 
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.10.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # JAP - Jamaican Referendum Begins. Let's dunk in the US on their own territory.
+	id = wif_crisis.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.10" }
+	title = wif_crisis.11.t
+	desc = wif_crisis.11.desc
+	picture = GFX_report_event_japan_generic_diplomats
+
+	is_triggered_only = yes
+
+	trigger = {
+		WIN = {
+			has_country_flag = Is_1963_Referendum_Going
+		}
+	}
+
+	option = { #
+		custom_effect_tooltip = TNO_jamaica_referendum_category_enabled_tooltip
+		name = wif_crisis.11.a
+		ai_chance = { factor = 1 }
+		TNO_fopo_add_jamaican_referendum_tab = yes
+	}
+}
+country_event = { # GER - Jamaican Referendum Begins. Let's dunk in the US on their own territory.
+	id = wif_crisis.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.10" }
+	title = wif_crisis.12.t
+	desc = wif_crisis.12.desc
+	picture = GFX_report_event_german_desk
+
+	trigger = {
+		WIN = {
+			has_country_flag = Is_1963_Referendum_Going
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = { #
+		custom_effect_tooltip = TNO_jamaica_referendum_category_enabled_tooltip
+		name = wif_crisis.12.a
+		ai_chance = { factor = 1 }
+		TNO_fopo_add_jamaican_referendum_tab = yes
+	}
+}
+
+
+# Constitutional Convention
+country_event = {
+	id = wif_crisis.15
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.15"
+		set_country_flag = USA_jamaica_crisis_guerrillas
+	}
+	title = wif_crisis.15.t
+	desc = wif_crisis.15.desc
+	picture = GFX_report_event_jamaica_rasta
+
+	trigger = {}
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.15.a
+		ai_chance = { factor = 1 }
+
+		WIN = {
+			add_stability = -0.1
+		}
+		custom_effect_tooltip = "wif_crisis.15.a.effect"
+
+	}
+}
+
+
+# Tick down referendum counter, apply tick
+country_event = {
+	id = wif_crisis.13
+
+	is_triggered_only = yes
+
+	trigger = {
+		WIN = {
+			has_country_flag = Is_1963_Referendum_Going
+		}
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.13"
+
+		WIN = {
+			TNO_jamaica_referendum_daily_tick = yes
+
+		}
+	}
+
+	hidden = yes
+}
+
+
+## REFERENDUM PASSES
+news_event = { # Referendum Passes World Event
+	id = wif_crisis.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.14" }
+	title = wif_crisis.14.t
+	desc = wif_crisis.14.desc
+	picture = GFX_news_event_jamaica_flag
+
+	trigger = {
+		WIN = {
+			has_country_flag = Is_1963_Referendum_Going
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = { # Is not the US
+		name = wif_crisis.14.a
+		ai_chance = { factor = 1 }
+
+		trigger = {
+			NOT = { tag = USA }
+		}
+	}
+	option = { # Is the US
+		name = wif_crisis.14.b
+		ai_chance = { factor = 1 }
+
+		trigger = {
+			tag = USA
+		}
+
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = wif_crisis.301
+					days = 60
+				}
+			}
+		}
+	}
+}
+
+## REFERENDUM FAILS
+news_event = { #  Referendum Fails World Event
+	id = wif_crisis.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.17" }
+	title = wif_crisis.17.t
+	desc = wif_crisis.17.desc
+	picture = GFX_news_event_jamaica_norman_manley
+
+	trigger = {
+		WIN = {
+			has_country_flag = Is_1963_Referendum_Going
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.17.a
+		ai_chance = { factor = 1 }
+
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = wif_crisis.302
+					days = 60
+				}
+			}
+		}
+	}
+}
+
+###### Post-Jamaica Leaving Trinidad Events ########
+
+# Williams' Proposal
+country_event = {
+	id = wif_crisis.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.7" }
+	title = wif_crisis.7.t
+	desc = wif_crisis.7.desc
+	picture = GFX_report_event_trinidad_eric_williams_handshake
+
+	is_triggered_only = yes
+
+	option = { # Support Williams
+		name = wif_crisis.7.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = "wif_crisis.7.a.tt"
+		hidden_effect = {
+			set_country_flag = Trinidad_Negotiations_Done
+			random_list = {
+				75 = {
+					every_country = {
+						news_event = {
+							id = wif_crisis.9
+							days = 14
+						}
+					}
+				}
+				25 = {
+					news_event = {
+						id = wif_crisis.8
+						days = 14
+					}
+				}
+			}
+		}
+	}
+	option = { # Oppose Williams
+		name = wif_crisis.7.b
+		ai_chance = { factor = 2 }
+		custom_effect_tooltip = "wif_crisis.7.b.tt"
+		hidden_effect = {
+			set_country_flag = Trinidad_Negotiations_Done
+			random_list = {
+				25 = {
+					every_country = {
+						news_event = {
+							id = wif_crisis.9
+							days = 14
+						}
+					}
+				}
+				75 = {
+					news_event = {
+						id = wif_crisis.8
+						days = 14
+					}
+				}
+			}
+		}
+	}
+}
+
+news_event = { # Trinidad Independence Failed Negotiations
+	id = wif_crisis.8
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.8"
+		hidden_effect = {
+			TNO_trinidad_leaves_WIF_negotiation = yes
+		}
+	}
+	title = wif_crisis.8.t
+	desc = wif_crisis.8.desc
+	picture = GFX_news_event_trinidad_flag
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.8.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+news_event = { # Unitary WIF
+	id = wif_crisis.9
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.9"
+		if = {
+			limit = { tag = WIN }
+			hidden_effect = {
+				TNO_trinidad_stays_WIF_negotiation = yes
+			}
+		}
+	}
+	title = wif_crisis.9.t
+	desc = wif_crisis.9.desc
+	picture = GFX_news_event_trinidad_eric_williams_speech
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.9.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+###### Post-Trinidad Leaving Negotiation Events ########
+
+# Final Negotiations, ask US for help
+country_event = {
+	id = wif_crisis.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.30" }
+	title = wif_crisis.30.t
+	desc = wif_crisis.30.desc
+	picture = GFX_report_event_wif_grantley_adams_proposal
+
+	is_triggered_only = yes
+
+
+	option = { # Propose closer ties
+		name = wif_crisis.30.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = "wif_crisis.30.a.tt"
+
+		set_country_flag = TNO_prevent_effect_flag
+		if = {
+			limit = { NOT = { has_country_flag = TNO_prevent_effect_flag } }
+			
+			USA = {
+				set_temp_variable = { misc_costs_temp = 0.1 }
+				custom_effect_tooltip = TNO_econ_misc_costs_increase_tt
+			}
+			WIN = {
+				give_resource_rights = { state = 695 receiver = USA }
+				hidden_effect = {
+					remove_ideas = {
+						WIN_fading_union
+						WIN_dreams_of_unity
+						WIN_trinidad_dominance
+						WIN_unnatural_union
+						WIN_more_perfect_union
+					}
+				}
+				swap_ideas = {
+					remove_idea = WIN_fading_union
+					add_idea = WIN_uncle_sams_aid
+				}
+			}
+		}
+		clr_country_flag = TNO_prevent_effect_flag
+
+		hidden_effect = {
+			random_list = {
+				60 = {
+					country_event = {
+						id = wif_crisis.31
+						days = 2
+					}
+				}
+				40 = {
+					country_event = {
+						id = wif_crisis.32
+						days = 2
+					}
+				}
+			}
+		}
+	}
+	option = { # Leave them
+		name = wif_crisis.30.b
+		ai_chance = { factor = 2 }
+		custom_effect_tooltip = "wif_crisis.30.b.tt"
+		hidden_effect = {
+			set_country_flag = Final_Negotiations_Done
+			random_list = {
+				60 = {
+					every_country = {
+						news_event = {
+							id = wif_crisis.35
+							days = 14
+						}
+					}
+				}
+				40 = {
+					every_country = {
+						news_event = {
+							id = wif_crisis.33
+							days = 14
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Final Negotiations, no to US
+country_event = {
+	id = wif_crisis.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.31" }
+	title = wif_crisis.31.t
+	desc = wif_crisis.31.desc
+	picture = GFX_report_event_wif_grantley_adams_unhappy
+	is_triggered_only = yes
+
+	option = {
+		name = wif_crisis.31.a
+		ai_chance = { factor = 1 }
+		set_country_flag = Final_Negotiations_Done
+
+		hidden_effect = {
+			random_list = {
+				60 = {
+					every_country = {
+						news_event = {
+							id = wif_crisis.35
+							days = 14
+						}
+					}
+				}
+				40 = {
+					every_country = {
+						news_event = {
+							id = wif_crisis.33
+							days = 14
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Final Negotiations, yes to US
+country_event = {
+	id = wif_crisis.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.32" }
+	title = wif_crisis.32.t
+	desc = wif_crisis.32.desc
+	picture = GFX_report_event_wif_grantley_adams
+
+	is_triggered_only = yes
+
+	option = {
+		name = wif_crisis.32.a
+		ai_chance = { factor = 1 }
+		set_country_flag = Final_Negotiations_Done
+
+		set_temp_variable = { misc_costs_temp = 0.1 }
+		custom_effect_tooltip = TNO_econ_misc_costs_increase_tt
+		hidden_effect = {
+			USA = {
+				add_ideas = WIN_uncle_sams_aid_misc_costs
+			}
+		}
+
+		WIN = {
+				
+			give_resource_rights = { state = 695 receiver = USA }
+			hidden_effect = {
+				remove_ideas = {
+					WIN_fading_union
+					WIN_dreams_of_unity
+					WIN_trinidad_dominance
+					WIN_unnatural_union
+					WIN_more_perfect_union
+				}
+				retire_country_leader = yes
+				create_country_leader = {
+					name = "Grantley Herbert Adams"
+					desc = "POLITICS_GRANTLEY_ADAMS_WIF3_DESC"
+					picture = "Portrait_WIN_Grantley_Adams.dds"
+					expire = "1971.10.28"
+					ideology = liberal_democracy_subtype
+					traits = {
+					}
+				}
+			}
+			swap_ideas = {
+				remove_idea = WIN_fading_union
+				add_idea = WIN_uncle_sams_aid
+			}
+		}
+
+		every_country = {
+			news_event = {
+				id = wif_crisis.34
+			}
+		}
+	}
+}
+
+news_event = { # WIF Stays the Course (until the oil crisis rip)
+	id = wif_crisis.33
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.33"
+
+		if = {
+			limit = { tag = WIN }
+			hidden_effect = {
+				set_country_flag = Little_Eleven_WIF
+				retire_country_leader = yes
+				create_country_leader = {
+					name = "Grantley Herbert Adams"
+					desc = "POLITICS_GRANTLEY_ADAMS_WIF2_DESC"
+					picture = "Portrait_WIN_Grantley_Adams.dds"
+					expire = "1971.10.28"
+					ideology = liberal_democracy_subtype
+					traits = {
+					}
+				}
+			}
+		}
+
+	}
+	title = wif_crisis.33.t
+	desc = wif_crisis.33.desc
+	picture = GFX_news_event_wif_survive
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.33.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+news_event = { # WIF Puppeted
+	id = wif_crisis.34
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.34"
+		if = {
+			limit = { tag = WIN }
+			hidden_effect = {
+				TNO_WIF_joins_USA = yes
+			}
+		}
+	}
+	title = wif_crisis.34.t
+	desc = wif_crisis.34.desc
+	picture = GFX_news_event_wif_usa
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.34.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+news_event = { # WIF Collapses
+	id = wif_crisis.35
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.35"
+		if = {
+			limit = { tag = WIN }
+			hidden_effect = {
+				TNO_total_WIF_collapse = yes
+			}
+		}
+	}
+	title = wif_crisis.35.t
+	desc = wif_crisis.35.desc
+	picture = GFX_news_event_wif_collapse
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.35.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+news_event = { # WIF Collapses, oil crisis
+	id = wif_crisis.36
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.36"
+		if = {
+			limit = { tag = WIN }
+			hidden_effect = {
+				TNO_total_WIF_collapse = yes
+			}
+		}
+	}
+	title = wif_crisis.36.t
+	desc = wif_crisis.36.desc
+	picture = GFX_news_event_wif_collapse
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.36.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # Check if WIF should collapse during oil crisis
+	id = wif_crisis.37
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.2374"
+
+		WIN = {
+			if = {
+				limit = { has_country_flag = Little_Eleven_WIF }
+
+				every_country = {
+					news_event = {
+						id = wif_crisis.36
+					}
+				}
+			}
+		}
+	}
+
+	hidden = yes
+}
+
+
+###### Cosmetic Tag Switches
+
+# Caribbean Union (Williams' Plan, Trinidad Negotiation Successful)
+country_event = {
+	id = wif_crisis.50
+
+	is_triggered_only = yes
+
+	trigger = {
+		WIN = {
+			has_country_flag = Trinidad_Negotiations_Success
+		}
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.50"
+
+		WIN = {
+
+			remove_ideas = {
+				WIN_unnatural_union
+				WIN_dreams_of_unity
+			}
+			add_ideas = {
+				WIN_trinidad_dominance
+			}
+
+			set_cosmetic_tag = WIN_unitary
+			WIN_set_leader_eric_williams = yes
+		}
+	}
+
+	hidden = yes
+}
+# Caribbean Commonwealth (Manley Plan, Jamaica Stays)
+country_event = {
+	id = wif_crisis.51
+
+	is_triggered_only = yes
+
+	trigger = {
+		WIN = {
+			has_country_flag = Was_1963_Referendum_Failure
+		}
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.51"
+
+		WIN = {
+
+			remove_ideas = {
+				WIN_unnatural_union
+				WIN_dreams_of_unity
+			}
+			add_ideas = {
+				WIN_more_perfect_union
+			}
+
+			set_cosmetic_tag = WIN_federated
+			WIN_set_leader_norman_manley = yes
+		}
+	}
+
+	hidden = yes
+}
+
+############# Jamaican Crisis
+
+
+# Political Violence Escalates in Jamaica
+country_event = {
+	id = wif_crisis.100
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.100" }
+	title = wif_crisis.100.t
+	desc = wif_crisis.100.desc
+	picture = GFX_report_event_jamaica_shack
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = wif_crisis.100.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = {
+				id = wif_crisis.101
+				days = 60
+			}
+		}
+	}
+}
+
+# Rastafarian Incident
+country_event = {
+	id = wif_crisis.101
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.101" }
+	title = wif_crisis.101.t
+	desc = wif_crisis.101.desc
+	picture = GFX_report_event_jamaica_rasta
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = wif_crisis.101.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = {
+				id = wif_crisis.102
+				days = 60
+			}
+		}
+	}
+}
+
+# Rodney Riots Begin
+country_event = {
+	id = wif_crisis.102
+	immediate = { log = "[GetDateText]: [Root.GetName]: event wif_crisis.102" }
+	title = wif_crisis.102.t
+	desc = wif_crisis.102.desc
+	picture = GFX_report_event_jamaica_rodney
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.102.a
+		ai_chance = { factor = 1 }
+
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = wif_crisis.103
+					days = 14
+				}
+			}
+		}
+	}
+}
+
+# Crisis Begins, USA
+country_event = {
+	id = wif_crisis.103
+	picture = GFX_report_event_jamaica_crisis
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.103"
+
+		hidden_effect = {
+			TNO_setup_jamaica_crisis = yes
+			TNO_fopo_add_jamaican_crisis_tab = yes
+			JAP = {
+				country_event = {
+					id = wif_crisis.104
+				}
+			}
+		}
+	}
+	title = wif_crisis.103.t
+	desc = wif_crisis.103.desc
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.103.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+# Crisis Begins, JAP 
+country_event = {
+	id = wif_crisis.104
+	picture = GFX_report_event_jamaica_crisis
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.104"
+
+		hidden_effect = {
+			TNO_fopo_add_jamaican_crisis_tab = yes
+		}
+	}
+	title = wif_crisis.104.t
+	desc = wif_crisis.104.desc
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.104.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+# Manley and Bustamante meet, rebels quashed
+country_event = {
+	id = wif_crisis.105
+	picture = GFX_report_event_jamaica_meeting
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.105"
+	}
+	title = wif_crisis.105.t
+	desc = wif_crisis.105.desc
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.105.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+# Manley and Bustamante meet, Manley will be out
+country_event = {
+	id = wif_crisis.106
+	picture = GFX_report_event_jamaica_meeting
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.106"
+	}
+	title = wif_crisis.106.t
+	desc = wif_crisis.106.desc
+
+	is_triggered_only = yes
+
+	option = { #
+		name = wif_crisis.106.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+
+# Bloodless Coup in Jamaica
+news_event = {
+	id = wif_crisis.107
+	picture = GFX_news_event_jamaica_alexander_bustamante_2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.107"
+
+		hidden_effect = {
+			if = {
+				limit = { tag = WIN }
+				hidden_effect = {
+					TNO_clear_jamaica_crisis = yes
+					TNO_jamaica_leaves_WIF_coup = yes
+				}
+			}
+		}
+	}
+	title = wif_crisis.107.t
+	desc = wif_crisis.107.desc
+
+	is_triggered_only = yes
+	# fire_only_once = yes
+
+	option = {
+		name = wif_crisis.107.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+# Protests quashed in Jamaica
+news_event = {
+	id = wif_crisis.108
+	picture = GFX_news_event_jamaica_norman_manley
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.108"
+
+		hidden_effect = {
+			if = {
+				limit = { tag = WIN }
+				hidden_effect = {
+					TNO_clear_jamaica_crisis = yes
+				}
+			}
+		}
+	}
+	title = wif_crisis.108.t
+	desc = wif_crisis.108.desc
+
+	is_triggered_only = yes
+	# fire_only_once = yes
+
+	option = {
+		name = wif_crisis.108.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+# Crisis Tick
+country_event = {
+	id = wif_crisis.200
+	title = wif_crisis.200.t
+	desc = wif_crisis.200.desc
+
+	is_triggered_only = yes
+
+	trigger = {
+		WIN = {
+			has_country_flag = Jamaica_Crisis_Ongoing
+		}
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.13"
+
+		WIN = {
+			TNO_jamaica_crisis_daily_tick = yes
+		}
+		country_event = {
+			id = wif_crisis.200
+			days = 1
+		}
+	}
+
+	hidden = yes
+}
+
+#############
+
+# BPR randomization check
+country_event = {
+	id = wif_crisis.24
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.24"
+
+		WIN = {
+			if = {
+				limit = { NOT = { has_country_flag = Trinidad_Negotiations_Success } }
+
+				random_list = {
+					
+					50 = {
+						TNO_trinidad_bpr_succeeds = yes
+					}
+					50 = {
+						# Nothing happen
+					}
+				}
+			}
+		}
+	}
+
+	hidden = yes
+}
+
+
+# BPR succeeds in Trinidad
+news_event = {
+	id = wif_crisis.25
+
+	picture = GFX_news_event_trinidad_bpr
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event wif_crisis.25"
+	}
+	title = wif_crisis.25.t
+	desc = wif_crisis.25.desc
+
+	is_triggered_only = yes
+	# fire_only_once = yes
+
+	option = {
+		name = wif_crisis.25.a
+
+		trigger = {
+			NOT = {
+				OR = {
+					tag = USA
+					tag = JAP
+					tag = GER
+					tag = WIN
+					tag = JAM
+				}
+			}
+		}
+
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = wif_crisis.25.b
+
+		trigger = {
+			tag = USA
+		}
+
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = wif_crisis.25.c
+
+		trigger = {
+			OR = {
+				tag = GER
+				tag = JAP
+			}
+		}
+
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = wif_crisis.25.d
+
+		trigger = {
+			OR = {
+				tag = WIN
+				tag = JAM
+			}
+		}
+
+		ai_chance = { factor = 1 }
+	}
+}
+
+##############
+
+
+country_event = { # Contact with the Honduras Cartels
+	id = jamaican_crisis_jap.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jamaican_crisis_jap.1"}
+	title = jamaican_crisis_jap.6.t
+	desc = jamaican_crisis_jap.6.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = jamaican_crisis_jap.6.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # Greasing their palms
+	id = jamaican_crisis_jap.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jamaican_crisis_jap.1"}
+	title = jamaican_crisis_jap.7.t
+	desc = jamaican_crisis_jap.7.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = jamaican_crisis_jap.7.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+country_event = { # Sending our conboys
+	id = jamaican_crisis_jap.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jamaican_crisis_jap.1"}
+	title = jamaican_crisis_jap.8.t
+	desc = jamaican_crisis_jap.8.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = jamaican_crisis_jap.8.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+### Flavor 
+
+country_event = { # Bob Marley
+	id = wif_crisis.300
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.300"}
+	title = wif_crisis.300.t
+	desc = wif_crisis.300.d
+
+	picture = GFX_report_event_radio1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = wif_crisis.300.a
+	}
+}
+
+country_event = { # Marley's album is a success after the referendum passes
+	id = wif_crisis.301
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.301"}
+	title = wif_crisis.301.t
+	desc = wif_crisis.301.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	picture = GFX_report_event_radio1
+
+	option = {
+		name = wif_crisis.301.a
+		hidden_effect = {
+			USA = {
+				country_event = { id = wif_crisis.307 days = 2920 }
+			}
+			JAP = {
+				country_event = { id = wif_crisis.308 days = 2920 }
+			}
+		}
+	}
+}
+
+country_event = { # Marley's album is not as great as a success after the referendum fails
+	id = wif_crisis.302
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.302"}
+	title = wif_crisis.302.t
+	desc = wif_crisis.302.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	picture = GFX_report_event_radio1
+
+	option = {
+		name = wif_crisis.302.a
+	}
+}
+
+country_event = { # Marley's album is okay, as the US forbids the Jamaican indep. ref.
+	id = wif_crisis.303
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.303"}
+	title = wif_crisis.303.t
+	desc = wif_crisis.303.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	picture = GFX_report_event_radio1
+
+	option = {
+		name = wif_crisis.303.a
+	}
+}
+
+country_event = { # Deterioration
+	id = wif_crisis.304
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.304"}
+	title = wif_crisis.304.t
+	desc = wif_crisis.304.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	picture = GFX_Radio_Mic
+
+	option = {
+		name = wif_crisis.304.a
+	}
+}
+
+country_event = { # I Shot the Sheriff
+	id = wif_crisis.305
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.305"}
+	title = wif_crisis.305.t
+	desc = wif_crisis.305.d
+
+	picture = GFX_Radio_Mic
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = wif_crisis.305.a
+		hidden_effect = {
+			country_event = {
+				id = wif_crisis.306
+				days = 6
+			}
+		}
+	}
+}
+
+country_event = { # ...But I didn't Shoot the Deputy
+	id = wif_crisis.306
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.306"}
+	title = wif_crisis.306.t
+	desc = wif_crisis.306.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	picture = GFX_report_event_radio1
+
+	option = {
+		name = wif_crisis.306.a
+	}
+}
+
+country_event = { # Reggae Craze - OFN
+	id = wif_crisis.307
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.306"}
+	title = wif_crisis.307.t
+	desc = wif_crisis.307.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = wif_crisis.307.a
+	}
+}
+
+country_event = { # Reggae Craze - Sphere
+	id = wif_crisis.308
+	immediate = {log = "[GetDateText]: [Root.GetName]: event wif_crisis.306"}
+	title = wif_crisis.308.t
+	desc = wif_crisis.308.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = wif_crisis.308.a
+	}
+}

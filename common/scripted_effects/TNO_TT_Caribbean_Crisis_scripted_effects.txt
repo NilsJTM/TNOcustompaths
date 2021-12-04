@@ -1,0 +1,1247 @@
+# Jamaica leaves the WIF because of a referendum
+TNO_jamaica_leaves_WIF_referendum = {
+
+	WIN = {
+		set_country_flag = Was_1963_Referendum_Success
+	}
+	every_country = {
+		news_event = {
+			id = wif_crisis.14
+		}
+	}
+	JAM = {
+		transfer_state = 689
+	}
+	
+	USA = {
+		set_autonomy = {
+			target = JAM
+			autonomy_state = autonomy_satellite
+		}
+
+		country_event = {
+			id = wif_crisis.7
+			days = 55
+		}
+	}
+
+	JAM = {
+		set_politics = {
+			ruling_party = conservative_democracy
+		}
+		add_ideas = { JAM_rastafarian_repression }
+		set_popularities = {
+    		liberal_democracy = 44
+    		conservative_democracy = 51
+			social_democracy = 5
+		}
+		add_ideas = {
+			OFN_Dependent_Member
+		}
+		econ_join_sphere_USA = yes
+		set_temp_variable = { TNO_economy_subtype_temp = 1 }
+		econ_subtype_change = yes
+	}
+}
+
+
+# Jamaica leaves the WIF via coup
+TNO_jamaica_leaves_WIF_coup = {
+	TNO_clear_jamaica_referendum = yes
+	JAM = {
+		transfer_state = 689
+		remove_ideas = { OFN_Dependent_Member }
+		add_ideas = { JAM_jamaica_first }
+	}
+	USA = {
+		end_puppet = JAM
+		remove_from_faction	= JAM
+
+		country_event = {
+			id = wif_crisis.7
+			days = 35
+		}
+	}
+	
+	JAM = {
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		set_popularities = {
+    		liberal_democracy = 32
+    		conservative_democracy = 28
+    		authoritarian_democracy = 38
+			social_democracy = 2
+		}
+	}
+}
+
+# Jamaica votes to stay in the referendum
+TNO_jamaica_stays_WIF_referendum = {
+
+	WIN = {
+		set_country_flag = Was_1963_Referendum_Failure
+		country_event = {
+			id = wif_crisis.51
+			days = 300
+		}
+	}
+
+	every_country = {
+		news_event = {
+			id = wif_crisis.17
+		}
+	}
+}
+
+# Trinidad leaves the WIF during negotiations
+TNO_trinidad_leaves_WIF_negotiation = {
+	WIN = {
+		if = {
+			limit = { has_cosmetic_tag = WIN_unitary }
+			drop_cosmetic_tag = yes
+		}
+	}
+	TRI = {
+		transfer_state = 691
+	}
+	USA = {
+		set_autonomy = {
+			target = TRI
+			autonomy_state = autonomy_client_state
+		}
+
+		WIN = {
+			remove_ideas = {
+				WIN_unnatural_union
+				WIN_dreams_of_unity
+			}
+			add_ideas = {
+				WIN_fading_union
+			}
+		}
+
+		country_event = {
+			id = wif_crisis.30
+			days = 38
+		}
+	}
+	TRI = {
+		set_politics = {
+			ruling_party = liberal_democracy
+		}
+		add_ideas = {
+			OFN_Dependent_Member
+			TRI_pnm_dominance
+		}
+		set_popularities = {
+			socialist = 4
+			social_democracy = 21
+			liberal_democracy = 53
+			conservative_democracy = 22
+		}
+		econ_join_sphere_USA = yes
+		set_temp_variable = { TNO_economy_subtype_temp = 1 }
+		econ_subtype_change = yes
+	}
+	WIN = {
+		set_capital = 901
+	}
+}
+
+# Trinidad stays in WIF during negotations, Williams plan
+TNO_trinidad_stays_WIF_negotiation = {
+	WIN = {
+		set_country_flag = Trinidad_Negotiations_Success
+		country_event = {
+			id = wif_crisis.50
+			days = 300
+		}
+	}
+}
+
+WIN_set_leader_eric_williams = {
+	WIN = {
+		create_country_leader = {
+			name = "Eric Williams"
+			desc = "POLITICS_ERIC_WILLIAMS_WIF_DESC"
+			picture = "Portrait_WIN_Eric_Williams.dds"
+			expire = "1971.10.28"
+			ideology = liberal_democracy_national_liberal_subtype
+			traits = {
+			}
+		}
+	}
+}
+WIN_set_leader_grantley_adams = {
+	WIN = {
+		create_country_leader = {
+			name = "Grantley Herbert Adams"
+			desc = "POLITICS_GRANTLEY_ADAMS_DESC"
+			picture = "Portrait_WIN_Grantley_Adams.dds"
+			expire = "1971.10.28"
+			ideology = liberal_democracy_subtype
+			traits = {
+			}
+		}
+	}
+}
+WIN_set_leader_norman_manley = {
+	WIN = {
+		create_country_leader = {
+			name = "Norman Manley"
+			desc = "POLITICS_NORMAN_MANLEY_WIF_DESC"
+			picture = "Portrait_WIN_Norman_Manley.dds"
+			expire = "1971.10.28"
+			ideology = liberal_democracy_subtype
+			traits = {
+			}
+		}
+	}
+}
+
+
+TRI_reset_party_names = {
+	TRI = {
+		set_party_name ={
+			ideology = social_democracy
+			long_name = TRI_social_democracy_party_long
+			name = TRI_social_democracy_party
+		}
+		set_party_name ={
+			ideology = socialist
+			long_name = TRI_socialist_party_long
+			name = TRI_socialist_party
+		}
+		set_party_name ={
+			ideology = liberal_democracy
+			long_name = TRI_liberal_democracy_party_long
+			name = TRI_liberal_democracy_party
+		}
+		set_party_name ={
+			ideology = conservative_democracy
+			long_name = TRI_conservative_democracy_party_long
+			name = TRI_conservative_democracy_party
+		}
+	}
+}
+
+TRI_bpr_party_names = {
+	TRI = {
+		set_party_name ={
+			ideology = social_democracy
+			long_name = TRI_bpr_social_democracy_party_long
+			name = TRI_bpr_social_democracy_party
+		}
+		set_party_name ={
+			ideology = socialist
+			long_name = TRI_bpr_socialist_party_long
+			name = TRI_bpr_socialist_party
+		}
+		set_party_name ={
+			ideology = liberal_democracy
+			long_name = TRI_bpr_liberal_democracy_party_long
+			name = TRI_bpr_liberal_democracy_party
+		}
+		set_party_name ={
+			ideology = conservative_democracy
+			long_name = TRI_bpr_conservative_democracy_party_long
+			name = TRI_bpr_conservative_democracy_party
+		}
+	}
+}
+
+
+TNO_WIF_joins_USA = {
+	USA = {
+		add_ideas = WIN_uncle_sams_aid_misc_costs
+	}
+	WIN = {
+		save_party_popularities = yes
+
+		
+		diplomatic_relation = {
+			country = USA
+			relation = docking_rights
+			active = yes
+		}
+		WIN = {
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "Grantley Herbert Adams"
+				desc = "POLITICS_GRANTLEY_ADAMS_WIF3_DESC"
+				picture = "Portrait_WIN_Grantley_Adams.dds"
+				expire = "1971.10.28"
+				ideology = liberal_democracy_subtype
+				traits = {
+				}
+			}
+			remove_ideas = {
+				WIN_fading_union
+				WIN_dreams_of_unity
+				WIN_trinidad_dominance
+				WIN_unnatural_union
+				WIN_more_perfect_union
+			}
+			add_ideas = WIN_uncle_sams_aid
+		}
+		give_resource_rights = { state = 695 receiver = USA }
+	}
+	USA = {
+		set_autonomy = {
+			target = WIN
+			autonomy_state = autonomy_italy_reliant
+		}
+	}
+	WIN = {
+		apply_party_popularities = yes
+		set_cosmetic_tag = WIN_puppeted
+		set_temp_variable = { TNO_economy_subtype_temp = 1 }
+		econ_subtype_change = yes
+	}
+}
+
+# Black Power Revolution trigger in Trinidad
+TNO_trinidad_bpr_succeeds = {
+	WIN = {
+		if = {
+			limit = { has_cosmetic_tag = WIN_unitary }
+			drop_cosmetic_tag = yes
+		}
+		WIN_set_leader_grantley_adams = yes
+	}
+	TRI = {
+		if = {
+			limit = {
+				controls_state = 691
+			}
+			set_country_flag = TRI_already_left_WIF
+		} 
+		else = {
+			clr_country_flag = TRI_already_left_WIF
+		}
+		transfer_state = 691
+	}
+	USA = {
+		end_puppet = TRI
+		remove_from_faction	= TRI
+	}
+	TRI = {
+		TRI_bpr_party_names = yes
+		set_politics = {
+			ruling_party = socialist
+		}
+		set_popularities = {
+			socialist = 14	
+			social_democracy = 22
+			liberal_democracy = 20
+			conservative_democracy = 16
+			authoritarian_democracy = 11
+			fascism = 7
+			ultranationalism = 10
+		}
+		set_temp_variable = { TNO_economy_type_temp = 3 }
+		econ_type_change = yes
+		remove_ideas = {
+			OFN_Dependent_Member
+			TRI_pnm_dominance
+		}
+		add_ideas = {
+			TRI_disunited_front
+		}
+	}
+
+	every_country = {
+		news_event = {
+			id = wif_crisis.25
+		}
+	}
+}
+
+# Reset the WIF to the initial state, used for debug
+TNO_reset_WIF = {
+	TNO_clear_jamaica_referendum = yes
+
+	USA = {
+		remove_ideas = WIN_uncle_sams_aid_misc_costs
+	}
+	JAM = {
+		remove_ideas = { JAM_jamaica_first JAM_rastafarian_repression }
+	}
+	TRI = {
+		remove_ideas = { TRI_pnm_dominance TRI_disunited_front }
+	}
+	WIN = {
+		remove_resource_rights = 695
+		remove_ideas = {
+			WIN_fading_union
+			WIN_dreams_of_unity
+			WIN_trinidad_dominance
+			WIN_uncle_sams_aid
+			WIN_more_perfect_union
+		}
+		add_ideas = {
+			WIN_unnatural_union
+		}
+	}
+
+	WIN = {
+		WIN_set_leader_grantley_adams = yes
+		clr_country_flag = Was_1963_Referendum_Failure
+		clr_country_flag = Was_1963_Referendum_Success
+		clr_country_flag = Trinidad_Negotiations_Done
+		clr_country_flag = Trinidad_Negotiations_Success
+		clr_country_flag = Little_Eleven_WIF
+
+		if = {
+			limit = { has_cosmetic_tag = WIN_unitary }
+			drop_cosmetic_tag = yes
+		}
+		if = {
+			limit = { has_cosmetic_tag = WIN_federated }
+			drop_cosmetic_tag = yes
+		}
+		if = {
+			limit = { has_cosmetic_tag = WIN_puppeted }
+			drop_cosmetic_tag = yes
+		}
+	}
+	TRI = {
+		if = {
+			limit = { has_cosmetic_tag = TRI_grenada }
+			drop_cosmetic_tag = yes
+		}
+		TRI_reset_party_names = yes
+	}
+	
+
+	WIN = {
+		transfer_state = 689
+		transfer_state = 691
+		transfer_state = 901
+		transfer_state = 692
+		transfer_state = 902
+		transfer_state = 1329
+		transfer_state = 903
+		transfer_state = 694
+		transfer_state = 907
+		transfer_state = 904
+		transfer_state = 695
+		transfer_state = 900
+		transfer_state = 308
+
+		add_ideas = {
+			OFN_Dependent_Member
+		}
+		if = {
+			limit = { NOT = { is_subject_of = USA }}
+			USA = {
+				puppet = WIN
+			}
+		}
+	}
+	USA = {
+		remove_resource_rights = 695
+		add_to_faction = WIN
+		set_autonomy = {
+			target = WIN
+			autonomy_state = autonomy_client_state
+		}
+	}
+
+	WIN = {
+		
+
+		set_popularities = {
+			conservative_democracy = 45
+			liberal_democracy = 49
+			social_democracy = 4
+			authoritarian_democracy = 2
+
+			communist = 0
+			socialist = 0
+			despotism = 0
+			fascism = 0
+			national_socialism = 0
+			ultranationalism = 0
+			
+		}
+	}
+}
+
+
+# Finish the Jamaican referendum, triggering its effects, and then tears it down
+TNO_finish_jamaica_referendum = {
+	random_list = {
+		var:WIN.WIN_jamaica_win_pct = {
+		    modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = jamaican_independence_referendum_result
+                    option = JAMAICAN_INDEPENDENCE_REFERENDUM_RESULT_SUCCESS
+                }
+            }
+			custom_effect_tooltip = TNO_jamaica_jamaica_win_tt
+
+			hidden_effect = {
+				TNO_jamaica_leaves_WIF_referendum = yes
+			}
+		}
+		var:WIN.WIN_wif_win_pct = {
+		    modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = jamaican_independence_referendum_result
+                    option = JAMAICAN_INDEPENDENCE_REFERENDUM_RESULT_FAIL
+                }
+            }
+			custom_effect_tooltip = TNO_jamaica_wif_win_tt
+
+			hidden_effect = {
+				TNO_jamaica_stays_WIF_referendum = yes
+			}
+		}
+	}
+
+	TNO_clear_jamaica_referendum = yes
+}
+
+# Tears down the Jamaica referendum, deactivating decision categories etc
+TNO_clear_jamaica_referendum = {
+	WIN = {
+		clr_country_flag = TNO_Nation_IntAlign_Enable
+		clr_country_flag = Is_1963_Referendum_Going
+	}
+	USA = {
+		TNO_fopo_remove_jamaican_referendum_tab = yes
+	}
+	GER = {
+		TNO_fopo_remove_jamaican_referendum_tab = yes
+	}
+	JAP = {
+		TNO_fopo_remove_jamaican_referendum_tab = yes
+	}
+}
+
+# Setup the Jamaican referendum, setting initial influence and relevant flags
+TNO_setup_jamaica_referendum = {
+	WIN = {
+		set_country_flag = Is_1963_Referendum_Going
+
+		# Set up initial favor, daily tick
+		TNO_set_jamaica_daily_variance = yes
+		set_variable = { WIN_jamaica_favor = 50 }
+		set_variable = { WIN_jamaica_daily_favor = 0 }
+		add_to_variable = { WIN_jamaica_daily_favor = jamaica_daily_favor  }
+		
+		# Set timer, and start countdown event
+		set_variable = { WIN_referendum_times_delayed = 0 }
+		set_variable = { WIN_referendum_days_left = 60 }
+		set_variable = { WIN_referendum_days_max = 60 }
+		set_variable = { WIN_referendum_fill = 100 }
+		set_variable = { WIN_us_intervention = 10 }
+		set_variable = { WIN_foreign_intervention = 0 }
+
+		clr_country_flag = TNO_WIN_commonweawlth_connection_made
+		clr_country_flag = TNO_WIN_investigation_happening
+		clr_country_flag = TNO_WIN_delay_happening
+		clr_country_flag = TNO_WIN_delay_happening_2
+		clr_country_flag = TNO_WIN_delay_happening_3
+
+		USA = {
+			clr_country_flag = USA_jamaica_crisis_intervention_blocked
+			clr_country_flag = USA_jamaica_crisis_guerrillas
+		}
+		GER = {
+			clr_country_flag = GER_jamaica_crisis_intervention_blocked
+		}
+		JAP = {
+			clr_country_flag = JAP_jamaica_crisis_intervention_blocked
+		}
+
+		country_event = {
+			id = wif_crisis.13
+			days = 1
+		}
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_set_jamaica_daily_variance = {
+	random_list = {
+		25 = {
+			set_variable = {
+				jamaica_daily_favor = 0.20
+			}
+		}
+		25 = {
+			set_variable = {
+				jamaica_daily_favor = -0.20
+			}
+		}
+		25 = {
+			set_variable = {
+				jamaica_daily_favor = -0.10
+			}
+		}
+		25 = {
+			set_variable = {
+				jamaica_daily_favor = 0.10
+			}
+		}
+	}
+}
+
+TNO_increase_us_intervention_low = {
+	custom_effect_tooltip = TNO_increase_us_intervention_low
+	WIN = {
+		add_to_variable = { WIN_us_intervention = 10 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_decrease_us_intervention_low = {
+	custom_effect_tooltip = TNO_decrease_us_intervention_low
+	WIN = {
+		add_to_variable = { WIN_us_intervention = -10 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_increase_us_intervention_med = {
+	custom_effect_tooltip = TNO_increase_foreign_intervention_med
+	WIN = {
+		add_to_variable = { WIN_us_intervention = 20 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_decrease_us_intervention_med = {
+	custom_effect_tooltip = TNO_decrease_us_intervention_med
+	WIN = {
+		add_to_variable = { WIN_us_intervention = -20 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_increase_us_intervention_high = {
+	custom_effect_tooltip =  TNO_increase_us_intervention_high
+	WIN = {
+		add_to_variable = { WIN_us_intervention = 30 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_decrease_us_intervention_high = {
+	custom_effect_tooltip =  TNO_decrease_us_intervention_high
+	WIN = {
+		add_to_variable = { WIN_us_intervention = -30 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_increase_foreign_intervention_low = {
+	custom_effect_tooltip = TNO_increase_foreign_intervention_low
+	WIN = {
+		add_to_variable = { WIN_foreign_intervention = 10 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_decrease_foreign_intervention_low = {
+	custom_effect_tooltip = TNO_decrease_foreign_intervention_low
+	WIN = {
+		add_to_variable = { WIN_foreign_intervention = -10 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_increase_foreign_intervention_med = {
+	custom_effect_tooltip = TNO_increase_foreign_intervention_med
+	WIN = {
+		add_to_variable = { WIN_foreign_intervention = 20 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_decrease_foreign_intervention_med = {
+	custom_effect_tooltip = TNO_decrease_foreign_intervention_med
+	WIN = {
+		add_to_variable = { WIN_foreign_intervention = -20 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_increase_foreign_intervention_high = {
+	custom_effect_tooltip = TNO_increase_foreign_intervention_high
+	WIN = {
+		add_to_variable = { WIN_foreign_intervention = 30 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_decrease_foreign_intervention_high = {
+	custom_effect_tooltip = TNO_decrease_foreign_intervention_high
+	WIN = {
+		add_to_variable = { WIN_foreign_intervention = -30 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+
+
+TNO_increase_jamaica_indep_daily_tick_low = {
+	custom_effect_tooltip = TNO_increase_jamaica_indep_daily_tick_low
+	WIN = {
+		subtract_from_variable = { WIN_jamaica_daily_favor = 0.25 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_decrease_jamaica_indep_daily_tick_low = {
+	custom_effect_tooltip = TNO_decrease_jamaica_indep_daily_tick_low
+	WIN = {
+		add_to_variable = { WIN_jamaica_daily_favor = 0.25 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_increase_jamaica_indep_daily_tick_med = {
+	custom_effect_tooltip = TNO_increase_jamaica_indep_daily_tick_med
+	WIN = {
+		subtract_from_variable = { WIN_jamaica_daily_favor = 0.5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_decrease_jamaica_indep_daily_tick_med = {
+	custom_effect_tooltip = TNO_decrease_jamaica_indep_daily_tick_med
+	WIN = {
+		add_to_variable = { WIN_jamaica_daily_favor = 0.5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_increase_jamaica_indep_daily_tick_high = {
+	custom_effect_tooltip = TNO_increase_jamaica_indep_daily_tick_high
+	WIN = {
+		subtract_from_variable = { WIN_jamaica_daily_favor = 0.75 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_decrease_jamaica_indep_daily_tick_high = {
+	custom_effect_tooltip = TNO_decrease_jamaica_indep_daily_tick_high
+	WIN = {
+		add_to_variable = { WIN_jamaica_daily_favor = 0.75 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_increase_jamaica_indep_chance_low = {
+	custom_effect_tooltip = TNO_increase_jamaica_indep_chance_low
+	WIN = {
+		subtract_from_variable = { WIN_jamaica_favor = 2.5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_decrease_jamaica_indep_chance_low = {
+	custom_effect_tooltip = TNO_decrease_jamaica_indep_chance_low
+	WIN = {
+		add_to_variable = { WIN_jamaica_favor = 2.5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_increase_jamaica_indep_chance_med = {
+	custom_effect_tooltip = TNO_increase_jamaica_indep_chance_med
+	WIN = {
+		subtract_from_variable = { WIN_jamaica_favor = 5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_decrease_jamaica_indep_chance_med = {
+	custom_effect_tooltip = TNO_decrease_jamaica_indep_chance_med
+	WIN = {
+		add_to_variable = { WIN_jamaica_favor = 5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_increase_jamaica_indep_chance_high = {
+	custom_effect_tooltip = TNO_increase_jamaica_indep_chance_high
+	WIN = {
+		subtract_from_variable = { WIN_jamaica_favor = 7.5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+TNO_decrease_jamaica_indep_chance_high = {
+	custom_effect_tooltip = TNO_decrease_jamaica_indep_chance_high
+	WIN = {
+		add_to_variable = { WIN_jamaica_favor = 7.5 }
+		TNO_recompute_jamaica_indep_chance = yes
+	}
+}
+
+TNO_jamaica_referendum_daily_tick = {
+	WIN = {
+		subtract_from_variable = { WIN_referendum_days_left = 1 }
+		set_variable = { WIN_referendum_fill = 100 }
+		multiply_variable = { WIN_referendum_fill = WIN_referendum_days_left }
+		divide_variable = { WIN_referendum_fill = WIN_referendum_days_max }
+
+
+		add_to_variable = { WIN_jamaica_favor = WIN_jamaica_daily_favor }
+
+		TNO_recompute_jamaica_indep_chance = yes
+
+		if = {
+			limit = { check_variable = { WIN_referendum_days_left = 0 } }
+
+			TNO_finish_jamaica_referendum = yes
+		}
+		else = {
+			country_event = {
+				id = wif_crisis.13
+				days = 1
+			}
+		}
+	}
+}
+
+
+## Jamaican Crisis
+
+dmz_test = {
+	689 = {
+		set_demilitarized_zone = yes
+	}	
+}
+TNO_setup_jamaica_crisis = {
+	689 = {
+		set_demilitarized_zone = yes
+	}
+	WIN = {
+		set_country_flag = Jamaica_Crisis_Ongoing
+		set_country_flag = Jamaica_Crisis_Unresolved
+		set_variable = { WIN_violence = 20 }
+		set_variable = { WIN_fervor = 40 }
+
+		set_variable = { WIN_violence_tick = 0 }
+		set_variable = { WIN_fervor_tick = 0.5 }
+
+		clr_country_flag = TNO_jamaica_crisis_squeezing_guns
+		clr_country_flag = TNO_jamaica_crisis_martial_law
+
+		country_event = {
+			id = wif_crisis.200
+			days = 1
+		}
+	}
+}
+
+TNO_end_jamaica_crisis_coup = {
+	WIN = {
+		clr_country_flag = Jamaica_Crisis_Unresolved
+	}
+	USA = {
+		country_event = {
+			id = wif_crisis.106
+		}
+	}
+	JAP = {
+		country_event = {
+			id = wif_crisis.106
+		}
+	}
+
+	every_country = {
+		news_event = {
+			id = wif_crisis.107
+			days = 3
+		}
+	}
+}
+
+TNO_end_jamaica_crisis_calmed = {
+	WIN = {
+		clr_country_flag = Jamaica_Crisis_Unresolved
+	}
+	USA = {
+		country_event = {
+			id = wif_crisis.105
+		}
+	}
+	JAP = {
+		country_event = {
+			id = wif_crisis.105
+		}
+	}
+
+	every_country = {
+		news_event = {
+			id = wif_crisis.108
+			days = 3
+		}
+	}
+}
+
+# Tears down the Jamaica crisis, deactivating decision categories etc
+TNO_clear_jamaica_crisis = {
+	689 = {
+		set_demilitarized_zone = no
+	}
+	WIN = {
+		clr_country_flag = Jamaica_Crisis_Ongoing
+		clr_country_flag = Jamaica_Crisis_Unresolved
+	}
+	USA = {
+		TNO_fopo_remove_jamaican_crisis_tab = yes
+	}
+	JAP = {
+		TNO_fopo_remove_jamaican_crisis_tab = yes
+	}
+}
+
+TNO_recompute_jamaica_crisis = {
+	clamp_variable = { var = WIN_violence min = 0 max = 100 }
+	clamp_variable = { var = WIN_fervor min = 0 max = 100 }
+}
+
+
+TNO_jamaica_crisis_daily_tick = { 
+	# set_temp_variable = { temp_fervor_growth = WIN.WIN_fervor }
+	# set_temp_variable = { temp_violence_growth = WIN.WIN_violence }
+	# divide_temp_variable = { temp_fervor_growth = 50 }
+	# divide_temp_variable = { temp_violence_growth = 100 }
+	# add_to_temp_variable = { temp_fervor_growth = temp_violence_growth }
+	# add_to_variable = { WIN.WIN_fervor = temp_fervor_growth }
+	# add_to_variable = { WIN.WIN_violence = temp_violence_growth }
+
+
+	# Violence will slowly tick up after supply line created, and if Martial Law declared
+	# Fervor will slowly tick do wn after Martial Law declared
+	add_to_variable = { WIN.WIN_fervor = WIN.WIN_fervor_tick }
+	add_to_variable = { WIN.WIN_violence = WIN.WIN_violence_tick }
+
+
+	TNO_recompute_jamaica_crisis = yes
+}
+
+TNO_increase_crisis_violence_low = {
+	custom_effect_tooltip = TNO_increase_crisis_violence_low_tt
+	WIN = {
+		add_to_variable = { WIN_violence = 5 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_increase_crisis_violence_med = {
+	custom_effect_tooltip = TNO_increase_crisis_violence_med_tt
+	WIN = {
+		add_to_variable = { WIN_violence = 15 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_increase_crisis_violence_high = {
+	custom_effect_tooltip = TNO_increase_crisis_violence_high_tt
+	WIN = {
+		add_to_variable = { WIN_violence = 20 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_crisis_violence_low = {
+	custom_effect_tooltip = TNO_decrease_crisis_violence_low_tt
+	WIN = {
+		subtract_from_variable = { WIN_violence = 5 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_crisis_violence_med = {
+	custom_effect_tooltip = TNO_decrease_crisis_violence_med_tt
+	WIN = {
+		subtract_from_variable = { WIN_violence = 10 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_crisis_violence_high = {
+	custom_effect_tooltip = TNO_decrease_crisis_violence_high_tt
+	WIN = {
+		subtract_from_variable = { WIN_violence = 20 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_increase_fervor_low = {
+	custom_effect_tooltip = TNO_increase_fervor_low_tt
+	WIN = {
+		add_to_variable = { WIN_fervor = 5 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_increase_fervor_med = {
+	custom_effect_tooltip = TNO_increase_fervor_med_tt
+	WIN = {
+		add_to_variable = { WIN_fervor = 10 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_increase_fervor_high = {
+	custom_effect_tooltip = TNO_increase_fervor_high_tt
+	WIN = {
+		add_to_variable = { WIN_fervor = 20 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_fervor_low = {
+	custom_effect_tooltip = TNO_decrease_fervor_low_tt
+	WIN = {
+		subtract_from_variable = { WIN_fervor = 5 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_fervor_med = {
+	custom_effect_tooltip = TNO_decrease_fervor_med_tt
+	WIN = {
+		subtract_from_variable = { WIN_fervor = 10 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_fervor_high = {
+	custom_effect_tooltip = TNO_decrease_fervor_high_tt
+	WIN = {
+		subtract_from_variable = { WIN_fervor = 20 }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+
+TNO_decrease_fervor_low_violence_sensitive = {
+	custom_effect_tooltip = TNO_decrease_fervor_low_violence_sensitive
+	WIN = {
+		set_temp_variable = { amount = 100 }
+		subtract_from_temp_variable = { amount = WIN_violence }
+		divide_temp_variable = { amount = 100 }
+		
+		multiply_temp_variable = { amount = 5 }
+		subtract_from_variable = { WIN_fervor = amount }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_fervor_med_violence_sensitive = {
+	custom_effect_tooltip = TNO_decrease_fervor_med_violence_sensitive
+	WIN = {
+		set_temp_variable = { amount = 100 }
+		subtract_from_temp_variable = { amount = WIN_violence }
+		divide_temp_variable = { amount = 100 }
+
+		multiply_temp_variable = { amount = 10 }
+		subtract_from_variable = { WIN_fervor = amount }
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+TNO_decrease_fervor_high_violence_sensitive = {
+	custom_effect_tooltip = TNO_decrease_fervor_high_violence_sensitive
+	WIN = {
+		set_temp_variable = { amount = 100 }
+		subtract_from_temp_variable = { amount = WIN_violence }
+		divide_temp_variable = { amount = 100 }
+		
+		multiply_temp_variable = { amount = 20 }
+		subtract_from_variable = { WIN_fervor = amount }
+
+		TNO_recompute_jamaica_crisis = yes
+	}
+}
+
+
+
+# Updates the dial display and kartenhaus display
+TNO_recompute_jamaica_indep_chance = {
+	WIN = {
+		clamp_variable = { var = WIN_jamaica_favor min = 0 max = 100 }
+
+
+		# Compute win percent from influence numbers 
+		set_variable = { WIN_jamaica_win_pct = WIN_jamaica_favor }
+		subtract_from_variable = { WIN_jamaica_win_pct = 20 }
+		subtract_from_variable = { WIN_jamaica_win_pct = 50 }
+		divide_variable = { WIN_jamaica_win_pct = -40 }
+		clamp_variable = { var = WIN_jamaica_win_pct min = 0 max = 1 }
+		set_variable = { WIN_wif_win_pct = 1 }
+		subtract_from_variable = { WIN_wif_win_pct = WIN_jamaica_win_pct }
+	}
+}
+
+
+
+# Trigger total WIF collapse, dissolving into its constituent nations
+TNO_total_WIF_collapse = {
+	clear_temp_array = WIF_constituent_nations
+	add_to_temp_array = { WIF_constituent_nations = ANT }
+	add_to_temp_array = { WIF_constituent_nations = GND }
+	add_to_temp_array = { WIF_constituent_nations = BRB }
+	add_to_temp_array = { WIF_constituent_nations = SVI }
+	add_to_temp_array = { WIF_constituent_nations = SLU }
+	add_to_temp_array = { WIF_constituent_nations = MRT }
+	add_to_temp_array = { WIF_constituent_nations = DMI }
+	add_to_temp_array = { WIF_constituent_nations = GUD }
+	add_to_temp_array = { WIF_constituent_nations = SKN }
+	add_to_temp_array = { WIF_constituent_nations = CUR }
+
+	# Also add OFN status faction to Jamaica, Trinidad if they are in WIF at collapse time
+	if = {
+		limit = {
+			NOT = { country_exists = JAM }
+		}
+		add_to_temp_array = { WIF_constituent_nations = JAM }
+	}
+	if = {
+		limit = {
+			NOT = { country_exists = TRI }
+		}
+		add_to_temp_array = { WIF_constituent_nations = TRI }
+	}
+
+
+	hidden_effect = {
+		TRI = {
+			remove_state_core = 900
+		}
+		JAM = {
+			remove_state_core = 308
+		}
+	}
+	random_list = {
+		#25 = {
+		#	TRI = {
+		#		transfer_state = 900
+		#		add_state_core = 900
+		#		set_cosmetic_tag = TRI_grenada
+		#	}
+		#	JAM = {
+		#		transfer_state = 308
+		#		add_state_core = 308
+		#	}
+		#}
+		#25 = {
+		#	GND = {
+		#		transfer_state = 900
+		#	}
+		#	JAM = {
+		#		transfer_state = 308
+		#		add_state_core = 308
+		#	}
+		#}
+		50 = {
+			GND = {
+				transfer_state = 900
+			}
+			ANT = {
+				transfer_state = 308
+			}
+		}
+		50 = {
+			TRI = {
+				transfer_state = 900
+				add_state_core = 900
+				set_cosmetic_tag = TRI_grenada
+			}
+			ANT = {
+				transfer_state = 308
+			}
+		}
+	}
+
+	JAM = {
+		transfer_state = 689
+	}
+	TRI = {
+		transfer_state = 691
+	}
+	BRB = {
+		transfer_state = 901
+	}
+	SVI = {
+		transfer_state = 692
+	}
+	SLU = {
+		transfer_state = 902
+	}
+	MRT = {
+		transfer_state = 1329
+	}
+	DMI = {
+		transfer_state = 903 
+	}
+	GUD = {
+		transfer_state = 694
+	}
+	SKN = {
+		transfer_state = 907
+		transfer_state = 904
+	}
+	CUR = {
+		transfer_state = 695
+	}
+
+
+	log = "[?WIF_constituent_nations^num] [?WIF_constituent_nations^0]"
+
+	for_each_scope_loop = {
+		array = WIF_constituent_nations
+
+		add_ideas = {
+			OFN_Dependent_Member
+		}
+		econ_join_sphere_USA = yes
+		save_party_popularities = yes
+		USA = {
+			add_to_faction = PREV
+			puppet = PREV
+			set_autonomy = {
+				target = PREV
+				autonomy_state = autonomy_client_state
+			}
+		}
+		apply_party_popularities = yes
+		set_temp_variable = { TNO_economy_subtype_temp = 1 }
+		econ_subtype_change = yes
+	}
+	
+	ANT = {
+		set_politics = { ruling_party = social_democracy }
+	}
+	DMI = {
+		set_politics = { ruling_party = authoritarian_democracy }
+	}
+	GUD = {
+		set_politics = { ruling_party = socialist }
+	}
+	SKN = {
+		set_politics = { ruling_party = conservative_democracy }
+	}
+	MRT = {
+		set_politics = { ruling_party = social_democracy }
+	}
+	SLU = {
+		set_politics = { ruling_party = conservative_democracy }
+	}
+	SVI = {
+		set_politics = { ruling_party = social_democracy }
+	}
+	BRB = {
+		set_politics = { ruling_party = social_democracy }
+	}
+	GND = {
+		set_politics = { ruling_party = conservative_democracy }
+	}
+	CUR = {
+		set_politics = { ruling_party = liberal_democracy }
+	}
+
+}

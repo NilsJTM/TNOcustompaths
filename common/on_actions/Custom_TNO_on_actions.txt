@@ -1,60 +1,201 @@
 on_actions = {
-	on_startup = {
-        effect = {
-            if = {
-				limit = {
-					has_game_rule = {
-						rule = ostland_civil_war_outcome
-						option = OSTLAND_CIVIL_WAR_OUTCOME_OST_STAHLECKER
-					}
-				}
-				OST = { add_ideas = Custom_TNO_ostland_civil_war }
-			}
+	on_declare_war = {
+		effect = {
 			if = {
-				limit = {
-					has_game_rule = {
-						rule = ostland_civil_war_outcome
-						option = OSTLAND_CIVIL_WAR_OUTCOME_DST_DRECHSLER
+				limit = {# Ostland Civil War
+					ROOT = {
+					    OR = {
+					        tag = OST
+					        tag = DST
+					        tag = MST
+					        tag = JST
+					        tag = UPO
+					        tag = BLR
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = OST
+					        tag = DST
+					        tag = MST
+					        tag = JST
+					        tag = UPO
+					        tag = BLR
+					    }
 					}
 				}
-				DST = { add_ideas = Custom_TNO_ostland_civil_war }
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_OST_STAHLECKER
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    OST = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_DST_DRECHSLER
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    DST = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_MST_MEYER
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    MST = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_JST_JECKELN
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    JST = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_UPO_KOVNER
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    UPO = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_BLR_VITUSKA
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    BLR = { apply_war_buff_with_10_divisions = yes }				    
+				}
 			}
+		}
+	}
+	on_annex = {
+		effect = {
 			if = {
-				limit = {
-					has_game_rule = {
-						rule = ostland_civil_war_outcome
-						option = OSTLAND_CIVIL_WAR_OUTCOME_MST_MEYER
+				limit = { # Ostland Civil War Ends
+					ROOT = {
+					    OR = {
+					        tag = OST
+					        tag = DST
+					        tag = MST
+					        tag = JST
+					        tag = UPO
+					        tag = BLR
+					    }
 					}
-				}
-				MST = { add_ideas = Custom_TNO_ostland_civil_war }
-			}
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = ostland_civil_war_outcome
-						option = OSTLAND_CIVIL_WAR_OUTCOME_JST_JECKELN
+					FROM = {
+					    OR = {
+					        tag = OST
+					        tag = DST
+					        tag = MST
+					        tag = JST
+					        tag = UPO
+					        tag = BLR
+					    }
 					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = OST
+				            country_exists = DST
+				            country_exists = MST
+				            country_exists = JST
+				            country_exists = UPO
+				            country_exists = BLR
+			            }
+		            }
 				}
-				JST = { add_ideas = Custom_TNO_ostland_civil_war }
-			}
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = ostland_civil_war_outcome
-						option = OSTLAND_CIVIL_WAR_OUTCOME_UPO_KOVNER
-					}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_OST_STAHLECKER
+					    }
+				    }
+				    OST = { remove_war_buff = yes }
 				}
-				UPO = { add_ideas = Custom_TNO_ostland_civil_war }
-			}
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = ostland_civil_war_outcome
-						option = OSTLAND_CIVIL_WAR_OUTCOME_BLR_VITUSKA
-					}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_DST_DRECHSLER
+					    }
+				    }
+				    DST = { remove_war_buff = yes }
 				}
-				BLR = { add_ideas = Custom_TNO_ostland_civil_war }
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_MST_MEYER
+					    }
+				    }
+				    MST = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_JST_JECKELN
+					    }
+				    }
+				    JST = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_UPO_KOVNER
+					    }
+				    }
+				    UPO = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ostland_civil_war_outcome
+						    option = OSTLAND_CIVIL_WAR_OUTCOME_BLR_VITUSKA
+					    }
+				    }
+				    BLR = { remove_war_buff = yes }
+				}
 			}
-        }
+		}
 	}	
 }

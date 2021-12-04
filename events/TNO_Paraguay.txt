@@ -1,0 +1,1316 @@
+﻿add_namespace = PAR_scripted
+add_namespace = PAR_bush_war_scripted
+add_namespace = PAR_invasion
+
+country_event = { # FULNA returns, Bush war starts in 120 days
+	id = PAR_scripted.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.1"}
+	title = PAR_scripted.1.t
+	desc = PAR_scripted.1.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_scripted.1.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.07
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.05
+		}
+		set_party_name = {
+			ideology = communist 
+			long_name = PAR_communist_party_fulna_long 
+			name = PAR_communist_party_fulna 
+		}
+		set_party_name = {
+			ideology = social_democracy 
+			long_name = PAR_social_democracy_party_fulna_long 
+			name = PAR_social_democracy_party_fulna 
+		}
+		set_party_name = {
+			ideology = liberal_democracy 
+			long_name = PAR_liberal_democracy_party_fulna_long 
+			name = PAR_liberal_democracy_party_fulna 
+		}
+		country_event = { id = PAR_scripted.2 days = 1 }
+		country_event = { id = PAR_bush_war_scripted.1 days = 120 } # Bush War starts
+	}
+}
+
+country_event = { # What should we do?
+	id = PAR_scripted.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.2"}
+	title = PAR_scripted.2.t
+	desc = PAR_scripted.2.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {#Reform
+		name = PAR_scripted.2.a
+		ai_chance = { factor = 60 }
+		country_event = { id = PAR_scripted.3 days = 60 } # Coup attempt
+	}
+
+	option = {#Status Quo
+		name = PAR_scripted.2.b
+		ai_chance = { 
+			factor = 40 
+		}
+		country_event = { id = PAR_scripted.6 days = 40 } # Democraticos coup attempt
+	}
+}
+
+country_event = { # Guión Rojo/Democraticos Coup
+	id = PAR_scripted.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.3"}
+	title = PAR_scripted.3.t
+	desc = PAR_scripted.3.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Guión Rojo
+		name = PAR_scripted.3.a
+		ai_chance = {
+			factor = 55
+		}
+		kill_ideology_leader = fascism
+		create_country_leader = {
+			name = "Juan Natalicio González"
+			picture = "Portrait_Paraguay_Juan_Natalicio_Gonzalez.dds"
+			#desc = "Paraguay_Juan_Natalicio_Gonzalez_desc"
+			expire = "1990.1.1"
+			ideology = fascism_fascist_populism_subtype
+			traits = { 
+				
+			}
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = -0.07
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = -0.12
+		}
+		country_event = { id = PAR_scripted.4 days = 5 } # Democraticos defect
+		remove_ideas = PAR_political_tarot
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.74
+			}
+		}
+	}
+
+	option = { # Democráticos
+		name = PAR_scripted.3.b
+		ai_chance = { factor = 45 }
+		random_list = {
+			75 = {#Democraticos in power
+				set_politics = {
+					ruling_party = conservative_democracy
+					last_election = "1940.1.20"
+					election_frequency = 48
+					elections_allowed = no
+				}
+				set_temp_variable = { TNO_economy_type_temp = 1 }
+			econ_type_change = yes
+				add_popularity = {
+					ideology = conservative_democracy
+					popularity = 0.1
+				}
+				add_popularity = {
+					ideology = authoritarian_democracy
+					popularity = 0.02
+				}
+				kill_ideology_leader = fascism
+				create_country_leader = {
+					name = "Juan Natalicio González"
+					picture = "Portrait_Paraguay_Juan_Natalicio_Gonzalez.dds"
+					#desc = "Paraguay_Juan_Natalicio_Gonzalez_desc"
+					expire = "1990.1.1"
+					ideology = fascism_fascist_populism_subtype
+					traits = { 
+					}
+				}
+				country_event = { id = PAR_scripted.5 days = 30 } # Guion Rojo Countercoup
+				remove_ideas = PAR_bastion_of_latin_american_fascism
+				remove_ideas = PAR_political_tarot
+				every_country = {
+					limit = { is_ai = no }
+					news_event = {
+						id = LATAM_news.75
+					}
+				}
+			}
+			25 = {#Coup fails, change to status quo path
+			    country_event = { id = PAR_scripted.7 days = 10 } # FdG coup
+			}
+		}
+	}
+}
+
+country_event = { # Democraticos defect
+	id = PAR_scripted.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.4"}
+	title = PAR_scripted.4.t
+	desc = PAR_scripted.4.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_scripted.4.a
+		set_party_name = { 
+			ideology = conservative_democracy 
+			long_name = PAR_conservative_democracy_party_fulna_long 
+			name = PAR_conservative_democracy_party_fulna 
+		}
+		set_country_flag = PAR_democraticos_insurgency
+	}
+}
+
+country_event = { # Guión Rojo Countercoup
+	id = PAR_scripted.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.5"}
+	title = PAR_scripted.5.t
+	desc = PAR_scripted.5.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Countercoup succeeds
+		name = PAR_scripted.5.a
+		ai_chance = { factor = 45 }
+		kill_ideology_leader = fascism
+		create_country_leader = {
+			name = "Juan Natalicio González"
+			picture = "Portrait_Paraguay_Juan_Natalicio_Gonzalez.dds"
+			#desc = "Paraguay_Juan_Natalicio_Gonzalez_desc"
+			expire = "1990.1.1"
+			ideology = fascism_fascist_populism_subtype
+			traits = { 
+				
+			}
+		}		
+		set_politics = {
+			ruling_party = fascism	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 2 }
+		econ_type_change = yes
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = -0.07
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = -0.12
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = national_socialism
+			popularity = 0.1
+		}
+		country_event = { id = PAR_scripted.4 days = 5 } # Democráticos defect
+		add_ideas = PAR_bastion_of_latin_american_fascism
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.76
+			}
+		}
+	}
+	
+	option = { # Countercoup Fails
+		name = PAR_scripted.5.b
+		ai_chance = { factor = 55 }
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.3
+		}
+		add_popularity = {
+			ideology = national_socialism
+			popularity = -0.15
+		}
+		set_country_flag = PAR_FdG_insurgency
+	}
+}
+
+country_event = { # Democráticos coup
+	id = PAR_scripted.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.6"}
+	title = PAR_scripted.6.t
+	desc = PAR_scripted.6.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Coup succeeds
+		name = PAR_scripted.6.a
+		ai_chance = { factor = 40 }
+		set_politics = {	
+			ruling_party = conservative_democracy	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 1 }
+		econ_type_change = yes
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		create_country_leader = {
+			name = "Juan Natalicio González"
+			picture = "Portrait_Paraguay_Juan_Natalicio_Gonzalez.dds"
+			#desc = "Paraguay_Juan_Natalicio_Gonzalez_desc"
+			expire = "1990.1.1"
+			ideology = fascism_fascist_populism_subtype
+			traits = { 
+				
+			}
+		}
+		country_event = { id = PAR_scripted.5 days = 30 } # Guión Rojo Countercoup
+		remove_ideas = PAR_bastion_of_latin_american_fascism
+		remove_ideas = PAR_political_tarot
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.75
+			}
+		}
+	}
+	
+	option = { # Coup fails
+		name = PAR_scripted.6.b
+		ai_chance = { factor = 60 }
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = -0.07
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = -0.12
+		}
+		country_event = { id = PAR_scripted.7 days = 50 } # FdG coup
+	}
+}
+
+country_event = { # FdG coup
+	id = PAR_scripted.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.7"}
+	title = PAR_scripted.7.t
+	desc = PAR_scripted.7.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_scripted.7.a
+		set_politics = {	
+			ruling_party = national_socialism	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		kill_ideology_leader = fascism
+		create_country_leader = {
+			name = "Juan Natalicio González"
+			picture = "Portrait_Paraguay_Juan_Natalicio_Gonzalez.dds"
+			#desc = "Paraguay_Juan_Natalicio_Gonzalez_desc"
+			expire = "1990.1.1"
+			ideology = fascism_fascist_populism_subtype
+			traits = { 
+				
+			}
+		}
+		add_popularity = {
+			ideology = national_socialism
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = esoteric_nazism
+			popularity = 0.1
+		}
+		country_event = { id = PAR_scripted.4 days = 5 } # Democraticos defect
+		remove_ideas = PAR_bastion_of_latin_american_fascism
+		remove_ideas = PAR_political_tarot
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.77
+			}
+		}
+	}
+}
+
+country_event = { # Death of Juan Natalicio González
+	id = PAR_scripted.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_scripted.8"}
+	title = PAR_scripted.8.t
+	desc = PAR_scripted.8.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_scripted.8.a
+		if = {
+			limit = {
+				has_country_leader = {
+					name = "Juan Natalicio González"
+				}
+			}
+			create_country_leader = {
+				name = "Juan Manuel Frutos Pane"
+				picture = "Portrait_Paraguay_Juan_Manuel_Frutos_Pane.dds"
+				#desc = "Paraguay_Juan_Manuel_Frutos_desc"
+				expire = "1990.1.1"
+				ideology = fascism_fascist_populism_subtype
+				traits = { 
+					
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Bush War
+	id = PAR_bush_war_scripted.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.1"}
+	title = PAR_bush_war_scripted.1.t
+	desc = PAR_bush_war_scripted.1.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_bush_war_scripted.1.a
+		country_event = { id = PAR_bush_war_scripted.2 days = 200 }
+		GER = { 
+			if = {
+				limit = {
+					has_global_flag = german_civil_war_speervic
+				}
+				country_event = { id = RND.45 days = 100 }
+			}
+			
+		}
+		BRA = {
+			country_event = { id = PAR_invasion.1 days = 14 }
+		}
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.78
+			}
+		}
+		add_ideas = PAR_bush_war
+	}
+}
+
+country_event = { # End of da Bush War
+	id = PAR_bush_war_scripted.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.2"}
+	title = PAR_bush_war_scripted.2.t
+	desc = PAR_bush_war_scripted.2.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Government wins
+		name = PAR_bush_war_scripted.2.a
+		remove_ideas = PAR_bush_war
+		ai_chance = { 
+			factor = 40
+			modifier = {
+				factor = 10
+				has_country_flag = PAR_GER_help
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_bush_war
+					option = PAR_BUSH_WAR_FULNA_VICTORY
+				}
+			}
+		}
+
+		if = { # FdG
+			limit = {
+				has_country_leader = {
+					name = "Mutshuito Villasboa"
+					ruling_only = yes
+				}
+			}
+			add_popularity = {
+				ideology = national_socialism
+				popularity = 0.13
+			}
+			add_popularity = {
+				ideology = esoteric_nazism
+				popularity = 0.6
+			}
+			set_party_name = {
+				ideology = authoritarian_democracy
+				long_name = PAR_cun_party_long
+				name = PAR_cun_party
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = PAR_cun_party_long
+				name = PAR_cun_party
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = PAR_cun_party_long
+				name = PAR_cun_party
+			}
+			set_party_name = {
+				ideology = national_socialism
+				long_name = PAR_cun_party_long
+				name = PAR_cun_party
+			}
+			set_party_name = {
+				ideology = ultranationalism
+				long_name = PAR_cun_party_long
+				name = PAR_cun_party
+			}
+			set_party_name = {
+				ideology = esoteric_nazism
+				long_name = PAR_cun_party_long
+				name = PAR_cun_party
+			}
+			every_country = {
+				limit = { is_ai = no }
+				news_event = {
+					id = LATAM_news.79
+				}
+			}
+		}
+
+		else_if = { # Democráticos
+			limit = {
+				has_country_leader = {
+					name = "Federico Chávez"
+					ruling_only = yes
+				}
+			}
+			add_popularity = {
+				ideology = conservative_democracy
+				popularity = 0.15
+			}
+			random_list = { # Stroessner coup check
+				70 = { # consolidation
+					country_event = { id = PAR_bush_war_scripted.6 days = 200 }
+				}
+				30 = { # stronato
+					country_event = { id = PAR_bush_war_scripted.8 days = 60 }
+				}
+			}
+			every_country = {
+				limit = { is_ai = no }
+				news_event = {
+					id = LATAM_news.80
+				}
+			}
+		}
+
+		else_if = { # Guión Rojo
+			limit = {
+				has_country_leader = {
+					name = "Juan Natalicio González"
+					ruling_only = yes
+				}
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+			every_country = {
+				limit = { is_ai = no }
+				news_event = {
+					id = LATAM_news.81
+				}
+			}
+		}
+
+		if = { # German help to government via FdG
+			limit = {
+				has_country_flag = PAR_GER_help
+			}
+			add_popularity = {
+				ideology = national_socialism
+				popularity = 0.07
+			}
+		}
+
+		GER = { clr_country_flag = RND_unlock_paraguay_ops_1 }
+	}
+
+	option = { # FULNA wins
+		name = PAR_bush_war_scripted.2.b
+		ai_chance = {
+			factor = 40
+			# add modifiers here
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_bush_war
+					option = PAR_BUSH_WAR_GOVERNMENT_VICTORY
+				}
+			}
+		}
+		country_event = { id = PAR_bush_war_scripted.9 days = 90 } # Battle of Asunción
+		remove_ideas = {
+			PAR_bastion_of_latin_american_fascism
+			PAR_political_tarot
+			PAR_bush_war
+		}
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.84
+			}
+		}
+		set_politics = {	
+			ruling_party = socialist	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 3 }
+		econ_type_change = yes
+		set_popularities = {
+			communist = 18
+			socialist = 12
+			social_democracy = 11
+			liberal_democracy = 23
+			conservative_democracy = 14
+			authoritarian_democracy = 0
+			despotism = 0
+			fascism = 19
+			national_socialism = 3
+			ultranationalism = 0
+		}
+		set_party_name = {
+			ideology = communist 
+			long_name = PAR_communist_party_long 
+			name = PAR_communist_party
+		}
+		set_party_name = {
+			ideology = social_democracy 
+			long_name = PAR_social_democracy_party_long 
+			name = PAR_social_democracy_party
+		}
+		set_party_name = {
+			ideology = liberal_democracy 
+			long_name = PAR_liberal_democracy_party_long 
+			name = PAR_liberal_democracy_party 
+		}
+		set_party_name = {
+			ideology = conservative_democracy 
+			long_name = PAR_conservative_democracy_party_long 
+			name = PAR_conservative_democracy_party 
+		}
+		create_country_leader = {
+			name = "José Félix Estigarribia"
+			picture = "Portrait_Paraguay_Jose_Felix_Estigarribia_Sexy.dds"
+			#desc = "Paraguay_Felix_Estigarribia_desc"
+			expire = "1990.1.1"
+			ideology = liberal_democracy_national_liberal_subtype
+			traits = { 
+				old_hero
+			}
+		}
+		create_country_leader = {
+			name = "Ernesto 'Che' Guevara"
+			picture = "Portrait_Paraguay_Ernesto_Guevara.dds"
+			desc = "Paraguay_Che_desc"
+			expire = "1990.1.1"
+			ideology = socialist_guevarism_subtype
+			traits = { 
+			}
+		}
+		GER = {
+			if = {
+				limit = {
+					has_global_flag = german_civil_war_speervic
+				}
+			}
+			country_event = { id = RND.44 days = 10 }
+		}
+		GER = { clr_country_flag = RND_unlock_paraguay_ops_1 }
+		BRA = {
+			country_event = { id = PAR_invasion.4 days = 10 }
+		}
+	}
+
+	option = { # FdG wins
+		name = PAR_bush_war_scripted.2.c
+		trigger = { has_country_flag = PAR_FdG_insurgency }
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 10
+				has_country_flag = PAR_GER_help_FdG_insurgency
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_bush_war
+					option = PAR_BUSH_WAR_GOVERNMENT_VICTORY
+				}
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_bush_war
+					option = PAR_BUSH_WAR_FULNA_VICTORY
+				}
+			}
+		}
+		remove_ideas = {
+			PAR_bastion_of_latin_american_fascism
+			PAR_political_tarot
+			PAR_bush_war
+		}
+		set_politics = {	
+			ruling_party = national_socialism	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 2 }
+		econ_type_change = yes
+		add_popularity = {
+			ideology = national_socialism
+			popularity = 0.2
+		}
+		add_popularity = {
+			ideology = esoteric_nazism
+			popularity = 0.1
+		}
+		set_party_name = {
+			ideology = authoritarian_democracy
+			long_name = PAR_cun_party_long
+			name = PAR_cun_party
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = PAR_cun_party_long
+			name = PAR_cun_party
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = PAR_cun_party_long
+			name = PAR_cun_party
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = PAR_cun_party_long
+			name = PAR_cun_party
+		}
+		set_party_name = {
+			ideology = ultranationalism
+			long_name = PAR_cun_party_long
+			name = PAR_cun_party
+		}
+		set_party_name = {
+			ideology = esoteric_nazism
+			long_name = PAR_cun_party_long
+			name = PAR_cun_party
+		}
+		GER = { clr_country_flag = RND_unlock_paraguay_ops_1 }
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.79
+			}
+		}
+	}
+}
+
+country_event = { # Elections
+	id = PAR_bush_war_scripted.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.3"}
+	title = PAR_bush_war_scripted.3.t
+	desc = PAR_bush_war_scripted.3.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	#option = { # Soler
+	#	name = PAR_bush_war_scripted.3.a
+	#	ai_chance = { factor = 35 }
+	#	set_politics = {	
+	#		ruling_party = communist	
+	#		last_election = "1940.1.20"
+	#		election_frequency = 48
+	#		elections_allowed = no
+	#	}
+	#	country_event = { id = PAR_bush_war_scripted.7 days = 365 }
+	#	GER = { clr_country_flag = RND_unlock_paraguay_ops_2 }
+	#}
+
+	option = { # Franco
+		name = PAR_bush_war_scripted.3.b
+		ai_chance = { factor = 60 }
+		country_event = { id = PAR_bush_war_scripted.4 days = 365 }
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.87
+			}
+		}
+	}
+
+	option = { # Estigarribia
+		name = PAR_bush_war_scripted.3.c
+		ai_chance = { factor = 40 }
+		set_politics = {	
+			ruling_party = liberal_democracy	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 1 }
+		econ_type_change = yes
+		country_event = { id = PAR_bush_war_scripted.5 days = 365 }
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.88
+			}
+		}
+	}
+}
+
+country_event = { # Franco consolidate
+	id = PAR_bush_war_scripted.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.4"}
+	title = PAR_bush_war_scripted.4.t
+	desc = PAR_bush_war_scripted.4.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_bush_war_scripted.4.a
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.4
+		}
+		create_country_leader = {
+			name = "Rafael Franco"
+			picture = "Portrait_Paraguay_Rafael_Franco.dds"
+			#desc = "Paraguay_Rafael_Franco_desc"
+			expire = "1990.1.1"
+			ideology = authoritarian_democracy_social_nationalism_subtype
+			traits = { 
+				old_hero
+			}
+		}
+		set_politics = {	
+			ruling_party = authoritarian_democracy	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 1 }
+		econ_type_change = yes
+		set_party_name = { 
+			ideology = authoritarian_democracy 
+			long_name = PAR_authoritarian_democracy_party_franco_long 
+			name = PAR_authoritarian_democracy_party_franco 
+		}
+	}
+}
+
+country_event = { # Estigarribia consolidate
+	id = PAR_bush_war_scripted.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.5"}
+	title = PAR_bush_war_scripted.5.t
+	desc = PAR_bush_war_scripted.5.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_bush_war_scripted.5.a
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.4
+		}
+		create_country_leader = {
+			name = "José Félix Estigarribia"
+			picture = "Portrat_Paraguay_Jose_Felix_Estigarribia.dds"
+			#desc = "Paraguay_Felix_Estigarribia_desc"
+			expire = "1990.1.1"
+			ideology = despotism_aristocratic_conservatism_subtype
+			traits = { 
+				old_hero
+			}
+		}
+		set_politics = {	
+			ruling_party = despotism	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 2 }
+		econ_type_change = yes
+		set_party_name = { 
+			ideology = despotism 
+			long_name = PAR_despotism_party_estigarribia_long 
+			name = PAR_despotism_party_estigarribia
+		}
+	}
+}
+
+country_event = { # Chávez consolidate
+	id = PAR_bush_war_scripted.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.6"}
+	title = PAR_bush_war_scripted.6.t
+	desc = PAR_bush_war_scripted.6.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_bush_war_scripted.6.a
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.4
+		}
+		create_country_leader = {
+			name = "Federico Chávez"
+			picture = "Portrait_Paraguay_Frederico_Chavez.dds"
+			#desc = "Paraguay_Frederico_Chavez_desc"
+			expire = "1990.1.1"
+			ideology = authoritarian_democracy_national_conservatism_subtype
+			traits = { 
+				strongman
+			}
+		}
+		set_temp_variable = { TNO_economy_type_temp = 2 }
+		econ_type_change = yes
+		set_politics = {	
+			ruling_party = authoritarian_democracy	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_party_name = { 
+			ideology = authoritarian_democracy 
+			long_name = PAR_authoritarian_democracy_party_chavez_long 
+			name = PAR_authoritarian_democracy_party_chavez
+		}
+	}
+}
+
+country_event = { # EMPTY
+	id = PAR_bush_war_scripted.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.7"}
+	title = PAR_bush_war_scripted.7.t
+	desc = PAR_bush_war_scripted.7.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = PAR_bush_war_scripted.7.a
+	}
+}
+
+country_event = { # Stronato moment
+	id = PAR_bush_war_scripted.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.8"}
+	title = PAR_bush_war_scripted.8.t
+	desc = PAR_bush_war_scripted.8.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {#F for Paraguay
+		name = PAR_bush_war_scripted.8.a
+		set_politics = {	
+			ruling_party = despotism	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 3 }
+		econ_type_change = yes
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.3
+		}
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.83
+			}
+		}
+	}
+}
+
+country_event = { # Battle of Asunción
+	id = PAR_bush_war_scripted.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_bush_war_scripted.9"}
+	title = PAR_bush_war_scripted.9.t
+	desc = PAR_bush_war_scripted.9.desc
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Communists Win
+		name = PAR_bush_war_scripted.9.a
+		ai_chance = {
+			factor = 65
+			# add modifiers here
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_battle_asuncion
+					option = PAR_BATTLE_ASUNCION_COMMUNIST_DEFEAT
+				}
+			}
+		}
+		set_politics = {	
+			ruling_party = communist	
+			last_election = "1940.1.20"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_temp_variable = { TNO_economy_type_temp = 3 }
+		econ_type_change = yes
+		add_popularity = {
+			ideology = socialist
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.2
+		}
+		GER = { clr_country_flag = RND_unlock_paraguay_ops_2 }
+		GER = {
+			if = {
+				limit = {
+					has_global_flag = german_civil_war_speervic
+				}
+			}
+			country_event = { id = RND.47 days = 30 }
+		}
+		set_cosmetic_tag = PAR_SOLER
+		if = {
+			limit = {
+				has_global_flag = PAR_invasion_discussion_succeeds
+			}
+			country_event = { id = PAR_invasion.8 days = 10 }
+		}
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.85
+			}
+		}
+	}
+	option = { # Communists Defeated
+		name = PAR_bush_war_scripted.9.a
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 10
+				has_country_flag = GER_PAR_help_democrats
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_battle_asuncion
+					option = PAR_BATTLE_ASUNCION_COMMUNIST_VICTORY
+				}
+			}
+		}
+		kill_ideology_leader = authoritarian_democracy
+		create_country_leader = {
+			name = "Provisional Authority"
+			picture = "Portrait_Paraguay_Junta.dds"
+			#desc = "Paraguay_Provisional_Authority_desc"
+			expire = "1990.1.1"
+			ideology = authoritarian_democracy_provisional_government_subtype
+			traits = {
+			}
+		}
+		set_politics = { ruling_party = authoritarian_democracy }
+		set_temp_variable = { TNO_economy_type_temp = 1 }
+		econ_type_change = yes
+		add_popularity = {
+			ideology = socialist
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = -0.2
+		}
+		country_event = {
+			id = PAR_bush_war_scripted.3
+			days = 120
+		}	
+		GER = { clr_country_flag = RND_unlock_paraguay_ops_2 }
+		clr_global_flag = PAR_invasion_discussion_succeeds
+		every_country = {
+			limit = { is_ai = no }
+			news_event = {
+				id = LATAM_news.86
+			}
+		}
+	}
+}
+
+country_event = { # SNI Report About Argentine Concerns
+	id = PAR_invasion.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.1"}
+	title = PAR_invasion.1.t
+	desc = PAR_invasion.1.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_ARG_Argentina_Army_1
+
+	option = {
+		name = PAR_invasion.1.a
+		country_event = { id = PAR_invasion.2 days = 60 }
+	}
+}
+
+country_event = { # Staff Meeting
+	id = PAR_invasion.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.2"}
+	title = PAR_invasion.2.t
+	desc = PAR_invasion.2.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_speer_war_room
+
+	option = {
+		name = PAR_invasion.2.a
+		if = {
+			limit = {
+				has_country_leader = {
+					name = "João Goulart"
+					ruling_only = yes
+				}
+			}
+			country_event = { id = PAR_invasion.3 }
+		}
+	}
+}
+
+country_event = { # Goulart Complains
+	id = PAR_invasion.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.3"}
+	title = PAR_invasion.3.t
+	desc = PAR_invasion.3.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PAR_invasion.3.a
+	}
+}
+
+country_event = { # Protocol Activated
+	id = PAR_invasion.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.4"}
+	title = PAR_invasion.4.t
+	desc = PAR_invasion.4.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PAR_invasion.4.a
+		country_event = { id = PAR_invasion.5 days = 5 }
+		hidden_effect = {
+			GER = {
+				if = {
+					limit = {
+						has_global_flag = german_civil_war_speervic
+					}
+				}
+				country_event = { id = PAR_invasion.401 }
+			}
+		}
+	}
+}
+
+country_event = { # German Promises to Support Intervention
+	id = PAR_invasion.401
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.401"}
+	title = PAR_invasion.401.t
+	desc = PAR_invasion.401.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PAR_invasion.401.a
+		ARG = {
+			country_event = { id = PAR_invasion.402 days = 1 }
+		}
+		BRA = {
+			country_event = { id = PAR_invasion.402 days = 1 }
+		}
+	}
+}
+
+country_event = { # Argentina and Brazil know that Germany will support
+	id = PAR_invasion.402
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.402"}
+	title = PAR_invasion.402.t
+	desc = PAR_invasion.402.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PAR_invasion.402.a
+	}
+}
+
+country_event = { # Discussion over Direct Intervention Phase 1
+	id = PAR_invasion.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.5"}
+	title = PAR_invasion.5.t
+	desc = PAR_invasion.5.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Yes
+		name = PAR_invasion.5.a
+		country_event = { id = PAR_invasion.6 days = 5 }
+	}
+}
+
+country_event = { # Discussion over Direct Intervention Phase 2
+	id = PAR_invasion.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.6"}
+	title = PAR_invasion.6.t
+	desc = PAR_invasion.6.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Yes
+		name = PAR_invasion.6.a
+		country_event = { id = PAR_invasion.7 days = 5 }
+	}
+}
+
+country_event = { # Discussion over Direct Intervention Phase 3
+	id = PAR_invasion.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.7"}
+	title = PAR_invasion.7.t
+	desc = PAR_invasion.7.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Yes
+		name = PAR_invasion.7.a
+		set_global_flag = PAR_invasion_discussion_succeeds
+	}
+}
+
+country_event = { # Mobilization Begins
+	id = PAR_invasion.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.8"}
+	title = PAR_invasion.8.t
+	desc = PAR_invasion.8.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PAR_invasion.8.a
+		country_event = { id = PAR_invasion.9 days = 15 }
+		hidden_effect = {
+			GER = {
+				if = {
+					limit = {
+						has_global_flag = german_civil_war_speervic
+					}
+				}
+				country_event = { id = PAR_invasion.801 }
+			}
+		}
+	}
+}
+
+country_event = { # Germany Activities in Paraguay to Support Intervention
+	id = PAR_invasion.801
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.801"}
+	title = PAR_invasion.801.t
+	desc = PAR_invasion.801.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PAR_invasion.801.a
+	}
+}
+
+country_event = { # Argentina and Uruguay are Ready
+	id = PAR_invasion.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.9"}
+	title = PAR_invasion.9.t
+	desc = PAR_invasion.9.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Yes
+		name = PAR_invasion.9.a
+		country_event = { id = PAR_invasion.10 days = 5 }
+	}
+}
+
+country_event = { # Da Intervention
+	id = PAR_invasion.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PAR_invasion.10"}
+	title = PAR_invasion.10.t
+	desc = PAR_invasion.10.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Yes
+		name = PAR_invasion.10.a
+		clr_global_flag = PAR_invasion_discussion_succeeds
+		declare_war_on = {
+			target = PAR
+			type = annex_everything
+		}
+		ARG = {
+			declare_war_on = {
+				target = PAR
+				type = annex_everything
+			}
+		}
+		URG = {
+			declare_war_on = {
+				target = PAR
+				type = annex_everything
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = { is_ai = no }
+				news_event = { id = LATAM_news.111 }
+			}
+		}
+	}
+}
