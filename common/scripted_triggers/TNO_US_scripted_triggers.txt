@@ -1,3 +1,14 @@
+OFN_CFN_candidates = {
+	OR = {
+		tag = CAN
+		tag = AST
+		tag = NZL
+		tag = ITA
+		tag = ENG
+		tag = BRA
+	}
+	is_in_faction_with = USA
+}
 
 USA_can_support_sphere_country = {
 	OR = {
@@ -48,26 +59,26 @@ USA_can_support_sphere_country_2 = {
 
 USA_has_arms_shipment = {
 	AND = {
-        has_equipment = { infantry_equipment > 999 }
-        has_equipment = { anti_tank_equipment > 399 }
-    }
+		has_equipment = { infantry_equipment > 999 }
+		has_equipment = { anti_tank_equipment > 399 }
+	}
 }
 
 USA_has_fighter_shipment = {
-    has_equipment = { fighter_equipment > 29 }
+	has_equipment = { fighter_equipment > 29 }
 }
 
 USA_RD_ruling_party = {
 	OR = {
-		has_government = social_liberal
-		has_government = social_conservative
+		has_government = liberal_democracy
+		has_government = conservative_democracy
 	}
 }
 
 USA_NPP_ruling_party = {
 	OR = {
-		has_government = authoritarian_democrat
-		has_government = social_democrat
+		has_government = authoritarian_democracy
+		has_government = social_democracy
 		has_government = national_socialism
 		has_government = communist
 	}
@@ -369,5 +380,29 @@ OFN_voting_opinion_check_high = {
 			target = BRT
 			value > 69
 		}
+	}
+}
+
+US_doesnt_have_crisis = {
+	custom_trigger_tooltip = {
+		tooltip = USA_not_in_crisis_tooltip
+		NOT = {
+			check_variable = { USA_crisis_counter > 0 }
+		}
+	}
+}
+
+US_has_crisis = {
+	custom_trigger_tooltip = {
+		tooltip = USA_in_crisis_tooltip
+		check_variable = { USA_crisis_counter > 0 }
+	}
+}
+
+US_has_no_bill_in_senate = {
+	custom_trigger_tooltip = {
+		tooltip = USA_not_passing_bill_tooltip
+		# check_variable = { bill_id = 0 }
+		always = yes
 	}
 }

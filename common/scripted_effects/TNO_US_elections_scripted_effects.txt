@@ -167,16 +167,16 @@ US_elections_calculate_country_vars = { #MUST ALWAYS BE USEN WHEN CHANGING SENAT
 #%%%%#%%#%%%%#%%%%%%%%%%%#%#%%#%%#%%%%%%%%%%%%%%%%%                                                                           
 #%%%(.#%%%%%% .%%%%%%. %%%%%%(.(%%%%%% .%%%%%%. %%%###########################################################################
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%###########################################################################
-                                                                                                                             
-                                                                                                                             
+
+
 #############################################################################################################################
 #############################################################################################################################
-                                                                                                                             
-                                                                                                                             
+
+
 #############################################################################################################################
 #############################################################################################################################
-                                                                                                                             
-                                                                                                                             
+
+
 #############################################################################################################################
 #############################################################################################################################
 
@@ -193,77 +193,77 @@ US_elections_calculate_country_vars = { #MUST ALWAYS BE USEN WHEN CHANGING SENAT
 #MAKE SURE THAT NPP_candidate_party AND RD_candidate_party ARE SET BEFORE FIRING THIS SCRIPTED EFFECT
 US_hold_presidential_election = {
 	clamp_variable = { #make sure to clamp any support variable that can change!
-   		var = USA_NPP_Unity
-    	min = @MINIMUM_UNITY
-    	max = @MAXIMUM_UNITY
+		var = USA_NPP_Unity
+		min = @MINIMUM_UNITY
+		max = @MAXIMUM_UNITY
 	}
 	clamp_variable = { #make sure to clamp any support variable that can change!
-   		var = USA_RD_Unity
-    	min = @MINIMUM_UNITY
-    	max = @MAXIMUM_UNITY
+		var = USA_RD_Unity
+		min = @MINIMUM_UNITY
+		max = @MAXIMUM_UNITY
 	}
 	every_owned_state = {
 		limit = { has_state_flag = US_election_state }
 		USA_clamp_state_popularities = yes
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_R_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_R_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_D_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_D_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_L_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_L_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_C_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_C_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_FR_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_FR_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_Y_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_Y_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		US_update_presidential_election_race_in_state = yes
 		US_hold_presidential_election_in_state = yes
 	}
 
-	log = "US Presidential Election: NPP: [?NPP_electoral_votes] || RD: [?RD_electoral_votes]"
-	
+	# log = "US Presidential Election: NPP: [?NPP_electoral_votes] || RD: [?RD_electoral_votes]"
+
 	divide_variable = { RD_actual_votes = 1000 }
 	divide_variable = { NPP_actual_votes = 1000 }
-	
+
 	set_temp_variable = { total_votes = RD_actual_votes }
 	add_to_temp_variable = { total_votes = NPP_actual_votes }
-	
+
 	divide_temp_variable = { total_votes = 4 }
 	divide_variable = { RD_actual_votes = 2 }
 	divide_variable = { NPP_actual_votes = 2 }
-	
+
 	add_to_variable = { RD_actual_votes = total_votes }
 	add_to_variable = { NPP_actual_votes = total_votes }
-	
+
 	set_variable = { RD_random_votes = random }
 	multiply_variable = { RD_random_votes = 1000 }
 	set_variable = { NPP_random_votes = random }
@@ -436,7 +436,7 @@ USA_check_presidential_landslide = {
 		limit = {
 			check_variable = { RD_electoral_votes > 533 }
 		}
-		log = "[GetDateText]: [Root.GetName]: Unlandsliding a RD win"
+		# log = "[GetDateText]: [Root.GetName]: Unlandsliding a RD win"
 		set_temp_variable = { highest_NPP = 0 }
 		every_owned_state = {
 			limit = { can_have_elections_in_state = yes }
@@ -462,14 +462,14 @@ USA_check_presidential_landslide = {
 			set_state_flag = voted_NPP
 			subtract_from_variable = { ROOT.RD_electoral_votes = electoral_votes }
 			add_to_variable = { ROOT.NPP_electoral_votes = electoral_votes }
-			log = "[GetDateText]: [Root.GetName]: [This.GetName] voted NPP in unlandsliding"
+			# log = "[GetDateText]: [Root.GetName]: [This.GetName] voted NPP in unlandsliding"
 		}
 	}
 	else_if = {
 		limit = {
 			check_variable = { NPP_electoral_votes > 533 }
 		}
-		log = "[GetDateText]: [Root.GetName]: Unlandsliding an NPP win"
+		# log = "[GetDateText]: [Root.GetName]: Unlandsliding an NPP win"
 		set_temp_variable = { highest_RD = 0 }
 		every_owned_state = {
 			limit = { can_have_elections_in_state = yes }
@@ -495,22 +495,22 @@ USA_check_presidential_landslide = {
 			set_state_flag = voted_RD
 			subtract_from_variable = { ROOT.NPP_electoral_votes = electoral_votes }
 			add_to_variable = { ROOT.RD_electoral_votes = electoral_votes }
-			log = "[GetDateText]: [Root.GetName]: [GetName] voted RD in unlandsliding"
+			# log = "[GetDateText]: [Root.GetName]: [GetName] voted RD in unlandsliding"
 		}
 	}
 }
 
 USA_apply_bonus_popularity_president_election = {
-#Bonus popularity if candidate is same ideology
+#Bonus popularity if candidate is same ideo# logy
 	set_temp_variable = { temp_var = @BONUS_POPULARITY_PRES_MULTIPLIER }
 	if = {
 		limit = { check_variable = { ROOT.RD_candidate_party = 1 } }
-		multiply_temp_variable = { temp_var = ROOT.party_popularity@social_liberal }
+		multiply_temp_variable = { temp_var = ROOT.party_popularity@liberal_democracy }
 		add_to_temp_variable = { RD_R_popularity = temp_var }
 	}
 	else_if = {
 		limit = { check_variable = { ROOT.RD_candidate_party = 2 } }
-		multiply_temp_variable = { temp_var = ROOT.party_popularity@social_conservative }
+		multiply_temp_variable = { temp_var = ROOT.party_popularity@conservative_democracy }
 		add_to_temp_variable = { RD_D_popularity = temp_var }
 	}
 	set_temp_variable = { temp_var = @BONUS_POPULARITY_PRES_MULTIPLIER }
@@ -521,7 +521,7 @@ USA_apply_bonus_popularity_president_election = {
 	}
 	else_if = {
 		limit = { check_variable = { ROOT.NPP_candidate_party = 4 } }
-		multiply_temp_variable = { temp_var = ROOT.party_popularity@social_democrat }
+		multiply_temp_variable = { temp_var = ROOT.party_popularity@social_democracy }
 		add_to_temp_variable = { NPP_C_popularity = temp_var }
 	}
 	else_if = {
@@ -531,7 +531,7 @@ USA_apply_bonus_popularity_president_election = {
 	}
 	else_if = {
 		limit = { check_variable = { ROOT.NPP_candidate_party = 6 } }
-		multiply_temp_variable = { temp_var = ROOT.party_popularity@authoritarian_democrat }
+		multiply_temp_variable = { temp_var = ROOT.party_popularity@authoritarian_democracy }
 		add_to_temp_variable = { NPP_FR_popularity = temp_var }
 	}
 	#boost faction if president
@@ -630,56 +630,56 @@ US_update_presidential_election_race_in_state = {
 	#################################################################
 
 	#5 Split votes from factions between parties, based on presidential candidates and party unity
-	
-	#log = "[This.GetName] Pre split: RD faction pops: RD_R_popularity [?RD_R_popularity] | RD_D_popularity [?RD_D_popularity] "
-	#log = "[This.GetName] Pre split: NPP faction pops: NPP_L_popularity [?NPP_L_popularity] | NPP_C_popularity [?NPP_C_popularity] | NPP_FR_popularity [?NPP_FR_popularity] | NPP_R_popularity [?NPP_R_popularity]"
-	#log = "[This.GetName] Real Party popularities: RD_popularity [?RD_popularity] | NPP_popularity [?NPP_popularity]   "
-	
+
+	## log = "[This.GetName] Pre split: RD faction pops: RD_R_popularity [?RD_R_popularity] | RD_D_popularity [?RD_D_popularity] "
+	## log = "[This.GetName] Pre split: NPP faction pops: NPP_L_popularity [?NPP_L_popularity] | NPP_C_popularity [?NPP_C_popularity] | NPP_FR_popularity [?NPP_FR_popularity] | NPP_R_popularity [?NPP_R_popularity]"
+	## log = "[This.GetName] Real Party popularities: RD_popularity [?RD_popularity] | NPP_popularity [?NPP_popularity]   "
+
 	USA_NPP_splitting_votes = yes
 	USA_RD_splitting_votes = yes
-	
-	#log = "[This.GetName] Post split: NPP faction pops: NPP_L_popularity [?NPP_L_popularity] | NPP_C_popularity [?NPP_C_popularity] | NPP_FR_popularity [?NPP_FR_popularity] | NPP_R_popularity [?NPP_R_popularity]"
-	#log = "[This.GetName] Pres elec final RD_temp_pop [?RD_temp_pop] | NPP_temp_pop [?NPP_temp_pop] final"
-	
+
+	## log = "[This.GetName] Post split: NPP faction pops: NPP_L_popularity [?NPP_L_popularity] | NPP_C_popularity [?NPP_C_popularity] | NPP_FR_popularity [?NPP_FR_popularity] | NPP_R_popularity [?NPP_R_popularity]"
+	## log = "[This.GetName] Pres elec final RD_temp_pop [?RD_temp_pop] | NPP_temp_pop [?NPP_temp_pop] final"
+
 	set_variable = { RD_election_pop = RD_temp_pop }
 	set_variable = { NPP_election_pop = NPP_temp_pop }
-	
-	#log = "[This.GetName]NPP_election_pop is [?NPP_election_pop]  ||  RD_election_pop is [?RD_election_pop] update"
-	#log = "[This.GetName] NPP_temp_pop is [?NPP_temp_pop] || RD_temp_pop is [?RD_temp_pop]  |"
+
+	## log = "[This.GetName]NPP_election_pop is [?NPP_election_pop]  ||  RD_election_pop is [?RD_election_pop] update"
+	## log = "[This.GetName] NPP_temp_pop is [?NPP_temp_pop] || RD_temp_pop is [?RD_temp_pop]  |"
 }
 
 
 US_hold_presidential_election_in_state = {
 	#check which party is largest
 	#ADD CHECK FOR TIES
-	
+
 	# Actual voting results Texas California and New York need special code
 	# normalizer
 	set_temp_variable = { total_election_pop = RD_election_pop }
 	add_to_temp_variable = { total_election_pop = NPP_election_pop }
-	
+
 	set_temp_variable = { actual_votes = state_population_k }
-	
+
 	if = { # California
 		limit = { check_variable = { THIS.id = 378.id } }
 		add_to_temp_variable = { actual_votes = 990.state_population_k }
 	}
-	
+
 	if = { # Texas
 		limit = { check_variable = { THIS.id = 375.id } }
 		add_to_temp_variable = { actual_votes = 989.state_population_k }
 	}
-	
+
 	if = { # New York
 		limit = { check_variable = { THIS.id = 358.id } }
 		add_to_temp_variable = { actual_votes = 991.state_population_k }
 	}
-	
+
 	if = { # Maryland DC
 		limit = { check_variable = { THIS.id = 361.id } }
 		add_to_temp_variable = { actual_votes = 992.state_population_k }
 	}
-	
+
 	if = {
 		limit = {
 			USA = { has_country_flag = USA_voting_rights_act }
@@ -692,33 +692,33 @@ US_hold_presidential_election_in_state = {
 		}
 		set_temp_variable = { voter_turnout_vra = voter_turnout }
 		add_to_temp_variable = { voter_turnout_vra = 0.108 } #Magic Number VRA
-		
+
 		multiply_temp_variable = { actual_votes = voter_turnout_vra }
-	} else = {
+		} else = {
 		multiply_temp_variable = { actual_votes = voter_turnout }
 	}
-	
+
 	set_temp_variable = { rd_temp_actual_votes = actual_votes }
 	multiply_temp_variable = { rd_temp_actual_votes = RD_election_pop }
 	divide_temp_variable = { rd_temp_actual_votes = total_election_pop }
 	add_to_variable = { ROOT.RD_actual_votes = rd_temp_actual_votes }
-	
+
 	set_temp_variable = { npp_temp_actual_votes = actual_votes }
 	multiply_temp_variable = { npp_temp_actual_votes = NPP_election_pop }
 	divide_temp_variable = { npp_temp_actual_votes = total_election_pop }
 	add_to_variable = { ROOT.NPP_actual_votes = npp_temp_actual_votes }
-	
-	log = "[GetDateText] [PREV.GetName] [This.GetName] NPP_election_pop is [?NPP_election_pop] actual_votes [?npp_temp_actual_votes] ||  RD_election_pop is [?RD_election_pop] actual_votes [?rd_temp_actual_votes] held election"
+
+	# log = "[GetDateText] [PREV.GetName] [This.GetName] NPP_election_pop is [?NPP_election_pop] actual_votes [?npp_temp_actual_votes] ||  RD_election_pop is [?RD_election_pop] actual_votes [?rd_temp_actual_votes] held election"
 
 	if = {
 		limit = { check_variable = { RD_election_pop > NPP_election_pop } }
 		add_to_variable = { ROOT.RD_electoral_votes = electoral_votes }
-	    log = "[This.GetName] : Voted for RD with [?electoral_votes] electoral votes"
+		# log = "[This.GetName] : Voted for RD with [?electoral_votes] electoral votes"
 		set_state_flag = voted_RD
 	}
 	else = {
 		add_to_variable = { ROOT.NPP_electoral_votes = electoral_votes }
-		log = "[This.GetName] : Voted for NPP with [?electoral_votes] electoral votes"
+		# log = "[This.GetName] : Voted for NPP with [?electoral_votes] electoral votes"
 		set_state_flag = voted_NPP
 	}
 	##########################################################################################
@@ -728,7 +728,7 @@ US_hold_presidential_election_in_state = {
 USA_NPP_splitting_votes = {
 	set_temp_variable = { temp_NPP_unity = ROOT.USA_NPP_Unity }
 	divide_temp_variable = { temp_NPP_unity = @MAXIMUM_UNITY }
-	#log = "ROOT.USA_NPP_Unity is [?ROOT.USA_NPP_Unity]"
+	## log = "ROOT.USA_NPP_Unity is [?ROOT.USA_NPP_Unity]"
 	set_temp_variable = { temp_NPP_unity_minus = 1}
 	subtract_from_temp_variable = { temp_NPP_unity_minus = temp_NPP_unity}
 	set_temp_variable = { NPP_C_popularity_2 = NPP_C_popularity}
@@ -740,9 +740,9 @@ USA_NPP_splitting_votes = {
 	multiply_temp_variable = { NPP_FR_popularity_1 = temp_NPP_unity}		#FR->NPP	NPP_FR_popularity
 	multiply_temp_variable = { NPP_C_popularity_2 = temp_NPP_unity_minus}	#C->RD		NPP_C_popularity_2
 	multiply_temp_variable = { NPP_FR_popularity_2 = temp_NPP_unity_minus}	#FR->RD		NPP_FR_popularity_2
-	#log = "temp_NPP_unity [?temp_NPP_unity] | temp_NPP_unity_minus [?temp_NPP_unity_minus]"
-	#log = "NPP_C_popularity, which goes to NPP is [?NPP_C_popularity_1] | NPP_C_popularity_2, which goes to RD is [?NPP_C_popularity_2]"
-	#log = "NPP_FR_popularity, which goes to NPP is [?NPP_FR_popularity_1] | NPP_FR_popularity_2, which goes to RD is [?NPP_FR_popularity_2]"
+	## log = "temp_NPP_unity [?temp_NPP_unity] | temp_NPP_unity_minus [?temp_NPP_unity_minus]"
+	## log = "NPP_C_popularity, which goes to NPP is [?NPP_C_popularity_1] | NPP_C_popularity_2, which goes to RD is [?NPP_C_popularity_2]"
+	## log = "NPP_FR_popularity, which goes to NPP is [?NPP_FR_popularity_1] | NPP_FR_popularity_2, which goes to RD is [?NPP_FR_popularity_2]"
 
 	if = {
 		limit = { check_variable = { ROOT.NPP_candidate_party = 5 } } #Yockey
@@ -855,7 +855,7 @@ USA_NPP_splitting_votes = {
 
 			add_to_temp_variable = { NPP_temp_pop = NPP_L_popularity }
 		}
-	} else = { # This is the first election, therefore we assume LBJ vs Wallace
+		} else = { # This is the first election, therefore we assume LBJ vs Wallace
 		add_to_temp_variable = { NPP_temp_pop = NPP_R_popularity }
 
 		add_to_temp_variable = { NPP_temp_pop = NPP_FR_popularity_1 }
@@ -882,13 +882,13 @@ USA_RD_splitting_votes = {
 	multiply_temp_variable = { RD_R_popularity_1 = temp_RD_unity }		#R->RD	RD_R_popularity
 	multiply_temp_variable = { RD_D_popularity_2 = temp_RD_unity_minus }		#D->NPP	RD_D_popularity_2
 	multiply_temp_variable = { RD_R_popularity_2 = temp_RD_unity_minus }		#R->NPP	RD_R_popularity_2
-	#log = "temp_RD_unity [?temp_RD_unity] | temp_RD_unity_minus [?temp_RD_unity_minus]"
-	#log = "RD_R_popularity, which goes to RD is [?RD_R_popularity_1] | RD_R_popularity_2, which goes to NPP is [?RD_R_popularity_2]"
-	#log = "RD_D_popularity, which goes to RD is [?RD_D_popularity_1] | RD_D_popularity_2, which goes to NPP is [?RD_D_popularity_2]"
+	## log = "temp_RD_unity [?temp_RD_unity] | temp_RD_unity_minus [?temp_RD_unity_minus]"
+	## log = "RD_R_popularity, which goes to RD is [?RD_R_popularity_1] | RD_R_popularity_2, which goes to NPP is [?RD_R_popularity_2]"
+	## log = "RD_D_popularity, which goes to RD is [?RD_D_popularity_1] | RD_D_popularity_2, which goes to NPP is [?RD_D_popularity_2]"
 
 	set_temp_variable = { RD_union_popularity = RD_R_popularity_1 }
 	add_to_temp_variable = { RD_union_popularity = RD_D_popularity_1 }		#together
-	#log = "RD_R_popularity ([?RD_R_popularity_1]) + RD_D_popularity ([?RD_D_popularity_1]) = RD_union_popularity [?RD_union_popularity]"
+	## log = "RD_R_popularity ([?RD_R_popularity_1]) + RD_D_popularity ([?RD_D_popularity_1]) = RD_union_popularity [?RD_union_popularity]"
 
 	if = {
 		limit = { check_variable = { ROOT.RD_candidate_party = 1 } } #Republican
@@ -937,7 +937,7 @@ USA_RD_splitting_votes = {
 		}
 		multiply_temp_variable = { RD_D_popularity_2 = @DISUNITY_SAME_FACTION_POPULARITY_MULTIPLIER }
 		add_to_temp_variable = { RD_temp_pop = RD_D_popularity_2 }
-	} else = { # This is the first election, therefore we assume LBJ vs Wallace
+		} else = { # This is the first election, therefore we assume LBJ vs Wallace
 		add_to_temp_variable = { RD_temp_pop = RD_R_popularity_1 }
 
 		add_to_temp_variable = { RD_temp_pop = RD_D_popularity_1 }
@@ -960,81 +960,81 @@ USA_RD_splitting_votes = {
 #%%%%#%%#%%%%#%%%%%%%%%%%#%#%%#%%#%%%%%%%%%%%%%%%%%                                                                           
 #%%%(.#%%%%%% .%%%%%%. %%%%%%(.(%%%%%% .%%%%%%. %%%###########################################################################
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%###########################################################################
-                                                                                                                             
-                                                                                                                             
+
+
 #############################################################################################################################
 #############################################################################################################################
-                                                                                                                             
-                                                                                                                             
+
+
 #############################################################################################################################
 #############################################################################################################################
-                                                                                                                             
-                                                                                                                             
+
+
 #############################################################################################################################
 #############################################################################################################################
 
 USA_hold_senate_election_tex = { #For debugging purposes, actual effect is down below
-every_owned_state = {
+	every_owned_state = {
 		limit = {
 			has_state_flag = elections_senator_1
 		}
-	set_variable = { SEN_Right_Vote = 0 }
-	set_variable = { SEN_Prog_Vote = 0 }
-	add_to_variable = { SEN_Prog_Vote = RD_R_bonus_popularity }
-	add_to_variable = { SEN_Prog_Vote = NPP_C_bonus_popularity }
-	add_to_variable = { SEN_Prog_Vote = NPP_L_bonus_popularity }
-	add_to_variable = { SEN_Right_Vote = RD_D_bonus_popularity }
-	add_to_variable = { SEN_Right_Vote = NPP_FR_bonus_popularity }
-	add_to_variable = { SEN_Right_Vote = NPP_Y_bonus_popularity }
+		set_variable = { SEN_Right_Vote = 0 }
+		set_variable = { SEN_Prog_Vote = 0 }
+		add_to_variable = { SEN_Prog_Vote = RD_R_bonus_popularity }
+		add_to_variable = { SEN_Prog_Vote = NPP_C_bonus_popularity }
+		add_to_variable = { SEN_Prog_Vote = NPP_L_bonus_popularity }
+		add_to_variable = { SEN_Right_Vote = RD_D_bonus_popularity }
+		add_to_variable = { SEN_Right_Vote = NPP_FR_bonus_popularity }
+		add_to_variable = { SEN_Right_Vote = NPP_Y_bonus_popularity }
 	#Progressives
-	if = {
-		limit = {
-		check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
-		check_variable = { RD_R_bonus_popularity > NPP_C_bonus_popularity }
-		check_variable = { RD_R_bonus_popularity > NPP_L_bonus_popularity }
+		if = {
+			limit = {
+				check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
+				check_variable = { RD_R_bonus_popularity > NPP_C_bonus_popularity }
+				check_variable = { RD_R_bonus_popularity > NPP_L_bonus_popularity }
+			}
+			set_variable = { senator_1 = 1 }
 		}
-		set_variable = { senator_1 = 1 }
-	}
-	else_if = {
-		limit = {
-		check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
-		check_variable = { NPP_L_bonus_popularity > RD_R_bonus_popularity }
-		check_variable = { NPP_L_bonus_popularity > NPP_C_bonus_popularity }
+		else_if = {
+			limit = {
+				check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
+				check_variable = { NPP_L_bonus_popularity > RD_R_bonus_popularity }
+				check_variable = { NPP_L_bonus_popularity > NPP_C_bonus_popularity }
+			}
+			set_variable = { senator_1 = 3 }
 		}
-		set_variable = { senator_1 = 3 }
-	}
-	else_if = {
-		limit = {
-		check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
-		check_variable = { NPP_C_bonus_popularity > RD_R_bonus_popularity }
-		check_variable = { NPP_C_bonus_popularity > NPP_L_bonus_bonus_popularity }
+		else_if = {
+			limit = {
+				check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
+				check_variable = { NPP_C_bonus_popularity > RD_R_bonus_popularity }
+				check_variable = { NPP_C_bonus_popularity > NPP_L_bonus_bonus_popularity }
+			}
+			set_variable = { senator_1 = 4 }
 		}
-		set_variable = { senator_1 = 4 }
-	}
 	#Right Wing
-	else_if = {
-		limit = {
-		check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
-		check_variable = { NPP_Y_bonus_popularity > RD_D_bonus_popularity }
-		check_variable = { NPP_Y_bonus_popularity > NPP_FR_bonus_popularity }
+		else_if = {
+			limit = {
+				check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
+				check_variable = { NPP_Y_bonus_popularity > RD_D_bonus_popularity }
+				check_variable = { NPP_Y_bonus_popularity > NPP_FR_bonus_popularity }
+			}
+			set_variable = { senator_1 = 5 }
 		}
-		set_variable = { senator_1 = 5 }
-	}
-	else_if = {
-		limit = {
-		check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
-		check_variable = { NPP_FR_bonus_popularity > RD_D_bonus_popularity }
-		check_variable = { NPP_FR_bonus_popularity > NPP_Y_bonus_popularity }
+		else_if = {
+			limit = {
+				check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
+				check_variable = { NPP_FR_bonus_popularity > RD_D_bonus_popularity }
+				check_variable = { NPP_FR_bonus_popularity > NPP_Y_bonus_popularity }
+			}
+			set_variable = { senator_1 = 6 }
 		}
-		set_variable = { senator_1 = 6 }
-		}
-	else_if = {
-		limit = {
-		check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
-		check_variable = { RD_D_bonus_popularity > NPP_FR_bonus_popularity }
-		check_variable = { RD_D_bonus_popularity > NPP_Y_bonus_popularity }
-		}
-		set_variable = { senator_1 = 2 }
+		else_if = {
+			limit = {
+				check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
+				check_variable = { RD_D_bonus_popularity > NPP_FR_bonus_popularity }
+				check_variable = { RD_D_bonus_popularity > NPP_Y_bonus_popularity }
+			}
+			set_variable = { senator_1 = 2 }
 		}
 	}
 
@@ -1052,55 +1052,55 @@ every_owned_state = {
 		add_to_variable = { SEN_Right_Vote = NPP_Y_bonus_popularity }
 		if = {
 		#Progressives
-		if = {
-			limit = { 
-			check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
-			check_variable = { RD_R_bonus_popularity > NPP_C_bonus_popularity }				
-			check_variable = { RD_R_bonus_popularity > NPP_L_bonus_popularity }
-			}
-			set_variable = { senator_1 = 1 }
-		}
-		else_if = {
-			limit = { 
-			check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
-			check_variable = { NPP_L_bonus_popularity > RD_R_bonus_popularity }				
-			check_variable = { NPP_L_bonus_popularity > NPP_C_bonus_popularity }
-			}
-			set_variable = { senator_1 = 3 }
-		}
-		else_if = {
-			limit = { 
-			check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
-			check_variable = { NPP_C_bonus_popularity > RD_R_bonus_popularity }				
-			check_variable = { NPP_C_bonus_popularity > NPP_L_bonus_bonus_popularity }
-			}
-			set_variable = { senator_1 = 4 }
-		}
-		#Right Wing
-		else_if = {
-			limit = { 
-			check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
-			check_variable = { NPP_Y_bonus_popularity > RD_D_bonus_popularity }				
-			check_variable = { NPP_Y_bonus_popularity > NPP_FR_bonus_popularity }
-			}
-			set_variable = { senator_1 = 5 }
-		}
-		else_if = {
-			limit = { 
-			check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
-			check_variable = { NPP_FR_bonus_popularity > RD_D_bonus_popularity }				
-			check_variable = { NPP_FR_bonus_popularity > NPP_Y_bonus_popularity }
-			}
-			set_variable = { senator_1 = 6 }
-		}
-		else_if = {
-			limit = { 
-			check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
-			check_variable = { RD_D_bonus_popularity > NPP_FR_bonus_popularity }				
-			check_variable = { RD_D_bonus_popularity > NPP_Y_bonus_popularity }
-			}
-			set_variable = { senator_1 = 2 }
+			if = {
+				limit = {
+					check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
+					check_variable = { RD_R_bonus_popularity > NPP_C_bonus_popularity }
+					check_variable = { RD_R_bonus_popularity > NPP_L_bonus_popularity }
 				}
+				set_variable = { senator_1 = 1 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
+					check_variable = { NPP_L_bonus_popularity > RD_R_bonus_popularity }
+					check_variable = { NPP_L_bonus_popularity > NPP_C_bonus_popularity }
+				}
+				set_variable = { senator_1 = 3 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { SEN_Prog_Vote > SEN_Right_Vote }
+					check_variable = { NPP_C_bonus_popularity > RD_R_bonus_popularity }
+					check_variable = { NPP_C_bonus_popularity > NPP_L_bonus_bonus_popularity }
+				}
+				set_variable = { senator_1 = 4 }
+			}
+		#Right Wing
+			else_if = {
+				limit = {
+					check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
+					check_variable = { NPP_Y_bonus_popularity > RD_D_bonus_popularity }
+					check_variable = { NPP_Y_bonus_popularity > NPP_FR_bonus_popularity }
+				}
+				set_variable = { senator_1 = 5 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
+					check_variable = { NPP_FR_bonus_popularity > RD_D_bonus_popularity }
+					check_variable = { NPP_FR_bonus_popularity > NPP_Y_bonus_popularity }
+				}
+				set_variable = { senator_1 = 6 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { SEN_Right_Vote > SEN_Prog_Vote }
+					check_variable = { RD_D_bonus_popularity > NPP_FR_bonus_popularity }
+					check_variable = { RD_D_bonus_popularity > NPP_Y_bonus_popularity }
+				}
+				set_variable = { senator_1 = 2 }
+			}
 		}
 	}
 	every_owned_state = {
@@ -1122,15 +1122,18 @@ USA_hold_senate_election = {
 	set_variable = { NPP_C_change = 0 }
 	set_variable = { NPP_R_change = 0 }
 	set_variable = { NPP_FR_change = 0 }
+	set_temp_variable = { alert_id = 201 }
+	remove_TNO_alert = yes
+		
 	clamp_variable = { #make sure to clamp any support variable that can change!
-   		var = USA_NPP_Unity
-    	min = @MINIMUM_UNITY
-    	max = @MAXIMUM_UNITY
+		var = USA_NPP_Unity
+		min = @MINIMUM_UNITY
+		max = @MAXIMUM_UNITY
 	}
 	clamp_variable = { #make sure to clamp any support variable that can change!
-   		var = USA_RD_Unity
-    	min = @MINIMUM_UNITY
-    	max = @MAXIMUM_UNITY
+		var = USA_RD_Unity
+		min = @MINIMUM_UNITY
+		max = @MAXIMUM_UNITY
 	}
 	every_owned_state = {
 		limit = {
@@ -1138,50 +1141,50 @@ USA_hold_senate_election = {
 		}
 		USA_clamp_state_popularities = yes
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_R_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_R_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_D_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_D_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_L_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_L_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_C_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_C_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_FR_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_FR_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_Y_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_Y_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
-		log = " update senate 1 race"
+		# log = " update senate 1 race"
 		USA_update_senator_1_in_state = yes
-		log = " pick senate 1 race"
+		# log = " pick senate 1 race"
 		USA_pick_senator_1_in_state = yes
-		log = " clear senate 1 race"
+		# log = " clear senate 1 race"
 		USA_clear_senate_predictions = yes
 	}
 	every_owned_state = {
@@ -1190,50 +1193,50 @@ USA_hold_senate_election = {
 		}
 		USA_clamp_state_popularities = yes
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_R_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_R_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = RD_D_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = RD_D_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_L_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_L_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_C_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_C_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_FR_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_FR_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
 		clamp_variable = { #make sure to clamp any support variable that can change!
-   			var = NPP_Y_bonus_popularity
-    		min = @POPULARITY_CLAMP_MIN
-    		max = @POPULARITY_CLAMP_MAX
+			var = NPP_Y_bonus_popularity
+			min = @POPULARITY_CLAMP_MIN
+			max = @POPULARITY_CLAMP_MAX
 		}
-		log = " update senate 2 race"
+		# log = " update senate 2 race"
 		USA_update_senator_2_in_state = yes
-		log = " pick senate 1 race"
+		# log = " pick senate 1 race"
 		USA_pick_senator_2_in_state = yes
-		log = " clear senate 1 race"
+		# log = " clear senate 1 race"
 		USA_clear_senate_predictions = yes
 	}
 	set_country_flag = USA_senate_conclusion
@@ -1517,12 +1520,12 @@ USA_update_senator_1_in_state = {
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
 		}
 	}
-}	
+}
 #####################################################################################
 
 USA_pick_senator_1_in_state	= {
-	log = "[This.GetName]: senator_1 is [?senator_1] at start of pick senator"
-	log = "[This.GetName]: RD_senate_final_popularity is [?RD_senate_final_popularity] and NPP_senate_final_popularity is [?NPP_senate_final_popularity]"
+	# log = "[This.GetName]: senator_1 is [?senator_1] at start of pick senator"
+	# log = "[This.GetName]: RD_senate_final_popularity is [?RD_senate_final_popularity] and NPP_senate_final_popularity is [?NPP_senate_final_popularity]"
 	#For determining which party gained and which lost
 	if = {
 		limit = { check_variable = { senator_1 = 1 } }
@@ -1559,11 +1562,11 @@ USA_pick_senator_1_in_state	= {
 				check_variable = { RD_senate_candidate = 1 }
 			}
 			set_variable = { senator_1 = 1 }
-			log = "[This.GetName] elected [?senator_1]"
+			# log = "[This.GetName] elected [?senator_1]"
 		}
 		else = {
 			set_variable = { senator_1 = 2 }
-			log = "[This.GetName] elected [?senator_1]"
+			# log = "[This.GetName] elected [?senator_1]"
 		}
 		if = {
 			limit = {
@@ -1582,28 +1585,28 @@ USA_pick_senator_1_in_state	= {
 				check_variable = { NPP_senate_candidate = 3 }
 			}
 			set_variable = { senator_1 = 3 }
-			log = "[This.GetName] elected [?senator_1]"
+			# log = "[This.GetName] elected [?senator_1]"
 		}
 		else_if = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 4 }
 			}
 			set_variable = { senator_1 = 4 }
-			log = "[This.GetName] elected [?senator_1]"
+			# log = "[This.GetName] elected [?senator_1]"
 		}
 		else_if = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 5 }
 			}
 			set_variable = { senator_1 = 5 }
-			log = "[This.GetName] elected [?senator_1]"
+			# log = "[This.GetName] elected [?senator_1]"
 		}
 		else_if = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 6 }
 			}
 			set_variable = { senator_1 = 6 }
-			log = "[This.GetName] elected [?senator_1]"
+			# log = "[This.GetName] elected [?senator_1]"
 		}
 		if = {
 			limit = {
@@ -1617,35 +1620,8 @@ USA_pick_senator_1_in_state	= {
 		set_variable = { senator_1 = prev_senator_1 }
 	}
 
-	if = { #senator has changed
-		limit = { NOT = { check_variable = { prev_senator_1 = senator_1 } } }
-		if = {
-			limit = { check_variable = { senator_1 = name_change_1 } } #if the previous senator was originally from the party which has won again now, things get a bit awkward - family dinners for sure are going to be a lot more silent.
-			random_list = { #on a more serious note, what happens is that neighbouring name gets borrowed - if the Republican have won while orig Republicans were chillin in C-NPP, either a democrat or orig C-NPP will step into their boots.
-				50 = {
-					modifier = { #just checking so it doesn't go out of index - 0 is not a replacment for an ideology
-						factor = 0
-						check_variable = { name_change_1 = 1 }
-					}
-					subtract_from_variable = { name_change_1 = 1 }
-				}
-				50 = {
-					modifier = { #and neither is 7
-						factor = 0
-						check_variable = { name_change_1 = 6 }
-					}
-					add_to_variable = { name_change_1 = 1 }
-				}
-
-			}
-		}
-		else = { #if there's no conflict of such nature, we just reset the name_change_1 to 0
-			set_variable = { name_change_1 = 0 }
-		}
-	}
-
-	#log = "[This.GetName] Initial popularities RD_popularity  [?RD_popularity] | NPP_popularity [?NPP_popularity]"
-	log = "[This.GetName] Temp faction pops final: RD-R: [?RD_R_popularity] | RD-D [?RD_D_popularity] | NPP-L [?NPP_L_popularity] | NPP-C [?NPP_C_popularity] | NPP-R [?NPP_R_popularity] | NPP-FR [?NPP_FR_popularity] | Senator is [?senator_1]"
+	## log = "[This.GetName] Initial popularities RD_popularity  [?RD_popularity] | NPP_popularity [?NPP_popularity]"
+	# log = "[This.GetName] Temp faction pops final: RD-R: [?RD_R_popularity] | RD-D [?RD_D_popularity] | NPP-L [?NPP_L_popularity] | NPP-C [?NPP_C_popularity] | NPP-R [?NPP_R_popularity] | NPP-FR [?NPP_FR_popularity] | Senator is [?senator_1]"
 
 	#For determining which party gained and which lost
 	#Readding now that you know what the elected senator is
@@ -1857,7 +1833,7 @@ USA_update_senator_2_in_state = {
 	add_to_variable = { RD_senate_final_popularity = RD_D_popularity }
 	set_variable = { NPP_senate_final_popularity = NPP_C_popularity }
 	add_to_variable = { NPP_senate_final_popularity = NPP_FR_popularity }
-	
+
 	if = {
 		limit = {
 			check_variable = { RD_senate_candidate = 1 }
@@ -1952,11 +1928,11 @@ USA_update_senator_2_in_state = {
 			add_to_variable = { RD_senate_final_popularity = NPP_L_popularity }
 		}
 	}
-}	
+}
 	#####################################################################################
 USA_pick_senator_2_in_state	= {
-	log = "[This.GetName]: senator_2 is [?senator_2] at start of pick senator"
-	log = "[This.GetName]: RD_senate_final_popularity is [?RD_senate_final_popularity] and NPP_senate_final_popularity is [?NPP_senate_final_popularity]"
+	# log = "[This.GetName]: senator_2 is [?senator_2] at start of pick senator"
+	# log = "[This.GetName]: RD_senate_final_popularity is [?RD_senate_final_popularity] and NPP_senate_final_popularity is [?NPP_senate_final_popularity]"
 	#For determining which party gained and which lost
 	if = {
 		limit = { check_variable = { senator_2 = 1 } }
@@ -1992,11 +1968,11 @@ USA_pick_senator_2_in_state	= {
 				check_variable = { RD_senate_candidate = 1 }
 			}
 			set_variable = { senator_2 = 1 }
-			log = "[This.GetName] elected [?senator_2]"
+			# log = "[This.GetName] elected [?senator_2]"
 		}
 		else = {
 			set_variable = { senator_2 = 2 }
-			log = "[This.GetName] elected [?senator_2]"
+			# log = "[This.GetName] elected [?senator_2]"
 		}
 	}
 	else_if = {
@@ -2008,21 +1984,21 @@ USA_pick_senator_2_in_state	= {
 				check_variable = { NPP_senate_candidate = 3 }
 			}
 			set_variable = { senator_2 = 3 }
-			log = "[This.GetName] elected [?senator_2]"
+			# log = "[This.GetName] elected [?senator_2]"
 		}
 		else_if = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 4 }
 			}
 			set_variable = { senator_2 = 4 }
-			log = "[This.GetName] elected [?senator_2]"
+			# log = "[This.GetName] elected [?senator_2]"
 		}
 		else_if = {
 			limit = {
 				check_variable = { NPP_senate_candidate = 5 }
 			}
 			set_variable = { senator_2 = 5 }
-			log = "[This.GetName] elected [?senator_2]"
+			# log = "[This.GetName] elected [?senator_2]"
 		}
 		else_if = {
 			limit = {
@@ -2030,7 +2006,7 @@ USA_pick_senator_2_in_state	= {
 
 			}
 			set_variable = { senator_2 = 6 }
-			log = "[This.GetName] elected [?senator_2]"
+			# log = "[This.GetName] elected [?senator_2]"
 		}
 
 
@@ -2039,35 +2015,8 @@ USA_pick_senator_2_in_state	= {
 		set_variable = { senator_2 = prev_senator_2 }
 	}
 
-	if = { #senator has changed
-		limit = { NOT = { check_variable = { prev_senator_2 = senator_2 } } }
-		if = {
-			limit = { check_variable = { senator_2 = name_change_1 } } #if the previous senator was originally from the party which has won again now, things get a bit awkward - family dinners for sure are going to be a lot more silent.
-			random_list = { #on a more serious note, what happens is that neighbouring name gets borrowed - if the Republican have won while orig Republicans were chillin in C-NPP, either a democrat or orig C-NPP will step into their boots.
-				50 = {
-					modifier = { #just checking so it doesn't go out of index - 0 is not a replacment for an ideology
-						factor = 0
-						check_variable = { name_change_1 = 1 }
-					}
-					subtract_from_variable = { name_change_1 = 1 }
-				}
-				50 = {
-					modifier = { #and neither is 7
-						factor = 0
-						check_variable = { name_change_1 = 6 }
-					}
-					add_to_variable = { name_change_1 = 1 }
-				}
-
-			}
-		}
-		else = { #if there's no conflict of such nature, we just reset the name_change_1 to 0
-			set_variable = { name_change_1 = 0 }
-		}
-	}
-
-	#log = "[This.GetName] Initial popularities RD_popularity  [?RD_popularity] | NPP_popularity [?NPP_popularity]"
-	log = "[This.GetName] Temp faction pops final: RD-R: [?RD_R_popularity] | RD-D [?RD_D_popularity] | NPP-L [?NPP_L_popularity] | NPP-C [?NPP_C_popularity] | NPP-R [?NPP_R_popularity] | NPP-FR [?NPP_FR_popularity] | Senator is [?senator_2]"
+	## log = "[This.GetName] Initial popularities RD_popularity  [?RD_popularity] | NPP_popularity [?NPP_popularity]"
+	# log = "[This.GetName] Temp faction pops final: RD-R: [?RD_R_popularity] | RD-D [?RD_D_popularity] | NPP-L [?NPP_L_popularity] | NPP-C [?NPP_C_popularity] | NPP-R [?NPP_R_popularity] | NPP-FR [?NPP_FR_popularity] | Senator is [?senator_2]"
 
 	#For determining which party gained and which lost
 	#Readding now that you know what the elected senator is
@@ -2131,7 +2080,7 @@ presidential_penalty = {
 incumbency_bonus_1 = {
 	if = {
 		limit = { check_variable = { prev_senator_1 = 1 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_liberal}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@liberal_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2143,7 +2092,7 @@ incumbency_bonus_1 = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_1 = 2 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_conservative}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@conservative_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2167,7 +2116,7 @@ incumbency_bonus_1 = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_1 = 4 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2179,7 +2128,7 @@ incumbency_bonus_1 = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_1 = 5 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2206,7 +2155,7 @@ incumbency_bonus_1 = {
 incumbency_bonus_2 = {
 	if = {
 		limit = { check_variable = { prev_senator_2 = 1 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_liberal}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@liberal_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2218,7 +2167,7 @@ incumbency_bonus_2 = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_2 = 2 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_conservative}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@conservative_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2242,7 +2191,7 @@ incumbency_bonus_2 = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_2 = 4 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2254,7 +2203,7 @@ incumbency_bonus_2 = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_2 = 5 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2339,7 +2288,7 @@ opposition_bonus_2 = {
 incumbency_bonus_1_primary = {
 	if = {
 		limit = { check_variable = { prev_senator_1 = 1 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_liberal}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@liberal_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2351,7 +2300,7 @@ incumbency_bonus_1_primary = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_1 = 2 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_conservative}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@conservative_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2375,7 +2324,7 @@ incumbency_bonus_1_primary = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_1 = 4 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2387,7 +2336,7 @@ incumbency_bonus_1_primary = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_1 = 5 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2413,7 +2362,7 @@ incumbency_bonus_1_primary = {
 incumbency_bonus_2_primary = {
 	if = {
 		limit = { check_variable = { prev_senator_2 = 1 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_liberal}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@liberal_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2425,7 +2374,7 @@ incumbency_bonus_2_primary = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_2 = 2 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_conservative}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@conservative_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2449,7 +2398,7 @@ incumbency_bonus_2_primary = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_2 = 4 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@social_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2461,7 +2410,7 @@ incumbency_bonus_2_primary = {
 	}
 	else_if = {
 		limit = { check_variable = { prev_senator_2 = 5 } }
-		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democrat}
+		set_temp_variable = { incumbency_bonus =  ROOT.party_popularity@authoritarian_democracy}
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_1 }
 		multiply_temp_variable = { incumbency_bonus = @SENATE_INCUMBENCY_BONUS_MULTIPLIER_2 }
 		clamp_temp_variable = {
@@ -2573,7 +2522,7 @@ presidential_penalty_primary = {
 #TIE BREAKERS
 tie_breaker_senator_1 = {
 	set_temp_variable = { max = -1 }
-	log = "[This.GetName] Tiebreaker 1"
+	# log = "[This.GetName] Tiebreaker 1"
 	if = {
 		limit = { check_variable = { senator_1 = 0 } }
 		if = {
@@ -2634,17 +2583,17 @@ tie_breaker_senator_1 = {
 		}
 		if = {
 			limit = { check_variable = { senator_1 = 0}}
-			log = "[This.GetName] Tiebreaker 2"
+			# log = "[This.GetName] Tiebreaker 2"
 			set_temp_variable = { max = -1 }
 
-			add_to_temp_variable = { RD_R_popularity = ROOT.party_popularity@social_liberal}
+			add_to_temp_variable = { RD_R_popularity = ROOT.party_popularity@liberal_democracy}
 			if = {
 				limit = { check_variable = { RD_R_popularity > max } }
 				set_variable = { senator_1 = 1 }
 				set_temp_variable = { max = RD_R_popularity }
 			}
 
-			add_to_temp_variable = { RD_D_popularity = ROOT.party_popularity@social_conservative}
+			add_to_temp_variable = { RD_D_popularity = ROOT.party_popularity@conservative_democracy}
 			if = {
 				limit = { check_variable = { RD_D_popularity > max } }
 				set_variable = { senator_1 = 1 }
@@ -2658,14 +2607,14 @@ tie_breaker_senator_1 = {
 				set_temp_variable = { max = NPP_L_popularity }
 			}
 
-			add_to_temp_variable = { NPP_FR_popularity = ROOT.party_popularity@authoritarian_democrat}
+			add_to_temp_variable = { NPP_FR_popularity = ROOT.party_popularity@authoritarian_democracy}
 			if = {
 				limit = { check_variable = { NPP_FR_popularity > max } }
 				set_variable = { senator_1 = 1 }
 				set_temp_variable = { max = NPP_FR_popularity }
 			}
 
-			add_to_temp_variable = { NPP_C_popularity = ROOT.party_popularity@social_democrat}
+			add_to_temp_variable = { NPP_C_popularity = ROOT.party_popularity@social_democracy}
 			if = {
 				limit = { check_variable = { NPP_C_popularity > max } }
 				set_variable = { senator_1 = 1 }
@@ -2683,7 +2632,7 @@ tie_breaker_senator_1 = {
 }
 tie_breaker_senator_2 = {
 	set_temp_variable = { max = -1 }
-	log = "[This.GetName] Tiebreaker 1"
+	# log = "[This.GetName] Tiebreaker 1"
 	if = {
 		limit = { check_variable = { senator_2 = 0 } }
 		if = {
@@ -2744,17 +2693,17 @@ tie_breaker_senator_2 = {
 		}
 		if = {
 			limit = { check_variable = { senator_2 = 0}}
-			log = "[This.GetName] Tiebreaker 2"
+			# log = "[This.GetName] Tiebreaker 2"
 			set_temp_variable = { max = -1 }
 
-			add_to_temp_variable = { RD_R_popularity = ROOT.party_popularity@social_liberal}
+			add_to_temp_variable = { RD_R_popularity = ROOT.party_popularity@liberal_democracy}
 			if = {
 				limit = { check_variable = { RD_R_popularity > max } }
 				set_variable = { senator_2 = 1 }
 				set_temp_variable = { max = RD_R_popularity }
 			}
 
-			add_to_temp_variable = { RD_D_popularity = ROOT.party_popularity@social_conservative}
+			add_to_temp_variable = { RD_D_popularity = ROOT.party_popularity@conservative_democracy}
 			if = {
 				limit = { check_variable = { RD_D_popularity > max } }
 				set_variable = { senator_2 = 1 }
@@ -2768,14 +2717,14 @@ tie_breaker_senator_2 = {
 				set_temp_variable = { max = NPP_L_popularity }
 			}
 
-			add_to_temp_variable = { NPP_FR_popularity = ROOT.party_popularity@authoritarian_democrat}
+			add_to_temp_variable = { NPP_FR_popularity = ROOT.party_popularity@authoritarian_democracy}
 			if = {
 				limit = { check_variable = { NPP_FR_popularity > max } }
 				set_variable = { senator_2 = 1 }
 				set_temp_variable = { max = NPP_FR_popularity }
 			}
 
-			add_to_temp_variable = { NPP_C_popularity = ROOT.party_popularity@social_democrat}
+			add_to_temp_variable = { NPP_C_popularity = ROOT.party_popularity@social_democracy}
 			if = {
 				limit = { check_variable = { NPP_C_popularity > max } }
 				set_variable = { senator_2 = 1 }
@@ -2806,11 +2755,11 @@ USA_recalculate_polls = {
 		limit = { has_country_flag = USA_senate_elections}
 		every_owned_state = {
 			limit = {
-				OR = { 
+				OR = {
 					has_state_flag = elections_senator_1
-				}	
+				}
 			}
-			log = "[This.GetName]: calculate senate poll, because senator 1 is up for election"
+			# log = "[This.GetName]: calculate senate poll, because senator 1 is up for election"
 			USA_update_senator_1_in_state = yes
 			USA_calculate_senate_predictions = yes
 		}
@@ -2818,7 +2767,7 @@ USA_recalculate_polls = {
 			limit = {
 				has_state_flag = elections_senator_2
 			}
-			log = "[This.GetName]: calculate senate poll, because senator 1 is up for election"
+			# log = "[This.GetName]: calculate senate poll, because senator 1 is up for election"
 			USA_update_senator_2_in_state = yes
 			USA_calculate_senate_predictions = yes
 		}
@@ -2830,7 +2779,7 @@ USA_recalculate_polls = {
 			USA_calculate_president_predictions = yes
 		}
 	}
-	
+
 }
 
 #call within a STATE scope to provide variables scripted localisation uses when predicting the senate race
@@ -2844,17 +2793,17 @@ USA_calculate_senate_predictions = {
 	#}
 	#else = { #if it is presidential season
 		#set_variable = { RD_poll_pop = RD_election_pop }
-		set_variable = { RD_poll_pop = RD_senate_final_popularity }
+	set_variable = { RD_poll_pop = RD_senate_final_popularity }
 		#set_variable = { NPP_poll_pop = NPP_election_pop }
-		set_variable = { NPP_poll_pop = NPP_senate_final_popularity }
+	set_variable = { NPP_poll_pop = NPP_senate_final_popularity }
 	#}
-	log = " CALCULATE SENATE PREDICTIONS"
-	log = "RD president pop = [?RD_election_pop SENATE PREDICTIONS]"
-	log = "RD senate pop = [?RD_senate_final_popularity] SENATE PREDICTIONS"
-	log = "RD_poll_pop, which is the one used in error margin is [?RD_poll_pop] SENATE PREDICTIONS"
-	log = "NPP president pop = [?NPP_election_pop] SENATE PREDICTIONS"
-	log = "NPP senate pop = [?NPP_senate_final_popularity] SENATE PREDICTIONS"
-	log = "NPP_poll_pop, which is the one used in error margin is [?NPP_poll_pop] SENATE PREDICTIONS"
+	# log = " CALCULATE SENATE PREDICTIONS"
+	# log = "RD president pop = [?RD_election_pop SENATE PREDICTIONS]"
+	# log = "RD senate pop = [?RD_senate_final_popularity] SENATE PREDICTIONS"
+	# log = "RD_poll_pop, which is the one used in error margin is [?RD_poll_pop] SENATE PREDICTIONS"
+	# log = "NPP president pop = [?NPP_election_pop] SENATE PREDICTIONS"
+	# log = "NPP senate pop = [?NPP_senate_final_popularity] SENATE PREDICTIONS"
+	# log = "NPP_poll_pop, which is the one used in error margin is [?NPP_poll_pop] SENATE PREDICTIONS"
 	set_temp_variable = { error_margin_state_RD = 1 }
 	set_temp_variable = { error_margin_state_NPP = 1 }
 	randomize_temp_variable = {
@@ -2871,12 +2820,12 @@ USA_calculate_senate_predictions = {
 	}
 	multiply_variable = { RD_poll_pop = error_margin_state_RD }
 	multiply_variable = { NPP_poll_pop = error_margin_state_NPP }
-	log = "[This.GetName]: error_margin_state_RD is [?error_margin_state_RD] SENATE PREDICTIONS "#DEBUG ONLY
-	log = "[This.GetName]: error_margin_state_NPP is [?error_margin_state_NPP]  SENATE PREDICTIONS"#DEBUG ONLY
+	# log = "[This.GetName]: error_margin_state_RD is [?error_margin_state_RD] SENATE PREDICTIONS "#DEBUG ONLY
+	# log = "[This.GetName]: error_margin_state_NPP is [?error_margin_state_NPP]  SENATE PREDICTIONS"#DEBUG ONLY
 
 	set_variable = { USA_state_poll_pop_diff = RD_poll_pop }
 	subtract_from_variable = { USA_state_poll_pop_diff = NPP_poll_pop}
-	log = "[This.GetName]: USA_state_poll_pop_diff is [?USA_state_poll_pop_diff]. RD_poll_pop is [?RD_poll_pop]. NPP_poll_pop is [?NPP_poll_pop]. SENATE PREDICTIONS" #DEBUG ONLY
+	# log = "[This.GetName]: USA_state_poll_pop_diff is [?USA_state_poll_pop_diff]. RD_poll_pop is [?RD_poll_pop]. NPP_poll_pop is [?NPP_poll_pop]. SENATE PREDICTIONS" #DEBUG ONLY
 }
 
 #call within a STATE scope to provide variables scripted localisation uses when predicting the president race
@@ -2931,6 +2880,8 @@ USA_class_1_senate_prepare = {
 	set_country_flag = USA_senate_elections
 	set_country_flag = USA_class_1_elections
 	USA_recalculate_polls = yes
+	set_temp_variable = { alert_id = 201 }
+	add_TNO_alert_unless_exists = yes
 	#SENATOR 1
 	377 = { #Arizona
 		set_state_flag = elections_senator_1
@@ -3032,6 +2983,8 @@ USA_class_2_senate_prepare = {
 	set_country_flag = USA_senate_elections
 	set_country_flag = USA_class_2_elections
 	USA_recalculate_polls = yes
+	set_temp_variable = { alert_id = 201 }
+	add_TNO_alert_unless_exists = yes
 	#SENATOR 1
 	#Alabama
 	367 = {
@@ -3174,6 +3127,8 @@ USA_class_3_senate_prepare = {
 	set_country_flag = USA_senate_elections
 	set_country_flag = USA_class_3_elections
 	USA_recalculate_polls = yes
+	set_temp_variable = { alert_id = 201 }
+	add_TNO_alert_unless_exists = yes
 	#SENATOR 2
 	#Alabama
 	367 = {
@@ -3322,6 +3277,8 @@ USA_clear_presidential_election_values = {
 	clr_country_flag = USA_presidential_conclusion
 	clr_country_flag = USA_presidential_elections
 	clr_country_flag = currently_campaigning
+	set_temp_variable = { alert_id = 201 }
+	remove_TNO_alert = yes
 	every_owned_state = {
 		limit = { can_have_elections_in_state = yes }
 		USA_clear_senate_predictions = yes
@@ -3343,7 +3300,7 @@ USA_prepare_presidential_election = {
 }
 
 USA_clamp_state_popularities = {
-	#log = "[This.GetName]: scripted effect = USA_clamp_state_popularities"  clutters the log way too much
+	## log = "[This.GetName]: scripted effect = USA_clamp_state_popularities"  clutters the # log way too much
 	clamp_variable = {
 		var = RD_popularity
 		min = @PULSE_POPULARITY_CLAMP_MIN
@@ -3469,20 +3426,20 @@ USA_print_pop_to_log_alt = {
 		limit = {
 			has_state_flag = US_election_state
 		}
-		log = "[This.GetName]: RD: [?RD_popularity] | NPP: [?NPP_popularity] | RD-R: [?RD_R_popularity] | RD-D [?RD_D_popularity] | NPP-L [?NPP_L_popularity] | NPP-C [?NPP_C_popularity] | NPP-R [?NPP_R_popularity] | NPP-FR [?NPP_FR_popularity]"
-		log = "[This.GetName] Bonus Popularity: RD-R: [?RD_R_bonus_popularity] | RD-D [?RD_D_bonus_popularity] | NPP-L [?NPP_L_bonus_popularity] | NPP-C [?NPP_C_bonus_popularity] | NPP-R [?NPP_Y_bonus_popularity] | NPP-FR [?NPP_FR_bonus_popularity]"
+		# log = "[This.GetName]: RD: [?RD_popularity] | NPP: [?NPP_popularity] | RD-R: [?RD_R_popularity] | RD-D [?RD_D_popularity] | NPP-L [?NPP_L_popularity] | NPP-C [?NPP_C_popularity] | NPP-R [?NPP_R_popularity] | NPP-FR [?NPP_FR_popularity]"
+		# log = "[This.GetName] Bonus Popularity: RD-R: [?RD_R_bonus_popularity] | RD-D [?RD_D_bonus_popularity] | NPP-L [?NPP_L_bonus_popularity] | NPP-C [?NPP_C_bonus_popularity] | NPP-R [?NPP_Y_bonus_popularity] | NPP-FR [?NPP_FR_bonus_popularity]"
 	}
 }
 
 USA_print_pop_to_log = {
-	log = "THIS_IS_USEL_DATA_3,\"[GetDateText]\",[This.GetName],RD_pie,[?party_popularity@social_liberal],[?party_popularity@social_conservative],current_pres,[?presidents_party],RD_Unity,[?USA_RD_Unity]"
-	log = "THIS_IS_USEL_DATA_3,\"[GetDateText]\",[This.GetName],NPP_pie,[?party_popularity@communist],[?party_popularity@social_democrat],[?party_popularity@national_socialism],[?party_popularity@authoritarian_democrat],NPP_Unity,[?USA_NPP_Unity]"
+	# log = "THIS_IS_USEL_DATA_3,\"[GetDateText]\",[This.GetName],RD_pie,[?party_popularity@liberal_democracy],[?party_popularity@conservative_democracy],current_pres,[?presidents_party],RD_Unity,[?USA_RD_Unity]"
+	# log = "THIS_IS_USEL_DATA_3,\"[GetDateText]\",[This.GetName],NPP_pie,[?party_popularity@communist],[?party_popularity@social_democracy],[?party_popularity@national_socialism],[?party_popularity@authoritarian_democracy],NPP_Unity,[?USA_NPP_Unity]"
 	every_owned_state = {
 		limit = {
 			has_state_flag = US_election_state
 		}
-		log = "THIS_IS_USEL_DATA_1,\"[GetDateText]\",[This.GetName],RD,[?RD_popularity],NPP,[?NPP_popularity],Senator1,[?senator_1],Senator2,[?senator_2]"
-		log = "THIS_IS_USEL_DATA_2,\"[GetDateText]\",[This.GetName],Bonus,,Popularity,,R,[?RD_R_bonus_popularity],D,[?RD_D_bonus_popularity],L,[?NPP_L_bonus_popularity],C,[?NPP_C_bonus_popularity],F,[?NPP_FR_bonus_popularity],Y,[?NPP_Y_bonus_popularity]"
+		# log = "THIS_IS_USEL_DATA_1,\"[GetDateText]\",[This.GetName],RD,[?RD_popularity],NPP,[?NPP_popularity],Senator1,[?senator_1],Senator2,[?senator_2]"
+		# log = "THIS_IS_USEL_DATA_2,\"[GetDateText]\",[This.GetName],Bonus,,Popularity,,R,[?RD_R_bonus_popularity],D,[?RD_D_bonus_popularity],L,[?NPP_L_bonus_popularity],C,[?NPP_C_bonus_popularity],F,[?NPP_FR_bonus_popularity],Y,[?NPP_Y_bonus_popularity]"
 	}
 }
 
@@ -3494,7 +3451,7 @@ USA_campaigning_effect = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_RD_tt
-				country_event = { id = USA.senate.1 } 
+				country_event = { id = USA.senate.1 }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
@@ -3504,12 +3461,12 @@ USA_campaigning_effect = {
 			20 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_RD_tt
-				country_event = { id = USA.senate.3 } 
+				country_event = { id = USA.senate.3 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_RD_tt
-				country_event = { id = USA.senate.4 } 
+				country_event = { id = USA.senate.4 }
 			}
 		}
 	}
@@ -3518,22 +3475,22 @@ USA_campaigning_effect = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_NPP_tt
-				country_event = { id = USA.senate.5 } 
+				country_event = { id = USA.senate.5 }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_good_success_NPP_tt
-				country_event = { id = USA.senate.6 } 
+				country_event = { id = USA.senate.6 }
 			}
 			20 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_NPP_tt
-				country_event = { id = USA.senate.7 } 
+				country_event = { id = USA.senate.7 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_NPP_tt
-				country_event = { id = USA.senate.8 } 
+				country_event = { id = USA.senate.8 }
 			}
 		}
 	}
@@ -3555,7 +3512,7 @@ USA_campaigning_effect_opposition = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_RD_tt
-				country_event = { id = USA.senate.14  } 
+				country_event = { id = USA.senate.14  }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
@@ -3565,12 +3522,12 @@ USA_campaigning_effect_opposition = {
 			20 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_RD_tt
-				country_event = { id = USA.senate.16 } 
+				country_event = { id = USA.senate.16 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_RD_tt
-				country_event = { id = USA.senate.17 } 
+				country_event = { id = USA.senate.17 }
 			}
 		}
 	}
@@ -3579,22 +3536,22 @@ USA_campaigning_effect_opposition = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_NPP_tt
-				country_event = { id = USA.senate.10 } 
+				country_event = { id = USA.senate.10 }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_good_success_NPP_tt
-				country_event = { id = USA.senate.11 } 
+				country_event = { id = USA.senate.11 }
 			}
 			20 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_NPP_tt
-				country_event = { id = USA.senate.12 } 
+				country_event = { id = USA.senate.12 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_NPP_tt
-				country_event = { id = USA.senate.13 } 
+				country_event = { id = USA.senate.13 }
 			}
 		}
 	}
@@ -3616,7 +3573,7 @@ USA_campaigning_effect_senate = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_RD_tt
-				country_event = { id = USA.senate.1 } 
+				country_event = { id = USA.senate.1 }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
@@ -3626,12 +3583,12 @@ USA_campaigning_effect_senate = {
 			20 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_RD_tt
-				country_event = { id = USA.senate.3 } 
+				country_event = { id = USA.senate.3 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_RD_tt
-				country_event = { id = USA.senate.4 } 
+				country_event = { id = USA.senate.4 }
 			}
 		}
 	}
@@ -3640,22 +3597,22 @@ USA_campaigning_effect_senate = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_NPP_tt
-				country_event = { id = USA.senate.5 } 
+				country_event = { id = USA.senate.5 }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_good_success_NPP_tt
-				country_event = { id = USA.senate.6 } 
+				country_event = { id = USA.senate.6 }
 			}
 			20 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_NPP_tt
-				country_event = { id = USA.senate.7 } 
+				country_event = { id = USA.senate.7 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_NPP_tt
-				country_event = { id = USA.senate.8 } 
+				country_event = { id = USA.senate.8 }
 			}
 		}
 	}
@@ -3673,12 +3630,12 @@ USA_campaigning_effect_opposition_senate = {
 	set_temp_variable = { USA_pop_factor_opposition = 1 }
 	if = {
 		limit = { has_country_flag = USA_campaigning_for_NPP }
-		log = "RD campaign as opposition"
+		# log = "RD campaign as opposition"
 		random_list = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_RD_tt
-				country_event = { id = USA.senate.14 } 
+				country_event = { id = USA.senate.14 }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
@@ -3688,37 +3645,37 @@ USA_campaigning_effect_opposition_senate = {
 			20 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_RD_tt
-				country_event = { id = USA.senate.16 } 
+				country_event = { id = USA.senate.16 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_RD_tt
-				country_event = { id = USA.senate.17 } 
+				country_event = { id = USA.senate.17 }
 			}
 		}
 	}
 	else = {
-		log = "NPP campaign as opposition"
+		# log = "NPP campaign as opposition"
 		random_list = {
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GREAT_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_great_success_NPP_tt
-				country_event = { id = USA.senate.10 } 
+				country_event = { id = USA.senate.10 }
 			}
 			50 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_GOOD_SUCCESS_BOOST }
 				custom_effect_tooltip = USA_campaigning_good_success_NPP_tt
-				country_event = { id = USA.senate.11 } 
+				country_event = { id = USA.senate.11 }
 			}
 			20 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_NEUTRAL_BOOST }
 				custom_effect_tooltip = USA_campaigning_neutral_NPP_tt
-				country_event = { id = USA.senate.12 } 
+				country_event = { id = USA.senate.12 }
 			}
 			15 = {
 				add_to_temp_variable = { USA_pop_factor_opposition = @CAMPAIGNING_BAD_BOOST }
 				custom_effect_tooltip = USA_campaigning_bad_NPP_tt
-				country_event = { id = USA.senate.13 } 
+				country_event = { id = USA.senate.13 }
 			}
 		}
 	}
@@ -3745,11 +3702,11 @@ USA_campaigning_state_boost_opposition = {
 	if = {
 		limit = { USA = { has_country_flag = USA_campaigning_for_NPP } }
 		multiply_variable = { RD_popularity = USA.USA_pop_factor_opposition }
-		log = "[This.GetName] [?USA.USA_pop_factor_opposition] RD campaign as opposition"
+		# log = "[This.GetName] [?USA.USA_pop_factor_opposition] RD campaign as opposition"
 	}
 	else = {
 		multiply_variable = { NPP_popularity = USA.USA_pop_factor_opposition }
-		log = "[This.GetName] [?USA.USA_pop_factor_opposition] NPP campaign as opposition"
+		# log = "[This.GetName] [?USA.USA_pop_factor_opposition] NPP campaign as opposition"
 	}
 }
 

@@ -8,7 +8,7 @@ GreatGame_game_1_effect = {
 	great_game_var_setup = yes
 	clear_array = global.great_game_array
 	set_variable = { global.great_game_game = 1 }
-	add_to_array = { global.great_game_array = 1 } 
+	add_to_array = { global.great_game_array = 1 }
 	set_variable = { global.great_game_turn = 1 }
 }
 
@@ -79,6 +79,8 @@ great_game_var_setup = {
 			max = 9
 		}
 		round_variable = great_game_number
+		set_temp_variable = { alert_id = 102 }
+		add_TNO_alert_unless_exists = yes
 	}
 	ITA = {
 		randomize_variable = {
@@ -88,6 +90,8 @@ great_game_var_setup = {
 			max = 9
 		}
 		round_variable = great_game_number
+		set_temp_variable = { alert_id = 102 }
+		add_TNO_alert_unless_exists = yes
 	}
 
 	if = { 
@@ -410,10 +414,14 @@ great_game_end_turn = {
 	GER = {
 		clr_country_flag = GreatGame_decision_taken
 		clr_country_flag = GreatGame_round_lost
+		set_temp_variable = { alert_id = 102 }
+		remove_TNO_alert = yes
 	}
 	ITA = {
 		clr_country_flag = GreatGame_decision_taken
 		clr_country_flag = GreatGame_round_lost
+		set_temp_variable = { alert_id = 102 }
+		remove_TNO_alert = yes
 	}
 }
 
@@ -500,6 +508,9 @@ great_game_get_winner = {
 			every_country = {
 				news_event = { id = WORLD.654 days = 1 }
 			}
+			BUL = {
+				econ_join_sphere_GER = yes
+			}
 		}
 		else_if = {
 			limit = {
@@ -510,6 +521,7 @@ great_game_get_winner = {
 			GER = { add_to_faction = HUN }
 			HUN = {
 				add_ideas = Pakt_Bundnispartner
+				econ_join_sphere_GER = yes
 				if = {
 					limit = { has_global_flag = german_civil_war_speervic }
 					join_zollverein = yes
@@ -536,6 +548,7 @@ great_game_get_winner = {
 					}
 				}
 				add_ideas = Pakt_Bundnispartner
+				econ_join_sphere_GER = yes
 				if = {
 					limit = { has_global_flag = german_civil_war_speervic }
 					join_zollverein = yes
@@ -553,8 +566,15 @@ great_game_get_winner = {
 			set_global_flag = GreatGame_game_4_GER_victory
 			if = {
 				limit = { has_global_flag = german_civil_war_bormannvic }
-				GER = { add_to_faction = FRA }
-				FRA = { add_ideas = Pakt_Bundnispartner }
+				GER = { 
+					add_to_faction = FRA
+					set_temp_variable = { SeaZone_ID = 3 } # 3; North Atlantic
+					Cold_War_GUI_PowerProjection_AddSeaZone = yes
+				}
+				FRA = { 
+					add_ideas = Pakt_Bundnispartner
+					econ_join_sphere_GER = yes
+				}
 			}
 			every_country = {
 				news_event = { id = WORLD.663 days = 1 }
@@ -567,24 +587,19 @@ great_game_get_winner = {
 			clr_global_flag = GER_great_game_serbia
 			set_global_flag = GreatGame_game_5_GER_victory
 			GER = {
-				if = {
-					limit = { has_dlc = "Together for Victory" }
-					set_autonomy = { target = SER autonomy_state = autonomy_occupied_territory }
-				}
-				else = {
-					puppet = SER
-				}
+				set_autonomy = { target = SER autonomy_state = autonomy_occupied_territory }
 			}
 			SER = {
+				econ_join_sphere_GER = yes
 				if = {
 					limit = { has_global_flag = german_civil_war_speervic }
 					add_ideas = Pakt_Marionettenstaat
 					join_zollverein = yes
-					country_event = { id = serbia.35 }
+					country_event = { id = serbia.3 }
 				}
 				else = {
 					add_ideas = Pakt_Reichsland
-					country_event = { id = serbia.36 }
+					country_event = { id = serbia.4 }
 				}
 			}
 			every_country = {
@@ -605,6 +620,7 @@ great_game_get_winner = {
 			set_global_flag = GreatGame_game_1_ITA_victory
 			BUL = {
 				country_event = { id = ita.1001 }
+				econ_join_sphere_ITA = yes
 				if = {
 					limit = {
 						USA = { is_faction_leader = yes }
@@ -622,6 +638,7 @@ great_game_get_winner = {
 				else_if = {
 					limit = {
 						ITA = { is_faction_leader = yes }
+						NOT = { has_global_flag = Triumvirate_Collapse }
 					}
 					add_ideas = TRI_Member_Client
 				}
@@ -638,6 +655,7 @@ great_game_get_winner = {
 			set_global_flag = GreatGame_game_2_ITA_victory
 			HUN = {
 				country_event = { id = ita.1001 }
+				econ_join_sphere_ITA = yes
 				if = {
 					limit = {
 						USA = { is_faction_leader = yes }
@@ -655,6 +673,7 @@ great_game_get_winner = {
 				else_if = {
 					limit = {
 						ITA = { is_faction_leader = yes }
+						NOT = { has_global_flag = Triumvirate_Collapse }
 					}
 					add_ideas = TRI_Member_Client
 				}
@@ -679,6 +698,7 @@ great_game_get_winner = {
 					}
 				}
 				country_event = { id = ita.1001 }
+				econ_join_sphere_ITA = yes
 				if = {
 					limit = {
 						USA = { is_faction_leader = yes }
@@ -696,6 +716,7 @@ great_game_get_winner = {
 				else_if = {
 					limit = {
 						ITA = { is_faction_leader = yes }
+						NOT = { has_global_flag = Triumvirate_Collapse }
 					}
 					add_ideas = TRI_Member_Client
 				}
@@ -712,6 +733,7 @@ great_game_get_winner = {
 			set_global_flag = GreatGame_game_4_ITA_victory
 			FRA = {
 				country_event = { id = ita.1001 }
+				econ_join_sphere_ITA = yes
 				if = {
 					limit = {
 						USA = { is_faction_leader = yes }
@@ -729,6 +751,7 @@ great_game_get_winner = {
 				else_if = {
 					limit = {
 						ITA = { is_faction_leader = yes }
+						NOT = { has_global_flag = Triumvirate_Collapse }
 					}
 					add_ideas = TRI_Member_Client
 				}
@@ -746,6 +769,7 @@ great_game_get_winner = {
 			SER = {
 				add_ideas = SER_Anti_German_Resistance
 				country_event = { id = ita.1001 }
+				econ_join_sphere_ITA = yes
 				if = {
 					limit = {
 						USA = { is_faction_leader = yes }
@@ -763,6 +787,7 @@ great_game_get_winner = {
 				else_if = {
 					limit = {
 						ITA = { is_faction_leader = yes }
+						NOT = { has_global_flag = Triumvirate_Collapse }
 					}
 					add_ideas = TRI_Member_Client
 				}
