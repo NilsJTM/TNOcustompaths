@@ -20,10 +20,25 @@ WRS_power_struggle_tukha_category = {
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout WRS_zhukov_influence_ticker"
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = WRS_LEADER_ROUTE
+						option = WRS_LEADER_ROUTE_TUKHACHEVSKY
+					}
+				}
+				hidden_effect = {
+					set_variable = { global.WRSZhukovInfluence = 0 }
+					set_variable = { global.WRSFactionalism = 0 }
+					activate_mission = WRS_zhukov_influence_ticker
+				}
+			}
+			else = {
 			WRS_increase_factionalism_low = yes
 			WRS_increase_zhukov_influence_low = yes
 			hidden_effect = {
 				activate_mission = WRS_zhukov_influence_ticker
+			}
 			}
 		}
 	}
@@ -262,10 +277,35 @@ WRS_power_struggle_zhukov_category = {
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout WRS_tukha_influence_ticker"
+			if = {
+				limit = {
+					OR = {
+						has_game_rule = {
+							rule = WRS_LEADER_ROUTE
+							option = WRS_LEADER_ROUTE_ZHUKOV_AUTHSOC
+						}
+						has_game_rule = {
+							rule = WRS_LEADER_ROUTE
+							option = WRS_LEADER_ROUTE_ZHUKOV_LIBSOC
+						}
+						has_game_rule = {
+							rule = WRS_LEADER_ROUTE
+							option = WRS_LEADER_ROUTE_ZHUKOV_SOCDEM
+						}
+					}
+				}
+				hidden_effect = {
+					set_variable = { global.WRSTukhaInfluence = 0 }
+					set_variable = { global.WRSFactionalism = 0 }
+					activate_mission = WRS_tukha_influence_ticker
+				}
+			}
+			else = {
 			WRS_increase_tukha_influence_low = yes
 			WRS_increase_factionalism_low = yes
 			hidden_effect = {
 				activate_mission = WRS_tukha_influence_ticker
+			}
 			}
 		}
 	}
