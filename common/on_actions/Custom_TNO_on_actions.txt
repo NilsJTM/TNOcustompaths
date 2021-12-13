@@ -1,4 +1,63 @@
 on_actions = {
+    on_startup = {
+        effect = {
+            if = {
+				limit = {
+					has_game_rule = {
+						rule = far_east_unification_outcome
+						option = FAR_EAST_UNIFICATION_OUTCOME_IRK_IRKUTSK
+					}
+				}
+				IRK = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = far_east_unification_outcome
+						option = FAR_EAST_UNIFICATION_OUTCOME_BRY_BURYATIA
+					}
+				}
+				BRY = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = far_east_unification_outcome
+						option = FAR_EAST_UNIFICATION_OUTCOME_CHT_CHITA
+					}
+				}
+				CHT = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = far_east_unification_outcome
+						option = FAR_EAST_UNIFICATION_OUTCOME_AMR_AMUR
+					}
+				}
+				AMR = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = far_east_unification_outcome
+						option = FAR_EAST_UNIFICATION_OUTCOME_MAG_MAGADAN
+					}
+				}
+				MAG = { apply_war_buff_with_10_divisions = yes }
+			}
+            if = {
+				limit = {
+					has_game_rule = {
+						rule = far_east_unification_outcome
+						option = FAR_EAST_UNIFICATION_OUTCOME_OMO_DIVINE_MANDATE
+					}
+				}
+				OMO = { apply_war_buff_with_10_divisions = yes }
+			}
+
+        }
+	}
 	on_declare_war = {
 		effect = {
 			if = {
@@ -194,6 +253,95 @@ on_actions = {
 					    }
 				    }
 				    BLR = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Far East Unification Ends
+					ROOT = {
+					    OR = {
+					        tag = IRK
+					        tag = BRY
+					        tag = CHT
+					        tag = AMR
+					        tag = MAG
+					        tag = OMO
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = IRK
+					        tag = BRY
+					        tag = CHT
+					        tag = AMR
+					        tag = MAG
+					        tag = OMO
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IRK
+				            country_exists = BRY
+				            country_exists = CHT
+				            country_exists = AMR
+				            country_exists = MAG
+				            country_exists = OMO
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = far_east_unification_outcome
+						    option = FAR_EAST_UNIFICATION_OUTCOME_IRK_IRKUTSK
+					    }
+				    }
+				    IRK = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = far_east_unification_outcome
+						    option = FAR_EAST_UNIFICATION_OUTCOME_BRY_BURYATIA
+					    }
+				    }
+				    BRY = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = far_east_unification_outcome
+						    option = FAR_EAST_UNIFICATION_OUTCOME_CHT_CHITA
+					    }
+				    }
+				    CHT = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = far_east_unification_outcome
+						    option = FAR_EAST_UNIFICATION_OUTCOME_AMR_AMUR
+					    }
+				    }
+				    AMR = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = far_east_unification_outcome
+						    option = FAR_EAST_UNIFICATION_OUTCOME_MAG_MAGADAN
+					    }
+				    }
+				    MAG = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = far_east_unification_outcome
+						    option = FAR_EAST_UNIFICATION_OUTCOME_OMO_DIVINE_MANDATE
+					    }
+				    }
+				    OMO = { remove_war_buff = yes }
 				}
 			}
 		}
