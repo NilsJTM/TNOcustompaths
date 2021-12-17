@@ -913,6 +913,26 @@ TNO_clear_jamaica_crisis = {
 TNO_recompute_jamaica_crisis = {
 	clamp_variable = { var = WIN_violence min = 0 max = 100 }
 	clamp_variable = { var = WIN_fervor min = 0 max = 100 }
+	if = { 
+		limit = {
+			has_game_rule = {
+				rule = jamaican_crisis
+				option = JAMAICAN_CRISIS_COUP
+			}
+		}
+	    set_variable = { WIN_violence = 100 }
+		set_variable = { WIN_fervor = 100 }
+	}
+	if = { 
+		limit = {
+			has_game_rule = {
+				rule = jamaican_crisis
+				option = JAMAICAN_CRISIS_CALMED
+			}
+		}
+	    set_variable = { WIN_violence = 0 }
+		set_variable = { WIN_fervor = 0 }
+	}
 }
 
 
