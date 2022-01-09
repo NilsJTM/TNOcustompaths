@@ -1,0 +1,170 @@
+add_namespace = VIN
+add_namespace = VIN_CCP
+
+country_event = {	#	Custom Country Path Event - Fate of Uncle Ho
+	id = VIN_CCP.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event VIN_CCP.0"}
+	title = VIN_CCP.0.t
+	desc = VIN_CCP.0.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#	Ho Chi Minh Dies
+		name = VIN_CCP.0.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = VIN_PATH option =  VIN_PATH_HO_CHI_MINH }
+            }
+		}
+		hidden_effect = {
+			country_event = { id = VIN.2 days = 1400 } # Ho Chi Mihn dies as leader of the Viet Minh 
+			country_event = { id = VIN_CCP.1 }
+		}
+	}
+	option = {	#	Ho Chi Minh Lives
+		name = VIN_CCP.0.b
+		ai_chance = {
+			factor = 3
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = VIN_PATH option =  VIN_PATH_REPUBLIC }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = VIN_PATH option =  VIN_PATH_CONSTITUTIONAL_MONARCHY }
+            }
+		}
+		hidden_effect = {
+			every_country = { news_event = { id = WORLD.16501 days = 1699 } } # Nagasaki Accords signed 
+			country_event = { id = VIN.0 days = 1729 } # Bao Dai abdicates, Ho Chi Minh swept into power 
+			country_event = { id = VIN.1 days = 2801 } # Ho Chi Minh dies as president of Vietnam 
+		}
+	}
+	
+}
+
+country_event = {	#	Custom Country Path Event - Vietnam's direction without Ho
+	id = VIN_CCP.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event VIN_CCP.1"}
+	title = VIN_CCP.1.t
+	desc = VIN_CCP.1.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	# Nagasaki Accords signed without Ho
+		name = VIN_CCP.1.a
+		ai_chance = {
+			factor = 9
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = VIN_PATH option =  VIN_PATH_CONSTITUTIONAL_MONARCHY }
+            }
+		}
+		hidden_effect = {
+			every_country = { news_event = { id = WORLD.16501 days = 2446 } } # Nagasaki Accords signed  
+		}
+	}
+	option = {	# Constitution adopted
+		name = VIN_CCP.1.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = VIN_PATH option =  VIN_PATH_REPUBLIC }
+            }
+		}
+		hidden_effect = {
+			every_country = { news_event = { id = WORLD.16504 days = 2446 } } # Vietnam adopts constitution, elections to be held  
+		}
+	}
+	
+}
+
+country_event = { # Bao Dai abdicates, Ho Chi Minh swept into power
+	id = VIN.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event VIN.0"}
+	title = VIN.0.t
+	desc = VIN.0.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = VIN.0.a
+		set_politics = { ruling_party = communist }
+		add_popularity = { ideology = communist popularity = .55 }
+		leave_faction = yes
+		set_capital = 728
+		set_cosmetic_tag = VIN_DRV
+		remove_ideas = {
+			VIN_japanese_army
+			VIN_vietcong_idea
+			VIN_japanese_rubber_exports
+		}
+		econ_leave_sphere = yes
+		every_country = { news_event = WORLD.16502 }
+	}
+}
+
+country_event = { # Ho Chi Minh dies as president of Vietnam
+	id = VIN.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event VIN.1"}
+	title = VIN.1.t
+	desc = VIN.1.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = VIN.1.a
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Truong Chinh"
+			picture = "Portrait_Vietnam_Truong_Chinh.dds"
+			desc = "POLITICS_TRUONG_CHINH_DESC"
+			expire = "1999.12.12"
+			ideology = communist_mao_zedong_thought_subtype
+		}
+		set_party_name = {
+			ideology = communist
+			long_name = VIN_post_HCM_communist_party_long
+			name = VIN_post_HCM_communist_party
+		}
+		add_popularity = { ideology = communist popularity = 0.1 }
+		every_country = { news_event = WORLD.16506 }
+	}
+}
+
+country_event = { # Ho Chi Mihn dies as leader of the Viet Minh
+	id = VIN.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event VIN.2"}
+	title = VIN.2.t
+	desc = VIN.2.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = VIN.2.a
+		kill_ideology_leader = communist
+		create_country_leader = {
+			name = "Truong Chinh"
+			picture = "Portrait_Vietnam_Truong_Chinh.dds"
+			desc = "POLITICS_TRUONG_CHINH_DESC"
+			expire = "1999.12.12"
+			ideology = communist_mao_zedong_thought_subtype
+		}
+		set_party_name = {
+			ideology = communist
+			long_name = VIN_post_HCM_communist_party_long
+			name = VIN_post_HCM_communist_party
+		}
+		add_popularity = { ideology = communist popularity = 0.1 }
+		every_country = { news_event = WORLD.16507 }
+	}
+}

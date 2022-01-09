@@ -1,0 +1,313 @@
+add_namespace = AZH_skeleton
+
+### SKELETON CONTENT FOR TT ###
+
+country_event = { # Penang Incident, Feb 5 1962
+	id = AZH_skeleton.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.1" }
+	title = AZH_skeleton.1.t
+	desc = AZH_skeleton.1.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AZH_skeleton.1.a
+		hidden_effect = {
+			country_event = {
+				id = AZH_skeleton.2
+				days = 194
+			}
+		}
+	}
+}
+
+country_event = { # Silchar Incident, Aug 18 1962
+	id = AZH_skeleton.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.2" }
+	title = AZH_skeleton.2.t
+	desc = AZH_skeleton.2.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AZH_skeleton.2.a
+		hidden_effect = {
+			country_event = {
+				id = AZH_skeleton.3
+				days = 516
+			}
+		}
+	}
+}
+
+country_event = { # Impending Kolkata Economic Crash, Jan 16 1964
+	id = AZH_skeleton.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.3" }
+	title = AZH_skeleton.3.t
+	desc = AZH_skeleton.3.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AZH_skeleton.3.a
+		hidden_effect = {
+			country_event = {
+				id = AZH_skeleton.4
+				days = 75
+			}
+		}
+	}
+}
+
+country_event = { # "Operation Ittihad" commences; South Asian Economic Conference begins. March 20 1964
+	id = AZH_skeleton.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.4" }
+	title = AZH_skeleton.4.t
+	desc = AZH_skeleton.4.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AZH_skeleton.4.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.31000
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = AZH_skeleton.5
+				days = 28
+			}
+			IND = {
+				country_event = {
+					id = IND_skeleton.4
+					days = 0
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Assassination Attempt on Bose, Apr 17 (15 really but event on 17) 1964
+	id = AZH_skeleton.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.5" }
+	title = AZH_skeleton.5.t
+	desc = AZH_skeleton.5.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AZH_skeleton.5.a
+		set_politics = {
+			ruling_party = despotism
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "John A. Thivy"
+			desc = "POLITICS_JOHN_A_THIVY_DESC"
+			picture = "Portrait_Azad_Hind_John_A_Thivy.dds"
+			expire = "1994.4.20"
+			ideology = despotism_civilian_dictatorship_subtype
+		}
+		set_party_name = { 
+			ideology = despotism 
+			long_name = AZH_despotism_national_protection_council_long
+			name = AZH_despotism_national_protection_council
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.31001
+				}
+			}
+			IND = {
+				country_event = {
+					id = IND_skeleton.5
+					days = 1
+				}
+			}
+			random_list = {
+				0 = {
+					country_event = { # Bose recovers!! omg
+						id = AZH_skeleton.6
+						days = 268
+					}
+				}
+				100 = {
+					country_event = { # Bose resigns
+						id = AZH_skeleton.7
+						days = 268
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Bose Recovers, Jan 10 1965
+	id = AZH_skeleton.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.6" }
+	title = AZH_skeleton.6.t
+	desc = AZH_skeleton.6.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AZH_skeleton.6.a
+		set_party_name = { 
+			ideology = despotism 
+			long_name = AZH_despotism_party_unity_long
+			name = AZH_despotism_party_unity
+		}
+		create_country_leader = {
+			name = "Subhas Chandra Bose"
+			desc = "POLITICS_BOSE_DESC"
+			expire = "1999.1.1"
+			picture = "Portrait_Azad_Hind_Subhas_Chandra_Bose.dds"
+			ideology = despotism_personalistic_dictatorship_subtype
+		}
+	}
+}
+
+country_event = { # Bose Retires, Jan 10 1965
+	id = AZH_skeleton.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.7" }
+	title = AZH_skeleton.7.t
+	desc = AZH_skeleton.7.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AZH_skeleton.7.a
+		set_party_name = { 
+			ideology = despotism 
+			long_name = AZH_despotism_party_unity_long
+			name = AZH_despotism_party_unity
+		}
+		create_country_leader = {
+			name = "AIFB Presidium"
+			desc = "POLITICS_AIFB_PRESIDIUM_DESC"
+			expire = "1999.1.1"
+			picture = "portrait_AZH_chair.dds"
+			ideology = despotism_interim_government_subtype
+		}
+		hidden_effect = {
+			country_event = {
+				id = AZH_skeleton.8
+				days = 256
+			}
+		}
+	}
+}
+
+country_event = { # Post-Interregnum, Sept 23 1965
+	id = AZH_skeleton.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AZH_skeleton.8" }
+	title = AZH_skeleton.8.t
+	desc = AZH_skeleton.8.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { # Nedyam Raghavan wins
+		name = AZH_skeleton.8.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = AZH_BOSE_SUCCESSOR_PATH option =  AZH_BOSE_SUCCESSOR_PATH_LEFT_WING_POPULISM }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = AZH_BOSE_SUCCESSOR_PATH option =  AZH_BOSE_SUCCESSOR_PATH_NATIONAL_COMMUNISM }
+            }
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Nedyam Raghavan"
+			desc = "POLITICS_NEDYAM_RAGHAVAN_DESC"
+			expire = "1999.1.1"
+			picture = "Portrait_Azad_Hind_Nedyam_Raghavan.dds"
+			ideology = authoritarian_democracy_social_nationalism_subtype
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.31004
+					hours = 1
+				}
+			}
+		}
+	}
+	option = { # Leela Roy wins
+		name = AZH_skeleton.8.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = AZH_BOSE_SUCCESSOR_PATH option =  AZH_BOSE_SUCCESSOR_PATH_SOCIAL_NATIONALISM }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = AZH_BOSE_SUCCESSOR_PATH option =  AZH_BOSE_SUCCESSOR_PATH_NATIONAL_COMMUNISM }
+            }
+		}
+		set_politics = {
+			ruling_party = social_democracy
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Leela Roy"
+			desc = "POLITICS_LEELA_ROY_DESC"
+			expire = "1999.1.1"
+			picture = "Portrait_Azad_Hind_Leela_Roy.dds"
+			ideology = social_democracy_left_wing_populism_subtype
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.31005
+					hours = 1
+				}
+			}
+		}
+	}
+	option = { # Sheel Bhadra Yagee wins
+		name = AZH_skeleton.8.c
+		ai_chance = {
+			factor = 20
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = AZH_BOSE_SUCCESSOR_PATH option =  AZH_BOSE_SUCCESSOR_PATH_SOCIAL_NATIONALISM }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = AZH_BOSE_SUCCESSOR_PATH option =  AZH_BOSE_SUCCESSOR_PATH_LEFT_WING_POPULISM }
+            }
+		}
+		set_politics = {
+			ruling_party = communist
+			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Sheel Bhadra Yagee"
+			desc = "POLITICS_SHEEL_BHADRA_YAGEE_DESC"
+			expire = "1999.1.1"
+			picture = "Portrait_Azad_Hind_Sheel_Bhadra_Yagee.dds"
+			ideology = communist_national_communism_subtype
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.31006
+					hours = 1
+				}
+			}
+		}
+	}
+}

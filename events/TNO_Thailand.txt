@@ -1,0 +1,598 @@
+add_namespace = tha
+add_namespace = tha_ccp # Custom Country Path events
+
+country_event = { #Dummy event for Phibun death
+	id = tha.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.0"}
+	title = tha.0.t
+	desc = tha.0.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.0.a
+		hidden_effect = {
+			kill_country_leader = yes
+			create_country_leader = {
+				name = "Bangkok Interim Government"
+				desc = ""
+				picture = "Portrait_Bangkok_Interim_Government.dds"
+				expire = "1999.12.12"
+				ideology = despotism_interim_government_subtype
+			}
+			set_politics = { ruling_party = despotism }
+			add_popularity = {
+				ideology = despotism
+				popularity = 0.1
+			}
+			every_country = { news_event = { id = WORLD.19000 } }
+			#random_list = {
+			#	20 = { # Thawan's Coup
+			#		country_event = {
+			#			id = tha.1
+			#			days = 30	
+			#		}	
+			#	} 
+			#	40 = { # Thanom's Coup
+			#		country_event = {
+			#			id = tha.2
+			#			days = 30	
+			#		}
+			#	} 
+			#	40 = { # Chatichai's Coup
+			#		country_event = {
+			#			id = tha.3
+			#			days = 30	
+			#		}
+			#	} 
+			#}
+			
+			country_event = { # Fires CCP Event for choosing path
+				id = tha_ccp.1
+				days = 0	
+			}
+			
+			country_event = { #Removes a Military Roulette
+				id = tha.4
+				days = 400	
+			}
+		}
+	}
+}
+
+country_event = { # Custom Country Paths event for post-Philbun coup
+	id = tha_ccp.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha_ccp.1"}
+	title = tha_ccp.1.t
+	desc = tha_ccp.1.d
+	picture = GFX_report_event_generic_military_parade
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	# Thawan's Coup
+		name = tha_ccp.1.a
+		ai_chance = {
+			factor = 2
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_CIVILIAN_DICTATORSHIP }
+			}
+		}
+		hidden_effect = {
+			country_event = {
+						id = tha.1
+						days = 30	
+			}
+		}
+	}
+	option = {	# Thanom's Coup
+		name = tha_ccp.1.b
+		ai_chance = {
+			factor = 4
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_CIVILIAN_DICTATORSHIP }
+			}	
+		}
+		hidden_effect = {
+			country_event = {
+						id = tha.2
+						days = 30	
+			}
+		}
+	}
+	option = {	# Chatichai's Coup
+		name = tha_ccp.1.c
+		ai_chance = {
+			factor = 4
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
+			}
+		}
+		hidden_effect = {
+			country_event = {
+						id = tha.3
+						days = 30	
+			}
+		}
+	}
+}
+
+country_event = { #Dummy event for Thawan's Coup
+	id = tha.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.1"}
+	title = tha.1.t
+	desc = tha.1.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.1.a
+		hidden_effect = {
+			create_country_leader = {
+				name = "Thawan Thamrongnawasawat"
+				desc = "POLITICS_THAWAN_THAMRONGNAWASAWAT_DESC"
+				picture = "Portrait_Thawan_Thamrongnasawat_Admiral.dds"
+				expire = "1999.12.12"
+				ideology = despotism_military_junta_subtype
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 7
+				authoritarian_democracy = 8
+				despotism = 45
+				fascism = 17
+				national_socialism = 9
+				ultranationalism = 14
+				
+			}
+			country_event = { #Elections get called
+				id = tha.11
+				days = 1100	
+			}	
+			set_politics = { ruling_party = despotism }
+			every_country = { news_event = WORLD.19001 }
+		}
+	}
+}
+
+country_event = { #Dummy event for 1966 Elections
+	id = tha.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.11"}
+	title = tha.11.t
+	desc = tha.11.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.11.a
+		hidden_effect = {
+			set_party_name = {
+				ideology = social_democracy
+				long_name = THA_Pridi_Election_social_democracy_party_long
+				name = THA_Pridi_Election_social_democracy_party
+			}
+			set_party_name = {
+				ideology = conservative_democracy
+				long_name = THA_Seni_Pramoj_conservative_democracy_party_long
+				name = THA_Seni_Pramoj_conservative_democracy_party
+			}
+			#random_list = {
+			#	60 = {
+			#		country_event = { #Pridi Wins
+			#			id = tha.12
+			#			days = 100	
+			#		}	
+			#	}
+			#	40 = {
+			#		country_event = { #Seni Wins
+			#			id = tha.13
+			#			days = 100	
+			#		}	
+			#	}
+			#}
+			every_country = { news_event = WORLD.19002 }
+			
+			country_event = { # Fires CCP Event for 1966 Elections
+				id = tha_ccp.2
+				days = 0	
+			}
+		}
+	}
+}
+
+country_event = { # Custom Country Paths event for 1966 Elections
+	id = tha_ccp.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha_ccp.2"}
+	title = tha_ccp.2.t
+	desc = tha_ccp.2.d
+	picture = GFX_report_event_generic_military_parade
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	# Pridi Wins
+		name = tha_ccp.2.a
+		ai_chance = {
+			factor = 3
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
+			}
+		}
+		hidden_effect = {
+			country_event = {
+						id = tha.12
+						days = 100		
+			}
+		}
+	}
+	option = {	# Seni Wins
+		name = tha_ccp.2.b
+		ai_chance = {
+			factor = 2
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
+			}
+		}
+		hidden_effect = {
+			country_event = {
+						id = tha.13
+						days = 100	
+			}
+		}
+	}	
+}
+	
+country_event = { #Pridi wins the elections
+	id = tha.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.12"}
+	title = tha.12.t
+	desc = tha.12.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.12.a
+		hidden_effect = {
+			create_country_leader = {
+				name = "Pridi Banomyong"
+				desc = "POLITICS_PRIDI_BANOMYONG_DESC"
+				picture = "Portrait_Pridi_Banomyong.dds"
+				expire = "1999.12.12"
+				ideology = social_democracy_left_wing_populism_subtype
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 0
+				social_democracy = 62
+				liberal_democracy = 0
+				conservative_democracy = 14
+				authoritarian_democracy = 7
+				despotism = 5
+				fascism = 12
+				national_socialism = 0
+				ultranationalism = 0
+				
+			}
+			set_politics = { ruling_party = social_democracy }
+			every_country = { news_event = WORLD.19003 }
+		}
+	}
+}
+
+country_event = { #Seni wins the elections
+	id = tha.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.13"}
+	title = tha.13.t
+	desc = tha.13.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.13.a
+		hidden_effect = {
+			create_country_leader = {
+				name = "Seni Pramoj"
+				desc = "POLITICS_SENI_PRAMOJ_DESC"
+				picture = "Portrait_Seni_Pramoj.dds"
+				expire = "1999.12.12"
+				ideology = conservative_democracy_liberal_conservatism_subtype
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 0
+				social_democracy = 24
+				liberal_democracy = 0
+				conservative_democracy = 53
+				authoritarian_democracy = 9
+				despotism = 4
+				fascism = 10
+				national_socialism = 0
+				ultranationalism = 0
+				
+			}
+			set_politics = { ruling_party = conservative_democracy }
+			every_country = { news_event = WORLD.19004 }
+		}
+	}
+}
+
+country_event = { #Dummy event for Thanom's Coup
+	id = tha.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.2"}
+	title = tha.2.t
+	desc = tha.2.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.2.a
+		hidden_effect = {
+			create_country_leader = {
+				name = "Thanom Kittikachorn"
+				desc = "POLITICS_THANOM_KITTIKACHORN_DESC"
+				picture = "Portrait_Thanom_Kitikachathorn.dds"
+				expire = "1999.12.12"
+				ideology = despotism_personalistic_dictatorship_subtype
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 2
+				authoritarian_democracy = 4
+				despotism = 60
+				fascism = 18
+				national_socialism = 16
+				ultranationalism = 0
+				
+			}
+			#random_list = {
+			#	20 = { #Kris Savara's Coup Works
+			#		country_event = { #Elections get called
+			#			id = tha.21
+			#			days = 1700	
+			#		}	
+			#	}
+			#	80 = { #Kris Savara's Coup Fails
+			#		country_event = { #Elections get called
+			#			id = tha.22
+			#			days = 1700	
+			#		}	
+			#	}
+			#}
+			set_politics = { ruling_party = despotism }
+			every_country = { news_event = WORLD.19005 }
+			
+			country_event = { # Fires CCP Event for Officer's Coup
+				id = tha_ccp.3
+				days = 0	
+			}
+		}
+	}
+}
+
+country_event = { # Custom Country Paths event for Officer's Coup
+	id = tha_ccp.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha_ccp.3"}
+	title = tha_ccp.3.t
+	desc = tha_ccp.3.d
+	picture = GFX_report_event_generic_military_parade
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	# Kris Savara's Coup Works
+		name = tha_ccp.3.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
+			}
+		}
+		hidden_effect = {
+			country_event = {
+						id = tha.21
+						days = 1700	
+			}
+		}
+	}
+	option = {	# Kris Savara's Coup Fails
+		name = tha_ccp.3.b
+		ai_chance = {
+			factor = 4
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
+			}
+		}
+		hidden_effect = {
+			country_event = {
+						id = tha.22
+						days = 1700	
+			}
+		}
+	}	
+}
+
+country_event = { #Dummy event for Kris Savara's Coup succeeding
+	id = tha.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.21"}
+	title = tha.21.t
+	desc = tha.21.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.21.a
+		hidden_effect = {
+			create_country_leader = {
+				name = "Kris Savara"
+				desc = "POLITICS_KRIS_SAVARA_DESC"
+				picture = "Portrait_Kris_Sivara.dds"
+				expire = "1999.12.12"
+				ideology = despotism_interim_government_subtype
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 4
+				authoritarian_democracy = 10
+				despotism = 40
+				fascism = 27
+				national_socialism = 19
+				ultranationalism = 0
+				
+			}
+			set_politics = { ruling_party = despotism }
+			every_country = { news_event = WORLD.19006 }
+		}
+	}
+}
+
+country_event = { #Dummy event for Kris Savara's Coup failing
+	id = tha.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.22"}
+	title = tha.22.t
+	desc = tha.22.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.22.a
+		hidden_effect = {
+			create_country_leader = {
+				name = "Thanom Kittikachorn"
+				desc = "POLITICS_THANOM_KITTIKACHORN_DESC"
+				picture = "Portrait_Thanom_Kitikachathorn.dds"
+				expire = "1999.12.12"
+				ideology = ultranationalism_ultramilitarism_subtype
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 0
+				authoritarian_democracy = 0
+				despotism = 4
+				fascism = 18
+				national_socialism = 3
+				ultranationalism = 75
+				
+			}
+			set_politics = { ruling_party = ultranationalism }
+			every_country = { news_event = WORLD.19007 }
+		}
+	}
+}
+
+country_event = { #Dummy event for Chatichai's Coup
+	id = tha.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.3"}
+	title = tha.3.t
+	desc = tha.3.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.3.a
+		hidden_effect = {
+			create_country_leader = {
+				name = "Chatichai Choonhavan"
+				desc = "POLITICS_CHATICHAI_CHOONHAVAN_DESC"
+				picture = "Portrait_Chatichai_Choonhavan.dds"
+				expire = "1999.12.12"
+				ideology = despotism_civilian_dictatorship_subtype
+			}
+			set_popularities = {
+				communist = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 2
+				authoritarian_democracy = 4
+				despotism = 65
+				fascism = 18
+				national_socialism = 11
+				ultranationalism = 0
+				
+			}
+			set_politics = { ruling_party = despotism }
+			every_country = { news_event = WORLD.19008 }
+		}
+	}
+}
+
+country_event = { #Removal of a Military Roulette
+	id = tha.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event tha.4"}
+	title = tha.4.t
+	desc = tha.4.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = tha.4.a
+		hidden_effect = {
+			remove_ideas = THA_A_Military_Roulette
+		}
+	}
+}
+

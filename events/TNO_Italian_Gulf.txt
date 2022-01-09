@@ -1,0 +1,372 @@
+﻿add_namespace = GUL_skeleton
+
+#	triggered from common/on_actions/TNO_Middle_East_on_actions.txt
+country_event = { #Gulf Outcome Roulette
+	id = GUL_skeleton.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event GUL_skeleton.1"}
+	title = GUL_skeleton.1.t
+	desc = GUL_skeleton.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	# League of Arab Emirates, Zayed bin Sultan Al Nahyan, Authoritarian Democracy - Oligarchy
+		name = GUL_skeleton.1.a
+		ai_chance = { 
+			factor = 8 
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_LEFT_WING_POPULISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_ABSOLUTE_MONARCHY }
+            } 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_SYNDICALISM }
+            } 
+		}
+		hidden_effect = {
+			country_event = {
+						id = GUL_skeleton.2	
+			}
+		}
+		#random_list = {
+		#	40 = {
+		#		country_event = { id = GUL_skeleton.2 }
+		#	}
+		#	35 = {
+		#		country_event = { id = GUL_skeleton.3 }
+		#	}
+		#	20 = {
+		#		country_event = { id = GUL_skeleton.4 }
+		#	}
+		#	5 = {
+		#		country_event = { id = GUL_skeleton.5 }
+		#	}
+		#}
+	}
+	option = {	# United Republic of the Arabian Gulf, Abdulrahman al Bakir, Social Democracy - Left Wing Populism
+		name = GUL_skeleton.1.b
+		ai_chance = { 
+			factor = 7
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_OLIGARCHY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_ABSOLUTE_MONARCHY }
+            } 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_SYNDICALISM }
+            } 
+		}
+		hidden_effect = {
+			country_event = {
+						id = GUL_skeleton.3	
+			}
+		}
+	}
+	option = {	# League of Arab Sheikhdoms, Shakhbut bin Sultan Al Nahyan, Despotism - Absolute Monarchy
+		name = GUL_skeleton.1.c
+		ai_chance = { 
+			factor = 4
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_OLIGARCHY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_LEFT_WING_POPULISM }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_SYNDICALISM }
+            } 
+		}
+		hidden_effect = {
+			country_event = {
+						id = GUL_skeleton.4
+			}
+		}
+	}
+	option = {	# Peoples Republic of the Arabian Gulf, Gurudas Dasgupta, Socialist - Syndicalism
+		name = GUL_skeleton.1.d
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_OLIGARCHY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_LEFT_WING_POPULISM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = GUL_PATH option = GUL_PATH_ABSOLUTE_MONARCHY }
+            } 
+		}
+		hidden_effect = {
+			country_event = {
+						id = GUL_skeleton.5
+			}
+		}
+	}
+}
+
+country_event = { #Zayed Victorious - League of Arab Emirates (WORLD.928)
+	id = GUL_skeleton.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event GUL_skeleton.2"}
+	title = GUL_skeleton.2.t
+	desc = GUL_skeleton.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = GUL_skeleton.2.a
+		ITA = {
+			set_autonomy = {
+				target = GUL
+				autonomy_state = autonomy_italy_associate
+			}
+		}
+		hidden_effect = {
+			drop_cosmetic_tag = yes
+			set_politics = {
+				ruling_party = authoritarian_democracy
+			}
+			add_popularity = {
+				ideology = authoritarian_democracy
+				popularity = 0.6
+			}
+
+			set_temp_variable = {TNO_economy_type_temp = 3 }
+			econ_type_change = yes
+
+			if = {
+				limit = { ITA = { is_in_faction_with = JAP } }
+				remove_ideas = {
+					Sphere_Fully_Dependent
+					Sphere_Economic_Dependent
+				}
+				add_ideas = Sphere_Coequal #Is politically independent from japan in the CPS
+			}
+			else_if = {
+				limit = { ITA = { is_in_faction_with = USA } }
+				remove_ideas = {
+					OFN_Independent_Member
+					OFN_Military_Government
+					OFN_Mandate
+				}
+				add_ideas = OFN_Dependent_Member #probably has a US/Italian-funded army though?
+			}
+		}
+		create_country_leader = {
+			name = "Zayed bin Sultan Al Nahyan"
+			desc = "POLITICS_ZAYED_BIN_SULTAN_AL_NAHYAN"
+			picture = "Portrait_Gulf_Zayed_bin_Sultan_Al_Nahyan.dds"
+			expire = 1992.1.1
+			ideology = authoritarian_democracy_oligarchy_subtype
+		}
+		remove_ideas = {
+			IEA_idea_colonial_government
+			#GUL_pride_of_the_regia_marina
+			#GUL_the_oil_empire
+			#GUL_the_nine_emirs
+			#GUL_immigrant_workforce
+		}
+		every_country = {
+			news_event = {
+				id = WORLD.928
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #NUC Victory 
+	id = GUL_skeleton.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event GUL_skeleton.3"}
+	title = GUL_skeleton.3.t
+	desc = GUL_skeleton.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = GUL_skeleton.3.a
+		transfer_navy = { target = ITA }
+		ITA = {
+			end_puppet = GUL
+		}
+		leave_faction = yes
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		drop_cosmetic_tag = yes
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.4
+		}
+
+		remove_ideas = {
+			IEA_idea_colonial_government
+			ita_oil_cult #Weird to have italian logo
+
+			Sphere_Economic_Dependent
+			Sphere_Fully_Dependent
+			Sphere_Coequal
+			OFN_Dependent_Member
+			OFN_Independent_Member
+		}
+
+		econ_leave_sphere = yes
+		set_temp_variable = {TNO_economy_type_temp = 3 }
+		econ_type_change = yes
+
+		#every_country = {
+		#	news_event = {
+		#		id = WORLD.941
+		#		days = 1
+		#	}
+		#}
+		create_country_leader = {
+			name = "Abdulrahman al Bakir"
+			desc = ""
+			picture = "Portrait_Gulf_Abdulrahman_al_Bakir.dds"
+			expire = 1992.1.1
+			ideology = social_democracy_left_wing_populism_subtype
+		}
+
+		set_country_flag = UAR_can_join
+	}
+}
+
+country_event = { #Emirates Formed (world 929)
+	id = GUL_skeleton.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event GUL_skeleton.4"}
+	title = GUL_skeleton.4.t
+	desc = GUL_skeleton.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = GUL_skeleton.4.a
+		ITA = {
+			end_puppet = GUL
+		}
+		set_country_flag = GUL_SAU
+		create_country_leader = {
+			name = "Shakhbut bin Sultan Al Nahyan"
+			desc = "POLITICS_SHAKHBUT_BIN_SULTAN_AL_NAHYAN"
+			picture = "Portrait_Gulf_Shakbut_bin_Sultan_al_Nahyan.dds"
+			expire = 1992.1.1
+			ideology = despotism_absolute_monarchy_subtype
+		}
+		set_politics = {
+			ruling_party = despotism
+		}
+		GUL = {
+			transfer_navy = { target = ITA }
+			drop_cosmetic_tag = yes
+			leave_faction = yes
+			remove_all_ministers = yes
+
+			set_temp_variable = {TNO_economy_type_temp = 3 }
+			econ_type_change = yes
+
+			add_ideas = {
+				GUL_Rashid_bin_Humaid_Al_Nuaimi_iii_hog
+				GUL_Khalifa_bin_Hamad_Al_Thani_for
+				GUL_Ahmad_bin_Rashid_Al_Mualla_eco
+				GUL_Khalid_bin_Mohammed_Al_Qasimi_sec
+			}
+			remove_ideas = {
+				IEA_idea_colonial_government
+				ita_oil_cult #Weird to have italian logo
+				#GUL_pride_of_the_regia_marina
+				#GUL_the_oil_empire
+				#GUL_the_nine_emirs
+				#GUL_immigrant_workforce
+
+				Sphere_Economic_Dependent
+				Sphere_Fully_Dependent
+				Sphere_Coequal
+				OFN_Dependent_Member
+				OFN_Independent_Member
+			}
+		}
+		every_country = {
+			news_event = {
+				id = WORLD.929
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Immigrant Worker Uprising (WORLD 940)
+	id = GUL_skeleton.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event GUL_skeleton.5"}
+	title = GUL_skeleton.5.t
+	desc = GUL_skeleton.5.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = GUL_skeleton.5.a
+		transfer_navy = { target = ITA }
+		drop_cosmetic_tag = yes
+		ITA = {
+			end_puppet = GUL
+			remove_from_faction = GUL
+		}
+		set_politics = {
+			ruling_party = socialist
+		}
+		add_popularity = {
+			ideology = socialist
+			popularity = 0.4
+		}
+
+		econ_leave_sphere = yes
+		set_temp_variable = { TNO_economy_subtype_temp = 2 }
+		econ_subtype_change = yes
+
+		every_country = {
+			news_event = {
+				id = WORLD.940
+				days = 1
+			}
+		}
+		create_country_leader = {
+			name = "Gurudas Dasgupta"
+			desc = "POLITICS_GURUDAS_DASGUPTA"
+			picture = "Portrait_Gulf_Gurudas_Dasgupta.dds"
+			expire = 2019.1.1
+			ideology = socialist_syndicalism_subtype
+		}
+		econ_leave_sphere = yes
+		leave_faction = yes
+		remove_all_ministers = yes
+		remove_ideas = {
+			IEA_idea_colonial_government
+			ita_oil_cult #Weird to have italian logo
+				#GUL_pride_of_the_regia_marina
+				#GUL_the_oil_empire
+				#GUL_the_nine_emirs
+				#GUL_immigrant_workforce
+
+			Sphere_Economic_Dependent
+			Sphere_Fully_Dependent
+			Sphere_Coequal
+			OFN_Dependent_Member
+			OFN_Independent_Member
+		}
+	}
+}

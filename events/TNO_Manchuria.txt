@@ -1,0 +1,232 @@
+﻿add_namespace = MAN
+
+country_event = { #Intro
+	id = MAN.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAN.0"}
+	title = MAN.0.t
+	desc = MAN.0.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MAN.0.a
+		hidden_effect = {
+			country_event = { id = MAN.1 days = 2114 } 
+		}
+	}
+}
+
+country_event = { #Puyi died
+	id = MAN.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MAN.1"}
+	title = MAN.1.t
+	desc = MAN.1.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Pujie's ascension
+		name = MAN.1.a
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_IMPERIAL_ARMY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_KWANTUNG_ARMY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_BUREAUCRACY }
+            } 
+		}
+		hidden_effect = {
+			retire_ideology_leader = despotism
+			kill_country_leader = yes
+			create_country_leader = {
+				name = "Aisin Gioro Pujie"
+				desc = "POLITICS_PUJIE_DESC"
+				picture = "Portrait_Manchukuo_Pujie.dds"
+				expire = "1999.1.1"
+				ideology = despotism_aristocratic_conservatism_subtype
+				traits = {
+					#
+				}
+			}
+			create_country_leader = {
+				name = "Gu Ciheng"
+				desc = "POLITICS_GU_CIHENG_DESC"
+				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
+				expire = "1990.1.1"
+				ideology = fascism_reform_bureaucracy_subtype
+				traits = {
+					#
+				}
+			}
+			set_popularities = {
+				despotism = 56
+				fascism = 26
+				ultranationalism = 15
+				communist = 3
+			}
+			set_politics = { ruling_party = despotism }
+			set_party_name = {
+				ideology = despotism 
+				long_name = MAN_despotism_concordia_party_long 
+				name = MAN_despotism_concordia_party 
+			}			
+			set_party_name = {
+				ideology = fascism 
+				long_name = MAN_fascism_split_party 
+				name = MAN_fascism_split_party_long 
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				MAN_Aisin_Gioro_Yuyan_hog
+				MAN_Han_Yunjie_eco
+				MAN_Gu_Ciheng_for
+				MAN_Gobulo_Runqi_sec
+			}
+			every_country = { news_event = { id = WORLD_MAN.1 } }
+		}
+	}
+
+	option = { # Sejima Coup
+		name = MAN.1.b
+		ai_chance = { factor = 4 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_PUJIE }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_KWANTUNG_ARMY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_BUREAUCRACY }
+            }
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "Gu Ciheng"
+				desc = "POLITICS_GU_CIHENG_DESC"
+				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
+				expire = "1990.1.1"
+				ideology = fascism_reform_bureaucracy_subtype
+				traits = {
+					#
+				}
+			}
+			set_popularities = {
+				despotism = 51
+				fascism = 29
+				ultranationalism = 15
+				communist = 5
+			}
+			set_politics = {ruling_party = despotism}	
+			set_party_name = {
+				ideology = fascism 
+				long_name = MAN_fascism_split_party 
+				name = MAN_fascism_split_party_long 
+			}
+			remove_all_ministers = yes
+			set_cosmetic_tag = MAN_state_of_manchuria
+			every_country = { news_event = { id = WORLD_MAN.2 } }
+		}
+	}
+
+	option = { # Kwantung Army Coup
+		name = MAN.1.c
+		ai_chance = { factor = 4 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_PUJIE }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_IMPERIAL_ARMY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_BUREAUCRACY }
+            }
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "Gu Ciheng"
+				desc = "POLITICS_GU_CIHENG_DESC"
+				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
+				expire = "1990.1.1"
+				ideology = fascism_reform_bureaucracy_subtype
+				traits = {
+					#
+				}
+			}
+			set_popularities = {
+				despotism = 10
+				fascism = 21
+				ultranationalism = 52
+				communist = 17
+			}
+			set_cosmetic_tag = MAN_manshukoku
+			set_politics = {ruling_party = ultranationalism }	
+			set_party_name = {
+				ideology = fascism 
+				long_name = MAN_fascism_split_party 
+				name = MAN_fascism_split_party_long 
+			}
+			remove_all_ministers = yes
+			every_country = { news_event = { id = WORLD_MAN.3 } }
+		}
+	}
+
+	option = { # Bureacratic Takeover
+		name = MAN.1.d
+		ai_chance = { factor = 3 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_PUJIE }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_IMPERIAL_ARMY }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MAN_FATE_PATH option = MAN_FATE_PATH_KWANTUNG_ARMY }
+            }
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "Gu Ciheng"
+				desc = "POLITICS_GU_CIHENG_DESC"
+				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
+				expire = "1990.1.1"
+				ideology = fascism_reform_bureaucracy_subtype
+				traits = {
+					#
+				}
+			}
+			set_popularities = {
+				despotism = 17
+				fascism = 57
+				ultranationalism = 16
+				communist = 10
+			}
+			set_cosmetic_tag = MAN_state_of_manchuria
+			set_politics = {ruling_party = fascism}	
+			set_party_name = {
+				ideology = fascism 
+				long_name = MAN_fascism_split_party 
+				name = MAN_fascism_split_party_long 
+			}
+			remove_all_ministers = yes
+			every_country = { news_event = { id = WORLD_MAN.4 } }
+		}
+	}
+}
