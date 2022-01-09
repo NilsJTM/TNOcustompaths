@@ -836,6 +836,26 @@ TNO_setup_jamaica_crisis = {
 
 		set_variable = { WIN_violence_tick = 0 }
 		set_variable = { WIN_fervor_tick = 0.5 }
+		if = { 
+		limit = {
+			has_game_rule = {
+				rule = jamaican_crisis
+				option = JAMAICAN_CRISIS_COUP
+			}
+		}
+	    set_variable = { WIN_violence = 100 }
+		set_variable = { WIN_fervor = 100 }
+	}
+	if = { 
+		limit = {
+			has_game_rule = {
+				rule = jamaican_crisis
+				option = JAMAICAN_CRISIS_CALMED
+			}
+		}
+	    set_variable = { WIN_violence = 0 }
+		set_variable = { WIN_fervor = 0 }
+	}
 
 		clr_country_flag = TNO_jamaica_crisis_squeezing_guns
 		clr_country_flag = TNO_jamaica_crisis_martial_law
@@ -1108,6 +1128,26 @@ TNO_recompute_jamaica_indep_chance = {
 		clamp_variable = { var = WIN_jamaica_win_pct min = 0 max = 1 }
 		set_variable = { WIN_wif_win_pct = 1 }
 		subtract_from_variable = { WIN_wif_win_pct = WIN_jamaica_win_pct }
+		if = { 
+		    limit = {
+			    has_game_rule = {
+				    rule = jamaican_independence_referendum_result
+				    option = JAMAICAN_INDEPENDENCE_REFERENDUM_RESULT_SUCCESS
+			    }
+		    }
+	        set_variable = { WIN_wif_win_pct = 0 }
+		    set_variable = { WIN_jamaica_win_pct = 1 }
+	    }
+	    if = { 
+		    limit = {
+			    has_game_rule = {
+				    rule = jamaican_independence_referendum_result
+				    option = JAMAICAN_INDEPENDENCE_REFERENDUM_RESULT_FAIL
+			    }
+		    }
+	        set_variable = { WIN_wif_win_pct = 1 }
+		    set_variable = { WIN_jamaica_win_pct = 0 }
+	    }
 	}
 }
 

@@ -1,0 +1,1422 @@
+###########################
+# Regime Leaning Commands #
+###########################
+
+increase_conservative_leaning_small = {
+
+	subtract_from_variable = {alignment_var = 10}
+
+	add_to_variable = {ConservativeWeight = 5}
+
+
+	if = {
+		limit = {
+			check_variable = {LeaningPivot > -50}
+		}
+		subtract_from_variable = {SGRRegimeStability = 0.025}
+	}
+
+	custom_effect_tooltip = SGR_conservative_influence_tt
+	check_speer_alignment_value = yes
+
+}
+
+increase_conservative_leaning_medium = {
+
+	subtract_from_variable = {alignment_var = 25}
+
+	if = {
+		limit = {
+			check_variable = {LeaningPivot > -50}
+		}
+		subtract_from_variable = {SGRRegimeStability = 0.05}
+	}
+
+	custom_effect_tooltip = SGR_conservative_influence_mid_tt
+	check_speer_alignment_value = yes
+
+}
+
+increase_conservative_leaning_large = {
+
+	subtract_from_variable = {alignment_var = 50}
+
+	if = {
+		limit = {
+			check_variable = {LeaningPivot > -50}
+		}
+		subtract_from_variable = {SGRRegimeStability = 0.1}
+	}
+
+	custom_effect_tooltip = SGR_conservative_influence_big_tt
+	check_speer_alignment_value = yes
+
+}
+
+increase_reformist_leaning_small = {
+
+	add_to_variable = {alignment_var = 10}
+
+	if = {
+		limit = {
+			check_variable = {LeaningPivot < 50}
+		}
+		subtract_from_variable = {SGRRegimeStability = 0.025}
+	}
+
+	custom_effect_tooltip = SGR_reformist_influence_tt
+	check_speer_alignment_value = yes
+
+}
+
+increase_reformist_leaning_medium = {
+
+	add_to_variable = {alignment_var = 25}
+
+	if = {
+		limit = {
+			check_variable = {LeaningPivot < 50}
+		}
+		subtract_from_variable = {SGRRegimeStability = 0.05}
+	}
+
+	custom_effect_tooltip = SGR_reformist_influence_mid_tt
+	check_speer_alignment_value = yes
+
+}
+
+increase_reformist_leaning_large = {
+
+	add_to_variable = {alignment_var = 50}
+
+	if = {
+		limit = {
+			check_variable = {LeaningPivot < 50}
+		}
+		subtract_from_variable = {SGRRegimeStability = 0.1}
+	}
+
+	custom_effect_tooltip = SGR_reformist_influence_big_tt
+	check_speer_alignment_value = yes
+
+}
+
+#econ here
+
+
+
+econ_increase_conservative_leaning_small = {
+
+	add_to_variable = {SGR_econ_con = 1}
+
+	if = {
+		limit = {
+			check_variable = { SGR_econ_lib > SGR_econ_con }
+		}
+		hidden_effect = {
+			set_temp_variable = { inflation_temp = 0.1 }
+			econ_inflation_change = yes
+			set_temp_variable = { gdp_growth_temp = -0.25 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { debt_temp = 0.01 }
+			econ_national_debt_change = yes
+		}
+		custom_effect_tooltip = SGR_erratic_economy
+	}
+
+	custom_effect_tooltip = SGR_econ_con_1
+}
+
+econ_increase_conservative_leaning_medium = {
+
+	add_to_variable = {SGR_econ_con = 2}
+
+	if = {
+		limit = {
+			check_variable = { SGR_econ_lib > SGR_econ_con }
+		}
+		hidden_effect = {
+			set_temp_variable = { inflation_temp = 0.25 }
+			econ_inflation_change = yes
+			set_temp_variable = { gdp_growth_temp = -0.5 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { debt_temp = 0.025 }
+			econ_national_debt_change = yes
+		}
+		custom_effect_tooltip = SGR_erratic_economy
+	}
+
+	custom_effect_tooltip = SGR_econ_con_2
+}
+
+econ_increase_conservative_leaning_large = {
+
+	add_to_variable = {SGR_econ_con = 3}
+
+	if = {
+		limit = {
+			check_variable = { SGR_econ_lib > SGR_econ_con }
+		}
+		hidden_effect = {
+			set_temp_variable = { inflation_temp = 0.5 }
+			econ_inflation_change = yes
+			set_temp_variable = { gdp_growth_temp = -1 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { debt_temp = 0.05 }
+			econ_national_debt_change = yes
+		}
+		custom_effect_tooltip = SGR_erratic_economy
+	}
+
+	custom_effect_tooltip = SGR_econ_con_3
+}
+
+econ_increase_liberal_leaning_small = {
+
+	add_to_variable = {SGR_econ_lib = 1}
+
+	if = {
+		limit = {
+			check_variable = { SGR_econ_con > SGR_econ_lib }
+		}
+		hidden_effect = {
+			set_temp_variable = { inflation_temp = 0.1 }
+			econ_inflation_change = yes
+			set_temp_variable = { gdp_growth_temp = -0.25 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { debt_temp = 0.01 }
+			econ_national_debt_change = yes
+		}
+		custom_effect_tooltip = SGR_erratic_economy
+	}
+
+	custom_effect_tooltip = SGR_econ_lib_1
+}
+
+econ_increase_liberal_leaning_medium = {
+
+	add_to_variable = {SGR_econ_lib = 2}
+
+	if = {
+		limit = {
+			check_variable = { SGR_econ_con > SGR_econ_lib }
+		}
+		hidden_effect = {
+			set_temp_variable = { inflation_temp = 0.25 }
+			econ_inflation_change = yes
+			set_temp_variable = { gdp_growth_temp = -0.5 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { debt_temp = 0.025 }
+			econ_national_debt_change = yes
+		}
+		custom_effect_tooltip = SGR_erratic_economy
+	}
+
+	custom_effect_tooltip = SGR_econ_lib_2
+}
+
+econ_increase_liberal_leaning_large = {
+
+	add_to_variable = {SGR_econ_lib = 3}
+
+	if = {
+		limit = {
+			check_variable = { SGR_econ_con > SGR_econ_lib }
+		}
+		hidden_effect = {
+			set_temp_variable = { inflation_temp = 0.5 }
+			econ_inflation_change = yes
+			set_temp_variable = { gdp_growth_temp = -1 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { debt_temp = 0.05 }
+			econ_national_debt_change = yes
+		}
+		custom_effect_tooltip = SGR_erratic_economy
+	}
+
+	custom_effect_tooltip = SGR_econ_lib_3
+}
+
+##REGIME STAB MANIPULATORS
+
+add_regime_stab_small = {
+	add_to_variable = {SGRRegimeStability = 0.025}
+	custom_effect_tooltip = SGR_stab_bonus_small
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+}
+
+add_regime_stab_med = {
+	add_to_variable = {SGRRegimeStability = 0.05}
+	custom_effect_tooltip = SGR_stab_bonus_med
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+}
+
+#USE SPARINGLY
+add_regime_stab_big = {
+	add_to_variable = {SGRRegimeStability = 0.1}
+	custom_effect_tooltip = SGR_stab_bonus_big
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+}
+
+add_regime_stab_20 = {
+	add_to_variable = {SGRRegimeStability = 0.2}
+	custom_effect_tooltip = SGR_stab_bonus_20
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+}
+
+decrease_regime_stab_small = {
+	subtract_from_variable = {SGRRegimeStability = 0.025}
+	custom_effect_tooltip = SGR_stab_malus_small
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+	if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+}
+
+decrease_regime_stab_med = {
+	subtract_from_variable = {SGRRegimeStability = 0.05}
+	custom_effect_tooltip = SGR_stab_malus_med
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+	if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+}
+
+#USE SPARINGLY
+decrease_regime_stab_big = {
+	subtract_from_variable = {SGRRegimeStability = 0.1}
+	custom_effect_tooltip = SGR_stab_malus_big
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+	if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+}
+
+decrease_regime_stab_15 = {
+	subtract_from_variable = {SGRRegimeStability = 0.15}
+	custom_effect_tooltip = SGR_stab_malus_15
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+	if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+}
+
+decrease_regime_stab_30 = {
+	subtract_from_variable = {SGRRegimeStability = 0.3}
+	custom_effect_tooltip = SGR_stab_malus_30
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+	if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+}
+
+decrease_regime_stab_huge = {
+	subtract_from_variable = {SGRRegimeStability = 0.5}
+	custom_effect_tooltip = SGR_stab_malus_huge
+	clamp_variable = {
+		var = SGRRegimeStability
+		max = 1
+		min = 0
+	}
+	if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+}
+
+################################
+# Pulse and Important Commands #
+################################
+
+initialize_state_of_the_reich = {
+	initialize_fashvsauthdem_system = yes
+	check_speer_alignment_value = yes
+	SGR_regime_pivot_update = yes
+	add_dynamic_modifier = { modifier = GER_SGR_propaganda_campaign_dynamic_modifier }
+	set_variable = { SGRRegimeStability = 0.54 }
+	set_variable = { SGR_econ_lib = 0 }
+	set_variable = { SGR_econ_con = 0 }
+}
+
+StateReich_two_weeks_pulse = {
+	if = {
+		limit = {
+			NOT = {
+				OR = {
+					has_completed_focus = SGR_ein_fuhrer
+					has_completed_focus = SGR_freiheit
+				}
+			}
+		}
+		SGR_regime_stab_update = yes
+		SGR_regime_pivot_update = yes
+	}
+	if = {
+		limit = {
+			has_country_flag = SGR_phase3
+		}
+		SGR_OC_tension_growth = yes
+	}
+}
+
+run_monthly_StateReich_pulse = {
+	if = {
+		limit = {
+			NOT = {
+				OR = {
+					has_completed_focus = SGR_ein_fuhrer
+					has_completed_focus = SGR_freiheit
+				}
+			}
+			is_ai = no
+		}
+		check_speer_alignment_value = yes
+	}
+	if = {
+		limit = {
+			NOT = {
+				OR = {
+					has_completed_focus = SGR_ein_fuhrer
+					has_completed_focus = SGR_freiheit
+				}
+			}
+			is_ai = yes
+		}
+		random_list = {
+			25 = {
+				increase_conservative_leaning_medium = yes
+				add_regime_stab_20 = yes
+			}
+			25 = {
+				increase_conservative_leaning_large = yes
+				add_regime_stab_20 = yes
+			}
+			25 = {
+				increase_reformist_leaning_medium = yes
+				add_regime_stab_20 = yes
+			}
+			25 = {
+				increase_reformist_leaning_medium = yes
+				add_regime_stab_20 = yes
+			}
+		}
+		check_speer_alignment_value = yes
+	}
+}
+
+reset_StateReich_buttons = {
+	set_country_flag = SGR_speerdometer_button1_visible
+	set_country_flag = SGR_speerdometer_button2_visible
+	set_country_flag = SGR_speerdometer_button3_visible
+	set_country_flag = SGR_speerdometer_button4_visible
+}
+
+###############
+# Initializer #
+###############
+
+initialize_fashvsauthdem_system = {
+
+	set_variable = {LeaningPivot = -50}
+
+	set_variable = {alignment_var = -30}
+
+	set_country_flag = SGR_speerdometer_button1_visible
+	set_country_flag = SGR_speerdometer_button2_visible
+	set_country_flag = SGR_speerdometer_button3_visible
+	set_country_flag = SGR_speerdometer_button4_visible
+
+}
+
+#######################
+# Propaganda Mechanic #
+#######################
+
+##GUI COMMANDS
+
+increase_propaganda_budget = {
+	if = {
+		limit = {
+			NOT = {check_variable = {SGRUSDInvestment = 10}}
+		}
+		add_to_variable = {SGRUSDInvestment = 2}
+	}
+}
+
+decrease_propaganda_budget = {
+	if = {
+		limit = {
+			NOT = {check_variable = {SGRUSDInvestment = 0}}
+		}
+		subtract_from_variable = {SGRUSDInvestment = 2}
+	}
+}
+
+increase_propaganda_pp = {
+	if = {
+		limit = {
+			NOT = {check_variable = {SGRPPInvestment = 100}}
+		}
+		add_to_variable = {SGRPPInvestment = 20}
+	}
+}
+
+decrease_propaganda_pp = {
+	if = {
+		limit = {
+			NOT = {check_variable = {SGRPPInvestment = 0}}
+		}
+		subtract_from_variable = {SGRPPInvestment = 20}
+	}
+}
+
+precalculate_propaganda_effects = {
+	#PP Investment
+	if = {
+		limit = {
+			NOT = {check_variable = {SGRPPInvestment = 0}}
+		}
+		set_temp_variable = {tempPPInvestment = SGRPPInvestment}
+		divide_temp_variable = {tempPPInvestment = 25}
+		#Political power bonus
+		set_temp_variable = {tempPolPow = tempPPInvestment}
+		multiply_temp_variable = {tempPolPow = 0.03 }
+		set_variable = {SGRPropagandaPPDisplay = tempPolPow}
+		#Social outlook bonus
+		if = {
+			limit = {
+				has_country_flag = SGR_GUI_reformist_focus
+			}
+			set_variable = {SGRReformistVarDisplay = tempPPInvestment}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SGR_GUI_conservative_focus
+			}
+			set_variable = {SGRConservativeVarDisplay = tempPPInvestment}
+		}
+	}
+	#Money investment
+	if = {
+		limit = {
+			NOT = {check_variable = {SGRUSDInvestment = 0}}
+		}
+		set_temp_variable = {tempUSDInvestment = SGRUSDInvestment}
+		divide_temp_variable = {tempUSDInvestment = 2}
+		#Stability growth
+		set_temp_variable = {tempUSD = tempUSDInvestment}
+		multiply_temp_variable = {tempUSD = 0.001 }
+		set_variable = {SGRPropagandaStabDisplay = tempUSD}
+		#Regime tick bonus
+		if = {
+			limit = {
+				has_country_flag = SGR_GUI_reformist_focus
+			}
+			set_variable = {SGRPropagandaReformistTickDisplay = tempUSDInvestment}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SGR_GUI_conservative_focus
+			}
+			set_variable = {SGRPropagandaConservativeTickDisplay = tempUSDInvestment}
+		}
+	}
+}
+
+launch_propaganda_campaign = {
+	#Political power bonus
+	set_variable = {SGRPropagandaPP = SGRPropagandaPPDisplay}
+	#Stability bonus
+	set_variable = {SGRPropagandaStab = SGRPropagandaStabDisplay}
+
+	set_temp_variable = {tempPP = SGRPPInvestment}
+	multiply_temp_variable = {tempPP = -1}
+	add_political_power = tempPP
+
+	set_temp_variable = {tempUSD = SGRUSDInvestment}
+	multiply_temp_variable = {tempUSD = 0.001 }
+	add_to_variable = {GER.national_debt = tempUSD}
+
+	country_event = {
+		id = speer.10001
+		days = 120
+	}
+
+	random_list = {
+		10 = {
+			country_event = {
+				id = speerpropaganda.1
+				days = 47
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_reformist_focus}
+					has_country_flag = SGR_propaganda_no_1_done
+				}
+			}
+		}
+		10 = {
+			country_event = {
+				id = speerpropaganda.2
+				days = 31
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_reformist_focus}
+					has_country_flag = SGR_propaganda_no_2_done
+				}
+			}
+		}
+		10 = {
+			country_event = {
+				id = speerpropaganda.3
+				days = 29
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_reformist_focus}
+					has_country_flag = SGR_propaganda_no_3_done
+				}
+			}
+		}
+		10 = {
+			country_event = {
+				id = speerpropaganda.4
+				days = 59
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_reformist_focus}
+					has_country_flag = SGR_propaganda_no_4_done
+				}
+			}
+		}
+		10 = {
+			country_event = {
+				id = speerpropaganda.5
+				days = 50
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_conservative_focus}
+					has_country_flag = SGR_propaganda_no_5_done
+				}
+			}
+		}
+		10 = {
+			country_event = {
+				id = speerpropaganda.6
+				days = 21
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_conservative_focus}
+					has_country_flag = SGR_propaganda_no_6_done
+				}
+			}
+		}
+		10 = {
+			country_event = {
+				id = speerpropaganda.7
+				days = 19
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_conservative_focus}
+					has_country_flag = SGR_propaganda_no_7_done
+				}
+			}
+		}
+		10 = {
+			country_event = {
+				id = speerpropaganda.8
+				days = 71
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {has_country_flag = SGR_GUI_conservative_focus}
+					has_country_flag = SGR_propaganda_no_8_done
+				}
+			}
+		}
+	}
+}
+
+reset_propaganda_campaign = {
+	set_variable = {SGRPropagandaPP = 0}
+	set_variable = {SGRPropagandaStab = 0}
+	set_variable = {SGRPPInvestment = 0}
+	set_variable = {SGRUSDInvestment = 0}
+	set_variable = {SGRPropagandaReformistTickDisplay = 0}
+	set_variable = {SGRPropagandaConservativeTickDisplay = 0}
+	set_variable = {SGRReformistVarDisplay = 0}
+	set_variable = {SGRConservativeVarDisplay = 0}
+	clr_country_flag = SGR_GUI_propaganda_in_progress
+	clr_country_flag = SGR_GUI_conservative_focus
+	clr_country_flag = SGR_GUI_reformist_focus
+	clr_country_flag = SGR_GUI_position_chosen
+}
+
+###########################
+# Regime Stability System #
+###########################
+
+SGR_regime_stab_update = {
+
+	log = "[GetDateText]: [Root.GetName]: SGR_regime_stab_update; Executing; Updating SGR Regime Stability currently at [?SGRRegimeStability|%]."
+
+	if = {
+		limit = {
+			NOT = {check_variable = { GER.stability = SGRRegimeStability }}
+		}
+		set_temp_variable = { tempStab = GER.stability }
+		multiply_temp_variable = { tempStab = 0.01 }
+		if = {
+			limit = {
+				check_variable = {GER.stability > SGRRegimeStability}
+			}
+			add_to_variable = {SGRRegimeStability = tempStab}
+			else = {
+				subtract_from_variable = {SGRRegimeStability = tempStab}
+			}
+		}
+	}
+
+	#Checking for if the regime leaning lies opposite to the Social Outlook
+
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { SGR_Alignment > 0 }
+					check_variable = { LeaningPivot < 0 }
+				}
+				AND = {
+					check_variable = {SGR_Alignment < 0 }
+					check_variable = {LeaningPivot > 0 }
+				}
+			}
+		}
+		set_temp_variable = {tempStab = SGRRegimeStability }
+		multiply_temp_variable = {tempStab = 0.05 }
+		subtract_from_variable = {SGRRegimeStability = tempStab }
+	}
+
+	clamp_variable = {
+		var = SGRRegimeStability
+		min = 0
+		max = 1
+	}
+	if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+
+	log = "[GetDateText]: [Root.GetName]: SGR_regime_stab_update; SGR Regime Stability updated to [?SGRRegimeStability|%]; Completed execution."
+
+}
+
+###################
+# Natsoc Collapse #
+###################
+
+perform_natsoc_collapse = {
+	custom_effect_tooltip = SGR_natsoc_collapse_tt
+	hidden_effect = {
+		set_global_flag = SGR_natsoc_collapse
+		remove_all_ministers = yes
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Albert Speer"
+			desc = "POLITICS_NATSOC_SPEER_DESC"
+			picture = "Portrait_Germany_Albert_Speer_natsoc.dds"
+			expire = "1990.1.1"
+			ideology = national_socialism_subtype
+			traits = {
+				dictator
+			}
+		}
+		set_politics = {
+			ruling_party = national_socialism
+		}
+		add_ideas = {
+			GER_Paul_Wegener_hog
+			GER_Theodor_Oberlander_for
+			GER_Heinrich_Trettner_sec
+		}
+		remove_ideas = {
+			GER_SGR_the_lost_generation
+			GER_SGR_wary_wehrmacht
+			GER_SGR_gang_of_four
+		}
+
+		add_to_variable = {
+			var = fashpoints
+			value = 100
+		}
+		subtract_from_variable = {
+			var = authpoints
+			value = 100
+		}
+		check_speer_alignment_value = yes
+		reload_GER_speer_post_cw_tree = yes
+		TNO_fopo_remove_saw_tab = yes
+
+		every_country = {
+			news_event = {
+				id = WORLD.2102
+				days = 2
+			}
+		}
+		country_event = {
+			id = speerflavor.100
+			days = 4
+		}
+		hidden_effect = {
+			country_event = {
+				id = speer_natsoc.1
+				days = 12
+			}
+		}
+	}
+}
+
+##############################################
+# Patented Speer authdem vs fash system (TM) #
+##############################################
+
+clear_trend_flags = {
+	clr_country_flag = SGR_Reich_AuthTrendSmall
+	clr_country_flag = SGR_Reich_AuthTrendMed
+	clr_country_flag = SGR_Reich_AuthTrendLarge
+	clr_country_flag = SGR_Reich_FashTrendSmall
+	clr_country_flag = SGR_Reich_FashTrendMed
+	clr_country_flag = SGR_Reich_FashTrendLarge
+}
+
+SGR_regime_pivot_update = {
+
+	set_variable = {SGRSocietyTick = 0}
+
+	#Regime leaning points
+
+	add_to_variable = {SGRSocietyTick = SGR_Alignment}
+
+	#Skilled Workforce
+
+	add_to_variable = {SGRSocietyTick = skilled_labour_Factor}
+
+	#Wehrwirtschaftsführer control over German states
+
+	set_variable = {SGRGermanyCompanyCohesion = 0}
+
+	for_each_loop = {
+		array = SGR_WWS_Megacorps
+		index = i
+		value = val
+
+		if = {
+			limit = {
+				check_variable = {i < 8}
+				NOT = {check_variable = {i = 0}}
+			}
+			add_to_variable = {SGRGermanyCompanyCohesion = 1}
+		}
+	}
+
+	divide_variable = {SGRGermanyCompanyCohesion = 7}
+
+	subtract_from_variable = {SGRSocietyTick = SGRGermanyCompanyCohesion}
+
+	#Party pop influences
+
+	set_variable = {SGRAuth = party_popularity@authoritarian_democracy}
+	add_to_variable = {SGRAuth = party_popularity@liberal_democracy}
+	add_to_variable = {SGRAuth = party_popularity@social_democracy}
+	add_to_variable = {SGRAuth = party_popularity@socialist}
+
+	set_variable = {SGRFash = party_popularity@fascism}
+	add_to_variable = {SGRFash = party_popularity@national_socialism}
+
+	add_to_variable = {SGRSocietyTick = SGRAuth}
+	subtract_from_variable = {SGRSocietyTick = SGRFash}
+
+	#Propaganda Campaigns
+
+	add_to_variable = {SGRSocietyTick = SGRReformistVarDisplay}
+	subtract_from_variable = {SGRSocietyTick = SGRConservativeVarDisplay}
+
+	#SAW Protest
+
+	add_to_variable = {SGRSocietyTick = SGR_civ_protest_soc_impact}
+
+	#Oil Crisis protest
+
+	add_to_variable = { SGRSocietyTick = SGR_OC_SocOutlook_display }
+
+	#Economic leaning
+
+	if = {
+		limit = {
+			check_variable = {
+				SGR_econ_lib > 10
+			}
+		}
+		add_to_variable = { SGRSocietyTick = 2 }
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				SGR_econ_lib > 15
+			}
+		}
+		add_to_variable = { SGRSocietyTick = 3 }
+	}
+
+	if = {
+		limit = {
+			check_variable = {
+				SGR_econ_con > 10
+			}
+		}
+		subtract_from_variable = { SGRSocietyTick = 2 }
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				SGR_econ_con > 15
+			}
+		}
+		subtract_from_variable = { SGRSocietyTick = 3 }
+	}
+
+	#Code
+
+	clamp_variable = {
+		var = SGRSocietyTick
+		min = -15
+		max = 15
+	}
+
+	add_to_variable = {SGRSocietyLevel = SGRSocietyTick}
+
+	clamp_variable = {
+		var = SGRSocietyLevel
+		min = -500
+		max = 500
+	}
+
+	if = {
+		limit = {
+			check_variable = {SGRSocietyLevel = 500}
+		}
+		add_to_variable = {LeaningPivot = 50}
+		set_variable = {SGRSocietyLevel = 0}
+	}
+	else_if = {
+		limit = {
+			check_variable = {SGRSocietyLevel = -500}
+		}
+		subtract_from_variable = {LeaningPivot = 50}
+		set_variable = {SGRSocietyLevel = 0}
+	}
+
+	clamp_variable = {
+		var = LeaningPivot
+		min = -100
+		max = 100
+	}
+
+	log = "[GetDateText]: [Root.GetName]: Regime Level: [?LeaningPivot] SGRSocietyLevel: [?SGRSocietyLevel]"
+
+}
+
+check_speer_alignment_value = {
+    if = { 
+		limit = {
+		    OR = {
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_CONSERVATIVE
+			    }
+			    has_game_rule = {
+				    rule = GER_SPEER_PATH
+				    option = GER_SPEER_PATH_REFORMER
+			    }  
+			} 
+		}
+	    set_variable = { SGRRegimeStability = 1 }
+	}
+
+	set_temp_variable = {factorAlignment = alignment_var}
+	set_temp_variable = {factorPivot = LeaningPivot}
+
+	if = {
+		limit = {
+			NOT = {check_variable = {factorAlignment = 0}}
+			NOT = {check_variable = {factorPivot = 0}}
+		}
+		divide_temp_variable = {factorAlignment = factorPivot}
+		set_variable = {pivotPercentage = factorAlignment}
+		set_variable = {pivotPercentage_was = factorAlignment}
+		else_if = {
+			limit = {
+				NOT = {check_variable = {pivotPercentage_was = 0}}
+			}
+			set_variable = {pivotPercentage = pivotPercentage_was}
+		}
+		else = {
+			set_variable = {pivotPercentage = 0.1}
+		}
+		log = "[GetDateText]: [Root.GetName]: Pivot Fraction [?pivotPercentage]"
+	}
+
+	if = {
+		limit = {
+			check_variable = {pivotPercentage = 1}
+		}
+		set_variable = {pivotFraction = 0.0025}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					check_variable = {pivotPercentage > 1}
+					NOT = {check_variable = {pivotPercentage > 1.25}}
+				}
+				AND = {
+					check_variable = {pivotPercentage < 1}
+					NOT = {check_variable = {pivotPercentage < 0.75}}
+				}
+			}
+		}
+		set_variable = {pivotFraction = 0.005}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					check_variable = {pivotPercentage > 1.25}
+					NOT = {check_variable = {pivotPercentage > 1.5}}
+				}
+				AND = {
+					check_variable = {pivotPercentage < 0.75}
+					NOT = {check_variable = {pivotPercentage < 0.5}}
+				}
+			}
+		}
+		set_variable = {pivotFraction = 0.01}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					check_variable = {pivotPercentage > 1.5}
+					NOT = {check_variable = {pivotPercentage > 1.75}}
+				}
+				AND = {
+					check_variable = {pivotPercentage < 0.5}
+					NOT = {check_variable = {pivotPercentage < 0.25}}
+				}
+			}
+		}
+		set_variable = {pivotFraction = 0.025}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				check_variable = {pivotPercentage > 1.75}
+				check_variable = {pivotPercentage < 0.25}
+			}
+		}
+		set_variable = {pivotFraction = 0.05}
+	}
+
+
+	#Ticker code
+
+	set_temp_variable = {tempAlignment = alignment_var}
+
+	if = {
+		limit = {
+			check_variable = {tempAlignment > LeaningPivot}
+		}
+		if = {
+			limit = {
+				NOT = {check_variable = {tempAlignment = 0}}
+			}
+			set_temp_variable = {tempPivot = LeaningPivot}
+			subtract_from_temp_variable = {tempPivot = tempAlignment}
+			multiply_temp_variable = {tempPivot = pivotFraction}
+			set_variable = {alignmentTicker = tempPivot}
+			#Propaganda things
+			add_to_variable = {alignmentTicker = SGRPropagandaReformistTickDisplay}
+			subtract_from_variable = {alignmentTicker = SGRPropagandaConservativeTickDisplay}
+			add_to_variable = {alignment_var = alignmentTicker}
+			set_variable = {was_ticker = alignmentTicker}
+			else_if = {
+				limit = {
+					check_variable = {tempAlignment = 0}
+					NOT = {check_variable = {was_ticker = 0}}
+				}
+				add_to_variable = {alignment_var = was_ticker}
+			}
+			else = {
+				set_temp_variable = {tempTicker = 1}
+				randomize_temp_variable = {
+					var = tempTicker
+					distribution = binomial
+					min = 1
+					max = 2
+				}
+				multiply_temp_variable = {tempTicker = -1}
+				set_variable = {alignmentTicker = tempTicker}
+				#Propaganda things
+				add_to_variable = {alignmentTicker = SGRPropagandaReformistTickDisplay}
+				subtract_from_variable = {alignmentTicker = SGRPropagandaConservativeTickDisplay}
+				add_to_variable = {alignment_var = alignmentTicker}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {tempAlignment < LeaningPivot}
+		}
+		if = {
+			limit = {
+				NOT = {check_variable = {tempAlignment = 0}}
+			}
+			set_temp_variable = {tempPivot = LeaningPivot}
+			subtract_from_temp_variable = {tempPivot = tempAlignment}
+			multiply_temp_variable = {tempPivot = pivotFraction}
+			set_variable = {alignmentTicker = tempPivot}
+			#Propaganda things
+			add_to_variable = {alignmentTicker = SGRPropagandaReformistTickDisplay}
+			subtract_from_variable = {alignmentTicker = SGRPropagandaConservativeTickDisplay}
+			add_to_variable = {alignment_var = alignmentTicker}
+			set_variable = {was_ticker = alignmentTicker}
+			else_if = {
+				limit = {
+					check_variable = {tempAlignment = 0}
+					NOT = {check_variable = {was_ticker = 0}}
+				}
+				add_to_variable = {alignment_var = was_ticker}
+			}
+			else = {
+				set_temp_variable = {tempTicker = 1}
+				randomize_temp_variable = {
+					var = tempTicker
+					distribution = binomial
+					min = 1
+					max = 5
+				}
+				set_variable = {alignmentTicker = tempTicker}
+				#Propaganda things
+				add_to_variable = {alignmentTicker = SGRPropagandaReformistTickDisplay}
+				subtract_from_variable = {alignmentTicker = SGRPropagandaConservativeTickDisplay}
+				add_to_variable = {alignment_var = alignmentTicker}
+			}
+		}
+	}
+
+	#Checks NEUTRAL case
+	if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var < 20}
+				check_variable = { alignment_var > -20}
+			}
+		}
+		set_variable = {SGR_Alignment = 0}
+	}
+	#Checks REFORMIST case
+	else_if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var < 60}
+				check_variable = { alignment_var > 19}
+			}
+		}
+		set_variable = {SGR_Alignment = 2}
+	}
+	#Checks STRONGLY REFORMIST case
+	else_if = {
+		limit = {
+			check_variable = { alignment_var > 59}
+		}
+		set_variable = {SGR_Alignment = 5}
+	}
+	#Checks CONSERVATIVE case
+	else_if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var < -19}
+				check_variable = { alignment_var > -60}
+			}
+		}
+		set_variable = {SGR_Alignment = -2}
+	}
+	#Checks STRONGLY CONSERVATIVE case
+	else_if = {
+		limit = {
+			check_variable = { alignment_var < -59}
+		}
+		set_variable = {SGR_Alignment = -5}
+	}
+
+	check_alignment_trend = yes
+	check_speer_alignment = yes
+}
+
+check_alignment_trend = {
+	if = {
+		limit = {
+			check_variable = {alignmentTicker < 2.1}
+			check_variable = {alignmentTicker > 0}
+		}
+		clear_trend_flags = yes
+		set_country_flag = SGR_Reich_AuthTrendSmall
+	}
+	else_if = {
+		limit = {
+			check_variable = {alignmentTicker < 5.1}
+			check_variable = {alignmentTicker > 2}
+		}
+		clear_trend_flags = yes
+		set_country_flag = SGR_Reich_AuthTrendMed
+	}
+	else_if = {
+		limit = {
+			check_variable = {alignmentTicker > 5}
+		}
+		clear_trend_flags = yes
+		set_country_flag = SGR_Reich_AuthTrendLarge
+	}
+	if = {
+		limit = {
+			check_variable = {alignmentTicker > -2.1}
+			check_variable = {alignmentTicker < 0}
+		}
+		clear_trend_flags = yes
+		set_country_flag = SGR_Reich_FashTrendSmall
+	}
+	else_if = {
+		limit = {
+			check_variable = {alignmentTicker > -5.1}
+			check_variable = {alignmentTicker < -2}
+		}
+		clear_trend_flags = yes
+		set_country_flag = SGR_Reich_FashTrendMed
+	}
+	else_if = {
+		limit = {
+			check_variable = {alignmentTicker < -5}
+		}
+		clear_trend_flags = yes
+		set_country_flag = SGR_Reich_FashTrendLarge
+	}
+}
+
+
+check_speer_alignment = {
+	if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var < 20}
+				check_variable = { alignment_var > -20}
+				NOT = { has_cosmetic_tag = SGR_neutral}
+			}
+		}
+		hidden_effect = {
+			GER = {
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SGR_neutral
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var < 60}
+				check_variable = { alignment_var > 19}
+				NOT = { has_cosmetic_tag = SGR_authdem1}
+			}
+		}
+		hidden_effect = {
+			GER = {
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SGR_authdem1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var > 59}
+				NOT = { has_cosmetic_tag = SGR_authdem2}
+			}
+		}
+		hidden_effect = {
+			GER = {
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SGR_authdem2
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var < -20}
+				check_variable = { alignment_var > -60}
+				NOT = { has_cosmetic_tag = SGR_fash1}
+			}
+		}
+		hidden_effect = {
+			GER = {
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SGR_fash1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			AND = {
+				check_variable = { alignment_var < -59}
+				NOT = { has_cosmetic_tag = SGR_fash2}
+			}
+		}
+		hidden_effect = {
+			GER = {
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SGR_fash2
+			}
+		}
+	}
+}
+

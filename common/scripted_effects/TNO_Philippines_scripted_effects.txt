@@ -1,0 +1,915 @@
+TNO_tt_phi_test = {
+	set_variable = { JAP_PHI_Morale_Rises_counter = 5 }
+}
+TNO_FGB_debug_script = {
+	TNO_Blitz_SPH_victory = yes
+	TNO_Blitz_Landing_Start = yes
+	TNO_fopo_add_philippines_reconstruction_tab = yes
+	log = "Global flags: FGB_Luzon; FGB_Central; FGB_Total"
+}
+
+TNO_PHI_stop_border_wars = {
+	cancel_border_war = {
+		dont_fire_events = yes
+		defender = 623
+		attacker = 1455
+	}
+	cancel_border_war = {
+		dont_fire_events = yes
+		defender = 1457
+		attacker = 624
+	}
+	cancel_border_war = {
+		dont_fire_events = yes
+		defender = 1458
+		attacker = 628
+	}
+}
+
+TNO_Start_Balintawak_Blitz = {
+	JAP = {
+		remove_from_faction = PHI
+	}
+	SPH = {
+		declare_war_on = {
+			target = PHI
+			type = civil_war
+		}
+		add_ideas = balintawak_blitz_against_japan
+	}
+	UPH = {
+		declare_war_on = {
+			target = PHI
+			type = civil_war
+		}
+		add_ideas = { balintawak_blitz_idea balintawak_blitz_against_japan }
+	}
+	PHI = {
+		add_ideas = balintawak_blitz_idea
+		remove_ideas = Sphere_Imp_Protectorate
+		set_country_flag = {
+			flag = PHI_normal
+			days = 250
+			value = 1
+		}
+	}
+	USA = {
+		TNO_fopo_add_philippines_tab = yes
+		set_country_flag = {
+			flag = USA_no_advisors_PHI_cooldown
+			days = 30
+			value = 1
+		}
+		set_country_flag = {
+			flag = USA_no_advisors_PHI_cooldown_2
+			days = 60
+			value = 1
+		}
+		
+		# Decide if AI wants to do USFIP-only or wants UFF
+		random_list = {
+			1 = {
+			    modifier = {
+                    factor = 0
+                    has_game_rule = {
+                        rule = united_filipino_front
+                        option = UNITED_FILIPINO_FRONT_CREATED
+                    }
+                }
+				set_country_flag = USA_PHI_AI_wants_USFIP
+				log = "USA - Philippines Blitz - AI wants USFIP only"
+			}
+			2 = {
+			    modifier = {
+                    factor = 0
+                    has_game_rule = {
+                        rule = united_filipino_front
+                        option = UNITED_FILIPINO_FRONT_REJECTED
+                    }
+                }
+				set_country_flag = USA_PHI_AI_wants_UFF
+				log = "USA - Philippines Blitz - AI wants United Front"
+			}
+		}
+	}
+	JAP = {
+		set_temp_variable = { target = PHI }
+		set_temp_variable = { number = 1 }
+		TNO_set_num_volunteers = yes
+
+		TNO_fopo_add_philippines_tab = yes
+		set_variable = { JAP_PHI_max_bombings = 1 }
+	}
+	set_global_flag = PHI_proxy_war
+	set_global_flag = PHI_proxy_war_started
+	TNO_PHI_stop_border_wars = yes
+}
+
+TNO_Blitz_SPH_victory = {
+	USA = {
+		set_temp_variable = { target = UPH }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { target = SPH }
+		TNO_clear_num_volunteers = yes
+		TNO_fopo_remove_philippines_tab = yes
+		remove_mission = USA_UPH_morale_lowers
+	}
+	JAP = {
+		set_temp_variable = { target = PHI }
+		TNO_clear_num_volunteers = yes
+		TNO_fopo_remove_philippines_tab = yes
+		remove_mission = JAP_PHI_morale_rises
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			add_command_power = 100 # look man, the japan AI sucks and this is the only way I could think of for the 14th army landing to last more than a week
+		}
+		set_variable = { JAP_PHI_supply_cost = 45 }
+	}
+	UPH = {
+		set_variable = { UPH_unsung_warriors_attack = 0.05 }
+		set_variable = { UPH_unsung_warriors_speed = 0.05 }
+		set_variable = { UPH_unsung_warriors_breakthrough = 0.10 }
+		clear_variable = UPH_fucking_surrender_limit
+		remove_ideas = balintawak_blitz_against_japan
+	}
+	SPH = {
+		set_variable = { SPH_para_sa_ating_himagsikan_attack = 0.1 }
+		set_variable = { SPH_para_sa_ating_himagsikan_speed = 0.05 }
+		set_variable = { SPH_para_sa_ating_himagsikan_breakthrough = 0.15 }
+		remove_ideas = balintawak_blitz_against_japan
+		clear_variable = SPH_fucking_surrender_limit
+	}
+	SPH = {
+		transfer_state = 623
+		transfer_state = 327
+		set_capital = 327
+		every_owned_state = {
+			remove_core_of = PHI
+		}
+	}
+	UPH = {
+		if = {
+			limit = { exists = no }
+			annex_country = { target = PHI }
+			load_oob = UPH_1962
+		}
+		set_capital = 625
+		transfer_state = 1458
+		transfer_state = 626
+		transfer_state = 1457
+		every_owned_state = {
+			remove_core_of = PHI
+		}
+	}
+	PHI = {
+		remove_ideas = { PHI_dummy_capitulation }
+	}
+	every_country = {
+		news_event = WORLD.18124
+	}
+	set_global_flag = SPH_Win_PHI
+	TNO_Start_PH_War_Prep = yes
+	clr_global_flag = PHI_proxy_war
+	set_global_flag = PHI_proxy_war_preparation
+	USA = {
+		country_event = {
+			id = PHI_Blitz.5
+			days = 7
+		}
+	}
+	TNO_kill_PHI_divisions = yes
+}
+
+TNO_Blitz_UPH_victory = {
+	USA = {
+		set_temp_variable = { target = UPH }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { target = SPH }
+		TNO_clear_num_volunteers = yes
+		TNO_fopo_remove_philippines_tab = yes
+		remove_mission = USA_UPH_morale_lowers
+	}
+	JAP = {
+		set_temp_variable = { target = PHI }
+		TNO_clear_num_volunteers = yes
+		TNO_fopo_remove_philippines_tab = yes
+		remove_mission = JAP_PHI_morale_rises
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			add_command_power = 100 # look man, the japan AI sucks and this is the only way I could think of for the 14th army landing to last more than a week
+		}
+	}
+	UPH = {
+		set_variable = { UPH_unsung_warriors_attack = 0.05 }
+		set_variable = { UPH_unsung_warriors_speed = 0.05 }
+		set_variable = { UPH_unsung_warriors_breakthrough = 0.10 }
+		clear_variable = UPH_fucking_surrender_limit
+		remove_ideas = balintawak_blitz_against_japan
+	}
+
+	SPH = {
+		set_variable = { SPH_para_sa_ating_himagsikan_attack = 0.1 }
+		set_variable = { SPH_para_sa_ating_himagsikan_speed = 0.05 }
+		set_variable = { SPH_para_sa_ating_himagsikan_breakthrough = 0.15 }
+		clear_variable = SPH_fucking_surrender_limit
+		remove_ideas = balintawak_blitz_against_japan
+	}
+	
+	UPH = {
+		diplomatic_relation = {
+			country = SPH
+			relation = non_aggression_pact
+			active = no
+		}	
+		transfer_state = 1458
+		transfer_state = 626
+		transfer_state = 1457
+		transfer_state = 327
+		set_capital = 327
+		every_owned_state = {
+			remove_core_of = PHI
+		}
+	}
+	SPH = {
+		if = {
+			limit = { exists = no }
+			annex_country = { target = PHI }
+			load_oob = SPH_1962
+		}
+		set_capital = 1456
+		transfer_state = 623
+		every_owned_state = {
+			remove_core_of = PHI
+		}
+	}
+	PHI = {
+		remove_ideas = { PHI_dummy_capitulation }
+	}
+	every_country = {
+		news_event = WORLD.18125
+	}
+	set_global_flag = UPH_Win_PHI
+	TNO_Start_PH_War_Prep = yes
+	clr_global_flag = PHI_proxy_war
+	set_global_flag = PHI_proxy_war_preparation
+	USA = {
+		if = {
+			limit = { has_country_flag = USA_PHI_huk_cooperation }
+			country_event = {
+				id = PHI_Blitz.5
+				days = 7
+			}
+		}
+		else = {
+			SPH = {
+				country_event = {
+					id = PHI_Blitz.8
+					days = 30
+				}
+			}
+			country_event = { id = PHI_flavor.6 days = 30 }
+		}
+	}
+	TNO_kill_PHI_divisions = yes
+}
+
+TNO_kill_PHI_divisions = { #In preparation for the 14th army landing
+	PHI = {
+		delete_unit_template_and_units = { division_template = "Brigadang Pamayapa" }
+		delete_unit_template_and_units = { division_template = "Dibisyong Pampangulo" }
+		delete_unit_template_and_units = { division_template = "Brigadang Makapili" }
+		delete_unit_template_and_units = { division_template = "Dai Shidan" }
+		delete_unit_template_and_units = { division_template = "Dokuritsu Konsei" }
+		delete_unit_template_and_units = { division_template = "Konoe Shidan" }
+	}
+}
+
+TNO_Blitz_PHI_victory = {
+	USA = {
+		set_temp_variable = { target = UPH }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { target = SPH }
+		TNO_clear_num_volunteers = yes
+		TNO_fopo_remove_philippines_tab = yes
+		remove_mission = USA_UPH_morale_lowers
+	}
+	JAP = {
+		set_temp_variable = { target = PHI }
+		TNO_clear_num_volunteers = yes
+		TNO_fopo_remove_philippines_tab = yes
+		remove_mission = JAP_PHI_morale_rises
+	}
+	PHI = {
+		remove_ideas = { balintawak_blitz_idea PHI_paradoxical_government PHI_listless_spirit PHI_fraudulent_sovereignty }
+		remove_dynamic_modifier = { modifier = PHI_listless_spirit_modifier }
+	}
+	clr_global_flag = PHI_proxy_war
+	every_country = {
+		news_event = WORLD.18123
+	}
+	JAP = {
+		country_event = {
+			id = PHI_Blitz.4
+			days = 14
+		}
+	}
+	PHI = {
+		set_cosmetic_tag = PHI_Victory
+		every_owned_state = {
+			remove_core_of = SPH
+			remove_core_of = UPH
+		}
+		set_cosmetic_tag = PHI_peace
+	}
+	set_global_flag = SPR_Win_PHI
+	set_global_flag = PHI_PW_End
+}
+
+TNO_Start_PH_War_Prep = {
+	USA = {
+		TNO_fopo_add_war_for_philippines_tab = yes
+	}
+	JAP = {
+		TNO_fopo_add_war_for_philippines_tab = yes
+		activate_mission = JAP_PHI_Invasion_Begins
+		set_variable = { JP_PHI_supply = 75 }
+		set_variable = { JP_PHI_supply_perc = 5 }
+		set_variable = { JP_PHI_target_pos = 18 }
+		country_event = PHI_flavor.8
+	}
+}
+
+TNO_JP_PHI_Check_Supply = {
+	if = {
+		limit = {
+			check_variable = {
+				var = JAP.JP_PHI_supply
+				value = JAP.JP_PHI_supply_perc
+				compare = greater_than_or_equals
+			}
+		}
+		if = {
+			limit = {
+				has_idea = PHI_not_supplied_army
+			}
+			swap_ideas = {
+				remove_idea = PHI_not_supplied_army
+				add_idea = PHI_well_supplied_army
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PHI_well_supplied_army
+		}
+		swap_ideas = {
+			remove_idea = PHI_well_supplied_army
+			add_idea = PHI_not_supplied_army
+		}
+	}
+}
+
+TNO_increase_JP_PHI_target_pos = {
+	add_to_variable = { JP_PHI_supply_perc = JP_PHI_target_pos_add }
+	set_variable = { JP_PHI_target_pos = JP_PHI_supply_perc }
+	multiply_variable = { JP_PHI_target_pos = 3.6 }
+	custom_effect_tooltip = JAP_PHI_invasion_supply_pos_tt
+	TNO_clamp_JP_PHI_supply = yes
+}
+
+TNO_increase_JP_PHI_supply = {
+	add_to_variable = { JP_PHI_supply = JP_PHI_supply_add }
+	custom_effect_tooltip = JAP_PHI_invasion_supply_tt
+	TNO_clamp_JP_PHI_supply = yes
+}
+
+TNO_clamp_JP_PHI_supply = {
+	clamp_variable = {
+		var = JP_PHI_supply
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = JP_PHI_supply_perc
+		min = 0
+		max = 100
+	}
+}
+
+TNO_Blitz_Landing_Start = {
+	USA = {
+		set_temp_variable = { target = UPH }
+		set_temp_variable = { number = 2 }
+		TNO_set_num_volunteers = yes
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = PHI_negotiations_failed
+				}
+			}
+			set_temp_variable = { target = SPH }
+			set_temp_variable = { number = 1 }
+			TNO_set_num_volunteers = yes
+		}
+		clr_country_flag = USA_PHI_huk_cooperation
+	}
+	JAP = {
+		set_temp_variable = { target = FGB }
+		set_temp_variable = { number = 1 }
+		TNO_set_num_volunteers = yes
+	}
+	clr_global_flag = PHI_proxy_war_preparation
+	set_global_flag = PHI_landing_ongoing
+	set_variable = {
+		var = JAP.JP_PHI_supply_decay
+		value = 2.5
+	}
+	FGB = {
+		econ_join_sphere_JAP = yes
+		1455 = {
+			set_demilitarized_zone = no
+			add_core_of = FGB
+		}
+		transfer_state = 1455
+		SPH = {
+			set_province_controller = 10167
+			set_province_controller = 4350
+			set_province_controller = 4368
+			set_province_controller = 10241
+		}
+		
+		add_ideas = {
+			PHI_home_of_the_14th_army
+			PHI_vengance_for_the_dead
+			PHI_volunteer_army
+		}
+		
+		if = {
+			limit = {
+				check_variable = {
+					var = JAP.JP_PHI_supply
+					value = JAP.JP_PHI_supply_perc
+					compare = greater_than_or_equals
+				}
+			}
+			add_ideas = PHI_well_supplied_army
+		}
+		else = {
+			add_ideas = PHI_not_supplied_army
+		}
+		add_manpower = 20000
+		country_event = {
+			id = PHI_Blitz.10
+			days = 7
+		}
+		if = {
+			limit = {
+				JAP = { has_country_flag = JAP_14_army_IJAAF_support }
+			}
+			add_equipment_to_stockpile = {
+				type = jet_fighter_equipment_2
+				amount = 60
+				producer = JAP
+			}
+			add_equipment_to_stockpile = {
+				type = jet_CAS_equipment_2
+				amount = 60
+				producer = JAP
+			}
+			set_fuel_ratio = 1
+			SPH = { add_ideas = PHI_IJAAF_bombing }
+			UPH = { add_ideas = PHI_IJAAF_bombing }
+		}
+		if = {
+			limit = {
+				JAP = { has_country_flag = JAP_14_army_IJN_support }
+			}
+			add_timed_idea = {
+				idea = PHI_IJN_support
+				days = 14
+			}
+		}
+
+		declare_war_on = {
+			target = SPH
+			type = annex_everything
+		}
+		declare_war_on = {
+			target = UPH
+			type = annex_everything
+		}
+	}
+
+	if = {
+		limit = {
+			NOT = {
+				UPH = {
+					is_in_faction_with = SPH
+				}
+			}
+		}
+		USA = {
+			set_temp_variable = { target = SPH }
+			TNO_clear_num_volunteers = yes
+		}
+		SPH = {
+			declare_war_on = {
+				target = UPH
+				type = civil_war
+			}	
+			set_country_flag = {
+				flag = SPH_normal
+				days = 250
+				value = 1
+			}
+		}
+	}
+	TNO_14th_army_load_oob = yes
+	every_country = {
+		news_event = {
+			id = WORLD.18132
+			days = 1
+		}
+	}
+}
+
+TNO_14th_army_load_oob = { #Scars' breaking point
+	FGB = {
+		load_oob = "PHI_14th_Army_Template"
+	
+		### INFANTRY DIVISIONS ###
+	
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Yodo_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Dai-Yon Shidan 'Yodo'
+					division = "name = \"4 'Yodo' Hohei Shidan\" division_template = \"Dai Shidan\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 12253
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Sugi_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Dai-Hachi Shidan 'Sugi'
+					division = "name = \"8 'Sugi' Hohei Shidan\" division_template = \"Dai Shidan\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 14706
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Kaki_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Dai-Jūroku Shidan 'Kaki'
+					division = "name = \"16 'Kaki' Hohei Shidan\" division_template = \"Dai Shidan\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 1415
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Hyo_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Dai-Sanjū Shidan 'Hyō'
+					division = "name = \"30 'Hyō' Hohei Shidan\" division_template = \"Dai Shidan\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 10280
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Umi_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Dai-Yonjūhachi Shidan 'Umi'
+					division = "name = \"48 'Umi' Hohei Shidan\" division_template = \"Dai Shidan\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 12253
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Hatsu_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Dai-Hyakuni Shidan 'Hatsu'
+					division = "name = \"102 'Hatsu' Hohei Shidan\" division_template = \"Dai Shidan\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 14706
+				}
+			}
+		}
+		
+		## ELITE INFANTRY ##
+		
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Dai_Ichi_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Konoe Dai-Ichi Shidan 'Sumi'
+					division = "name = \"Konoe Dai-1 'Sumi' Shidan\" division_template = \"Konoe Shidan\" start_experience_factor = 0.6 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 1415
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Dai_San_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Konoe Dai-San Shidan 'Nori'
+					division = "name = \"Konoe Dai-3 'Nori' Shidan\" division_template = \"Konoe Shidan\" start_experience_factor = 0.6 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 10280
+				}
+			}
+		}
+		
+		### ARMORED DIVISIONS ###
+		
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Dai_Nii_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Sensha Dai-Nii Shidan
+					division = "name = \"Sensha Dai-2 'Geki' Shidan\" division_template = \"Sensha Shidan\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 10280
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Dai_Go_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Sensha Dai-Go Shidan
+					division = "name = \"Sensha Dai-3 'Taki' Shidan\" division_template = \"Sensha Shidan\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 12253
+				}
+			}
+		}
+		
+		### SPECIAL FORCES ###
+		
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Yokosuka_Rikusentai_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Yokosuka Tokubetsu Rikusentai
+					division = "name = \"Yokosuka Tokubetsu Rikusentai\" division_template = \"Tokubetsu Rikusentai\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 14706
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAP_PHI_Teishin_Dai_Ichi_Division
+				}
+			}
+			1455 = {
+				create_unit = { #Teishin Dai-Ichi Shudan
+					division = "name = \"Teishin Dai-1 Shidan\" division_template = \"Teishin Shudan\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = FGB
+					prioritize_location = 1415
+				}
+			}
+		}
+	}
+}
+
+### 14th army outcomes ###
+
+TNO_14th_Army_Ceasefire_North = {
+	FGB = {
+		white_peace = UPH
+		white_peace = SPH
+			
+		transfer_state = 1455
+		transfer_state = 1456
+		transfer_state = 623
+		transfer_state = 1457
+		transfer_state = 327
+		transfer_state = 624
+		
+		set_capital = 327
+	}
+}
+
+TNO_14th_Army_Ceasefire_Mid = {
+	FGB = {
+		white_peace = UPH
+		white_peace = SPH
+		
+		transfer_state = 1455
+		transfer_state = 1456
+		transfer_state = 623
+		transfer_state = 1457
+		transfer_state = 327
+		transfer_state = 624
+		
+		transfer_state = 625
+		transfer_state = 626
+		transfer_state = 628
+		transfer_state = 1458
+		
+		set_capital = 327
+	}
+}
+
+TNO_War_For_Philippines_closing = {
+	clr_global_flag = PHI_landing_ongoing
+	JAP = {
+		TNO_fopo_remove_war_for_philippines_tab = yes
+		set_temp_variable = { target = FGB }
+		TNO_clear_num_volunteers = yes
+	}
+	USA = {
+		TNO_fopo_remove_war_for_philippines_tab = yes
+		set_temp_variable = { target = SPH }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { target = UPH }
+		TNO_clear_num_volunteers = yes
+	}
+	UPH = {
+		remove_ideas = PHI_IJAAF_bombing
+		remove_ideas = PHI_IJAAF_bombing_2
+		remove_ideas = PHI_IJAAF_bombing_3
+	}
+	SPH = {
+		remove_ideas = PHI_IJAAF_bombing
+		remove_ideas = PHI_IJAAF_bombing_2
+		remove_ideas = PHI_IJAAF_bombing_3
+	}
+}
+
+TNO_SPH_Form_Coalition_Government = {
+	if = {
+		limit = { check_variable = { global.PHI_form_coalition_government_var = 2 } }
+		SPH = {
+			annex_country = {
+				target = UPH
+				transfer_troops = yes
+			}
+			UPH = {
+				every_unit_leader = {
+					set_nationality = SPH
+				}
+			}
+			dismantle_faction = yes
+			remove_ideas = {
+				SPH_wounded_revolution
+				SPH_changeless_land
+				SPH_para_sa_ating_himagsikan
+			}
+			add_ideas = {
+				OFN_Observer
+				SPH_coalition_idea
+			}
+			swap_ruler_traits = {
+				remove = supremo_ng_himagsikan
+				add = para_sa_walandugoang_himagsikan
+			}
+			create_country_leader = {
+				name = "Lorenzo Martinez Tañada"
+				desc = "POLITICS_LORENZO_MARTINEZ_TANADA_DESC"
+				picture = "Portrait_Philippines_Lorenzo_Tanada.dds"
+				expire = "2000.1.1"
+				ideology = liberal_democracy_national_liberal_subtype
+				traits = { for_the_magandang_pinanangarap }
+			}
+			create_country_leader = {
+				name = "Ramon del Fierro Magsaysay"
+				desc = "POLITICS_RAMON_DEL_FIERRO_MAGSAYSAY_DESC"
+				picture = "portrait_SPH_Ramon_Magsaysay.dds"
+				expire = "2000.1.1"
+				ideology = authoritarian_democracy_stratocracy_subtype
+				traits = { for_the_safety_of_the_republic }
+			}
+			set_popularities = {
+				socialist = 33
+				liberal_democracy = 34
+				authoritarian_democracy = 33
+			}
+			set_politics = { ruling_party = liberal_democracy }
+			set_party_name = { ideology = authoritarian_democracy name = SPH_coalition_authdem_party long_name = SPH_coalition_authdem_party_long }
+			set_party_name = { ideology = liberal_democracy name = SPH_coalition_libdem_party long_name = SPH_coalition_libdem_party_long }
+			set_party_name = { ideology = socialist name = SPH_coalition_socialism_party long_name = SPH_coalition_socialism_party_long }
+			set_cosmetic_tag = SPH_Coalition_Government
+			set_capital = 327
+			every_owned_state = {
+				remove_core_of = PHI
+				remove_core_of = UPH
+				remove_core_of = FGB
+			}
+			#country_event = {
+			#	id = PHI_Blitz.20
+			#	days = 180
+			#}
+			every_country = {
+				news_event = {
+					id = WORLD.18139
+					days = 1
+				}
+			}
+		}
+	}
+}
+
+### Reconstruction stuff
+TNO_PHI_Reconstruction_Progress_Change = {
+	add_to_variable = { PHI_reconstruction_var = PHI_reconstruction_temp }
+	if = {
+		limit = { check_variable = { PHI_reconstruction_temp < 0 } }
+		custom_effect_tooltip = PHI_Reconstruction_decrease_tt
+	}
+	else = {
+		custom_effect_tooltip = PHI_Reconstruction_increase_tt
+	}
+	clamp_variable = {
+		var = PHI_reconstruction_var
+		min = 0
+		max = 100
+	}
+	#if = {
+	#	limit = {
+	#		is_ai = yes
+	#		check_variable = { PHI_reconstruction_var = 100 }
+	#	}
+	#	PHI_reconstruction_complete = yes
+	#}
+}
+
+PHI_reconstruction_complete = {
+	if = {
+		limit = { original_tag = JAP }
+		remove_mission = JAP_PHI_recon_timeout
+		PHI = { country_event = { id = PHI_Blitz.6 days = 7 } }
+	}
+	else_if = {
+		limit = { country_exists = UPH }
+		remove_mission = USA_USFIP_recon_timeout
+		USA = {
+			if = {
+				limit = {
+					has_country_flag = USA_PHI_delegitimized_leyte
+				}
+				country_event = PHI_Blitz.21
+			}
+			else = {
+				country_event = PHI_Blitz.22
+			}
+		}
+	}
+	else_if = {
+		limit = { country_exists = SPH }
+		SPH = { country_event = { id = PHI_Blitz.20 days = 100 } }
+		remove_mission = USA_SPH_recon_timeout
+	}
+	TNO_fopo_remove_philippines_reconstruction_tab = yes
+}

@@ -1,0 +1,6209 @@
+SGR_reich_in_crisis_category = {
+	SGR_OC_inevitable = {
+		icon = GFX_decision_generic_assault
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+				has_global_flag = SGR_natsoc_collapse
+			}
+		}
+
+		fire_only_once = yes
+		is_good = no
+		days_mission_timeout = SGR_OC_mission_var
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission SGR_OC_inevitable"
+			hidden_effect = {
+				country_event = {
+					id = speeroilcrisis.45
+					days = 1
+				}
+			}
+		}
+	}
+
+	SGR_OC_wtf_economy_dead = {
+		icon = GFX_decision_SAF_end_pakt_trade
+
+		activation = {
+			has_global_flag = german_civil_war_speervic
+			has_country_flag = SGR_phase3
+			NOT = {
+				OR = {
+					has_completed_focus = GER_volksarchitekt
+					has_completed_focus = GER_volksbund
+					has_completed_focus = GER_volkswille
+				}
+			}
+			check_variable = { SGR_OC_economic_status < 1 }
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_OC_economic_status_collapsing_tt
+				check_variable = { SGR_OC_economic_status > 19 }
+			}
+		}
+
+		fire_only_once = yes
+		is_good = no
+		days_mission_timeout = 42
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission SGR_OC_inevitable"
+			add_days_mission_timeout = {
+				mission = SGR_OC_inevitable
+				days = -10
+			}
+			SGR_OC_tension_tick_increase_big = yes
+			SGR_OC_social_tension_worsen_big = yes
+			add_to_variable = { SGR_OC_economic_status = -12 }
+			custom_effect_tooltip = SGR_OC_economic_worsening_tt
+		}
+	}
+
+
+	SGR_OC_strike_the_companies = {
+		icon = GFX_decision_document_target
+
+		activation = {
+			always = no
+		}
+
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_global_flag = SGR_natsoc_collapse
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_OC_strike_the_companies_check
+				check_variable = { GER_speer_dismantle_foci < 4 }
+			}
+		}
+
+		cost = 40
+		days_remove = 20
+
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission SGR_OC_inevitable"
+			set_country_flag = Dismantle_IGFarben
+			set_country_flag = Dismantle_Reichswerke
+			set_country_flag = Dismantle_Daimler
+			set_country_flag = Dismantle_Siemens
+			custom_effect_tooltip = SGR_OC_strike_the_companies.tt
+		}
+	}
+
+	SGR_OC_fix_the_oil_crisis = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_OC_improvement_condition_tt
+				OR = {
+					AND = {
+						check_variable = { SGR_OC_economic_status > 9 }
+						check_variable = { SGR_OC_economic_status < 21 }
+						NOT = { has_country_flag = SGR_OC_econ_ref_1 }
+					}
+					AND = {
+						check_variable = { SGR_OC_economic_status > 20 }
+						check_variable = { SGR_OC_economic_status < 41 }
+						NOT = { has_country_flag = SGR_OC_econ_ref_2 }
+					}
+					AND = {
+						check_variable = { SGR_OC_economic_status > 40 }
+						check_variable = { SGR_OC_economic_status < 61 }
+						NOT = { has_country_flag = SGR_OC_econ_ref_3 }
+					}
+					AND = {
+						check_variable = { SGR_OC_economic_status > 60 }
+						check_variable = { SGR_OC_economic_status < 81 }
+						NOT = { has_country_flag = SGR_OC_econ_ref_4 }
+					}
+					AND = {
+						check_variable = { SGR_OC_economic_status > 80 }
+						NOT = { has_country_flag = SGR_OC_econ_ref_5 }
+					}
+				}
+			}
+		}
+
+		cost = 30
+
+		days_remove = 0
+		days_re_enable = 0
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = SGR_OC_inevitable
+				days = -10
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_fix_the_oil_crisis"
+			SGR_OC_economic_upgrade = yes
+			hidden_effect = {
+				random_list = {
+					30 = {
+						set_temp_variable = { gdp_growth_temp = 1.25 }
+						econ_gdp_growth_change = yes
+					}
+					10 = {
+						set_temp_variable = { gdp_growth_temp = 2.1 }
+						econ_gdp_growth_change = yes
+					}
+					2 = {
+						set_temp_variable = { gdp_growth_temp = 3 }
+						econ_gdp_growth_change = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { SGR_OC_economic_status < 21 }
+					NOT = { has_country_flag = SGR_OC_econ_ref_1 }
+				}
+				set_country_flag = SGR_OC_econ_ref_1
+			}
+			else_if = {
+				limit = {
+					check_variable = { SGR_OC_economic_status > 20 }
+					check_variable = { SGR_OC_economic_status < 41 }
+				}
+				set_country_flag = SGR_OC_econ_ref_2
+			}
+			else_if = {
+				limit = {
+					check_variable = { SGR_OC_economic_status > 40 }
+					check_variable = { SGR_OC_economic_status < 61 }
+				}
+				set_country_flag = SGR_OC_econ_ref_3
+			}
+			else_if = {
+				limit = {
+					check_variable = { SGR_OC_economic_status > 60 }
+					check_variable = { SGR_OC_economic_status < 81 }
+				}
+				set_country_flag = SGR_OC_econ_ref_4
+			}
+			else_if = {
+				limit = {
+					check_variable = { SGR_OC_economic_status > 80 }
+				}
+				set_country_flag = SGR_OC_econ_ref_5
+			}
+			SGR_OC_stab_decrease_factor = yes
+		}
+
+		ai_will_do = {
+			factor = 500
+		}
+	}
+	SGR_OC_declare_martial_law = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_OC_social_status_catastrophic_tt
+				check_variable = { SGR_OC_social_tension < 40 }
+			}
+		}
+
+		cost = 50
+
+		days_remove = 7
+		days_re_enable = 0
+
+		fire_only_once = yes
+
+		remove_effect = {
+			SGR_OC_tension_tick_increase_big = yes
+			TNO_worsen_security_policy_effectiveness_monthly_low = yes
+			custom_effect_tooltip = SGR_OC_martial_law_boost
+			set_country_flag = SGR_OC_martial_law_declared
+			country_event = {
+				id = speeroilcrisis.8
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_declare_martial_law"
+			SGR_OC_social_tension_better_big = yes
+			increase_conservative_leaning_medium = yes
+			TNO_improve_security_policy_effectiveness_med = yes
+			add_stability = 0.1
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	SGR_OC_curtail_public_meetings = {
+		icon = GFX_decision_arrest
+		visible = {
+
+		}
+		available = {
+			has_completed_focus = GER_heart_bleeds
+		}
+
+		cost = 25
+
+		days_remove = 3
+		days_re_enable = 0
+
+		fire_only_once = yes
+
+		remove_effect = {
+			SGR_OC_tension_tick_increase_small = yes
+			TNO_improve_public_meetings_policy_effectiveness_monthly_low = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_curtail_public_meetings"
+			SGR_OC_social_tension_better_med = yes
+			increase_conservative_leaning_small = yes
+			TNO_improve_public_meetings_policy_effectiveness_med = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	SGR_OC_distribute_propaganda = {
+		icon = GFX_decision_generic_propaganda
+		visible = {
+
+		}
+		available = {
+			has_completed_focus = GER_heart_bleeds
+		}
+
+		cost = 20
+
+		days_remove = 7
+		days_re_enable = 28
+
+		remove_effect = {
+			add_stability = 0.025
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_distribute_propaganda"
+			SGR_OC_social_tension_better_med = yes
+			TNO_improve_public_meetings_policy_effectiveness_low = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	#GO4
+	SGR_OC_buy_foreign_oil = {
+		icon = GFX_decision_oil_extraction
+		visible = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+		available = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+
+		cost = 20
+
+		days_remove = 21
+		days_re_enable = 14
+
+		remove_effect = {
+			775 = {
+				add_resource = {
+					type = oil
+					amount = -10
+				}
+			}
+			SGR_OC_econ_status_better_small = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_buy_foreign_oil"
+			775 = {
+				add_resource = {
+					type = oil
+					amount = 10
+				}
+			}
+			SGR_OC_social_tension_better_med = yes
+			custom_effect_tooltip = SGR_OC_debt_20_tt
+			add_to_variable = {GER.national_debt = 0.02} #already converted to billion
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_invest_in_alternative_energy = {
+		icon = GFX_decision_reactor
+		visible = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+		available = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+
+		cost = 20
+
+		days_remove = 21
+		days_re_enable = 28
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			random_list = {
+				20 = {
+					SGR_OC_econ_status_better_med = yes
+				}
+				70 = {
+					SGR_OC_econ_status_better_med = yes
+					add_stability = 0.03
+				}
+				10 = {
+					SGR_OC_econ_status_better_big = yes
+					random_owned_controlled_state = {
+						add_building_construction = {
+							type = nuclear_reactor
+							level = 1
+							instant_build = yes
+						}
+					}
+					add_stability = 0.05
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_invest_in_alternative_energy"
+			random_list = {
+				50 = {
+					SGR_OC_social_tension_worsen_med = yes
+					TNO_worsen_security_policy_effectiveness_med = yes
+					TNO_worsen_trade_unions_policy_effectiveness_med = yes
+					TNO_worsen_public_meetings_policy_effectiveness_med= yes
+				}
+				30 = {
+					SGR_OC_social_tension_worsen_big = yes
+					TNO_worsen_security_policy_effectiveness_med = yes
+					TNO_worsen_trade_unions_policy_effectiveness_high = yes
+					TNO_worsen_public_meetings_policy_effectiveness_med = yes
+				}
+				10 = {
+					SGR_OC_social_tension_better_small = yes
+					TNO_worsen_public_meetings_policy_effectiveness_med = yes
+				}
+			}
+			add_to_variable = { GER.national_debt = 0.05 } #already converted to billion
+			custom_effect_tooltip = SGR_OC_debt_50_tt
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_mandate_car_free_sunday_period = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+		available = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+
+		cost = 20
+
+		days_remove = 28
+		days_re_enable = 7
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			random_list = {
+				40 = {
+					SGR_OC_econ_status_better_small = yes
+				}
+				50 = {
+					SGR_OC_econ_status_better_med = yes
+					add_stability = 0.03
+				}
+				10 = {
+					SGR_OC_econ_status_better_big = yes
+					add_stability = 0.05
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_mandate_car_free_sunday_period"
+			random_list = {
+				65 = {
+					SGR_OC_social_tension_worsen_med = yes
+					TNO_worsen_trade_unions_policy_effectiveness_med = yes
+					TNO_worsen_public_meetings_policy_effectiveness_med = yes
+				}
+				30 = {
+					SGR_OC_social_tension_worsen_big = yes
+					TNO_worsen_trade_unions_policy_effectiveness_high = yes
+					TNO_worsen_public_meetings_policy_effectiveness_high = yes
+				}
+			}
+			add_to_variable = { GER.national_debt = 0.02 } #already converted to billion
+			custom_effect_tooltip = SGR_OC_debt_20_tt
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_replace_officials = {
+		icon = GFX_decision_point
+		visible = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+		available = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+
+		cost = 20
+
+		days_remove = 21
+		days_re_enable = 14
+
+		remove_effect = {
+			random_list = {
+				60 = {
+					SGR_OC_tension_tick_decrease_small = yes
+					TNO_worsen_political_parties_policy_effectiveness_monthly_low = yes
+					add_popularity = {
+						ideology = national_socialism
+						popularity = -0.015
+					}
+				}
+				20 = {
+					SGR_OC_tension_tick_decrease_med = yes
+					TNO_worsen_political_parties_policy_effectiveness_monthly_low = yes
+					add_popularity = {
+						ideology = national_socialism
+						popularity = -0.015
+					}
+				}
+				20 = {
+					SGR_OC_social_tension_better_med = yes
+					SGR_OC_tension_tick_decrease_med = yes
+					TNO_worsen_political_parties_policy_effectiveness_monthly_low = yes
+					add_popularity = {
+						ideology = national_socialism
+						popularity = -0.03
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_replace_officials"
+			SGR_OC_social_tension_better_med = yes
+			TNO_worsen_political_parties_policy_effectiveness_low = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_welfare_grants = {
+		icon = GFX_decision_generic_money
+		visible = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+		available = {
+			has_country_flag = SGR_Energiesicherungsgesetz_flag
+		}
+
+		cost = 20
+
+		days_remove = 21
+		days_re_enable = 14
+
+		remove_effect = {
+			random_list = {
+				60 = {
+					SGR_OC_social_tension_better_small = yes
+					TNO_improve_poverty_med = yes
+					TNO_improve_unemployment_policy_effectiveness_monthly_med = yes
+				}
+				30 = {
+					SGR_OC_tension_tick_decrease_med = yes
+					SGR_OC_tension_tick_decrease_small = yes
+					TNO_improve_poverty_med = yes
+					TNO_improve_unemployment_policy_effectiveness_monthly_med = yes
+					TNO_improve_pensions_policy_effectiveness_monthly_med = yes
+				}
+				10 = {
+					SGR_OC_social_tension_better_med = yes
+					SGR_OC_tension_tick_decrease_med = yes
+					TNO_improve_poverty_high = yes
+					TNO_improve_unemployment_policy_effectiveness_monthly_med = yes
+					TNO_improve_pensions_policy_effectiveness_monthly_med = yes
+					TNO_improve_minimum_wage_policy_effectiveness_monthly_med = yes
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_welfare_grants"
+			set_temp_variable = { temp_econ_spending_amount = 0.75 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+
+
+	#Speer
+	SGR_OC_organize_welfare = {
+		icon = GFX_decision_generic_money
+		visible = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+		available = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+
+		cost = 20
+
+		days_remove = 21
+		days_re_enable = 14
+
+		remove_effect = {
+			add_stability = 0.04
+			SGR_OC_econ_status_better_small = yes
+			TNO_improve_poverty_med = yes
+			TNO_improve_minimum_wage_policy_effectiveness_monthly_med = yes
+			TNO_improve_pensions_policy_effectiveness_monthly_med = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_organize_welfare"
+			SGR_OC_social_tension_better_small = yes
+			TNO_improve_trade_unions_policy_effectiveness_low = yes
+			TNO_improve_public_meetings_policy_effectiveness_low = yes
+			custom_effect_tooltip = SGR_OC_debt_20_tt
+			add_to_variable = {GER.national_debt = 0.02} #already converted to billion
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	SGR_OC_suppress_protests = {
+		icon = GFX_decision_generic_use_force
+		visible = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+		available = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+
+		cost = 20
+
+		days_remove = 14
+		days_re_enable = 14
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			random_list = {
+				40 = {
+					add_stability = 0.025
+					TNO_improve_public_meetings_policy_effectiveness_monthly_low = yes
+					SGR_OC_tension_tick_increase_small = yes
+				}
+				30 = {
+					SGR_OC_tension_tick_increase_small = yes
+				}
+				10 = {
+					SGR_OC_social_tension_worsen_small = yes
+					TNO_improve_political_parties_policy_effectiveness_monthly_low = yes
+					TNO_improve_trade_unions_policy_effectiveness_monthly_low = yes
+					TNO_improve_public_meetings_policy_effectiveness_monthly_low = yes
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_suppress_protests"
+			SGR_OC_social_tension_better_med = yes
+			TNO_improve_security_policy_effectiveness_low = yes
+			TNO_improve_public_meetings_policy_effectiveness_low = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	SGR_OC_wrangle_the_state = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+		available = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+
+		cost = 20
+
+		days_remove = 28
+		days_re_enable = 14
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			random_list = {
+				50 = {
+					add_regime_stab_small = yes
+				}
+				30 = {
+					add_regime_stab_med = yes
+					TNO_improve_political_parties_policy_effectiveness_monthly_low = yes
+					add_popularity = {
+						ideology = national_socialism
+						popularity = -0.015
+					}
+				}
+				20 = {
+					SGR_OC_tension_tick_increase_small = yes
+					add_regime_stab_med = yes
+					TNO_improve_political_parties_policy_effectiveness_monthly_med = yes
+					add_popularity = {
+						ideology = authoritarian_democracy
+						popularity = -0.015
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_wrangle_the_state"
+			SGR_OC_econ_status_better_small = yes
+			SGR_OC_social_tension_worsen_small = yes
+			TNO_improve_political_parties_policy_effectiveness_med = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_organize_job_programs = {
+		icon = GFX_decision_handshake
+		visible = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+		available = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+
+		cost = 20
+
+		days_remove = 28
+		days_re_enable = 14
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			random_list = {
+				50 = {
+					SGR_OC_social_tension_better_small = yes
+					TNO_improve_unemployment_policy_effectiveness_monthly_low = yes
+				}
+				30 = {
+					SGR_OC_tension_tick_decrease_med = yes
+					SGR_OC_tension_tick_decrease_small = yes
+					add_popularity = {
+						ideology = social_democracy
+						popularity = -0.015
+					}
+					TNO_improve_unemployment_policy_effectiveness_monthly_med = yes
+				}
+				20 = {
+					SGR_OC_social_tension_better_med = yes
+					SGR_OC_tension_tick_decrease_small = yes
+					add_popularity = {
+						ideology = social_democracy
+						popularity = -0.03
+					}
+					TNO_improve_unemployment_policy_effectiveness_monthly_med = yes
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_organize_job_programs"
+			SGR_OC_econ_status_better_small = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.3 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_arrest_radicals = {
+		icon = GFX_decision_generic_investigate
+		visible = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+		available = {
+			has_country_flag = SGR_OC_Fuhrererlass
+		}
+
+		cost = 20
+
+		days_remove = 28
+		days_re_enable = 14
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			random_list = {
+				50 = {
+					SGR_OC_social_tension_better_small = yes
+				}
+				30 = {
+					SGR_OC_social_tension_better_small = yes
+					SGR_OC_tension_tick_decrease_small = yes
+				}
+				20 = {
+					SGR_OC_social_tension_better_med = yes
+					SGR_OC_tension_tick_decrease_small = yes
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_arrest_radicals"
+			TNO_worsen_political_parties_policy_effectiveness_monthly_med = yes
+			TNO_worsen_trade_unions_policy_effectiveness_monthly_med = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+
+	#Natsoc
+	SGR_OC_send_in_the_tanks = {
+		icon = GFX_decision_generic_tank
+		visible = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+		available = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+
+		cost = 20
+
+		days_remove = 14
+		days_re_enable = 62
+
+		remove_effect = {
+			SGR_OC_tension_tick_increase_med = yes
+			add_regime_stab_med = yes
+			TNO_worsen_minorities_policy_effectiveness_monthly_med = yes
+			TNO_worsen_political_parties_policy_effectiveness_monthly_med = yes
+			TNO_worsen_trade_unions_policy_effectiveness_monthly_med = yes
+			TNO_worsen_public_meetings_policy_effectiveness_monthly_med = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_send_in_the_tanks"
+			SGR_OC_social_tension_better_big = yes
+			TNO_improve_security_policy_effectiveness_low = yes
+			TNO_improve_public_meetings_policy_effectiveness_low = yes
+			add_political_power = 20
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	SGR_OC_employ_ostarbeiter = {
+		icon = GFX_decision_forced_labor
+		visible = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+		available = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+
+		cost = 20
+
+		days_remove = 20
+		days_re_enable = 20
+
+		remove_effect = {
+			TNO_improve_poverty_low = yes
+			SGR_OC_social_tension_worsen_med = yes
+			decrease_regime_stab_med = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_employ_ostarbeiter"
+			custom_effect_tooltip = SGR_OC_slaves_temp_tt
+			hidden_effect = {
+				random_list = {
+					30 = {
+						add_to_variable = {SGR_WWS_Regions^0 = 5000}
+						subtract_from_variable = {SGR_WWS_Regions^8 = 5000}
+					}
+					30 = {
+						add_to_variable = {SGR_WWS_Regions^1 = 5000}
+						subtract_from_variable = {SGR_WWS_Regions^8 = 5000}
+					}
+					30 = {
+						add_to_variable = {SGR_WWS_Regions^4 = 5000}
+						subtract_from_variable = {SGR_WWS_Regions^8 = 5000}
+					}
+				}
+			}
+			SGR_OC_econ_status_better_med = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	SGR_OC_combat_andersdenkende = {
+		icon = GFX_decision_generic_civil_support
+		visible = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+		available = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+
+		cost = 20
+
+		days_remove = 20
+		days_re_enable = 20
+
+		remove_effect = {
+			add_regime_stab_small = yes
+			SGR_OC_tension_tick_increase_small = yes
+			TNO_improve_political_parties_policy_effectiveness_monthly_med = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_combat_andersdenkende"
+			SGR_OC_social_tension_better_med = yes
+			increase_conservative_leaning_small = yes
+			TNO_improve_political_parties_policy_effectiveness_med = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_subsidise_recreation = {
+		icon = GFX_decision_generic_fighter_plane
+		visible = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+		available = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+
+		cost = 20
+
+		days_remove = 20
+		days_re_enable = 20
+
+		remove_effect = {
+			SGR_OC_social_tension_better_med = yes
+			SGR_OC_tension_tick_decrease_small = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_subsidise_recreation"
+			set_temp_variable = { temp_econ_spending_amount = 0.5 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_OC_promise_amnesty = {
+		icon = GFX_decision_generic_investigate_no
+		visible = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+		available = {
+			has_country_flag = SGR_OC_the_true_ideology
+		}
+
+		cost = 20
+
+		days_remove = 20
+		days_re_enable = 20
+
+		remove_effect = {
+			random_list = {
+				50 = {
+					SGR_OC_social_tension_better_small = yes
+					SGR_OC_tension_tick_decrease_small = yes
+				}
+				50 = {
+					SGR_OC_social_tension_better_small = yes
+					SGR_OC_tension_tick_decrease_med = yes
+					add_popularity = {
+						ideology = national_socialism
+						popularity = 0.015
+					}
+				}
+			}
+
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_promise_amnesty"
+			TNO_worsen_security_policy_effectiveness_med = yes
+			TNO_worsen_security_policy_effectiveness_monthly_med = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+}
+
+SGR_Zollverein_members_investment_category = {
+
+	#Oil Crisis decisions
+
+	SGR_ZV_oil_exploration = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			GER = { has_country_flag = SGR_OC_ZV_help }
+			custom_trigger_tooltip = {
+				tooltip = SGR_SR_oil_crisis_tt
+				hidden_trigger = {
+					GER = { has_country_flag = SGR_phase3 }
+				}
+			}
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			GER = { has_country_flag = SGR_OC_ZV_help }
+			custom_trigger_tooltip = {
+				tooltip = SGR_SR_oil_crisis_tt
+				hidden_trigger = {
+					GER = { has_country_flag = SGR_phase3 }
+				}
+			}
+		}
+
+		days_remove = 391
+		days_re_enable = 130
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.200}
+		}
+
+		custom_cost_text = SGR_ZV_debt_reduction_cost
+
+		remove_effect = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_oil_exploration"
+			subtract_from_variable = {MemberSpentBudget = 0.200}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_ZV_introduce_rationing = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			GER = { has_country_flag = SGR_OC_ZV_help }
+			custom_trigger_tooltip = {
+				tooltip = SGR_SR_oil_crisis_tt
+				hidden_trigger = {
+					GER = { has_country_flag = SGR_phase3 }
+				}
+			}
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			GER = { has_country_flag = SGR_OC_ZV_help }
+			custom_trigger_tooltip = {
+				tooltip = SGR_SR_oil_crisis_tt
+				hidden_trigger = {
+					GER = { has_country_flag = SGR_phase3 }
+				}
+			}
+		}
+
+		days_remove = 0
+		#days_re_enable = 130
+		fire_only_once = yes
+
+		cost = 50
+
+		remove_effect = {
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_introduce_rationing"
+			social_funding_maximal_decrease_high = yes
+			social_funding_minimal_decrease_high = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_ZV_fight_systematic_issues = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			GER = { has_country_flag = SGR_OC_ZV_help }
+			custom_trigger_tooltip = {
+				tooltip = SGR_SR_oil_crisis_tt
+				hidden_trigger = {
+					OR = {
+						GER = { has_country_flag = SGR_phase3 }
+						has_idea = TNO_Oil_Crisis
+					}
+				}
+			}
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			GER = { has_country_flag = SGR_OC_ZV_help }
+			custom_trigger_tooltip = {
+				tooltip = SGR_SR_oil_crisis_tt
+				hidden_trigger = {
+					OR = {
+						GER = { has_country_flag = SGR_phase3 }
+						has_idea = TNO_Oil_Crisis
+					}
+				}
+			}
+		}
+
+		days_remove = 230
+		days_re_enable = 189
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.100}
+		}
+
+		custom_cost_text = SGR_ZV_infrastructure_investment_cost
+
+		remove_effect = {
+			TNO_Oil_Crisis_reduce_effects = yes
+			set_temp_variable = { tempGDPGrowth = THIS.preOC_GDP_growth }
+			multiply_temp_variable = { tempGDPGrowth = 0.2 }
+			add_to_variable = { THIS.GDP_growth = tempGDPGrowth }
+			custom_effect_tooltip = SGR_OC_gdp_bonus_tt
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_fight_systematic_issues"
+			subtract_from_variable = {MemberSpentBudget = 0.100}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	#Standard decisions
+
+	SGR_Zollverein_Quarterly_Update = {
+		icon = GFX_decision_black_market_presence_increase
+
+		allowed = { tag = GER }
+		activation = {
+			has_global_flag = german_civil_war_speervic
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			has_idea = SGR_zollverein_germany
+		}
+
+		available = {
+			has_global_flag = SGR_natsoc_collapse
+		}
+
+		is_good = yes
+		days_mission_timeout = 90
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission SGR_Zollverein_Quarterly_Update"
+			custom_effect_tooltip = zv_quarterly_budget_tt
+			hidden_effect = {
+				check_zollverein_boni = yes
+				activate_mission = SGR_Zollverein_Quarterly_Update
+			}
+		}
+
+	}
+
+	SGR_ZV_open_special_investments = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			NOT = {has_country_flag = ZV_investments_special_opened}
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_open_special_investments"
+			set_country_flag = ZV_investments_special_opened
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = ZV_investments_special_opened
+				factor = 0
+			}
+		}
+	}
+
+	SGR_ZV_close_special_investments = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_special_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_close_special_investments"
+			clr_country_flag = ZV_investments_special_opened
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = ZV_investments_special_opened
+				factor = 0
+			}
+		}
+	}
+
+	SGR_ZV_education_investment = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_special_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 160
+		days_re_enable = 60
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.050}
+		}
+
+		custom_cost_text = SGR_ZV_education_investment_cost
+
+		modifier = {
+			academic_base_monthly_rate = 1
+			research_facilities_monthly_rate = 1
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_synthoil_investment"
+			subtract_from_variable = {MemberSpentBudget = 0.050}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_ZV_poverty_investment = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_special_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 160
+		days_re_enable = 60
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.050}
+		}
+
+		custom_cost_text = SGR_ZV_education_investment_cost
+
+		modifier = {
+			poverty_monthly_rate = 0.03
+			agriculture_monthly_rate = 1
+		}
+
+		remove_effect = {
+			TNO_improve_poverty_low = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_poverty_investment"
+			subtract_from_variable = {MemberSpentBudget = 0.050}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_ZV_workers_investment = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_special_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 160
+		days_re_enable = 60
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.050}
+		}
+
+		custom_cost_text = SGR_ZV_education_investment_cost
+
+		modifier = {
+			industrial_equipment_monthly_rate = 1
+			industrial_expertise_monthly_rate = 1
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_poverty_investment"
+			subtract_from_variable = {MemberSpentBudget = 0.050}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+
+	SGR_ZV_open_investments = {
+		icon = GFX_decision_generic_construction
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			NOT = {has_country_flag = ZV_investments_opened}
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_open_investments"
+			set_country_flag = ZV_investments_opened
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = ZV_investments_opened
+				factor = 0
+			}
+		}
+	}
+
+	SGR_ZV_close_investments = {
+		icon = GFX_decision_generic_construction
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_close_investments"
+			clr_country_flag = ZV_investments_opened
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = ZV_investments_opened
+				factor = 0
+			}
+		}
+	}
+
+	SGR_ZV_civilian_investment = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 40
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.150}
+		}
+
+		custom_cost_text = SGR_ZV_civilian_investment_cost
+
+		remove_effect = {
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_civilian_investment"
+			subtract_from_variable = {MemberSpentBudget = 0.150}
+			random_owned_controlled_state = {
+				random_list = {
+					1 = {
+						add_building_construction = {
+							type = schools
+							level = 1
+							instant_build = yes
+						}
+					}
+					1 = {
+						add_building_construction = {
+							type = offices
+							level = 1
+							instant_build = yes
+						}
+					}
+					1 = {
+						add_building_construction = {
+							type = hospitals
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_ZV_military_investment = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 40
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.150}
+		}
+
+		custom_cost_text = SGR_ZV_civilian_investment_cost
+
+		remove_effect = {
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_military_investment"
+			subtract_from_variable = {MemberSpentBudget = 0.150}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = barracks
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_ZV_infrastructure_investment = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 40
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.100}
+		}
+
+		custom_cost_text = SGR_ZV_infrastructure_investment_cost
+
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_infrastructure_investment"
+			subtract_from_variable = {MemberSpentBudget = 0.100}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	SGR_ZV_synthoil_investment = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			has_global_flag = german_civil_war_speervic
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+			has_country_flag = ZV_investments_opened
+		}
+		available = {
+			OR = {
+				has_idea = SGR_zollverein_basic
+				has_idea = SGR_zollverein_germany
+			}
+		}
+
+		days_remove = 100
+		days_re_enable = 40
+
+		custom_cost_trigger = {
+			check_variable = {MemberSpentBudget > 0.250}
+		}
+
+		custom_cost_text = SGR_ZV_synthoil_investment_desc_cost
+
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = synthetic_refinery
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ZV_synthoil_investment"
+			subtract_from_variable = {MemberSpentBudget = 0.250}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+
+	SGR_Konjunkturpaket = {
+		icon = GFX_decision_generic_industry
+		fire_only_once = yes
+		days_remove = 460
+		allowed = {
+			tag = GER
+		}
+		visible = {
+			has_country_flag = SGR_phase2
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			has_completed_focus = GER_industria
+		}
+		cost = 75
+		remove_effect = {
+			#Event
+			clr_country_flag = SGR_konjunkturpaket_active
+			set_country_flag = SGR_konjunkturpaket_finished
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 1026
+						state = 776
+						state = 64
+					}
+				}
+				set_building_level = {
+					type = infrastructure
+					level = 10
+					instant_build = yes
+				} 
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Konjunkturpaket"
+			custom_effect_tooltip = SGR_konjunkturpaket_cost
+			set_country_flag = SGR_konjunkturpaket_active
+			TNO_improve_poverty_med = yes
+			TNO_improve_academic_base_med = yes
+			TNO_improve_industrial_equipment_med = yes
+			TNO_improve_industrial_expertise_med = yes
+			TNO_improve_agriculture_low = yes
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SGR_Poland_investment = {
+		icon = diplo_poland
+		fire_only_once = yes
+		days_remove = 220
+		allowed = {
+			tag = GER
+		}
+		visible = {
+			has_country_flag = SGR_phase2
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			has_completed_focus = GER_sapientia
+		}
+		cost = 75
+		remove_effect = {
+			#Event
+			clr_country_flag = SGR_poland_active
+			set_country_flag = SGR_poland_invested
+			POL = {
+				set_temp_variable = { gdp_growth_temp = 2 }
+				econ_gdp_growth_change = yes
+				every_owned_state = {
+					add_extra_state_shared_building_slots = 1
+				}
+			}
+			custom_effect_tooltip = SGR_oilsteel_reward
+			hidden_effect = {
+				POL = {
+					random_owned_controlled_state = {
+						add_resource = {
+							type = steel
+							amount = 17
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+					random_owned_controlled_state = {
+						add_resource = {
+							type = oil
+							amount = 6
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Poland_investment"
+			custom_effect_tooltip = SGR_eastern_investment_cost
+			set_country_flag = SGR_poland_active
+			POL = {
+				TNO_improve_poverty_med = yes
+				TNO_improve_academic_base_low = yes
+				TNO_improve_industrial_equipment_med = yes
+				TNO_improve_industrial_expertise_med = yes
+				TNO_improve_agriculture_low = yes
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SGR_Ukraine_investment = {
+		icon = diplo_ukraine
+		fire_only_once = yes
+		days_remove = 300
+		allowed = {
+			tag = GER
+		}
+		visible = {
+			has_country_flag = SGR_phase2
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			has_completed_focus = GER_sapientia
+		}
+		cost = 75
+		remove_effect = {
+			#Event
+			clr_country_flag = SGR_ukraine_active
+			set_country_flag = SGR_ukraine_invested
+			UKR = {
+				set_temp_variable = { gdp_growth_temp = 2 }
+				econ_gdp_growth_change = yes
+				every_owned_state = {
+					add_extra_state_shared_building_slots = 1
+				}
+			}
+			custom_effect_tooltip = SGR_oilsteelchrome_reward
+			hidden_effect = {
+				UKR = {
+					random_owned_controlled_state = {
+						add_resource = {
+							type = steel
+							amount = 15
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+					random_owned_controlled_state = {
+						add_resource = {
+							type = chromium
+							amount = 22
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+					random_owned_controlled_state = {
+						add_resource = {
+							type = chromium
+							amount = 22
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+					random_owned_controlled_state = {
+						add_resource = {
+							type = chromium
+							amount = 22
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+					random_owned_controlled_state = {
+						add_resource = {
+							type = oil
+							amount = 8
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+					random_owned_controlled_state = {
+						add_resource = {
+							type = oil
+							amount = 6
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+					random_owned_controlled_state = {
+						add_resource = {
+							type = oil
+							amount = 7
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Ukraine_investment"
+			custom_effect_tooltip = SGR_eastern_investment_cost
+			set_country_flag = SGR_ukraine_active
+			UKR = {
+				TNO_improve_poverty_med = yes
+				TNO_improve_academic_base_low = yes
+				TNO_improve_industrial_equipment_med = yes
+				TNO_improve_industrial_expertise_med = yes
+				TNO_improve_agriculture_low = yes
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SGR_Ostland_investment = {
+		icon = diplo_ostland
+		fire_only_once = yes
+		days_remove = 250
+		allowed = {
+			tag = GER
+		}
+		visible = {
+			has_country_flag = SGR_phase2
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			has_completed_focus = GER_sapientia
+		}
+		cost = 75
+		remove_effect = {
+			#Event
+			clr_country_flag = SGR_ostland_active
+			set_country_flag = SGR_ostland_invested
+			BLR = {
+				set_temp_variable = { gdp_growth_temp = 2 }
+				econ_gdp_growth_change = yes
+				every_owned_state = {
+					add_extra_state_shared_building_slots = 1
+				}
+			}
+			OST = {
+				set_temp_variable = { gdp_growth_temp = 2 }
+				econ_gdp_growth_change = yes
+				every_owned_state = {
+					add_extra_state_shared_building_slots = 1
+				}
+			}
+			custom_effect_tooltip = SGR_oilsteel_reward
+			hidden_effect = {
+				OST = {
+					random_owned_controlled_state = {
+						add_resource = {
+							type = oil
+							amount = 3
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+				}
+				BLR = {
+					random_owned_controlled_state = {
+						add_resource = {
+							type = steel
+							amount = 6
+						}
+						set_state_flag = SGR_WWS_Investment
+					}
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Ostland_investment"
+			custom_effect_tooltip = SGR_eastern_investment_cost
+			set_country_flag = SGR_ostland_active
+			every_country = {
+				limit = {
+					original_tag = OST
+				}
+				TNO_improve_poverty_med = yes
+				TNO_improve_academic_base_low = yes
+				TNO_improve_industrial_equipment_med = yes
+				TNO_improve_industrial_expertise_med = yes
+				TNO_improve_agriculture_low = yes
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SGR_Kaukasien_investment = {
+		icon = diplo_kaukasien
+		fire_only_once = yes
+		days_remove = 200
+		allowed = {
+			tag = GER
+		}
+		visible = {
+			has_country_flag = SGR_phase2
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			has_completed_focus = GER_sapientia
+		}
+		cost = 75
+		remove_effect = {
+			#Event
+			clr_country_flag = SGR_kaukasien_active
+			set_country_flag = SGR_kaukasien_invested
+			CAU = {
+				set_temp_variable = { gdp_growth_temp = 2 }
+				econ_gdp_growth_change = yes
+				every_owned_state = {
+					add_extra_state_shared_building_slots = 1
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Kaukasien_investment"
+			custom_effect_tooltip = SGR_eastern_investment_cost
+			set_country_flag = SGR_kaukasien_active
+			CAU = {
+				TNO_improve_poverty_med = yes
+				TNO_improve_academic_base_low = yes
+				TNO_improve_industrial_equipment_med = yes
+				TNO_improve_industrial_expertise_med = yes
+				TNO_improve_agriculture_low = yes
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SGR_Volga_investment = {
+		icon = diplo_moskowien
+		fire_only_once = yes
+		days_remove = 200
+		allowed = {
+			tag = GER
+		}
+		visible = {
+			has_country_flag = SGR_phase2
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			has_completed_focus = GER_sapientia
+		}
+		cost = 75
+		remove_effect = {
+			#Event
+			clr_country_flag = SGR_volga_active
+			set_country_flag = SGR_volga_invested
+			MCW = {
+				set_temp_variable = { gdp_growth_temp = 2 }
+				econ_gdp_growth_change = yes
+				every_owned_state = {
+					add_extra_state_shared_building_slots = 1
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Volga_investment"
+			custom_effect_tooltip = SGR_eastern_investment_cost
+			set_country_flag = SGR_volga_active
+			MCW = {
+				TNO_improve_poverty_med = yes
+				TNO_improve_academic_base_low = yes
+				TNO_improve_industrial_equipment_med = yes
+				TNO_improve_industrial_expertise_med = yes
+				TNO_improve_agriculture_low = yes
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+
+SGR_state_of_the_reich_category = {
+
+	SGR_Invasion_of_Brittany = {
+		icon = GFX_decision_black_market_shut_down
+
+		activation = {
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			NOT = {FRA = {is_in_faction_with = GER}}
+			NOT = {has_global_flag = FRA_post_breton_war_collapse}
+			OR = {
+				has_country_flag = SGR_France_Germany_Support
+				has_country_flag = SGR_France_Germany_Allied
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_Brittany_invasion_success
+				hidden_trigger = {
+					NOT = {country_exists = BRT}
+				}
+			}
+		}
+
+		is_good = no
+		days_mission_timeout = 120
+
+		timeout_effect = {
+			custom_effect_tooltip = SGR_Brittany_invasion_failure
+			decrease_regime_stab_big = yes
+			if = {
+				limit = {
+					FRA = {has_war_with = BRT}
+					GER = {has_war_with = BRT}
+				}
+				FRA = {white_peace = BRT}
+				GER = {white_peace = BRT}
+			}
+			else_if = {
+				limit = {
+					FRA = {has_war_with = BRT}
+					NOT = {GER = {has_war_with = BRT}}
+				}
+				FRA = {white_peace = BRT}
+			}
+			hidden_effect = {
+				country_event = {
+					id = speerfrance.22
+				}
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = SGR_Brittany_invasion_success
+			country_event = {
+				id = speerfrance.21
+				days = 2
+			}
+		}
+	}
+	#For France to declare war on Brittany by itself when Germany goes the support route
+	SGR_FRA_Invasion_of_Brittany = {
+		icon = GFX_decision_black_market_shut_down
+
+		activation = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_france_divisions_minimum
+				NOT = {FRA = {num_divisions < 4}}
+				NOT = {FRA = {has_war_with = BRT}}
+				has_global_flag = german_civil_war_speervic
+				has_active_mission = SGR_Invasion_of_Brittany
+				NOT = {FRA = {is_in_faction_with = GER}}
+			}
+		}
+
+		available = {
+			NOT = {country_exists = BRT}
+		}
+
+		is_good = yes
+		days_mission_timeout = 7
+
+		timeout_effect = {
+			FRA = {
+				declare_war_on = {
+					target = BRT
+					type = annex_everything
+				}
+			}
+		}
+		complete_effect = {
+			FRA = {add_political_power = 200}
+		}
+
+	}
+
+
+	SGR_statereich_speeches = {
+		icon = GFX_decision_generic_propaganda
+
+		days_remove = 7
+		days_re_enable = 21
+
+		cost = SGR_speech_cost?5
+
+		remove_effect = {
+			add_regime_stab_small = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_statereich_speeches"
+			add_to_variable = {SGR_speech_cost = 5}
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				add_stability = 0.05
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				check_variable = { SGRRegimeStability < 0.3 }
+				factor = 100
+			}
+			modifier = {
+				check_variable = { SGRRegimeStability > 0.5 }
+				factor = 0
+			}
+		}
+	}
+
+	SGR_statereich_promises_light = {
+		icon = GFX_decision_generic_political_discourse
+
+		days_remove = 7
+		days_re_enable = 21
+
+		cost = 15
+
+		remove_effect = {
+			add_political_power = 10
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_statereich_promises_light"
+			add_regime_stab_med = yes
+		}
+
+		modifier = {
+			fascism_drift = 0.01
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				check_variable = { SGRRegimeStability < 0.3 }
+				factor = 70
+			}
+			modifier = {
+				check_variable = { SGRRegimeStability > 0.7 }
+				factor = 0
+			}
+		}
+	}
+
+	SGR_statereich_promises_huge = {
+		icon = GFX_decision_chess_knight_rook_bishop_pawn
+
+		days_remove = 31
+		days_re_enable = 42
+
+		cost = 20
+
+		remove_effect = {
+			decrease_regime_stab_big = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_statereich_promises_huge"
+			add_regime_stab_big = yes
+		}
+
+		modifier = {
+			authoritarian_democracy_drift = 0.02
+			national_socialism_drift = 0.02
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { SGRRegimeStability < 0.3 }
+				add = 10000
+			}
+		}
+	}
+
+	SGR_statereich_charge_treason = {
+		icon = GFX_decision_generic_assault
+
+		days_remove = 34
+		days_re_enable = 68
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_RegimeStab_50
+				NOT = { check_variable = { SGRRegimeStability < 0.5 }}
+			}
+			national_socialism > 0.1
+			has_completed_focus = SGR_sondergericht
+		}
+
+		visible = {
+
+		}
+
+		cost = 30
+
+		remove_effect = {
+			add_regime_stab_20 = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_statereich_charge_treason"
+			decrease_regime_stab_big = yes
+		}
+
+		modifier = {
+			stability_weekly = 0.025
+			national_socialism_drift = -0.03
+		}
+
+		ai_will_do = {
+			base = 30
+			modifier = {
+				OR = {
+					check_variable = { SGRRegimeStability < 0.4 }
+					check_variable = { SGRRegimeStability > 0.8 }
+				}
+				factor = 0
+			}
+		}
+	}
+
+	SGR_statereich_shift_econ_liberal = {
+		icon = GFX_decision_generic_money
+		days_re_enable = 30
+
+		cost = 20
+
+		visible = {
+			check_variable = {
+				SGR_econ_lib < SGR_econ_con
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_statereich_shift_econ_liberal"
+			add_to_variable = {SGR_econ_lib = 1}
+			custom_effect_tooltip = SGR_econ_lib_1
+		}
+	}
+
+	SGR_statereich_shift_econ_conservative = {
+		icon = GFX_decision_generic_money
+		days_re_enable = 30
+
+		cost = 20
+
+		visible = {
+			check_variable = {
+				SGR_econ_lib > SGR_econ_con
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_statereich_shift_econ_conservative"
+			add_to_variable = {SGR_econ_con = 1}
+			custom_effect_tooltip = SGR_econ_con_1
+		}
+	}
+
+	SGR_StateReich_open_pakt = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			NOT = {has_country_flag = SGR_pakt_open}
+		}
+		available = {
+			NOT = {has_country_flag = SGR_pakt_open}
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_StateReich_open_pakt"
+			set_country_flag = SGR_pakt_open
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = SGR_pakt_open
+				factor = 0
+			}
+		}
+	}
+
+	SGR_StateReich_close_pakt = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			has_country_flag = SGR_pakt_open
+		}
+		available = {
+			has_country_flag = SGR_pakt_open
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_StateReich_close_pakt"
+			clr_country_flag = SGR_pakt_open
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = SGR_pakt_open
+				factor = 0
+			}
+		}
+	}
+
+	SGR_Regime_Collapse_Impeding = {
+		icon = GFX_decision_black_market_shut_down
+
+		activation = {
+			has_global_flag = german_civil_war_speervic
+			NOT = { has_global_flag = SGR_natsoc_collapse }
+			NOT = { check_variable = { SGRRegimeStability > 0.3 }}
+			NOT = {
+				OR = {
+					has_completed_focus = SGR_the_dream_come_true_fash
+					has_completed_focus = SGR_the_dream_come_true_auth
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_regime_stab
+				NOT = { check_variable = { SGRRegimeStability < 0.3 }}
+			}
+		}
+
+		is_good = no
+		days_mission_timeout = 120
+
+		timeout_effect = {
+			custom_effect_tooltip = SGR_collapse_looming
+			log = "[GetDateText]: [Root.GetName]: Mission SGR_Regime_Collapse_Impeding timed out."
+			hidden_effect = {
+				country_event = {
+					id = speer.9999
+					days = 1
+				}
+				add_stability = -0.5
+				add_political_power = -500
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = SGR_collapse_averted
+		}
+	}
+
+
+	#French Question
+	SGR_French_Question = {
+		icon = GFX_decision_generic_industry
+		fire_only_once = yes
+		cost = 0
+		available = {
+			OR = {
+				has_country_flag = SGR_debug_flag
+				AND = {
+					POL = {is_in_faction_with = GER}
+					OSL = {is_in_faction_with = GER}
+					NOR = {is_in_faction_with = GER}
+				}
+			}
+			has_global_flag = GreatGame_game_4_GER_victory
+			BRT = {NOT = {is_in_faction = yes}}
+		}
+		visible = {
+			country_exists = FRA
+			NOT = {FRA = {is_in_faction_with = GER}}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_French_Question"
+			country_event = {
+				id = speerfrance.1
+				days = 1
+			}
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	#Brittany War Declaration
+	SGR_Brittany_War_Dec = {
+		icon = GFX_decision_generic_industry
+		fire_only_once = yes
+		days_remove = 2
+		cost = 25
+		available = {
+			has_active_mission = SGR_Invasion_of_Brittany
+			has_country_flag = SGR_France_Germany_Allied
+		}
+		visible = {
+			country_exists = FRA
+			NOT = {FRA = {is_in_faction_with = GER}}
+			has_active_mission = SGR_Invasion_of_Brittany
+			FRA = {num_divisions > 3}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Brittany_War_Dec"
+			GER = {
+				declare_war_on = {
+					target = BRT
+					type = annex_everything
+				}
+			}
+			FRA = {
+				declare_war_on = {
+					target = BRT
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	#Support France - German reinforcement divs
+	SGR_France_German_reinforcement = {
+		icon = GFX_decision_generic_industry
+		fire_only_once = yes
+		days_remove = 14
+		cost = 30
+		available = {
+			has_active_mission = SGR_Invasion_of_Brittany
+		}
+		visible = {
+			country_exists = FRA
+			NOT = {FRA = {is_in_faction_with = GER}}
+			has_active_mission = SGR_Invasion_of_Brittany
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Brittany_War_Dec"
+			hidden_effect = {
+				FRA = {load_oob = SGR_FRA_volunteers}
+			}
+			custom_effect_tooltip = SGR_FRA_volunteers
+			decrease_regime_stab_small = yes
+			add_manpower = -20000
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	#Support France - German equipment
+	SGR_France_German_equipment = {
+		icon = GFX_decision_generic_industry
+		fire_only_once = no
+		days_remove = 14
+		cost = 15
+		available = {
+			has_active_mission = SGR_Invasion_of_Brittany
+		}
+		visible = {
+			country_exists = FRA
+			NOT = {FRA = {is_in_faction_with = GER}}
+			has_active_mission = SGR_Invasion_of_Brittany
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Brittany_War_Dec"
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = 3000
+				target = FRA
+			}
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	#Support France - German volunteers
+	SGR_France_German_manpower = {
+		icon = GFX_decision_generic_industry
+		fire_only_once = no
+		days_remove = 14
+		cost = 15
+		available = {
+			has_active_mission = SGR_Invasion_of_Brittany
+		}
+		visible = {
+			country_exists = FRA
+			NOT = {FRA = {is_in_faction_with = GER}}
+			has_active_mission = SGR_Invasion_of_Brittany
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Brittany_War_Dec"
+			add_manpower = -2000
+			FRA = {add_manpower = 2000}
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	SGR_retake_madagascar_militarists = {
+		icon = GFX_decision_ger_reichskommissariats
+		fire_only_once = yes
+		visible = {
+			has_country_flag = SGR_retake_mauritius_reunion
+			country_exists = MDG
+			MDG = {
+				has_war = no
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_mro_welcome_back_the_heroes"
+			add_to_faction = MDG
+			econ_join_sphere_GER = yes
+			set_autonomy = {
+				target = MDG
+				autonomy_state = autonomy_autonomous_reichskommissariat
+			}
+			hidden_effect = {
+				MDG = {
+					set_politics = {
+						ruling_party = national_socialism
+					}
+					set_popularities = {
+						fascism = 24
+						national_socialism = 69
+						authoritarian_democracy = 7
+					}
+					add_ideas = Pakt_Autonomous_Reichskommissariat
+				}
+				
+				join_zollverein = yes
+			}
+			GER = {
+				set_temp_variable = { SeaZone_ID = 6 } # 6; Indian Ocean
+				Cold_War_GUI_PowerProjection_AddSeaZone = yes
+			}
+			transfer_state = 707
+			add_state_core = 707
+			transfer_state = 706
+			add_state_core = 706
+			country_event = {
+				id = speermilitary.100
+				days = 13
+			}
+			hidden_effect = {
+				country_event = {
+					id = MADAGASKAR.13
+					days = 7
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SGR_reclaim_mauritius_reunion = {
+		icon = GFX_decision_shipyard
+		visible = {
+			has_country_flag = SGR_retake_mauritius_reunion
+			NOT = {
+				country_exists = MDG
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		available = {
+			if = {
+				limit = { is_ai = yes } # Because the AI is dumb and we can't make it send fleets to that location, they get to do it for free
+				always = yes
+			}
+			else = { ships_in_area = { area = 85 size > 19 } } # But if you're a player you have to do the long route, no easy stuff for you lol
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 50
+			command_power > 25
+		}
+		custom_cost_text = decision_cost_50_pp_25_cp
+		days_remove = 7
+		fire_only_once = yes
+
+		highlight_states = { state = 706 }
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_reclaim_mauritius_reunion"
+			hidden_effect = {
+				add_political_power = -50
+				add_command_power = -25
+			}
+		}
+		remove_effect = {
+			transfer_state = 707
+			add_state_core = 707
+			transfer_state = 706
+			add_state_core = 706
+			country_event = {
+				id = speermilitary.100
+				days = 6
+			}
+			GER = {
+				set_temp_variable = { SeaZone_ID = 6 } # 6; Indian Ocean
+				Cold_War_GUI_PowerProjection_AddSeaZone = yes
+			}
+		}
+		ai_will_do = { factor = 20 }
+	}
+	SGR_place_nukes_mauritius_reunion = {
+		icon = GFX_decision_ger_reichskommissariats
+		visible = {
+			has_country_flag = SGR_allow_reunion_nukes
+			has_country_flag = SGR_pakt_open
+		}
+		available = {
+			if = {
+				limit = { is_ai = yes } # Because the AI is dumb and we can't make it send fleets to that location, they get to do it for free
+				always = yes
+			}
+			else = {
+				ships_in_area = { area = 65 size > 14 }
+				ships_in_area = { area = 85 size > 29 }
+			} # But if you're a player you have to do the long route, no easy stuff for you lol
+		}
+		custom_cost_trigger = {
+			has_political_power > 50
+			command_power > 25
+		}
+		custom_cost_text = decision_cost_50_pp_25_cp
+		days_remove = 180
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_place_nukes_mauritius_reunion"
+			hidden_effect = {
+				add_political_power = -50
+				add_command_power = -25
+			}
+			set_temp_variable = { temp_econ_spending_amount = 7.5 }
+			econ_spend_money_once_effect_raw_money = yes
+			set_country_flag = SGR_started_placing_nukes
+		}
+		remove_effect = {
+			706 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = missile_silo
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 5
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 5
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+			707 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = missile_silo
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 5
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 5
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = { all_provinces = yes }
+				}
+			}
+			set_temp_variable = { tension_WT = 15 }
+			set_temp_variable = { tension_superpower_1 = GER }
+			set_temp_variable = { tension_superpower_2 = USA }
+			set_temp_variable = { tension_id = 26 }
+			TNO_change_tension = yes
+
+			set_temp_variable = { tension_WT = 15 }
+			set_temp_variable = { tension_superpower_1 = GER }
+			set_temp_variable = { tension_superpower_2 = JAP }
+			set_temp_variable = { tension_id = 26 }
+			TNO_change_tension = yes
+			set_temp_variable = { global_coverage_change_temp = 0.2 }
+			nuclear_global_coverage_change = yes
+			hidden_effect = {
+				every_country = {
+					news_event = {
+						id = WORLD.16524
+						days = 2
+					}
+				}
+			}
+		}
+		ai_will_do = { factor = 20 }
+	}
+	#Ukraine Question
+	SGR_Ukraine_Question = {
+		icon = diplo_ukraine
+		fire_only_once = yes
+		cost = 0
+		available = {
+			AND = {
+				POL = {is_in_faction_with = GER}
+				OSL = {is_in_faction_with = GER}
+				NOR = {is_in_faction_with = GER}
+			}
+		}
+		visible = {
+			country_exists = UKR
+			NOT = { UKR = { is_in_faction_with = GER } }
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Ukraine_Question"
+			if = {
+				limit = {
+					NOT = { 
+						has_global_flag = SGR_natsoc_collapse 
+						has_global_flag = UKR_freedom
+					}
+				}
+				set_country_flag = SGR_UKR_tree
+				reload_GER_speer_post_cw_tree = yes
+			}
+			else_if = {
+				limit = {
+					has_global_flag = UKR_freedom
+				}
+				declare_war_on = {
+					target = UKR
+					type = annex_everything
+				}
+			}
+			else = {
+				puppet = UKR
+			}
+		}
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	#Netherlands Question
+	SGR_Netherlands_Question = {
+		icon = diplo_netherlands
+		fire_only_once = yes
+		cost = 0
+		visible = {
+			HOL = {
+				NOT = {is_in_faction_with = GER}
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Netherlands_Question"
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = SGR_natsoc_collapse
+						HOL = { has_government = esoteric_nazism }
+					}
+				}
+				country_event = {
+					id = speerholland.1
+					days = 2
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+				}
+				country_event = {
+					id = speerholland.7
+					days = 2
+				}
+			}
+			else = {
+				GER = {
+					declare_war_on = {
+						target = HOL
+						type = annex_everything
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	#Denmark Question
+	SGR_Denmark_Question = {
+		icon = diplo_denmark
+		fire_only_once = yes
+		cost = 0
+		visible = {
+			DEN = {
+				NOT = {is_in_faction_with = GER}
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Denmark_Question"
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = SGR_natsoc_collapse
+						DEN = { has_government = national_socialism }
+					}
+				}
+				country_event = {
+					id = speerdenmark.1
+					days = 2
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+				}
+				country_event = {
+					id = speerdenmark.5
+					days = 2
+				}
+			}
+			else = {
+				GER = {
+					declare_war_on = {
+						target = DEN
+						type = annex_everything
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 80
+		}
+	}
+	#Bohemia Question
+	SGR_Bohemia_Question = {
+		icon = diplo_bohemia
+		fire_only_once = yes
+		cost = 0
+		visible = {
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Bohemia_Question"
+			if = { # Bohemia sided with Speer but died
+				limit = {
+					CZE = { exists = no }
+					has_country_flag = GER_CZE_joined_speer
+				}
+				country_event = { id = reich.807 days = 3 }
+			}
+			else_if = { # Bohemia didn't side with Speer
+				limit = {
+					CZE = { exists = no }
+					NOT = { has_country_flag = GER_CZE_joined_speer }
+				}
+				country_event = { id = reich.806 days = 3 }
+			}
+			else_if = { # Bohemia sided with Speer and didn't die
+				limit = {
+					CZE = { exists = yes }
+					has_country_flag = GER_CZE_joined_speer
+				}
+				country_event = { id = reich.809 days = 3 }
+			}
+			else = { country_event = { id = speerbohemia.1 days = 3 } } # Bohemia is neutral
+		}
+		ai_will_do = {
+			factor = 90
+		}
+	}
+	#Issue of Slovakia
+	SGR_Issue_of_Slovakia = {
+		icon = diplo_slovakia
+		fire_only_once = yes
+		cost = 0
+		visible = {
+			OR = {
+				SLO = {
+					NOT = {is_in_faction_with = GER}
+				}
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_bohemia_dealt_with_tt
+				owns_state = 75
+				owns_state = 9
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Issue_of_Slovakia"
+			hidden_effect = {
+				country_event = {
+					id = speerslovakia.1
+					days = 1
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = SGR_natsoc_collapse
+				}
+				hidden_effect = {
+					declare_war_on = {
+						target = SLO
+						type = annex_everything
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 90
+		}
+	}
+	#Polish Question
+	SGR_Polish_Question = {
+		icon = diplo_poland
+		fire_only_once = yes
+		cost = 0
+		available = {
+			AND = {
+				DEN = {is_in_faction_with = GER}
+				HOL = {is_in_faction_with = GER}
+				NOT = {country_exists = CZE}
+			}
+		}
+		visible = {
+			OR = {
+				country_exists = GGN
+				country_exists = POL
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Polish_Question"
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					country_exists = POL
+				}
+				set_country_flag = SGR_POL_tree
+				reload_GER_speer_post_cw_tree = yes
+			}
+			else_if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					country_exists = GGN
+				}
+				country_event = {
+					id = speerpoland.19
+					days = 5
+				}
+			}
+			else_if = {
+				limit = {
+					has_global_flag = SGR_natsoc_collapse
+					country_exists = POL
+				}
+				declare_war_on = {
+					target = POL
+					type = annex_everything
+				}
+			}
+			else_if = {
+				limit = {
+					has_global_flag = SGR_natsoc_collapse
+					country_exists = GGN
+				}
+				puppet = GGN
+			}
+		}
+		ai_will_do = {
+			factor = 70
+		}
+	}
+	#Norway
+	SGR_Norwegian_Question = {
+		icon = diplo_norway
+		fire_only_once = yes
+		cost = 0
+		available = {
+			AND = {
+				DEN = {is_in_faction_with = GER}
+				HOL = {is_in_faction_with = GER}
+				NOT = {country_exists = CZE}
+			}
+		}
+		visible = {
+			OR = {
+				has_global_flag = NOR_freedom
+				has_global_flag = NOR_moderates
+				has_global_flag = NOR_mainstream
+				has_global_flag = NOR_radicals
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Norwegian_Question"
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					OR = {
+						has_global_flag = NOR_moderates
+						has_global_flag = NOR_mainstream
+						has_global_flag = NOR_radicals
+					}
+				}
+				set_country_flag = SGR_NOR_tree2
+				reload_GER_speer_post_cw_tree = yes
+				else_if = {
+					limit = {
+						has_global_flag = SGR_natsoc_collapse
+						OR = {
+							has_global_flag = NOR_moderates
+							has_global_flag = NOR_mainstream
+							has_global_flag = NOR_radicals
+						}
+					}
+					declare_war_on = {
+						target = NOR
+						type = puppet_wargoal_focus
+					}
+				}
+				else = {
+					set_country_flag = SGR_NOR_tree1
+					reload_GER_speer_post_cw_tree = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 70
+		}
+	}
+
+	#Ostland Question
+	SGR_Ostland_Question = {
+		icon = diplo_ostland
+		fire_only_once = yes
+		cost = 0
+		available = {
+			AND = {
+				DEN = {is_in_faction_with = GER}
+				HOL = {is_in_faction_with = GER}
+				NOT = {country_exists = CZE}
+			}
+		}
+		visible = {
+			OR = {
+				has_global_flag = OST_OCW_Ongoing
+				Pakt_OST_OCW_Meyer_Landrut_Victory = yes
+				Pakt_OST_OCW_Drechsler_Victory = yes
+				Pakt_OST_OCW_Stahlecker_Victory = yes
+				Pakt_OST_OCW_Kovner_Victory = yes
+				Pakt_OST_OCW_Jeckeln_Victory = yes
+				Pakt_OST_OCW_Vituska_Victory = yes
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Ostland_Question"
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					NOT = {has_global_flag = OST_OCW_Ongoing}
+					Pakt_OST_OCW_Meyer_Landrut_Victory = yes
+				}
+				country_event = { id = speerostland.17 }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					has_global_flag = OST_OCW_Ongoing
+					country_exists = MST
+				}
+				country_event = { id = speerostland.26 }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					has_global_flag = OST_OCW_Ongoing
+					NOT = { country_exists = MST }
+				}
+				country_event = { id = speerostland.25 }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					Pakt_OST_OCW_Drechsler_Victory = yes
+				}
+				country_event = { id = speerostland.18 }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					Pakt_OST_OCW_Stahlecker_Victory = yes
+				}
+				country_event = { id = speerostland.16 }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					Pakt_OST_OCW_Kovner_Victory = yes
+				}
+				country_event = { id = speerostland.22 }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					Pakt_OST_OCW_Jeckeln_Victory = yes
+				}
+				country_event = { id = speerostland.24 }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					Pakt_OST_OCW_Vituska_Victory = yes
+				}
+				country_event = { id = speerostland.19 }
+			}
+			else_if = {
+				limit = {
+					has_global_flag = SGR_natsoc_collapse
+				}
+				every_country = {
+					limit = {
+						original_tag = OST
+						NOT = {has_war = yes}
+					}
+					declare_war_on = {
+						target = THIS
+						type = annex_everything
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	#Moskowien Question
+	SGR_Moskowien_Question = {
+		icon = diplo_moskowien
+		fire_only_once = yes
+		cost = 0
+		available = {
+			AND = {
+				POL = {is_in_faction_with = GER}
+				OSL = {is_in_faction_with = GER}
+				NOR = {is_in_faction_with = GER}
+				UKR = {is_in_faction_with = GER}
+			}
+		}
+		visible = {
+			NOT = { country_exists = MCW }
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Moskowien_Question"
+			country_event = {
+				id = speer_moskowien.52
+				days = 1
+			}
+			activate_mission = SGR_take_moskowien
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	#Moskowien taking timer
+	SGR_Take_Moskowien = {
+		icon = diplo_moskowien
+		fire_only_once = yes
+		activation = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		is_good = yes
+		days_mission_timeout = 20
+		timeout_effect = {
+			MSK_SE_dissolution_GER_declare_war = yes
+		}
+	}
+	#Reorganize Moskowien
+	SGR_Moskowien_Setup = {
+		icon = diplo_moskowien
+		fire_only_once = yes
+		cost = 20
+		visible = {
+			check_variable = { global.MSK_dissolution_ongoing = 2 }
+			has_country_flag = SGR_pakt_open
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = GER_moskowien_conquered_trigger_tt
+				NOT = {
+					country_exists = OKB
+					country_exists = RSB
+					country_exists = KAG
+					country_exists = PSK
+					country_exists = DFK
+					country_exists = BBB
+					country_exists = MOS
+					country_exists = SMO
+					country_exists = LAK
+					country_exists = ZLB
+					country_exists = RDC
+					country_exists = TAM
+					country_exists = POS
+					country_exists = PEN
+					country_exists = PAU
+					country_exists = FRP
+					country_exists = MZL
+					country_exists = SKR
+				}
+			}
+		}
+		complete_effect = {
+			country_event = {
+				id = speer_moskowien.53
+				days = 1
+			}
+			add_regime_stab_med = yes
+			add_command_power = 25
+			hidden_effect = {
+				SGR_split_moskowien = yes
+			}
+			custom_effect_tooltip = SGR_Moskowien_Setup_tt
+			clear_variable = global.MSK_dissolution_ongoing
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	#Kaukasien Question
+	SGR_Kaukasien_Question = {
+		icon = diplo_kaukasien
+		fire_only_once = yes
+		cost = 0
+		available = {
+			AND = {
+				POL = {is_in_faction_with = GER}
+				OSL = {is_in_faction_with = GER}
+				NOR = {is_in_faction_with = GER}
+				UKR = {is_in_faction_with = GER}
+			}
+		}
+		visible = {
+			CAU = {
+				NOT = {is_in_faction_with = GER}
+			}
+			has_country_flag = SGR_pakt_open
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_Kaukasien_Question"
+			if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					CAU = {
+						has_government = national_socialism
+						NOT = {
+							has_country_flag = CAU_caucasian_revolt
+							has_country_flag = CAU_rebel_victory
+						}
+					}
+				}
+				set_country_flag = SGR_CAU_tree1
+				reload_GER_speer_post_cw_tree = yes
+			}
+			else_if = {
+				limit = {
+					NOT = { has_global_flag = SGR_natsoc_collapse }
+					CAU = {
+						OR = {
+							has_government = despotism
+							has_government = esoteric_nazism
+						}
+						NOT = {
+							has_country_flag = CAU_caucasian_revolt
+							has_country_flag = CAU_rebel_victory
+						}
+					}
+				}
+				set_country_flag = SGR_CAU_tree2
+				reload_GER_speer_post_cw_tree = yes
+			}
+			else_if = {
+				limit = {
+					has_global_flag = SGR_natsoc_collapse
+				}
+				declare_war_on = {
+					target = CAU
+					type = puppet_wargoal_focus
+				}
+			}
+			else_if = {
+				limit = {
+					CAU = {
+						OR = {
+							has_country_flag = CAU_caucasian_revolt
+							has_country_flag = CAU_rebel_victory
+						}
+					}
+				}
+				set_country_flag = SGR_CAU_tree3
+				reload_GER_speer_post_cw_tree = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 40
+		}
+	}
+
+	GER_Bohemia_Reconstruction_SGR_A = {
+		icon = diplo_bohemia
+		available = { hidden_trigger = { always = no } }
+		activation = { always = no }
+
+		is_good = yes
+		days_mission_timeout = 120
+		priority = 100
+
+		timeout_effect = {
+			country_event = reich.808
+		}
+	}
+	GER_Bohemia_Reconstruction_SGR_B = {
+		icon = diplo_bohemia
+		available = { hidden_trigger = { always = no } }
+		activation = { always = no }
+
+		is_good = yes
+		days_mission_timeout = 30
+		priority = 100
+
+		timeout_effect = {
+			country_event = reich.811
+		}
+	}
+
+	GER_Speer_Foreign_Policy_Burgundy_Collapse_Intervention = {
+		icon = diplo_burgundy
+		available = { hidden_trigger = { always = no } }
+		activation = { always = no }
+
+		is_good = yes
+		days_mission_timeout = 90
+		priority = 100
+		fire_only_once = yes
+
+		war_with_on_timeout = BRG
+		war_with_on_timeout = PIC
+		war_with_on_timeout = BEL
+		war_with_on_timeout = FLR
+		war_with_on_timeout = RPY
+		
+		timeout_effect = {
+			BRG = { set_country_flag = TNO_nuke_disabled }
+
+			if = {
+				limit = { has_global_flag = FRA_post_breton_war_collapse }
+				# Nothing happens
+			}
+			else_if = { ### Pakt France 
+				limit = { FRA = { is_in_faction_with = GER } }
+				set_global_flag = BRG_AI_Collapse_Pakt_France
+
+				country_event =  BRG_ai_collapse.2
+				FRA = {
+					if = { limit = { country_exists = BRG } declare_war_on = { target = BRG type = annex_everything } }
+					if = { limit = { country_exists = PIC } declare_war_on = { target = PIC type = annex_everything } }
+					if = { limit = { country_exists = BEL } declare_war_on = { target = BEL type = annex_everything } }
+					if = { limit = { country_exists = FLR } declare_war_on = { target = FLR type = annex_everything } }
+					if = { limit = { country_exists = RPY } declare_war_on = { target = RPY type = annex_everything } }
+				}
+			}
+			else_if = { ### OFN France 
+				limit = { FRA = { is_in_faction_with = USA } }
+				set_global_flag = BRG_AI_Collapse_OFN_France
+				USA = { country_event = { id = BRG_ai_collapse.4 days = 1 } }
+			}
+			else_if = { ### Italian France
+				limit = { FRA = { is_subject = yes } }
+				set_global_flag = BRG_AI_Collapse_Italy_France
+			}
+			else_if = { ### Neutral France
+				limit = { FRA = { is_subject = no } }
+				set_global_flag = BRG_AI_Collapse_Neutral_France
+			}
+
+			if = { limit = { country_exists = BRG } declare_war_on = { target = BRG type = annex_everything } }
+			if = { limit = { country_exists = PIC } declare_war_on = { target = PIC type = annex_everything } }
+			if = { limit = { country_exists = BEL } declare_war_on = { target = BEL type = annex_everything } }
+			if = { limit = { country_exists = FLR } declare_war_on = { target = FLR type = annex_everything } }
+			if = { limit = { country_exists = RPY } declare_war_on = { target = RPY type = annex_everything } }
+
+			hidden_effect = { every_country = { news_event = WORLD.101 } }
+		}
+	}
+}
+
+SGR_collab_regimes_category = {
+
+	divide_ostland = {
+		icon = diplo_ostland
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision divide_ostland" }
+		remove_effect = {
+			hidden_effect = {
+				divide_ostland = yes
+				BLR = { load_focus_tree = BLR_Blank }
+			}
+			custom_effect_tooltip = SGR_divide_ostland_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+
+	collab_regime_in_poland = {
+		icon = diplo_poland
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision collab_regime_in_poland" }
+		remove_effect = {
+			hidden_effect = { collab_regime_in_poland = yes }
+			custom_effect_tooltip = SGR_collab_regime_in_poland_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+
+	collab_regime_in_ukraine = {
+		icon = diplo_ukraine
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision collab_regime_in_ukraine" }
+		remove_effect = {
+			hidden_effect = { collab_regime_in_ukraine = yes }
+			custom_effect_tooltip = SGR_collab_regime_in_ukraine_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+
+	collab_regime_in_kaukasien = {
+		icon = diplo_kaukasien
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision collab_regime_in_kaukasien" }
+		remove_effect = {
+			hidden_effect = { collab_regime_in_kaukasien = yes }
+			custom_effect_tooltip = SGR_collab_regime_in_kaukasien_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+}
+
+SGR_reichslander_category = {
+	divide_ostland2 = {
+		icon = diplo_ostland
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision divide_ostland2" }
+		remove_effect = {
+			hidden_effect = {
+				divide_ostland2 = yes
+				BLR = { load_focus_tree = BLR_Blank }
+			}
+			custom_effect_tooltip = SGR_divide_ostland2_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+
+	reichsland_in_poland = {
+		icon = diplo_poland
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision reichsland_in_poland" }
+		remove_effect = {
+			hidden_effect = { reichsland_in_poland = yes }
+			custom_effect_tooltip = SGR_reichsland_in_poland_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+
+	reichsland_in_ukraine = {
+		icon = diplo_ukraine
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision reichsland_in_ukraine" }
+		remove_effect = {
+			hidden_effect = { reichsland_in_ukraine = yes }
+			custom_effect_tooltip = SGR_reichsland_in_ukraine_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+
+	reichsprotektorat_in_kaukasia = {
+		icon = diplo_kaukasien
+
+		days_remove = 2
+		fire_only_once = yes
+
+		complete_effect = { log = "[GetDateText]: [Root.GetName]: Decision reichsprotektorat_in_kaukasia" }
+		remove_effect = {
+			hidden_effect = { reichsprotektorat_in_kaukasia = yes }
+			custom_effect_tooltip = SGR_reichsprotektorat_in_kaukasia_tt
+		}
+		ai_will_do = { factor = 100 }
+	}
+}
+
+SGR_science_competition_category = {
+
+	SGR_science_competition_production = {
+
+		icon = GFX_decision_generic_industry
+
+		available = {
+			OR = {
+				has_tech = batch_production_3
+				has_tech = mass_production_3
+			}
+
+			NOT = {
+				OR = {
+					USA = {
+						OR = {
+							has_tech = batch_production_3
+							has_tech = mass_production_3
+						}
+					}
+					JAP = {
+						OR = {
+							has_tech = batch_production_3
+							has_tech = mass_production_3
+						}
+					}
+					ITA = {
+						OR = {
+							has_tech = batch_production_3
+							has_tech = mass_production_3
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			NOT = {
+				OR = {
+					USA = {
+						OR = {
+							has_tech = batch_production_3
+							has_tech = mass_production_3
+						}
+					}
+					JAP = {
+						OR = {
+							has_tech = batch_production_3
+							has_tech = mass_production_3
+						}
+					}
+					ITA = {
+						OR = {
+							has_tech = batch_production_3
+							has_tech = mass_production_3
+						}
+					}
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_science_competition_production"
+			add_political_power = 50
+			if = {
+				limit = { NOT = { amount_research_slots > 5 } }
+				add_research_slot = 1
+			}
+			hidden_effect = {
+				country_event = {
+					id = speerscience.4
+					days = 70
+				}
+			}
+			custom_effect_tooltip = SGR_science_competition_temp_res_slot
+			add_stability = 0.025
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+#	SGR_science_competition_industry = {
+#
+#		icon = GFX_decision_generic_decision
+#
+#		available = {
+#			OR = {
+#				has_tech = concentrated_industry4
+#				has_tech = dispersed_industry4
+#			}
+#
+#			NOT = {
+#				OR = {
+#					USA = {
+#						OR = {
+#							has_tech = concentrated_industry4
+#							has_tech = dispersed_industry4
+#						}
+#					}
+#					JAP = {
+#						OR = {
+#							has_tech = concentrated_industry4
+#							has_tech = dispersed_industry4
+#						}
+#					}
+#					ITA = {
+#						OR = {
+#							has_tech = concentrated_industry4
+#							has_tech = dispersed_industry4
+#						}
+#					}
+#				}
+#			}
+#		}
+#		visible = {
+#			NOT = {
+#				OR = {
+#					USA = {
+#						OR = {
+#							has_tech = concentrated_industry4
+#							has_tech = dispersed_industry4
+#						}
+#					}
+#					JAP = {
+#						OR = {
+#							has_tech = concentrated_industry4
+#							has_tech = dispersed_industry4
+#						}
+#					}
+#					ITA = {
+#						OR = {
+#							has_tech = concentrated_industry4
+#							has_tech = dispersed_industry4
+#						}
+#					}
+#				}
+#			}
+#		}
+#
+#		fire_only_once = yes
+#
+#		complete_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision SGR_science_competition_industry"
+#			add_political_power = 50
+#			if = {
+#				limit = { NOT = { amount_research_slots > 5 } }
+#				add_research_slot = 1
+#			}
+#			hidden_effect = {
+#				country_event = {
+#					id = speerscience.4
+#					days = 70
+#				}
+#			}
+#			custom_effect_tooltip = SGR_science_competition_temp_res_slot
+#			random_owned_controlled_state = {
+#				add_building_construction = {
+#					type = infrastructure
+#					level = 1
+#					instant_build = yes
+#				}
+#				add_extra_state_shared_building_slots = 1
+#			}
+#			random_owned_controlled_state = {
+#				add_building_construction = {
+#					type = infrastructure
+#					level = 1
+#					instant_build = yes
+#				}
+#				add_extra_state_shared_building_slots = 1
+#			}
+#			random_owned_controlled_state = {
+#				add_building_construction = {
+#					type = infrastructure
+#					level = 1
+#					instant_build = yes
+#				}
+#				add_extra_state_shared_building_slots = 1
+#			}
+#		}
+#
+#		ai_will_do = {
+#			factor = 100
+#		}
+#
+#	}
+#
+#	SGR_science_competition_military_construction = {
+#
+#		icon = GFX_decision_generic_prepare_civil_war
+#
+#		available = {
+#			has_tech = military_construction4
+#
+#			NOT = {
+#				OR = {
+#					USA = {
+#						has_tech = military_construction4
+#					}
+#					JAP = {
+#						has_tech = military_construction4
+#					}
+#					ITA = {
+#						has_tech = military_construction4
+#					}
+#				}
+#			}
+#		}
+#		visible = {
+#			NOT = {
+#				OR = {
+#					USA = {
+#						has_tech = military_construction4
+#					}
+#					JAP = {
+#						has_tech = military_construction4
+#					}
+#					ITA = {
+#						has_tech = military_construction4
+#					}
+#				}
+#			}
+#		}
+#
+#		fire_only_once = yes
+#
+#		complete_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision SGR_science_competition_military_construction"
+#			add_political_power = 50
+#			if = {
+#				limit = { NOT = { amount_research_slots > 5 } }
+#				add_research_slot = 1
+#			}
+#			hidden_effect = {
+#				country_event = {
+#					id = speerscience.4
+#					days = 70
+#				}
+#			}
+#			custom_effect_tooltip = SGR_science_competition_temp_res_slot
+#		}
+#
+#		ai_will_do = {
+#			factor = 100
+#		}
+#
+#	}
+#
+#	SGR_science_competition_civilian_construction = {
+#
+#		icon = GFX_decision_generic_construction
+#
+#		available = {
+#			has_tech = construction4
+#
+#			NOT = {
+#				OR = {
+#					USA = {
+#						has_tech = construction4
+#					}
+#					JAP = {
+#						has_tech = construction4
+#					}
+#					ITA = {
+#						has_tech = construction4
+#					}
+#				}
+#			}
+#		}
+#		visible = {
+#			NOT = {
+#				OR = {
+#					USA = {
+#						has_tech = construction4
+#					}
+#					JAP = {
+#						has_tech = construction4
+#					}
+#					ITA = {
+#						has_tech = construction4
+#					}
+#				}
+#			}
+#		}
+#
+#		fire_only_once = yes
+#
+#		complete_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision SGR_science_competition_civilian_construction"
+#			add_political_power = 50
+#			if = {
+#				limit = { NOT = { amount_research_slots > 5 } }
+#				add_research_slot = 1
+#			}
+#			hidden_effect = {
+#				country_event = {
+#					id = speerscience.4
+#					days = 70
+#				}
+#			}
+#			custom_effect_tooltip = SGR_science_competition_temp_res_slot
+#		}
+#
+#		ai_will_do = {
+#			factor = 100
+#		}
+#
+#	}
+
+	SGR_science_competition_improved_processing = {
+
+		icon = GFX_decision_generic_ignite_civil_war
+
+		available = {
+			has_tech = excavation3
+
+			NOT = {
+				OR = {
+					USA = {
+						has_tech = excavation3
+					}
+					JAP = {
+						has_tech = excavation3
+					}
+					ITA = {
+						has_tech = excavation3
+					}
+				}
+			}
+		}
+		visible = {
+			NOT = {
+				OR = {
+					USA = {
+						has_tech = excavation3
+					}
+					JAP = {
+						has_tech = excavation3
+					}
+					ITA = {
+						has_tech = excavation3
+					}
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_science_competition_improved_processing"
+			add_political_power = 50
+			if = {
+				limit = { NOT = { amount_research_slots > 5 } }
+				add_research_slot = 1
+			}
+			hidden_effect = {
+				country_event = {
+					id = speerscience.4
+					days = 70
+				}
+			}
+			custom_effect_tooltip = SGR_science_competition_temp_res_slot
+			random_owned_controlled_state = {
+				add_resource = {
+					type = aluminium
+					amount = 12
+				}
+			}
+			random_owned_controlled_state = {
+				add_resource = {
+					type = steel
+					amount = 18
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+}
+
+
+
+
+
+GER_SGR_post_embargo_trading = {
+
+	GER_SGR_pet_promote_the_cooperation = {
+
+		icon = GFX_decision_generic_form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_max_trust
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 100
+					compare = less_than
+				}
+			}
+			has_political_power > 75
+		}
+
+		days_re_enable = 180
+
+		cost = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_promote_the_cooperation"
+			custom_effect_tooltip = SGR_pet_trust_growth_15
+			hidden_effect = {
+				if = {
+					limit = {
+						tag = GER
+					}
+					USA = {
+						country_event = {
+							id = usagertrade.9
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					GER = {
+						country_event = {
+							id = usagertrade.9
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 5
+					compare = less_than_or_equals
+				}
+				factor = 100
+			}
+		}
+
+	}
+
+	GER_SGR_pet_encourage_civilian_trading = {
+
+		icon = GFX_decision_generic_construction
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_max_congood
+				check_variable = {
+					var = SGR_pet_consumer_goods
+					value = -0.1
+					compare = greater_than
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_check_civtrade
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 5
+					compare = greater_than_or_equals
+				}
+			}
+		}
+
+		#days_remove = 45
+
+		days_re_enable = 90
+
+		custom_cost_trigger = {
+			num_of_available_civilian_factories > 10
+		}
+
+		custom_cost_text = SGR_pet_civ_fact_cost_10
+
+		#modifier = {
+		#	civilian_factory_use = 10
+		#}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_encourage_civilian_trading"
+			custom_effect_tooltip = SGR_pet_army_coop_reward
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_dynamic_modifier = {
+								modifier = GER_SGR_german_american_commerce_dynamic_modifier
+							}
+						}
+					}
+					add_dynamic_modifier = { modifier = GER_SGR_german_american_commerce_dynamic_modifier }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_relations_var
+						value = 100
+						compare = less_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_trust_growth_10
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_consumer_goods
+						value = -0.1
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_consumer_goods_tt
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						tag = GER
+					}
+					USA = {
+						country_event = {
+							id = usagertrade.6
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					GER = {
+						country_event = {
+							id = usagertrade.6
+						}
+					}
+				}
+			}
+		}
+
+		#remove_effect = {
+		#
+		#}
+
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				num_of_available_civilian_factories > 15
+				factor = 50
+			}
+			modifier = {
+				num_of_available_civilian_factories > 20
+				factor = 75
+			}
+			modifier = {
+				num_of_available_civilian_factories > 25
+				factor = 100
+			}
+		}
+
+	}
+
+	GER_SGR_pet_encourage_arms_trading = {
+
+		icon = GFX_decision_generic_prepare_civil_war
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 4999
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_max_indcap
+				check_variable = {
+					var = SGR_pet_industrial_capacity
+					value = 0.1
+					compare = less_than
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_check_civtrade
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 25
+					compare = greater_than_or_equals
+				}
+			}
+		}
+
+		#days_remove = 45
+
+		days_re_enable = 90
+
+		custom_cost_trigger = {
+			has_equipment = {
+				infantry_equipment > 4999
+			}
+		}
+
+		custom_cost_text = SGR_pet_mil_fact_cost_10
+
+		#modifier = {
+		#	civilian_factory_use = 10
+		#}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_encourage_arms_trading"
+			custom_effect_tooltip = SGR_pet_army_coop_reward
+			custom_effect_tooltip = econ_increase_money_reserves
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_dynamic_modifier = {
+								modifier = GER_SGR_german_american_commerce_dynamic_modifier
+							}
+						}
+					}
+					add_dynamic_modifier = { modifier = GER_SGR_german_american_commerce_dynamic_modifier }
+				}
+				if = {
+					limit = {
+						tag = GER
+					}
+					send_equipment = {
+						equipment = infantry_equipment
+						amount = 5000
+						target = USA
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					send_equipment = {
+						equipment = infantry_equipment
+						amount = 5000
+						target = GER
+					}
+				}
+				add_timed_idea = {
+					idea = GER_SGR_encouraging_arms_trading
+					days = 45
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_relations_var
+						value = 100
+						compare = less_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_trust_growth_10
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_industrial_capacity
+						value = 0.1
+						compare = less_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_industrial_capacity_tt
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						tag = GER
+					}
+					USA = {
+						country_event = {
+							id = usagertrade.12
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					GER = {
+						country_event = {
+							id = usagertrade.12
+						}
+					}
+				}
+			}
+		}
+
+		#remove_effect = {
+		#
+		#}
+
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				num_of_available_military_factories > 10
+				factor = 50
+			}
+			modifier = {
+				num_of_available_military_factories > 15
+				factor = 75
+			}
+			modifier = {
+				num_of_available_military_factories > 20
+				factor = 100
+			}
+		}
+
+	}
+
+	GER_SGR_pet_army_technology_cooperation = {
+
+		icon = GFX_decision_drug_trade_increase
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_check_miltech
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 50
+					compare = greater_than_or_equals
+				}
+			}
+			has_army_experience > 50
+		}
+
+		days_re_enable = 120
+
+		custom_cost_trigger = {
+			has_army_experience > 50
+		}
+
+		custom_cost_text = SGR_pet_army_exp_cost_50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_army_technology_cooperation"
+			custom_effect_tooltip = SGR_pet_army_coop_reward
+			custom_effect_tooltip = econ_increase_money_reserves_small
+			effect_tooltip = {
+				add_tech_bonus = {
+					bonus = 0.25
+					uses = 1
+					category = infantry_weapons
+					category = support_tech
+					category = artillery
+					category = armor
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_relations_var
+						value = 100
+						compare = less_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_trust_growth_5
+			}
+			hidden_effect = {
+				army_experience = -50
+
+				if = {
+					limit = {
+						tag = GER
+					}
+					USA = {
+						country_event = {
+							id = usagertrade.1
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					GER = {
+						country_event = {
+							id = usagertrade.1
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				has_army_experience > 100
+				factor = 50
+			}
+			modifier = {
+				has_army_experience > 150
+				factor = 75
+			}
+			modifier = {
+				has_army_experience > 200
+				factor = 100
+			}
+		}
+
+	}
+
+	GER_SGR_pet_maritime_technology_cooperation = {
+
+		icon = GFX_decision_drug_trade_increase
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_check_miltech
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 50
+					compare = greater_than_or_equals
+				}
+			}
+			has_navy_experience > 50
+		}
+
+		days_re_enable = 120
+
+		custom_cost_trigger = {
+			has_navy_experience > 50
+		}
+
+		custom_cost_text = SGR_pet_navy_exp_cost_50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_aviation_technology_cooperation"
+			custom_effect_tooltip = SGR_pet_army_coop_reward
+			custom_effect_tooltip = econ_increase_money_reserves_small
+			effect_tooltip = {
+				add_tech_bonus = {
+					bonus = 0.25
+					uses = 1
+					category = naval_equipment
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_relations_var
+						value = 100
+						compare = less_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_trust_growth_5
+			}
+			hidden_effect = {
+				air_experience = -50
+
+				if = {
+					limit = {
+						tag = GER
+					}
+					USA = {
+						country_event = {
+							id = usagertrade.5
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					GER = {
+						country_event = {
+							id = usagertrade.5
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				has_navy_experience > 100
+				factor = 50
+			}
+			modifier = {
+				has_navy_experience > 150
+				factor = 75
+			}
+			modifier = {
+				has_navy_experience > 200
+				factor = 100
+			}
+		}
+
+	}
+
+	GER_SGR_pet_aviation_technology_cooperation = {
+
+		icon = GFX_decision_drug_trade_increase
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_check_miltech
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 50
+					compare = greater_than_or_equals
+				}
+			}
+			has_air_experience > 50
+		}
+
+		days_re_enable = 120
+
+		custom_cost_trigger = {
+			has_air_experience > 50
+		}
+
+		custom_cost_text = SGR_pet_air_exp_cost_50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_aviation_technology_cooperation"
+			custom_effect_tooltip = SGR_pet_army_coop_reward
+			custom_effect_tooltip = econ_increase_money_reserves_small
+			effect_tooltip = {
+				add_tech_bonus = {
+					bonus = 0.25
+					uses = 1
+					category = air_equipment
+					category = helicopter
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_relations_var
+						value = 100
+						compare = less_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_trust_growth_5
+			}
+			hidden_effect = {
+				air_experience = -50
+
+				if = {
+					limit = {
+						tag = GER
+					}
+					USA = {
+						country_event = {
+							id = usagertrade.4
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					GER = {
+						country_event = {
+							id = usagertrade.4
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 25
+			modifier = {
+				has_air_experience > 100
+				factor = 50
+			}
+			modifier = {
+				has_air_experience > 150
+				factor = 75
+			}
+			modifier = {
+				has_air_experience > 200
+				factor = 100
+			}
+		}
+
+	}
+
+	GER_SGR_pet_invite_foreign_business = {
+
+		icon = GFX_decision_generic_form_nation
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_check_forbus
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 65
+					compare = greater_than_or_equals
+				}
+			}
+			has_political_power > 100
+		}
+
+		days_re_enable = 180
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_invite_foreign_business"
+			custom_effect_tooltip = SGR_pet_army_coop_reward
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_relations_var
+						value = 100
+						compare = less_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_trust_growth_20
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = SGR_pet_consumer_goods
+						value = -0.1
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = SGR_pet_consumer_goods_tt
+			}
+			if = {
+				limit = {
+					tag = GER
+				}
+				custom_effect_tooltip = SGR_megacorp_attack_tt
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						tag = GER
+					}
+					USA = {
+						country_event = {
+							id = usagertrade.10
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					GER = {
+						country_event = {
+							id = usagertrade.10
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 80
+					compare = less_than_or_equals
+				}
+				factor = 100
+			}
+		}
+
+	}
+
+	GER_SGR_pet_a_historic_meeting = {
+
+		icon = GFX_decision_generic_civil_support
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = sgr_beaten_to_punch
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_pet_relations_var_max_everything
+				check_variable = {
+					var = SGR_pet_relations_var
+					value = 100
+					compare = equals
+				}
+				check_variable = {
+					var = SGR_pet_consumer_goods
+					value = -0.1
+					compare = equals
+				}
+				check_variable = {
+					var = SGR_pet_industrial_capacity
+					value = 0.1
+					compare = equals
+				}
+			}
+			has_political_power > 150
+		}
+
+		fire_only_once = yes
+
+		cost = 150
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_SGR_pet_a_historic_meeting"
+			add_stability = 0.05
+			country_event = {
+				id = usagertrade.15
+			}
+			if = {
+				limit = {
+					tag = GER
+				}
+				remove_dynamic_modifier = { modifier = GER_SGR_german_american_commerce_dynamic_modifier }
+				add_ideas = GER_SGR_german_american_commerce_one
+				USA = {
+					remove_dynamic_modifier = { modifier = GER_SGR_german_american_commerce_dynamic_modifier }
+					add_ideas = GER_SGR_german_american_commerce_two
+				}
+			}
+			if = {
+				limit = {
+					tag = USA
+				}
+				remove_dynamic_modifier = { modifier = GER_SGR_german_american_commerce_dynamic_modifier }
+				add_ideas = GER_SGR_german_american_commerce_one
+				GER = {
+					remove_dynamic_modifier = { modifier = GER_SGR_german_american_commerce_dynamic_modifier }
+					add_ideas = GER_SGR_german_american_commerce_two
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						tag = GER
+					}
+					set_country_flag = sgr_pet_finished
+					USA = {
+						country_event = {
+							id = usagertrade.15
+						}
+						set_country_flag = sgr_beaten_to_punch
+						set_country_flag = sgr_pet_finished
+					}
+				}
+				if = {
+					limit = {
+						tag = USA
+					}
+					set_country_flag = sgr_pet_finished
+					GER = {
+						country_event = {
+							id = usagertrade.15
+						}
+						set_country_flag = sgr_beaten_to_punch
+						set_country_flag = sgr_pet_finished
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+
+GER_foreign_policy_category = {
+	GER_Speer_ICW_send_weapons = {
+		icon = GFX_decision_black_market_infantry_purchase
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		available = {
+			has_equipment = { infantry_equipment > 599 }
+			has_equipment = { anti_tank_equipment > 349 }
+			has_equipment = { support_equipment > 299 }
+			has_equipment = { artillery_equipment > 99 }
+		}
+
+		custom_cost_trigger = { command_power > 2 }
+		custom_cost_text = decision_cost_3_cp
+		days_remove = 3
+		days_re_enable = 14
+
+		highlight_states = {
+			is_owned_and_controlled_by = PER
+			is_capital = yes
+		}
+		# on_map_mode = map_only
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_send_weapons"
+			hidden_effect = { add_command_power = -3 }
+		}
+		remove_effect = {
+			send_equipment = {
+				type = infantry_equipment
+				amount = 600
+				target = PER
+			}
+			send_equipment = {
+				type = anti_tank_equipment
+				amount = 350
+				target = PER
+			}
+			send_equipment = {
+				type = support_equipment
+				amount = 300
+				target = PER
+			}
+			send_equipment = {
+				type = artillery_equipment
+				amount = 100
+				target = PER
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_send_vehicles = {
+		icon = GFX_decision_black_market_motorized_purchase
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		available = {
+			has_equipment = { motorized_equipment > 199 }
+			has_equipment = { MBT_equipment > 99 }
+		}
+
+		custom_cost_trigger = { command_power > 2 }
+		custom_cost_text = decision_cost_3_cp
+		days_remove = 6
+		days_re_enable = 30
+
+		highlight_states = {
+			is_owned_and_controlled_by = PER
+			is_capital = yes
+		}
+		# on_map_mode = map_only
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_send_vehicles"
+			hidden_effect = { add_command_power = -3 }
+		}
+		remove_effect = {
+			send_equipment = {
+				type = motorized_equipment
+				amount = 200
+				target = PER
+			}
+			send_equipment = {
+				type = MBT_equipment
+				amount = 100
+				target = PER
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_iranisches_freiwilligenkorps = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		available = {
+			if = {
+				limit = { has_global_flag = german_civil_war_speervic }
+				SRT = { exists = no }
+			}
+		}
+
+		cost = 30
+		fire_only_once = yes
+		days_remove = 3
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_iranisches_freiwilligenkorps"
+		}
+		remove_effect = {
+			custom_effect_tooltip = GER_iran_volunteers_tt
+			PER = { country_event = PER_GER.1 }
+
+			set_temp_variable = { target = PER }
+			TNO_increase_volunteer_cap_1 = yes
+			custom_effect_tooltip = "TNO_increase_volunteers_PER_1"
+
+			set_country_flag = GER_iran_volunteers
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_expand_the_iranisches_freiwilligenkorps = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			TNO_fopo_iran_selected = yes
+			has_country_flag = GER_iran_volunteers
+		}
+		available = {
+			set_temp_variable = { target = PER }
+			TNO_volunteer_cap_less_4 = yes
+		}
+
+		cost = 50
+		days_re_enable = 30
+		days_remove = 3
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_expand_the_iranisches_freiwilligenkorps"
+		}
+		remove_effect = {
+			set_temp_variable = { target = PER }
+			TNO_increase_volunteer_cap_1 = yes
+			custom_effect_tooltip = "TNO_increase_volunteers_PER_1"
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_expand_the_gebirgsjager_program = {
+		icon = GFX_decision_generic_assault
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		available = { has_country_flag = GER_iran_volunteers }
+
+		custom_cost_trigger = { command_power > 9 }
+		custom_cost_text = decision_cost_10_cp
+		fire_only_once = yes
+		days_remove = 21
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_expand_the_gebirgsjager_program"
+			hidden_effect = { add_command_power = -10 }
+		}
+		remove_effect = {
+			custom_effect_tooltip = BOR_expand_the_gebirgsjager_program_effect
+			hidden_effect = { set_technology = { expanded_gebirgsjager_program = 1 } }
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_create_the_iranische_bombergruppe = {
+		icon = GFX_decision_black_market_helicopter_purchase
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		available = { has_country_flag = GER_iran_volunteers }
+
+		custom_cost_trigger = { command_power > 19 }
+		custom_cost_text = decision_cost_20_cp
+		fire_only_once = yes
+		days_remove = 7
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_create_the_iranische_bombergruppe"
+			hidden_effect = { add_command_power = -20 }
+		}
+		remove_effect = {
+			set_country_flag = GER_ICW_luftwaffe_squadron
+			air_experience = 25
+			add_equipment_to_stockpile = {
+				type = tac_bomber_equipment
+				amount = 100
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment
+				amount = 50
+				producer = GER
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_fliegerverbindungsoffizier = {
+		icon = GFX_decision_black_market_helicopter_purchase
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		available = { has_country_flag = GER_ICW_luftwaffe_squadron }
+
+		custom_cost_trigger = { command_power > 19 }
+		custom_cost_text = decision_cost_20_cp
+		fire_only_once = yes
+		days_remove = 21
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_fliegerverbindungsoffizier"
+			hidden_effect = { add_command_power = -20 }
+			set_temp_variable = { temp_econ_spending_amount = 0.01 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+		remove_effect = {
+			custom_effect_tooltip = BOR_fliegerverbindungsoffizier_effect
+			hidden_effect = { set_technology = { fliegerverbindungsoffizier = 1 } }
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_operation_rollender_donner = {
+		icon = GFX_decision_generic_ignite_civil_war
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		available =  { has_country_flag = GER_ICW_luftwaffe_squadron }
+
+		custom_cost_trigger = { command_power > 14 }
+		custom_cost_text = decision_cost_15_cp
+		fire_only_once = yes
+		days_remove = 7
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_operation_rollender_donner"
+			hidden_effect = { add_command_power = -15 }
+		}
+		remove_effect = {
+			add_timed_idea = { idea = GER_operation_rollender_donner days = 90 }
+			every_other_country = {
+				limit = { has_war_with = PER }
+				add_timed_idea = { idea = GER_Bormann_OC_bombing_runs days = 90 }
+				TNO_worsen_poverty_high = yes
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_beratergruppe_fur_militarhilfe = {
+		icon = GFX_decision_generic_military_parade
+
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		custom_cost_trigger = { command_power > 4 }
+		custom_cost_text = decision_cost_5_cp_20_pp
+		fire_only_once = yes
+		days_remove = 7
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_beratergruppe_fur_militarhilfe"
+			hidden_effect = { add_command_power = -5 }
+		}
+		remove_effect = {
+			PER = {
+				add_command_power = 20
+				add_ideas = PER_german_military_advisers
+				TNO_improve_training_policy_effectiveness_high = yes
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	GER_Speer_ICW_german_industrial_aid = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			TNO_fopo_iran_selected = yes
+		}
+		custom_cost_trigger = { command_power > 19 }
+		custom_cost_text = decision_cost_20_cp
+		fire_only_once = yes
+		days_remove = 25
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_german_industrial_aid"
+			set_temp_variable = { temp_econ_spending_amount = 0.025}
+			econ_spend_money_once_effect_raw_money = yes
+		}
+		remove_effect = {
+			add_command_power = 25
+			PER = {
+				add_ideas = PER_german_industrial_aid
+				TNO_improve_industrial_equipment_high = yes
+				TNO_improve_industrial_expertise_med = yes
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+}
+
+
+SGR_escalation_decision_category = {
+
+	SGR_escalation_schorner_intervention_launch = {
+
+		icon = GFX_decision_generic_assault
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_preparedness_tooltip
+				check_variable = {SGR_intervention_preparedness = 100}
+				NOT = {
+					has_country_flag = SGR_seizing_lands
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_SR_intervention_agi_30_tt
+				check_variable = {SGR_escalation_social_agitation < 30.01}
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_schorner_intervention_launch"
+			country_event = {
+				id = speer_slaverevolt.32
+			}
+			puppet = OKB
+			OKB = {
+				every_owned_state = {
+					add_core_of = GER
+				}
+			}
+			annex_country = {
+				target = OKB
+				transfer_troops = no
+			}
+			declare_war_on = {
+				target = MCW
+				type = annex_everything
+			}
+			if = {
+				limit = {
+					country_exists = DFK
+				}
+				DFK = {
+					declare_war_on = {
+						target = GER
+						type = annex_everything
+					}
+				}
+			}
+			remove_mission = SGR_escalation_schorner_intervention_preparation
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_military_open = {
+		icon = GFX_decision_generic_visibility
+		allowed = {
+			tag = GER
+		}
+
+		available = {
+			always = yes
+		}
+
+		activation = {
+			has_global_flag = SGR_Slave_Revolt
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_military_open"
+			if = {
+				limit = {
+					NOT = {has_country_flag = SGR_SR_mil_opened}
+				}
+				set_country_flag = SGR_SR_mil_opened
+			}
+			else = {
+				clr_country_flag = SGR_SR_mil_opened
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = SGR_SR_mil_opened
+				factor = 0
+			}
+		}
+	}
+
+	SGR_escalation_society_open = {
+		icon = GFX_decision_generic_visibility
+		allowed = {
+			tag = GER
+		}
+
+		available = {
+			always = yes
+		}
+
+		activation = {
+			has_global_flag = SGR_Slave_Revolt
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		remove_effect = {
+
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_society_open"
+			if = {
+				limit = {
+					NOT = {has_country_flag = SGR_SR_soc_opened}
+				}
+				set_country_flag = SGR_SR_soc_opened
+			}
+			else = {
+				clr_country_flag = SGR_SR_soc_opened
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+			modifier = {
+				has_country_flag = SGR_SR_soc_opened
+				factor = 0
+			}
+		}
+	}
+
+
+	SGR_escalation_send_in_orpo = {
+
+		icon = GFX_decision_generic_use_force
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_soc_opened
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+		}
+
+		cost = 30
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_send_in_orpo"
+			decrease_regime_stab_med = yes
+			increase_conservative_leaning_small = yes
+		}
+
+
+		days_remove = 7
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_send_in_orpo"
+			SGR_SR_agitation_decrease_med = yes
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_negotiate_with_students = {
+
+		icon = GFX_decision_generic_investigate
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_soc_opened
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+		}
+
+		cost = 30
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_negotiate_with_students"
+			increase_reformist_leaning_small = yes
+			decrease_regime_stab_med = yes
+		}
+
+
+		days_remove = 7
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_send_in_orpo"
+			SGR_SR_agitation_decrease_med = yes
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+
+
+	SGR_escalation_IGFarben_support = {
+
+		icon = GFX_decision_handshake
+
+		allowed = {
+			tag = GER
+		}
+
+		available = {
+			has_country_flag = IGFarben_dismantled
+		}
+
+		activation = {
+			has_global_flag = SGR_Slave_Revolt
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			hidden_trigger = {
+				OR = {
+					NOT = {has_country_flag = SGR_SR_bad_end}
+					NOT = {has_country_flag = SGR_SR_good_end}
+				}
+				NOT = { has_country_flag = IGFarben_dismantled }
+			}
+		}
+
+		is_good = no
+
+		days_mission_timeout = 60
+
+		#fire_only_once = yes
+
+		timeout_effect = {
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = 2000
+				target = MCW
+			}
+
+			if = {
+				limit = {
+					NOT = {has_country_flag = Daimler_dismantled}
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 1500
+					target = MCW
+				}
+				send_equipment = {
+					equipment = motorized_equipment
+					amount = 300
+					target = MCW
+				}
+			}
+			if = {
+				limit = {
+					NOT = {has_country_flag = Reichswerke_dismantled}
+				}
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 1000
+					target = MCW
+				}
+				send_equipment = {
+					equipment = artillery_equipment
+					amount = 850
+					target = MCW
+				}
+			}
+
+			hidden_effect = {
+				if = {
+					limit = {
+						has_active_mission = SGR_escalation_schorner_intervention_preparation
+					}
+					activate_mission = SGR_escalation_IGFarben_support
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+
+	SGR_escalation_go4_actions = {
+
+		icon = GFX_decision_generic_political_discourse
+
+		#visible = {
+		#	tag = GER
+		#}
+
+		allowed = {
+			tag = GER
+		}
+
+		available = {
+			has_political_power > SGR_go4_pp_var
+		}
+
+		activation = {
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_country_flag = SGR_SR_bad_end
+						has_country_flag = SGR_SR_good_end
+					}
+				}
+				has_global_flag = SGR_Slave_Revolt
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+		}
+
+		selectable_mission = yes
+
+
+		is_good = no
+
+		days_mission_timeout = 14
+
+		complete_effect = {
+			hidden_effect = {
+				activate_mission = SGR_escalation_go4_actions
+			}
+			set_temp_variable = {tempgo4 = SGR_go4_pp_var}
+			multiply_temp_variable = {tempgo4 = -1}
+			add_political_power = tempgo4
+			add_to_variable = {SGR_go4_pp_var = 10}
+			decrease_regime_stab_small = yes
+			increase_conservative_leaning_small = yes
+		}
+
+		timeout_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_country_flag = SGR_SR_bad_end
+								has_country_flag = SGR_SR_good_end
+							}
+						}
+					}
+					activate_mission = SGR_escalation_go4_actions
+					add_popularity = {
+						ideology = authoritarian_democracy
+						popularity = 0.003
+					}
+				}
+			}
+			SGR_SR_agitation_decrease_med = yes
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+
+	SGR_escalation_schorner_intervention_preparation = {
+
+		icon = GFX_decision_generic_assault
+
+		#visible = {
+		#	tag = GER
+		#}
+
+		allowed = {
+			tag = GER
+		}
+
+		available = {
+			GER = {has_war_with = MCW}
+		}
+
+		activation = {
+			has_global_flag = SGR_Slave_Revolt
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_country_flag = SGR_SR_bad_end
+						has_country_flag = SGR_SR_good_end
+					}
+				}
+			}
+		}
+
+		is_good = no
+
+		days_mission_timeout = SGR_escalation_decision_timer?100
+
+		fire_only_once = yes
+
+		timeout_effect = {
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				random_list = {
+					10 = {
+					    modifier = {
+                            factor = 0
+                            has_game_rule = {
+                                rule = GER_SPEER_PATH
+                                option = GER_SPEER_PATH_REFORMER
+                            }
+                        }
+                        modifier = {
+                            factor = 0
+                            has_game_rule = {
+                                rule = GER_SPEER_PATH
+                                option = GER_SPEER_PATH_CONSERVATIVE
+                            }
+                        }
+						MCW = {
+							declare_war_on = {
+								target = SRT
+								type = annex_everything
+							}
+						}
+						if = {
+							limit = {
+								PAU = { exists = yes }
+							}
+							PAU = {
+								declare_war_on = {
+									target = MCW
+									type = annex_everything
+								}
+							}
+							else = {
+								DFK = {
+									declare_war_on = {
+										target = SRT
+										type = annex_everything
+									}
+								}
+							}
+						}
+						country_event = speerescalation.4
+					}
+					90 = {
+						country_event = {
+							id = speer_slaverevolt.32
+						}
+						puppet = OKB
+						OKB = {
+							every_owned_state = {
+								add_core_of = GER
+							}
+						}
+						annex_country = {
+							target = OKB
+							transfer_troops = no
+						}
+						declare_war_on = {
+							target = MCW
+							type = annex_everything
+						}
+						if = {
+							limit = {
+								country_exists = DFK
+							}
+							DFK = {
+								declare_war_on = {
+									target = GER
+									type = annex_everything
+								}
+							}
+						}
+						remove_mission = SGR_escalation_schorner_intervention_preparation
+					}
+				}
+			}
+			else = {
+				MCW = {
+					declare_war_on = {
+						target = SRT
+						type = annex_everything
+					}
+				}
+				if = {
+					limit = {
+						PAU = { exists = yes }
+					}
+					PAU = {
+						declare_war_on = {
+							target = MCW
+							type = annex_everything
+						}
+					}
+					else = {
+						DFK = {
+							declare_war_on = {
+								target = SRT
+								type = annex_everything
+							}
+						}
+					}
+				}
+				country_event = speerescalation.4
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_fortify_Sankt_Petersburg = {
+
+		icon = GFX_decision_generic_construction
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_mil_opened
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_agitation_50_tt
+				hidden_trigger = {
+					check_variable = {SGR_escalation_social_agitation < 50}
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 10
+		}
+
+		custom_cost_text = SGR_revolt_cp_10_cost
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_fortify_brauchitschstadt"
+		}
+
+		days_remove = 14
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_fortify_brauchitschstadt"
+			custom_effect_tooltip = SGR_brau_forts
+			hidden_effect = {
+				195 = {
+					add_building_construction = {
+						type = coastal_bunker
+						level = 2
+						instant_build = yes
+						province = 3151
+					}
+
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 3151
+					}
+
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 149
+					}
+				}
+			}
+			SGR_SR_intervention_increase_big = yes
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+
+
+	SGR_obtain_hostile_deployment_intelligence = {
+
+		icon = GFX_decision_point
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_mil_opened
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_RND_20_expertise_tt
+				hidden_trigger = {
+					check_variable = {RND_training_lvl > 20}
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+			check_variable = {RND_training_lvl > 20}
+		}
+
+		custom_cost_text = SGR_obtain_hostile_deployment_intelligence_cost
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_obtain_hostile_deployment_intelligence"
+			hidden_effect = {
+				subtract_from_variable = {RND_training_lvl = 20}
+			}
+		}
+
+		days_remove = 7
+		days_re_enable = 7
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_obtain_hostile_deployment_intelligence"
+			SGR_SR_intervention_increase_med = yes
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_airbridge_to_gotenhalbinsel = {
+
+		icon = GFX_decision_generic_fighter_plane
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_mil_opened
+			hidden_trigger = {
+				GOT = {
+					exists = yes
+				}
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_escalation_luft_ref_check
+				OR = {
+					has_idea = GER_SGR_reformed_luftwaffe
+					has_idea = GER_SGR_reformed_luftwaffe_two
+				}
+			}
+			command_power > 10
+		}
+
+		custom_cost_trigger = {
+			command_power > 10
+		}
+
+		custom_cost_text = SGR_escalation_compow_cost
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_airbridge_to_gotenhalbinsel"
+			hidden_effect = {
+				add_command_power = -10
+			}
+			add_to_faction = GOT
+		}
+
+		days_remove = 25
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_airbridge_to_gotenhalbinsel"
+			SGR_SR_intervention_increase_med = yes
+			195 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			clamp_variable = {
+				var = SGR_escalation_preparedness_var
+				min = 0
+				max = 100
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_seize_baltic_islands = {
+
+		icon = GFX_decision_infiltrate_state
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_mil_opened
+			hidden_trigger = {
+				SRT = {
+					exists = yes
+				}
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_escalation_kriegsmarine_ref_check
+				OR = {
+					has_idea = GER_SGR_global_fleet
+					has_idea = GER_SGR_global_fleet_two
+				}
+			}
+			command_power > 10
+		}
+
+		custom_cost_trigger = {
+			command_power > 10
+		}
+
+		custom_cost_text = SGR_escalation_compow_cost
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_airbridge_to_gotenhalbinsel"
+			hidden_effect = {
+				add_command_power = -10
+			}
+			transfer_state = 1440
+			add_state_core = 1440
+			add_manpower = -16740
+		}
+
+		days_remove = 14
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_airbridge_to_gotenhalbinsel"
+			SGR_SR_intervention_increase_med = yes
+			1440 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			clamp_variable = {
+				var = SGR_escalation_preparedness_var
+				min = 0
+				max = 100
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_pounce_on_schorner = {
+
+		icon = GFX_decision_generic_assault
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_mil_opened
+			hidden_trigger = {
+				MCW = {
+					exists = yes
+				}
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_preparedness_tooltip_80
+
+				check_variable = {
+					SGR_intervention_preparedness > 79
+				}
+			}
+			command_power > 10
+		}
+
+		custom_cost_trigger = {
+			command_power > 10
+		}
+
+		custom_cost_text = SGR_escalation_compow_cost
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_airbridge_to_gotenhalbinsel"
+			hidden_effect = {
+				add_command_power = -29
+			}
+			subtract_from_variable = {
+				SGR_intervention_preparedness = 20
+			}
+			set_country_flag = SGR_seizing_lands
+		}
+
+		days_remove = 25
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_airbridge_to_gotenhalbinsel"
+			custom_effect_tooltip = SGR_lose_20_preparedness
+			OKB = {
+				transfer_state = 1421
+				transfer_state = 1434
+				transfer_state = 209
+				add_state_core = 1421
+				add_state_core = 1434
+				add_state_core = 209
+			}
+			clamp_variable = {
+				var = SGR_escalation_preparedness_var
+				min = 0
+				max = 100
+			}
+			clr_country_flag = SGR_seizing_lands
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_prepare_convoy_routes = {
+
+		icon = GFX_decision_shipyard
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_mil_opened
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+			has_equipment = {
+				convoy_1 > 19
+			}
+			custom_trigger_tooltip = {
+				tooltip = SGR_escalation_no_focus_student
+				NOT = {
+					has_country_flag = SGR_escalation_thing_speer_focus_students
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+			has_equipment = {
+				convoy_1 > 19
+			}
+		}
+
+		custom_cost_text = SGR_escalation_convoy_cost
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_prepare_convoy_routes"
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = convoy_1
+					amount = -20
+				}
+			}
+		}
+
+		days_remove = 25
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_prepare_convoy_routes"
+			SGR_SR_intervention_increase_med = yes
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+	SGR_escalation_grant_emergency_funding = {
+
+		icon = GFX_decision_generic_money
+
+		allowed = {
+			tag = GER
+		}
+
+		visible = {
+			has_active_mission = SGR_escalation_schorner_intervention_preparation
+			has_country_flag = SGR_SR_mil_opened
+		}
+
+		available = {
+			hidden_trigger = {
+				has_active_mission = SGR_escalation_schorner_intervention_preparation
+			}
+			has_political_power > 30
+		}
+
+		cost = 15
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_escalation_grant_emergency_funding"
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+
+		days_remove = 7
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SGR_escalation_grant_emergency_funding"
+			SGR_SR_intervention_increase_small = yes
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+
+	}
+
+}
+

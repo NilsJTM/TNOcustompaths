@@ -1,0 +1,2012 @@
+add_namespace = PHI_Blitz
+add_namespace = PHI_old_soldier
+add_namespace = PHI_revolutionary
+add_namespace = PHI_conscript
+add_namespace = PHI_militiaman
+add_namespace = PHI_brother
+add_namespace = PHI_flavor
+add_namespace = PHI_border_conflict
+
+#####PHILIPPINES EVENTS (TECHNICAL)
+
+country_event = { #USA lore/choice event
+	id = PHI_Blitz.0
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.0"
+		if = {
+			limit = {
+				exists = yes
+				OR = { 
+					has_war_with = SPH
+					has_war_with = UPH
+				}
+			}
+			add_to_variable = { PHI.PHI_fucking_surrender_limit = -0.05 }
+			add_to_variable = { UPH.UPH_fucking_surrender_limit = -0.05 }
+			#add_to_variable = { SPH.SPH_fucking_surrender_limit = -0.05 }
+			country_event = { id = PHI_Blitz.0 days = 30 }
+		}
+	}
+	is_triggered_only = yes
+	hidden = yes
+}
+
+country_event = { #USA lore/choice event
+	id = PHI_Blitz.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.1"}
+	title = PHI_Blitz.1.t
+	desc = PHI_Blitz.1.desc
+	picture = GFX_report_event_south_african_war_us_soldier9
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.1.a
+		set_country_flag = USA_PHI_soldier
+		custom_effect_tooltip = USA_PHI_soldier_tt
+	}
+	option = {
+		name = PHI_Blitz.1.b
+		custom_effect_tooltip = USA_PHI_revolutionary_tt
+	}
+}
+
+country_event = { #JAP lore/choice event
+	id = PHI_Blitz.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.2"}
+	title = PHI_Blitz.2.t
+	desc = PHI_Blitz.2.desc
+	picture = GFX_report_event_blitz_begins
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.2.a
+		set_country_flag = JAP_PHI_conscript
+		custom_effect_tooltip = JAP_PHI_conscript_tt
+	}
+	option = {
+		name = PHI_Blitz.2.b
+		custom_effect_tooltip = JAP_PHI_militiaman_tt
+	}
+}
+
+country_event = { #PHI leaves the Sphere after Yasuda and the Blitz starts
+	id = PHI_Blitz.3
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.3"
+		hidden_effect = {
+			TNO_Start_Balintawak_Blitz = yes
+		}
+	}
+	title = PHI_Blitz.3.t
+	desc = PHI_Blitz.3.desc
+	picture = GFX_report_event_blitz_begins
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.3.a
+		hidden_effect = {
+			every_country = {
+				news_event = WORLD.18122
+			}
+		}
+	}
+}
+
+country_event = { #Assassination of Jose Yulo
+	id = PHI_Blitz.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.4"}
+	title = PHI_Blitz.4.t
+	desc = PHI_Blitz.4.desc
+	picture = GFX_report_event_PHI_jose_yulo
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.4.a
+		PHI = {
+			kill_country_leader = yes
+			create_country_leader = {
+				name = "National Assembly"
+				desc = "POLITICS_PHI_NATIONAL_ASSEMBLY_DESC"
+				picture = "portrait_PHI_national_assembly.dds"
+				expire = "2000.1.1"
+				ideology = despotism_interim_government_subtype
+				traits = {
+					extraordinary_session_extraordinarily_gridlocked
+				}
+			}
+			set_politics = {
+				ruling_party = despotism
+			}
+		}
+		hidden_effect = {
+			JAP = {
+				country_event = { days = 3 id = PHI_flavor.3 }
+			}
+		}
+	}
+}
+
+country_event = { #Formation of the UFF?
+	id = PHI_Blitz.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.5"}
+	title = PHI_Blitz.5.t
+	desc = PHI_Blitz.5.desc
+	picture = GFX_report_event_PHI_map
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { #Yes
+		name = PHI_Blitz.5.a
+		ai_chance = { 
+		    factor = 7
+		    modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = united_filipino_front
+                    option = UNITED_FILIPINO_FRONT_REJECTED
+                }
+            }
+		}
+		country_event = {
+			id = PHI_Blitz.7
+			days = 1
+		}
+		set_country_flag = USA_PHI_negotiations_over
+	}
+	option = { #No
+		name = PHI_Blitz.5.b
+		ai_chance = { 
+		    factor = 3
+		    modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = united_filipino_front
+                    option = UNITED_FILIPINO_FRONT_CREATED
+                }
+            }
+		}
+		set_global_flag = PHI_negotiations_failed
+		SPH = {
+			country_event = {
+				id = PHI_Blitz.8
+				days = 30
+			}
+		}
+		set_country_flag = USA_PHI_negotiations_over
+	}
+}
+
+country_event = { #Who to lead again?
+	id = PHI_Blitz.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.6"}
+	title = PHI_Blitz.6.t
+	desc = PHI_Blitz.6.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { #Quentin Paredes
+		name = PHI_Blitz.6.a
+		ai_chance = { 
+            modifier = {
+				OR = {
+					has_game_rule = {
+						rule = PHI_ideology
+						option = PHI_IDEOLOGY_OSMENA
+					}
+					has_game_rule = {
+						rule = PHI_ideology
+						option = PHI_IDEOLOGY_RECTO
+				    }
+				}
+				factor = 0
+			}
+		    factor = 4 
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		create_country_leader = {
+			name = "Quentin Paredes"
+			desc = "POLITICS_QUENTIN_PAREDES_DESC"
+			picture = "portrait_PHI_Quintin_Paredes.dds"
+			expire = "2000.1.1"
+			ideology = authoritarian_democracy_controlled_democracy_subtype
+			traits = {
+				kalibapi_higit_sa_lahat
+			}
+		}
+		add_ideas = Sphere_Fully_Dependent
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.2
+		}
+		JAP = {
+			add_to_faction = PHI
+		}
+		every_country = {
+			news_event = { id = WORLD.18127 }
+		}
+	}
+	option = { #Claro M. Recto
+		name = PHI_Blitz.6.b
+		ai_chance = { 
+            modifier = {
+				OR = {
+					has_game_rule = {
+						rule = PHI_ideology
+						option = PHI_IDEOLOGY_PAREDES
+					}
+					has_game_rule = {
+						rule = PHI_ideology
+						option = PHI_IDEOLOGY_OSMENA
+				    }
+				}
+				factor = 0
+			}
+		    factor = 4 
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		create_country_leader = {
+			name = "Claro M. Recto"
+			desc = "POLITICS_CLARO_M_RECTO_DESC"
+			picture = "portrait_PHI_Claro_Recto.dds"
+			expire = "2000.1.1"
+			ideology = authoritarian_democracy_social_nationalism_subtype
+			traits = {
+				inang_bayan_higit_sa_lahat
+			}
+		}
+		add_ideas = Sphere_Fully_Dependent
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.2
+		}
+		JAP = {
+			add_to_faction = PHI
+		}
+		every_country = {
+			news_event = { id = WORLD.18130 }
+		}
+	}
+	option = { # Osmena
+		name = PHI_Blitz.6.c
+		ai_chance = { 
+            modifier = {
+				OR = {
+					has_game_rule = {
+						rule = PHI_ideology
+						option = PHI_IDEOLOGY_PAREDES
+					}
+					has_game_rule = {
+						rule = PHI_ideology
+						option = PHI_IDEOLOGY_RECTO
+				    }
+				}
+				factor = 0
+			}
+		    factor = 2 
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		create_country_leader = {
+			name = "Sergio Osmeña Jr."
+			desc = "POLITICS_SERGIO_OSMENA_JR"
+			picture = "portrait_PHI_Sergio_Osmena_Jr.dds"
+			expire = "2000.1.1"
+			ideology = authoritarian_democracy_oligarchy_subtype
+			traits = {
+				pangangalakal_higit_sa_lahat
+			}
+		}
+		add_ideas = Sphere_Fully_Dependent
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.2
+		}
+		JAP = {
+			add_to_faction = PHI
+		}
+		every_country = {
+			news_event = { id = WORLD.18131 }
+		}
+	}
+}
+
+country_event = { #UFF Formed
+	id = PHI_Blitz.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.7"}
+	title = PHI_Blitz.7.t
+	desc = PHI_Blitz.7.desc
+	picture = GFX_report_event_PHI_UFF
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { #Yes
+		name = PHI_Blitz.7.a
+		SPH = {
+			create_faction = United_Filipino_Front
+			add_to_faction = UPH
+			hidden_effect = { add_ideas = UFF_Faction }
+		}
+		hidden_effect = { UPH = { add_ideas = UFF_Faction } }
+	}
+}
+
+country_event = { #Taruc gets angry that the us doesn't want to work with him, funi ensues
+	id = PHI_Blitz.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.8"}
+	title = PHI_Blitz.8.t
+	desc = PHI_Blitz.8.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.8.a
+		diplomatic_relation = {
+			country = UPH
+			relation = non_aggression_pact
+			active = no
+		}
+		set_cosmetic_tag = SPH_PRP
+		set_popularities = {
+			communist = 61
+			socialist = 39
+		}
+		set_politics = { ruling_party = communist }
+		hidden_effect = {
+			if = {
+				limit = {
+					owns_state = 327
+				}
+				USA = {
+					country_event = {
+						id = PHI_Blitz.11
+						days = 6
+					}
+				}
+				set_variable = { SPH_para_sa_ating_himagsikan_surrender = 0.23 }
+			}
+			else = {
+				set_variable = { SPH_para_sa_ating_himagsikan_surrender = 0.2 }
+			}
+		}
+	}
+}
+
+country_event = { #T H E   L A N D I N G   starts, 14th army appears
+	id = PHI_Blitz.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.9"}
+	title = PHI_Blitz.9.t
+	desc = PHI_Blitz.9.desc
+	picture = GFX_report_event_JAP_flamethrower3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.9.a
+		hidden_effect = {
+			TNO_Blitz_Landing_Start = yes
+		}
+	}
+}
+
+country_event = { #weekly event that gives 14th army the supply decay and checks if debuffs should be applied
+	id = PHI_Blitz.10
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.10"
+		if = {
+			limit = {
+				country_exists = FGB
+				has_global_flag = PHI_landing_ongoing
+			}
+			subtract_from_variable = { JAP.JP_PHI_supply = JAP.JP_PHI_supply_decay }
+			TNO_JP_PHI_Check_Supply = yes
+			country_event = {
+				id = PHI_Blitz.10
+				days = 7
+			}
+		}
+	}
+	hidden = yes
+	is_triggered_only = yes
+}
+
+country_event = { #Operation iridescent
+	id = PHI_Blitz.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.11" }
+	title =  PHI_Blitz.11.t
+	desc = PHI_Blitz.11.desc
+	picture = GFX_report_event_cia
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.11.a
+		custom_effect_tooltip = PHI_Blitz.11_tt
+		hidden_effect = {
+			UPH = {
+				kill_country_leader	= yes
+				create_country_leader = {
+					name = "Dwight Edward Beach"
+					desc = "POLITICS_DWIGHT_EDWARD_BEACH_DESC"
+					picture = "Portrait_USA_Dwight_E_Beach.dds"
+					expire = "2000.1.1"
+					ideology = authoritarian_democracy_military_mandate_subtype
+					traits = {
+						phi_american_firepower
+					}
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+					elections_allowed = no
+				}
+				set_popularities = {
+					authoritarian_democracy = 80
+					despotism = 20
+				}
+				set_party_name = {
+					ideology = authoritarian_democracy
+					name = UPH_mandate_authdem_party
+					long_name = UPH_mandate_authdem_party_long
+				}
+			}
+			set_global_flag = UPH_Operation_Iridescent
+		}
+		random_unit_leader = {
+			limit = {
+				has_id = 1022
+			}
+			set_nationality = UPH
+		}
+	}
+}
+
+### 14th Army invasion outcomes ###
+
+country_event = { # Ceasefire, Japan withdraws
+	id = PHI_Blitz.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.12" }
+	title = PHI_Blitz.12.t
+	desc = PHI_Blitz.12.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # For Japan, the only one that has effect
+		name = PHI_Blitz.12.a
+		custom_effect_tooltip = PHI_JAP_Blitz_12_loss
+		hidden_effect = {
+			if = { #To make sure that this doesn't double annex if peace_on_actions already did its job
+				limit = { country_exists = FGB }
+				SPH = {
+					annex_country = {
+						target = FGB
+						transfer_troops = no
+					}
+				}
+			}
+			if = {
+				limit = {
+					UPH = {
+						is_in_faction_with = SPH
+					}
+				}
+				USA = {
+					country_event = {
+						id = PHI_Blitz.17 # Coalition ending
+						days = 1
+					}
+				}
+			}
+			else_if = { ### checks if PRP is already dead
+				limit = {
+					SPH = {
+						exists = no
+					}
+					UPH = {
+						has_country_leader = { name = "Dwight Edward Beach" ruling_only = yes }
+					}
+				}
+				USA = {
+					country_event = {
+						id = PHI_Blitz.16 # OFN Mandate ending
+						days = 1
+					}
+				}
+			}
+			else_if = { ### checks if PRP is already dead
+				limit = {
+					SPH = {
+						exists = no
+					}
+				}
+				USA = {
+					country_event = {
+						id = PHI_Blitz.166 # USFIP ending
+						days = 1
+					}
+				}
+			}
+			else_if = { ### checks if Mandate is already dead
+				limit = {
+					UPH = {
+						exists = no
+					}
+					SPH = { has_cosmetic_tag = SPH_PRP }
+				}
+				USA = {
+					country_event = {
+						id = PHI_Blitz.18 # Commie Philippines ending
+						days = 1
+					}
+				}
+			}
+			else = {
+				USA = { country_event = PHI_Blitz.122 }
+			}
+
+			#The following effects are intended to be only for Japan
+
+			TNO_fopo_remove_war_for_philippines_tab = yes
+			set_temp_variable = { target = FGB }
+			TNO_clear_num_volunteers = yes
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 4 }
+				set_temp_variable = { Victory_Points = 75 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 2 }
+				set_temp_variable = { Victory_Points = -75 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+	}
+}
+
+country_event = { # Ceasefire, Japan keeps Luzon
+	id = PHI_Blitz.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.13" }
+	title = PHI_Blitz.13.t
+	desc = PHI_Blitz.13.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # For Japan, the only one that has effect
+		name = PHI_Blitz.13.a
+		hidden_effect = {
+			JAP = {
+				add_to_faction = FGB
+			}
+			FGB = {
+				set_cosmetic_tag = PHI_JAP_Administration
+				add_ideas = { Sphere_Fully_Dependent }
+				remove_ideas = {
+					PHI_vengance_for_the_dead
+					PHI_well_supplied_army
+					PHI_not_supplied_army
+				}
+			}
+			TNO_14th_Army_Ceasefire_North = yes
+			UPH = {
+				econ_join_sphere_USA = yes
+				if = {
+					limit = {
+						has_country_leader = {
+							name = "Dwight Edward Beach"
+							ruling_only = yes
+						}
+					}
+					USA = {
+						set_autonomy = {
+							target = UPH
+							autonomy_state = autonomy_military_government
+						}
+					}
+					set_politics = {
+						ruling_party = authoritarian_democracy
+						elections_allowed = no
+					}
+					set_popularities = {
+						authoritarian_democracy = 80
+						despotism = 20
+					}
+					add_ideas = OFN_Mandate
+					set_cosmetic_tag = UPH_OFN_Mandate
+				}
+			}
+			every_country = {
+				news_event = WORLD.18134
+			}
+			set_global_flag = FGB_Luzon
+			TNO_War_For_Philippines_closing = yes
+			USA = { country_event = PHI_Blitz.133 }
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 2 }
+				set_temp_variable = { Victory_Points = -50 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 4 }
+				set_temp_variable = { Victory_Points = 50 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+	}
+}
+
+country_event = { # Ceasefire, Japan keeps Luzon and Vis
+	id = PHI_Blitz.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.14" }
+	title = PHI_Blitz.14.t
+	desc = PHI_Blitz.14.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # For Japan, the only one that has effect
+		name = PHI_Blitz.14.a
+		hidden_effect = {
+			JAP = {
+				add_to_faction = FGB
+			}
+			FGB = {
+				set_cosmetic_tag = PHI_JAP_Administration
+				add_ideas = { Sphere_Fully_Dependent }
+				remove_ideas = {
+					PHI_vengance_for_the_dead
+					PHI_well_supplied_army
+					PHI_not_supplied_army
+				}
+			}
+			TNO_14th_Army_Ceasefire_Mid = yes
+			UPH = {
+				econ_join_sphere_USA = yes
+				if = {
+					limit = {
+						has_country_leader = {
+							name = "Dwight Edward Beach"
+							ruling_only = yes
+						}
+					}
+					USA = {
+						set_autonomy = {
+							target = UPH
+							autonomy_state = autonomy_military_government
+						}
+					}
+					set_politics = {
+						ruling_party = authoritarian_democracy
+						elections_allowed = no
+					}
+					set_popularities = {
+						authoritarian_democracy = 80
+						despotism = 20
+					}
+					add_ideas = OFN_Mandate
+					set_cosmetic_tag = UPH_OFN_Mandate
+				}
+			}
+			every_country = {
+				news_event = WORLD.18135
+			}
+			set_global_flag = FGB_Central
+			TNO_War_For_Philippines_closing = yes
+			USA = { country_event = PHI_Blitz.144 }
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 2 }
+				set_temp_variable = { Victory_Points = -75 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 4 }
+				set_temp_variable = { Victory_Points = 75 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+	}
+}
+
+country_event = { # 14th army victory, FIRES FOR JAPAN ONLY
+	id = PHI_Blitz.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.15" }
+	title = PHI_Blitz.15.t
+	desc = PHI_Blitz.15.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.15.a
+		hidden_effect = {
+			JAP = {
+				add_to_faction = FGB
+			}
+			if = { # Checking whether peace_on_actions has done its job, if so, this won't do anything
+				limit = {
+					OR = {
+						country_exists = UPH
+						country_exists = SPH
+					}
+				}
+				FGB = {
+					annex_country = {
+						target = UPH
+						transfer_troops = no
+					}
+					annex_country = {
+						target = SPH
+						transfer_troops = no
+					}
+				}
+			}
+			set_capital = 327
+			FGB = {
+				set_cosmetic_tag = PHI_JAP_Administration
+				add_ideas = { Sphere_Fully_Dependent }
+				remove_ideas = {
+					PHI_vengance_for_the_dead
+					PHI_well_supplied_army
+					PHI_not_supplied_army
+				}
+			}
+			every_country = {
+				news_event = WORLD.18136
+			}
+			set_global_flag = FGB_Total
+			TNO_War_For_Philippines_closing = yes
+			USA = { country_event = PHI_Blitz.155 }
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 1 }
+				set_temp_variable = { Victory_Points = -125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 5 }
+				set_temp_variable = { Victory_Points = 125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+	}
+}
+
+country_event = { # Total Edward Beach (OFN Mandate) victory, FIRES FOR USA ONLY
+	id = PHI_Blitz.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.16" }
+	title = PHI_Blitz.16.t
+	desc = PHI_Blitz.16.desc
+	picture = GFX_report_event_blitz_begins
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.16.a
+		hidden_effect = {
+			USA = {
+				set_autonomy = {
+					target = UPH
+					autonomy_state = autonomy_military_government
+				}
+			}
+			UPH = {
+				set_politics = {
+					ruling_party = authoritarian_democracy
+					elections_allowed = no
+				}
+				set_popularities = {
+					authoritarian_democracy = 80
+					despotism = 20
+				}
+				add_ideas = OFN_Mandate
+				set_cosmetic_tag = UPH_OFN_Mandate
+				econ_join_sphere_USA = yes
+				every_owned_state = {
+					remove_core_of = FGB
+					remove_core_of = SPH
+				}
+				set_capital = 327
+			}
+			every_country = {
+				news_event = {
+					id = WORLD.18137
+					days = 1
+				}
+			}
+			TNO_War_For_Philippines_closing = yes
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 5 }
+				set_temp_variable = { Victory_Points = 125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 1 }
+				set_temp_variable = { Victory_Points = -125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+	}
+}
+
+country_event = { # USFIP (Fertig) victory
+	id = PHI_Blitz.166
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.166" }
+	title = PHI_Blitz.166.t
+	desc = PHI_Blitz.166.desc
+	picture = GFX_report_event_PHI_usfip
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.166.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.181377
+					days = 1
+				}
+			}
+			UPH = {
+				every_owned_state = {
+					remove_core_of = SPH
+					remove_core_of = FGB
+				}
+				econ_join_sphere_USA = yes
+				set_capital = 327
+			}
+			TNO_War_For_Philippines_closing = yes
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 4 }
+				set_temp_variable = { Victory_Points = 75 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 2 }
+				set_temp_variable = { Victory_Points = -75 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+		TNO_fopo_add_philippines_reconstruction_tab = yes
+	}
+}
+
+country_event = { # Total Coalition victory, FIRES FOR USA ONLY
+	id = PHI_Blitz.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.17" }
+	title = PHI_Blitz.17.t
+	desc = PHI_Blitz.17.desc
+	picture = GFX_report_event_PHI_UFF
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.17.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18133
+					days = 1
+				}
+			}
+			SPH = {
+				country_event = {
+					id = PHI_Blitz.19
+					days = 14
+				}
+			}
+			UPH = {
+				country_event = {
+					id = PHI_Blitz.19
+					days = 14
+				}
+			}
+			TNO_War_For_Philippines_closing = yes
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 5 }
+				set_temp_variable = { Victory_Points = 125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 1 }
+				set_temp_variable = { Victory_Points = -125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+	}
+}
+
+country_event = { # Total PRP Victory, FIRES FOR USA ONLY
+	id = PHI_Blitz.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.18" }
+	title = PHI_Blitz.18.t
+	desc = PHI_Blitz.18.desc
+	picture = GFX_report_event_luis_taruc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.18.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18138
+					days = 1
+				}
+			}
+			SPH = {
+				every_owned_state = {
+					remove_core_of = UPH
+					remove_core_of = FGB
+				}
+				set_capital = 327
+				country_event = { id = PHI_flavor.7 days = 90 }
+			}
+			TNO_War_For_Philippines_closing = yes
+			USA = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 5 }
+				set_temp_variable = { Victory_Points = 125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			JAP = {
+				set_temp_variable = { Victory_ID = 20 }
+				set_temp_variable = { Victory_Outcome = 1 }
+				set_temp_variable = { Victory_Points = -125 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+		}
+		if = {
+			limit = {
+				has_global_flag = UPH_Operation_Iridescent
+			}
+			UPH = {
+				random_unit_leader = {
+					limit = {
+						has_id = 1022
+					}
+					set_nationality = USA
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Coalition gov't ending, gonna give this to SPH and UPH tag
+	id = PHI_Blitz.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.19" }
+	title = PHI_Blitz.19.t
+	desc = PHI_Blitz.19.desc
+	picture = GFX_report_event_PHI_usfip
+
+	is_triggered_only = yes
+
+	option = {
+		name = PHI_Blitz.19.a
+		trigger = { tag = UPH }
+		hidden_effect = {
+			add_to_variable = { global.PHI_form_coalition_government_var = 1 }
+			TNO_SPH_Form_Coalition_Government = yes # There's a var check that will make the scripted effect only fire when both tags have clicked their option
+			log = "[GetDateText]: [Root.GetName]: UPH has clicked their PHI_Blitz.19 option"
+		}
+	}
+	option = {
+		name = PHI_Blitz.19.b
+		trigger = { tag = SPH }
+		hidden_effect = {
+			add_to_variable = { global.PHI_form_coalition_government_var = 1 }
+			TNO_SPH_Form_Coalition_Government = yes # There's a var check that will make the scripted effect only fire when both tags have clicked their option
+			log = "[GetDateText]: [Root.GetName]: SPH has clicked their PHI_Blitz.19 option"
+		}
+	}
+}
+
+country_event = { # Six months later..
+	id = PHI_Blitz.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.20" }
+	title = PHI_Blitz.20.t
+	desc = PHI_Blitz.20.desc
+	
+	trigger = {
+		SPH = {
+			NOT = {
+				has_country_leader = { name = "Ramon del Fierro Magsaysay" ruling_only = yes }
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Lorenzo Tañada
+		name = PHI_Blitz.20.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				has_country_flag = SPH_successful_tanada_reconstruction
+				add = 200
+			}
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = SPH_coalition_path
+                    option = SPH_COALITION_PATH_TARUC
+                }
+            }
+            modifier = {
+                add = 100
+                has_game_rule = {
+                    rule = SPH_coalition_path
+                    option = SPH_COALITION_PATH_TANADA
+                }
+            }
+		}
+		# Nothing happens, lol
+	}
+	option = { # Taruc (commie)
+		name = PHI_Blitz.20.b
+		ai_chance = {
+			base = 10
+			modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = SPH_coalition_path
+                    option = SPH_COALITION_PATH_TANADA
+                }
+            }
+		}
+		hidden_effect = {
+			set_popularities = {
+				socialist = 61
+				liberal_democracy = 29
+				authoritarian_democracy = 10
+			}
+			set_politics = {
+				ruling_party = socialist
+			}
+			every_country = {
+				news_event = WORLD.18141
+			}
+		}
+	}
+}
+
+country_event = {
+	id = PHI_Blitz.200
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.200" }
+	title = PHI_Blitz.200.t
+	desc = PHI_Blitz.200.desc
+	picture = GFX_report_event_PHI_usfip
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Army coup
+		name = PHI_Blitz.200.a
+		custom_effect_tooltip = PHI_Blitz.200_tt
+		hidden_effect = {
+			SPH = {
+				set_popularities = {
+					socialist = 11
+					liberal_democracy = 19
+					authoritarian_democracy = 70
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+				}
+				every_country = {
+					news_event = { id = WORLD.18142 days = 1 }
+				}
+				remove_ideas = OFN_Observer
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SPH_Magsaysays_Republic
+			}
+		}
+	}
+}
+
+country_event = { # USFIP - Leyte proclamation
+	id = PHI_Blitz.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.21" }
+	title = PHI_Blitz.21.t
+	desc = PHI_Blitz.21.desc
+	picture = GFX_report_event_PHI_usfip
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Exiles or smth
+		name = PHI_Blitz.21.a
+		custom_effect_tooltip = PHI_Blitz.21_tt
+		hidden_effect = {
+			UPH = {
+				set_cosmetic_tag = PHI_UPH_Republic
+				kill_country_leader = yes
+				create_country_leader = {
+					name = "Carlos Peña Romulo"
+					desc = "POLITICS_CARLOS_ROMULO_DESC"
+					picture = "portrait_UPH_Carlos_Romulo.dds"
+					expire = 2000.1.1
+					ideology = despotism_civilian_dictatorship_subtype
+					traits = {
+						heir_of_the_commonwealth
+					}
+				}
+				set_politics = { ruling_party = despotism }
+				set_party_name = { ideology = despotism name = UPH_USFIP_postwar_romulo_party long_name = UPH_USFIP_postwar_romulo_party_long }
+				set_party_name = { ideology = authoritarian_democracy name = UPH_USFIP_postwar_garcia_party long_name = UPH_USFIP_postwar_garcia_party_long }
+				set_popularities = {
+					authoritarian_democracy = 27
+					despotism = 73
+				}
+				USA = { add_to_faction = UPH }
+				add_ideas = OFN_Independent_Member
+				remove_ideas = {
+					UPH_provisional_occupation
+					UPH_unsung_warriors
+					UPH_anarchy_of_families # Replace with something else in the future.
+				}
+				remove_dynamic_modifier = { modifier = UPH_unsung_warriors_modifier }
+			}
+		}
+	}
+}
+
+country_event = { # USFIP gives choice to leaders
+	id = PHI_Blitz.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.22" }
+	title = PHI_Blitz.22.t
+	desc = PHI_Blitz.22.desc
+	picture = GFX_report_event_PHI_usfip
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Exiles or smth
+		name = PHI_Blitz.22.a
+		custom_effect_tooltip = PHI_Blitz.22_tt
+		hidden_effect = {
+			UPH = {
+				country_event = {
+					id = PHI_Blitz.23
+					days = 14
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Choice for USFIP
+	id = PHI_Blitz.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.23" }
+	title = PHI_Blitz.23.t
+	desc = PHI_Blitz.23.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.23.b
+		hidden_effect = {
+			UPH = {
+				set_cosmetic_tag = PHI_UPH_Republic
+				kill_country_leader = yes
+				create_country_leader = {
+					name = "Carlos Polístico García"
+					desc = "POLITICS_CARLOS_GARCIA"
+					picture = "portrait_UPH_Carlos_Garcia.dds"
+					expire = 2000.1.1
+					ideology = authoritarian_democracy_oligarchy_subtype
+					traits = {
+						model_of_the_new_filipino
+					}
+				}
+				set_politics = { ruling_party = authoritarian_democracy }
+				set_party_name = { ideology = authoritarian_democracy name = UPH_USFIP_postwar_garcia_party long_name = UPH_USFIP_postwar_garcia_party_long }
+				set_party_name = { ideology = despotism name = UPH_USFIP_postwar_romulo_party long_name = UPH_USFIP_postwar_romulo_party_long }
+				set_popularities = {
+					authoritarian_democracy = 73
+					despotism = 27
+				}
+				add_ideas = OFN_Observer
+				remove_ideas = {
+					UPH_provisional_occupation
+					UPH_unsung_warriors
+					UPH_anarchy_of_families # Replace with something else in the future.
+				}
+			}
+		}
+	}
+}
+
+### SPR becomes funny ###
+country_event = { # Trigger
+	id = PHI_Blitz.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.24" }
+	title = PHI_Blitz.24.t
+	desc = PHI_Blitz.24.desc
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.24.a
+		custom_effect_tooltip = PHI_Blitz.24_tt
+		hidden_effect = {
+			327 = {
+				set_demilitarized_zone = yes
+			}
+			PHI = { set_capital = 1455 }
+			country_event = { id = PHI_Blitz.25 days = 3 }
+		}
+	}
+}
+
+country_event = { # The incident
+	id = PHI_Blitz.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.25" }
+	title = PHI_Blitz.25.t
+	desc = PHI_Blitz.25.desc
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_Blitz.25.a
+		custom_effect_tooltip = PHI_Blitz.25_tt
+		hidden_effect = {
+			JAP = {
+				add_to_faction = PHI
+				country_event = { id = PHI_Blitz.26 days = 30 }
+			}
+			PHI = {
+				set_cosmetic_tag = PHI_JAP_Administration
+				set_popularities = { despotism = 100 }
+				set_politics = { ruling_party = despotism }
+				set_party_name = {
+					ideology = despotism
+					name = FGB_ultranationalism_party
+					long_name = FGB_ultranationalism_party_long
+				}
+				kill_country_leader = yes
+				create_country_leader = {
+					name = "Masazumi Inada"
+					desc = "POLITICS_MASAZUMI_INADA_DESC"
+					picture = "Portrait_PHI_Masazumi_Inada.dds"
+					expire = "2000.1.1"
+					ideology = despotism_interim_government_subtype
+					traits = { only_guts_and_eggshells_left }
+				}
+				add_ideas = { PHI_home_of_the_14th_army_crisis Sphere_Imp_Protectorate }
+			}
+			every_country = {
+				news_event = { id = WORLD.181234 days = 1}
+			}
+		}
+	}
+}
+
+# Hidden events that demilitarize more filipino land
+country_event = {
+	id = PHI_Blitz.26
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.26"
+		623 = { set_demilitarized_zone = yes }
+		country_event = { id = PHI_Blitz.27 days = 60 }
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+}
+
+country_event = {
+	id = PHI_Blitz.27
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.27"
+		1457 = { set_demilitarized_zone = yes }
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+}
+
+### USA Response to stuff ###
+
+country_event = { #US response to .12
+	id = PHI_Blitz.122
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.122" }
+	title = PHI_Blitz.122.t
+	desc = PHI_Blitz.122.desc
+	picture = GFX_report_event_blitz_begins
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.122.a
+	}
+}
+
+country_event = { #US response to .13
+	id = PHI_Blitz.133
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.133" }
+	title = PHI_Blitz.133.t
+	desc = PHI_Blitz.133.desc
+	picture = GFX_report_event_blitz_begins
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.133.a
+		if = {
+			limit = {
+				UPH = {
+					NOT = { has_country_leader = { name = "Dwight Edward Beach" ruling_only = yes } }
+				}
+			}
+			TNO_fopo_add_philippines_reconstruction_tab = yes
+		}
+	}
+}
+
+country_event = { #US response to .14
+	id = PHI_Blitz.144
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.144" }
+	title = PHI_Blitz.144.t
+	desc = PHI_Blitz.144.desc
+	picture = GFX_report_event_blitz_begins
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.144.a
+		if = {
+			limit = {
+				UPH = {
+					NOT = { has_country_leader = { name = "Dwight Edward Beach" ruling_only = yes } }
+				}
+			}
+			TNO_fopo_add_philippines_reconstruction_tab = yes
+		}
+	}
+}
+
+country_event = { #US response to .15
+	id = PHI_Blitz.155
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_Blitz.155" }
+	title = PHI_Blitz.155.t
+	desc = PHI_Blitz.155.desc
+	picture = GFX_report_event_USA_MacArthur_funeral
+	trigger = {
+		NOT = { has_country_flag = USA_MacArthur_has_died }
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = PHI_Blitz.155.a
+		set_country_flag = USA_MacArthur_has_died
+		if = {
+			limit = {
+				has_global_flag = UPH_Operation_Iridescent
+			}
+			UPH = {
+				random_unit_leader = {
+					limit = {
+						has_id = 1022
+					}
+					set_nationality = USA
+				}
+			}
+		}
+	}
+}
+
+##########################################
+###                                    ###
+############ THE FLAVOR ZONE #############
+###                                    ###
+##########################################
+
+country_event = { #The Commonwealth
+	id = PHI_flavor.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.1"}
+	title = PHI_flavor.1.t
+	desc = PHI_flavor.1.desc
+	picture = GFX_report_event_PHI_romulo
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_flavor.1.a
+	}
+}
+
+country_event = { #Ramos
+	id = PHI_flavor.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.2"}
+	title = PHI_flavor.2.t
+	desc = PHI_flavor.2.desc
+	picture = GFX_report_event_PHI_hospital
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_flavor.2.a
+	}
+}
+
+country_event = { #Jose Yulo fucking dies
+	id = PHI_flavor.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.3"}
+	title = PHI_flavor.3.t
+	desc = PHI_flavor.3.desc
+	picture = GFX_report_event_PHI_carbomb
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_flavor.3.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.181233
+					days = 1
+				}
+			}
+		}
+		TNO_fopo_add_philippines_reconstruction_tab = yes
+	}
+}
+
+country_event = { #Guards division thing for Japan
+	id = PHI_flavor.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.4"}
+	title = PHI_flavor.4.t
+	desc = PHI_flavor.4.desc
+	picture = GFX_report_event_japan_ww1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_flavor.4.a
+	}
+}
+
+country_event = { # USA - "Report on the Philippines"
+	id = PHI_flavor.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.5"}
+	title = PHI_flavor.5.t
+	desc = PHI_flavor.5.desc
+	picture = GFX_report_event_PHI_map
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_flavor.5.a
+	}
+}
+
+country_event = { # USA - Explaining when the USFIP is about to go to war with the AFRSR
+	id = PHI_flavor.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.6"}
+	title = PHI_flavor.6.t
+	desc = PHI_flavor.6.desc
+	picture = GFX_report_event_luis_taruc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_flavor.6.a
+		custom_effect_tooltip = PHI_flavor.6_tt
+	}
+}
+
+country_event = { # Marcos takeover after taruc's PRP
+	id = PHI_flavor.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.7"}
+	title = PHI_flavor.7.t
+	desc = PHI_flavor.7.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { # Nothing happens
+		name = PHI_flavor.7.a
+		ai_chance = {
+		    modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = SPH_ideology
+                    option = SPH_IDEOLOGY_MARCOS
+                }
+            } 
+		    base = 1        
+		}
+	}
+	option = { # Marcos coup
+		name = PHI_flavor.7.b
+		ai_chance = {
+		    modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = SPH_ideology
+                    option = SPH_IDEOLOGY_TARUC
+                }
+            } 
+		    base = 1        
+		}
+		create_country_leader = {
+			name = "Ferdinand E. Marcos"
+			desc = "POLITICS_FERDINAND_MARCOS_DESC"
+			picture = "portrait_SPH_Ferdinand_Marcos.dds"
+			expire = "2000.1.1"
+			ideology = authoritarian_democracy_right_wing_populism_subtype
+			#traits = { }
+		}
+		set_popularities = {
+			authoritarian_democracy = 73
+			communist = 20
+			socialist = 7
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		set_cosmetic_tag = SPH_Marcos
+		every_country = {
+			news_event = { id = WORLD.18140 days = 1 }
+		}
+	}
+}
+
+country_event = { # Masazumi Inada commits die after SPR loss
+	id = PHI_flavor.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_flavor.8"}
+	title = PHI_flavor.8.t
+	desc = PHI_flavor.8.desc
+	picture = GFX_report_event_PHI_Inada_oof
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_flavor.8.a
+		ai_chance = { base = 1 }
+		custom_effect_tooltip = PHI_flavor.8_tt
+	}
+}
+
+
+## Sporadic border conflicts
+
+country_event = {
+	id = PHI_border_conflict.0
+	trigger = {
+		PHI = {
+			NOT = {
+				has_war_with = SPH
+				has_war_with = UPH
+			}
+		}
+	}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event PHI_border_conflict.0"
+		random_list = {
+			2 = { # Between PHI and SPH
+				start_border_war = {
+					change_state_after_war = no
+					attacker = {
+						state = 1455
+						num_provinces = 2
+					}
+					defender = {
+						state = 623
+						num_provinces = 3
+					}
+				}
+			}
+			1 = { # PHI and UPH - 1
+				start_border_war = {
+					change_state_after_war = no
+					attacker = {
+						state = 624
+						num_provinces = 2
+					}
+					defender = {
+						state = 1457
+						num_provinces = 1
+					}
+				}
+			}
+			1 = { # PHI abd UPH - 2
+				start_border_war = {
+					change_state_after_war = no
+					attacker = {
+						state = 628
+						num_provinces = 2
+					}
+					defender = {
+						state = 1458
+						num_provinces = 2
+					}
+				}
+			}
+		}
+		country_event = { id = PHI_border_conflict.1 days = 35 }
+	}
+	is_triggered_only = yes
+	hidden = yes
+}
+
+country_event = {
+	id = PHI_border_conflict.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event PHI_border_conflict.0"
+		TNO_PHI_stop_border_wars = yes
+		country_event = { id = PHI_border_conflict.0 days = 90 random_days = 20 }
+	}
+	is_triggered_only = yes
+	hidden = yes
+}
+
+####################################
+#################################### Flavor events below here are deprecated.
+####################################
+
+
+country_event = { #The Old Soldier
+	id = PHI_old_soldier.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_old_soldier.1"}
+	title = PHI_old_soldier.1.t
+	desc = PHI_old_soldier.1.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_old_soldier.1.a
+	}
+}
+
+country_event = { #The Old Soldier, Blitz start
+	id = PHI_old_soldier.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_old_soldier.2" }
+	title = PHI_old_soldier.2.t
+	desc = PHI_old_soldier.2.desc
+	picture = GFX_report_event_PHI_usfip
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_old_soldier.2.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_old_soldier.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_old_soldier.3" }
+	title = PHI_old_soldier.3.t
+	desc = PHI_old_soldier.3.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_old_soldier.3.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_old_soldier.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_old_soldier.4" }
+	title = PHI_old_soldier.4.t
+	desc = PHI_old_soldier.4.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_old_soldier.4.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+####################################
+
+country_event = { #The Revolutionary
+	id = PHI_revolutionary.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_revolutionary.1"}
+	title = PHI_revolutionary.1.t
+	desc = PHI_revolutionary.1.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_revolutionary.1.a
+	}
+}
+
+country_event = { #
+	id = PHI_revolutionary.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_revolutionary.2" }
+	title = PHI_revolutionary.2.t
+	desc = PHI_revolutionary.2.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_revolutionary.2.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_revolutionary.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_revolutionary.3" }
+	title = PHI_revolutionary.3.t
+	desc = PHI_revolutionary.3.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_revolutionary.3.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_revolutionary.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_revolutionary.4" }
+	title = PHI_revolutionary.4.t
+	desc = PHI_revolutionary.4.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_revolutionary.4.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+####################################
+
+country_event = { #The Conscript
+	id = PHI_conscript.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_conscript.1"}
+	title = PHI_conscript.1.t
+	desc = PHI_conscript.1.desc
+	picture = GFX_report_event_IJA_soldiers_jungle
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_conscript.1.a
+	}
+}
+
+country_event = { #
+	id = PHI_conscript.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PHI_conscript.2"}
+	title = PHI_conscript.2.t
+	desc = PHI_conscript.2.desc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = PHI_conscript.2.a
+	}
+}
+
+country_event = { #
+	id = PHI_conscript.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_conscript.3" }
+	title = PHI_conscript.3.t
+	desc = PHI_conscript.3.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_conscript.3.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_conscript.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_conscript.4" }
+	title = PHI_conscript.4.t
+	desc = PHI_conscript.4.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_conscript.4.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+####################################
+
+country_event = { #The Militiaman
+	id = PHI_militiaman.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_militiaman.1" }
+	title = PHI_militiaman.1.t
+	desc = PHI_militiaman.1.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_militiaman.1.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_militiaman.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_militiaman.2" }
+	title = PHI_militiaman.2.t
+	desc = PHI_militiaman.2.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_militiaman.2.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_militiaman.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_militiaman.3" }
+	title = PHI_militiaman.3.t
+	desc = PHI_militiaman.3.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_militiaman.3.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_militiaman.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_militiaman.4" }
+	title = PHI_militiaman.4.t
+	desc = PHI_militiaman.4.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_militiaman.4.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+####################################
+
+country_event = { #The Brother
+	id = PHI_brother.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_brother.1" }
+	title = PHI_brother.1.t
+	desc = PHI_brother.1.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_brother.1.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_brother.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_brother.2" }
+	title = PHI_brother.2.t
+	desc = PHI_brother.2.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_brother.2.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_brother.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_brother.3" }
+	title = PHI_brother.3.t
+	desc = PHI_brother.3.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_brother.3.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = PHI_brother.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PHI_brother.4" }
+	title = PHI_brother.4.t
+	desc = PHI_brother.4.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PHI_brother.4.a
+		ai_chance = { factor = 1 }
+
+	}
+}

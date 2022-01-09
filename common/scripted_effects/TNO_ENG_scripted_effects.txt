@@ -4704,6 +4704,39 @@ ENG_initialize_Faction_Mechanic = {
 	set_variable = { ENG_OFN_Influence = 5 }
 	set_variable = { ENG_EP_Influence = 10 }
 	set_variable = { ENG_Independent_Influence = 20 }
+	if = { 
+	    limit = {
+		    has_game_rule = {
+			    rule = collab_foreign_policy
+			    option = COLLAB_FOREIGN_POLICY_INDEPENDENT
+		    }
+		   }
+		set_variable = { ENG_Independent_Influence = 100 }
+		set_variable = { ENG_OFN_Influence = 0 }
+		set_variable = { ENG_EP_Influence = 0 }
+    }
+    if = { 
+		limit = {
+		    has_game_rule = {
+			    rule = collab_foreign_policy
+			    option = COLLAB_FOREIGN_POLICY_OFN
+		    }
+	    }
+		set_variable = { ENG_Independent_Influence = 1 }
+		set_variable = { ENG_OFN_Influence = 100 }
+		set_variable = { ENG_EP_Influence = 0 }
+	}
+	if = { 
+		limit = {
+			has_game_rule = {
+				rule = collab_foreign_policy
+				option = COLLAB_FOREIGN_POLICY_PAKT
+			}
+		}
+		set_variable = { ENG_Independent_Influence = 0 }
+		set_variable = { ENG_OFN_Influence = 0 }
+	    set_variable = { ENG_EP_Influence = 100 }
+	}
 	set_global_flag = ENG_faction_mechanic_England_Leading
 	if = {
 		limit = { has_country_flag = ENG_defeated_cornwall }

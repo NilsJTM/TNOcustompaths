@@ -1,0 +1,4113 @@
+﻿ ##########################################
+ ##  ██████╗ ███╗   ███╗ ██████╗██╗  ██╗ ##
+ ## ██╔═══██╗████╗ ████║██╔════╝██║ ██╔╝ ##
+ ## ██║   ██║██╔████╔██║██║     █████╔╝  ##
+ ## ██║   ██║██║╚██╔╝██║██║     ██╔═██╗  ##
+ ## ╚██████╔╝██║ ╚═╝ ██║╚██████╗██║  ██╗ ##
+ ##  ╚═════╝ ╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝ ##
+ ##########################################
+
+add_namespace = omsk #Regular events
+add_namespace = omskgauntlet #Gekokujou time
+add_namespace = omskexp #Expansion events
+add_namespace = omskbatov #Insurgency events
+add_namespace = omskreg #Regional events
+add_namespace = omskdiplo #Diplomacy events
+add_namespace = omsksr #Super-Regional events
+
+country_event = { #Intro Event
+	id = omsk.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.1"}
+	title = omsk.1.t
+	desc = omsk.1.desc
+	picture = GFX_report_event_russia_omsk_endgame
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Last Days of Comrade Karbyshev
+	id = omsk.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.2"}
+	title = omsk.2.t
+	desc = omsk.2.desc
+	picture = GFX_report_event_karbyshev
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.2.a
+		ai_chance = { factor = 90 }
+	}
+}
+
+country_event = { #German Bomber Shot Down
+	id = omsk.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.3"}
+	title = omsk.3.t
+	desc = omsk.3.desc
+	picture = GFX_report_event_anti_air
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #A Nice Ol' Lynching
+		name = omsk.3.a
+		ai_chance = { factor = 1 }
+		add_political_power = 35
+		add_war_support = 0.035
+		add_stability = 0.035
+	}
+}
+
+country_event = { #Enforcing Discipline
+	id = omsk.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.4"}
+	title = omsk.4.t
+	desc = omsk.4.desc
+	picture = GFX_report_event_komi_paramils_3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.4.a
+		ai_chance = { factor = 1 }
+		add_stability = -0.035
+		TNO_improve_draft_exemptions_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #The State of the Redemptionary Brigades
+	id = omsk.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.5"}
+	title = omsk.5.t
+	desc = omsk.5.desc
+	picture = GFX_report_event_russia_omsk_redemption_brigade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.5.a
+		ai_chance = { factor = 1 }
+		add_political_power = -10
+	}
+}
+
+country_event = { #Refugees Arrive at Omsk
+	id = omsk.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.6"}
+	title = omsk.6.t
+	desc = omsk.6.desc
+	picture = GFX_report_event_russian_refugees
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.6.a
+		ai_chance = { factor = 1 }
+		add_political_power = -10
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = OMS
+			}
+			add_manpower = 10000
+		}
+	}
+}
+
+country_event = { #Bandits Attack
+	id = omsk.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.7"}
+	title = omsk.7.t
+	desc = omsk.7.desc
+	picture = GFX_report_event_DRL_strike_orenburg
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.7.a
+		ai_chance = { factor = 90 }
+		add_political_power = -30
+		hidden_effect = {
+			OMS	= {
+				country_event = { id = omsk.8 days = 30 }
+			}
+		}
+	}
+	option = { #Hunker Down
+		name = omsk.7.b
+		ai_chance = { factor = 10 }
+		add_political_power = 25
+		add_stability = -0.02
+		571 = {
+			add_building_construction = {
+				type = bunker
+				level = 1
+				province = 10696
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = { #Bandits Hunted Down
+	id = omsk.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.8"}
+	title = omsk.8.t
+	desc = omsk.8.desc
+	picture = GFX_report_event_russia_kazakh_riders
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.8.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.02
+		add_political_power = 25
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 750
+			producer = OMS
+		}
+	}
+}
+
+country_event = { #Karbyshev's Birthday
+	id = omsk.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.9"}
+	title = omsk.9.t
+	desc = omsk.9.desc
+	picture = GFX_report_event_karbyshev
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.9.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+		add_war_support = 0.075
+		add_political_power = 45
+		hidden_effect = {
+			country_event = { id = omsk.10 days = 20 }
+		}
+	}
+}
+
+country_event = { #Karbyshev's Condition Gets Worse
+	id = omsk.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.10"}
+	title = omsk.10.t
+	desc = omsk.10.desc
+	picture = GFX_report_event_karbyshev
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.10.a
+		ai_chance = { factor = 1 }
+		add_political_power = -10
+		hidden_effect = {
+			country_event = { id = omsk.11 days = 30 }
+		}
+	}
+}
+
+country_event = { #Karbyshev is on His Death Bed
+	id = omsk.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.11"}
+	title = omsk.11.t
+	desc = omsk.11.desc
+	picture = GFX_report_event_karbyshev
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.11.a
+		ai_chance = { factor = 1 }
+		every_unit_leader = {
+			limit = { has_id = 3586 }
+			retire = yes
+		}
+		every_unit_leader = {
+			limit = { has_id = 3587 }
+			promote_leader = yes
+		}
+		add_political_power = -5
+	}
+}
+
+country_event = { #The Death of Karbyshev
+	id = omsk.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.12"}
+	title = omsk.12.t
+	desc = omsk.12.desc
+	picture = GFX_report_event_karbyshev
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #F
+		name = omsk.12.a
+		ai_chance = { factor = 1 }
+		set_party_name = {
+			ideology = ultranationalism
+			long_name = "Chernaya Liga"
+			name = "Chernaya Liga"
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = "Chernaya Liga"
+			name = "Chernaya Liga"
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.4
+		}
+		kill_country_leader = yes
+		add_political_power = -100
+		create_country_leader = {
+			name = "Dmitry Yazov"
+			desc = "POLITICS_DMITRY_YAZOV_DESC"
+			picture = "Portrait_Omsk_Dmitry_Yazov.dds"
+			expire = "1999.1.1"
+			ideology = ultranationalism_ultramilitarism_subtype
+			traits = { the_supreme_commander_of_the_great_trial }
+		}
+		swap_ideas = {
+			remove_idea = OMS_karbyshev_figurehead
+			add_idea = OMS_new_boss
+		}
+		hidden_effect = {
+			retire_ideology_leader = despotism
+			remove_ideas = OMS_Dmitry_Yazov_hog
+			add_ideas = OMS_Evgeny_Savintsev_hog
+			country_event = { id = omsk.38 days = 2 }
+			country_event = { id = omsk.27 days = 3 }
+			country_event = { id = omsk.41 days = 14 random = 24 }
+			TYM = {
+				country_event = { id = omsk.44 days = 5 random = 24 }
+			}
+		}
+	}
+}
+
+country_event = { #Underground Manufactories
+	id = omsk.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.13"}
+	title = omsk.13.t
+	desc = omsk.13.desc
+	picture = GFX_report_event_russia_bunker_command
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.13.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 750
+			producer = OMS
+		}
+	}
+}
+
+country_event = { #Bombings Easing Up
+	id = omsk.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.14"}
+	title = omsk.14.t
+	desc = omsk.14.desc
+	picture = GFX_report_event_uprising
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.14.a
+		ai_chance = { factor = 1 }
+		add_political_power = 35
+		add_stability = 0.05
+	}
+}
+
+country_event = { #The Bombings Stop
+	id = omsk.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.15"}
+	title = omsk.15.t
+	desc = omsk.15.desc
+	picture = GFX_report_event_uprising
+
+	trigger = {
+		NOT = {
+			has_idea = SIB_terror_bombing
+		}
+		original_tag = OMS
+	}
+
+	fire_only_once = yes
+
+	option = { #This is where the fun begins
+		name = omsk.15.a
+		ai_chance = { factor = 1 }
+		trigger = {
+			NOT = {
+				has_country_leader = {
+					name = "Collapsed Authority"
+					ruling_only = yes
+				}
+			}
+		}
+		hidden_effect = {
+			load_focus_tree = { tree = OMS_post_bombing_tree keep_completed = yes }
+		}
+	}
+	option = { #We're too busy killing each other to expand
+		name = omsk.15.b
+		ai_chance = { factor = 1 }
+		trigger = {
+			has_country_leader = {
+				name = "Collapsed Authority"
+				ruling_only = yes
+			}
+		}
+	}
+}
+
+country_event = { #Against the Old Guard
+	id = omsk.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.16"}
+	title = omsk.16.t
+	desc = omsk.16.desc
+	picture = GFX_report_event_russia_nkvd_officer
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.16.a
+		ai_chance = { factor = 1 }
+		add_political_power = -15
+	}
+}
+
+country_event = { #The Underground Cities
+	id = omsk.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.17"}
+	title = omsk.17.t
+	desc = omsk.17.desc
+	picture = GFX_report_event_bunker_city
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.17.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Breaking The Cliques
+	id = omsk.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.18"}
+	title = omsk.18.t
+	desc = omsk.18.desc
+	picture = GFX_report_event_soldiers_training
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.18.a
+		ai_chance = { factor = 1 }
+		add_war_support = -0.035
+	}
+}
+
+country_event = { #Karbyshev's Final Speech
+	id = omsk.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.19"}
+	title = omsk.19.t
+	desc = omsk.19.desc
+	picture = GFX_report_event_microphone
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.19.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Protégé - Yazov intro event
+	id = omsk.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.20"}
+	title = omsk.20.t
+	desc = omsk.20.desc
+	picture = GFX_report_event_yazov
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.20.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omsk.45 days = 3 }
+		}
+	}
+}
+
+country_event = { #Test their Mettle border war - Omsk perspective - victory
+	id = omsk.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.21"}
+	title = omsk.21.t
+	desc = omsk.21.desc
+	picture = GFX_report_event_russia_forest_battle
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.21.a
+		ai_chance = { factor = 1 }
+		army_experience = 5
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Test their Mettle border war - Omsk perspective - loss
+	id = omsk.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.22"}
+	title = omsk.22.t
+	desc = omsk.22.desc
+	picture = GFX_report_event_russia_devastated_village
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.22.a
+		ai_chance = { factor = 1 }
+		add_war_support = -0.05
+		add_stability = -0.05
+	}
+}
+
+country_event = { #Test their Mettle border war - Tyumen perspective - victory
+	id = omsk.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.23"}
+	title = omsk.23.t
+	desc = omsk.23.desc
+	picture = GFX_report_event_russia_forest_battle
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.23.a
+		ai_chance = { factor = 1 }
+		army_experience = 5
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Test their Mettle border war - Tyumen perspective - loss
+	id = omsk.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.24"}
+	title = omsk.24.t
+	desc = omsk.24.desc
+	picture = GFX_report_event_ouch_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.24.a
+		ai_chance = { factor = 1 }
+		add_war_support = -0.05
+		add_stability = -0.05
+	}
+}
+
+country_event = { #Infiltrate Tyumen - Tyumen perspective
+	id = omsk.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.25"}
+	title = omsk.25.t
+	desc = omsk.25.desc
+	picture = GFX_report_event_russian_refugees
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Accept them
+		name = omsk.25.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+		add_stability = -0.05
+		403 = {
+			add_manpower = 5000
+		}
+		hidden_effect = {
+			OMS = {
+				set_country_flag = OMS_tyumen_infiltrators
+			}
+		}
+	}
+	option = { #Turn them away
+		name = omsk.25.b
+		ai_chance = { factor = 1 }
+		add_stability = 0.075
+	}
+}
+
+country_event = { #Omsktransmash tank equipment
+	id = omsk.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.26"}
+	title = omsk.26.t
+	desc = omsk.26.desc
+	picture = GFX_report_event_gorky_tank_factory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.26.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = MBT_equipment
+			amount = 250
+			producer = OMS
+		}
+		add_equipment_to_stockpile = {
+			type = IFV_equipment
+			amount = 250
+			producer = OMS
+		}
+	}
+}
+
+country_event = { #The Reign of Yazov
+	id = omsk.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.27"}
+	title = omsk.27.t
+	desc = omsk.27.desc
+	picture = GFX_report_event_generic_funeral
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.27.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = { tree = OMS_initial_yazov_tree keep_completed = yes }
+			country_event = { id = omsk.39 hours = 6 }
+		}
+	}
+}
+
+country_event = { #The New Order
+	id = omsk.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.28"}
+	title = omsk.28.t
+	desc = omsk.28.desc
+	picture = GFX_report_event_far_right_rally
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.28.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+	}
+}
+
+country_event = { #Honor the Old General
+	id = omsk.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.29"}
+	title = omsk.29.t
+	desc = omsk.29.desc
+	picture = GFX_report_event_karbyshev
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.29.a
+		ai_chance = { factor = 1 }
+		add_political_power = 35
+	}
+}
+
+country_event = { #A Chance at Redemption
+	id = omsk.30
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.30"}
+	title = omsk.30.t
+	desc = omsk.30.desc
+	picture = GFX_report_event_russian_irregulars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.30.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Fortress Omsk
+	id = omsk.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.31" }
+	title = omsk.31.t
+	desc = omsk.31.desc
+	picture = GFX_report_event_bunker_city
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.31.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Plan Hydra
+	id = omsk.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.32" }
+	title = omsk.32.t
+	desc = omsk.32.desc
+	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.32.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #A Grip of Cold Iron
+	id = omsk.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.33" }
+	title = omsk.33.t
+	desc = omsk.33.desc
+	picture = GFX_report_event_russian_military
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.33.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+	}
+}
+
+country_event = { #Black Hand of Yazov
+	id = omsk.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.34" }
+	title = omsk.34.t
+	desc = omsk.34.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.34.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Enhanced Training Programs
+	id = omsk.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.35" }
+	title = omsk.35.t
+	desc = omsk.35.desc
+	picture = GFX_report_event_soldiers_training
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.35.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Infiltration units
+	id = omsk.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.36" }
+	title = omsk.36.t
+	desc = omsk.36.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.36.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Tyumen/Sverdlovsk perspective - Omsk infiltrators have sabotaged us!
+	id = omsk.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.37" }
+	title = omsk.37.t
+	desc = omsk.37.desc
+	picture = GFX_report_event_komi_bombing
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.37.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Those Who Are Left Behind
+	id = omsk.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.38" }
+	title = omsk.38.t
+	desc = omsk.38.desc
+	picture = GFX_report_event_yazov
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.38.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Road Ahead - post funeral
+	id = omsk.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.39" }
+	title = omsk.39.t
+	desc = omsk.39.desc
+	picture = GFX_report_event_yazov
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.39.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Out with the Old - Yuriy Drozdov replaces Konstantin Valukhin as Omsk SecMin
+	id = omsk.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.40" }
+	title = omsk.40.t
+	desc = omsk.40.desc
+	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.40.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omsk.43 days = 7 random = 24 }
+			swap_ideas = {
+				remove_idea = OMS_Konstantin_Valukhin_sec
+				add_idea = OMS_Yuriy_Drozdov_sec
+			}
+		}
+	}
+}
+
+country_event = { #Evgeny Savintsev (HoG) intro event
+	id = omsk.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.41" }
+	title = omsk.41.t
+	desc = omsk.41.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.41.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Aleksandr Sakharovsky intro event
+	id = omsk.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.42" }
+	title = omsk.42.t
+	desc = omsk.42.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.42.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Black League purge event - Evgeny Pitovranov replaces Alexander Kharkhardin as EconMin
+	id = omsk.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.43" }
+	title = omsk.43.t
+	desc = omsk.43.desc
+	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.43.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = OMS_Alexander_Kharkhardin_eco
+				add_idea = OMS_Evgeny_Pitovranov_eco
+			}
+		}
+	}
+}
+
+country_event = { #The Black Marshal's Daughter - event for Tyumen; Karby's daughter reacts to her father's death
+	id = omsk.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.44" }
+	title = omsk.44.t
+	desc = omsk.44.desc
+	picture = GFX_report_event_karbyshev
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.44.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Great Trial
+	id = omsk.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.45" }
+	title = omsk.45.t
+	desc = omsk.45.desc
+	picture = GFX_report_event_russia_omsk_endgame
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.45.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Reckless Hate - War with Amur
+	id = omsk.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.46" }
+	title = omsk.46.t
+	desc = omsk.46.desc
+	picture = GFX_report_event_iberian_wars_6
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.46.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Our Greatest Foe - War with the Aryan Brotherhood
+	id = omsk.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.47" }
+	title = omsk.47.t
+	desc = omsk.47.desc
+	picture = GFX_report_event_russia_nkvd_officer
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.47.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #The Aviators over the Black League
+	id = omsk.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omsk.48" }
+	title = omsk.48.t
+	desc = omsk.48.desc
+	picture = GFX_report_event_pilots
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omsk.48.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+
+### The Gauntlet event chain ###
+country_event = { #Against the Grain
+	id = omskgauntlet.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.1"}
+	title = omskgauntlet.1.t
+	desc = omskgauntlet.1.desc
+	picture = GFX_report_event_russian_military
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.1.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omskgauntlet.2 days = 1 }
+			swap_ideas = {
+				remove_idea = OMS_Viktor_Abakumov_for
+				add_idea = OMS_Aleksandr_Sakharovsky_for
+			}
+		}
+	}
+}
+
+country_event = { #Ending the Corruption
+	id = omskgauntlet.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.2"}
+	title = omskgauntlet.2.t
+	desc = omskgauntlet.2.desc
+	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.2.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omskgauntlet.3 days = 2 }
+		}
+	}
+}
+
+country_event = { #The Low Overcomes the High
+	id = omskgauntlet.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.3"}
+	title = omskgauntlet.3.t
+	desc = omskgauntlet.3.desc
+	picture = GFX_report_event_russia_nkvd_officer
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.3.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omskgauntlet.4 days = 2 }
+		}
+	}
+}
+
+country_event = { #Revolts in Iskilkul and Tara
+	id = omskgauntlet.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.4"}
+	title = omskgauntlet.4.t
+	desc = omskgauntlet.4.desc
+	picture = GFX_report_event_russia_forest_battle
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.4.a
+		ai_chance = { factor = 1 }
+		TNO_worsen_admin_efficiency_high = yes
+		hidden_effect = {
+			country_event = { id = omskgauntlet.5 days = 2 }
+		}
+	}
+}
+
+country_event = { #Running the Gauntlet
+	id = omskgauntlet.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.5"}
+	title = omskgauntlet.5.t
+	desc = omskgauntlet.5.desc
+	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.5.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omskgauntlet.6 days = 2 }
+		}
+	}
+}
+
+country_event = { #Under Lock and Key
+	id = omskgauntlet.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.6"}
+	title = omskgauntlet.6.t
+	desc = omskgauntlet.6.desc
+	picture = GFX_report_event_DRL_novotroitsk_city
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.6.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omskgauntlet.7 days = 2 }
+		}
+	}
+}
+
+country_event = { #The Battle of Omsk
+	id = omskgauntlet.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.7"}
+	title = omskgauntlet.7.t
+	desc = omskgauntlet.7.desc
+	picture = GFX_report_event_russia_soldiers_bombed_city
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.7.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = omskgauntlet.8 days = 2 }
+		}
+	}
+}
+
+country_event = { #The City Secured
+	id = omskgauntlet.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.8"}
+	title = omskgauntlet.8.t
+	desc = omskgauntlet.8.desc
+	picture = GFX_report_event_russian_city
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.8.a
+		ai_chance = { factor = 1 }
+		activate_mission = OMS_old_guard_revolt
+		hidden_effect = {
+			set_country_flag = OMS_the_capital_secured
+			set_country_flag = OMS_old_guard_uprising
+			set_country_flag = OMS_revolt_in_iskilkul
+			set_country_flag = OMS_revolt_in_tara
+		}
+	}
+}
+
+country_event = { #The Death of Yazov
+	id = omskgauntlet.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.9"}
+	title = omskgauntlet.9.t
+	desc = omskgauntlet.9.desc
+	picture = GFX_report_event_russia_omsk_endgame
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.9.a
+		ai_chance = { factor = 1 }
+		kill_country_leader = yes
+		add_political_power = -100
+		add_stability = -0.35
+		add_war_support = -0.35
+		add_ideas = OMS_collapsed_central_authority
+		create_country_leader = {
+			name = "Collapsed Authority"
+			desc = "POLITICS_OMSK_COLLAPSED_AUTHORITY_DESC"
+			picture = "Portrait_Omsk_Power_Vacuum.dds"
+			expire = "1999.1.1"
+			ideology = ultranationalism_ultramilitarism_subtype
+			traits = { utterly_abandoned }
+		}
+		delete_unit_template_and_units = {
+			division_template = "Strelkovaya Diviziya"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Iskupitelnaya Brigada"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Kavaleriyskaya Diviziya"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Proniknuvshiy"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Gruppa Zashchity"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Chernaya Gvardiya"
+		}
+		hidden_effect = {
+			load_focus_tree = shattered_ambitions
+			SVR = {
+				set_country_flag = SVR_yazov_dead
+				country_event = { id = SVR.47 days = 1 }
+			}
+			remove_ideas = OMS_new_boss
+			remove_ideas = OMS_fueled_by_revenge
+			remove_ideas = OMS_nothing_left_to_lose
+			remove_ideas = OMS_the_shield
+			tno_worsen_army_professionalism = yes
+			tno_worsen_army_professionalism = yes
+			add_ideas = {
+				Generic_Vacant_hog
+				Generic_Vacant_for
+				Generic_Vacant_eco
+				Generic_Vacant_sec
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_idea_plan_hydra
+					}
+				}
+				remove_ideas = OMS_idea_plan_hydra
+			}
+		}
+	}
+}
+
+country_event = { #The Old Guard Crushed
+	id = omskgauntlet.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.10"}
+	title = omskgauntlet.10.t
+	desc = omskgauntlet.10.desc
+	picture = GFX_report_event_russia_bunker_command
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.10.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		add_stability = 0.1
+		clr_country_flag = OMS_old_guard_uprising
+		clr_country_flag = OMS_Lock_Warlord
+		TNO_improve_admin_efficiency_med = yes
+	}
+}
+
+country_event = { #Infiltrating Iskilkul
+	id = omskgauntlet.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.11"}
+	title = omskgauntlet.11.t
+	desc = omskgauntlet.11.desc
+	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.11.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Abakumov assassinated, Iskilkul Clique falls apart
+	id = omskgauntlet.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.12"}
+	title = omskgauntlet.12.t
+	desc = omskgauntlet.12.desc
+	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.12.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.035
+		add_political_power = 35
+	}
+}
+
+country_event = { #Siege of Tara
+	id = omskgauntlet.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.13"}
+	title = omskgauntlet.13.t
+	desc = omskgauntlet.13.desc
+	picture = GFX_report_event_big_guns
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Tara revolt crushed
+	id = omskgauntlet.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskgauntlet.14"}
+	title = omskgauntlet.14.t
+	desc = omskgauntlet.14.desc
+	picture = GFX_report_event_iberian_wars_6
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskgauntlet.14.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.035
+		add_political_power = 35
+		TNO_improve_admin_efficiency_low = yes
+	}
+}
+
+### Expansion tree events ###
+country_event = { #On the Road to War
+	id = omskexp.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.1" }
+	title = omskexp.1.t
+	desc = omskexp.1.desc
+	picture = GFX_report_event_microphone
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.1.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.1
+	}
+}
+
+country_event = { #Sharpen the Sword
+	id = omskexp.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.2" }
+	title = omskexp.2.t
+	desc = omskexp.2.desc
+	picture = GFX_report_event_soldiers_training
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.2.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+	}
+}
+
+country_event = { #Ready the Shield
+	id = omskexp.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.3" }
+	title = omskexp.3.t
+	desc = omskexp.3.desc
+	picture = GFX_report_event_russia_bunker_command
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.3.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.075
+	}
+}
+
+country_event = { #Take the Black
+	id = omskexp.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.4" }
+	title = omskexp.4.t
+	desc = omskexp.4.desc
+	picture = GFX_report_event_russian_crowd
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.4.a
+		ai_chance = { factor = 1 }
+		#Add Tyumen generals later or smth (Logunov, Losik, funny mustache man and Stalin's adopted son Pacifica pls do Tyumen generals aaaaaaaaaaaa)
+		custom_effect_tooltip = OMS_integrate_tyumen_generals_tt
+		TYM = {
+			every_unit_leader = {
+				limit = {
+					OR = {
+						has_id = 3574
+						has_id = 3578
+					}
+				}
+				set_nationality = OMS
+			}
+		}
+		TNO_improve_army_professionalism_low = yes
+	}
+}
+
+country_event = { #Study their methods
+	id = omskexp.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.5" }
+	title = omskexp.5.t
+	desc = omskexp.5.desc
+	picture = GFX_report_event_russian_crowd
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Accept
+		name = omskexp.5.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = OMS_integrate_sverdlovsk_generals_tt
+		hidden_effect = {
+			SVR = {
+				every_unit_leader = {
+					limit = {
+						OR = {
+							has_id = 3560
+						}
+					}
+					set_nationality = OMS
+				}
+			}
+		}
+	}
+}
+
+country_event = { #A New Bureaucracy
+	id = omskexp.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.6" }
+	title = omskexp.6.t
+	desc = omskexp.6.desc
+	picture = GFX_report_event_far_right_rally
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.6.a
+		ai_chance = { factor = 1 }
+		add_political_power = 15
+	}
+}
+
+country_event = { #Loyalty to Comrade Yazov
+	id = omskexp.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.7" }
+	title = omskexp.7.t
+	desc = omskexp.7.desc
+	picture = GFX_report_event_yazov
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.7.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #An offer they can't refuse focus - for the Aviators
+	id = omskexp.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.8" }
+	title = omskexp.8.t
+	desc = omskexp.8.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Accept
+		name = omskexp.8.a
+		ai_chance = { factor = 30 }
+		hidden_effect = {
+			OMS = {
+				country_event = { id = omskexp.9 days = 1 }
+			}
+		}
+	}
+	option = { #Refuse
+		name = omskexp.8.b
+		ai_chance = { factor = 15 }
+		hidden_effect = {
+			OMS = {
+				country_event = { id = omskexp.10 days = 1 }
+			}
+		}
+	}
+}
+
+country_event = { #The Free Aviators accept
+	id = omskexp.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.9" }
+	title = omskexp.9.t
+	desc = omskexp.9.desc
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.9.a
+		ai_chance = { factor = 1 }
+		annex_country = {
+			target = FAV
+			transfer_troops = no
+		}
+		579 = {
+			add_core_of = OMS
+			remove_core_of = FAV
+		}
+		TNO_improve_admin_efficiency_really_low = yes
+	}
+}
+
+country_event = { #The Free Aviators refuse
+	id = omskexp.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.10" }
+	title = omskexp.10.t
+	desc = omskexp.10.desc
+	picture = GFX_report_event_pilots
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.10.a
+		ai_chance = { factor = 1 }
+		declare_war_on = {
+			target = FAV
+			type = russian_reclamation
+		}
+	}
+}
+
+country_event = { #Yugorsk Prison City
+	id = omskexp.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.11" }
+	title = omskexp.11.t
+	desc = omskexp.11.desc
+	picture = GFX_report_generic_prisoners3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.11.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #From Gulags to Training Camps
+	id = omskexp.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.12" }
+	title = omskexp.12.t
+	desc = omskexp.12.desc
+	picture = GFX_report_event_russia_vorkutlag
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.12.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Solidify control
+	id = omskexp.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.13" }
+	title = omskexp.13.t
+	desc = omskexp.13.desc
+	picture = GFX_report_event_soldier_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.13.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Shadows over West Siberia
+	id = omskexp.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.14" }
+	title = omskexp.14.t
+	desc = omskexp.14.desc
+	picture = GFX_report_event_russia_nkvd_officer
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.14.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Our Authority Secured
+	id = omskexp.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.15" }
+	title = omskexp.15.t
+	desc = omskexp.15.desc
+	picture = GFX_report_event_far_right_rally
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.15.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			load_focus_tree = { tree = OMS_regional_tree keep_completed = no }
+			if = {
+				limit = { is_ai = no }
+				country_event = { id = omskbatov.1 days = 10 }
+			}
+			else = {
+				random_list = {
+					8 = {
+					    modifier = {
+                            factor = 0
+                            has_game_rule = {
+                                rule = OMS_batov_insurgency
+                                option = OMS_BATOV_INSURGENCY_COLLAPSE
+                            }
+                        }
+					}
+					2 = {
+                        modifier = {
+                            factor = 0
+                            has_game_rule = {
+                                rule = OMS_batov_insurgency
+                                option = OMS_BATOV_INSURGENCY_STABLE
+                            }
+                        }
+						country_event = { id = omskbatov.4 days = 400 }
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Trialing the Ural Military District leadership
+	id = omskexp.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.16" }
+	title = omskexp.16.t
+	desc = omskexp.16.desc
+	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.16.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+	}
+}
+
+country_event = { #Trial for the Tyumen Government
+	id = omskexp.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event omskexp.17" }
+	title = omskexp.17.t
+	desc = omskexp.17.desc
+	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = omskexp.17.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+	}
+}
+
+###############################################################################################################
+
+### Batov insurgency events ###
+
+country_event = { #Introduction
+	id = omskbatov.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.1"}
+ 	title = omskbatov.1.t
+ 	desc = omskbatov.1.d
+ 	picture = GFX_report_event_russia_partisan
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.1.a
+		set_country_flag = OMS_batov_insurgency_flag
+		OMS_SE_insurgency_start = yes
+		hidden_effect = {
+			country_event = { id = omskbatov.12 days = 4 random = 24 }
+			country_event = { id = omskbatov.14 days = 21 random = 48 }
+			country_event = { id = omskbatov.15 days = 35 random = 48 }
+		}
+		if = {
+			limit = {
+				has_country_flag = OMS_Lock_Regional
+			}
+			add_political_power = 150
+		}
+ 	}
+}
+
+country_event = { #Success - Batov assassinated.
+	id = omskbatov.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.2"}
+ 	title = omskbatov.2.t
+ 	desc = omskbatov.2.d
+ 	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.2.a
+		clr_country_flag = OMS_batov_insurgency_active
+		add_manpower = -1
+		kill_ideology_leader = authoritarian_democracy
+		add_political_power = 200
+		hidden_effect = {
+			scoped_sound_effect = tno_gunfire
+			remove_mission = OMS_batov_making_moves
+			create_country_leader = {
+				name = "RKNV Remnants"
+				#desc = ""
+				#picture = ""
+				expire = "1999.1.1"
+				ideology = authoritarian_democracy_provisional_government_subtype
+				traits = { utterly_abandoned }
+			}
+		}
+ 	}
+}
+
+country_event = { #Last remnants mopped up - the group is eliminated.
+	id = omskbatov.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.3"}
+ 	title = omskbatov.3.t
+ 	desc = omskbatov.3.d
+ 	picture = GFX_report_event_german_army3
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.3.a
+		clr_country_flag = OMS_batov_insurgency_flag
+		custom_effect_tooltip = OMS_insurgency_remnants_cleared_tt
+		add_political_power = 50
+		add_stability = 0.10
+		add_manpower = -2500
+		tno_improve_admin_efficiency = yes
+		hidden_effect = {
+			remove_mission = OMS_put_down_batovs_bandits
+			remove_mission = OMS_batov_making_moves
+			remove_decision = OMS_acquire_more_bases
+			remove_decision = OMS_build_base
+			remove_decision = OMS_dismantle_own_base
+			remove_decision = OMS_attack_enemy_base
+			remove_decision = OMS_rally_people_against_batov
+			remove_decision = OMS_intensify_operations
+			country_event = { id = omskbatov.13 days = 4 random = 24 }
+			every_owned_state = {
+				limit = {
+					NOT = { state = 581 }
+				}
+				remove_dynamic_modifier = { modifier = OMS_BI_state_dynomod }
+			}
+		}
+		remove_ideas = OMS_batov_insurgency_dynmod_dummy
+ 	}
+}
+
+country_event = { #Failure - Yazov assassinated, collapse begins
+	id = omskbatov.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.4"}
+ 	title = omskbatov.4.t
+ 	desc = omskbatov.4.d
+ 	picture = GFX_report_event_russia_omsk_endgame
+	
+	is_triggered_only = yes
+	trigger = { GGR_not_invaded_russia = yes }
+ 	
+ 	option = {
+ 		name = omskbatov.4.a
+		clear_global_event_target = RUS_west_siberia_unifier
+		clr_country_flag = OMS_batov_insurgency_flag
+		clr_country_flag = OMS_batov_insurgency_active
+		hidden_effect = {
+			remove_mission = OMS_put_down_batovs_bandits
+			remove_mission = OMS_batov_making_moves
+			remove_decision = OMS_acquire_more_bases
+			remove_decision = OMS_build_base
+			remove_decision = OMS_dismantle_own_base
+			remove_decision = OMS_attack_enemy_base
+			remove_decision = OMS_rally_people_against_batov
+			remove_decision = OMS_intensify_operations
+			country_event = { id = omskbatov.5 days = 10 }
+		}
+		set_global_flag = OMS_BatovInsurrectionSuccess
+		kill_country_leader = yes
+		add_political_power = -100
+		add_stability = -0.35
+		add_war_support = -0.35
+		add_ideas = OMS_collapsed_central_authority
+		create_country_leader = {
+			name = "Collapsed Authority"
+			desc = "POLITICS_OMSK_COLLAPSED_AUTHORITY_DESC"
+			picture = "Portrait_Omsk_Power_Vacuum.dds"
+			expire = "1999.1.1"
+			ideology = ultranationalism_ultramilitarism_subtype
+			traits = { utterly_abandoned }
+		}
+		set_popularities = {
+			ultranationalism = 100
+		}
+		delete_unit_template_and_units = {
+			division_template = "Strelkovaya Diviziya"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Iskupitelnaya Brigada"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Kavaleriyskaya Diviziya"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Proniknuvshiy"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Gruppa Zashchity"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Chernaya Gvardiya"
+		}
+		hidden_effect = {
+			load_focus_tree = shattered_ambitions
+			create_country_leader = {
+				name = "Collapsed Authority"
+				desc = "POLITICS_OMSK_COLLAPSED_AUTHORITY_DESC"
+				picture = "Portrait_Omsk_Power_Vacuum.dds"
+				expire = "1999.1.1"
+				ideology = despotism_military_junta_subtype
+				traits = { utterly_abandoned }
+			}
+			remove_ideas = OMS_new_boss
+			remove_ideas = OMS_fueled_by_revenge
+			remove_ideas = OMS_nothing_left_to_lose
+			remove_ideas = OMS_the_shield
+			add_ideas = {
+				Generic_Vacant_hog
+				Generic_Vacant_for
+				Generic_Vacant_eco
+				Generic_Vacant_sec
+			}
+			tno_worsen_army_professionalism = yes
+			tno_worsen_army_professionalism = yes
+
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_idea_plan_hydra
+					}
+				}
+				remove_ideas = OMS_idea_plan_hydra
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_idea_quiet_war
+					}
+				}
+				remove_ideas = OMS_idea_quiet_war
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_leadership_secured
+					}
+				}
+				remove_ideas = OMS_leadership_secured
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_idea_dispersed_industry
+					}
+				}
+				remove_ideas = OMS_idea_dispersed_industry
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_vorkuta_nkvd
+					}
+				}
+				remove_ideas = OMS_vorkuta_nkvd
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_securing_the_people_idea
+					}
+				}
+				remove_ideas = OMS_securing_the_people_idea
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_an_end_to_luxury
+					}
+				}
+				remove_ideas = OMS_an_end_to_luxury
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_an_end_to_luxury_2
+					}
+				}
+				remove_ideas = OMS_an_end_to_luxury_2
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_a_plan_for_russia
+					}
+				}
+				remove_ideas = OMS_a_plan_for_russia
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_a_plan_for_russia_2
+					}
+				}
+				remove_ideas = OMS_a_plan_for_russia_2
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_nothing_left_to_lose_2
+					}
+				}
+				remove_ideas = OMS_nothing_left_to_lose_2
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_a_new_sibplan_idea
+					}
+				}
+				remove_ideas = OMS_a_new_sibplan_idea
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_project_kamera_idea
+					}
+				}
+				remove_ideas = OMS_project_kamera_idea
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_isd_field_commissars_idea
+					}
+				}
+				remove_ideas = OMS_isd_field_commissars_idea
+			}
+			if = {
+				limit = {
+					OMS = {
+						has_idea = OMS_expanded_auxiliaries
+					}
+				}
+				remove_ideas = OMS_expanded_auxiliaries
+			}
+			756 = {
+				set_demilitarized_zone = yes
+			}
+			871 = {
+				set_demilitarized_zone = yes
+			}
+			845 = {
+				set_demilitarized_zone = yes
+			}
+			844 = {
+				set_demilitarized_zone = yes
+			}
+			573 = {
+				set_demilitarized_zone = yes
+			}
+			579 = {
+				set_demilitarized_zone = yes
+			}
+		}
+ 	}
+}
+
+country_event = { #Failure - Plan Hydra fails, outlying territories secede.
+	id = omskbatov.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.5"}
+ 	title = omskbatov.5.t
+ 	desc = omskbatov.5.d
+ 	picture = GFX_report_event_russia_omsk_endgame
+	
+	is_triggered_only = yes
+	trigger = { GGR_not_invaded_russia = yes }
+
+ 	option = {
+ 		name = omskbatov.5.a
+		hidden_effect = {
+			country_event = { id = omskbatov.6 days = 10 }
+
+			756 = {
+				set_demilitarized_zone = no
+			}
+			871 = {
+				set_demilitarized_zone = no
+			}
+			845 = {
+				set_demilitarized_zone = no
+			}
+			844 = {
+				set_demilitarized_zone = no
+			}
+			573 = {
+				set_demilitarized_zone = no
+			}
+			579 = {
+				set_demilitarized_zone = no
+			}
+
+			YGR = {
+				drop_cosmetic_tag = yes
+				transfer_state = 756
+				transfer_state = 845
+				every_owned_state = {
+					remove_core_of = OMS
+					add_core_of = PREV
+				}
+				set_cosmetic_tag = YGR_OMSK_COLLAPSE
+				set_politics = {
+					ruling_party = despotism
+				}
+				add_popularity = {
+					ideology = despotism
+					popularity = 0.5
+				}
+				create_country_leader = {
+					name = "Soslanbek Apayev"
+					desc = "POLITICS_SOSLANBEK_APAYEV_OMSK_COLLAPSE_DESC"
+					picture = "Portrait_Yugra_Soslanbek_Apayev.dds"
+					expire = "1999.1.1"
+					ideology = despotism_warlordism_subtype
+					traits = { }
+				}
+				load_focus_tree = shattered_ambitions
+			}
+			FAV = {
+				drop_cosmetic_tag = yes
+				transfer_state = 844
+				transfer_state = 579
+				every_owned_state = {
+					remove_core_of = OMS
+					add_core_of = PREV
+				}
+				set_cosmetic_tag = FAV_OMSK_COLLAPSE
+				set_politics = {
+					ruling_party = communist
+				}
+				add_popularity = {
+					ideology = communist
+					popularity = 0.7
+				}
+				create_country_leader = {
+					name = "Valentin Shashin"
+					desc = "POLITICS_VALENTIN_SHASHIN_OMSK_COLLAPSE_DESC"
+					picture = "Portrait_Surgut_Valentin_Shashin.dds"
+					expire = "1999.1.1"
+					ideology = communist_bukharinism_subtype
+					traits = { }
+				}
+				add_ideas = {
+					Generic_Vacant_hog
+					Generic_Vacant_for
+					Generic_Vacant_eco
+					Generic_Vacant_sec
+				}
+				remove_ideas = {
+					FAV_night_witches
+					FAV_aerial_society
+					FAV_collective_improvisation
+				}
+				load_focus_tree = shattered_ambitions
+			}
+			NTG = {
+				drop_cosmetic_tag = yes
+				transfer_state = 871
+				every_owned_state = {
+					remove_core_of = OMS
+					add_core_of = PREV
+				}
+				set_cosmetic_tag = NTG_OMSK_COLLAPSE
+				set_party_name = {
+					ideology = communist
+					long_name = "Narodnyy Komissariat Vnutrennikh Del"
+					name = "NKVD"
+				}
+				load_focus_tree = shattered_ambitions
+			}
+			ZLT = {
+				drop_cosmetic_tag = yes
+				transfer_state = 573
+				every_owned_state = {
+					remove_core_of = OMS
+					add_core_of = PREV
+				}
+				set_cosmetic_tag = ZLT_OMSK_COLLAPSE
+				set_politics = {
+					ruling_party = ultranationalism
+				}
+				set_popularities = {
+					ultranationalism = 100
+				}
+				set_party_name = {
+					ideology = ultranationalism
+					long_name = "Operativnaya Grupa Bogatyr"
+					name = "OGP"
+				}
+				create_country_leader = {
+					name = "Konstantin Pastanogov"
+					desc = "POLITICS_KONSTANTIN_PASTANOGOV_OMSK_COLLAPSE_DESC"
+					picture = "gfx/leaders/OMS/Portrait_Omsk_Konstantin_Pastanogov.dds"
+					expire = "1999.1.1"
+					ideology = ultranationalism_ultramilitarism_subtype
+					traits = { }
+				}
+				add_ideas = {
+					Generic_Vacant_hog
+					Generic_Vacant_for
+					Generic_Vacant_eco
+					Generic_Vacant_sec
+				}
+				remove_ideas = {
+					ZLT_golden_republic
+					ZLT_the_two_consuls
+				}
+				load_focus_tree = shattered_ambitions
+			}
+			if = {
+				limit = {
+					has_war = yes
+				}
+				every_other_country = {
+					limit = {
+						has_war_with = OMS
+					}
+					declare_war_on = {
+						target = YGR
+						type = annex_everything
+					}
+					declare_war_on = {
+						target = FAV
+						type = annex_everything
+					}
+					declare_war_on = {
+						target = NTG
+						type = annex_everything
+					}
+					declare_war_on = {
+						target = ZLT
+						type = annex_everything
+					}
+				}
+			}
+		}	
+		580 = {
+			set_demilitarized_zone = yes
+		}
+		653 = {
+			set_demilitarized_zone = yes
+		}
+		754 = {
+			set_demilitarized_zone = yes
+		}
+		572 = {
+			set_demilitarized_zone = yes
+		}
+		403 = {
+			set_demilitarized_zone = yes
+		}
+ 	}
+}
+
+country_event = {  #Failure - Batov forms the Russian National Salvation Commission out of Chelyabinsk, Tyumen, and Sverdlovsk
+	id = omskbatov.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.6"}
+ 	title = omskbatov.6.t
+ 	desc = omskbatov.6.d
+ 	picture = GFX_report_event_russia_omsk_endgame
+	
+	is_triggered_only = yes
+	trigger = { GGR_not_invaded_russia = yes }
+
+ 	option = {
+ 		name = omskbatov.6.a
+		hidden_effect = {
+			country_event = { id = omskbatov.7 days = 10 }
+
+			580 = {
+				set_demilitarized_zone = no
+			}
+			653 = {
+				set_demilitarized_zone = no
+			}
+			754 = {
+				set_demilitarized_zone = no
+			}
+			572 = {
+				set_demilitarized_zone = no
+			}
+			403 = {
+				set_demilitarized_zone = no
+			}
+
+			SVR = {
+				create_country_leader = {
+					name = "Pavel Batov"
+					desc = "POLITICS_PAVEL_BATOV_OMSK_COLLAPSE_DESC"
+					picture = "Portrait_Sverdlovsk_Punished_Pavel_Batov.dds"
+					traits = { the_modern_suvorov }
+					expire = "1999.1.1"
+					ideology = authoritarian_democracy_stratocracy_subtype
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+				}
+				set_party_name = {
+					ideology = authoritarian_democracy
+					long_name = "Russkiy Komitet Natsionalnogo Vosstanovleniya"
+					name = "RKNV"
+				}
+				transfer_state = 403
+				transfer_state = 580
+				transfer_state = 653
+				transfer_state = 754
+				transfer_state = 572
+				every_owned_state = {
+					remove_core_of = OMS
+					add_core_of = PREV
+				}
+				set_cosmetic_tag = SVR_OMSK_COLLAPSE
+				add_ideas = {
+					RUS_shattered_ambitions
+					SVR_Ivan_Bagramyan_hog
+					SVR_Yelena_Karbysheva_for
+					SVR_Ernest_Voznesensky_eco
+					SVR_Hamazasp_Babadzhanian_sec
+				}
+				remove_ideas = {
+					SVR_notso_redarmy
+					SVR_black_league_influence_tier_1
+					SVR_revisionist_influence_tier_2
+				}
+				load_focus_tree = shattered_ambitions
+			}
+			if = {
+				limit = {
+					has_war = yes
+				}
+				every_other_country = {
+					limit = {
+						has_war_with = OMS
+					}
+					declare_war_on = {
+						target = SVR
+						type = annex_everything
+					}
+				}
+			}
+		}
+ 	}
+}
+
+country_event = { #Failure - collapse is complete
+	id = omskbatov.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.7"}
+ 	title = omskbatov.7.t
+ 	desc = omskbatov.7.d
+ 	picture = GFX_report_event_russia_omsk_endgame
+	
+	is_triggered_only = yes
+	trigger = { GGR_not_invaded_russia = yes }
+
+ 	option = {
+		name = omskbatov.7.a
+		hidden_effect = {
+			VOR = {
+				transfer_state = 863
+				every_owned_state = {
+					remove_core_of = OMS
+					add_core_of = PREV
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+				}
+				set_popularities = {
+					authoritarian_democracy = 100
+				}
+				set_party_name = {
+					ideology = authoritarian_democracy
+					long_name = "Komitet Osvobozhdenia Vorkuty"
+					name = "KOV"
+				}
+				set_cosmetic_tag = VOR_OMSK_COLLAPSE
+				create_country_leader = {
+					name = "Viktor Kolesnikov"
+					desc = "POLITICS_VIKTOR_KOLESNIKOV_OMSK_COLLAPSE_DESC"
+					picture = "Portrait_Vorkuta_Uprising_Viktor_Kolesnikov.dds"
+					expire = "1999.1.1"
+					ideology = authoritarian_democracy_provisional_government_subtype
+					traits = { }
+				}
+				remove_ideas = VOR_security_state
+				add_ideas = {
+					Generic_Vacant_hog
+					Generic_Vacant_for
+					Generic_Vacant_eco
+					Generic_Vacant_sec
+				}
+			}
+		   	SGV = {
+				transfer_state = 581
+				every_owned_state = {
+					remove_core_of = OMS
+					add_core_of = PREV
+				}
+				set_party_name = {
+					ideology = ultranationalism
+					long_name = "Spetsgruppa V"
+					name = "Spetsgruppa V"
+				}
+			}
+			OMS = { set_cosmetic_tag = OMS_OMSK_COLLAPSE }
+			if = {
+				limit = {
+					NOT = { country_exists = URL }
+				}
+				URL = {
+					create_country_leader = {
+						name = "Hadji-Umar Mamsurov"
+						desc = "POLITICS_HADJI_UMAR_MAMSUROV_OMSK_COLLAPSE_DESC"
+						picture = "gfx/leaders/URL/Portrait_Ural_League_Hadji_Umar_Mamsurov.dds"
+						expire = "1999.1.1"
+						ideology = authoritarian_democracy_stratocracy_subtype
+						traits = { }
+					}
+					add_ideas = {
+						Generic_Vacant_hog
+						Generic_Vacant_for
+						Generic_Vacant_eco
+						Generic_Vacant_sec
+					}
+					remove_ideas = {
+						URL_children_of_vorkuta
+						URL_refugee_crisis
+					}
+				}
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = ORE
+						is_core_of = URL
+						is_core_of = MGN
+						is_core_of = DRL
+					}
+				}
+				URL = {
+					transfer_state = PREV
+					add_state_core = PREV
+				}
+				remove_core_of = OMS
+			}
+			if = {
+				limit = { has_global_flag = RUS_SOUTHERN_URALS_CRISIS_OVER }
+				WSR = {
+					set_country_flag = BEGUN_SOUTHERN_URALS_CRISIS
+					clr_country_flag = RUS_RFTU_preparing_invasion
+					RUS_urals_influence_initialise = yes
+				}
+				clr_global_flag = RUS_SOUTHERN_URALS_CRISIS_OVER
+			}
+			if = {
+				limit = {
+					has_war = yes
+				}
+				every_other_country = {
+					limit = {
+						has_war_with = OMS
+					}
+					declare_war_on = {
+						target = SGV
+						type = annex_everything
+					}
+					declare_war_on = {
+						target = URL
+						type = annex_everything
+					}
+				}
+			}
+		}
+ 	}
+}
+
+country_event = { #zlatoust purged
+	id = omskbatov.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.8"}
+ 	title = omskbatov.8.t
+ 	desc = omskbatov.8.d
+ 	picture = GFX_report_event_russia_sack_of_tashkent
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.8.a
+		573 = {
+			OMS_purge_state = yes
+		}
+ 	}
+}
+
+country_event = { #chelyabinsk purged
+	id = omskbatov.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.9"}
+ 	title = omskbatov.9.t
+ 	desc = omskbatov.9.d
+ 	picture = GFX_report_event_DRL_novotroitsk_city
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.9.a
+		754 = {
+			OMS_purge_state = yes
+		}
+ 	}
+}
+
+country_event = { #Tyumen purged
+	id = omskbatov.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.10"}
+ 	title = omskbatov.10.t
+ 	desc = omskbatov.10.d
+ 	picture = GFX_report_event_iberian_wars_6
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.10.a
+		403 = {
+			OMS_purge_state = yes
+		}
+ 	}
+}
+
+country_event = { #Sverdlovsk purged
+	id = omskbatov.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.11"}
+ 	title = omskbatov.11.t
+ 	desc = omskbatov.11.d
+ 	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.11.a
+		batov_insurgency_decrease = yes
+		653 = {
+			OMS_purge_state = yes
+		}
+ 	}
+}
+
+country_event = { #A Lost Connection
+	id = omskbatov.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.12"}
+ 	title = omskbatov.12.t
+ 	desc = omskbatov.12.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.12.a
+ 	}
+}
+
+country_event = { #A Sense of Closure, Or...
+	id = omskbatov.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.13"}
+ 	title = omskbatov.13.t
+ 	desc = omskbatov.13.d
+ 	picture = GFX_report_event_komi_syktyvkar_4
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.13.a
+ 	}
+}
+
+country_event = { #A Tangible Threat
+	id = omskbatov.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.14"}
+ 	title = omskbatov.14.t
+ 	desc = omskbatov.14.d
+ 	picture = GFX_report_event_exploding_building1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.14.a
+ 	}
+}
+
+country_event = { #Disappearing Act
+	id = omskbatov.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.15"}
+ 	title = omskbatov.15.t
+ 	desc = omskbatov.15.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.15.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -1256
+			producer = OMS
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = -397
+			producer = OMS
+		}
+		random_owned_controlled_state = { # Good looking tooltip
+			limit = { state = 653 }
+			custom_effect_tooltip = omskbatov.15_tt
+			add_to_variable = { insurgency_strength = 0.1 }
+		}
+		OMS_SE_insurgency_calc_insurgency_strength = yes
+ 	}
+}
+
+country_event = { # Operation: CROOKED FANG briefing
+	id = omskbatov.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.16"}
+ 	title = omskbatov.16.t
+ 	desc = omskbatov.16.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.16.a
+ 	}
+}
+
+country_event = { # Operation: CROOKED FANG
+	id = omskbatov.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.17"}
+ 	title = omskbatov.17.t
+ 	desc = omskbatov.17.d
+ 	picture = GFX_report_event_Siberian_Troops
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.17.a
+		863 = {
+			OMS_purge_state = yes
+		}
+ 	}
+}
+
+country_event = { # Operation: SMOKE PIT briefing
+	id = omskbatov.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.18"}
+ 	title = omskbatov.18.t
+ 	desc = omskbatov.18.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.18.a
+ 	}
+}
+
+country_event = { # Operation: DRAGON'S LAIR briefing
+	id = omskbatov.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.19"}
+ 	title = omskbatov.19.t
+ 	desc = omskbatov.19.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.19.a
+ 	}
+}
+
+country_event = { # Operation: BROKEN STEEL briefing
+	id = omskbatov.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.20"}
+ 	title = omskbatov.20.t
+ 	desc = omskbatov.20.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.20.a
+ 	}
+}
+
+country_event = { # Operation: HOMECOMING briefing
+	id = omskbatov.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.21"}
+ 	title = omskbatov.21.t
+ 	desc = omskbatov.21.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.21.a
+ 	}
+}
+
+country_event = { # Operation: KNIGHTFALL briefing
+	id = omskbatov.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskbatov.22"}
+ 	title = omskbatov.22.t
+ 	desc = omskbatov.22.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskbatov.22.a
+ 	}
+}
+
+###############################################################################################################
+
+### Regional events ###
+
+country_event = { ### Establishing a Foothold ###
+	id = omskreg.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.1"}
+ 	title = omskreg.1.t
+ 	desc = omskreg.1.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.1.a
+ 	}
+}
+
+country_event = { ### Securing the People ###
+	id = omskreg.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.2"}
+ 	title = omskreg.2.t
+ 	desc = omskreg.2.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.2.a
+ 	}
+}
+
+country_event = { ### An End to Frivolous Luxury ###
+	id = omskreg.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.3"}
+ 	title = omskreg.3.t
+ 	desc = omskreg.3.d
+ 	picture = GFX_report_event_russia_trouble_in_nowa_warszawa
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.3.a
+		add_stability = -0.05
+ 	}
+}
+
+country_event = { ### Hunt Down Batov's Bandits ###
+	id = omskreg.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.4"}
+ 	title = omskreg.4.t
+ 	desc = omskreg.4.d
+ 	picture = GFX_report_event_map
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.4.a
+ 	}
+}
+
+country_event = { ### The Mountain Holdouts ###
+	id = omskreg.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.5"}
+ 	title = omskreg.5.t
+ 	desc = omskreg.5.d
+ 	picture = GFX_report_event_russia_bunker_command
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.5.a
+ 	}
+}
+
+country_event = { ### Erase Their Legacy ###
+	id = omskreg.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.6"}
+ 	title = omskreg.6.t
+ 	desc = omskreg.6.d
+ 	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.6.a
+ 	}
+}
+
+country_event = { ### The Three Theses ###
+	id = omskreg.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.7"}
+ 	title = omskreg.7.t
+ 	desc = omskreg.7.d
+ 	picture = GFX_report_event_russia_nkvd_officer
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.7.a
+		add_political_power = 50
+ 	}
+}
+
+country_event = { ### Lessons from the Gauntlet ###
+	id = omskreg.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.8"}
+ 	title = omskreg.8.t
+ 	desc = omskreg.8.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.8.a
+		 add_popularity = {
+			ideology = ultranationalism
+			popularity = 0.05
+		}
+ 	}
+}
+
+country_event = { ### Committee of Internal Investigation ###
+	id = omskreg.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.9"}
+ 	title = omskreg.9.t
+ 	desc = omskreg.9.d
+ 	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.9.a
+		army_experience = -10
+		add_political_power = 50
+ 	}
+}
+
+country_event = { ### Program of National Action ###
+	id = omskreg.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.10"}
+ 	title = omskreg.10.t
+ 	desc = omskreg.10.d
+ 	picture = GFX_report_event_iberia_guy_paper_meeting
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.10.a
+ 	}
+}
+
+country_event = { ### Great Trial Above All ###
+	id = omskreg.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.11"}
+ 	title = omskreg.11.t
+ 	desc = omskreg.11.d
+ 	picture = GFX_report_event_child_german_soldiers
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.11.a
+		add_war_support = 0.05
+ 	}
+}
+
+country_event = { ### The Duty of the Black League ###
+	id = omskreg.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.12"}
+ 	title = omskreg.12.t
+ 	desc = omskreg.12.d
+ 	picture = GFX_report_event_crate_of_guns
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.12.a
+		 add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 500
+			producer = OMS
+		}
+ 	}
+}
+
+country_event = { ### The Watchful Eye of the Directorate ###
+	id = omskreg.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.13"}
+ 	title = omskreg.13.t
+ 	desc = omskreg.13.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.13.a
+		add_manpower = -15
+ 	}
+}
+
+country_event = { ### A Quiet Rage ###
+	id = omskreg.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.14"}
+ 	title = omskreg.14.t
+ 	desc = omskreg.14.d
+ 	picture = GFX_report_event_yazov
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.14.a
+ 	}
+}
+
+country_event = { ### State Development Directorate ###
+	id = omskreg.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.15"}
+ 	title = omskreg.15.t
+ 	desc = omskreg.15.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.15.a
+ 	}
+}
+
+country_event = { ### Expand the Industrial Cadres ### 
+	id = omskreg.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.16"}
+ 	title = omskreg.16.t
+ 	desc = omskreg.16.d
+ 	picture = GFX_report_event_russia_siberian_worker
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.16.a
+		add_manpower = 150
+ 	}
+}
+
+country_event = { ### Better Tools ###
+	id = omskreg.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.17"}
+ 	title = omskreg.17.t
+ 	desc = omskreg.17.d
+ 	picture = GFX_report_event_chi_tools
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.17.a
+ 	}
+}
+
+country_event = { ### Forced Urbanization ###
+	id = omskreg.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.18"}
+ 	title = omskreg.18.t
+ 	desc = omskreg.18.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.18.a
+ 	}
+}
+
+country_event = { ### Project Kamera ###
+	id = omskreg.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.19"}
+ 	title = omskreg.19.t
+ 	desc = omskreg.19.d
+ 	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.19.a
+		army_experience = 10
+ 	}
+}
+
+country_event = { ### The Black Budget ###
+	id = omskreg.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.20"}
+ 	title = omskreg.20.t
+ 	desc = omskreg.20.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.20.a
+		TNO_improve_research_facilities_med = yes
+ 	}
+}
+
+country_event = { ### Russian National Army ###
+	id = omskreg.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.21"}
+ 	title = omskreg.21.t
+ 	desc = omskreg.21.d
+ 	picture = GFX_report_event_soldier_2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.21.a
+ 	}
+}
+
+country_event = { ### Spetzgruppa V
+	id = omskreg.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.22"}
+ 	title = omskreg.22.t
+ 	desc = omskreg.22.d
+ 	picture = GFX_report_event_russia_special_forces
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.22.a
+		army_experience = 10
+ 	}
+}
+
+country_event = { ### A Will of Iron ###
+	id = omskreg.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.23"}
+ 	title = omskreg.23.t
+ 	desc = omskreg.23.d
+ 	picture = GFX_report_event_russia_vorkutlag
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.23.a
+ 	}
+}
+
+country_event = { ### Monitored Dedovschina ###
+	id = omskreg.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.24"}
+ 	title = omskreg.24.t
+ 	desc = omskreg.24.d
+ 	picture = GFX_report_event_russia_soldier_beaten
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.24.a
+ 	}
+}
+
+country_event = { ### Expand Vorkuta Training Center ###
+	id = omskreg.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.25"}
+ 	title = omskreg.25.t
+ 	desc = omskreg.25.d
+ 	picture = GFX_report_event_russia_vorkutlag
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.25.a
+		army_experience = 10
+		add_manpower = -25
+ 	}
+}
+
+country_event = { ### A Professional Core ###
+	id = omskreg.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.26"}
+ 	title = omskreg.26.t
+ 	desc = omskreg.26.d
+ 	picture = GFX_report_event_soldiers_training
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskreg.26.a
+ 	}
+}
+
+country_event = { ### Marching for Vengeance ###
+	id = omskreg.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.27"}
+ 	title = omskreg.27.t
+ 	desc = omskreg.27.d
+ 	picture = GFX_report_event_soldier_2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.27.a
+ 	}
+}
+
+country_event = { ### National Redoubt Program ###
+	id = omskreg.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.28"}
+ 	title = omskreg.28.t
+ 	desc = omskreg.28.d
+ 	picture = GFX_report_event_german_bunker
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.28.a
+ 	}
+}
+
+country_event = { ### An All-League Education ###
+	id = omskreg.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskreg.29"}
+ 	title = omskreg.29.t
+ 	desc = omskreg.29.d
+ 	picture = GFX_report_event_iberia_iberian_classroom
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskreg.29.a
+ 	}
+}
+
+###############################################################################################################
+
+country_event = { ### Situation Report ###
+	id = omskdiplo.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.1"}
+ 	title = omskdiplo.1.t
+ 	desc = omskdiplo.1.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.1.a
+		add_political_power = 25
+ 	}
+}
+
+country_event = { ### Operation Potemkin ###
+	id = omskdiplo.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.2"}
+ 	title = omskdiplo.2.t
+ 	desc = omskdiplo.2.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.2.a
+		add_stability = 0.05
+ 	}
+}
+
+country_event = { ### Omsk Appeals for Recognition - America ###
+	id = omskdiplo.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.3"}
+ 	title = omskdiplo.3.t
+ 	desc = omskdiplo.3.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.3.a
+		add_opinion_modifier = {
+			target = OMS
+			modifier = OMS_recognition
+		}
+		OMS = {
+			country_event = { id = omskdiplo.4 days = 1 }
+		}
+ 	}
+	 option = {
+		name = omskdiplo.3.b
+		OMS = {
+			country_event = { id = omskdiplo.5 days = 1 }
+		}
+	}
+}
+
+country_event = { ### Omsk Appeals for Recognition - America - Yes ###
+	id = omskdiplo.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.4"}
+ 	title = omskdiplo.4.t
+ 	desc = omskdiplo.4.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.4.a
+		add_political_power = 50
+		hidden_effect = {
+			every_country = {
+				news_event = { id = omskdiplo.9 days = 3 random = 72 }
+			}
+			country_event = { id = omskdiplo.21 days = 45 random = 72 }
+		}
+ 	}
+}
+
+country_event = { ### Omsk Appeals for Recognition - America - No ###
+	id = omskdiplo.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.5"}
+ 	title = omskdiplo.5.t
+ 	desc = omskdiplo.5.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.5.a
+		add_political_power = -25
+ 	}
+}
+
+country_event = { ### Omsk Appeals for Recognition - Japan ###
+	id = omskdiplo.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.6"}
+ 	title = omskdiplo.6.t
+ 	desc = omskdiplo.6.d
+ 	picture = GFX_report_event_japan_diet_1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.6.a
+		add_opinion_modifier = {
+			target = OMS
+			modifier = OMS_recognition
+		}
+		OMS = {
+			country_event = { id = omskdiplo.7 days = 1 }
+		}
+ 	}
+	option = {
+		name = omskdiplo.6.b
+		OMS = {
+			country_event = { id = omskdiplo.8 days = 1 }
+		}
+	}
+}
+
+country_event = { ### Omsk Appeals for Recognition - Japan - Yes ###
+	id = omskdiplo.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.7"}
+ 	title = omskdiplo.7.t
+ 	desc = omskdiplo.7.d
+ 	picture = GFX_report_event_japan_diet_1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.7.a
+		add_political_power = 50
+		hidden_effect = {
+			every_country = {
+				news_event = { id = omskdiplo.10 days = 3 random = 72 }
+			}
+		}
+ 	}
+}
+
+country_event = { ### Omsk Appeals for Recognition - Japan - No ###
+	id = omskdiplo.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.8"}
+ 	title = omskdiplo.8.t
+ 	desc = omskdiplo.8.d
+ 	picture = GFX_report_event_japan_diet_1
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.8.a
+		add_political_power = -25
+ 	}
+}
+
+news_event = { ### America Recognizes Omsk ###
+	id = omskdiplo.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.9"}
+ 	title = omskdiplo.9.t
+ 	desc = omskdiplo.9.d
+ 	picture = GFX_news_event_white_house
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskdiplo.9.a
+ 	}
+}
+
+news_event = { ### Japan Recognizes Omsk ###
+	id = omskdiplo.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.10"}
+ 	title = omskdiplo.10.t
+ 	desc = omskdiplo.10.d
+ 	picture = GFX_news_event_omsk_sphere
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskdiplo.10.a
+ 	}
+}
+
+country_event = { ### Humanitarian Aid Foundation Event ###
+	id = omskdiplo.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.11"}
+ 	title = omskdiplo.11.t
+ 	desc = omskdiplo.11.d
+ 	picture = GFX_report_event_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.11.a
+		add_stability = 0.01
+		hidden_effect = {
+			country_event = { id = omskdiplo.12 days = 7 }
+		}
+ 	}
+}
+
+country_event = { ### Humanitarian Aid Foundation Event II ###
+	id = omskdiplo.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.12"}
+ 	title = omskdiplo.12.t
+ 	desc = omskdiplo.12.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.12.a
+		add_political_power = 25
+		set_temp_variable = { money_reserves_temp = 0.015 }
+		econ_money_reserves_change_raw_money = yes
+ 	}
+}
+
+country_event = { ### Illegals Program ###
+	id = omskdiplo.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.13"}
+ 	title = omskdiplo.13.t
+ 	desc = omskdiplo.13.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.13.a
+		add_political_power = -25
+ 	}
+}
+
+country_event = { #Message to Germania - Speer
+	id = omskdiplo.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.14"}
+ 	title = omskdiplo.14.t
+ 	desc = omskdiplo.14.d
+ 	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.14.a
+		increase_conservative_leaning_small = yes
+	}
+}
+
+country_event = { #Message to Germania - Bormann
+	id = omskdiplo.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.15"}
+ 	title = omskdiplo.15.t
+ 	desc = omskdiplo.15.d
+ 	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskdiplo.15.a
+		BOR_SIG_AL_0_3_2 = yes
+		BOR_SIG_AL_1_3_2 = yes
+		BOR_SIG_AL_4_3_2 = yes
+ 	}
+}
+
+country_event = { #Message to Germania - Göring
+	id = omskdiplo.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.16"}
+ 	title = omskdiplo.16.t
+ 	desc = omskdiplo.16.d
+ 	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.16.a
+		GGR_increase_militarist_influence_small = yes
+ 	}
+}
+
+country_event = { ### Omsk Condemns Us ###
+	id = omskdiplo.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.17"}
+ 	title = omskdiplo.17.t
+ 	desc = omskdiplo.17.d
+ 	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.17.a
+		add_political_power = -15
+		add_opinion_modifier = {
+			target = OMS
+			modifier = OMS_condemned_us
+		}
+ 	}
+}
+
+country_event = { ### Kazakhstan - Black League Infiltration ###
+	id = omskdiplo.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.18"}
+ 	title = omskdiplo.18.t
+ 	desc = omskdiplo.18.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.18.a
+		add_political_power = -25
+ 	}
+}
+
+country_event = { ### Directorate of Foreign Activities ###
+	id = omskdiplo.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.19"}
+ 	title = omskdiplo.19.t
+ 	desc = omskdiplo.19.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omskdiplo.19.a
+		add_political_power = 15
+ 	}
+}
+
+country_event = { ### The Foundations Laid ###
+	id = omskdiplo.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.20"}
+ 	title = omskdiplo.20.t
+ 	desc = omskdiplo.20.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskdiplo.20.a
+ 	}
+}
+
+country_event = { ### The Lycurgus of Russia ###
+	id = omskdiplo.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omskdiplo.21"}
+ 	title = omskdiplo.21.t
+ 	desc = omskdiplo.21.d
+ 	picture = GFX_report_event_generic_newspaper
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omskdiplo.21.a
+ 	}
+}
+
+###############################################################################################################
+
+### Super-Regional Events ###
+
+country_event = { ### The Reclamation Government ###
+	id = omsksr.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.1"}
+ 	title = omsksr.1.t
+ 	desc = omsksr.1.d
+ 	picture = GFX_report_event_komi_bombing_2
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.1.a
+ 	}
+}
+
+news_event = { ### The Reclamation Government - World Event ###
+	id = omsksr.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.2"}
+ 	title = omsksr.2.t
+ 	desc = omsksr.2.d
+ 	picture = GFX_news_event_russian_crowd
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.2.a
+		trigger = {
+			NOT = {
+				OR = {
+					tag = OMS
+					tag = GER
+				}
+			}
+		}
+ 	}
+
+	option = {
+		name = omsksr.2.b
+		trigger = {
+			tag = OMS
+		}
+	}
+
+	option = {
+		name = omsksr.2.c
+		trigger = {
+			tag = GER
+		}
+	}
+}
+
+country_event = { ### National Survival ###
+	id = omsksr.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.3"}
+ 	title = omsksr.3.t
+ 	desc = omsksr.3.d
+ 	picture = GFX_report_event_russia_trade_caravan
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.3.a
+ 	}
+}
+
+country_event = { ### Fires of Hell ###
+	id = omsksr.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.4"}
+ 	title = omsksr.4.t
+ 	desc = omsksr.4.d
+ 	picture = GFX_report_event_russia_bunker_command
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.4.a
+		hidden_effect = {
+			country_event = { id = omsksr.5 days = 365 }
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.25 }
+		econ_spend_money_once_effect_raw_money = yes
+ 	}
+}
+
+country_event = { ### Fires of Hell - Bunker Construction ###
+	id = omsksr.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.5"}
+ 	title = omsksr.5.t
+ 	desc = omsksr.5.d
+ 	picture = GFX_report_event_bunker_city
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.5.a
+		custom_effect_tooltip = fires_of_hell_2_tt
+		hidden_effect = {
+			571 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = {
+						all_provinces = yes
+					}
+				}
+			}
+		}
+ 	}
+}
+
+country_event = { ### Escalate Potemkin ###
+	id = omsksr.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.6"}
+ 	title = omsksr.6.t
+ 	desc = omsksr.6.d
+ 	picture = GFX_white_house_picture
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.6.a
+		RWS = {
+			country_event = { id = omsksr.7 days = 3 }
+		}
+		add_opinion_modifier = {
+			target = OMS
+			modifier = OMS_media_support
+		}
+	}
+	option = {
+		name = omsksr.6.b
+		RWS = {
+			country_event = { id = omsksr.8 days = 3 }
+		}
+	}
+}
+
+country_event = { ### Escalate Potemkin - Yes ###
+	id = omsksr.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.7"}
+ 	title = omsksr.7.t
+ 	desc = omsksr.7.d
+ 	picture = GFX_white_house_picture
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.7.a
+		add_political_power = 25
+		add_opinion_modifier = {
+			target = USA
+			modifier = OMS_media_support
+		}
+		hidden_effect = {
+			USA = {
+				country_event = { id = omsksr.9 days = 35 }
+			}
+			OMS = {
+				country_event = { id = omsksr.9 days = 35 }
+			}
+		}
+ 	}
+}
+
+country_event = { ### Escalate Potemkin - No ###
+	id = omsksr.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.8"}
+ 	title = omsksr.8.t
+ 	desc = omsksr.8.d
+ 	picture = GFX_white_house_picture
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.8.a
+		add_political_power = -10
+ 	}
+}
+
+country_event = { ### Escalate Potemkin - Movie Release ###
+	id = omsksr.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.9"}
+ 	title = omsksr.9.t
+ 	desc = omsksr.9.d
+ 	picture = GFX_report_event_movie_theater
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.9.a
+ 	}
+}
+
+country_event = { ### Contacts in Moskowien - Illegals Program Expanded ###
+	id = omsksr.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.10"}
+ 	title = omsksr.10.t
+ 	desc = omsksr.10.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.10.a
+		MCW = {
+			add_stability = -0.05
+		}
+		GER = {
+			country_event = { id = omsksr.11 days = 3 }
+		}
+ 	}
+}
+
+country_event = { ### Contacts in Moskowien - Suspicious Transmissions ###
+	id = omsksr.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.11"}
+ 	title = omsksr.11.t
+ 	desc = omsksr.11.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.11.a
+		add_political_power = -25
+ 	}
+}
+
+country_event = { ### The First Draft ###
+	id = omsksr.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.12"}
+ 	title = omsksr.12.t
+ 	desc = omsksr.12.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.12.a
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+ 	}
+}
+
+country_event = { ### De-Warlordization Trials ###
+	id = omsksr.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.13"}
+ 	title = omsksr.13.t
+ 	desc = omsksr.13.d
+ 	picture = GFX_report_event_black_league_purge
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.13.a
+		add_manpower = -250
+		add_political_power = 25
+ 	}
+}
+
+country_event = { ### Venerate the Front - Soldiers Join ###
+	id = omsksr.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.14"}
+ 	title = omsksr.14.t
+ 	desc = omsksr.14.d
+ 	picture = GFX_report_event_russia_soldiers
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.14.a
+		add_manpower = 50000
+ 	}
+}
+
+country_event = { ### Venerate the Front - Ustinov and Yepishev Join ###
+	id = omsksr.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.15"}
+ 	title = omsksr.15.t
+ 	desc = omsksr.15.d
+ 	picture = GFX_report_event_russian_letter
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.15.a
+		create_field_marshal = {
+			name = "Dmitry Ustinov"
+			picture = "Portrait_Omsk_Dmitry_Ustinov.dds"
+			traits = { politically_connected expert_delegator logistics_wizard organizer }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			id = 3597
+		}
+		create_corps_commander = {
+			name = "Alexey Yepishev"
+			picture = "Portrait_Omsk_Alexey_Yepishev.dds"
+			traits = { politically_connected trickster }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+			id = 3598
+		}		
+ 	}
+}
+
+country_event = { ### Re-integrate the Armies ###
+	id = omsksr.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.16"}
+ 	title = omsksr.16.t
+ 	desc = omsksr.16.d
+ 	picture = GFX_report_event_iberia_female_fighters
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.16.a
+		add_ideas = tno_women_noncombat_only
+		hidden_effect = { TNO_worsen_women_policy_effectiveness_high = yes }
+ 	}
+}
+
+country_event = { ### Onwards to Berlin ###
+	id = omsksr.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.17"}
+ 	title = omsksr.17.t
+ 	desc = omsksr.17.d
+ 	picture = GFX_report_event_omsk_building
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.17.a
+ 	}
+}
+
+country_event = { ### Warnings from Within ###
+	id = omsksr.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.18"}
+ 	title = omsksr.18.t
+ 	desc = omsksr.18.d
+ 	picture = GFX_report_event_secret_squirrel_stuff
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.18.a
+ 	}
+}
+
+country_event = { ### The Weapons of National Vengeance ###
+	id = omsksr.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.19"}
+ 	title = omsksr.19.t
+ 	desc = omsksr.19.d
+ 	picture = GFX_report_event_cog_explosion
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.19.a
+ 	}
+}
+
+country_event = { ### The Atomic Age ###
+	id = omsksr.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.20"}
+ 	title = omsksr.20.t
+ 	desc = omsksr.20.d
+ 	picture = GFX_report_event_generic_research_lab
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.20.a
+		if = {
+			limit = {
+				has_country_flag = RUS_nuclear_program_phase_1
+			}
+			add_to_variable = { RUSNukesTheoryProgress = 5 }
+		}
+		add_to_variable = { RUSNukesMonthlyProgress = 1 }
+ 	}
+}
+
+country_event = { ### Consult with Ovchinnikov ###
+	id = omsksr.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.21"}
+ 	title = omsksr.21.t
+ 	desc = omsksr.21.d
+ 	picture = GFX_report_event_gas_mask_soldiers
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.21.a
+		add_manpower = -25
+ 	}
+}
+
+country_event = { ### Source Uranium Deposits ###
+	id = omsksr.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.22"}
+ 	title = omsksr.22.t
+ 	desc = omsksr.22.d
+ 	picture = GFX_report_event_russia_kazakh_uranium_mine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.22.a
+ 	}
+}
+
+country_event = { ### The Fourth Thesis ###
+	id = omsksr.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.23"}
+ 	title = omsksr.23.t
+ 	desc = omsksr.23.d
+ 	picture = GFX_report_event_black_league_symbol
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+ 		name = omsksr.23.a
+ 	}
+}
+
+country_event = { ### Clear the Black Mountain ###
+	id = omsksr.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.24"}
+ 	title = omsksr.24.t
+ 	desc = omsksr.24.d
+ 	picture = GFX_report_event_russia_magnitogorsk
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.24.a
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = industry
+		}
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = electronics
+		}
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = infantry_weapons
+		}
+ 	}
+}
+
+country_event = { ### A Cold, Dark Sea ###
+	id = omsksr.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.25"}
+ 	title = omsksr.25.t
+ 	desc = omsksr.25.d
+ 	picture = GFX_report_event_generic_submarine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.25.a
+		navy_experience = 10
+		create_navy_leader = {
+			name = "Boris Yeronin"
+			picture = "Portrait_Omsk_Boris_Yeronin.dds"
+			traits = { seawolf silent_hunter }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			maneuvering_skill = 2
+			coordination_skill = 1
+			id = 7561
+		}
+		create_navy_leader = {
+			name = "Evgeny Druzhinin"
+			picture = "Portrait_Omsk_Evgeny_Druzhinin.dds"
+			traits = { fleet_protector lancer }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 3
+			maneuvering_skill = 1
+			coordination_skill = 2
+			id = 7562
+		}
+ 	}
+}
+
+country_event = { ### The Fate of the Pretenders ###
+	id = omsksr.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.26"}
+ 	title = omsksr.26.t
+ 	desc = omsksr.26.d
+ 	picture = GFX_report_event_iberian_wars_6
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.26.a
+ 	}
+}
+
+country_event = { ###  ###
+	id = omsksr.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.27"}
+ 	title = omsksr.27.t
+ 	desc = omsksr.27.d
+ 	picture = GFX_report_event_generic_submarine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.27.a
+		hidden_effect = {
+			random_list = {
+				95 = {
+					create_country_leader = {
+						name = "Dmitry Yazov"
+						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
+						picture = "Portrait_Omsk_Dmitry_Yazov_70s.dds"
+						expire = "1999.1.1"
+						ideology = ultranationalism_ultramilitarism_subtype
+						traits = { the_supreme_commander_of_the_great_trial }
+					}
+					create_country_leader = {
+						name = "Dmitry Yazov"
+						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
+						picture = "Portrait_Omsk_Dmitry_Yazov_70s.dds"
+						expire = "1999.1.1"
+						ideology = despotism_military_junta_subtype
+						traits = { the_supreme_commander_of_the_great_trial }
+					}
+				}
+				5 = {
+					create_country_leader = {
+						name = "Dmitry Yazov"
+						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
+						picture = "Portrait_Omsk_Dmitry_Yazov_70s_shades.dds"
+						expire = "1999.1.1"
+						ideology = ultranationalism_ultramilitarism_subtype
+						traits = { the_supreme_commander_of_the_great_trial }
+					}
+					create_country_leader = {
+						name = "Dmitry Yazov"
+						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
+						picture = "Portrait_Omsk_Dmitry_Yazov_70s_shades.dds"
+						expire = "1999.1.1"
+						ideology = despotism_military_junta_subtype
+						traits = { the_supreme_commander_of_the_great_trial }
+					}
+				}
+			}
+			TNO_russia_ending_screen = yes
+		}
+ 	}
+}
+
+country_event = { ###  ###
+	id = omsksr.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.28"}
+ 	title = omsksr.28.t
+ 	desc = omsksr.28.d
+ 	picture = GFX_report_event_generic_submarine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.28.a
+ 	}
+}
+
+country_event = { ###  ###
+	id = omsksr.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.29"}
+ 	title = omsksr.29.t
+ 	desc = omsksr.29.d
+ 	picture = GFX_report_event_generic_submarine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.29.a
+ 	}
+}
+
+country_event = { ###  ###
+	id = omsksr.30
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsksr.30"}
+ 	title = omsksr.30.t
+ 	desc = omsksr.30.d
+ 	picture = GFX_report_event_generic_submarine
+	
+	is_triggered_only = yes
+ 	
+ 	option = {
+		name = omsksr.30.a
+ 	}
+}
+
+###############################################################################################################
+
+country_event = { #Fuck you Dread
+	id = omsk.1000
+	immediate = {log = "[GetDateText]: [Root.GetName]: event omsk.1000"}
+	title = omsk.1000.t
+	desc = omsk.1000.desc
+	picture = GFX_report_event_schorner
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = omsk.1000.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # weekly pulse for Batov's insurgency
+	id = omsk.1999
+	immediate = {
+		log = "[GetDatetext]: [ROOT.GetName]: event omsk.1999"
+		if = {
+			limit = {
+				has_country_flag = OMS_batov_insurgency_active
+			}
+			for_each_loop = {
+				array = OMS_map_grid_array
+				var:v = {
+					if = {
+						limit = {
+							check_variable = { base_status = 2 }
+						}
+						add_to_variable = { insurgency_strength = ROOT.OMS_our_base_effectiveness }
+					}
+					else_if = {
+						limit = {
+							check_variable = { base_status = 3 }
+						}
+						add_to_variable = { insurgency_strength = ROOT.OMS_batov_base_effectiveness }
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_active_mission = OMS_batov_making_moves }
+				}
+				activate_mission = OMS_batov_making_moves
+			}
+			OMS_SE_insurgency_calc_insurgency_strength = yes
+			country_event = { id = omsk.1999 days = 7 }
+		}
+	}
+	is_triggered_only = yes
+	hidden = yes
+}
