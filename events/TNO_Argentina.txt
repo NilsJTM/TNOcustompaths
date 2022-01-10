@@ -1,0 +1,2198 @@
+add_namespace = ARG
+add_namespace = ARGnews
+
+#################
+#SKELETON EVENTS#
+#################
+
+country_event = {
+	id = ARG.148 #AI event for choosing between Frondizi and coup
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.148" }
+	title = ARG.148.t
+	desc = ARG.148.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Frondizi stays in power
+		name = ARG.148.a
+		ai_chance = { 
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_FRONDIZI option = ARG_SKELETON_FRONDIZI_COLORADOS_COUP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_FRONDIZI option = ARG_SKELETON_FRONDIZI_GUIDO_INSTALLED }
+            }
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.05
+		}
+		add_stability = 0.05
+		hidden_effect = {
+			country_event = { days = 497 id = ARG.150 }
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.37 }
+			}
+			create_country_leader = {
+				name = "Juan Carlos Onganía"
+				desc = "POLITICS_JCO_DESC"
+				picture = "Portrait_ARG_Juan_Carlos_Ongania.dds"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = {
+					el_tropero_latin
+				}
+			}
+			set_party_name = { 
+				ideology = despotism 
+				long_name = ARG_despotism_azules_party_long
+				name = ARG_despotism_azules_party
+			}
+			remove_ideas = {
+				ARG_the_death_of_discipline
+			}
+			add_ideas = {
+				ARG_reign_of_the_cavalry
+			}
+		}
+	}
+	option = { #Colorado Coup
+		name = ARG.148.b
+		ai_chance = {
+			factor = 20
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_FRONDIZI option = ARG_SKELETON_FRONDIZI_FRONDIZI_STAYS }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_FRONDIZI option = ARG_SKELETON_FRONDIZI_GUIDO_INSTALLED }
+            }
+		}
+		hidden_effect = {
+			country_event = { id = ARG.149 }
+		}
+	}
+	option = { #Colorado Coup Not Succeeds, Guido is installed
+		name = ARG.148.c
+		ai_chance = {
+			factor = 50
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_FRONDIZI option = ARG_SKELETON_FRONDIZI_FRONDIZI_STAYS }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_FRONDIZI option = ARG_SKELETON_FRONDIZI_COLORADOS_COUP }
+            }
+		}
+		add_stability = -0.1
+		create_country_leader = {
+			name = "José María Guido"
+			desc = "POLITICS_JOSE_MARIA_GUIDO_DESC"
+			picture = "Portrait_ARG_Jose_Maria_Guido.dds"
+			expire = "1994.4.20"
+			ideology = liberal_democracy_liberal_radicalism_subtype
+			traits = {
+				un_patriota_en_la_borrasca_latin
+			}
+		}
+		set_politics = {
+			ruling_party = liberal_democracy
+			elections_allowed = no
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Rodolfo_Martinez_hog
+			ARG_Mariano_Jose_Drago_for
+			ARG_Federico_Pinedo_eco
+			ARG_Carlos_Eugenio_Moori_Koening_sec
+			ARG_anarchy_in_the_army
+		}
+		hidden_effect = {
+			country_event = { days = 246 id = ARG.154 }
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.66 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.149 #Colorados Coup
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.149" }
+	title = ARG.149.t
+	desc = ARG.149.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.149.a #Colorados
+		add_political_power = -25
+		add_stability = -0.20
+		set_party_name = { 
+			ideology = despotism 
+			long_name = ARG_despotism_colorados_party_long
+			name = ARG_despotism_colorados_party
+		}
+		create_country_leader = {
+			name = "Raúl Alejandro Poggi"
+			desc = "POLITICS_RAUL_POGGI_DESC"
+			picture = "Portrait_Argentina_Poggi.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+			}
+		}
+		set_politics = {
+			ruling_party = despotism
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = -0.05
+		}	
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = -0.1
+		}	
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.2
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = ARG_despotism_colorados_party_long
+			name = ARG_despotism_colorados_party
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Junta_Militar_hog
+			ARG_Armando_P_Martineja_for
+			ARG_Adolfo_Vicchi_poggi_eco
+			ARG_Carlos_Eugenio_Moori_Koening_sec
+			ARG_anarchy_in_the_army
+		}
+		remove_ideas = {
+			ARG_reign_of_the_cavalry
+		}
+		hidden_effect = {
+			country_event = { days = 256 id = ARG.153 }
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.38 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.150 #AI event for 1963 Election
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.150"
+		set_politics = {	
+			ruling_party = liberal_democracy
+			last_election = "1963.10.23"
+			election_frequency = 72
+			elections_allowed = yes
+		}
+	}
+	title = ARG.150.t
+	desc = ARG.150.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #UCRP vs PS vs FNPC
+		name = ARG.150.a
+		ai_chance = { 
+			factor = 65
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_CHOICE option = ARG_SKELETON_1963_ELECTIONS_CHOICE_TWO_WAY_ELECTION }
+            }
+		}
+		hidden_effect = {
+			country_event = { id = ARG.151 }
+		}
+	}
+	option = { #Frigerio's FN vs UD II
+		name = ARG.150.b
+		ai_chance = { 
+			factor = 35
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_CHOICE option = ARG_SKELETON_1963_ELECTIONS_CHOICE_THREE_WAY_ELECTION }
+            }
+		}
+		set_party_name = { 
+			ideology = communist
+			long_name = ARG_ud_ii_communist_party_long
+			name = ARG_ud_ii_communist_party
+		}
+		set_party_name = { 
+			ideology = socialist
+			long_name = ARG_ud_ii_socialist_party_long
+			name = ARG_ud_ii_socialist_party
+		}
+		set_party_name = { 
+			ideology = social_democracy
+			long_name = ARG_ud_ii_social_democracy_party_long
+			name = ARG_ud_ii_social_democracy_party
+		}
+		set_party_name = { 
+			ideology = liberal_democracy
+			long_name = ARG_ud_ii_liberal_democracy_party_long
+			name = ARG_ud_ii_liberal_democracy_party
+		}
+		set_party_name = { 
+			ideology = conservative_democracy
+			long_name = ARG_ud_ii_conservative_democracy_party_long
+			name = ARG_ud_ii_conservative_democracy_party
+		}
+		set_party_name = { 
+			ideology = authoritarian_democracy
+			long_name = ARG_fn_frigerio_party_long
+			name = ARG_fn_frigerio_party
+		}
+		hidden_effect = {
+			country_event = { id = ARG.152 }
+		}
+	}
+}
+
+country_event = {
+	id = ARG.151 #AI event for 1963 Election
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.151" }
+	title = ARG.151.t
+	desc = ARG.151.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #UCRP wins
+		name = ARG.151.a
+		ai_chance = { 
+			factor = 40
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_I option = ARG_SKELETON_1963_ELECTIONS_I_PS }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_I option = ARG_SKELETON_1963_ELECTIONS_I_FNPC }
+            } 
+		}
+		create_country_leader = {
+			name = "Arturo Umberto Illia"
+			desc = "POLITICS_ILLIA_DESC"
+			picture = "Portrait_ARG_Arturo_Illia.dds"
+			expire = "1994.4.20"
+			ideology = social_democracy_social_radicalism_subtype
+			traits = {
+			}
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.04
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.2
+		}
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		add_stability = 0.05
+		set_party_name = { 
+			ideology = social_democracy 
+			long_name = ARG_ucrp_lc_party_long
+			name = ARG_ucrp_lc_party
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Juan_Palmero_hog
+			ARG_Miguel_Angel_Zavala_Ortiz_for
+			ARG_Juan_Carlos_Pugliese_eco
+			ARG_Ignacio_Avalos_sec
+		}
+		country_event = { id = ARG.164 days = 964 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.40 }
+			}
+		}
+	}
+	option = { #PS Wins
+		name = ARG.151.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_I option = ARG_SKELETON_1963_ELECTIONS_I_UCRP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_I option = ARG_SKELETON_1963_ELECTIONS_I_FNPC }
+            }
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.04
+		}
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		add_stability = 0.05
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Juan_Carlos_Coral_hog
+			ARG_Americo_Ghioldi_for
+			ARG_Torcuato_S_Di_Tella_eco
+			ARG_Juan_C_Rosas_romero_sec
+		}
+		country_event = { id = ARG.164 days = 964 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.62 }
+			}
+		}
+	}
+	option = { #FNPC Wins
+		name = ARG.151.c
+		ai_chance = {
+			factor = 10
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_I option = ARG_SKELETON_1963_ELECTIONS_I_UCRP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_I option = ARG_SKELETON_1963_ELECTIONS_I_PS }
+            }
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.04
+		}
+		set_politics = {
+			ruling_party = conservative_democracy
+		}
+		add_stability = 0.05
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Pablo_Gonzales_Berges_hog
+			ARG_Adolfo_Vicchi_for
+			ARG_Raul_Prebisch_eco
+			ARG_Rosendo_Fraga_hardoy_sec
+		}
+		country_event = { id = ARG.169 days = 2190 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.63 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.152 #AI event for 1963 Election
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.152" }
+	title = ARG.152.t
+	desc = ARG.152.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #FN Wins
+		name = ARG.152.a
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_II option = ARG_SKELETON_1963_ELECTIONS_II_UD_II }
+            }
+		}
+		create_country_leader = {
+			name = "Rogelio Julio Frigerio"
+			desc = "POLITICS_FRIGERIO_DESC"
+			picture = "Portrait_ARG_Rogelio_Frigerio.dds"
+			expire = "1994.4.20"
+			ideology = authoritarian_democracy_dominant_party_democracy_subtype
+			traits = {
+			}
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.04
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		add_stability = 0.05
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Mariano_Grondona_hog
+			ARG_Mario_Amadeo_for
+			ARG_Juan_E_Guglialmelli_eco
+			ARG_Juan_C_Rosas_sec
+		}
+		country_event = { id = ARG.169 days = 2190 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.41 }
+			}
+		}
+	}
+	option = { #UD II Wins
+		name = ARG.152.a
+		ai_chance = { 
+			factor = 15
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_II option = ARG_SKELETON_1963_ELECTIONS_II_FN }
+            } 
+		}
+		create_country_leader = {
+			name = "Alfredo Palacios"
+			desc = "POLITICS_ALFREDO_PALACIOS_DESC"
+			picture = "Portrait_ARG_Alfredo_Palacios.dds"
+			expire = "1994.4.20"
+			ideology = social_democracy_popular_front_subtype
+			traits = {
+			}
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.04
+		}
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		add_stability = 0.05
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Silvano_Santander_hog
+			ARG_Adolfo_Vicchi_ud_ii_for
+			ARG_Aldo_Ferrer_eco
+			ARG_Eduardo_R_Castro_Sanchez_sec
+		}
+		country_event = { id = ARG.169 days = 2190 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.60 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.153 #Poggi Dies
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.153" }
+	title = ARG.153.t
+	desc = ARG.153.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.153.a #Menendez
+		add_stability = -0.1
+		create_country_leader = {
+			name = "Benjamín Menéndez"
+			desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
+			picture = "Portrait_ARG_Benjamin_Menendez.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+			}
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Isaac_Rojas_hog
+			ARG_Ernesto_Sanmartino_for
+			ARG_Arturo_Mathov_eco
+			ARG_Pedro_Eugenio_Aramburu_sec
+			ARG_navy_controlled_army
+		}
+		remove_ideas = {
+			ARG_anarchy_in_the_army
+			}
+		hidden_effect = {
+			country_event = { days = 712 id = ARG.162 }
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.65 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.154 #Azules y Colorados, should the Colorados win or should the Azules win?
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.154"
+		create_country_leader = {
+			name = "José María Guido"
+			desc = "POLITICS_JOSE_MARIA_GUIDO_DESC"
+			picture = "Portrait_ARG_Jose_Maria_Guido.dds"
+			expire = "1994.4.20"
+			ideology = despotism_civilian_dictatorship_subtype
+			traits = {
+				un_patriota_en_la_borrasca_latin
+			}
+		}
+		set_party_name = { 
+			ideology = despotism 
+			long_name = ARG_liberal_democracy_party_long
+			name = ARG_liberal_democracy_party
+		}
+		set_politics = {
+			ruling_party = despotism
+		}
+		add_ideas = {
+			ARG_vacant_hog
+			ARG_vacant_for
+			ARG_vacant_eco
+			ARG_vacant_sec
+		}
+	}
+	title = ARG.154.t
+	desc = ARG.154.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.154.a #Colorados
+		ai_chance = {
+			factor = 5
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_AZULES_Y_COLORADOS option = ARG_SKELETON_AZULES_Y_COLORADOS_AZULES }
+            }
+		}
+		country_event = {
+			id = ARG.156 days = 60
+		}
+	}
+	option = { #Azules
+		name = ARG.154.b
+		ai_chance = { 
+			factor = 95 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_AZULES_Y_COLORADOS option = ARG_SKELETON_AZULES_Y_COLORADOS_COLORADOS }
+            }
+		}
+		country_event = { id = ARG.157 days = 60 }
+	}
+}
+
+country_event = {
+	id = ARG.155 #AI event for 1963 election
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.155"
+		set_party_name = { 
+			ideology = conservative_democracy
+			long_name = ARG_fn_solanolima_party_long
+			name = ARG_fn_solanolima_party
+		}
+	}
+	title = ARG.155.t
+	desc = ARG.155.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.155.a #FN Wins
+		ai_chance = { 
+			factor = 70
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_III option = ARG_SKELETON_1963_ELECTIONS_III_UD_II }
+            }
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.04
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Vicente Solano Lima"
+			desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
+			picture = "Portrait_ARG_Vicente_Solano_Lima.dds"
+			expire = "1994.4.20"
+			ideology = conservative_democracy_populist_conservatism_subtype
+			traits = {
+			}
+		}
+		add_stability = 0.05
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Alberto_Maria_Fonrouge_hog
+			ARG_Mario_Amadeo_for
+			ARG_Rogelio_Frigerio_eco
+			ARG_Manuel_Reimundes_sec
+		}
+		country_event = { id = ARG.160 days = 270 } #Peron Returns In 9 Months
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.61 }
+			}
+		}
+	}
+	option = { #UD II Wins
+		name = ARG.155.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_III option = ARG_SKELETON_1963_ELECTIONS_III_FN }
+            }
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.04
+		}
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		add_stability = 0.05
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Silvano_Santander_hog
+			ARG_Adolfo_Vicchi_ud_ii_for
+			ARG_Aldo_Ferrer_eco
+			ARG_Eduardo_R_Castro_Sanchez_sec
+		}
+		create_country_leader = {
+			name = "Vicente Solano Lima"
+			desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
+			picture = "Portrait_ARG_Vicente_Solano_Lima.dds"
+			expire = "1994.4.20"
+			ideology = conservative_democracy_populist_conservatism_subtype
+			traits = {
+			}
+		}
+		country_event = { id = ARG.169 days = 2190 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.60 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.156 #Colorados Victory
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.156"
+		set_party_name = { 
+			ideology = despotism 
+			long_name = ARG_despotism_colorados_party_long
+			name = ARG_despotism_colorados_party
+		}
+	}
+	title = ARG.156.t
+	desc = ARG.156.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.156.a 
+		add_political_power = -25
+		add_stability = -0.1
+		create_country_leader = {
+			name = "Benjamín Menéndez"
+			desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
+			picture = "Portrait_ARG_Benjamin_Menendez.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+			}
+		}
+		set_politics = {
+			ruling_party = despotism
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = -0.05
+		}	
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = -0.1
+		}	
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.2
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = ARG_despotism_colorados_party_long
+			name = ARG_despotism_colorados_party
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Isaac_Rojas_hog
+			ARG_Ernesto_Sanmartino_for
+			ARG_Arturo_Mathov_eco
+			ARG_Pedro_Eugenio_Aramburu_sec
+			ARG_navy_controlled_army
+		}
+		remove_ideas = {
+			ARG_reign_of_the_cavalry
+			ARG_anarchy_in_the_army
+		}
+		hidden_effect = {
+			country_event = { days = 649 id = ARG.162 }
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.70 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.157 #Azules Victory
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.157"
+	}
+	title = ARG.157.t
+	desc = ARG.157.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.157.a 
+		add_political_power = -25
+		remove_ideas = {
+			ARG_anarchy_in_the_army
+		}
+		add_ideas = {
+			ARG_reign_of_the_cavalry
+		}	
+		hidden_effect = {
+			country_event = { id = ARG.158 days = 50 }
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.39 }
+			}
+		}
+	}
+	#option = {
+	#	name = ARG.157.b
+	#	add_political_power = -25
+	#	remove_ideas = {
+	#		ARG_anarchy_in_the_army
+	#	}
+	#	hidden_effect = {
+	#		country_event = { id = ARG.151 days = 86 }
+	#		every_country = {
+	#			news_event = { hours = 1 id = LATAM_news.39 }
+	#		}
+	#	}
+	#}
+}
+
+country_event = {
+	id = ARG.158 #FN Forms
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.158" }
+	title = ARG.158.t
+	desc = ARG.158.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.158.a 
+		add_political_power = -25
+		set_party_name = { 
+			ideology = communist
+			long_name = ARG_ud_ii_communist_party_long
+			name = ARG_ud_ii_communist_party
+		}
+		set_party_name = { 
+			ideology = socialist
+			long_name = ARG_ud_ii_socialist_party_long
+			name = ARG_ud_ii_socialist_party
+		}
+		set_party_name = { 
+			ideology = social_democracy
+			long_name = ARG_ud_ii_social_democracy_party_long
+			name = ARG_ud_ii_social_democracy_party
+		}
+		set_party_name = { 
+			ideology = liberal_democracy
+			long_name = ARG_ud_ii_liberal_democracy_party_long
+			name = ARG_ud_ii_liberal_democracy_party
+		}
+		set_party_name = { 
+			ideology = conservative_democracy
+			long_name = ARG_fn_martinez_party_long
+			name = ARG_fn_martinez_party
+		}
+		set_party_name = { 
+			ideology = authoritarian_democracy
+			long_name = ARG_fn_frigerio_party_long
+			name = ARG_fn_frigerio_party
+		}
+		set_party_name = { 
+			ideology = despotism 
+			long_name = ARG_despotism_azules_party_long
+			name = ARG_despotism_azules_party
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.15
+		}
+		create_country_leader = {
+			name = "Rodolfo Martínez"
+			desc = "POLITICS_RODOLFO_MARTINEZ_DESC"
+			picture = "Portrait_ARG_Rodolfo_Martinez.dds"
+			expire = "1994.4.20"
+			ideology = conservative_democracy_christian_democracy_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Silvano Santander"
+			#desc = "POLITICS_FRIGERIO_DESC"
+			picture = "Potrait_ARG_Silvano_Santander.dds"
+			expire = "1994.4.20"
+			ideology = liberal_democracy_liberal_radicalism_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Alfredo Palacios"
+			desc = "POLITICS_ALFREDO_PALACIOS_DESC"
+			picture = "Portrait_ARG_Alfredo_Palacios.dds"
+			expire = "1994.4.20"
+			ideology = social_democracy_popular_front_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Alfredo Palacios"
+			desc = "POLITICS_ALFREDO_PALACIOS_DESC"
+			picture = "Portrait_ARG_Alfredo_Palacios.dds"
+			expire = "1994.4.20"
+			ideology = socialist_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Rogelio Julio Frigerio"
+			desc = "POLITICS_FRIGERIO_DESC"
+			picture = "Portrait_ARG_Rogelio_Frigerio.dds"
+			expire = "1994.4.20"
+			ideology = authoritarian_democracy_dominant_party_democracy_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Juan Carlos Onganía"
+			desc = "POLITICS_JCO_DESC"
+			picture = "Portrait_ARG_Juan_Carlos_Ongania.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+			}
+		}
+		set_politics = {	
+			ruling_party = conservative_democracy
+			last_election = "1957.7.23"
+			election_frequency = 72
+			elections_allowed = yes
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Mariano_Grondona_martinez_hog
+			ARG_Jose_Maria_Guido_for
+			ARG_Juan_E_Guglialmelli_martinez_eco
+			ARG_Benjamin_Rattenbach_sec
+		}
+		hidden_effect = {
+			country_event = { id = ARG.155 days = 36 }
+		}
+	}
+}
+
+country_event = {
+	id = ARG.159 #debug
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.159"
+		set_politics = {	
+			ruling_party = liberal_democracy
+			last_election = "1963.10.23"
+			election_frequency = 72
+			elections_allowed = yes
+		}
+	}
+	title = ARG.159.t
+	desc = ARG.159.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #cavalry natspirit
+		name = ARG.159.a
+		ai_chance = { factor = 65 }
+		remove_ideas = {
+			ARG_anarchy_in_the_army
+			ARG_the_death_of_discipline
+			ARG_navy_controlled_army
+		}
+		add_ideas = {
+			ARG_reign_of_the_cavalry
+		}		
+	}
+	option = { #anarchy natspirit
+		name = ARG.159.b
+		ai_chance = { factor = 65 }
+		remove_ideas = {
+			
+			ARG_reign_of_the_cavalry
+			ARG_the_death_of_discipline
+			ARG_navy_controlled_army
+		}
+		add_ideas = {
+			ARG_anarchy_in_the_army
+		}		
+	}
+	option = { #navy natspirit
+		name = ARG.159.c
+		ai_chance = { factor = 65 }
+		remove_ideas = {
+			ARG_anarchy_in_the_army
+			ARG_the_death_of_discipline
+			ARG_reign_of_the_cavalry
+		}
+		add_ideas = {
+			ARG_navy_controlled_army
+		}		
+	}
+	option = { #planteos natspirit
+		name = ARG.159.d
+		ai_chance = { factor = 65 }
+		remove_ideas = {
+			ARG_anarchy_in_the_army
+			ARG_reign_of_the_cavalry
+			ARG_navy_controlled_army
+		}
+		add_ideas = {
+			ARG_the_death_of_discipline
+		}		
+	}
+}
+
+country_event = {
+	id = ARG.160 #Peron Returns
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.160"
+	}
+	title = ARG.160.t
+	desc = ARG.160.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.160.a 
+		create_country_leader = {
+			name = "José Emilio Visca"
+			#desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
+			picture = "Portrait_ARG_Jose_Emilio_Visca.dds"
+			expire = "1994.4.20"
+			ideology = conservative_democracy_populist_conservatism_subtype
+			traits = {
+			}
+		}
+		set_party_name = { 
+			ideology = conservative_democracy
+			long_name = ARG_fn_party_long
+			name = ARG_fn_party
+		}
+		add_ideas = {
+			ARG_Rodolfo_Decker_hog
+			ARG_Miguel_Angel_Iniguez_sec
+		}
+		country_event = { id = ARG.161 days = 30 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.64 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.161 #Peron Elected
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.161"
+	}
+	title = ARG.161.t
+	desc = ARG.161.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.161.a 
+		ARG_load_peron = yes
+		country_event = { id = ARG.170 days = 2190 }
+	}
+}
+
+country_event = {
+	id = ARG.162 #Menéndez Dies
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.162" }
+	title = ARG.162.t
+	desc = ARG.162.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.162.a #Rojas interim presidency
+		add_stability = -0.1
+		create_country_leader = {
+			name = "Isaac Rojas"
+			desc = ""
+			picture = "Portrait_ARG_Isaac_Rojas.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+			}
+		}
+		add_ideas = {
+			ARG_Junta_Militar_hog
+			ARG_Raul_Ondarts_eco
+			ARG_Bernardino_Labayru_sec
+		}
+		country_event = { id = ARG.163 days = 90 }
+		add_ideas = {
+			ARG_navy_controlled_army
+		}
+	}
+}
+
+country_event = {
+	id = ARG.163 #Aramburu Presidency
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.163" }
+	title = ARG.163.t
+	desc = ARG.163.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.163.a 
+		ARG_load_aramburu = yes
+		remove_all_ministers = yes
+	}
+}
+
+country_event = {
+	id = ARG.164 #Argentine Revolution trigger
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.164" }
+	title = ARG.164.t
+	desc = ARG.164.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.164.a 
+		ai_chance = { 
+			factor = 50 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_ARGENTINE_REVOLUTION option = ARG_SKELETON_ARGENTINE_REVOLUTION_COUP_FAILS }
+            }
+		}
+		country_event = { id = ARG.165 }
+	}
+
+	option = {
+		name = ARG.164.b
+		ai_chance = { 
+			factor = 50 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_ARGENTINE_REVOLUTION option = ARG_SKELETON_ARGENTINE_REVOLUTION_COUP_SUCCESS }
+            }
+		}
+		country_event = { id = ARG.169 days = 1226 }
+	}
+}
+
+country_event = {
+	id = ARG.165 #Argentine Revolution
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.165" }
+	title = ARG.165.t
+	desc = ARG.165.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.165.a 
+		add_stability = -0.15
+		create_country_leader = {
+			name = "Juan Carlos Onganía"
+			desc = "POLITICS_JCO_DESC"
+			picture = "Portrait_ARG_Juan_Carlos_Ongania.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+				el_tropero_latin
+			}
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = ARG_ongania_party_long
+			name = ARG_ongania_party
+		}
+		set_popularities = {
+			communist = 1
+			ultranationalism = 0
+			socialist = 3
+			social_democracy = 0
+			liberal_democracy = 19
+			#market_liberal = 0
+			conservative_democracy = 6
+			authoritarian_democracy = 52
+			despotism = 15
+			fascism = 0
+			national_socialism = 4
+		}
+		set_politics = {
+			ruling_party = despotism
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Guillermo_Borda_hog
+			ARG_Nicanor_Costa_Mendez_for
+			ARG_Adalbert_Krieger_Vassena_eco
+			ARG_Eduardo_Senorans_sec
+		}
+		country_event = { id = ARG.166 days = 1441 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.89 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.166 #Ongania is fucked, Long live Levingston
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.166" }
+	title = ARG.166.t
+	desc = ARG.166.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.166.a 
+		add_stability = -0.05
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Roberto Marcelo Levingston"
+			desc = "POLITICS_ROBERTO_MARCELO_LEVINGSTON_DESC"
+			picture = "Portrait_ARG_Roberto_Levingston.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+				
+			}
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = ARG_levingston_party_long
+			name = ARG_levingston_party
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Francisco_Manrique_hog
+			ARG_Luis_Maria_de_Pablo_Pardo_for
+			ARG_Aldo_Ferrer_levingston_eco
+			ARG_Jose_Rafael_Caceres_Monie_sec
+		}
+		country_event = { id = ARG.167 days = 287 }
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.90 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.167 #Long Live Lanusse and GAN
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.167" }
+	title = ARG.167.t
+	desc = ARG.167.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.167.a 
+		add_stability = -0.05
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Alejandro Agustín Lanusse"
+			desc = "POLITICS_ALEJANDRO_AGUSTIN_LANUSSE_DESC"
+			picture = "Portrait_ARG_Alejandro_Lanusse.dds"
+			expire = "1994.4.20"
+			ideology = despotism_military_junta_subtype
+			traits = {
+				
+			}
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = ARG_lanusse_party_long
+			name = ARG_lanusse_party
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ARG_Arturo_Mor_Roig_hog
+			ARG_Eduardo_Mc_Loughlin_for
+			ARG_Cayetano_Antonio_Licciardo_eco
+			ARG_Ezequiel_Alfredo_Martinez_sec
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.91 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.168 #Death of Palacios
+	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.168" }
+	title = ARG.168.t
+	desc = ARG.168.desc
+	#picture =
+
+	trigger = {
+		has_country_leader = {
+			name = "Alfredo Palacios"
+			ruling_only = yes
+		}
+		date > 1965.04.19
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = ARG.168.a 
+		kill_country_leader = yes
+		set_politics = {
+			ruling_party = liberal_democracy
+		}
+		create_country_leader = {
+			name = "Juan Carlos Coral"
+			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
+			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
+			expire = "1965.1.1"
+			ideology = socialist_subtype
+			traits = {
+				#
+			}
+		}
+		create_country_leader = {
+			name = "Juan Carlos Coral"
+			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
+			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
+			expire = "1965.1.1"
+			ideology = social_democracy_democratic_socialism_subtype
+			traits = {
+				#
+			}
+		}
+		add_ideas = ARG_Ernesto_Sanmartino_hog
+	}
+}
+
+country_event = {
+	id = ARG.169 #1969 Election event
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ARG.169"
+		add_stability = 0.1
+		set_party_name = {
+			ideology = communist
+			long_name = ARG_communist_party_long
+			name = ARG_communist_party
+		}
+		set_party_name = {
+			ideology = socialist
+			long_name = ARG_socialist_party_long
+			name = ARG_socialist_party
+		}
+		set_party_name = {
+			ideology = social_democracy
+			long_name = ARG_ucrp_lc_party_long
+			name = ARG_ucrp_lc_party
+		}
+		set_party_name = {
+			ideology = liberal_democracy
+			long_name = ARG_ucrp_ln_party_long
+			name = ARG_ucrp_ln_party
+		}
+		set_party_name = {
+			ideology = conservative_democracy
+			long_name = ARG_conservador_party_long
+			name = ARG_conservador_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democracy
+			long_name = ARG_frepoleju_pl_party_long
+			name = ARG_frepoleju_pl_party
+		}
+		create_country_leader = {
+			name = "Juan Carlos Coral"
+			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
+			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
+			expire = "1965.1.1"
+			ideology = socialist_subtype
+			traits = {
+				#
+			}
+		}
+		create_country_leader = {
+			name = "Rodolfo Martinovic"
+			desc = "POLITICS_RODOLFO_MARTINOVIC_DESC"
+			picture = "Portrait_ARG_Rudolfo_Martinovic.dds"
+			expire = "1965.1.1"
+			ideology = social_democracy_social_radicalism_subtype
+			traits = {
+				#
+			}
+		}
+		create_country_leader = {
+			name = "Ricardo Balbín"
+			#desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
+			picture = "Portrait_ARG_Ricardo_Balbin.dds"
+			expire = "1965.1.1"
+			ideology = liberal_democracy_liberal_radicalism_subtype
+			traits = {
+				#
+			}
+		}
+		create_country_leader = {
+			name = "Emilio Jofré"
+			desc = "POLITICS_EMILIO_JOFRE_DESC"
+			picture = "Potrait_ARG_Emilio_Jofre.dds"
+			expire = "1965.1.1"
+			ideology = conservative_democracy_liberal_conservatism_subtype
+			traits = {
+				#
+			}
+		}
+		create_country_leader = {
+			name = "Cipriano Reyes"
+			desc = "POLITICS_CIPRIANO_REYES_DESC"
+			picture = "Portrait_ARG_Cipriano_Reyes.dds"
+			expire = "1965.1.1"
+			ideology = authoritarian_democracy_peronism_subtype
+			traits = {
+				#
+			}
+		}
+	}
+	title = ARG.169.t
+	desc = ARG.169.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#UCRP
+		name = ARG.169.a
+		ai_chance = { 
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_PS }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_FNCP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_PL }
+            }
+		}
+		set_politics = {
+			ruling_party = social_democracy
+			last_election = "1969.10.23"
+			election_frequency = 72
+			elections_allowed = yes
+		}
+		add_ideas = {
+			ARG_Eugenio_Conde_hog
+			ARG_Victor_H_Martinez_for
+			ARG_Eduardo_Gamond_eco
+			ARG_Osiris_Guillermo_Villegas_sec
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.100 }
+			}
+		}
+	}
+	option = {#PS
+		name = ARG.169.b
+		ai_chance = { 
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_UCRP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_FNCP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_PL }
+            }
+		}
+		create_country_leader = {
+			name = "Juan Carlos Coral"
+			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
+			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
+			expire = "1965.1.1"
+			ideology = social_democracy_democratic_socialism_subtype
+			traits = {
+				#
+			}
+		}
+		set_party_name = {
+			ideology = social_democracy
+			long_name = ARG_social_democracy_party_long
+			name = ARG_social_democracy_party
+		}
+		set_politics = {
+			ruling_party = social_democracy
+			last_election = "1969.10.23"
+			election_frequency = 72
+			elections_allowed = yes
+		}
+		add_ideas = {
+			ARG_Guillermo_Estevez_Boero_hog
+			ARG_Victor_Garcia_Costa_for
+			ARG_Leopoldo_Portnoy_eco
+			ARG_Osiris_Guillermo_Villegas_sec
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.101 }
+			}
+		}
+	}
+	option = {#FNPC
+		name = ARG.169.c
+		ai_chance = { 
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_UCRP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_PS }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_PL }
+            }
+		}
+		set_politics = {
+			ruling_party = conservative_democracy
+			last_election = "1969.10.23"
+			election_frequency = 72
+			elections_allowed = yes
+		}
+		add_ideas = {
+			ARG_Francisco_Gabrielli_hog
+			ARG_Juan_Ramon_Aguirre_Lanari_for
+			ARG_Felipe_Yofre_eco
+			ARG_Eduardo_Juan_Uriburu_sec
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.102 }
+			}
+		}
+	}
+	option = {#PL
+		name = ARG.169.d
+		ai_chance = { 
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_UCRP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_PS }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_FNCP }
+            }
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+			last_election = "1969.10.23"
+			election_frequency = 72
+			elections_allowed = yes
+		}
+		add_ideas = {
+			ARG_Augusto_Vandor_hog
+			ARG_Leopoldo_Bravo_for
+			ARG_Oreste_Popescu_eco
+			ARG_Osiris_Guillermo_Villegas_sec
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.103 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.170 #Peron Newly Elected
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.170"
+	}
+	title = ARG.170.t
+	desc = ARG.170.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ARG.170.a
+		set_popularities = {
+			communist = 0
+			socialist = 4
+			social_democracy = 8
+			liberal_democracy = 21
+			conservative_democracy = 4
+			authoritarian_democracy = 20
+			despotism = 23
+			fascism = 16
+			national_socialism = 2
+			ultranationalism = 0
+			esoteric_nazism = 2
+		}
+		set_politics = {
+			ruling_party = despotism
+		}
+		set_party_name = { 
+			ideology = authoritarian_democracy 
+			long_name = ARG_authoritarian_democracy_peron_party_long 
+			name = ARG_authoritarian_democracy_peron_party 
+		}
+		set_party_name = { 
+			ideology = despotism 
+			long_name = ARG_authoritarian_democracy_peron_party_long 
+			name = ARG_authoritarian_democracy_peron_party 
+		}
+		set_party_name = { 
+			ideology = fascism 
+			long_name = ARG_authoritarian_democracy_peron_party_long 
+			name = ARG_authoritarian_democracy_peron_party 
+		}
+		create_country_leader = {
+			name = "Juan Domingo Perón"
+			desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = authoritarian_democracy_peronism_subtype
+			traits = {
+				el_primer_trabajador_latin
+			}
+		}
+		create_country_leader = {
+			name = "Juan Domingo Perón"
+			desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = despotism_personalistic_dictatorship_subtype
+			traits = {
+				el_primer_trabajador_latin
+			}
+		}
+		create_country_leader = {
+			name = "Juan Domingo Perón"
+			desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = fascism_fascist_populism_subtype
+			traits = {
+				el_primer_trabajador_latin
+			}
+		}
+		country_event = { id = ARG.171 days = 580 }
+	}
+}
+
+country_event = {
+	id = ARG.171 #Election of A New VP, Peron dies in 5 months
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.171"
+		hidden_effect = {
+			every_country = {
+				news_event = { hours = 1 id = LATAM_news.93 }
+			}
+		}
+	}
+	title = ARG.171.t
+	desc = ARG.171.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Menem
+		name = ARG.171.a
+		ai_chance = { 
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_ISABEL }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_ANCHORENA }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_BALBIN }
+            }
+		}
+		set_country_flag = ARG_Menem
+		country_event = { id = ARG.172 days = 150 }
+	}
+	option = {#Isabel
+		name = ARG.171.b
+		ai_chance = {
+			factor = 20
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_MENEM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_ANCHORENA }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_BALBIN }
+            }
+		}
+		set_country_flag = ARG_Isabel
+		country_event = { id = ARG.172 days = 150 }
+	}
+	option = {#Anchorena
+		name = ARG.171.c
+		ai_chance = { 
+			factor = 30
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_MENEM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_ISABEL }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_BALBIN }
+            }
+		}
+		set_country_flag = ARG_Anchorena
+		set_politics = {
+			ruling_party = fascism
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+		country_event = { id = ARG.172 days = 150 }
+	}
+	option = {#Balbin
+		name = ARG.171.d
+		ai_chance = {
+			factor = 20
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_MENEM }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_ISABEL }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_PERON_VP option = ARG_SKELETON_PERON_VP_ANCHORENA }
+            }
+		}
+		set_country_flag = ARG_Balbin
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.05
+		}
+		add_ideas = {
+			tno_political_parties_multiparty_system
+		}
+		country_event = { id = ARG.172 days = 150 }
+	}
+}
+
+country_event = {
+	id = ARG.172 #The Death of Peron
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.172"
+		set_party_name = { 
+			ideology = social_democracy 
+			long_name = ARG_autentico_party_long 
+			name = ARG_autentico_party 
+		}
+	}
+	title = ARG.172.t
+	desc = ARG.172.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Menem
+		name = ARG.172.a
+		trigger = {
+			has_country_flag = ARG_Menem
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		set_party_name = { 
+			ideology = authoritarian_democracy 
+			long_name = ARG_menem_party_long 
+			name = ARG_menem_party 
+		}
+		create_country_leader = {
+			name = "Carlos Saúl Menem"
+			desc = "POLITICS_CARLOS_MENEM_DESC"
+			picture = "Portrait_ARG_Carlos_Menem.dds"
+			expire = "1965.1.1"
+			ideology = authoritarian_democracy_peronism_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = despotism_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = fascism_subtype
+			traits = {
+			}
+		}
+		add_ideas = {
+			ARG_Italo_Luder_hog
+			ARG_Antonio_Cafiero_for
+			ARG_Alvaro_Alsogaray_menem_eco
+			ARG_Jorge_Carcagno_sec
+		}
+		country_event = { id = ARG.173 days = 7 }
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.95 hours = 1 }
+			}
+		}
+	}
+	option = {#Isabel
+		name = ARG.172.b
+		trigger = {
+			has_country_flag = ARG_Isabel
+		}
+		set_politics = {
+			ruling_party = esoteric_nazism
+		}
+		set_party_name = { 
+			ideology = esoteric_nazism 
+			long_name = ARG_isabel_party_long 
+			name = ARG_isabel_party 
+		}
+		add_popularity = {#Lopez Rega is coming to town
+			ideology = esoteric_nazism
+			popularity = 0.15
+		}
+		create_country_leader = {
+			name = "Isabel Martínez de Perón"
+			desc = "POLITICS_ISABEL_DE_PERON_DESC"
+			picture = "Portrait_ARG_Isabel_Peron.dds"
+			expire = "1965.1.1"
+			ideology = esoteric_nazism_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			picture = "Portrait_ARG_Isabel_Peron.dds"
+			expire = "1965.1.1"
+			ideology = authoritarian_democracy_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = despotism_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = fascism_subtype
+			traits = {
+			}
+		}
+		add_ideas = {
+			ARG_Jose_Lopez_Rega_hog
+			ARG_Alberto_Vignes_for
+			ARG_Celestino_Rodrigo_eco
+			ARG_Jorge_Rafael_Videla_sec
+		}
+		country_event = { id = ARG.173 days = 7 }
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.96 hours = 1 }
+			}
+		}
+	}
+	option = {#Anchorena
+		name = ARG.172.c
+		trigger = {
+			has_country_flag = ARG_Anchorena
+		}
+		set_politics = {
+			ruling_party = fascism
+		}
+		set_party_name = { 
+			ideology = fascism 
+			long_name = ARG_fascism_peron_party_long 
+			name = ARG_fascism_peron_party 
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = authoritarian_democracy_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = despotism_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Manuel de Anchorena"
+			desc = "POLITICS_MANUEL_DE_ANCHORENA_DESC"
+			picture = "Portrait_ARG_Manuel_de_Anchorena.dds"
+			expire = "1965.1.1"
+			ideology = fascism_fascist_populism_subtype
+			traits = {
+			}
+		}
+		add_ideas = {
+			ARG_Alberto_Eduardo_Ottalagano_hog
+			ARG_Oscar_Ivanissevich_for
+			ARG_Alfredo_Gomez_Morales_eco
+			ARG_Fernando_Amadeo_Baldrich_sec
+		}
+		country_event = { id = ARG.173 days = 7 }
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.97 hours = 1 }
+			}
+		}
+	}
+	option = {#Balbin
+		name = ARG.172.d
+		trigger = {
+			has_country_flag = ARG_Balbin
+		}
+		set_politics = {
+			ruling_party = liberal_democracy
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = authoritarian_democracy_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = despotism_subtype
+			traits = {
+			}
+		}
+		create_country_leader = {
+			name = "Partido Peronista"
+			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+			#picture = "Portrait_ARG_Juan_Peron.dds"
+			expire = "1965.1.1"
+			ideology = fascism_subtype
+			traits = {
+			}
+		}
+		add_ideas = {
+			ARG_Carlos_Alconada_Aramburu_hog
+			ARG_Carlos_Humberto_Perrette_for
+			ARG_Raul_Prebisch_balbin_eco
+			ARG_Hector_Hidalgo_Sola_sec
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.98 hours = 1 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ARG.173 #CTP coup trigger
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.173"
+	}
+	title = ARG.173.t
+	desc = ARG.173.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Coup
+		name = ARG.173.a
+		ai_chance = {
+			factor = 40
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_CTP_COUP option = ARG_SKELETON_CTP_COUP_COUP_FAILS }
+            }
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		set_party_name = { 
+			ideology = authoritarian_democracy 
+			long_name = ARG_ctp_party_long 
+			name = ARG_ctp_party 
+		}
+		set_popularities = {
+			communist = 0
+			socialist = 4
+			social_democracy = 6
+			liberal_democracy = 19
+			conservative_democracy = 4
+			authoritarian_democracy = 62
+			despotism = 2
+			fascism = 3
+			national_socialism = 0
+			ultranationalism = 0
+			esoteric_nazism = 0
+		}
+		create_country_leader = {
+			name = "Julián Licastro"
+			desc = "POLITICS_JULIO_LICASTRO_DESC"
+			picture = "Portrait_ARG_Julian_Licastro.dds"
+			expire = "1965.1.1"
+			ideology = authoritarian_democracy_social_nationalism_subtype
+			traits = {
+			}
+		}
+		add_ideas = {
+			ARG_Julio_Barbaro_hog
+			ARG_Juan_Carlos_Puig_for
+			ARG_CTP_eco
+			ARG_Jose_Luis_Fernandez_Valoni_sec
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.99 days = 3 }
+			}
+		}
+	}
+	option = {#No
+		name = ARG.173.b
+		ai_chance = { 
+			factor = 60 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = ARG_SKELETON_CTP_COUP option = ARG_SKELETON_CTP_COUP_COUP_SUCCESS }
+            }
+		}
+		if = {
+			limit = {
+				has_country_leader = {
+					name = "Manuel de Anchorena"
+					ruling_only = yes
+				}
+			}
+			set_cosmetic_tag = ARG_confederation
+		}
+	}
+}

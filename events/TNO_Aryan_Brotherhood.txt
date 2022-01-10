@@ -1,0 +1,2531 @@
+#######################################
+### PERM, aka the Aryan Brotherhood ###
+#######################################
+add_namespace = PRM
+add_namespace = PRM_initial
+add_namespace = PRM_bombing
+add_namespace = PRM_expansion
+add_namespace = PRM_regional
+add_namespace = PRM_Russia
+add_namespace = PRM_yemelyanov
+add_namespace = PRM_vagner
+
+### INTRO EVENT
+
+country_event = {
+	id = PRM.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM.1"}
+	title = PRM.1.t
+	desc = PRM.1.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = {#win border war with Bashkirs
+	id = PRM.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM.2"}
+	title = PRM.2.t
+	desc = PRM.2.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		add_war_support = 0.05
+		set_temp_variable = { money_reserves_temp = 0.05 }
+		econ_money_reserves_change_raw_money = yes
+		name = PRM.2.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = {#lose border war with Bashkirs
+	id = PRM.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM.3"}
+	title = PRM.3.t
+	desc = PRM.3.desc
+	picture = GFX_report_event_algerian_war_4
+
+	is_triggered_only = yes
+
+	option = {
+		add_stability = -0.15
+		add_war_support = -0.15
+		add_manpower = -414
+		name = PRM.3.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = {#draw border war with Bashkirs
+	id = PRM.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM.4"}
+	title = PRM.4.t
+	desc = PRM.4.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		add_stability = -0.1
+		name = PRM.4.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = PRM.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PRM.5" }
+	title = PRM.5.t
+	desc = PRM.5.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM.5.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = PRM.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PRM.6" }
+	title = PRM.6.t
+	desc = PRM.6.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM.6.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #
+	id = PRM.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PRM.7" }
+	title = PRM.7.t
+	desc = PRM.7.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM.7.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Aryan control weakening
+	id = PRM.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event PRM.8" }
+	title = PRM.8.t
+	desc = {
+		text = PRM.8.desc
+		trigger = {
+			NOT = {
+				has_country_leader = { name = "Velimir" ruling_only = yes }
+			}
+		}
+	}
+	desc = {
+		text = PRM.8.desc_hyperborea
+		trigger = {
+			has_country_leader = { name = "Velimir" ruling_only = yes }
+		}
+	}
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = { #
+		name = PRM.8.a
+		ai_chance = { factor = 1 }
+		if = {
+			limit = {
+				has_idea = PRM_aryan_control_2
+			}
+			swap_ideas = {
+				remove_idea = PRM_aryan_control_2
+				add_idea = PRM_aryan_control_1
+			}
+			add_to_variable = {PRM_aryan_strength = -1}
+		}
+		if = {
+			limit = {
+				has_idea = PRM_aryan_control_3
+			}
+			swap_ideas = {
+				remove_idea = PRM_aryan_control_3
+				add_idea = PRM_aryan_control_2
+			}
+			add_to_variable = {PRM_aryan_strength = -1}
+		}
+		if = {
+			limit = {
+				has_idea = PRM_aryan_control_4
+			}
+			swap_ideas = {
+				remove_idea = PRM_aryan_control_4
+				add_idea = PRM_aryan_control_3
+			}
+			add_to_variable = {PRM_aryan_strength = -1}
+		}
+		if = {
+			limit = {
+				has_idea = PRM_aryan_control_5
+			}
+			swap_ideas = {
+				remove_idea = PRM_aryan_control_5
+				add_idea = PRM_aryan_control_4
+			}
+			add_to_variable = {PRM_aryan_strength = -1}
+		}
+	}
+}
+
+country_event = {
+	id = PRM.1312
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM.1312"}
+	title = PRM.1.t
+	desc = PRM.1.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {#OH GOD OH FUCK
+		name = PRM.1312.a
+		ai_chance = { factor = 1 }
+		add_political_power = -200
+		add_stability = -0.25
+		add_war_support = -0.5
+	}
+}
+
+######################
+#Initial Tree Events##
+######################
+
+country_event = {
+	id = PRM_initial.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.20"}
+	title = PRM_initial.20.t
+	desc = PRM_initial.20.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.20.a
+		ai_chance = { factor = 1 }
+		add_political_power = 30
+		add_stability = 0.05
+		TNO_improve_political_parties_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.11"}
+	title = PRM_initial.11.t
+	desc = PRM_initial.11.desc
+	picture = GFX_report_event_komi_bombing
+
+	is_triggered_only = yes
+
+	option = {
+		add_resource = {
+			type = steel
+			amount = 2
+			state = 753
+		}
+		add_political_power = 5
+		add_war_support = 0.01
+		name = PRM_initial.11.a
+		ai_chance = { factor = 1 }
+		TNO_improve_admin_efficiency_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.121
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.121"}
+	title = PRM_initial.121.t
+	desc = PRM_initial.121.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.121.a
+		ai_chance = { factor = 1 }
+		add_ideas = PRM_free_labor
+		TNO_improve_industrial_expertise_low = yes
+		TNO_improve_max_workhours_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.122
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.122"}
+	title = PRM_initial.122.t
+	desc = PRM_initial.122.desc
+	picture = GFX_report_event_german_slavery
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.122.a
+		ai_chance = { factor = 1 }
+		add_ideas = PRM_forced_labor
+		tno_max_workhours_worsen = yes
+		TNO_improve_slavery_policy_effectiveness_low = yes
+		TNO_improve_max_workhours_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.131
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.131"}
+	title = PRM_initial.131.t
+	desc = PRM_initial.131.desc
+	picture = GFX_report_event_iberia_candle
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.131.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 400
+			producer = PRM
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.001 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.132
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.132"}
+	title = PRM_initial.132.t
+	desc = PRM_initial.132.desc
+	picture = GFX_report_event_german_slavery
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.132.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 150
+			producer = PRM
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.001 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.14"}
+	title = PRM_initial.14.t
+	desc = PRM_initial.14.desc
+	picture = GFX_report_event_russia_special_forces
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.14.a
+		ai_chance = { factor = 1 }
+		TNO_improve_slavery_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.151
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.151"}
+	title = PRM_initial.151.t
+	desc = PRM_initial.151.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.151.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 300
+			producer = PRM
+		}
+
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 300
+			producer = PRM
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.001 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.152
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.152"}
+	title = PRM_initial.152.t
+	desc = PRM_initial.152.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.152.a
+		ai_chance = { factor = 1 }
+		add_resource = {
+			type = oil
+			amount = 3
+			state = 753
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.001 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.161
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.161"}
+	title = PRM_initial.161.t
+	desc = PRM_initial.161.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.161.a
+		ai_chance = { factor = 1 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 1500
+			producer = PRM
+		}
+		TNO_improve_safety_policy_effectiveness_low = yes
+		set_temp_variable = { temp_econ_spending_amount = 0.001 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.162
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.162"}
+	title = PRM_initial.162.t
+	desc = PRM_initial.162.desc
+	picture = GFX_report_event_ural_road
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.162.a
+		ai_chance = { factor = 1 }
+		set_technology = {
+			motorized_infantry = 1
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 300
+			producer = PRM
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.001 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.17"}
+	title = PRM_initial.17.t
+	desc = PRM_initial.17.desc
+	picture = GFX_report_event_norilsk
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.17.a
+		ai_chance = { factor = 1 }
+		add_timed_idea ={
+			idea = PRM_rebuilding_industry
+			days = 365
+		}
+		tno_improve_admin_efficiency_med = yes
+		TNO_improve_slavery_policy_effectiveness_low = yes
+		TNO_improve_safety_policy_effectiveness_low = yes
+		set_temp_variable = { econ_centralization_temp = 2.5 }
+		econ_centralization_change = yes
+	}
+}
+country_event = {#Bolstering Our Ranks
+	id = PRM_initial.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.21"}
+	title = PRM_initial.21.t
+	desc = PRM_initial.21.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.21.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		add_war_support = 0.01
+		TNO_improve_conscription_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.22"}
+	title = PRM_initial.22.t
+	desc = PRM_initial.22.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.22.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+}
+
+country_event = {
+	id = PRM_initial.231
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.231"}
+	title = PRM_initial.231.t
+	desc = PRM_initial.231.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.231.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+		add_war_support = 0.05
+		tno_racial_integration_worsen = yes
+		TNO_improve_racial_integration_policy_effectiveness_med = yes
+		swap_ideas = {
+			remove_idea = PRM_aryan_cult
+			add_idea = PRM_aryan_cult_full_aryan
+		}
+	}
+}
+
+country_event = {
+	id = PRM_initial.232
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.232"}
+	title = PRM_initial.232.t
+	desc = PRM_initial.232.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.232.a
+		ai_chance = { factor = 1 }
+		TNO_improve_military_supervision_policy_effectiveness_high = yes
+		swap_ideas = {
+			remove_idea = PRM_aryan_cult
+			add_idea = PRM_aryan_cult_non_aryan
+		}
+	}
+}
+
+country_event = {
+	id = PRM_initial.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.24"}
+	title = PRM_initial.24.t
+	desc = PRM_initial.24.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.24.a
+		ai_chance = { factor = 1 }
+		add_manpower = 140
+	}
+}
+
+country_event = { #Ubermensch march to war
+	id = PRM_initial.251
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.251"}
+	title = PRM_initial.251.t
+	desc = PRM_initial.251.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.251.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = {
+	id = PRM_initial.261
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.261"}
+	title = PRM_initial.261.t
+	desc = PRM_initial.261.desc
+	picture = GFX_report_event_czech_guard
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.261.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = PRM_2_divs_tt
+		hidden_effect = {
+			division_template = {
+				name = "Arishe Infanteriy-Divizyon"
+				division_names_group = PRM_Infantry
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 0 }
+				}
+				support = {
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "division_template = \"Arishe Infanteriy-Divizyon\" start_experience_factor = 0.5 start_equipment_factor = 1"
+					owner = PRM
+				}
+				create_unit = {
+					division = "division_template = \"Arishe Infanteriy-Divizyon\" start_experience_factor = 0.5 start_equipment_factor = 1"
+					owner = PRM
+				}
+			}
+		}
+
+	}
+}
+
+
+country_event = {
+	id = PRM_initial.252
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.252"}
+	title = PRM_initial.252.t
+	desc = PRM_initial.252.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.252.a
+		ai_chance = { factor = 1 }
+		add_manpower = 8000
+		tno_improve_military_supervision_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_initial.262
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.262"}
+	title = PRM_initial.262.t
+	desc = PRM_initial.262.desc
+	picture = GFX_report_event_CHI_Victim_Body
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.262.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = PRM_4_militia_tt
+		hidden_effect = {
+			division_template = {
+				name = "Leikhte Gilvs-Yeger"
+				division_names_group = PRM_Light_Infantry
+				regiments = {
+					light_infantry = { x = 0 y = 0 }
+					light_infantry = { x = 0 y = 1 }
+					light_infantry = { x = 0 y = 2 }
+					light_infantry = { x = 1 y = 0 }
+					light_infantry = { x = 1 y = 1 }
+				}
+				support = {
+
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "division_template = \"Leikhte Gilvs-Yeger\" start_experience_factor = 0.2 start_equipment_factor = 0.7"
+					owner = PRM
+				}
+				create_unit = {
+					division = "division_template = \"Leikhte Gilvs-Yeger\" start_experience_factor = 0.2 start_equipment_factor = 0.7"
+					owner = PRM
+				}
+				create_unit = {
+					division = "division_template = \"Leikhte Gilvs-Yeger\" start_experience_factor = 0.2 start_equipment_factor = 0.7"
+					owner = PRM
+				}
+				create_unit = {
+					division = "division_template = \"Leikhte Gilvs-Yeger\" start_experience_factor = 0.2 start_equipment_factor = 0.7"
+					owner = PRM
+				}
+			}
+		}
+
+	}
+}
+
+country_event = { #The Brotherhood
+	id = PRM_initial.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.27"}
+	title = PRM_initial.27.t
+	desc = PRM_initial.27.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.27.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Instilling Fear
+	id = PRM_initial.31
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.31"}
+	title = PRM_initial.31.t
+	desc = PRM_initial.31.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.31.a
+		ai_chance = { factor = 1 }
+		TNO_improve_training_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #Reform Our Raiders
+	id = PRM_initial.32
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.32"}
+	title = PRM_initial.32.t
+	desc = PRM_initial.32.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.32.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Disciplined Raiding Force
+	id = PRM_initial.331
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.331"}
+	title = PRM_initial.331.t
+	desc = PRM_initial.331.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.331.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Autonomous Battalions
+	id = PRM_initial.332
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.332"}
+	title = PRM_initial.332.t
+	desc = PRM_initial.332.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.332.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Strike at the Heart
+	id = PRM_initial.341
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.341"}
+	title = PRM_initial.341.t
+	desc = PRM_initial.341.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.341.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Strike at the Arteries
+	id = PRM_initial.342
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.342"}
+	title = PRM_initial.342.t
+	desc = PRM_initial.342.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.342.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Test Our Theories
+	id = PRM_initial.35
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.35"}
+	title = PRM_initial.35.t
+	desc = PRM_initial.35.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.35.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Terrorize the Bashkirs
+	id = PRM_initial.361
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.361"}
+	title = PRM_initial.361.t
+	desc = PRM_initial.361.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.361.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Strike at Berezniki
+	id = PRM_initial.362
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.362"}
+	title = PRM_initial.362.t
+	desc = PRM_initial.362.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.362.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Liberate the Aryans
+	id = PRM_initial.371
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.371"}
+	title = PRM_initial.371.t
+	desc = PRM_initial.371.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.371.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Seize their resources
+	id = PRM_initial.372
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.372"}
+	title = PRM_initial.372.t
+	desc = PRM_initial.372.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.372.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Towards New Pastures
+	id = PRM_initial.38
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.38"}
+	title = PRM_initial.38.t
+	desc = PRM_initial.38.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.38.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = {#Cleansing Russia
+	id = PRM_initial.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.29"}
+	title = PRM_initial.29.t
+	desc = PRM_initial.29.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	hidden = yes
+
+	option = {
+		name = PRM_initial.29.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = GER_new_options_will_focus_tree
+		hidden_effect = {
+			load_focus_tree = {
+				tree = PRM_AB_bombing
+				keep_completed = no
+			}
+		}
+	}
+}
+
+country_event = {#Home Away From Home
+	id = PRM_initial.30
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_initial.30"}
+	title = PRM_initial.30.t
+	desc = PRM_initial.30.desc
+	picture = GFX_report_event_german_bombing
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_initial.30.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+#####################
+#POST-BOMBING EVENTS#
+#####################
+country_event = { #Silent Night
+	id = PRM_bombing.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.20"}
+	title = PRM_bombing.20.t
+	desc = PRM_bombing.20.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.20.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Now or Never
+	id = PRM_bombing.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.21"}
+	title = PRM_bombing.21.t
+	desc = PRM_bombing.21.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.21.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Our Chance in Bashkiria
+	id = PRM_bombing.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.22"}
+	title = PRM_bombing.22.t
+	desc = PRM_bombing.22.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.22.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = { #Report from our gestapo
+	id = PRM_bombing.231
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.231"}
+	title = PRM_bombing.231.t
+	desc = PRM_bombing.231.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.231.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = { #Contacts among the Russians
+	id = PRM_bombing.232
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.232"}
+	title = PRM_bombing.232.t
+	desc = PRM_bombing.232.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.232.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = {#Yeeting the Bashkirs
+	id = PRM_bombing.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.24"}
+	title = PRM_bombing.24.t
+	desc = PRM_bombing.24.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.24.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = {
+	id = PRM_bombing.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.25"}
+	title = PRM_bombing.25.t
+	desc = PRM_bombing.25.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.25.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+		add_war_support = 0.025
+	}
+}
+
+country_event = {
+	id = PRM_bombing.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.26"}
+	title = PRM_bombing.26.t
+	desc = PRM_bombing.26.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.26.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = PRM_expansion_tt
+		hidden_effect = {
+			load_focus_tree = {
+				tree = PRM_AB_expansion
+				keep_completed = no
+			}
+		}
+	}
+}
+
+country_event = { #Ploughshares Into Swords
+	id = PRM_bombing.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.11"}
+	title = PRM_bombing.11.t
+	desc = PRM_bombing.11.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.11.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Dark Skies Over Perm
+	id = PRM_bombing.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.12"}
+	title = PRM_bombing.12.t
+	desc = PRM_bombing.12.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.12.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #More Hands For the Smelters
+	id = PRM_bombing.131
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.131"}
+	title = PRM_bombing.131.t
+	desc = PRM_bombing.131.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.131.a
+		ai_chance = { factor = 1 }
+		add_political_power = -40
+		add_stability = -0.01
+	}
+}
+
+country_event = { #A City That Never Sleeps
+	id = PRM_bombing.132
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.132"}
+	title = PRM_bombing.132.t
+	desc = PRM_bombing.132.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.132.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = { #A Gun For Every Hand
+	id = PRM_bombing.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.14"}
+	title = PRM_bombing.14.t
+	desc = PRM_bombing.14.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.14.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Full Speed Ahead
+	id = PRM_bombing.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.15"}
+	title = PRM_bombing.15.t
+	desc = PRM_bombing.15.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.15.a
+		ai_chance = { factor = 1 }
+		add_timed_idea = {
+			idea = PRM_revitalized_industry
+			days = 365
+		}
+	}
+}
+
+country_event = {
+	id = PRM_bombing.31
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.31"}
+	title = PRM_bombing.31.t
+	desc = PRM_bombing.31.desc
+	picture = GFX_report_generic_prisoners3
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.31.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+		add_manpower = -150
+		TNO_improve_penal_system_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_bombing.32
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.32"}
+	title = PRM_bombing.32.t
+	desc = PRM_bombing.32.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.32.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			add_to_variable = {PRM_aryan_sacrifices = 1}
+		}
+	}
+}
+
+country_event = {
+	id = PRM_bombing.331
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.331"}
+	title = PRM_bombing.331.t
+	desc = PRM_bombing.331.desc
+	picture = GFX_report_event_algeria_native_surrender
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.331.a
+		ai_chance = { factor = 1 }
+		tno_improve_admin_efficiency_low = yes
+	}
+}
+
+country_event = {
+	id = PRM_bombing.332
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.332"}
+	title = PRM_bombing.332.t
+	desc = PRM_bombing.332.desc
+	picture = GFX_report_event_destroyed_krakow
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.332.a
+		ai_chance = { factor = 1 }
+		army_experience = 10
+		add_manpower = -79
+	}
+}
+country_event = { #Take from the Unworthy
+	id = PRM_bombing.34
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.34"}
+	title = PRM_bombing.34.t
+	desc = PRM_bombing.34.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.34.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Hooked Cross Advances
+	id = PRM_bombing.35
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_bombing.35"}
+	title = PRM_bombing.35.t
+	desc = PRM_bombing.35.desc
+	picture = GFX_report_event_russian_fascists_harbin
+
+	is_triggered_only = yes
+
+	option = {
+		name = PRM_bombing.35.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+##################
+#EXPANSION EVENTS#
+##################
+country_event = { #BKR The Bashkirs Pacified
+	id = PRM_expansion.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.1"}
+	title = PRM_expansion.1.t
+	desc = PRM_expansion.1.desc
+	picture = GFX_report_event_war_crime_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.1.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+	}
+}
+
+country_event = { #MAR The Mladorossi Silenced
+	id = PRM_expansion.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.2"}
+	title = PRM_expansion.2.t
+	desc = PRM_expansion.2.desc
+	picture = GFX_report_event_german_city_burning
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.2.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.03
+		TNO_improve_political_parties_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #VYT The Tsar's Hold Destroyed
+	id = PRM_expansion.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.3"}
+	title = PRM_expansion.3.t
+	desc = PRM_expansion.3.desc
+	picture = GFX_report_event_BRG_event8
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.3.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.08
+	}
+}
+
+country_event = { #TAR Putting On The Bridles
+	id = PRM_expansion.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.4"}
+	title = PRM_expansion.4.t
+	desc = PRM_expansion.4.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.4.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.02
+		TNO_improve_slavery_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #GAY Their Prayers Ignored
+	id = PRM_expansion.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.5"}
+	title = PRM_expansion.5.t
+	desc = PRM_expansion.5.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.5.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.02
+	}
+}
+
+country_event = { #VOL Their Obedience Ensured
+	id = PRM_expansion.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.6"}
+	title = PRM_expansion.6.t
+	desc = PRM_expansion.6.desc
+	picture = GFX_report_event_generic_german_riot
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.6.a
+		ai_chance = { factor = 1 }
+		add_manpower = 250
+		add_stability = 0.02
+	}
+}
+
+country_event = { #KOM (komi) Komi's Bickering Ended
+	id = PRM_expansion.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.7"}
+	title = PRM_expansion.7.t
+	desc = PRM_expansion.7.desc
+	picture = GFX_report_event_komi_riot
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.7.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.025
+	}
+}
+
+country_event = { #SAM Embrace The Fascists
+	id = PRM_expansion.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.8"}
+	title = PRM_expansion.8.t
+	desc = PRM_expansion.8.desc
+	picture = GFX_report_event_BRG_event2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.8.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+	}
+}
+
+country_event = {#GOR Our Own Blitzkrieg
+	id = PRM_expansion.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.9"}
+	title = PRM_expansion.9.t
+	desc = PRM_expansion.9.desc
+	picture = GFX_report_event_soviet_russian_tanks_4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.9.a
+		ai_chance = { factor = 1 }
+		add_ideas = PRM_aryan_pantsers
+		TNO_improve_training_policy_effectiveness_low = yes
+		add_tech_bonus = {
+			bonus = 0.35
+			uses = 1
+			category = cat_strategic_theorem
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 2
+			category = MBT
+		}
+	}
+}
+
+country_event = { #WRS The End Of Bolshevism
+	id = PRM_expansion.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.10"}
+	title = PRM_expansion.10.t
+	desc = PRM_expansion.10.desc
+	picture = GFX_report_event_burning_books
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.10.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.05
+		add_war_support = 0.1
+	}
+}
+
+country_event = { #ONG Beside The Crooked Cross
+	id = PRM_expansion.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_expansion.11"}
+	title = PRM_expansion.11.t
+	desc = PRM_expansion.11.desc
+	picture = GFX_report_event_BRG_event2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_expansion.11.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.025
+	}
+}
+
+country_event = { #Regional tree debug
+	id = PRM_regional.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.1"}
+	title = PRM_regional.1.t
+	desc = PRM_regional.1.desc
+	hidden = yes
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.1.a
+		ai_chance = { factor = 1 }
+		load_focus_tree = PRM_AB_regional
+	}
+}
+
+country_event = { #The Aryan Code
+	id = PRM_regional.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.2"}
+	title = PRM_regional.2.t
+	desc = PRM_regional.2.desc
+	picture = GFX_report_event_BRG_event8
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.2.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Outlining the Castes
+	id = PRM_regional.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.3"}
+	title = PRM_regional.3.t
+	desc = PRM_regional.3.desc
+	picture = GFX_report_event_russia_siberian_worker
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Vagner and the hardliners win
+		name = PRM_regional.3.a
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+                factor = 0
+                has_game_rule = { rule = PRM_ideology_route option = PRM_IDEOLOGY_ROUTE_ULTNAT }
+            }
+		}
+		custom_effect_tooltip = PRM_vagner_power
+		TNO_improve_minorities_policy_effectiveness_med = yes
+		TNO_worsen_minorities_policy_effectiveness_monthly_low = yes
+	}
+	option = { #Yemelyanov and his faction win
+		name = PRM_regional.3.b
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+                factor = 0
+                has_game_rule = { rule = PRM_ideology_route option = PRM_IDEOLOGY_ROUTE_NATSOC }
+            }
+		}
+		custom_effect_tooltip = PRM_Yemmy_power
+		TNO_worsen_minorities_policy_effectiveness_med = yes
+		TNO_improve_minorities_policy_effectiveness_monthly_low = yes
+		add_to_variable = { yemelyanov_power = 1 }
+	}
+}
+
+country_event = { #Clash of Gods - Vagner stays in power
+	id = PRM_regional.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.4"}
+	title = PRM_regional.4.t
+	desc = PRM_regional.4.desc
+	picture = GFX_report_event_BRG_event8
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.4.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = PRM_brother_tt
+		hidden_effect = {
+			every_unit_leader = {
+				limit = {
+					has_id = 3459
+				}
+				retire = yes
+			}
+			set_country_flag = TNO_AB_Coup_Failed
+			# remove_ideas = {
+			# 	PRM_Siegfried_Schulz_sec
+			# }
+			# add_ideas = {
+			# 	PRM_No_available_sec
+			# }
+			load_focus_tree = {
+				tree = PRM_vagnar_regional
+				keep_completed = yes
+			}
+		}
+	}
+}
+
+country_event = { #Clash of Gods - Yemelyanov takes over
+	id = PRM_regional.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.5"}
+	title = PRM_regional.5.t
+	desc = PRM_regional.5.desc
+	picture = GFX_report_event_hyperborea_map
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.5.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = PRM_hyperborea_tt
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_religious_rights_state_atheism
+				add_idea = tno_religious_rights_state_religion
+			}
+			kill_country_leader = yes
+			set_politics = {
+				ruling_party = ultranationalism
+			}
+			add_popularity = {
+				ideology = ultranationalism
+				popularity = 0.4
+			}
+			remove_ideas = PRM_aryan_schematics
+			create_country_leader = {
+				name = "Velimir"
+				desc = "POLITICS_VALERY_YEMELYANOV_DESC"
+				picture = "Portrait_Aryan_Brotherhood_Valery_Yemelyanov.dds"
+				expire = "1995.1.1"
+				ideology = ultranationalism_slavo_aryanism_subtype
+				traits = {
+					the_high_priest
+				}
+			}
+			create_country_leader = {
+				name = "Power Vaccuum"
+				#desc = "POLITICS_VALERY_YEMELYANOV_DESC"
+				#picture = "Portrait_Aryan_Brotherhood_Valery_Yemelyanov.dds"
+				expire = "1995.1.1"
+				ideology = national_socialism_subtype
+			}
+			every_unit_leader = {
+				limit = {
+					OR = {
+						has_id = 3457
+						has_id = 3458
+						has_id = 3459
+					}
+				}
+				retire = yes
+			}
+			create_corps_commander = {
+				name = "Anatoly Ivanov-Skuratov"
+				picture = "Portrait_Hyperborea_Anatoly_Ivanov_Skuratov.dds"
+				traits = { politically_connected harsh_leader organizer }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 3
+				logistics_skill = 1
+				id = 3466
+			}
+			add_ideas = {
+				PRM_Valery_Yemelyanov_hog
+				PRM_Viktor_Bezverkhiy_for
+				PRM_Yevgeniy_Yevseyev_eco
+				PRM_Anatoly_Ivanov_Skuratov_sec
+			}
+			set_cosmetic_tag = PRM_hyperborea_regional
+			load_focus_tree = {
+				tree = PRM_yemelyanov_regional
+				keep_completed = yes
+			}
+		}
+	}
+}
+
+country_event = { #Vagnar New Economics for a New Reykh
+	id = PRM_regional.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.6"}
+	title = PRM_regional.6.t
+	desc = PRM_regional.6.desc
+	picture = GFX_report_event_german_slavery
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.6.a
+		ai_chance = { factor = 1 }
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 3
+			category = industry
+		}
+	}
+}
+
+country_event = { #Vagnar The German Model
+	id = PRM_regional.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.7"}
+	title = PRM_regional.7.t
+	desc = PRM_regional.7.desc
+	picture = GFX_report_generic_prisoners2
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.7.a
+		ai_chance = { factor = 1 }
+		TNO_improve_training_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #Vagnar A Shape of Our Own
+	id = PRM_regional.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.8"}
+	title = PRM_regional.8.t
+	desc = PRM_regional.8.desc
+	picture = GFX_report_event_hgr_generic_ss_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.8.a
+		ai_chance = { factor = 1 }
+		TNO_improve_training_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #Yemelyanov Army of the Pure
+	id = PRM_regional.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.9"}
+	title = PRM_regional.9.t
+	desc = PRM_regional.9.desc
+	picture = GFX_report_event_BRG_event3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.9.a
+		ai_chance = { factor = 1 }
+		TNO_improve_training_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #Yemelyanov Ancient Lessons
+	id = PRM_regional.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.10"}
+	title = PRM_regional.10.t
+	desc = PRM_regional.10.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.10.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Into the World
+	id = PRM_regional.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.11"}
+	title = PRM_regional.11.t
+	desc = PRM_regional.11.desc
+	picture = GFX_report_event_Paper_Bundle
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.11.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Spread Our Ideals
+	id = PRM_regional.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.12"}
+	title = PRM_regional.12.t
+	desc = PRM_regional.12.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.12.a
+		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = national_socialism
+			popularity = 0.02
+		}
+	}
+}
+
+country_event = { #Overtures to the West
+	id = PRM_regional.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.13"}
+	title = PRM_regional.13.t
+	desc = PRM_regional.13.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.13.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Pan-Aryan Congress
+	id = PRM_regional.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.14"}
+	title = PRM_regional.14.t
+	desc = PRM_regional.14.desc
+	picture = GFX_report_event_russian_letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.14.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			PRM = {
+				country_event = { id = PRM_regional.15 days = 1 }
+			}
+		}
+	}
+}
+
+country_event = { #Nobody came to the congress
+	id = PRM_regional.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.15"}
+	title = PRM_regional.15.t
+	desc = PRM_regional.15.desc
+	picture = GFX_report_event_komi_factory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.15.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Sverdlovsk unified West-Siberia
+	id = PRM_regional.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.16"}
+	title = PRM_regional.16.t
+	desc = PRM_regional.16.desc
+	picture = GFX_report_event_russia_war_planning
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.16.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+	}
+}
+
+country_event = { #Tyumen unified West-Siberia
+	id = PRM_regional.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.17"}
+	title = PRM_regional.17.t
+	desc = PRM_regional.17.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.17.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+	}
+}
+
+country_event = { #Omsk unified West-Siberia
+	id = PRM_regional.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.18"}
+	title = PRM_regional.18.t
+	desc = PRM_regional.18.desc
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.18.a
+		ai_chance = { factor = 1 }
+		add_political_power = 25
+	}
+}
+
+country_event = { #The Khazak Conundrum
+	id = PRM_regional.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.19"}
+	title = PRM_regional.19.t
+	desc = PRM_regional.19.desc
+	picture = GFX_report_event_russia_kazakh_rider
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Test their strength
+		name = PRM_regional.19.a
+		ai_chance = { factor = 10 }
+		hidden_effect = {
+			random_list = {
+				70 = {
+					country_event = { id = PRM_regional.20 days = 1 }
+				}
+				30 = {
+					country_event = { id = PRM_regional.21 days = 1 }
+				}
+			}
+		}
+	}
+	option = { #Remain Vigilant
+		name = PRM_regional.19.b
+		ai_chance = { factor = 2 }
+		add_stability = 0.02
+	}
+}
+
+country_event = { #Succesful raid
+	id = PRM_regional.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.20"}
+	title = PRM_regional.20.t
+	desc = PRM_regional.20.desc
+	picture = GFX_report_event_russian_fascists
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.20.a
+		ai_chance = { factor = 1 }
+		add_manpower = -75
+		add_stability = 0.05
+		add_political_power = 50
+	}
+}
+
+country_event = { #Failed raid
+	id = PRM_regional.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.21"}
+	title = PRM_regional.21.t
+	desc = PRM_regional.21.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.21.a
+		ai_chance = { factor = 1 }
+		add_manpower = -300
+		add_stability = -0.03
+	}
+}
+
+country_event = { #Denounce the Masonic-Zionist Puppets
+	id = PRM_regional.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.22"}
+	title = PRM_regional.22.t
+	desc = PRM_regional.22.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.22.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Deride Burgundy
+	id = PRM_regional.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.23"}
+	title = PRM_regional.23.t
+	desc = PRM_regional.23.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.23.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Into the World - Yemmy
+	id = PRM_regional.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.24"}
+	title = PRM_regional.24.t
+	desc = PRM_regional.24.desc
+	picture = GFX_report_event_soviet_russian_tank_factory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.24.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Caring for your Child; by Gutrum Vagner
+	id = PRM_regional.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.25"}
+	title = PRM_regional.25.t
+	desc = PRM_regional.25.desc
+	picture = GFX_report_event_BRG_event2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.25.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Omsk shattered West-Siberia
+	id = PRM_regional.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.26"}
+	title = PRM_regional.26.t
+	desc = PRM_regional.26.desc
+	picture = GFX_report_event_BRG_event2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.26.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Zlatoust shattered West-Siberia
+	id = PRM_regional.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_regional.27"}
+	title = PRM_regional.27.t
+	desc = PRM_regional.27.desc
+	picture = GFX_report_event_BRG_event2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_regional.27.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Yemelyanov Arrives
+	id = PRM_yemelyanov.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.1"}
+	title = PRM_yemelyanov.1.t
+	desc = PRM_yemelyanov.1.desc
+	picture = GFX_report_event_BRG_event16
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.1.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = PRM_yemelyanov.2 days = 360 }
+			# add_ideas = PRM_Siegfried_Schulz_sec
+			create_corps_commander = {
+				name = "Zigfrid Shultz"
+				picture = "Portrait_Aryan_Brotherhood_Valery_Yemelyanov.dds"
+				traits = { politically_connected organizer }
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+				id = 3459
+			}
+		}
+	}
+}
+
+country_event = { #Yemelyanov Works his way up
+	id = PRM_yemelyanov.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.2"}
+	title = PRM_yemelyanov.2.t
+	desc = PRM_yemelyanov.2.desc
+	picture = GFX_report_event_hgr_generic_ss_3
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #More power
+		name = PRM_yemelyanov.2.a
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+                factor = 0
+                has_game_rule = { rule = PRM_ideology_route option = PRM_IDEOLOGY_ROUTE_NATSOC }
+            }
+		}
+		custom_effect_tooltip = PRM_Yemmy_power
+		add_to_variable = { yemelyanov_power = 1 }
+		hidden_effect = {
+			country_event = { id = PRM_yemelyanov.3 days = 360 }
+		}
+	}
+	option = { #
+		name = PRM_yemelyanov.2.b
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+                factor = 0
+                has_game_rule = { rule = PRM_ideology_route option = PRM_IDEOLOGY_ROUTE_ULTNAT }
+            }
+		}
+		hidden_effect = {
+			country_event = { id = PRM_yemelyanov.3 days = 360 }
+		}
+	}
+}
+
+country_event = { #Yemelyanov advocates for things
+	id = PRM_yemelyanov.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.3"}
+	title = PRM_yemelyanov.3.t
+	desc = PRM_yemelyanov.3.desc
+	picture = GFX_report_event_BRG_event9
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #More power
+		name = PRM_yemelyanov.3.a
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+                factor = 0
+                has_game_rule = { rule = PRM_ideology_route option = PRM_IDEOLOGY_ROUTE_NATSOC }
+            }
+		}
+		custom_effect_tooltip = PRM_Yemmy_power
+		add_to_variable = { yemelyanov_power = 1 }
+	}
+	option = { #
+		name = PRM_yemelyanov.3.b
+		ai_chance = { 
+		    factor = 1 
+		    modifier = {
+                factor = 0
+                has_game_rule = { rule = PRM_ideology_route option = PRM_IDEOLOGY_ROUTE_ULTNAT }
+            }
+		}
+	}
+}
+
+country_event = { #The Reign of the North
+	id = PRM_yemelyanov.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.4"}
+	title = PRM_yemelyanov.4.t
+	desc = PRM_yemelyanov.4.desc
+	picture = GFX_report_event_ORS_camp
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.4.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = PRM_yemelyanov.13 days = 21 random = 48 }
+		}
+	}
+}
+
+country_event = { #The High Priest
+	id = PRM_yemelyanov.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.5"}
+	title = PRM_yemelyanov.5.t
+	desc = PRM_yemelyanov.5.desc
+	picture = GFX_report_event_russian_crowd
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.5.a
+		ai_chance = { factor = 1 }
+		TNO_improve_political_parties_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #Reform the Brotherhood
+	id = PRM_yemelyanov.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.6"}
+	title = PRM_yemelyanov.6.t
+	desc = PRM_yemelyanov.6.desc
+	picture = GFX_report_generic_prisoners2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.6.a
+		ai_chance = { factor = 1 }
+		TNO_improve_political_parties_policy_effectiveness_low = yes
+		add_popularity = {
+			ideology = national_socialism
+			popularity = -0.1
+		}
+	}
+}
+
+country_event = { #We Who Judge
+	id = PRM_yemelyanov.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.7"}
+	title = PRM_yemelyanov.7.t
+	desc = PRM_yemelyanov.7.desc
+	picture = GFX_report_event_russia_soldiers_generic_4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.7.a
+		ai_chance = { factor = 1 }
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #The Two Cosmic Forces
+	id = PRM_yemelyanov.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.8"}
+	title = PRM_yemelyanov.8.t
+	desc = PRM_yemelyanov.8.desc
+	picture = GFX_report_event_russia_soldiers_generic_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.8.a
+		ai_chance = { factor = 1 }
+		RUS_integration_cost_days_decrease = yes
+	}
+}
+
+country_event = { #De-Zionization and De-Masonization
+	id = PRM_yemelyanov.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.9"}
+	title = PRM_yemelyanov.9.t
+	desc = PRM_yemelyanov.9.desc
+	picture = GFX_report_event_burning_books
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.9.a
+		ai_chance = { factor = 1 }
+		add_manpower = -1000
+	}
+}
+
+country_event = { #The Scorched Camp - Event asking Italy for Palestine
+	id = PRM_yemelyanov.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.10"}
+	title = PRM_yemelyanov.10.t
+	desc = PRM_yemelyanov.10.desc
+	picture = GFX_report_event_soviet_russian_map
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Fuck no you LARPers
+		name = PRM_yemelyanov.10.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #The Ancestral Homelands
+	id = PRM_yemelyanov.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.11"}
+	title = PRM_yemelyanov.11.t
+	desc = PRM_yemelyanov.11.desc
+	picture = GFX_report_event_russia_soldiers_generic_5
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.11.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Under Perun's Light
+	id = PRM_yemelyanov.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.12"}
+	title = PRM_yemelyanov.12.t
+	desc = PRM_yemelyanov.12.desc
+	picture = GFX_report_event_russia_soldiers_generic_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.12.a
+		ai_chance = { factor = 1 }
+		add_political_power = 50
+	}
+}
+
+country_event = { #Winter Holidays
+	id = PRM_yemelyanov.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.13"}
+	title = PRM_yemelyanov.13.t
+	desc = PRM_yemelyanov.13.desc
+	picture = GFX_report_event_burning_books
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.13.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = PRM_yemelyanov.14 days = 21 random = 48 }
+		}
+	}
+}
+
+country_event = { #Aid of the Gods
+	id = PRM_yemelyanov.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.14"}
+	title = PRM_yemelyanov.14.t
+	desc = PRM_yemelyanov.14.desc
+	picture = GFX_report_event_post_apoc_old_rural_church
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_yemelyanov.14.a
+		ai_chance = { factor = 1 }
+		TNO_improve_religious_rights_policy_effectiveness_low = yes
+		hidden_effect = {
+			country_event = { id = PRM_yemelyanov.15 days = 21 random = 48 }
+		}
+	}
+}
+
+country_event = { #Healer of the Gods
+	id = PRM_yemelyanov.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.15"}
+	title = PRM_yemelyanov.15.t
+	desc = PRM_yemelyanov.15.desc
+	picture = GFX_report_event_generic_wheat #I really couldn't find a better picture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #
+		name = PRM_yemelyanov.15.a
+		ai_chance = { factor = 1 }
+		TNO_worsen_health_care_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #The Catch
+	id = PRM_yemelyanov.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_yemelyanov.16"}
+	title = PRM_yemelyanov.16.t
+	desc = PRM_yemelyanov.16.desc
+	picture = GFX_report_event_SAFWAR_burning_village
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #
+		name = PRM_yemelyanov.16.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+
+#Vagner superregional tree events
+country_event = { #PRM_the_reykh_triumphant event
+	id = PRM_vagner.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.1"}
+	title = PRM_vagner.1.t
+	desc = PRM_vagner.1.desc
+	picture = GFX_report_event_far_right_rally
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #PRM_a_slave_caste event
+	id = PRM_vagner.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.2"}
+	title = PRM_vagner.2.t
+	desc = PRM_vagner.2.desc
+	picture = GFX_report_event_post_apoc_mine
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.2.a
+		ai_chance = { factor = 1 }
+		TNO_improve_slavery_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #PRM_the_purification_of_siberia event
+	id = PRM_vagner.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.3"}
+	title = PRM_vagner.3.t
+	desc = PRM_vagner.3.desc
+	picture = GFX_report_event_german_city_burning
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.3.a
+		ai_chance = { factor = 1 }
+		add_manpower = -20000
+	}
+}
+
+country_event = { #PRM_liberate_the_aryans event
+	id = PRM_vagner.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.4"}
+	title = PRM_vagner.4.t
+	desc = PRM_vagner.4.desc
+	picture = GFX_report_event_russia_soldiers_bombed_city
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.4.a
+		ai_chance = { factor = 1 }
+		add_manpower = -20000
+	}
+}
+
+country_event = { #PRM_the_world_calls event
+	id = PRM_vagner.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.5"}
+	title = PRM_vagner.5.t
+	desc = PRM_vagner.5.desc
+	picture = GFX_report_event_BRG_event2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.5.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #PRM_woe_to_the_conquered event
+	id = PRM_vagner.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.6"}
+	title = PRM_vagner.6.t
+	desc = PRM_vagner.6.desc
+	#picture =
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.6.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #PRM_take_up_our_mantle event
+	id = PRM_vagner.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.7"}
+	title = PRM_vagner.7.t
+	desc = PRM_vagner.7.desc
+	picture = GFX_report_event_komi_execution
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.7.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #One Man's Trash
+	id = PRM_vagner.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.8"}
+	title = PRM_vagner.8.t
+	desc = PRM_vagner.8.desc
+	picture = GFX_report_event_russia_burning_village
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.8.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Same War, Different Day
+	id = PRM_vagner.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event PRM_vagner.9"}
+	title = PRM_vagner.9.t
+	desc = PRM_vagner.9.desc
+	picture = GFX_report_event_burning_building
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = PRM_vagner.9.a
+		ai_chance = { factor = 1 }
+	}
+}
