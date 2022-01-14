@@ -1,0 +1,4365 @@
+﻿add_namespace = NPP_SAF
+add_namespace = honolulu_accords
+add_namespace = USA.hawaiinegot
+
+country_event = { #Let's win this fucking war
+	id = NPP_SAF.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.1" }
+	title = NPP_SAF.1.t
+	desc = NPP_SAF.1.desc
+	picture = GFX_report_event_iberia_meeting_table
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = NPP_SAF.1.a
+		ai_chance = { factor = 1 }
+		add_stability = 0.01
+		add_war_support = 0.01
+		custom_effect_tooltip = USA_add_NPP_unity
+		add_to_variable = { USA_NPP_Unity = 2 }
+	}
+}
+
+country_event = { #Pres gives a speech to the nation, shits going to get better we're not the RDs we promise
+	id = NPP_SAF.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.2" }
+	title = NPP_SAF.2.t
+	desc = NPP_SAF.2.desc
+	picture = GFX_report_event_usa_supreme_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #YAY!
+		name = NPP_SAF.2.a
+		ai_chance = { factor = 1 }
+
+		hidden_effect = {
+			every_owned_state = {
+				limit = {
+					can_have_elections_in_state = yes
+				}
+				set_temp_variable = { popularity_bonus = 0.01 }
+				add_to_variable = { NPP_popularity = popularity_bonus }
+			}
+		}
+
+		if = {
+			limit = { has_government = authoritarian_democracy }
+
+			add_popularity = {
+				ideology = authoritarian_democracy
+				popularity = 0.01
+			}
+		}
+
+		if = {
+			limit = { has_government = social_democracy }
+
+			add_popularity = {
+				ideology = social_democracy
+				popularity = 0.01
+			}
+		}
+	}
+}
+
+country_event = { #The options for RFK
+	id = NPP_SAF.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.3" }
+	title = NPP_SAF.3.t
+	desc = NPP_SAF.3.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Thank you gentleman and one gentlelady
+		name = NPP_SAF.3.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+country_event = { #The options for Wallace
+	id = NPP_SAF.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.3" }
+	title = NPP_SAF.30.t
+	desc = NPP_SAF.30.desc
+	picture = GFX_report_event_whitehouse_color
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Thank you gentleman and one gentlelady
+		name = NPP_SAF.30.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #President authorizes more troops, lets win this war in 180 days
+	id = NPP_SAF.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.4" }
+	title = NPP_SAF.4.t
+	desc = NPP_SAF.4.desc
+	picture = GFX_report_event_generic_rally
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = NPP_SAF.4.a
+		ai_chance = { factor = 1 }
+
+
+		if = {
+			limit = {
+				set_temp_variable = { target = SAF }
+				TNO_volunteer_cap_less_5 = yes
+			}
+			set_temp_variable = { target = SAF }
+			TNO_increase_volunteer_cap_1 = yes
+			custom_effect_tooltip = "TNO_increase_volunteers_SAF_1"
+			add_to_variable = {
+				USA_SAF_WAR_Discontent = 6
+			}
+			custom_effect_tooltip = USA_increase_war_discontent_tt
+		}
+
+	}
+}
+
+country_event = { #Fight mother fuckers
+	id = NPP_SAF.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.5" }
+	title = NPP_SAF.5.t
+	desc = NPP_SAF.5.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = NPP_SAF.5.a
+		ai_chance = { factor = 1 }
+		SAF = { add_war_support = 0.04 }
+	}
+}
+
+country_event = { #Hippies are pissed you lied about the war
+	id = NPP_SAF.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.6" }
+	title = NPP_SAF.6.t
+	desc = NPP_SAF.6.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Fuck you man!
+		name = NPP_SAF.6.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = USA_SAF_WAR_Insurgency_Discontent_Rise_Low
+		add_to_variable = { USA_SAF_WAR_Discontent = 4 }
+
+		add_stability = -0.01
+		add_war_support = -0.03
+	}
+}
+
+country_event = { #
+	id = NPP_SAF.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.7" }
+	title = NPP_SAF.7.t
+	desc = NPP_SAF.7.desc
+	picture = GFX_report_event_npp_generic2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = NPP_SAF.7.a
+		ai_chance = { factor = 1 }
+
+	}
+	option = { #
+		name = NPP_SAF.7.b
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = NPP_SAF.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.8" }
+	title = NPP_SAF.8.t
+	desc = NPP_SAF.8.desc
+	picture = GFX_report_event_us_congress1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = NPP_SAF.8.a
+		ai_chance = { factor = 1 }
+
+	}
+	option = { #
+		name = NPP_SAF.8.b
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = NPP_SAF.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.9" }
+	title = NPP_SAF.9.t
+	desc = NPP_SAF.9.desc
+	picture = GFX_report_event_us_pentagon
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = NPP_SAF.9.a
+		ai_chance = { factor = 1 }
+
+	}
+	option = { #
+		name = NPP_SAF.9.b
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #
+	id = NPP_SAF.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event NPP_SAF.10" }
+	title = NPP_SAF.10.t
+	desc = NPP_SAF.10.desc
+	picture = GFX_report_event_generic_rally
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = NPP_SAF.10.a
+		ai_chance = { factor = 1 }
+
+	}
+	option = { #
+		name = NPP_SAF.10.b
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+
+
+
+
+country_event = { #USA: Time to seek Return of the Treaty Ports from Japan, also explain how this shit works
+	id = honolulu_accords.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.1" }
+	title = honolulu_accords.1.t
+	desc = honolulu_accords.1.desc
+	picture = GFX_report_event_generic_rally
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Give our 'Neighbors' in Tokyo a call
+		name = honolulu_accords.1.a
+		custom_effect_tooltip = HA_explain
+		ai_chance = { factor = 1 }
+		JAP = { country_event = {id = honolulu_accords.2 days = 1} }
+		set_variable = { global.USA_Negotiating_Power = 0 }
+		set_variable = { global.JAP_Negotiating_Power = 0 }
+		set_variable = { global.TP_Clauses_Failed = 0 }
+		set_variable = { global.TP_Clauses_Agreed = 0 }
+		set_variable = { global.honolulu_accords_status = 1 }
+		set_variable = { global.JAP_PP_Investment = 0 }
+		set_variable = { global.USA_PP_Investment = 0 }
+		set_variable = { global.PP_Investment_pool = 0 }
+		TP_Initial_Calc = yes
+	}
+}
+
+
+country_event = { #The US wants to meet to discuss the treaty ports, how should we do this? Also explain how this shit works
+	id = honolulu_accords.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.2" }
+	title = honolulu_accords.2.t
+	desc = honolulu_accords.2.desc
+	picture = GFX_report_event_us_washington_obelisk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #How about Honolulu so we can get a home court advantage, strong arm PMs
+		name = honolulu_accords.2.a
+		custom_effect_tooltip = HA_explain
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+		add_political_power = -50
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		add_to_variable = { global.JAP_Negotiating_Power = -2 }
+		custom_effect_tooltip = HA_lose_pp
+		USA = { country_event =  { id =  honolulu_accords.3 days = 2  } }
+	}
+
+	option = { # How about one of our carriers, so we can get a smaller home court advantage? strong arms PMs
+		name = honolulu_accords.2.b
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+		custom_effect_tooltip = HA_explain
+		add_political_power = -25
+		add_to_variable = { global.JAP_Negotiating_Power = -1 }
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		custom_effect_tooltip = HA_lose_pp
+		USA = { country_event = { id = honolulu_accords.6 days = 2 } }
+	}
+
+	option = { # We could always just do something nuetral... What about Mexico? Middle PMs
+		name = honolulu_accords.2.c
+		custom_effect_tooltip = HA_explain
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		add_political_power = 25
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+		custom_effect_tooltip = HA_gain_pp
+		USA = { country_event = { id = honolulu_accords.8 days = 2 }  }
+
+	}
+
+	option = { # Playing nice is always the best thing to do, let's do what they want! Shrewd PMs
+		name = honolulu_accords.2.d
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+		}
+
+		custom_effect_tooltip = HA_gain_pp
+		USA = { country_event = { id = honolulu_accords.1980 days = 2 }  }
+		add_political_power = 50
+		add_to_variable = { global.JAP_PP_Investment = -50 }
+		add_to_variable = { global.PP_Investment_pool = -50 }
+		add_to_variable = { global.JAP_Negotiating_Power = 2 }
+	}
+}
+
+country_event = { #Japan wants to meet in Hawaii, and that's kinda bullshit
+	id = honolulu_accords.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.3" }
+	title = honolulu_accords.3.t
+	desc = honolulu_accords.3.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #You know what, let's just agree, it'll help us out in the long run
+		name = honolulu_accords.3.a
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_political_power = 25
+		add_to_variable = { global.USA_Negotiating_Power = 1 }
+		set_global_flag = JAP_TP_picked_honolulu
+		country_event = { id = honolulu_accords.4 days = 2 }
+		JAP = { country_event =  { id = honolulu_accords.5 days = 2} }
+		custom_effect_tooltip = HA_gain_pp
+	}
+
+	option = { # Fuck that, why don't we meet on one of our carriers?
+		name = honolulu_accords.3.b
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+		}
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		add_political_power = -25
+		add_to_variable = { global.USA_Negotiating_Power = -1 }
+		JAP = { country_event = { id = honolulu_accords.7 days = 2} }
+		custom_effect_tooltip = HA_lose_pp
+	}
+
+	option = { # You know, we could always just choose Mexico?
+		name = honolulu_accords.3.c
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+
+		JAP = { country_event = { id = honolulu_accords.9 days = 2 }  }
+	}
+}
+
+country_event = { # We've managed to agree on a place. Awesome! On to that place!
+	id = honolulu_accords.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.4" }
+	title = honolulu_accords.4.t
+	desc = honolulu_accords.4.desc
+	picture = GFX_report_event_us_congress3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.4.a
+		ai_chance = { factor = 1 }
+		TP_Location_Effect = yes
+		USA = { country_event = { id = honolulu_accords.10 days = 2 } }
+		hidden_effect = {
+			every_country = { country_event = { id = WORLD.785 days = 4 } }
+		}
+	}
+}
+
+country_event = { # We've manged to agree on a place. Awesome! on to that place (but from japans perspective )
+	id = honolulu_accords.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.5" }
+	title = honolulu_accords.5.t
+	desc = honolulu_accords.5.desc
+	picture = GFX_report_event_generic_people
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.5.a
+		ai_chance = { factor = 1 }
+		USA = { country_event = { id = honolulu_accords.10 days = 2 } }
+	}
+}
+
+country_event = { #Japan wants to meet on one of their carriers?
+	id = honolulu_accords.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.6" }
+	title = honolulu_accords.6.t
+	desc = honolulu_accords.6.desc
+	picture = GFX_report_event_npp_generic3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Why don't we just do it on OUR carrier?
+		name = honolulu_accords.6.a
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+		}
+		custom_effect_tooltip = HA_lose_pp
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		add_political_power = -25
+		add_to_variable = { global.USA_Negotiating_Power = -1 }
+		JAP = { country_event = { id = honolulu_accords.7 days = 2} }
+
+
+	}
+	option = { #You know, I hear Mexico is nice this time of year
+		name = honolulu_accords.6.b
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+		JAP = { country_event = { id = honolulu_accords.9 days = 2 }  }
+	}
+
+	option = { #Fine, whatever, I just want those ports
+		name = honolulu_accords.6.c
+		ai_chance = { factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+
+		add_political_power = 25
+		custom_effect_tooltip = HA_gain_pp
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		add_to_variable = { global.USA_Negotiating_Power = 1 }
+		set_global_flag = JAP_TP_picked_JAP_carrier
+		country_event = { id = honolulu_accords.4 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.5 days = 2 }  }
+
+	}
+}
+
+country_event = { #The US denies our request, they want to meet on THEIR carrier
+	id = honolulu_accords.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.7" }
+	title = honolulu_accords.7.t
+	desc = honolulu_accords.7.desc
+	picture = GFX_report_event_npp_generic3
+
+	is_triggered_only = yes
+
+	option = { #Fine, whatever
+		name = honolulu_accords.7.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 9
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+		add_political_power = 25
+		custom_effect_tooltip = HA_gain_pp
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+		set_global_flag = USA_TP_picked_USA_carrier
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		country_event = { id = honolulu_accords.5 days = 2 }
+		USA = { country_event = { id = honolulu_accords.4 days = 2 }  }
+	}
+
+	option = { #What about Mexico?
+		name = honolulu_accords.7.b
+		trigger = {
+			OR = {
+				AND = {
+					NOT = { has_global_flag = TP_Startin_Out_Already_Picked_Mexico }
+					is_ai = yes
+				}
+				is_ai = no
+			}
+
+		}
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 9
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		set_global_flag = TP_Startin_Out_Already_Picked_Mexico
+		USA = { country_event = { id = honolulu_accords.8 days = 2 }  }
+
+	}
+}
+
+country_event = { #Japan brings up Mexico
+	id = honolulu_accords.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.8" }
+	title = honolulu_accords.8.t
+	desc = honolulu_accords.8.desc
+	picture = GFX_report_event_iberia_meeting_table
+
+	is_triggered_only = yes
+
+	option = { #I mean, I would prefer our carrier
+		name = honolulu_accords.8.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 9
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+		}
+		trigger = { NOT = { has_global_flag = TP_Startin_Out_Already_Picked_Mexico } }
+		add_political_power = -25
+		custom_effect_tooltip = HA_lose_pp
+		add_to_variable = { global.USA_Negotiating_Power = -1 }
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		JAP = { country_event = { id = honolulu_accords.7 days = 2} }
+
+	}
+
+	option = { #Seems good to me!
+		name = honolulu_accords.8.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 9
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+
+		add_political_power = 25
+		custom_effect_tooltip = HA_gain_pp
+		add_to_variable = { global.USA_Negotiating_Power = 1 }
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = TP_picked_Mexico
+
+		country_event = { id = honolulu_accords.4 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.5 days = 2 }  }
+	}
+}
+
+country_event = { #The US brings up Mexico
+	id = honolulu_accords.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.9" }
+	title = honolulu_accords.9.t
+	desc = honolulu_accords.9.desc
+	picture = GFX_report_event_us_presidential_podium
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Sure, whatever. Let's just do this
+		name = honolulu_accords.9.a
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = HA_gain_pp
+		add_political_power = 25
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = TP_picked_Mexico
+
+		country_event = { id = honolulu_accords.5 days = 2 }
+		USA = { country_event = { id = honolulu_accords.4 days = 2 }  }
+
+	}
+}
+
+
+
+##########################################################################
+
+##### BEGIN CLAUSE I
+
+##########################################################################
+
+
+
+
+country_event = { #Start of the Chain, we're going to be talking about the subsidized oil
+	id = honolulu_accords.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.10" }
+	title = honolulu_accords.10.t
+	desc = honolulu_accords.10.desc
+	picture = GFX_report_event_us_washington_obelisk
+	immediate = {
+		hidden_effect = {
+			set_variable = { global.honolulu_accords_status = 2 }
+			HA_pp_reset = yes
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Let's just give in a little, could help us later
+		name = honolulu_accords.10.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = -50 }
+		add_to_variable = { global.PP_Investment_pool = -50 }
+		add_political_power = 50
+		add_to_variable = { global.USA_Negotiating_Power = 2 }
+
+		JAP = { country_event = { id = honolulu_accords.11 days = 2} }
+
+	}
+	option = { #Let's just take it slow and steady
+		name = honolulu_accords.10.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }		
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		JAP = { country_event = { id = honolulu_accords.15 days = 2} }
+
+	}
+
+	option = { #Let's just bluff them
+		name = honolulu_accords.10.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }		
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		add_political_power = -50
+		add_to_variable = { global.USA_Negotiating_Power = -2 }
+
+		JAP = { country_event = { id = honolulu_accords.18 days = 2} }
+
+	}
+}
+
+country_event = { #The US is offering us a lot of subsidized oil in exchange for these ports
+	id = honolulu_accords.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.11" }
+	title = honolulu_accords.11.t
+	desc = honolulu_accords.11.desc
+	picture = GFX_report_event_iberia_meeting_table
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #this could be a trap, let's demand even more!
+		name = honolulu_accords.11.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+
+		add_political_power = -25
+		add_to_variable = { global.JAP_Negotiating_Power = -1 }
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		USA = { country_event = { id = honolulu_accords.12 days = 2} }
+
+	}
+	option = { #Are you shitting me?!?!?! MAKE IT RAIN MOTHER FUCKER!!!
+		name = honolulu_accords.11.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		USA = { country_event = { id = honolulu_accords.14 days = 2 } }
+		set_global_flag = TP_Sub_Oil_US_Gives_Lots_Of_Oil
+	}
+}
+
+country_event = { #So those fucking assholes want even more oil then when we were trying to be nice!
+	id = honolulu_accords.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.12" }
+	title = honolulu_accords.12.t
+	desc = honolulu_accords.12.desc
+	picture = GFX_report_event_npp_generic3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #You know what, fuck em! On to the next god damn thing!
+		name = honolulu_accords.12.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+
+		add_political_power = -50
+		add_to_variable = { global.USA_Negotiating_Power = -2 }
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		country_event = { id = honolulu_accords.13 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.13 days = 2} }
+
+
+	}
+	option = { #God damn it, revert back to just being normal
+		name = honolulu_accords.12.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }				
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		JAP = { country_event = { id = honolulu_accords.15 days = 2 } }
+	}
+
+	option = { #You know what, fine!
+		name = honolulu_accords.12.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		set_global_flag = TP_Sub_Oil_US_Gives_Lots_Of_Oil
+		country_event = { id = honolulu_accords.14 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.14 days = 2} }
+
+	}
+}
+
+country_event = { #Clause fails, onto the next one
+	id = honolulu_accords.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.13" }
+	title = honolulu_accords.13.t
+	desc = honolulu_accords.13.desc
+	picture = GFX_report_event_us_washington_obelisk
+
+	is_triggered_only = yes
+
+	option = { #well, fuck
+		name = honolulu_accords.13.a
+		ai_chance = { factor = 1 }
+		add_to_variable = { global.TP_Clauses_Failed = 1 }
+		JAP = {
+			country_event = { id = honolulu_accords.21 days = 2}
+		}
+	}
+}
+
+country_event = { #Clause agreed to
+	id = honolulu_accords.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.14" }
+	title = honolulu_accords.14.t
+	desc = honolulu_accords.14.desc
+	picture = GFX_report_event_npp_generic3
+
+	is_triggered_only = yes
+
+	option = { #Awesome, on to the next one!
+		name = honolulu_accords.14.a
+		ai_chance = { factor = 1 }
+		add_to_variable = { TP_Clausus_Agreed = 1 }
+		set_global_flag = TP_Oil_Clause_Agreed_to
+		JAP = {
+			country_event = { id = honolulu_accords.21 days = 2}
+		}
+	}
+}
+
+country_event = { #The US offers us a totally normal amount of subsidized oil
+	id = honolulu_accords.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.15" }
+	title = honolulu_accords.15.t
+	desc = honolulu_accords.15.desc
+	picture = GFX_report_event_iberia_big_meeting
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Eh, we could push for more if we wanted to.
+		name = honolulu_accords.15.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		add_political_power = -25
+		add_to_variable = { global.JAP_Negotiating_Power = -1 }
+
+		USA = { country_event = { id = honolulu_accords.16 days = 2} }
+
+	}
+	option = { #Yeah know what, sure, whatever, that's fine
+		name = honolulu_accords.15.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = 25
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = TP_Sub_Oil_US_Gives_Medium_Oil
+		country_event = { id = honolulu_accords.14 days = 2 }
+		USA = { country_event = { id = honolulu_accords.14 days = 2} }
+
+	}
+}
+
+country_event = { #Japan pushes for even more oil when we offered a normal amount!
+	id = honolulu_accords.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.16" }
+	title = honolulu_accords.16.t
+	desc = honolulu_accords.16.desc
+	picture = GFX_report_event_us_congress2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Oh fuck them, demand it goes back to the original!
+		name = honolulu_accords.16.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+
+		add_political_power = -50
+		add_to_variable = { global.USA_Negotiating_Power = -1 }
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		JAP = { country_event = { id = honolulu_accords.17 days = 2} }
+
+	}
+	option = { #Eh sure, why not?
+		name = honolulu_accords.16.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }						
+		}
+
+		add_political_power = 25
+		add_to_variable = { global.USA_Negotiating_Power = 1 }
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = TP_Sub_Oil_US_Gives_Lots_Of_Oil
+		country_event = { id = honolulu_accords.14 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.14 days = 2} }
+
+	}
+}
+
+country_event = { #The US demands we back down and go back to the original medium amount!
+	id = honolulu_accords.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.17" }
+	title = honolulu_accords.17.t
+	desc = honolulu_accords.17.desc
+	picture = GFX_report_event_us_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Ah shit, yeah, fine
+		name = honolulu_accords.17.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = -25
+		add_to_variable = { global.JAP_Negotiating_Power = -1 }
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		set_global_flag = TP_Sub_Oil_US_Gives_Medium_Oil
+
+		country_event = { id = honolulu_accords.14 days = 2 }
+		USA = { country_event = { id = honolulu_accords.14 days = 2} }
+
+	}
+	option = { #No, fuck you! Move on to the next one assholes...
+		name = honolulu_accords.17.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+
+		country_event = { id = honolulu_accords.13 days = 2 }
+		USA = { country_event = { id = honolulu_accords.13 days = 2} }
+
+	}
+}
+
+country_event = { #So the Americans want to only give us a small amount of oil...
+	id = honolulu_accords.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.18" }
+	title = honolulu_accords.18.t
+	desc = honolulu_accords.18.desc
+	picture = GFX_report_event_USA_congress_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #You know what, let's stay on good terms
+		name = honolulu_accords.18.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		add_political_power = 25
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+
+		set_global_flag = TP_Sub_Oil_US_Gives_Little_Oil
+
+		country_event = { id = honolulu_accords.14 days = 2 }
+		USA = { country_event = { id = honolulu_accords.14 days = 2} }
+
+	}
+	option = { #We should push for a medium amount at least...
+		name = honolulu_accords.18.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }				
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+
+		USA = { country_event = { id = honolulu_accords.19 days = 2} }
+
+	}
+
+	option = { #The fuck? Let's call their god damn bluff. We want ALL THE OIL!!!!
+		name = honolulu_accords.18.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+
+		add_political_power = -50
+		add_to_variable = { global.JAP_Negotiating_Power = -2 }
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		USA = { country_event = { id = honolulu_accords.12 days = 2} }
+
+	}
+}
+
+country_event = { #Japan wants a totally normal amount of oil
+	id = honolulu_accords.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.19" }
+	title = honolulu_accords.19.t
+	desc = honolulu_accords.19.desc
+	picture = GFX_report_event_us_presidential_podium
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Alright, fine...
+		name = honolulu_accords.19.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+
+		set_global_flag = TP_Sub_Oil_US_Gives_Medium_Oil
+
+		country_event = { id = honolulu_accords.14 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.14 days = 2} }
+
+	}
+	option = { #Ah hell no!
+		name = honolulu_accords.19.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		add_political_power = -25
+		add_to_variable = { global.USA_Negotiating_Power = -1 }
+
+		JAP = { country_event = { id = honolulu_accords.20 days = 2} }
+
+	}
+}
+
+country_event = { #The US has a final offer of a small amount of oil
+	id = honolulu_accords.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.20" }
+	title = honolulu_accords.20.t
+	desc = honolulu_accords.20.desc
+	picture = GFX_report_event_us_congress2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Fine, CLAUSE FAILED BITCH
+		name = honolulu_accords.20.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+
+		add_political_power = 25
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = TP_Sub_Oil_US_Gives_Little_Oil
+
+		country_event = { id = honolulu_accords.13 days = 2 }
+		USA = { country_event = { id = honolulu_accords.13 days = 2} }
+
+	}
+	option = { #These assholes!
+		name = honolulu_accords.20.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = -50
+		add_to_variable = { global.JAP_Negotiating_Power = -2 }
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		set_global_flag = TP_Sub_Oil_US_Gives_Little_Oil
+
+		country_event = { id = honolulu_accords.14 days = 2 }
+		USA = { country_event = { id = honolulu_accords.14 days = 2} }
+
+	}
+}
+
+#######################################################################
+
+#####  START OF CLAUSE 2
+
+#######################################################################
+
+
+country_event = { #Begin the second clause. You know, if we are going to give them these ports, we probably should secure more trade for our country right?
+	id = honolulu_accords.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.21" }
+	title = honolulu_accords.21.t
+	desc = honolulu_accords.21.desc
+	picture = GFX_report_event_us_presidential_podium
+	immediate = {
+		set_variable = { global.honolulu_accords_status = 3 }
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We just want an end to this fucking embargo
+		name = honolulu_accords.21.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = 25
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		USA = { country_event = { id = honolulu_accords.22 days = 2} }
+
+	}
+	option = { #Push for some more subsidized shit!
+		name = honolulu_accords.21.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = -25
+		add_to_variable = { global.JAP_Negotiating_Power = -1 }
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		USA = { country_event = { id = honolulu_accords.27 days = 2} }
+	}
+
+	option = { #End the embaro and make them pay for the islands too!
+		name = honolulu_accords.21.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+
+		USA = { country_event = { id = honolulu_accords.30 days = 2} }
+
+	}
+}
+
+country_event = { #Japan wants us to end the embargo, what should we do.
+	id = honolulu_accords.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.22" }
+	title = honolulu_accords.22.t
+	desc = honolulu_accords.22.desc
+	picture = GFX_report_event_generic_people
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Well, we want a bit more compensation then that... That would help you more then it would help us. Push for some more cash!
+		name = honolulu_accords.22.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		add_political_power = -50
+		add_to_variable = { global.JAP_Negotiating_Power = -2 }
+
+		JAP = { country_event = { id = honolulu_accords.23 days = 2 } }
+
+	}
+	option = { #Eh, sure. Fine by me
+		name = honolulu_accords.22.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = 25
+		add_to_variable = { global.USA_Negotiating_Power = 1 }
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = TP_Trade_No_More_Embargo
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.25 days = 2} }
+
+	}
+}
+
+country_event = { #US demands some cash in exchange for the ports and ending the embargo.
+	id = honolulu_accords.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.23" }
+	title = honolulu_accords.23.t
+	desc = honolulu_accords.23.desc
+	picture = GFX_report_event_usa_supreme_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #The fuck got into them? We're doing them a damn favor for even taking up this shit
+		name = honolulu_accords.23.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		add_political_power = -25
+		add_to_variable = { global.JAP_Negotiating_Power = -1 }
+
+		USA = { country_event = { id = honolulu_accords.24 days = 2 } }
+
+	}
+	option = { # You know what, fine.
+		name = honolulu_accords.23.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = -50
+		add_to_variable = { global.JAP_Negotiating_Power = -2 }
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		set_global_flag = TP_Trade_Us_Gets_Cash_And_No_Embargo
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		USA = { country_event = { id = honolulu_accords.25 days = 2} }
+
+	}
+}
+
+country_event = { #Japan demands their original offer (End of the embargo)
+	id = honolulu_accords.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.24" }
+	title = honolulu_accords.24.t
+	desc = honolulu_accords.24.desc
+	picture = GFX_report_event_npp_generic1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Ok, Jesus assholes
+		name = honolulu_accords.24.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = -50
+		add_to_variable = { global.USA_Negotiating_Power = -2 }
+		add_to_variable = { global.JAP_PP_Investment = -50 }
+		add_to_variable = { global.PP_Investment_pool = -50 }
+		country_event = { id = honolulu_accords.25 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+	}
+	option = { #You know what, fuck you
+		name = honolulu_accords.24.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_to_variable = { global.TP_Clauses_Failed = 1}
+		country_event = { id = honolulu_accords.26 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.26 days = 2 } }
+
+	}
+}
+
+country_event = { #Yayyyyy, everything worked!
+	id = honolulu_accords.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.25" }
+	title = honolulu_accords.25.t
+	desc = honolulu_accords.25.desc
+	picture = GFX_report_event_whitehouse_bnw
+
+	is_triggered_only = yes
+
+	option = { #Sweet
+		name = honolulu_accords.25.a
+		ai_chance = { factor = 1 }
+
+		add_to_variable = { TP_Clausus_Agreed = 1 }
+
+		set_global_flag = TP_Trade_Clause_Agreed_to
+		USA = {
+			country_event = { id = honolulu_accords.33 days = 2 }
+		}
+	}
+}
+
+country_event = { #Great, we fucking failed...
+	id = honolulu_accords.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.26" }
+	title = honolulu_accords.26.t
+	desc = honolulu_accords.26.desc
+	picture = GFX_report_event_us_congress1
+
+	is_triggered_only = yes
+
+	option = { #Fucking great...
+		name = honolulu_accords.26.a
+		ai_chance = { factor = 1 }
+
+		subtract_from_variable = { OFN_Unity = 3 }
+		custom_effect_tooltip = USA_subtract_OFN_unity
+
+		################ If you already failed the other one...
+
+		if = {
+			limit = { check_variable =  { global.TP_Clauses_Failed = 2 }  }
+			country_event = { id = honolulu_accords.75 days = 2 }
+			JAP = { country_event = { id = honolulu_accords.74 days = 2 } }
+		}
+
+		############## If you haven't already failed the other one
+
+		if = {
+			limit = { check_variable =  { global.TP_Clauses_Failed < 2 }  }
+			USA = {
+				country_event = { id = honolulu_accords.33 days = 2 }
+			}
+		}
+
+	}
+}
+
+country_event = { #Japan wants the end of the embargo AND for us to buy up their shit?
+	id = honolulu_accords.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.27" }
+	title = honolulu_accords.27.t
+	desc = honolulu_accords.27.desc
+	picture = GFX_report_event_generic_people
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Alright, whatever. Let's just take it
+		name = honolulu_accords.27.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = -50 }
+		add_to_variable = { global.PP_Investment_pool = -50 }
+		add_political_power = 50
+		add_to_variable = { global.USA_Negotiating_Power = 2 }
+
+		set_global_flag = TP_Trade_No_More_Embargo_US_Buys_Stuff
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+	}
+	option = { #Uh, that's kind of a shit deal, how about we don't do that?
+		name = honolulu_accords.27.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		add_political_power = -25
+		add_to_variable = { global.USA_Negotiating_Power = -1 }
+
+		JAP = { country_event = { id = honolulu_accords.28 days = 2 } }
+	}
+}
+
+country_event = { #The US just wants to end the embargo
+	id = honolulu_accords.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.28" }
+	title = honolulu_accords.28.t
+	desc = honolulu_accords.28.desc
+	picture = GFX_report_event_iberia_big_meeting
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Fine, whatever. We pushed too far.
+		name = honolulu_accords.28.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		add_political_power = 25
+		add_to_variable = { global.JAP_Negotiating_Power = 1 }
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = TP_Trade_No_More_Embargo
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		USA = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+	}
+	option = { #No, YOU will cooperate with US
+		name = honolulu_accords.28.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		add_political_power = -50
+		add_to_variable = { global.JAP_Negotiating_Power = -2 }
+
+		USA = { country_event = { id = honolulu_accords.29 days = 2 } }
+
+	}
+}
+
+country_event = { #Japan is insisting on subsidies
+	id = honolulu_accords.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.29" }
+	title = honolulu_accords.29.t
+	desc = honolulu_accords.29.desc
+	picture = GFX_report_event_whitehouse_bnw
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #You know what, fuck you
+		name = honolulu_accords.29.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_to_variable = { global.TP_Clauses_Failed = 1}
+		country_event = { id = honolulu_accords.26 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.26 days = 2 } }
+
+	}
+	option = { #You are such pricks you know that?
+		name = honolulu_accords.29.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_to_variable = { global_USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		add_political_power = 25
+		add_to_variable = { global.USA_Negotiating_Power = 1 }
+
+		set_global_flag = TP_Trade_No_More_Embargo_US_Buys_Stuff
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+	}
+}
+
+country_event = { #Japan wants us to end the embargo and pay them for the Islands
+	id = honolulu_accords.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.30" }
+	title = honolulu_accords.30.t
+	desc = honolulu_accords.30.desc
+	picture = GFX_report_event_npp_generic2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Honestly, that's fair. We'll take it
+		name = honolulu_accords.30.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		add_political_power = 25
+		add_to_variable = { global.USA_Negotiating_Power = 1 }
+
+		set_global_flag = TP_Trade_No_More_Embargo_US_Pays_For_Ports
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+	}
+	option = { #How about we don't pay, and just end the embaro?
+		name = honolulu_accords.30.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		add_political_power = -25
+		add_to_variable = { global.USA_Negotiating_Power = -1 }
+
+		JAP = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+
+	}
+}
+
+country_event = { #The US just wants to end the embargo
+	id = honolulu_accords.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.31" }
+	title = honolulu_accords.31.t
+	desc = honolulu_accords.31.desc
+	picture = GFX_report_event_us_congress3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Alright, sure
+		name = honolulu_accords.31.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		
+
+		add_political_power = -25
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		set_global_flag = TP_Trade_No_More_Embargo
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		USA = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+	}
+	option = { #Uh, no assholes, you are paying for this shit!
+		name = honolulu_accords.31.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		add_political_power = -50
+
+		USA = { country_event = { id = honolulu_accords.32 days = 2 } }
+
+	}
+}
+
+country_event = { #Japan wants us to pay, what the hell
+	id = honolulu_accords.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.32" }
+	title = honolulu_accords.32.t
+	desc = honolulu_accords.32.desc
+	picture = GFX_report_event_us_congress3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Alright assholes, we'll fucking do it
+		name = honolulu_accords.32.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+
+		set_global_flag = TP_Trade_No_More_Embargo_US_Pays_For_Ports
+
+		country_event = { id = honolulu_accords.25 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.25 days = 2 } }
+
+	}
+	option = { #You know what, fuck you
+		name = honolulu_accords.32.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+
+		add_political_power = 25
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		add_to_variable = { global.TP_Clauses_Failed = 1}
+		country_event = { id = honolulu_accords.26 days = 2 }
+		JAP = { country_event = { id = honolulu_accords.26 days = 2 } }
+
+	}
+}
+
+#######################################################################
+
+#####  START OF CLAUSE 3
+
+#######################################################################
+
+country_event = { #USA perspective - Ok, so if we are to say, get these ports back, whats the status here militarily?
+	id = honolulu_accords.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.33" }
+	title = honolulu_accords.33.t
+	desc = honolulu_accords.33.desc
+	picture = GFX_report_event_generic_usa_treaty
+	immediate = {
+		set_variable = { global.honolulu_accords_status = 4 }
+		HA_pp_reset = yes
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #yo, we wanna demilitarize the ports, just to ignore tension
+		name = honolulu_accords.33.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		JAP = { country_event = { id = honolulu_accords.34 days = 3 } }
+		add_political_power = 25
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+	}
+	option = { #have the ports and hawaii demilitarized
+		name = honolulu_accords.33.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = -25
+		JAP = { country_event = { id = honolulu_accords.39 days = 3 } }
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+	}
+	option = { #demilitarize hawaii bitch
+		name = honolulu_accords.33.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_political_power = -50
+		JAP = { country_event = { id = honolulu_accords.42 days = 3 } }
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+	}
+}
+
+country_event = { #(Japanese) -America says we should demilitarize ports
+	id = honolulu_accords.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.34" }
+	title = honolulu_accords.34.t
+	desc = honolulu_accords.34.desc
+	picture = GFX_report_event_us_presidential_podium
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #could we slip in japanese arms in the ports :)
+		name = honolulu_accords.34.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_political_power = -25
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		USA = { country_event = { id = honolulu_accords.35 days = 3 } }
+	}
+	option = { #smart
+		name = honolulu_accords.34.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		set_global_flag = honolulu_accords_ports_demilitarization
+		hidden_effect = { USA = { country_event = { id = honolulu_accords.38 } } }
+	}
+}
+
+country_event = { #japans tryna what?
+	id = honolulu_accords.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.35" }
+	title = honolulu_accords.35.t
+	desc = honolulu_accords.35.desc
+	picture = GFX_report_event_us_presidential_podium
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #sure! lets just get this over with!
+		name = honolulu_accords.35.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 25
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		set_global_flag = honolulu_accords_ports_demilitarization
+		set_global_flag = honolulu_accords_ports_japanese_militarization
+		hidden_effect = { USA = { country_event = { id = honolulu_accords.38 } } }
+	}
+	option = { #lul, say syke now
+		name = honolulu_accords.35.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_political_power = -25
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		JAP = { country_event = { id = honolulu_accords.36 days = 3 } }
+	}
+}
+
+country_event = { #america told us to say syke :flushed:
+	id = honolulu_accords.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.36" }
+	title = honolulu_accords.36.t
+	desc = honolulu_accords.36.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #whatever
+		name = honolulu_accords.36.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 10
+		add_to_variable = { global.JAP_PP_Investment = -10 }
+		add_to_variable = { global.PP_Investment_pool = -10 }
+		set_global_flag = honolulu_accords_ports_japanese_militarization
+		hidden_effect = { USA = { country_event = { id = honolulu_accords.38 } } }
+	}
+	option = { #clause failed fucker
+		name = honolulu_accords.36.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_political_power = -25
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		USA = { country_event = { id = honolulu_accords.37 days = 5 } }
+	}
+}
+
+
+country_event = { #this means this clause failed (for usa)
+	id = honolulu_accords.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.37" }
+	title = honolulu_accords.37.t
+	desc = honolulu_accords.37.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.37.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+
+			add_to_variable = { global.TP_Clauses_Failed = 1 }
+			if = {
+				limit = { check_variable = { global.TP_Clauses_Failed > 1 } }
+				country_event = { id = honolulu_accords.75 days = 2 }
+				JAP = { country_event = { id = honolulu_accords.74 days = 2 } }
+			}
+			else = {
+				JAP = { country_event = { id = honolulu_accords.72 days = 5 } }
+				country_event = { id = honolulu_accords.73 days = 5 }
+				add_to_variable = { global.TP_Clausus_Agreed = 1 }
+			}
+		}
+	}
+}
+
+country_event = { #success event (USA)
+	id = honolulu_accords.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.38" }
+	title = honolulu_accords.38.t
+	desc = honolulu_accords.38.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.38.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+
+			if = {
+				limit = { check_variable = { global.TP_Clauses_Failed > 1 } }
+				country_event = { id = honolulu_accords.75 days = 2 }
+				JAP = { country_event = { id = honolulu_accords.74 days = 2 } }
+			}
+			else = {
+				JAP = { country_event = { id = honolulu_accords.72 days = 5 } }
+				country_event = { id = honolulu_accords.73 days = 5 }
+				add_to_variable = { global.TP_Clausus_Agreed = 1 }
+			}
+		}
+	}
+
+}
+
+country_event = { #yo, so americans just want ports demilitarized and hawaii
+	id = honolulu_accords.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.39" }
+	title = honolulu_accords.39.t
+	desc = honolulu_accords.39.desc
+	picture = GFX_report_event_whitehouse_color
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #i mean... the ports, yea sounds like a great idea lmao
+		name = honolulu_accords.39.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		USA = { country_event = { id = honolulu_accords.40 days = 2 } }
+	}
+	option = { #oh thats it, ok?
+		name = honolulu_accords.39.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 10
+		add_to_variable = { global.JAP_PP_Investment = -10 }
+		add_to_variable = { global.PP_Investment_pool = -10 }
+		set_global_flag = honolulu_accords_militarization_clause_medium
+		USA = { country_event = { id = honolulu_accords.38 days = 3 } }
+	}
+}
+
+country_event = { #soooo Japanese, they fuckin yknow, they want it so we have to demilitarize just the ports like thats so unfair
+	id = honolulu_accords.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.40" }
+	title = honolulu_accords.40.t
+	desc = honolulu_accords.40.desc
+	picture = GFX_report_event_usa_supreme_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #I mean, i guess they are doing us a favour?
+		name = honolulu_accords.40.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 10
+		add_to_variable = { global.USA_PP_Investment = -10 }
+		add_to_variable = { global.PP_Investment_pool = -10 }
+		set_global_flag = honolulu_accords_ports_demilitarization
+		hidden_effect = {
+			country_event = { id = honolulu_accords.38 days = 2 }
+		}
+	}
+	option = { #nahh japan, im not a dumb, i know if we have to concede on some demilitarization so do you bro.
+		name = honolulu_accords.40.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		hidden_effect = {
+			JAP = { country_event = { id = honolulu_accords.41 days = 2 } }
+		}
+	}
+}
+
+country_event = { #americans are dicks
+	id = honolulu_accords.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.41" }
+	title = honolulu_accords.41.t
+	desc = honolulu_accords.41.desc
+	picture = GFX_report_event_iberia_big_meeting
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #FUCK YOU I HATE YOU, but fine...
+		name = honolulu_accords.41.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 30
+		add_to_variable = { global.JAP_PP_Investment = -30 }
+		add_to_variable = { global.PP_Investment_pool = -30 }
+		set_global_flag = honolulu_accords_militarization_clause_medium
+		hidden_effect = {
+			country_event = { id = honolulu_accords.38 days = 2 }
+		}
+	}
+	option = { #FUCK YOU FOREVER
+		name = honolulu_accords.41.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		USA = { country_event = { id = honolulu_accords.37 days = 5 }
+		}
+	}
+}
+
+country_event = { #uhhh what did the americans just ask...?
+	id = honolulu_accords.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.42" }
+	title = honolulu_accords.42.t
+	desc = honolulu_accords.42.desc
+	picture = GFX_report_event_USA_congress_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #uh, no but we'll demilitarize hawaii if you demilitarize the ports
+		name = honolulu_accords.42.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		USA = { country_event = { id = honolulu_accords.43 days = 5 } }
+	}
+	option = { #sure......
+		name = honolulu_accords.42.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 50
+		add_to_variable = { global.JAP_PP_Investment = -50 }
+		add_to_variable = { global.PP_Investment_pool = -50 }
+		set_global_flag = honolulu_accords_militarization_clause_high
+		USA = { country_event = { id = honolulu_accords.38 days = 5 } }
+	}
+	option = { #you're gonna listen to us lol, the ports are gonna be demilitarized
+		name = honolulu_accords.42.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		add_political_power = -75
+		add_to_variable = { global.JAP_PP_Investment = 75 }
+		add_to_variable = { global.PP_Investment_pool = 75 }
+		USA = { country_event = { id = honolulu_accords.40 days = 3 } }
+	}
+}
+
+country_event = { #the counter offer
+	id = honolulu_accords.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.43" }
+	title = honolulu_accords.43.t
+	desc = honolulu_accords.43.desc
+	picture = GFX_report_event_generic_people
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #no. we want it.
+		name = honolulu_accords.43.a
+		ai_chance = { factor = 1 }
+		JAP = { country_event = { id = honolulu_accords.44 days = 3 } }
+	}
+}
+
+country_event = { #they insist
+	id = honolulu_accords.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.44" }
+	title = honolulu_accords.44.t
+	desc = honolulu_accords.44.desc
+	picture = GFX_report_event_npp_generic3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #ok
+		name = honolulu_accords.44.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 50
+		add_to_variable = { global.JAP_PP_Investment = -50 }
+		add_to_variable = { global.PP_Investment_pool = -50 }
+		set_global_flag = honolulu_accords_militarization_clause_high
+		USA = { country_event = { id = honolulu_accords.38 days = 5 } }
+
+	}
+	option = { #CLAUSE FAILED BITCH
+		name = honolulu_accords.44.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		USA = { country_event = { id = honolulu_accords.37 days = 3 } }
+	}
+}
+
+country_event = { #We WANT HAWAII BACK MOTHER FUCKERSSSSS
+	id = honolulu_accords.71
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.71" }
+	title = honolulu_accords.71.t
+	desc = honolulu_accords.71.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.71.a
+		ai_chance = { factor = 1 }
+		USA = { country_event = { id = USA.hawaiinegot.1 days = 7 } }
+	}
+}
+
+country_event = { #WE FUCKING GOT RID OF THEM, YESSSSSSSSSSSSSSSSSSSS (Japan view)
+	id = honolulu_accords.72
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.72" }
+	title = honolulu_accords.72.t
+	desc = honolulu_accords.72.desc
+	picture = GFX_report_event_whitehouse_bnw
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.72.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #We FUCKING DID IT!!!!! WEEEEEEEEEEH (US View)
+	id = honolulu_accords.73
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.73" }
+	title = honolulu_accords.73.t
+	desc = honolulu_accords.73.desc
+	picture = GFX_report_event_usa_supreme_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #U S A U S A U S A U S A
+		name = honolulu_accords.73.a
+		ai_chance = { factor = 1 }
+		USA_decrease_depression = yes
+		honolulu_accords_militarization_clause_win = yes
+		TP_Oil_Subsidies_Effect_calculator = yes
+		TP_trade_calculator = yes
+		country_event = { id = honolulu_accords.71 days = 3 }
+
+		custom_effect_tooltip =  USA_treaty_ports_gain_pop
+
+		hidden_effect = {
+
+			if = {
+				limit = {
+					OR = {
+						has_government = social_democracy
+						has_government = authoritarian_democracy
+					}
+				}
+				every_owned_state = {
+					limit = {
+						can_have_elections_in_state = yes
+						OR = {
+							check_variable = { nationality = 88 } #Pacific
+							check_variable = { nationality = 83 } #Dixie
+							check_variable = { nationality = 84 } #African American
+							check_variable = { nationality = 86 } #Southwestern
+						}
+					}
+					subtract_from_variable = { RD_popularity = 0.1 }
+					add_to_variable = { NPP_popularity = 0.1 }
+					US_underdog_NPP_5_5 = yes
+				}
+			}
+			else = {
+				every_owned_state = {
+					limit = {
+						can_have_elections_in_state = yes
+						OR = {
+							check_variable = { nationality = 88 } #Pacific
+							check_variable = { nationality = 83 } #Dixie
+							check_variable = { nationality = 84 } #African American
+							check_variable = { nationality = 86 } #Southwestern
+						}
+					}
+					subtract_from_variable = { NPP_popularity = 0.1 }
+					add_to_variable = { RD_popularity = 0.1 }
+					US_underdog_RD_5_5 = yes
+				}
+			}
+		}
+		USA = {
+			transfer_state = 768
+			transfer_state = 769
+			768 = { set_state_name = STATE_768_nor }
+			set_province_name = { id = 13285 name = VICTORY_POINTS_13285_nor }
+			769 = { set_state_name = STATE_769_nor }
+			set_province_name = { id = 13280 name = VICTORY_POINTS_13280_nor }
+		}
+		set_temp_variable = { tension_WT = -10 }
+		set_temp_variable = { tension_superpower_1 = JAP }
+		set_temp_variable = { tension_superpower_2 = USA }
+		set_temp_variable = { tension_id = 42 }
+		TNO_change_tension = yes
+	}
+}
+
+country_event = { #Japan: negotiations break down!
+	id = honolulu_accords.74
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.74" }
+	title = honolulu_accords.74.t
+	desc = honolulu_accords.74.desc
+	picture = GFX_report_event_USA_congress_2
+	immediate = {
+		HA_pp_reset = yes
+		set_variable = { global.honolulu_accords_status = 0 }
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.74.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #USA: negotiations break down!
+	id = honolulu_accords.75
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.75" }
+	title = honolulu_accords.75.t
+	desc = honolulu_accords.75.desc
+	picture = GFX_report_event_usa_supreme_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = honolulu_accords.75.a
+		ai_chance = { factor = 1 }
+
+		custom_effect_tooltip =  USA_treaty_ports_lose_pop
+
+		hidden_effect = {
+			every_country = { country_event = { id = WORLD.779 days = 2 } }
+			if = {
+				limit = {
+					OR = {
+						has_government = social_democracy
+						has_government = authoritarian_democracy
+					}
+				}
+				every_owned_state = {
+					limit = {
+						can_have_elections_in_state = yes
+						OR = {
+							check_variable = { nationality = 88 } #Pacific
+							check_variable = { nationality = 83 } #Dixie
+							check_variable = { nationality = 84 } #African American
+							check_variable = { nationality = 86 } #Southwestern
+						}
+					}
+					add_to_variable = { RD_popularity = 0.1 }
+					subtract_from_variable = { NPP_popularity = 0.1 }
+					US_underdog_RD_5_5 = yes
+				}
+			}
+			else = {
+				every_owned_state = {
+					limit = {
+						can_have_elections_in_state = yes
+						OR = {
+							check_variable = { nationality = 88 } #Pacific
+							check_variable = { nationality = 83 } #Dixie
+							check_variable = { nationality = 84 } #African American
+							check_variable = { nationality = 86 } #Southwestern
+						}
+					}
+					add_to_variable = { NPP_popularity = 0.1 }
+					subtract_from_variable = { RD_popularity = 0.1 }
+					US_underdog_NPP_5_5 = yes
+				}
+			}
+		}
+
+	}
+}
+
+country_event = { #Japan says do what fucking ever
+	id = honolulu_accords.1980
+	immediate = { log = "[GetDateText]: [Root.GetName]: event honolulu_accords.1980" }
+	title = honolulu_accords.1980.t
+	desc = honolulu_accords.1980.desc
+	picture = GFX_report_event_us_washington_obelisk
+	#smothers 1980
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #HAWAII
+		name = honolulu_accords.1980.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }			
+		}
+		set_global_flag = JAP_TP_picked_honolulu
+		country_event = { id = honolulu_accords.10 days = 2 }
+	}
+
+	option = { #OUR CARRIER
+		name = honolulu_accords.1980.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		set_global_flag = USA_TP_picked_USA_carrier
+		country_event = { id = honolulu_accords.10 days = 2 }
+	}
+
+	option = { #MEXICO
+		name = honolulu_accords.1980.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_USA_LEANING }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = TREATY_PORTS_PATH option =  TREATY_PORTS_PATH_JAP_LEANING }
+            }			
+		}
+		set_global_flag = TP_picked_Mexico
+		country_event = { id = honolulu_accords.10 days = 2 }
+	}
+}
+
+#https://drive.google.com/file/d/1W4Od3dQTZR-VCB3G-J7l7SGmHjGxKfST/view
+country_event = { #America Brings Up Hawaii
+	id = USA.hawaiinegot.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.1" }
+	title = USA.hawaiinegot.1.t
+	desc = USA.hawaiinegot.1.desc
+	picture = GFX_report_event_us_flag
+	immediate = {
+		set_variable = { global.honolulu_accords_status = 5 }
+		HA_pp_reset = yes
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Request Demilitarization
+		name = USA.hawaiinegot.1.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }			
+		}
+		trigger = {
+			NOT = {
+				OR = {
+					has_global_flag = honolulu_accords_militarization_clause_medium
+					has_global_flag = honolulu_accords_militarization_clause_high
+				}
+			}
+		}
+		JAP = { country_event = { id = USA.hawaiinegot.2 days = 2 } }
+		add_political_power = -25
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+	}
+
+	option = { #Request Return
+		name = USA.hawaiinegot.1.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }			
+		}
+		JAP = { country_event = { id = USA.hawaiinegot.3 days = 2 } }
+		add_political_power = -75
+		add_to_variable = { global.USA_PP_Investment = 75 }
+		add_to_variable = { global.PP_Investment_pool = 75 }
+	}
+
+	option = { #Request Offer a Trade
+		name = USA.hawaiinegot.1.c
+		ai_chance = { 
+			factor = 1 	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }			
+		}
+		add_political_power = -25
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		JAP = { country_event = { id = USA.hawaiinegot.4 days = 2 } }
+	}
+
+	option = { #Request Return, no strings attached
+		name = USA.hawaiinegot.1.d
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }				
+		}
+		add_political_power = -100
+		add_to_variable = { global.USA_PP_Investment = 100 }
+		add_to_variable = { global.PP_Investment_pool = 100 }
+		set_global_flag = Treaty_Ports_Hawaii_Turned_Over_No_Strings_attached
+		JAP = { country_event = { id = USA.hawaiinegot.6 days = 2 } }
+	}
+}
+
+country_event = { #Demilitarization Requested
+	id = USA.hawaiinegot.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.2" }
+	title = USA.hawaiinegot.2.t
+	desc = USA.hawaiinegot.2.desc
+	picture = GFX_report_event_us_congress2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Accept
+		name = USA.hawaiinegot.2.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 25
+		add_to_variable = { global.JAP_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		USA = { country_event = { id = USA.hawaiinegot.5 days = 2 } }
+	}
+
+	option = { #Decline
+		name = USA.hawaiinegot.2.b
+		add_political_power = -25
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		USA = { country_event = { id = USA.hawaiinegot.22 days = 2 } }
+	}
+}
+
+country_event = { #Return Requested
+	id = USA.hawaiinegot.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.3" }
+	title = USA.hawaiinegot.3.t
+	desc = USA.hawaiinegot.3.desc
+	picture = GFX_report_event_npp_generic3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Counter-Offer
+		name = USA.hawaiinegot.3.a
+		add_political_power = -25
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		USA = { country_event = { id = USA.hawaiinegot.13 days = 2 } } #USA hears of counter offer
+	}
+
+	option = { #Decline
+		name = USA.hawaiinegot.3.b
+		add_political_power = -50
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		USA = { country_event = { id = USA.hawaiinegot.23 days = 2 } } #fail event
+	}
+}
+
+country_event = { #Trade Offered
+	id = USA.hawaiinegot.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.4" }
+	title = USA.hawaiinegot.4.t
+	desc = USA.hawaiinegot.4.desc
+	picture = GFX_report_event_generic_people
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Counter-Offer
+		name = USA.hawaiinegot.4.a
+		ai_chance = { factor = 1 }
+		USA = { country_event = { id = USA.hawaiinegot.14 days = 2 } }
+	}
+}
+
+country_event = { #Demilitarization of Hawaii and Panama
+	id = USA.hawaiinegot.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.5" }
+	title = USA.hawaiinegot.5.t
+	desc = USA.hawaiinegot.5.desc
+	picture = GFX_report_event_iberia_meeting_table
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = USA.hawaiinegot.5.a
+		ai_chance = { factor = 1 }
+		set_global_flag = Treaty_Ports_Hawaii_Demiliterized_Hawaii_and_Panama
+		JAP = { country_event = { id = USA.hawaiinegot.6 days = 2 } }
+	}
+}
+
+country_event = { #Inspections?
+	id = USA.hawaiinegot.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.6" }
+	title = USA.hawaiinegot.6.t
+	desc = USA.hawaiinegot.6.desc
+	picture = GFX_report_event_us_congress2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yearly
+		name = USA.hawaiinegot.6.a
+		ai_chance = { 
+			factor = 1 
+			
+		}
+		add_political_power = -25
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		USA = { country_event = { id = USA.hawaiinegot.7 days = 2 } }
+	}
+
+	option = { #Biyearly
+		name = USA.hawaiinegot.6.b
+		ai_chance = { 
+			factor = 1 
+			
+		}
+		add_political_power = -50
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		USA = { country_event = { id = USA.hawaiinegot.7 days = 2 } }
+	}
+}
+
+country_event = { #Enforcement Clause
+	id = USA.hawaiinegot.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.7" }
+	title = USA.hawaiinegot.7.t
+	desc = USA.hawaiinegot.7.desc
+	picture = GFX_report_event_us_congress2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = { #Sure
+		name = USA.hawaiinegot.7.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		JAP = { country_event = { id = USA.hawaiinegot.8 days = 2 } }
+	}
+
+	option = { #We don't need that!
+		name = USA.hawaiinegot.7.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		hidden_effect = { country_event = { id = USA.hawaiinegot.23 days = 2 } }
+		JAP = { country_event = { id = USA.hawaiinegot.23 days = 2 } }
+		add_political_power = -25
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+	}
+}
+
+country_event = { #Harsh or Light Clause?
+	id = USA.hawaiinegot.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.8" }
+	title = USA.hawaiinegot.8.t
+	desc = USA.hawaiinegot.8.desc
+	picture = GFX_report_event_us_congress2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Light
+		name = USA.hawaiinegot.8.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		USA = { country_event = { id = USA.hawaiinegot.9 days = 2 } } ##Leads to a successful negotiation
+	}
+
+	option = { #Harsh
+		name = USA.hawaiinegot.8.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		USA = { country_event = { id = USA.hawaiinegot.22 days = 2 } } #US pulls out
+		USA = { country_event = { id = USA.hawaiinegot.24 days = 3 } } #hard clause asked for
+	}
+}
+
+country_event = { #This event is the USA being informed negotiations are a success
+	id = USA.hawaiinegot.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.9" }
+	title = USA.hawaiinegot.9.t
+	desc = USA.hawaiinegot.9.desc
+	picture = GFX_report_event_whitehouse_color
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Leave it at that, lets demilitarize hawaii, applies success effects
+		name = USA.hawaiinegot.9.a
+		ai_chance = { 
+			factor = 1 
+			
+		}
+		JAP = { country_event = { id = USA.hawaiinegot.12 days = 2 } } #success event
+		country_event = { id = USA.hawaiinegot.12 days = 2 } #success event
+	}
+
+	option = { #
+		name = USA.hawaiinegot.9.b #now can we have hawaii back
+		ai_chance = { 
+			factor = 1 
+			
+		}
+		add_political_power = -50
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		JAP = { country_event = { id = USA.hawaiinegot.10 days = 2 } }
+	}
+}
+
+country_event = { #
+	id = USA.hawaiinegot.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.10" }
+	title = USA.hawaiinegot.10.t
+	desc = USA.hawaiinegot.10.desc
+	picture = GFX_report_event_USA_congress_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #No you can't have fucking Hawaii back lmao what
+		name = USA.hawaiinegot.10.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		add_political_power = -25
+		add_to_variable = { global.JAP_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		USA = { country_event = { id = USA.hawaiinegot.11 days = 2 } }
+	}
+
+	option = { #aight, imma head out
+		name = USA.hawaiinegot.10.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.JAP_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		USA = { country_event = { id = USA.hawaiinegot.23 days = 2 } }
+	}
+}
+
+country_event = { #japan said we cant have japan
+	id = USA.hawaiinegot.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.11" }
+	title = USA.hawaiinegot.11.t
+	desc = USA.hawaiinegot.11.desc
+	picture = GFX_report_event_USA_congress_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #aight, imma head out
+		name = USA.hawaiinegot.11.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		JAP = { country_event = { id = USA.hawaiinegot.22 days = 2 } }
+	}
+
+	option = { #fine, whatever, didn't want hawaii
+		name = USA.hawaiinegot.11.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 50
+		add_to_variable = { global.USA_PP_Investment = -50 }
+		add_to_variable = { global.PP_Investment_pool = -50 }
+		country_event = { id = USA.hawaiinegot.12 days = 2 } #success event
+		JAP = { country_event = { id = USA.hawaiinegot.12 days = 2 } } #success event
+	}
+}
+
+
+#Success Events
+country_event = { #Success Event
+	id = USA.hawaiinegot.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.12" }
+	title = USA.hawaiinegot.12.t
+	desc = USA.hawaiinegot.12.desc
+	picture = GFX_report_event_us_pentagon
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = USA.hawaiinegot.12.a
+		ai_chance = { factor = 1 }
+		HA_pp_reset = yes
+		USA_decrease_depression = yes
+		set_variable = { global.honolulu_accords_status = 0 }
+		###### Hawaii back, traded panama and demilitarized it
+		hidden_effect = { every_country = { country_event = { id = WORLD.781 days = 2 } } }
+		if = {
+			limit = { has_global_flag = Treaty_Ports_Trade_Hawaii_Demiliterized }
+
+			JAP = {
+				annex_country = {
+					target = PCZ
+					transfer_troops = no
+				}
+				685 = {
+					remove_core_of = PCZ
+				}
+				685 = { set_demilitarized_zone = yes }
+				685 = { set_state_name = STATE_685_jap }
+				set_province_name = { id = 7617 name = VICTORY_POINTS_7617_jap }
+			}
+			USA = {
+
+				#### If NPPC took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_C_NPP has_country_flag = USA_68_C_NPP has_country_flag = USA_72_C_NPP }  }
+					629 = {
+						set_variable = { senator_1 = 4 }
+						set_variable = { senator_2 = 4 }
+						add_to_variable = { NPP_popularity = 0.2 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.1 }
+					}
+					772 = { set_state_name = "Patton Islands"}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.13 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.12 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.11 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.10 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.09 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.08 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.07 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.3 }
+					}
+				}
+
+				#### If NPPFR took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_FR_NPP has_country_flag = USA_68_FR_NPP has_country_flag = USA_72_FR_NPP has_country_flag = USA_THURMOND_FR_NPP has_country_flag = USA_LEMAY }  }
+					629 = {
+						set_variable = { senator_1 = 6 }
+						set_variable = { senator_2 = 6  }
+						add_to_variable = { NPP_popularity = 0.2 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.1 }
+					}
+					772 = { set_state_name = "Patton Islands"}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.13 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.12 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.11 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.10 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.09 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.08 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.07 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.3 }
+					}
+				}
+
+				#### If RD-D took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_D_RD has_country_flag = USA_68_D_RD has_country_flag = USA_72_D_RD }  }
+					629 = {
+						set_variable = { senator_1 = 2 }
+						set_variable = { senator_2 = 1 }
+						add_to_variable = { RD_popularity = 0.2 }
+						add_to_variable = { RD_D_bonus_popularity = 0.1 }
+					}
+					772 = { set_state_name = "Eisenhower Islands"}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { RD_popularity = 0.13 }
+						add_to_variable = { RD_D_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { RD_popularity = 0.12 }
+						add_to_variable = { RD_D_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.11 }
+						add_to_variable = { RD_D_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.10 }
+						add_to_variable = { RD_D_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { RD_popularity = 0.09 }
+						add_to_variable = { RD_D_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { RD_popularity = 0.08 }
+						add_to_variable = { RD_D_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { RD_popularity = 0.07 }
+						add_to_variable = { RD_D_bonus_popularity = 0.3 }
+					}
+				}
+
+				#### If RD-R took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_R_RD  has_country_flag = USA_68_R_RD  has_country_flag = USA_72_R_RD }  }
+					629 = {
+						set_variable = { senator_1 = 1 }
+						set_variable = { senator_2 = 1}
+						add_to_variable = { RD_popularity = 0.2 }
+						add_to_variable = { RD_R_bonus_popularity = 0.1 }
+					}
+					772 = { set_state_name = "Eisenhower Islands"}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { RD_popularity = 0.13 }
+						add_to_variable = { RD_R_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { RD_popularity = 0.12 }
+						add_to_variable = { RD_R_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.11 }
+						add_to_variable = { RD_R_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.10 }
+						add_to_variable = { RD_R_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { RD_popularity = 0.09 }
+						add_to_variable = { RD_R_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { RD_popularity = 0.08 }
+						add_to_variable = { RD_R_bonus_popularity = 0.4 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { RD_popularity = 0.07 }
+						add_to_variable = { RD_R_bonus_popularity = 0.3 }
+					}
+				}
+				US_elections_calculate_country_vars = yes
+
+				transfer_state = 629
+				transfer_state = 772
+				USA = {
+					set_temp_variable = { SeaZone_ID = 1 } # 1; West Pacific
+					Cold_War_GUI_PowerProjection_AddSeaZone = yes
+				}
+
+
+
+				629 = {
+					set_demilitarized_zone = yes
+					set_state_flag = US_election_state
+					set_state_name = "Hawaii"
+					set_province_name = { id = 4180 name = VICTORY_POINTS_4180_nor } #Honolulu
+				}
+			}
+		}
+
+		###### Hawaii back, demiliterized panama and hawaii
+		if = {
+			limit = { has_global_flag = Treaty_Ports_Hawaii_Demiliterized_Hawaii_and_Panama }
+			USA = {
+
+				#### If NPPC took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_C_NPP has_country_flag = USA_68_C_NPP has_country_flag = USA_72_C_NPP }  }
+					629 = {
+						set_variable = { senator_1 = 4 }
+						set_variable = { senator_2 = 4 }
+					}
+
+					772 = { set_state_name = "Patton Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.14 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.13 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.12 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.11 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.10 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.09 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.8 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.4 }
+					}
+				}
+
+				#### If NPPFR took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_FR_NPP has_country_flag = USA_68_FR_NPP has_country_flag = USA_72_FR_NPP  }  }
+					629 = {
+						set_variable = { senator_1 = 6 }
+						set_variable = { senator_2 = 6  }
+					}
+
+					772 = { set_state_name = "Patton Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.14 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.13 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.12 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.11 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.10 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.09 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.8 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.4 }
+					}
+				}
+
+				#### If RD-D took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_D_RD has_country_flag = USA_68_D_RD has_country_flag = USA_72_D_RD }  }
+					629 = {
+						set_variable = { senator_1 = 2 }
+						set_variable = { senator_2 = 1 }
+					}
+
+					772 = { set_state_name = "Eisenhower Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { RD_popularity = 0.14 }
+						add_to_variable = { RD_D_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { RD_popularity = 0.13 }
+						add_to_variable = { RD_D_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.12 }
+						add_to_variable = { RD_D_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.11 }
+						add_to_variable = { RD_D_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { RD_popularity = 0.10 }
+						add_to_variable = { RD_D_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { RD_popularity = 0.09 }
+						add_to_variable = { RD_D_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { RD_popularity = 0.8 }
+						add_to_variable = { RD_D_bonus_popularity = 0.4 }
+					}
+				}
+
+				#### If RD-R took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_R_RD  has_country_flag = USA_68_R_RD has_country_flag = USA_72_R_RD }  }
+					629 = {
+						set_variable = { senator_1 = 1 }
+						set_variable = { senator_2 = 1}
+					}
+
+					772 = { set_state_name = "Eisenhower Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { RD_popularity = 0.14 }
+						add_to_variable = { RD_R_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { RD_popularity = 0.13 }
+						add_to_variable = { RD_R_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.12 }
+						add_to_variable = { RD_R_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.11 }
+						add_to_variable = { RD_R_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { RD_popularity = 0.10 }
+						add_to_variable = { RD_R_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { RD_popularity = 0.09 }
+						add_to_variable = { RD_R_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { RD_popularity = 0.8 }
+						add_to_variable = { RD_R_bonus_popularity = 0.4 }
+					}
+				}
+				US_elections_calculate_country_vars = yes
+
+				transfer_state = 629
+				transfer_state = 772
+				USA = {
+					set_temp_variable = { SeaZone_ID = 1 } # 1; West Pacific
+					Cold_War_GUI_PowerProjection_AddSeaZone = yes
+				}
+
+				629 = {
+					set_demilitarized_zone = yes
+					set_state_flag = US_election_state
+					set_state_name = "Hawaii"
+					set_province_name = { id = 4180 name = VICTORY_POINTS_4180_nor } #Honolulu
+				}
+
+				685 = {
+					set_demilitarized_zone = yes
+				}
+			}
+		}
+
+
+		###### Hawaii back, no strings attached
+		if = {
+			limit = { has_global_flag = Treaty_Ports_Hawaii_Turned_Over_No_Strings_attached }
+			USA = {
+
+				#### If NPPC took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_C_NPP has_country_flag = USA_68_C_NPP has_country_flag = USA_72_C_NPP }  }
+					629 = {
+						set_variable = { senator_1 = 4 }
+						set_variable = { senator_2 = 4 }
+					}
+
+					772 = { set_state_name = "Patton Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.15 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.14 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.13 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.12 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.11 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.10 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.09 }
+						add_to_variable = { NPP_C_bonus_popularity = 0.4 }
+					}
+				}
+
+				#### If NPPFR took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_FR_NPP has_country_flag = USA_68_FR_NPP has_country_flag = USA_72_FR_NPP }  }
+					629 = {
+						set_variable = { senator_1 = 6 }
+						set_variable = { senator_2 = 6  }
+					}
+
+					772 = { set_state_name = "Patton Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.15 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.14 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.13 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.12 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.11 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.10 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { NPP_popularity = 0.09 }
+						add_to_variable = { NPP_FR_bonus_popularity = 0.4 }
+					}
+				}
+
+				#### If RD-D took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_D_RD has_country_flag = USA_68_D_RD has_country_flag = USA_72_D_RD }  }
+					629 = {
+						set_variable = { senator_1 = 2 }
+						set_variable = { senator_2 = 1 }
+					}
+
+					772 = { set_state_name = "Eisenhower Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { RD_popularity = 0.15 }
+						add_to_variable = { RD_D_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { RD_popularity = 0.14 }
+						add_to_variable = { RD_D_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.13 }
+						add_to_variable = { RD_D_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.12 }
+						add_to_variable = { RD_D_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { RD_popularity = 0.11 }
+						add_to_variable = { RD_D_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { RD_popularity = 0.10 }
+						add_to_variable = { RD_D_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { RD_popularity = 0.09 }
+						add_to_variable = { RD_D_bonus_popularity = 0.4 }
+					}
+				}
+
+				#### If RD-R took it back
+				if = {
+					limit = { OR = { has_country_flag = USA_64_R_RD  has_country_flag = USA_68_R_RD has_country_flag = USA_72_R_RD }  }
+					629 = {
+						set_variable = { senator_1 = 1 }
+						set_variable = { senator_2 = 1}
+					}
+
+					772 = { set_state_name = "Eisenhower Islands"}
+
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 88 } #Pacific
+							}
+						}
+						add_to_variable = { RD_popularity = 0.15 }
+						add_to_variable = { RD_R_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 86 } #Southwestern
+							}
+						}
+						add_to_variable = { RD_popularity = 0.14 }
+						add_to_variable = { RD_R_bonus_popularity = 0.7 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 337 } #Corn Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.13 }
+						add_to_variable = { RD_R_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 85 } #Steel Belt
+							}
+						}
+						add_to_variable = { RD_popularity = 0.12 }
+						add_to_variable = { RD_R_bonus_popularity = 0.6 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 82 } #Yankee
+							}
+						}
+						add_to_variable = { RD_popularity = 0.11 }
+						add_to_variable = { RD_R_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 83 } #Dixie
+							}
+						}
+						add_to_variable = { RD_popularity = 0.10 }
+						add_to_variable = { RD_R_bonus_popularity = 0.5 }
+					}
+					every_owned_state = {
+						limit = {
+							OR = {
+								check_variable = { nationality = 84 } #African American
+							}
+						}
+						add_to_variable = { RD_popularity = 0.09 }
+						add_to_variable = { RD_R_bonus_popularity = 0.4 }
+					}
+				}
+				US_elections_calculate_country_vars = yes
+
+				transfer_state = 629
+				transfer_state = 772
+				USA = {
+					set_temp_variable = { SeaZone_ID = 1 } # 1; West Pacific
+					Cold_War_GUI_PowerProjection_AddSeaZone = yes
+				}
+
+				629 = {
+					set_state_name = "Hawaii"
+					set_state_flag = US_election_state
+					set_province_name = { id = 4180 name = VICTORY_POINTS_4180_nor } #Honolulu
+				}
+			}
+		}
+
+		set_temp_variable = { tension_WT = -15 }
+		set_temp_variable = { tension_superpower_1 = JAP }
+		set_temp_variable = { tension_superpower_2 = USA }
+		set_temp_variable = { tension_id = 41 }
+		TNO_change_tension = yes
+
+	}
+}
+
+country_event = { #The Counter-Offer - Demilitarization of Panama and Hawaii
+	id = USA.hawaiinegot.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.13" }
+	title = USA.hawaiinegot.13.t
+	desc = USA.hawaiinegot.13.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = USA.hawaiinegot.13.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		JAP = { country_event = { id = USA.hawaiinegot.5 days = 2 } }
+		add_political_power = 25
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+	}
+	option = { #Fuck you
+		name = USA.hawaiinegot.13.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		JAP = { country_event = { id = USA.hawaiinegot.23 days = 2 } }
+	}
+}
+
+country_event = { #Yes, but Hawaii has to be demilitarized
+	id = USA.hawaiinegot.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.14" }
+	title = USA.hawaiinegot.14.t
+	desc = USA.hawaiinegot.14.desc
+	picture = GFX_report_event_us_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Fuck you
+		name = USA.hawaiinegot.14.a
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_NO_STRINGS_ATTACHED }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_RANDOM_SUCCESS }
+            }			
+		}
+		add_political_power = -50
+		add_to_variable = { global.USA_PP_Investment = 50 }
+		add_to_variable = { global.PP_Investment_pool = 50 }
+		JAP = { country_event = { id = USA.hawaiinegot.22 days = 2 } }
+	}
+	option = { #I wanna keep Panama, lets have both be demilitarized
+		name = USA.hawaiinegot.14.b
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_HAWAII_FOR_PANAMA }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		add_political_power = -25
+		add_to_variable = { global.USA_PP_Investment = 25 }
+		add_to_variable = { global.PP_Investment_pool = 25 }
+		JAP = { country_event = { id = USA.hawaiinegot.5 days = 2 } }
+	}
+	option = { #I guess so
+		name = USA.hawaiinegot.14.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_PANAMA_DMZ }
+            }	
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HAWAII_PATH option =  HAWAII_PATH_FAILURE }
+            }			
+		}
+		add_political_power = 25
+		add_to_variable = { global.USA_PP_Investment = -25 }
+		add_to_variable = { global.PP_Investment_pool = -25 }
+		JAP = { country_event = { id = USA.hawaiinegot.6 days = 2 } }
+		set_global_flag = Treaty_Ports_Trade_Hawaii_Demiliterized
+	}
+}
+
+#Fail Events
+country_event = { #Clause Fails - USA pulls out
+	id = USA.hawaiinegot.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.22" }
+	title = USA.hawaiinegot.22.t
+	desc = USA.hawaiinegot.22.desc
+	picture = GFX_report_event_iberia_big_meeting
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = USA.hawaiinegot.22.a
+		ai_chance = { factor = 1 }
+		subtract_from_variable = { OFN_Unity = 2 }
+		custom_effect_tooltip = USA_subtract_OFN_unity
+		HA_pp_reset = yes
+		set_variable = { global.honolulu_accords_status = 0 }
+	}
+}
+
+country_event = { #Clause Fails - JAP pulls out
+	id = USA.hawaiinegot.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.23" }
+	title = USA.hawaiinegot.23.t
+	desc = USA.hawaiinegot.23.desc
+	picture = GFX_report_event_npp_generic3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = USA.hawaiinegot.23.a
+		ai_chance = { factor = 1 }
+		subtract_from_variable = { OFN_Unity = 2 }
+		custom_effect_tooltip = USA_subtract_OFN_unity
+		HA_pp_reset = yes
+		set_variable = { global.honolulu_accords_status = 0 }
+	}
+}
+
+country_event = { #we're outta here
+	id = USA.hawaiinegot.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.hawaiinegot.24" }
+	title = USA.hawaiinegot.24.t
+	desc = USA.hawaiinegot.24.desc
+	picture = GFX_report_event_us_flag
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = USA.hawaiinegot.24.a
+		ai_chance = { factor = 1 }
+		HA_pp_reset = yes
+		set_variable = { global.honolulu_accords_status = 0 }
+		hidden_effect = { every_country = { country_event = { id = WORLD.780 days = 2 } } }
+	}
+}
