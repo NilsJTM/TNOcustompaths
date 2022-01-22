@@ -21,125 +21,72 @@ country_event = { #Dummy event for Phibun death
 				popularity = 0.1
 			}
 			every_country = { news_event = { id = WORLD.19000 } }
-			#random_list = {
-			#	20 = { # Thawan's Coup
-			#		country_event = {
-			#			id = tha.1
-			#			days = 30	
-			#		}	
-			#	} 
-			#	40 = { # Thanom's Coup
-			#		country_event = {
-			#			id = tha.2
-			#			days = 30	
-			#		}
-			#	} 
-			#	40 = { # Chatichai's Coup
-			#		country_event = {
-			#			id = tha.3
-			#			days = 30	
-			#		}
-			#	} 
-			#}
+			random_list = {
+				20 = { # Thawan's Coup
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
+					}
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
+					}
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_CIVILIAN_DICTATORSHIP }
+					}
+					country_event = {
+						id = tha.1
+						days = 30	
+					}	
+				} 
+				40 = { # Thanom's Coup
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
+					}
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
+					}
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_CIVILIAN_DICTATORSHIP }
+					}
+					country_event = {
+						id = tha.2
+						days = 30	
+					}
+				} 
+				40 = { # Chatichai's Coup
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
+					}
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
+					}
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
+					}
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
+					}										
+					country_event = {
+						id = tha.3
+						days = 30	
+					}
+				} 
+			}
 			
 			country_event = { # Fires CCP Event for choosing path
 				id = tha_ccp.1
 				days = 0	
 			}
 			
-			country_event = { #Removes a Military Roulette
-				id = tha.4
-				days = 400	
-			}
-		}
-	}
-}
-
-country_event = { # Custom Country Paths event for post-Philbun coup
-	id = tha_ccp.1
-	immediate = {log = "[GetDateText]: [Root.GetName]: event tha_ccp.1"}
-	title = tha_ccp.1.t
-	desc = tha_ccp.1.d
-	picture = GFX_report_event_generic_military_parade
-	is_triggered_only = yes
-	fire_only_once = yes
-	
-	option = {	# Thawan's Coup
-		name = tha_ccp.1.a
-		ai_chance = {
-			factor = 2
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_CIVILIAN_DICTATORSHIP }
-			}
-		}
-		hidden_effect = {
-			country_event = {
-						id = tha.1
-						days = 30	
-			}
-		}
-	}
-	option = {	# Thanom's Coup
-		name = tha_ccp.1.b
-		ai_chance = {
-			factor = 4
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_CIVILIAN_DICTATORSHIP }
-			}	
-		}
-		hidden_effect = {
-			country_event = {
-						id = tha.2
-						days = 30	
-			}
-		}
-	}
-	option = {	# Chatichai's Coup
-		name = tha_ccp.1.c
-		ai_chance = {
-			factor = 4
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
-			}
-		}
-		hidden_effect = {
-			country_event = {
-						id = tha.3
-						days = 30	
-					}
-				} 
-			}
 			country_event = { #Removes a Military Roulette
 				id = tha.4
 				days = 400	
@@ -234,12 +181,20 @@ country_event = { #Dummy event for 1966 Elections
 			}
 			random_list = {
 				60 = {
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_LIBERAL_CONSERVATISM }
+					}					
 					country_event = { #Pridi Wins
 						id = tha.12
 						days = 100	
 					}	
 				}
 				40 = {
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_LEFT_WING_POPULISM }
+					}				
 					country_event = { #Seni Wins
 						id = tha.13
 						days = 100	
@@ -350,12 +305,20 @@ country_event = { #Dummy event for Thanom's Coup
 			}
 			random_list = {
 				20 = { #Kris Sivara's Coup Works
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_ULTRAMILITARISM }
+					}
 					country_event = { #Elections get called
 						id = tha.21
 						days = 1700	
 					}	
 				}
 				80 = { #Kris Sivara's Coup Fails
+					modifier = {
+						factor = 0
+						has_game_rule = { rule = THA_PATH option =  THA_PATH_INTERIM_GOVERNMENT }
+					}
 					country_event = { #Elections get called
 						id = tha.22
 						days = 1700	
