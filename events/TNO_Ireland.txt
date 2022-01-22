@@ -57,6 +57,18 @@ country_event = { #North Irish Debug -Twomey
 	option = {
 		name = "twomey moment"
 		ULS = {
+			hidden_effect = {
+				add_country_leader_role = {
+					character = ULS_Seamus_Twomey
+					country_leader = {
+						desc = "POLITICS_Seamus_Twomey_ULS_desc"
+						ideology = communist_subtype
+						expire = "2222.2.2"
+						id = -1
+					}
+					promote_leader = yes
+				}
+			}
 			set_politics = {
 				ruling_party = communist
 			}
@@ -86,14 +98,7 @@ country_event = { #North Irish Debug -MilGov
 			set_politics = {
 				ruling_party = despotism
 			}
-			create_country_leader = {
-				name = "James Kelly"
-				desc = "POLITICS_James_Kelly_desc"
-				picture = "James_Kelly_1.dds"
-				expire = "1995.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = {}
-			}
+			promote_character = ULS_James_Kelly
 			set_cosmetic_tag = ULS_military_district
 		}
 	}
@@ -2670,23 +2675,13 @@ country_event = { #Twomey ded
 			popularity = -0.3
 		}
 		hidden_effect = {
-			create_country_leader = {
-				name = "UNKNOWN"
-				expire = "1995.1.1"
-				ideology = communist_subtype
-				traits = {}
-			}
+			promote_character = IRE_Unknown
 			ULS = {
 				add_popularity = {
 					ideology = communist
 					popularity = -0.3
 				}
-				create_country_leader = {
-					name = "UNKNOWN"
-					expire = "1995.1.1"
-					ideology = communist_subtype
-					traits = {}
-				}
+				promote_character = ULS_Unknown_com
 			}
 		}
 	}
@@ -2775,7 +2770,7 @@ country_event = { #Ask Germany for Help
 		GER = {
 			NOT = {
 				has_country_leader = {
-					name = "Reinhard Heydrich"
+					character = GER_reinhard_heydrich
 					ruling_only = yes
 				}
 			}
@@ -2804,15 +2799,33 @@ country_event = { #Ask Germany for Help
 			amount = 500
 			target = IRE
 		}
-		send_equipment = {
-			type = IFV_equipment
-			amount = 150
-			target = IRE
+
+		if = {
+			limit = { 
+				has_dlc = "No Step Back"
+			}
+			send_equipment = {
+				type = MBT_chassis
+				amount = 50
+				target = IRE
+			}
+			send_equipment = {
+				type = IFV_chassis
+				amount = 150
+				target = IRE
+			}
 		}
-		send_equipment = {
-			type = MBT_equipment
-			amount = 50
-			target = IRE
+		else = {
+			send_equipment = {
+				type = MBT_equipment
+				amount = 50
+				target = IRE
+			}
+			send_equipment = {
+				type = IFV_equipment
+				amount = 150
+				target = IRE
+			}
 		}
 		send_equipment = {
 			type = fighter_equipment
@@ -2977,14 +2990,7 @@ country_event = { #Dawn in Belfast (ULS event)
 			119 = {
 				set_demilitarized_zone = no
 			}
-			create_country_leader = {
-				name = "James Kelly"
-				desc = "POLITICS_James_Kelly_desc"
-				picture = "James_Kelly_1.dds"
-				expire = "1995.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = {}
-			}
+			promote_character = ULS_James_Kelly
 		}
 	}
 }
@@ -3061,19 +3067,9 @@ country_event = { #End of the Line
 			set_politics = {
 				ruling_party = despotism
 			}
-			set_politics = {
-				ruling_party = despotism
-			}
 			retire_country_leader = yes
 			clr_country_flag = IRE_MOG_allowed
-			create_country_leader = {
-				name = "Neil Blaney"
-				desc = "POLITICS_Neil_Blaney_desc"
-				picture = "Neil_Blaney.dds"
-				expire = "1995.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = {}
-			}
+			promote_character = IRE_Neil_Blaney
 			remove_dynamic_modifier = { modifier = IRE_MOG_dm }
 			set_country_flag = IRE_regime_of_the_brigadiers
 		}
@@ -3350,13 +3346,7 @@ country_event = { #Good Friday Agreement (ULS)
 	is_triggered_only = yes
 	option = {
 		name = IRE_crisis.32.a
-		set_politics = {
-			ruling_party = authoritarian_democracy
-		}
-		swap_ideas = {
-			remove_idea = ULS_Eddie_MacAteer_hog
-			add_idea = ULS_Terence_O_Neill_hog
-		}
+		
 		hidden_effect = {
 			retire_country_leader = yes
 			set_popularities = {
@@ -3367,6 +3357,12 @@ country_event = { #Good Friday Agreement (ULS)
 				social_democracy = 20
 			}
 		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+
+		remove_ideas = ULS_Eddie_MacAteer_hog
+		add_ideas = ULS_Terence_ONeill_hog
 	}
 }
 
@@ -3402,7 +3398,7 @@ country_event = { #UVF takeover
 				}
 				remove_ideas = Pakt_Bundnispartner
 				remove_ideas = Pakt_Observer
-				add_ideas = ULS_Ian_Paisley_hog_ultnat
+				add_ideas = ULS_Ian_Paisley_hog
 			}
 			complete_national_focus = IRE_FT_orange_devil
 			leave_faction = yes
@@ -3438,6 +3434,18 @@ country_event = { #IRA takeover
 		end_puppet = ULS
 		set_country_flag = IRE_IRA_uprising
 		IRE_merge_IRA = yes
+		hidden_effect = {
+			add_country_leader_role = {
+				character = ULS_Seamus_Twomey
+				country_leader = {
+					desc = "POLITICS_Seamus_Twomey_ULS_desc"
+					ideology = communist_subtype
+					expire = "2222.2.2"
+					id = -1
+				}
+				promote_leader = yes
+			}
+		}
 		ULS = {
 			econ_leave_sphere = yes
 			set_cosmetic_tag = ULS_IRA_Takeover
@@ -3506,14 +3514,7 @@ country_event = { #UVF Beat Ireland, Ireland Failstate
 	option = { #
 		name = IRE_crisis.40.a
 		ai_chance = { factor = 1 }
-		create_country_leader = {
-			name = "Sean McKeown"
-			desc = "POLITICS_Sean_McKeown_desc"
-			picture = "Sean_McKeown.dds"
-			expire = "1995.1.1"
-			ideology = despotism_military_junta_subtype
-			traits = {}
-		}
+		promote_character = IRE_Sean_McKewon
 		remove_dynamic_modifier = { modifier = IRE_MOG_dm }
 		clr_country_flag = IRE_MOG_allowed
 		set_politics = {
@@ -3683,14 +3684,17 @@ country_event = { #Haughey fuck
 	option = { #
 		name = IRE_crisis.44.a
 		ai_chance = { factor = 1 }
-		create_country_leader = {
-			name = "Charles Haughey"
-			desc = "POLITICS_Charles_Haughey_desc"
-			picture = "Charles_Haughey.dds"
-			expire = "1995.1.1"
-			ideology = despotism_interim_government_subtype
-			traits = {}
+		add_country_leader_role = {
+			character = IRE_Charles_Haughey
+			country_leader = {
+				expire = "1995.1.1"
+				desc = "POLITICS_Charles_Haughey_desc"
+				ideology = despotism_interim_government_subtype
+				traits = { }
+			}
+			promote_leader = yes
 		}
+
 		TNO_worsen_political_parties_policy_effectiveness_high = yes
 		TNO_worsen_press_rights_policy_effectiveness_med = yes
 		TNO_worsen_vote_franchise_policy_effectiveness_med = yes
@@ -3883,14 +3887,14 @@ country_event = { #Twomey is a bad person wow what a surprise
 				long_name = IRE_saor_eire_twomey_long
 				name = IRE_saor_eire_twomey
 			}
-			create_country_leader = {
-				name = "Seamus Twomey"
-				desc = "POLITICS_Seamus_Twomey_ire_desc"
-				picture = "Seamus_Twomey.dds"
-				expire = "2222.2.2"
-				ideology = despotism_civilian_dictatorship_subtype
-				traits = {
+			add_country_leader_role = {
+				character = IRE_Seamus_Twomey
+				country_leader = {
+					desc = "POLITICS_Seamus_Twomey_IRE_desc"
+					expire = "2222.2.2"
+					ideology = despotism_civilian_dictatorship_subtype
 				}
+				promote_leader = yes
 			}
 		}
 	}
@@ -3986,10 +3990,15 @@ country_event = { #"Government Bails out Companies" event
 		name = IRE_eco_collapse.4.a
 		set_temp_variable = { gdp_growth_temp = 0.7 }
 		econ_gdp_growth_change = yes
-		every_owned_state = {
-			set_temp_variable = { state_value_multiplier_temp = 1.07 }
-			econ_state_value_change_multiply_specified_state = yes
-		}
+		#hidden_effect = {
+		#	every_owned_state = {
+		#		set_temp_variable = { state_value_multiplier_temp = 1.07 }
+		#		econ_state_value_change_multiply_specified_state = yes
+		#	}
+		#}
+		# im pretty sure this does the same thing as above lol
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.07 }
+		econ_GDP_boost_once_percentage = yes
 		set_temp_variable = { temp_econ_spending_amount = 0.25 } #already converted to billion
 		econ_spend_money_once_effect_raw_money = yes
 		custom_effect_tooltip = IRE_government_bails_out_companies_tt
@@ -5728,12 +5737,7 @@ country_event = { #Paisley Fucking Dies
 				days = 3
 			}
 			ULS = {
-				create_country_leader = {
-					name = "UNKNOWN"
-					expire = "1995.1.1"
-					ideology = ultranationalism_subtype
-					traits = {}
-				}
+				promote_character = ULS_Unknown_ultranat
 			}
 		}
 	}
@@ -5753,19 +5757,9 @@ country_event = { #Twomey Fucking Dies
 		name = IRE_brigadiers.2.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			create_country_leader = {
-				name = "UNKNOWN"
-				expire = "1995.1.1"
-				ideology = communist_subtype
-				traits = {}
-			}
+			promote_character = IRE_Unknown
 			ULS = {
-				create_country_leader = {
-					name = "UNKNOWN"
-					expire = "1995.1.1"
-					ideology = communist_subtype
-					traits = {}
-				}
+				promote_character = ULS_Unknown_com
 			}
 		}
 	}

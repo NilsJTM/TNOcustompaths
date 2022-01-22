@@ -374,8 +374,8 @@ GER_foreign_policy_category = {
 			}
 
 			TNO_decrease_jamaica_indep_daily_tick_low = yes
-			custom_effect_tooltip = econ_increase_money_reserves_small
-			add_to_variable = { money_reserves = 0.01 }
+			set_temp_variable = { money_reserves_temp = 0.01 }
+			econ_money_reserves_change_raw_money = yes
 		}
 	}
 
@@ -1410,6 +1410,106 @@ JAP_foreign_policy_category = {
 
 USA_foreign_policy_category = {
 
+	## CAPITULATION ##
+	USA_WAC_cameroon_capitulates = {
+		icon = GFX_decision_generic_use_force
+		priority = 2000
+
+		days_mission_timeout = 35
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			CAO = { controls_state = 793 }
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = { # Success
+			log = "[GetDateText]: [Root.GetName]: mission timeout USA_WAC_cameroon_capitulates"
+			custom_effect_tooltip = USA_WAC_cameroon_capitulates_success_tt
+			hidden_effect = {
+				if = { # Scenario 1
+					limit = { has_global_flag = WAC_scenario_1 }
+
+					every_country = {
+						limit = {
+							OR = {
+								has_war_with = WOL
+								has_war_with = FFR
+							}
+						}
+						leave_faction = yes
+						every_country = {
+							limit = {
+								OR = {
+									is_in_faction_with = WOL
+									original_tag = WOL
+								}
+							}
+							white_peace = PREV
+						}
+					}
+					ZZZ = {
+						TNO_WAC_clear_decision_categories = yes
+						WAC_1_WAA_VICTORY = yes
+					}
+					if = {
+						limit = { country_exists = YOR }
+						every_country = {
+							limit = { has_war_with = YOR }
+							white_peace = YOR
+						}
+					}
+				}
+				else_if = { # Scenario 2
+					limit = { has_global_flag = WAC_scenario_2 }
+
+					every_country = {
+						limit = { has_war_with = CAO }
+						white_peace = CAO
+					}
+					ZZZ = { WAC_2_PALF_BEATEN = yes }
+				}
+				else = { # Scenario 3
+					every_country = {
+						limit = {
+							OR = {
+								has_war_with = FFR
+								has_war_with = WOL
+								has_war_with = SUS
+							}
+						}
+						leave_faction = yes
+						every_country = {
+							limit = { is_in_faction_with = FFR }
+							white_peace = PREV
+						}
+					}
+					ZZZ = {
+						TNO_WAC_clear_decision_categories = yes
+						WAC_3_FMA_VICTORY = yes
+					}
+					if = {
+						limit = { country_exists = YOR }
+						every_country = {
+							limit = { has_war_with = YOR }
+							white_peace = YOR
+						}
+					}
+				}
+			}
+		}
+		complete_effect = { # Failure
+			log = "[GetDateText]: [Root.GetName]: mission complete USA_WAC_cameroon_capitulates"
+			custom_effect_tooltip = USA_WAC_cameroon_capitulates_failure_tt
+		}
+	}
+
 	## EQUIPMENT ##
 	USA_WAC_toggle_infantry_equipment_shipments = {
 		icon = GFX_decision_generic_visibility
@@ -1446,11 +1546,11 @@ USA_foreign_policy_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision USA_meeting_with_generals"
 			if = {
 				limit = { has_country_flag = WAC_ground_vehicles_shipments_visible }
-				custom_effect_tooltip = WAC_ground_vehicles_shipments_tt_1
+				custom_effect_tooltip = WAC_ground_vehicle_shipments_tt_1
 				clr_country_flag = WAC_ground_vehicles_shipments_visible
 			}
 			else = {
-				custom_effect_tooltip = WAC_ground_vehicles_shipments_tt_2
+				custom_effect_tooltip = WAC_ground_vehicle_shipments_tt_2
 				set_country_flag = WAC_ground_vehicles_shipments_visible
 			}
 		}
@@ -1686,15 +1786,42 @@ USA_foreign_policy_category = {
 				amount = 300
 				target = FROM
 			}
-			send_equipment = {
-				type = MBT_equipment_2
-				amount = 250
-				target = FROM
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					type = MBT_chassis_2
+					amount = 250
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_chassis_2
+					amount = 200
+					target = FROM
+				}
 			}
-			send_equipment = {
-				type = IFV_equipment_2
-				amount = 200
-				target = FROM
+			else = {
+				send_equipment = {
+					type = MBT_equipment_2
+					amount = 250
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_equipment_2
+					amount = 200
+					target = FROM
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment_1
+				amount = 1000
+				producer = IBR
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_1
+				amount = 500
+				producer = IBR
 			}
 		}
 	}
@@ -1767,15 +1894,32 @@ USA_foreign_policy_category = {
 				amount = 80
 				target = FROM
 			}
-			send_equipment = {
-				type = MBT_equipment_2
-				amount = 50
-				target = FROM
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					type = MBT_chassis_2
+					amount = 50
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_chassis_2
+					amount = 30
+					target = FROM
+				}
 			}
-			send_equipment = {
-				type = IFV_equipment_2
-				amount = 30
-				target = FROM
+			else = {
+				send_equipment = {
+					type = MBT_equipment_2
+					amount = 50
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_equipment_2
+					amount = 30
+					target = FROM
+				}
 			}
 		}
 	}
@@ -1785,7 +1929,7 @@ USA_foreign_policy_category = {
 		icon = GFX_decision_clock
 		priority = 1000
 
-		days_mission_timeout = 180
+		days_mission_timeout = 200
 		is_good = no
 		selectable_mission = no
 
@@ -1902,18 +2046,18 @@ USA_foreign_policy_category = {
 			factor = 3
 		}
 		custom_cost_trigger = {
-			command_power > 49.99
-			has_political_power > 49.99
+			command_power > 14.99
+			has_political_power > 14.99
 		}
-		custom_cost_text = decision_cost_50_cp_50_pp
+		custom_cost_text = decision_cost_15_cp_15_pp
 
 		days_remove = 90
 		fire_only_once = yes
 
 		complete_effect = {
 			hidden_effect = {
-				add_political_power = -50
-				add_command_power = -50
+				add_political_power = -30
+				add_command_power = -30
 			}
 		}
 		remove_effect = {
@@ -1967,14 +2111,14 @@ USA_foreign_policy_category = {
 			factor = 10
 		}
 		custom_cost_trigger = {
-			command_power > 14.99
+			command_power > 9.99
 		}
-		custom_cost_text = decision_cost_15_cp
+		custom_cost_text = decision_cost_10_cp
 		days_remove = 30
 
 		complete_effect = {
 			hidden_effect = {
-				add_command_power = -15
+				add_command_power = -10
 			}
 			JAP = { set_country_flag = WAC_convoys_being_harassed }
 		}
@@ -1986,7 +2130,6 @@ USA_foreign_policy_category = {
 			WAC_escalate = yes
 		}
 	}
-
 	USA_WAC_train_naval_bombers = {
 		icon = GFX_decision_generic_fighter_plane
 		priority = 995
@@ -2000,21 +2143,1773 @@ USA_foreign_policy_category = {
 			factor = 10
 		}
 		custom_cost_trigger = {
-			command_power > 19.99
+			command_power > 9.99
 		}
-		custom_cost_text = decision_cost_20_cp
+		custom_cost_text = decision_cost_10_cp
 		days_remove = 35
 		fire_only_once = yes
 
 		complete_effect = {
 			hidden_effect = {
-				add_command_power = -20
+				add_command_power = -10
 			}
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision USA_WAC_provide_naval_intelligence"
 			WAC_OFN_increase_gulf_advantage_large = yes
 			WAC_escalate = yes
+		}
+	}
+
+	## OFFENSIVES ## (ONLY SHOW UP IN SCENARIO 3)
+	USA_WAC_solidify_front = {
+		allowed = { always = no }
+
+		icon = GFX_decision_generic_military_hat
+		priority = 102
+
+		custom_cost_trigger = {
+			command_power > 24.99
+		}
+		custom_cost_text = decision_cost_25_cp
+		available = {
+			command_power > 24.99
+			#hidden_trigger = { always = no }
+		}
+
+		days_mission_timeout = 100
+		days_remove = 21
+		is_good = yes
+		fire_only_once = yes
+		selectable_mission = yes
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission timeout USA_WAC_solidify_front"
+			custom_effect_tooltip = USA_WAC_solidify_front_tt
+			hidden_effect = {
+				set_global_flag = WAC_fronts_stabilized
+				every_country = {
+					limit = {
+						is_in_array = { global.west_african_nations = THIS }
+						has_war = yes
+					}
+					every_owned_state = {
+						set_state_flag = WAC_solid_frontline_flag
+						add_dynamic_modifier = {
+							modifier = solid_frontline
+						}
+					}
+					add_ideas = WEST_AFRICA_idea_stable_front
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission removed USA_WAC_solidify_front"
+			custom_effect_tooltip = USA_WAC_solidify_front_tt
+			hidden_effect = {
+				set_global_flag = WAC_fronts_stabilized
+				every_country = {
+					limit = {
+						is_in_array = { global.west_african_nations = THIS }
+						has_war = yes
+					}
+					every_owned_state = {
+						set_state_flag = WAC_solid_frontline_flag
+						add_dynamic_modifier = {
+							modifier = solid_frontline
+						}
+					}
+					add_ideas = WEST_AFRICA_idea_stable_front
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission complete USA_WAC_solidify_front"
+			hidden_effect = { add_command_power = -25 }
+		}
+	}
+
+ 	USA_WAC_preparing_offensive = {
+		icon = GFX_decision_document_target
+		priority = 101
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		days_mission_timeout = 80
+		is_good = no
+
+		cancel_if_not_visible = yes
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_global_flag = west_african_war_ongoing
+				has_global_flag = WAC_scenario_3
+				has_country_flag = WAC_preparing_offensive_in_progress_flag
+			}
+		}
+
+		timeout_effect = {
+			clr_country_flag = WAC_preparing_offensive_in_progress_flag
+		}
+	}
+
+	USA_WAC_offensive_ghana = {
+		icon = GFX_decision_generic_tank
+		priority = 100
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 827
+					controls_state = 274
+					controls_state = 833
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 827
+							controls_state = 274
+							controls_state = 833
+
+							# Neighboring States
+							controls_state = 779
+							controls_state = 780
+							controls_state = 1208
+							controls_state = 834
+							controls_state = 1217
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				827 = { has_state_flag = WAC_solid_frontline_flag }
+				274 = { has_state_flag = WAC_solid_frontline_flag }
+				833 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 827 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 827 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 274 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 833 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_ghana_stagnate
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 827
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 827
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 274
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 274
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 833
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 833
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_ghana_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 100
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 827 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 274 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 833 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_benin = {
+		icon = GFX_decision_generic_tank
+		priority = 99
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 883
+					controls_state = 882
+					controls_state = 941
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 883
+							controls_state = 882
+							controls_state = 941
+
+							# Neighboring States
+							controls_state = 827
+							controls_state = 274
+							controls_state = 833
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 883 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 14.99
+		}
+		custom_cost_text = decision_cost_15_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -15 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 883 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 882 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 941 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_benin_stagnate
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 883
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 883
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 882
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 882
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 941
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 941
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_benin_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 99
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 883 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 882 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 941 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_yoruba = {
+		icon = GFX_decision_generic_tank
+		priority = 98
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 825
+					controls_state = 1188
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 825
+							controls_state = 1188
+
+							# Neighboring States
+							controls_state = 883
+							controls_state = 882
+							controls_state = 941
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 825 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 19.99
+		}
+		custom_cost_text = decision_cost_20_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -20 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 825 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1188 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_yoruba_stagnate
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 150
+				divisions_in_state = {
+					state = 825
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 825
+				}
+			}
+			modifier = {
+				factor = 150
+				divisions_in_state = {
+					state = 1188
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1188
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_yoruba_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 98
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 825 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1188 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_douala = {
+		icon = GFX_decision_generic_tank
+		priority = 97
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 1187
+					controls_state = 793
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 1187
+							controls_state = 793
+
+							# Neighboring States
+							controls_state = 825
+							controls_state = 1188
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 793 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 24.99
+		}
+		custom_cost_text = decision_cost_25_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -25 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate_large = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 1187 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 793 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_douala_stagnate
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 825
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1187
+				}
+			}
+			modifier = {
+				factor = 200
+				divisions_in_state = {
+					state = 1188
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 793
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_douala_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 97
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 1187 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 793 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_mali = {
+		icon = GFX_decision_generic_tank
+		priority = 96
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 1216
+					controls_state = 837
+					controls_state = 1540
+					controls_state = 1225
+					controls_state = 1230
+					controls_state = 836
+					controls_state = 1604
+					controls_state = 1231
+					controls_state = 1227
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 1216
+							controls_state = 837
+							controls_state = 1540
+							controls_state = 1225
+							controls_state = 1230
+							controls_state = 836
+							controls_state = 1604
+							controls_state = 1231
+							controls_state = 1227
+
+							# Neighboring States
+							controls_state = 1223
+							controls_state = 556
+							controls_state = 1224
+							controls_state = 838
+							controls_state = 1208
+							controls_state = 834
+							controls_state = 1217
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 1540 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 1216 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 837 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1540 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1225 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1230 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 836 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1604 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1231 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1227 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_mali_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1216
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1216
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 837
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 837
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1540
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1540
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1225
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1225
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1230
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1230
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 836
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 836
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1604
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1604
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1231
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1231
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1227
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1227
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_mali_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 96
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 1216 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 837 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1540 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1225 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1230 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 836 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1604 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1231 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1227 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_guinea = {
+		icon = GFX_decision_generic_tank
+		priority = 95
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 828
+					controls_state = 556
+					controls_state = 1224
+					controls_state = 838
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 828
+							controls_state = 556
+							controls_state = 1224
+							controls_state = 838
+
+							# Neighboring States
+							controls_state = 829
+							controls_state = 1223
+							controls_state = 1604
+							controls_state = 836
+							controls_state = 1540
+							controls_state = 837
+							controls_state = 1208
+							controls_state = 1209
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 828 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 828 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 556 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1224 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 838 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_guinea_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 828
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 828
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 556
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 556
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1224
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1224
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 838
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 838
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_guinea_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 95
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 828 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 556 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1224 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 838 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_wolofia = {
+		icon = GFX_decision_generic_tank
+		priority = 94
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 830
+					controls_state = 272
+					controls_state = 1223
+					controls_state = 701
+					controls_state = 829
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 830
+							controls_state = 272
+							controls_state = 1223
+							controls_state = 701
+							controls_state = 829
+
+							# Neighboring States
+							controls_state = 828
+							controls_state = 556
+							controls_state = 1604
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 830 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 830 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 272 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1223 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 701 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 829 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_wolofia_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 830
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 830
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 272
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 272
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1223
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1223
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 701
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 701
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 829
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 829
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_wolofia_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 94
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 830 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 272 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1223 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 701 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 829 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_burkina = {
+		icon = GFX_decision_generic_tank
+		priority = 93
+
+		available = {
+			any_country = {
+				is_in_faction_with = CAO
+				OR = {
+					controls_state = 1541
+					controls_state = 1217
+					controls_state = 834
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = USA_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						OR = {
+							is_in_faction_with = FFR
+							is_in_faction_with = WOL
+							is_in_faction_with = SUS
+						}
+						OR = {
+							# States
+							controls_state = 1541
+							controls_state = 1217
+							controls_state = 834
+
+							# Neighboring States
+							controls_state = 1208
+							controls_state = 1216
+							controls_state = 833
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+ 			highlight_state_targets = { state = 1541 }
+ 			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = USA_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 1541 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1217 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 834 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = USA_WAC_offensive_burkina_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1451
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1451
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1217
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1217
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 834
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 834
+				}
+			}
+		}
+	}
+
+	USA_WAC_offensive_burkina_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 93
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 830 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 272 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1223 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 701 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 829 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
 		}
 	}
 
@@ -2025,6 +3920,7 @@ USA_foreign_policy_category = {
 		visible = {
 			TNO_fopo_wac_selected = yes
 			NOT = { has_global_flag = WAC_fronts_stabilized }
+			NOT = { has_global_flag = WAC_scenario_3 }
 		}
 		custom_cost_trigger = {
 			command_power > 24
@@ -2061,11 +3957,12 @@ USA_foreign_policy_category = {
 		visible = {
 			TNO_fopo_wac_selected = yes
 			has_global_flag = WAC_fronts_stabilized
+			NOT = { has_global_flag = WAC_scenario_3 }
 		}
 		custom_cost_trigger = {
-			command_power > 29
+			command_power > 19
 		}
-		custom_cost_text = decision_cost_30_cp
+		custom_cost_text = decision_cost_20_cp
 		days_re_enable = 90
 		days_remove = 21
 
@@ -2088,25 +3985,119 @@ USA_foreign_policy_category = {
 		visible = {
 			TNO_fopo_wac_selected = yes
 		}
-		custom_cost_trigger = {
-			has_political_power > 39
-			command_power > 29
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = USA_WAC_shipment_trigger
+				NOT = { has_country_flag = WAC_active_shipment }
+			}
 		}
-		custom_cost_text = decision_cost_30_cp_40_pp
+		custom_cost_trigger = {
+			has_political_power > 29.99
+			command_power > 14.99
+		}
+		custom_cost_text = decision_cost_15_cp_30_pp
 		fire_only_once = yes
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision USA_WAC_expand_shipments"
-			hidden_effect = { add_command_power = -30 add_political_power = -40 }
+			hidden_effect = { add_command_power = -15 add_political_power = -30 }
 			set_country_flag = WAC_large_shipments_enabled
 			custom_effect_tooltip = USA_WAC_expand_shipments_tt
 			WAC_escalate = yes
 		}
 	}
 
+
+	USA_coup_mali_WA = {
+		icon = GFX_MAG_decision_werbell_combat_unit
+		priority = 99
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = WAC_scenario_3
+		}
+		available = {
+			country_exists = MLI
+		}
+		fire_only_once = yes
+		days_remove = 50
+
+		custom_cost_trigger = {
+			has_political_power > 19.99
+			command_power > 19.99
+		}
+		custom_cost_text = decision_cost_20_cp_20_pp
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision USA_coup_mali_WA"
+			hidden_effect = { add_command_power = -20 add_political_power = -20 }
+		}
+		remove_effect = {
+			custom_effect_tooltip = USA_coup_mali_WA_tt
+			hidden_effect = {
+				KAY = {
+					add_state_core = 1604
+					add_state_core = 836
+					add_state_core = 1227
+					add_state_core = 1231
+					transfer_state = 1604
+					transfer_state = 836
+					transfer_state = 1227
+					transfer_state = 1231
+
+					load_oob = "KAY_1962"
+					TNO_startup_nation = yes
+
+					random_owned_controlled_state = {
+						add_resource = {
+							type = power
+							amount = 2
+						}
+					}
+					set_temp_variable = { pus_temp = 1 }
+					econ_pus_change = yes
+
+					set_country_flag = FMA_MEMBER
+					remove_faction_status = yes
+					add_ideas = FMA_Faction
+				}
+				MLI = {
+					remove_ideas = MLI_idea_traore_problem
+					set_temp_variable = { pus_temp = -1 }
+					econ_pus_change = yes
+				}
+				FFR = {
+					add_to_faction = KAY
+					every_country = {
+						limit = { has_war_with = FFR }
+						KAY = {
+							add_to_war = {
+								targeted_alliance = FFR
+								enemy = PREV
+							}
+						}
+					}
+				}
+				if = {
+					limit = { NOT = { country_exists = MLI } }
+					KAY = {
+						set_cosmetic_tag = KAY_unified
+						add_state_core = 1540
+						add_state_core = 1225
+						add_state_core = 1230
+						add_state_core = 837
+						transfer_state = 1540
+						transfer_state = 1225
+						transfer_state = 1230
+						transfer_state = 837
+					}					
+				}
+			}
+		}
+	}
+
 	USA_egypt_intelligence_WA = {
 		icon = GFX_decision_generic_investigate
-		priority = 99
+		priority = 98
 		visible = {
 			TNO_fopo_wac_selected = yes
 			is_in_faction_with = ITA
@@ -2114,6 +4105,9 @@ USA_foreign_policy_category = {
 			OR = {
 				1127 = { is_fully_controlled_by = EGY }
 				1128 = { is_fully_controlled_by = EGY }
+			}
+			NOT = { 
+				CAO = { has_idea = CAO_idea_egyptian_intelligence }
 			}
 		}
 		available = {
@@ -2126,10 +4120,10 @@ USA_foreign_policy_category = {
 		}
 
 		custom_cost_trigger = {
-			has_political_power > 25
-			command_power > 15
+			has_political_power > 19.99
+			command_power > 4.99
 		}
-		custom_cost_text = decision_cost_15_cp_25_pp
+		custom_cost_text = decision_cost_5_cp_20_pp
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision USA_italian_intelligence_WA"
@@ -2144,7 +4138,7 @@ USA_foreign_policy_category = {
 
 	USA_Crank_Up_The_Draft_WA = {
 		icon = GFX_decision_generic_military_parade
-		priority = 98
+		priority = 97
 		visible = {
 			TNO_fopo_wac_selected = yes
 			has_country_flag = USA_In_The_WAC_WAR
@@ -2218,7 +4212,7 @@ USA_foreign_policy_category = {
 
 	USA_swell_foreign_legion_WA = {
 		icon = GFX_decision_SAF_ask_OFN_stationing
-		priority = 97
+		priority = 96
 		visible = {
 			TNO_fopo_wac_selected = yes
 		}
@@ -2244,7 +4238,7 @@ USA_foreign_policy_category = {
 
 	USA_bombing_runs_WA = {
 		icon = GFX_decision_generic_bombing
-		priority = 96
+		priority = 95
 		visible = {
 			TNO_fopo_wac_selected = yes
 			has_country_flag = USA_In_The_WAC_WAR
@@ -2293,14 +4287,14 @@ USA_foreign_policy_category = {
 			factor = 50
 		}
 		custom_cost_trigger = {
-			has_political_power > 29
-			command_power > 29
+			has_political_power > 24.99
+			command_power > 19.99
 		}
-		custom_cost_text = decision_cost_30_cp_30_pp
+		custom_cost_text = decision_cost_20_cp_25_pp
 		days_remove = 21
 		fire_only_once = yes
 
-		complete_effect = { hidden_effect = { add_command_power = -30 add_political_power = -30 } }
+		complete_effect = { hidden_effect = { add_command_power = -20 add_political_power = -25 } }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision USA_supply_air_force_WA"
 			send_equipment = {
@@ -2318,7 +4312,7 @@ USA_foreign_policy_category = {
 
 	USA_send_military_advisors_WA = {
 		icon = GFX_decision_generic_military_parade
-		priority = 92
+		priority = 93
 		visible = {
 			TNO_fopo_wac_selected = yes
 		}
@@ -2370,7 +4364,7 @@ USA_foreign_policy_category = {
 
 	USA_ship_oil_WA = {
 		icon = GFX_decision_oil_extraction
-		priority = 91
+		priority = 92
 		visible = {
 			TNO_fopo_wac_selected = yes
 		}
@@ -2549,11 +4543,11 @@ JAP_foreign_policy_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision JAP_WAC_toggle_ground_vehicle_shipments"
 			if = {
 				limit = { has_country_flag = WAC_ground_vehicles_shipments_visible }
-				custom_effect_tooltip = WAC_ground_vehicles_shipments_tt_1
+				custom_effect_tooltip = WAC_ground_vehicle_shipments_tt_1
 				clr_country_flag = WAC_ground_vehicles_shipments_visible
 			}
 			else = {
-				custom_effect_tooltip = WAC_ground_vehicles_shipments_tt_2
+				custom_effect_tooltip = WAC_ground_vehicle_shipments_tt_2
 				set_country_flag = WAC_ground_vehicles_shipments_visible
 			}
 		}
@@ -2795,15 +4789,32 @@ JAP_foreign_policy_category = {
 				amount = 300
 				target = FROM
 			}
-			send_equipment = {
-				type = MBT_equipment_2
-				amount = 250
-				target = FROM
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					type = MBT_chassis_2
+					amount = 250
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_chassis_2
+					amount = 200
+					target = FROM
+				}
 			}
-			send_equipment = {
-				type = IFV_equipment_2
-				amount = 200
-				target = FROM
+			else = {
+				send_equipment = {
+					type = MBT_equipment_2
+					amount = 250
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_equipment_2
+					amount = 200
+					target = FROM
+				}
 			}
 		}
 	}
@@ -2878,15 +4889,32 @@ JAP_foreign_policy_category = {
 				amount = 80
 				target = FROM
 			}
-			send_equipment = {
-				type = MBT_equipment_2
-				amount = 50
-				target = FROM
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					type = MBT_chassis_2
+					amount = 50
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_chassis_2
+					amount = 30
+					target = FROM
+				}
 			}
-			send_equipment = {
-				type = IFV_equipment_2
-				amount = 30
-				target = FROM
+			else = {
+				send_equipment = {
+					type = MBT_equipment_2
+					amount = 50
+					target = FROM
+				}
+				send_equipment = {
+					type = IFV_equipment_2
+					amount = 30
+					target = FROM
+				}
 			}
 		}
 	}
@@ -2896,7 +4924,7 @@ JAP_foreign_policy_category = {
 		icon = GFX_decision_clock
 		priority = 1000
 
-		days_mission_timeout = 180
+		days_mission_timeout = 200
 		is_good = no
 		selectable_mission = no
 
@@ -3075,13 +5103,1828 @@ JAP_foreign_policy_category = {
 		}
 	}
 
+	## OFFENSIVES ## (ONLY SHOW UP IN SCENARIO 3)
+	JAP_WAC_solidify_front = {
+		allowed = { always = no }
+
+		icon = GFX_decision_generic_military_hat
+		priority = 102
+
+		custom_cost_trigger = {
+			command_power > 24.99
+		}
+		custom_cost_text = decision_cost_25_cp
+		available = {
+			command_power > 24.99
+			#hidden_trigger = { always = no }
+		}
+
+		days_mission_timeout = 100
+		days_remove = 21
+		is_good = yes
+		fire_only_once = yes
+		selectable_mission = yes
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission timeout JAP_WAC_solidify_front"
+			custom_effect_tooltip = USA_WAC_solidify_front_tt
+			hidden_effect = {
+				set_global_flag = WAC_fronts_stabilized
+				every_country = {
+					limit = {
+						is_in_array = { global.west_african_nations = THIS }
+						has_war = yes
+					}
+					every_owned_state = {
+						set_state_flag = WAC_solid_frontline_flag
+						add_dynamic_modifier = {
+							modifier = solid_frontline
+						}
+					}
+					add_ideas = WEST_AFRICA_idea_stable_front
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission removed JAP_WAC_solidify_front"
+			custom_effect_tooltip = USA_WAC_solidify_front_tt
+			hidden_effect = {
+				set_global_flag = WAC_fronts_stabilized
+				every_country = {
+					limit = {
+						is_in_array = { global.west_african_nations = THIS }
+						has_war = yes
+					}
+					every_owned_state = {
+						set_state_flag = WAC_solid_frontline_flag
+						add_dynamic_modifier = {
+							modifier = solid_frontline
+						}
+					}
+					add_ideas = WEST_AFRICA_idea_stable_front
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission complete JAP_WAC_solidify_front"
+			hidden_effect = { add_command_power = -25 }
+		}
+	}
+
+	JAP_WAC_preparing_offensive = {
+		icon = GFX_decision_document_target
+		priority = 101
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		days_mission_timeout = 80
+		is_good = no
+
+		cancel_if_not_visible = yes
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			hidden_trigger = {
+				has_global_flag = west_african_war_ongoing
+				has_global_flag = WAC_scenario_3
+				has_country_flag = WAC_preparing_offensive_in_progress_flag
+			}
+		}
+
+		timeout_effect = {
+			clr_country_flag = WAC_preparing_offensive_in_progress_flag
+		}
+	}
+	JAP_WAC_offensive_ghana = {
+		icon = GFX_decision_generic_tank
+		priority = 100
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 827
+					controls_state = 274
+					controls_state = 833
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 827
+							controls_state = 274
+							controls_state = 833
+
+							# Neighboring States
+							controls_state = 883
+							controls_state = 941
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				827 = { has_state_flag = WAC_solid_frontline_flag }
+				274 = { has_state_flag = WAC_solid_frontline_flag }
+				833 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 827 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 827 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 274 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 833 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_ghana_stagnate
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 827
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 827
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 274
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 274
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 833
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 833
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_ghana_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 100
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 827 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 274 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 833 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+	JAP_WAC_offensive_benin = {
+		icon = GFX_decision_generic_tank
+		priority = 99
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 883
+					controls_state = 882
+					controls_state = 941
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 883
+							controls_state = 882
+							controls_state = 941
+
+							# Neighboring States
+							controls_state = 825
+							controls_state = 1188
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 883 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 14.99
+		}
+		custom_cost_text = decision_cost_15_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -15 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 883 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 882 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 941 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_benin_stagnate
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 883
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 883
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 882
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 882
+				}
+			}
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 941
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 941
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_benin_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 99
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 883 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 882 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 941 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_yoruba = {
+		icon = GFX_decision_generic_tank
+		priority = 98
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 825
+					controls_state = 1188
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 825
+							controls_state = 1188
+
+							# Neighboring States
+							controls_state = 1187
+							controls_state = 826
+							controls_state = 1189
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 825 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 19.99
+		}
+		custom_cost_text = decision_cost_20_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -20 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 825 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1188 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_yoruba_stagnate
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 150
+				divisions_in_state = {
+					state = 825
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 825
+				}
+			}
+			modifier = {
+				factor = 150
+				divisions_in_state = {
+					state = 1188
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1188
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_yoruba_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 98
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 825 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1188 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+	JAP_WAC_offensive_cote_divorie = {
+		icon = GFX_decision_generic_tank
+		priority = 97
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 779
+					controls_state = 1210
+					controls_state = 780
+					controls_state = 1209
+					controls_state = 1208
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 779
+							controls_state = 1210
+							controls_state = 780
+							controls_state = 1209
+							controls_state = 1208
+
+							# Neighboring States
+							controls_state = 827
+							controls_state = 833
+							controls_state = 834
+							controls_state = 1216
+							controls_state = 837
+							controls_state = 838
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 779 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 24.99
+		}
+		custom_cost_text = decision_cost_25_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -25 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate_large = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 779 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1210 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 780 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1209 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1208 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_cote_divorie_stagnate
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 100
+				divisions_in_state = {
+					state = 827
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 779
+				}
+			}
+			modifier = {
+				factor = 200
+				divisions_in_state = {
+					state = 780
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 779
+				}
+			}
+			modifier = {
+				factor = 200
+				divisions_in_state = {
+					state = 780
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1210
+				}
+			}
+			modifier = {
+				factor = 200
+				divisions_in_state = {
+					state = 1209
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1210
+				}
+			}
+		}
+	}
+	JAP_WAC_offensive_cote_divorie_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 97
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 779 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1210 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 780 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1209 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1208 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_mali = {
+		icon = GFX_decision_generic_tank
+		priority = 96
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 1216
+					controls_state = 837
+					controls_state = 1540
+					controls_state = 1225
+					controls_state = 1230
+					controls_state = 836
+					controls_state = 1604
+					controls_state = 1231
+					controls_state = 1227
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 1216
+							controls_state = 837
+							controls_state = 1540
+							controls_state = 1225
+							controls_state = 1230
+							controls_state = 836
+							controls_state = 1604
+							controls_state = 1231
+							controls_state = 1227
+
+							# Neighboring States
+							controls_state = 1223
+							controls_state = 556
+							controls_state = 1224
+							controls_state = 838
+							controls_state = 1208
+							controls_state = 834
+							controls_state = 1217
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 1540 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 1216 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 837 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1540 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1225 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1230 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 836 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1604 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1231 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1227 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_mali_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1216
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1216
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 837
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 837
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1540
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1540
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1225
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1225
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1230
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1230
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 836
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 836
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1604
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1604
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1231
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1231
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1227
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1227
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_mali_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 96
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 1216 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 837 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1540 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1225 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1230 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 836 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1604 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1231 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1227 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_guinea = {
+		icon = GFX_decision_generic_tank
+		priority = 95
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 828
+					controls_state = 556
+					controls_state = 1224
+					controls_state = 838
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 828
+							controls_state = 556
+							controls_state = 1224
+							controls_state = 838
+
+							# Neighboring States
+							controls_state = 829
+							controls_state = 1223
+							controls_state = 1604
+							controls_state = 836
+							controls_state = 1540
+							controls_state = 837
+							controls_state = 1208
+							controls_state = 1209
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 828 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 828 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 556 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1224 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 838 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_guinea_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 828
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 828
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 556
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 556
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1224
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1224
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 838
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 838
+				}
+			}
+		}
+	}
+	JAP_WAC_offensive_guinea_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 95
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 828 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 556 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1224 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 838 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_wolofia = {
+		icon = GFX_decision_generic_tank
+		priority = 94
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 830
+					controls_state = 272
+					controls_state = 1223
+					controls_state = 701
+					controls_state = 829
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 830
+							controls_state = 272
+							controls_state = 1223
+							controls_state = 701
+							controls_state = 829
+
+							# Neighboring States
+							controls_state = 828
+							controls_state = 556
+							controls_state = 1604
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 830 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 830 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 272 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1223 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 701 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 829 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_wolofia_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 830
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 830
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 272
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 272
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1223
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1223
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 701
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 701
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 829
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 829
+				}
+			}
+		}
+	}
+	JAP_WAC_offensive_wolofia_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 94
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 830 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 272 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1223 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 701 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 829 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_burkina = {
+		icon = GFX_decision_generic_tank
+		priority = 93
+
+		available = {
+			any_country = {
+				OR = {
+					is_in_faction_with = FFR
+					is_in_faction_with = WOL
+					is_in_faction_with = SUS
+				}
+				OR = {
+					controls_state = 1541
+					controls_state = 1217
+					controls_state = 834
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_logistics_not_saturated_tt
+				NOT = { has_active_mission = JAP_WAC_preparing_offensive }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WAC_offensive_neighbor_state_tt
+				OR = {
+					any_country = {
+						is_in_faction_with = CAO
+						OR = {
+							# States
+							controls_state = 1541
+							controls_state = 1217
+							controls_state = 834
+
+							# Neighboring States
+							controls_state = 1208
+							controls_state = 1216
+							controls_state = 833
+						}
+					}
+				}
+			}
+		}
+		visible = {
+			TNO_fopo_wac_selected = yes
+			has_global_flag = west_african_war_ongoing
+			has_global_flag = WAC_scenario_3
+			OR = {
+				883 = { has_state_flag = WAC_solid_frontline_flag }
+				882 = { has_state_flag = WAC_solid_frontline_flag }
+				941 = { has_state_flag = WAC_solid_frontline_flag }
+			}
+		}
+
+		highlight_states = {
+			 highlight_state_targets = { state = 1541 }
+			 highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+
+		on_map_mode = map_only
+
+		custom_cost_trigger = {
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp
+		days_remove = 30
+		modifier = {
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -10 }		
+			activate_mission = JAP_WAC_preparing_offensive
+			set_country_flag = WAC_preparing_offensive_in_progress_flag
+			WAC_escalate = yes
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = { state = 1541 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1217 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 834 }
+				clr_state_flag = WAC_solid_frontline_flag
+				remove_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			activate_mission = JAP_WAC_offensive_burkina_stagnate
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1451
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1451
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 1217
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 1217
+				}
+			}
+			modifier = {
+				factor = 10
+				divisions_in_state = {
+					state = 834
+					size > 0
+				}
+				NOT = {
+					has_full_control_of_state = 834
+				}
+			}
+		}
+	}
+
+	JAP_WAC_offensive_burkina_stagnate = {
+		icon = GFX_decision_generic_assault
+		priority = 93
+
+		days_mission_timeout = 50
+		is_good = no
+		selectable_mission = no
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			random_state = {
+				limit = { state = 830 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 272 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 1223 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 701 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+			random_state = {
+				limit = { state = 829 }
+				set_state_flag = WAC_solid_frontline_flag
+				add_dynamic_modifier = {
+					modifier = solid_frontline
+				}
+			}
+		}
+	}
+
 	## WAR DECISIONS ##
-	JAP_WAC_plan_offensive = {
+	JAP_WAC_plan_offensive = { #
 		icon = GFX_decision_generic_tank
 		priority = 101
 		visible = {
 			TNO_fopo_wac_selected = yes
 			has_global_flag = WAC_fronts_stabilized
+			NOT = { has_global_flag = WAC_scenario_3 }
 		}
 		custom_cost_trigger = {
 			command_power > 29
@@ -3097,7 +6940,7 @@ JAP_foreign_policy_category = {
 		}
 		remove_effect = {
 			every_country = {
-				limit = { is_in_faction_with = FFR }
+				limit = { is_in_faction_with = CAO }
 				add_timed_idea = { idea = WEST_AFRICA_idea_offensive days = 30 }
 			}			
 		}
@@ -3109,6 +6952,10 @@ JAP_foreign_policy_category = {
 
 		available = {
 			custom_trigger_tooltip = {
+				tooltip = JAP_WAC_shipment_trigger
+				NOT = { has_country_flag = WAC_active_shipment }
+			}
+			custom_trigger_tooltip = {
 				tooltip = WAC_JAP_defended_gulf_of_guinea_tt
 				has_country_flag = WAC_JAP_defended_gulf_of_guinea
 			}
@@ -3117,15 +6964,15 @@ JAP_foreign_policy_category = {
 			TNO_fopo_wac_selected = yes
 		}
 		custom_cost_trigger = {
-			has_political_power > 39
-			command_power > 29
+			has_political_power > 24.99
+			command_power > 24.99
 		}
-		custom_cost_text = decision_cost_30_cp_40_pp
+		custom_cost_text = decision_cost_25_cp_25_pp
 		fire_only_once = yes
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision USA_WAC_expand_shipments"
-			hidden_effect = { add_command_power = -30 add_political_power = -40 }
+			hidden_effect = { add_command_power = -25 add_political_power = -25 }
 			set_country_flag = WAC_large_shipments_enabled
 			custom_effect_tooltip = USA_WAC_expand_shipments_tt
 			WAC_escalate = yes
@@ -4060,7 +7907,15 @@ GER_foreign_policy_category = {
 		icon = GFX_decision_black_market_motorized_purchase
 		available = {
 			has_equipment = { motorized_equipment > 199 }
-			has_equipment = { MBT_equipment > 99 }
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				has_equipment = { MBT_chassis > 99 }
+			}
+			else = {
+				has_equipment = { MBT_equipment > 99 }
+			}
 			has_equipment = { artillery_equipment > 99 }
 			custom_trigger_tooltip = {
 				tooltip = BOR_baathists_have_a_port
@@ -4119,10 +7974,22 @@ GER_foreign_policy_category = {
 				amount = 200
 				target = FROM
 			}
-			send_equipment = {
-				type = MBT_equipment
-				amount = 100
-				target = FROM
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					type = MBT_chassis
+					amount = 100
+					target = FROM
+				}
+			}
+			else = {
+				send_equipment = {
+					type = MBT_equipment
+					amount = 100
+					target = FROM
+				}
 			}
 			send_equipment = {
 				type = artillery_equipment
@@ -4574,7 +8441,10 @@ JAP_foreign_policy_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision JAP_OC_bomb_someone"
 			hidden_effect = { add_command_power = -15 }
 			every_other_country = {
-				limit = { has_war_with = FROM }
+				limit = {
+					has_war_with = FROM
+					NOT = { is_in_faction_with = GER } #Prevent Japan trying to bomb goering's allies
+				}
 				add_ideas = JAP_OC_bombing_runs
 				set_country_flag = JAP_OC_being_bombed
 				TNO_worsen_poverty_high = yes
@@ -5202,7 +9072,7 @@ JAP_foreign_policy_category = {
 				add_command_power = -10
 				add_political_power = -25
 			}
-			ANL = {
+			ANG = {
 				add_timed_idea = {
 					idea = JAP_sabotage_effort
 					days = 90
@@ -6479,26 +10349,6 @@ JAP_foreign_policy_category = {
 			}
 		}
 	}
-	JAP_more_sf_ins = {
-		icon = GFX_decision_generic_assault
-		cost = 50
-
-		ai_will_do = {
-			factor = 40
-		}
-
-		visible = {
-			has_global_flag = INS_war
-			TNO_fopo_indonesia_selected = yes
-		}
-		fire_only_once = no
-		complete_effect = {
-			#JAP = {
-			#	special_forces_cap = 0.05
-			#}
-			#Ideas only
-		}
-	}
 	JAP_anti_FRI_offensive = {
 		icon = GFX_decision_generic_assault
 		cost = 75
@@ -6903,15 +10753,17 @@ USA_foreign_policy_category = { #Fetti
 				uses = 1
 				category = dd_tech
 			}
-			add_tech_bonus = {
-				bonus = 0.25
-				uses = 1
-				category = naval_doctrine
+			add_doctrine_cost_reduction = {
+			    name = naval_doc_bonus
+			    cost_reduction = 0.25
+			    uses = 1
+			    category = naval_doctrine
 			}
-			add_tech_bonus = {
-				bonus = 0.25
-				uses = 1
-				category = naval_doctrine
+			add_doctrine_cost_reduction = {
+			    name = naval_doc_bonus
+			    cost_reduction = 0.25
+			    uses = 1
+			    category = naval_doctrine
 			}
 			create_production_license = {
 				target = FRI
@@ -6955,10 +10807,11 @@ USA_foreign_policy_category = { #Fetti
 				amount = 20
 				target = FRI
 			}
-			add_tech_bonus = {
-				bonus = 0.25
-				uses = 1
-				category = air_doctrine
+			add_doctrine_cost_reduction = {
+			    name = air_doc_bonus
+			    cost_reduction = 0.25
+			    uses = 1
+			    category = air_doctrine
 			}
 		}
 	}
@@ -8001,10 +11854,22 @@ BRA_foreign_policy_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision BRA_SAW_buy_tanks"
-			add_equipment_to_stockpile = {
-				type = MBT_equipment
-				amount = 100
-				producer = BRA
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				add_equipment_to_stockpile = {
+					type = MBT_chassis
+					amount = 100
+					producer = BRA
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = MBT_equipment
+					amount = 100
+					producer = BRA
+				}
 			}
 			set_temp_variable = { debt_temp = 0.3 }
 			econ_national_debt_change = yes
@@ -8115,17 +11980,35 @@ BRA_foreign_policy_category = {
 			TNO_fopo_saw_selected = yes
 		}
 		available = {
-			has_equipment = {
-				MBT_equipment > 99
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				has_equipment = { MBT_chassis > 99 }
+			}
+			else = {
+				has_equipment = { MBT_equipment > 99 }
 			}
 		}
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision BRA_SAW_sell_tanks"
-			send_equipment = {
-				type = MBT_equipment
-				amount = 100
-				target = SAF
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					type = MBT_chassis
+					amount = 100
+					target = SAF
+				}
+			}
+			else = {
+				send_equipment = {
+					type = MBT_equipment
+					amount = 100
+					target = SAF
+				}
 			}
 			set_temp_variable = { debt_temp = -0.3 }
 			econ_national_debt_change = yes
@@ -8147,7 +12030,7 @@ BRA_foreign_policy_category = {
 				amount = 100
 				producer = BRA
 			}
-			set_temp_variable = { debt_temp = 0.3 }
+			set_temp_variable = { debt_temp = -0.3 }
 			econ_national_debt_change = yes
 		}
 	}
@@ -8214,7 +12097,7 @@ GER_foreign_policy_category = {
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Mission GER_Bormann_SAF_war_effort_failure"
-			GER_Bormann_SAF_conclude_SAW = yes
+			TNO_fopo_add_saw_withdrawal_tab = yes
 		}
 	}
 
@@ -8238,7 +12121,7 @@ GER_foreign_policy_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Bormann_SAF_withdraw_from_the_war"
-			GER_Bormann_SAF_conclude_SAW = yes
+			TNO_fopo_add_saw_withdrawal_tab = yes
 		}
 
 		ai_will_do = {
@@ -9045,7 +12928,7 @@ GER_foreign_policy_category = {
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Mission GER_Goring_SAF_war_effort_failure"
-			GGR_conclude_SAW = yes
+			TNO_fopo_add_saw_withdrawal_tab = yes
 		}
 	}
 
@@ -9069,7 +12952,7 @@ GER_foreign_policy_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Goring_SAF_withdraw_from_the_war"
-			GGR_conclude_SAW = yes
+			TNO_fopo_add_saw_withdrawal_tab = yes
 		}
 
 		ai_will_do = {
@@ -9732,7 +13615,7 @@ GER_foreign_policy_category = {
 
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Mission SGR_SAW_war_effort_failure"
-			SGR_conclude_SAW = yes
+			TNO_fopo_add_saw_withdrawal_tab = yes
 		}
 	}
 
@@ -9778,7 +13661,7 @@ GER_foreign_policy_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SGR_SAW_withdraw_from_the_war"
-			SGR_conclude_SAW = yes
+			TNO_fopo_add_saw_withdrawal_tab = yes
 			add_command_power = -30
 		}
 
@@ -11193,10 +15076,22 @@ USA_foreign_policy_category = {
 							amount = 75
 							producer = USA
 						}
-						add_equipment_to_stockpile = {
-							type = MBT_equipment_1
-							amount = 100
-							producer = USA
+						if = { 
+							limit = { 
+								has_dlc = "No Step Back"
+							}
+							add_equipment_to_stockpile = {
+								type = MBT_chassis_1
+								amount = 100
+								producer = USA
+							}
+						}
+						else = {
+							add_equipment_to_stockpile = {
+								type = MBT_equipment_1
+								amount = 100
+								producer = USA
+							}
 						}
 						add_equipment_to_stockpile = {
 							type = motorized_equipment_1
@@ -11286,10 +15181,22 @@ USA_foreign_policy_category = {
 							amount = 225
 							producer = USA
 						}
-						add_equipment_to_stockpile = {
-							type = MBT_equipment_1
-							amount = 300
-							producer = USA
+						if = { 
+							limit = { 
+								has_dlc = "No Step Back"
+							}
+							add_equipment_to_stockpile = {
+								type = MBT_chassis_1
+								amount = 300
+								producer = USA
+							}
+						}
+						else = {
+							add_equipment_to_stockpile = {
+								type = MBT_equipment_1
+								amount = 300
+								producer = USA
+							}
 						}
 						add_equipment_to_stockpile = {
 							type = motorized_equipment_1
@@ -12293,12 +16200,11 @@ JAP_foreign_policy_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_MEN_Kalgan_supply_network"
-			612 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+			build_railway = {
+				level = 1
+				fallback = yes
+				build_only_on_allied = no
+				path = { 6969 3955 952 1489 7674 11752 }
 			}
 			hidden_effect = {
 				country_event = {
@@ -13703,6 +17609,7 @@ USA_foreign_policy_category = {
 		}
 	}
 	USA_PHI_huks_Irregular = {
+		icon = GFX_decision_generic_document
 		visible = {
 			TNO_fopo_philippines_selected = yes
 			has_global_flag = PHI_proxy_war
@@ -14098,16 +18005,8 @@ USA_foreign_policy_category = {
 		}
 		remove_effect = {
 			clr_country_flag = PHI_Doing_Reconstruction
-			random_list = {
-				2 = {
-					set_temp_variable = { PHI_reconstruction_temp = 10 }
-					TNO_PHI_Reconstruction_Progress_Change = yes
-				}
-				8 = {
-					set_temp_variable = { PHI_reconstruction_temp = 5 }
-					TNO_PHI_Reconstruction_Progress_Change = yes
-				}
-			}
+			set_temp_variable = { PHI_reconstruction_temp = 10 }
+			TNO_PHI_Reconstruction_Progress_Change = yes
 		}
 	}
 	USA_demobilize_philippine_army = {
@@ -14305,7 +18204,7 @@ USA_foreign_policy_category = {
 			base = 5
 		}
 
-		days_remove = 30
+		days_remove = 14
 		fire_only_once = yes
 		cost = 40
 
@@ -15181,8 +19080,14 @@ JAP_foreign_policy_category = {
 		custom_cost_text = decision_cost_150_mbt_25_cp
 		custom_cost_trigger = {
 			command_power > 24.99
-			has_equipment = {
-				MBT_equipment > 149
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				has_equipment = { MBT_chassis > 149 }
+			}
+			else = {
+				has_equipment = { MBT_equipment > 149 }
 			}
 		}
 		days_remove = 21
@@ -15192,10 +19097,22 @@ JAP_foreign_policy_category = {
 			FGB = { add_war_support = 0.1 }
 		}
 		remove_effect = {
-			send_equipment = {
-				equipment = MBT_equipment
-				amount = 150
-				target = FGB
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					equipment = MBT_chassis
+					amount = 150
+					target = FGB
+				}
+			}
+			else = {
+				send_equipment = {
+					equipment = MBT_equipment
+					amount = 150
+					target = FGB
+				}
 			}
 		}
 	}
@@ -15482,7 +19399,6 @@ JAP_foreign_policy_category = {
 		}
 		custom_cost_text = decision_cost_20_million_10_pp
 		days_remove = 14
-		days_re_enable = 14
 		fixed_random_seed = no
 
 		complete_effect = {
@@ -15493,16 +19409,8 @@ JAP_foreign_policy_category = {
 		}
 		remove_effect = {
 			clr_country_flag = PHI_Doing_Reconstruction
-			random_list = {
-				2 = {
-					set_temp_variable = { PHI_reconstruction_temp = 10 }
-					TNO_PHI_Reconstruction_Progress_Change = yes
-				}
-				8 = {
-					set_temp_variable = { PHI_reconstruction_temp = 5 }
-					TNO_PHI_Reconstruction_Progress_Change = yes
-				}
-			}
+			set_temp_variable = { PHI_reconstruction_temp = 10 }
+			TNO_PHI_Reconstruction_Progress_Change = yes
 		}
 	}
 
@@ -16071,10 +19979,22 @@ USA_foreign_policy_category = {
 		fire_only_once = yes
 
 		complete_effect = {
-			send_equipment = {
-				equipment = MBT_equipment
-				amount = 50
-				target = SPR
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					equipment = MBT_chassis
+					amount = 50
+					target = SPR
+				}
+			}
+			else = {
+				send_equipment = {
+					equipment = MBT_equipment
+					amount = 50
+					target = SPR
+				}
 			}
 		}
 		ai_will_do = {
@@ -16238,10 +20158,22 @@ GER_foreign_policy_category = {
 		fire_only_once = yes
 
 		complete_effect = {
-			send_equipment = {
-				equipment = MBT_equipment
-				amount = 50
-				target = SPS
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					equipment = MBT_chassis
+					amount = 50
+					target = SPS
+				}
+			}
+			else = {
+				send_equipment = {
+					equipment = MBT_equipment
+					amount = 50
+					target = SPS
+				}
 			}
 		}
 		ai_will_do = {
@@ -17770,7 +21702,7 @@ JAP_foreign_policy_category = {
 	JAP_technician_aid_MaCW = {
 		icon = GFX_decision_generic_industry
 		visible = {
-			TNO_fopo_congo_civil_war_selected = yes
+			TNO_fopo_madagascar_selected = yes
 		}
 
 		days_re_enable = 180
@@ -18207,7 +22139,7 @@ JAP_foreign_policy_category = {
 }
 
 ##########################
-## Mano Campaign (WAMC) ##
+## Mano Campaign (MANO) ##
 ##########################
 USA_foreign_policy_category = {
 	#USA_meeting_with_generals_WA = {
@@ -18812,4 +22744,1110 @@ JAP_foreign_policy_category = {
 	#		}			
 	#	}
 	#}
+}
+
+# SAW Withdrawal
+GER_foreign_policy_category = {
+	
+	# Mission - 1 year timer, modifiable by variable
+
+	GER_withdrawal_deadline = {
+		icon = GFX_decision_clock
+		priority = 1000
+
+		days_mission_timeout = GER_withdrawal_timer_var
+		is_good = no
+		selectable_mission = no
+
+		fire_only_once = yes
+
+		available = { # Completed via GUI
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = { # Failure
+			log = "[GetDateText]: [Root.GetName]: mission timeout GER_withdrawal_deadline"
+			set_country_flag = GER_halve_cabal_strength
+			if = {
+				limit = {
+					has_global_flag = german_civil_war_speervic
+					is_ai = no # because AI sucks at regime stab
+				}
+				decrease_regime_stab_30 = yes
+			}
+			else_if = {
+				limit = {
+					has_global_flag = german_civil_war_speervic
+					is_ai = yes # because AI sucks at regime stab
+				}
+				decrease_regime_stab_15 = yes
+			}
+			else_if = {
+				limit = {
+					has_global_flag = german_civil_war_bormannvic
+				}
+				if = {
+					limit = {
+						has_country_flag = BOR_schorner_okw #Aligned with militarists
+					}
+					BOR_SIG_SL_0_3_2 = yes
+					BOR_SIG_SL_1_3_2 = yes
+					BOR_SIG_SL_4_3_2 = yes
+					BOR_SIG_SL_5_3_2 = yes
+					BOR_SIG_SL_0_2_1 = yes
+					BOR_SIG_SL_1_2_1 = yes
+					BOR_SIG_SL_4_2_1 = yes
+					BOR_SIG_SL_5_2_1 = yes
+				}
+				else_if = {
+					limit = {
+						has_country_flag = BOR_speidel_okw #Aligned with militarists
+					}
+					BOR_SIG_SL_0_3_0 = yes
+					BOR_SIG_SL_1_3_0 = yes
+					BOR_SIG_SL_4_3_0 = yes
+					BOR_SIG_SL_5_3_0 = yes
+					BOR_SIG_SL_0_2_1 = yes
+					BOR_SIG_SL_1_2_1 = yes
+					BOR_SIG_SL_4_2_1 = yes
+					BOR_SIG_SL_5_2_1 = yes
+				}
+				else = { # Before alignment
+					BOR_SIG_SL_0_5_1 = yes
+					BOR_SIG_SL_1_5_1 = yes
+					BOR_SIG_SL_4_5_1 = yes
+					BOR_SIG_SL_5_5_1 = yes
+				}
+			}
+			else_if = {
+				limit = {
+					has_global_flag = german_civil_war_goeringvic
+				}
+				GGR_decrease_militarist_loyalty = yes
+				GGR_increase_militarist_power = yes
+				GGR_increase_militarist_influence = yes
+			}
+			else = {
+				custom_effect_tooltip = "goering, speer or bormann didnt win GCW and fopo broke"
+			}
+			if = {
+				limit = { # So African RKs doesnt collapse for no reason if Germany is AI
+					GER = {
+						is_ai = no
+					}
+				}
+				custom_effect_tooltip = GER_African_RKs_Collapse_tt
+				hidden_effect = {
+					every_other_country = {
+						limit = {
+							OR = {
+								tag = GRO
+								tag = COG
+								tag = ANG
+								tag = BOR
+							}
+						}
+						add_equipment_to_stockpile = {
+							type = infantry_equipment
+							amount = -30000
+						}
+						add_equipment_to_stockpile = {
+							type = anti_tank_equipment
+							amount = -5000
+						}
+						add_equipment_to_stockpile = {
+							type = motorized_equipment
+							amount = -2000
+						}
+						add_equipment_to_stockpile = {
+							type = support_equipment
+							amount = -5000
+						}
+						if = { 
+							limit = { 
+								has_dlc = "No Step Back"
+							}
+							add_equipment_to_stockpile = {
+								type = MBT_chassis
+								amount = -500
+								producer = USA
+							}
+						}
+						else = {
+							add_equipment_to_stockpile = {
+								type = MBT_equipment
+								amount = -500
+								producer = USA
+							}
+						}
+						add_manpower = -150000
+					}
+					SAF = {
+						add_equipment_to_stockpile = {
+							type = infantry_equipment
+							amount = 40000
+						}
+						add_equipment_to_stockpile = {
+							type = anti_tank_equipment
+							amount = 4000
+						}
+						add_equipment_to_stockpile = {
+							type = motorized_equipment
+							amount = 2500
+						}
+						add_equipment_to_stockpile = {
+							type = support_equipment
+							amount = 4000
+						}
+						if = { 
+							limit = { 
+								has_dlc = "No Step Back"
+							}
+							add_equipment_to_stockpile = {
+								type = MBT_chassis
+								amount = 250
+							}
+						}
+						else = {
+							add_equipment_to_stockpile = {
+								type = MBT_equipment
+								amount = 250
+							}
+						}
+						add_manpower = 200000
+						load_OOB = SAF_hard
+					}
+				}
+			}
+		}
+	}
+
+	# Common - reserved for Cabal preparation decisions
+
+	GER_promote_kai_uwe_von_hassel = {
+		icon = GFX_COG_invitation_decision
+		visible = {
+			TNO_fopo_saw_withdrawal_selected = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_promote_kai_uwe_von_hassel"
+			custom_effect_tooltip = GER_promote_kai_uwe_von_hassel_tt
+		}
+	}
+
+	GER_prepare_german_loyalists = {
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			TNO_fopo_saw_withdrawal_selected = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = {
+			has_political_power > 29
+			command_power > 9
+		}
+		custom_cost_text = decision_cost_10_cp_30_pp
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_prepare_german_loyalists"
+			hidden_effect = { add_command_power = -10 add_political_power = -30 }
+			set_country_flag = GER_add_5_cabal
+			custom_effect_tooltip = GER_prepare_german_loyalists_tt
+		}
+	}
+
+	GER_investigate_internal_affairs = {
+		icon = GFX_decision_generic_investigate
+		visible = {
+			TNO_fopo_saw_withdrawal_selected = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_investigate_internal_affairs"
+			set_country_flag = GER_add_10_cabal
+			custom_effect_tooltip = GER_investigate_internal_affairs_tt
+		}
+	}
+
+	GER_investigate_african_rebels = {
+		icon = GFX_decision_generic_investigate
+		visible = {
+			TNO_fopo_saw_withdrawal_selected = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GER_investigate_african_rebels"
+			set_country_flag = GER_allow_african_meddling
+			custom_effect_tooltip = GER_investigate_african_rebels_tt
+		}
+	}
+	
+	# Speer
+	SGR_open_withdrawal_decisions = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_open_withdrawal_decisions"
+			set_country_flag = SGR_withdrawal_decisions_open
+		}
+	}
+	SGR_close_withdrawal_decisions = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_close_withdrawal_decisions"
+			clr_country_flag = SGR_withdrawal_decisions_open
+		}
+	}
+
+	SGR_schedule_troop_withdrawal = {
+		icon = GFX_decision_generic_military_hat
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_schedule_troop_withdrawal"
+			GRO = {
+				add_manpower = -500
+			}
+			COG = {
+				add_manpower = -500
+			}
+			ANG = {
+				add_manpower = -500
+			}
+			add_manpower = 1500
+			set_temp_variable = { GER_withdrawal_var_change = 2.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	SGR_ship_back_assets = {
+		icon = GFX_decision_generic_money_sign
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_ship_back_assets"
+			set_temp_variable = { money_reserves_temp = 0.1 }
+			econ_money_reserves_change_raw_money = yes
+			set_temp_variable = { GER_withdrawal_var_change = 4 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	SGR_quell_down_protests = {
+		icon = GFX_decision_generic_propaganda
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_quell_down_protests"
+			if = {
+				limit = {
+					check_variable = {
+						SGR_SAW_civilian_protest > 2.4
+					}
+				}
+				SGR_SAW_protest_decrease_small = yes
+			}
+			add_stability = 0.025
+			add_regime_stab_small = yes
+			set_temp_variable = { GER_withdrawal_var_change = 2.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	SGR_plans_for_the_future = {
+		icon = GFX_decision_document_target
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_plans_for_the_future"
+			hidden_effect = { add_command_power = -15 }
+			set_temp_variable = { GER_withdrawal_var_change = 3 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	SGR_appropriate_resources = {
+		icon = GFX_ANG_diamond_icon
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_appropriate_resources"
+			set_temp_variable = { temp_econ_spending_amount = 0.075 }
+			econ_spend_money_once_effect_raw_money = yes
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 2
+				}
+			}
+			set_temp_variable = { GER_withdrawal_var_change = 4.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+	
+	# From Speer focuses
+
+	SGR_liquidate_german_properties = {
+		icon = GFX_decision_generic_destroy_fort
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+			has_completed_focus = GER_soften_the_blow
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = {
+			has_political_power > 29
+			command_power > 9
+		}
+		custom_cost_text = decision_cost_10_cp_30_pp
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_liquidate_german_properties"
+			hidden_effect = {
+				add_political_power = -30
+				add_command_power = -10
+			}
+			random_list = {
+				1 = {
+					GRO = {
+						random_owned_controlled_state = {
+							damage_building = {
+								type = infrastructure
+								damage = 1
+							}
+						}
+					}
+				}
+				1 = {
+					COG = {
+						random_owned_controlled_state = {
+							damage_building = {
+								type = infrastructure
+								damage = 1
+							}
+						}
+					}
+				}
+				1 = {
+					ANG = {
+						random_owned_controlled_state = {
+							damage_building = {
+								type = infrastructure
+								damage = 1
+							}
+						}
+					}
+				}
+			}
+			increase_reformist_leaning_small = yes
+			set_temp_variable = { money_reserves_temp = 0.15 }
+			econ_money_reserves_change_raw_money = yes
+			set_temp_variable = { GER_withdrawal_var_change = 5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	SGR_speedtrack_evacuation_timeline = {
+		icon = GFX_decision_clock
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+			has_completed_focus = GER_soften_the_blow
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_speedtrack_evacuation_timeline"
+			add_days_mission_timeout = {
+				mission = GER_withdrawal_deadline
+				days = -90
+			}
+			add_regime_stab_big = yes
+			increase_reformist_leaning_small = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.250 }
+			econ_spend_money_once_effect_raw_money = yes
+			set_temp_variable = { GER_withdrawal_var_change = 10 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	SGR_maximize_colonial_exploitation = {
+		icon = GFX_decision_forced_labor
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+			has_completed_focus = GER_youre_on_your_own
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_maximize_colonial_exploitation"
+			GRO = {
+				add_stability = -0.05
+				add_manpower = -2500
+			}
+			COG = {
+				add_stability = -0.05
+				add_manpower = -2500
+			}
+			ANG = {
+				add_stability = -0.05
+				add_manpower = -2500
+			}
+			set_temp_variable = { money_reserves_temp = 0.35 }
+			econ_money_reserves_change_raw_money = yes
+			set_temp_variable = { GER_withdrawal_var_change = 5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	SGR_seize_natural_resources = {
+		icon = GFX_decision_seizure
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_speer = yes
+			has_country_flag = SGR_withdrawal_decisions_open
+			has_completed_focus = GER_youre_on_your_own
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_seize_natural_resources"
+			add_fuel = 10000
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 4
+				}
+			}
+			random_owned_controlled_state = {
+				add_resource = {
+					type = rubber
+					amount = 6
+				}
+			}
+			set_temp_variable = { GER_withdrawal_var_change = 5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	# Bormann
+	BOR_open_withdrawal_decisions = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_open_withdrawal_decisions"
+			set_country_flag = BOR_withdrawal_decisions_open
+		}
+	}
+	BOR_close_withdrawal_decisions = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_close_withdrawal_decisions"
+			clr_country_flag = BOR_withdrawal_decisions_open
+		}
+	}
+	BOR_schedule_troop_withdrawal = {
+		icon = GFX_decision_generic_military_hat
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_schedule_troop_withdrawal"
+			GRO = {
+				add_manpower = -500
+			}
+			COG = {
+				add_manpower = -500
+			}
+			ANG = {
+				add_manpower = -500
+			}
+			add_manpower = 1500
+			set_temp_variable = { GER_withdrawal_var_change = 2.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	BOR_ship_back_assets = {
+		icon = GFX_decision_generic_money_sign
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_ship_back_assets"
+			set_temp_variable = { money_reserves_temp = 0.1 }
+			econ_money_reserves_change_raw_money = yes
+			set_temp_variable = { GER_withdrawal_var_change = 4 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+
+		}
+	}
+
+	BOR_quell_down_protests = {
+		icon = GFX_decision_generic_propaganda
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_quell_down_protests"
+			if = {
+				limit = {
+					check_variable = {
+						GER_Bormann_SAW_protest_decrease_small > 2.4
+					}
+				}
+				GER_Bormann_SAW_protest_decrease_small = yes
+			}
+			add_stability = 0.025
+			set_temp_variable = { GER_withdrawal_var_change = 2.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	BOR_plans_for_the_future = {
+		icon = GFX_decision_document_target
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_plans_for_the_future"
+			hidden_effect = { add_command_power = -15 }
+			set_temp_variable = { GER_withdrawal_var_change = 3 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	BOR_appropriate_resources = {
+		icon = GFX_ANG_diamond_icon
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_appropriate_resources"
+			set_temp_variable = { temp_econ_spending_amount = 0.075 }
+			econ_spend_money_once_effect_raw_money = yes
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 2
+				}
+			}
+			set_temp_variable = { GER_withdrawal_var_change = 4.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	# From Bormann focuses
+
+	BOR_promise_glory_to_veterans = {
+		icon = GFX_decision_generic_military_parade
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+			has_completed_focus = BOR_veterans_of_the_civil_war
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = {
+			has_political_power > 29
+			command_power > 9
+		}
+		custom_cost_text = decision_cost_10_cp_30_pp
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_promise_glory_to_veterans"
+			hidden_effect = { add_command_power = -10 add_political_power = -30 }
+			BOR_SIG_SL_4_4_2 = yes
+			BOR_SIG_SL_0_4_2 = yes
+			BOR_SIG_SL_1_2_2 = yes
+			add_manpower = -12500
+			add_popularity = {
+				ideology = ultranationalism
+				popularity = -0.03
+			}
+			every_other_country = {
+				limit = {
+					OR = {
+						tag = GRO
+						tag = COG
+						tag = ANG
+					}
+				}
+				add_manpower = 2500
+				add_popularity = {
+					ideology = ultranationalism
+					popularity = 0.01
+				}
+			}
+			set_temp_variable = { GER_withdrawal_var_change = 5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	BOR_put_dissidents_on_duty = {
+		icon = GFX_decision_point
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+			has_completed_focus = BOR_not_so_volunteers
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = {
+			has_political_power > 29
+			command_power > 9
+		}
+		custom_cost_text = decision_cost_10_cp_30_pp
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_put_dissidents_on_duty"
+			hidden_effect = { add_command_power = -10 add_political_power = -30 }
+			BOR_SIG_SL_4_4_0 = yes
+			BOR_SIG_SL_0_4_0 = yes
+			BOR_SIG_SL_1_2_0 = yes
+			add_manpower = -12500
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.03
+			}
+			add_popularity = {
+				ideology = authoritarian_democracy
+				popularity = -0.01
+			}
+			every_other_country = {
+				limit = {
+					OR = {
+						tag = GRO
+						tag = COG
+						tag = ANG
+					}
+				}
+				add_manpower = 2500
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.01
+				}
+			}
+			set_temp_variable = { GER_withdrawal_var_change = 5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	BOR_hone_shock_and_awe_tactics = {
+		icon = GFX_decision_death_road
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+			has_completed_focus = BOR_abwehrabteilung_afrika
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_hone_shock_and_awe_tactics"
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						OR = {
+							tag = GRO
+							tag = COG
+							tag = ANG
+						}
+					}
+					remove_ideas = GER_BOR_schock_methode
+				}
+			}
+			every_other_country = {
+				limit = {
+					OR = {
+						tag = GRO
+						tag = COG
+						tag = ANG
+					}
+				}
+				add_timed_idea = {
+					idea = GER_BOR_schock_methode
+					days = 365
+				}
+			}
+			set_temp_variable = { GER_withdrawal_var_change = 5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	BOR_the_final_shipments = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_bormann = yes
+			has_country_flag = BOR_withdrawal_decisions_open
+			has_completed_focus = BOR_the_best_gear
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BOR_the_final_shipments"
+			every_other_country = {
+				limit = {
+					OR = {
+						tag = GRO
+						tag = COG
+						tag = ANG
+					}
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_2
+					amount = 2500
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_air_shoulder_equipment_0
+					amount = 500
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment_1
+					amount = 500
+					producer = GER
+				}
+			}
+			set_temp_variable = { temp_econ_spending_amount = 0.250 }
+			econ_spend_money_once_effect_raw_money = yes
+			set_temp_variable = { GER_withdrawal_var_change = 7.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	# Goering
+	GGR_open_withdrawal_decisions = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_goring = yes
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GGR_open_withdrawal_decisions"
+			set_country_flag = GGR_withdrawal_decisions_open
+		}
+	}
+	GGR_close_withdrawal_decisions = {
+		icon = GFX_decision_generic_political_action
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_goring = yes
+			has_country_flag = GGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		days_remove = 0
+		days_re_enable = 0
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GGR_close_withdrawal_decisions"
+			clr_country_flag = GGR_withdrawal_decisions_open
+		}
+	}
+
+	GGR_schedule_troop_withdrawal = {
+		icon = GFX_decision_generic_military_hat
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_goring = yes
+			has_country_flag = GGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GGR_schedule_troop_withdrawal"
+			GRO = {
+				add_manpower = -500
+			}
+			COG = {
+				add_manpower = -500
+			}
+			ANG = {
+				add_manpower = -500
+			}
+			add_manpower = 1500
+			set_temp_variable = { GER_withdrawal_var_change = 2.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	GGR_ship_back_assets = {
+		icon = GFX_decision_generic_money_sign
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_goring = yes
+			has_country_flag = GGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GGR_ship_back_assets"
+			set_temp_variable = { money_reserves_temp = 0.1 }
+			econ_money_reserves_change_raw_money = yes
+			set_temp_variable = { GER_withdrawal_var_change = 4 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	GGR_quell_down_protests = {
+		icon = GFX_decision_generic_propaganda
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_goring = yes
+			has_country_flag = GGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 25
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GGR_quell_down_protests"
+			if = {
+				limit = {
+					check_variable = {
+						GGR_SAW_civilian_protest > 2.4
+					}
+				}
+				GGR_SAW_protest_decrease_small = yes
+			}
+			add_stability = 0.025
+			set_temp_variable = { GER_withdrawal_var_change = 2.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	GGR_plans_for_the_future = {
+		icon = GFX_decision_document_target
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_goring = yes
+			has_country_flag = GGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		custom_cost_trigger = { command_power > 14.99 }
+		custom_cost_text = decision_cost_15_cp
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GGR_plans_for_the_future"
+			hidden_effect = { add_command_power = -15 }
+			set_temp_variable = { GER_withdrawal_var_change = 3 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
+
+	GGR_appropriate_resources = {
+		icon = GFX_ANG_diamond_icon
+		visible = {
+			TNO_fopo_saw_withdrawal_selected_goring = yes
+			has_country_flag = GGR_withdrawal_decisions_open
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		cost = 35
+		days_re_enable = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GGR_appropriate_resources"
+			set_temp_variable = { temp_econ_spending_amount = 0.075 }
+			econ_spend_money_once_effect_raw_money = yes
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 2
+				}
+			}
+			set_temp_variable = { GER_withdrawal_var_change = 4.5 }
+			GER_SAW_Withdrawal_Modify_Progress = yes
+		}
+	}
 }

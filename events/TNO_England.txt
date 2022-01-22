@@ -226,7 +226,18 @@ country_event = { #HMMLR asks USA for enough equipment and spares for a tank div
 		ai_chance = { factor = 100 }
 		add_equipment_to_stockpile = { type = infantry_equipment amount = -492 producer = USA }
 		add_equipment_to_stockpile = { type = APC_equipment amount = -240 producer = USA }
-		add_equipment_to_stockpile = { type = MBT_equipment amount = -492 producer = USA }
+		if = {
+			limit = { has_dlc = "No Step Back" }
+			add_equipment_to_stockpile = { type = MBT_chassis amount = -492 producer = USA }
+		}
+		if = {
+			limit = { 
+				NOT = {
+					has_dlc = "No Step Back"
+				}
+			}
+			add_equipment_to_stockpile = { type = MBT_equipment amount = -492 producer = USA }
+		}
 		add_equipment_to_stockpile = { type = artillery_equipment amount = -29 producer = USA }
 		add_equipment_to_stockpile = { type = support_equipment amount = -66 producer = USA }
 		hidden_effect = {
@@ -1050,7 +1061,7 @@ country_event = { #A Strange Man in a Strange Land
 	}
 }
 
-country_event = { #A Meeting with the F�hrer
+country_event = { #A Meeting with the Führer
 	id = ENG_intro.27
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_intro.12" }
 	title = ENG_intro.27.t
@@ -1120,7 +1131,7 @@ country_event = { #A King and a Pilot
 			type = anti_tank_equipment_0
 			amount = 150
 			producer = GER
-		}
+		} 
 		add_equipment_to_stockpile = {
 			type = jet_fighter_equipment_1
 			amount = 25
@@ -2116,7 +2127,7 @@ country_event = {
 	hidden = yes
 
 	option = {
-		set_global_flag = ECW_ongoing #why didnt we have one of these before what the fuck am i blind?
+		set_global_flag = ECW_ongoing #why didnt we have one of these before what the fuck am i blind? 
 		if = {
 			limit = {
 				FEN = { is_ai = yes }
@@ -2126,17 +2137,11 @@ country_event = {
 			ENG = {
 				country_event = {
 					id = ENG_HMMLRECW.6
-					days = 180
+					days = 145
 				}
 			}
 		}
 		econ_leave_sphere = yes
-		set_politics = {
-			ruling_party = authoritarian_democracy
-			last_election = "1935.11.14"
-			election_frequency = 48
-			elections_allowed = no
-		}
 
 		set_popularities = {
 			communist = 0
@@ -2146,21 +2151,11 @@ country_event = {
 			liberal_democracy = 0
 			national_socialism = 0
 			conservative_democracy = 26
-
+			
 			authoritarian_democracy = 54
 			despotism = 0
 			fascism = 20
 
-		}
-
-		create_country_leader = {
-			name = "Alec Douglas-Home"
-			desc = "POLITICS_ALEC_DOUGLAS_HOME_DESC"
-			picture = "Portrait_ENG_Alec_Douglas_Home.dds"
-			expire = "1985.1.1"
-			ideology = authoritarian_democracy_national_conservatism_subtype
-			traits = {
-			}
 		}
 
 		every_owned_state = {
@@ -2203,7 +2198,7 @@ country_event = {
 
 		CRN = { give_military_access = ENG }
 		ENG = { give_military_access = CRN }
-
+		
 		FEN = {
 			inherit_technology = ENG
 			division_template = {
@@ -2471,6 +2466,8 @@ country_event = {
 			}
 			set_fuel_ratio = 0.5
 		}
+		ENG = { add_ideas = ENG_Brutal_War }
+		FEN = { add_ideas = ENG_Brutal_War }
 		if = {
 			limit = {
 				ENG = { is_ai = yes }
@@ -2478,10 +2475,6 @@ country_event = {
 			}
 			ENG = { add_ideas = ENG_Brutal_War_AI }
 			FEN = { add_ideas = ENG_Brutal_War_AI }
-		}
-		else = {
-			ENG = { add_ideas = ENG_Brutal_War }
-			FEN = { add_ideas = ENG_Brutal_War }
 		}
 		FEN = {
 			add_timed_idea = { idea = ENG_consolidating_forces days = 7 }
@@ -2663,7 +2656,6 @@ country_event = { #HMMLR Victory
 		# ENG_RECONSTRUCTION_initialize = yes
 		clr_global_flag = ECW_ongoing
 		set_country_flag = ENG_Reconstruction
-		remove_ideas = Custom_TNO_war_buff
 		country_event = {
 			id = ENG_devastation.5
 			days = 1
@@ -2873,10 +2865,27 @@ country_event = { # USA - Request Heavy Equipment
     			amount = 500
     			target = FEN
 		}
-		send_equipment = {
+		if = {
+			limit = { 
+				has_dlc = "No Step Back"
+			}
+			send_equipment = {
+    			equipment = MBT_chassis
+    			amount = 100
+    			target = FEN
+			}
+		}
+		if = {
+			limit = { 
+				NOT = {
+					has_dlc = "No Step Back"
+				}
+			}
+			send_equipment = {
     			equipment = MBT_equipment
     			amount = 100
     			target = FEN
+			}
 		}
 		FEN = {
 			country_event = {
@@ -3278,12 +3287,7 @@ country_event = { #End of an Era
 	option = {
 		name = ENG_reconstruction.6.a
 		custom_effect_tooltip = ENG_new_focus_tree_reconstruction_2_tt
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Rab Butler"
-			picture = "Portrait_England_Rab_Butler.dds"
-			ideology = authoritarian_democracy_national_conservatism_subtype
-		}
+		promote_character = ENG_Rab_Butler
 		remove_ideas = ENG_Alec_Douglas_Home_hog
 		hidden_effect = { load_focus_tree = ENG_FT_Collab_Reconstruction_2 }
 		country_event = { id = ENG_ElectionSeason.5 hours = 12 }
@@ -3669,7 +3673,14 @@ country_event = { #chesterton
 	}
 	option = { #death
 		name = FEN_reconstruction.8.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+
+			modifier = {
+				add = 9
+				check_variable = { TNO_Britain_ElectionSeason_ActorID = 16 }
+			}
+		}
 		country_event = {
 			id = FEN_reconstruction.10
 			days = 1
@@ -3767,7 +3778,14 @@ country_event = { #montgomery
 	}
 	option = { #death
 		name = FEN_reconstruction.11.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+
+			modifier = {
+				add = 9
+				check_variable = { TNO_Britain_ElectionSeason_ActorID = 16 }
+			}
+		}
 		country_event = {
 			id = FEN_reconstruction.13
 			days = 1
@@ -3901,7 +3919,14 @@ country_event = { #generals
 	}
 	option = { #death
 		name = FEN_reconstruction.15.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+
+			modifier = {
+				add = 9
+				check_variable = { TNO_Britain_ElectionSeason_ActorID = 16 }
+			}
+		}
 		country_event = {
 			id = FEN_reconstruction.17
 			days = 1
@@ -4048,7 +4073,14 @@ country_event = { #mac
 	}
 	option = { #death
 		name = FEN_reconstruction.19.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+
+			modifier = {
+				add = 9
+				check_variable = { TNO_Britain_ElectionSeason_ActorID = 16 }
+			}
+		}
 		country_event = {
 			id = FEN_reconstruction.21
 			days = 1
@@ -4185,7 +4217,14 @@ country_event = { #maudling
 	}
 	option = { #exile
 		name = FEN_reconstruction.23.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+
+			modifier = {
+				add = 9
+				check_variable = { TNO_Britain_ElectionSeason_ActorID = 16 }
+			}
+		}
 		country_event = {
 			id = FEN_reconstruction.25
 			days = 1
@@ -4384,7 +4423,7 @@ country_event = { #FEN_YDL
 	immediate = {log = "[GetDateText]: [Root.GetName]: event FEN_reconstruction.34"}
 	title = FEN_reconstruction.34.t
 	desc = FEN_reconstruction.34.desc
-
+	
 	picture = GFX_report_event_usa_wfb_subcommittees
 
 	is_triggered_only = yes
@@ -4947,7 +4986,7 @@ country_event = { #England actually joins OFN
 				}
 				if = {
 					limit = {
-						has_country_leader = { name = "Margaret Thatcher" ruling_only = yes }
+						has_country_leader = { character = ENG_Margaret_Thatcher ruling_only = yes }
 					}
 					activate_mission = ENG_OFN_Focus_Mission
 				}
@@ -5103,10 +5142,10 @@ country_event = { #
 	title = ENG_International_Mechanic.23.t
 	desc = ENG_International_Mechanic.23.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.23.a
 		ai_chance = { factor = 1 }
@@ -5131,10 +5170,10 @@ country_event = { #
 	title = ENG_International_Mechanic.24.t
 	desc = ENG_International_Mechanic.24.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.24.a
 		ai_chance = { factor = 1 }
@@ -5159,10 +5198,10 @@ country_event = { #
 	title = ENG_International_Mechanic.25.t
 	desc = ENG_International_Mechanic.25.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.25.a
 		ai_chance = { factor = 1 }
@@ -5187,10 +5226,10 @@ country_event = { #
 	title = ENG_International_Mechanic.26.t
 	desc = ENG_International_Mechanic.26.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.26.a
 		ai_chance = { factor = 1 }
@@ -5215,10 +5254,10 @@ country_event = { #
 	title = ENG_International_Mechanic.27.t
 	desc = ENG_International_Mechanic.27.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.27.a
 		ai_chance = { factor = 1 }
@@ -5243,10 +5282,10 @@ country_event = { #
 	title = ENG_International_Mechanic.28.t
 	desc = ENG_International_Mechanic.28.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.28.a
 		ai_chance = { factor = 1 }
@@ -5271,10 +5310,10 @@ country_event = { #
 	title = ENG_International_Mechanic.29.t
 	desc = ENG_International_Mechanic.29.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.29.a
 		ai_chance = { factor = 1 }
@@ -5299,10 +5338,10 @@ country_event = { #
 	title = ENG_International_Mechanic.30.t
 	desc = ENG_International_Mechanic.30.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.30.a
 		ai_chance = { factor = 1 }
@@ -5327,10 +5366,10 @@ country_event = { #
 	title = ENG_International_Mechanic.31.t
 	desc = ENG_International_Mechanic.31.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.31.a
 		ai_chance = { factor = 1 }
@@ -5355,10 +5394,10 @@ country_event = { #
 	title = ENG_International_Mechanic.32.t
 	desc = ENG_International_Mechanic.32.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.32.a
 		ai_chance = { factor = 1 }
@@ -5383,10 +5422,10 @@ country_event = { #
 	title = ENG_International_Mechanic.33.t
 	desc = ENG_International_Mechanic.33.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.33.a
 		ai_chance = { factor = 1 }
@@ -5411,10 +5450,10 @@ country_event = { #
 	title = ENG_International_Mechanic.34.t
 	desc = ENG_International_Mechanic.34.desc
 	picture = GFX_report_event_ENG_margaret_thatcher_old
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.34.a
 		ai_chance = { factor = 1 }
@@ -5455,13 +5494,13 @@ country_event = { #
 	title = ENG_International_Mechanic.35.t
 	desc = ENG_International_Mechanic.35.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.35.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5471,13 +5510,13 @@ country_event = { #
 	title = ENG_International_Mechanic.36.t
 	desc = ENG_International_Mechanic.36.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.36.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5486,14 +5525,14 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_International_Mechanic.37" }
 	title = ENG_International_Mechanic.37.t
 	desc = ENG_International_Mechanic.37.desc
-	picture = GFX_report_event_westminister
-
+	picture = GFX_report_event_westminister 
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.37.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5503,13 +5542,13 @@ country_event = { #
 	title = ENG_International_Mechanic.38.t
 	desc = ENG_International_Mechanic.38.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.38.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5519,13 +5558,13 @@ country_event = { #
 	title = ENG_International_Mechanic.39.t
 	desc = ENG_International_Mechanic.39.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.39.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5535,13 +5574,13 @@ country_event = { #
 	title = ENG_International_Mechanic.40.t
 	desc = ENG_International_Mechanic.40.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.40.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5551,13 +5590,13 @@ country_event = { #
 	title = ENG_International_Mechanic.41.t
 	desc = ENG_International_Mechanic.41.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.41.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5566,14 +5605,14 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_International_Mechanic.42" }
 	title = ENG_International_Mechanic.42.t
 	desc = ENG_International_Mechanic.42.desc
-	picture = GFX_report_event_westminister
-
+	picture = GFX_report_event_westminister 
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.42.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5583,13 +5622,13 @@ country_event = { #
 	title = ENG_International_Mechanic.43.t
 	desc = ENG_International_Mechanic.43.desc
 	picture = GFX_report_event_ENG_thatcher_goldwater
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.43.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5599,13 +5638,13 @@ country_event = { #
 	title = ENG_International_Mechanic.44.t
 	desc = ENG_International_Mechanic.44.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.44.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5615,13 +5654,13 @@ country_event = { #
 	title = ENG_International_Mechanic.45.t
 	desc = ENG_International_Mechanic.45.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.45.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5631,13 +5670,13 @@ country_event = { #
 	title = ENG_International_Mechanic.46.t
 	desc = ENG_International_Mechanic.46.desc
 	picture = GFX_report_event_westminister
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.46.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5647,13 +5686,13 @@ country_event = { #
 	title = ENG_International_Mechanic.47.t
 	desc = ENG_International_Mechanic.47.desc
 	picture = GFX_report_event_ENG_thatcher_schmidt
-
+	
 	is_triggered_only = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.47.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5664,14 +5703,14 @@ country_event = { #
 	title = ENG_International_Mechanic.48.t
 	desc = ENG_International_Mechanic.48.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.48.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5681,14 +5720,14 @@ country_event = { #
 	title = ENG_International_Mechanic.49.t
 	desc = ENG_International_Mechanic.49.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.49.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5698,14 +5737,14 @@ country_event = { #
 	title = ENG_International_Mechanic.50.t
 	desc = ENG_International_Mechanic.50.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.50.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5715,14 +5754,14 @@ country_event = { #
 	title = ENG_International_Mechanic.51.t
 	desc = ENG_International_Mechanic.51.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.51.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5732,14 +5771,14 @@ country_event = { #
 	title = ENG_International_Mechanic.52.t
 	desc = ENG_International_Mechanic.52.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.52.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5749,14 +5788,14 @@ country_event = { #
 	title = ENG_International_Mechanic.53.t
 	desc = ENG_International_Mechanic.53.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.53.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5766,14 +5805,14 @@ country_event = { #
 	title = ENG_International_Mechanic.54.t
 	desc = ENG_International_Mechanic.54.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.54.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5783,14 +5822,14 @@ country_event = { #
 	title = ENG_International_Mechanic.55.t
 	desc = ENG_International_Mechanic.55.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.55.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5800,14 +5839,14 @@ country_event = { #
 	title = ENG_International_Mechanic.56.t
 	desc = ENG_International_Mechanic.56.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.56.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5817,14 +5856,14 @@ country_event = { #
 	title = ENG_International_Mechanic.57.t
 	desc = ENG_International_Mechanic.57.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.57.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5834,14 +5873,14 @@ country_event = { #
 	title = ENG_International_Mechanic.58.t
 	desc = ENG_International_Mechanic.58.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.58.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -5851,14 +5890,14 @@ country_event = { #
 	title = ENG_International_Mechanic.59.t
 	desc = ENG_International_Mechanic.59.desc
 	picture = GFX_report_event_eng_thatcher_speech
-
+	
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	
 	option = { #
 		name = ENG_International_Mechanic.59.a
 		ai_chance = { factor = 1 }
-
+		
 	}
 }
 
@@ -8105,7 +8144,7 @@ country_event = {
 }
 
 country_event = {
-	id = ENG_mac.134 ### Cornwall Crisis - Hello mr F�hrer
+	id = ENG_mac.134 ### Cornwall Crisis - Hello mr Führer
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_mac.134" }
 	title = ENG_mac.134.t
 	desc = ENG_mac.134.desc
@@ -8201,7 +8240,6 @@ country_event = {
 			id = ENG_mac.137
 			days = 1
 		}
-
 	}
 
 	option = { #Wait
@@ -8213,11 +8251,6 @@ country_event = {
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
 			amount = -600
-			producer = ENG
-		}
-		add_equipment_to_stockpile = {
-			type = MBT_equipment_2
-			amount = -100
 			producer = ENG
 		}
 	}
@@ -8267,15 +8300,6 @@ country_event = {
 	option = {
 		name = ENG_mac.144.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Bernard Montgomery"
-				desc = "POLITICS_BERNARD_MONTGOMERY_DESC"
-				picture = "gfx/leaders/ENG/Generals/Portrait_ENG_Bernard_Montgomery.dds"
-				expire = "1985.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = {
-				}
-			}
 			set_politics = {
 				ruling_party = despotism
 			}
@@ -8319,7 +8343,7 @@ country_event = {
 	option = {
 		name = ENG_mac.145.a
 		country_event = {
-			id = ENG_mac.137
+			id = ENG_mac.138
 			days = 1
 		}
 	}
@@ -8366,7 +8390,7 @@ country_event = {
 }
 
 country_event = {
-	id = ENG_mac.139 ### Cornwall Crisis - Herr F�hrer accept our terms
+	id = ENG_mac.139 ### Cornwall Crisis - Herr Führer accept our terms
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_mac.139" }
 	title = ENG_mac.139.t
 	desc = ENG_mac.139.desc
@@ -8464,10 +8488,13 @@ country_event = {
 					amount = 100
 					producer = USA
 				}
-				add_equipment_to_stockpile = {
-					type = MBT_equipment_2
-					amount = 25
-					producer = USA
+				if = {
+					limit = { has_dlc = "No Step Back" }
+					add_equipment_to_stockpile = { type = MBT_chassis_2 amount = 25 producer = USA variant_name = "M60 Clark" }
+				}
+				if = {
+					limit = { NOT = { has_dlc = "No Step Back" } }
+					add_equipment_to_stockpile = { type = MBT_equipment_2 amount = 25 producer = USA }
 				}
 				add_to_variable = { ENG_MIL_LOY = 10 }
 				add_to_variable = { ENG_MIL_LOY_FLR = 15 }
@@ -11101,6 +11128,9 @@ country_event = { #Meeting with St. John-Stevas
 	option = {
 		name = FEN_NDL_political.2.a
 		ai_chance = { factor = 1 }
+		hidden_effect = {
+			remove_ideas = ENG_Generic_Vacant_for
+		}
 		add_ideas = ENG_Norman_St_John_Stevas_for
 	}
 }
@@ -11117,6 +11147,9 @@ country_event = { #Meeting with Powell
 	option = {
 		name = FEN_NDL_political.3.a
 		ai_chance = { factor = 1 }
+		hidden_effect = {
+			remove_ideas = ENG_Generic_Vacant_sec
+		}
 		add_ideas = ENG_Enoch_Powell_sec
 	}
 }
@@ -11921,17 +11954,35 @@ country_event = { #Wilson Kicks out Birch
 		ai_chance = { factor = 1 }
 		hidden_effect = {
 			set_country_flag = Birch_Removed
-			swap_ideas = {
-				remove_idea = ENG_Reg_Birch_hog
-				add_idea = ENG_Yigael_Gluckstein_hog
-			}
+			remove_ideas = ENG_Reg_Birch_hog
+			add_ideas = ENG_Yigael_Gluckstein_hog
 		}
 	}
 }
 
 country_event = { #Birch Kicks out Wilson
 	id = FEN_SLP_political.9
-	immediate = { log = "[GetDateText]: [Root.GetName]: event FEN_SLP_political.9" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event FEN_SLP_political.9" 
+		remove_advisor_role = {
+			character = FEN_Bill_Alexander
+			slot = security_minister
+		}
+		add_advisor_role = {
+			character = ENG_Bill_Alexander
+			advisor = {
+				slot = foreign_minister
+				cost = -1
+				idea_token = ENG_Bill_Alexander_for
+				traits = {
+					for_the_cloak_n_dagger_schemer
+				}
+				allowed = {
+					original_tag = ENG
+				}
+			}
+		}
+	}
 	title = FEN_SLP_political.9.t
 	desc = FEN_SLP_political.9.desc
 
@@ -11962,8 +12013,8 @@ country_event = { #Birch Kicks out Wilson
 				#TNO_ParliamentMechanic_Speaker_Reg_Birch
 				FEN_Philip_Toynbee_hog
 				FEN_Bill_Alexander_for
-				FEN_bert_ramelson_eco
-				FEN_kim_philby_sec
+				FEN_Bert_Ramelson_eco
+				FEN_Kim_Philby_sec
 			}
 			every_country = {
 				news_event = {
@@ -12698,15 +12749,6 @@ country_event = { # monty coups
 		name = ENG_Corn_crisis.21.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			create_country_leader = {
-				name = "Bernard Montgomery"
-				desc = "POLITICS_BERNARD_MONTGOMERY_DESC"
-				picture = "gfx/leaders/ENG/Generals/Portrait_ENG_Bernard_Montgomery.dds"
-				expire = "1985.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = {
-				}
-			}
 			set_politics = {
 				ruling_party = despotism
 			}
@@ -13633,10 +13675,11 @@ country_event = { #
 	option = { #nah fuck that shit, we can do it ourselves
 		name = FEN_SLP.1006.b
 		ai_chance = { factor = 1 }
-		add_tech_bonus = {
-			bonus = 0.5
-			category = air_doctrine
-			uses = 1
+		add_doctrine_cost_reduction = {
+		    name = air_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = air_doctrine
 		}
 		add_popularity = {
 			ideology = socialist
@@ -14269,7 +14312,7 @@ country_event = { #Rocket Man
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.15" }
 	title = ENG_flavor.15.t
 	desc = ENG_flavor.15.desc
-	#picture =
+	#picture = 
 
 	fire_only_once = yes
 
@@ -14292,7 +14335,7 @@ country_event = { # Polish Immigrant Books
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.16" }
 	title = ENG_flavor.16.t
 	desc = ENG_flavor.16.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14309,7 +14352,7 @@ country_event = { # Maudling trade dealing with Liberia, angery MAC
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.17" }
 	title = ENG_flavor.17.t
 	desc = ENG_flavor.17.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14326,7 +14369,7 @@ country_event = { # Philby HQ
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.18" }
 	title = ENG_flavor.18.t
 	desc = ENG_flavor.18.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14343,7 +14386,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.19" }
 	title = ENG_flavor.19.t
 	desc = ENG_flavor.19.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14377,7 +14420,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.21" }
 	title = ENG_flavor.21.t
 	desc = ENG_flavor.21.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14394,7 +14437,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.22" }
 	title = ENG_flavor.22.t
 	desc = ENG_flavor.22.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14431,7 +14474,7 @@ country_event = { # Macmillan sadboi
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.24" }
 	title = ENG_flavor.24.t
 	desc = ENG_flavor.24.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14451,7 +14494,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.25" }
 	title = ENG_flavor.25.t
 	desc = ENG_flavor.25.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14471,7 +14514,7 @@ country_event = { # Sadboi SAS
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.26" }
 	title = ENG_flavor.26.t
 	desc = ENG_flavor.26.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14491,7 +14534,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.27" }
 	title = ENG_flavor.27.t
 	desc = ENG_flavor.27.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14511,7 +14554,7 @@ country_event = { # Shooting MP's epic style
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.28" }
 	title = ENG_flavor.28.t
 	desc = ENG_flavor.28.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14532,7 +14575,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.29" }
 	title = ENG_flavor.29.t
 	desc = ENG_flavor.29.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14557,7 +14600,7 @@ country_event = { #Stirling Guns Down Collabs
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.30" }
 	title = ENG_flavor.30.t
 	desc = ENG_flavor.30.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14611,7 +14654,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.33" }
 	title = ENG_flavor.33.t
 	desc = ENG_flavor.33.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14758,7 +14801,7 @@ country_event = { #
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.41" }
 	title = ENG_flavor.41.t
 	desc = ENG_flavor.41.desc
-	#picture =
+	#picture = 
 	is_triggered_only = yes
 
 	fire_only_once = yes
@@ -14818,7 +14861,7 @@ country_event = { # oath event
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.45" }
 	title = ENG_flavor.45.t
 	desc = ENG_flavor.45.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -14833,7 +14876,7 @@ country_event = { # ofn sub hunt Exercise
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_flavor.46" }
 	title = ENG_flavor.46.t
 	desc = ENG_flavor.46.desc
-	#picture =
+	#picture = 
 
 	is_triggered_only = yes
 
@@ -15351,7 +15394,6 @@ country_event = { #england asks for demilitirisation
 
 	option = { #yes
 		name = ENG_Wales_unification.7.a
-		ai_chance = { factor = 1 }
 		ENG = {
 			country_event = {
 				id = ENG_Wales_unification.8
@@ -17263,7 +17305,9 @@ country_event = { #NDL 1st Election Victory
 			remove_all_ministers = yes
 			add_ideas = {
 				ENG_David_Eccles_hog
+				ENG_Generic_Vacant_for
 				ENG_Shirley_Williams_eco
+				ENG_Generic_Vacant_sec
 			}
 			set_country_flag = NDL_victorious
 			set_country_flag = ENG_government_monarchy
@@ -17282,7 +17326,27 @@ country_event = { #NDL 1st Election Victory
 
 country_event = { #SLP 1st Election Victory
 	id = ENG_Government_Changes.2
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_Government_Changes.2" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ENG_Government_Changes.2" 
+		remove_advisor_role = {
+			character = FEN_Reg_Birch
+			slot = economy_minister
+		}
+		add_advisor_role = {
+			character = FEN_Reg_Birch 
+			advisor = {
+				slot = head_of_government
+				cost = 50
+				idea_token = ENG_Reg_Birch_hog
+				traits = {
+					hog_ambitious_union_boss
+				}
+				allowed = {
+					original_tag = ENG
+				}
+			}
+		}
+	}
 	title = ENG_Government_Changes.2.t
 	desc = ENG_Government_Changes.2.desc
 	picture = GFX_report_event_eng_harold_wilson
@@ -17403,15 +17467,8 @@ country_event = { #Thatcher 1st Election Victory
 	option = {
 		name = ENG_Government_Changes.3.a
 		hidden_effect = {
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Margaret Thatcher"
-				desc = "POLITICS_MARGARET_THATCHER_DESC"
-				picture = "Portrait_England_Margaret_Thatcher_60s.dds"
-				expire = "1990.1.1"
-				ideology = authoritarian_democracy_national_conservatism_subtype
-				traits = { }
-			}
+			
+			promote_character = ENG_Margaret_Thatcher
 			clr_country_flag = ENG_reconstruction
 			RP_POP_SPLIT_CALC = yes
 			RP_ELITE_SPLIT_CALC = yes
@@ -17492,14 +17549,6 @@ country_event = { #Macmillan 1st Election Victory
 	option = {
 		name = ENG_Government_Changes.4.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Harold Macmillan"
-				desc = "POLITICS_HAROLD_MACMILLAN_DESC"
-				picture = "Portrait_ENG_Harold_Macmillan.dds"
-				expire = "1990.1.1"
-				ideology = conservative_democracy_paternalistic_conservatism_subtype
-				traits = { }
-			}
 			clr_country_flag = ENG_reconstruction
 			resize_array = {
 				array = ENG_Next_UE_Dec
@@ -17644,13 +17693,10 @@ country_event = { #SLP 2nd Election Victory
 	option = {
 		name = ENG_Government_Changes.6.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Harold Wilson"
-				desc = "POLITICS_HAROLD_WILSON_DESC"
-				picture = "Portrait_England_Harold_Wilson_60s.dds"
-				expire = "1990.1.1"
-				ideology = socialist_revolutionary_frontism_subtype
-				traits = { }
+			FEN_Harold_Wilson = {
+				set_portraits = {
+					civilian = { large = "gfx/leaders/ENG/Portrait_England_Harold_Wilson_70s.dds" }
+				}
 			}
 			set_politics = {
 				ruling_party = socialist
@@ -17705,17 +17751,13 @@ country_event = { #Thatcher 2nd Election Victory
 	option = {
 		name = ENG_Government_Changes.7.a
 		hidden_effect = {
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Margaret Thatcher"
-				desc = "POLITICS_MARGARET_THATCHER_DESC"
-				picture = "Portrait_England_Margaret_Thatcher_70s.dds"
-				expire = "1990.1.1"
-				ideology = authoritarian_democracy_national_conservatism_subtype
-				traits = { }
-			}
 			set_politics = {
 				ruling_party = authoritarian_democracy
+			}
+			ENG_Margaret_Thatcher = {
+				set_portraits = {
+					civilian = { large = "GFX_Portrait_ENG_Margaret_Thatcher_2" }
+				}
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -17765,14 +17807,6 @@ country_event = { #Macmillan 2nd Election Victory
 	option = {
 		name = ENG_Government_Changes.8.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Harold Macmillan"
-				desc = "POLITICS_HAROLD_MACMILLAN_DESC"
-				picture = "Portrait_ENG_Harold_Macmillan.dds"
-				expire = "1990.1.1"
-				ideology = conservative_democracy_paternalistic_conservatism_subtype
-				traits = { }
-			}
 			set_politics = {
 				ruling_party = conservative_democracy
 			}
@@ -17949,7 +17983,45 @@ country_event = { #NDL Post-other Party Election Victory
 
 country_event = { #SLP Post-other Party Election Victory
 	id = ENG_Government_Changes.11
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_Government_Changes.11" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ENG_Government_Changes.11"
+		remove_advisor_role = {
+			character = FEN_Reg_Birch
+			slot = economy_minister
+		}
+		add_advisor_role = {
+			character = FEN_Reg_Birch
+			advisor = {
+				slot = head_of_government
+				cost = -1
+				idea_token = ENG_Reg_Birch_hog
+				traits = {
+					hog_ambitious_union_boss
+				}
+				allowed = {
+					original_tag = ENG
+				}
+			}
+		}
+		remove_advisor_role = {
+			character = FEN_Bill_Alexander
+			slot = foreign_minister
+		}
+		add_advisor_role = {
+			character = ENG_Bill_Alexander
+			advisor = {
+				slot = security_minister
+				cost = -1
+				idea_token = ENG_Bill_Alexander_sec
+				traits = {
+					sec_resistance_hero
+				}
+				allowed = {
+					original_tag = ENG
+				}
+			}
+		}
+	}
 	title = ENG_Government_Changes.11.t
 	desc = ENG_Government_Changes.11.desc
 	picture = GFX_report_event_ENG_intro_12
@@ -18047,17 +18119,14 @@ country_event = { #Thatcher Post-other Party 2nd Election Victory
 	option = {
 		name = ENG_Government_Changes.12.a
 		hidden_effect = {
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Margaret Thatcher"
-				desc = "POLITICS_MARGARET_THATCHER_DESC"
-				picture = "Portrait_England_Margaret_Thatcher_70s.dds"
-				expire = "1990.1.1"
-				ideology = authoritarian_democracy_national_conservatism_subtype
-				traits = { }
-			}
 			set_politics = {
 				ruling_party = authoritarian_democracy
+			}
+			promote_character = ENG_Margaret_Thatcher
+			ENG_Margaret_Thatcher = {
+				set_portraits = {
+					civilian = { large = "GFX_Portrait_ENG_Margaret_Thatcher_2" }
+				}
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -18126,14 +18195,6 @@ country_event = { #Macmillan Post-other Party 2nd Election Victory
 	option = {
 		name = ENG_Government_Changes.13.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Harold Macmillan"
-				desc = "POLITICS_HAROLD_MACMILLAN_DESC"
-				picture = "Portrait_ENG_Harold_Macmillan.dds"
-				expire = "1990.1.1"
-				ideology = conservative_democracy_paternalistic_conservatism_subtype
-				traits = { }
-			}
 			set_politics = {
 				ruling_party = conservative_democracy
 			}
@@ -18204,13 +18265,11 @@ country_event = {
 				ideology = authoritarian_democracy
 				popularity = 0.1
 			}
-			create_country_leader = {
-				name = "Rab Butler"
-				desc = "POLITICS_RAB_BUTLER_DESC"
-				picture = "Portrait_England_Rab_Butler.dds"
-				expire = "1990.1.1"
-				ideology = authoritarian_democracy_national_conservatism_subtype
-				traits = { }
+			promote_character = ENG_Rab_Butler
+			hidden_effect = {
+				set_country_leader_description = {
+					desc = "POLITICS_RAB_BUTLER_DESC"
+				}
 			}
 			set_country_flag = ENG_Parliament_Disabled
 			set_politics = {
@@ -18338,7 +18397,7 @@ country_event = { #MSA 1st Election Victory
 				ideology = despotism_interim_government_subtype
 				traits = { }
 			}
-
+			
 
 			### Paaaaarliament mechanic stuff
 				# NOTE: Because of how arrays start at zero, the ID's for each party here are one less than normal
@@ -18388,10 +18447,10 @@ country_event = { #MSA 1st Election Victory
 			load_focus_tree = FEN_MSA_Teaser
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_Empty_hog
-				ENG_Empty_for
-				ENG_Empty_eco
-				ENG_Empty_sec
+				ENG_Generic_Vacant_hog
+				ENG_Generic_Vacant_for
+				ENG_Generic_Vacant_eco
+				ENG_Generic_Vacant_sec
 			}
 			set_country_flag = MSA_victorious
 			set_country_flag = ENG_government_monarchy #FIXME: idk what stirling even does with the monarchy, please fix this later if its wrong
@@ -18516,7 +18575,7 @@ country_event = { #MSA post-other Party 2nd Election Victory
 			ParliamentMechanic_GovStab_Calculate = yes
 			### Paaaaarliament mechanic stuff
 
-			# load_focus_tree =
+			# load_focus_tree = 
 			remove_all_ministers = yes
 			# add_ideas = {
 				#FIXME: fill this up with stirling's ministers
@@ -18586,10 +18645,10 @@ country_event = { #NF 1st Election Victory
 			load_focus_tree = ENG_NF_Teaser
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_Empty_hog
-				ENG_Empty_for
-				ENG_Empty_eco
-				ENG_Empty_sec
+				ENG_Generic_Vacant_hog
+				ENG_Generic_Vacant_for
+				ENG_Generic_Vacant_eco
+				ENG_Generic_Vacant_sec
 			}
 			set_country_flag = NF_victorious
 			set_country_flag = ENG_government_monarchy
@@ -18714,7 +18773,7 @@ country_event = { #NF post-other Party 2nd Election Victory
 			ParliamentMechanic_GovStab_Calculate = yes
 			### Paaaaarliament mechanic stuff
 
-			# load_focus_tree =
+			# load_focus_tree = 
 			remove_all_ministers = yes
 			# add_ideas = {
 				#FIXME: fill this up with chesterton's ministers
@@ -19843,7 +19902,7 @@ country_event = { #calculates all the shizzle (ENG)
 					has_global_flag = ECW_ongoing
 					has_global_flag = ENG_Reconstruction
 				}
-
+				
 			}
 			country_event = {
 				id = ENG_devastation.2
@@ -19933,13 +19992,8 @@ country_event = { #radicalisation effects blah blah
 				days = 10
 			}
 		}
-		if = {
-			limit = {
-				is_ai = no
-			}
-			every_controlled_state = {
-				TNO_ENG_Devastation_Radicalisation_Effect = yes
-			}
+		every_controlled_state = {
+			TNO_ENG_Devastation_Radicalisation_Effect = yes
 		}
 
 	}
@@ -20252,45 +20306,8 @@ country_event = {
 
 country_event = {
 	id = ENG_NF.2
-	immediate = { log = "[GetDateText]: [Root.GetName] event ENG_NF.2"}
-	title = ENG_NF.2.t
-	desc = ENG_NF.2.desc
-	picture = GFX_ENG_NF_Cabinet_2
-	is_triggered_only = yes
-
-	option = {
-		name = ENG_NF.2.a
-
-		create_country_leader = {
-			name = "Colin Jordan"
-			desc = "POLITICS_Colin_Jordan_DESC"
-			picture = "Portrait_England_Colin_Jordan.dds"
-			expire = "1985.1.1"
-			ideology = esoteric_nazism_subtype
-			traits = {
-			}
-		}
-
-		create_country_leader = {
-			name = "Denis Pirie"
-			desc = "POLITICS_Denis_Pirie_DESC"
-			picture = "Portrait_England_Denis_Pirie.dds"
-			expire = "1985.1.1"
-			ideology = ultranationalism_subtype
-			traits = {
-			}
-		}
-
-
-		create_country_leader = {
-			name = "John Tyndall"
-			desc = "POLITICS_John_Tyndall_DESC"
-			picture = "Portrait_England_John_Tyndall.dds"
-			expire = "1985.1.1"
-			ideology = national_socialism_subtype
-			traits = {
-			}
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName] event ENG_NF.2"
 		hidden_effect = {
 			set_party_name = {
 				ideology = national_socialism
@@ -20307,6 +20324,21 @@ country_event = {
 				long_name = ENG_NF_Ultranat_long
 				name = ENG_NF_Ultranat
 			}
+		}
+	}
+	title = ENG_NF.2.t
+	desc = ENG_NF.2.desc
+	picture = GFX_ENG_NF_Cabinet_2
+	is_triggered_only = yes
+
+	option = {
+		name = ENG_NF.2.a
+		
+		promote_character = ENG_Colin_Jordan
+		promote_character = ENG_Denis_Pirie
+		promote_character = ENG_John_Tyndall
+
+		hidden_effect = {
 
 			remove_all_ministers = yes
 			add_ideas = {

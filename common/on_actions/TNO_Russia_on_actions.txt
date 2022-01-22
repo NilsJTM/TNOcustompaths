@@ -1120,6 +1120,59 @@ on_actions = {
 		}
 	}
 
+	on_monthly_PRC = {
+		effect = {
+			if = {
+				limit = { PRC = { is_ai = yes } }
+				every_owned_state = {
+					limit = {
+						PRC_can_assign_status = yes
+					}
+					if = {
+						limit = {
+							PRC = { has_country_flag = PRC_destroyed_citzenry }
+						}
+						PRC_add_mil_status_effect = yes
+					}
+					else_if = {
+						limit = {
+							PRC = { has_country_flag = PRC_destroyed_military }
+						}
+						PRC_add_mil_status_effect = yes
+					}
+					else = {
+						PRC = {
+							set_temp_variable = { PRC_total = 0 }
+							set_variable = { PRC_mil_chance = 1 }
+							set_variable = { PRC_civ_chance = 1 }
+							every_owned_state = {
+								add_to_temp_variable = { PRC.PRC_total = THIS.PRC_Owner }
+							}
+							if = {
+								limit = { # More state controlled by military
+									check_variable = { PRC_total < 0 }
+								}
+								# Subtract a negative number is adding it's absolute value
+								subtract_from_variable = { PRC_civ_chance = PRC_total }
+							}
+							else = { # More state controlled by citzenry / balanced
+								add_to_variable = { PRC_mil_chance = PRC_total }
+							}
+						}
+						random_list = {
+							PRC.PRC_civ_chance = {
+								PRC_add_civ_status_effect = yes
+							}
+							PRC.PRC_mil_chance = {
+								PRC_add_mil_status_effect = yes
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	on_monthly_OMO = {
 		effect = {
 			OMO = {
@@ -1338,7 +1391,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Sergey Taboritsky"
+										character = KOM_Sergey_Taboritsky
 										ruling_only = yes
 									}
 								}
@@ -1349,7 +1402,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Sergey Taboritsky"
+										character = KOM_Sergey_Taboritsky
 										ruling_only = yes
 									}
 								}
@@ -1449,7 +1502,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Ivan Serov"
+										character = KOM_Ivan_Serov
 										ruling_only = yes
 									}
 								}
@@ -1460,7 +1513,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Ivan Serov"
+										character = KOM_Ivan_Serov
 										ruling_only = yes
 									}
 								}
@@ -1482,7 +1535,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Ivan Serov"
+										character = KOM_Ivan_Serov
 										ruling_only = yes
 									}
 								}
@@ -1493,7 +1546,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Ivan Serov"
+										character = KOM_Ivan_Serov
 										ruling_only = yes
 									}
 								}
@@ -1532,7 +1585,7 @@ on_actions = {
 								AND = {
 									tag = WRS
 									has_country_leader = {
-										name = "Mikhail Tukhachevsky"
+										character = WRS_Mikhail_Tukhachevsky
 										ruling_only = yes
 									}
 								}
@@ -1543,7 +1596,7 @@ on_actions = {
 								AND = {
 									tag = WRS
 									has_country_leader = {
-										name = "Mikhail Tukhachevsky"
+										character = WRS_Mikhail_Tukhachevsky
 										ruling_only = yes
 									}
 								}
@@ -1602,7 +1655,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Sergey Taboritsky"
+										character = KOM_Sergey_Taboritsky
 										ruling_only = yes
 									}
 								}
@@ -1613,7 +1666,7 @@ on_actions = {
 								AND = {
 									tag = KOM
 									has_country_leader = {
-										name = "Sergey Taboritsky"
+										character = KOM_Sergey_Taboritsky
 										ruling_only = yes
 									}
 								}
@@ -2070,7 +2123,7 @@ on_actions = {
 					FROM = { tag = TYM }
 					ROOT = { tag = OMS
 							has_country_leader = {
-								name = "Dmitry Yazov"
+								character = OMS_Dmitry_Yazov 
 								ruling_only = yes
 						} 
 					}
@@ -2083,7 +2136,7 @@ on_actions = {
 					FROM = { tag = TYM }
 					ROOT = { tag = OMS
 							has_country_leader = {
-								name = "Collapsed Authority"
+								character = OMS_Collapsed_Authority 
 								ruling_only = yes
 						} 
 					}

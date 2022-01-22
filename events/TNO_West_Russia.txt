@@ -597,7 +597,6 @@ country_event = { #explain power struggle
 
 	option = {#TUKHA
 		name = WRS.37.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -618,14 +617,12 @@ country_event = { #explain power struggle
 				}
 			}
 		}
-		
 		complete_national_focus = WRS_the_red_bonaparte
 		set_country_flag = WRS_power_struggle_tukha
 		WRS_power_struggle_pulse = yes
 	}
 	option = {#ZHUKOV
 		name = WRS.37.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -636,7 +633,6 @@ country_event = { #explain power struggle
 				}
 			}
 		}
-		
 		complete_national_focus = WRS_the_peoples_marshal
 		set_country_flag = WRS_power_struggle_zhukov
 		WRS_power_struggle_pulse = yes
@@ -697,16 +693,8 @@ country_event = { #Death of Voroshilov
 	fire_only_once = yes
 	immediate = {
 		hidden_effect = {
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Power Vacuum"
-				picture = "Portrait_WRS_Power_Vacuum.dds"
-				expire = "1999.1.1"
-				ideology = communist_subtype
-				traits = {
-
-				}
-			}
+			retire_character = WRS_Kliment_Voroshilov
+			promote_character = WRS_Power_Vacuum
 			remove_mission = WRS_zhukov_influence_ticker
 			remove_mission = WRS_tukha_influence_ticker
 			end_puppet = UKH
@@ -719,10 +707,6 @@ country_event = { #Death of Voroshilov
 			ONG = {
 				country_event = { id = ONG.21 days = 1 } #Old Comrades
 			}
-		}
-		if = {
-			limit = { has_unit_leader = 3398 }
-			remove_unit_leader = 3398
 		}
 	}
 	is_triggered_only = yes
@@ -1431,10 +1415,11 @@ country_event = { #Tukha publishes "The Structure of the Militia Army in Operati
 		name = WRS_power_struggle.2.a
 		WRS_increase_tukha_influence_low = yes
 		army_experience = 30
-		add_tech_bonus = {
-			bonus = 0.5
-			uses = 1
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
 	}
 }
@@ -4080,7 +4065,10 @@ country_event = {
 
 	option = {
 		name = tukha.80.a
-		load_focus_tree = WRS_tukhachevsky_regional
+		custom_effect_tooltip = tukha.80.tt
+		hidden_effect = {
+			load_focus_tree = WRS_tukhachevsky_regional
+		}
 	}
 }
 
@@ -4363,7 +4351,7 @@ country_event = { #Recruit Komi leftist generals?
 
 	option = { #Sure why not
 		name = zhukov.8.a
-		custom_effect_tooltip = "When the time comes, we will offer them service."
+		custom_effect_tooltip = zhukov.8.a.tt
 		set_country_flag = RECRUITED_KOMI_GENERALS
 	}
 	option = { #No.
@@ -4417,28 +4405,26 @@ country_event = {
 			}
 		}
 		WRS = {
-			create_corps_commander = {
-				name = "Nikolay Oplesnin"
-				picture = "Portrait_WRS_Nikolay_Oplesnin_WRRF.dds"
+			add_corps_commander_role = {
+				character = WRS_Nikolay_Oplesnin
 				traits = { 	}
 				skill = 3
 				attack_skill = 2
 				defense_skill = 3
 				planning_skill = 3
 				logistics_skill = 2
-				id = 3357
+				legacy_id = 3357
 			}
 
-			create_corps_commander = {
-				name = "Valentin Varennikov"
-				picture = "Portrait_WRS_Valentin_Varennikov_WRRF.dds"
+			add_corps_commander_role = {
+				character = WRS_Valentin_Varennikov
 				traits = { 	}
 				skill = 3
 				attack_skill = 3
 				defense_skill = 2
 				planning_skill = 2
 				logistics_skill = 3
-				id = 3358
+				legacy_id = 3358
 			}
 		}
 		VOL = {
@@ -4811,7 +4797,7 @@ country_event = {
 		trigger = {
 			owns_state = 397
 		}
-		set_capital = 397
+		set_capital = { state = 397 }
 		397 = {
 			set_temp_variable = { state_value_multiplier_temp = 1.05 }
 			econ_state_value_change_multiply_specified_state = yes
@@ -4822,7 +4808,7 @@ country_event = {
 		trigger = {
 			owns_state = 400
 		}
-		set_capital = 400
+		set_capital = { state = 400 }
 		400 = {
 			set_temp_variable = { state_value_multiplier_temp = 1.05 }
 			econ_state_value_change_multiply_specified_state = yes
@@ -5656,10 +5642,11 @@ country_event = { #PROJECT TSYSKLON - INCONCLUSIVE
 	option = {
 		name = indrik.42.a
 		set_country_flag = WRS_INDRIK_4_INCONCLUSIVE
-		add_tech_bonus = {
-			bonus = 1
-			uses = 1
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = air_doctrine
 		}
 	}
 }
@@ -5714,10 +5701,11 @@ country_event = { #PROJECT SHCHUKA - INCONCLUSIVE
 	option = {
 		name = indrik.52.a
 		set_country_flag = WRS_INDRIK_5_INCONCLUSIVE
-		add_tech_bonus = {
-			bonus = 0.40
-			uses = 1
-			category = naval_doctrine
+		add_doctrine_cost_reduction = {
+		    name = naval_doc_bonus
+		    cost_reduction = 0.4
+		    uses = 1
+		    category = naval_doctrine
 		}
 		add_tech_bonus = {
 			bonus = 0.25
@@ -6482,15 +6470,14 @@ country_event = { #Epilogue - Sacred War
 		name = tukhasuperregional.6.a
 		custom_effect_tooltip = WRS_tukhachevsky_epilogue_tt
 		hidden_effect = {
-			create_country_leader = {
-				name = "Mikhail Tukhachevsky"
-				picture = "Portrait_WRS_Mikhail_Tukhachevsky_70s.dds"
-				expire = "1999.1.1"
-				desc = "POLITICS_MIKHAIL_TUKHACHEVSKY_70S_DESC"
-				ideology = communist_stratocratic_communism_subtype
-				traits = {
-					the_red_bonaparte
+			WRS_Mikhail_Tukhachevsky = {
+				set_portraits = {
+					civilian = { large = "gfx/leaders/WRS/Portrait_WRRF_Mikhail_Tukhachevsky_70s.dds" }
+					army = { large = "gfx/leaders/WRS/Portrait_WRRF_Mikhail_Tukhachevsky_70s.dds" }
 				}
+			}
+			set_country_leader_description = {
+				desc = "POLITICS_MIKHAIL_TUKHACHEVSKY_70S_DESC"
 			}
 			TNO_russia_ending_screen = yes
 		}
@@ -6679,15 +6666,14 @@ country_event = { #Epilogue
 	option = {
 		name = zhukovsuperregional.11.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Georgy Zhukov"
-				picture = "Portrait_WRRF_Georgy_Zhukov_70s.dds"
-				expire = "1999.1.1"
-				desc = "POLITICS_GEORGY_ZHUKOV_70S_DESC"
-				ideology = communist_bukharinism_subtype
-				traits = {
-
+			WRS_Georgy_Zhukov = {
+				set_portraits = {
+					civilian = { large = "gfx/leaders/WRS/Portrait_WRRF_Georgy_Zhukov_70s.dds" }
+					army = { large = "gfx/leaders/WRS/Portrait_WRRF_Georgy_Zhukov_70s.dds" }
 				}
+			}
+			set_country_leader_description = {
+				desc = "POLITICS_GEORGY_ZHUKOV_70S_DESC"
 			}
 			TNO_russia_ending_screen = yes
 		}

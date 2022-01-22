@@ -23,14 +23,7 @@ country_event = {
 
 		retire_country_leader = yes
 		set_country_flag = JAP_Ino_deposed
-		create_country_leader = {
-			name = "Hirohito"
-			desc = "POLITICS_HIROHITO_DESC"
-			picture = "Portrait_Japan_Hirohito.dds"
-			expire = "1989.1.1"
-			ideology = fascism_subtype
-			traits = {}
-		}
+		promote_character = JAP_hirohito
 		country_event = { id = jap_interregnum.2 days = 4}
 	}
 }
@@ -270,13 +263,7 @@ country_event = {
 		name = jap_interregnum.14.a
 		retire_country_leader = yes
 		set_politics = { ruling_party = fascism }
-		create_country_leader = {
-			name = "Aichi Kiichi"
-			desc = "POLITICS_AICHI_KIICHI_DESC"
-			picture = "Portrait_Japan_Aichi_Kiichi.tga"
-			expire = "1983.1.1"
-			ideology = fascism_corporatism_subtype
-		}
+		promote_character = JAP_aichi_kiichi
 		remove_all_ministers = yes
 		add_ideas = {
 			JAP_Yoshino_Shinji_dep
@@ -837,12 +824,12 @@ country_event = {
 	option = { #Army backing
 		name = jap_interregnum.39.a
 		country_event = { id = jap_interregnum.40 days = 2}
-		custom_effect_tooltip = JAP_interregnum_ikeda_v_kaya_tt
+		custom_effect_tooltip = JAP_interregnum_takagi_v_kaya_tt
 	}
 	option = { #the Representatives
 		name = jap_interregnum.39.b
 		country_event = { id = jap_interregnum.44 days = 2}
-		custom_effect_tooltip = JAP_interregnum_takagi_v_kaya_tt
+		custom_effect_tooltip = JAP_interregnum_ikeda_v_kaya_tt
 	}
 }
 
@@ -866,7 +853,7 @@ country_event = {
 	}
 	option = { #army scrutiny
 		name = jap_interregnum.40.b
-		custom_effect_tooltip = JAP_interregnum_weaken_ikeda_tt
+		custom_effect_tooltip = JAP_interregnum_weaken_takagi_tt
 		hidden_effect = {
 			country_event = { id = jap_interregnum.42 days = 2}
 		}
@@ -927,11 +914,9 @@ country_event = {
 
 	option = {
 		name = jap_interregnum.43.a
-		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
-		custom_effect_tooltip = JAP_interregnum_weakened_kaya_tt
+		custom_effect_tooltip = JAP_interregnum_weakened_takagi_tt
 		hidden_effect = {
 			add_to_variable = { takagi_loss = 1 }
-			add_to_variable = { kaya_loss = 1 }
 			country_event = { id = jap_interregnum.48 days = 4 }
 		}
 	}
@@ -1071,9 +1056,8 @@ country_event = {
 			if = {
 				limit = {
 					AND = {
-						check_variable = { kaya_loss = 1 }
-						check_variable = { ikeda_loss = 1 }
-						check_variable = { takagi_loss = 1 }
+						check_variable = { kaya_loss = ikeda_loss }
+						check_variable = { ikeda_loss = takagi_loss }
 					}
 				}
 				random_list = {
@@ -1091,6 +1075,9 @@ country_event = {
 					}
 				}
 			}
+			clear_variable = takagi_loss
+			clear_variable = ikeda_loss
+			clear_variable = kaya_loss
 		}
 	}
 }
@@ -1252,16 +1239,7 @@ country_event = {
 	option = {
 		name = jap_interregnum.70.a
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Ikeda Masanosuke"
-			desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-			picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-			expire = "1983.1.1"
-			ideology = fascism_corporatism_subtype
-			traits = {
-				hotheaded_firebrand
-			}
-		}
+		promote_character = JAP_ikeda_masanosuke
 		set_politics = { ruling_party = fascism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Ikeda_Prime_Minister
@@ -1438,40 +1416,22 @@ country_event = {
 			remove_ideas = JAP_anti_corruption_protests
 		}
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Kaya Okinori"
-			desc = "POLITICS_KAYA_OKINORI_DESC"
-			picture = "Portrait_Japan_Kaya_Okinori.dds"
-			expire = "1983.1.1"
-			ideology = despotism_interim_government_subtype
-			traits = {
-				committed_bureaucrat
-			}
-		}
+		promote_character = JAP_kaya_okinori
 		set_politics = { ruling_party = despotism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Kaya_Prime_Minister
 		JAP_Kaya_PM_initialize = yes
 		JAP_set_base_faction_approval = yes
 		hidden_effect = {
-			create_country_leader = {
-				name = "Ikeda Masanosuke"
-				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-				expire = "1983.1.1"
-				ideology = fascism_corporatism_subtype
-				traits = {
-					hotheaded_firebrand
-				}
-			}
+			promote_character = JAP_ikeda_masanosuke
 			#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
 			JAP_tree_swap = yes
 			remove_all_ministers = yes
 			add_ideas = {
 				JAP_Aoki_Kazuo_hog
-				Generic_Vacant_eco
-				Generic_Vacant_for
-				Generic_Vacant_sec
+				JAP_Generic_Vacant_eco
+				JAP_Generic_Vacant_for
+				JAP_Generic_Vacant_sec
 			}
 			clr_country_flag = JAP_in_interregnum
 			clr_country_flag = JAP_interregnum_final_stage
@@ -1551,16 +1511,7 @@ country_event = {
 		retire_country_leader = yes
 		random_list = {
 			50 = {
-				create_country_leader = {
-					name = "Ikeda Masanosuke"
-					desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-					picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-					expire = "1983.1.1"
-					ideology = fascism_corporatism_subtype
-					traits = {
-						hotheaded_firebrand
-					}
-				}
+				promote_character = JAP_ikeda_masanosuke
 				set_politics = { ruling_party = fascism }
 				JAP_clear_PM_flags = yes
 				set_country_flag = JAP_Ikeda_Prime_Minister
@@ -1591,40 +1542,22 @@ country_event = {
 					}
 					remove_ideas = JAP_anti_corruption_protests
 				}
-				create_country_leader = {
-					name = "Kaya Okinori"
-					desc = "POLITICS_KAYA_OKINORI_DESC"
-					picture = "Portrait_Japan_Kaya_Okinori.dds"
-					expire = "1983.1.1"
-					ideology = despotism_interim_government_subtype
-					traits = {
-						committed_bureaucrat
-					}
-				}
+				promote_character = JAP_kaya_okinori
 				set_politics = { ruling_party = despotism }
 				JAP_clear_PM_flags = yes
 				set_country_flag = JAP_Kaya_Prime_Minister
 				JAP_Kaya_PM_initialize = yes
 				JAP_set_base_faction_approval = yes
 				hidden_effect = {
-					create_country_leader = {
-						name = "Ikeda Masanosuke"
-						desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-						picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-						expire = "1983.1.1"
-						ideology = fascism_corporatism_subtype
-						traits = {
-							hotheaded_firebrand
-						}
-					}
+					promote_character = JAP_ikeda_masanosuke
 					#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
 					JAP_tree_swap = yes
 					remove_all_ministers = yes
 					add_ideas = {
 						JAP_Aoki_Kazuo_hog
-						Generic_Vacant_eco
-						Generic_Vacant_for
-						Generic_Vacant_sec
+						JAP_Generic_Vacant_eco
+						JAP_Generic_Vacant_for
+						JAP_Generic_Vacant_sec
 					}
 					clr_country_flag = JAP_in_interregnum
 					clr_country_flag = JAP_interregnum_final_stage
@@ -1739,11 +1672,21 @@ country_event = {
 				}
 				country_event = { id = jap_interregnum.87 days = 2 }
 			}
-			if = {
+			else_if = {
 				limit = {
 					check_variable = { takagi_power < kaya_power }
 				}
 				country_event = { id = jap_interregnum.88 days = 2}
+			}
+			else = {
+				random_list = {
+					1 = {
+						country_event = { id = jap_interregnum.87 days = 2 }
+					}
+					1 = {
+						country_event = { id = jap_interregnum.88 days = 2}
+					}
+				}
 			}
 		}
 	}
@@ -1758,11 +1701,21 @@ country_event = {
 				}
 				country_event = { id = jap_interregnum.87 days = 2 }
 			}
-			if = {
+			else_if = {
 				limit = {
 					check_variable = { takagi_power < kaya_power }
 				}
 				country_event = { id = jap_interregnum.88 days = 2}
+			}
+			else = {
+				random_list = {
+					1 = {
+						country_event = { id = jap_interregnum.87 days = 2 }
+					}
+					1 = {
+						country_event = { id = jap_interregnum.88 days = 2}
+					}
+				}
 			}
 		}
 	}
@@ -1788,35 +1741,17 @@ country_event = {
 			remove_ideas = JAP_anti_corruption_protests
 		}
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Soukichi Takagi"
-			desc = "POLITICS_TAKAGI_SOUKICHI_DESC"
-			picture = "Portrait_Japan_Takagi_Soukichi.dds"
-			expire = "1989.1.1"
-			ideology = conservative_democracy_paternalistic_conservatism_subtype
-			traits = {
-				the_reformist_admiral
-			}
-		}
+		promote_character = JAP_takagi_soukichi
 		set_politics = { ruling_party = conservative_democracy }
 		JAP_clear_PM_flags = yes
 		hidden_effect = {
-			create_country_leader = {
-				name = "Ikeda Masanosuke"
-				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-				expire = "1983.1.1"
-				ideology = fascism_corporatism_subtype
-				traits = {
-					hotheaded_firebrand
-				}
-			}
+			promote_character = JAP_ikeda_masanosuke
 			remove_all_ministers = yes
 			add_ideas = {
 				JAP_Kouichi_Kido_dep
 				JAP_Kuranari_Tadashi_for
 				JAP_Nakasone_Yasuhiro_eco
-				JAP_Hokiriki_Zenjiro_sec
+				JAP_Horikiri_Zenjiro_sec
 			}
 			hidden_effect = {
 				every_country = { news_event = WORLD.2067 }
@@ -1855,40 +1790,22 @@ country_event = {
 			remove_ideas = JAP_anti_corruption_protests
 		}
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Kaya Okinori"
-			desc = "POLITICS_KAYA_OKINORI_DESC"
-			picture = "Portrait_Japan_Kaya_Okinori.dds"
-			expire = "1989.1.1"
-			ideology = despotism_interim_government_subtype
-			traits = {
-				committed_bureaucrat
-			}
-		}
+		promote_character = JAP_kaya_okinori
 		set_politics = { ruling_party = despotism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Kaya_Prime_Minister
 		JAP_Kaya_PM_initialize = yes
 		JAP_set_base_faction_approval = yes
 		hidden_effect = {
-			create_country_leader = {
-				name = "Ikeda Masanosuke"
-				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-				expire = "1983.1.1"
-				ideology = fascism_corporatism_subtype
-				traits = {
-					hotheaded_firebrand
-				}
-			}
+			promote_character = JAP_ikeda_masanosuke
 			#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
 			JAP_tree_swap = yes
 			remove_all_ministers = yes
 			add_ideas = {
 				JAP_Aoki_Kazuo_hog
-				Generic_Vacant_eco
-				Generic_Vacant_for
-				Generic_Vacant_sec
+				JAP_Generic_Vacant_eco
+				JAP_Generic_Vacant_for
+				JAP_Generic_Vacant_sec
 			}
 			clr_country_flag = JAP_in_interregnum
 			clr_country_flag = JAP_interregnum_final_stage
@@ -2006,14 +1923,14 @@ country_event = {
 
 	option = { #-1 power for ikeda
 		name = jap_interregnum.103.a
-		custom_effect_tooltip = JAP_interregnum_strengthened_ikeda
+		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
 		hidden_effect = {
 			subtract_from_variable = { var = ikeda_power value = 1 }
 		}
 	}
 	option = { #1 power for ikeda
 		name = jap_interregnum.103.b
-		custom_effect_tooltip = JAP_interregnum_weakened_ikeda_tt
+		custom_effect_tooltip = JAP_interregnum_strengthened_ikeda
 		hidden_effect = {
 			add_to_variable = { var = ikeda_power value = 1 }
 		}
@@ -2294,16 +2211,7 @@ country_event = {
 	option = {
 		name = jap_interregnum.113.a
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Ikeda Masanosuke"
-			desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-			picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-			expire = "1983.1.1"
-			ideology = fascism_corporatism_subtype
-			traits = {
-				hotheaded_firebrand
-			}
-		}
+		promote_character = JAP_ikeda_masanosuke
 		set_politics = { ruling_party = fascism }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Ikeda_Prime_Minister
@@ -2352,32 +2260,14 @@ country_event = {
 			remove_ideas = JAP_anti_corruption_protests
 		}
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Soukichi Takagi"
-			desc = "POLITICS_TAKAGI_SOUKICHI_DESC"
-			picture = "Portrait_Japan_Takagi_Soukichi.dds"
-			expire = "1983.1.1"
-			ideology = conservative_democracy_paternalistic_conservatism_subtype
-			traits = {
-				the_reformist_admiral
-			}
-		}
+		promote_character = JAP_takagi_soukichi
 		set_politics = { ruling_party = conservative_democracy }
 		JAP_clear_PM_flags = yes
 		set_country_flag = JAP_Takagi_Prime_Minister
 		JAP_Takagi_PM_initialize = yes
 		JAP_set_base_faction_approval = yes
 		hidden_effect = {
-			create_country_leader = {
-				name = "Ikeda Masanosuke"
-				desc = "POLITICS_IKEDA_MASANOSUKE_DESC"
-				picture = "Portrait_Japan_Ikeda_Masanosuke.dds"
-				expire = "1983.1.1"
-				ideology = fascism_corporatism_subtype
-				traits = {
-					hotheaded_firebrand
-				}
-			}
+			promote_character = JAP_ikeda_masanosuke
 			#load_focus_tree = { tree = japan_takagi_5_years keep_completed = yes }
 			JAP_tree_swap = yes
 			remove_all_ministers = yes
@@ -2385,7 +2275,7 @@ country_event = {
 				JAP_Kouichi_Kido_dep
 				JAP_Kuranari_Tadashi_for
 				JAP_Nakasone_Yasuhiro_eco
-				JAP_Hokiriki_Zenjiro_sec
+				JAP_Horikiri_Zenjiro_sec
 			}
 			clr_country_flag = JAP_in_interregnum
 			clr_country_flag = JAP_interregnum_final_stage

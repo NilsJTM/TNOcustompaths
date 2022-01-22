@@ -969,7 +969,7 @@ USA_increase_RK_debuff = {
 			add_idea = usa_Wervolf_3
 		}
 	}
-	else  {
+	else = {
 		add_ideas = usa_Wervolf_2
 	}
 }
@@ -4285,7 +4285,7 @@ USA_RFK_CRA_Filibuster = {
 				country_event = {
 					id = bobby.cra.11
 					days = 1
-					}
+				}
 			}
 			10 = {
 				country_event = { id = bobby.cra.7 days = 1 }
@@ -4712,8 +4712,6 @@ USA_RFK_pass_civil_rights = {
 
 		custom_effect_tooltip = USA_RFK_pass_civil_rights_tt
 
-		custom_effect_tooltip = USA_RFK_pass_civil_rights_tt
-
 		### Regular Effects:
 
 		add_stability = 0.07
@@ -4771,8 +4769,6 @@ USA_RFK_pass_civil_rights = {
 		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.03 }
 		econ_GDP_boost_once_percentage = yes
 
-		custom_effect_tooltip = USA_RFK_pass_civil_rights_tt
-
 
 		### Regular Effects:
 
@@ -4822,8 +4818,6 @@ USA_RFK_pass_civil_rights = {
 		social_funding_minimal_increase_low = yes
 		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
 		econ_GDP_boost_once_percentage = yes
-
-		custom_effect_tooltip = USA_RFK_pass_civil_rights_tt
 
 
 		### Regular Effects:
@@ -6956,7 +6950,7 @@ GLN_fund_NASA_once_effect = {
 GLN_NASA_recalculate_budget_left = {
 	set_variable = { USA_GLN_NASA_Budget_Leftover = USA_GLN_NASA_Funding }
 	set_temp_variable = { budget_impact = USA_GLN_NASA_Mission_Investment }
-	divide_temp_variable = { budget_impact = 1000 } #Funding is in millions and is directly used in a dynmod so we need to reduce it first
+	#divide_temp_variable = { budget_impact = 1000 } #Funding is in millions and is directly used in a dynmod so we need to reduce it first
 	subtract_from_variable = { USA_GLN_NASA_Budget_Leftover = budget_impact }
 	set_variable = { USA_GLN_NASA_Funding_Display = USA_GLN_NASA_Funding }
 	multiply_variable = { USA_GLN_NASA_Funding_Display = 1000 }
@@ -10332,6 +10326,7 @@ mcs_unity_check = {# ALWAYS RUN THIS AFTER ANY SATISFACTION CHANGES
 	}
 
 	set_variable = { MCS_starting_unity = 0 }
+	clear_variable = mcs_divisiveness
 	clamp_variable = {
 		var = USA_NPP_unity
 		min = 0

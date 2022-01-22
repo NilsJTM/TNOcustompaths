@@ -238,12 +238,8 @@ country_event = { #Karbyshev is on His Death Bed
 	option = { #
 		name = omsk.11.a
 		ai_chance = { factor = 1 }
-		every_unit_leader = {
-			limit = { has_id = 3586 }
-			retire = yes
-		}
-		every_unit_leader = {
-			limit = { has_id = 3587 }
+		remove_unit_leader_role = OMS_Dmitry_Karbyshev
+		OMS_Dmitry_Yazov = {
 			promote_leader = yes
 		}
 		add_political_power = -5
@@ -265,34 +261,40 @@ country_event = { #The Death of Karbyshev
 		ai_chance = { factor = 1 }
 		set_party_name = {
 			ideology = ultranationalism
-			long_name = "Chernaya Liga"
-			name = "Chernaya Liga"
+			long_name = OMS_ultranationalism_yazov_party
+			name = OMS_ultranationalism_yazov_party
 		}
 		set_party_name = {
 			ideology = fascism
-			long_name = "Chernaya Liga"
-			name = "Chernaya Liga"
+			long_name = OMS_ultranationalism_yazov_party
+			name = OMS_ultranationalism_yazov_party
 		}
 		add_popularity = {
 			ideology = despotism
 			popularity = -0.4
 		}
-		kill_country_leader = yes
-		add_political_power = -100
-		create_country_leader = {
-			name = "Dmitry Yazov"
-			desc = "POLITICS_DMITRY_YAZOV_DESC"
-			picture = "Portrait_Omsk_Dmitry_Yazov.dds"
-			expire = "1999.1.1"
-			ideology = ultranationalism_ultramilitarism_subtype
-			traits = { the_supreme_commander_of_the_great_trial }
+		effect_tooltip = {
+			kill_country_leader = yes
 		}
+		hidden_effect = {
+			OMS_Dmitry_Yazov = {
+				promote_character = {
+					ideology = despotism_military_junta_subtype
+				}
+			}
+		}
+		OMS_Dmitry_Yazov = {
+			promote_character = {
+				ideology = ultranationalism_ultramilitarism_subtype
+			}
+		}
+		add_political_power = -100
 		swap_ideas = {
 			remove_idea = OMS_karbyshev_figurehead
 			add_idea = OMS_new_boss
 		}
 		hidden_effect = {
-			retire_ideology_leader = despotism
+			retire_character = OMS_Dmitry_Karbyshev
 			remove_ideas = OMS_Dmitry_Yazov_hog
 			add_ideas = OMS_Evgeny_Savintsev_hog
 			country_event = { id = omsk.38 days = 2 }
@@ -366,7 +368,7 @@ country_event = { #The Bombings Stop
 		trigger = {
 			NOT = {
 				has_country_leader = {
-					name = "Collapsed Authority"
+					character = OMS_Collapsed_Authority
 					ruling_only = yes
 				}
 			}
@@ -380,7 +382,7 @@ country_event = { #The Bombings Stop
 		ai_chance = { factor = 1 }
 		trigger = {
 			has_country_leader = {
-				name = "Collapsed Authority"
+				character = OMS_Collapsed_Authority
 				ruling_only = yes
 			}
 		}
@@ -588,15 +590,28 @@ country_event = { #Omsktransmash tank equipment
 	option = { #
 		name = omsk.26.a
 		ai_chance = { factor = 1 }
-		add_equipment_to_stockpile = {
-			type = MBT_equipment
-			amount = 250
-			producer = OMS
+		if = { 
+			limit = { 
+				has_dlc = "No Step Back"
+			}
+			add_equipment_to_stockpile = {
+				type = MBT_chassis
+				amount = 250
+			}
+			add_equipment_to_stockpile = {
+				type = IFV_chassis
+				amount = 250
+			}
 		}
-		add_equipment_to_stockpile = {
-			type = IFV_equipment
-			amount = 250
-			producer = OMS
+		else = {
+			add_equipment_to_stockpile = {
+				type = MBT_equipment
+				amount = 250
+			}
+			add_equipment_to_stockpile = {
+				type = IFV_equipment
+				amount = 250
+			}
 		}
 	}
 }
@@ -831,10 +846,8 @@ country_event = { #Out with the Old - Yuriy Drozdov replaces Konstantin Valukhin
 		ai_chance = { factor = 1 }
 		hidden_effect = {
 			country_event = { id = omsk.43 days = 7 random = 24 }
-			swap_ideas = {
-				remove_idea = OMS_Konstantin_Valukhin_sec
-				add_idea = OMS_Yuriy_Drozdov_sec
-			}
+			remove_ideas = OMS_Konstantin_Valukhin_sec
+			add_ideas = OMS_Yuriy_Drozdov_sec
 		}
 	}
 }
@@ -885,10 +898,8 @@ country_event = { #Black League purge event - Evgeny Pitovranov replaces Alexand
 		name = omsk.43.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
-			swap_ideas = {
-				remove_idea = OMS_Alexander_Kharkhardin_eco
-				add_idea = OMS_Evgeny_Pitovranov_eco
-			}
+			remove_ideas = OMS_Alexander_Kharkhardin_eco
+			add_ideas = OMS_Evgeny_Pitovranov_eco
 		}
 	}
 }
@@ -991,10 +1002,8 @@ country_event = { #Against the Grain
 		ai_chance = { factor = 1 }
 		hidden_effect = {
 			country_event = { id = omskgauntlet.2 days = 1 }
-			swap_ideas = {
-				remove_idea = OMS_Viktor_Abakumov_for
-				add_idea = OMS_Aleksandr_Sakharovsky_for
-			}
+			remove_ideas = OMS_Viktor_Abakumov_for
+			add_ideas = OMS_Aleksandr_Sakharovsky_for
 		}
 	}
 }
@@ -1155,14 +1164,7 @@ country_event = { #The Death of Yazov
 		add_stability = -0.35
 		add_war_support = -0.35
 		add_ideas = OMS_collapsed_central_authority
-		create_country_leader = {
-			name = "Collapsed Authority"
-			desc = "POLITICS_OMSK_COLLAPSED_AUTHORITY_DESC"
-			picture = "Portrait_Omsk_Power_Vacuum.dds"
-			expire = "1999.1.1"
-			ideology = ultranationalism_ultramilitarism_subtype
-			traits = { utterly_abandoned }
-		}
+		promote_character = OMS_Collapsed_Authority
 		delete_unit_template_and_units = {
 			division_template = "Strelkovaya Diviziya"
 		}
@@ -1193,11 +1195,12 @@ country_event = { #The Death of Yazov
 			remove_ideas = OMS_the_shield
 			tno_worsen_army_professionalism = yes
 			tno_worsen_army_professionalism = yes
+			remove_all_ministers = yes
 			add_ideas = {
-				Generic_Vacant_hog
-				Generic_Vacant_for
-				Generic_Vacant_eco
-				Generic_Vacant_sec
+				OMS_Generic_Vacant_hog
+				OMS_Generic_Vacant_for
+				OMS_Generic_Vacant_eco
+				OMS_Generic_Vacant_sec
 			}
 			if = {
 				limit = {
@@ -1710,17 +1713,10 @@ country_event = { #Success - Batov assassinated.
 		add_manpower = -1
 		kill_ideology_leader = authoritarian_democracy
 		add_political_power = 200
+		promote_character = OMS_RKNV_Remnants_dummy
 		hidden_effect = {
 			scoped_sound_effect = tno_gunfire
 			remove_mission = OMS_batov_making_moves
-			create_country_leader = {
-				name = "RKNV Remnants"
-				#desc = ""
-				#picture = ""
-				expire = "1999.1.1"
-				ideology = authoritarian_democracy_provisional_government_subtype
-				traits = { utterly_abandoned }
-			}
 		}
  	}
 }
@@ -1795,54 +1791,43 @@ country_event = { #Failure - Yazov assassinated, collapse begins
 		add_stability = -0.35
 		add_war_support = -0.35
 		add_ideas = OMS_collapsed_central_authority
-		create_country_leader = {
-			name = "Collapsed Authority"
-			desc = "POLITICS_OMSK_COLLAPSED_AUTHORITY_DESC"
-			picture = "Portrait_Omsk_Power_Vacuum.dds"
-			expire = "1999.1.1"
-			ideology = ultranationalism_ultramilitarism_subtype
-			traits = { utterly_abandoned }
-		}
+		promote_character = OMS_Collapsed_Authority
 		set_popularities = {
 			ultranationalism = 100
 		}
-		delete_unit_template_and_units = {
-			division_template = "Strelkovaya Diviziya"
-		}
-		delete_unit_template_and_units = {
-			division_template = "Iskupitelnaya Brigada"
-		}
-		delete_unit_template_and_units = {
-			division_template = "Kavaleriyskaya Diviziya"
-		}
-		delete_unit_template_and_units = {
-			division_template = "Proniknuvshiy"
-		}
-		delete_unit_template_and_units = {
-			division_template = "Gruppa Zashchity"
-		}
-		delete_unit_template_and_units = {
-			division_template = "Chernaya Gvardiya"
-		}
 		hidden_effect = {
-			load_focus_tree = shattered_ambitions
-			create_country_leader = {
-				name = "Collapsed Authority"
-				desc = "POLITICS_OMSK_COLLAPSED_AUTHORITY_DESC"
-				picture = "Portrait_Omsk_Power_Vacuum.dds"
-				expire = "1999.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = { utterly_abandoned }
+			delete_unit_template_and_units = {
+				division_template = "Strelkovaya Diviziya"
 			}
-			remove_ideas = OMS_new_boss
-			remove_ideas = OMS_fueled_by_revenge
-			remove_ideas = OMS_nothing_left_to_lose
-			remove_ideas = OMS_the_shield
+			delete_unit_template_and_units = {
+				division_template = "Iskupitelnaya Brigada"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Kavaleriyskaya Diviziya"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Proniknuvshiy"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Gruppa Zashchity"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Chernaya Gvardiya"
+			}
+			load_focus_tree = shattered_ambitions
+			promote_character = OMS_Collapsed_Authority_despot
+			remove_ideas = {
+				OMS_new_boss
+				OMS_fueled_by_revenge
+				OMS_nothing_left_to_lose
+				OMS_the_shield
+			}
+			remove_all_ministers = yes
 			add_ideas = {
-				Generic_Vacant_hog
-				Generic_Vacant_for
-				Generic_Vacant_eco
-				Generic_Vacant_sec
+				OMS_Generic_Vacant_hog
+				OMS_Generic_Vacant_for
+				OMS_Generic_Vacant_eco
+				OMS_Generic_Vacant_sec
 			}
 			tno_worsen_army_professionalism = yes
 			tno_worsen_army_professionalism = yes
@@ -2039,14 +2024,7 @@ country_event = { #Failure - Plan Hydra fails, outlying territories secede.
 					ideology = despotism
 					popularity = 0.5
 				}
-				create_country_leader = {
-					name = "Soslanbek Apayev"
-					desc = "POLITICS_SOSLANBEK_APAYEV_OMSK_COLLAPSE_DESC"
-					picture = "Portrait_Yugra_Soslanbek_Apayev.dds"
-					expire = "1999.1.1"
-					ideology = despotism_warlordism_subtype
-					traits = { }
-				}
+				promote_character = YGR_OMS_Collapse_Soslanbek_Apayev
 				load_focus_tree = shattered_ambitions
 			}
 			FAV = {
@@ -2065,24 +2043,18 @@ country_event = { #Failure - Plan Hydra fails, outlying territories secede.
 					ideology = communist
 					popularity = 0.7
 				}
-				create_country_leader = {
-					name = "Valentin Shashin"
-					desc = "POLITICS_VALENTIN_SHASHIN_OMSK_COLLAPSE_DESC"
-					picture = "Portrait_Surgut_Valentin_Shashin.dds"
-					expire = "1999.1.1"
-					ideology = communist_bukharinism_subtype
-					traits = { }
-				}
-				add_ideas = {
-					Generic_Vacant_hog
-					Generic_Vacant_for
-					Generic_Vacant_eco
-					Generic_Vacant_sec
-				}
+				promote_character = FAV_OMS_Collapse_Valentin_Shashin
 				remove_ideas = {
 					FAV_night_witches
 					FAV_aerial_society
 					FAV_collective_improvisation
+				}
+				remove_all_ministers = yes
+				add_ideas = {
+					FAV_Generic_Vacant_hog
+					FAV_Generic_Vacant_eco
+					FAV_Generic_Vacant_for
+					FAV_Generic_Vacant_sec
 				}
 				load_focus_tree = shattered_ambitions
 			}
@@ -2096,8 +2068,8 @@ country_event = { #Failure - Plan Hydra fails, outlying territories secede.
 				set_cosmetic_tag = NTG_OMSK_COLLAPSE
 				set_party_name = {
 					ideology = communist
-					long_name = "Narodnyy Komissariat Vnutrennikh Del"
-					name = "NKVD"
+					long_name = OMS_communist_nizhny_party_long
+					name = OMS_communist_nizhny_party
 				}
 				load_focus_tree = shattered_ambitions
 			}
@@ -2117,26 +2089,20 @@ country_event = { #Failure - Plan Hydra fails, outlying territories secede.
 				}
 				set_party_name = {
 					ideology = ultranationalism
-					long_name = "Operativnaya Grupa Bogatyr"
-					name = "OGP"
+					long_name = OMS_ultranationalism_zlatoust_party_long
+					name = OMS_ultranationalism_zlatoust_party
 				}
-				create_country_leader = {
-					name = "Konstantin Pastanogov"
-					desc = "POLITICS_KONSTANTIN_PASTANOGOV_OMSK_COLLAPSE_DESC"
-					picture = "gfx/leaders/OMS/Portrait_Omsk_Konstantin_Pastanogov.dds"
-					expire = "1999.1.1"
-					ideology = ultranationalism_ultramilitarism_subtype
-					traits = { }
-				}
-				add_ideas = {
-					Generic_Vacant_hog
-					Generic_Vacant_for
-					Generic_Vacant_eco
-					Generic_Vacant_sec
-				}
+				promote_character = ZLT_OMS_Collapse_Konstantin_Pastanogov
 				remove_ideas = {
 					ZLT_golden_republic
 					ZLT_the_two_consuls
+				}
+				remove_all_ministers = yes
+				add_ideas = {
+					ZLT_Generic_Vacant_hog
+					ZLT_Generic_Vacant_eco
+					ZLT_Generic_Vacant_for
+					ZLT_Generic_Vacant_sec
 				}
 				load_focus_tree = shattered_ambitions
 			}
@@ -2217,21 +2183,23 @@ country_event = {  #Failure - Batov forms the Russian National Salvation Commiss
 			}
 
 			SVR = {
-				create_country_leader = {
-					name = "Pavel Batov"
+				promote_character = SVR_Pavel_Batov
+				set_country_leader_description = {
 					desc = "POLITICS_PAVEL_BATOV_OMSK_COLLAPSE_DESC"
-					picture = "Portrait_Sverdlovsk_Punished_Pavel_Batov.dds"
-					traits = { the_modern_suvorov }
-					expire = "1999.1.1"
-					ideology = authoritarian_democracy_stratocracy_subtype
+				}
+				SVR_Pavel_Batov = {
+					set_portraits = {
+						army = { large = "gfx/leaders/SVR/Portrait_Sverdlovsk_Punished_Pavel_Batov.dds" }
+						civilian = { large = "gfx/leaders/SVR/Portrait_Sverdlovsk_Punished_Pavel_Batov.dds" }
+					}
 				}
 				set_politics = {
 					ruling_party = authoritarian_democracy
 				}
 				set_party_name = {
 					ideology = authoritarian_democracy
-					long_name = "Russkiy Komitet Natsionalnogo Vosstanovleniya"
-					name = "RKNV"
+					long_name = OMS_authoritarian_democracy_batov_party_long
+					name = OMS_authoritarian_democracy_batov_party
 				}
 				transfer_state = 403
 				transfer_state = 580
@@ -2243,6 +2211,7 @@ country_event = {  #Failure - Batov forms the Russian National Salvation Commiss
 					add_core_of = PREV
 				}
 				set_cosmetic_tag = SVR_OMSK_COLLAPSE
+				remove_all_ministers = yes
 				add_ideas = {
 					RUS_shattered_ambitions
 					SVR_Ivan_Bagramyan_hog
@@ -2302,27 +2271,22 @@ country_event = { #Failure - collapse is complete
 				}
 				set_party_name = {
 					ideology = authoritarian_democracy
-					long_name = "Komitet Osvobozhdenia Vorkuty"
-					name = "KOV"
+					long_name = OMS_authoritarian_democracy_vorkuta_party_long
+					name = OMS_authoritarian_democracy_vorkuta_party
 				}
 				set_cosmetic_tag = VOR_OMSK_COLLAPSE
-				create_country_leader = {
-					name = "Viktor Kolesnikov"
-					desc = "POLITICS_VIKTOR_KOLESNIKOV_OMSK_COLLAPSE_DESC"
-					picture = "Portrait_Vorkuta_Uprising_Viktor_Kolesnikov.dds"
-					expire = "1999.1.1"
-					ideology = authoritarian_democracy_provisional_government_subtype
-					traits = { }
-				}
+				promote_character = VOR_Viktor_Kolesnikov
 				remove_ideas = VOR_security_state
+				remove_all_ministers = yes
 				add_ideas = {
-					Generic_Vacant_hog
-					Generic_Vacant_for
-					Generic_Vacant_eco
-					Generic_Vacant_sec
+					VOR_Generic_Vacant_hog
+					VOR_Generic_Vacant_eco
+					VOR_Generic_Vacant_for
+					VOR_Generic_Vacant_sec
 				}
 			}
 		   	SGV = {
+				promote_character = SGV_Evgeny_Savintsev
 				transfer_state = 581
 				every_owned_state = {
 					remove_core_of = OMS
@@ -2330,8 +2294,8 @@ country_event = { #Failure - collapse is complete
 				}
 				set_party_name = {
 					ideology = ultranationalism
-					long_name = "Spetsgruppa V"
-					name = "Spetsgruppa V"
+					long_name = OMS_authoritarian_democracy_spetsgruppa_party
+					name = OMS_authoritarian_democracy_spetsgruppa_party
 				}
 			}
 			OMS = { set_cosmetic_tag = OMS_OMSK_COLLAPSE }
@@ -2340,23 +2304,27 @@ country_event = { #Failure - collapse is complete
 					NOT = { country_exists = URL }
 				}
 				URL = {
-					create_country_leader = {
-						name = "Hadji-Umar Mamsurov"
-						desc = "POLITICS_HADJI_UMAR_MAMSUROV_OMSK_COLLAPSE_DESC"
-						picture = "gfx/leaders/URL/Portrait_Ural_League_Hadji_Umar_Mamsurov.dds"
-						expire = "1999.1.1"
-						ideology = authoritarian_democracy_stratocracy_subtype
-						traits = { }
-					}
-					add_ideas = {
-						Generic_Vacant_hog
-						Generic_Vacant_for
-						Generic_Vacant_eco
-						Generic_Vacant_sec
+					add_country_leader_role = {
+						character = URL_Hadji_Umar_Mamsurov
+						promote_leader = yes
+						country_leader = {
+							desc = "POLITICS_HADJI_UMAR_MAMSUROV_OMSK_COLLAPSE_DESC"
+							expire = "1999.1.1"
+							ideology = authoritarian_democracy_stratocracy_subtype
+							traits = { }
+							id = -1
+						}
 					}
 					remove_ideas = {
 						URL_children_of_vorkuta
 						URL_refugee_crisis
+					}
+					remove_all_ministers = yes
+					add_ideas = {
+						URL_Generic_Vacant_hog
+						URL_Generic_Vacant_for
+						URL_Generic_Vacant_eco
+						URL_Generic_Vacant_sec
 					}
 				}
 			}
@@ -3681,10 +3649,11 @@ country_event = { ### The First Draft ###
  	
  	option = {
 		name = omsksr.12.a
-		add_tech_bonus = {
-			bonus = 0.5
-			uses = 1
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
  	}
 }
@@ -3731,27 +3700,25 @@ country_event = { ### Venerate the Front - Ustinov and Yepishev Join ###
  	
  	option = {
 		name = omsksr.15.a
-		create_field_marshal = {
-			name = "Dmitry Ustinov"
-			picture = "Portrait_Omsk_Dmitry_Ustinov.dds"
+		add_field_marshal_role = {
+			character = OMS_Dmitry_Ustinov
 			traits = { politically_connected expert_delegator logistics_wizard organizer }
 			skill = 2
 			attack_skill = 1
 			defense_skill = 1
 			planning_skill = 2
 			logistics_skill = 2
-			id = 3597
+			legacy_id = 3597
 		}
-		create_corps_commander = {
-			name = "Alexey Yepishev"
-			picture = "Portrait_Omsk_Alexey_Yepishev.dds"
+		add_corps_commander_role = {
+			character = OMS_Alexey_Yepishev
 			traits = { politically_connected trickster }
 			skill = 2
 			attack_skill = 3
 			defense_skill = 1
 			planning_skill = 1
 			logistics_skill = 2
-			id = 3598
+			legacy_id = 3598
 		}		
  	}
 }
@@ -3919,27 +3886,25 @@ country_event = { ### A Cold, Dark Sea ###
  	option = {
 		name = omsksr.25.a
 		navy_experience = 10
-		create_navy_leader = {
-			name = "Boris Yeronin"
-			picture = "Portrait_Omsk_Boris_Yeronin.dds"
+		add_naval_commander_role = {
+			character = OMS_Boris_Yeronin
 			traits = { seawolf silent_hunter }
 			skill = 2
 			attack_skill = 3
 			defense_skill = 1
 			maneuvering_skill = 2
 			coordination_skill = 1
-			id = 7561
+			legacy_id = 7561
 		}
-		create_navy_leader = {
-			name = "Evgeny Druzhinin"
-			picture = "Portrait_Omsk_Evgeny_Druzhinin.dds"
+		add_naval_commander_role = {
+			character = OMS_Evgeny_Druzhinin
 			traits = { fleet_protector lancer }
 			skill = 2
 			attack_skill = 1
 			defense_skill = 3
 			maneuvering_skill = 1
 			coordination_skill = 2
-			id = 7562
+			legacy_id = 7562
 		}
  	}
 }
@@ -3969,42 +3934,24 @@ country_event = { ###  ###
  	
  	option = {
 		name = omsksr.27.a
+		custom_effect_tooltip = omsksr.27_tt
 		hidden_effect = {
-			random_list = {
-				95 = {
-					create_country_leader = {
-						name = "Dmitry Yazov"
-						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
-						picture = "Portrait_Omsk_Dmitry_Yazov_70s.dds"
-						expire = "1999.1.1"
-						ideology = ultranationalism_ultramilitarism_subtype
-						traits = { the_supreme_commander_of_the_great_trial }
+			set_country_leader_description = {
+				desc = "POLITICS_DMITRY_YAZOV_70_DESC"
+			}
+			OMS_Dmitry_Yazov = {
+				random_list = {
+					95 = {
+						set_portraits = {
+							army = { large = "gfx/leaders/OMS/Portrait_Omsk_Dmitry_Yazov_70s.dds" }
+							civilian = { large = "gfx/leaders/OMS/Portrait_Omsk_Dmitry_Yazov_70s.dds" }
+						}
 					}
-					create_country_leader = {
-						name = "Dmitry Yazov"
-						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
-						picture = "Portrait_Omsk_Dmitry_Yazov_70s.dds"
-						expire = "1999.1.1"
-						ideology = despotism_military_junta_subtype
-						traits = { the_supreme_commander_of_the_great_trial }
-					}
-				}
-				5 = {
-					create_country_leader = {
-						name = "Dmitry Yazov"
-						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
-						picture = "Portrait_Omsk_Dmitry_Yazov_70s_shades.dds"
-						expire = "1999.1.1"
-						ideology = ultranationalism_ultramilitarism_subtype
-						traits = { the_supreme_commander_of_the_great_trial }
-					}
-					create_country_leader = {
-						name = "Dmitry Yazov"
-						desc = "POLITICS_DMITRY_YAZOV_70_DESC"
-						picture = "Portrait_Omsk_Dmitry_Yazov_70s_shades.dds"
-						expire = "1999.1.1"
-						ideology = despotism_military_junta_subtype
-						traits = { the_supreme_commander_of_the_great_trial }
+					5 = {
+						set_portraits = {
+							army = { large = "gfx/leaders/OMS/Portrait_Omsk_Dmitry_Yazov_70s_shades.dds" }
+							civilian = { large = "gfx/leaders/OMS/Portrait_Omsk_Dmitry_Yazov_70s_shades.dds" }
+						}
 					}
 				}
 			}

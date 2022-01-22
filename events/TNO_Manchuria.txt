@@ -13,7 +13,7 @@ country_event = { #Intro
 	option = {
 		name = MAN.0.a
 		hidden_effect = {
-			country_event = { id = MAN.1 days = 2114 } 
+			country_event = { id = MAN.1 days = 2114 }
 		}
 	}
 }
@@ -45,35 +45,26 @@ country_event = { #Puyi died
             } 
 		}
 		hidden_effect = {
-			retire_ideology_leader = despotism
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Aisin Gioro Pujie"
-				desc = "POLITICS_PUJIE_DESC"
-				picture = "Portrait_Manchukuo_Pujie.dds"
-				expire = "1999.1.1"
-				ideology = despotism_aristocratic_conservatism_subtype
-				traits = {
-					#
+			retire_character = MAN_aisin_gioro_puyi
+			MAN_aisin_gioro_pujie = {
+				add_country_leader_role = {
+					country_leader = {
+						desc = "POLITICS_PUJIE_DESC"
+						expire = "1999.1.1"
+						ideology = despotism_aristocratic_conservatism_subtype
+						traits = { }
+						id = -1
+					}
 				}
+				promote_character = despotism_aristocratic_conservatism_subtype
 			}
-			create_country_leader = {
-				name = "Gu Ciheng"
-				desc = "POLITICS_GU_CIHENG_DESC"
-				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
-				expire = "1990.1.1"
-				ideology = fascism_reform_bureaucracy_subtype
-				traits = {
-					#
-				}
-			}
+			set_politics = { ruling_party = despotism }
 			set_popularities = {
 				despotism = 56
 				fascism = 26
 				ultranationalism = 15
 				communist = 3
 			}
-			set_politics = { ruling_party = despotism }
 			set_party_name = {
 				ideology = despotism 
 				long_name = MAN_despotism_concordia_party_long 
@@ -112,16 +103,7 @@ country_event = { #Puyi died
             }
 		}
 		hidden_effect = {
-			create_country_leader = {
-				name = "Gu Ciheng"
-				desc = "POLITICS_GU_CIHENG_DESC"
-				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
-				expire = "1990.1.1"
-				ideology = fascism_reform_bureaucracy_subtype
-				traits = {
-					#
-				}
-			}
+			retire_character = MAN_aisin_gioro_puyi
 			set_popularities = {
 				despotism = 51
 				fascism = 29
@@ -135,6 +117,12 @@ country_event = { #Puyi died
 				name = MAN_fascism_split_party_long 
 			}
 			remove_all_ministers = yes
+			add_ideas = { 
+				MAN_Sejima_Ryuzo_hog
+				MAN_Kouda_Chikugen_eco
+				MAN_Wang_Jiashan_for   
+				MAN_Jengjuurjab_sec
+			}
 			set_cosmetic_tag = MAN_state_of_manchuria
 			every_country = { news_event = { id = WORLD_MAN.2 } }
 		}
@@ -157,16 +145,7 @@ country_event = { #Puyi died
             }
 		}
 		hidden_effect = {
-			create_country_leader = {
-				name = "Gu Ciheng"
-				desc = "POLITICS_GU_CIHENG_DESC"
-				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
-				expire = "1990.1.1"
-				ideology = fascism_reform_bureaucracy_subtype
-				traits = {
-					#
-				}
-			}
+			retire_character = MAN_aisin_gioro_puyi
 			set_popularities = {
 				despotism = 10
 				fascism = 21
@@ -181,6 +160,12 @@ country_event = { #Puyi died
 				name = MAN_fascism_split_party_long 
 			}
 			remove_all_ministers = yes
+			add_ideas = { 
+				MAN_Katakura_Tadashi_hog
+				MAN_Kamata_Senichi_eco
+				MAN_Takeshita_Yoshiharu_for   
+				MAN_Inomata_Jinya_sec
+			}
 			every_country = { news_event = { id = WORLD_MAN.3 } }
 		}
 	}
@@ -202,16 +187,7 @@ country_event = { #Puyi died
             }
 		}
 		hidden_effect = {
-			create_country_leader = {
-				name = "Gu Ciheng"
-				desc = "POLITICS_GU_CIHENG_DESC"
-				picture = "Portrait_Manchukuo_Gu_Ciheng.dds"
-				expire = "1990.1.1"
-				ideology = fascism_reform_bureaucracy_subtype
-				traits = {
-					#
-				}
-			}
+			retire_character = MAN_aisin_gioro_puyi
 			set_popularities = {
 				despotism = 17
 				fascism = 57
@@ -225,7 +201,29 @@ country_event = { #Puyi died
 				long_name = MAN_fascism_split_party 
 				name = MAN_fascism_split_party_long 
 			}
+			MAN_katakura_tadashi = {
+				remove_advisor_role = { slot = security_minister}
+				add_advisor_role = {
+					advisor = {
+						slot = security_minister
+						idea_token = MAN_Katakura_Tadashi_inn_sec
+						allowed = { original_tag = MAN }
+						traits = { }
+						ledger = civilian
+						cost = -1
+						removal_cost = -1
+						ai_will_do = { factor = 0 }
+					}
+					activate = yes
+				}
+			}
 			remove_all_ministers = yes
+			add_ideas = { 
+				MAN_Sakomizu_Hisatsune_hog
+				MAN_Wada_Hiro_eco
+				MAN_Takase_Jiro_for
+				MAN_Katakura_Tadashi_inn_sec
+			}
 			every_country = { news_event = { id = WORLD_MAN.4 } }
 		}
 	}

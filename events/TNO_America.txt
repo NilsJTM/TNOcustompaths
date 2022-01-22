@@ -6,7 +6,6 @@
 add_namespace = USA
 add_namespace = USA_election_helpers
 add_namespace = USA_elec_prim
-add_namespace = USA_officers
 add_namespace = USA_debate
 add_namespace = USA.senate
 add_namespace = USA.senate.deaths
@@ -2446,81 +2445,70 @@ country_event = {
 	option = {
 		name = USA.103.a
 
-		if = {
-			limit = { tag = USA }
-			hidden_effect = {
-				every_country = {
-					news_event = { id = USA.420 }
-				}
-				country_event = { id = USA.104 days = 34 }
-				country_event = { id = USA.early_flavor.3 days = 6 }
-				country_event = { id = USA.167 days = 20 }
+		hidden_effect = {
+			every_country = {
+				news_event = { id = USA.420 }
 			}
+			country_event = { id = USA.104 days = 62 }
+			country_event = { id = USA.early_flavor.3 days = 6 }
+			country_event = { id = USA.167 days = 20 }
+		}
 
+		effect_tooltip = {
 			retire_country_leader = yes
-			add_to_variable = { USA_crisis_counter = 1 }
+		}
+		add_to_variable = { USA_crisis_counter = 1 }
 
-			subtract_from_variable = { USA_RD_Unity = 5 }
-			clr_country_flag = USA_60_R_RD
-			set_country_flag = USA_nixon_impeached
-			set_country_flag = USA_JFK_is_president
-			USA_reload_nixon_tree = yes
+		subtract_from_variable = { USA_RD_Unity = 5 }
+		clr_country_flag = USA_60_R_RD
+		set_country_flag = USA_nixon_impeached
+		set_country_flag = USA_JFK_is_president
+		USA_reload_nixon_tree = yes
+		hidden_effect = {
+
+			US_elections_calculate_country_vars = yes
+			remove_ideas = USA_John_F_Kennedy_dep
+			add_ideas = USA_John_McCormack_dep
+			promote_character = USA_John_McCormack
+
+			set_politics = { 
+				ruling_party = conservative_democracy 
+				elections_allowed = yes
+			}
+			USA_get_total_congress_votes = yes
+			add_to_variable = { US_presidents = 1}
+			custom_effect_tooltip = USA_add_societal_unity
+			add_to_variable = { USA_unity = 1 }
 			hidden_effect = {
+				463 = { # Alaska (NPPC)
+					add_to_variable = { NPP_popularity = 0.15 }
+					subtract_from_variable = { RD_popularity = 0.15 }
+					set_variable = { senator_1 = 4 }
+					add_to_variable = { senator_1_RD_R_name = 1 } # We don't change the C-NPP name because it's already set
+				}
 
+				377 = { # Arizona (NPPFR)
+					add_to_variable = { NPP_popularity = 0.15 }
+					subtract_from_variable = { RD_popularity = 0.15 }
+					set_variable = { senator_1 = 6 }
+					add_to_variable = { senator_1_RD_D_name = 1 } # We don't change the FR-NPP name because it's already set
+				}
+
+				376 = { # New Mexico (NPPC)
+					add_to_variable = { NPP_popularity = 0.15 }
+					subtract_from_variable = { RD_popularity = 0.15 }
+					set_variable = { senator_2 = 4 }
+					add_to_variable = { senator_2_RD_R_name = 1 } # We don't change the C-NPP name because it's already set
+				}
+
+				381 = { # Wyoming (NPPFR)
+					add_to_variable = { NPP_popularity = 0.25 }
+					subtract_from_variable = { RD_popularity = 0.25 }
+					set_variable = { senator_2 = 6 }
+					add_to_variable = { senator_2_RD_D_name = 1 } # We don't change the FR-NPP name because it's already set
+				}
 				US_elections_calculate_country_vars = yes
-
-				swap_ideas = {
-					remove_idea = USA_John_F_Kennedy_dep
-					add_idea = USA_John_McCormack_dep
-				}
-
-				create_country_leader = {
-					name = "John W. McCormack"
-					desc = "POLITICS_JOHN_MCCORMACK_DESC"
-					picture = "Portrait_USA_John_W_McCormack.dds"
-					expire = "1994.4.20"
-					ideology = liberal_democracy_subtype
-					traits = {}
-				}
-
-				set_politics = { 
-					ruling_party = conservative_democracy 
-					elections_allowed = yes
-				}
-				USA_get_total_congress_votes = yes
-				add_to_variable = { US_presidents = 1}
-				custom_effect_tooltip = USA_add_societal_unity
-				add_to_variable = { USA_unity = 1 }
-				hidden_effect = {
-					463 = { # Alaska (NPPC)
-						add_to_variable = { NPP_popularity = 0.15 }
-						subtract_from_variable = { RD_popularity = 0.15 }
-						set_variable = { senator_1 = 4 }
-						add_to_variable = { senator_1_RD_R_name = 1 } # We don't change the C-NPP name because it's already set
-					}
-
-					377 = { # Arizona (NPPFR)
-						add_to_variable = { NPP_popularity = 0.15 }
-						subtract_from_variable = { RD_popularity = 0.15 }
-						set_variable = { senator_1 = 6 }
-						add_to_variable = { senator_1_RD_D_name = 1 } # We don't change the FR-NPP name because it's already set
-					}
-
-					376 = { # New Mexico (NPPC)
-						add_to_variable = { NPP_popularity = 0.15 }
-						subtract_from_variable = { RD_popularity = 0.15 }
-						set_variable = { senator_2 = 4 }
-						add_to_variable = { senator_2_RD_R_name = 1 } # We don't change the C-NPP name because it's already set
-					}
-
-					381 = { # Wyoming (NPPFR)
-						add_to_variable = { NPP_popularity = 0.25 }
-						subtract_from_variable = { RD_popularity = 0.25 }
-						set_variable = { senator_2 = 6 }
-						add_to_variable = { senator_2_RD_D_name = 1 } # We don't change the FR-NPP name because it's already set
-					}
-					US_elections_calculate_country_vars = yes
-				}
+				set_variable = { presidents_party = 2 }
 			}
 		}
 	}
@@ -2539,8 +2527,10 @@ country_event = {
 
 	option = {
 		name = USA.104.a
-		kill_country_leader = yes
-		effect_tooltip = { set_politics = { ruling_party = liberal_democracy } }
+		effect_tooltip = {
+			kill_country_leader = yes
+			set_politics = { ruling_party = liberal_democracy }
+		}
 		hidden_effect = { 
 			set_politics = { 
 				ruling_party = liberal_democracy 
@@ -2570,18 +2560,9 @@ country_event = {
 			every_country = {
 				news_event = { id = USA.421 }
 			}
-			swap_ideas = {
-				remove_idea = USA_John_McCormack_dep
-				add_idea = USA_Carl_Hayden_dep
-			}
-			create_country_leader = {
-				name = "Wallace F. Bennett"
-				desc = "POLITICS_WALLACE_F_BENNETT_DESC"
-				picture = "Portrait_USA_Wallace_F_Bennett.dds"
-				expire = "1994.4.20"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {}
-			}
+			remove_ideas = USA_John_McCormack_dep
+			add_ideas = USA_Carl_Hayden_dep
+			promote_character = USA_Wallace_F_Bennett
 
 			#country_event = { id = USA.33 days = 7 }
 			IF = {
@@ -2611,6 +2592,7 @@ country_event = {
 			clr_country_flag = USA_initial_tree_flag
 			set_country_flag = mccormack_is_president
 			USA_reload_nixon_tree = yes
+			set_variable = { presidents_party = 1 }
 		}
 	}
 }
@@ -2825,7 +2807,10 @@ country_event = {
 
 country_event = {
 	id = USA.1738
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1738"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event USA.1738"
+		set_country_flag = USA_nixon_lock
+	}
 	title = USA.1738.t
 	desc = USA.1738.desc
 	picture = GFX_report_event_usa_congress1
@@ -2841,22 +2826,27 @@ country_event = {
 
 	option = {
 		name = USA.1738.a #go civil rights
+		ai_chance = { base = 3 }
 		custom_effect_tooltip = USA_the_1962_civil_rights_act_tooltip
 		hidden_effect = {
 			country_event = USA_sen_bill.101
 			set_country_flag = nixon_neutral_pass
 			set_country_flag = USA_civil_rights_passed
 			clr_country_flag = USA_pro_civil_rights_demonstrations
+			unlock_national_focus = USA_the_kennedy_plan
 		}
 	}
 
 	option = {
 		name = USA.1738.b #veto the bill
+		ai_chance = { base = 1 }
 		custom_effect_tooltip = USA_veto_the_civil_rights_act_tooltip
-		hidden_effect = { country_event = USA.68 }
-		set_country_flag = nixon_neutral_veto
-		set_country_flag = USA_civil_rights_blocked
-
+		hidden_effect = {
+			country_event = USA.68
+			set_country_flag = nixon_neutral_veto
+			set_country_flag = USA_civil_rights_blocked
+			unlock_national_focus = USA_crack_down_on_the_movement
+		}
 	}
 }
 
@@ -3328,24 +3318,8 @@ country_event = {
 			}
 			USA_get_total_congress_votes = yes
 			remove_all_ministers = yes
-			create_country_leader = {
-				name = "Lyndon B. Johnson"
-				desc = "POLITICS_LYNDON_B_JOHNSON_DESC"
-				picture = "Portrait_USA_Lyndon_B_Johnson.dds"
-				expire = "1994.4.20"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Henry M. Jackson"
-				desc = "POLITICS_SCP_DESC"
-				picture = "Portrait_USA_Henry_M_Jackson.dds"
-				expire = "1994.4.20"
-				ideology = social_democracy_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Lyndon_B_Johnson
+			promote_character = USA_Henry_M_Jackson
 			every_country = {
 				news_event = {
 					id = WORLD.701
@@ -3367,6 +3341,7 @@ country_event = {
 					days = 1
 				}
 			}
+			set_variable = { presidents_party = 2 }
 		}
 	}
 
@@ -3403,30 +3378,15 @@ country_event = {
 				elections_allowed = yes
 			}
 			USA_get_total_congress_votes = yes
-			create_country_leader = {
-				name = "Lyndon B. Johnson"
-				desc = "POLITICS_LYNDON_B_JOHNSON_DESC"
-				picture = "Portrait_USA_Lyndon_B_Johnson.dds"
-				expire = "1994.4.20"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Henry M. Jackson"
-				desc = "POLITICS_SCP_DESC"
-				picture = "Portrait_USA_Henry_M_Jackson.dds"
-				expire = "1994.4.20"
-				ideology = social_democracy_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Lyndon_B_Johnson
+			promote_character = USA_Henry_M_Jackson
 			every_country = {
 				news_event = {
 					id = WORLD.702
 					days = 1
 				}
 			}
+			remove_all_ministers = yes
 			add_ideas = USA_Edmund_Muskie_dep
 			add_ideas = USA_Dean_Rusk_pol
 			add_ideas = USA_Henry_Fowler_eco
@@ -3441,6 +3401,7 @@ country_event = {
 				}
 			}
 			load_focus_tree = USA_LBJ_64
+			set_variable = { presidents_party = 1 }
 		}
 	}
 
@@ -3490,24 +3451,8 @@ country_event = {
 				elections_allowed = yes
 			}
 			USA_get_total_congress_votes = yes
-			create_country_leader = {
-				name = "Lyndon B. Johnson"
-				desc = "POLITICS_LYNDON_B_JOHNSON_DESC"
-				picture = "Portrait_USA_Lyndon_B_Johnson.dds"
-				expire = "1994.4.20"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Henry M. Jackson"
-				desc = "POLITICS_SCP_DESC"
-				picture = "Portrait_USA_Henry_M_Jackson.dds"
-				expire = "1994.4.20"
-				ideology = social_democracy_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Lyndon_B_Johnson
+			promote_character = USA_Henry_M_Jackson
 			every_country = {
 				news_event = {
 					id = WORLD.704
@@ -3520,7 +3465,7 @@ country_event = {
 			add_ideas = USA_Wilbur_Mills_eco
 			add_ideas = USA_Robert_Byrd_mil
 			hidden_effect = { country_event = { id = wallace.633 days = 17 } }
-
+			set_variable = { presidents_party = 6 }
 		}
 	}
 
@@ -3560,24 +3505,8 @@ country_event = {
 				elections_allowed = yes
 			}
 			USA_get_total_congress_votes = yes
-			create_country_leader = {
-				name = "Lyndon B. Johnson"
-				desc = "POLITICS_LYNDON_B_JOHNSON_DESC"
-				picture = "Portrait_USA_Lyndon_B_Johnson.dds"
-				expire = "1994.4.20"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Robert F. Kennedy"
-				desc = "POLITICS_RFK_DESC"
-				picture = "Portrait_USA_Bobby_Kennedy.dds"
-				expire = "1994.4.20"
-				ideology = social_democracy_progressivism_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Lyndon_B_Johnson
+			promote_character = USA_Robert_F_Kennedy
 			every_country = {
 				news_event = {
 					id = WORLD.703
@@ -3592,6 +3521,9 @@ country_event = {
 			load_focus_tree = USA_RFK_64
 			remove_all_ministers = yes
 			add_ideas = USA_Hubert_Humphrey_dep
+			add_ideas = USA_Generic_Vacant_eco
+			add_ideas = USA_Generic_Vacant_for
+			add_ideas = USA_Generic_Vacant_sec
 			391 = { add_to_variable = { senator_2_NPP_C_name = 1 } } # Humphrey abandons his seat
 			USA_RFK_flavor1 = yes
 			set_variable = { RFK_brink = 4 }
@@ -3603,6 +3535,7 @@ country_event = {
 			} else = {
 				country_event = { id = strom.flavor.1 days = 3 } 
 			}
+			set_variable = { presidents_party = 4 }
 		}
 	}
 
@@ -3766,15 +3699,7 @@ country_event = { #Chase-Smith Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Margaret Chase Smith"
-				desc = "POLITICS_MARGARET_CHASE_SMITH_DESC"
-				picture = "Portrait_USA_Margaret_C_Smith.dds"
-				expire = "1994.4.20"
-				ideology = authoritarian_democracy_neoconservatism_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Margaret_Chase_Smith
 			every_country = {
 				news_event = {
 					id = WORLD.714
@@ -3816,6 +3741,7 @@ country_event = { #Chase-Smith Inauguration
 			mcs_faction_setup = yes
 			mcs_influence_calculation = yes
 			mcs_update_party_display_debug = yes
+			set_variable = { presidents_party = 6 }
 		}
 	}
 
@@ -3838,15 +3764,7 @@ country_event = { #Goldwater Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Barry Goldwater"
-				desc = "POLITICS_GLD_DESC"
-				picture = "Portrait_USA_Barry_Goldwater.dds"
-				expire = "1994.4.20"
-				ideology = conservative_democracy_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Barry_Goldwater
 			every_country = {
 				news_event = {
 					id = WORLD.711
@@ -3885,6 +3803,7 @@ country_event = { #Goldwater Inauguration
 				set_country_flag = USA_begin_response
 			}
 			hidden_effect = { country_event = { id = USA.neo_silver.1 days = 117 } }
+			set_variable = { presidents_party = 2 }
 		}
 	}
 
@@ -3908,15 +3827,7 @@ country_event = { #Glenn Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "John Glenn"
-				desc = "POLITICS_GLN_DESC"
-				picture = "Portrait_USA_John_Glenn.dds"
-				expire = "1994.4.20"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_John_Glenn
 			every_country = {
 				news_event = {
 					id = WORLD.712
@@ -3960,6 +3871,7 @@ country_event = { #Glenn Inauguration
 			}
 			country_event = { id = USA.neo_silver.1 days = 117 }
 			add_dynamic_modifier = { modifier = USA_GLN_nasa_funding_annual }
+			set_variable = { presidents_party = 1 }
 		}
 	}
 
@@ -3979,15 +3891,7 @@ country_event = { #Harrington Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Michael Harrington"
-				desc = "POLITICS_HAR_DESC"
-				picture = "Portrait_USA_Michael_Harrington.dds"
-				expire = "1994.4.20"
-				ideology = social_democracy_democratic_socialism_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Michael_Harrington
 			every_country = {
 				news_event = {
 					id = WORLD.713
@@ -4059,6 +3963,7 @@ country_event = { #Harrington Inauguration
 
 			set_variable = { USA_HAR_fatigue_event_count = 0 }
 			hidden_effect = { country_event = { id = USA.neo_silver.1 days = 117 } }
+			set_variable = { presidents_party = 4 }
 		}
 	}
 	is_triggered_only = yes
@@ -5416,7 +5321,13 @@ country_event = {
 #it's been 5 months how have you not won yet
 country_event = {
 	id = USA.1108
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1108"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event USA.1108"
+		white_peace = {
+			tag = GUY
+			message = USA_failed_policing_action
+		}
+	}
 	title = USA.1108.t
 	desc = USA.1108.desc
 	picture = GFX_report_event_generic_people
@@ -5432,10 +5343,6 @@ country_event = {
 		name = USA.1108.a
 		add_stability = -0.03
 		add_political_power = -100
-		white_peace = {
-			tag = GUY
-			message = USA_failed_policing_action
-		}
 		add_popularity = {
 			ideology = liberal_democracy
 			popularity = -0.015
@@ -5686,2008 +5593,6 @@ country_event = { #ARPA Funding
 	}
 }
 
-##########################
-#  US ARMY/NAVY LEADERS  #
-##########################
-
-#New Generals Coming in
-
-#James H. Polk
-country_event = {
-	id = USA_officers.7
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1003"}
-	title = USA_officers.7.t
-	desc = USA_officers.7.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.7.a
-		create_corps_commander = {
-			name = "James H. Polk"
-			picture = "Portrait_USA_GEN_James_H_Polk.dds"
-			traits = { cavalry_leader }
-
-			skill = 2
-			id = 1007
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 1
-			logistics_skill = 1
-		}
-	}
-}
-
-#Creighton Abrams
-country_event = {
-	id = USA_officers.8
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1004"}
-	title = USA_officers.8.t
-	desc = USA_officers.8.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.8.a
-		create_corps_commander = {
-			name = "Creighton Abrams"
-			picture = "Portrait_USA_GEN_Creighton_Abrams.dds"
-			traits = { panzer_leader media_personality }
-
-			skill = 3
-			id = 1008
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 3
-			logistics_skill = 2
-		}
-	}
-}
-
-#Ralph E. Haines Jr.
-country_event = {
-	id = USA_officers.9
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1005"}
-	title = USA_officers.9.t
-	desc = USA_officers.9.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.9.a
-		create_corps_commander = {
-			name = "Ralph E. Haines Jr."
-			picture = "Portrait_USA_GEN_Ralph_E_Haines_Jr.dds"
-			traits = {  }
-
-			skill = 2
-			id = 1009
-			attack_skill = 1
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 1
-		}
-	}
-}
-
-#Earl E. Anderson
-country_event = {
-	id = USA_officers.10
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1006"}
-	title = USA_officers.10.t
-	desc = USA_officers.10.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.10.a
-		create_corps_commander = {
-			name = "Earl E. Anderson"
-			picture = "Portrait_USA_GEN_Earl_E_Anderson.dds"
-			traits = { naval_invader }
-
-			skill = 3
-			id = 1010
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 2
-			logistics_skill = 3
-		}
-	}
-}
-
-#Frederick C. Weyand
-country_event = {
-	id = USA_officers.11
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1007"}
-	title = USA_officers.11.t
-	desc = USA_officers.11.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.11.a
-		create_corps_commander = {
-			name = "Frederick C. Weyand"
-			picture = "Portrait_USA_GEN_Frederick_C_Weyand.dds"
-			traits = { skilled_staffer }
-
-			skill = 3
-			id = 1011
-			attack_skill = 2
-			defense_skill = 3
-			planning_skill = 3
-			logistics_skill = 2
-		}
-	}
-}
-
-#Alexander Haig
-country_event = {
-	id = USA_officers.12
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1008"}
-	title = USA_officers.12.t
-	desc = USA_officers.12.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.12.a
-		create_corps_commander = {
-			name = "Alexander Haig"
-			picture = "Portrait_USA_Alexander_Haig.dds"
-			traits = { adaptable career_officer}
-
-			skill = 3
-			id = 1012
-			attack_skill = 2
-			defense_skill = 4
-			planning_skill = 2
-			logistics_skill = 1
-		}
-	}
-}
-
-#Henry A. Miley Jr.
-country_event = {
-	id = USA_officers.13
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.13"}
-	title = USA_officers.13.t
-	desc = USA_officers.13.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.13.a
-		create_corps_commander = {
-			name = "Henry A. Miley Jr."
-			picture = "Portrait_USA_GEN_Henry_A_Miley_Jr.dds"
-			traits = { } #no it's not a bug
-
-			skill = 1
-			id = 1013
-			attack_skill = 1
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 1
-		}
-	}
-}
-
-#Bernard W. Rogers
-country_event = {
-	id = USA_officers.14
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1010"}
-	title = USA_officers.14.t
-	desc = USA_officers.14.desc
-	picture = GFX_report_event_iberia_meeting_table
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.14.a
-		create_corps_commander = {
-			name = "Bernard W. Rogers"
-			picture = "Portrait_USA_GEN_Bernard_W_Rogers.dds"
-			traits = { organizer }
-
-			skill = 3
-			id = 1014
-			attack_skill = 1
-			defense_skill = 2
-			planning_skill = 4
-			logistics_skill = 3
-		}
-	}
-}
-
-#Robert H. Barrow
-country_event = {
-	id = USA_officers.15
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1011"}
-	title = USA_officers.15.t
-	desc = USA_officers.15.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.15.a
-		create_corps_commander = {
-			name = "Robert H. Barrow"
-			picture = "Portrait_USA_GEN_Robert_H_Barrow.dds"
-			traits = { naval_liason }
-
-			skill = 3
-			id = 1015
-			attack_skill = 3
-			defense_skill = 3
-			planning_skill = 3
-			logistics_skill = 1
-		}
-	}
-}
-country_event = {
-	id = USA_officers.19
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.19"}
-	title = USA_officers.19.t
-	desc = USA_officers.19.desc
-	picture = GFX_report_event_generic_usa_treaty
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.19.a
-		create_corps_commander = {
-			name = "Hugh P. Harris"
-			picture = "Portrait_USA_Hugh_P_Harris.dds"
-			traits = { } #neither is that one
-
-			skill = 1
-			id = 1019
-			attack_skill = 1
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 1
-		}
-	}
-}
-country_event = {
-	id = USA_officers.20
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.20"}
-	title = USA_officers.20.t
-	desc = USA_officers.20.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.20.a
-		create_corps_commander = {
-			name = "Bruce Palmer Jr."
-			picture = "Portrait_USA_Bruce_Palmer_Jr.dds"
-			traits = { paratrooper }
-
-			skill = 3
-			id = 1020
-			attack_skill = 2
-			defense_skill = 2
-			planning_skill = 4
-			logistics_skill = 2
-		}
-	}
-}
-country_event = {
-	id = USA_officers.24
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.24"}
-	title = USA_officers.24.t
-	desc = USA_officers.24.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.24.a
-		create_corps_commander = {
-			name = "Edward C. Meyer"
-			picture = "Portrait_USA_Edward_Charles_Meyer.dds"
-			traits = { career_officer }
-
-			skill = 2
-			id = 1024
-			attack_skill = 1
-			defense_skill = 1
-			planning_skill = 3
-			logistics_skill = 2
-		}
-	}
-}
-country_event = {
-	id = USA_officers.25
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.25"}
-	title = USA_officers.25.t
-	desc = USA_officers.25.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.25.a
-		create_corps_commander = {
-			name = "Andrew Goodpaster"
-			picture = "Portrait_USA_Andrew_Goodpaster.dds"
-			traits = { trait_cautious }
-
-			skill = 2
-			id = 1025
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 1
-			logistics_skill = 1
-		}
-	}
-}
-country_event = {
-	id = USA_officers.26
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.26"}
-	title = USA_officers.26.t
-	desc = USA_officers.26.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.26.a
-		create_corps_commander = {
-			name = "Norman Schwarzkopf Jr."
-			picture = "Portrait_USA_Norman_Schwarzkopf.dds"
-			traits = { }
-
-			skill = 1
-			id = 1026
-			attack_skill = 1
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 1
-		}
-	}
-}
-country_event = {
-	id = USA_officers.27
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.27"}
-	title = USA_officers.27.t
-	desc = USA_officers.27.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.27.a
-		create_corps_commander = {
-			name = "GEORGE ROBINSON MATHER"
-			picture = "Portrait_USA_George_Robinson_Mather.dds"
-			traits = { infantry_officer }
-
-			skill = 2
-			id = 1027
-			attack_skill = 2
-			defense_skill = 2
-			planning_skill = 2
-			logistics_skill = 1
-		}
-	}
-}
-#Navy Leaders
-
-#John S. McCain Jr.
-country_event = {
-	id = USA_officers.103
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.103"}
-	title = USA_officers.103.t
-	desc = USA_officers.103.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.103.a
-		create_navy_leader = {
-			name = "John S. McCain Jr."
-			picture = "Portrait_USA_ADM_John_S_McCain_Jr.dds"
-			traits = { }
-
-			skill = 1
-			id = 1103
-		}
-	}
-}
-
-#Bernard A. Clarey
-country_event = {
-	id = USA_officers.104
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.104"}
-	title = USA_officers.104.t
-	desc = USA_officers.104.desc
-	picture = GFX_report_event_us_washington_obelisk
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.104.a
-		create_navy_leader = {
-			name = "Bernard A. Clarey"
-			picture = "Portrait_USA_Chick_Clarey.dds"
-			traits = { }
-
-			skill = 1
-			id = 1104
-		}
-	}
-}
-
-#Elmo Zumwalt
-country_event = {
-	id = USA_officers.105
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.105"}
-	title = USA_officers.105.t
-	desc = USA_officers.105.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.105.a
-		create_navy_leader = {
-			name = "Elmo Zumwalt"
-			picture = "Portrait_USA_ADM_Elmo_Zumwalt.dds"
-			traits = { }
-
-			skill = 1
-			id = 1105
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.106
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.106"}
-	title = USA_officers.106.t
-	desc = USA_officers.106.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.106.a
-		create_navy_leader = {
-			name = "James L. Holloway III"
-			picture = "Portrait_USA_James_Holloway_III.dds"
-			traits = { }
-
-			skill = 1
-			id = 1106
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.107
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.107"}
-	title = USA_officers.107.t
-	desc = USA_officers.107.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.107.a
-		create_navy_leader = {
-			name = "Maurice F. Weisner"
-			picture = "Portrait_USA_Maurice_F_Weisner.dds"
-			traits = { }
-
-			skill = 1
-			id = 1107
-		}
-	}
-}
-country_event = {
-	id = USA_officers.108
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.108"}
-	title = USA_officers.108.t
-	desc = USA_officers.108.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.108.a
-		create_navy_leader = {
-			name = "Ralph W. Cousins"
-			picture = "Portrait_USA_Ralph_W_Cousins.dds"
-			traits = { }
-
-			skill = 1
-			id = 1108
-		}
-	}
-}
-country_event = {
-	id = USA_officers.109
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.109"}
-	title = USA_officers.109.t
-	desc = USA_officers.109.desc
-	picture = GFX_report_event_us_washington_obelisk
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.109.a
-		create_navy_leader = {
-			name = "David H. Bagley"
-			picture = "Portrait_USA_David_H_Bagley.dds"
-			traits = { }
-
-			skill = 1
-			id = 1109
-		}
-	}
-}
-country_event = {
-	id = USA_officers.110
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.110"}
-	title = USA_officers.110.t
-	desc = USA_officers.110.desc
-	picture = GFX_report_event_iberia_meeting_table
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.110.a
-		create_navy_leader = {
-			name = "William F. Bringle"
-			picture = "Portrait_USA_William_F_Bringle.dds"
-			traits = { }
-
-			skill = 1
-			id = 1110
-		}
-	}
-}
-country_event = {
-	id = USA_officers.111
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.111"}
-	title = USA_officers.111.t
-	desc = USA_officers.111.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.111.a
-		create_navy_leader = {
-			name = "Waldemar F. A. Wendt"
-			picture = "Portrait_USA_Waldemar_F_A_Wendt.dds"
-			traits = { }
-
-			skill = 1
-			id = 1111
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.112
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.112"}
-	title = USA_officers.112.t
-	desc = USA_officers.112.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.112.a
-		create_navy_leader = {
-			name = "Worth H. Bagley"
-			picture = "Portrait_USA_Worth_H_Bagley.dds"
-			traits = { }
-
-			skill = 1
-			id = 1112
-		}
-	}
-}
-
-
-#Generals Retiring
-
-country_event = {
-	id = USA_officers.200
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1034"}
-	title = USA_officers.200.t
-	desc = USA_officers.200.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.200.a
-		country_event = { id = USA_officers.300 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.201
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1035"}
-	title = USA_officers.201.t
-	desc = USA_officers.201.desc
-	picture = GFX_report_event_us_pentagon
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.201.a
-		country_event = { id = USA_officers.301 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.202
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1036"}
-	title = USA_officers.202.t
-	desc = USA_officers.202.desc
-	picture = GFX_report_event_generic_usa_treaty
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.202.a
-		country_event = { id = USA_officers.302 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.203
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1037"}
-	title = USA_officers.203.t
-	desc = USA_officers.203.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.203.a
-		country_event = { id = USA_officers.303 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.204
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1038"}
-	title = USA_officers.204.t
-	desc = USA_officers.204.desc
-	picture = GFX_report_event_us_flag
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.204.a
-		country_event = { id = USA_officers.304 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.205
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1039"}
-	title = USA_officers.205.t
-	desc = USA_officers.205.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.205.a
-		country_event = { id = USA_officers.305 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.206
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1040"}
-	title = USA_officers.206.t
-	desc = USA_officers.206.desc
-	picture = GFX_report_event_us_pentagon
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.206.a
-		country_event = { id = USA_officers.306 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.207
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1041"}
-	title = USA_officers.207.t
-	desc = USA_officers.207.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.207.a
-		country_event = { id = USA_officers.307 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.208
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1042"}
-	title = USA_officers.208.t
-	desc = USA_officers.208.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.208.a
-		country_event = { id = USA_officers.308 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.209
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1043"}
-	title = USA_officers.209.t
-	desc = USA_officers.209.desc
-	picture = GFX_report_event_USA_congress_2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.209.a
-		country_event = { id = USA_officers.309 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.210
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1044"}
-	title = USA_officers.210.t
-	desc = USA_officers.210.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.210.a
-		country_event = { id = USA_officers.310 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.211
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1045"}
-	title = USA_officers.211.t
-	desc = USA_officers.211.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.211.a
-		country_event = { id = USA_officers.311 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.212
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1046"}
-	title = USA_officers.212.t
-	desc = USA_officers.212.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.212.a
-		country_event = { id = USA_officers.312 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.217
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.217"}
-	title = USA_officers.217.t
-	desc = USA_officers.217.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.217.a
-		country_event = { id = USA_officers.317 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.218
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.218"}
-	title = USA_officers.218.t
-	desc = USA_officers.218.desc
-	picture = GFX_report_event_us_washington_obelisk
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.218.a
-		country_event = { id = USA_officers.318 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.219
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.219"}
-	title = USA_officers.219.t
-	desc = USA_officers.219.desc
-	picture = GFX_report_event_generic_rally
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.219.a
-		country_event = { id = USA_officers.319 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.220
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.220"}
-	title = USA_officers.220.t
-	desc = USA_officers.220.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.220.a
-		country_event = { id = USA_officers.320 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.221
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.221"}
-	title = USA_officers.221.t
-	desc = USA_officers.221.desc
-	picture = GFX_report_event_us_washington_obelisk
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.221.a
-		country_event = { id = USA_officers.321 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.222
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.222"}
-	title = USA_officers.222.t
-	desc = USA_officers.222.desc
-	picture = GFX_report_event_us_flag
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.222.a
-		country_event = { id = USA_officers.322 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.223
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.223"}
-	title = USA_officers.223.t
-	desc = USA_officers.223.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.223.a
-		country_event = { id = USA_officers.323 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.224
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.224"}
-	title = USA_officers.224.t
-	desc = USA_officers.224.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.224.a
-		country_event = { id = USA_officers.324 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.225
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.225"}
-	title = USA_officers.225.t
-	desc = USA_officers.225.desc
-	picture = GFX_report_event_generic_rally
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.225.a
-		country_event = { id = USA_officers.325 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.226
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.226"}
-	title = USA_officers.226.t
-	desc = USA_officers.226.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.226.a
-		country_event = { id = USA_officers.326 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.227
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.227"}
-	title = USA_officers.227.t
-	desc = USA_officers.227.desc
-	picture = GFX_report_event_us_congress
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.227.a
-		country_event = { id = USA_officers.327 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.228
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.228"}
-	title = USA_officers.228.t
-	desc = USA_officers.228.desc
-	picture = GFX_report_event_us_flag
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.228.a
-		country_event = { id = USA_officers.328 days = 365 }
-	}
-}
-#Wallace M. Greene Jr.
-country_event = {
-	id = USA_officers.300
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.300"}
-	title = USA_officers.300.t
-	desc = USA_officers.300.desc
-	picture = GFX_report_event_USA_congress_2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.300.a
-		if = {
-			limit = { has_unit_leader = 1000 }
-			remove_unit_leader = 1000
-		}
-	}
-}
-
-#Lyman Lemnitzer
-country_event = {
-	id = USA_officers.301
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.301"}
-	title = USA_officers.301.t
-	desc = USA_officers.301.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.301.a
-		if = {
-			limit = { has_unit_leader = 1001 }
-			remove_unit_leader = 1001
-		}
-	}
-}
-
-#Robert W. Porter Jr.
-country_event = {
-	id = USA_officers.302
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.302"}
-	title = USA_officers.302.t
-	desc = USA_officers.302.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.302.a
-		if = {
-			limit = { has_unit_leader = 1002 }
-			remove_unit_leader = 1002
-		}
-	}
-}
-
-#Earle Wheeler
-country_event = {
-	id = USA_officers.303
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.303"}
-	title = USA_officers.303.t
-	desc = USA_officers.303.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.303.a
-		if = {
-			limit = { has_unit_leader = 1003 }
-			remove_unit_leader = 1003
-		}
-	}
-}
-
-#Frank S. Besson Jr.
-country_event = {
-	id = USA_officers.304
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.304"}
-	title = USA_officers.304.t
-	desc = USA_officers.304.desc
-	picture = GFX_report_event_USA_congress_2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.304.a
-		if = {
-			limit = { has_unit_leader = 1004 }
-			remove_unit_leader = 1004
-		}
-	}
-}
-
-#William Westmoreland
-country_event = {
-	id = USA_officers.305
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.305"}
-	title = USA_officers.305.t
-	desc = USA_officers.305.desc
-	picture = GFX_report_event_generic_usa_treaty
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.305.a
-		if = {
-			limit = { has_unit_leader = 1005 }
-			remove_unit_leader = 1005
-		}
-	}
-}
-
-#Leonard F. Chapman Jr.
-country_event = {
-	id = USA_officers.306
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.306"}
-	title = USA_officers.306.t
-	desc = USA_officers.306.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.306.a
-		if = {
-			limit = { has_unit_leader = 1006 }
-			remove_unit_leader = 1006
-		}
-	}
-}
-
-#James H. Polk
-country_event = {
-	id = USA_officers.307
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.307"}
-	title = USA_officers.307.t
-	desc = USA_officers.307.desc
-	picture = GFX_report_event_us_pentagon
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.307.a
-		if = {
-			limit = { has_unit_leader = 1007 }
-			remove_unit_leader = 1007
-		}
-	}
-}
-
-#Creighton Abrams
-country_event = {
-	id = USA_officers.308
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.308"}
-	title = USA_officers.308.t
-	desc = USA_officers.308.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.308.a
-		if = {
-			limit = { has_unit_leader = 1008 }
-			remove_unit_leader = 1008
-		}
-	}
-}
-
-#Ralph E. Haines Jr.
-country_event = {
-	id = USA_officers.309
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.309"}
-	title = USA_officers.309.t
-	desc = USA_officers.309.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.309.a
-		if = {
-			limit = { has_unit_leader = 1009 }
-			remove_unit_leader = 1009
-		}
-	}
-}
-
-#Earl E. Anderson
-country_event = {
-	id = USA_officers.310
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.310"}
-	title = USA_officers.310.t
-	desc = USA_officers.310.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.310.a
-		if = {
-			limit = { has_unit_leader = 1010 }
-			remove_unit_leader = 1010
-		}
-	}
-}
-
-#Frederick C. Weyand
-country_event = {
-	id = USA_officers.311
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.311"}
-	title = USA_officers.311.t
-	desc = USA_officers.311.desc
-	picture = GFX_report_event_us_pentagon
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.311.a
-		if = {
-			limit = { has_unit_leader = 1011 }
-			remove_unit_leader = 1011
-		}
-	}
-}
-
-#Alexander Haig
-country_event = {
-	id = USA_officers.312
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.312"}
-	title = USA_officers.312.t
-	desc = USA_officers.312.desc
-	picture = GFX_report_event_usa_supreme_court
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.312.a
-		if = {
-			limit = { has_unit_leader = 1012 }
-			remove_unit_leader = 1012
-		}
-	}
-}
-country_event = {
-	id = USA_officers.317
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.317"}
-	title = USA_officers.312.t
-	desc = USA_officers.312.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.312.a
-		if = {
-			limit = { has_unit_leader = 1017 }
-			remove_unit_leader = 1017
-		}
-	}
-}
-country_event = {
-	id = USA_officers.318
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.318"}
-	title = USA_officers.318.t
-	desc = USA_officers.318.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.318.a
-		if = {
-			limit = { has_unit_leader = 1018 }
-			remove_unit_leader = 1018
-		}
-	}
-}
-country_event = {
-	id = USA_officers.319
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.319"}
-	title = USA_officers.319.t
-	desc = USA_officers.319.desc
-	picture = GFX_report_event_us_washington_obelisk
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.319.a
-		if = {
-			limit = { has_unit_leader = 1019 }
-			remove_unit_leader = 1019
-		}
-	}
-}
-country_event = {
-	id = USA_officers.320
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.320"}
-	title = USA_officers.320.t
-	desc = USA_officers.320.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.320.a
-		if = {
-			limit = { has_unit_leader = 1020 }
-			remove_unit_leader = 1020
-		}
-	}
-}
-country_event = {
-	id = USA_officers.321
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.321"}
-	title = USA_officers.321.t
-	desc = USA_officers.321.desc
-	picture = GFX_report_event_us_congress
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.321.a
-		if = {
-			limit = { has_unit_leader = 1021 }
-			remove_unit_leader = 1021
-		}
-	}
-}
-country_event = {
-	id = USA_officers.322
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.322"}
-	title = USA_officers.322.t
-	desc = USA_officers.322.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.322.a
-		if = {
-			limit = { has_unit_leader = 1022 }
-			remove_unit_leader = 1022
-		}
-	}
-}
-country_event = {
-	id = USA_officers.323
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.323"}
-	title = USA_officers.323.t
-	desc = USA_officers.323.desc
-	picture = GFX_report_event_us_washington_obelisk
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.323.a
-		if = {
-			limit = { has_unit_leader = 1023 }
-			remove_unit_leader = 1023
-		}
-	}
-}
-country_event = {
-	id = USA_officers.324
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.324"}
-	title = USA_officers.324.t
-	desc = USA_officers.324.desc
-	picture = GFX_report_event_iberia_meeting_table
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.324.a
-		if = {
-			limit = { has_unit_leader = 1024 }
-			remove_unit_leader = 1024
-		}
-	}
-}
-country_event = {
-	id = USA_officers.325
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.325"}
-	title = USA_officers.325.t
-	desc = USA_officers.325.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.325.a
-		if = {
-			limit = { has_unit_leader = 1025 }
-			remove_unit_leader = 1025
-		}
-	}
-}
-country_event = {
-	id = USA_officers.326
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.326"}
-	title = USA_officers.326.t
-	desc = USA_officers.326.desc
-	picture = GFX_report_event_generic_rally
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.326.a
-		if = {
-			limit = { has_unit_leader = 1026 }
-			remove_unit_leader = 1026
-		}
-	}
-}
-country_event = {
-	id = USA_officers.327
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.327"}
-	title = USA_officers.327.t
-	desc = USA_officers.327.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.327.a
-		if = {
-			limit = { has_unit_leader = 1027 }
-			remove_unit_leader = 1027
-		}
-	}
-}
-country_event = {
-	id = USA_officers.328
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.328"}
-	title = USA_officers.328.t
-	desc = USA_officers.328.desc
-	picture = GFX_report_event_us_flag
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.328.a
-		if = {
-			limit = { has_unit_leader = 1028 }
-			remove_unit_leader = 1028
-		}
-	}
-}
-#Navy Leaders
-
-country_event = {
-	id = USA_officers.400
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1047"}
-	title = USA_officers.400.t
-	desc = USA_officers.400.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.400.a
-		country_event = { id = USA_officers.500 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.401
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1048"}
-	title = USA_officers.401.t
-	desc = USA_officers.401.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.401.a
-		country_event = { id = USA_officers.501 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.402
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.402"}
-	title = USA_officers.402.t
-	desc = USA_officers.402.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.402.a
-		country_event = { id = USA_officers.502 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.403
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.403"}
-	title = USA_officers.403.t
-	desc = USA_officers.403.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.403.a
-		country_event = { id = USA_officers.503 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.404 #missing admiral ayyy
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.404"}
-	title = USA_officers.404.t
-	desc = USA_officers.404.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.404.a
-		country_event = { id = USA_officers.504 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.405
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.405"}
-	title = USA_officers.405.t
-	desc = USA_officers.405.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.405.a
-		country_event = { id = USA_officers.505 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.406
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.406"}
-	title = USA_officers.406.t
-	desc = USA_officers.406.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.406.a
-		country_event = { id = USA_officers.506 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.407
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.407"}
-	title = USA_officers.407.t
-	desc = USA_officers.407.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.407.a
-		country_event = { id = USA_officers.507 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.408
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.408"}
-	title = USA_officers.408.t
-	desc = USA_officers.408.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.408.a
-		country_event = { id = USA_officers.508 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.409
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.409"}
-	title = USA_officers.409.t
-	desc = USA_officers.409.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.409.a
-		country_event = { id = USA_officers.509 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.410
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.410"}
-	title = USA_officers.410.t
-	desc = USA_officers.410.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.410.a
-		country_event = { id = USA_officers.510 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.411
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.411"}
-	title = USA_officers.411.t
-	desc = USA_officers.411.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.411.a
-		country_event = { id = USA_officers.511 days = 365 }
-	}
-}
-country_event = {
-	id = USA_officers.412
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.412"}
-	title = USA_officers.412.t
-	desc = USA_officers.412.desc
-	picture = GFX_report_event_us_congress
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.412.a
-		country_event = { id = USA_officers.512 days = 365 }
-	}
-}
-
-country_event = {
-	id = USA_officers.413
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.413"}
-	title = USA_officers.413.t
-	desc = USA_officers.413.desc
-	picture = GFX_report_event_usa_congress1
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.413.a
-		country_event = { id = USA_officers.513 days = 365 }
-	}
-}
-
-#David L. McDonald
-country_event = {
-	id = USA_officers.500
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.500"}
-	title = USA_officers.500.t
-	desc = USA_officers.500.desc
-	picture = GFX_report_event_generic_people
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.500.a
-		if = {
-			limit = { has_unit_leader = 1100 }
-			remove_unit_leader = 1100
-		}
-	}
-}
-
-#Thomas H. Moorer
-country_event = {
-	id = USA_officers.501
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.501"}
-	title = USA_officers.501.t
-	desc = USA_officers.501.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.501.a
-		if = {
-			limit = { has_unit_leader = 1101 }
-			remove_unit_leader = 1101
-		}
-	}
-}
-
-#Horacio Rivero Jr.
-country_event = {
-	id = USA_officers.502
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.502"}
-	title = USA_officers.502.t
-	desc =USA_officers.502.desc
-	picture = GFX_report_event_whitehouse_color
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.502.a
-		if = {
-			limit = { has_unit_leader = 1102 }
-			remove_unit_leader = 1102
-		}
-	}
-}
-
-#John S. McCain Jr.
-country_event = {
-	id = USA_officers.503
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.503"}
-	title = USA_officers.503.t
-	desc = USA_officers.503.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.503.a
-		if = {
-			limit = { has_unit_leader = 1103 }
-			remove_unit_leader = 1103
-		}
-	}
-}
-
-#Bernard A. Clarey
-country_event = {
-	id = USA_officers.504
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.504"}
-	title = USA_officers.504.t
-	desc = USA_officers.504.desc
-	picture = GFX_report_event_generic_usa_treaty
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.504.a
-		if = {
-			limit = { has_unit_leader = 1104 }
-			remove_unit_leader = 1104
-		}
-	}
-}
-
-#Elmo Zumwalt
-country_event = {
-	id = USA_officers.505
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.505"}
-	title = USA_officers.505.t
-	desc = USA_officers.505.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.505.a
-		if = {
-			limit = { has_unit_leader = 1105 }
-			remove_unit_leader = 1105
-		}
-	}
-}
-country_event = {
-	id = USA_officers.506
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.506"}
-	title = USA_officers.506.t
-	desc = USA_officers.506.desc
-	picture = GFX_report_event_us_congress2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.506.a
-		if = {
-			limit = { has_unit_leader = 1106 }
-			remove_unit_leader = 1106
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.507
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.507"}
-	title = USA_officers.507.t
-	desc = USA_officers.507.desc
-	picture = GFX_report_event_us_presidential_podium
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.507.a
-		if = {
-			limit = { has_unit_leader = 1107 }
-			remove_unit_leader = 1107
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.508
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.508"}
-	title = USA_officers.508.t
-	desc = USA_officers.508.desc
-	picture = GFX_report_event_iberia_meeting_table
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.508.a
-		if = {
-			limit = { has_unit_leader = 1108 }
-			remove_unit_leader = 1108
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.509
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.509"}
-	title = USA_officers.509.t
-	desc = USA_officers.509.desc
-	picture = GFX_report_event_iberia_big_meeting
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.509.a
-		if = {
-			limit = { has_unit_leader = 1109 }
-			remove_unit_leader = 1109
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.510
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.510"}
-	title = USA_officers.510.t
-	desc = USA_officers.510.desc
-	picture = GFX_report_event_iberia_meeting_table
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.510.a
-		if = {
-			limit = { has_unit_leader = 1110 }
-			remove_unit_leader = 1110
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.511
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.511"}
-	title = USA_officers.511.t
-	desc = USA_officers.511.desc
-	picture = GFX_report_event_us_congress
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.511.a
-		if = {
-			limit = { has_unit_leader = 1111 }
-			remove_unit_leader = 1111
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.512
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.512"}
-	title = USA_officers.512.t
-	desc = USA_officers.512.desc
-	picture = GFX_report_event_whitehouse_bnw
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.512.a
-		if = {
-			limit = { has_unit_leader = 1112 }
-			remove_unit_leader = 1112
-		}
-	}
-}
-
-country_event = {
-	id = USA_officers.513
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA_officers.513"}
-	title = USA_officers.513.t
-	desc = USA_officers.513.desc
-	picture = GFX_report_event_generic_usa_treaty
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = {
-		name = USA_officers.513.a
-		if = {
-			limit = { has_unit_leader = 1113 }
-			remove_unit_leader = 1113
-		}
-	}
-}
-
 
 #india diplo
 country_event = { #india becomes partner for peace
@@ -7808,159 +5713,6 @@ country_event = { #america recognizes roi- AZH
 	option = {
 		name = USA.1622.a
 		add_political_power = -50
-	}
-}
-
-country_event = { #america offers ofn protection to sri lanka
-	id = USA.1631
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1631"}
-	title = USA.1631.t
-	desc = USA.1631.desc
-	picture = GFX_report_event_us_congress3
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = { #great idea
-		name = USA.1631.a
-		SRI = {
-			country_event = {
-				id = USA.1632
-				days = 2
-			}
-		}
-	}
-
-	option = { #why bother
-		name = USA.1631.b
-		ai_chance = { factor = 0 }
-		custom_effect_tooltip = USA_NPP_popularity_grows_low
-		hidden_effect = {
-			every_owned_state = {
-				limit = {
-					can_have_elections_in_state = yes
-				}
-				set_temp_variable = { popularity_bonus = 0.02 }
-				add_to_variable = { NPP_popularity = popularity_bonus }
-			}
-		}
-	}
-}
-
-country_event = { #america offers ofn protection to sri lanka- sri lanka receives
-	id = USA.1632
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1632"}
-	title = USA.1632.t
-	desc = USA.1632.desc
-	picture = GFX_report_event_us_pentagon
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = { #epic
-		name = USA.1632.a
-		USA = {
-			country_event = {
-				id = USA.1633
-				days = 12
-			}
-		}
-	}
-
-	option = { #no
-		name = USA.1632.b
-		ai_chance = { factor = 0 }
-	}
-}
-
-country_event = { #sri lanka in the ofn
-	id = USA.1633
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1633"}
-	title = USA.1633.t
-	desc = USA.1633.desc
-	picture = GFX_report_event_iberia_meeting_table
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = { #send in the ships
-		name = USA.1633.a
-		add_to_faction = SRI
-		SRI = {
-			white_peace = IND
-			white_peace = AZH
-		}
-	}
-}
-
-country_event = { #ofn mandate of ceylon
-	id = USA.1634
-	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1634"}
-	title = USA.1634.t
-	desc = USA.1634.desc
-	picture = GFX_report_event_USA_congress_2
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	option = { #send in the ships
-		name = USA.1634.a
-		SRI = {
-			add_state_core = 422
-			transfer_state = 422
-			add_state_core = 970
-			transfer_state = 970
-			set_cosmetic_tag = SRI_OFN
-			set_politics = {
-				ruling_party = authoritarian_democracy
-			}
-			add_popularity = {
-				ideology = authoritarian_democracy
-				popularity = 0.8
-			}
-			set_party_name = {
-				ideology = authoritarian_democracy
-				name = SRI_authoritarian_democracy_party_OFN
-				long_name = SRI_authoritarian_democracy_party_OFN_long
-			}
-			create_country_leader = {
-				name = "Horacio Rivero"
-				expire = "1999.1.1"
-				picture = "Portrait_Sri_Lanka_Horacio_Rivero.dds"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
-			}
-			set_country_flag = SRI_is_ofn_admin
-			hidden_effect = {
-				#load_focus_tree = SRI_OFN_Admin
-				tno_political_parties_clear = yes
-				add_ideas = tno_political_parties_one_party_state
-				tno_vote_franchise_clear = yes
-				add_ideas = tno_vote_franchise_no_voting
-				tno_refugees_clear = yes
-				add_ideas = tno_refugees_banned
-				tno_minorities_clear = yes
-				add_ideas = tno_minorities_equal_rights
-			}
-		}
-		USA = {
-			add_to_faction = SRI
-		}
-	}
-
-	option = { #why bother
-		name = USA.1634.b
-		custom_effect_tooltip = USA_NPP_popularity_grows_low
-		hidden_effect = {
-			every_owned_state = {
-				limit = {
-					can_have_elections_in_state = yes
-				}
-				set_temp_variable = { popularity_bonus = 0.03 }
-				add_to_variable = { NPP_popularity = popularity_bonus }
-			}
-		}
 	}
 }
 
@@ -8615,15 +6367,7 @@ country_event = { #McNamara Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Robert McNamara"
-				desc = "POLITICS_BOB_DESC"
-				picture = "Portrait_USA_Robert_McNamara.dds"
-				expire = "1994.4.20"
-				ideology = conservative_democracy_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Robert_McNamara
 			every_country = {
 				news_event = {
 					id = WORLD.721
@@ -8646,6 +6390,7 @@ country_event = { #McNamara Inauguration
 			396 = { add_to_variable = { senator_2_RD_R_name = 1 } }
 #			set_country_flag = USA_mil_72_tree_available
 			load_focus_tree = USA_BOB_72
+			set_variable = { presidents_party = 2 }
 		}
 	}
 
@@ -8668,15 +6413,7 @@ country_event = { #McGovern Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "George McGovern"
-				desc = "POLITICS_GOV_DESC"
-				picture = "Portrait_USA_George_McGovern.dds"
-				expire = "1994.4.20"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_George_McGovern
 			every_country = {
 				news_event = {
 					id = WORLD.722
@@ -8702,7 +6439,7 @@ country_event = { #McGovern Inauguration
 			949 = { add_to_variable = { senator_2_RD_R_name = 1 } }
 #			set_country_flag = USA_mil_72_tree_available
 			load_focus_tree = USA_GOV_72
-
+			set_variable = { presidents_party = 1 }
 		}
 	}
 
@@ -8725,15 +6462,7 @@ country_event = { #Jackson Inauguration #EPIC EPIC EPIC
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Henry M. Jackson"
-				desc = "POLITICS_SCP_DESC"
-				picture = "Portrait_USA_Henry_M_Jackson.dds"
-				expire = "1994.4.20"
-				ideology = social_democracy_progressivism_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Henry_M_Jackson
 			every_country = {
 				news_event = {
 					id = WORLD.723
@@ -8762,6 +6491,7 @@ country_event = { #Jackson Inauguration #EPIC EPIC EPIC
 				limit = { has_country_flag = USA_68_R_RD_Past }
 				remove_dynamic_modifier = { modifier = USA_GLN_nasa_funding_annual }
 			}
+			set_variable = { presidents_party = 4 }
 		}
 	}
 
@@ -8784,15 +6514,7 @@ country_event = { #Kirkpatrick Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Jeane Kirkpatrick"
-				desc = "POLITICS_KIRK_DESC"
-				picture = "Portrait_USA_Jeane_Kirkpatrick.dds"
-				expire = "1994.4.20"
-				ideology = authoritarian_democracy_neoconservatism_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Kirkpatrick
 			every_country = {
 				news_event = {
 					id = WORLD.724
@@ -8819,6 +6541,7 @@ country_event = { #Kirkpatrick Inauguration
 				limit = { has_country_flag = USA_68_R_RD_Past }
 				remove_dynamic_modifier = { modifier = USA_GLN_nasa_funding_annual }
 			}
+			set_variable = { presidents_party = 6 }
 		}
 	}
 
@@ -8841,15 +6564,7 @@ country_event = { #Yockey Inauguration NO WORLD WHY WHY WHY WHAT THE FUCK DID YO
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Francis Parker Yockey"
-				desc = "POLITICS_YOCKEY_DESC"
-				picture = "Portrait_USA_Francis_Parker_Yockey.dds"
-				expire = "1994.4.20"
-				ideology = national_socialism_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Francis_Yockey
 			every_country = {
 				news_event = {
 					id = WORLD.725
@@ -8864,7 +6579,12 @@ country_event = { #Yockey Inauguration NO WORLD WHY WHY WHY WHAT THE FUCK DID YO
 			set_politics = { ruling_party = national_socialism }
 			USA_get_total_congress_votes = yes
 			remove_all_ministers = yes
-			add_ideas = USA_Louis_Byers_dep
+			add_ideas = {
+				USA_Louis_Byers_dep
+				USA_Generic_Vacant_for
+				USA_Generic_Vacant_eco
+				USA_Generic_Vacant_sec
+			}
 #			set_country_flag = USA_mil_72_tree_available
 			load_focus_tree = USA_YKY_72
 			set_cosmetic_tag = USA_you_really_fucked_up
@@ -8872,6 +6592,7 @@ country_event = { #Yockey Inauguration NO WORLD WHY WHY WHY WHAT THE FUCK DID YO
 				limit = { has_country_flag = USA_68_R_RD_Past }
 				remove_dynamic_modifier = { modifier = USA_GLN_nasa_funding_annual }
 			}
+			set_variable = { presidents_party = 5 }
 		}
 	}
 
@@ -8901,15 +6622,7 @@ country_event = { #Hall Inauguration
 		hidden_effect = {
 			USA_on_new_president_election = yes
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Gus Hall"
-				desc = "POLITICS_HALL_DESC"
-				picture = "Portrait_USA_Gus_Hall.dds"
-				expire = "1994.4.20"
-				ideology = communist_subtype
-				traits = {
-				}
-			}
+			promote_character = USA_Gus_Hall
 			every_country = {
 				news_event = {
 					id = WORLD.726
@@ -8936,6 +6649,7 @@ country_event = { #Hall Inauguration
 				limit = { has_country_flag = USA_68_R_RD_Past }
 				remove_dynamic_modifier = { modifier = USA_GLN_nasa_funding_annual }
 			}
+			set_variable = { presidents_party = 3 }
 		}
 	}
 
@@ -9560,6 +7274,7 @@ country_event = { #Bennett Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 2 }
 		}
 	}
 }
@@ -9588,6 +7303,7 @@ country_event = { #Johnson Second Inauguration
 			}
 			USA_get_total_congress_votes = yes
 			country_event = { id = USA.neo_silver.1 days = 117 }
+			set_variable = { presidents_party = 1 }
 		}
 	}
 }
@@ -9615,6 +7331,7 @@ country_event = { #Kennedy Second Inauguration
 			}
 			USA_get_total_congress_votes = yes
 			country_event = { id = USA.neo_silver.1 days = 117 }
+			set_variable = { presidents_party = 4 }
 		}
 	}
 }
@@ -9642,6 +7359,7 @@ country_event = { #Wallace Second Inauguration
 			}
 			USA_get_total_congress_votes = yes
 			country_event = { id = USA.neo_silver.1 days = 117 }
+			set_variable = { presidents_party = 6 }
 		}
 	}
 }
@@ -9669,6 +7387,7 @@ country_event = { #Goldwater Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 2 }
 		}
 	}
 }
@@ -9695,6 +7414,7 @@ country_event = { #Glenn Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 1 }
 		}
 	}
 }
@@ -9721,6 +7441,7 @@ country_event = { #Harrington Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 4 }
 		}
 	}
 }
@@ -9747,6 +7468,7 @@ country_event = { #Chase-Smith Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 6 }
 		}
 	}
 }
@@ -9774,6 +7496,7 @@ country_event = { #McNamara Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 2 }
 		}
 	}
 }
@@ -9800,6 +7523,7 @@ country_event = { #McGovern Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 1 }
 		}
 	}
 }
@@ -9826,6 +7550,7 @@ country_event = { #Jackson Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 4 }
 		}
 	}
 }
@@ -9852,6 +7577,7 @@ country_event = { #Kirkpatrick Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 6 }
 		}
 	}
 }
@@ -9878,6 +7604,7 @@ country_event = { #Yockey Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 5 }
 		}
 	}
 }
@@ -9904,6 +7631,7 @@ country_event = { #Hall Second Inauguration
 				}
 			}
 			USA_get_total_congress_votes = yes
+			set_variable = { presidents_party = 3 }
 		}
 	}
 }
@@ -10089,7 +7817,7 @@ country_event = { #Hall Second Inauguration
 # 	}
 #}
 
-country_event = { #Reserved for the most FREEDOM event possible; by uncountably
+country_event = { #Reserved for the least FREEDOM event possible; by uncountably
 	id = USA.1776
 	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.1776"}
 	title = USA.1776.t
@@ -10143,60 +7871,60 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 		add_to_faction = HON
 		add_to_faction = COS
 		add_to_faction = PAN
-		629 = { set_state_name = "THE 50TH STATE, HAWAII" }
-		set_province_name = { id = 4180 name = "Honolulu" }
+		629 = { set_state_name = STATE_629_kkk }
+		set_province_name = { id = 4180 name = VICTORY_POINTS_4180_nor }
 
 		#jaabn
-		282 = { set_state_name = "New New York City" set_variable = { nationality = 82 } }
-		set_province_name = { id = 9998 name = "New Brooklyn" }
-		set_province_name = { id = 1182 name = "New Manhattan" }
-		1234 = { set_state_name = "New New York" set_variable = { nationality = 82 } }
-		set_province_name = { id = 7016 name = "New Buffalo" }
-		set_province_name = { id = 4188 name = "New Albany" }
-		642 = { set_state_name = "South New Oregon" set_variable = { nationality = 88 } }
-		set_province_name = { id = 7169 name = "New Portland" }
-		set_province_name = { id = 4153 name = "New Salem" }
-		set_province_name = { id = 4118 name = "New Eugene" }
-		533 = { set_state_name = "North New Oregon" set_variable = { nationality = 88 } }
-		set_province_name = { id = 9807 name = "New Bend" }
-		set_province_name = { id = 6994 name = "New Medford" }
-		536 = { set_state_name = "New Utah" set_variable = { nationality = 87 } }
-		set_province_name = { id = 10444 name = "New Salt Lake City" }
-		set_province_name = { id = 12421 name = "New Provo" }
-		528 = { set_state_name = "New Washington" set_variable = { nationality = 88 } }
-		set_province_name = { id = 4102 name = "New Spokane" }
-		set_province_name = { id = 7110 name = "New Tacoma" }
-		set_province_name = { id = 4027 name = "New Bellevue" }
-		set_province_name = { id = 1020 name = "New Vancouver" }
-		639 = { set_state_name = "New Seattle" set_variable = { nationality = 88 } }
-		set_province_name = { id = 9950 name = "New Seattle" }
-		530 = { set_state_name = "New Arizona" set_variable = { nationality = 86 } }
-		set_province_name = { id = 7197 name = "New Phoenix" }
-		set_province_name = { id = 4179 name = "New Tuscon" }
-		529 = { set_state_name = "New Colorado" set_variable = { nationality = 87 } }
-		set_province_name = { id = 7212 name = "New Colorado Springs" }
-		set_province_name = { id = 11985 name = "New Boulder" }
-		set_province_name = { id = 10055 name = "New Fort Collins" }
-		650 = { set_state_name = "New Denver" set_variable = { nationality = 87 } }
-		set_province_name = { id = 1092 name = "New Denver" }
-		531 = { set_state_name = "New Illinois" set_variable = { nationality = 85 } }
-		630 = { set_state_name = "New Chicago" set_variable = { nationality = 85 } }
-		set_province_name = { id = 7072 name = "New Chicago" }
-		set_province_name = { id = 12031 name = "West New Chicago" }
-		631 = { set_state_name = "New Springfield" set_variable = { nationality = 85 } }
-		set_province_name = { id = 11960 name = "New Springfield" }
-		532 = { set_state_name = "New Wisconsin" set_variable = { nationality = 85 } }
-		set_province_name = { id = 10125 name = "New Milwaukee" }
-		set_province_name = { id = 4172 name = "New Madison" }
-		set_province_name = { id = 7087 name = "New Green Bay" }
-		534 = { set_state_name = "New Iowa" set_variable = { nationality = 337 } }
-		set_province_name = { id = 1117 name = "New Des Moines" }
-		set_province_name = { id = 12072 name = "New Cedar Rapids" }
-		535 = { set_state_name = "New Minnesota" set_variable = { nationality = 337 } }
-		set_province_name = { id = 10032 name = "New Minneapolis" }
-		set_province_name = { id = 7102 name = "New St. Paul" }
-		526 = { set_state_name = "New Wyoming" set_variable = { nationality = 87 } }
-		set_province_name = { id = 11932 name = "New Cheyenne" }
+		282 = { set_state_name = STATE_282_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 9998 name = VICTORY_POINTS_9998_kkk }
+		set_province_name = { id = 1182 name = VICTORY_POINTS_1182_kkk }
+		1234 = { set_state_name = STATE_1234_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 7016 name = VICTORY_POINTS_7016_kkk }
+		set_province_name = { id = 4188 name = VICTORY_POINTS_4188_kkk }
+		642 = { set_state_name = STATE_642_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 7169 name = VICTORY_POINTS_7169_kkk }
+		set_province_name = { id = 4153 name = VICTORY_POINTS_4153_kkk }
+		set_province_name = { id = 4118 name = VICTORY_POINTS_4118_kkk }
+		533 = { set_state_name = STATE_533_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 9807 name = VICTORY_POINTS_9807_kkk }
+		set_province_name = { id = 6994 name = VICTORY_POINTS_6994_kkk }
+		536 = { set_state_name = STATE_536_kkk set_variable = { nationality = 87 } }
+		set_province_name = { id = 10444 name = VICTORY_POINTS_10444_kkk }
+		set_province_name = { id = 12421 name = VICTORY_POINTS_12421_kkk }
+		528 = { set_state_name = STATE_528_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 4102 name = VICTORY_POINTS_4102_kkk }
+		set_province_name = { id = 7110 name = VICTORY_POINTS_7110_kkk }
+		set_province_name = { id = 4027 name = VICTORY_POINTS_4027_kkk }
+		set_province_name = { id = 1020 name = VICTORY_POINTS_1020_kkk }
+		639 = { set_state_name = STATE_639_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 9950 name = VICTORY_POINTS_9950_kkk }
+		530 = { set_state_name = STATE_530_kkk set_variable = { nationality = 86 } }
+		set_province_name = { id = 7197 name = VICTORY_POINTS_7197_kkk }
+		set_province_name = { id = 4179 name = VICTORY_POINTS_4179_kkk }
+		529 = { set_state_name = STATE_529_kkk set_variable = { nationality = 87 } }
+		set_province_name = { id = 7212 name = VICTORY_POINTS_7212_kkk }
+		set_province_name = { id = 11985 name = VICTORY_POINTS_11985_kkk }
+		set_province_name = { id = 10055 name = VICTORY_POINTS_10055_kkk }
+		650 = { set_state_name = STATE_650_kkk set_variable = { nationality = 87 } }
+		set_province_name = { id = 1092 name = VICTORY_POINTS_1092_kkk }
+		531 = { set_state_name = STATE_531_kkk set_variable = { nationality = 85 } }
+		630 = { set_state_name = STATE_630_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 7072 name = VICTORY_POINTS_7072_kkk }
+		set_province_name = { id = 12031 name = VICTORY_POINTS_12031_kkk }
+		631 = { set_state_name = STATE_631_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 11960 name = VICTORY_POINTS_11960_kkk }
+		532 = { set_state_name = STATE_532_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 10125 name = VICTORY_POINTS_10125_kkk }
+		set_province_name = { id = 4172 name = VICTORY_POINTS_4172_kkk }
+		set_province_name = { id = 7087 name = VICTORY_POINTS_7087_kkk }
+		534 = { set_state_name = STATE_534_kkk set_variable = { nationality = 337 } }
+		set_province_name = { id = 1117 name = VICTORY_POINTS_1117_kkk }
+		set_province_name = { id = 12072 name = VICTORY_POINTS_12072_kkk }
+		535 = { set_state_name = STATE_535_kkk set_variable = { nationality = 337 } }
+		set_province_name = { id = 10032 name = VICTORY_POINTS_10032_kkk }
+		set_province_name = { id = 7102 name = VICTORY_POINTS_7102_kkk }
+		526 = { set_state_name = STATE_526_kkk set_variable = { nationality = 87 } }
+		set_province_name = { id = 11932 name = VICTORY_POINTS_11932_kkk }
 		every_owned_state = {
 			limit = { is_core_of = JAP }
 			remove_core_of = JAP
@@ -10204,115 +7932,115 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 		}
 
 		#germany
-		64 = { set_state_name = "New Los Angeles" set_variable = { nationality = 88 } }
-		set_province_name = { id = 6521 name = "New Los Angeles" }
-		776 = { set_state_name = "New Southern California" set_variable = { nationality = 88 } }
-		set_province_name = { id = 3522 name = "New San Diego" }
-		set_province_name = { id = 375 name = "New Sacramento" }
-		1026 = { set_state_name = "New Bay Area" set_variable = { nationality = 88 } }
-		set_province_name = { id = 3499 name = "New San Francisco" }
-		775 = { set_state_name = "New Detroit" set_variable = { nationality = 337 } }
-		set_province_name = { id = 9347 name = "New Detroit" }
-		58 = { set_state_name = "New Michigan" set_variable = { nationality = 85 } }
-		set_province_name = { id = 6389 name = "New Lansing" }
-		set_province_name = { id = 11366 name = "New Dearborn" }
-		774 = { set_state_name = "New Upper Peninsula" set_variable = { nationality = 85 } }
-		set_province_name = { id = 332 name = "New Marquette" }
-		51 = { set_state_name = "New Oklahoma" set_variable = { nationality = 83 } }
-		set_province_name = { id = 587 name = "New Tulsa" }
-		set_province_name = { id = 3488 name = "New Oklahoma City" }
-		set_province_name = { id = 3547 name = "New Norman" }
-		55 = { set_state_name = "New Massachusetts" set_variable = { nationality = 82 } }
-		set_province_name = { id = 6488 name = "New Boston" }
-		set_province_name = { id = 9524 name = "New Worcester" }
-		56 = { set_state_name = "New Rhode Island" set_variable = { nationality = 82 } }
-		set_province_name = { id = 241 name = "New Providence" }
-		set_province_name = { id = 247 name = "New Warwick" }
-		57 = { set_state_name = "New Connecticut" set_variable = { nationality = 82 } }
-		set_province_name = { id = 495 name = "New New Haven" }
-		set_province_name = { id = 6469 name = "New Hartford" }
-		42 = { set_state_name = "New New Jersey" set_variable = { nationality = 82 } }
-		set_province_name = { id = 11435 name = "New Trenton" }
-		set_province_name = { id = 11531 name = "New Newark" }
-		28 = { set_state_name = "New Georgia" set_variable = { nationality = 83 } }
-		set_province_name = { id = 9559 name = "New Atlanta" }
-		set_province_name = { id = 9503 name = "New Macon" }
-		set_province_name = { id = 678 name = "New Savannah" }
-		50 = { set_state_name = "New Louisiana" set_variable = { nationality = 83 } }
-		set_province_name = { id = 9517 name = "New New Orleans" }
-		85 = { set_state_name = "West New Ohio" set_variable = { nationality = 85 } }
-		set_province_name = { id = 362 name = "New Cleveland" }
-		set_province_name = { id = 279 name = "New Columbus" }
-		5 = { set_state_name = "East New Ohio" set_variable = { nationality = 85 } }
-		set_province_name = { id = 6332 name = "New Cincinnati" }
-		set_province_name = { id = 6375 name = "New Toledo" }
-		97 = { set_state_name = "South New Ohio" set_variable = { nationality = 85 } }
-		set_province_name = { id = 11301 name = "New Dayton" }
-		set_province_name = { id = 318 name = "New Youngstown" }
-		98 = { set_state_name = "New Mississippi" set_variable = { nationality = 83 } }
-		set_province_name = { id = 3230 name = "New Jackson" }
-		59 = { set_state_name = "New Montana" set_variable = { nationality = 87 } }
-		62 = { set_state_name = "West New Missouri" set_variable = { nationality = 85 } }
-		set_province_name = { id = 6282 name = "New Jefferson City" }
-		63 = { set_state_name = "East New Missouri" set_variable = { nationality = 85 } }
-		set_province_name = { id = 11372 name = "New St. Louis" }
-		set_province_name = { id = 9277 name = "New Kansas City" }
-		61 = { set_state_name = "New Alabama" set_variable = { nationality = 83 } }
-		set_province_name = { id = 9294 name = "New Birmingham" }
-		set_province_name = { id = 321 name = "New Montgomery" }
-		65 = { set_state_name = "New Indiana" set_variable = { nationality = 85 } }
-		set_province_name = { id = 514 name = "New Indianapolis" }
-		set_province_name = { id = 3535 name = "New Gary" }
-		188 = { set_state_name = "New Virginia" set_variable = { nationality = 83 } }
-		set_province_name = { id = 6377 name = "New Richmond" }
-		set_province_name = { id = 6298 name = "New Norfolk" }
-		set_province_name = { id = 3326 name = "New Chesapeake" }
-		86 = { set_state_name = "New Florida" set_variable = { nationality = 83 } }
-		set_province_name = { id = 6558 name = "New Miami" }
-		87 = { set_state_name = "New North Carolina" set_variable = { nationality = 83 } }
-		set_province_name = { id = 9508 name = "New Charlotte" }
-		set_province_name = { id = 9546 name = "New Raleigh" }
-		8 = { set_state_name = "New West Virginia" set_variable = { nationality = 83 } }
-		set_province_name = { id = 6583 name = "New Charleston" }
-		68 = { set_state_name = "New Kentucky" set_variable = { nationality = 83 } }
-		set_province_name = { id = 3473 name = "New Louisville" }
-		66 = { set_state_name = "New Maryland" set_variable = { nationality = 82 } }
-		set_province_name = { id = 9570 name = "New Baltimore" }
-		set_province_name = { id = 552 name = "New Frederick" }
-		67 = { set_state_name = "New Delaware" set_variable = { nationality = 82 } }
-		set_province_name = { id = 11467 name = "New Dover" }
-		69 = { set_state_name = "New Arkansas" set_variable = { nationality = 83 } }
-		set_province_name = { id = 11432 name = "New Little Rock" }
-		74 = { set_state_name = "New Maine" set_variable = { nationality = 82 } }
-		set_province_name = { id = 3414 name = "New Portland" }
-		72 = { set_state_name = "New Idaho" set_variable = { nationality = 87 } }
-		set_province_name = { id = 6542 name = "New Boise" }
-		60 = { set_state_name = "New Nebraska" set_variable = { nationality = 337 } }
-		set_province_name = { id = 6524 name = "New Omaha" }
-		153 = { set_state_name = "New North Dakota" set_variable = { nationality = 337 } }
-		set_province_name = { id = 673 name = "New Bismarck" }
-		set_province_name = { id = 6680 name = "New Grand Forks" }
-		770 = { set_state_name = "New South Dakota" set_variable = { nationality = 337 } }
-		set_province_name = { id = 665 name = "New Pierre" }
-		52 = { set_state_name = "South New Texas" set_variable = { nationality = 86 } }
-		set_province_name = { id = 692 name = "New Houston" }
-		set_province_name = { id = 3705 name = "New Austin" }
-		set_province_name = { id = 11638 name = "New Dallas" }
-		53 = { set_state_name = "North New Texas" set_variable = { nationality = 86 } }
-		set_province_name = { id = 3541 name = "New San Antonio" }
-		54 = { set_state_name = "New Tennessee" set_variable = { nationality = 83 } }
-		set_province_name = { id = 11544 name = "New Nashville" }
-		744 = { set_state_name = "New Nevada" set_variable = { nationality = 88 } }
-		152 = { set_state_name = "West New Pennsylvania" set_variable = { nationality = 82 } }
-		set_province_name = { id = 688 name = "New Pittsburgh" }
-		set_province_name = { id = 732 name = "New Gettysburg" }
-		4 = { set_state_name = "East New Pennsylvania" set_variable = { nationality = 82 } }
-		1025 = { set_state_name = "New Philadelphia" set_variable = { nationality = 82 } }
-		set_province_name = { id = 11666 name = "New Philadelphia" }
-		set_province_name = { id = 9648 name = "New Scranton" }
-		137 = { set_state_name = "New Alaska" set_variable = { nationality = 88 } }
-		set_province_name = { id = 3686 name = "New Anchorage" }
-		1373 = { set_state_name = "New New Hampshire" set_variable = { nationality = 82 } }
+		64 = { set_state_name = STATE_64_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 6521 name = VICTORY_POINTS_6521_kkk }
+		776 = { set_state_name = STATE_776_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 3522 name = VICTORY_POINTS_3522_kkk }
+		set_province_name = { id = 375 name = VICTORY_POINTS_375_kkk }
+		1026 = { set_state_name = STATE_1026_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 3499 name = VICTORY_POINTS_3499_kkk }
+		775 = { set_state_name = STATE_775_kkk set_variable = { nationality = 337 } }
+		set_province_name = { id = 9347 name = VICTORY_POINTS_9347_kkk }
+		58 = { set_state_name = STATE_58_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 6389 name = VICTORY_POINTS_6389_kkk }
+		set_province_name = { id = 11366 name = VICTORY_POINTS_11366_kkk }
+		774 = { set_state_name = STATE_774_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 332 name = VICTORY_POINTS_332_kkk }
+		51 = { set_state_name = STATE_51_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 587 name = VICTORY_POINTS_587_kkk }
+		set_province_name = { id = 3488 name = VICTORY_POINTS_3488_kkk }
+		set_province_name = { id = 3547 name = VICTORY_POINTS_3547_kkk }
+		55 = { set_state_name = STATE_55_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 6488 name = VICTORY_POINTS_6488_kkk }
+		set_province_name = { id = 9524 name = VICTORY_POINTS_9524_kkk }
+		56 = { set_state_name = STATE_56_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 241 name = VICTORY_POINTS_241_kkk }
+		set_province_name = { id = 247 name = VICTORY_POINTS_247_kkk }
+		57 = { set_state_name = STATE_57_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 495 name = VICTORY_POINTS_495_kkk }
+		set_province_name = { id = 6469 name = VICTORY_POINTS_6469_kkk }
+		42 = { set_state_name = STATE_42_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 11435 name = VICTORY_POINTS_11435_kkk }
+		set_province_name = { id = 11531 name = VICTORY_POINTS_11531_kkk }
+		28 = { set_state_name = STATE_28_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 9559 name = VICTORY_POINTS_9559_kkk }
+		set_province_name = { id = 9503 name = VICTORY_POINTS_9503_kkk }
+		set_province_name = { id = 678 name = VICTORY_POINTS_678_kkk }
+		50 = { set_state_name = STATE_50_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 9517 name = VICTORY_POINTS_9517_kkk }
+		85 = { set_state_name = STATE_85_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 362 name = VICTORY_POINTS_362_kkk }
+		set_province_name = { id = 279 name = VICTORY_POINTS_279_kkk }
+		5 = { set_state_name = STATE_5_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 6332 name = VICTORY_POINTS_6332_kkk }
+		set_province_name = { id = 6375 name = VICTORY_POINTS_6375_kkk }
+		97 = { set_state_name = STATE_97_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 11301 name = VICTORY_POINTS_11301_kkk }
+		set_province_name = { id = 318 name = VICTORY_POINTS_318_kkk }
+		98 = { set_state_name = STATE_98_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 3230 name = VICTORY_POINTS_3230_kkk }
+		59 = { set_state_name = STATE_59_kkk set_variable = { nationality = 87 } }
+		62 = { set_state_name = STATE_62_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 6282 name = VICTORY_POINTS_6282_kkk }
+		63 = { set_state_name = STATE_63_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 11372 name = VICTORY_POINTS_11372_kkk }
+		set_province_name = { id = 9277 name = VICTORY_POINTS_9277_kkk }
+		61 = { set_state_name = STATE_61_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 9294 name = VICTORY_POINTS_9294_kkk }
+		set_province_name = { id = 321 name = VICTORY_POINTS_321_kkk }
+		65 = { set_state_name = STATE_65_kkk set_variable = { nationality = 85 } }
+		set_province_name = { id = 514 name = VICTORY_POINTS_514_kkk }
+		set_province_name = { id = 3535 name = VICTORY_POINTS_3535_kkk }
+		188 = { set_state_name = STATE_188_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 6377 name = VICTORY_POINTS_6377_kkk }
+		set_province_name = { id = 6298 name = VICTORY_POINTS_6298_kkk }
+		set_province_name = { id = 3326 name = VICTORY_POINTS_3326_kkk }
+		86 = { set_state_name = STATE_86_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 6558 name = VICTORY_POINTS_6558_kkk }
+		87 = { set_state_name = STATE_87_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 9508 name = VICTORY_POINTS_9508_kkk }
+		set_province_name = { id = 9546 name = VICTORY_POINTS_9546_kkk }
+		8 = { set_state_name = STATE_8_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 6583 name = VICTORY_POINTS_6583_kkk }
+		68 = { set_state_name = STATE_68_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 3473 name = VICTORY_POINTS_3473_kkk }
+		66 = { set_state_name = STATE_66_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 9570 name = VICTORY_POINTS_9570_kkk }
+		set_province_name = { id = 552 name = VICTORY_POINTS_552_kkk }
+		67 = { set_state_name = STATE_67_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 11467 name = VICTORY_POINTS_11467_kkk }
+		69 = { set_state_name = STATE_69_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 11432 name = VICTORY_POINTS_11432_kkk }
+		74 = { set_state_name = STATE_74_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 3414 name = VICTORY_POINTS_3414_kkk }
+		72 = { set_state_name = STATE_72_kkk set_variable = { nationality = 87 } }
+		set_province_name = { id = 6542 name = VICTORY_POINTS_6542_kkk }
+		60 = { set_state_name = STATE_60_kkk set_variable = { nationality = 337 } }
+		set_province_name = { id = 6524 name = VICTORY_POINTS_6524_kkk }
+		153 = { set_state_name = STATE_153_kkk set_variable = { nationality = 337 } }
+		set_province_name = { id = 673 name = VICTORY_POINTS_673_kkk }
+		set_province_name = { id = 6680 name = VICTORY_POINTS_6680_kkk }
+		770 = { set_state_name = STATE_770_kkk set_variable = { nationality = 337 } }
+		set_province_name = { id = 665 name = VICTORY_POINTS_665_kkk }
+		52 = { set_state_name = STATE_52_kkk set_variable = { nationality = 86 } }
+		set_province_name = { id = 692 name = VICTORY_POINTS_692_kkk }
+		set_province_name = { id = 3705 name = VICTORY_POINTS_3705_kkk }
+		set_province_name = { id = 11638 name = VICTORY_POINTS_11638_kkk }
+		53 = { set_state_name = STATE_53_kkk set_variable = { nationality = 86 } }
+		set_province_name = { id = 3541 name = VICTORY_POINTS_3541_kkk }
+		54 = { set_state_name = STATE_54_kkk set_variable = { nationality = 83 } }
+		set_province_name = { id = 11544 name = VICTORY_POINTS_11544_kkk }
+		744 = { set_state_name = STATE_744_kkk set_variable = { nationality = 88 } }
+		152 = { set_state_name = STATE_152_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 688 name = VICTORY_POINTS_688_kkk }
+		set_province_name = { id = 732 name = VICTORY_POINTS_732_kkk }
+		4 = { set_state_name = STATE_4_kkk set_variable = { nationality = 82 } }
+		1025 = { set_state_name = STATE_1025_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 11666 name = VICTORY_POINTS_11666_kkk }
+		set_province_name = { id = 9648 name = VICTORY_POINTS_9648_kkk }
+		137 = { set_state_name = STATE_137_kkk set_variable = { nationality = 88 } }
+		set_province_name = { id = 3686 name = VICTORY_POINTS_3686_kkk }
+		1373 = { set_state_name = STATE_1373_kkk set_variable = { nationality = 82 } }
 		every_owned_state = {
 			limit = { is_core_of = GER }
 			remove_core_of = GER
@@ -10326,40 +8054,38 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 			target = ULS
 			transfer_troops = no
 		}
-		113 = { set_state_name = "New Suffolk County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 11293 name = "New Boston" }
-		1374 = { set_state_name = "New Bristol County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 3342 name = "New New Bedford" }
-		135 = { set_state_name = "New Plymouth County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 7394 name = "New Brockton" }
-		1354 = { set_state_name = "New Berkshire County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 6405 name = "New Pittsfield" }
-		1353 = { set_state_name = "New Franklin County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 6289 name = "New Greenfield" }
-		1352 = { set_state_name = "New Hampshire County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 11334 name = "New Amherst" }
-		134 = { set_state_name = "New Hampden County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 9303 name = "New Springfield" }
-		134 = { set_state_name = "New Hampden County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 9303 name = "New Springfield" }
-		1358 = { set_state_name = "New Essex County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 369 name = "New Lawrence" }
-		1356 = { set_state_name = "New Middlesex County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 9255 name = "New Lowell" }
-		set_province_name = { id = 11371 name = "New Cambridge" }
-		119 = { set_state_name = "New Worcester County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 3379 name = "New Worcester" }
-		1357 = { set_state_name = "New North of Boston" set_variable = { nationality = 82 } }
-		1315 = { set_state_name = "New Norfolk County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 385 name = "New Quincy" }
-		1355 = { set_state_name = "New Barnstable County" set_variable = { nationality = 82 } }
-		set_province_name = { id = 337 name = "New Provincetown" }
+		113 = { set_state_name = STATE_113_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 11293 name = VICTORY_POINTS_11293_kkk }
+		1374 = { set_state_name = STATE_1374_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 3342 name = VICTORY_POINTS_3342_kkk }
+		135 = { set_state_name = STATE_135_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 7394 name = VICTORY_POINTS_7394_kkk }
+		1354 = { set_state_name = STATE_1354_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 6405 name = VICTORY_POINTS_6405_kkk }
+		1353 = { set_state_name = STATE_1353_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 6289 name = VICTORY_POINTS_6289_kkk }
+		1352 = { set_state_name = STATE_1352_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 11334 name = VICTORY_POINTS_11334_kkk }
+		134 = { set_state_name = STATE_134_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 9303 name = VICTORY_POINTS_9303_kkk }
+		1358 = { set_state_name = STATE_1358_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 369 name = VICTORY_POINTS_369_kkk }
+		1356 = { set_state_name = STATE_1356_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 9255 name = VICTORY_POINTS_9255_kkk }
+		set_province_name = { id = 11371 name = VICTORY_POINTS_11371_kkk }
+		119 = { set_state_name = STATE_119_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 3379 name = VICTORY_POINTS_3379_kkk }
+		1357 = { set_state_name = STATE_1357_kkk set_variable = { nationality = 82 } }
+		1315 = { set_state_name = STATE_1315_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 385 name = VICTORY_POINTS_385_kkk }
+		1355 = { set_state_name = STATE_1355_kkk set_variable = { nationality = 82 } }
+		set_province_name = { id = 337 name = VICTORY_POINTS_337_kkk }
 		transfer_state = 1322
-		1322 = { set_state_name = "New Nantucket County" set_variable = { nationality = 82 } add_core_of = USA }
-		set_province_name = { id = 6196 name = "New Nantucket" }
+		1322 = { set_state_name = STATE_1322_kkk set_variable = { nationality = 82 } add_core_of = USA }
+		set_province_name = { id = 6196 name = VICTORY_POINTS_6196_kkk }
 		transfer_state = 337
-		337 = { set_state_name = "New Dukes County" set_variable = { nationality = 82 } add_core_of = USA }
-		set_province_name = { id = 13003 name = "New Oak Bluffs" }
+		337 = { set_state_name = STATE_337_kkk set_variable = { nationality = 82 } add_core_of = USA }
+		set_province_name = { id = 13003 name = VICTORY_POINTS_13003_kkk }
 		every_owned_state = {
 			limit = { is_core_of = IRE }
 			remove_core_of = IRE
@@ -10410,43 +8136,43 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				add_state_core = 1208
 				transfer_state = 1209
 				add_state_core = 1209
-				6 = { set_state_name = "Flanders" set_variable = { nationality = 139 } }
-				set_province_name = { id = 516 name = "Brussels" }
-				set_province_name = { id = 6560 name = "Ghent" }
+				6 = { set_state_name = STATE_6_kkk set_variable = { nationality = 139 } }
+				set_province_name = { id = 516 name = VICTORY_POINTS_516_kkk }
+				set_province_name = { id = 6560 name = VICTORY_POINTS_6560_kkk }
 				15 = { set_variable = { nationality = 123 } }
-				set_province_name = { id = 9434 name = "Le Havre" }
-				set_province_name = { id = 11563 name = "Rouen" }
-				16 = { set_state_name = "Paris" set_variable = { nationality = 123 } }
-				set_province_name = { id = 11506 name = "Paris" }
-				17 = { set_state_name = "Franche-Comte" set_variable = { nationality = 123 } }
-				set_province_name = { id = 9642 name = "Besancon" }
-				set_province_name = { id = 11516 name = "Nancy" }
-				18 = { set_state_name = "Champagne" set_variable = { nationality = 123 } }
-				1625 = { set_state_name = "Picardie" set_variable = { nationality = 123 } }
-				set_province_name = { id = 9490 name = "Troyes" }
-				set_province_name = { id = 13011 name = "Reims" }
-				set_province_name = { id = 5291 name = "Verdun" }
+				set_province_name = { id = 9434 name = VICTORY_POINTS_9434_kkk }
+				set_province_name = { id = 11563 name = VICTORY_POINTS_11563_kkk }
+				16 = { set_state_name = STATE_16_kkk set_variable = { nationality = 123 } }
+				set_province_name = { id = 11506 name = VICTORY_POINTS_11506_kkk }
+				17 = { set_state_name = STATE_17_kkk set_variable = { nationality = 123 } }
+				set_province_name = { id = 9642 name = VICTORY_POINTS_9642_kkk }
+				set_province_name = { id = 11516 name = VICTORY_POINTS_11516_kkk }
+				18 = { set_state_name = STATE_18_kkk set_variable = { nationality = 123 } }
+				1625 = { set_state_name = STATE_1625_kkk set_variable = { nationality = 123 } }
+				set_province_name = { id = 9490 name = VICTORY_POINTS_9490_kkk }
+				set_province_name = { id = 13011 name = VICTORY_POINTS_13011_kkk }
+				set_province_name = { id = 5291 name = VICTORY_POINTS_5291_kkk }
 				20 = { set_variable = { nationality = 123 } }
-				set_province_name = { id = 6613 name = "Lyon" }
-				24 = { set_state_name = "Centre" }
-				27 = { set_state_name = "Bourgogne" set_variable = { nationality = 123 } }
-				set_province_name = { id = 3652 name = "Dijon" }
-				set_province_name = { id = 3681 name = "Auxerre" }
+				set_province_name = { id = 6613 name = VICTORY_POINTS_6613_kkk }
+				24 = { set_state_name = STATE_24_kkk }
+				27 = { set_state_name = STATE_27_kkk set_variable = { nationality = 123 } }
+				set_province_name = { id = 3652 name = VICTORY_POINTS_3652_kkk }
+				set_province_name = { id = 3681 name = VICTORY_POINTS_3681_kkk }
 				29 = { set_variable = { nationality = 123 } }
-				1626 = { set_state_name = "Reimes" set_variable = { nationality = 123 } }
-				set_province_name = { id = 575 name = "Dunkirk" }
-				set_province_name = { id = 3476 name = "Amiens" }
-				set_province_name = { id = 11483 name = "Lille" }
-				set_province_name = { id = 11548 name = "Calais" }
-				32 = { set_state_name = "Alpes" set_variable = { nationality = 123 } }
-				set_province_name = { id = 3768 name = "Grenoble" }
-				33 = { set_state_name = "Centre-Sud" }
-				34 = { set_state_name = "Wallonia" set_variable = { nationality = 123 } }
-				set_province_name = { id = 11519 name = "Liege" }
-				747 = { set_state_name = "Normandie-Occidentale" }
+				1626 = { set_state_name = STATE_1626_kkk set_variable = { nationality = 123 } }
+				set_province_name = { id = 575 name = VICTORY_POINTS_575_kkk }
+				set_province_name = { id = 3476 name = VICTORY_POINTS_3476_kkk }
+				set_province_name = { id = 11483 name = VICTORY_POINTS_11483_kkk }
+				set_province_name = { id = 11548 name = VICTORY_POINTS_11548_kkk }
+				32 = { set_state_name = STATE_32_kkk set_variable = { nationality = 123 } }
+				set_province_name = { id = 3768 name = VICTORY_POINTS_3768_kkk }
+				33 = { set_state_name = STATE_33_kkk }
+				34 = { set_state_name = STATE_34_kkk set_variable = { nationality = 123 } }
+				set_province_name = { id = 11519 name = VICTORY_POINTS_11519_kkk }
+				747 = { set_state_name = STATE_747_kkk }
 				788 = { set_variable = { nationality = 123 } }
-				set_province_name = { id = 6949 name = "Meaux" }
-				set_capital = 16
+				set_province_name = { id = 6949 name = VICTORY_POINTS_6949_kkk }
+				set_capital = { state = 16 }
 			}
 			ITA = {
 				set_politics = {
@@ -10500,8 +8226,8 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				}
 				set_party_name = {
 					ideology = despotism
-					long_name = "Partito Popolare Monarchico"
-					name = PMP
+					long_name = ITA_despotism_kkk_party_dem_long
+					name = ITA_despotism_kkk_party_dem
 				}
 				set_party_name = {
 					ideology = fascism
@@ -10514,7 +8240,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					desc = "POLITICS_PIETRO_NENNI_DESC"
 					picture = "Portrait_Italy_Pietro_Nenni_portrait.dds"
 					expire = "1999.1.1"
-					ideology = social_democracy_subtype
+					ideology = social_democracy_democratic_socialism_subtype
 					traits = {
 					}
 				}
@@ -10547,7 +8273,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					transfer_troops = yes
 				}
 				USA = { add_to_faction = MST }
-				set_capital = 12
+				set_capital = { state = 12 }
 				every_owned_state = {
 					limit = { is_core_of = OST }
 					remove_core_of = OST
@@ -10568,7 +8294,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					transfer_troops = yes
 				}
 				USA = { add_to_faction = FUK }
-				set_capital = 525
+				set_capital = { state = 525 }
 				every_owned_state = {
 					limit = { is_core_of = UKR }
 					remove_core_of = UKR
@@ -10682,7 +8408,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					transfer_troops = yes
 				}
 				USA = { add_to_faction = FRI }
-				set_capital = 795
+				set_capital = { state = 795 remember_old_capital = no }
 				every_owned_state = {
 					limit = { is_core_of = INS }
 					remove_core_of = INS
@@ -10723,16 +8449,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					election_frequency = 48
 					elections_allowed = yes
 				}
-				create_country_leader = {
-					name = "Torcuato Fernández-Miranda"
-					desc = "POLITICS_TORQUATO_FERNANDEZ_MIRANDA_DESC"
-					picture = "Portrait_Iberia_Torcuato_Fernandez_Miranda.dds"
-					expire = "1975.10.20"
-					ideology = liberal_democracy_subtype
-					traits = {
-						#
-					}
-				}
+				promote_character = IBR_Torcuato_Fernandez_Miranda
 				set_popularities = {
 					communist = 0
 					socialist = 11
@@ -10763,7 +8480,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					transfer_troops = yes
 				}
 				USA = { add_to_faction = IRL }
-				set_capital = 266
+				set_capital = { state = 266 remember_old_capital = no }
 				every_owned_state = {
 					limit = { is_core_of = PER }
 					remove_core_of = PER
@@ -10791,7 +8508,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				127 = { set_demilitarized_zone = no }
 				338 = { set_demilitarized_zone = no }
 				USA = { add_to_faction = FEN }
-				set_capital = 1300
+				set_capital = { state = 1300 }
 				every_owned_state = {
 					limit = { is_core_of = ENG }
 					remove_core_of = ENG
@@ -10867,7 +8584,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					add_core_of = PAV
 				}
 				set_cosmetic_tag = PAV_regional_unifier
-				set_capital = 589
+				set_capital = { state = 589 }
 			}
 			TOM = {
 				annex_country = {
@@ -11074,112 +8791,112 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				every_owned_state = {
 					add_core_of = TOM
 				}
-				195 = { set_state_name = "St. Petersburg" set_variable = { nationality = 151 } }
-				set_province_name = { id = 3151 name = "St. Petersburg" }
-				196 = { set_state_name = "Kherson" set_variable = { nationality = 164 } }
-				set_province_name = { id = 767 name = "Nova Kakhovka" }
-				200 = { set_state_name = "Zaporizhzhia" set_variable = { nationality = 164 } }
-				set_province_name = { id = 11405 name = "Zaporizhzhia"}
-				208 = { set_state_name = "Luga" }
-				set_province_name = { id = 9098 name = "Luga" }
-				set_province_name = { id = 11186 name = "Koporye" }
-				209 = { set_state_name = "Pskov" }
-				set_province_name = { id = 9319 name = "Lamovo" }
-				set_province_name = { id = 11202 name = "Pskov" }
-				210 = { set_state_name = "Ostrov" }
-				set_province_name = { id = 9254 name = "Ostrov" }
-				217 = { set_state_name = "Volgograd" }
-				set_province_name = { id = 3529 name = "Volgograd" }
-				218 = { set_state_name = "Rostov" set_demilitarized_zone = no }
-				set_province_name = { id = 9417 name = "Rostov-on-Don" }
-				219 = { set_state_name = "Moscow" }
-				set_province_name = { id = 6380 name = "Moscow" }
-				220 = { set_state_name = "Kursk" }
-				set_province_name = { id = 3580 name = "Kursk" }
-				221 = { set_state_name = "Kharkiv" }
-				set_province_name = { id = 418 name = "Kharkiv" }
-				222 = { set_state_name = "Free Russian Partisan" }
-				set_province_name = { id = 9355 name = "Free Russian Partisan" }
-				223 = { set_state_name = "Tula" }
-				set_province_name = { id = 6262 name = "Tula" }
-				224 = { set_state_name = "Bryansk" }
-				set_province_name = { id = 3335 name = "Bryansk" }
-				226 = { set_state_name = "Dnipropetrovsk" set_variable = { nationality = 164 } }
-				set_province_name = { id = 11437 name = "Dnipro" }
-				set_province_name = { id = 11561 name = "Kryvyi Rih" }
-				227 = { set_state_name = "Donetsk" }
-				set_province_name = { id = 6420 name = "Mariupol'" }
-				set_province_name = { id = 6474 name = "Donetsk" }
-				228 = { set_state_name = "Luhansk" set_demilitarized_zone = no }
-				set_province_name = { id = 6519 name = "Severodonetsk" }
-				set_province_name = { id = 9461 name = "Luhansk" }
-				229 = { set_state_name = "Azerbaijan" }
-				231 = { set_state_name = "Georgia" }
-				set_province_name = { id = 1599 name = "Tbilisi" }
-				set_province_name = { id = 9626 name = "Kutaisi" }
-				232 = { set_state_name = "Chechnya-Dagestan" }
-				set_province_name = { id = 712 name = "Kizlyar" }
-				set_province_name = { id = 3672 name = "Grozny" }
-				set_province_name = { id = 6701 name = "Makhachkala" }
-				set_province_name = { id = 7624 name = "Derbent" }
-				233 = { set_state_name = "Caucasus Mountains" }
-				set_province_name = { id = 9628 name = "Vladikavkaz" }
-				set_province_name = { id = 9649 name = "Nalchik" }
-				234 = { set_state_name = "Krasnodar" }
-				set_province_name = { id = 3720 name = "Maykop" }
-				set_province_name = { id = 3734 name = "Krasnodar" }
-				235 = { set_state_name = "Stavropol" }
-				set_province_name = { id = 748 name = "Stavropol" }
-				set_province_name = { id = 11678 name = "Pyatigorsk" }
-				236 = { set_state_name = "Astrakhan" }
-				set_province_name = { id = 9753 name = "Astrakhan" }
-				237 = { set_state_name = "Elista" }
-				set_province_name = { id = 11566 name = "Elista" }
-				238 = { set_state_name = "Volgodonsk" }
-				set_province_name = { id = 6490 name = "Volgodonsk" }
-				239 = { set_state_name = "Saratov" }
-				set_province_name = { id = 433 name = "Balashov" }
-				set_province_name = { id = 3578 name = "Saratov" }
-				242 = { set_state_name = "Smolensk" }
-				set_province_name = { id = 306 name = "Smolensk" }
-				set_province_name = { id = 11254 name = "Vyazma" }
-				243 = { set_state_name = "Roslavl" }
-				set_province_name = { id = 3210 name = "Prigorskoye" }
-				set_province_name = { id = 6544 name = "Morosovsk" } #in 245
-				246 = { set_state_name = "Rzhev" }
-				set_province_name = { id = 11224 name = "Ostashkov" }
-				set_province_name = { id = 11349 name = "Rzhev" }
-				247 = { set_state_name = "Tver" }
-				set_province_name = { id = 6245 name = "Tver" }
-				248 = { set_state_name = "Yaroslavl" }
-				set_province_name = { id = 121 name = "Yaroslavl" }
-				253 = { set_state_name = "Vladimir" }
-				set_province_name = { id = 378 name = "Vladimir" }
-				254 = { set_state_name = "Ryazan" }
-				set_province_name = { id = 11248 name = "Ryazan" }
-				255 = { set_state_name = "Penza" }
-				set_province_name = { id = 9409 name = "Penza" }
-				257 = { set_state_name = "Tambov" }
-				set_province_name = { id = 367 name = "Tambov" }
-				258 = { set_state_name = "Lipetsk" }
-				set_province_name = { id = 6398 name = "Lipetsk" }
-				259 = { set_state_name = "Poltava" }
-				set_province_name = { id = 11504 name = "Poltava" }
-				260 = { set_state_name = "Voronezh" }
-				set_province_name = { id = 413 name = "Voronezh" }
-				263 = { set_state_name = "Novgorod" }
-				set_province_name = { id = 117 name = "Novgorod" }
-				264 = { set_state_name = "Stolbovo" }
-				set_province_name = { id = 3124 name = "Cherepovets" }
-				set_province_name = { id = 3140 name = "Stolbovo" }
-				265 = { set_state_name = "Mikhaylovka" }
-				set_province_name = { id = 487 name = "Mikhaylovka" }
-				401 = { set_state_name = "Engels" }
-				set_province_name = { id = 3551 name = "Yershov" }
-				set_province_name = { id = 11523 name = "Engels" }
-				1314 = { set_state_name = "North Moscow" }
-				set_province_name = { id = 14457 name = "North Moscow" }
-				set_capital = 1442
+				195 = { set_state_name = STATE_195_kkk set_variable = { nationality = 151 } }
+				set_province_name = { id = 3151 name = VICTORY_POINTS_3151_kkk }
+				196 = { set_state_name = STATE_196_kkk set_variable = { nationality = 164 } }
+				set_province_name = { id = 767 name = VICTORY_POINTS_767_kkk }
+				200 = { set_state_name = STATE_200_kkk set_variable = { nationality = 164 } }
+				set_province_name = { id = 11405 name = VICTORY_POINTS_11405_kkk}
+				208 = { set_state_name = STATE_208_kkk }
+				set_province_name = { id = 9098 name = VICTORY_POINTS_9098_kkk }
+				set_province_name = { id = 11186 name = VICTORY_POINTS_11186_kkk }
+				209 = { set_state_name = STATE_209_kkk }
+				set_province_name = { id = 9319 name = VICTORY_POINTS_9319_kkk }
+				set_province_name = { id = 11202 name = VICTORY_POINTS_11202_kkk }
+				210 = { set_state_name = STATE_210_kkk }
+				set_province_name = { id = 9254 name = VICTORY_POINTS_9254_kkk }
+				217 = { set_state_name = STATE_217_kkk }
+				set_province_name = { id = 3529 name = VICTORY_POINTS_3529_kkk }
+				218 = { set_state_name = STATE_218_kkk set_demilitarized_zone = no }
+				set_province_name = { id = 9417 name = VICTORY_POINTS_9417_kkk }
+				219 = { set_state_name = STATE_219_kkk }
+				set_province_name = { id = 6380 name = VICTORY_POINTS_6380_kkk }
+				220 = { set_state_name = STATE_220_kkk }
+				set_province_name = { id = 3580 name = VICTORY_POINTS_3580_kkk }
+				221 = { set_state_name = STATE_221_kkk }
+				set_province_name = { id = 418 name = VICTORY_POINTS_418_kkk }
+				222 = { set_state_name = STATE_222_kkk }
+				set_province_name = { id = 9355 name = VICTORY_POINTS_9355_kkk }
+				223 = { set_state_name = STATE_223_kkk }
+				set_province_name = { id = 6262 name = VICTORY_POINTS_6262_kkk }
+				224 = { set_state_name = STATE_224_kkk }
+				set_province_name = { id = 3335 name = VICTORY_POINTS_3335_kkk }
+				226 = { set_state_name = STATE_226_kkk set_variable = { nationality = 164 } }
+				set_province_name = { id = 11437 name = VICTORY_POINTS_11437_kkk }
+				set_province_name = { id = 11561 name = VICTORY_POINTS_11561_kkk }
+				227 = { set_state_name = STATE_227_kkk }
+				set_province_name = { id = 6420 name = VICTORY_POINTS_6420_kkk }
+				set_province_name = { id = 6474 name = VICTORY_POINTS_6474_kkk }
+				228 = { set_state_name = STATE_228_kkk set_demilitarized_zone = no }
+				set_province_name = { id = 6519 name = VICTORY_POINTS_6519_kkk }
+				set_province_name = { id = 9461 name = VICTORY_POINTS_9461_kkk }
+				229 = { set_state_name = STATE_229_kkk }
+				231 = { set_state_name = STATE_231_kkk }
+				set_province_name = { id = 1599 name = VICTORY_POINTS_1599_kkk }
+				set_province_name = { id = 9626 name = VICTORY_POINTS_9626_kkk }
+				232 = { set_state_name = STATE_232_kkk }
+				set_province_name = { id = 712 name = VICTORY_POINTS_712_kkk }
+				set_province_name = { id = 3672 name = VICTORY_POINTS_3672_kkk }
+				set_province_name = { id = 6701 name = VICTORY_POINTS_6701_kkk }
+				set_province_name = { id = 7624 name = VICTORY_POINTS_7624_kkk }
+				233 = { set_state_name = STATE_233_kkk }
+				set_province_name = { id = 9628 name = VICTORY_POINTS_9628_kkk }
+				set_province_name = { id = 9649 name = VICTORY_POINTS_9649_kkk }
+				234 = { set_state_name = STATE_234_kkk }
+				set_province_name = { id = 3720 name = VICTORY_POINTS_3720_kkk }
+				set_province_name = { id = 3734 name = VICTORY_POINTS_3734_kkk }
+				235 = { set_state_name = STATE_235_kkk }
+				set_province_name = { id = 748 name = VICTORY_POINTS_748_kkk }
+				set_province_name = { id = 11678 name = VICTORY_POINTS_11678_kkk }
+				236 = { set_state_name = STATE_236_kkk }
+				set_province_name = { id = 9753 name = VICTORY_POINTS_9753_kkk }
+				237 = { set_state_name = STATE_237_kkk }
+				set_province_name = { id = 11566 name = VICTORY_POINTS_11566_kkk }
+				238 = { set_state_name = STATE_238_kkk }
+				set_province_name = { id = 6490 name = VICTORY_POINTS_6490_kkk }
+				239 = { set_state_name = STATE_239_kkk }
+				set_province_name = { id = 433 name = VICTORY_POINTS_433_kkk }
+				set_province_name = { id = 3578 name = VICTORY_POINTS_3578_kkk }
+				242 = { set_state_name = STATE_242_kkk }
+				set_province_name = { id = 306 name = VICTORY_POINTS_306_kkk }
+				set_province_name = { id = 11254 name = VICTORY_POINTS_11254_kkk }
+				243 = { set_state_name = STATE_243_kkk }
+				set_province_name = { id = 3210 name = VICTORY_POINTS_3210_kkk }
+				set_province_name = { id = 6544 name = VICTORY_POINTS_6544_kkk } #in 245
+				246 = { set_state_name = STATE_246_kkk }
+				set_province_name = { id = 11224 name = VICTORY_POINTS_11224_kkk }
+				set_province_name = { id = 11349 name = VICTORY_POINTS_11349_kkk }
+				247 = { set_state_name = STATE_247_kkk }
+				set_province_name = { id = 6245 name = VICTORY_POINTS_6245_kkk }
+				248 = { set_state_name = STATE_248_kkk }
+				set_province_name = { id = 121 name = VICTORY_POINTS_121_kkk }
+				253 = { set_state_name = STATE_253_kkk }
+				set_province_name = { id = 378 name = VICTORY_POINTS_378_kkk }
+				254 = { set_state_name = STATE_254_kkk }
+				set_province_name = { id = 11248 name = VICTORY_POINTS_11248_kkk }
+				255 = { set_state_name = STATE_255_kkk }
+				set_province_name = { id = 9409 name = VICTORY_POINTS_9409_kkk }
+				257 = { set_state_name = STATE_257_kkk }
+				set_province_name = { id = 367 name = VICTORY_POINTS_367_kkk }
+				258 = { set_state_name = STATE_258_kkk }
+				set_province_name = { id = 6398 name = VICTORY_POINTS_6398_kkk }
+				259 = { set_state_name = STATE_259_kkk }
+				set_province_name = { id = 11504 name = VICTORY_POINTS_11504_kkk }
+				260 = { set_state_name = STATE_260_kkk }
+				set_province_name = { id = 413 name = VICTORY_POINTS_413_kkk }
+				263 = { set_state_name = STATE_263_kkk }
+				set_province_name = { id = 117 name = VICTORY_POINTS_117_kkk }
+				264 = { set_state_name = STATE_264_kkk }
+				set_province_name = { id = 3124 name = VICTORY_POINTS_3124_kkk }
+				set_province_name = { id = 3140 name = VICTORY_POINTS_3140_kkk }
+				265 = { set_state_name = STATE_265_kkk }
+				set_province_name = { id = 487 name = VICTORY_POINTS_487_kkk }
+				401 = { set_state_name = STATE_401_kkk }
+				set_province_name = { id = 3551 name = VICTORY_POINTS_3551_kkk }
+				set_province_name = { id = 11523 name = VICTORY_POINTS_11523_kkk }
+				1314 = { set_state_name = STATE_1314_kkk }
+				set_province_name = { id = 14457 name = VICTORY_POINTS_14457_kkk }
+				set_capital = { state = 1442 }
 			}
 			LEB = {
 				transfer_state = 553
@@ -11199,13 +8916,13 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				}
 			}
 			EGY = {
-				create_country_leader = {
-					name = "Anwar Sadat"
-					desc = "POLITICS_Anwar_Sadat_DESC"
-					picture = "Portrait_Egypt_Anwar_Sadat.dds"
-					expire = "2018.01.01"
-					ideology = liberal_democracy_subtype
-					traits = {
+				add_country_leader_role = {
+					character = EGY_Anwar_Sadat
+					promote_leader = yes
+					country_leader = {
+						expire = "2018.01.01"
+						ideology = liberal_democracy_subtype
+						id = -1
 					}
 				}
 				set_politics = {
@@ -11218,13 +8935,6 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 					authoritarian_democracy = 7
 					communist = 21
 					socialist = 9
-				}
-				remove_all_ministers = yes
-				add_ideas = {
-					EGY_minister_Mustafa_Khalil_hog
-					EGY_minister_Ahmad_Ismail_Ali_sec
-					EGY_minister_Mahmoud_Riad_for
-					EGY_minister_Ahmed_Abu_Ismail_eco
 				}
 				transfer_state = 453
 				transfer_state = 1304
@@ -11389,7 +9099,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 			}
 			ANG = {
 				retire_country_leader = yes
-				set_capital = 1035
+				set_capital = { state = 1035 }
 				set_politics = {
 					ruling_party = authoritarian_democracy
 					last_election = "1933.3.5"
@@ -11428,7 +9138,7 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				remove_unit_leader = 190
 				remove_unit_leader = 191
 			}
-			SRI = {
+			CYL = {
 				transfer_state = 422
 				add_state_core = 422
 				transfer_state = 970
@@ -11500,7 +9210,6 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				}
 			}
 			add_to_faction = HAI
-			add_to_faction = SRI
 			BKF = {
 				transfer_state = 834
 				add_state_core = 834
@@ -11813,8 +9522,8 @@ country_event = { #Reserved for the most FREEDOM event possible; by uncountably
 				}
 				set_party_name = {
 					ideology = socialist
-					long_name = "Black Lions Movement"
-					name = BLM
+					long_name = ETH_socialist_kkk_party_long
+					name = ETH_socialist_kkk_party
 				}
 			}
 			NOR = {

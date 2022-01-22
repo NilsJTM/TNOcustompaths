@@ -851,29 +851,41 @@ perform_natsoc_collapse = {
 	hidden_effect = {
 		set_global_flag = SGR_natsoc_collapse
 		remove_all_ministers = yes
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Albert Speer"
-			desc = "POLITICS_NATSOC_SPEER_DESC"
-			picture = "Portrait_Germany_Albert_Speer_natsoc.dds"
-			expire = "1990.1.1"
-			ideology = national_socialism_subtype
-			traits = {
-				dictator
+		BGR = {
+			GER_heinrich_trettner = {
+				set_nationality = GER
+			}
+		}
+		GER_albert_speer = {
+			set_portraits = {
+				civilian = { large = "gfx/leaders/GER/Portrait_Germany_Albert_Speer_natsoc.dds" }
+			}
+			add_country_leader_role = {
+				country_leader = {
+					desc = "POLITICS_NATSOC_SPEER_DESC"
+					expire = "1990.1.1"
+					ideology = national_socialism_subtype
+					traits = {
+						dictator
+					}
+				}
+				promote_leader = yes
 			}
 		}
 		set_politics = {
 			ruling_party = national_socialism
 		}
-		add_ideas = {
-			GER_Paul_Wegener_hog
-			GER_Theodor_Oberlander_for
-			GER_Heinrich_Trettner_sec
-		}
+		remove_all_ministers = yes 
 		remove_ideas = {
 			GER_SGR_the_lost_generation
 			GER_SGR_wary_wehrmacht
 			GER_SGR_gang_of_four
+			GER_Henning_von_Tresckow_high_command
+		}
+		add_ideas = {
+			GER_Paul_Wegener_hog
+			GER_Theodor_Oberlander_for
+			GER_Heinrich_Trettner_sec
 		}
 
 		add_to_variable = {

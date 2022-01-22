@@ -835,7 +835,7 @@ country_event = { #ANC Revolts
 				SAF = {
 					if = {
 						limit = {
-							check_variable = { var = SAF_ANC_power < 25 }
+							check_variable = { SAF_ANC_power < 25 }
 						}
 						ANC = { load_oob = ANC_strength_min }
 						else_if = {
@@ -1075,9 +1075,19 @@ country_event = { #Boers Revolt
 				add_dynamic_modifier = {modifier = GRO_SAW_buff}
 			}
 			SAF = {
-				USA = { country_event = { id = USA.40 days = 21 } } #WALKER OF CHAOS WAS HERE AND REPLACED THE ABOVE WITH THIS TO TRY AND FIX SAF TREES LOADING IN PROPERLY
+				USA = { 
+					country_event = { 
+						id = USA.40 
+						days = 21 
+					}
+				} #WALKER OF CHAOS WAS HERE AND REPLACED THE ABOVE WITH THIS TO TRY AND FIX SAF TREES LOADING IN PROPERLY
+				
+				add_popularity = {
+					ideology = fascism
+					popularity = -0.1
+				}
 
-				add_dynamic_modifier = {modifier = SAF_SAW_buff}
+				add_dynamic_modifier = { modifier = SAF_SAW_buff }
 
 				every_unit_leader = {
 					limit = {
@@ -1092,6 +1102,7 @@ country_event = { #Boers Revolt
 					idea = SAF_surprise_attack
 					days = 60
 				}
+
 				load_focus_tree = SAF_war_tree
 
 				#add_named_threat = {
@@ -1106,7 +1117,10 @@ country_event = { #Boers Revolt
 				add_dynamic_modifier = {modifier = COG_SAW_buff}
 			}
 			clr_country_flag = SAF_referendum_decisions
-			remove_ideas = SAF_Desperate_Neutrality
+			remove_ideas = {
+					SAF_Desperate_Neutrality
+					SAF_Boer_Viet_Cong
+			}
 		}
 	}
 
@@ -1351,14 +1365,23 @@ country_event = { # Humanitarian Aid
 	option = {
 		name = SAF.46.a
 		add_political_power = -75
+		add_war_support = 0.1
 		SAF = {
+			country_event = {
+				id = SAF.47
+				days = 10
+			}
 		}
 	}
 
 	option = {
 		name = SAF.46.b
-		add_political_power = -25
+		add_political_power = 25
 		SAF = {
+			country_event = {
+				id = SAF.47
+				days = 10
+			}
 		}
 	}
 }
@@ -1376,10 +1399,22 @@ country_event = { # Trucks
 	option = { #
 		name = SAF.47.a
 		SAF = {
-			add_equipment_to_stockpile = {
-				type = IFV_equipment_1
-				amount = 200
-				producer = USA
+			if = {
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				add_equipment_to_stockpile = {
+					type = IFV_chassis_1
+					amount = 200
+					producer = USA
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = IFV_equipment_1
+					amount = 200
+					producer = USA
+				}
 			}
 			add_equipment_to_stockpile = {
 				type = motorized_equipment_0

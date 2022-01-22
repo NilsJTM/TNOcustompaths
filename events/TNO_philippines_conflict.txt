@@ -107,17 +107,7 @@ country_event = { #Assassination of Jose Yulo
 	option = {
 		name = PHI_Blitz.4.a
 		PHI = {
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "National Assembly"
-				desc = "POLITICS_PHI_NATIONAL_ASSEMBLY_DESC"
-				picture = "portrait_PHI_national_assembly.dds"
-				expire = "2000.1.1"
-				ideology = despotism_interim_government_subtype
-				traits = {
-					extraordinary_session_extraordinarily_gridlocked
-				}
-			}
+			promote_character = PHI_National_Assembly
 			set_politics = {
 				ruling_party = despotism
 			}
@@ -209,16 +199,7 @@ country_event = { #Who to lead again?
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
-		create_country_leader = {
-			name = "Quentin Paredes"
-			desc = "POLITICS_QUENTIN_PAREDES_DESC"
-			picture = "portrait_PHI_Quintin_Paredes.dds"
-			expire = "2000.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = {
-				kalibapi_higit_sa_lahat
-			}
-		}
+		promote_character = PHI_Quentin_Paredes
 		add_ideas = Sphere_Fully_Dependent
 		add_popularity = {
 			ideology = authoritarian_democracy
@@ -252,16 +233,7 @@ country_event = { #Who to lead again?
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
-		create_country_leader = {
-			name = "Claro M. Recto"
-			desc = "POLITICS_CLARO_M_RECTO_DESC"
-			picture = "portrait_PHI_Claro_Recto.dds"
-			expire = "2000.1.1"
-			ideology = authoritarian_democracy_social_nationalism_subtype
-			traits = {
-				inang_bayan_higit_sa_lahat
-			}
-		}
+		promote_character = PHI_Claro_Recto
 		add_ideas = Sphere_Fully_Dependent
 		add_popularity = {
 			ideology = authoritarian_democracy
@@ -295,16 +267,7 @@ country_event = { #Who to lead again?
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
-		create_country_leader = {
-			name = "Sergio Osmeña Jr."
-			desc = "POLITICS_SERGIO_OSMENA_JR"
-			picture = "portrait_PHI_Sergio_Osmena_Jr.dds"
-			expire = "2000.1.1"
-			ideology = authoritarian_democracy_oligarchy_subtype
-			traits = {
-				pangangalakal_higit_sa_lahat
-			}
-		}
+		promote_character = PHI_Sergio_Osmena_Jr
 		add_ideas = Sphere_Fully_Dependent
 		add_popularity = {
 			ideology = despotism
@@ -361,6 +324,11 @@ country_event = { #Taruc gets angry that the us doesn't want to work with him, f
 		}
 		set_politics = { ruling_party = communist }
 		hidden_effect = {
+			SPH_Luis_Taruc = {
+				set_portraits = {
+					civilian = { large = "gfx/leaders/SPH/portrait_SPH_Luis_Taruc_PRP.dds" }
+				}
+			}
 			if = {
 				limit = {
 					owns_state = 327
@@ -430,19 +398,25 @@ country_event = { #Operation iridescent
 	option = {
 		name = PHI_Blitz.11.a
 		custom_effect_tooltip = PHI_Blitz.11_tt
+		USA_Dwight_Beach = {
+			set_nationality = UPH
+		}
 		hidden_effect = {
 			UPH = {
-				kill_country_leader	= yes
-				create_country_leader = {
-					name = "Dwight Edward Beach"
-					desc = "POLITICS_DWIGHT_EDWARD_BEACH_DESC"
-					picture = "Portrait_USA_Dwight_E_Beach.dds"
-					expire = "2000.1.1"
-					ideology = authoritarian_democracy_military_mandate_subtype
-					traits = {
-						phi_american_firepower
+				add_country_leader_role = {
+					character = USA_Dwight_Beach
+					country_leader = {
+						desc = "POLITICS_DWIGHT_EDWARD_BEACH_DESC"
+						ideology = authoritarian_democracy_military_mandate_subtype
+						expire = "2000.1.1"
+						traits = {
+							phi_american_firepower
+						}
+						id = -1
 					}
+					promote_leader = yes
 				}
+				promote_character = UPH_Carlos_Romulo
 				set_politics = {
 					ruling_party = authoritarian_democracy
 					elections_allowed = no
@@ -458,12 +432,6 @@ country_event = { #Operation iridescent
 				}
 			}
 			set_global_flag = UPH_Operation_Iridescent
-		}
-		random_unit_leader = {
-			limit = {
-				has_id = 1022
-			}
-			set_nationality = UPH
 		}
 	}
 }
@@ -511,7 +479,7 @@ country_event = { # Ceasefire, Japan withdraws
 						exists = no
 					}
 					UPH = {
-						has_country_leader = { name = "Dwight Edward Beach" ruling_only = yes }
+						has_country_leader = { character = USA_Dwight_Beach ruling_only = yes }
 					}
 				}
 				USA = {
@@ -603,7 +571,7 @@ country_event = { # Ceasefire, Japan keeps Luzon
 				if = {
 					limit = {
 						has_country_leader = {
-							name = "Dwight Edward Beach"
+							character = USA_Dwight_Beach
 							ruling_only = yes
 						}
 					}
@@ -677,7 +645,7 @@ country_event = { # Ceasefire, Japan keeps Luzon and Vis
 				if = {
 					limit = {
 						has_country_leader = {
-							name = "Dwight Edward Beach"
+							character = USA_Dwight_Beach
 							ruling_only = yes
 						}
 					}
@@ -754,7 +722,7 @@ country_event = { # 14th army victory, FIRES FOR JAPAN ONLY
 					}
 				}
 			}
-			set_capital = 327
+			set_capital = { state = 327 remember_old_capital = no }
 			FGB = {
 				set_cosmetic_tag = PHI_JAP_Administration
 				add_ideas = { Sphere_Fully_Dependent }
@@ -821,7 +789,7 @@ country_event = { # Total Edward Beach (OFN Mandate) victory, FIRES FOR USA ONLY
 					remove_core_of = FGB
 					remove_core_of = SPH
 				}
-				set_capital = 327
+				set_capital = { state = 327 remember_old_capital = no }
 			}
 			every_country = {
 				news_event = {
@@ -871,7 +839,7 @@ country_event = { # USFIP (Fertig) victory
 					remove_core_of = FGB
 				}
 				econ_join_sphere_USA = yes
-				set_capital = 327
+				set_capital = { state = 327 remember_old_capital = no }
 			}
 			TNO_War_For_Philippines_closing = yes
 			USA = {
@@ -963,7 +931,7 @@ country_event = { # Total PRP Victory, FIRES FOR USA ONLY
 					remove_core_of = UPH
 					remove_core_of = FGB
 				}
-				set_capital = 327
+				set_capital = { state = 327 remember_old_capital = no }
 				country_event = { id = PHI_flavor.7 days = 90 }
 			}
 			TNO_War_For_Philippines_closing = yes
@@ -978,19 +946,6 @@ country_event = { # Total PRP Victory, FIRES FOR USA ONLY
 				set_temp_variable = { Victory_Outcome = 1 }
 				set_temp_variable = { Victory_Points = -125 }
 				Cold_War_GUI_ManipulateVictory = yes
-			}
-		}
-		if = {
-			limit = {
-				has_global_flag = UPH_Operation_Iridescent
-			}
-			UPH = {
-				random_unit_leader = {
-					limit = {
-						has_id = 1022
-					}
-					set_nationality = USA
-				}
 			}
 		}
 	}
@@ -1034,7 +989,7 @@ country_event = { # Six months later..
 	trigger = {
 		SPH = {
 			NOT = {
-				has_country_leader = { name = "Ramon del Fierro Magsaysay" ruling_only = yes }
+				has_country_leader = { character = SPH_Ramon_Magsaysay ruling_only = yes }
 			}
 		}
 	}
@@ -1145,17 +1100,7 @@ country_event = { # USFIP - Leyte proclamation
 		hidden_effect = {
 			UPH = {
 				set_cosmetic_tag = PHI_UPH_Republic
-				kill_country_leader = yes
-				create_country_leader = {
-					name = "Carlos Peña Romulo"
-					desc = "POLITICS_CARLOS_ROMULO_DESC"
-					picture = "portrait_UPH_Carlos_Romulo.dds"
-					expire = 2000.1.1
-					ideology = despotism_civilian_dictatorship_subtype
-					traits = {
-						heir_of_the_commonwealth
-					}
-				}
+				promote_character = UPH_Carlos_Romulo
 				set_politics = { ruling_party = despotism }
 				set_party_name = { ideology = despotism name = UPH_USFIP_postwar_romulo_party long_name = UPH_USFIP_postwar_romulo_party_long }
 				set_party_name = { ideology = authoritarian_democracy name = UPH_USFIP_postwar_garcia_party long_name = UPH_USFIP_postwar_garcia_party_long }
@@ -1214,16 +1159,7 @@ country_event = { # Choice for USFIP
 			UPH = {
 				set_cosmetic_tag = PHI_UPH_Republic
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Carlos Polístico García"
-					desc = "POLITICS_CARLOS_GARCIA"
-					picture = "portrait_UPH_Carlos_Garcia.dds"
-					expire = 2000.1.1
-					ideology = authoritarian_democracy_oligarchy_subtype
-					traits = {
-						model_of_the_new_filipino
-					}
-				}
+				promote_character = UPH_Carlos_Garcia
 				set_politics = { ruling_party = authoritarian_democracy }
 				set_party_name = { ideology = authoritarian_democracy name = UPH_USFIP_postwar_garcia_party long_name = UPH_USFIP_postwar_garcia_party_long }
 				set_party_name = { ideology = despotism name = UPH_USFIP_postwar_romulo_party long_name = UPH_USFIP_postwar_romulo_party_long }
@@ -1259,7 +1195,7 @@ country_event = { # Trigger
 			327 = {
 				set_demilitarized_zone = yes
 			}
-			PHI = { set_capital = 1455 }
+			PHI = { set_capital = { state = 1455 } }
 			country_event = { id = PHI_Blitz.25 days = 3 }
 		}
 	}
@@ -1291,15 +1227,7 @@ country_event = { # The incident
 					name = FGB_ultranationalism_party
 					long_name = FGB_ultranationalism_party_long
 				}
-				kill_country_leader = yes
-				create_country_leader = {
-					name = "Masazumi Inada"
-					desc = "POLITICS_MASAZUMI_INADA_DESC"
-					picture = "Portrait_PHI_Masazumi_Inada.dds"
-					expire = "2000.1.1"
-					ideology = despotism_interim_government_subtype
-					traits = { only_guts_and_eggshells_left }
-				}
+				promote_character = PHI_Masazumi_Inada
 				add_ideas = { PHI_home_of_the_14th_army_crisis Sphere_Imp_Protectorate }
 			}
 			every_country = {
@@ -1365,7 +1293,7 @@ country_event = { #US response to .13
 		if = {
 			limit = {
 				UPH = {
-					NOT = { has_country_leader = { name = "Dwight Edward Beach" ruling_only = yes } }
+					NOT = { has_country_leader = { character = USA_Dwight_Beach ruling_only = yes } }
 				}
 			}
 			TNO_fopo_add_philippines_reconstruction_tab = yes
@@ -1388,7 +1316,7 @@ country_event = { #US response to .14
 		if = {
 			limit = {
 				UPH = {
-					NOT = { has_country_leader = { name = "Dwight Edward Beach" ruling_only = yes } }
+					NOT = { has_country_leader = { character = USA_Dwight_Beach ruling_only = yes } }
 				}
 			}
 			TNO_fopo_add_philippines_reconstruction_tab = yes
@@ -1412,19 +1340,6 @@ country_event = { #US response to .15
 	option = {
 		name = PHI_Blitz.155.a
 		set_country_flag = USA_MacArthur_has_died
-		if = {
-			limit = {
-				has_global_flag = UPH_Operation_Iridescent
-			}
-			UPH = {
-				random_unit_leader = {
-					limit = {
-						has_id = 1022
-					}
-					set_nationality = USA
-				}
-			}
-		}
 	}
 }
 
@@ -1561,19 +1476,17 @@ country_event = { # Marcos takeover after taruc's PRP
             } 
 		    base = 1        
 		}
-		create_country_leader = {
-			name = "Ferdinand E. Marcos"
-			desc = "POLITICS_FERDINAND_MARCOS_DESC"
-			picture = "portrait_SPH_Ferdinand_Marcos.dds"
-			expire = "2000.1.1"
-			ideology = authoritarian_democracy_right_wing_populism_subtype
-			#traits = { }
-		}
 		set_popularities = {
 			authoritarian_democracy = 73
 			communist = 20
 			socialist = 7
 		}
+		remove_ideas = {
+			SPH_wounded_revolution
+			SPH_changeless_land
+			SPH_para_sa_ating_himagsikan
+		}
+		remove_dynamic_modifier = { modifier = SPH_para_sa_ating_himagsikan_modifier }
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}

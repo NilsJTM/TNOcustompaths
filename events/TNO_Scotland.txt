@@ -940,10 +940,22 @@ country_event = { #ECW tanks hmmlr
 	option = {
 
 		name =  SCO.225.a
-		add_equipment_to_stockpile = {
-			type = MBT_equipment
-			amount = -50
-			producer = SCO
+		if = {
+			limit = {
+				has_dlc = "No Step Back"
+			}
+			add_equipment_to_stockpile = {
+				type = MBT_chassis
+				amount = -40
+				producer = SCO
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = MBT_equipment
+				amount = -40
+				producer = SCO
+			}
 		}
 		FEN =  {
 			country_event = {
@@ -966,10 +978,22 @@ country_event = { #ECW tanks hmmlr
 	option = {
 
 		name =  SCO.226.a
-		add_equipment_to_stockpile = {
-			type = MBT_equipment
-			amount = 50
-			producer = SCO
+		if = {
+			limit = {
+				has_dlc = "No Step Back"
+			}
+			add_equipment_to_stockpile = {
+				type = MBT_chassis
+				amount = 40
+				producer = SCO
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = MBT_equipment
+				amount = 40
+				producer = SCO
+			}
 		}
 	}
 }
@@ -1169,19 +1193,24 @@ country_event = { #coup event
 					SCOsuccessor = 0
 				}
 			}
-			create_country_leader = {
-				name = "Douglas Wimberley"
-				desc = "POLITICS_DOUGLAS_WIMBERLEY_DESC"
-				picture = "Douglas_Wimberly.dds"
-				expire = "1990.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = { Paranoid }
+			add_country_leader_role = {
+				character = SCO_Douglas_Wimberley
+				promote_leader = yes
+				country_leader = {
+					desc = "POLITICS_DOUGLAS_WIMBERLEY_DESC"
+					ideology = despotism_military_junta_subtype
+					expire = "1990.1.1"
+					traits = {
+						Paranoid
+					}
+					id = -1
+				}
 			}
 			remove_all_ministers = yes
-			add_ideas = SCO_Bernard_Charles_Gordon_Lennox
-			add_ideas = SCO_Eric_Brown
-			add_ideas = SCO_John_Gilmour
-			add_ideas = SCO_Alexander_Boswell
+			add_ideas = SCO_Bernard_Charles_Gordon_Lennox_hog
+			add_ideas = SCO_Eric_Brown_for
+			add_ideas = SCO_John_Gilmour_eco
+			add_ideas = SCO_Alexander_Boswell_sec
 		}
 		if = {
 			limit = {
@@ -1189,18 +1218,22 @@ country_event = { #coup event
 					SCOsuccessor = 1
 				}
 			}
-			create_country_leader = {
-				name = "Bernard Gordon Lennox"
-				picture = "Bernard_Charles_Gordon_Lennox.dds"
-				desc = "POLITICS_BERNARD_GORDON_LENNOX_DESC"
-				expire = "1990.1.1"
-				ideology = despotism_military_junta_subtype
+			add_country_leader_role = {
+				character = SCO_Bernard_Charles_Gordon_Lennox
+				promote_leader = yes
+				country_leader = {
+					desc = ""
+					expire = "1990.1.1"
+					ideology = despotism_military_junta_subtype
+					traits = {  }
+					id = -1
+				}
 			}
 			remove_all_ministers = yes
-			add_ideas = SCO_Edmund_Anstice
-			add_ideas = SCO_Eric_Brown
-			add_ideas = SCO_John_Gilmour
-			add_ideas = SCO_Alexander_Boswell
+			add_ideas = SCO_Edmund_Walter_Anstice_hog
+			add_ideas = SCO_Eric_Brown_for
+			add_ideas = SCO_John_Gilmour_eco
+			add_ideas = SCO_Alexander_Boswell_sec
 		}
 
 
@@ -1210,19 +1243,22 @@ country_event = { #coup event
 					SCOsuccessor = 2
 				}
 			}
-			create_country_leader = {
-				name = "Alexander Boswell"
-				desc = "POLITICS_ALEXANDER_BOSWELL_DESC"
-				picture = Alexander_Boswell.dds
-				expire = "1990.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = { Paranoid }
+			add_country_leader_role = {
+				character = SCO_Alexander_Boswell
+				promote_leader = yes
+				country_leader = {
+					desc = "POLITICS_ALEXANDER_BOSWELL_DESC"
+					expire = "1990.1.1"
+					ideology = despotism_military_junta_subtype
+					traits = { Paranoid }
+					id = -1
+				}
 			}
 			remove_all_ministers = yes
-			add_ideas = SCO_Winnie_Ewing
-			add_ideas = SCO_Douglas_Henderson
-			add_ideas = SCO_Alexander_Cairncross
-			add_ideas = SCO_Ian_Oliver
+			add_ideas = SCO_Winnie_Ewing_hog
+			add_ideas = SCO_Douglas_Henderson_for
+			add_ideas = SCO_Alexander_Cairncross_eco
+			add_ideas = SCO_Ian_Oliver_sec
 		}
 		if = {
 			limit = {
@@ -1230,18 +1266,22 @@ country_event = { #coup event
 					SCOsuccessor = 3
 				}
 			}
-			create_country_leader = {
-				name = "Eric Brown"
-				picture =  "Eric_Brown.dds"
-				desc = "POLITICS_ERIC_BROWN_DESC"
-				expire = "1990.1.1"
-				ideology = despotism_military_junta_subtype
+			add_country_leader_role = {
+				character = SCO_Eric_Brown
+				promote_leader = yes
+				country_leader = {
+					desc = ""
+					expire = "1990.1.1"
+					ideology = despotism_military_junta_subtype
+					traits = {  }
+					id = -1
+				}
 			}
 			remove_all_ministers = yes
-			add_ideas = SCO_Douglas_Crawford
-			add_ideas = SCO_Andrew_Gilchrist
-			add_ideas = SCO_Alexander_Cairncross
-			add_ideas = SCO_Charles_Shaw
+			add_ideas = SCO_Douglas_Crawford_hog
+			add_ideas = SCO_Andrew_Gilchrist_for
+			add_ideas = SCO_Alexander_Cairncross_eco
+			add_ideas = SCO_Charles_Shaw_sec
 		}
 		if = {
 			limit = {
@@ -1249,17 +1289,21 @@ country_event = { #coup event
 					SCOsuccessor = 4
 				}
 			}
-			create_country_leader = {
-				name = "Edmund Anstice"
-				desc = "POLITICS_EDMUND_ANSTICE_DESC"
-				picture = "Sir_Edmund_Walter_Anstice.dds"
-				expire = "1990.1.1"
-				ideology = despotism_military_junta_subtype
+			add_country_leader_role = {
+				character = SCO_Edmund_Walter_Anstice
+				promote_leader = yes
+				country_leader = {
+					desc = ""
+					expire = "1990.1.1"
+					ideology = despotism_military_junta_subtype
+					traits = {  }
+					id = -1
+				}
 			}
-			add_ideas = SCO_Francis_McFadzean
-			add_ideas = SCO_Arnold_Clark
-			add_ideas = SCO_Iain_Maxwell_Stewart
-			add_ideas = SCO_Alexander_Boswell
+			add_ideas = SCO_Francis_McFadzean_hog
+			add_ideas = SCO_Arnold_Clark_for
+			add_ideas = SCO_Iain_Maxwell_Stewart_eco
+			add_ideas = SCO_Alexander_Boswell_sec
 		}
 
 		set_politics = {
@@ -1351,10 +1395,10 @@ country_event = { #Scottish Coup
 #		}
 #		set_country_flag = junta_lennox_successor
 #		remove_all_ministers = yes
-#		add_ideas = SCO_Edmund_Anstice
-#		add_ideas = SCO_Eric_Brown
-#		add_ideas = SCO_John_Gilmour
-#		add_ideas = SCO_Alexander_Boswell
+#		add_ideas = SCO_Edmund_Walter_Anstice_hog
+#		add_ideas = SCO_Eric_Brown_for
+#		add_ideas = SCO_John_Gilmour_eco
+#		add_ideas = SCO_Alexander_Boswell_sec
 #		set_country_flag = wimberly_death_junta
 #		#load_focus_tree = { tree = SCO_Wimberly_Death keep_completed = no }
 #		#complete_national_focus = SCO_Death_of_the_Marshal
@@ -1377,10 +1421,10 @@ country_event = { #Scottish Coup
 #		}
 #		set_country_flag = junta_boswell_successor
 #		remove_all_ministers = yes
-#		add_ideas = SCO_Winnie_Ewing
-#		add_ideas = SCO_Douglas_Henderson
-#		add_ideas = SCO_Alexander_Cairncross
-#		add_ideas = SCO_Ian_Oliver
+#		add_ideas = SCO_Winnie_Ewing_hog
+#		add_ideas = SCO_Douglas_Henderson_for
+#		add_ideas = SCO_Alexander_Cairncross_eco
+#		add_ideas = SCO_Ian_Oliver_sec
 #		set_country_flag = wimberly_death_junta
 #		#load_focus_tree = { tree = SCO_Wimberly_Death keep_completed = no }
 #		#complete_national_focus = SCO_Death_of_the_Marshal
@@ -1403,10 +1447,10 @@ country_event = { #Scottish Coup
 #		}
 #		set_country_flag = junta_brown_successor
 #		remove_all_ministers = yes
-#		add_ideas = SCO_Douglas_Crawford
-#		add_ideas = SCO_Andrew_Gilchrist
-#		add_ideas = SCO_Alexander_Cairncross
-#		add_ideas = SCO_Charles_Shaw
+#		add_ideas = SCO_Douglas_Crawford_hog
+#		add_ideas = SCO_Andrew_Gilchrist_for
+#		add_ideas = SCO_Alexander_Cairncross_eco
+#		add_ideas = SCO_Charles_Shaw_sec
 #		set_country_flag = wimberly_death_junta
 #		#load_focus_tree = { tree = SCO_Wimberly_Death keep_completed = no }
 #		#complete_national_focus = SCO_Death_of_the_Marshal
@@ -1430,10 +1474,10 @@ country_event = { #Scottish Coup
 #		}
 #		set_country_flag = junta_anstice_successor
 #		remove_all_ministers = yes
-#		add_ideas = SCO_Francis_McFadzean
-#		add_ideas = SCO_Arnold_Clark
-#		add_ideas = SCO_Iain_Maxwell_Stewart
-#		add_ideas = SCO_Alexander_Boswell
+#		add_ideas = SCO_Francis_McFadzean_hog
+#		add_ideas = SCO_Arnold_Clark_for
+#		add_ideas = SCO_Iain_Maxwell_Stewart_eco
+#		add_ideas = SCO_Alexander_Boswell_sec
 #		set_country_flag = wimberly_death_junta
 #		#load_focus_tree = { tree = SCO_Wimberly_Death keep_completed = no }
 #		#complete_national_focus = SCO_Death_of_the_Marshal
@@ -2395,7 +2439,7 @@ country_event = { #addressing the protests
 		name = SCO.2041.a
 		trigger = {
 			NOT = {
-				has_country_leader = { name = "Alexander Boswell" }
+				has_country_leader = { character = SCO_Alexander_Boswell }
 			}
 		}
 		set_country_flag = SCO_tmtn
@@ -2405,7 +2449,7 @@ country_event = { #addressing the protests
 		name = SCO.2041.b
 		trigger = {
 			NOT = {
-				has_country_leader = { name = "Eric Brown" }
+				has_country_leader = { character = SCO_Eric_Brown }
 			}
 		}
 		set_country_flag = SCO_tmwn
@@ -2714,15 +2758,12 @@ country_event = { #ILP won the elections
 				popularity = 0.05
 			}
 			load_focus_tree = SCO_ILP_Victory
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 
-			add_ideas = SCO_Alice_Cullen
+			add_ideas = SCO_Alice_Cullen_eco
 			add_ideas = SCO_Myer_Galpern_for
-			add_ideas = SCO_george_wallis
-			add_ideas = SCO_Malcom_MacPherson
+			add_ideas = SCO_Eustace_George_Willis_hog
+			add_ideas = SCO_Malcom_MacPherson_sec
 		}
 		hidden_effect = {
 			every_country = {
@@ -2792,15 +2833,12 @@ country_event = { #UP 1962 election victory
 			set_country_flag = SCO_UP_Victory
 			load_focus_tree = SCO_UP_Victory
 
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 
-			add_ideas = SCO_James_Stuart
-			add_ideas = SCO_Iain_Sproat
-			add_ideas = SCO_Kate_Losinska
-			add_ideas = SCO_Michael_Noble
+			add_ideas = SCO_James_Stuart_hog
+			add_ideas = SCO_Iain_Sproat_for
+			add_ideas = SCO_Kate_Losinska_eco
+			add_ideas = SCO_Michael_Noble_sec
 			every_country = {
 				news_event = {
 					id = WORLD.60104
@@ -3597,14 +3635,15 @@ country_event = { #SAS Coup Failure Pt. 1
 		name = SCO.1685.a
 		custom_effect_tooltip = SCO_paddy_coup_tt
 		hidden_effect = {
-			create_country_leader = {
-				name = "Paddy Mayne"
-				desc = "POLITICS_PADDY_MAYNE_DESC"
-				picture = "Portrait_Scotland_Paddy_Mayne.dds"
-				expire = "1981.10.20"
-				ideology = despotism_military_junta_subtype
-				traits = {
-					#
+			add_country_leader_role = {
+				character = SCO_Paddy_Mayne # optional if inside character scope
+				promote_leader = yes
+				country_leader = {
+					desc = "POLITICS_PADDY_MAYNE_DESC"
+					ideology = despotism_military_junta_subtype
+					expire = "1981.10.20"
+					traits = {	}
+					id = -1
 				}
 			}
 			set_party_name = {
@@ -3640,14 +3679,15 @@ country_event = { #SAS Coup Success Pt. 1
 		custom_effect_tooltip = SCO_paddy_coup_tt
 		set_country_flag = SCO_UP_COUP
 		hidden_effect = {
-			create_country_leader = {
-				name = "Paddy Mayne"
-				desc = "POLITICS_PADDY_MAYNE_DESC"
-				picture = "Portrait_Scotland_Paddy_Mayne.dds"
-				expire = "1981.10.20"
-				ideology = despotism_military_junta_subtype
-				traits = {
-					#
+			add_country_leader_role = {
+				character = SCO_Paddy_Mayne # optional if inside character scope
+				promote_leader = yes
+				country_leader = {
+					desc = "POLITICS_PADDY_MAYNE_DESC"
+					ideology = despotism_military_junta_subtype
+					expire = "1981.10.20"
+					traits = {	}
+					id = -1
 				}
 			}
 			set_party_name = {
@@ -3725,22 +3765,23 @@ country_event = { #SAS Coup Failure Finale
 				long_name = SCO_Armed_Forces_coup_long
 				name = SCO_Armed_Forces_coup
 			}
-			create_country_leader = {
-				name = "Douglas Wimberley"
-				desc = "POLITICS_DOUGLAS_WIMBERLEY_DESC"
-				picture = "Douglas_Wimberly.dds"
-				expire = "1990.1.1"
-				ideology = despotism_military_junta_subtype
-				traits = {
-					Paranoid
+			add_country_leader_role = {
+				character = SCO_Douglas_Wimberley
+				promote_leader = yes
+				country_leader = {
+					desc = "POLITICS_DOUGLAS_WIMBERLEY_DESC"
+					ideology = despotism_military_junta_subtype
+					traits = { Paranoid }
+					expire = "1990.1.1"
+					id = -1
 				}
 			}
 			set_country_flag = SCO_Paranoia_Removed
 			remove_all_ministers = yes
-			add_ideas = SCO_Bernard_Charles_Gordon_Lennox
-			add_ideas = SCO_Eric_Brown
-			add_ideas = SCO_John_Gilmour
-			add_ideas = SCO_Alexander_Boswell
+			add_ideas = SCO_Bernard_Charles_Gordon_Lennox_hog
+			add_ideas = SCO_Eric_Brown_for
+			add_ideas = SCO_John_Gilmour_eco
+			add_ideas = SCO_Alexander_Boswell_sec
 			load_focus_tree = { tree = SCO_Wimberly_UP_Countercoup }
 			unlock_national_focus = SCO_Wimberlys_Countercoup
 			every_country = {
@@ -3776,12 +3817,11 @@ country_event = { #SAS Coup Success Finale
 			remove_unit_leader = 684
 		}
 		set_country_flag = SCO_Paranoia_Removed
-		create_field_marshal = {
-			name = "Paddy Mayne"
-			picture = "Portrait_Scotland_Paddy_Mayne.dds"
+		add_field_marshal_role = {
+			character = SCO_Paddy_Mayne
 			traits = {commando trait_reckless }
 			skill = 3
-			id = 686
+			legacy_id = 686
 			attack_skill = 3
 			defense_skill = 1
 			planning_skill = 3
@@ -3810,10 +3850,10 @@ country_event = { #SAS Coup Success Finale
 			logistics_skill = 1
 		}
 		remove_all_ministers = yes
-		add_ideas = SCO_David_Eyton_Jones
-		add_ideas = SCO_John_Slim
-		add_ideas = SCO_John_Woodhouse
-		add_ideas = SCO_Anthony_Royle
+		add_ideas = SCO_David_Eyton_Jones_hog
+		add_ideas = SCO_John_Slim_for
+		add_ideas = SCO_John_Woodhouse_sec
+		add_ideas = SCO_Anthony_Royle_eco
 		set_variable = { FEN_Mayne_DA = 55 }
 		set_variable = { FEN_Mayne_MD = 45 }
 		set_variable = { FEN_Mayne_DA_min = 45 }
@@ -7078,14 +7118,11 @@ country_event = { #SNP Victory 1966
 
 
 		hidden_effect = {
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 			add_ideas = SCO_Arthur_Donaldson_hog
-			add_ideas = SCO_George_Leslie
+			add_ideas = SCO_George_Leslie_eco
 			add_ideas = SCO_Iain_Maccormick_for
-			add_ideas = SCO_Jimmy_Halliday
+			add_ideas = SCO_Jimmy_Halliday_sec
 			if = {
 				limit = {has_country_flag = SCO_SNP_Detente }
 				#load_focus_tree = SCO_1966_SNP_Detente_Victory
@@ -7146,15 +7183,12 @@ country_event = { #ILP Victory 1966
 			elections_allowed = no
 		}
 		hidden_effect = {
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 
-			add_ideas = SCO_Alice_Cullen
+			add_ideas = SCO_Alice_Cullen_eco
 			add_ideas = SCO_Myer_Galpern_for
-			add_ideas = SCO_george_wallis
-			add_ideas = SCO_Malcom_MacPherson
+			add_ideas = SCO_Eustace_George_Willis_hog
+			add_ideas = SCO_Malcom_MacPherson_sec
 			if = {
 				limit = {has_country_flag = SCO_ILP_Unionists }
 				#load_focus_tree = SCO_1966_ILP_Unionist_Victory
@@ -7848,15 +7882,12 @@ country_event = { #UP Victory 1966
 			elections_allowed = no
 		}
 		hidden_effect = {
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 
-			add_ideas = SCO_James_Stuart
-			add_ideas = SCO_Iain_Sproat
-			add_ideas = SCO_Kate_Losinska
-			add_ideas = SCO_Michael_Noble
+			add_ideas = SCO_James_Stuart_hog
+			add_ideas = SCO_Iain_Sproat_for
+			add_ideas = SCO_Kate_Losinska_eco
+			add_ideas = SCO_Michael_Noble_sec
 			#load_focus_tree = SCO_1966_UP_Victory
 			set_popularities = {
 				communist = 0
@@ -8054,14 +8085,11 @@ country_event = { #SNP Win
 				elections_allowed = no
 			}
 		#load_focus_tree = SCO_1966_SNP_Victory
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 			add_ideas = SCO_Arthur_Donaldson_hog
-			add_ideas = SCO_George_Leslie
+			add_ideas = SCO_George_Leslie_eco
 			add_ideas = SCO_Iain_Maccormick_for
-			add_ideas = SCO_Jimmy_Halliday
+			add_ideas = SCO_Jimmy_Halliday_sec
 			set_popularities = {
 				communist = 0
 				ultranationalism = 0
@@ -8098,15 +8126,12 @@ country_event = { #ILP Win
 				ruling_party = social_democracy
 				elections_allowed = no
 			}
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 
-			add_ideas = SCO_Alice_Cullen
+			add_ideas = SCO_Alice_Cullen_eco
 			add_ideas = SCO_Myer_Galpern_for
-			add_ideas = SCO_george_wallis
-			add_ideas = SCO_Malcom_MacPherson
+			add_ideas = SCO_Eustace_George_Willis_hog
+			add_ideas = SCO_Malcom_MacPherson_sec
 			#load_focus_tree = SCO_1966_ILP_Victory
 			set_popularities = {
 				communist = 0
@@ -10359,8 +10384,7 @@ country_event = { #random popularity (i pray this works)
 					OR = {
 						country_exists = FEN
 						ENG = {
-
-							has_country_leader = {name = "Harold Macmillan"}
+							has_country_leader = {character = ENG_Harold_MacMillan}
 						}
 					}
 
@@ -10659,17 +10683,17 @@ country_event = { #Capital
 
 	option = {
 		name = UOB.1.a #london
-		set_capital = 1300
+		set_capital = { state = 1300 }
 
 	}
 	option = {
 		name = UOB.1.b
-		set_capital = 121
+		set_capital = { state = 121 }
 
 	}
 	option = {
 		name = UOB.1.c
-		set_capital = 130
+		set_capital = { state = 130 }
 
 	}
 
@@ -11444,30 +11468,8 @@ country_event = { #OMG a new UK? cool bro
 
 	option = {
 		name = sco_up.44.a
-		# SCO = {
-		# 	annex_country = { target = FEN transfer_troops = yes }
-		# 	every_state = {
-		# 		limit = { is_core_of = SCO }
-		# 		add_core_of = FEN
-		# 	}		
-		# }
-
-			# #add_ideas = FEN_mayne_collab_legacy
 		add_ideas = FEN_mayne_growing_discontent
 		add_ideas = FEN_mayne_devastated_economy
-			# set_cosmetic_tag = ENG_united_kingdom
-			# set_country_flag = Mayne_England
-			# #Mayne country leader and government
-			# create_country_leader = {
-			# 	name = "Paddy Mayne"
-			# 	#desc = "POLITICS_PADDY_MAYNE_DESC"
-			# 	picture = "Portrait_England_Paddy_Mayne.dds"
-			# 	expire = "1981.10.20"
-			# 	ideology = despotism_military_junta_subtype 
-			# 	traits = {
-			# 		#
-			# 	}
-			# }
 		set_politics = {
 			ruling_party = despotism
 			elections_allowed = no
@@ -11477,13 +11479,13 @@ country_event = { #OMG a new UK? cool bro
 				ideology = despotism
 				popularity = 0.3
 			}
-			set_capital = 1300
+			set_capital = { state = 1300 }
 		}
 		remove_all_ministers = yes
-		add_ideas = SCO_David_Eyton_Jones
-		add_ideas = SCO_John_Slim
-		add_ideas = SCO_John_Woodhouse
-		add_ideas = SCO_Anthony_Royle
+		add_ideas = SCO_David_Eyton_Jones_hog
+		add_ideas = SCO_John_Slim_for
+		add_ideas = SCO_John_Woodhouse_sec
+		add_ideas = SCO_Anthony_Royle_eco
 		set_country_flag = TNO_closing_screen_show
 
 	}
@@ -11678,14 +11680,6 @@ country_event = { #Catastrophe: Mayne goes to Stirling land, choose a successor
 		effect_tooltip = {
 			remove_unit_leader = 686
 		}
-		create_country_leader = {
-			name = "David Eyton-Jones"
-			desc = "POLITICS_DAVID_EYTON_JONES_DESC"
-			picture = "David_Eyton_Jones.dds"
-			expire = "1990.1.1"
-			ideology = despotism_military_junta_subtype
-			traits = {}
-		}
 		unlock_national_focus = SCO_Eyton_Jones_Ruthlessness
 	}
 	option = { #Woodhouse
@@ -11694,14 +11688,6 @@ country_event = { #Catastrophe: Mayne goes to Stirling land, choose a successor
 		retire_country_leader = yes
 		effect_tooltip = {
 			remove_unit_leader = 686
-		}
-		create_country_leader = {
-			name = "John Woodhouse"
-			desc = "POLITICS_JOHN_WOODHOUSE_DESC"
-			picture = "John_Woodhouse.dds"
-			expire = "1990.1.1"
-			ideology = despotism_military_junta_subtype
-			traits = {}
 		}
 		unlock_national_focus = SCO_Woodhouses_Specops
 	}
@@ -12329,15 +12315,12 @@ country_event = { #ILP Win
 			elections_allowed = no
 		}
 		hidden_effect = {
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 
-			add_ideas = SCO_Alice_Cullen
+			add_ideas = SCO_Alice_Cullen_eco
 			add_ideas = SCO_Myer_Galpern_for
-			add_ideas = SCO_george_wallis
-			add_ideas = SCO_Malcom_MacPherson
+			add_ideas = SCO_Eustace_George_Willis_hog
+			add_ideas = SCO_Malcom_MacPherson_sec
 			if = {
 				limit = {has_country_flag = SCO_ILP_Unionists }
 				#load_focus_tree = SCO_ILP_Unionist_1970
@@ -12648,14 +12631,11 @@ country_event = { #SNP Win
 
 
 		hidden_effect = {
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 			add_ideas = SCO_Arthur_Donaldson_hog
-			add_ideas = SCO_George_Leslie
+			add_ideas = SCO_George_Leslie_eco
 			add_ideas = SCO_Iain_Maccormick_for
-			add_ideas = SCO_Jimmy_Halliday
+			add_ideas = SCO_Jimmy_Halliday_sec
 				#load_focus_tree = SCO_SNP_1970
 			set_popularities = {
 				communist = 0
@@ -12698,15 +12678,12 @@ country_event = { #UP Win
 			elections_allowed = no
 		}
 		hidden_effect = {
-			remove_ideas_with_trait = foreign_minister
-			remove_ideas_with_trait = security_minister
-			remove_ideas_with_trait = economy_minister
-			remove_ideas_with_trait = head_of_government
+			remove_all_ministers = yes
 
-			add_ideas = SCO_James_Stuart
-			add_ideas = SCO_Iain_Sproat
-			add_ideas = SCO_Kate_Losinska
-			add_ideas = SCO_Michael_Noble
+			add_ideas = SCO_James_Stuart_hog
+			add_ideas = SCO_Iain_Sproat_for
+			add_ideas = SCO_Kate_Losinska_eco
+			add_ideas = SCO_Michael_Noble_sec
 			#load_focus_tree = SCO_UP_1970
 			set_popularities = {
 				communist = 0
@@ -17928,7 +17905,7 @@ country_event = { #officers expose Them - Good
 	fire_only_once = yes
 
 	option = { #SNP Campaign
-		name = SCO.70756.a
+		name = SCO.70757.a
 		remove_mission = SCO_Paranoia_Military_Aberdeen_Airport
 		SCO_Paranoia_Increase = yes
 		hidden_effect  = {

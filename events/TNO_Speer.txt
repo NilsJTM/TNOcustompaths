@@ -37,6 +37,7 @@ country_event = { #Speer Wins GCW
 					clear_variable = ECON_SPHERE_LEADER
 				}
 			}
+			SGR_project_initialize = yes
 		}
 	}
 }
@@ -257,7 +258,7 @@ country_event = { # German Mothers March
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.28"}
 	title = speer.28.t
 	desc = speer.28.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -271,7 +272,7 @@ country_event = { # Aryan Feminism
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.29"}
 	title = speer.29.t
 	desc = speer.29.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -736,7 +737,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.555"}
 	title = speer.555.t
 	desc = speer.555.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -750,7 +751,7 @@ country_event = { # debug flags
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.998"}
 	title = speer.998.t
 	desc = speer.998.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -766,7 +767,7 @@ country_event = { # debug
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.999"}
 	title = speer.999.t
 	desc = speer.999.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -1107,7 +1108,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.202"}
 	title = speer.202.t
 	desc = speer.202.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -1600,6 +1601,11 @@ country_event = {
 			ROM = {
 				country_event = { id = speer.312 days = 3 }
 			}
+			GER = {
+				GER_ewaldheinrich_von_kleistschmenzin = {
+					set_nationality = UKR
+				}
+			}
 			UKR = {
 				annex_country = { target = UKR transfer_troops = no}
 				save_party_popularities = yes
@@ -1615,14 +1621,7 @@ country_event = {
 					popularity = 0.5
 				}
 				set_cosmetic_tag = Speer_UKR_rejoined_peacefully
-				create_country_leader = {
-					name = "Ewald-Heinrich von Kleist-Schmenzin"
-					desc = ""
-					picture = "Portrait_GER_Ewald_Heinrich_von_Kleist_Schmenzin.dds"
-					expire = "1984.10.28"
-					ideology = fascism_reformed_national_socialism_subtype
-					traits = { }
-				}
+				promote_character = GER_ewaldheinrich_von_kleistschmenzin
 				set_party_name = {
 					ideology = fascism
 					long_name =    UKR_speer_prov_government_fascism_long
@@ -2869,7 +2868,6 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.10001"}
 	title = speer.10001.t
 	desc = speer.10001.d
-	picture = GFX_report_event_banker_propoganda
 
 	is_triggered_only = yes
 
@@ -2898,15 +2896,9 @@ country_event = {
 		}
 	}
 	title = speer.10002.t
-	desc = speer.10002.d
-	picture = GFX_report_event_generic_speer
 
 	hidden = yes
 	is_triggered_only = yes
-
-	option = {
-		name = speer.10002.a
-	}
 }
 
 #RND research hidden pulse event
@@ -2921,15 +2913,9 @@ country_event = {
 		}
 	}
 	title = speer.10003.t
-	desc = speer.10003.d
-	picture = GFX_report_event_generic_speer
 
 	hidden = yes
 	is_triggered_only = yes
-
-	option = {
-		name = speer.10003.a
-	}
 }
 
 #Hidden event to fire event chains
@@ -2937,8 +2923,6 @@ country_event = {
 	id = speer.10004
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.10004"}
 	title = speer.10004.t
-	desc = speer.10004.d
-	picture = GFX_report_event_generic_speer
 
 	hidden = yes
 	is_triggered_only = yes
@@ -3049,22 +3033,16 @@ country_event = {
 		}
 	}
 	title = speer.10005.t
-	desc = speer.10005.d
-	picture = GFX_report_event_generic_speer
 
 	hidden = yes
 	is_triggered_only = yes
-
-	option = {
-		name = speer.10005.a
-	}
 }
 
 #econ limiter
 country_event = {
 	id = speer.10010
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event speer.10003"
+		log = "[GetDateText]: [Root.GetName]: event speer.10010"
 		if = {
 			limit = {
 				AND = {
@@ -3119,16 +3097,10 @@ country_event = {
 		}
 		country_event = {id = speer.10010 days = 30 }
 	}
-	title = speer.10003.t
-	desc = speer.10003.d
-	picture = GFX_report_event_generic_speer
+	title = speer.10010.t
 
 	hidden = yes
 	is_triggered_only = yes
-
-	option = {
-		name = speer.10003.a
-	}
 }
 
 
@@ -3368,12 +3340,14 @@ country_event = { #Finally, a hundred thousand Polish slaves are brought back to
 			apply_party_popularities = yes
 			retire_country_leader = yes
 			add_ideas = Pakt_Marionettenstaat
-			create_country_leader = {
-				name = "Werner Schrader"
-				desc = ""
-				picture = "Portrait_POL_Werner_Schrader.dds"
-				ideology = fascism_reformed_national_socialism_subtype
-				expire = "1990.1.1"
+			add_country_leader_role = {
+				character = POL_Werner_Schrader
+				promote_leader = yes
+				country_leader = {
+					ideology = fascism_reformed_national_socialism_subtype
+					expire = "1990.1.1"
+					id = -1
+				}
 			}
 			TNO_improve_admin_efficiency_med = yes
 			set_politics = {
@@ -3868,11 +3842,14 @@ country_event = { #Outcome 1 of KÃ¶nigsberger Abkommen: Poles agree, treaty is
 				add_ideas = Pakt_Marionettenstaat
 				set_cosmetic_tag = POL_SGR
 				retire_country_leader = yes
-				create_country_leader = {
-					name = "Stanisław Wachowiak"
-					picture = "Portrait_Poland_Stanislaw_Wachowiak.dds"
-					expire = "1999.3.4"
-					ideology = authoritarian_democracy_national_conservatism_subtype
+				add_country_leader_role = {
+					character = POL_Stanislaw_Wachowiak
+					promote_leader = yes
+					country_leader = {
+						ideology = authoritarian_democracy_national_conservatism_subtype
+						expire = "1999.3.4"
+						id = -1
+					}
 				}
 				set_politics = {
 					ruling_party = authoritarian_democracy
@@ -4302,7 +4279,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer_moskowien.17"}
 	title = speer_moskowien.17.t
 	desc = speer_moskowien.17.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -4586,7 +4563,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer_moskowien.31"}
 	title = speer_moskowien.31.t
 	desc = speer_moskowien.31.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -4926,6 +4903,14 @@ country_event = { #Speer goes to meet with the guy leading the OCW
 
 	option = {
 		name = speer_moskowien.51.a
+		GER = {
+			GER_alexis_von_roenne = {
+				set_nationality = MCW
+			}
+			GER_ferdinand_schorner = {
+				set_nationality = MCW
+			}
+		}
 		MCW = {
 			transfer_state = 263
 			transfer_state = 209
@@ -4956,6 +4941,9 @@ country_event = { #Speer goes to meet with the guy leading the OCW
 			transfer_state = 245
 			transfer_state = 222
 			load_oob = Speer_Moskow
+			GER_alexis_von_roenne = {
+				promote_character = { ideology = fascism_reformed_national_socialism_subtype}
+			}
 			set_politics = {
 				ruling_party = fascism
 			}
@@ -4965,18 +4953,11 @@ country_event = { #Speer goes to meet with the guy leading the OCW
 				authoritarian_democracy = 16
 				communist = 4
 			}
+			promote_character = GER_ferdinand_schorner
 			set_party_name = {
 				ideology = ultranationalism
 				long_name = MCW_ultranationalism_schorner_party_long
 				name = MCW_ultranationalism_schorner_party
-			}
-			create_country_leader = {
-				name = "Alexis von Roenne"
-				desc = "POLITICS_ALEXIS_VON_ROENNE_DESC"
-				picture = "gfx/leaders/GER/Portrait_GER_Alexis_von_Roenne.dds"
-				expire = "1983.4.24"
-				ideology = fascism_reformed_national_socialism_subtype
-				traits = {}
 			}
 			set_cosmetic_tag = MCW_SGR
 			join_zollverein = yes
@@ -5075,7 +5056,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event speer.900"}
 	title = speer.900.t
 	desc = speer.900.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -5152,6 +5133,9 @@ country_event = {
 
 	option = {
 		name = speer.903.a
+		MST = {
+			save_party_popularities = yes 
+		}
 		add_to_faction = MST
 		set_autonomy = {
 			target = MST
@@ -5163,13 +5147,8 @@ country_event = {
 		econ_spend_money_once_effect_raw_money = yes
 		MST = {
 			hidden_effect = {
-				create_country_leader = {
-					name = "Andreas Meyer-Landrut"
-					desc = "POLITICS_ANDREAS_MEYER_LANDRUT_DESC"
-					picture = "Portrait_Ostland_Andreas_Meyer_Landrut.dds"
-					expire = "1985.1.1"
-					ideology = authoritarian_democracy_oligarchy_subtype
-				}
+				set_politics = { ruling_party = authoritarian_democracy }
+				apply_party_popularities = yes
 			}
 			set_temp_variable = { temp_econ_GDP_boost_percentage = 0.02 }
 			econ_GDP_boost_once_percentage = yes
@@ -5213,6 +5192,7 @@ country_event = {
 				}
 			}
 			join_zollverein = yes
+			econ_join_sphere_GER = yes
 		}
 	}
 }
@@ -5233,6 +5213,11 @@ country_event = {
 		add_regime_stab_med = yes
 		TNO_improve_political_parties_policy_effectiveness_med = yes
 		hidden_effect = {
+			GER = {
+				GER_alfred_zerbel = {
+					set_nationality = OST
+				}
+			}
 			OST = {
 			set_cosmetic_tag = ostland_occupation_authority
 			if = { limit = {has_idea = OST_model_colony} remove_ideas = OST_model_colony }
@@ -5277,12 +5262,7 @@ country_event = {
 			set_politics = {
 				ruling_party = fascism
 			}
-			create_country_leader = {
-				name = "Alfred Zerbel"
-				picture = "Portrait_GER_Alfred_Zerbel.dds"
-				expire = "1980.1.1"
-				ideology = fascism_reformed_national_socialism_subtype
-			}
+			promote_character = GER_alfred_zerbel
 			set_party_name = {
 				ideology = despotism
 				long_name = OST_speer_belarus_liberation_front
@@ -5893,6 +5873,11 @@ country_event = {
 	option = {
 		name = speerostland.27.a
 		hidden_effect = {
+			GER = {
+				GER_alfred_zerbel = {
+					set_nationality = OST
+				}
+			}
 			OST = {
 				annex_country = {
 					target = MST
@@ -5918,12 +5903,7 @@ country_event = {
 				if = { limit = {has_idea = OST_Prussian_Values} remove_ideas = OST_Prussian_Values }
 				if = { limit = {has_idea = OST_Haste_Makes_Waste} remove_ideas = OST_Haste_Makes_Waste }
 				set_cosmetic_tag = ostland_occupation_authority
-				create_country_leader = {
-					name = "Alfred Zerbel"
-					picture = "Portrait_GER_Alfred_Zerbel.dds"
-					expire = "1980.1.1"
-					ideology = fascism_reformed_national_socialism_subtype
-				}
+				promote_character = GER_alfred_zerbel
 				set_politics = {
 					ruling_party = fascism
 				}
@@ -6061,13 +6041,7 @@ country_event = { #Slovakia joins the Einheitspakt
 				set_politics = { ruling_party = authoritarian_democracy }
 				join_zollverein = yes
 				hidden_effect = {
-					create_country_leader = {
-						name = "Ján Golian"
-						desc = "POLITICS_JAN_GOLIAN_DESC"
-						picture = "Portrait_Slovakia_Jan_Golian.dds"
-						expire = "1983.1.1"
-						ideology = authoritarian_democracy_subtype
-					}
+					promote_character = SLO_Jan_Golian
 				}
 			}
 		}
@@ -6568,7 +6542,7 @@ country_event = { #Coup Succeeds - Denmark Joins Pakt
 	immediate = { log = "[GetDateText]: [Root.GetName]: event speerdenmark.13" }
 	title = speerdenmark.13.t
 	desc = speerdenmark.13.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -6801,13 +6775,7 @@ country_event = { #We've Got Work To Do
 				set_politics = { ruling_party = despotism }
 				set_cosmetic_tag = SGR_HOL_provisional_government
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Provisional Government"
-					picture = "Portrait_Netherlands_Provisional_Government.dds"
-					desc = "POLITICS_DUTCH_PROVISIONAL_GOVERNMENT_DESC"
-					expire = "1980.1.1"
-					ideology = despotism_subtype
-				}
+				promote_character = HOL_provisional_government
 				set_popularities = {
 					fascism = 20
 					despotism = 40
@@ -6881,14 +6849,14 @@ country_event = { #The Return to Civilian Rule
 	option = { #
 		name = speerholland.11.a
 		hidden_effect = {
+			GER = {
+				GER_hans_ulrich_von_oertzen = {
+					set_nationality = HOL
+				}
+			}
 			HOL = {
 				set_politics = { ruling_party = fascism }
-				create_country_leader = {
-					name = "Hans Ulrich von Oertzen"
-					picture = "Portrait_GER_Hans_Ulrich_von_Oertzen.dds"
-					expire = "1980.1.1"
-					ideology = fascism_reformed_national_socialism_subtype
-				}
+				promote_character = GER_hans_ulrich_von_oertzen
 				set_party_name = {
 					ideology = fascism
 					long_name = HOL_fascism
@@ -11269,7 +11237,7 @@ country_event = { #Sending the Wehrmacht - The Wehrmacht is sent to seize IG Far
 	immediate = { log = "[GetDateText]: [Root.GetName]: event erhardnomics.8" }
 	title = erhardnomics.8.t
 	desc = erhardnomics.8.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -11526,7 +11494,7 @@ country_event = {# Razzia against antifa across germany in response
 	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_rnd.20" }
 	title = speer_rnd.20.t
 	desc = speer_rnd.20.d
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 
 	option = {
@@ -11912,8 +11880,12 @@ country_event = { #Student Leader Dutschke murdered , the situation explodes
 
 	option = {
 		name = speer_rnd.45.a
-		news_event = { id = WORLD.2068 }
 		country_event = { id = speer_rnd.46 days = 1 }
+		hidden_effect = {
+			every_country = {
+				news_event = WORLD.2068
+			}
+		}
 	}
 }
 
@@ -14551,7 +14523,8 @@ country_event = { #Gang meets to discuss new project
 		name = speer_railway.1.a
 		custom_effect_tooltip = GER_SGR_RSFSTP_begin_tt
 		hidden_effect = {
-			SGR_start_RSFSTP = yes
+			set_temp_variable = { SGR_project_start_temp = RSFSTP }
+			SGR_start_project = yes
 		}
 	}
 }
@@ -14570,41 +14543,31 @@ country_event = { #Abs meets Schmidt
 		name = speer_railway.2.a
 		set_temp_variable = { gdp_growth_temp = 0.25 }
 		econ_gdp_growth_change = yes
-		set_temp_variable = { RSFSTP_monthly_temp = -0.2 }
-		SGR_RSFSTP_prog_change = yes
+		set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+		set_temp_variable = { SGR_Amount_Change_Mod_temp = -0.2 }
+		SGR_project_prog_change = yes
 		set_temp_variable = { RSFSTP_slave_repatriation_temp = 2.5 }
 		SGR_RSFSTP_repatriation_change = yes
 		add_to_variable = { SGR_railway_frame_progress = 1}
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
 		hidden_effect = {
+			build_railway = {
+				level = 5
+				fallback = yes
+				path = { 6488 3397 11445 9524 3500 6524 }
+				start_province = 6488
+				target_province = 6524
+			}
 			55 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6488
-						id = 3397
-						id = 11445
-						id = 9524
-					}
-				}
 				set_building_level = {
 					type = infrastructure
 					level = 10
 					instant_build = yes
-				}
-			}
-			60 = {
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 3500
-					}
 				}
 			}
 		}
@@ -14614,41 +14577,30 @@ country_event = { #Abs meets Schmidt
 		set_temp_variable = { gdp_growth_temp = 0.25 }
 		econ_gdp_growth_change = yes
 		set_country_flag = SGR_RSFSTP_Abs_Deal
-		set_temp_variable = { RSFSTP_monthly_temp = 0.1 }
-		SGR_RSFSTP_prog_change = yes
-		defend_igfarben = yes
+		set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+		set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.1 }
+		SGR_project_prog_change = yes
 		custom_effect_tooltip = GER_SGR_RSFSTP_abs_tt
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
 		add_to_variable = { SGR_railway_frame_progress = 1}
 		hidden_effect = {
+			build_railway = {
+				level = 5
+				fallback = yes
+				path = { 6488 3397 11445 9524 3500 6524 }
+				start_province = 6488
+				target_province = 6524
+			}
 			55 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6488
-						id = 3397
-						id = 11445
-						id = 9524
-					}
-				}
 				set_building_level = {
 					type = infrastructure
 					level = 10
 					instant_build = yes
-				}
-			}
-			60 = {
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 3500
-					}
 				}
 			}
 		}
@@ -14673,8 +14625,9 @@ country_event = { #Gang meets to discuss new project
 			limit = {
 				has_country_flag = SGR_RSFSTP_Abs_Deal
 			}
-			set_temp_variable = { RSFSTP_monthly_temp = 0.1 }
-			SGR_RSFSTP_prog_change = yes
+			set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+			set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.1 }
+			SGR_project_prog_change = yes
 			set_temp_variable = { RSFSTP_slave_repatriation_temp = 1 }
 			SGR_RSFSTP_repatriation_change = yes
 		}
@@ -14685,18 +14638,17 @@ country_event = { #Gang meets to discuss new project
 		add_to_variable = { SGR_railway_frame_progress = 1}
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
 		hidden_effect = {
+			build_railway = { # Munich-Thuringen
+				level = 5
+				fallback = yes
+				path = { 692 3705 3299 571 11544 9416 3474 6524 }
+				start_province = 692
+				target_province = 6524
+			}
 			52 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 692
-						id = 3705
 					}
 				}
 				set_building_level = {
@@ -14711,16 +14663,6 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 3299
-						id = 571
-						id = 9416
-						id = 3474
-					}
-				}
 				set_building_level = {
 					type = infrastructure
 					level = 10
@@ -14733,13 +14675,6 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 11544
-					}
-				}
 				set_building_level = {
 					type = infrastructure
 					level = 10
@@ -14750,13 +14685,6 @@ country_event = { #Gang meets to discuss new project
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6524
-						id = 9497
 					}
 				}
 				set_building_level = {
@@ -14787,37 +14715,29 @@ country_event = { #Gang meets to discuss new project
 			limit = {
 				has_country_flag = SGR_RSFSTP_Abs_Deal
 			}
-			set_temp_variable = { RSFSTP_monthly_temp = 0.25 }
-			SGR_RSFSTP_prog_change = yes
+			set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+			set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.25 }
+			SGR_project_prog_change = yes
 		}
 		else = {
-			set_temp_variable = { RSFSTP_monthly_temp = 0.15 }
-			SGR_RSFSTP_prog_change = yes
+			set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+			set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.15 }
+			SGR_project_prog_change = yes
 		}
 		add_to_variable = { SGR_railway_frame_progress = 1}
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
 		hidden_effect = {
-			60 = {
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 538
-						id = 6501
-					}
-				}
+			build_railway = { # Thuringen-Germania
+				level = 5
+				fallback = yes
+				path = { 6524 538 6501 3535 11545 6441 3499 6521 }
+				start_province = 6524
+				target_province = 6521
 			}
 			65 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 3535
-						id = 11545
-						id = 6441
 					}
 				}
 				set_building_level = {
@@ -14832,12 +14752,6 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 3499
-					}
-				}
 				set_building_level = {
 					type = infrastructure
 					level = 10
@@ -14848,12 +14762,6 @@ country_event = { #Gang meets to discuss new project
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.1
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6521
 					}
 				}
 				set_building_level = {
@@ -14884,28 +14792,31 @@ country_event = { #Gang meets to discuss new project
 			limit = {
 				has_country_flag = SGR_RSFSTP_Abs_Deal
 			}
-			set_temp_variable = { RSFSTP_monthly_temp = 0.2 }
-			SGR_RSFSTP_prog_change = yes
+			set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+			set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.2 }
+			SGR_project_prog_change = yes
 		}
 		else = {
-			set_temp_variable = { RSFSTP_monthly_temp = 0.1 }
-			SGR_RSFSTP_prog_change = yes
+			set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+			set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.1 }
+			SGR_project_prog_change = yes
 			set_temp_variable = { RSFSTP_slave_repatriation_temp = 1.25 }
 			SGR_RSFSTP_repatriation_change = yes
 		}
 		add_to_variable = { SGR_railway_frame_progress = 1}
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
 		hidden_effect = {
+			build_railway = { # Hamburg-Germania
+				level = 5
+				fallback = yes
+				path = { 9347 9320 9294 11219 375 6524 }
+				start_province = 9347
+				target_province = 6524
+			}
 			775 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 9347
 					}
 				}
 				set_building_level = {
@@ -14920,12 +14831,6 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 9320
-					}
-				}
 			}
 			61 = {
 				add_state_modifier = {
@@ -14933,24 +14838,11 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 9294
-					}
-				}
 			}
 			776 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 11216
-						id = 375
 					}
 				}
 				set_building_level = {
@@ -14981,26 +14873,29 @@ country_event = { #Gang meets to discuss new project
 			limit = {
 				has_country_flag = SGR_RSFSTP_Abs_Deal
 			}
-			set_temp_variable = { RSFSTP_monthly_temp = 0.3 }
-			SGR_RSFSTP_prog_change = yes
+			set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+			set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.3 }
+			SGR_project_prog_change = yes
 		}
 		else = {
-			set_temp_variable = { RSFSTP_monthly_temp = 0.2 }
-			SGR_RSFSTP_prog_change = yes
+			set_temp_variable = { SGR_Project_Change_Mod_temp = RSFSTP }
+			set_temp_variable = { SGR_Amount_Change_Mod_temp = 0.2 }
+			SGR_project_prog_change = yes
 		}
 		add_to_variable = { SGR_railway_frame_progress = 1}
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
 		hidden_effect = {
+			build_railway = { # Wien-Prague
+				level = 5
+				fallback = yes
+				path = { 11666 6739 9527 6552 543 9541 9569 11542 }
+				start_province = 11666
+				target_province = 11542
+			}
 			1025 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 11666
 					}
 				}
 				set_building_level = {
@@ -15015,13 +14910,6 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6739
-						id = 9527
-					}
-				}
 			}
 			152 = {
 				add_state_modifier = {
@@ -15029,26 +14917,11 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6552
-						id = 543
-					}
-				}
 			}
 			9 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 9541
-						id = 9569
-						id = 11542
 					}
 				}
 				set_building_level = {
@@ -15088,14 +14961,14 @@ country_event = { #Gang meets to discuss new project
 		}
 		add_to_variable = { SGR_railway_frame_progress = 1}
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
+		custom_effect_tooltip = SGR_RSFSTP_krakau_unlock_tt
 		hidden_effect = {
-			9 = {
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6440
-					}
-				}
+			build_railway = { # Prague-Germania
+				level = 5
+				fallback = yes
+				path = { 11542 6440 11432 6559 514 9428 6521 }
+				start_province = 11542
+				target_province = 6521
 			}
 			69 = {
 				add_state_modifier = {
@@ -15103,32 +14976,11 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 11432
-					}
-				}
 			}
 			65 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 6559
-						id = 514
-					}
-				}
-			}
-			1026 = {
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 9428
 					}
 				}
 			}
@@ -15159,26 +15011,17 @@ country_event = { #Gang meets to discuss new project
 		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
 		hidden_effect = {
 			add_ideas = { SGR_choo_choo }
-			1026 = {
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 11505
-					}
-				}
+			build_railway = { # Germania-Danzig
+				level = 5
+				fallback = yes
+				path = { 6521 11505 9496 3473 11478 388 11232 279 3324 389 362 }
+				start_province = 6521
+				target_province = 362
 			}
 			68 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 9496
-						id = 3473
-						id = 68
 					}
 				}
 			}
@@ -15188,27 +15031,11 @@ country_event = { #Gang meets to discuss new project
 						state_GDP_growth_factor_modifier = 0.05
 					}
 				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 388
-						id = 11232
-					}
-				}
 			}
 			85 = {
 				add_state_modifier = {
 					modifier = {
 						state_GDP_growth_factor_modifier = 0.05
-					}
-				}
-				add_province_modifier = {
-					static_modifiers = { SGR_RSFSTP_modifier }
-					province = {
-						id = 279
-						id = 3324
-						id = 389
-						id = 362
 					}
 				}
 			}
@@ -15249,10 +15076,210 @@ country_event = { #General protests and terror attack destroys part of the railw
 		name = speer_railway.10.a
 		custom_effect_tooltip = GER_SGR_RSFSTP_liberate_tt
 		hidden_effect = {
-			add_to_variable = { SGR_RSFSTP_progress = -5 }
+			add_to_variable = { SGR_Project_Progress^RSFSTP = -5 }
 			SGR_RSRG_liberate_slaves_RSFSTP = yes
-			clamp_variable = { var = SGR_RSFSTP_progress min = 0 }
+			clamp_variable = { var = SGR_Project_Progress^RSFSTP min = 0 }
 		}
+	}
+}
+
+country_event = { #Krakau connection begun
+	id = speer_railway.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_railway.11" }
+	title = speer_railway.11.t
+	desc = speer_railway.11.desc
+	picture = GFX_report_event_sniper
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # damn
+		name = speer_railway.11.a
+		hidden_effect = {
+			set_country_flag = SGR_RSFSTP_started_krakau_connection
+			set_country_flag = SGR_RSFSTP_started_krakau_connection_dummy
+			add_to_variable = { SGR_railway_krakau_frame_progress = 1 }
+			add_to_variable = { SGR_Project_Progress^RSFSTP = -5 }
+			clamp_variable = { var = SGR_Project_Progress^RSFSTP min = 0 }
+			add_to_variable = { SGR_Project_Cost_Temp^RSFSTP = 0.25 }
+			SGR_calculate_efficiency = yes
+		}
+	}
+}
+
+country_event = { #Krakau network finished
+	id = speer_railway.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_railway.12" }
+	title = speer_railway.12.t
+	desc = speer_railway.12.desc
+	picture = GFX_report_event_sniper
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # damn
+		name = speer_railway.12.a
+		custom_effect_tooltip = SGR_RSFSTP_modifer_impact_tt
+		set_temp_variable = { gdp_growth_temp = 0.25 }
+		econ_gdp_growth_change = yes
+		add_to_variable = { SGR_railway_krakau_frame_progress = 1 }
+		hidden_effect = {
+			build_railway = { # Prag-Germania
+				level = 5
+				fallback = yes
+				path = { 11542 9429 583 421 3414 9457 6464 9427 }
+				start_province = 11542
+				target_province = 9427
+			}
+			74 = {
+				add_state_modifier = {
+					modifier = {
+						state_GDP_growth_factor_modifier = 0.05
+					}
+				}
+			}
+			67 = {
+				add_state_modifier = {
+					modifier = {
+						state_GDP_growth_factor_modifier = 0.05
+					}
+				}
+			}
+			88 = {
+				add_state_modifier = {
+					modifier = {
+						state_GDP_growth_factor_modifier = 0.1
+					}
+				}
+			}
+		}
+	}
+}
+
+add_namespace = speer_russianwall
+
+country_event = { #Gehlen briefs Speer and Tresckow on new project
+	id = speer_russianwall.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.1" }
+	title = speer_russianwall.1.t
+	desc = speer_russianwall.1.desc
+	picture = GFX_report_event_GER_gsg9
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = speer_russianwall.1.a
+		custom_effect_tooltip = GER_SGR_RSFSTP_begin_tt
+		hidden_effect = {
+			set_temp_variable = { SGR_project_start_temp = RUSSIAN_WALL }
+			SGR_start_project = yes
+		}
+	}
+}
+
+country_event = { #Soldiers refurbish Kasche's prison walls
+	id = speer_russianwall.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.2" }
+	title = speer_russianwall.2.t
+	desc = speer_russianwall.2.desc
+	picture = GFX_report_event_iberia_prison_jail_cell
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = speer_russianwall.2.a
+	}
+}
+
+country_event = { #Memories of the bombings as planes take off from new airfields 
+	id = speer_russianwall.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.3" }
+	title = speer_russianwall.3.t
+	desc = speer_russianwall.3.desc
+	picture = GFX_report_event_german_bombing
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = speer_russianwall.3.a
+	}
+}
+
+country_event = { # Parade of soldiers being sent for an exercise
+	id = speer_russianwall.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.4" }
+	title = speer_russianwall.4.t
+	desc = speer_russianwall.4.desc
+	picture = GFX_report_event_iberia_military_parade_big
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = speer_russianwall.4.a
+	}
+}
+
+country_event = { # Schorner is pleased as the project is in full swing and complete now
+	id = speer_russianwall.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.5" }
+	title = speer_russianwall.5.t
+	desc = speer_russianwall.5.desc
+	picture = GFX_report_event_map
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = speer_russianwall.5.a
+	}
+}
+
+country_event = { # Gehlen, Tresckow and Speer discuss danger of Russia, proposes new upgrade. Kiesinger interrupts them by saying that Syria has revolted from Turkey.
+	id = speer_russianwall.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.6" }
+	title = speer_russianwall.6.t
+	desc = speer_russianwall.6.desc
+	picture = GFX_report_event_crate_of_german_machine_guns
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = speer_russianwall.6.a
+	}
+}
+
+country_event = { # RUSSIA EPILOGUE - Schmidt victory. Starts second stage of Russian Wall.
+	id = speer_russianwall.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.7" }
+	title = speer_russianwall.7.t
+	desc = speer_russianwall.7.desc
+	picture = GFX_report_event_russia_the_motherland_calls
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = speer_russianwall.7.a
+	}
+}
+
+country_event = { # RUSSIA EPILOGUE - Speer victory. Starts second stage of Russian Wall.
+	id = speer_russianwall.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_russianwall.8" }
+	title = speer_russianwall.8.t
+	desc = speer_russianwall.8.desc
+	picture = GFX_report_event_russia_the_motherland_calls
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = speer_russianwall.8.a
 	}
 }
 
@@ -17419,7 +17446,7 @@ country_event = { #The first demand; renounce Burgundian territories and denounc
 			limit = {
 				FRA = {
 					has_country_leader = {
-						name = "Pierre Poujade"
+						character = FRA_Pierre_Poujade
 						ruling_only = yes
 					}
 				}
@@ -17433,7 +17460,7 @@ country_event = { #The first demand; renounce Burgundian territories and denounc
 			limit = {
 				FRA = {
 					has_country_leader = {
-						name = "Pierre Sidos"
+						character = FRA_Pierre_Sidos
 						ruling_only = yes
 					}
 				}
@@ -17447,7 +17474,7 @@ country_event = { #The first demand; renounce Burgundian territories and denounc
 			limit = {
 				FRA = {
 					has_country_leader = {
-						name = "Antoine Pinay"
+						character = FRA_Antoine_Pinay
 						ruling_only = yes
 					}
 				}
@@ -17461,7 +17488,7 @@ country_event = { #The first demand; renounce Burgundian territories and denounc
 			limit = {
 				FRA = {
 					has_country_leader = {
-						name = "Jean Bichelonne"
+						character = FRA_Jean_Bichelonne
 						ruling_only = yes
 					}
 				}
@@ -17475,7 +17502,7 @@ country_event = { #The first demand; renounce Burgundian territories and denounc
 			limit = {
 				FRA = {
 					has_country_leader = {
-						name = "Henri VI d'Orléans"
+						character = FRA_Henri_VI_dOrleans
 						ruling_only = yes
 					}
 				}
@@ -17485,6 +17512,8 @@ country_event = { #The first demand; renounce Burgundian territories and denounc
 				days = 7
 			}
 		}
+		add_to_variable = { BRG.BRG_collapse_chance = 5 }
+		custom_effect_tooltip = SGR_FRA_reaffirmed_support
 	}
 }
 
@@ -17581,6 +17610,8 @@ country_event = { #SIDOS NEGOTIATIONS; first demand - Germany declares Burgundy 
 				days = 3
 			}
 		}
+		add_to_variable = { BRG.BRG_collapse_chance = 10 }
+		custom_effect_tooltip = SGR_promise_kill_BRG
 	}
 	option = { #Nah
 		name = speerfrance.9.b
@@ -18020,6 +18051,19 @@ country_event = { #The war is won and France joins the Pakt
 			hidden_effect = {
 				add_ideas = Pakt_Bundnispartner
 			}
+		}
+		if = {
+			limit = {
+				ENG = { # Collab England in Pakt
+					is_in_faction_with = GER
+				}
+			}
+			add_to_variable = { BRG.BRG_collapse_chance = 45 } #fuck up burgundy
+			custom_effect_tooltip = SGR_total_isolation_BRG
+		}
+		else = {
+			add_to_variable = { BRG.BRG_collapse_chance = 30 } #fuck up burgundy
+			custom_effect_tooltip = SGR_black_market_BRG
 		}
 		hidden_effect = {
 			every_country = {
@@ -19353,7 +19397,7 @@ country_event = { # Reichsbanner and civilians vs police and the military in Nur
 			}
 			
 			if = { 
-				limit = { check_variable = { SGR_RSFSTP_progress < 100 } }
+				limit = { check_variable = { SGR_Project_Progress^RSFSTP < 100 } }
 				country_event = { id = speer_railway.10 days = 1 }
 			}
 		}
@@ -20166,13 +20210,17 @@ country_event = { #Revolt Expands Out of the Cities
 		set_temp_variable = { temp_econ_GDP_boost_flat = -0.5 }
 		econ_GDP_boost_once_flat = yes
 		 
-		create_country_leader = {
-			name = "Willy Brandt"
-			desc = "POLITICS_WILLY_BRANDT_DESC"
-			picture = "gfx/leaders/GER/Portrait_Germany_Willy_Brandt.dds"
-			expire = "1983.4.24"
-			ideology = social_democracy_popular_front_subtype
-			traits = {}
+		GER_willy_brandt = {
+			set_character_name = GER_willy_brandt
+			set_portraits = {
+				civilian = {
+					large = "gfx/leaders/GER/Portrait_Germany_Willy_Brandt.dds"
+				}
+				army = {
+					large = "gfx/leaders/GER/Portrait_Germany_Willy_Brandt.dds"
+				}
+			}
+			set_nationality = SRT
 		}
 		hidden_effect = {
 			country_event = {
@@ -20180,6 +20228,17 @@ country_event = { #Revolt Expands Out of the Cities
 				days = 3
 			}
 			SRT = {
+				GER_willy_brandt = {
+					add_field_marshal_role = {
+						traits = { defensive_doctrine }
+						skill = 3
+						attack_skill = 1
+						defense_skill = 3
+						planning_skill = 1
+						logistics_skill = 2
+					}
+					promote_character = { ideology = social_democracy_popular_front_subtype }
+				}
 				inherit_technology = PREV
 				transfer_state = 10
 				transfer_state = 88
@@ -20461,21 +20520,22 @@ country_event = { #Schörner takes power in Moskowien
 					#MCW_the_reichs_eastern_frontier
 					#MCW_the_black_spot
 				}
+				GER_otto_ernst_remer = {
+					set_nationality = MCW 
+				}
 				add_ideas = {
 					MCW_The_Marshals_Fiefdom
 					MCW_Brutal_Repression
 					MCW_Schorners_Ambition
-					MCW_minister_Otto_Ernst_Remer_sec
+					GER_Otto_Ernst_Remer_sec
 					MCW_minister_Otto_Bradfisch_hog
 					MCW_minister_Otto_Abetz_for
 					MCW_minister_Otto_Ambros_eco
 				}
-				create_country_leader = {
-					name = "Ferdinand Schörner"
-					desc = "POLITICS_FERDINAND_SCHORNER_MOSKOWIEN_DESC"
-					picture = "Portrait_MCW_Ferdinand_Schorner.dds"
-					expire = "1995.1.1"
-					ideology = ultranationalism_stratocratic_nazism_subtype
+				remove_ideas = GER_SGR_safe_seas
+				promote_character = GER_ferdinand_schorner
+				GER_alexis_von_roenne = {
+					set_nationality = OKB
 				}
 				add_popularity = {
 					ideology = ultranationalism
@@ -20496,8 +20556,8 @@ country_event = { #Schörner takes power in Moskowien
 				id = speer_slaverevolt.9
 				days = 	1
 			}
-			OKB = {	transfer_state = 195 }
 			195 = { add_core_of = OKB }
+			OKB = {	transfer_state = 195 }
 			GER = { puppet = OKB }
 			OKB = {
 				inherit_technology = PREV
@@ -20509,12 +20569,12 @@ country_event = { #Schörner takes power in Moskowien
 					OKB_Moskowien_Refugee_Crisis
 					Pakt_Military_Authority
 				}
-				create_country_leader = {
-					name = "Alexis von Roenne"
-					desc = "POLITICS_ALEXIS_VON_ROENNE_DESC"
-					picture = "/gfx/leaders/GER/Portrait_GER_Alexis_von_Roenne.dds"
-					expire = "1995.1.1"
-					ideology = fascism_reformed_national_socialism_subtype
+				remove_ideas = {
+					MSK_dissolution_start
+					MSK_dissolution_end
+				}
+				GER_alexis_von_roenne = {
+					promote_character = { ideology = fascism_reformed_national_socialism_subtype}
 				}
 				set_politics = {
 					ruling_party = fascism
@@ -21680,7 +21740,16 @@ country_event = {#Mercs take over Baku
 				transfer_state = 1563
 				transfer_state = 1552
 				load_oob = DFK
-				set_capital = 1552
+				set_capital = { state = 1552 }
+				remove_ideas = {
+					MSK_dissolution_start
+					MSK_dissolution_end
+				}
+				add_ideas = {
+					DFK_Funding_from_the_Shadows
+					DFK_Band_of_Brothers
+					DFK_Rule_of_the_Mercenaries
+				}
 			}
 			country_event = {
 				id = speer_slaverevolt.28
@@ -22015,23 +22084,13 @@ country_event = {# Remer betrays Schörner and returns to Germany
 		name = speer_slaverevolt.33.a
 		ai_chance = { factor = 1 }
 		add_manpower = 4
-		create_corps_commander = {
-			name = "Otto Ernst Remer"
-			picture = "Portrait_GER_Otto_Ernst_Remer.dds"
-			traits = { infantry_leader urban_assault_specialist }
-			skill = 3
-			attack_skill = 2
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 2
-			id = 1120
-		}
 		hidden_effect = {
-				MCW = {
-					swap_ideas = {
-						remove_idea = MCW_minister_Otto_Ernst_Remer_sec
-						add_idea = MCW_minister_Otto_Wohler_sec
-					}
+			MCW = {
+				remove_ideas = MCW_minister_Otto_Ernst_Remer_sec
+				add_ideas = MCW_minister_Otto_Wohler_sec
+				GER_otto_ernst_remer = {
+					set_nationality = GER 
+				}
 				army_experience = -10
 				add_manpower = -4
 				TNO_worsen_army_professionalism_high = yes
@@ -22214,7 +22273,7 @@ country_event = {#Coup happens with german pressure. Tys is now in charge for a 
 	immediate = { log = "[GetDateText]: [Root.GetName]: event speer_ukraine.9" }
 	title = speer_ukraine.9.t
 	desc = speer_ukraine.9.desc
-	picture = GFX_report_event_German_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -22222,11 +22281,14 @@ country_event = {#Coup happens with german pressure. Tys is now in charge for a 
 	option = { #
 		name = speer_ukraine.9.a
 		UKR = {
-			create_country_leader = {
-				name = "Yuryi Tys"
-				picture = "Portrait_UKR_Yuryi_Tys.dds"
-				expire = "1980.1.1"
-				ideology = fascism_reformed_national_socialism_subtype
+			add_country_leader_role = {
+				character = UKR_Yuryi_Tys
+				country_leader = {
+				 	ideology = fascism_reformed_national_socialism_subtype
+					expire = "1980.1.1"
+					id = -1
+				}
+				promote_leader = yes
 			}
 			set_politics = {
 				ruling_party = fascism
@@ -22626,13 +22688,25 @@ country_event = { #Erhard demands Flat Income Tax
 			}
 		}
 		add_political_power = -30
-		swap_ideas = {
-			remove_idea = tno_income_taxation_elite_tax_exemptions
-			add_idea = tno_income_taxation_flat_taxes
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_income_taxation_elite_tax_exemptions
+				add_idea = tno_income_taxation_flat_taxes
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+			    remove_idea = tno_income_taxation_elite_tax_exemptions_dummy
+			    add_idea = tno_income_taxation_flat_taxes_dummy
+	        }
 		}
 		set_variable = { tno_income_taxation_effectiveness = 60 }
 		TNO_update_policy_effectiveness = yes
 		econ_increase_liberal_leaning_small = yes
+		effect_tooltip = {
+			TNO_worsen_income_taxation_policy_effectiveness_high = yes
+		}
+		TNO_improve_income_taxation_policy_effectiveness_monthly_med = yes
 	}
 	option = { #Deny
 		name = erhardgo4.1.b
@@ -22709,12 +22783,24 @@ country_event = { #ACCEPT: Flat Income Tax is introduced, industrialists (esp. I
 			}
 		}
 		econ_increase_conservative_leaning_small = yes
-		swap_ideas = {
-			remove_idea = tno_income_taxation_flat_taxes
-			add_idea = tno_income_taxation_elite_tax_exemptions
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_income_taxation_flat_taxes
+				add_idea = tno_income_taxation_elite_tax_exemptions
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+			    remove_idea = tno_income_taxation_flat_taxes_dummy
+			    add_idea = tno_income_taxation_elite_tax_exemptions_dummy
+	        }
 		}
 		set_variable = { tno_income_taxation_effectiveness = 40 }
 		TNO_update_policy_effectiveness = yes
+		effect_tooltip = {
+			TNO_worsen_income_taxation_policy_effectiveness_high = yes
+		}
+		TNO_improve_income_taxation_policy_effectiveness_monthly_med = yes
 	}
 }
 
@@ -22847,12 +22933,24 @@ country_event = { #Erhard demands the introduction of a decent minimum wage to t
 	option = { #hell yeah
 		name = erhardgo4.8.a
 		ai_chance = { factor = 70 }
-		swap_ideas = {
-			remove_idea = tno_minimum_wage_trinket_minimum_wage
-			add_idea = tno_minimum_wage_acceptable_minimum
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_minimum_wage_trinket_minimum_wage
+				add_idea = tno_minimum_wage_acceptable_minimum
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+			    remove_idea = tno_minimum_wage_trinket_minimum_wage_dummy
+			    add_idea = tno_minimum_wage_acceptable_minimum_dummy
+	        }
 		}
 		set_variable = { tno_minimum_wage_effectiveness = 55 }
 		TNO_update_policy_effectiveness = yes
+		effect_tooltip = {
+			TNO_worsen_minimum_wage_policy_effectiveness_high = yes
+		}
+		TNO_improve_minimum_wage_policy_effectiveness_monthly_med = yes
 		econ_increase_liberal_leaning_small = yes
 		set_temp_variable = { debt_temp = 1 }
 		econ_national_debt_change = yes
@@ -22941,13 +23039,24 @@ country_event = { #ACCEPT: Acceptable Minimum Wage is introducded, Industrialist
 			}
 		}
 		econ_increase_conservative_leaning_small = yes
-
-		swap_ideas = {
-			remove_idea = tno_minimum_wage_acceptable_minimum
-			add_idea = tno_minimum_wage_trinket_minimum_wage
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_minimum_wage_acceptable_minimum
+				add_idea = tno_minimum_wage_trinket_minimum_wage
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+			    remove_idea = tno_minimum_wage_acceptable_minimum_dummy
+			    add_idea = tno_minimum_wage_trinket_minimum_wage_dummy
+	        }
 		}
 		set_variable = { tno_minimum_wage_effectiveness = 45 }
 		TNO_update_policy_effectiveness = yes
+		effect_tooltip = {
+			TNO_worsen_minimum_wage_policy_effectiveness_high = yes
+		}
+		TNO_improve_minimum_wage_policy_effectiveness_monthly_med = yes
 	}
 }
 
@@ -23023,6 +23132,10 @@ country_event = { #DECLINE: Speer declines Erhard's request for Acceptable Minim
 		}
 		set_variable = { tno_minimum_wage_effectiveness = 55 }
 		TNO_update_policy_effectiveness = yes
+		effect_tooltip = {
+			TNO_worsen_minimum_wage_policy_effectiveness_high = yes
+		}
+		TNO_improve_minimum_wage_policy_effectiveness_monthly_med = yes
 		set_temp_variable = { debt_temp = 1 }
 		econ_national_debt_change = yes
 		add_political_power = -30
@@ -23062,6 +23175,10 @@ country_event = { #Erhard threatens resignation
 		}
 		set_variable = { tno_minimum_wage_effectiveness = 55 }
 		TNO_update_policy_effectiveness = yes
+		effect_tooltip = {
+			TNO_worsen_minimum_wage_policy_effectiveness_high = yes
+		}
+		TNO_improve_minimum_wage_policy_effectiveness_monthly_med = yes
 		set_temp_variable = { debt_temp = 1 }
 		econ_national_debt_change = yes
 		econ_increase_liberal_leaning_small = yes
@@ -23096,8 +23213,12 @@ country_event = { #Tresckow demands lowering the draft to one year
 		name = tresckowgo4.1.a
 		ai_chance = { factor = 70 }
 		tno_conscription_improve = yes
-		set_variable = { tno_conscription_effectiveness = 80 }
+		set_variable = { tno_conscription_effectiveness = 60 }
 		TNO_update_policy_effectiveness = yes
+		effect_tooltip = {
+			TNO_worsen_conscription_policy_effectiveness_high = yes
+		}
+		TNO_improve_conscription_policy_effectiveness_monthly_med = yes
 		add_political_power = -30
 		hidden_effect = {
 			country_event = {
@@ -23468,12 +23589,16 @@ country_event = { #IF SPEER AGREED WITH KIESINGER: The bill ultimately passes, l
 		ai_chance = { factor = 1 }
 		tno_health_care_improve = yes
 		tno_education_improve = yes
-		set_variable = { tno_health_care_effectiveness = 75 }
+		set_variable = { tno_health_care_effectiveness = 55 }
 		TNO_update_policy_effectiveness = yes
-		set_variable = { tno_education_effectiveness = 75 }
+		set_variable = { tno_education_effectiveness = 55 }
 		TNO_update_policy_effectiveness = yes
-		TNO_improve_health_care_policy_effectiveness_high = yes
-		TNO_improve_education_policy_effectiveness_high = yes
+		effect_tooltip = {
+			TNO_worsen_health_care_policy_effectiveness_high = yes
+			TNO_worsen_education_policy_effectiveness_high = yes
+		}
+		TNO_improve_health_care_policy_effectiveness_monthly_med = yes
+		TNO_improve_education_policy_effectiveness_monthly_med = yes
 		econ_increase_liberal_leaning_small = yes
 
 		set_temp_variable = { temp_econ_spending_amount = 5 }
@@ -23501,6 +23626,10 @@ country_event = { #IF SPEER AGREED WITH GEHLEN: Education parts of the bill are 
 		tno_health_care_improve = yes
 		set_variable = { tno_health_care_effectiveness = 75 }
 		TNO_update_policy_effectiveness = yes
+		effect_tooltip = {
+			TNO_worsen_health_care_policy_effectiveness_high = yes
+		}
+		TNO_improve_health_care_policy_effectiveness_monthly_med = yes
 		set_temp_variable = { temp_econ_spending_amount = 2.5 }
 		econ_spend_money_once_effect_raw_money = yes
 		econ_increase_conservative_leaning_small = yes
@@ -24908,22 +25037,67 @@ country_event = { #
 		name = speerphase3.4.a
 		ai_chance = { factor = 1 }
 		custom_effect_tooltip = SGR_gang_leashed
+		### These need modern effects ###
 		hidden_effect = {
-			swap_ideas = {
-				remove_idea = GER_Ludwig_Erhard_eco
-				add_idea = GER_Hans_Kehrl_eco
+			remove_all_ministers = yes
+			GER_otto_ernst_remer = {
+				set_portraits = {
+					civilian = {
+						large = "gfx/leaders/GER/Portrait_GER_Otto_Ernst_Remer_70s.dds"
+						small = "GFX_idea_GER_Otto_Ernst_Remer_2"
+					}
+					army = {
+						large = "gfx/leaders/GER/Portrait_GER_Otto_Ernst_Remer_70s.dds"
+						small = "GFX_idea_GER_Otto_Ernst_Remer_2"
+					}
+				}
 			}
-			swap_ideas = {
-				remove_idea = GER_Henning_von_Tresckow_sec
-				add_idea = GER_minister_Otto_Ernst_Remer_sec
+			GER_helmut_schmidt = {
+				set_portraits = {
+					civilian = {
+						small = "GFX_idea_GER_Helmut_Schmidt_2"
+					}
+				}
 			}
-			swap_ideas = {
-				remove_idea = GER_Helmut_Schmidt_for
-				add_idea = GER_Martin_Mussgnug_for
+			GER_henning_von_tresckow = {
+				set_portraits = {
+					civilian = {
+						small = "GFX_idea_GER_Henning_von_Tresckow_2"
+					}
+					army = {
+						small = "GFX_idea_GER_Henning_von_Tresckow_2"
+					}
+				}
 			}
-			swap_ideas = {
-				remove_idea = GER_Kurt_Georg_Kiesinger_hog
-				add_idea = GER_Kurt_Georg_Kiesinger_hog_3
+			GER_kurt_georg_kiesinger = {
+				set_portraits = {
+					civilian = {
+						small = "GFX_idea_GER_Kurt_Georg_Kiesinger_2"
+					}
+				}
+				remove_advisor_role = { slot = head_of_government }
+				add_advisor_role = {
+					advisor = {
+						slot = head_of_government
+						idea_token = GER_Kurt_Georg_Kiesinger_hog_3
+						allowed = { original_tag = GER }
+						traits = {
+							head_of_government 
+							hog_silver_tongue
+						}
+						ledger = civilian
+						cost = -1
+						removal_cost = -1
+						ai_will_do = { factor = 0 }
+					}
+					activate = yes
+				}
+			}
+			add_ideas = {
+				GER_Hans_Kehrl_eco
+				GER_Martin_Mussgnug_for
+				GER_Otto_Ernst_Remer_sec
+				GER_Otto_Ernst_Remer_high_command
 			}
 		}
 	}
@@ -25109,7 +25283,6 @@ country_event = { #
 	option = { #
 		name = speerphase3.14.a
 		ai_chance = { factor = 1 }
-
 	}
 }
 

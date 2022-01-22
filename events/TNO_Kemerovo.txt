@@ -903,13 +903,13 @@ country_event = { #A New Capital
 	option = { #Move to Novosibirsk
 		name = kemreg.2.a
 		ai_chance = { factor = 1 }
-		set_capital = 570
+		set_capital = { state = 570 }
 	}
 
 	option = { #Move to Krasnoyarsk
 		name = kemreg.2.b
 		ai_chance = { factor = 1 }
-		set_capital = 757
+		set_capital = { state = 757 }
 	}
 
 	option = { #Stay in Kemerovo
@@ -984,16 +984,6 @@ country_event = { #Clash of Wolves - Yuriy victorious
 			popularity = 0.1
 		}
 		remove_ideas = KEM_the_two_wolves
-		create_country_leader = {
-			name = "Rurik II"
-			desc = "POLITICS_RURIK_II_DESC"
-			picture = "Portrait_Kemerovo_Rurik_II.dds"
-			expire = "1999.1.1"
-			ideology = authoritarian_democracy_social_nationalism_subtype
-			traits = {
-
-			}
-		}
 	}
 }
 
@@ -1010,10 +1000,8 @@ country_event = { #Clash of Wolves - Lydia Victorious
 	option = { #
 		name = kemreg.5.a
 		ai_chance = { factor = 1 }
-		swap_ideas = {
-			remove_idea = KEM_Yuriy_Krylov_hog
-			add_idea = KEM_Lydia_Krylova_hog
-		}
+		remove_ideas = KEM_Yuriy_Krylov_hog
+		add_ideas = KEM_Lydia_Krylova_hog
 		remove_ideas = KEM_the_two_wolves
 		add_popularity = {
 			ideology = despotism
@@ -1521,42 +1509,18 @@ country_event = { #The Death of King Rurik II
 			limit = {
 				has_government = authoritarian_democracy
 			}
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Rurik III"
-				desc = "POLITICS_KING_YURIY_DESC"
-				picture = "Portrait_Kemerovo_Yuriy_Krylov.dds"
-				expire = "1999.1.1"
-				ideology = authoritarian_democracy_social_nationalism_subtype
-				traits = {
-	
-				}
-			}
-			every_unit_leader = {
-				limit = { has_id = 3635 }
-				retire = yes
-			}
+			effect_tooltip = { kill_country_leader = yes }
+			hidden_effect = { retire_character = KEM_Rurik_II }
+			promote_character = KEM_Rurik_III
 			country_event = { id = kemreg.28 days = 7 }
 		}
 		else_if = {
 			limit = {
 				has_government = despotism
 			}
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Rogneda I"
-				desc = "POLITICS_QUEEN_LYDIA_DESC"
-				picture = "Portrait_Kemerovo_Lydia_Krylova.dds"
-				expire = "1999.1.1"
-				ideology = despotism_aristocratic_conservatism_subtype
-				traits = {
-	
-				}
-			}
-			every_unit_leader = {
-				limit = { has_id = 3635 }
-				retire = yes
-			}
+			effect_tooltip = { kill_country_leader = yes }
+			hidden_effect = { retire_character = KEM_Rurik_II }
+			promote_character = KEM_Ronegda_I
 			country_event = { id = kemreg.29 days = 7 }
 		}
 	}
@@ -1860,26 +1824,53 @@ country_event = { #The Arteries of a Nation
 		ai_chance = { factor = 1 }
 		set_temp_variable = { temp_econ_spending_amount = 0.075 }
 		econ_spend_money_once_effect_modal = yes
-		569 = {
-			add_building_construction = {
-				type = infrastructure
-				level = 2
-				instant_build = yes
+		build_railway = {
+			level = 3
+			build_only_on_allied = yes
+			controller_priority = {
+				base = 1
+			
+				modifier = {
+				tag = KEM
+				add = 2
+				}
 			}
+			fallback = yes
+			path = { 4789 4793 7886 }
+			start_province = 4789
+			target_province = 7886
 		}
-		570 = {
-			add_building_construction = {
-				type = infrastructure
-				level = 2
-				instant_build = yes
+		build_railway = {
+			level = 1
+			build_only_on_allied = yes
+			controller_priority = {
+				base = 1
+			
+				modifier = {
+				tag = KEM
+				add = 2
+				}
 			}
+			fallback = yes
+			path = { 7825 7274 4866 4789 }
+			start_province = 7825
+			target_province = 4789
 		}
-		757 = {
-			add_building_construction = {
-				type = infrastructure
-				level = 2
-				instant_build = yes
+		build_railway = {
+			level = 3
+			build_only_on_allied = yes
+			controller_priority = {
+				base = 1
+			
+				modifier = {
+				tag = KEM
+				add = 2
+				}
 			}
+			fallback = yes
+			path = { 7886 7815 4724 }
+			start_province = 7886
+			target_province = 4724
 		}
 	}
 }

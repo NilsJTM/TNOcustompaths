@@ -155,19 +155,23 @@ SGR_reich_in_crisis_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SGR_OC_fix_the_oil_crisis"
 			SGR_OC_economic_upgrade = yes
+			log = "[GetDateText]: [Root.GetName]: gdp growth recovery OC: [?gdp_growth]"
 			hidden_effect = {
 				random_list = {
 					30 = {
-						set_temp_variable = { gdp_growth_temp = 1.25 }
+						set_temp_variable = { gdp_growth_temp = 0.25 }
 						econ_gdp_growth_change = yes
+						log = "[GetDateText]: [Root.GetName]: add 0.25: [?gdp_growth]"
 					}
 					10 = {
-						set_temp_variable = { gdp_growth_temp = 2.1 }
+						set_temp_variable = { gdp_growth_temp = 0.75 }
 						econ_gdp_growth_change = yes
+						log = "[GetDateText]: [Root.GetName]: add 0.75: [?gdp_growth]"
 					}
 					2 = {
-						set_temp_variable = { gdp_growth_temp = 3 }
+						set_temp_variable = { gdp_growth_temp = 1.25 }
 						econ_gdp_growth_change = yes
+						log = "[GetDateText]: [Root.GetName]: add 1.25: [?gdp_growth]"
 					}
 				}
 			}
@@ -1178,6 +1182,45 @@ SGR_Zollverein_members_investment_category = {
 
 		ai_will_do = {
 			factor = 15
+		}
+	}
+
+	SGR_RSFSTP_Extend_Railway = {
+		icon = GFX_decision_generic_high_speed_train
+		fire_only_once = yes
+		allowed = {
+			tag = GER
+		}
+		visible = {
+			#custom_trigger_tooltip = {
+			#	tooltip = SGR_RSFSTP_Krakau_Trigger
+			#	hidden_trigger = {
+			#		check_variable = {
+			#			SGR_railway_frame_progress > 6
+			#		}
+			#		has_country_flag = SGR_RSFSTP_started
+			#	}
+			#}
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SGR_RSFSTP_Krakau_Trigger
+				hidden_trigger = {
+					check_variable = {
+						SGR_railway_frame_progress > 6
+					}
+					has_country_flag = SGR_RSFSTP_started
+				}
+			}
+		}
+		cost = 75
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SGR_RSFSTP_Extend_Railway"
+			country_event = { id = speer_railway.11 days = 1 }
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 
@@ -4153,7 +4196,7 @@ GER_SGR_post_embargo_trading = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = SGR_pet_relations_var_check_civtrade
+				tooltip = SGR_pet_relations_var_check_civtrade_5
 				check_variable = {
 					var = SGR_pet_relations_var
 					value = 5
@@ -4924,7 +4967,15 @@ GER_foreign_policy_category = {
 		}
 		available = {
 			has_equipment = { motorized_equipment > 199 }
-			has_equipment = { MBT_equipment > 99 }
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				has_equipment = { MBT_chassis > 99 }
+			}
+			else = {
+				has_equipment = { MBT_equipment > 99 }
+			}
 		}
 
 		custom_cost_trigger = { command_power > 2 }
@@ -4948,10 +4999,22 @@ GER_foreign_policy_category = {
 				amount = 200
 				target = PER
 			}
-			send_equipment = {
-				type = MBT_equipment
-				amount = 100
-				target = PER
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				send_equipment = {
+					type = MBT_chassis
+					amount = 100
+					target = PER
+				}
+			}
+			else = {
+				send_equipment = {
+					type = MBT_equipment
+					amount = 100
+					target = PER
+				}
 			}
 		}
 		ai_will_do = {
@@ -4971,12 +5034,14 @@ GER_foreign_policy_category = {
 			}
 		}
 
-		cost = 30
+		custom_cost_trigger = { command_power > 19 }
+		custom_cost_text = decision_cost_20_cp
 		fire_only_once = yes
 		days_remove = 3
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Speer_ICW_iranisches_freiwilligenkorps"
+			hidden_effect = { add_command_power = -20 }
 		}
 		remove_effect = {
 			custom_effect_tooltip = GER_iran_volunteers_tt
@@ -4989,7 +5054,7 @@ GER_foreign_policy_category = {
 			set_country_flag = GER_iran_volunteers
 		}
 		ai_will_do = {
-			factor = 20
+			factor = 200
 		}
 	}
 
@@ -5017,7 +5082,7 @@ GER_foreign_policy_category = {
 			custom_effect_tooltip = "TNO_increase_volunteers_PER_1"
 		}
 		ai_will_do = {
-			factor = 20
+			factor = 200
 		}
 	}
 

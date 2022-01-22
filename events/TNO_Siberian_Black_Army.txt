@@ -210,19 +210,21 @@ country_event = { #The Trans-Siberian Railway
 		name = SBA.12.a
 		ai_chance = { factor = 1 }
 		SIB_decrease_construction_speed_low = yes
-		568 = {
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
+		build_railway = {
+			level = 1
+			build_only_on_allied = yes
+			controller_priority = {
+				base = 1
+			
+				modifier = {
+				tag = SBA
+				add = 2
+				}
 			}
-		}
-		567 = {
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
+			fallback = yes
+			path = { 12691 12621 4853 10570 7876 1803 }
+			start_province = 12691
+			target_province = 1803
 		}
 	}
 	option = { #
@@ -800,7 +802,23 @@ country_event = { #Convince them with Political Power
 		name = SBA.42.a
 		ai_chance = { factor = 1 }
 		SBA_commune_conscession = yes
-		add_political_power = -10
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = RUS_regional_stage
+				}
+			}
+			add_political_power = -10
+		}
+		if = {
+			limit = {
+				has_country_flag = RUS_regional_stage
+				NOT = {
+					has_country_flag = RUS_superregional_stage
+				}
+			}
+			add_political_power = -20
+		}
 	}
 	option = { #
 		name = SBA.42.b
@@ -822,7 +840,29 @@ country_event = { #Reinforce Region
 		name = SBA.43.a
 		ai_chance = { factor = 1 }
 		SBA_commune_conscession = yes
-		add_manpower = -100
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = RUS_regional_stage
+				}
+			}
+			add_manpower = -500
+		}
+		if = {
+			limit = {
+				has_country_flag = RUS_regional_stage
+				NOT = {
+					has_country_flag = RUS_superregional_stage
+				}
+			}
+			add_manpower = -2000
+		}
+		if = {
+			limit = {
+				has_country_flag = RUS_superregional_stage
+			}
+			add_manpower = -5000
+		}
 	}
 	option = { #
 		name = SBA.43.b
@@ -864,6 +904,20 @@ country_event = { #Allow Political Autonomy
 				}
 			}
 		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = RUS_regional_stage
+				}
+			}
+			add_political_power = -5
+		}
+		if = {
+			limit = {
+				has_country_flag = RUS_regional_stage
+			}
+			add_political_power = -10
+		}
 	}
 	option = { #
 		name = SBA.44.b
@@ -885,7 +939,7 @@ country_event = { #Invest in Commune
 		name = SBA.45.a
 		ai_chance = { factor = 1 }
 		SBA_commune_conscession = yes
-		set_temp_variable = { temp_month_income_spent = 0.3 }
+		set_temp_variable = { temp_month_income_spent = 0.25 }
 		econ_spend_money_once_effect_month_income = yes
 		SBA_state_concession_gdp = yes
 	}
@@ -909,7 +963,20 @@ country_event = { #Militia Training
 		name = SBA.46.a
 		ai_chance = { factor = 1 }
 		SBA_commune_conscession = yes
-		army_experience = -1
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = RUS_regional_stage
+				}
+			}
+			army_experience = -1
+		}
+		if = {
+			limit = {
+				has_country_flag = RUS_regional_stage
+			}
+			army_experience = -5
+		}
 	}
 	option = { #
 		name = SBA.46.b
@@ -931,9 +998,30 @@ country_event = { #Medical Aid
 		name = SBA.47.a
 		ai_chance = { factor = 1 }
 		SBA_commune_conscession = yes
-		add_equipment_to_stockpile = {
-			type = support_equipment
-			amount = -10
+		SBA_state_concession_gdp_small = yes
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = RUS_regional_stage
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -25
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = RUS_regional_stage
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -100
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -15
+			}
 		}
 	}
 	option = { #
@@ -978,9 +1066,25 @@ country_event = { #Guns
 		name = SBA.49.a
 		ai_chance = { factor = 1 }
 		SBA_commune_conscession = yes
-		add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = -75
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = RUS_regional_stage
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = RUS_regional_stage
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -500
+			}
 		}
 	}
 	option = { #
@@ -1022,13 +1126,14 @@ country_event = { #Freedom Has Been Found
 	option = { #
 		name = SBA.51.a
 		ai_chance = { factor = 1 }
+		custom_effect_tooltip = SBA_collapse_decisions_tt
 		hidden_effect = {
-			load_focus_tree = SBA_regional
+			SBA_collapse_mechanic_setup = yes
 			if = {
 				limit = {
-					NOT = { has_country_flag = SBA_reform2_passed }
+					check_variable = { SIB_worker_tension > 10 }
 				}
-				clr_country_flag = SBA_reform2_unavailable
+				country_event = { id = SBA.93 days = 12 random = 50 }
 			}
 		}
 	}
@@ -1126,8 +1231,13 @@ country_event = { #Correct Misguided Teachings
 			ideology = socialist
 			popularity = 0.03
 		}
-		add_to_variable = { SBA_collapse_counter = 1 }
-		SBA_collapse_check = yes
+		if = {
+			limit = {
+				has_country_flag = SBA_collapse_mechanic_enabled
+			}
+			set_temp_variable = { SBA_collapse_counter_change = 20 }
+			SBA_collapse_update = yes
+		}
 	}
 }
 
@@ -1159,6 +1269,10 @@ country_event = { #Cast Down Social Injustice
 			ideology = socialist
 			popularity = -0.02
 		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.01
+		}
 	}
 	option = { #Can't force people do abandon bigotry
 		name = SBA.55.b
@@ -1181,8 +1295,8 @@ country_event = { #Cast Down Social Injustice
 		
 		TNO_worsen_lgbt_rights_policy_effectiveness_low = yes
 		add_popularity = {
-			ideology = authoritarian_democracy
-			popularity = 0.02
+			ideology = conservative_democracy
+			popularity = 0.03
 		}
 	}
 }
@@ -1218,10 +1332,15 @@ country_event = { #Enshrine Material Rights
 			ideology = despotism
 			popularity = 0.025
 		}
-		add_to_variable = { SBA_collapse_counter = 1 }
-		SBA_collapse_check = yes
 		set_temp_variable = { inflation_temp = 0.15 }
 		econ_inflation_change = yes
+		if = {
+			limit = {
+				has_country_flag = SBA_collapse_mechanic_enabled
+			}
+			set_temp_variable = { SBA_collapse_counter_change = 20 }
+			SBA_collapse_update = yes
+		}
 	}
 	option = { #
 		name = SBA.56.b
@@ -1283,8 +1402,13 @@ country_event = { #Rural-Urban Split
 			ideology = despotism
 			popularity = 0.05
 		}
-		add_to_variable = { SBA_collapse_counter = 2 }
-		SBA_collapse_check = yes
+		if = {
+			limit = {
+				has_country_flag = SBA_collapse_mechanic_enabled
+			}
+			set_temp_variable = { SBA_collapse_counter_change = 40 }
+			SBA_collapse_update = yes
+		}
 	}
 	option = { #Self-organised transition into communes
 		name = SBA.58.b
@@ -1349,8 +1473,13 @@ country_event = { #Honors for Humanity
 			ideology = despotism
 			popularity = 0.05
 		}
-		add_to_variable = { SBA_collapse_counter = 2 }
-		SBA_collapse_check = yes
+		if = {
+			limit = {
+				has_country_flag = SBA_collapse_mechanic_enabled
+			}
+			set_temp_variable = { SBA_collapse_counter_change = 40 }
+			SBA_collapse_update = yes
+		}
 	}
 	option = { #Decentralise religion
 		name = SBA.59.b
@@ -1465,6 +1594,8 @@ country_event = { #Encourage the Kostinsty
 			remove_idea = tno_max_workhours_12_hour_work_day
 			add_idea = tno_max_workhours_10_hour_work_day
 		}
+		TNO_worsen_max_workhours_policy_effectiveness_high = yes
+		TNO_improve_max_workhours_policy_effectiveness_monthly_med = yes
 		add_popularity = {
 			ideology = socialist
 			popularity = 0.05
@@ -1874,6 +2005,7 @@ country_event = { # Little Fires Burn the Brightest
 
 	option = { 
 		name = SBA.85.a
+		TNO_improve_lgbt_rights_policy_effectiveness_low = yes
 	}
 }
 
@@ -1934,40 +2066,6 @@ country_event = { #The Joys Of Fine Dining
 		name = SBA.88.a
 		ai_chance = { factor = 1 }
 
-	}
-}
-
-country_event = { #Socialist -> Despotist
-	id = SBA.114
-	immediate = {log = "[GetDateText]: [Root.GetName]: event SBA.114"}
-	title = SBA.114.t
-	desc = SBA.114.desc
-
-	is_triggered_only = yes
-
-	option = { #
-		name = SBA.114.a
-		ai_chance = { factor = 1 }
-		set_politics = {
-			ruling_party = despotism
-		}
-	}
-}
-
-country_event = { #Despotist -> Socialist
-	id = SBA.115
-	immediate = {log = "[GetDateText]: [Root.GetName]: event SBA.115"}
-	title = SBA.115.t
-	desc = SBA.115.desc
-
-	is_triggered_only = yes
-
-	option = { #
-		name = SBA.115.a
-		ai_chance = { factor = 1 }
-		set_politics = {
-			ruling_party = socialist
-		}
 	}
 }
 
@@ -2044,6 +2142,13 @@ country_event = { #Kostinsty Demands
 			ideology = socialist
 			popularity = 0.05
 		}
+		if = {
+			limit = {
+				has_country_flag = SBA_collapse_mechanic_enabled
+			}
+			set_temp_variable = { SBA_collapse_counter_change = -20 }
+			SBA_collapse_update = yes
+		}
 	}
 	option = { #anarcho-oppression
 		name = SBA.93.b
@@ -2055,8 +2160,13 @@ country_event = { #Kostinsty Demands
 			ideology = socialist
 			popularity = -0.1
 		}
-		add_to_variable = { SBA_collapse_counter = 5 }
-		SBA_collapse_check = yes
+		if = {
+			limit = {
+				has_country_flag = SBA_collapse_mechanic_enabled
+			}
+			set_temp_variable = { SBA_collapse_counter_change = 60 }
+			SBA_collapse_update = yes
+		}
 	}
 }
 
@@ -2080,21 +2190,15 @@ country_event = { #Novosibirsk secedes
 		hidden_effect = {
 			NOV = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Vitaly Kostin"
-					desc = "POLITICS_VITALY_KOSTIN_COLLAPSE_DESC"
-					picture = "gfx/leaders/KAL/Portrait_KAL_Vitaly_Kostin.dds"
-					expire = "1999.1.1"
-					ideology = socialist_syndicalism_subtype
-				}
+				promote_character = KAL_Vitaly_Kostin
 				set_politics = {
 					ruling_party = socialist
 				}
 				set_popularities = {
-					communist = 21
+					communist = 20
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 79
+					socialist = 80
 					social_democracy = 0
 					liberal_democracy = 0
 					conservative_democracy = 0
@@ -2145,19 +2249,8 @@ country_event = { #oh god oh fuck
 			ideology = despotism
 			popularity = 0.075
 		}
-		start_border_war = {
-			change_state_after_war = no
-			attacker = {
-				state = 578
-				num_provinces = 4
-				on_win = SBA.98
-				on_lose = SBA.102
-			}
-			defender = {
-				state = 570
-				num_provinces = 4
-			}
-		}
+		declare_war_on = { target = NOV type = annex_everything }
+		activate_mission = SBA_recapture_novosibirsk
 	}
 	option = { #
 		name = SBA.95.b
@@ -2167,12 +2260,7 @@ country_event = { #oh god oh fuck
 			ideology = socialist
 			popularity = 0.05
 		}
-		hidden_effect = {
-			country_event = {
-				id = SBA.100
-				days = 3
-			}
-		}
+		activate_mission = SBA_stepanov_invasion
 	}
 }
 
@@ -2196,12 +2284,17 @@ country_event = { #Tomsk secedes
 		hidden_effect = {
 			TOM = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Viktor Nekrasov"
-					desc = "POLITICS_VIKTOR_NEKRASOV_DESC"
-					picture = "gfx/leaders/TOM/Portrait_Tomsk_Viktor_Nekrasov.dds"
-					expire = "1999.1.1"
-					ideology = socialist_utopian_socialism_subtype
+				TOM_Viktor_Nekrasov = {
+					add_country_leader_role = {
+						country_leader = {
+							desc = "POLITICS_VIKTOR_NEKRASOV_DESC"
+							ideology = socialist_utopian_socialism_subtype
+							expire = "1999.1.1"
+							traits = { }
+							id = -1
+						}
+					}
+					promote_character = yes
 				}
 				set_politics = {
 					ruling_party = socialist
@@ -2250,19 +2343,8 @@ country_event = { #oh god oh fuck #2
 			ideology = despotism
 			popularity = 0.075
 		}
-		start_border_war = {
-			change_state_after_war = no
-			attacker = {
-				state = 570
-				num_provinces = 4
-				on_win = SBA.99
-				on_lose = SBA.103
-			}
-			defender = {
-				state = 578
-				num_provinces = 4
-			}
-		}
+		declare_war_on = { target = TOM type = annex_everything }
+		activate_mission = SBA_recapture_tomsk
 	}
 	option = { #
 		name = SBA.97.b
@@ -2272,12 +2354,7 @@ country_event = { #oh god oh fuck #2
 			ideology = socialist
 			popularity = 0.05
 		}
-		hidden_effect = {
-			country_event = {
-				id = SBA.100
-				days = 3
-			}
-		}
+		activate_mission = SBA_stepanov_invasion
 	}
 }
 
@@ -2308,6 +2385,7 @@ country_event = { #novosibirsk back
 			ideology = despotism
 			popularity = 0.1
 		}
+		clr_country_flag = SBA_collapse_mechanic_enabled
 	}
 }
 
@@ -2338,6 +2416,7 @@ country_event = { #tomsk back
 			ideology = despotism
 			popularity = 0.1
 		}
+		clr_country_flag = SBA_collapse_mechanic_enabled
 	}
 }
 
@@ -2365,6 +2444,7 @@ country_event = { #stepanov gaming
 				days = 2
 			}
 		}
+		clr_country_flag = SBA_collapse_mechanic_enabled
 	}
 }
 
@@ -2409,14 +2489,20 @@ country_event = { #tomsk leaves
 		name = SBA.102.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
+			white_peace = NOV
 			TOM = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Viktor Nekrasov"
-					desc = "POLITICS_VIKTOR_NEKRASOV_DESC"
-					picture = "gfx/leaders/TOM/Portrait_Tomsk_Viktor_Nekrasov.dds"
-					expire = "1999.1.1"
-					ideology = socialist_utopian_socialism_subtype
+				TOM_Viktor_Nekrasov = {
+					add_country_leader_role = {
+						country_leader = {
+							desc = "POLITICS_VIKTOR_NEKRASOV_DESC"
+							ideology = socialist_utopian_socialism_subtype
+							expire = "1999.1.1"
+							traits = { }
+							id = -1
+						}
+					}
+					promote_character = yes
 				}
 				set_politics = {
 					ruling_party = socialist
@@ -2462,23 +2548,18 @@ country_event = { #novosibirsk leaves
 		name = SBA.103.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
+			white_peace = TOM
 			NOV = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Vitaly Kostin"
-					desc = "POLITICS_VITALY_KOSTIN_COLLAPSE_DESC"
-					picture = "gfx/leaders/KAL/Portrait_KAL_Vitaly_Kostin.dds"
-					expire = "1999.1.1"
-					ideology = socialist_syndicalism_subtype
-				}
+				promote_character = KAL_Vitaly_Kostin
 				set_politics = {
 					ruling_party = socialist
 				}
 				set_popularities = {
-					communist = 21
+					communist = 20
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 79
+					socialist = 20
 					social_democracy = 0
 					liberal_democracy = 0
 					conservative_democracy = 0
@@ -2593,12 +2674,17 @@ country_event = { #collapse
 			}
 			KRS = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Viktor Astafyev"
-					desc = "POLITICS_VIKTOR_ASTAFYEV"
-					picture = "gfx/leaders/KRS/Portrait_Krasnoyarsk_Viktor_Astafyev.dds"
-					expire = "1999.1.1"
-					ideology = social_democracy_left_wing_populism_subtype
+				KRS_Viktor_Astafyev = {
+					add_country_leader_role = {
+						country_leader = {
+							desc = "POLITICS_VIKTOR_ASTAFYEV"
+							ideology = social_democracy_left_wing_populism_subtype
+							expire = "1999.1.1"
+							traits = { }
+							id = -1
+						}
+					}
+					promote_character = yes
 				}
 				set_politics = {
 					ruling_party = social_democracy
@@ -2609,11 +2695,11 @@ country_event = { #collapse
 					communist = 0
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 24
-					social_democracy = 64
+					socialist = 25
+					social_democracy = 65
 					liberal_democracy = 0
 					conservative_democracy = 0
-					authoritarian_democracy = 12
+					authoritarian_democracy = 10
 					despotism = 0
 					fascism = 0
 					
@@ -2645,26 +2731,23 @@ country_event = { #collapse
 			}
 			KEM = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Rurik III"
-					desc = "POLITICS_YURIY_KRYLOV_COLLAPSE_DESC"
-					picture = "gfx/leaders/KEM/Portrait_Kemerovo_Yuriy_Krylov.dds"
-					expire = "1999.1.1"
-					ideology = authoritarian_democracy_social_nationalism_subtype
-				}
 				set_politics = {
 					ruling_party = authoritarian_democracy
+				}
+				promote_character = KEM_Rurik_III
+				set_country_leader_description = {
+					desc = "POLITICS_YURIY_KRYLOV_COLLAPSE_DESC"
 				}
 				set_popularities = {
 					communist = 0
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 31
+					socialist = 30
 					social_democracy = 0
 					liberal_democracy = 0
 					conservative_democracy = 0
-					authoritarian_democracy = 57
-					despotism = 12
+					authoritarian_democracy = 60
+					despotism = 10
 					fascism = 0
 					
 				}
@@ -2683,25 +2766,22 @@ country_event = { #collapse
 			}
 			ALT = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Vasily Shukshin"
-					desc = "POLITICS_VASILY_SHUKSHIN_COLLAPSE_DESC"
-					picture = "gfx/leaders/NOV/Portrait_Novosibirsk_Vasily_Shukshin.dds"
-					expire = "1999.1.1"
-					ideology = conservative_democracy_agrarianism_subtype
-				}
 				set_politics = {
 					ruling_party = conservative_democracy
+				}
+				promote_character = NOV_Vasily_Shukshin
+				set_country_leader_description = {
+					desc = "POLITICS_VASILY_SHUKSHIN_COLLAPSE_DESC"
 				}
 				set_popularities = {
 					communist = 0
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 11
+					socialist = 10
 					social_democracy = 0
 					liberal_democracy = 0
-					conservative_democracy = 66
-					authoritarian_democracy = 23
+					conservative_democracy = 65
+					authoritarian_democracy = 25
 					despotism = 0
 					fascism = 0
 					
@@ -2726,7 +2806,7 @@ country_event = { #collapse
 				set_cosmetic_tag = ALT_collapse
 				transfer_state = 40
 				add_state_core = 40
-				set_capital = 40
+				set_capital = { state = 40 }
 				add_ideas = {
 					SBA_collapsed_communes
 					SBA_memories_of_the_federation
@@ -2788,12 +2868,17 @@ country_event = { #stepanov fucks off
 			remove_unit_leader = 3668
 			PRC = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Ivan Stepanov"
-					desc = "POLITICS_IVAN_STEPANOV_DESC"
-					picture = "gfx/leaders/SBA/Portrait_SBA_Ivan_Stepanov.dds"
-					expire = "1999.1.1"
-					ideology = despotism_vanguard_anarchism_subtype
+				SBA_Ivan_Stepanov = {
+					add_country_leader_role = {
+						country_leader = {
+							desc = "POLITICS_IVAN_STEPANOV_DESC"
+							ideology = despotism_vanguard_anarchism_subtype
+							expire = "1999.1.1"
+							traits = { }
+							id = -1
+						}
+					}
+					promote_character = yes
 				}
 				set_politics = {
 					ruling_party = despotism
@@ -2802,12 +2887,12 @@ country_event = { #stepanov fucks off
 					communist = 0
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 13
+					socialist = 15
 					social_democracy = 0
 					liberal_democracy = 0
 					conservative_democracy = 0
-					authoritarian_democracy = 9
-					despotism = 78
+					authoritarian_democracy = 10
+					despotism = 75
 					fascism = 0
 					
 				}
@@ -2900,7 +2985,7 @@ country_event = { #siuda fucks off
 				ruling_party = socialist
 			}
 			set_popularities = {
-				communist = 3
+				communist = 0
 				ultranationalism = 0
 				national_socialism = 0
 				socialist = 80
@@ -2908,7 +2993,7 @@ country_event = { #siuda fucks off
 				liberal_democracy = 0
 				conservative_democracy = 0
 				authoritarian_democracy = 0
-				despotism = 17
+				despotism = 20
 				fascism = 0
 				
 			}
@@ -2919,12 +3004,17 @@ country_event = { #siuda fucks off
 			load_focus_tree = shattered_ambitions
 			PRC = {
 				kill_country_leader = yes
-				create_country_leader = {
-					name = "Ivan Stepanov"
-					desc = "POLITICS_IVAN_STEPANOV_DESC"
-					picture = "gfx/leaders/SBA/Portrait_SBA_Ivan_Stepanov.dds"
-					expire = "1999.1.1"
-					ideology = despotism_vanguard_anarchism_subtype
+				SBA_Ivan_Stepanov = {
+					add_country_leader_role = {
+						country_leader = {
+							desc = "POLITICS_IVAN_STEPANOV_DESC"
+							ideology = despotism_vanguard_anarchism_subtype
+							expire = "1999.1.1"
+							traits = { }
+							id = -1
+						}
+					}
+					promote_character = yes
 				}
 				set_politics = {
 					ruling_party = despotism
@@ -2933,12 +3023,12 @@ country_event = { #siuda fucks off
 					communist = 0
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 13
+					socialist = 15
 					social_democracy = 0
 					liberal_democracy = 0
 					conservative_democracy = 0
-					authoritarian_democracy = 9
-					despotism = 78
+					authoritarian_democracy = 10
+					despotism = 75
 					fascism = 0
 					
 				}
@@ -3294,13 +3384,13 @@ country_event = { #Central Siberian War won
 			}
 			set_cosmetic_tag = KRS_SBA_Collapse_Unifier
 			set_popularities = {
-				communist = 3
+				communist = 5
 				ultranationalism = 0
 				national_socialism = 0
-				socialist = 32
+				socialist = 30
 				social_democracy = 45
-				liberal_democracy = 13
-				conservative_democracy = 7
+				liberal_democracy = 10
+				conservative_democracy = 10
 				authoritarian_democracy = 0
 				despotism = 0
 				fascism = 0
@@ -3362,11 +3452,11 @@ country_event = { #Central Siberian War won
 					communist = 0
 					ultranationalism = 0
 					national_socialism = 0
-					socialist = 11
+					socialist = 10
 					social_democracy = 0
 					liberal_democracy = 0
-					conservative_democracy = 66
-					authoritarian_democracy = 23
+					conservative_democracy = 65
+					authoritarian_democracy = 25
 					despotism = 0
 					fascism = 0
 				}
@@ -3423,6 +3513,7 @@ country_event = { #
 		clr_country_flag = SBA_Promote_Discipline
 		clr_country_flag = SBA_Empower_GA
 		clr_country_flag = SBA_Empower_SC
+		clr_country_flag = SBA_debate_ongoing
 	}
 	title = SBA_PowerStruggle.1.t
 	desc = SBA_PowerStruggle.1.desc
@@ -3474,18 +3565,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.3.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_3_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_11 = -2 }
-			}
-			add_to_variable = { SBA_Support_11 = 3 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_11 = 2 }
-		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
+		add_political_power = 25
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.4 days = 9 } }
 	}
 }
@@ -3506,16 +3586,15 @@ country_event = { #
 		custom_effect_tooltip = SBA_PowerStruggle_4_tt
 		if = {
 			limit = {
-				check_variable = { SBA_Support_12 = 2 }
+				check_variable = { SBA_Support_12 = -2 }
 			}
-			add_to_variable = { SBA_Support_12 = -3 }
+			add_to_variable = { SBA_Support_12 = 3 }
 		}
 		else = {
-			add_to_variable = { SBA_Support_12 = -2 }
+			add_to_variable = { SBA_Support_12 = 2 }
 		}
 		SBA_influence_effects = yes
 		SBA_select_region = yes
-		activate_mission = SBA_Siuda_mission1
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.5 days = 9 } }
 	}
 }
@@ -3533,6 +3612,11 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.5.a
 		ai_chance = { factor = 1 }
+		activate_mission = SBA_Siuda_mission1
+		add_popularity = {
+			ideology = national_socialism
+			popularity = 0.05
+		}
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.6 days = 9 } }
 	}
 }
@@ -3550,7 +3634,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.6.a
 		ai_chance = { factor = 1 }
-		activate_mission = SBA_Siuda_mission2
+		add_political_power = 10
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.7 days = 9 } }
 	}
 }
@@ -3568,12 +3652,17 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.7.a
 		ai_chance = { factor = 1 }
+		add_political_power = 25
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.8 days = 9 } }
 	}
 	option = { #
 		name = SBA_PowerStruggle.7.b
 		ai_chance = { factor = 1 }
-		hidden_effect = { country_event = { id = SBA_PowerStruggle.12 days = 9 } }
+		add_popularity = {
+			ideology = national_socialism
+			popularity = -0.01
+		}
+		hidden_effect = { country_event = { id = SBA_PowerStruggle.13 days = 9 } }
 	}
 }
 
@@ -3590,18 +3679,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.8.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_8_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_9 = -2 }
-			}
-			add_to_variable = { SBA_Support_9 = 3 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_9 = 2 }
-		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
+		activate_mission = SBA_Siuda_mission2
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.9 days = 9 } }
 	}
 }
@@ -3622,16 +3700,19 @@ country_event = { #
 		custom_effect_tooltip = SBA_PowerStruggle_9_tt
 		if = {
 			limit = {
-				check_variable = { SBA_Support_10 = 2 }
+				check_variable = { SBA_Support_10 = -2 }
 			}
-			add_to_variable = { SBA_Support_10 = -3 }
+			add_to_variable = { SBA_Support_10 = 3 }
 		}
 		else = {
-			add_to_variable = { SBA_Support_10 = -2 }
+			add_to_variable = { SBA_Support_10 = 2 }
 		}
 		SBA_influence_effects = yes
 		SBA_select_region = yes
-		activate_mission = SBA_Siuda_mission3
+		566 = {
+			set_temp_variable = { state_value_multiplier_temp = 1.1 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.10 days = 9 } }
 	}
 }
@@ -3649,11 +3730,19 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.10.a
 		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = socialist
+			popularity = 0.02
+		}
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.11 days = 9 } }
 	}
 	option = { #
-		name = SBA_PowerStruggle.10.a
+		name = SBA_PowerStruggle.10.b
 		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.12 days = 9 } }
 	}
 }
@@ -3671,7 +3760,8 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.11.a
 		ai_chance = { factor = 1 }
-		hidden_effect = { country_event = { id = SBA_PowerStruggle.13 days = 9 } }
+		TNO_improve_security_policy_effectiveness_low = yes
+		hidden_effect = { country_event = { id = SBA_PowerStruggle.12 days = 9 } }
 	}
 }
 
@@ -3691,16 +3781,19 @@ country_event = { #
 		custom_effect_tooltip = SBA_PowerStruggle_12_tt
 		if = {
 			limit = {
-				check_variable = { SBA_Support_9 = 2 }
+				check_variable = { SBA_Support_10 = -2 }
 			}
-			add_to_variable = { SBA_Support_9 = -3 }
+			add_to_variable = { SBA_Support_10 = 3 }
 		}
 		else = {
-			add_to_variable = { SBA_Support_9 = -2 }
+			add_to_variable = { SBA_Support_10 = 2 }
 		}
 		SBA_influence_effects = yes
 		SBA_select_region = yes
-		hidden_effect = { country_event = { id = SBA_PowerStruggle.13 days = 9 } }
+		add_popularity = {
+			ideology = communist
+			popularity = 0.03
+		}
 	}
 }
 
@@ -3717,18 +3810,6 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.13.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_13_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_10 = -2 }
-			}
-			add_to_variable = { SBA_Support_10 = 3 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_10 = 2 }
-		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
 		activate_mission = SBA_Siuda_mission3
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.14 days = 9 } }
 	}
@@ -3750,16 +3831,15 @@ country_event = { #
 		custom_effect_tooltip = SBA_PowerStruggle_14_tt
 		if = {
 			limit = {
-				check_variable = { SBA_Support_10 = -2 }
+				check_variable = { SBA_Support_12 = -2 }
 			}
-			add_to_variable = { SBA_Support_10 = 3 }
+			add_to_variable = { SBA_Support_12 = 3 }
 		}
 		else = {
-			add_to_variable = { SBA_Support_10 = 2 }
+			add_to_variable = { SBA_Support_12 = 2 }
 		}
 		SBA_influence_effects = yes
 		SBA_select_region = yes
-		add_stability = -0.05
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.15 days = 9 } }
 	}
 }
@@ -3777,6 +3857,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.15.a
 		ai_chance = { factor = 1 }
+		add_political_power = -10
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.16 days = 9 } }
 	}
 }
@@ -3792,9 +3873,12 @@ country_event = { #
 	fire_only_once = yes
 
 	option = { #
-		name = SBA_PowerStruggle.15.a
+		name = SBA_PowerStruggle.16.a
 		ai_chance = { factor = 1 }
-
+		add_popularity = {
+			ideology = national_socialism
+			popularity = -0.15
+		}
 	}
 }
 
@@ -3963,15 +4047,6 @@ country_event = { #
 		else = {
 			add_to_variable = { SBA_Support_9 = 2 }
 		}
-		if = {
-			limit = {
-				check_variable = { SBA_Support_14 = -2 }
-			}
-			add_to_variable = { SBA_Support_14 = 3 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_14 = 2 }
-		}
 		SBA_influence_effects = yes
 		SBA_select_region = yes
 	}
@@ -4076,28 +4151,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.26.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_26_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_6 = 1 }
-			}
-			add_to_variable = { SBA_Support_6 = -2 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_6 = -1 }
-		}
-		if = {
-			limit = {
-				check_variable = { SBA_Support_10 = 1 }
-			}
-			add_to_variable = { SBA_Support_10 = -2 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_10 = -1 }
-		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
-		activate_mission = SBA_Stepanov_mission1
+		add_political_power = 25
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.27 days = 9 } }
 	}
 }
@@ -4115,6 +4169,11 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.27.a
 		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.03
+		}
+		add_political_power = -10
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.28 days = 9 } }
 	}
 }
@@ -4135,12 +4194,12 @@ country_event = { #
 		custom_effect_tooltip = SBA_PowerStruggle_28_tt
 		if = {
 			limit = {
-				check_variable = { SBA_Support_7 = -1 }
+				check_variable = { SBA_Support_7 = -2 }
 			}
-			add_to_variable = { SBA_Support_7 = 2 }
+			add_to_variable = { SBA_Support_7 = 3 }
 		}
 		else = {
-			add_to_variable = { SBA_Support_7 = 1 }
+			add_to_variable = { SBA_Support_7 = 2 }
 		}
 		SBA_influence_effects = yes
 		SBA_select_region = yes
@@ -4149,18 +4208,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.28.b
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_28_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_7 = -1 }
-			}
-			add_to_variable = { SBA_Support_7 = 2 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_7 = 1 }
-		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
+		activate_mission = SBA_Stepanov_mission1
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.30 days = 9 } }
 	}
 }
@@ -4178,18 +4226,6 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.29.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_29_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_4 = 1 }
-			}
-			add_to_variable = { SBA_Support_4 = -2 }
-		}
-		else = {
-			add_to_variable = { SBA_Support_4 = -1 }
-		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
 		activate_mission = SBA_Stepanov_mission2
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.31 days = 9 } }
 	}
@@ -4208,19 +4244,14 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.30.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_30_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_7 = 1 }
-			}
-			add_to_variable = { SBA_Support_7 = -2 }
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.03
 		}
-		else = {
-			add_to_variable = { SBA_Support_7 = -1 }
+		add_popularity = {
+			ideology = social_democracy
+			popularity = -0.03
 		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
-		activate_mission = SBA_Stepanov_mission3
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.31 days = 9 } }
 	}
 }
@@ -4238,6 +4269,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.31.a
 		ai_chance = { factor = 1 }
+		add_command_power = 5
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.32 days = 9 } }
 	}
 }
@@ -4255,11 +4287,19 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.32.a
 		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = socialist
+			popularity = -0.03
+		}
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.33 days = 9 } }
 	}
 	option = { #
 		name = SBA_PowerStruggle.32.b
 		ai_chance = { factor = 1 }
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.03
+		}
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.36 days = 9 } }
 	}
 }
@@ -4277,7 +4317,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.33.a
 		ai_chance = { factor = 1 }
-		activate_mission = SBA_Stepanov_mission4
+		add_stability = -0.05
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.34 days = 9 } }
 	}
 }
@@ -4295,18 +4335,11 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.34.a
 		ai_chance = { factor = 1 }
-		custom_effect_tooltip = SBA_PowerStruggle_34_tt
-		if = {
-			limit = {
-				check_variable = { SBA_Support_12 = -1 }
-			}
-			add_to_variable = { SBA_Support_12 = 2 }
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.03
 		}
-		else = {
-			add_to_variable = { SBA_Support_12 = 1 }
-		}
-		SBA_influence_effects = yes
-		SBA_select_region = yes
+		add_manpower = -7
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.35 days = 9 } }
 	}
 }
@@ -4324,7 +4357,7 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.35.a
 		ai_chance = { factor = 1 }
-
+		activate_mission = SBA_Stepanov_mission3
 	}
 }
 
@@ -4341,13 +4374,11 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.36.a
 		ai_chance = { factor = 1 }
-		activate_mission = SBA_Stepanov_mission5
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.37 days = 9 } }
 	}
 	option = { #
 		name = SBA_PowerStruggle.36.b
 		ai_chance = { factor = 1 }
-		activate_mission = SBA_Stepanov_mission5
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.38 days = 9 } }
 	}
 }
@@ -4365,6 +4396,8 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.37.a
 		ai_chance = { factor = 1 }
+		add_stability = -0.05
+		add_manpower = -12
 		custom_effect_tooltip = SBA_PowerStruggle_37_tt
 		if = {
 			limit = {
@@ -4395,6 +4428,14 @@ country_event = { #
 		name = SBA_PowerStruggle.38.a
 		ai_chance = { factor = 1 }
 		hidden_effect = { country_event = { id = SBA_PowerStruggle.39 days = 9 } }
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.03
+		}
 	}
 }
 
@@ -4411,7 +4452,10 @@ country_event = { #
 	option = { #
 		name = SBA_PowerStruggle.39.a
 		ai_chance = { factor = 1 }
-
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.03
+		}
 	}
 }
 
@@ -4723,7 +4767,6 @@ country_event = { #
 		set_politics = {
 			ruling_party = socialist
 		}
-		load_focus_tree = SBA_superregional_libsoc
 		remove_unit_leader = 3668
 		add_popularity = {
 			ideology = despotism
@@ -4733,6 +4776,7 @@ country_event = { #
 		add_stability = 0.2
 		custom_effect_tooltip = SBA_no_more_power_struggle_tt
 		hidden_effect = {
+			load_focus_tree = SBA_superregional_libsoc
 			remove_ideas = {
 				SBA_black_army_administration_1
 				SBA_black_army_administration_2
@@ -4760,6 +4804,7 @@ country_event = { #
 			ruling_party = despotism
 		}
 		load_focus_tree = SBA_superregional_despotist
+		remove_ideas = SBA_Pyotr_Siuda_hog
 		add_ideas = SBA_Ivan_Stepanov_hog
 		set_country_flag = SBA_STEPANOV_COUP
 		add_popularity = {
@@ -5136,7 +5181,7 @@ country_event = { #
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SBA_LibSoc.20"}
 	title = SBA_LibSoc.20.t
 	desc = SBA_LibSoc.20.desc
-	#picture =
+	picture = GFX_report_event_command_table
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -5169,7 +5214,7 @@ country_event = { #
 	immediate = {log = "[GetDateText]: [Root.GetName]: event SBA_LibSoc.21"}
 	title = SBA_LibSoc.21.t
 	desc = SBA_LibSoc.21.desc
-	#picture =
+	picture = GFX_report_event_science_building
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -5842,7 +5887,20 @@ country_event = { #
 		ai_chance = { factor = 1 }
 		remove_unit_leader = 3666
 		random_unit_leader = { limit = { has_id = 3672 } promote_leader = yes }
-		add_ideas = SBA_Androniy_Mishurenko_sec
+		add_advisor_role = {
+			character = SBA_Androniy_Mishurenko
+			advisor = {
+				slot = security_minister
+				idea_token = SBA_Androniy_Mishurenko_sec
+				allowed = { original_tag = SBA }
+				traits = { sec_guerilla_fighter }
+				ledger = civilian
+				cost = -1
+				removal_cost = -1
+				ai_will_do = { factor = 0 }
+			}
+			activate = yes 
+		}
 	}
 }
 

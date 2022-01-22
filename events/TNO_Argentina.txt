@@ -7,7 +7,20 @@ add_namespace = ARGnews
 
 country_event = {
 	id = ARG.148 #AI event for choosing between Frondizi and coup
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.148" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ARG.148"
+		hidden_effect = {
+			remove_ideas = {
+				ARG_Carlos_Toranzo_Montero_army_chief
+				ARG_Isaac_Rojas_navy_chief
+				ARG_Cayo_Alsina_air_chief
+				ARG_Raul_Poggi_high_command
+				ARG_Bernardino_Labayru_high_command
+				ARG_Enrique_Rauch_high_command
+				ARG_Armando_P_Martineja_theorist
+			}
+		}
+	}
 	title = ARG.148.t
 	desc = ARG.148.desc
 	#picture =
@@ -42,14 +55,15 @@ country_event = {
 			every_country = {
 				news_event = { hours = 1 id = LATAM_news.37 }
 			}
-			create_country_leader = {
-				name = "Juan Carlos Onganía"
-				desc = "POLITICS_JCO_DESC"
-				picture = "Portrait_ARG_Juan_Carlos_Ongania.dds"
-				expire = "1994.4.20"
-				ideology = despotism_military_junta_subtype
-				traits = {
-					el_tropero_latin
+			add_country_leader_role = {
+				character = ARG_Juan_Carlos_Ongania
+				promote_leader = yes
+				country_leader = {
+					desc = "POLITICS_JCO_DESC"
+					expire = "1994.4.20"
+					ideology = despotism_military_junta_subtype
+					traits = { el_tropero_latin }
+					id = -1
 				}
 			}
 			set_party_name = { 
@@ -96,14 +110,15 @@ country_event = {
             }
 		}
 		add_stability = -0.1
-		create_country_leader = {
-			name = "José María Guido"
-			desc = "POLITICS_JOSE_MARIA_GUIDO_DESC"
-			picture = "Portrait_ARG_Jose_Maria_Guido.dds"
-			expire = "1994.4.20"
-			ideology = liberal_democracy_liberal_radicalism_subtype
-			traits = {
-				un_patriota_en_la_borrasca_latin
+		add_country_leader_role = {
+			character = ARG_Jose_Maria_Guido
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_JOSE_MARIA_GUIDO_DESC"
+				expire = "1994.4.20"
+				ideology = liberal_democracy_liberal_radicalism_subtype
+				traits = { un_patriota_en_la_borrasca_latin }
+				id = -1
 			}
 		}
 		set_politics = {
@@ -146,13 +161,12 @@ country_event = {
 			long_name = ARG_despotism_colorados_party_long
 			name = ARG_despotism_colorados_party
 		}
-		create_country_leader = {
-			name = "Raúl Alejandro Poggi"
-			desc = "POLITICS_RAUL_POGGI_DESC"
-			picture = "Portrait_Argentina_Poggi.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Raul_Poggi
+			promote_leader = yes
+			country_leader = {
+				ideology = despotism_military_junta_subtype
+				expire = "1994.4.20"
 			}
 		}
 		set_politics = {
@@ -299,13 +313,15 @@ country_event = {
                 has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_I option = ARG_SKELETON_1963_ELECTIONS_I_FNPC }
             } 
 		}
-		create_country_leader = {
-			name = "Arturo Umberto Illia"
-			desc = "POLITICS_ILLIA_DESC"
-			picture = "Portrait_ARG_Arturo_Illia.dds"
-			expire = "1994.4.20"
-			ideology = social_democracy_social_radicalism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Arturo_Umberto_Illia
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_ILLIA_DESC"
+				expire = "1994.4.20"
+				ideology = social_democracy_social_radicalism_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		add_popularity = {
@@ -374,10 +390,10 @@ country_event = {
 		add_stability = 0.05
 		remove_all_ministers = yes
 		add_ideas = {
-			ARG_Juan_Carlos_Coral_hog
+			ARG_Carlos_Sanchez_Viamonte_hog
 			ARG_Americo_Ghioldi_for
 			ARG_Torcuato_S_Di_Tella_eco
-			ARG_Juan_C_Rosas_romero_sec
+			ARG_Juan_C_Rosas_sec
 		}
 		country_event = { id = ARG.164 days = 964 }
 		hidden_effect = {
@@ -433,7 +449,10 @@ country_event = {
 
 country_event = {
 	id = ARG.152 #AI event for 1963 Election
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ARG.152" }
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ARG.152"
+		remove_all_ministers = yes
+	}
 	title = ARG.152.t
 	desc = ARG.152.desc
 	#picture =
@@ -450,13 +469,15 @@ country_event = {
                 has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_II option = ARG_SKELETON_1963_ELECTIONS_II_UD_II }
             }
 		}
-		create_country_leader = {
-			name = "Rogelio Julio Frigerio"
-			desc = "POLITICS_FRIGERIO_DESC"
-			picture = "Portrait_ARG_Rogelio_Frigerio.dds"
-			expire = "1994.4.20"
-			ideology = authoritarian_democracy_dominant_party_democracy_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Carlos_Alberto_Perez_Companc
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_CARLOS_ALBERTO_PEREZ_COMPANC"
+				expire = "1994.4.20"
+				ideology = authoritarian_democracy_dominant_party_democracy_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		add_popularity = {
@@ -498,13 +519,12 @@ country_event = {
                 has_game_rule = { rule = ARG_SKELETON_1963_ELECTIONS_II option = ARG_SKELETON_1963_ELECTIONS_II_FN }
             } 
 		}
-		create_country_leader = {
-			name = "Alfredo Palacios"
-			desc = "POLITICS_ALFREDO_PALACIOS_DESC"
-			picture = "Portrait_ARG_Alfredo_Palacios.dds"
-			expire = "1994.4.20"
-			ideology = social_democracy_popular_front_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Alfredo_Palacios
+			promote_leader = yes
+			country_leader = {
+				ideology = social_democracy_popular_front_subtype
+				expire = "1994.4.20"
 			}
 		}
 		add_popularity = {
@@ -556,13 +576,15 @@ country_event = {
 	option = {
 		name = ARG.153.a #Menendez
 		add_stability = -0.1
-		create_country_leader = {
-			name = "Benjamín Menéndez"
-			desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
-			picture = "Portrait_ARG_Benjamin_Menendez.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Benjamin_Menendez
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		remove_all_ministers = yes
@@ -589,14 +611,15 @@ country_event = {
 	id = ARG.154 #Azules y Colorados, should the Colorados win or should the Azules win?
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event ARG.154"
-		create_country_leader = {
-			name = "José María Guido"
-			desc = "POLITICS_JOSE_MARIA_GUIDO_DESC"
-			picture = "Portrait_ARG_Jose_Maria_Guido.dds"
-			expire = "1994.4.20"
-			ideology = despotism_civilian_dictatorship_subtype
-			traits = {
-				un_patriota_en_la_borrasca_latin
+		add_country_leader_role = {
+			character = ARG_Jose_Maria_Guido
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_JOSE_MARIA_GUIDO_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_civilian_dictatorship_subtype
+				traits = { un_patriota_en_la_borrasca_latin }
+				id = -1
 			}
 		}
 		set_party_name = { 
@@ -607,11 +630,12 @@ country_event = {
 		set_politics = {
 			ruling_party = despotism
 		}
+		remove_all_ministers = yes
 		add_ideas = {
-			ARG_vacant_hog
-			ARG_vacant_for
-			ARG_vacant_eco
-			ARG_vacant_sec
+			ARG_Generic_Vacant_hog
+		    ARG_Generic_Vacant_eco
+		    ARG_Generic_Vacant_for
+		    ARG_Generic_Vacant_sec
 		}
 	}
 	title = ARG.154.t
@@ -656,6 +680,7 @@ country_event = {
 			long_name = ARG_fn_solanolima_party_long
 			name = ARG_fn_solanolima_party
 		}
+		remove_all_ministers = yes
 	}
 	title = ARG.155.t
 	desc = ARG.155.desc
@@ -694,17 +719,18 @@ country_event = {
 			popularity = -0.04
 		}
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Vicente Solano Lima"
-			desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
-			picture = "Portrait_ARG_Vicente_Solano_Lima.dds"
-			expire = "1994.4.20"
-			ideology = conservative_democracy_populist_conservatism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Vicente_Solano_Lima
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
+				expire = "1994.4.20"
+				ideology = conservative_democracy_populist_conservatism_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		add_stability = 0.05
-		remove_all_ministers = yes
 		add_ideas = {
 			ARG_Alberto_Maria_Fonrouge_hog
 			ARG_Mario_Amadeo_for
@@ -747,20 +773,21 @@ country_event = {
 			ruling_party = social_democracy
 		}
 		add_stability = 0.05
-		remove_all_ministers = yes
 		add_ideas = {
 			ARG_Silvano_Santander_hog
 			ARG_Adolfo_Vicchi_ud_ii_for
 			ARG_Aldo_Ferrer_eco
 			ARG_Eduardo_R_Castro_Sanchez_sec
 		}
-		create_country_leader = {
-			name = "Vicente Solano Lima"
-			desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
-			picture = "Portrait_ARG_Vicente_Solano_Lima.dds"
-			expire = "1994.4.20"
-			ideology = conservative_democracy_populist_conservatism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Vicente_Solano_Lima
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
+				expire = "1994.4.20"
+				ideology = conservative_democracy_populist_conservatism_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		country_event = { id = ARG.169 days = 2190 }
@@ -793,13 +820,15 @@ country_event = {
 		name = ARG.156.a 
 		add_political_power = -25
 		add_stability = -0.1
-		create_country_leader = {
-			name = "Benjamín Menéndez"
-			desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
-			picture = "Portrait_ARG_Benjamin_Menendez.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Benjamin_Menendez
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		set_politics = {
@@ -946,58 +975,67 @@ country_event = {
 			ideology = conservative_democracy
 			popularity = 0.15
 		}
-		create_country_leader = {
-			name = "Rodolfo Martínez"
-			desc = "POLITICS_RODOLFO_MARTINEZ_DESC"
-			picture = "Portrait_ARG_Rodolfo_Martinez.dds"
-			expire = "1994.4.20"
-			ideology = conservative_democracy_christian_democracy_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Rodolfo_Martinez
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_RODOLFO_MARTINEZ_DESC"
+				expire = "1994.4.20"
+				ideology = conservative_democracy_christian_democracy_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Silvano Santander"
-			#desc = "POLITICS_FRIGERIO_DESC"
-			picture = "Potrait_ARG_Silvano_Santander.dds"
-			expire = "1994.4.20"
-			ideology = liberal_democracy_liberal_radicalism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Silvano_Santander
+			promote_leader = yes
+			country_leader = {
+				#desc = "POLITICS_MANUEL_DE_ANCHORENA_DESC"
+				expire = "1994.4.20"
+				ideology = liberal_democracy_liberal_radicalism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Alfredo Palacios"
-			desc = "POLITICS_ALFREDO_PALACIOS_DESC"
-			picture = "Portrait_ARG_Alfredo_Palacios.dds"
-			expire = "1994.4.20"
-			ideology = social_democracy_popular_front_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Alfredo_Palacios
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_ALFREDO_PALACIOS_DESC"
+				expire = "1994.4.20"
+				ideology = social_democracy_popular_front_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Alfredo Palacios"
-			desc = "POLITICS_ALFREDO_PALACIOS_DESC"
-			picture = "Portrait_ARG_Alfredo_Palacios.dds"
-			expire = "1994.4.20"
-			ideology = socialist_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Rogelio_Julio_Frigerio
+			promote_leader = yes
+			country_leader = {
+				#desc = "POLITICS_FRIGERIO_DESC"
+				expire = "1994.4.20"
+				ideology = authoritarian_democracy_dominant_party_democracy_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Rogelio Julio Frigerio"
-			desc = "POLITICS_FRIGERIO_DESC"
-			picture = "Portrait_ARG_Rogelio_Frigerio.dds"
-			expire = "1994.4.20"
-			ideology = authoritarian_democracy_dominant_party_democracy_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Juan_Carlos_Ongania
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_JCO_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = { el_tropero_latin }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Juan Carlos Onganía"
-			desc = "POLITICS_JCO_DESC"
-			picture = "Portrait_ARG_Juan_Carlos_Ongania.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Alfredo_Palacios
+			promote_leader = yes
+			country_leader = {
+				ideology = socialist_subtype
+				expire = "1994.4.20"
 			}
 		}
 		set_politics = {	
@@ -1008,9 +1046,9 @@ country_event = {
 		}
 		remove_all_ministers = yes
 		add_ideas = {
-			ARG_Mariano_Grondona_martinez_hog
+			ARG_Mariano_Grondona_hog
 			ARG_Jose_Maria_Guido_for
-			ARG_Juan_E_Guglialmelli_martinez_eco
+			ARG_Juan_E_Guglialmelli_eco
 			ARG_Benjamin_Rattenbach_sec
 		}
 		hidden_effect = {
@@ -1092,6 +1130,10 @@ country_event = {
 	id = ARG.160 #Peron Returns
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event ARG.160"
+		remove_ideas = {
+			ARG_Alberto_Maria_Fonrouge_hog
+			ARG_Manuel_Reimundes_sec
+		}
 	}
 	title = ARG.160.t
 	desc = ARG.160.desc
@@ -1102,13 +1144,15 @@ country_event = {
 
 	option = {
 		name = ARG.160.a 
-		create_country_leader = {
-			name = "José Emilio Visca"
-			#desc = "POLITICS_BENJAMIN_MENENDEZ_DESC"
-			picture = "Portrait_ARG_Jose_Emilio_Visca.dds"
-			expire = "1994.4.20"
-			ideology = conservative_democracy_populist_conservatism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Jose_Emilio_Visca
+			promote_leader = yes
+			country_leader = {
+				#desc = "POLITICS_MANUEL_DE_ANCHORENA_DESC"
+				expire = "1994.4.20"
+				ideology = conservative_democracy_populist_conservatism_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		set_party_name = { 
@@ -1142,7 +1186,8 @@ country_event = {
 	fire_only_once = yes
 
 	option = {
-		name = ARG.161.a 
+		name = ARG.161.a
+		remove_all_ministers = yes
 		ARG_load_peron = yes
 		country_event = { id = ARG.170 days = 2190 }
 	}
@@ -1161,14 +1206,21 @@ country_event = {
 	option = {
 		name = ARG.162.a #Rojas interim presidency
 		add_stability = -0.1
-		create_country_leader = {
-			name = "Isaac Rojas"
-			desc = ""
-			picture = "Portrait_ARG_Isaac_Rojas.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Isaac_Rojas
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_ISAAC_ROJAS_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = { }
+				id = -1
 			}
+		}
+		remove_ideas = {
+			ARG_Isaac_Rojas_hog
+			ARG_Arturo_Mathov_eco
+			ARG_Pedro_Eugenio_Aramburu_sec
 		}
 		add_ideas = {
 			ARG_Junta_Militar_hog
@@ -1195,7 +1247,6 @@ country_event = {
 	option = {
 		name = ARG.163.a 
 		ARG_load_aramburu = yes
-		remove_all_ministers = yes
 	}
 }
 
@@ -1247,14 +1298,15 @@ country_event = {
 	option = {
 		name = ARG.165.a 
 		add_stability = -0.15
-		create_country_leader = {
-			name = "Juan Carlos Onganía"
-			desc = "POLITICS_JCO_DESC"
-			picture = "Portrait_ARG_Juan_Carlos_Ongania.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
-				el_tropero_latin
+		add_country_leader_role = {
+			character = ARG_Juan_Carlos_Ongania
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_JCO_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = { el_tropero_latin }
+				id = -1
 			}
 		}
 		set_party_name = {
@@ -1307,15 +1359,15 @@ country_event = {
 	option = {
 		name = ARG.166.a 
 		add_stability = -0.05
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Roberto Marcelo Levingston"
-			desc = "POLITICS_ROBERTO_MARCELO_LEVINGSTON_DESC"
-			picture = "Portrait_ARG_Roberto_Levingston.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
-				
+        add_country_leader_role = {
+			character = ARG_Roberto_Marcelo_Levingston
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_ROBERTO_MARCELO_LEVINGSTON_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		set_party_name = {
@@ -1352,21 +1404,26 @@ country_event = {
 	option = {
 		name = ARG.167.a 
 		add_stability = -0.05
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Alejandro Agustín Lanusse"
-			desc = "POLITICS_ALEJANDRO_AGUSTIN_LANUSSE_DESC"
-			picture = "Portrait_ARG_Alejandro_Lanusse.dds"
-			expire = "1994.4.20"
-			ideology = despotism_military_junta_subtype
-			traits = {
-				
+		add_country_leader_role = {
+			character = ARG_Alejandro_Agustin_Lanusse
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_ALEJANDRO_AGUSTIN_LANUSSE_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_military_junta_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		set_party_name = {
 			ideology = despotism
 			long_name = ARG_lanusse_party_long
 			name = ARG_lanusse_party
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = ARG_levingston_party_long
+			name = ARG_levingston_party
 		}
 		remove_all_ministers = yes
 		add_ideas = {
@@ -1392,7 +1449,7 @@ country_event = {
 
 	trigger = {
 		has_country_leader = {
-			name = "Alfredo Palacios"
+			character = ARG_Alfredo_Palacios
 			ruling_only = yes
 		}
 		date > 1965.04.19
@@ -1406,24 +1463,37 @@ country_event = {
 		set_politics = {
 			ruling_party = liberal_democracy
 		}
-		create_country_leader = {
-			name = "Juan Carlos Coral"
-			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
-			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
-			expire = "1965.1.1"
-			ideology = socialist_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Silvano_Santander
+			promote_leader = yes
+			country_leader = {
+				#desc = "POLITICS_MANUEL_DE_ANCHORENA_DESC"
+				expire = "1994.4.20"
+				ideology = liberal_democracy_liberal_radicalism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Juan Carlos Coral"
-			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
-			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
-			expire = "1965.1.1"
-			ideology = social_democracy_democratic_socialism_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Guillermo_Estevez_Boero
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_GUSTAVO_BOERO_DESC"
+				expire = "1994.4.20"
+				ideology = social_democracy_democratic_socialism_subtype
+				traits = { }
+				id = -1
+			}
+		}
+		add_country_leader_role = {
+			character = ARG_Guillermo_Estevez_Boero
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_GUSTAVO_BOERO_DESC"
+				expire = "1994.4.20"
+				ideology = socialist_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		add_ideas = ARG_Ernesto_Sanmartino_hog
@@ -1442,8 +1512,8 @@ country_event = {
 		}
 		set_party_name = {
 			ideology = socialist
-			long_name = ARG_socialist_party_long
-			name = ARG_socialist_party
+			long_name = ARG_frepaso_party_long
+			name = ARG_frepaso_party
 		}
 		set_party_name = {
 			ideology = social_democracy
@@ -1465,56 +1535,62 @@ country_event = {
 			long_name = ARG_frepoleju_pl_party_long
 			name = ARG_frepoleju_pl_party
 		}
-		create_country_leader = {
-			name = "Juan Carlos Coral"
-			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
-			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
-			expire = "1965.1.1"
-			ideology = socialist_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Guillermo_Estevez_Boero
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_GUSTAVO_BOERO_DESC"
+				expire = "1994.4.20"
+				ideology = socialist_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Rodolfo Martinovic"
-			desc = "POLITICS_RODOLFO_MARTINOVIC_DESC"
-			picture = "Portrait_ARG_Rudolfo_Martinovic.dds"
-			expire = "1965.1.1"
-			ideology = social_democracy_social_radicalism_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Rodolfo_Martinovic
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_RODOLFO_MARTINOVIC_DESC"
+				expire = "1994.4.20"
+				ideology = social_democracy_social_radicalism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Ricardo Balbín"
-			#desc = "POLITICS_VICENTE_SOLANO_LIMA_DESC"
-			picture = "Portrait_ARG_Ricardo_Balbin.dds"
-			expire = "1965.1.1"
-			ideology = liberal_democracy_liberal_radicalism_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Ricardo_Balbin
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_BALBIN_DESC"
+				expire = "1994.4.20"
+				ideology = liberal_democracy_liberal_radicalism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Emilio Jofré"
-			desc = "POLITICS_EMILIO_JOFRE_DESC"
-			picture = "Potrait_ARG_Emilio_Jofre.dds"
-			expire = "1965.1.1"
-			ideology = conservative_democracy_liberal_conservatism_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Emilio_Jofre
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_EMILIO_JOFRE_DESC"
+				expire = "1994.4.20"
+				ideology = conservative_democracy_liberal_conservatism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Cipriano Reyes"
-			desc = "POLITICS_CIPRIANO_REYES_DESC"
-			picture = "Portrait_ARG_Cipriano_Reyes.dds"
-			expire = "1965.1.1"
-			ideology = authoritarian_democracy_peronism_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Cirpriano_Reyes
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_CIPRIANO_REYES_DESC"
+				expire = "1994.4.20"
+				ideology = authoritarian_democracy_peronism_subtype
+				traits = { }
+				id = -1
 			}
 		}
+		remove_all_ministers = yes
 	}
 	title = ARG.169.t
 	desc = ARG.169.desc
@@ -1575,20 +1651,21 @@ country_event = {
                 has_game_rule = { rule = ARG_SKELETON_1969_ELECTIONS option = ARG_SKELETON_1969_ELECTIONS_PL }
             }
 		}
-		create_country_leader = {
-			name = "Juan Carlos Coral"
-			desc = "POLITICS_JUAN_CARLOS_CORAL_DESC"
-			picture = "Portrait_ARG_Juan_Carlos_Coral.dds"
-			expire = "1965.1.1"
-			ideology = social_democracy_democratic_socialism_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = ARG_Guillermo_Estevez_Boero
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_GUSTAVO_BOERO_DESC"
+				expire = "1994.4.20"
+				ideology = social_democracy_democratic_socialism_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		set_party_name = {
 			ideology = social_democracy
-			long_name = ARG_social_democracy_party_long
-			name = ARG_social_democracy_party
+			long_name = ARG_frepaso_party_long
+			name = ARG_frepaso_party
 		}
 		set_politics = {
 			ruling_party = social_democracy
@@ -1597,7 +1674,7 @@ country_event = {
 			elections_allowed = yes
 		}
 		add_ideas = {
-			ARG_Guillermo_Estevez_Boero_hog
+			ARG_Alfredo_Bravo_hog
 			ARG_Victor_Garcia_Costa_for
 			ARG_Leopoldo_Portnoy_eco
 			ARG_Osiris_Guillermo_Villegas_sec
@@ -1725,34 +1802,26 @@ country_event = {
 			long_name = ARG_authoritarian_democracy_peron_party_long 
 			name = ARG_authoritarian_democracy_peron_party 
 		}
-		create_country_leader = {
-			name = "Juan Domingo Perón"
-			desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = authoritarian_democracy_peronism_subtype
-			traits = {
-				el_primer_trabajador_latin
+		add_country_leader_role = {
+			character = ARG_Juan_Domingo_Peron
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+				ideology = despotism_personalistic_dictatorship_subtype
+				expire = "1994.4.20"
+				traits = { el_primer_trabajador_latin }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Juan Domingo Perón"
-			desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = despotism_personalistic_dictatorship_subtype
-			traits = {
-				el_primer_trabajador_latin
-			}
-		}
-		create_country_leader = {
-			name = "Juan Domingo Perón"
-			desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = fascism_fascist_populism_subtype
-			traits = {
-				el_primer_trabajador_latin
+		add_country_leader_role = {
+			character = ARG_Juan_Domingo_Peron
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+				ideology = fascism_fascist_populism_subtype
+				expire = "1994.4.20"
+				traits = { el_primer_trabajador_latin }
+				id = -1
 			}
 		}
 		country_event = { id = ARG.171 days = 580 }
@@ -1884,6 +1953,7 @@ country_event = {
 			long_name = ARG_autentico_party_long 
 			name = ARG_autentico_party 
 		}
+		remove_all_ministers = yes
 	}
 	title = ARG.172.t
 	desc = ARG.172.desc
@@ -1905,31 +1975,35 @@ country_event = {
 			long_name = ARG_menem_party_long 
 			name = ARG_menem_party 
 		}
-		create_country_leader = {
-			name = "Carlos Saúl Menem"
-			desc = "POLITICS_CARLOS_MENEM_DESC"
-			picture = "Portrait_ARG_Carlos_Menem.dds"
-			expire = "1965.1.1"
-			ideology = authoritarian_democracy_peronism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Carlos_Menem
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_CARLOS_MENEM_DESC"
+				expire = "1994.4.20"
+				ideology = authoritarian_democracy_peronism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = despotism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = despotism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = fascism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = fascism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
 		add_ideas = {
@@ -1962,40 +2036,45 @@ country_event = {
 			ideology = esoteric_nazism
 			popularity = 0.15
 		}
-		create_country_leader = {
-			name = "Isabel Martínez de Perón"
-			desc = "POLITICS_ISABEL_DE_PERON_DESC"
-			picture = "Portrait_ARG_Isabel_Peron.dds"
-			expire = "1965.1.1"
-			ideology = esoteric_nazism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Isabel_de_Peron
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_ISABEL_DE_PERON_DESC"
+				expire = "1994.4.20"
+				ideology = esoteric_nazism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			picture = "Portrait_ARG_Isabel_Peron.dds"
-			expire = "1965.1.1"
-			ideology = authoritarian_democracy_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democracy_peronism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = despotism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = despotism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = fascism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = fascism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
 		add_ideas = {
@@ -2024,31 +2103,35 @@ country_event = {
 			long_name = ARG_fascism_peron_party_long 
 			name = ARG_fascism_peron_party 
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = authoritarian_democracy_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democracy_peronism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = despotism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = despotism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Manuel de Anchorena"
-			desc = "POLITICS_MANUEL_DE_ANCHORENA_DESC"
-			picture = "Portrait_ARG_Manuel_de_Anchorena.dds"
-			expire = "1965.1.1"
-			ideology = fascism_fascist_populism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Manuel_de_Anchorena
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_MANUEL_DE_ANCHORENA_DESC"
+				expire = "1994.4.20"
+				ideology = fascism_fascist_populism_subtype
+				traits = { }
+				id = -1
 			}
 		}
 		add_ideas = {
@@ -2072,31 +2155,34 @@ country_event = {
 		set_politics = {
 			ruling_party = liberal_democracy
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = authoritarian_democracy_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democracy_peronism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = despotism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = despotism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
-		create_country_leader = {
-			name = "Partido Peronista"
-			#desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
-			#picture = "Portrait_ARG_Juan_Peron.dds"
-			expire = "1965.1.1"
-			ideology = fascism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Partido_Peronista
+			promote_leader = yes
+			country_leader = {
+				ideology = fascism_subtype
+				expire = "1994.4.20"
+				traits = { }
+				id = -1
 			}
 		}
 		add_ideas = {
@@ -2155,15 +2241,18 @@ country_event = {
 			ultranationalism = 0
 			esoteric_nazism = 0
 		}
-		create_country_leader = {
-			name = "Julián Licastro"
-			desc = "POLITICS_JULIO_LICASTRO_DESC"
-			picture = "Portrait_ARG_Julian_Licastro.dds"
-			expire = "1965.1.1"
-			ideology = authoritarian_democracy_social_nationalism_subtype
-			traits = {
+		add_country_leader_role = {
+			character = ARG_Julian_Licastro
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_JULIAN_LICASTRO_DESC"
+				expire = "1994.4.20"
+				ideology = authoritarian_democracy_social_nationalism_subtype
+				traits = { }
+				id = -1
 			}
 		}
+		remove_all_ministers = yes
 		add_ideas = {
 			ARG_Julio_Barbaro_hog
 			ARG_Juan_Carlos_Puig_for
@@ -2188,11 +2277,19 @@ country_event = {
 		if = {
 			limit = {
 				has_country_leader = {
-					name = "Manuel de Anchorena"
+					character = ARG_Manuel_de_Anchorena
 					ruling_only = yes
 				}
 			}
 			set_cosmetic_tag = ARG_confederation
+		}
+		if = {
+			limit = { country_exists = TDF }
+			TDF = { set_cosmetic_tag = TDF_confederation }
+		}
+		if = {
+			limit = { country_exists = ARP }
+			ARP = { set_cosmetic_tag = ARP_confederation }
 		}
 	}
 }

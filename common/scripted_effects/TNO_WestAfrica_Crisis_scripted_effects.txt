@@ -357,7 +357,8 @@ TNO_Manu_Set_Majors = {
 		set_country_flag = US_aid_Manu
 		#TNO_fopo_add_manu_campaign_tab = yes
 		set_temp_variable = { target = LIB }
-		TNO_increase_volunteer_cap_2 = yes
+		set_temp_variable = { number = 2 }
+		TNO_set_num_volunteers = yes
 
 		#else = {
 		#	LIB = { load_oob = LIB_Manu }
@@ -373,7 +374,7 @@ TNO_Manu_clear_decision_categories = {
 	USA = {
 		#TNO_fopo_remove_manu_campaign_tab = yes
 		set_temp_variable = { target = LIB }
-		TNO_clear_num_volunteers = yes
+		TNO_clear_and_recall_volunteers = yes
 	}
 	JAP = {
 		#TNO_fopo_remove_manu_campaign_tab = yes
@@ -393,24 +394,39 @@ TNO_Manu_clear_decision_categories = {
 	}
 }
 
+TNO_WAC_clear_decision_categories_scenario2japan = {
+	JAP = {
+		clr_country_flag = JAP_In_The_WAC_WAR
+		TNO_fopo_remove_wac_tab = yes
+		set_temp_variable = { target = CAO }
+		TNO_clear_and_recall_volunteers = yes
+		set_temp_variable = { target = SUS }
+		TNO_clear_and_recall_volunteers = yes
+	}
+}
+
 TNO_WAC_clear_decision_categories = {
 	USA = {
 		clr_country_flag = USA_In_The_WAC_WAR
 		TNO_fopo_remove_wac_tab = yes
 		set_temp_variable = { target = FFR }
-		TNO_clear_num_volunteers = yes
+		TNO_clear_and_recall_volunteers = yes
 		set_temp_variable = { target = WOL }
-		TNO_clear_num_volunteers = yes
+		TNO_clear_and_recall_volunteers = yes
 	}
-	JAP = {
-		clr_country_flag = JAP_In_The_WAC_WAR
-		TNO_fopo_remove_wac_tab = yes
-		set_temp_variable = { target = CAO }
-		TNO_clear_num_volunteers = yes
-		set_temp_variable = { target = SUS }
-		TNO_clear_num_volunteers = yes
+	if = {
+		limit = { NOT = { has_global_flag = WAC_scen2_cao_fell } }
+
+		JAP = {
+			clr_country_flag = JAP_In_The_WAC_WAR
+			TNO_fopo_remove_wac_tab = yes
+			set_temp_variable = { target = CAO }
+			TNO_clear_and_recall_volunteers = yes
+			set_temp_variable = { target = SUS }
+			TNO_clear_and_recall_volunteers = yes
+		}
 	}
-	clr_global_flag = west_african_war
+	clr_global_flag = west_african_war_ongoing
 	set_global_flag = WAC_over
 
 	# OOB unload
@@ -501,6 +517,10 @@ TNO_TT_WAC_debug_1 = {
 		limit = { NOT = { has_global_flag = africa_timeskipped } }
 		TNO_timeskip_Africa = yes
 	}
+	country_event = {
+		id = MLI.1
+		hours = 14
+	}
 	set_global_flag = WAC_scenario_1
 	clr_global_flag = WAC_scenario_2
 	clr_global_flag = WAC_scenario_3
@@ -536,6 +556,10 @@ TNO_TT_WAC_debug_2 = {
 	if = {
 		limit = { NOT = { has_global_flag = africa_timeskipped } }
 		TNO_timeskip_Africa = yes
+	}
+	country_event = {
+		id = MLI.1
+		hours = 14
 	}
 	clr_global_flag = WAC_scenario_1
 	set_global_flag = WAC_scenario_2
@@ -607,7 +631,7 @@ TNO_CCW_USA_Faction_Gone = {
 	USA = {
 		TNO_fopo_remove_congo_civil_war_tab = yes
 		set_temp_variable = { target = CFS }
-		TNO_clear_num_volunteers = yes 
+		TNO_clear_and_recall_volunteers = yes
 	}
 }
 
@@ -615,7 +639,7 @@ TNO_CCW_JAP_Faction_Gone = {
 	JAP = {
 		TNO_fopo_remove_congo_civil_war_tab = yes
 		set_temp_variable = { target = CPR }
-		TNO_clear_num_volunteers = yes 
+		TNO_clear_and_recall_volunteers = yes
 	}
 }
 
@@ -623,7 +647,7 @@ TNO_CCW_GER_Faction_Gone = {
 	GER = {
 		TNO_fopo_remove_congo_civil_war_tab = yes
 		set_temp_variable = { target = GRO }
-		TNO_clear_num_volunteers = yes 
+		TNO_clear_and_recall_volunteers = yes
 	}
 }
 
@@ -809,7 +833,23 @@ TNO_TT_DBG_PALF_WINS_2 = {
 
 
 ## Peace Deals ##
+WAC_clear_war_spirits = {
+	every_country = {
+		limit = { is_west_african_nation = yes }
+		remove_ideas = {
+			WEST_AFRICA_idea_offensive
+			WEST_AFRICA_idea_stable_front
+			WEST_AFRICA_idea_chaotic_front
+			WEST_AFRICA_idea_resistance
+		}
+	}
+}
+
 WAC_1_WAA_VICTORY = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
 	set_global_flag = WAC_SCENARIO_1_WAA_VICTORY
 	if = {
 		limit = {
@@ -919,17 +959,7 @@ WAC_1_WAA_VICTORY = {
 				puppet = GBE
 			}
 			set_cosmetic_tag = GBE_FFRPuppet
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "Hubert Maga"
-				#desc = "POLITICS_IBRAHIM_BABANGIDA_DESC"
-				picture = "Portrait_Gbeland_Hubert_Maga.dds"
-				expire = "1970.1.1"
-				ideology = conservative_democracy_paternalistic_conservatism_subtype
-				traits = {
-					#
-				}
-			}
+
 			set_politics = {
 				ruling_party = conservative_democracy
 				last_election = "1960.1.1"
@@ -980,15 +1010,7 @@ WAC_1_WAA_VICTORY = {
 		}
 	}
 
-	every_country = {
-		limit = { is_west_african_nation = yes }
-		remove_ideas = {
-			WEST_AFRICA_idea_offensive
-			WEST_AFRICA_idea_stable_front
-			WEST_AFRICA_idea_chaotic_front
-			WEST_AFRICA_idea_resistance
-		}
-	}
+	WAC_clear_war_spirits = yes
 
 	CAO = {
 		transfer_state = 793
@@ -1026,14 +1048,7 @@ WAC_1_WAA_VICTORY = {
 		TNO_startup_nation = yes
 
 		set_politics = { ruling_party = authoritarian_democracy }
-		create_country_leader = {
-			name = "Nicolas Grunitzky"
-			desc = "POLITICS_NICOLAS_GRUNITZKY_DESC"
-			picture = "Portrait_Ewe_Nicolas_Grunitzky.dds"
-			expire = "1973.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = { }
-		}
+		promote_character = EWE_nicolas_grunitzky
 		set_popularities = {
 			socialist = 25
 			social_democracy = 20
@@ -1063,15 +1078,8 @@ WAC_1_WAA_VICTORY = {
 		TNO_startup_nation = yes
 
 		remove_ideas = SUS_idea_guinean_democracy
+		promote_character = SUS_louis_lansana_beavogui
 		set_politics = { ruling_party = authoritarian_democracy }
-		create_country_leader = {
-			name = "Louis Lansana Beavogui"
-			desc = "POLITICS_LOUIS_LANSANA_BEAVOGUI_DESC"
-			picture = "Portrait_Susu_Louis_Lansana_Beavogui.dds"
-			expire = "1990.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = { }
-		}
 		WOL = { add_to_faction = SUS }
 		clr_country_flag = PALF_MEMBER
 		set_country_flag = WAA_MEMBER
@@ -1112,14 +1120,6 @@ WAC_1_WAA_VICTORY = {
 		TNO_startup_nation = yes
 
 		set_politics = { ruling_party = authoritarian_democracy }
-		create_country_leader = {
-			name = "Hamani Diori"
-			desc = "POLITICS_HAMANI_DIORI_DESC"
-			picture = "gfx/leaders/ZAR/Portrait_Zarmaland_Hamani_Diori.dds"
-			expire = "1990.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = { }
-		}
 
 		WOL = { add_to_faction = NGR }
 		clr_country_flag = PALF_MEMBER
@@ -1185,37 +1185,9 @@ WAC_1_WAA_VICTORY = {
 			popularity = 0.1
 		}
 		if = {
-			limit = { has_country_leader = { name = "Philippe Leclerc" ruling_only = yes } }
-			kill_ideology_leader = liberal_democracy
-			kill_ideology_leader = conservative_democracy
-			kill_ideology_leader = authoritarian_democracy
-
-			create_country_leader = {
-				name = "Philippe Leclerc"
+			limit = { has_country_leader = { character = FFR_Philippe_Leclerc ruling_only = yes } }
+			set_country_leader_description = {
 				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
 			}
 		}
 	}
@@ -1257,6 +1229,10 @@ WAC_1_WAA_VICTORY = {
 }
 
 WAC_1_PALF_VICTORY = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
 	set_global_flag = WAC_SCENARIO_1_PALF_VICTORY
 	if = {
 		limit = {
@@ -1372,15 +1348,7 @@ WAC_1_PALF_VICTORY = {
 		}
 	}
 
-	every_country = {
-		limit = { is_west_african_nation = yes }
-		remove_ideas = {
-			WEST_AFRICA_idea_offensive
-			WEST_AFRICA_idea_stable_front
-			WEST_AFRICA_idea_chaotic_front
-			WEST_AFRICA_idea_resistance
-		}
-	}
+	WAC_clear_war_spirits = yes
 
 	CAO = {
 		set_cosmetic_tag = CAO_win
@@ -1431,19 +1399,6 @@ WAC_1_PALF_VICTORY = {
 			add_to_faction = GBE
 			puppet = GBE
 		}
-
-		set_politics = {
-			ruling_party = socialist
-		}
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Mathieu Kereko"
-			desc = ""
-			picture = "Portrait_Gbeland_Mathieu_Kerekou.dds"
-			expire = "1994.4.20"
-			ideology = socialist_panafricanism_subtype
-			traits = { }
-		}
 		set_politics = {
 			ruling_party = socialist
 			last_election = "1966.6.23"
@@ -1456,14 +1411,11 @@ WAC_1_PALF_VICTORY = {
 			socialist = 45
 			social_democracy = 25
 			liberal_democracy = 0
-
 			conservative_democracy = 5
 			authoritarian_democracy = 5
 			despotism = 0
 			fascism = 0
-			
 		}
-
 		set_cosmetic_tag = GBE_CAOPuppet
 		clr_country_flag = WAA_MEMBER
 		set_country_flag = PALF_MEMBER
@@ -1488,15 +1440,7 @@ WAC_1_PALF_VICTORY = {
 			add_to_faction = BKF
 			puppet = BKF
 		}
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Joseph Ki-Zerbo"
-			#desc = "POLITICS_JOSEPH_KIZERBO_DESC"
-			picture = "Portrait_Burkina_Faso_Joseph_Ki_Zerbo.dds"
-			expire = "1999.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = { }
-		}
+		promote_character = BKF_joseph_ki_zerbo 
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			communist = 10
@@ -1504,13 +1448,11 @@ WAC_1_PALF_VICTORY = {
 			socialist = 50
 			social_democracy = 0
 			liberal_democracy = 0
-
 			conservative_democracy = 10
 			authoritarian_democracy = 30
 			despotism = 0
 			fascism = 0
 		}
-
 		clr_country_flag = WAA_MEMBER
 		set_country_flag = PALF_MEMBER
 		hidden_effect = {
@@ -1581,7 +1523,7 @@ WAC_1_PALF_VICTORY = {
 			add_to_faction = WOL
 			puppet = WOL
 		}
-
+		promote_character = WOL_cheikh_anta_diop 
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			communist = 0
@@ -1589,14 +1531,11 @@ WAC_1_PALF_VICTORY = {
 			socialist = 40
 			social_democracy = 30
 			liberal_democracy = 0
-
 			conservative_democracy = 0
 			authoritarian_democracy = 30
 			despotism = 0
 			fascism = 0
-			
 		}
-
 		clr_country_flag = WAA_MEMBER
 		set_country_flag = PALF_MEMBER
 		hidden_effect = {
@@ -1621,18 +1560,17 @@ WAC_1_PALF_VICTORY = {
 			add_to_faction = MLI
 			puppet = MLI
 		}
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Aoua Keïta"
-			desc = "POLITICS_AOUA_KEITA_DESC"
-			picture = "Portrait_Mali_Aoua_Keita.dds"
-			expire = "1965.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = {
-				#
+		add_country_leader_role = {
+			character = MLI_aoua_keita
+			promote_leader = yes
+			country_leader = {
+				expire = "1965.1.1"
+				ideology = socialist_panafricanism_subtype
+				traits = { }
+				id = -1
 			}
 		}
-
+		promote_character = MLI_aoua_keita
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			communist = 10
@@ -1690,37 +1628,9 @@ WAC_1_PALF_VICTORY = {
 		}
 		add_ideas = FFR_tomb_republic
 		if = {
-			limit = { has_country_leader = { name = "Philippe Leclerc" ruling_only = yes } }
-			kill_ideology_leader = liberal_democracy
-			kill_ideology_leader = conservative_democracy
-			kill_ideology_leader = authoritarian_democracy
-
-			create_country_leader = {
-				name = "Philippe Leclerc"
+			limit = { has_country_leader = { character = FFR_Philippe_Leclerc ruling_only = yes } }
+			set_country_leader_description = {
 				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
 			}
 		}
 	}
@@ -1756,7 +1666,130 @@ WAC_1_PALF_VICTORY = {
 	}
 }
 
+WAC_2_PALF_BEATEN = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
+	set_global_flag = WAC_scen2_cao_fell
+	TNO_WAC_clear_decision_categories_scenario2japan = yes
+
+	if = {
+		limit = {
+			event_target:winning_country = { is_in_faction_with = FFR }
+			NOT = { country_exists = GBE }
+		}
+		GBE = {
+			transfer_state = 883
+			transfer_state = 882
+			transfer_state = 941
+			TNO_startup_nation = yes
+		}
+		FFR = {
+			puppet = GBE
+			add_to_faction = GBE
+		}
+		GBE = {
+			set_country_flag = FMA_MEMBER
+			hidden_effect = {
+				remove_faction_status = yes
+				add_ideas = FMA_Puppet
+			}
+			set_cosmetic_tag = GBE_FFRPuppet
+
+			set_politics = {
+				ruling_party = conservative_democracy
+				last_election = "1960.1.1"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_popularities = {
+				communist = 10
+				ultranationalism = 0
+				socialist = 5
+				social_democracy = 10
+				liberal_democracy = 0
+
+				conservative_democracy = 50
+				authoritarian_democracy = 15
+				despotism = 10
+				fascism = 0
+				
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			event_target:winning_country = { is_in_faction_with = FFR }
+			NOT = { country_exists = YOR }
+			country_exists = GBE
+		}
+		GBE = {
+			add_state_core = 1188
+			add_state_core = 825
+		}
+	}
+	else_if = {
+		limit = { NOT = { country_exists = YOR } }
+		YOR = {
+			transfer_state = 1188
+			transfer_state = 825
+			TNO_startup_nation = yes
+		}
+	}
+
+	CAO = {
+		country_event = {
+			id = CAO.100
+			days = 90
+		}
+		
+		clr_country_flag = PALF_MEMBER
+		remove_faction_status = yes
+	}
+
+	if = {
+		limit = { country_exists = SWB }
+
+		every_country = {
+			limit = { has_war_with = SWB }
+			white_peace = SWB
+		}
+		event_target:winning_country = {
+			annex_country = {
+				target = SWB
+				transfer_troops = no
+			}
+		}
+	}
+	
+	JAP = {
+		country_event = {
+			id = west_african_crisis.219
+			days = 2
+		}
+	}
+
+	if = {
+		limit = {
+			event_target:winning_country = { is_in_faction_with = WOL }
+			NOT = { country_exists = FFR }
+		}
+		every_country = {
+			limit = { has_war_with = WOL }
+			leave_faction = yes
+			white_peace = WOL
+		}
+		WAC_2_WAA_VICTORY = yes
+	}
+}
+
 WAC_2_FFR_VICTORY = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
 	set_global_flag = WAC_SCENARIO_2_FMA_VICTORY
 	if = {
 		limit = {
@@ -1781,16 +1814,7 @@ WAC_2_FFR_VICTORY = {
 				add_ideas = FMA_Puppet
 			}
 			set_cosmetic_tag = GBE_FFRPuppet
-			create_country_leader = {
-				name = "Hubert Maga"
-				#desc = "POLITICS_IBRAHIM_BABANGIDA_DESC"
-				picture = "Portrait_Gbeland_Hubert_Maga.dds"
-				expire = "1970.1.1"
-				ideology = conservative_democracy_paternalistic_conservatism_subtype
-				traits = {
-					#
-				}
-			}
+
 			set_politics = {
 				ruling_party = conservative_democracy
 				last_election = "1960.1.1"
@@ -1854,17 +1878,7 @@ WAC_2_FFR_VICTORY = {
 				puppet = MLI
 			}
 			set_cosmetic_tag = MLI_FFRPuppet
-			kill_ideology_leader = authoritarian_democracy
-			create_country_leader = {
-				name = "Fily Dabo Sissoko"
-				desc = "POLITICS_FILY_DABO_SISSOKO_DESC"
-				picture = "Portrait_Mali_Fily_Dabo_Sissoko.dds"
-				expire = "1973.1.1"
-				ideology = authoritarian_democracy_controlled_democracy_subtype
-				traits = {
-					#
-				}
-			}
+			promote_character = MLI_fily_dabo_sissoko
 			set_politics = { ruling_party = authoritarian_democracy }
 			set_popularities = {
 				socialist = 30
@@ -1917,19 +1931,11 @@ WAC_2_FFR_VICTORY = {
 			transfer_state = 1540
 			transfer_state = 1604
 			set_cosmetic_tag = KAY_unified
-			set_capital = 1540
+			set_capital = { state = 1540 }
 		}
 	}
 
-	every_country = {
-		limit = { is_west_african_nation = yes }
-		remove_ideas = {
-			WEST_AFRICA_idea_offensive
-			WEST_AFRICA_idea_stable_front
-			WEST_AFRICA_idea_chaotic_front
-			WEST_AFRICA_idea_resistance
-		}
-	}
+	WAC_clear_war_spirits = yes
 
 	FFR = {
 		add_popularity = {
@@ -1968,37 +1974,9 @@ WAC_2_FFR_VICTORY = {
 			}
 		}
 		if = {
-			limit = { has_country_leader = { name = "Philippe Leclerc" ruling_only = yes } }
-			kill_ideology_leader = liberal_democracy
-			kill_ideology_leader = conservative_democracy
-			kill_ideology_leader = authoritarian_democracy
-
-			create_country_leader = {
-				name = "Philippe Leclerc"
+			limit = { has_country_leader = { character = FFR_Philippe_Leclerc ruling_only = yes } }
+			set_country_leader_description = {
 				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
 			}
 		}
 	}
@@ -2014,17 +1992,7 @@ WAC_2_FFR_VICTORY = {
 			puppet = EWE
 		}
 		set_cosmetic_tag = EWE_FFRPuppet
-		kill_ideology_leader = authoritarian_democracy
-		create_country_leader = {
-			name = "Nicolas Grunitzky"
-			desc = "POLITICS_NICOLAS_GRUNITZKY_DESC"
-			picture = "Portrait_Ewe_Nicolas_Grunitzky.dds"
-			expire = "1973.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = {
-				#
-			}
-		}
+		promote_character = EWE_nicolas_grunitzky
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 20
@@ -2064,17 +2032,7 @@ WAC_2_FFR_VICTORY = {
 			add_to_faction = SUS
 		}
 		set_cosmetic_tag = SUS_FFRPuppet
-		kill_ideology_leader = authoritarian_democracy
-		create_country_leader = {
-			name = "Louis Lansana Beavogui"
-			desc = "POLITICS_LOUIS_LANSANA_BEAVOGUI_DESC"
-			picture = "Portrait_Susu_Louis_Lansana_Beavogui.dds"
-			expire = "1990.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = {
-				#
-			}
-		}
+		promote_character = SUS_louis_lansana_beavogui
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 30
@@ -2127,17 +2085,6 @@ WAC_2_FFR_VICTORY = {
 			add_to_faction = NGR
 		}
 		set_cosmetic_tag = NGR_FFRPuppet
-		kill_ideology_leader = authoritarian_democracy
-		create_country_leader = {
-			name = "Hamani Diori"
-			desc = "POLITICS_HAMANI_DIORI_DESC"
-			picture = "Portrait_Niger_Hamani_Diori.dds"
-			expire = "1990.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = {
-				#
-			}
-		}
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 10
@@ -2160,16 +2107,6 @@ WAC_2_FFR_VICTORY = {
 		econ_subtype_change = yes
 	}
 
-	GBE = {
-		if = {
-			limit = { NOT = { country_exists = YOR } }
-			add_state_core = 1188
-			add_state_core = 825
-			transfer_state = 1188
-			transfer_state = 825
-		}
-	}
-
 	WOL = {
 		add_state_core = 701
 		add_state_core = 829
@@ -2190,17 +2127,7 @@ WAC_2_FFR_VICTORY = {
 			add_to_faction = WOL
 		}
 		set_cosmetic_tag = WOL_FFRPuppet
-		kill_ideology_leader = authoritarian_democracy
-		create_country_leader = {
-			name = "Mamadou Dia"
-			desc = "POLITICS_MAMADOU_DIA_DESC"
-			picture = "Portrait_Wolofia_Mamadou_Dia.dds"
-			expire = "1973.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = {
-				#
-			}
-		}
+		promote_character = WOL_mamadou_dia
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 20
@@ -2210,7 +2137,6 @@ WAC_2_FFR_VICTORY = {
 			authoritarian_democracy = 50
 			despotism = 10
 		}
-
 		clr_country_flag = WAA_MEMBER
 		set_country_flag = FMA_MEMBER
 		hidden_effect = {
@@ -2221,35 +2147,6 @@ WAC_2_FFR_VICTORY = {
 		set_temp_variable = { TNO_economy_subtype_temp = 10 }
 		econ_type_change = yes
 		econ_subtype_change = yes
-	}
-
-	CAO = {
-		transfer_state = 793
-		transfer_state = 1187
-		transfer_state = 826
-		transfer_state = 1197
-		transfer_state = 1196
-		transfer_state = 1189
-		transfer_state = 558
-		transfer_state = 1198
-		transfer_state = 1199
-		transfer_state = 1200
-		transfer_state = 1201
-		transfer_state = 1202
-		transfer_state = 1203
-		transfer_state = 1207
-		transfer_state = 1204
-		transfer_state = 1206
-		transfer_state = 1205
-		TNO_startup_nation = yes
-
-		country_event = {
-			id = CAO.100
-			days = 90
-		}
-		
-		clr_country_flag = PALF_MEMBER
-		remove_faction_status = yes
 	}
 
 	every_country = {
@@ -2265,12 +2162,7 @@ WAC_2_FFR_VICTORY = {
 			days = 2
 		}
 	}
-	JAP = {
-		country_event = {
-			id = west_african_crisis.219
-			days = 2
-		}		
-	}
+
 	every_country = {
 		limit = { is_west_african_nation = yes }
 		remove_ideas = WEST_AFRICA_idea_obliterated_infrastructures
@@ -2278,6 +2170,10 @@ WAC_2_FFR_VICTORY = {
 }
 
 WAC_2_WAA_VICTORY = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
 	set_global_flag = WAC_SCENARIO_2_WAA_VICTORY
 	if = {
 		limit = {
@@ -2357,11 +2253,7 @@ WAC_2_WAA_VICTORY = {
 		}
 	}
 	if = {
-		limit = {
-			NOT = {
-				country_exists = YOR
-			}
-		}
+		limit = { NOT = { country_exists = YOR } }
 		YOR = {
 			transfer_state = 1188
 			transfer_state = 825
@@ -2389,15 +2281,7 @@ WAC_2_WAA_VICTORY = {
 		}
 	}
 
-	every_country = {
-		limit = { is_west_african_nation = yes }
-		remove_ideas = {
-			WEST_AFRICA_idea_offensive
-			WEST_AFRICA_idea_stable_front
-			WEST_AFRICA_idea_chaotic_front
-			WEST_AFRICA_idea_resistance
-		}
-	}
+	WAC_clear_war_spirits = yes
 
 	MLI = {
 		add_state_core = 1604
@@ -2435,22 +2319,13 @@ WAC_2_WAA_VICTORY = {
 			BKF_idea_remnant_francophilia
 			BKF_idea_relative_democracy
 		}
-		kill_ideology_leader = conservative_democracy
-		create_country_leader = {
-			name = "Daniel Ouezzin Coulibaly"
-			#desc = "POLITICS_DANIEL_OUEZZIN_DESC"
-			picture = "Portrait_Burkina_Faso_Daniel_Ouezzin_Coulibaly.dds"
-			expire = "1999.1.1"
-			ideology = conservative_democracy_subtype
-			traits = { }
-		}
+		promote_character = BKF_daniel_ouezzin_coulibaly
 		set_politics = { ruling_party = conservative_democracy }
 		set_popularities = {
 			liberal_democracy = 30
 			conservative_democracy = 50
 			authoritarian_democracy = 20
 		}
-
 		WOL = { add_to_faction = BKF }
 		set_country_flag = WAA_MEMBER
 		hidden_effect = {
@@ -2476,15 +2351,6 @@ WAC_2_WAA_VICTORY = {
 		transfer_state = 1208
 		TNO_startup_nation = yes
 
-		kill_ideology_leader = authoritarian_democracy
-		create_country_leader = {
-			name = "Félix Houphouët-Boigny"
-			desc = "POLITICS_FELIX_HOUPHOUET_DESC"
-			picture = "Portrait_Ivory_Coast_Felix_Houphouet_Boigny.dds"
-			expire = "1999.1.1"
-			ideology = authoritarian_democracy_subtype
-			traits = { }
-		}
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 10
@@ -2531,15 +2397,6 @@ WAC_2_WAA_VICTORY = {
 
 		TNO_startup_nation = yes
 
-		kill_ideology_leader = authoritarian_democracy
-		create_country_leader = {
-			name = "Hamani Diori"
-			desc = "POLITICS_HAMANI_DIORI_DESC"
-			picture = "gfx/leaders/ZAR/Portrait_Zarmaland_Hamani_Diori.dds"
-			expire = "1999.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = { }
-		}
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 30
@@ -2566,13 +2423,13 @@ WAC_2_WAA_VICTORY = {
 		TNO_startup_nation = yes
 			
 		set_cosmetic_tag = GBE_WOLPuppet
+		promote_character = GBE_christophe_soglo
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 10
 			conservative_democracy = 40
 			authoritarian_democracy = 50
 		}
-
 		WOL = { add_to_faction = GBE }
 		clr_country_flag = FMA_MEMBER
 		set_country_flag = WAA_MEMBER
@@ -2635,68 +2492,11 @@ WAC_2_WAA_VICTORY = {
 		}
 		add_ideas = FFR_tomb_republic
 		if = {
-			limit = { has_country_leader = { name = "Philippe Leclerc" ruling_only = yes } }
-			kill_ideology_leader = liberal_democracy
-			kill_ideology_leader = conservative_democracy
-			kill_ideology_leader = authoritarian_democracy
-
-			create_country_leader = {
-				name = "Philippe Leclerc"
+			limit = { has_country_leader = { character = FFR_Philippe_Leclerc ruling_only = yes } }
+			set_country_leader_description = {
 				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
 			}
 		}
-	}
-
-	CAO = {
-		transfer_state = 793
-		transfer_state = 1187
-		transfer_state = 826
-		transfer_state = 1197
-		transfer_state = 1196
-		transfer_state = 1189
-		transfer_state = 558
-		transfer_state = 1198
-		transfer_state = 1199
-		transfer_state = 1200
-		transfer_state = 1201
-		transfer_state = 1202
-		transfer_state = 1203
-		transfer_state = 1207
-		transfer_state = 1204
-		transfer_state = 1206
-		transfer_state = 1205
-		TNO_startup_nation = yes
-
-		country_event = {
-			id = CAO.100
-			days = 90
-		}
-		
-		clr_country_flag = PALF_MEMBER
-		remove_faction_status = yes
 	}
 
 	if = {
@@ -2723,12 +2523,6 @@ WAC_2_WAA_VICTORY = {
 			days = 2
 		}
 	}
-	JAP = {
-		country_event = {
-			id = west_african_crisis.219
-			days = 2
-		}		
-	}
 	every_country = {
 		limit = { is_west_african_nation = yes }
 		remove_ideas = WEST_AFRICA_idea_obliterated_infrastructures
@@ -2736,6 +2530,10 @@ WAC_2_WAA_VICTORY = {
 }
 
 WAC_2_PALF_VICTORY = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
 	set_global_flag = WAC_SCENARIO_2_PALF_VICTORY
 	if = {
 		limit = {
@@ -2805,15 +2603,7 @@ WAC_2_PALF_VICTORY = {
 		}
 	}
 
-	every_country = {
-		limit = { is_west_african_nation = yes }
-		remove_ideas = {
-			WEST_AFRICA_idea_offensive
-			WEST_AFRICA_idea_stable_front
-			WEST_AFRICA_idea_chaotic_front
-			WEST_AFRICA_idea_resistance
-		}
-	}
+	WAC_clear_war_spirits = yes
 
 	CAO = { # Post-WAC
 		set_cosmetic_tag = CAO_win
@@ -2859,15 +2649,7 @@ WAC_2_PALF_VICTORY = {
 			BKF_idea_relative_democracy
 		}
 		CAO = { puppet = BKF }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Joseph Ki-Zerbo"
-			#desc = "POLITICS_JOSEPH_KIZERBO_DESC"
-			picture = "Portrait_Burkina_Faso_Joseph_Ki_Zerbo.dds"
-			expire = "1999.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = { }
-		}
+		promote_character = BKF_joseph_ki_zerbo
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 40
@@ -2875,7 +2657,6 @@ WAC_2_PALF_VICTORY = {
 			authoritarian_democracy = 20
 			despotism = 20
 		}
-
 		CAO = { add_to_faction = BKF }
 		set_country_flag = PALF_MEMBER
 		hidden_effect = {
@@ -2900,15 +2681,7 @@ WAC_2_PALF_VICTORY = {
 		TNO_startup_nation = yes
 
 		CAO = { puppet = IVO }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Christophe Kragbé Gnagbé"
-			desc = "POLITICS_CHRISTOPHE_KRAGBE_GNAGBE_DESC"
-			picture = "Portrait_Ivory_Coast_Christophe_Kragbe_Gnagbe.dds"
-			expire = "1999.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = { }
-		}
+
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 60
@@ -2944,17 +2717,7 @@ WAC_2_PALF_VICTORY = {
 			WOL_idea_haven_africa
 		}
 		CAO = { puppet = WOL }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Cheikh Anta Diop"
-			desc = "POLITICS_CHEIKH_ANTA_DIOP_DESC"
-			picture = "Portrait_Wolofia_Cheikh_Anta_Diop.dds"
-			expire = "1999.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = {
-				#
-			}
-		}
+		promote_character = WOL_cheikh_anta_diop
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 50
@@ -2964,7 +2727,6 @@ WAC_2_PALF_VICTORY = {
 			authoritarian_democracy = 0
 			despotism = 20
 		}
-
 		CAO = { add_to_faction = WOL }
 		clr_country_flag = WAA_MEMBER
 		set_country_flag = PALF_MEMBER
@@ -3004,19 +2766,21 @@ WAC_2_PALF_VICTORY = {
 		TNO_startup_nation = yes
 
 		remove_ideas = MLI_idea_keitas_leadership
-		CAO = { add_to_faction = MLI }
-		CAO = { puppet = MLI }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Aoua Keïta"
-			desc = "POLITICS_AOUA_KEITA_DESC"
-			picture = "Portrait_Mali_Aoua_Keita.dds"
-			expire = "1965.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = {
-				#
+		CAO = { 
+			add_to_faction = MLI 
+			puppet = MLI
+		}
+		add_country_leader_role = {
+			character = MLI_aoua_keita
+			promote_leader = yes
+			country_leader = {
+				expire = "1965.1.1"
+				ideology = socialist_panafricanism_subtype
+				traits = { }
+				id = -1
 			}
 		}
+		promote_character = MLI_aoua_keita
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 50
@@ -3052,17 +2816,7 @@ WAC_2_PALF_VICTORY = {
 
 		remove_ideas = SUS_idea_guinean_democracy
 		CAO = { puppet = SUS }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Koumandian Keita"
-			desc = "POLITICS_KOUMANDIAN_KEITA_DESC"
-			picture = "Portrait_Susu_Noumandian_Keita.dds"
-			expire = "1999.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = {
-				#
-			}
-		}
+		promote_character = SUS_koumandian_keita
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 46
@@ -3092,17 +2846,7 @@ WAC_2_PALF_VICTORY = {
 		TNO_startup_nation = yes
 
 		CAO = { puppet = EWE }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Kwame Nkrumah"
-			desc = "POLITICS_KWAME_NKRUMAH_DESC"
-			picture = "Portrait_Ewe_Kwame_Nkrumah.dds"
-			expire = "1965.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = {
-				#
-			}
-		}
+		promote_character = EWE_kwame_nkrumah
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 55
@@ -3138,18 +2882,6 @@ WAC_2_PALF_VICTORY = {
 
 		set_politics = {
 			ruling_party = socialist
-		}
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Mathieu Kereko"
-			desc = ""
-			picture = "Portrait_Gbeland_Mathieu_Kerekou.dds"
-			expire = "1994.4.20"
-			ideology = socialist_panafricanism_subtype
-			traits = { }
-		}
-		set_politics = {
-			ruling_party = socialist
 			last_election = "1966.6.23"
 			election_frequency = 48
 			elections_allowed = no
@@ -3160,14 +2892,11 @@ WAC_2_PALF_VICTORY = {
 			socialist = 45
 			social_democracy = 25
 			liberal_democracy = 0
-
 			conservative_democracy = 5
 			authoritarian_democracy = 5
 			despotism = 0
 			fascism = 0
-			
 		}
-
 		set_cosmetic_tag = GBE_CAOPuppet
 		clr_country_flag = FMA_MEMBER
 		set_country_flag = PALF_MEMBER
@@ -3215,37 +2944,9 @@ WAC_2_PALF_VICTORY = {
 		}
 		add_ideas = FFR_tomb_republic
 		if = {
-			limit = { has_country_leader = { name = "Philippe Leclerc" ruling_only = yes } }
-			kill_ideology_leader = liberal_democracy
-			kill_ideology_leader = conservative_democracy
-			kill_ideology_leader = authoritarian_democracy
-
-			create_country_leader = {
-				name = "Philippe Leclerc"
+			limit = { has_country_leader = { character = FFR_Philippe_Leclerc ruling_only = yes } }
+			set_country_leader_description = {
 				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
 			}
 		}
 	}
@@ -3276,6 +2977,17 @@ WAC_2_PALF_VICTORY = {
 }
 
 WAC_3_FMA_VICTORY = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
+	every_state = {
+		limit = { has_state_flag = WAC_solid_frontline_flag }
+		clr_state_flag = WAC_solid_frontline_flag
+		remove_dynamic_modifier = {
+			modifier = unplanned_offensive
+		}
+	}
 	set_global_flag = WAC_SCENARIO_3_FMA_VICTORY
 	if = {
 		limit = {
@@ -3411,7 +3123,7 @@ WAC_3_FMA_VICTORY = {
 			remove_state_core = 837
 			remove_state_core = 1230
 			remove_state_core = 1540
-			remove_state_core = 1604		
+			remove_state_core = 1604
 		}
 		MLI = {
 			add_state_core = 1604
@@ -3449,17 +3161,7 @@ WAC_3_FMA_VICTORY = {
 				puppet = MLI
 			}
 			set_cosmetic_tag = MLI_FFRPuppet
-			kill_ideology_leader = authoritarian_democracy
-			create_country_leader = {
-				name = "Fily Dabo Sissoko"
-				desc = "POLITICS_FILY_DABO_SISSOKO_DESC"
-				picture = "Portrait_Mali_Fily_Dabo_Sissoko.dds"
-				expire = "1973.1.1"
-				ideology = authoritarian_democracy_controlled_democracy_subtype
-				traits = {
-					#
-				}
-			}
+			promote_character = MLI_fily_dabo_sissoko
 			set_politics = { ruling_party = authoritarian_democracy }
 			set_popularities = {
 				socialist = 30
@@ -3511,7 +3213,7 @@ WAC_3_FMA_VICTORY = {
 			transfer_state = 1540
 			transfer_state = 1604
 			set_cosmetic_tag = KAY_unified
-			set_capital = 1540
+			set_capital = { state = 1540 }
 		}
 		if = {
 			limit = {
@@ -3527,15 +3229,7 @@ WAC_3_FMA_VICTORY = {
 		}
 	}
 
-	every_country = {
-		limit = { is_west_african_nation = yes }
-		remove_ideas = {
-			WEST_AFRICA_idea_offensive
-			WEST_AFRICA_idea_stable_front
-			WEST_AFRICA_idea_chaotic_front
-			WEST_AFRICA_idea_resistance
-		}
-	}
+	WAC_clear_war_spirits = yes
 
 	FFR = { # Post-WAC
 		country_event = { # French Community
@@ -3564,51 +3258,16 @@ WAC_3_FMA_VICTORY = {
 			}
 		}
 		if = {
-			limit = { has_country_leader = { name = "Philippe Leclerc" ruling_only = yes } }
-			kill_ideology_leader = liberal_democracy
-			kill_ideology_leader = conservative_democracy
-			kill_ideology_leader = authoritarian_democracy
-
-			create_country_leader = {
-				name = "Philippe Leclerc"
+			limit = { has_country_leader = { character = FFR_Philippe_Leclerc ruling_only = yes } }
+			set_country_leader_description = {
 				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_1"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
 			}
 		}
 	}
 
 	EWE = {
 		transfer_state = 833
-		create_country_leader = {
-			name = "Nicolas Grunitzky"
-			desc = "POLITICS_NICOLAS_GRUNITZKY_DESC"
-			picture = "Portrait_Ewe_Nicolas_Grunitzky.dds"
-			expire = "1973.1.1"
-			ideology = authoritarian_democracy_controlled_democracy_subtype
-			traits = { }
-		}
+		promote_character = EWE_nicolas_grunitzky
 	}
 
 	GBE = {
@@ -3617,6 +3276,7 @@ WAC_3_FMA_VICTORY = {
 		transfer_state = 941
 		FFR = { puppet = GBE }
 		set_cosmetic_tag = GBE_FFRPuppet
+		promote_character = GBE_christophe_soglo
 		set_politics = { ruling_party = authoritarian_democracy }
 		set_popularities = {
 			socialist = 30
@@ -3709,6 +3369,17 @@ WAC_3_FMA_VICTORY = {
 }
 
 WAC_3_PALF_VICTORY = {
+	if = {
+		limit = { USA = { has_active_mission = USA_WAC_cameroon_capitulates } }
+		USA = { remove_mission = USA_WAC_cameroon_capitulates }
+	}
+	every_state = {
+		limit = { has_state_flag = WAC_solid_frontline_flag }
+		clr_state_flag = WAC_solid_frontline_flag
+		remove_dynamic_modifier = {
+			modifier = unplanned_offensive
+		}
+	}
 	set_global_flag = WAC_SCENARIO_3_PALF_VICTORY
 	if = {
 		limit = {
@@ -3759,11 +3430,34 @@ WAC_3_PALF_VICTORY = {
 				country_exists = MLI
 			}
 		}
+		KAY = {
+			remove_state_core = 836
+			remove_state_core = 1227
+			remove_state_core = 1231
+			remove_state_core = 1225
+			remove_state_core = 837
+			remove_state_core = 1230
+			remove_state_core = 1540
+			remove_state_core = 1604
+		}
 		MLI = {
+			add_state_core = 1604
+			add_state_core = 1225
+			add_state_core = 837
+			add_state_core = 1230
+			add_state_core = 1540
+			add_state_core = 836
+			add_state_core = 1227
+			add_state_core = 1231
+			transfer_state = 836
+			transfer_state = 1227
+			transfer_state = 1231
 			transfer_state = 1225
 			transfer_state = 837
 			transfer_state = 1230
 			transfer_state = 1540
+			transfer_state = 1604
+
 			TNO_startup_nation = yes
 		}
 		CAO = { add_to_faction = MLI }
@@ -3795,15 +3489,7 @@ WAC_3_PALF_VICTORY = {
 		}
 	}
 
-	every_country = {
-		limit = { is_west_african_nation = yes }
-		remove_ideas = {
-			WEST_AFRICA_idea_offensive
-			WEST_AFRICA_idea_stable_front
-			WEST_AFRICA_idea_chaotic_front
-			WEST_AFRICA_idea_resistance
-		}
-	}
+	WAC_clear_war_spirits = yes
 
 	CAO = { # Post-WAC
 		set_cosmetic_tag = CAO_win
@@ -3839,66 +3525,6 @@ WAC_3_PALF_VICTORY = {
 		}
 	}
 
-	#SWB = {
-	#	add_state_core = 1216
-	#	transfer_state = 1216
-	#	TNO_startup_nation = yes
-	#	CAO = {
-	#		puppet = SWB
-	#		add_to_faction = SWB
-	#	}
-	#
-	#	set_politics = {
-	#		ruling_party = socialist
-	#		last_election = "1966.6.23"
-	#		election_frequency = 48
-	#		elections_allowed = no
-	#	}
-	#	set_popularities = {
-	#		communist = 10
-	#		ultranationalism = 0
-	#		socialist = 35
-	#		social_democracy = 5
-	#		liberal_democracy = 0
-	#
-	#		authoritarian_democracy = 10
-	#		despotism = 30
-	#		fascism = 10
-	#
-	#	}
-	#	set_country_flag = PALF_MEMBER
-	#	hidden_effect = {
-	#		remove_faction_status = yes
-	#		add_ideas = PALF_Satellite
-	#	}
-	#	set_temp_variable = { TNO_economy_type_temp = 3 }
-	#	econ_type_change = yes
-	#}
-
-	MLI = {
-		add_state_core = 1604
-		add_state_core = 836
-		add_state_core = 1216
-		add_state_core = 1227
-		add_state_core = 1231
-		transfer_state = 836
-		transfer_state = 1216
-		transfer_state = 1227
-		transfer_state = 1231
-		transfer_state = 1604
-
-		KAY = {
-			remove_state_core = 836
-			remove_state_core = 1227
-			remove_state_core = 1231
-			remove_state_core = 1225
-			remove_state_core = 837
-			remove_state_core = 1230
-			remove_state_core = 1540
-			remove_state_core = 1604
-		}
-	}
-
 	BKF = {
 		add_state_core = 834
 		add_state_core = 1217
@@ -3913,15 +3539,7 @@ WAC_3_PALF_VICTORY = {
 			BKF_idea_relative_democracy
 		}
 		CAO = { puppet = BKF }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Joseph Ki-Zerbo"
-			#desc = "POLITICS_JOSEPH_KIZERBO_DESC"
-			picture = "Portrait_Burkina_Faso_Joseph_Ki_Zerbo.dds"
-			expire = "1999.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = { }
-		}
+		promote_character = BKF_joseph_ki_zerbo
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 40
@@ -3996,17 +3614,7 @@ WAC_3_PALF_VICTORY = {
 
 		remove_ideas = SUS_idea_guinean_democracy
 		CAO = { puppet = SUS }
-		kill_ideology_leader = socialist
-		create_country_leader = {
-			name = "Koumandian Keita"
-			desc = "POLITICS_KOUMANDIAN_KEITA_DESC"
-			picture = "Portrait_Susu_Noumandian_Keita.dds"
-			expire = "1999.1.1"
-			ideology = socialist_panafricanism_subtype
-			traits = {
-				#
-			}
-		}
+		promote_character = SUS_koumandian_keita
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 40
@@ -4042,6 +3650,7 @@ WAC_3_PALF_VICTORY = {
 			WOL_idea_haven_africa
 		}
 		CAO = { puppet = WOL }
+		promote_character = WOL_cheikh_anta_diop
 		set_politics = { ruling_party = socialist }
 		set_popularities = {
 			socialist = 30
@@ -4093,37 +3702,9 @@ WAC_3_PALF_VICTORY = {
 		}
 		add_ideas = FFR_tomb_republic
 		if = {
-			limit = { has_country_leader = { name = "Philippe Leclerc" ruling_only = yes } }
-			kill_ideology_leader = liberal_democracy
-			kill_ideology_leader = conservative_democracy
-			kill_ideology_leader = authoritarian_democracy
-
-			create_country_leader = {
-				name = "Philippe Leclerc"
+			limit = { has_country_leader = { character = FFR_Philippe_Leclerc ruling_only = yes } }
+			set_country_leader_description = {
 				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = conservative_democracy_liberal_conservatism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Philippe Leclerc"
-				desc = "POLITICS_PHILIPPE_LECLERC_2"
-				picture = "Portrait_Free_France_Philippe_Leclerc.dds"
-				expire = "1980.1.1"
-				ideology = authoritarian_democracy_subtype
-				traits = {
-				}
 			}
 		}
 	}
@@ -4350,7 +3931,7 @@ MANU_PALF_VICTORY = {
 			puppet = MDI
 			add_to_faction = MDI
 		}
-
+		promote_character = MDI_ita_wallace_johnson
 		set_politics = {
 			ruling_party = socialist
 			last_election = "1966.6.23"
@@ -4391,7 +3972,7 @@ MANU_PALF_VICTORY = {
 			puppet = LIB
 			add_to_faction = LIB
 		}
-
+		promote_character = LIB_hans_jurgen_massaquoi
 		set_politics = {
 			ruling_party = socialist
 			last_election = "1966.6.23"
@@ -4428,7 +4009,7 @@ WAC_escalation_effect = {
 	if = { # Intervention
 		limit = {
 			NOT = { has_global_flag = WAC_escalated_into_intervention USA = { has_active_mission = USA_WAC_secure_gulf_of_guinea } }
-			check_variable = { global.WAC_escalation > 19 }
+			check_variable = { global.WAC_escalation > 14 }
 		}
 		set_global_flag = WAC_escalated_into_intervention
 		USA = {
@@ -4439,7 +4020,7 @@ WAC_escalation_effect = {
 	}
 	if = {
 		limit = {
-			check_variable = { global.WAC_escalation > 25 }
+			check_variable = { global.WAC_escalation > 19 }
 			has_global_flag = WAC_scenario_2
 			NOT = { has_global_flag = WAC_fronts_stabilized }
 		}
@@ -4457,7 +4038,7 @@ WAC_escalation_effect = {
 	}
 	if = {
 		limit = {
-			check_variable = { global.WAC_escalation > 44 }
+			check_variable = { global.WAC_escalation > 34 }
 			NOT = { has_global_flag = WAC_fronts_changed }
 		}
 		set_global_flag = WAC_fronts_changed
@@ -4465,17 +4046,34 @@ WAC_escalation_effect = {
 			limit = {
 				is_in_array = { global.west_african_nations = THIS }
 				has_war = yes
+				has_idea = WEST_AFRICA_idea_stable_front
 			}
 			remove_ideas = WEST_AFRICA_idea_stable_front
 		}
+		every_country = {
+			limit = {
+				is_in_faction_with = CAO
+				NOT = { has_idea = WEST_AFRICA_idea_guerrilla }
+			}
+			add_ideas = WEST_AFRICA_idea_guerrilla
+		}
 	}
 	if = {
-		limit = { check_variable = { global.WAC_escalation > 49 } }
+		limit = { check_variable = { global.WAC_escalation > 39 } }
 		add_to_variable = { USA_WAC_WAR_Discontent = 2 }
+		every_country = {
+			limit = {
+				is_in_faction_with = CAO
+				has_idea = WEST_AFRICA_idea_guerrilla
+				NOT = { has_idea = WEST_AFRICA_idea_guerrilla_2 }
+			}
+			remove_ideas = WEST_AFRICA_idea_guerrilla
+			add_ideas = WEST_AFRICA_idea_guerrilla_2
+		}
 	}
 	if = {
 		limit = {
-			check_variable = { global.WAC_escalation > 69 }
+			check_variable = { global.WAC_escalation > 49 }
 			NOT = { has_global_flag = WAC_escalated_a_lot }
 		}
 		set_global_flag = WAC_escalated_a_lot
@@ -4521,7 +4119,7 @@ WAC_Gulf_finish_campaign = {
 	else = { set_temp_variable = { WAC_gulf_advantage_difference = 0 } }
 
 	if = {
-		limit = { check_variable = { WAC_gulf_advantage_difference > 5 } }
+		limit = { check_variable = { WAC_gulf_advantage_difference > 3 } }
 		if = { # OFN Victory
 			limit = { check_variable = { USA.WAC_OFN_gulf_advantage > JAP.WAC_Sphere_gulf_advantage } }
 			USA = {
@@ -4558,7 +4156,7 @@ WAC_Gulf_Escalations_Effects = {
 		limit = {
 			has_active_mission = USA_WAC_secure_gulf_of_guinea
 			NOT = { has_global_flag = WAC_gulf_incident_happened }
-			check_variable = { global.WAC_gulf_escalation > 34 }
+			check_variable = { global.WAC_gulf_escalation > 14 }
 		}
 		add_to_variable = { global.WAC_escalation = 5 }
 		set_global_flag = WAC_escalated_into_intervention

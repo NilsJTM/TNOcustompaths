@@ -25,6 +25,41 @@ country_event = { #The Last Of The True - Intro event
 	option = {
 		name = MAG.1.a
 		ai_chance = { factor = 1 }
+		if = {
+			limit = { has_dlc = "No Step Back" }
+			add_equipment_to_stockpile = {
+				type = MBT_chassis_2
+				amount = 100
+				producer = USA
+				variant_name = "M60 Clark"
+			}
+			add_equipment_to_stockpile = {
+				type = IFV_chassis_2
+				amount = 100
+				producer = USA
+				variant_name = "M706 Commando"
+			}
+		}
+		create_equipment_variant = {
+			name = "M60 Clark"
+			type = MBT_chassis_2
+			parent_version = 0
+			modules = {
+				main_armament_slot = MBT_cannon_3
+				turret_type_slot = MBT_three_man_tank_turret
+				suspension_type_slot = tank_torsion_bar_suspension
+				armor_type_slot = tank_cast_armor
+				engine_type_slot = tank_diesel_engine
+				special_type_slot_1 = tank_radio_1
+				special_type_slot_2 = command_optics
+				special_type_slot_3 = secondary_turret_hmg
+			}
+			icon = GFX_USA_MBT_1960_medium
+			upgrades = {
+				tank_nsb_engine_upgrade = 10
+				tank_nsb_armor_upgrade = 10
+			}
+		}
 	}
 }
 
@@ -142,13 +177,15 @@ country_event = { #Welcoming WerBell
 			long_name = MAG_WA_authoritarian_democracy_party_long
 			name = MAG_WA_authoritarian_democracy_party
 		}
-		create_country_leader = {
-			name = "Mitchell WerBell III"
-			desc = "POLITICS_MITCHELL_WERBELL_DESC"
-			picture = "Portrait_West_Alaska_Mitchell_WerBell_III.dds"
-			expire = "1999.1.1"
-			ideology = authoritarian_democracy_stratocracy_subtype
-			traits = { }
+		add_country_leader_role = {
+			character = MAG_Mitchell_Werbell
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democracy_stratocracy_subtype
+				desc = "POLITICS_MITCHELL_WERBELL_DESC"
+				expire = "1999.1.1"
+				traits = { }
+			}
 		}
 	}
 }
@@ -207,7 +244,10 @@ country_event = { #The Mercenary Coup
 			long_name = MAG_authoritarian_democracy_party_long
 			name = MAG_authoritarian_democracy_party
 		}
-		retire_ideology_leader = authoritarian_democracy
+		remove_country_leader_role = {
+			character = MAG_Mitchell_Werbell
+			ideology = authoritarian_democracy_stratocracy_subtype
+		}
 		if = {
 			limit = {
 				has_idea = MAG_soldiers_without_borders_idea
@@ -241,8 +281,16 @@ country_event = { #The Mercenary Coup
 		trigger = {
 			has_country_flag = MAG_werbell_influence_strengthened
 		}
-		retire_country_leader  = yes
-		retire_ideology_leader = fascism
+		retire_character = MAG_Mikhail_Matkovsky
+		add_country_leader_role = {
+			character = MAG_No_Leader
+			promote_leader = yes
+			country_leader = {
+				ideology = fascism_corporatism_subtype
+				expire = "1999.1.1"
+				traits = { }
+			}
+		}
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
@@ -1305,16 +1353,17 @@ country_event = { #Reformists take-over
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
-		add_ideas = {
-			MAG_Sergey_Solovyev_hog
-			MAG_Yuriy_Vlasov_for
-			MAG_Andrey_Starostin_eco
-			MAG_Lev_Netto_sec
-		}
-		retire_ideology_leader = despotism
+		retire_character = MAG_Mikhail_Matkovsky
 		clr_country_flag = MAG_regional_factions
 		clr_country_flag = MAG_will_of_the_people
 		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = {
+				MAG_Sergey_Solovyev_hog
+				MAG_Yuriy_Vlasov_for
+				MAG_Andrey_Starostin_eco
+				MAG_Lev_Netto_sec
+			}
 			remove_ideas = MAG_fascist_splitters
 			remove_ideas = MAG_fascist_renewal
 			country_event = { id = magreg.32 days = 7 }
@@ -1338,23 +1387,26 @@ country_event = { #Reformists arrested
 		clr_country_flag = MAG_regional_factions
 		clr_country_flag = MAG_will_of_the_people
 		set_country_flag = MAG_reformists_arrested
-		add_ideas = MAG_Igor_Kovalchuk_Koval_for
-		retire_ideology_leader = authoritarian_democracy
+
 		hidden_effect = {
+			remove_ideas = MAG_Nikolay_Petlin_for
+			add_ideas = MAG_Igor_Kovalchuk_Koval_for
+			retire_character = MAG_Nikolay_Petlin
 			country_event = { id = magreg.33 days = 7 }
-			create_country_leader = {
-				name = "No Leader"
-				desc = ""
-				picture = ""
-				expire = "1999.1.1"
-				ideology = authoritarian_democracy_controlled_democracy_subtype
-				traits = { }
+			add_country_leader_role = {
+				character = MAG_No_Leader
+				promote_leader = yes
+				country_leader = {
+					ideology = authoritarian_democracy_controlled_democracy_subtype
+					expire = "1999.1.1"
+					traits = { }
+				}
 			}
 		}
 	}
 }
 
-country_event = { #"Merchant" Fleet
+country_event = { # "Merchant" Fleet
 	id = magreg.6
 	immediate = {log = "[GetDateText]: [Root.GetName]: event magreg.6"}
 	title = magreg.6.t
@@ -1368,17 +1420,18 @@ country_event = { #"Merchant" Fleet
 		name = magreg.6.a
 		ai_chance = { factor = 1 }
 		navy_experience = 5
-		create_navy_leader = {
-			name = "Nikolai Abramov"
-			picture = "Portrait_Magadan_Nikolai_Abramov.dds"
+
+		add_naval_commander_role = {
+			character = MAG_Nikolai_Abramov
 			traits = { spotter }
 			skill = 1
 			attack_skill = 1
 			defense_skill = 1
 			maneuvering_skill = 1
 			coordination_skill = 1
-			id = 7642
+			legacy_id = 7642
 		}
+
 		hidden_effect = {
 			if = {
 				limit = { has_dlc = "Man the Guns" }
@@ -1879,30 +1932,40 @@ country_event = { #Fresh Coat of Paint
 		}
 		add_popularity = { ideology = despotism popularity = 0.45 }
 		add_popularity = { ideology = authoritarian_democracy popularity = 0.2 }
-		create_country_leader = {
-			name = "Mikhail Matkovsky"
-			desc = "POLITICS_MIKHAIL_MATKOVSKY_DESC"
-			picture = "Portrait_Magadan_Mikhail_Matkovsky.dds"
-			expire = "1999.1.1"
-			ideology = despotism_civilian_dictatorship_subtype
-			traits = { the_knyaz }
+
+		add_country_leader_role = {
+			character = MAG_Mikhail_Matkovsky
+			promote_leader = yes
+			country_leader = {
+				ideology = despotism_civilian_dictatorship_subtype
+				desc = "POLITICS_MIKHAIL_MATKOVSKY_DESC"
+				expire = "1999.1.1"
+				traits = { the_knyaz }
+			}
 		}
-		create_country_leader = {
-			name = "Nikolay Petlin"
-			desc = "POLITICS_NIKOLAY_PETLIN_DESC"
-			picture = "Portrait_Magadan_Nikolay_Petlin.dds"
-			expire = "1999.1.1"
-			ideology = authoritarian_democracy_dominant_party_democracy_subtype
-			traits = { }
+
+		add_country_leader_role = {
+			character = MAG_Nikolay_Petlin
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democracy_dominant_party_democracy_subtype
+				desc = "POLITICS_NIKOLAY_PETLIN_DESC"
+				expire = "1999.1.1"
+				traits = { }
+			}
 		}
-		create_country_leader = {
-			name = "Vladimir Kibardin"
-			desc = "POLITICS_VLADIMIR_KIBARDIN_DESC"
-			picture = "Portrait_Magadan_Vladimir_Kibardin.dds"
-			expire = "1999.1.1"
-			ideology = fascism_national_syndicalism_subtype
-			traits = {  }
+
+		add_country_leader_role = {
+			character = MAG_Vladimir_Kibardin
+			promote_leader = yes
+			country_leader = {
+				ideology = fascism_national_syndicalism_subtype
+				desc = "POLITICS_VLADIMIR_KIBARDIN_DESC"
+				expire = "1999.1.1"
+				traits = { }
+			}
 		}
+
 		set_party_name = {
 			ideology = fascism
 			long_name = MAG_reg_fascism_party_long
@@ -2485,7 +2548,7 @@ country_event = { #Assembly of Novosibirsk 2
 	option = { #
 		name = petlin.8.a
 		ai_chance = { factor = 1 }
-		set_capital = 570
+		set_capital = { state = 570 }
 		RUS_integration_cost_days_decrease = yes
 		add_popularity = { ideology = liberal_democracy popularity = 0.035 }
 		add_popularity = { ideology = conservative_democracy popularity = 0.025 }
@@ -2796,13 +2859,12 @@ country_event = { #Epilogue
 		ai_chance = { factor = 1 }
 		custom_effect_tooltip = MAG_matkovsky_70s_tt
 		hidden_effect = {
-			create_country_leader = {
-				name = "Mikhail Matkovsky"
-				desc = "POLITICS_MIKHAIL_MATKOVSKY_70S_DESC"
-				picture = "Portrait_Magadan_Mikhail_Matkovsky_70s.dds"
-				expire = "1999.1.1"
-				ideology = despotism_civilian_dictatorship_subtype
-				traits = { the_knyaz }
+			add_country_leader_trait = the_knyaz
+			set_country_leader_description = {
+				desc = POLITICS_MIKHAIL_MATKOVSKY_70S_DESC
+			}
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/MAG/Portrait_Magadan_Mikhail_Matkovsky_70s.dds"
 			}
 			TNO_russia_ending_screen = yes
 		}
@@ -3050,27 +3112,25 @@ country_event = { #Heia Safari!
 	option = { #
 		name = westalaska.14.a
 		ai_chance = { factor = 1 }
-		create_corps_commander = {
-			name = "Fernando Calistrat"
-			picture = "Portrait_West_Alaska_Fernando_Calistrat.dds"
+		add_corps_commander_role = {
+			character = MAG_Fernando_Calistrat
 			skill = 3
 			attack_skill = 3
 			defense_skill = 1
 			planning_skill = 4
 			logistics_skill = 1
 			traits = { foreign_mercenary media_personality organizer skilled_staffer }
-			id = 3781
+			legacy_id = 3781
 		}
-		create_corps_commander = {
-			name = "Roy Larsen"
-			picture = "Portrait_West_Alaska_Roy_Larsen.dds"
+		add_corps_commander_role = {
+			character = MAG_Roy_Larsen
 			skill = 2
 			attack_skill = 1
 			defense_skill = 3
 			planning_skill = 1
 			logistics_skill = 2
 			traits = { foreign_mercenary infantry_officer trickster winter_specialist }
-			id = 3782
+			legacy_id = 3782
 		}
 	}
 }
@@ -3090,17 +3150,15 @@ country_event = { #The Man of a Thousand Lives
 		ai_chance = { factor = 1 }
 		set_country_flag = MAG_WA_Roger_Faulques_available
 		custom_effect_tooltip = MAG_WA_Roger_Faulques_available_tt
-		create_corps_commander = {
-			name = "Roger Faulques"
-			desc = "MILITARY_ROGER_FAULQUES_DESC"
-			picture = "Portrait_West_Alaska_Roger_Faulques.dds"
+		add_corps_commander_role = {
+			character = MAG_Roger_Faulques
 			skill = 3
 			attack_skill = 3
 			defense_skill = 1
 			planning_skill = 3
 			logistics_skill = 3
 			traits = { foreign_mercenary harsh_leader commando }
-			id = 3783
+			legacy_id = 3783
 		}
 	}
 }
@@ -3745,10 +3803,8 @@ country_event = { #Nancy leaves
 		ai_chance = { factor = 1 }
 		remove_unit_leader = 3777
 		hidden_effect = {
-			swap_ideas = {
-				remove_idea = MAG_Nancy_Wake_hog
-				add_idea = MAG_Gordon_Ingram_hog
-			}
+			remove_ideas = MAG_Nancy_Wake_hog
+			add_ideas = MAG_Gordon_Ingram_hog
 		}
 	}
 }
@@ -4243,33 +4299,30 @@ country_event = { #Epilogue
 				limit = {
 					has_country_flag = MAG_WA_cincinnatus_route
 				}
-				create_country_leader = {
-					name = "Mitchell WerBell III"
-					desc = "POLITICS_MITCHELL_WERBELL_70S_DESC"
-					picture = "Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
-					expire = "1999.1.1"
-					ideology = authoritarian_democracy_stratocracy_subtype
-					traits = {
-						MAG_WA_cincinnatus
-						bolshoy_boss
-					}
+
+				add_country_leader_trait = MAG_WA_cincinnatus
+				add_country_leader_trait = bolshoy_boss
+				set_country_leader_description = {
+					desc = POLITICS_MITCHELL_WERBELL_70S_DESC
 				}
+				set_country_leader_portrait = {
+					portrait = "gfx/leaders/MAG/Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
+				}
+
 				TNO_russia_ending_screen = yes
 			}
 			else_if = {
 				limit = {
 					has_country_flag = MAG_WA_caesar_route
 				}
-				create_country_leader = {
-					name = "Mitchell WerBell III"
-					desc = "POLITICS_MITCHELL_WERBELL_70S_DESC"
-					picture = "Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
-					expire = "1999.1.1"
-					ideology = authoritarian_democracy_stratocracy_subtype
-					traits = {
-						MAG_WA_caesar
-						bolshoy_boss
-					}
+
+				add_country_leader_trait = MAG_WA_caesar
+				add_country_leader_trait = bolshoy_boss
+				set_country_leader_description = {
+					desc = POLITICS_MITCHELL_WERBELL_70S_DESC
+				}
+				set_country_leader_portrait = {
+					portrait = "gfx/leaders/MAG/Portrait_West_Alaska_Mitchell_WerBell_70s.dds"
 				}
 				TNO_russia_ending_screen = yes
 			}

@@ -1,6 +1,5 @@
 ﻿add_namespace = GUL_skeleton
 
-#	triggered from common/on_actions/TNO_Middle_East_on_actions.txt
 country_event = { #Gulf Outcome Roulette
 	id = GUL_skeleton.1
 	immediate = {log = "[GetDateText]: [Root.GetName]: event GUL_skeleton.1"}
@@ -10,7 +9,7 @@ country_event = { #Gulf Outcome Roulette
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	option = {	# League of Arab Emirates, Zayed bin Sultan Al Nahyan, Authoritarian Democracy - Oligarchy
+	option = {
 		name = GUL_skeleton.1.a
 		ai_chance = { 
 			factor = 8 
@@ -137,6 +136,8 @@ country_event = { #Zayed Victorious - League of Arab Emirates (WORLD.928)
 		}
 		hidden_effect = {
 			drop_cosmetic_tag = yes
+			retire_character = GUL_Enrico_Mattei
+			retire_character = GUL_Giuseppe_Oriana
 			set_politics = {
 				ruling_party = authoritarian_democracy
 			}
@@ -165,13 +166,6 @@ country_event = { #Zayed Victorious - League of Arab Emirates (WORLD.928)
 				}
 				add_ideas = OFN_Dependent_Member #probably has a US/Italian-funded army though?
 			}
-		}
-		create_country_leader = {
-			name = "Zayed bin Sultan Al Nahyan"
-			desc = "POLITICS_ZAYED_BIN_SULTAN_AL_NAHYAN"
-			picture = "Portrait_Gulf_Zayed_bin_Sultan_Al_Nahyan.dds"
-			expire = 1992.1.1
-			ideology = authoritarian_democracy_oligarchy_subtype
 		}
 		remove_ideas = {
 			IEA_idea_colonial_government
@@ -203,6 +197,8 @@ country_event = { #NUC Victory
 		ITA = {
 			end_puppet = GUL
 		}
+		retire_character = GUL_Enrico_Mattei
+		retire_character = GUL_Giuseppe_Oriana
 		leave_faction = yes
 		set_politics = {
 			ruling_party = social_democracy
@@ -234,13 +230,6 @@ country_event = { #NUC Victory
 		#		days = 1
 		#	}
 		#}
-		create_country_leader = {
-			name = "Abdulrahman al Bakir"
-			desc = ""
-			picture = "Portrait_Gulf_Abdulrahman_al_Bakir.dds"
-			expire = 1992.1.1
-			ideology = social_democracy_left_wing_populism_subtype
-		}
 
 		set_country_flag = UAR_can_join
 	}
@@ -261,13 +250,11 @@ country_event = { #Emirates Formed (world 929)
 			end_puppet = GUL
 		}
 		set_country_flag = GUL_SAU
-		create_country_leader = {
-			name = "Shakhbut bin Sultan Al Nahyan"
-			desc = "POLITICS_SHAKHBUT_BIN_SULTAN_AL_NAHYAN"
-			picture = "Portrait_Gulf_Shakbut_bin_Sultan_al_Nahyan.dds"
-			expire = 1992.1.1
-			ideology = despotism_absolute_monarchy_subtype
-		}
+
+		retire_character = GUL_Enrico_Mattei
+		retire_character = GUL_Giuseppe_Oriana
+		promote_character = GUL_Shakhbut_bin_Sultan_al_Nahyan
+
 		set_politics = {
 			ruling_party = despotism
 		}
@@ -275,17 +262,9 @@ country_event = { #Emirates Formed (world 929)
 			transfer_navy = { target = ITA }
 			drop_cosmetic_tag = yes
 			leave_faction = yes
-			remove_all_ministers = yes
 
 			set_temp_variable = {TNO_economy_type_temp = 3 }
 			econ_type_change = yes
-
-			add_ideas = {
-				GUL_Rashid_bin_Humaid_Al_Nuaimi_iii_hog
-				GUL_Khalifa_bin_Hamad_Al_Thani_for
-				GUL_Ahmad_bin_Rashid_Al_Mualla_eco
-				GUL_Khalid_bin_Mohammed_Al_Qasimi_sec
-			}
 			remove_ideas = {
 				IEA_idea_colonial_government
 				ita_oil_cult #Weird to have italian logo
@@ -333,6 +312,8 @@ country_event = { #Immigrant Worker Uprising (WORLD 940)
 			ideology = socialist
 			popularity = 0.4
 		}
+		retire_character = GUL_Enrico_Mattei
+		retire_character = GUL_Giuseppe_Oriana
 
 		econ_leave_sphere = yes
 		set_temp_variable = { TNO_economy_subtype_temp = 2 }
@@ -344,16 +325,8 @@ country_event = { #Immigrant Worker Uprising (WORLD 940)
 				days = 1
 			}
 		}
-		create_country_leader = {
-			name = "Gurudas Dasgupta"
-			desc = "POLITICS_GURUDAS_DASGUPTA"
-			picture = "Portrait_Gulf_Gurudas_Dasgupta.dds"
-			expire = 2019.1.1
-			ideology = socialist_syndicalism_subtype
-		}
 		econ_leave_sphere = yes
 		leave_faction = yes
-		remove_all_ministers = yes
 		remove_ideas = {
 			IEA_idea_colonial_government
 			ita_oil_cult #Weird to have italian logo

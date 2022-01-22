@@ -75,10 +75,10 @@ country_event = { #Josias is betrayed!
 	option = {
 		name = cau.10001.a
 		BRG = {
-			country_event = {
-				id = BRG.1004
-				days = 1
-			}
+			# country_event = { - event does not exist
+			# 	id = BRG.1004
+			# 	days = 1
+			# }
 		}
 	}
 }
@@ -165,18 +165,12 @@ country_event = { #business plot
 		set_politics = {
 			ruling_party = national_socialism
 		}
-		swap_ideas = {
-			remove_idea = CAU_Herbert_Backe_hog
-			add_idea = CAU_Karl_Blessing_hog
-		}
-		swap_ideas = {
-			remove_idea = CAU_Paul_Pleiger_for
-			add_idea = CAU_Eugen_Ott_for
-		}
-		swap_ideas = {
-			remove_idea = CAU_KarlHeinz_Burger_sec
-			add_idea = CAU_Otto_Stapf_sec
-		}
+		remove_ideas = CAU_Herbert_Backe_hog
+		add_ideas = CAU_Karl_Blessing_hog
+		remove_ideas = CAU_Paul_Pleiger_for
+		add_ideas = CAU_Eugen_Ott_for
+		remove_ideas = CAU_KarlHeinz_Burger_sec
+		add_ideas = CAU_Otto_Stapf_sec
 		swap_ideas = {
 			remove_idea = CAU_stratified
 			add_idea = CAU_stratified_less
@@ -348,15 +342,18 @@ country_event = {
 	fire_only_once = yes
 	option = {
 		name = cau.10008.a
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Herbert Backe"
-			desc = "POLITICS_HERBERT_BACKE_DESC"
-			picture = "Portrait_Caucasus_Herbert_Backe.dds"
-			expire = "1990.1.1"
-			ideology = esoteric_nazism_agrarian_spartanism_subtype
-			traits = { terrorizer }
+		add_country_leader_role = {
+			character = CAU_Herbert_Backe
+			country_leader = {
+				desc = "POLITICS_HERBERT_BACKE_DESC"
+			 	ideology = esoteric_nazism_agrarian_spartanism_subtype
+				expire = "1990.1.1"
+				traits = { terrorizer }
+				id = -1
+			}
+			promote_leader = yes
 		}
+		retire_character = CAU_josias_zu_waldeck_und_pyrmont
 	}
 }
 
@@ -373,14 +370,19 @@ country_event = {
 	fire_only_once = yes
 	option = {
 		name = cau.10009.a
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Wittekind I"
-			desc = "POLITICS_WITTEKIND_DESC"
-			picture = "Portrait_Caucasus_Wittekind_Kaiser.dds"
-			expire = "1990.1.1"
-			ideology = despotism_absolute_monarchy_subtype
+		add_country_leader_role = {
+			character = CAU_Wittekind_I
+			country_leader = {
+				desc = "POLITICS_WITTEKIND_DESC"
+			 	ideology = despotism_absolute_monarchy_subtype
+				expire = "1990.1.1"
+				traits = { }
+				id = -1
+			}
+			promote_leader = yes
 		}
+		#retire_character = CAU_josias_zu_waldeck_und_pyrmont
+		#kill_country_leader = yes #kills despotist josias
 	}
 }
 

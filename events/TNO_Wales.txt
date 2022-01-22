@@ -181,13 +181,7 @@ country_event = { #Collapse of Plaid Cymru following the Coal Crisis
 
 	option = {
 		name = wal.11.a
-		create_country_leader = {
-			name = "The Welsh Assembly"
-               #desc = "POLITICS_BILL_ALEXANDER_DESC"
-			picture = "Portrait_Welsh_Assembly.dds"
-			expire = "1990.1.1"
-			ideology = authoritarian_democracy_national_conservatism_subtype
-		}
+		promote_character = WAL_welsh_assembly
 		set_politics = {
 			ruling_party = authoritarian_democracy
 			elections_allowed = no
@@ -207,13 +201,7 @@ country_event = { #Socdems win the elections
 
 	option = {
 		name = wal.13.a
-		create_country_leader = {
-			name = "Emrys Thomas"
-			desc = "POLITICS_EMRYS_THOMAS_DESC"
-			picture = "Portrait_Wales_Emrys_Thomas.dds"
-			expire = "1990.1.1"
-			ideology = social_democracy_democratic_socialism_subtype
-		}
+		promote_character = WAL_emrys_thomas
 		set_politics = {
 			ruling_party = social_democracy
 			elections_allowed = no
@@ -249,13 +237,7 @@ country_event = { #Independent Unionists win the elections
 
 	option = {
 		name = wal.14.a
-		create_country_leader = {
-			name = "John Morris"
-			desc = "POLITICS_JOHN_MORRIS_DESC"
-			picture = "Portrait_Wales_John_Morris.dds"
-			expire = "1990.1.1"
-			ideology = conservative_democracy_liberal_conservatism_subtype
-		}
+		promote_character = WAL_john_morris
 		set_politics = {
 			ruling_party = conservative_democracy
 			elections_allowed = no
@@ -309,13 +291,7 @@ country_event = { #Libsocs take over the Socdems
 
 	option = {
 		name = wal.15.a
-		create_country_leader = {
-			name = "Raymond Williams"
-			desc = "POLITICS_BILL_ALEXANDER_DESC"
-			picture = "Portrait_Wales_Raymond_Williams.dds"
-			expire = "1990.1.1"
-			ideology = socialist_subtype
-		}
+		promote_character = WAL_raymond_williams
 		set_politics = {
 			ruling_party = socialist
 			elections_allowed = no
@@ -340,13 +316,7 @@ country_event = { #Cayo takes over the country
 	option = {
 		name = wal.16.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Julian Cayo-Evans"
-				desc = "POLITICS_JULIAN_CAYO-EVANS_DESC"
-				picture = "Portrait_Wales_Julian_Cayo_Evans.dds"
-				expire = "1985.10.1"
-				ideology = authoritarian_democracy_subtype
-			}
+			promote_character = WAL_julian_cayo_evans
 			set_politics = {
 				ruling_party = despotism
 				elections_allowed = no
@@ -411,13 +381,7 @@ country_event = { #Natsocs take over Plaid
 
 	option = {
 		name = wal.17.a
-		create_country_leader = {
-			name = "John Barnard Jenkins"
-			desc = "POLITICS_JOHN_BARNARD_JENKINS_DESC"
-			picture = "Portrait_Wales_John_Bernard_Jenkins.dds"
-			expire = "1985.10.1"
-			ideology = fascism_subtype
-		}
+		promote_character = WAL_john_barnard_jenkins
 		set_politics = {
 			ruling_party = fascism
 			elections_allowed = no
@@ -1187,13 +1151,7 @@ country_event = { #Authsocs take over
 
 	option = {
 		name = wal.54.a
-		create_country_leader = {
-			name = "John Roberts"
-			desc = "POLITICS_BILL_ALEXANDER_DESC"
-			picture = ""
-			expire = "1990.1.1"
-			ideology = communist_subtype
-		}
+		promote_character = WAL_john_roberts
 		set_politics = {
 			ruling_party = communist
 			elections_allowed = no
@@ -1612,13 +1570,7 @@ country_event = { #Vote of No Confidence Part Two
 	is_triggered_only = yes
 	option = {
 		name = wal.115.a
-		create_country_leader = {
-			name = "The Welsh Assembly"
-			desc = "POLITICS_WELSH_ASSEMBLY_DESC"
-			picture = "Portrait_Welsh_Assembly.dds"
-			expire = "1990.1.1"
-			ideology = authoritarian_democracy_national_conservatism_subtype
-		}
+		promote_character = WAL_welsh_assembly
 		add_stability = -0.025
 		add_popularity = {
 			ideology = authoritarian_democracy
@@ -1894,11 +1846,24 @@ country_event = { #USA - Wales wants tanks
 		}
 		name = wal.1240.a
 		custom_effect_tooltip = WAL_WeGetTankMoney
-		send_equipment = {
-			equipment = MBT_equipment_1
-			amount = 100
-			target = WAL
+		if = { 
+			limit = { 
+				has_dlc = "No Step Back"
+			}
+			send_equipment = {
+				equipment = MBT_chassis_1
+				amount = 100
+				target = WAL
+			}
 		}
+		else = {
+			send_equipment = {
+				equipment = MBT_equipment_1
+				amount = 100
+				target = WAL
+			}
+		}
+
 		WAL = {
 			country_event = {
 				id = wal.1241
@@ -1985,11 +1950,24 @@ country_event = { #Italy - Wales wants tanks
 		}
 		name = wal.1243.a
 		custom_effect_tooltip = WAL_WeGetTankMoney
-		send_equipment = {
-			equipment = MBT_equipment_1
-			amount = 100
-			target = WAL
+		if = { 
+			limit = { 
+				has_dlc = "No Step Back"
+			}
+			send_equipment = {
+				equipment = MBT_chassis_1
+				amount = 100
+				target = WAL
+			}
 		}
+		else = {
+			send_equipment = {
+				equipment = MBT_equipment_1
+				amount = 100
+				target = WAL
+			}
+		}
+
 		WAL = {
 			country_event = {
 				id = wal.1244
@@ -4365,14 +4343,7 @@ country_event = { ##The Death of Cayo
 		custom_effect_tooltip = WAL_Deathofcayo
 		hidden_effect = {
 			kill_ideology_leader = despotism
-			create_country_leader = {
-				name = "Leaderless"
-				desc = "REICHSTAG_EMERGENCY_COUNCIL_DESC"
-				picture = "Portrait_Germany_Reichstag_Emergency_Council.dds"
-				expire = "1990.1.1"
-				ideology = despotism_interim_government_subtype
-				traits = { }
-			}
+			promote_character = WAL_leaderless
 		}
 	}
 }
@@ -5207,13 +5178,7 @@ country_event = { #Cayos consolidated coup and now will get onto running the cou
 	option = { #ok
 		name = cayo.9.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Julian Cayo-Evans"
-				desc = "POLITICS_JULIAN_CAYO-EVANS_DESC"
-				picture = "Portrait_Wales_Julian_Cayo_Evans_Mab_Darogan.dds"
-				expire = "1985.10.1"
-				ideology = authoritarian_democracy_subtype
-			}
+			promote_character = WAL_julian_cayo_evans
 			load_focus_tree = WAL_Cayo_RunsCountry
 			add_popularity = {
 				ideology = despotism

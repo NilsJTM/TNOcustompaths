@@ -211,6 +211,7 @@ country_event = { #anti heydrich pact from speer
 		}
 	}
 }
+
 country_event = { #anti heydrich pact from bormann
 	id = bormann.9
 	immediate = {log = "[GetDateText]: [Root.GetName]: event bormann.9"}
@@ -242,6 +243,7 @@ country_event = { #anti heydrich pact from bormann
 		}
 	}
 }
+
 country_event = { #goering rejects, dead in water
 	id = bormann.10
 	immediate = {log = "[GetDateText]: [Root.GetName]: event bormann.10"}
@@ -437,10 +439,11 @@ country_event = {
 			id = bormann.30
 			days = 1
 		}
-		add_tech_bonus = {
-			bonus = 0.5
-			uses = 1
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
 		add_to_variable = { bormann_speidel_point = 1 }
 	}
@@ -546,7 +549,10 @@ country_event = {
 		name = bormann.32.a
 		trigger = { check_variable = { bormann_speidel_point > bormann_schorner_point } }
 		BOR_SIG_AS_0_15 = yes
-		add_ideas = GER_BOR_speidels_okw
+		add_ideas = { 
+			GER_BOR_speidels_okw
+			GER_Hans_Speidel_high_command
+		}
 		set_country_flag = BOR_speidel_okw
 		clear_variable = bormann_speidel_point
 		clear_variable = bormann_schorner_point
@@ -556,7 +562,10 @@ country_event = {
 		name = bormann.32.a
 		trigger = { check_variable = { bormann_schorner_point > bormann_speidel_point } }
 		BOR_SIG_AS_2_15 = yes
-		add_ideas = GER_BOR_schorners_okw
+		add_ideas = {
+			GER_BOR_schorners_okw
+			GER_Ferdinand_Schorner_high_command
+		}
 		set_country_flag = BOR_schorner_okw
 		clear_variable = bormann_speidel_point
 		clear_variable = bormann_schorner_point
@@ -581,7 +590,10 @@ country_event = {
 		BOR_SIG_AP_6_10 = yes
 		BOR_SIG_AL_6_5_1 = yes
 		custom_effect_tooltip = GER_Heinrich_Mueller_sec_addition_tt
-		hidden_effect = { add_ideas = GER_Heinrich_Mueller_sec }
+		hidden_effect = {
+			remove_ideas_with_trait = security_minister
+			add_ideas = GER_Heinrich_Mueller_sec
+		}
 	}
 }
 
@@ -1089,14 +1101,14 @@ country_event = {
 		name = bormann.1510.a_wagner
 		trigger = { GER = { has_country_flag = BOR_POL_choose_wagner } }
 		add_political_power = 100
+		GER_eduard_wagner = {
+			set_nationality = GGN
+		}
 		GGN = {
-			create_country_leader = {
-				name = "Eduard Wagner"
-				desc = "POLITICS_EDUARD_WAGNER_DESC"
-				picture = "Portrait_Generalgouvernment_Eduard_Wagner.dds"
-				expire = "1984.10.28"
-				ideology = national_socialism_subtype
-				traits = { eco_military_entrepreneur }
+			GER_eduard_wagner = {
+				promote_character = {
+					ideology = national_socialism_stratocratic_nazism_subtype
+				}
 			}
 		}
 		hidden_effect = { every_country = { news_event = { id = bormann.165 days = 3 } } }
@@ -1106,14 +1118,7 @@ country_event = {
 		trigger = { GER = { has_country_flag = BOR_POL_choose_koch } }
 		add_political_power = 100
 		GGN = {
-			create_country_leader = {
-				name = "Theodor Koch"
-				desc = "POLITICS_THEODOR_KOCH_DESC"
-				picture = "Portrait_Generalgouvernment_Theodor_Koch.dds"
-				expire = "1984.10.28"
-				ideology = national_socialism_subtype
-				traits = { captain_of_industry }
-			}
+			promote_character = GGN_theodor_koch
 		}
 		hidden_effect = { every_country = { news_event = { id = bormann.165 days = 3 } } }
 	}
@@ -1122,14 +1127,7 @@ country_event = {
 		trigger = { GER = { has_country_flag = BOR_POL_choose_dollinger } }
 		add_political_power = 100
 		GGN = {
-			create_country_leader = {
-				name = "Werner Dollinger"
-				desc = "POLITICS_WERNER_DOLLINGER_DESC"
-				picture = "Portrait_Generalgouvernment_Werner_Dollinger.dds"
-				expire = "1984.10.28"
-				ideology = national_socialism_subtype
-				traits = { eco_mixed_economy }
-			}
+			promote_character = GGN_werner_dollinger
 		}
 		hidden_effect = { every_country = { news_event = { id = bormann.165 days = 3 } } }
 	}
@@ -1223,14 +1221,7 @@ country_event = {
 					fascism = 20
 				}
 				set_cosmetic_tag = RPO_protectorate
-				create_country_leader = {
-					name = "Albert Forster"
-					desc = "POLITICS_ALBERT_FORSTER_DESC"
-					picture = "Portrait_Reichsprotektorat_Albert_Forster.dds"
-					expire = "1984.10.28"
-					ideology = national_socialism_subtype
-					traits = { terrorizer }
-				}
+				promote_character = GGN_albert_forster
 			}
 		}
     }
@@ -1447,13 +1438,7 @@ country_event = {
 		hidden_effect = {
 			country_event = { id = bormann.162 days = 7 }
 			GGN = {
-				create_country_leader = {
-					name = "Interimregierung"
-					desc = "POLITICS_INTERIMREGIERUNG_DESC"
-					picture = "gfx/leaders/GER/Portrait_Germany_Reichstag_Emergency_Council.dds"
-					expire = "1984.10.28"
-					ideology = national_socialism_subtype
-				}
+				promote_character = GGN_interimregierung
 			}
 			remove_ideas = POL_underground_state
 		}
@@ -1467,7 +1452,7 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event bormann.162"}
     title = bormann.162.t
     desc = bormann.162.desc
-    picture = GFX_report_event_german_arrest
+    picture = GFX_report_event_generic_german_arrests
 	is_triggered_only = yes
 	fire_only_once = yes
 	
@@ -1536,15 +1521,11 @@ country_event = {
 			BOR_SIG_AL_7_3_2 = yes
 			BOR_SIG_AL_8_3_2 = yes
 			BOR_SIG_AL_9_3_2 = yes
+			GER_eduard_wagner = {
+				set_nationality = GGN
+			}
 			GGN = {
-				create_country_leader = {
-					name = "Eduard Wagner"
-					desc = "POLITICS_EDUARD_WAGNER_DESC"
-					picture = "Portrait_Generalgouvernment_Eduard_Wagner.dds"
-					expire = "1984.10.28"
-					ideology = national_socialism_subtype
-					traits = { eco_military_entrepreneur }
-				}
+				promote_character = GER_eduard_wagner
 			}
 		}
 		else = { 
@@ -1561,14 +1542,7 @@ country_event = {
 			BOR_SIG_AP_8_5 = yes
 			BOR_SIG_AP_9_5 = yes
 			GGN = {
-				create_country_leader = {
-					name = "Theodor Koch"
-					desc = "POLITICS_THEODOR_KOCH_DESC"
-					picture = "Portrait_Generalgouvernment_Theodor_Koch.dds"
-					expire = "1984.10.28"
-					ideology = national_socialism_subtype
-					traits = { captain_of_industry }
-				}
+				promote_character = GGN_theodor_koch
 			}
 		}
 		else = { 
@@ -1584,14 +1558,7 @@ country_event = {
 			BOR_SIG_AL_8_3_0 = yes
 			BOR_SIG_AL_9_3_0 = yes
 			GGN = {
-				create_country_leader = {
-					name = "Werner Dollinger"
-					desc = "POLITICS_WERNER_DOLLINGER_DESC"
-					picture = "Portrait_Generalgouvernment_Werner_Dollinger.dds"
-					expire = "1984.10.28"
-					ideology = national_socialism_subtype
-					traits = { eco_mixed_economy }
-				}
+				promote_character = GGN_werner_dollinger
 			}
 		}
 		else = { 
@@ -2826,16 +2793,10 @@ country_event = {
 	#Yes
 	option = {
 		name = bormann.1603.a
-		every_unit_leader = {
-			limit = { 
-				has_id = 89
-			}
+		GER_karladolf_hollidt = {
 			set_nationality = FIN
 		}
-		every_unit_leader = {
-			limit = { 
-				has_id = 103
-			}
+		GER_hans_krebs = {
 			set_nationality = FIN
 		}
 		
@@ -3134,7 +3095,7 @@ country_event = {
 			add_manpower = -7000
 			add_timed_idea = { idea = BOR_FIN_bunkers  days = 365 }
 		}
-		add_to_variable = { fin_agree = 5}
+		add_to_variable = { fin_agree = 5 }
 		hidden_effect = { country_event = { id = bormann.1613 days = 3 } }
 	}
 	
@@ -3151,7 +3112,6 @@ country_event = {
 		MCW = {
 			add_stability = 0.1
 		}
-		custom_effect_tooltip = econ_increase_debt_large
 		hidden_effect = { country_event = { id = bormann.1614 days = 3 } }
 	}
 }
@@ -3362,16 +3322,10 @@ country_event = {
 		name = bormann.1620.a
 		army_experience = 20
 		FIN = {
-			every_unit_leader = {
-				limit = { 
-					has_id = 89
-				}
+			GER_karladolf_hollidt = {
 				set_nationality = GER
 			}
-			every_unit_leader = {
-				limit = { 
-					has_id = 103
-				}
+			GER_hans_krebs = {
 				set_nationality = GER
 			}
 		}
@@ -4469,7 +4423,11 @@ country_event = { # Heim ins Reich - Party happy that Bormann managed to negotia
 		hidden_effect = {
 			add_state_core = 9
 			add_state_core = 75
-			CZE = { every_unit_leader = { set_nationality = GER } }
+			CZE = {
+				every_character = {
+					set_nationality = GER
+				}
+			}
 		}
 		annex_country = { target = CZE transfer_troops = yes }
 		TNO_improve_admin_efficiency_really_low = yes
@@ -4496,6 +4454,9 @@ country_event = { # Newspaper article about the impending return of the Crimean 
 	option = { #
 		name = bormann.620.a
 		add_to_faction = CRI
+		CRI = {
+			add_ideas = Pakt_Reichsland
+		}
 		BOR_SIG_AL_1_1_1 = yes
 		country_event = { id = bormann.621 days = 4 }
 	}
@@ -4534,7 +4495,14 @@ country_event = { # The Crimean administration is reintegrated into the Reich
 		name = bormann.622.a
 		hidden_effect = {
 			add_state_core = 137
-			CRI = { every_unit_leader = { set_nationality = GER } }
+			CRI = {
+				every_character = {
+					set_nationality = GER
+				}
+			}
+			GER = {
+				add_ideas = GER_Karl_Donitz_navy_chief
+			}
 		}
 		annex_country = { target = CRI transfer_troops = yes }
 		TNO_improve_admin_efficiency_really_low = yes
@@ -4641,7 +4609,7 @@ country_event = { # Unleashing the Orpo
 	desc = { text = bormann.652.desc.c trigger = { HOL = { has_country_flag = HOL_towards_democracy } } }
 	# SS
 	desc = { text = bormann.652.desc.d trigger = { HOL = { has_country_flag = HOL_SS_in_power } } }
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -4750,13 +4718,7 @@ country_event = { # Reichskommissar Ritterbusch
 		BOR_SIG_AP_0_5 = yes
 		HOL = {
 			TNO_improve_admin_efficiency_low = yes
-			create_country_leader = {
-				name = "Wilhelm Ritterbusch"
-				desc = "POLITICS_WILHELM_RITTERBUSCH_DESC"
-				picture = "Portrait_Netherlands_Wilhelm_Ritterbusch.dds"
-				expire = "2999.1.1"
-				ideology = national_socialism_subtype
-			}
+			promote_character = HOL_wilhelm_ritterbusch
 		}
 	}
 }
@@ -4776,13 +4738,7 @@ country_event = { # Reichskommissar Rochemont
 		BOR_SIG_AP_0_5 = yes
 		HOL = {
 			TNO_improve_admin_efficiency_low = yes
-			create_country_leader = {
-				name = "Sinclair de Rochemont"
-				desc = "POLITICS_SINCLAIR_DE_ROCHEMONT_DESC"
-				picture = "Portrait_Netherlands_de_Rochemont_Sinclair.dds"
-				expire = "2999.1.1"
-				ideology = national_socialism_subtype
-			}
+			promote_character = HOL_sinclair_de_rochemont
 		}
 	}
 }
@@ -5178,7 +5134,7 @@ country_event = { # The New "Democracy"
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.667" }
 	title = bormann.667.t
 	desc = bormann.667.desc
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 	
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -5823,6 +5779,7 @@ country_event = { # Bormann and Hüttig have to work together even though they d
 	immediate = {log = "[GetDateText]: [Root.GetName]: event bormann.49001"}
 	title = bormann.49001.t
 	desc = bormann.49001.desc
+	picture = GFX_report_event_south_african_war_rk_tank3
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -6120,12 +6077,7 @@ country_event = { #Landrut and co are away from their seats of power, they are p
 		hidden_effect = {
 			OST = {
 				set_popularities = { national_socialism = 100 }
-				create_country_leader = {
-					name = "Friedrich Karl Vialon"
-					picture = "gfx/leaders/OST/Portrait_Ostland_Friedrich_Karl_Vialon.dds"
-					expire = "1985.1.1"
-					ideology = national_socialism_subtype
-				}
+				promote_character = OST_friedrich_karl_vialon
 				remove_ideas = {
 					OST_model_colony
 					OST_unusual_quiet
@@ -6494,13 +6446,7 @@ country_event = { # Hanneken steps down, the dysfunctional old government is kep
 		DEN = {
 			apply_party_popularities = yes
 			hidden_effect = { set_politics = { ruling_party = authoritarian_democracy } }
-			create_country_leader = {
-				name = "Gustav Meißner"
-				picture = "gfx/leaders/DEN/Portrait_Denmark_Gustav_Meissner.dds"
-				desc = "POLITICS_GUSTAV_MEISSNER_DESC"
-				expire = "1983.1.1"
-				ideology = authoritarian_democracy_oligarchy_subtype
-			}
+			promote_character = DEN_Gustav_Meissner
 		}
 	}
 }
@@ -6853,20 +6799,7 @@ country_event = { #The Coup
 			days = 200
 		}
 		hidden_effect = {
-			create_country_leader = {
-				name = "Henrik Rogstad"
-				picture = "gfx/leaders/NOR/Portrait_Norway_Henrik_Rogstad.dds"
-				desc = "POLITICS_HENRIK_ROGSTAD_DESC"
-				expire = "1983.1.1"
-				ideology = national_socialism_subtype
-			}
-			create_country_leader = {
-				name = "Henrik Rogstad"
-				picture = "gfx/leaders/NOR/Portrait_Norway_Henrik_Rogstad.dds"
-				desc = "POLITICS_HENRIK_ROGSTAD_DESC"
-				expire = "1983.1.1"
-				ideology = fascism_subtype
-			}
+			promote_character = NOR_Henrik_Rogstad
 			set_party_name = { 
 				ideology = national_socialism
 				long_name = NOR_national_socialism_rogstad_party_long
@@ -6877,11 +6810,14 @@ country_event = { #The Coup
 				long_name = NOR_fascism_rogstad_party_long
 				name = NOR_fascism_rogstad_party
 			}
+			hidden_effect = {
+				remove_all_ministers = yes
+			}
 			add_ideas = {
-				NOR_minister_Sverre_Riisns_hog
-				NOR_minister_Henrik_Rogstad_for
-				NOR_minister_Axel_Heiberg_Stang_eco
-				NOR_minister_Karl_Marthinsen_sec
+				NOR_Sverre_Riisns_hog
+				NOR_Henrik_Rogstad_for
+				NOR_Axel_Heiberg_Stang_eco
+				NOR_Karl_Marthinsen_sec
 			}
 		}
 		GER = {
@@ -7020,7 +6956,7 @@ country_event = { #Milorg dies
 	immediate = {log = "[GetDateText]: [Root.GetName]: event bormann.1061"}
 	title = bormann.1061.t
 	desc = bormann.1061.desc
-	picture = GFX_report_event_german_arrest
+	picture = GFX_report_event_generic_german_arrests
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -8035,7 +7971,11 @@ country_event = { # Ukraine accepts Reichsprotektorat offer
 			autonomy_state = autonomy_reichsprotektorat
 		}
 		hidden_effect = {
+			GER_theodor_oberlander = {
+				set_nationality = UKR
+			}
 			UKR = {
+				econ_join_sphere_GER = yes
 				set_cosmetic_tag = FUK_GER
 				set_politics = { ruling_party = fascism }
 				set_popularities = {
@@ -8050,12 +7990,9 @@ country_event = { # Ukraine accepts Reichsprotektorat offer
 					name = "UKR_Bormann_fascism_party_name"
 					long_name = "UKR_Bormann_fascism_party_name_long"
 				}
-				create_country_leader = {
-					name = "Theodor Oberländer"
-					picture = "gfx/leaders/GER/Portrait_Germany_Theodor_Oberlander.dds"
-					expire = "1999.4.24"
-					ideology = fascism_subtype
-				}
+				GER_theodor_oberlander = {
+					promote_character = { ideology = fascism_subtype }
+				}				
 				set_temp_variable = { TNO_economy_subtype_temp = 5 }
 				econ_subtype_change = yes
 			}
@@ -8112,14 +8049,14 @@ country_event = { # Koch - let him stay or not
 	option = { # Replace with Oberländer (another wonderful idea)
 		name = bormann.1107.b
 		add_political_power = -25
+		GER_theodor_oberlander = {
+			set_nationality = UKR
+		}
 		UKR = {
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Theodor Oberländer"
-				picture = "gfx/leaders/GER/Portrait_Germany_Theodor_Oberlander.dds"
-				expire = "1999.4.24"
-				ideology = national_socialism_idiosyncratic_nazism_subtype
-			}
+			GER_theodor_oberlander = {
+				promote_character = { ideology = national_socialism_idiosyncratic_nazism_subtype }
+			}	
 			add_stability = 0.1
 		}
 	}
@@ -8153,14 +8090,14 @@ country_event = { # Leibbrandt - Leibbrandt sends Bormann a letter and tells him
 		name = bormann.1108.b
 		add_political_power = -25
 		BOR_SIG_AP_0_5 = yes
+		GER_theodor_oberlander = {
+			set_nationality = UKR
+		}
 		UKR = {
 			set_politics = { ruling_party = national_socialism }
-			create_country_leader = {
-				name = "Theodor Oberländer"
-				picture = "gfx/leaders/GER/Portrait_Germany_Theodor_Oberlander.dds"
-				expire = "1999.4.24"
-				ideology = national_socialism_idiosyncratic_nazism_subtype
-			}
+			GER_theodor_oberlander = {
+				promote_character = { ideology = national_socialism_idiosyncratic_nazism_subtype }
+			}	
 			hidden_effect = {
 				set_temp_variable = { TNO_economy_subtype_temp = 5 }
 				econ_subtype_change = yes
@@ -8190,14 +8127,14 @@ country_event = { # Heerema - Heerema took over in a provisional basis after Koc
 		name = bormann.1109.b
 		add_political_power = -25
 		BOR_SIG_AP_0_5 = yes
+		GER_theodor_oberlander = {
+			set_nationality = UKR
+		}
 		UKR = {
 			retire_country_leader = yes
-			create_country_leader = {
-				name = "Theodor Oberländer"
-				picture = "gfx/leaders/GER/Portrait_Germany_Theodor_Oberlander.dds"
-				expire = "1999.4.24"
-				ideology = national_socialism_idiosyncratic_nazism_subtype
-			}
+			GER_theodor_oberlander = {
+				promote_character = { ideology = national_socialism_idiosyncratic_nazism_subtype }
+			}	
 			hidden_effect = {
 				set_temp_variable = { TNO_economy_subtype_temp = 5 }
 				econ_subtype_change = yes
@@ -8246,24 +8183,17 @@ country_event = { # Reconstruction is done, what to do with Moskowien now?
 
 	immediate = { hidden_effect = { country_event = { id = bormann.1130 days = 30 } } }
 	
-	option = { # Return to a civillian administration
+	option = { # Return to a civilian administration
 		name = bormann.1129.a
 		BOR_SIG_AP_0_5 = yes
 		add_political_power = -50
 		MCW = {
 			set_cosmetic_tag = MCW_BOR2
 			add_stability = 0.05
-			retire_country_leader = yes
-			every_unit_leader = {
-				limit = { has_id = 107 }
+			GER_walther_wenck = {
 				set_nationality = GER
 			}
-			create_country_leader = {
-				name = "Albert Hoffman"
-				picture = "gfx/leaders/MCW/Portrait_Moskowien_Albert_Hoffman.dds"
-				expire = "1999.4.24"
-				ideology = national_socialism_subtype
-			}
+			promote_character = MCW_albert_hoffman
 		}
 		ai_chance = {
 			factor = 100
@@ -8330,7 +8260,6 @@ country_event = { # Bormann event for starting the Mosk invasion timer
 	}
 }
 
-
 country_event = { # Bormann asks gehlen to investigate Mosk
 	id = bormann.1132
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1132" }
@@ -8345,6 +8274,7 @@ country_event = { # Bormann asks gehlen to investigate Mosk
 		name = bormann.1132.a
 	}
 }
+
 #############################
 # Bormann Oil Crisis events #
 #############################
@@ -8958,6 +8888,7 @@ country_event = { #The end. Police close in. He's dead.
 		set_country_flag = BOR_Herbst
 		reload_GER_bormann_post_cw_tree = yes
 		hidden_effect = {
+			fill_empty_minister = yes
 			every_country = {
 				news_event = {
 					id = WORLD.1300
@@ -8985,9 +8916,17 @@ country_event = { # Haha guys we did it, slavery is no more
 	
 	option = { #
 		name = bormann.1400.a
-		swap_ideas = {
-			remove_idea = tno_slavery_allowed
-			add_idea = tno_slavery_outlawed
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_slavery_allowed
+				add_idea = tno_slavery_outlawed
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+			    remove_idea = tno_slavery_allowed_dummy
+			    add_idea = tno_slavery_outlawed_dummy
+	        }
 		}
 		set_variable = { tno_slavery_effectiveness = 52 }
 		TNO_update_slavery_policy_effectiveness = yes
@@ -9060,14 +8999,22 @@ country_event = { # Bormann gets lung cancer
 		set_country_flag = TNO_closing_screen_show
 		custom_effect_tooltip = BOR_closing_tt
 		hidden_effect = {
-			create_country_leader = {
-				name = "Martin Bormann"
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/GER/Portrait_Germany_Martin_Bormann_Fuck.dds"
+			}
+			set_country_leader_description = {
 				desc = "POLITICS_MARTIN_BORMANN_FUCK_DESC"
-				picture = "Portrait_Germany_Martin_Bormann_Fuck.dds"
-				expire = "1990.1.1"
-				ideology = national_socialism_subtype
-				traits = {
-					dictator
+			}
+			GER_otto_ernst_remer = {
+				set_portraits = {
+					civilian = {
+						large = "gfx/leaders/GER/Portrait_GER_Otto_Ernst_Remer_70s.dds"
+						small = "GFX_idea_GER_Otto_Ernst_Remer_2"
+					}
+					army = {
+						large = "gfx/leaders/GER/Portrait_GER_Otto_Ernst_Remer_70s.dds"
+						small = "GFX_idea_GER_Otto_Ernst_Remer_2"
+					}
 				}
 			}
 		}
@@ -10713,9 +10660,6 @@ country_event = { # Yanks ask for red telephone - how to respond
 
 	option = { # sure
 		name = bormann.1903.a
-		ai_chance = {
-			factor = 50
-		}
 		USA = {
 			country_event = bormann.1904
 		}
@@ -10724,22 +10668,17 @@ country_event = { # Yanks ask for red telephone - how to respond
 	}
 	option = { # well we need to make sure everything works first...
 		name = bormann.1903.b
-		ai_chance = {
-			factor = 50
-		}
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Stalling
 		USA = { country_event = bormann.1905 }
 	}
 	option = { # nah (bad idea)
 		name = bormann.1903.c
-		ai_chance = {
-			factor = 50
-		}
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Stalling
 		add_political_power = 10
 		USA = { country_event = bormann.1906 }
 	}
 }
+
 country_event = { # Germans say yes
 	id = bormann.1904
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1904" }
@@ -10752,9 +10691,6 @@ country_event = { # Germans say yes
 
 	option = { # based
 		name = bormann.1904.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = 10
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Succeeding
 		hidden_effect = { 
@@ -10765,6 +10701,7 @@ country_event = { # Germans say yes
 		}
 	}
 }
+
 country_event = { # Germans delay
 	id = bormann.1905
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1905" }
@@ -10777,9 +10714,6 @@ country_event = { # Germans delay
 
 	option = { # Insist
 		name = bormann.1905.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = 10
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Stalling
 		GER = {
@@ -10788,9 +10722,6 @@ country_event = { # Germans delay
 	}
 	option = { # fine (grumble grumble grumble)
 		name = bormann.1905.b
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = -10
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Succeeding
 		hidden_effect = { 
@@ -10801,6 +10732,7 @@ country_event = { # Germans delay
 		}
 	}
 }
+
 country_event = { # Germans say no
 	id = bormann.1906
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1906" }
@@ -10875,6 +10807,7 @@ country_event = { # Yanks insist
 		}
 	}
 }
+
 country_event = { # Talks succeed (GER)
 	id = bormann.1908
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1908" }
@@ -10887,9 +10820,6 @@ country_event = { # Talks succeed (GER)
 
 	option = { #yay
 		name = bormann.1908.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = 50
 		set_country_flag = GER_BOR_OFN_Talks_Succeed
 		hidden_effect = { every_country = { news_event = bormann.1912 } }
@@ -10900,6 +10830,7 @@ country_event = { # Talks succeed (GER)
 		TNO_change_tension = yes
 	}
 }
+
 country_event = { # Talks succeed (USA)
 	id = bormann.1909
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1909" }
@@ -10912,12 +10843,10 @@ country_event = { # Talks succeed (USA)
 
 	option = { #yay
 		name = bormann.1909.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = 50
 	}
 }
+
 country_event = { # Talks fail (GER)
 	id = bormann.1910
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1910" }
@@ -10930,9 +10859,6 @@ country_event = { # Talks fail (GER)
 
 	option = { #damn
 		name = bormann.1910.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = -50
 		set_country_flag = GER_BOR_OFN_Talks_Fail
 		hidden_effect = { every_country = { news_event = bormann.1913 } }
@@ -10943,6 +10869,7 @@ country_event = { # Talks fail (GER)
 		TNO_change_tension = yes
 	}
 }
+
 country_event = { # Talks fail (USA)
 	id = bormann.1911
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1911" }
@@ -10955,9 +10882,6 @@ country_event = { # Talks fail (USA)
 
 	option = { #:oof:
 		name = bormann.1911.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = -50
 	}
 }
@@ -10973,9 +10897,6 @@ news_event = { # Talks succeed (news)
 
 	option = { #yay
 		name = bormann.1912.a
-		ai_chance = {
-			factor = 50
-		}
 		
 	}
 }
@@ -10991,9 +10912,6 @@ news_event = { # Talks fail (news)
 
 	option = { #:oof:
 		name = bormann.1913.a
-		ai_chance = {
-			factor = 50
-		}
 		
 	}
 }
@@ -11010,12 +10928,10 @@ country_event = { #English Issue Event
 
 	option = { #
 		name = bormann.1914.a
-		ai_chance = {
-			factor = 50
-		}
 		
 	}
 }
+
 country_event = { #Japanese Issue Event
 	id = bormann.1915
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1915" }
@@ -11028,12 +10944,10 @@ country_event = { #Japanese Issue Event
 
 	option = { #
 		name = bormann.1915.a
-		ai_chance = {
-			factor = 50
-		}
 		
 	}
 }
+
 country_event = { #England Agreement
 	id = bormann.1916
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1916" }
@@ -11046,13 +10960,11 @@ country_event = { #England Agreement
 
 	option = { #
 		name = bormann.1916.a
-		ai_chance = {
-			factor = 50
-		}
 		USA = { country_event = bormann.1917 }
 		ENG = { clr_global_flag = ENG_Faction_Start_Flag }
 	}
 }
+
 country_event = { #English Agreement (USA)
 	id = bormann.1917
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1917" }
@@ -11065,12 +10977,10 @@ country_event = { #English Agreement (USA)
 
 	option = { #
 		name = bormann.1917.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = -10
 	}
 }
+
 country_event = { #Supporting US Claims
 	id = bormann.1918
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1918" }
@@ -11083,9 +10993,6 @@ country_event = { #Supporting US Claims
 
 	option = { #
 		name = bormann.1918.a
-		ai_chance = {
-			factor = 50
-		}
 		USA = { add_political_power = 100 }
 		add_opinion_modifier = {
 			target = USA
@@ -11093,6 +11000,7 @@ country_event = { #Supporting US Claims
 		}
 	}
 }
+
 country_event = { #Ask America for invitation
 	id = bormann.1919
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1919" }
@@ -11108,6 +11016,7 @@ country_event = { #Ask America for invitation
 		USA = { country_event = bormann.1920 }
 	}
 }
+
 country_event = { #Bormann asks to come
 	id = bormann.1920
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1920" }
@@ -11130,10 +11039,11 @@ country_event = { #Bormann asks to come
 		ai_chance = {
 			factor = 25
 		}
-		add_political_power = -100
+		add_political_power = -50
 		GER = { country_event = bormann.1922 }
 	}
 }
+
 country_event = { #Invitation Rejected
 	id = bormann.1921
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1921" }
@@ -11146,12 +11056,10 @@ country_event = { #Invitation Rejected
 
 	option = { #
 		name = bormann.1921.a
-		ai_chance = {
-			factor = 50
-		}
-		add_political_power = -150
+		add_political_power = -40
 	}
 }
+
 country_event = { #Invitation Accepted - Visit
 	id = bormann.1922
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1922" }
@@ -11164,10 +11072,7 @@ country_event = { #Invitation Accepted - Visit
 
 	option = { #
 		name = bormann.1922.a
-		ai_chance = {
-			factor = 50
-		}
-		add_political_power = 150
+		add_political_power = 100
 		hidden_effect = {
 			country_event = {
 				id = bormann.1925
@@ -11186,6 +11091,7 @@ country_event = { #Invitation Accepted - Visit
 		}
 	}
 }
+
 country_event = { #Speaking with yocket
 	id = bormann.1923
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1923" }
@@ -11198,12 +11104,10 @@ country_event = { #Speaking with yocket
 
 	option = { #
 		name = bormann.1923.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = -10
 	}
 }
+
 country_event = { #Curtain closed
 	id = bormann.1924
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1924" }
@@ -11216,12 +11120,10 @@ country_event = { #Curtain closed
 
 	option = { #
 		name = bormann.1924.a
-		ai_chance = {
-			factor = 50
-		}
 		add_political_power = 50
 	}
 }
+
 country_event = { #BORMANN DISNEYLAND EVENT :crab: :crab: :crab: :crab: :crab: :crab: v :crab: :crab: :crab:
 	id = bormann.1925
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1925" }
@@ -11234,12 +11136,10 @@ country_event = { #BORMANN DISNEYLAND EVENT :crab: :crab: :crab: :crab: :crab: :
 
 	option = { #
 		name = bormann.1925.a
-		ai_chance = {
-			factor = 50
-		}
 		
 	}
 }
+
 country_event = { #Goldwater refuses negotiations
 	id = bormann.1926
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1926" }
@@ -11252,12 +11152,10 @@ country_event = { #Goldwater refuses negotiations
 
 	option = { #
 		name = bormann.1926.a
-		ai_chance = {
-			factor = 50
-		}
 		set_country_flag = GER_BOR_OFN_Talks_Fail
 	}
 }
+
 country_event = { #Goldwater refuses negotiations (USA)
 	id = bormann.1927
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1927" }
@@ -11270,356 +11168,127 @@ country_event = { #Goldwater refuses negotiations (USA)
 
 	option = { #
 		name = bormann.1927.a
-		ai_chance = {
-			factor = 50
-		}
-		
 	}
 }
+
 country_event = { #Bormann meets the President: @Hexcron#5122 if this code is ***too*** cancerous
 	id = bormann.1928
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormann.1928" }
 	title = {
 		text = bormann.1928.bennett
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Wallace F. Bennett"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Wallace_F_Bennett ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.lbj
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Lyndon B. Johnson"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Lyndon_B_Johnson ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.rfk
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Robert F. Kennedy"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Robert_F_Kennedy ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.wallace
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "George Wallace"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_George_Wallace ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.mcs
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Margaret Chase Smith"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Margaret_Chase_Smith ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.glenn
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "John Glenn"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_John_Glenn ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.harrington
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Michael Harrington"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Michael_Harrington ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.thurmond
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Strom Thurmond"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Strom_Thurmond ruling_only = yes } } }
 	}
 	title = {
 		text = bormann.1928.lemay
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Curtis LeMay"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Curtis_LeMay ruling_only = yes } } }
 	}
-
 
 	desc = {
 		text = bormann.1928.bennett.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Wallace F. Bennett"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Wallace_F_Bennett ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.lbj.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Lyndon B. Johnson"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Lyndon_B_Johnson ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.rfk.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Robert F. Kennedy"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Robert_F_Kennedy ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.wallace.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "George Wallace"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_George_Wallace ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.mcs.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Margaret Chase Smith"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Margaret_Chase_Smith ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.glenn.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "John Glenn"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_John_Glenn ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.harrington.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Michael Harrington"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Michael_Harrington ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.thurmond.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Strom Thurmond"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Strom_Thurmond ruling_only = yes } } }
 	}
 	desc = {
 		text = bormann.1928.lemay.desc
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Curtis LeMay"
-					ruling_only = yes
-				}
-			}
-		}
+		trigger = { USA = { has_country_leader = { character = USA_Curtis_LeMay ruling_only = yes } } }
 	}
-	picture = GFX_report_event_usa_supreme_court
 
+	picture = GFX_report_event_usa_supreme_court
 	is_triggered_only = yes
-	
 
 	option = { #
 		name = bormann.1928.bennett.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Wallace F. Bennett"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-		
+		trigger = { USA = { has_country_leader = { character = USA_Wallace_F_Bennett ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.lbj.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Lyndon B. Johnson"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_Lyndon_B_Johnson ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.rfk.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Robert F. Kennedy"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_Robert_F_Kennedy ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.wallace.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "George Wallace"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_George_Wallace ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.mcs.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Margaret Chase Smith"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_Margaret_Chase_Smith ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.glenn.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "John Glenn"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_John_Glenn ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.harrington.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Michael Harrington"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_Michael_Harrington ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.lemay.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Curtis LeMay"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_Curtis_LeMay ruling_only = yes } } }
 	}
 	option = { #
 		name = bormann.1928.thurmond.option
-		trigger = {
-			USA = {
-				has_country_leader = {
-					name = "Strom Thurmond"
-					ruling_only = yes
-				}
-			}
-		}
-		ai_chance = {
-			factor = 50
-		}
-	
+		trigger = { USA = { has_country_leader = { character = USA_Strom_Thurmond ruling_only = yes } } }
 	}
 }
+
 ###################################
 # Bormann Economy Mechanic Events #
 ###################################
@@ -12064,6 +11733,12 @@ country_event = { # Amsterdam-Hamburg-Germania Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = { # Amsterdam-Hamburg-Germania
+			level = 3
+			path = { 3314 15172 391 6241 9363 3512 6469 495 9443 11431 3355 11493 526 6218 6298 6235 9347 9427 9320 9294 11219 375 6521 }
+			start_province = 3314
+			target_province = 6521
+		}
 		7 = {
 			set_building_level = {
 				type = infrastructure
@@ -12131,6 +11806,11 @@ country_event = { # Germania-Krakau Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 6521
+  			target_province = 9427
+		}
 		1026  = {
 			set_building_level = {
 				type = infrastructure
@@ -12184,6 +11864,11 @@ country_event = { # Krakau-Kiew Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 9427
+  			target_province = 525
+		}
 		92 = {
 			set_building_level = {
 				type = infrastructure
@@ -12251,6 +11936,11 @@ country_event = { # Krakau-Minsk Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 9427
+  			target_province = 14560
+		}
 		# 90 = {
 		# 	set_building_level = {
 		# 		type = infrastructure
@@ -12325,6 +12015,11 @@ country_event = { # Minsk-Riga Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 14560
+  			target_province = 9340
+		}
 		1403 = {
 			set_building_level = {
 				type = infrastructure
@@ -12385,6 +12080,11 @@ country_event = { # Minsk-Moskau Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 14560
+  			target_province = 6380
+		}
 		1405 = {
 			set_building_level = {
 				type = infrastructure
@@ -12445,6 +12145,11 @@ country_event = { # Minsk-Sankt Peterburg Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 14560
+  			target_province = 3151
+		}
 		# 207 = {
 		# 	set_building_level = {
 		# 		type = infrastructure
@@ -12498,6 +12203,11 @@ country_event = { # Kiew-Rostau Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 525
+  			target_province = 9417
+		}
 		193 = {
 			set_building_level = {
 				type = infrastructure
@@ -12551,6 +12261,11 @@ country_event = { # Rostau-Paulusburg Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 9417
+  			target_province = 3529
+		}
 		224 = {
 			set_building_level = {
 				type = infrastructure
@@ -12583,6 +12298,11 @@ country_event = { # Rostau-Katharinastadt Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 9417
+  			target_province = 3734
+		}
 		234 = {
 			set_building_level = {
 				type = infrastructure
@@ -12610,6 +12330,11 @@ country_event = { # Katharinastadt-Baku Line
 		set_temp_variable = { gdp_growth_temp = 0.1 }
 		econ_gdp_growth_change = yes
 		add_to_variable = { BOR_BreitspurbahnFrame = 1 }
+		build_railway = {
+			level = 3
+			start_province = 3734
+  			target_province = 7661
+		}
 		235 = {
 			set_building_level = {
 				type = infrastructure
@@ -12677,6 +12402,12 @@ country_event = { # Germania-Copenhagen Line
 				level = 10
 				instant_build = yes
 			}
+		}
+
+		build_railway = {
+			level = 3
+			start_province = 6521
+  			target_province = 6287
 		}
 
 		37 = {
@@ -12932,16 +12663,20 @@ country_event = {
 		custom_effect_tooltip = GER_BOR_schoerner_available_tt
 		hidden_effect = {
 			GGR = {
-				every_army_leader = {
-					limit = {
-						OR = {
-							has_id = 122
-							has_id = 1120
-						}
-					}
+				GER_ferdinand_schorner = {
+					set_nationality = GER
+				}
+				GER_otto_ernst_remer = {
+					set_nationality = GER
+				}
+				GER_eduard_wagner = {
+					set_nationality = GER
+				}
+				GER_theodor_tolsdorff = {
 					set_nationality = GER
 				}
 			}
+			promote_character = GER_ferdinand_schorner
 		}
 	}
 }
@@ -13263,6 +12998,7 @@ country_event = {
 		}
 	}
 }
+
 country_event = {
 	id = bormannflavor.19 # Inside the third Reich is published in the US (Bormann perspective)
 	immediate = { log = "[GetDateText]: [Root.GetName]: event bormannflavor.19" }
@@ -13334,9 +13070,9 @@ country_event = {
 
 	option = { #Quiet assassination
 		name = bormannflavor.22.a
-		set_country_flag = BOR_HVA_speer_assasination_mission_quiet
+		set_country_flag = BOR_HVA_speer_assassination_mission_quiet
 		custom_effect_tooltip = GER_Espionage_new_operation_available_tt
-		unlock_decision_tooltip = GER_BOR_HVA_assasinate_speer
+		unlock_decision_tooltip = GER_BOR_HVA_assassinate_speer
 		ai_chance = {
 			factor = 66
 		}
@@ -13344,9 +13080,9 @@ country_event = {
 	
 	option = { #Open and brutal assassination
 		name = bormannflavor.22.b
-		set_country_flag = BOR_HVA_speer_assasination_mission_brutal
+		set_country_flag = BOR_HVA_speer_assassination_mission_brutal
 		custom_effect_tooltip = GER_Espionage_new_operation_available_tt
-		unlock_decision_tooltip = GER_BOR_HVA_assasinate_speer
+		unlock_decision_tooltip = GER_BOR_HVA_assassinate_speer
 		ai_chance = {
 			factor = 33
 		}
@@ -13780,9 +13516,9 @@ country_event = {
 		ai_chance = {
 			factor = 40
 		}
-		set_country_flag = BOR_HVA_go4_assasination_mission
+		set_country_flag = BOR_HVA_go4_assassination_mission
 		custom_effect_tooltip = GER_Espionage_new_operation_available_tt
-		unlock_decision_tooltip = GER_BOR_HVA_assasinate_erhard_kiesinger
+		unlock_decision_tooltip = GER_BOR_HVA_assassinate_erhard_kiesinger
 	}
 }
 

@@ -16,16 +16,15 @@ country_event = { #Tiso dies during the GCW, Štefan takes over
 
 	option = {
 		name = slo.1.a
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Štefan Tiso"
-			desc = "POLITICS_STEFAN_TISO_DESC"
-			picture = "Portrait_Slovakia_Stefan_Tiso.dds"
-			expire = "1965.1.1"
-			ideology = national_socialism_clerical_fascism_subtype
+		retire_character = SLO_Jozef_Tiso
+		SLO_Stefan_Tiso = {
+			promote_character = {
+				ideology = national_socialism_clerical_fascism_subtype
+			}
 		}
-		add_ideas = SLO_tiso_dead
+		remove_ideas = SLO_Stefan_Tiso_hog
 		add_ideas = SLO_Pavol_Carnogursky_hog
+		add_ideas = SLO_tiso_dead
 		set_country_flag = SLO_josef_tiso_dead
 		hidden_effect = { country_event = { id = slo.2 days = 90 } }
 	}
@@ -44,10 +43,16 @@ country_event = { #Popular revolt, Jan Golian takes over
 	option = {
 		name = slo.2.a
 		set_politics = { ruling_party = authoritarian_democracy }
+		SLO_Jan_Golian = {
+			promote_character = {
+				ideology = authoritarian_democracy_subtype
+			}
+		}
 		add_popularity = {
 			ideology = authoritarian_democracy
 			popularity = 0.3
 		}
+		remove_all_ministers = yes
 		add_ideas = {
 			SLO_Augustin_Malar_hog
 			SLO_Imrich_Karvas_eco

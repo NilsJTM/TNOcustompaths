@@ -2532,16 +2532,16 @@ shared_focus = {
 	y = 7
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_call_up_chesterton"
-		create_corps_commander = {
-			name = "Arthur Kenneth Chesterton"
-			picture = "Portrait_ENG_Arthur_Chesterton.dds"
-			traits = { politically_connected infantry_officer infantry_leader urban_assault_specialist}
-			skill = 3
-			attack_skill = 4
-			defense_skill = 1
-			planning_skill = 2
-			logistics_skill = 1
-			id = 1635
+		ENG_Arthur_Kenneth_Chesterton = {
+			add_corps_commander_role = {
+				traits = { politically_connected infantry_officer infantry_leader urban_assault_specialist}
+				skill = 3
+				attack_skill = 4
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 1
+				legacy_id = 1635
+			}
 		}
 		add_popularity = {
 			ideology = fascism
@@ -3365,6 +3365,11 @@ shared_focus = {
 			add = 9
 			check_variable = { TNO_Britain_ElectionSeason_ActorID = 8 }
 		}
+
+		modifier = {
+			factor = 0
+			check_variable = { TNO_Britain_ElectionSeason_ActorID = 9 }
+		}
 	}
 	relative_position_id = ENG_an_end_of_the_disaster
 	x = -2
@@ -3677,6 +3682,11 @@ shared_focus = {
 		modifier = {
 			add = 9
 			check_variable = { TNO_Britain_ElectionSeason_ActorID = 6 }
+		}
+
+		modifier = {
+			factor = 0
+			check_variable = { TNO_Britain_ElectionSeason_ActorID = 9 }
 		}
 	}
 	relative_position_id = ENG_an_end_of_the_disaster
@@ -5114,10 +5124,11 @@ shared_focus = {
 	x = -2
 	y = 1
 	completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ENG_MT_thatcher_offensive_efforts"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = land_doctrine
 		}
 		add_to_variable = { ENG_MIL_LOY = 5 }
 		ENG_MILMAN_CALC = yes
@@ -5213,21 +5224,38 @@ shared_focus = {
 	x = 0
 	y = 1
 	completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ENG_MT_thatcher_chieftain_tank"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = MBT
-			uses = 1
+		if = {
+			limit = { has_dlc = "No Step Back" }
+			add_tech_bonus = {
+				bonus = 0.5
+				category = MBT
+				uses = 1
+			}
+			add_tech_bonus = {
+				bonus = 1
+				category = MBT
+				uses = 1
+			}
 		}
-		add_tech_bonus = {
-			bonus = 0.5
-			category = 	armor_improvements
-			uses = 1
+		if = {
+			limit = { NOT = { has_dlc = "No Step Back" } }
+			add_tech_bonus = {
+				bonus = 0.5
+				category = MBT
+				uses = 1
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				category = 	armor_improvements
+				uses = 1
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				category = 	turret_improvements
+				uses = 1
+			}
 		}
-		add_tech_bonus = {
-			bonus = 0.5
-			category = 	turret_improvements
-			uses = 1
-		}
+		
 		add_to_variable = { ENG_MIL_LOY_FLR = 5 }
 		custom_effect_tooltip = loyalty_boost_small.tt
 		ENG_MILMAN_CALC = yes
@@ -5258,15 +5286,18 @@ shared_focus = {
 			category = APC
 			uses = 1
 		}
-		add_tech_bonus = {
-			bonus = 0.5
-			category = 	armor_improvements
-			uses = 1
-		}
-		add_tech_bonus = {
-			bonus = 0.5
-			category = 	turret_improvements
-			uses = 1
+		if = {
+			limit = { NOT = { has_dlc = "No Step Back" } }
+			add_tech_bonus = {
+				bonus = 0.5
+				category = 	armor_improvements
+				uses = 1
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				category = 	turret_improvements
+				uses = 1
+			}
 		}
 		add_to_variable = { ENG_MIL_EFF_FLR = 5 }
 		custom_effect_tooltip = efficiency_boost_small.tt
@@ -5675,10 +5706,11 @@ shared_focus = {
 			remove_idea = ENG_MT_thatcher_defensive_efforts_idea
 			add_idea = ENG_MT_thatcher_defensive_doctrines
 		}
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = land_doctrine
 		}
 	}
 }
@@ -5955,10 +5987,11 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_MT_thatcher_rebuild_royal_airforce"
 		add_ideas = ENG_MT_rebuild_RAF
-		add_tech_bonus = {
-			bonus = 0.5
-			category = air_doctrine
-			uses = 1
+		add_doctrine_cost_reduction = {
+		    name = air_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = air_doctrine
 		}
 		country_event = {
 			id = ENG_thatcher.304
@@ -6169,10 +6202,11 @@ shared_focus = { #give airforce doctrine research bonuses
 	y = 3
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_MT_thatcher_air_doctrinal_advances"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = air_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = air_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = air_doctrine
 		}
 	}
 }
@@ -6284,10 +6318,11 @@ shared_focus = {
 			days = 3
 		}
 		army_experience = 25
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 1
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
 	}
 }
@@ -6373,10 +6408,11 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_defend_every_piece_of_land"
 		add_ideas = ENG_MT_defend_every_piece_of_land
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 1
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
 		add_to_variable = { ENG_MIL_LOY = 5 }
 		add_to_variable = { ENG_MIL_LOY_FLR = 10 }
@@ -6405,10 +6441,11 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_strategic_redoubts"
 		add_ideas = ENG_MT_strategic_redoubts
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = land_doctrine
 		}
 		add_to_variable = { ENG_MIL_EFF = 5 }
 		add_to_variable = { ENG_MIL_EFF_FLR = 10 }
@@ -6811,10 +6848,11 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_a_new_way_of_warfare"
 		add_ideas = ENG_MT_a_new_way_of_warfare
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = land_doctrine
 		}
 		add_tech_bonus = {
 			bonus = 0.5
@@ -6848,10 +6886,11 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_lessons_from_the_empire"
 		add_ideas = ENG_MT_lessons_from_the_empire
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 1
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
 		country_event = {
 			id = ENG_mac.102
@@ -7060,10 +7099,11 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_a_new_royal_navy"
 		naval_funding_maximal_increase_med = yes
-		add_tech_bonus = {
-			bonus = 0.5
-			category = naval_doctrine
-			uses = 3
+		add_doctrine_cost_reduction = {
+		    name = naval_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 3
+		    category = naval_doctrine
 		}
 		country_event = {
 			id = ENG_mac.21
@@ -12217,7 +12257,23 @@ shared_focus = {
 		}
 		ParliamentMechanic_GovStab_Calculate = yes
 		remove_ideas_with_trait = head_of_government
-		add_ideas = ENG_Harold_Macmillan_hog
+		add_advisor_role = {
+			character = ENG_Harold_Macmillan
+			advisor = {
+				slot = head_of_government
+				idea_token = ENG_Harold_Macmillan_hog
+				allowed = {
+					original_tag = ENG
+				}
+				traits = {
+					hog_defender_of_democracy
+				}
+				cost = -1
+				removal_cost = -1
+				ai_will_do = { factor = 0 }
+			}
+			activate = yes
+		}
 	}
 }
 
@@ -17611,10 +17667,11 @@ shared_focus = {
 	y = 2
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_NDL_listen_to_the_experts"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = naval_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = naval_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = naval_doctrine
 		}
 		add_to_variable = { ENG_MIL_EFF_FLR = 15 }
 		add_to_variable = { ENG_MIL_EFF = 10 }
@@ -17899,19 +17956,22 @@ shared_focus = {
 		country_event = {
 			id = FEN_NDL.1010
 		}
-		add_tech_bonus = {
-			bonus = 0.5
-			category = naval_doctrine
-			uses = 3
+		add_doctrine_cost_reduction = {
+		    name = naval_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 3
+		    category = naval_doctrine
 		}
 		add_ideas = FEN_NDL_MT_battleship_navy
 		add_war_support = 0.15
 		hidden_effect = {
 			if = {
 				limit = { has_dlc = "Man the Guns" }
+				set_technology = { advanced_ship_hull_heavy_custom_jellicoe = 1 }
 				load_oob = FEN_jellicoe_naval
 			}
 			else = {
+				set_technology = { advanced_battleship_custom_jellicoe = 1 }
 				load_oob = FEN_jellicoe_naval_non_mtg
 			}
 		}
@@ -17934,10 +17994,11 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_NDL_the_royal_army"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = land_doctrine
 		}
 	}
 }
@@ -18040,10 +18101,11 @@ shared_focus = {
 			category = infantry_weapons
 			uses = 2
 		}
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = land_doctrine
 		}
 	}
 }
@@ -18089,10 +18151,11 @@ shared_focus = {
 	y = 2
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_NDL_meeting_with_stirling"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 1
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
 		country_event = {
 			id = FEN_NDL.1007
@@ -18197,10 +18260,11 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_NDL_the_royal_air_force"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = air_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = air_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = air_doctrine
 		}
 		country_event = {
 			id = FEN_NDL.1008
@@ -18454,10 +18518,11 @@ shared_focus = {
 	y = 6
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_NDL_a_professional_air_force"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = air_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = air_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = air_doctrine
 		}
 		air_experience = 50
 	}
@@ -21716,10 +21781,11 @@ shared_focus = {
 	y = 2
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_SLP_Military_a_navy_to_protect_the_coasts"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = naval_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = naval_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = naval_doctrine
 		}
 	}
 }
@@ -21916,10 +21982,11 @@ shared_focus = {
 	y = 6
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_SLP_Military_lessons_from_1943"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = naval_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = naval_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = naval_doctrine
 		}
 		add_war_support = 0.1
 	}
@@ -22213,10 +22280,11 @@ shared_focus = {
 	y = 7
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_SLP_Military_the_trade_secured"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = naval_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = naval_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = naval_doctrine
 		}
 		add_stability = 0.05
 	}
@@ -22237,10 +22305,11 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_SLP_Military_the_new_socialist_army"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = land_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = land_doctrine
 		}
 	}
 }
@@ -22506,10 +22575,11 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_SLP_Military_the_new_socialist_air_force"
-		add_tech_bonus = {
-			bonus = 0.5
-			category = air_doctrine
-			uses = 2
+		add_doctrine_cost_reduction = {
+		    name = air_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 2
+		    category = air_doctrine
 		}
 		country_event = {
 			id = FEN_SLP.1005
@@ -25455,6 +25525,7 @@ shared_focus = {
 	cost = 3
 	available = {
 		NOT = { has_country_flag = ENG_in_crisis }
+		ENG_no_bills_in_parliament = yes
 		custom_trigger_tooltip = {
 			tooltip = ENG_thatcher_influence40.tt
 			check_variable = {
@@ -25805,6 +25876,7 @@ shared_focus = {
 	cost = 3
 	available = {
 		NOT = { has_country_flag = ENG_in_crisis }
+		ENG_no_bills_in_parliament = yes
 	}
 	prerequisite = {
 		focus = ENG_ET_thatcher_road_flat_taxes
@@ -26114,6 +26186,7 @@ shared_focus = {
 	cost = 3
 	available = {
 		NOT = { has_country_flag = ENG_in_crisis }
+		ENG_no_bills_in_parliament = yes
 	}
 	prerequisite = {
 		focus = ENG_ET_thatcher_targetting_corruption_local_authorities
@@ -26218,6 +26291,7 @@ shared_focus = {
 	cost = 3
 	available = {
 		NOT = { has_country_flag = ENG_in_crisis }
+		ENG_no_bills_in_parliament = yes
 	}
 	prerequisite = {
 		focus = ENG_ET_thatcher_small_govt_of_people
@@ -27115,10 +27189,11 @@ shared_focus = {
 			limit = {
 				has_country_flag = ENG_USA_Dover_Conference_picked
 			}
-			add_tech_bonus = {
-				bonus = 0.25
-				uses = 2
-				category = air_doctrine
+			add_doctrine_cost_reduction = {
+			    name = air_doc_bonus
+			    cost_reduction = 0.25
+			    uses = 2
+			    category = air_doctrine
 			}
 			TNO_improve_military_supervision_policy_effectiveness_high = yes
 		}
@@ -27126,10 +27201,11 @@ shared_focus = {
 			limit = {
 				has_country_flag = ENG_GER_Dover_Conference_picked
 			}
-			add_tech_bonus = {
-				bonus = 0.25
-				uses = 2
-				category = land_doctrine
+			add_doctrine_cost_reduction = {
+			    name = land_doc_bonus
+			    cost_reduction = 0.25
+			    uses = 2
+			    category = land_doctrine
 			}
 			TNO_improve_training_policy_effectiveness_med = yes
 		}
@@ -27613,23 +27689,23 @@ shared_focus = {
 	ai_will_do = {
 		base = 0
 		modifier = {
-			add = 2.5
+			add = 2
 			has_completed_focus = ENG_hint_at_the_scottish_oil
 		}
 		modifier = {
-			add = 2.5
+			add = 2
 			has_completed_focus = ENG_the_value_of_the_english_market
 		}
 		modifier = {
-			add = 2.5
+			add = 2
 			has_completed_focus = ENG_our_proficiency_on_the_world_stage
 		}
 		modifier = {
-			add = 2.5
+			add = 2
 			has_completed_focus = ENG_discuss_the_enemy
 		}
 		modifier = {
-			add = 2.5
+			add = 2
 			has_completed_focus = ENG_study_the_results
 		}
 	}
@@ -29886,6 +29962,10 @@ shared_focus = {
 	relative_position_id = ENG_NF_beware_the_ides_of_march
 	x = 1
 	y = 1
+	available = {
+		NOT = { has_country_flag = ENG_in_crisis }
+		ENG_no_bills_in_parliament = yes
+	}
 	prerequisite = {
 		focus = ENG_NF_beware_the_ides_of_march
 	}
@@ -30105,6 +30185,10 @@ shared_focus = {
 	relative_position_id = FEN_MSA_shove_the_gunpowder
 	x = 0
 	y = 2
+	available = {
+		NOT = { has_country_flag = ENG_in_crisis }
+		ENG_no_bills_in_parliament = yes
+	}
 	prerequisite = {
 		focus = FEN_MSA_the_queen_and_her_general
 		focus = FEN_MSA_talk_with_wilson

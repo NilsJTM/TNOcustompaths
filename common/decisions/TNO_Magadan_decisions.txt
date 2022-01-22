@@ -266,10 +266,22 @@ MAG_USA_market_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove MAG_USA_purchase_tanks"
-			add_equipment_to_stockpile = {
-				type = MBT_equipment_1
-				amount = 75
-				producer = USA
+			if = { 
+				limit = { 
+					has_dlc = "No Step Back"
+				}
+				add_equipment_to_stockpile = {
+					type = MBT_chassis_1
+					amount = 75
+					producer = USA
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = MBT_equipment_1
+					amount = 75
+					producer = USA
+				}
 			}
 		}
 	}
@@ -1135,14 +1147,14 @@ MAG_WA_a_government_of_personalities_category = {
 		}
 	}
 
-	MAG_WA_collaborator_Georgy_Shekerev = {
+	MAG_WA_collaborator_Georgy_Shekherev = {
 		visible = {
 			has_completed_focus = MAG_WA_make_use_of_the_blackshirts
 		}
 		available = {
 			NOT = {
 				has_country_flag = MAG_WA_minister_cooldown_flag
-				has_idea = MAG_Georgy_Shekerev_sec
+				has_idea = MAG_Georgy_Shekherev_sec
 			}
 		}
 		ai_will_do = {
@@ -1150,7 +1162,7 @@ MAG_WA_a_government_of_personalities_category = {
 		}
 		cost = 50
 		complete_effect = {
-			add_ideas = MAG_Georgy_Shekerev_sec
+			add_ideas = MAG_Georgy_Shekherev_sec
 			activate_mission = MAG_WA_minister_cooldown
 			set_country_flag = MAG_WA_minister_cooldown_flag
 			set_country_flag = MAG_WA_collab_chosen
@@ -1259,6 +1271,23 @@ MAG_WA_a_government_of_personalities_category = {
 		}
 		cost = 50
 		complete_effect = {
+			CHT = {
+				CHT_Leonid_Chernykh = {
+					set_nationality = MAG
+					add_advisor_role = {
+						advisor = {
+							slot = foreign_minister
+							idea_token = MAG_Leonid_Chernykh_for
+							allowed = { original_tag = MAG }
+							ledger = civilian
+							cost = -1
+							removal_cost = -1
+							ai_will_do = { factor = 0 }
+							traits = { for_great_compromiser }
+						}
+					}
+				}
+			}
 			add_ideas = MAG_Leonid_Chernykh_for
 			activate_mission = MAG_WA_minister_cooldown
 			set_country_flag = MAG_WA_minister_cooldown_flag
@@ -3044,7 +3073,7 @@ MAG_WA_mercenary_contracts_category = {
 	MAG_west_african_war_effigy = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			has_global_flag = west_african_war
+			has_global_flag = west_african_war_ongoing
 		}
 		available = {
 			always = no
@@ -3061,7 +3090,7 @@ MAG_WA_mercenary_contracts_category = {
 				exists = yes 
 				is_faction_leader = yes
 			}
-			has_global_flag = west_african_war
+			has_global_flag = west_african_war_ongoing
 			NOT = {
 				OR = {
 					CAO = { has_idea = MAG_WA_mercenary_contract_idea }
@@ -3085,7 +3114,7 @@ MAG_WA_mercenary_contracts_category = {
 				exists = yes
 				is_faction_leader = yes
 			}
-			has_global_flag = west_african_war
+			has_global_flag = west_african_war_ongoing
 			NOT = {
 				OR = {
 					CAO = { has_idea = MAG_WA_mercenary_contract_idea }
@@ -3106,7 +3135,7 @@ MAG_WA_mercenary_contracts_category = {
 		icon = GFX_decision_black_market_arms_trade_increase
 		visible = {
 			CAO = { exists = yes }
-			has_global_flag = west_african_war
+			has_global_flag = west_african_war_ongoing
 			NOT = {
 				OR = {
 					CAO = { has_idea = MAG_WA_mercenary_contract_idea }

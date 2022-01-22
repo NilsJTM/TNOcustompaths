@@ -97,7 +97,7 @@ country_event = { # Bao Dai abdicates, Ho Chi Minh swept into power
 		set_politics = { ruling_party = communist }
 		add_popularity = { ideology = communist popularity = .55 }
 		leave_faction = yes
-		set_capital = 728
+		set_capital = { state = 728 }
 		set_cosmetic_tag = VIN_DRV
 		remove_ideas = {
 			VIN_japanese_army
@@ -105,6 +105,10 @@ country_event = { # Bao Dai abdicates, Ho Chi Minh swept into power
 			VIN_japanese_rubber_exports
 		}
 		econ_leave_sphere = yes
+		if = {
+			limit = { has_war_with = YUN } 
+			YUN = { white_peace = ROOT }
+		}
 		every_country = { news_event = WORLD.16502 }
 	}
 }
@@ -121,14 +125,7 @@ country_event = { # Ho Chi Minh dies as president of Vietnam
 
 	option = {
 		name = VIN.1.a
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Truong Chinh"
-			picture = "Portrait_Vietnam_Truong_Chinh.dds"
-			desc = "POLITICS_TRUONG_CHINH_DESC"
-			expire = "1999.12.12"
-			ideology = communist_mao_zedong_thought_subtype
-		}
+		retire_character = VIN_ho_chi_minh
 		set_party_name = {
 			ideology = communist
 			long_name = VIN_post_HCM_communist_party_long
@@ -151,14 +148,7 @@ country_event = { # Ho Chi Mihn dies as leader of the Viet Minh
 
 	option = {
 		name = VIN.2.a
-		kill_ideology_leader = communist
-		create_country_leader = {
-			name = "Truong Chinh"
-			picture = "Portrait_Vietnam_Truong_Chinh.dds"
-			desc = "POLITICS_TRUONG_CHINH_DESC"
-			expire = "1999.12.12"
-			ideology = communist_mao_zedong_thought_subtype
-		}
+		retire_character = VIN_ho_chi_minh
 		set_party_name = {
 			ideology = communist
 			long_name = VIN_post_HCM_communist_party_long

@@ -266,7 +266,8 @@ country_event = { #Svetlana distinguishes herself as a valuable asset
 				days = 1
 			}
 		}
-		KOM_increase_Stalina_influence_med = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
 	}
 	option = { #She cannot be trusted
 		name = KOM.1.b
@@ -362,9 +363,12 @@ country_event = { #Kosygin and Svetlana form a secret agreement
 
 	option = {
 		name = KOM.5.a
-		KOM_increase_Stalina_influence_low = yes
-		KOM_increase_Kosygin_influence_med = yes
-		KOM_decrease_Voznesensky_influence_med = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 1 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 3 }
+        KOM_kosygin_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+        KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -468,7 +472,8 @@ country_event = { #A bunch of stuff about the former ties is leaked
 		ai_chance = {
 			factor = 70
 		}
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 		hidden_effect = {
 			country_event = {
 				id = KOM.13
@@ -520,8 +525,9 @@ country_event = { #Voz is forgiven
 
 	option = {
 		name = KOM.11.a
-		KOM_decrease_Voznesensky_influence_high = yes
-		KOM_decrease_center_power_random = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
+		KOM_center_power_decrease_random = yes
 	}
 }
 
@@ -536,9 +542,12 @@ country_event = {  #Voz is not forgiven
 
 	option = {
 		name = KOM.12.a
-		KOM_decrease_Voznesensky_influence_high = yes
-		KOM_decrease_center_power_high = yes
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 		set_country_flag = KOMVoznesenskyControversy
 	}
 }
@@ -562,7 +571,7 @@ country_event = { #Voz tries to cover it up
 				days = 2
 			}
 		}
-		KOM_decrease_Voznesensky_influence_random = yes
+		KOM_voznesensky_influence_decrease_random = yes
 	}
 }
 
@@ -585,8 +594,10 @@ country_event = { #Leak issue gets even worse
 				days = 3
 			}
 		}
-		KOM_decrease_center_power_med = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -646,7 +657,8 @@ country_event = { #Purge the party
 	option = {
 		name = KOM.17.a
 		add_political_power = 25
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		hidden_effect = {
 			country_event = {
 				id = KOM.20
@@ -676,14 +688,15 @@ country_event = { #Svetlana urges caution
 				days = 5
 			}
 		}
-		KOM_increase_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
 	}
 	option = {
 		name = KOM.18.b
 		ai_chance = {
 			factor = 50
 		}
-		KOM_increase_Stalina_influence_random = yes
+		KOM_stalina_influence_increase_random = yes
 		hidden_effect = {
 			country_event = {
 				id = KOM.29
@@ -813,12 +826,17 @@ country_event = { #It is revealed that he was innocent after all
 			}
 		}
 		add_political_power = -150
-		KOM_decrease_center_power_med = yes
-		KOM_decrease_Voznesensky_influence_high = yes
-		KOM_increase_Zhdanov_influence_med = yes
-		KOM_increase_Suslov_influence_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
 		hidden_effect = {
-			KOM_decrease_Voznesensky_influence_high = yes
+			set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 		}
 	}
 	option = {
@@ -827,10 +845,14 @@ country_event = { #It is revealed that he was innocent after all
 			NOT = { has_country_flag = StraightUpMurderedADude }
 		}
 		add_political_power = -25
-		KOM_decrease_center_power_low = yes
-		KOM_increase_Zhdanov_influence_low = yes
-		KOM_increase_Suslov_influence_low = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 1 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 1 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -851,14 +873,17 @@ country_event = { #Voz is guilty of murder, the party turns on him
 				days = 2
 			}
 		}
-		KOM_decrease_center_power_random = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		KOM_center_power_decrease_random = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 		hidden_effect = {
-			KOM_decrease_Voznesensky_influence_high = yes
-			KOM_decrease_Voznesensky_influence_high = yes
+			set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
+			set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 		}
-		KOM_increase_Stalina_influence_random = yes
-		KOM_increase_Kosygin_influence_random = yes
+		KOM_stalina_influence_increase_random = yes
+		KOM_kosygin_influence_increase_random = yes
 	}
 }
 
@@ -948,15 +973,9 @@ country_event = { #Kosygin takes over
 			ruling_party = liberal_democracy
 		}
 		KOM_assign_soclib_ministers = yes
-		create_country_leader = {
-			name = "Leonid Kantorovich"
-			desc = "POLITICS_LEONID_KANTOROVICH_DESC"
-			picture = "Portrait_Komi_Leonid_Kantorovich.dds"
-			expire = "1999.1.1"
-			ideology = social_democracy_democratic_socialism_subtype
-			traits = {
-				the_prefect
-			}
+		retire_character = KOM_Nikolai_Voznesensky
+		KOM_Leonid_Kantorovich = {
+			promote_character = yes
 		}
 		set_country_flag = KOM_Voznesensky_Retired
 		KOM_eliminate_center_leader = yes
@@ -979,15 +998,9 @@ country_event = { #Svetlana takes over
 			ruling_party = authoritarian_democracy
 		}
 		KOM_assign_authdem_ministers = yes
-		create_country_leader = {
-			name = "Leonid Kantorovich"
-			desc = "POLITICS_LEONID_KANTOROVICH_DESC"
-			picture = "Portrait_Komi_Leonid_Kantorovich.dds"
-			expire = "1999.1.1"
-			ideology = social_democracy_democratic_socialism_subtype
-			traits = {
-				the_prefect
-			}
+		retire_character = KOM_Nikolai_Voznesensky
+		KOM_Leonid_Kantorovich = {
+			promote_character = yes
 		}
 		set_country_flag = KOM_Voznesensky_Retired
 		KOM_eliminate_center_leader = yes
@@ -1047,8 +1060,10 @@ country_event = { #The leaks stop, but the Party takes a hit
 				days = 3
 			}
 		}
-		KOM_decrease_center_power_med = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -1110,7 +1125,7 @@ country_event = { #SocDems' idea is the best
 
 	option = {
 		name = KOM.32.a
-		KOM_increase_Voznesensky_influence_random = yes
+		KOM_voznesensky_influence_increase_random = yes
 	}
 }
 
@@ -1125,7 +1140,7 @@ country_event = { #SocLibs' ideas is the best
 
 	option = {
 		name = KOM.33.a
-		KOM_increase_Kosygin_influence_random = yes
+		KOM_kosygin_influence_increase_random = yes
 	}
 }
 
@@ -1154,7 +1169,7 @@ country_event = { #Svetlana is the compromise choice
 
 	option = {
 		name = KOM.35.a
-		KOM_increase_Stalina_influence_random = yes
+		KOM_stalina_influence_increase_random = yes
 	}
 }
 
@@ -1175,9 +1190,12 @@ country_event = { #Zhdanov thanks Voz for not cutting ties
 				days = 3
 			}
 		}
-		KOM_increase_Zhdanov_influence_med = yes
-		KOM_increase_right_power_low = yes
-		KOM_increase_Shafarevich_influence_low = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+        KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 1 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 1 }
+        KOM_shafarevich_influence_change = yes
 	}
 }
 
@@ -1271,9 +1289,12 @@ country_event = { #Bukharina and Ponomaryov are outed, you owe Zhdanov a favor
 		add_to_variable = { KOMZhdanovFavors = 10 }
 		custom_effect_tooltip = KOM_request_insider_information_tt
 		add_to_variable = { KOMZhdanovFavors = 5 }
-		KOM_increase_Voznesensky_influence_high = yes
-		KOM_increase_Zhdanov_influence_low = yes
-		KOM_decrease_Suslov_influence_high = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 5 }
+           KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 1 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -1451,8 +1472,10 @@ country_event = { #Communists get voter intimdation advantage
 
 	option = {
 		name = KOM.46.a
-		KOM_increase_left_power_high = yes
-		KOM_increase_Suslov_influence_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 5 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -1467,7 +1490,8 @@ country_event = { #Moderates flee to center due to violence
 
 	option = {
 		name = KOM.47.a
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -1502,8 +1526,10 @@ country_event = { #Fascists get voter intimidation advantage
 
 	option = {
 		name = KOM.49.a
-		KOM_increase_right_power_high = yes
-		KOM_increase_gumilyov_influence_high = yes
+		set_temp_variable = { KOMRightPowerTemp = 5 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 5 }
+        KOM_gumilyov_influence_change = yes
 	}
 }
 
@@ -1588,7 +1614,8 @@ country_event = { #No - suddenly propaganda makes you look no worse than the rad
 
 	option = {
 		name = KOM.52.a
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -1603,10 +1630,14 @@ country_event = { #Yes, you look suspicious for suddenly stopping, Suslov laughs
 
 	option = {
 		name = KOM.53.a
-		KOM_increase_left_power_high = yes
-		KOM_increase_Suslov_influence_med = yes
-		KOM_increase_Zhdanov_influence_low = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 1 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 		set_country_flag = KOMVoznesenskyControversy
 	}
 }
@@ -1664,9 +1695,12 @@ country_event = { #More or less bloodless victory
 
 	option = {
 		name = KOM.56.a
-		KOM_increase_center_power_med = yes
-		KOM_decrease_right_power_low = yes
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -1 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -1681,7 +1715,7 @@ country_event = { #Svetlana gets some good ideas...
 
 	option = {
 		name = KOM.57.a
-		KOM_increase_Stalina_influence_random = yes
+		KOM_stalina_influence_increase_random = yes
 	}
 }
 
@@ -1750,8 +1784,9 @@ country_event = { #Svetlana gains influence
 				days = 1
 			}
 		}
-		KOM_increase_center_power_random = yes
-		KOM_increase_Stalina_influence_high = yes
+		KOM_center_power_increase_random = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
 	}
 }
 
@@ -1786,8 +1821,10 @@ country_event = { #Suslov becomes more and more unchecked
 
 	option = {
 		name = KOM.61.a
-		KOM_increase_Suslov_influence_high = yes
-		KOM_increase_left_power_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 5 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -1837,9 +1874,12 @@ country_event = { #Placate Stalina by agreeing with her and increasing her influ
 
 	option = {
 		name = KOM.63.a
-		KOM_increase_Stalina_influence_med = yes
-		KOM_increase_Voznesensky_influence_low = yes
-		KOM_decrease_Kosygin_influence_low = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 1 }
+           KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = -1 }
+           KOM_kosygin_influence_change = yes
 	}
 }
 
@@ -1860,9 +1900,11 @@ country_event = { #Tell her it's a bad idea, Kosygin approaches her.
 				days = 1
 			}
 		}
-		KOM_increase_Stalina_influence_med = yes
-		KOM_decrease_Voznesensky_influence_random = yes
-		KOM_increase_Kosygin_influence_med = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
+		KOM_voznesensky_influence_decrease_random = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 3 }
+           KOM_kosygin_influence_change = yes
 	}
 }
 
@@ -1883,9 +1925,12 @@ country_event = { #Kosygin mentions Voz's Zhdanov connections to Stalina
 				days = 1
 			}
 		}
-		KOM_increase_Stalina_influence_low = yes
-		KOM_decrease_Voznesensky_influence_med = yes
-		KOM_increase_Kosygin_influence_low = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 1 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+            KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 1 }
+           KOM_kosygin_influence_change = yes
 	}
 }
 
@@ -1956,7 +2001,8 @@ country_event = { #Voznesenzky is not compromised
 
 	option = {
 		name = KOM.68.a
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -1984,8 +2030,10 @@ country_event = { #Do not confront him, instead build support secretly
 				}
 			}
 		}
-		KOM_decrease_center_power_med = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -2007,7 +2055,7 @@ country_event = { #Approach the left to flip them
 				days = 3
 			}
 		}
-		KOM_decrease_Voznesensky_influence_random = yes
+		KOM_voznesensky_influence_decrease_random = yes
 	}
 }
 
@@ -2084,17 +2132,27 @@ country_event = { #THe Party confronts Stalina and Kosygin
 				}
 			}
 		}
-		KOM_decrease_Stalina_influence_high = yes
-		KOM_decrease_Kosygin_influence_high = yes
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = -5 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = -5 }
+           KOM_kosygin_influence_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		hidden_effect = {
-			KOM_decrease_Stalina_influence_high = yes
-			KOM_decrease_Kosygin_influence_high = yes
-			KOM_decrease_center_power_high = yes
-			KOM_increase_right_power_med = yes
-			KOM_increase_left_power_high = yes
-			KOM_increase_gumilyov_influence_med = yes
-			KOM_increase_Suslov_influence_high = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = -5 }
+        KOM_stalina_influence_change = yes
+			set_temp_variable = { KOMKosyginInfluenceTemp = -5 }
+           KOM_kosygin_influence_change = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
+			set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = 5 }
+            KOM_suslov_influence_change = yes
 		}
 	}
 }
@@ -2111,10 +2169,14 @@ country_event = { #Suslov cackles at the party more or less splitting
 	option = {
 		name = KOM.74.a
 		set_country_flag = KOMSuslovLaughs
-		KOM_increase_Suslov_influence_high = yes
-		KOM_increase_Zhdanov_influence_med = yes
-		KOM_decrease_center_power_med = yes
-		KOM_increase_left_power_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 5 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
 		set_country_flag = KOMVoznesenskyControversy
 	}
 }
@@ -2170,7 +2232,8 @@ country_event = { #This was all a Suslov plot, we're being watched!
 
 	option = {
 		name = KOM.77.a
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -2191,8 +2254,10 @@ country_event = { #Suslov manages to consolidate more power over the communists
 				days = 3
 			}
 		}
-		KOM_increase_Suslov_influence_high = yes
-		KOM_decrease_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 5 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = -3 }
+            KOM_zhdanov_influence_change = yes
 		#KOM_decrease_Ponomaryov_influence_med = yes
 	}
 }
@@ -2269,8 +2334,10 @@ country_event = { #Gumilyov isn't fully neutered
 
 	option = {
 		name = KOM.81.a
-		KOM_increase_gumilyov_influence_med = yes
-		KOM_increase_right_power_high = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 5 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -2378,7 +2445,8 @@ country_event = { #Vozesensky will not give in
 			}
 		}
 		else = {
-			KOM_decrease_center_power_high = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		}
 		set_country_flag = KOMVoznesenskyControversy
 	}
@@ -2401,8 +2469,10 @@ country_event = { #Voz folds, makes plans to backstab Zhdanov, plays it off as 3
 				days = 2
 			}
 		}
-		KOM_increase_Voznesensky_influence_med = yes
-		KOM_decrease_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 3 }
+           KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = -3 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -2423,7 +2493,7 @@ country_event = { #The plan gets leaked
 				days = 2
 			}
 		}
-		KOM_decrease_center_power_random = yes
+		KOM_center_power_decrease_random = yes
 	}
 }
 
@@ -2444,7 +2514,7 @@ country_event = { #Suslov has infiltrated the Party!
 				days = 2
 			}
 		}
-		KOM_increase_Suslov_influence_random = yes
+		KOM_suslov_influence_increase_random = yes
 	}
 }
 
@@ -2472,7 +2542,7 @@ country_event = { #Zhdanov cuts ties
 				}
 			}
 		}
-		KOM_decrease_Voznesensky_influence_random = yes
+		KOM_voznesensky_influence_decrease_random = yes
 		hidden_effect = {
 			if = {
 				limit = {
@@ -2584,10 +2654,14 @@ country_event = { #A revelation
 
 	option = {
 		name = KOM.93.a
-		KOM_increase_gumilyov_influence_med = yes
-		KOM_increase_Voznesensky_influence_low = yes
-		KOM_increase_right_power_med = yes
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 1 }
+           KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -2602,9 +2676,11 @@ country_event = { #The trail fades away
 
 	option = {
 		name = KOM.94.a
-		KOM_increase_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
 		hidden_effect = {
-			KOM_increase_Suslov_influence_high = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = 5 }
+            KOM_suslov_influence_change = yes
 			#KOM_increase_Ponomaryov_influence_high = yes
 		}
 	}
@@ -2628,8 +2704,10 @@ country_event = { #Gumilyov's activity ramps up
 				days = 3
 			}
 		}
-		KOM_increase_right_power_med = yes
-		KOM_increase_gumilyov_influence_med = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
 	}
 }
 
@@ -2650,8 +2728,10 @@ country_event = { #The left democrats threaten to split
 				days = 3
 			}
 		}
-		KOM_decrease_center_power_low = yes
-		KOM_decrease_Voznesensky_influence_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+            KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -2672,8 +2752,10 @@ country_event = { #The realization occurs that Suslov has infiltrated the party
 				days = 3
 			}
 		}
-		KOM_decrease_center_power_low = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -2694,7 +2776,8 @@ country_event = { #Zhdanov secretly sends out an olive branch
 				days = 1
 			}
 		}
-		KOM_increase_Zhdanov_influence_low = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 1 }
+            KOM_zhdanov_influence_change = yes
 	}
 	option = {
 		name = KOM.98.b
@@ -2710,8 +2793,10 @@ country_event = { #Zhdanov secretly sends out an olive branch
 				days = 3
 			}
 		}
-		KOM_decrease_left_power_low = yes
-		KOM_decrease_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = -3 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -2726,10 +2811,14 @@ country_event = { #Agree, trade Gumilyov for Suslov.
 
 	option = {
 		name = KOM.99.a
-		KOM_increase_left_power_high = yes
-		KOM_decrease_right_power_high = yes
-		KOM_increase_Suslov_influence_med = yes
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -2744,7 +2833,8 @@ country_event = { #Refuse, Zhdanov cuts ties.
 
 	option = {
 		name = KOM.100.a
-		KOM_decrease_Voznesensky_influence_med = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+            KOM_voznesensky_influence_change = yes
 		hidden_effect = {
 			if = {
 				limit = {
@@ -2771,14 +2861,19 @@ country_event = { #The left walks out and the majority is in trouble.
 
 	option = { #Let more conservatives in
 		name = KOM.101.a
-		KOM_decrease_Voznesensky_influence_med = yes
-		KOM_decrease_center_power_low = yes
-		KOM_increase_right_power_med = yes
-		KOM_increase_Shafarevich_influence_med = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+            KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 3 }
+        KOM_shafarevich_influence_change = yes
 	}
 	option = { #Wait for the next election
 		name = KOM.101.b
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -2842,22 +2937,18 @@ country_event = { #Kosygin is made leader - Deprecated
 
 	option = {
 		name = KOM.104.a
-		KOM_decrease_center_power_med = yes
-		KOM_increase_Kosygin_influence_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 3 }
+           KOM_kosygin_influence_change = yes
 
 		set_politics = {
 			ruling_party = liberal_democracy
 		}
 		KOM_assign_soclib_ministers = yes
-		create_country_leader = {
-			name = "Leonid Kantorovich"
-			desc = "POLITICS_LEONID_KANTOROVICH_DESC"
-			picture = "Portrait_Komi_Leonid_Kantorovich.dds"
-			expire = "1999.1.1"
-			ideology = social_democracy_democratic_socialism_subtype
-			traits = {
-				the_prefect
-			}
+		retire_character = KOM_Nikolai_Voznesensky
+		KOM_Leonid_Kantorovich = {
+			promote_character = yes
 		}
 		set_country_flag = KOM_Voznesensky_Retired
 		KOM_eliminate_center_leader = yes
@@ -2875,7 +2966,8 @@ country_event = { #Voznesenzky endures - Deprecated
 
 	option = {
 		name = KOM.105.a
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		set_country_flag = KOMVoznesenskyControversy
 	}
 }
@@ -2920,7 +3012,8 @@ country_event = { #The leftist paramiliaries go on strike
 				days = 1
 			}
 		}
-		KOM_increase_right_power_med = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -2935,7 +3028,8 @@ country_event = { #Sacrifice the armor and such
 
 	option = {
 		name = KOM.108.a
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 		add_timed_idea = { idea = KOM_neutered_paramilitaries days = 400 }
 	}
 }
@@ -2986,8 +3080,10 @@ country_event = { #Refuse concessions - Gumilyov does it instead.
 				days = 3
 			}
 		}
-		KOM_increase_right_power_low = yes
-		KOM_increase_gumilyov_influence_high = yes
+		set_temp_variable = { KOMRightPowerTemp = 1 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 5 }
+        KOM_gumilyov_influence_change = yes
 	}
 }
 
@@ -3002,7 +3098,8 @@ country_event = { #Reports of Gumilyov's men in our army
 
 	option = {
 		name = KOM.111.a
-		KOM_increase_gumilyov_influence_med = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
 	}
 }
 
@@ -3017,9 +3114,12 @@ country_event = { #The Conservatives take greater and greater roles in the coali
 
 	option = {
 		name = KOM.112.a
-		KOM_increase_right_power_low = yes
-		KOM_increase_center_power_low = yes
-		KOM_increase_Shafarevich_influence_low = yes
+		set_temp_variable = { KOMRightPowerTemp = 1 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 1 }
+        KOM_shafarevich_influence_change = yes
 	}
 }
 
@@ -3063,8 +3163,10 @@ country_event = { #The democrats investigate his shadow
 				days = 1
 			}
 		}
-		KOM_decrease_left_power_med = yes
-		KOM_increase_center_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -3085,7 +3187,8 @@ country_event = { #Bukharina gains more and more power
 				days = 4
 			}
 		}
-		KOM_increase_Bukharina_influence_high = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 5 }
+            KOM_bukharina_influence_change = yes
 	}
 }
 
@@ -3180,7 +3283,8 @@ country_event = { #He sacrifices influence to Bukharina to keep it afloat
 
 	option = {
 		name = KOM.118.a
-		KOM_increase_Bukharina_influence_high = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 5 }
+            KOM_bukharina_influence_change = yes
 		hidden_effect = {
 			country_event = {
 				id = KOM.120
@@ -3208,7 +3312,8 @@ country_event = { #Suslov eats the loss, to rely on Ponomaryov
 			}
 		}
 		#KOM_increase_Ponomaryov_influence_high = yes
-		KOM_decrease_Suslov_influence_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -3 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -3229,9 +3334,11 @@ country_event = { #Bukharina makes a play
 				days = 1
 			}
 		}
-		KOM_increase_Bukharina_influence_high = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 5 }
+            KOM_bukharina_influence_change = yes
 		#KOM_increase_Ponomaryov_influence_med = yes
-		KOM_decrease_Suslov_influence_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -3 }
+            KOM_suslov_influence_change = yes
 	}
 	option = { #TO ZHDANOV
 		name = KOM.120.b
@@ -3241,9 +3348,12 @@ country_event = { #Bukharina makes a play
 				days = 1
 			}
 		}
-		KOM_increase_Bukharina_influence_high = yes
-		KOM_increase_Zhdanov_influence_med = yes
-		KOM_decrease_Suslov_influence_med = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 5 }
+            KOM_bukharina_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -3 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -3264,7 +3374,8 @@ country_event = { #Andropov wins out, and Suslov loses him.
 				days = 1
 			}
 		}
-		KOM_decrease_Suslov_influence_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -3 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -3302,7 +3413,8 @@ country_event = { #Suslov hunts for another puppet.
 				days = 1
 			}
 		}
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -3363,9 +3475,12 @@ country_event = { #Zhdanov has acquired far too much power, Suslov hangs by a th
 				days = 1
 			}
 		}
-		KOM_decrease_left_power_med = yes
-		KOM_increase_Zhdanov_influence_med = yes
-		KOM_decrease_Suslov_influence_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -3391,8 +3506,10 @@ country_event = { #Zhdanov and Bukharina form a partnership.
 				days = 1
 			}
 		}
-		KOM_increase_center_power_med = yes
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 	option = {
 		name = KOM.126.b
@@ -3402,7 +3519,8 @@ country_event = { #Zhdanov and Bukharina form a partnership.
 				days = 5
 			}
 		}
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -3423,7 +3541,8 @@ country_event = { #Zhdanov talks to the liberals about a coup against Suslov
 				days = 3
 			}
 		}
-		KOM_increase_Voznesensky_influence_med = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 3 }
+           KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -3445,7 +3564,8 @@ country_event = { #Bukharina decides whether or not to out Zhdanov secretly.
 			}
 		}
 		set_country_flag = ZhdSecretlyOuted
-		KOM_increase_Bukharina_influence_low = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 1 }
+            KOM_bukharina_influence_change = yes
 	}
 	option = {
 		name = KOM.128.b
@@ -3478,10 +3598,14 @@ country_event = { #The deciding attempt.
 				days = 3
 			}
 		}
-		KOM_decrease_left_power_low = yes
-		KOM_increase_Bukharina_influence_high = yes
-		KOM_increase_Suslov_influence_low = yes
-		KOM_decrease_Zhdanov_influence_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 5 }
+            KOM_bukharina_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 1 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = -5 }
+            KOM_zhdanov_influence_change = yes
 	}
 	option = {
 		name = KOM.129.b
@@ -3496,10 +3620,14 @@ country_event = { #The deciding attempt.
 				days = 3
 			}
 		}
-		KOM_decrease_left_power_med = yes
-		KOM_increase_Bukharina_influence_med = yes
-		KOM_increase_Zhdanov_influence_med = yes
-		KOM_decrease_Suslov_influence_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 3 }
+            KOM_bukharina_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -3518,20 +3646,19 @@ country_event = { #Zhdanov gets backstabbed and buried in a shallow grave. Suslo
 		custom_effect_tooltip = KOM_zhdanov_kill_tt
 		set_variable = { KOMZhdanovInfluence = 0 }
 		KOM_eliminate_left_leader = yes
-		KOM_decrease_Suslov_influence_high = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
 		hidden_effect = {
-			KOM_decrease_Suslov_influence_high = yes
-			KOM_decrease_Suslov_influence_high = yes
-			KOM_decrease_Suslov_influence_high = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
 		}
-		create_country_leader = {
-			name = "Presidium of the KPK"
-			desc = "POLITICS_KPK_PRESIDIUM_DESC"
-			picture = "Portrait_Komi_Presidium_of_the_KPK.dds"
-			expire = "1999.1.1"
-			ideology = socialist_subtype
-			traits = {
-			}
+		retire_character = KOM_Andrei_Zhdanov
+		KOM_KPK_Presidium = {
+			promote_character = { ideology = socialist_subtype }
 		}
 		hidden_effect = {
 			country_event = {
@@ -3571,9 +3698,11 @@ country_event = { #Suslov gets fucked
 
 	option = {
 		name = KOM.13101.a
-		KOM_decrease_Suslov_influence_high = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
 		hidden_effect = {
-			KOM_decrease_Suslov_influence_high = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = -5 }
+            KOM_suslov_influence_change = yes
 		}
 		add_political_power = 10
 	}
@@ -3624,7 +3753,8 @@ country_event = { #Gumilyov is hit badly and needs to rearrange his forces
 				days = 3
 			}
 		}
-		KOM_increase_Taboritsky_influence_high = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 5 }
+        KOM_taboritsky_influence_change = yes
 	}
 	option = {
 		name = KOM.132.b
@@ -3634,7 +3764,8 @@ country_event = { #Gumilyov is hit badly and needs to rearrange his forces
 				days = 3
 			}
 		}
-		KOM_increase_right_power_med = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -3649,7 +3780,8 @@ country_event = { #The monarchists gain power
 
 	option = {
 		name = KOM.133.a
-		KOM_increase_Taboritsky_influence_high = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 5 }
+        KOM_taboritsky_influence_change = yes
 	}
 }
 
@@ -3664,7 +3796,8 @@ country_event = { #He focuses on the moderates and Eurasianists
 
 	option = {
 		name = KOM.134.a
-		KOM_increase_gumilyov_influence_low = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 1 }
+        KOM_gumilyov_influence_change = yes
 	}
 }
 
@@ -3820,8 +3953,10 @@ country_event = { #Event about waning popularity on the SocDem wing
 
 	option = {
 		name = KOM.149.a
-		KOM_increase_Voznesensky_influence_med = yes
-		KOM_decrease_Kosygin_influence_high = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 3 }
+           KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = -5 }
+           KOM_kosygin_influence_change = yes
 		hidden_effect = {
 			country_event = {
 				id = komi_friendship.3
@@ -3831,9 +3966,12 @@ country_event = { #Event about waning popularity on the SocDem wing
 	}
 	option = {
 		name = KOM.149.b
-		KOM_decrease_Voznesensky_influence_med = yes
-		KOM_increase_Stalina_influence_low = yes
-		KOM_increase_Kosygin_influence_low = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+            KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 1 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 1 }
+           KOM_kosygin_influence_change = yes
 		hidden_effect = {
 			country_event = {
 				id = komi_friendship.4
@@ -3869,13 +4007,16 @@ country_event = {
 
 	option = { #Beat some more commies.
 		name = KOM.151.a
-		KOM_decrease_left_power_low = yes
-		KOM_decrease_right_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -1 }
+        KOM_right_power_change = yes
 		add_manpower = -25
 	}
 	option = { #Defense is key.
 		name = KOM.151.b
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 		add_manpower = -15
 	}
 }
@@ -4355,13 +4496,16 @@ country_event = { #Preparing for election day
 
 	option = { #Invest in ensuring our voters can vote
 		name = KOM.169.a
-		KOM_increase_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
 	}
 	option = { #Invest in ensuring the opposition cannot vote
 		name = KOM.169.b
 		add_political_power = -50
-		KOM_decrease_left_power_low = yes
-		KOM_decrease_right_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -1 }
+        KOM_right_power_change = yes
 		TNO_worsen_vote_franchise_policy_effectiveness_med = yes
 	}
 }
@@ -4383,8 +4527,10 @@ country_event = {
 	option = { #Strategic mistakes...
 		name = KOM.170.b
 		add_stability = -0.10
-		KOM_decrease_left_power_low = yes
-		KOM_decrease_right_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -1 }
+        KOM_right_power_change = yes
 		TNO_worsen_political_parties_policy_effectiveness_med = yes
 	}
 }
@@ -4400,12 +4546,14 @@ country_event = { #Eyes on the radicals
 
 	option = { #Focus on the right
 		name = KOM.171.a
-		KOM_decrease_right_power_low = yes
+		set_temp_variable = { KOMRightPowerTemp = -1 }
+        KOM_right_power_change = yes
 		add_political_power = -25
 	}
 	option = { #Focus on the left
 		name = KOM.171.b
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 		add_political_power = -25
 	}
 }
@@ -4796,15 +4944,8 @@ country_event = { #Inauguration of Andropov
 	option = {
 		name = KOM.17804.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Yuri Andropov"
-				desc = "POLITICS_YURI_ANDROPOV_DESC"
-				picture = "Portrait_Komi_Yuri_Andropov.dds"
-				expire = "1999.1.1"
-				ideology = socialist_revolutionary_frontism_subtype
-				traits = {
-					sec_secret_police_chief
-				}
+			KOM_Yuri_Andropov = {
+				promote_character = yes
 			}
 			set_politics = {
 				ruling_party = socialist
@@ -5045,8 +5186,10 @@ country_event = { #Ponomaryov coup, appeal for united party
 
 	option = { #Ask for more support from Suslov
 		name = KOM.181.a
-		KOM_increase_Suslov_influence_med = yes
-		KOM_increase_left_power_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_static_low = yes
 		KOM_decrease_coup_risk_low = yes
 	}
@@ -5061,15 +5204,19 @@ country_event = { #Ponomaryov coup, appeal for united party
 				}
 			}
 		}
-		KOM_increase_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_static_low = yes
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 	option = { #Aid Bukharina
 		name = KOM.181.c
-		KOM_increase_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_static_low = yes
-		KOM_increase_Bukharina_influence_med = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 3 }
+            KOM_bukharina_influence_change = yes
 	}
 }
 
@@ -5110,7 +5257,8 @@ country_event = { #Zhdanov's power grows
 
 	option = {
 		name = KOM.183.a
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -5125,8 +5273,10 @@ country_event = { #Democrats power grows
 
 	option = {
 		name = KOM.184.a
-		KOM_increase_center_power_med = yes
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_low = yes
 	}
 }
@@ -5182,7 +5332,8 @@ country_event = { #A compromise with the bureaucrats
 
 	option = {
 		name = KOM.186.a
-		KOM_increase_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_static_med = yes
 	}
 }
@@ -5198,8 +5349,10 @@ country_event = { #Mistrust Consumes Us
 
 	option = {
 		name = KOM.187.a
-		KOM_decrease_left_power_high = yes
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_med = yes
 	}
 }
@@ -5216,7 +5369,8 @@ country_event = { #Mistrust Abounds
 	option = {
 		name = KOM.188.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_left_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = 1 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_static_med = yes
 	}
 }
@@ -5272,13 +5426,16 @@ country_event = { #Intense crackdowns
 
 	option = { #Target the right!
 		name = KOM.191.a
-		KOM_decrease_right_power_med = yes
+		set_temp_variable = { KOMRightPowerTemp = -3 }
+        KOM_right_power_change = yes
 		KOM_decrease_coup_risk_low = yes
 	}
 	option = { #Target the center!
 		name = KOM.191.b
-		KOM_decrease_center_power_med = yes
-		KOM_increase_left_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 1 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -5347,7 +5504,8 @@ country_event = { #Total false info, keep going?
 	option = { #Give up
 		name = KOM.193.a
 		add_political_power = -25
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 	}
 	option = { #Keep going
 		name = KOM.193.b
@@ -5422,7 +5580,8 @@ country_event = { #Serov doesn't fall for it
 
 	option = {
 		name = KOM.196.a
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_low = yes
 	}
 }
@@ -5441,13 +5600,9 @@ country_event = { #Serov is dead!
 		set_country_flag = KOM_serov_Dead
 		set_variable = { KOMserovInfluence = 0 }
 		KOM_decrease_coup_risk_static_med = yes
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = national_socialism_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = national_socialism_subtype }
 			}
 		}
 	}
@@ -5557,13 +5712,9 @@ country_event = { #Serov is dead - raid
 		set_country_flag = KOM_serov_Dead
 		set_variable = { KOMSerovInfluence = 0 }
 		KOM_decrease_coup_risk_static_med = yes
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = national_socialism_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = national_socialism_subtype }
 			}
 		}
 	}
@@ -5581,7 +5732,8 @@ country_event = { #No leads at all
 	option = { #Give up
 		name = KOM.203.a
 		add_political_power = -25
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 	}
 	option = { #Go further
 		name = KOM.203.b
@@ -5689,13 +5841,9 @@ country_event = { #serov is dead with lots of collateral damage
 		set_variable = { KOMSerovInfluence = 0 }
 		KOM_decrease_coup_risk_static_low = yes
 		add_manpower = -37
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = national_socialism_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = national_socialism_subtype }
 			}
 		}
 	}
@@ -5712,8 +5860,10 @@ country_event = { #serov escapes
 
 	option = {
 		name = KOM.207.a
-		KOM_decrease_left_power_low = yes
-		KOM_increase_right_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 1 }
+        KOM_right_power_change = yes
 		KOM_increase_coup_risk_static_low = yes
 		add_political_power = -50
 	}
@@ -5730,8 +5880,10 @@ country_event = { #serov escapes with extra communist humiliation
 
 	option = {
 		name = KOM.208.a
-		KOM_decrease_left_power_med = yes
-		KOM_increase_right_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
 		KOM_increase_coup_risk_static_high = yes
 	}
 }
@@ -5768,8 +5920,10 @@ country_event = { #Zhdanov events
 		name = KOM.210.b
 		KOM_decrease_coup_risk_med = yes
 		set_country_flag = KOM_Zhdanov_Promises
-		KOM_increase_left_power_med = yes
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -5784,9 +5938,12 @@ country_event = {
 
 	option = { #Keep them available
 		name = KOM.211.a
-		KOM_increase_left_power_low = yes
-		KOM_increase_Voznesensky_influence_med = yes
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = 1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 3 }
+           KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 	option = { #Liquidate them
 		name = KOM.211.b
@@ -5821,18 +5978,16 @@ country_event = { #Voznesentsi successfully absorbed, Voznesensky exiled
 	option = {
 		name = KOM.212.a
 		set_country_flag = KOM_Voznesensky_Arrested
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_NIKOLAI_VOZNESENSKY_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = social_democracy_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = social_democracy_subtype }
 			}
 		}
 		KOM_eliminate_center_leader = yes
-		KOM_increase_left_power_high = yes
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		set_variable = { KOMVoznesenskyInfluence = 0 }
 		hidden_effect = {
 			add_popularity = {
@@ -5855,7 +6010,8 @@ country_event = { #Failure - lose our ties
 	option = {
 		name = KOM.213.a
 		KOM_increase_coup_risk_static_med = yes
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -6041,14 +6197,11 @@ country_event = { #Gumilyov dead
 		name = KOM.219.a
 		set_country_flag = KOM_Gumilyov_Dead
 		set_variable = { KOMGumilyovInfluence = 0 }
-		KOM_decrease_right_power_high = yes
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = ultranationalism_subtype
-			traits = {
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = ultranationalism_subtype }
 			}
 		}
 	}
@@ -6173,14 +6326,11 @@ country_event = { #Taboritsky is dead
 		name = KOM.225.a
 		set_country_flag = KOM_Taboritsky_Dead
 		set_variable = { KOMTaboritskyInfluence = 0 }
-		KOM_decrease_right_power_high = yes
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = despotism_subtype
-			traits = {
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = despotism_subtype }
 			}
 		}
 	}
@@ -6199,14 +6349,11 @@ country_event = { #Gumilyov is dead
 		name = KOM.226.a
 		set_country_flag = KOM_Gumilyov_Dead
 		set_variable = { KOMGumilyovInfluence = 0 }
-		KOM_decrease_right_power_high = yes
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = ultranationalism_subtype
-			traits = {
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = ultranationalism_subtype }
 			}
 		}
 	}
@@ -6297,8 +6444,10 @@ country_event = { #Our interference discovered
 	option = {
 		name = KOM.230.a
 		KOM_increase_coup_risk_static_med = yes
-		KOM_decrease_left_power_high = yes
-		KOM_decrease_Zhdanov_influence_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = -5 }
+            KOM_zhdanov_influence_change = yes
 	}
 }
 
@@ -6314,8 +6463,10 @@ country_event = { #A successful operation
 	option = {
 		name = KOM.231.a
 		KOM_decrease_coup_risk_med = yes
-		KOM_decrease_center_power_high = yes
-		KOM_decrease_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -6331,17 +6482,22 @@ country_event = { #Pre-empetive purge
 	option = { #No
 		name = KOM.232.a
 		add_political_power = 25
-		KOM_increase_center_power_med = yes
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_static_low = yes
 	}
 	option = { #Yes
 		name = KOM.232.b
 		add_political_power = -50
 		add_manpower = -250
-		KOM_decrease_center_power_high = yes
-		KOM_decrease_right_power_high = yes
-		KOM_increase_left_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_low = yes
 	}
 }
@@ -6357,26 +6513,34 @@ country_event = { #Unstable Victory - Secure The Republic
 
 	option = { #Arrest the radicals!
 		name = KOM.233.a
-		KOM_decrease_left_power_high = yes
-		KOM_decrease_right_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
 		KOM_decrease_coup_risk_low = yes
 	}
 	option = { #Let in the willing!
 		name = KOM.233.b
-		KOM_increase_center_power_med = yes
-		KOM_increase_left_power_low = yes
-		KOM_increase_right_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 1 }
+        KOM_right_power_change = yes
 		add_political_power = 25
 		KOM_increase_coup_risk_low = yes
 		KOM_decrease_coup_risk_static_med = yes
 	}
 	option = { #Rule by decree!
 		name = KOM.233.c
-		KOM_increase_center_power_high = yes
-		KOM_increase_Stalina_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
 		KOM_decrease_coup_risk_static_low = yes
 		hidden_effect = {
-			KOM_increase_Stalina_influence_high = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
 		}
 	}
 }
@@ -6448,7 +6612,8 @@ country_event = { #Shots fired!
 	option = {
 		name = KOM.235.a
 		KOM_increase_coup_risk_static_high = yes
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -6464,8 +6629,10 @@ country_event = { #A successful speech
 	option = {
 		name = KOM.236.a
 		KOM_decrease_coup_risk_low = yes
-		KOM_increase_center_power_med = yes
-		KOM_increase_Stalina_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
 	}
 }
 
@@ -6480,7 +6647,8 @@ country_event = { #Failed speech
 
 	option = {
 		name = KOM.237.a
-		KOM_decrease_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_static_low = yes
 	}
 }
@@ -6573,7 +6741,8 @@ country_event = { #Effective strikes against the left
 	option = {
 		name = KOM.240.a
 		KOM_decrease_coup_risk_low = yes
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -6589,7 +6758,8 @@ country_event = { #Effective strikes against the right
 	option = {
 		name = KOM.241.a
 		KOM_decrease_coup_risk_low = yes
-		KOM_decrease_right_power_med = yes
+		set_temp_variable = { KOMRightPowerTemp = -3 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -6605,7 +6775,8 @@ country_event = { #Failure against the left
 	option = {
 		name = KOM.242.a
 		KOM_increase_coup_risk_low = yes
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -6621,7 +6792,8 @@ country_event = { #Failure against the right
 	option = {
 		name = KOM.243.a
 		KOM_increase_coup_risk_low = yes
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -6693,7 +6865,8 @@ country_event = { #False info
 		name = KOM.245.a
 		set_country_flag = KOM_false_info
 		add_political_power = 25
-		KOM_increase_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -6779,7 +6952,8 @@ country_event = {
 
 	option = {
 		name = KOM.249.a
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_high = yes
 		KOM_increase_coup_risk_static_high = yes
 	}
@@ -6796,9 +6970,12 @@ country_event = {
 
 	option = {
 		name = KOM.250.a
-		KOM_increase_center_power_med = yes
-		KOM_decrease_left_power_high = yes
-		KOM_decrease_right_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
 		KOM_decrease_coup_risk_high = yes
 		KOM_decrease_coup_risk_static_high = yes
 	}
@@ -6815,9 +6992,12 @@ country_event = {
 
 	option = {
 		name = KOM.251.a
-		KOM_increase_center_power_low = yes
-		KOM_decrease_left_power_med = yes
-		KOM_decrease_right_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -3 }
+        KOM_right_power_change = yes
 		KOM_decrease_coup_risk_static_med = yes
 		add_political_power = 25
 	}
@@ -6851,7 +7031,7 @@ country_event = { #Leftist attack on dems 1
 	option = {
 		name = KOM.253.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_left_power_random = yes
+		KOM_left_power_increase_random = yes
 		set_temp_variable = { temp_econ_GDP_boost_flat = -0.002 }
 		econ_GDP_boost_once_flat = yes
 	}
@@ -6869,7 +7049,7 @@ country_event = { #Leftist attack on dems 2
 	option = {
 		name = KOM.254.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_increase_left_power_random = yes
+		KOM_left_power_increase_random = yes
 	}
 }
 
@@ -6886,7 +7066,7 @@ country_event = { #Leftist attack on dems 3
 	option = {
 		name = KOM.255.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_left_power_random = yes
+		KOM_left_power_increase_random = yes
 	}
 }
 
@@ -6902,7 +7082,7 @@ country_event = { #Leftist attack on right 1
 	option = {
 		name = KOM.256.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_left_power_random = yes
+		KOM_left_power_increase_random = yes
 	}
 }
 
@@ -6918,7 +7098,7 @@ country_event = { #Leftist attack on right 2
 	option = {
 		name = KOM.257.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_increase_left_power_random= yes
+		KOM_left_power_increase_random = yes
 	}
 }
 
@@ -6934,7 +7114,7 @@ country_event = { #Leftist attack on right 3
 	option = {
 		name = KOM.258.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_left_power_random = yes
+		KOM_left_power_increase_random = yes
 	}
 }
 
@@ -6950,7 +7130,7 @@ country_event = { #Rightist attack on center 1
 	option = {
 		name = KOM.259.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_right_power_random = yes
+		KOM_right_power_increase_random = yes
 	}
 }
 
@@ -6966,7 +7146,7 @@ country_event = { #Rightist attack on center 2
 	option = {
 		name = KOM.260.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_increase_right_power_random = yes
+		KOM_right_power_increase_random = yes
 		set_temp_variable = { temp_econ_GDP_boost_percentage = -0.005 }
 		econ_GDP_boost_once_percentage = yes
 	}
@@ -6984,7 +7164,7 @@ country_event = { #Rightist attack on center 3
 	option = {
 		name = KOM.261.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_right_power_random = yes
+		KOM_right_power_increase_random = yes
 	}
 }
 
@@ -7000,7 +7180,7 @@ country_event = { #Rightist attack on left 1
 	option = {
 		name = KOM.262.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_right_power_random = yes
+		KOM_right_power_increase_random = yes
 	}
 }
 
@@ -7016,7 +7196,7 @@ country_event = { #Rightist attack on left 2
 	option = {
 		name = KOM.263.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_increase_right_power_random = yes
+		KOM_right_power_increase_random = yes
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
 			amount = -400
@@ -7037,7 +7217,7 @@ country_event = { #Rightist attack on left 3
 	option = {
 		name = KOM.264.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_right_power_random = yes
+		KOM_right_power_increase_random = yes
 	}
 }
 
@@ -7053,7 +7233,7 @@ country_event = { #Public discontent with center 1
 	option = {
 		name = KOM.265.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_decrease_center_power_random = yes
+		KOM_center_power_decrease_random = yes
 	}
 }
 
@@ -7069,7 +7249,7 @@ country_event = { #Public discontent with center 2
 	option = {
 		name = KOM.266.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_decrease_center_power_random = yes
+		KOM_center_power_decrease_random = yes
 	}
 }
 
@@ -7085,7 +7265,7 @@ country_event = { #Public discontent with left 1
 	option = {
 		name = KOM.267.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_decrease_left_power_random = yes
+		KOM_left_power_decrease_random = yes
 	}
 }
 
@@ -7101,7 +7281,7 @@ country_event = { #Public discontent with left 2
 	option = {
 		name = KOM.268.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_decrease_left_power_random = yes
+		KOM_left_power_decrease_random = yes
 	}
 }
 
@@ -7117,7 +7297,7 @@ country_event = { #Public discontent with right 1
 	option = {
 		name = KOM.269.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_decrease_right_power_random = yes
+		KOM_right_power_decrease_random = yes
 	}
 }
 
@@ -7133,7 +7313,7 @@ country_event = { #Public discontent with right 2
 	option = {
 		name = KOM.270.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_decrease_right_power_random = yes
+		KOM_right_power_decrease_random = yes
 	}
 }
 
@@ -7149,7 +7329,7 @@ country_event = { #Centrist attack on right 1
 	option = {
 		name = KOM.271.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_center_power_random = yes
+		KOM_center_power_increase_random = yes
 	}
 }
 
@@ -7180,7 +7360,7 @@ country_event = { #Centrist attack on right 3
 	option = {
 		name = KOM.273.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_center_power_random = yes
+		KOM_center_power_increase_random = yes
 	}
 }
 
@@ -7196,7 +7376,7 @@ country_event = { #Centrist attack on left 1
 	option = {
 		name = KOM.274.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_center_power_random = yes
+		KOM_center_power_increase_random = yes
 	}
 }
 
@@ -7212,7 +7392,7 @@ country_event = { #Centrist attack on left 2
 	option = {
 		name = KOM.275.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_increase_center_power_random = yes
+		KOM_center_power_increase_random = yes
 	}
 }
 
@@ -7228,7 +7408,7 @@ country_event = { #Centrist attack on left 3
 	option = {
 		name = KOM.276.a
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_center_power_random = yes
+		KOM_center_power_increase_random = yes
 	}
 }
 
@@ -7244,11 +7424,13 @@ country_event = {
 
 	option = { #Focus on Bukharina alone
 		name = KOM.277.a
-		KOM_increase_Bukharina_influence_high = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 5 }
+            KOM_bukharina_influence_change = yes
 	}
 	option = { #Focus on all of the party.
 		name = KOM.277.b
-		KOM_increase_left_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_static_low = yes
 	}
 }
@@ -7264,8 +7446,10 @@ country_event = {
 
 	option = { #Ally with Suslov
 		name = KOM.278.a
-		KOM_increase_Bukharina_influence_low = yes
-		KOM_increase_Suslov_influence_med = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 1 }
+            KOM_bukharina_influence_change = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
 	}
 	option = { #Ally with Zhdanov
 		name = KOM.278.b
@@ -7278,13 +7462,17 @@ country_event = {
 				}
 			}
 		}
-		KOM_increase_Bukharina_influence_low = yes
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 1 }
+            KOM_bukharina_influence_change = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 	option = { #Party unity be damned!
 		name = KOM.278.c
-		KOM_increase_Bukharina_influence_high = yes
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 5 }
+            KOM_bukharina_influence_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_med = yes
 	}
 }
@@ -7339,8 +7527,10 @@ country_event = { #Successful raids
 
 	option = {
 		name = KOM.280.a
-		KOM_decrease_center_power_low = yes
-		KOM_decrease_right_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -1 }
+        KOM_right_power_change = yes
 		KOM_decrease_coup_risk_low = yes
 		add_manpower = -60
 	}
@@ -7357,8 +7547,10 @@ country_event = { #Very successful raids
 
 	option = {
 		name = KOM.281.a
-		KOM_decrease_center_power_med = yes
-		KOM_decrease_right_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -3 }
+        KOM_right_power_change = yes
 		KOM_decrease_coup_risk_med = yes
 		add_manpower = -35
 	}
@@ -7375,7 +7567,8 @@ country_event = { #Failed raids
 
 	option = {
 		name = KOM.282.a
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 		KOM_increase_coup_risk_static_low = yes
 		add_manpower = -125
 	}
@@ -7393,7 +7586,8 @@ country_event = { #Gumilyovites raid supply caches
 	option = {
 		name = KOM.283.a
 		KOM_increase_coup_risk_static_low = yes
-		KOM_increase_right_power_high = yes
+		set_temp_variable = { KOMRightPowerTemp = 5 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -7409,7 +7603,8 @@ country_event = {
 	option = { #Lock down the streets
 		name = KOM.284.a
 		KOM_decrease_coup_risk_low = yes
-		KOM_increase_left_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
 	}
 	option = { #Go for their leaders
 		name = KOM.284.b
@@ -7519,7 +7714,8 @@ country_event = {
 			KOMCoupRisk = -1
 		}
 		add_stability = 0.05
-		KOM_increase_left_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
 		custom_effect_tooltip = KOMAssassinateLeaders
 		hidden_effect = {
 			if = {
@@ -7634,8 +7830,10 @@ country_event = { #Kosygin failed assassination
 	option = {
 		name = KOM.285.a
 		KOM_increase_coup_risk_static_med = yes
-		KOM_increase_center_power_high = yes
-		KOM_increase_Kosygin_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 5 }
+           KOM_kosygin_influence_change = yes
 	}
 }
 
@@ -7650,16 +7848,13 @@ country_event = { #Kosygin successful assassination
 
 	option = {
 		name = KOM.286.a
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		set_country_flag = KOM_Kosygin_Dead
 		set_variable = { KOMKosyginInfluence = 0 }
-		create_country_leader = {
-			name = "National Assembly"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = liberal_democracy_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = liberal_democracy_subtype }
 			}
 		}
 		custom_effect_tooltip = KOM_kosygin_kill_tt
@@ -7679,8 +7874,10 @@ country_event = { #Voznesensky failed assassination
 	option = {
 		name = KOM.287.a
 		KOM_increase_coup_risk_static_med = yes
-		KOM_increase_center_power_high = yes
-		KOM_increase_Voznesensky_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 5 }
+           KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -7695,16 +7892,13 @@ country_event = { #Voznesensky successful assassination
 
 	option = {
 		name = KOM.288.a
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		set_country_flag = KOM_Voznesensky_Dead
 		set_variable = { KOMVoznesenskyInfluence = 0 }
-		create_country_leader = {
-			name = "National Assembly"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = social_democracy_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = social_democracy_subtype }
 			}
 		}
 		custom_effect_tooltip = KOM_voznesensky_kill_tt
@@ -7724,8 +7918,10 @@ country_event = { #Stalina failed assassination
 	option = {
 		name = KOM.289.a
 		KOM_increase_coup_risk_static_med = yes
-		KOM_increase_center_power_high = yes
-		KOM_increase_Stalina_influence_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
 	}
 }
 
@@ -7740,16 +7936,13 @@ country_event = { #Stalina successful assassination
 
 	option = {
 		name = KOM.290.a
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 		set_country_flag = KOM_Stalina_Dead
 		set_variable = { KOMStalinaInfluence = 0 }
-		create_country_leader = {
-			name = "National Assembly"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = authoritarian_democracy_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = authoritarian_democracy_subtype }
 			}
 		}
 		custom_effect_tooltip = KOM_stalin_kill_tt
@@ -7769,8 +7962,10 @@ country_event = { #Gumilyov failed assassination
 	option = {
 		name = KOM.291.a
 		KOM_increase_coup_risk_static_med = yes
-		KOM_increase_right_power_high = yes
-		KOM_increase_gumilyov_influence_high = yes
+		set_temp_variable = { KOMRightPowerTemp = 5 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 5 }
+        KOM_gumilyov_influence_change = yes
 	}
 }
 
@@ -7785,16 +7980,13 @@ country_event = { #Gumilyov successful assassination
 
 	option = {
 		name = KOM.292.a
-		KOM_decrease_right_power_high = yes
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
 		set_country_flag = KOM_Gumilyov_Dead
 		set_variable = { KOMGumilyovInfluence = 0 }
-		create_country_leader = {
-			name = "Power Vacuum"
-			#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-			picture = "Portrait_Komi_National_Assembly.dds"
-			expire = "1999.1.1"
-			ideology = ultranationalism_subtype
-			traits = {
+		hidden_effect = {
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = ultranationalism_subtype }
 			}
 		}
 		custom_effect_tooltip = KOM_gumilyov_kill_tt
@@ -7814,16 +8006,20 @@ country_event = {
 
 	option = { #A light hand
 		name = KOM.293.a
-		KOM_decrease_Voznesensky_influence_med = yes
-		KOM_decrease_center_power_low = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+            KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_static_med = yes
 		add_political_power = 25
 	}
 	option = { #Get them all!
 		name = KOM.293.b
 		KOM_decrease_coup_risk_low = yes
-		KOM_decrease_Voznesensky_influence_high = yes
-		KOM_decrease_center_power_high = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -5 }
+KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -7844,7 +8040,8 @@ country_event = {
 			}
 		}
 		add_ideas = KOM_alexei_kosygin_hog
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_low = yes
 		add_popularity = {
 			ideology = liberal_democracy
@@ -7859,7 +8056,8 @@ country_event = {
 			}
 		}
 		add_ideas = KOM_Leonid_Kantorovich_hog
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_low = yes
 		add_popularity = {
 			ideology = social_democracy
@@ -7874,7 +8072,8 @@ country_event = {
 			}
 		}
 		add_ideas = KOM_svetlana_stalina_hog
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_low = yes
 		add_popularity = {
 			ideology = authoritarian_democracy
@@ -7933,7 +8132,8 @@ country_event = {
 	}
 	option = { #Let them in!
 		name = KOM.296.b
-		KOM_increase_center_power_high = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
 		add_manpower = 750
 		hidden_effect = {
 			random_list = {
@@ -7977,9 +8177,12 @@ country_event = { #Locking down Syktyvkar
 	option = { #A curfew is a bad idea.
 		name = KOM.298.a
 		add_political_power = 50
-		KOM_increase_center_power_high = yes
-		KOM_increase_left_power_low = yes
-		KOM_increase_right_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 1 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
 		KOM_decrease_coup_risk_static_low = yes
 		hidden_effect = {
 			random_list = {
@@ -7998,7 +8201,8 @@ country_event = { #Locking down Syktyvkar
 	option = { #EScort them back to their homes.
 		name = KOM.298.b
 		add_political_power = 20
-		KOM_increase_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
 	}
 	option = { #Triple the night patrols - arrest anyone out past dark.
 		name = KOM.298.c
@@ -8034,8 +8238,10 @@ country_event = {
 
 	option = {
 		name = KOM.300.a
-		KOM_increase_center_power_med = yes
-		KOM_increase_Stalina_influence_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
 		KOM_decrease_coup_risk_low = yes
 	}
 	option = {
@@ -8049,9 +8255,12 @@ country_event = {
 				}
 			}
 		}
-		KOM_increase_center_power_high = yes
-		KOM_increase_Stalina_influence_med = yes
-		KOM_increase_Kosygin_influence_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 3 }
+           KOM_kosygin_influence_change = yes
 		KOM_decrease_coup_risk_med = yes
 	}
 	option = {
@@ -8065,9 +8274,12 @@ country_event = {
 				}
 			}
 		}
-		KOM_increase_center_power_high = yes
-		KOM_increase_Stalina_influence_med = yes
-		KOM_increase_Voznesensky_influence_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 3 }
+           KOM_voznesensky_influence_change = yes
 		KOM_decrease_coup_risk_med = yes
 	}
 }
@@ -8187,7 +8399,8 @@ country_event = {
 	option = { #Don't do this.
 		name = KOM.305.b
 		add_political_power = -25
-		KOM_decrease_Stalina_influence_med = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = -3 }
+        KOM_stalina_influence_change = yes
 		KOM_decrease_coup_risk_low = yes
 		KOM_increase_coup_risk_static_low = yes
 	}
@@ -8226,26 +8439,15 @@ country_event = { #Suslov - successful arrest!
 						has_country_flag = KOM_Bukharina_Recovered
 					}
 				}
-				create_country_leader = {
-					name = "Power Vacuum"
-					#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-					picture = "Portrait_Komi_National_Assembly.dds"
-					expire = "1999.1.1"
-					ideology = communist_subtype
-					traits = {
+				hidden_effect = {
+					KOM_Power_Vacuum = {
+						promote_character = { ideology = communist_subtype }
 					}
 				}
 			}
 			else = {
-				create_country_leader = {
-					name = "Svetlana Bukharina"
-					desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-					picture = "Portrait_Komi_Svetlana_Bukharina.dds"
-					expire = "1999.1.1"
-					ideology = communist_left_communist_subtype
-					traits = {
-						daughter_of_soviet_union
-					}
+				KOM_Svetlana_Bukharina = {
+					promote_character = yes
 				}
 			}
 		}
@@ -8313,14 +8515,8 @@ country_event = { #Gumilyov - successful arrest!
 	immediate = {
 		set_variable = { KOMGumilyovInfluence = 0 }
 		hidden_effect = {
-			create_country_leader = {
-				name = "Power Vacuum"
-				#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = ultranationalism_subtype
-				traits = {
-				}
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = ultranationalism_subtype }
 			}
 		}
 	}
@@ -8388,14 +8584,8 @@ country_event = { #Zhdanov - successful arrest!
 	immediate = {
 		set_variable = { KOMZhdanovInfluence = 0 }
 		hidden_effect = {
-			create_country_leader = {
-				name = "Power Vacuum"
-				#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = socialist_subtype
-				traits = {
-				}
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = socialist_subtype }
 			}
 		}
 	}
@@ -8470,26 +8660,13 @@ country_event = { #Bukharina - successful arrest!
 						has_country_flag = KOM_Zhdanov_Recovered
 					}
 				}
-				create_country_leader = {
-					name = "Power Vacuum"
-					#desc = "POLITICS_SVETLANA_BUKHARINA_DESC"
-					picture = "Portrait_Komi_National_Assembly.dds"
-					expire = "1999.1.1"
-					ideology = socialist_subtype
-					traits = {
-					}
+				KOM_Power_Vacuum = {
+					promote_character = { ideology = socialist_subtype }
 				}
 			}
 			else = {
-				create_country_leader = {
-					name = "Andrei Zhdanov"
-					desc = "POLITICS_ANDREY_ZHDANOV_DESC"
-					picture = "Portrait_Komi_Andrei_Zhdanov.dds"
-					expire = "1999.1.1"
-					ideology = socialist_revolutionary_frontism_subtype
-					traits = {
-						ultravisionary_socialist
-					}
+				KOM_Andrei_Zhdanov = {
+					promote_character = yes
 				}
 			}
 		}
@@ -8609,7 +8786,8 @@ country_event = { #Gumilyov Coup - Absorb Conservatives
 	}
 	option = {
 		name = KOM.321.b #Nu
-		KOM_decrease_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -8624,7 +8802,8 @@ country_event = { #They will help
 
 	option = {
 		name = KOM.322.a
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_static_med = yes
 	}
 }
@@ -8640,7 +8819,8 @@ country_event = { #They won't help
 
 	option = {
 		name = KOM.323.a
-		KOM_decrease_right_power_low = yes
+		set_temp_variable = { KOMRightPowerTemp = -1 }
+        KOM_right_power_change = yes
 		KOM_increase_coup_risk_med = yes
 	}
 }
@@ -8657,14 +8837,17 @@ country_event = { #Flood The Streets
 	option = { #Plan something more insidious...
 		name = KOM.324.a
 		KOM_decrease_coup_risk_low = yes
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 	}
 	option = { #Break them as hard as we can!
 		name = KOM.324.b
 		KOM_decrease_coup_risk_med = yes
 		KOM_increase_coup_risk_static_med = yes
-		KOM_decrease_left_power_high = yes
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -8682,12 +8865,15 @@ country_event = {
 		add_political_power = 25
 		KOM_decrease_coup_risk_low = yes
 		add_manpower = -200
-		KOM_increase_Taboritsky_influence_low = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 1 }
+        KOM_taboritsky_influence_change = yes
 	}
 	option = {
 		name = KOM.325.b
-		KOM_increase_serov_influence_low = yes
-		KOM_increase_right_power_med = yes
+		set_temp_variable = { KOMSerovInfluenceTemp = 1 }
+        KOM_serov_influence_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 3 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -8800,19 +8986,13 @@ country_event = { #Taboritsky kills Suslov
 		name = KOM.327.a
 		custom_effect_tooltip = KOM_suslov_kill_tt
 		set_country_flag = KOM_Suslov_Dead
-		create_country_leader = {
-			name = "Boris Ponomaryov"
-			desc = "POLITICS_BORIS_PONOMARYOV_DESC"
-			picture = "Portrait_Komi_Boris_Nikolayevich_Ponomaryov_DDS.dds"
-			expire = "1999.1.1"
-			ideology = communist_bukharinism_subtype
-			traits = {
-				affable_puppet
-			}
+		KOM_Boris_Ponomaryov = {
+			promote_character = yes
 		}
 		KOM_eliminate_left_leader = yes
 		set_variable = { KOMSuslovInfluence = 0 }
-		KOM_decrease_left_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
 		KOM_decrease_coup_risk_med = yes
 	}
 }
@@ -8829,7 +9009,8 @@ country_event = { #Taboritsky doesn't kills Suslov
 	option = {
 		name = KOM.328.a
 		KOM_increase_coup_risk_low = yes
-		KOM_decrease_right_power_med = yes
+		set_temp_variable = { KOMRightPowerTemp = -3 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -8853,17 +9034,11 @@ country_event = { #Taboritsky bombs the centrists
 			custom_effect_tooltip = KOM_voznesensky_kill_tt
 			set_country_flag = KOM_Voznesensky_Dead
 			set_variable = { KOMVoznesenskyInfluence = 0 }
-			KOM_decrease_center_power_high = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+     		KOM_left_power_change = yes
 			KOM_eliminate_center_leader = yes
-			create_country_leader = {
-				name = "National Assembly"
-				desc = "POLITICS_NATIONAL_ASSEMBLY_DESC"
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = social_democracy_subtype
-				traits = {
-
-				}
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = social_democracy_subtype }
 			}
 		}
 		if = {
@@ -8874,26 +9049,25 @@ country_event = { #Taboritsky bombs the centrists
 			}
 			custom_effect_tooltip = KOM_kosygin_kill_tt
 			set_country_flag = KOM_Kosygin_Dead
-			create_country_leader = {
-				name = "National Assembly"
-				desc = "POLITICS_NATIONAL_ASSEMBLY_DESC"
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = liberal_democracy_subtype
-				traits = {
-
-				}
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = liberal_democracy_subtype }
 			}
 			set_variable = { KOMKosyginInfluence = 0 }
-			KOM_decrease_center_power_high = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
 			KOM_eliminate_center_leader = yes
 		}
-		KOM_increase_Stalina_influence_high = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
 		hidden_effect = {
-			KOM_increase_Stalina_influence_high = yes
-			KOM_increase_Stalina_influence_high = yes
-			KOM_increase_Stalina_influence_high = yes
-			KOM_increase_Stalina_influence_high = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
 		}
 		KOM_decrease_coup_risk_med = yes
 	}
@@ -8948,7 +9122,8 @@ country_event = {
 	option = { #Let them beg.
 		name = KOM.332.b
 		KOM_increase_coup_risk_low = yes
-		KOM_increase_Taboritsky_influence_high = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 5 }
+        KOM_taboritsky_influence_change = yes
 	}
 }
 
@@ -8963,14 +9138,18 @@ country_event = { #Reconciliation with the monarchists
 
 	option = {
 		name = KOM.333.a
-		KOM_decrease_Taboritsky_influence_med = yes
-		KOM_decrease_right_power_med = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = -3 }
+        KOM_taboritsky_influence_change = yes
+		set_temp_variable = { KOMRightPowerTemp = -3 }
+        KOM_right_power_change = yes
 		add_political_power = 50
 	}
 	option = {
 		name = KOM.333.b
-		KOM_increase_gumilyov_influence_med = yes
-		KOM_increase_Taboritsky_influence_med = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 3 }
+        KOM_taboritsky_influence_change = yes
 	}
 }
 
@@ -8992,7 +9171,8 @@ country_event = {
 		name = KOM.334.b
 		add_manpower = 3500
 		army_experience = 25
-		KOM_increase_Taboritsky_influence_high = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 5 }
+        KOM_taboritsky_influence_change = yes
 	}
 }
 
@@ -9008,11 +9188,13 @@ country_event = {
 
 	option = {
 		name = KOM.335.a
-		KOM_increase_Suslov_influence_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
 	}
 	option = {
 		name = KOM.335.b
-		KOM_decrease_Suslov_influence_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = -3 }
+            KOM_suslov_influence_change = yes
 	}
 }
 
@@ -9083,15 +9265,8 @@ country_event = {
 
 	option = {
 		name = KOM.340.a
-		create_country_leader = {
-			name = "Mikhail Suslov"
-			desc = "POLITICS_MIKHAIL_SUSLOV_DESC"
-			picture = "Portrait_Komi_Mikhail_Suslov.dds"
-			expire = "1999.1.1"
-			ideology = communist_bukharinism_subtype
-			traits = {
-				master_ideologue
-			}
+		KOM_Mikhail_Suslov = {
+			promote_character = yes
 		}
 		KOM_assign_suslov_ministers = yes
 	}
@@ -9208,7 +9383,8 @@ country_event = {
 				}
 			}
 		}
-		KOM_increase_Suslov_influence_med = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
 	}
 	option = {
 		name = KOM.347.b
@@ -9221,7 +9397,8 @@ country_event = {
 				}
 			}
 		}
-		KOM_increase_Zhdanov_influence_med = yes
+		set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
 	}
 	option = {
 		name = KOM.347.c
@@ -9234,7 +9411,8 @@ country_event = {
 				}
 			}
 		}
-		KOM_increase_Bukharina_influence_med = yes
+		set_temp_variable = { KOMBukharinaInfluenceTemp = 3 }
+            KOM_bukharina_influence_change = yes
 	}
 }
 
@@ -9482,7 +9660,8 @@ country_event = { #Serov booted from the party
 
 	option = {
 		name = KOM.361.a
-		KOM_decrease_left_power_low = yes
+		set_temp_variable = { KOMLeftPowerTemp = -1 }
+        KOM_left_power_change = yes
 		hidden_effect = {
 			country_event = {
 				id = KOM.362
@@ -9507,8 +9686,10 @@ country_event = { #Serov shows up again as a rightist
 			country_event = { id = komi.23 days = 15 random = 380 }
 		}
 		set_country_flag = KOM_Serov_Defected
-		KOM_decrease_left_power_med = yes
-		KOM_increase_right_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 5 }
+        KOM_right_power_change = yes
 		hidden_effect = {
 			country_event = {
 				id = KOM.363
@@ -9517,18 +9698,22 @@ country_event = { #Serov shows up again as a rightist
 		}
 		set_party_name = {
 			ideology = national_socialism
-			long_name = "Ordosotsialisty"
-			name = "Ordosotsialisty"
+			long_name = KOM_national_socialism_serov_party
+			name = KOM_national_socialism_serov_party
 		}
-		create_country_leader = {
-			name = "Ivan Serov"
-			desc = "POLITICS_IVAN_SEROV_DESC"
-			picture = "Portrait_Komi_Ivan_Serov.dds"
-			expire = "1999.1.1"
-			ideology = national_socialism_ordosocialism_subtype
-			traits = {
-				prince_of_terror
+		KOM_Ivan_Serov = {
+			add_country_leader_role = {
+				country_leader = {
+					desc = "POLITICS_IVAN_SEROV_DESC"
+					expire = "1999.1.1"
+					ideology = national_socialism_ordosocialism_subtype
+					traits = {
+						prince_of_terror
+					}
+					id = -1
+				}
 			}
+			promote_character = yes
 		}
 	}
 }
@@ -9544,8 +9729,10 @@ country_event = { #Some communists defect to Serov - Suslov is incandescently fu
 
 	option = {
 		name = KOM.363.a
-		KOM_increase_serov_influence_high = yes
-		KOM_decrease_left_power_med = yes
+		set_temp_variable = { KOMSerovInfluenceTemp = 5 }
+        KOM_serov_influence_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -9597,7 +9784,7 @@ country_event = { #Move the capital?
 	}
 	option = { #Make it Vyatka
 		name = KOM.366.b
-		set_capital = 400
+		set_capital = { state = 400 }
 		hidden_effect = {
 			country_event = { id = komi.28 days = 12 random = 380 }
 		}
@@ -9619,7 +9806,7 @@ country_event = { #Move the capital - communist
 	}
 	option = { #Make it Vyatka
 		name = KOM.367.b
-		set_capital = 400
+		set_capital = { state = 400 }
 	}
 }
 
@@ -9638,7 +9825,7 @@ country_event = { #Move the capital - fascist
 	}
 	option = { #Make it Vyatka
 		name = KOM.3670.b
-		set_capital = 400
+		set_capital = { state = 400 }
 	}
 }
 
@@ -9655,10 +9842,11 @@ country_event = { #Fascist tree - assemble our forces
 		name = KOM.368.a
 		army_experience = 15
 		TNO_improve_training_policy_effectiveness_low = yes
-		add_tech_bonus = {
-			bonus = 1
-			uses = 1
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.75
+		    uses = 1
+		    category = land_doctrine
 		}
 	}
 }
@@ -9674,15 +9862,15 @@ country_event = { #Oaths Of Loyalty
 
 	option = { #Restore Imperial oaths
 		name = KOM.369.a
-		KOM_increase_Taboritsky_influence_random = yes
+		KOM_taboritsky_influence_increase_random = yes
 	}
 	option = { #Maintain Republican oaths but edit them
 		name = KOM.369.b
-		KOM_increase_shafarevich_influence_random = yes
+		KOM_shafarevich_influence_increase_random = yes
 	}
 	option = { #Implement entirely new Soviet-esque oaths
 		name = KOM.369.c
-		KOM_increase_serov_influence_random = yes
+		KOM_serov_influence_increase_random = yes
 	}
 }
 
@@ -9697,17 +9885,17 @@ country_event = { #Embrace the Church
 
 	option = { #No. Just no.
 		name = KOM.370.a
-		KOM_increase_serov_influence_random = yes
+		KOM_serov_influence_increase_random = yes
 		add_ideas = tno_religious_rights_secularism
 	}
 	option = { #The Church is a critical part of Russian culture!
 		name = KOM.370.b
-		KOM_increase_Taboritsky_influence_random = yes
+		KOM_taboritsky_influence_increase_random = yes
 		TNO_improve_religious_rights_policy_effectiveness_med = yes
 	}
 	option = { #This is a prime opportunity to strengthen state power.
 		name = KOM.370.c
-		KOM_increase_Shafarevich_influence_random = yes
+		KOM_shafarevich_influence_increase_random = yes
 		TNO_improve_religious_rights_policy_effectiveness_low = yes
 	}
 }
@@ -9729,7 +9917,7 @@ country_event = { #Rebuild the Monestaries
 	}
 	option = {  #This is far too expensive.
 		name = KOM.371.b
-		KOM_decrease_Taboritsky_influence_random = yes
+		KOM_taboritsky_influence_decrease_random = yes
 	}
 }
 
@@ -9744,15 +9932,15 @@ country_event = { #Trial their Officers
 
 	option = { #Some of them can be used.
 		name = KOM.372.a
-		KOM_increase_serov_influence_random = yes
-		KOM_increase_Shafarevich_influence_random = yes
+		KOM_serov_influence_increase_random = yes
+		KOM_shafarevich_influence_increase_random = yes
 		TNO_improve_army_professionalism_low = yes
 		army_experience = 25
 	}
 	option = { #Show no mercy
 		name = KOM.372.b
-		KOM_increase_gumilyov_influence_random = yes
-		KOM_increase_Taboritsky_influence_random = yes
+		KOM_gumilyov_influence_increase_random = yes
+		KOM_taboritsky_influence_increase_random = yes
 		add_political_power = 50
 	}
 }
@@ -9769,12 +9957,13 @@ country_event = { #Indulge The Monarchists
 	option = {
 		name = KOM.373.a
 		add_stability = 0.05
-		KOM_increase_Taboritsky_influence_high = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 5 }
+        KOM_taboritsky_influence_change = yes
 	}
 	option = {
 		name = KOM.373.b
 		add_political_power = 25
-		KOM_decrease_Taboritsky_influence_random = yes
+		KOM_taboritsky_influence_decrease_random = yes
 	}
 }
 
@@ -9789,12 +9978,13 @@ country_event = { #Welcome the true believers
 
 	option = { #Allow them to join the Moderates
 		name = KOM.374.a
-		KOM_increase_Shafarevich_influence_high = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 5 }
+        KOM_shafarevich_influence_change = yes
 		add_stability = 0.03
 	}
 	option = { #Off to the dungeons with them!
 		name = KOM.374.b
-		KOM_increase_Taboritsky_influence_random = yes
+		KOM_taboritsky_influence_increase_random = yes
 		add_political_power = -25
 	}
 }
@@ -9825,17 +10015,17 @@ country_event = {
 
 	option = { #Begin the process of converting them to Christianity
 		name = KOM.376.a
-		KOM_increase_Taboritsky_influence_random = yes
+		KOM_taboritsky_influence_increase_random = yes
 		TNO_improve_religious_rights_policy_effectiveness_med = yes
 	}
 	option = { #Focusing on erasing Islam
 		name = KOM.376.b
-		KOM_increase_serov_influence_random = yes
+		KOM_serov_influence_increase_random = yes
 		TNO_improve_religious_rights_policy_effectiveness_low = yes
 	}
 	option = { #Hold off on that.
 		name = KOM.376.c
-		KOM_increase_gumilyov_influence_random = yes
+		KOM_gumilyov_influence_increase_random = yes
 		TNO_worsen_religious_rights_policy_effectiveness_low = yes
 	}
 }
@@ -9851,8 +10041,10 @@ country_event = { #The Passionariyy Split!
 
 	option = {
 		name = KOM.377.a
-		KOM_decrease_gumilyov_influence_high = yes
-		KOM_increase_Shafarevich_influence_med = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = -5 }
+        KOM_gumilyov_influence_change = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 3 }
+        KOM_shafarevich_influence_change = yes
 		add_stability = -0.10	
 	}
 }
@@ -9868,19 +10060,19 @@ country_event = { #The new oaths
 
 	option = {
 		name = KOM.378.a
-		KOM_increase_gumilyov_influence_random = yes
+		KOM_gumilyov_influence_increase_random = yes
 	}
 	option = {
 		name = KOM.378.b
-		KOM_increase_Taboritsky_influence_random = yes
+		KOM_taboritsky_influence_increase_random = yes
 	}
 	option = {
 		name = KOM.378.c
-		KOM_increase_Shafarevich_influence_random = yes
+		KOM_shafarevich_influence_increase_random = yes
 	}
 	option = {
 		name = KOM.378.e
-		KOM_increase_serov_influence_random = yes
+		KOM_serov_influence_increase_random = yes
 	}
 }
 
@@ -10018,20 +10210,8 @@ country_event = { #Convergence - MODERATE VICTORY
 		set_politics = {
 			ruling_party = despotism
 		}
-		create_country_leader = {
-			name = "Igor Shafarevich"
-			desc = "POLITICS_IGOR_SHAFAREVICH_DESC"
-			picture = "Portrait_Komi_Igor_Shafarevich.dds"
-			expire = "1999.1.1"
-			ideology = despotism_aristocratic_conservatism_subtype
-			traits = {
-				hog_intelligentsia
-			}
-		}	
-		set_party_name = {
-			ideology = despotism
-			long_name = "Rossiyskaya Natsionalnaya Partiya"
-			name = "RNP"
+		KOM_Igor_Shafarevich = {
+			promote_character = { ideology = despotism_aristocratic_conservatism_subtype }
 		}
 		set_temp_variable = {TNO_economy_type_temp = 10}
 		econ_subtype_change = yes
@@ -10095,24 +10275,11 @@ country_event = { #Convergence - LEFTIST PACT VICTORY
 		set_politics = {
 			ruling_party = despotism
 		}
-		create_country_leader = {
-			name = "Igor Shafarevich"
-			desc = "POLITICS_IGOR_SHAFAREVICH_DESC"
-			picture = "Portrait_Komi_Igor_Shafarevich.dds"
-			expire = "1999.1.1"
-			ideology = despotism_aristocratic_conservatism_subtype
-			traits = {
-				hog_intelligentsia
-			}
-		}	
-		set_party_name = {
-			ideology = despotism
-			long_name = "Rossiyskaya Natsionalnaya Partiya"
-			name = "RNP"
+		KOM_Igor_Shafarevich = {
+			promote_character = { ideology = despotism_aristocratic_conservatism_subtype }
 		}
 		set_temp_variable = {TNO_economy_subtype_temp = 10}
 		econ_subtype_change = yes
-		KOM_assign_left_pact_ministers = yes
 		set_country_flag = KOM_POLITICS_RESOLVED
 	}
 }
@@ -10133,7 +10300,6 @@ country_event = { #Convergence - PASSIONARIYY PACT VICTORY
 		}
 		set_temp_variable = {TNO_economy_type_temp = 3}
 		econ_type_change = yes
-		KOM_assign_passionariyy_pact_ministers = yes
 		set_country_flag = KOM_POLITICS_RESOLVED
 	}
 }
@@ -10236,8 +10402,9 @@ country_event = { #Red-Brown Alliance
 	}
 	option = {
 		name = KOM.394.b
-		KOM_increase_left_power_random = yes
-		KOM_increase_serov_influence_med = yes
+		KOM_left_power_increase_random = yes
+		set_temp_variable = { KOMSerovInfluenceTemp = 3 }
+        KOM_serov_influence_change = yes
 	}
 }
 
@@ -10267,7 +10434,8 @@ country_event = { #Consolidate The Monarchists
 	option = {
 		name = KOM.396.a
 		add_political_power = 25
-		KOM_increase_Taboritsky_influence_med = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 3 }
+        KOM_taboritsky_influence_change = yes
 	}
 }
 
@@ -10295,7 +10463,7 @@ country_event = { #New Nationalism
 
 	option = {
 		name = KOM.398.a
-		KOM_increase_gumilyov_influence_random = yes
+		KOM_gumilyov_influence_increase_random = yes
 	}
 	option = {
 		name = KOM.398.b
@@ -10329,7 +10497,8 @@ country_event = { #Compassionate Fascism
 	option = {
 		name = KOM.400.a
 		add_political_power = 15
-		KOM_increase_Shafarevich_influence_med = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 3 }
+        KOM_shafarevich_influence_change = yes
 	}
 }
 
@@ -10358,7 +10527,8 @@ country_event = { #Draft a Constitution 1
 
 	option = {
 		name = KOM.402.a
-		KOM_decrease_Shafarevich_influence_low = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = -1 }
+        KOM_shafarevich_influence_change = yes
 		country_event = {
 			id = KOM.403
 			days = 4
@@ -10366,7 +10536,8 @@ country_event = { #Draft a Constitution 1
 	}
 	option = {
 		name = KOM.402.b
-		KOM_decrease_serov_influence_low = yes
+		set_temp_variable = { KOMSerovInfluenceTemp = -1 }
+        KOM_serov_influence_change = yes
 		country_event = {
 			id = KOM.403
 			days = 4
@@ -10374,7 +10545,8 @@ country_event = { #Draft a Constitution 1
 	}
 	option = {
 		name = KOM.402.c
-		KOM_decrease_Taboritsky_influence_low = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = -1 }
+        KOM_taboritsky_influence_change = yes
 		country_event = {
 			id = KOM.403
 			days = 4
@@ -10393,7 +10565,8 @@ country_event = { #Draft a Constitution 2
 
 	option = {
 		name = KOM.403.a
-		KOM_increase_Shafarevich_influence_low = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 1 }
+        KOM_shafarevich_influence_change = yes
 		set_temp_variable = { econ_centralization_temp = -3 }
 		econ_centralization_change = yes
 		set_temp_variable = { gdp_growth_temp = 0.1 }
@@ -10405,8 +10578,10 @@ country_event = { #Draft a Constitution 2
 	}
 	option = {
 		name = KOM.403.b
-		KOM_increase_gumilyov_influence_low = yes
-		KOM_increase_serov_influence_low = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 1 }
+        KOM_gumilyov_influence_change = yes
+		set_temp_variable = { KOMSerovInfluenceTemp = 1 }
+        KOM_serov_influence_change = yes
 		set_temp_variable = { econ_centralization_temp = 3 }
 		econ_centralization_change = yes
 		set_temp_variable = { gdp_growth_temp = 0.075 }
@@ -10418,7 +10593,8 @@ country_event = { #Draft a Constitution 2
 	}
 	option = {
 		name = KOM.403.c
-		KOM_increase_Taboritsky_influence_low = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 1 }
+        KOM_taboritsky_influence_change = yes
 		set_temp_variable = { econ_centralization_temp = 5 }
 		econ_centralization_change = yes
 		set_temp_variable = { gdp_growth_temp = 0.06 }
@@ -10441,20 +10617,26 @@ country_event = { #Draft a Constitution 3
 
 	option = {
 		name = KOM.404.a
-		KOM_decrease_Taboritsky_influence_low = yes
-		KOM_increase_Shafarevich_influence_low = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = -1 }
+        KOM_taboritsky_influence_change = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 1 }
+        KOM_shafarevich_influence_change = yes
 		TNO_improve_admin_efficiency_low = yes
 	}
 	option = {
 		name = KOM.404.b
-		KOM_decrease_Shafarevich_influence_low = yes
-		KOM_increase_gumilyov_influence_low = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = -1 }
+        KOM_shafarevich_influence_change = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 1 }
+        KOM_gumilyov_influence_change = yes
 		TNO_improve_minorities_policy_effectiveness_med = yes
 	}
 	option = {
 		name = KOM.404.c
-		KOM_decrease_serov_influence_low = yes
-		KOM_increase_Taboritsky_influence_low = yes
+		set_temp_variable = { KOMSerovInfluenceTemp = -1 }
+        KOM_serov_influence_change = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 1 }
+        KOM_taboritsky_influence_change = yes
 		add_political_power = 25
 	}
 }
@@ -10485,19 +10667,23 @@ country_event = { #The Final Words
 
 	option = { #Gumilyov
 		name = KOM.406.a
-		KOM_increase_gumilyov_influence_med = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
 	}
 	option = { #Shafarevich
 		name = KOM.406.b
-		KOM_increase_Shafarevich_influence_med = yes
+		set_temp_variable = { KOMShafarevichInfluenceTemp = 3 }
+        KOM_shafarevich_influence_change = yes
 	}
 	option = { #Serov
 		name = KOM.406.c
-		KOM_increase_serov_influence_med = yes
+		set_temp_variable = { KOMSerovInfluenceTemp = 3 }
+        KOM_serov_influence_change = yes
 	}
 	option = { #Taboritsky
 		name = KOM.406.e
-		KOM_increase_Taboritsky_influence_med = yes
+		set_temp_variable = { KOMTaboritskyInfluenceTemp = 3 }
+        KOM_taboritsky_influence_change = yes
 	}
 }
 
@@ -10582,16 +10768,8 @@ country_event = {
 
 	option = {
 		name = KOM.418.a
-		create_country_leader = {
-
-			name = "Sergey Taboritsky"
-			desc = "POLITICS_SERGEY_TABORITSKY_DESC"
-			picture = "GFX_Portrait_Komi_Blink_Sergey_Taboritsky"
-			expire = "1999.1.1"
-			ideology = esoteric_nazism_imperial_cult_subtype
-			traits = {
-
-			}
+		KOM_Sergey_Taboritsky = {
+			promote_character = { ideology = esoteric_nazism_imperial_cult_subtype }
 		}
 	}
 }
@@ -10607,16 +10785,8 @@ country_event = {
 
 	option = {
 		name = KOM.419.a
-		create_country_leader = {
-
-			name = "Sergey Taboritsky"
-			desc = "POLITICS_SERGEY_TABORITSKY_DESC"
-			picture = "Portrait_Komi_Sergey_Taboritsky.dds"
-			expire = "1999.1.1"
-			ideology = esoteric_nazism_imperial_cult_subtype
-			traits = {
-
-			}
+		KOM_Sergey_Taboritsky = {
+			promote_character = { ideology = esoteric_nazism_imperial_cult_subtype }
 		}
 	}
 }
@@ -10641,14 +10811,9 @@ country_event = { #TABBY'S REVEAL
 		}
 		set_temp_variable = {TNO_economy_subtype_temp = 7}
 		econ_subtype_change = yes
-		create_country_leader = {
-			name = "Sergey Taboritsky"
-			desc = "POLITICS_SERGEY_TABORITSKY_BURGSYS_DESC"
-			picture = "Portrait_Komi_Sergey_Taboritsky.dds"
-			expire = "1999.1.1"
-			ideology = esoteric_nazism_imperial_cult_subtype
-			traits = {
-				black_regent
+		KOM_Sergey_Taboritsky = {
+			set_portraits = {
+				civilian = { large = "gfx/leaders/KOM/Portrait_Komi_Sergey_Taboritsky.dds" }
 			}
 		}
 		hidden_effect = {
@@ -10672,7 +10837,7 @@ country_event = { #Oplesnin joins up
 
 	option = {
 		name = KOM.421.a
-		custom_effect_tooltip = "Nikolai Oplesnin becomes a General."
+		custom_effect_tooltip = KOM.421.a.tt
 		hidden_effect = {
 			ZZZ = {
 				random_unit_leader = {
@@ -10701,7 +10866,8 @@ country_event = { #Grigorenko disapproves
 
 	option = {
 		name = KOM.422.a
-		KOM_increase_Stalina_influence_med = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
 		add_war_support = -0.01
 	}
 }
@@ -11220,10 +11386,11 @@ country_event = { #Yes
 	option = {
 		name = komidiplo.5.a
 		army_experience = 30
-		add_tech_bonus = {
-			bonus = 0.5
-			uses = 1
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.5
+		    uses = 1
+		    category = land_doctrine
 		}
 		WRS = {
 			diplomatic_relation = {
@@ -13137,7 +13304,8 @@ country_event = { #Radio Free Syktyvkar - First Event
 	}
 	option = {
 		name = komi.44.b
-		KOM_decrease_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -13235,27 +13403,31 @@ country_event = { #Komi Republican Navy
 	option = {
 		name = komi.50.a
 		navy_experience = 5
-		create_navy_leader = {
-			name = "Vladimir Chernavin"
-			picture = "Portrait_Komi_Vladimir_Chernavin.dds"
-			traits = { seawolf }
-			skill = 2
-			attack_skill = 2
-			defense_skill = 2
-			maneuvering_skill = 1
-			coordination_skill = 2
-			id = 7541
+		KOM_Vladimir_Chernavin = {
+			add_naval_commander_role = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				maneuvering_skill = 1
+				coordination_skill = 2
+				traits = { 
+					seawolf 
+				}
+				legacy_id = 7541
+			}
 		}
-		create_navy_leader = {
-			name = "Timur Gaidar"
-			picture = "Portrait_Komi_Timur_Gaidar.dds"
-			traits = { fleet_protector }
-			skill = 2
-			attack_skill = 1
-			defense_skill = 3
-			maneuvering_skill = 1
-			coordination_skill = 2
-			id = 7542
+		KOM_Timur_Gaidar = {
+			add_naval_commander_role = {
+				skill = 2
+				attack_skill = 1
+				defense_skill = 3
+				maneuvering_skill = 1
+				coordination_skill = 2
+				traits = { 
+					fleet_protector 
+				}
+				legacy_id = 7542
+			}
 		}
 	}
 }
@@ -13820,7 +13992,7 @@ country_event = { #Budget will not have sufficient votes
 
 	option = { #Damn it all! Call up Zhdanov.
 		name = komilaws.2.a
-		KOM_decrease_Voznesensky_influence_random = yes
+		KOM_voznesensky_influence_decrease_random = yes
 		custom_effect_tooltip = KOM_discourage_paramilitary_violence_tt
 		add_to_variable = { KOMZhdanovFavors = 3 }
 		country_event = {
@@ -13831,7 +14003,7 @@ country_event = { #Budget will not have sufficient votes
 
 	option = { #Fucking fine Kosygin takes it
 		name = komilaws.2.b
-		KOM_decrease_Voznesensky_influence_random = yes
+		KOM_voznesensky_influence_decrease_random = yes
 		country_event = {
 			id = komilaws.12
 			days = 1
@@ -13850,7 +14022,7 @@ country_event = { #Communist Party endorses the budget
 
 	option = {
 		name = komilaws.3.a
-		KOM_increase_left_power_random = yes
+		KOM_left_power_increase_random = yes
 		country_event = {
 			id = komilaws.4
 			days = 1
@@ -13869,7 +14041,8 @@ country_event = { #Shafarevich denounces the budget
 
 	option = {
 		name = komilaws.4.a
-		KOM_decrease_center_power_low = yes
+		set_temp_variable = { KOMCenterPowerTemp = -1 }
+        KOM_left_power_change = yes
 		country_event = {
 			id = komilaws.5
 			days = 1
@@ -13926,7 +14099,8 @@ country_event = { #Kosygin passes budget
 
 	option = {
 		name = komilaws.7.a
-		KOM_increase_Kosygin_influence_med = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 3 }
+           KOM_kosygin_influence_change = yes
 		add_political_power = 25
 	}
 }
@@ -13969,7 +14143,8 @@ country_event = { #Cutting police funding
 		name = komilaws.9.a
 		set_temp_variable = { civilian_costs_temp = -0.006 }
 		econ_civilian_costs_change = yes
-		KOM_increase_right_power_low = yes
+		set_temp_variable = { KOMRightPowerTemp = 1 }
+        KOM_right_power_change = yes
 		add_stability = -0.05
 	}
 }
@@ -13985,8 +14160,10 @@ country_event = { #Passing it with Kosygin's blessing
 
 	option = {
 		name = komilaws.10.a
-		KOM_increase_Stalina_influence_low = yes
-		KOM_increase_Kosygin_influence_low = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 1 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 1 }
+           KOM_kosygin_influence_change = yes
 		add_stability = 0.05
 	}
 }
@@ -14019,8 +14196,10 @@ country_event = { #Voznesensky-Kosygin bill passes
 		name = komilaws.12.a
 		set_temp_variable = { income_tax_temp = 0.015 }
 		econ_income_tax_rate_change = yes
-		KOM_increase_Kosygin_influence_med = yes
-		KOM_increase_Voznesensky_influence_low = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 3 }
+           KOM_kosygin_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 1 }
+           KOM_voznesensky_influence_change = yes
 	}
 }
 
@@ -14039,8 +14218,9 @@ country_event = { #Infrastructure Repair Bill
 		econ_income_tax_rate_change = yes
 		set_temp_variable = { temp_econ_spending_amount = 0.003 }
 		econ_spend_money_once_effect_raw_money = yes
-		KOM_increase_left_power_random = yes
-		KOM_increase_Voznesensky_influence_low = yes
+		KOM_left_power_increase_random = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 1 }
+           KOM_voznesensky_influence_change = yes
 		custom_effect_tooltip = KOM_zhd_reduce_effect_tt_2
 		add_to_variable = { KOMZhdanovFavors = -2 }
 		397 = {
@@ -14055,7 +14235,8 @@ country_event = { #Infrastructure Repair Bill
 		name = komilaws.13.b
 		set_temp_variable = { temp_econ_spending_amount = 0.004 }
 		econ_spend_money_once_effect_raw_money = yes
-		KOM_increase_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = 3 }
+        KOM_left_power_change = yes
 		add_stability = -0.025
 		397 = {
 			add_building_construction = {
@@ -14067,7 +14248,7 @@ country_event = { #Infrastructure Repair Bill
 	}
 	option = { #Accept the right's proposal and allow for prison labor
 		name = komilaws.13.c
-		KOM_increase_right_power_random = yes
+		KOM_right_power_increase_random = yes
 		add_ideas = tno_penal_system_penal_labor
 		set_temp_variable = { temp_econ_spending_amount = 0.002 }
 		econ_spend_money_once_effect_raw_money = yes
@@ -14092,15 +14273,20 @@ country_event = { #Mandated Minority Representation Bill
 
 	option = { #Pass it
 		name = komilaws.14.a
-		KOM_increase_Stalina_influence_med = yes
-		KOM_decrease_Voznesensky_influence_med = yes
-		KOM_increase_left_power_low = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = -3 }
+            KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMLeftPowerTemp = 1 }
+        KOM_left_power_change = yes
 		TNO_improve_minorities_policy_effectiveness_monthly_high = yes
 	}
 	option = { #Pass a watered-down version.
 		name = komilaws.14.b
-		KOM_increase_Stalina_influence_low = yes
-		KOM_increase_Kosygin_influence_low = yes
+		set_temp_variable = { KOMStalinaInfluenceTemp = 1 }
+        KOM_stalina_influence_change = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 1 }
+           KOM_kosygin_influence_change = yes
 		add_political_power = 25
 		TNO_improve_minorities_policy_effectiveness_monthly_low = yes
 	}
@@ -14108,8 +14294,10 @@ country_event = { #Mandated Minority Representation Bill
 		name = komilaws.14.c
 		add_stability = -0.05
 		add_political_power = -10
-		KOM_increase_Voznesensky_influence_low = yes
-		KOM_increase_right_power_low = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 1 }
+           KOM_voznesensky_influence_change = yes
+		set_temp_variable = { KOMRightPowerTemp = 1 }
+        KOM_right_power_change = yes
 	}
 }
 
@@ -14129,7 +14317,8 @@ country_event = { #Defense Of The Republic Bill
 		add_manpower = 5000
 		tno_conscription_worsen = yes
 		TNO_improve_conscription_policy_effectiveness_med = yes
-		KOM_increase_left_power_med = yes
+		set_temp_variable = { KOMLeftPowerTemp = 3 }
+        KOM_left_power_change = yes
 	}
 	option = { #Pass it as is.
 		name = komilaws.15.b
@@ -14140,7 +14329,8 @@ country_event = { #Defense Of The Republic Bill
 	option = { #Kill it, this is too far.
 		name = komilaws.15.c
 		add_stability = -0.05
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -14158,24 +14348,27 @@ country_event = { #Equal Zoning Bill
 		add_stability = -0.05
 		custom_effect_tooltip = KOM_zhd_reduce_effect_tt_4
 		add_to_variable = { KOMZhdanovFavors = -4 }
-		KOM_increase_left_power_random = yes
-		KOM_increase_Suslov_influence_med = yes
+		KOM_left_power_increase_random = yes
+		set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
 		TNO_worsen_political_parties_policy_effectiveness_low = yes
 	}
 	option = { #We need the right.
 		name = komilaws.16.b
 		add_stability = -0.05
-		KOM_increase_right_power_random = yes
-		KOM_increase_gumilyov_influence_med = yes
+		KOM_right_power_increase_random = yes
+		set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
 		TNO_worsen_political_parties_policy_effectiveness_low = yes
 	}
 	option = { #We need no one!
 		name = komilaws.16.c
 		add_political_power = -50
 		TNO_improve_vote_franchise_policy_effectiveness_low = yes
-		KOM_increase_Stalina_influence_random = yes
-		KOM_increase_Kosygin_influence_random = yes
-		KOM_increase_center_power_low = yes
+		KOM_stalina_influence_increase_random = yes
+		KOM_kosygin_influence_increase_random = yes
+		set_temp_variable = { KOMCenterPowerTemp = 1 }
+        KOM_left_power_change = yes
 	}
 }
 
@@ -14194,9 +14387,9 @@ country_event = { #Municipal Pacification Bill
 		TNO_improve_security_policy_effectiveness_low = yes
 		add_stability = 0.05
 		add_manpower = -750
-		KOM_decrease_left_power_random = yes
-		KOM_decrease_right_power_random = yes
-		KOM_increase_Stalina_influence_random = yes
+		KOM_left_power_decrease_random = yes
+		KOM_right_power_decrease_random = yes
+		KOM_stalina_influence_increase_random = yes
 	}
 	option = { #Kill it, this has turned into a nightmare.
 		name = komilaws.17.b
@@ -14257,10 +14450,11 @@ country_event = {
 			factor = 150
 		}
 		army_experience = 20
-		add_tech_bonus = {
-			bonus = 1
-			uses = 2
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.75
+		    uses = 2
+		    category = land_doctrine
 		}
 	}
 	option = {
@@ -14270,15 +14464,17 @@ country_event = {
 		}
 		army_experience = 10
 		air_experience = 10
-		add_tech_bonus = {
-			bonus = 1
-			uses = 1
-			category = air_doctrine
+		add_doctrine_cost_reduction = {
+		    name = air_doc_bonus
+		    cost_reduction = 0.75
+		    uses = 1
+		    category = air_doctrine
 		}
-		add_tech_bonus = {
-			bonus = 1
-			uses = 1
-			category = land_doctrine
+		add_doctrine_cost_reduction = {
+		    name = land_doc_bonus
+		    cost_reduction = 0.75
+		    uses = 1
+		    category = land_doctrine
 		}
 	}
 }
@@ -14336,13 +14532,28 @@ country_event = {
 
 	option = {
 		name = komi_dem_generic.7.a
-		add_equipment_to_stockpile = {
-			type = MBT_equipment
-			amount = 150
+		if = { 
+			limit = { 
+				has_dlc = "No Step Back"
+			}
+			add_equipment_to_stockpile = {
+				type = MBT_chassis
+				amount = 150
+			}
+			add_equipment_to_stockpile = {
+				type = IFV_chassis
+				amount = 200
+			}
 		}
-		add_equipment_to_stockpile = {
-			type = IFV_equipment
-			amount = 200
+		else = {
+			add_equipment_to_stockpile = {
+				type = MBT_equipment
+				amount = 150
+			}
+			add_equipment_to_stockpile = {
+				type = IFV_equipment
+				amount = 200
+			}
 		}
 	}
 }
@@ -14961,7 +15172,7 @@ country_event = { #Accepts visit - MAKE THIS PRESIDENT SPECIFIC LATER WHEN WE HA
 			limit = {
 				WSR = {
 					has_country_leader = {
-						name = "Nikolai Voznesensky"
+						character = KOM_Nikolai_Voznesensky
 						ruling_only = yes
 					}
 				}
@@ -14983,7 +15194,7 @@ country_event = { #Accepts visit - MAKE THIS PRESIDENT SPECIFIC LATER WHEN WE HA
 			limit = {
 				WSR = {
 					has_country_leader = {
-						name = "Alexei Kosygin"
+						character = KOM_Alexei_Kosygin
 						ruling_only = yes
 					}
 				}
@@ -15005,7 +15216,7 @@ country_event = { #Accepts visit - MAKE THIS PRESIDENT SPECIFIC LATER WHEN WE HA
 			limit = {
 				WSR = {
 					has_country_leader = {
-						name = "Svetlana Stalina"
+						character = KOM_Svetlana_Stalina
 						ruling_only = yes
 					}
 				}
@@ -16656,7 +16867,8 @@ country_event = { #Shafarevich meets with several figures from the Center and sw
 
 	option = {
 		name = komi_RNP.3.a
-		KOM_increase_Kosygin_influence_low = yes
+		set_temp_variable = { KOMKosyginInfluenceTemp = 1 }
+           KOM_kosygin_influence_change = yes
 		add_political_power = -50
 		country_event = {
 			id = komi_RNP.4
@@ -16710,10 +16922,13 @@ country_event = { #Suslov is tipped off and flees the country with most of his s
 				KOM_eliminate_left_leader = yes
 			}
 		}
-		KOM_decrease_left_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
 		hidden_effect = {
-			KOM_decrease_left_power_high = yes
-			KOM_decrease_left_power_high = yes
+			set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
 		}
 		add_stability = -0.15
 		add_political_power = 50
@@ -16733,10 +16948,13 @@ country_event = { #KPK is declared unconstitutional in a 2AM session, Suslov is 
 		name = komi_RNP.5.a
 		custom_effect_tooltip = KOM_suslov_arrest_tt
 		set_country_flag = KOM_Suslov_Arrested
-		KOM_decrease_left_power_high = yes
+		set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
 		hidden_effect = {
-			KOM_decrease_left_power_high = yes
-			KOM_decrease_left_power_high = yes
+			set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMLeftPowerTemp = -5 }
+        KOM_left_power_change = yes
 		}
 		add_political_power = 50
 		country_event = {
@@ -16790,8 +17008,10 @@ country_event = { #Communist terrorist attack caused by leftist discontent
 			ideology = conservative_democracy
 			popularity = 0.05
 		}
-		KOM_increase_right_power_high = yes
-		KOM_decrease_center_power_med = yes
+		set_temp_variable = { KOMRightPowerTemp = 5 }
+        KOM_right_power_change = yes
+		set_temp_variable = { KOMCenterPowerTemp = -3 }
+        KOM_left_power_change = yes
 		hidden_effect = {
 			country_event = {
 				id = komi_RNP.8
@@ -16877,8 +17097,10 @@ country_event = { #Passage of the National Democracy Act
 		name = komi_RNP.11.a
 		custom_effect_tooltip = NDA_PASSED_TT
 		hidden_effect = {
-			KOM_decrease_center_power_high = yes
-			KOM_increase_Shafarevich_influence_high = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMShafarevichInfluenceTemp = 5 }
+        KOM_shafarevich_influence_change = yes
 			set_politics = {
 				ruling_party = despotism
 			}
@@ -16910,8 +17132,10 @@ country_event = { #Passage of the National Democracy Act (Illegally)
 		add_stability = -0.15
 		add_political_power = -75
 		hidden_effect = {
-			KOM_decrease_center_power_high = yes
-			KOM_increase_Shafarevich_influence_high = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMShafarevichInfluenceTemp = 5 }
+        KOM_shafarevich_influence_change = yes
 			set_politics = {
 				ruling_party = despotism
 			}
@@ -17087,7 +17311,8 @@ country_event = {
 
 	option = {
 		name = komi_KPK.7.a
-		KOM_increase_Voznesensky_influence_low = yes
+		set_temp_variable = { KOMVoznesenskyInfluenceTemp = 1 }
+           KOM_voznesensky_influence_change = yes
 		add_political_power = -50
 		country_event = {
 			id = komi_KPK.8
@@ -17111,30 +17336,18 @@ country_event = {
 		set_country_flag = KOM_Shafarevich_Retired
 		set_variable = { KOMModerateFascInfluence = 0 }
 		KOM_eliminate_right_leader = yes
-		KOM_decrease_right_power_high = yes
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
 		hidden_effect = {
-			KOM_decrease_right_power_high = yes
+			set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
 		}
 		add_stability = -0.10
 		add_political_power = 50
 		hidden_effect = {
-			create_country_leader = {
-				name = "Power Vacuum"
-				#desc = ""
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = conservative_democracy_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Power Vacuum"
-				#desc = ""
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = despotism_subtype
-				traits = {
-				}
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = conservative_democracy_subtype }
+				promote_character = { ideology = despotism_subtype }
 			}
 		}
 	}
@@ -17155,10 +17368,13 @@ country_event = {
 		set_country_flag = KOM_Gumilyov_Arrested
 		custom_effect_tooltip = KOM_serov_arrest_tt
 		set_country_flag = KOM_Serov_Arrested
-		KOM_decrease_right_power_high = yes
+		set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
 		hidden_effect = {
-			KOM_decrease_right_power_high = yes
-			KOM_decrease_right_power_high = yes
+			set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
+			set_temp_variable = { KOMRightPowerTemp = -5 }
+        KOM_right_power_change = yes
 		}
 		add_political_power = 25
 		country_event = {
@@ -17192,23 +17408,9 @@ country_event = {
 		set_country_flag = KOM_Gumilyov_Dead
 		set_country_flag = KOM_Serov_Dead
 		hidden_effect = {
-			create_country_leader = {
-				name = "Power Vacuum"
-				#desc = ""
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = national_socialism_subtype
-				traits = {
-				}
-			}
-			create_country_leader = {
-				name = "Power Vacuum"
-				#desc = ""
-				picture = "Portrait_Komi_National_Assembly.dds"
-				expire = "1999.1.1"
-				ideology = ultranationalism_subtype
-				traits = {
-				}
+			KOM_Power_Vacuum = {
+				promote_character = { ideology = national_socialism_subtype }
+				promote_character = { ideology = ultranationalism_subtype }
 			}
 		}
 	}
@@ -17227,9 +17429,12 @@ country_event = {
 		name = komi_KPK.11.a
 		custom_effect_tooltip = PAA_PASSED_TT
 		hidden_effect = {
-			KOM_decrease_center_power_high = yes
-			KOM_increase_left_power_high = yes
-			KOM_increase_Zhdanov_influence_high = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMZhdanovInfluenceTemp = 5 }
+            KOM_zhdanov_influence_change = yes
 		}
 		tno_vote_franchise_worsen = yes
 		TNO_improve_industrial_expertise_med = yes
@@ -17254,9 +17459,12 @@ country_event = {
 		name = komi_KPK.12.a
 		custom_effect_tooltip = PAA_PASSED_TT
 		hidden_effect = {
-			KOM_decrease_center_power_high = yes
-			KOM_increase_left_power_high = yes
-			KOM_increase_Zhdanov_influence_high = yes
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMLeftPowerTemp = 5 }
+        KOM_left_power_change = yes
+			set_temp_variable = { KOMZhdanovInfluenceTemp = 5 }
+            KOM_zhdanov_influence_change = yes
 		}
 		tno_vote_franchise_worsen = yes
 		TNO_improve_industrial_expertise_med = yes
@@ -17292,14 +17500,8 @@ country_event = { #Total control achieved
 		set_temp_variable = { TNO_economy_type_temp = 3}
 		econ_type_change = yes
 		KOM_assign_suslov_ministers = yes
-		create_country_leader = {
-			name = "Presidium of the KPK"
-			desc = "POLITICS_KPK_PRESIDIUM_DESC"
-			picture = "Portrait_Komi_Presidium_of_the_KPK.dds"
-			expire = "1999.1.1"
-			ideology = communist_subtype
-			traits = {
-			}
+		KOM_KPK_Presidium = {
+			promote_character = { ideology = communist_subtype }
 		}
 		remove_ideas = KOM_syvtyvkartsi
 		add_ideas = KOM_internal_conflicts
