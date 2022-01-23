@@ -25,24 +25,94 @@ reload_GER_speer_post_cw_tree = {
 	}
 }
 
-#####################################
-# Reichsschnellfahrstreckenprogramm #
-#####################################
+############
+# Projects #
+############
 
-#Start up RSFSTP
-SGR_start_RSFSTP = {
-	set_variable = { SGR_RSFSTP_progress = 1.2 }
-	set_variable = { SGR_RSFSTP_progress_monthly = 0.8 }
-    set_variable = { SGR_RSFSTP_slave_repatriation = 2.5 }
-	set_variable = { SGR_railway_frame_progress = 1}
-	add_dynamic_modifier = { modifier = GER_SGR_RSFSTP_dynamic_modifier }
-	set_variable = { SGR_RSFSTP_PU_Cost = -8 }
-	set_variable = { SGR_RSFSTP_PUs = 8 }
-    set_variable = { SGR_RSFSTP_political_power_gain = -0.2 }
-	set_variable = { SGR_RSFSTP_cost = 0.5}
-	set_country_flag = SGR_RSFSTP_started
-	set_country_flag = SGR_RSFSTP_started_dummy_railway
-	add_ideas = { GER_SGR_RSFSTP_Dummy }
+#Start up projects
+SGR_project_initialize = {
+	
+	#Define projects here
+	set_variable = { RSFSTP = 0 }
+	set_variable = { RUSSIAN_WALL = 1 }
+
+	add_to_array = { SGR_Project_Progress = 0 }
+	resize_array = { SGR_Project_Progress = 10 }
+
+	add_to_array = { SGR_Project_Progress_Monthly = 0 }
+	resize_array = { SGR_Project_Progress_Monthly = 10 }
+
+	add_to_array = { SGR_Project_Cost_Temp = 0 }
+	resize_array = { SGR_Project_Cost_Temp = 10 }
+
+	add_to_array = { SGR_Project_PP_Cost = 0 }
+	resize_array = { SGR_Project_PP_Cost = 10 }
+
+	add_to_array = { SGR_Project_PU_Cost = 0 }
+	resize_array = { SGR_Project_PU_Cost = 10 }
+
+	add_to_array = { SGR_Project_PU_Investment = 0 }
+	resize_array = { SGR_Project_PU_Investment = 10 }
+
+	add_to_array = { SGR_Project_Bureaucracy_Display = 0 }
+	resize_array = { SGR_Project_Bureaucracy_Display = 10 }
+
+	add_to_array = { SGR_Project_Actual_Cost = 0 }
+	resize_array = { SGR_Project_Actual_Cost = 10 }
+}
+
+SGR_start_project = { # Uses a temp var to determine which project you are going to start
+	if = {
+		limit = {
+			check_variable = {
+				SGR_project_start_temp = RSFSTP
+			}
+		}
+		# Set up everything here for any projects
+		set_variable = { SGR_Project_Progress^SGR_project_start_temp = 5.4 }
+		set_variable = { SGR_Project_Progress_Monthly^SGR_project_start_temp = 1.2 }
+		set_variable = { SGR_Project_Cost_Temp^SGR_project_start_temp = 0.5 }
+		set_variable = { SGR_Project_PP_Cost^SGR_project_start_temp = -0.2 }
+		set_variable = { SGR_Project_PU_Cost^SGR_project_start_temp = -8 }
+		set_variable = { SGR_Project_PU_Investment^SGR_project_start_temp = 8 }
+
+		# Unique
+		set_country_flag = SGR_RSFSTP_started
+		set_country_flag = SGR_RSFSTP_started_dummy_railway
+		set_variable = { SGR_RSFSTP_slave_repatriation = 2.5 }
+		set_variable = { SGR_railway_frame_progress = 1}
+		set_variable = { SGR_railway_krakau_frame_progress = 1 }
+		add_dynamic_modifier = { modifier = GER_SGR_RSFSTP_dynamic_modifier }
+
+		# Efficiency calc
+		set_temp_variable = { SGR_project_calc = RSFSTP }
+		SGR_calculate_efficiency = yes
+	}
+
+	else_if = {
+		limit = {
+			check_variable = {
+				SGR_project_start_temp = RUSSIAN_WALL
+			}
+		}
+		# Set up everything here for any projects
+		set_variable = { SGR_Project_Progress^SGR_project_start_temp = 5.4 }
+		set_variable = { SGR_Project_Progress_Monthly^SGR_project_start_temp = 2.1 }
+		set_variable = { SGR_Project_Cost_Temp^SGR_project_start_temp = 0.75 }
+		set_variable = { SGR_Project_PP_Cost^SGR_project_start_temp = -0.2 }
+		set_variable = { SGR_Project_PU_Cost^SGR_project_start_temp = -8 }
+		set_variable = { SGR_Project_PU_Investment^SGR_project_start_temp = 8 }
+
+		# Unique
+		set_country_flag = SGR_russian_wall_started
+		set_country_flag = SGR_russian_wall_started_dummy
+		set_variable = { SGR_russian_wall_frame_progress = 1 }
+		add_dynamic_modifier = { modifier = GER_SGR_russian_wall_dynamic_modifier }
+
+		# Efficiency calc
+		set_temp_variable = { SGR_project_calc = RUSSIAN_WALL }
+		SGR_calculate_efficiency = yes
+	}
 }
 
 SGR_railway_test = {
@@ -50,24 +120,84 @@ SGR_railway_test = {
 }
 
 SGR_prog_test = {
-	add_to_variable = { SGR_RSFSTP_progress = 10}
+	add_to_variable = { SGR_Project_Progress^RSFSTP = 10}
 	SGR_update_RSFSTP_progress = yes
 }
 
-SGR_RSFSTP_prog_change = {
-	set_temp_variable = { SGR_RSFSTP_progress_monthly_temp = SGR_RSFSTP_progress_monthly }
-	add_to_temp_variable = { SGR_RSFSTP_progress_monthly_temp = RSFSTP_monthly_temp?0.1 }
+SGR_calculate_efficiency = { # Calculates cost
+	set_temp_variable = { SGR_project_effiency_calc = SGR_project_calc }
+	set_variable = {
+		SGR_Project_Actual_Cost^SGR_project_effiency_calc = SGR_Project_Cost_Temp^SGR_project_effiency_calc
+	}
 	if = {
-		limit = { check_variable = { RSFSTP_monthly_temp?0.1 > 0 } }
-		custom_effect_tooltip = SGR_RSFSTP_monthly_add_tt
+		limit = {
+			has_idea = tno_admin_efficiency_organized_chaos
+		}
+		set_temp_variable = { SGR_project_cost_mult = 2.5 }
+		set_variable = { SGR_project_cost_mult_disp = SGR_project_cost_mult}
 	}
-	else = {
-		custom_effect_tooltip = SGR_RSFSTP_monthly_sub_tt
+	else_if = {
+		limit = {
+			has_idea = tno_admin_efficiency_nonexistent_state_apparatus
+		}
+		set_temp_variable = { SGR_project_cost_mult = 2 }
+		set_variable = { SGR_project_cost_mult_disp = SGR_project_cost_mult}
 	}
+	else_if = {
+		limit = {
+			has_idea = tno_admin_efficiency_illegitimate_administration
+		}
+		set_temp_variable = { SGR_project_cost_mult = 1.5 }
+		set_variable = { SGR_project_cost_mult_disp = SGR_project_cost_mult}
+	}
+	else_if = {
+		limit = {
+			has_idea = tno_admin_efficiency_deficient_administrative_systems
+		}
+		set_temp_variable = { SGR_project_cost_mult = 1.25 }
+		set_variable = { SGR_project_cost_mult_disp = SGR_project_cost_mult}
+	}
+	else_if = {
+		limit = {
+			has_idea = tno_admin_efficiency_functional_administrative_systems
+		}
+		set_temp_variable = { SGR_project_cost_mult = 1.1 }
+		set_variable = { SGR_project_cost_mult_disp = SGR_project_cost_mult}
+	}
+	else_if = {
+		limit = {
+			has_idea = tno_admin_efficiency_streamlined_bureaucracy
+		}
+		set_temp_variable = { SGR_project_cost_mult = 1 }
+		set_variable = { SGR_project_cost_mult_disp = SGR_project_cost_mult}
+	}
+	else_if = {
+		limit = {
+			has_idea = tno_admin_efficiency_well_oiled_machine
+		}
+		set_temp_variable = { SGR_project_cost_mult = 0.9 }
+		set_variable = { SGR_project_cost_mult_disp = SGR_project_cost_mult}
+	}
+	# Take from bureaucracy budget, reduce cost by 1/3 of budget slider
+	set_temp_variable = { SGR_bureaucracy_budget_calc = GER.econ_admin_bureaucracy_slider_pct }
+	divide_temp_variable = { SGR_bureaucracy_budget_calc = 300 }
+	clamp_temp_variable = { var = SGR_bureaucracy_budget_calc min = 0 }
+	set_variable = { SGR_Project_Bureaucracy_Display^SGR_project_effiency_calc = SGR_bureaucracy_budget_calc }
+
+	# Reduce multiplier by bureaucracy budget
+	subtract_from_temp_variable = { SGR_project_cost_mult = SGR_bureaucracy_budget_calc }
+	multiply_variable = { SGR_Project_Actual_Cost^SGR_project_effiency_calc = SGR_project_cost_mult }
+}
+
+SGR_project_prog_change = { # Changes monthly progress #use SGR_Project_Change_Mod_temp
+	set_temp_variable = { SGR_Amount_Change_Mod_temp_tt = SGR_Project_Progress_Monthly^SGR_Project_Change_Mod_temp }
+	add_to_temp_variable = { SGR_Amount_Change_Mod_temp_tt = SGR_Amount_Change_Mod_temp?0.1 }
+
+	custom_effect_tooltip = SGR_project_monthly_change_tt
 
 	# The actual math
-	add_to_variable = { SGR_RSFSTP_progress_monthly = RSFSTP_monthly_temp?0.1 }
-	clamp_variable = { var = SGR_RSFSTP_progress_monthly min = 0 }
+	add_to_variable = { SGR_Project_Progress_Monthly^SGR_Project_Change_Mod_temp = SGR_Amount_Change_Mod_temp?0.1 }
+	clamp_variable = { var = SGR_Project_Progress_Monthly^SGR_Project_Change_Mod_temp min = 0 }
 }
 SGR_RSFSTP_repatriation_change = {
 	set_temp_variable = { SGR_RSFSTP_slave_repatriation_temp = SGR_RSFSTP_slave_repatriation }
@@ -89,32 +219,67 @@ SGR_RSFSTP_repatriation_change = {
 	clamp_variable = { var = SGR_RSFSTP_slave_repatriation min = 0 }
 }
 
-
+SGR_monthly_project_progress_update = {
+	if = {
+		limit = {
+			has_country_flag = SGR_RSFSTP_started
+		}
+		SGR_update_RSFSTP_progress = yes
+	}
+}
 ### Monthly progress update for the RSfStP
 SGR_update_RSFSTP_progress = {
 
-	add_to_variable = { SGR_RSFSTP_progress = SGR_RSFSTP_progress_monthly }
-	clamp_variable = { var = SGR_RSFSTP_progress max = 100 }
+	add_to_variable = { SGR_Project_Progress^RSFSTP = SGR_Project_Progress_Monthly^RSFSTP }
+	clamp_variable = { var = SGR_Project_Progress^RSFSTP max = 100 }
 
 	## Progress Milestone events #Calcs on WWS repatriation and skilled workforce as well, speeds up repatriation
 	# Main
 	if = { # Germania-Danzig (final)
-		limit = { check_variable = { SGR_RSFSTP_progress = 100 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP = 100 } }
 		country_event = { id = speer_railway.8 days = 1 }
-		clear_variable = SGR_RSFSTP_progress_monthly
+		if = { # If you have Krakau connection, finish at the same time like Germania-Danzig.
+			limit = { has_country_flag = SGR_RSFSTP_started_krakau_connection }
+			country_event = { id = speer_railway.12 days = 3 }
+		}
+		clear_variable = SGR_Project_Progress_Monthly^RSFSTP
 		clear_variable = SGR_RSFSTP_slave_repatriation
 		clear_variable = SGR_RSFSTP_workforce_growth
-		clear_variable = SGR_RSFSTP_PU_Cost
-		clear_variable = SGR_RSFSTP_PUs
-		clear_variable = SGR_RSFSTP_political_power_gain
-		clear_variable = SGR_RSFSTP_cost
+		clear_variable = SGR_Project_PU_Cost^RSFSTP
+		clear_variable = SGR_Project_PU_Investment^RSFSTP
+		clear_variable = SGR_Project_PP_Cost^RSFSTP
+		clear_variable = SGR_Project_Actual_Cost^RSFSTP
+		clear_variable = SGR_Project_Cost_Temp^RSFSTP
 		remove_dynamic_modifier = { modifier = GER_SGR_RSFSTP_dynamic_modifier }
 		clr_country_flag = SGR_RSFSTP_started
+		clr_country_flag = SGR_RSFSTP_started_krakau_connection
 		clr_country_flag = SGR_project_info_window_open
-		remove_ideas = { GER_SGR_RSFSTP_Dummy }
+	}
+	else_if = { # Constructing link to Krakau, take away slaves from Central Germany
+		limit = { has_country_flag = SGR_RSFSTP_started_krakau_connection }
+		subtract_from_variable = {SGR_WWS_Regions^2 = SGR_RSFSTP_slave_repatriation }
+
+		#Calc slaves being sent away
+		set_temp_variable = { RSFSTPrepatriationsCalc = SGR_RSFSTP_slave_repatriation}
+		multiply_temp_variable = { RSFSTPrepatriationsCalc = -1000} # Negative manpower addition
+		random_list = {
+			1 = { 66 = {add_manpower = var:RSFSTPrepatriationsCalc } }
+			1 = { 67 = {add_manpower = var:RSFSTPrepatriationsCalc } }
+			1 = { 87 = {add_manpower = var:RSFSTPrepatriationsCalc } }
+		}
+		multiply_temp_variable = { RSFSTPrepatriationsCalc = -1} # Make it positive again
+		divide_temp_variable = { RSFSTPrepatriationsCalc = 6} #1/6th of pop goes to each RK, too lazy to do specific number
+
+		#Send them to RKs
+		POL = { add_manpower = var:RSFSTPrepatriationsCalc }
+		OST = { add_manpower = var:RSFSTPrepatriationsCalc }
+		BLR = { add_manpower = var:RSFSTPrepatriationsCalc }
+		UKR = { add_manpower = var:RSFSTPrepatriationsCalc }
+		CAU = { add_manpower = var:RSFSTPrepatriationsCalc }
+		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Prague-Germania, take away slaves from Prussia
-		limit = { check_variable = { SGR_RSFSTP_progress > 75 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 75 } }
 		country_event = { id = speer_railway.7 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^4 = SGR_RSFSTP_slave_repatriation }
 
@@ -141,7 +306,7 @@ SGR_update_RSFSTP_progress = {
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Wien-Prague, take away slaves from Bohemia
-		limit = { check_variable = { SGR_RSFSTP_progress > 62.5 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 62.5 } }
 		country_event = { id = speer_railway.6 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^5 = SGR_RSFSTP_slave_repatriation }
 
@@ -164,7 +329,7 @@ SGR_update_RSFSTP_progress = {
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Hamburg-Germania, take away slaves from Austria
-		limit = { check_variable = { SGR_RSFSTP_progress > 50 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 50 } }
 		country_event = { id = speer_railway.5 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^7 = SGR_RSFSTP_slave_repatriation }
 
@@ -188,7 +353,7 @@ SGR_update_RSFSTP_progress = {
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Thuringen-Germania, take away slaves from North Germany
-		limit = { check_variable = { SGR_RSFSTP_progress > 37.5 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 37.5 } }
 		country_event = { id = speer_railway.4 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^1 = SGR_RSFSTP_slave_repatriation }
 
@@ -211,7 +376,7 @@ SGR_update_RSFSTP_progress = {
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Munich-Thuringen, take away slaves from Sachsen-Anhalt and Central Germany
-		limit = { check_variable = { SGR_RSFSTP_progress > 25 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 25 } }
 		country_event = { id = speer_railway.3 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^2 = SGR_RSFSTP_slave_repatriation }
 
@@ -251,7 +416,7 @@ SGR_update_RSFSTP_progress = {
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Frankfurt-Thuringen, take away slaves from South Germany and Sachsen-Anhalt
-		limit = { check_variable = { SGR_RSFSTP_progress > 12.5 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 12.5 } }
 		country_event = { id = speer_railway.2 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^6 = SGR_RSFSTP_slave_repatriation }
 
@@ -315,6 +480,9 @@ SGR_update_RSFSTP_progress = {
 
 	}
 
+	set_temp_variable = { SGR_project_calc = RSFSTP }
+	SGR_calculate_efficiency = yes
+
 	#Adds 0.5% growth to Skilled Labour growth monthly
 	add_to_variable = { SGR_RSFSTP_workforce_growth = 0.005}
 
@@ -336,8 +504,8 @@ SGR_update_RSFSTP_progress = {
 		}
 	}
 
-	log = "[GetDateText]: [Root.GetName]: RSFSTP; Monthly progress: [?SGR_RSFSTP_progress_monthly]"
-	log = "[GetDateText]: [Root.GetName]: RSFSTP; Current progress: [?SGR_RSFSTP_progress]"
+	log = "[GetDateText]: [Root.GetName]: RSFSTP; Monthly progress: [?SGR_Project_Progress_Monthly^RSFSTP]"
+	log = "[GetDateText]: [Root.GetName]: RSFSTP; Current progress: [?SGR_Project_Progress^RSFSTP]"
 }
 
 SGR_RSFSTP_reverse = {
@@ -349,12 +517,12 @@ SGR_RSFSTP_reverse = {
 	multiply_temp_variable = {tempVal = SGR_RSFSTP_workforce_growth_preOC}
 	set_variable = { SGR_RSFSTP_workforce_growth = tempVal}
 
-	set_variable = { SGR_RSFSTP_progress_monthly_preOC = SGR_RSFSTP_progress_monthly}
-	set_variable = { SGR_RSFSTP_progress_monthly = 0 }
+	set_variable = { SGR_RSFSTP_progress_monthly_preOC = SGR_Project_Progress_Monthly^RSFSTP}
+	set_variable = { SGR_Project_Progress_Monthly^RSFSTP = 0 }
     set_variable = { SGR_RSFSTP_slave_repatriation = 0 }
 
     #Skyrocket cost
-	multiply_variable = { SGR_RSFSTP_cost = 2.5}
+	multiply_variable = { SGR_Project_Cost_Temp^RSFSTP = 2.5}
 	set_country_flag = SGR_RSFSTP_OC
 	
 }
@@ -362,17 +530,17 @@ SGR_RSFSTP_reverse = {
 SGR_RSFSTP_reverse_reverse = {
 	set_variable = { SGR_RSFSTP_workforce_growth = SGR_RSFSTP_workforce_growth_preOC}
 
-	set_variable = { SGR_RSFSTP_progress_monthly = SGR_RSFSTP_progress_monthly_preOC }
+	set_variable = { SGR_Project_Progress_Monthly^RSFSTP = SGR_RSFSTP_progress_monthly_preOC }
 
     #Skyrocket cost
-	divide_variable = { SGR_RSFSTP_cost = 2.5}
+	divide_variable = { SGR_Project_Cost_Temp^RSFSTP = 2.5}
 	clr_country_flag = SGR_RSFSTP_OC
 	
 }
 
 SGR_RSRG_liberate_slaves_RSFSTP = { #Liberates 25k slaves from region being constructed
 	if = { # Prague-Germania, take away slaves from Prussia
-		limit = { check_variable = { SGR_RSFSTP_progress > 75 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 75 } }
 		country_event = { id = speer_railway.7 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^4 = 25 }
 
@@ -399,7 +567,7 @@ SGR_RSRG_liberate_slaves_RSFSTP = { #Liberates 25k slaves from region being cons
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Wien-Prague, take away slaves from Bohemia
-		limit = { check_variable = { SGR_RSFSTP_progress > 62.5 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 62.5 } }
 		country_event = { id = speer_railway.6 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^5 = 25 }
 
@@ -422,7 +590,7 @@ SGR_RSRG_liberate_slaves_RSFSTP = { #Liberates 25k slaves from region being cons
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Hamburg-Germania, take away slaves from Austria
-		limit = { check_variable = { SGR_RSFSTP_progress > 50 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 50 } }
 		country_event = { id = speer_railway.5 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^7 = 25 }
 
@@ -446,7 +614,7 @@ SGR_RSRG_liberate_slaves_RSFSTP = { #Liberates 25k slaves from region being cons
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Thuringen-Germania, take away slaves from North Germany
-		limit = { check_variable = { SGR_RSFSTP_progress > 37.5 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 37.5 } }
 		country_event = { id = speer_railway.4 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^1 = 25 }
 
@@ -469,7 +637,7 @@ SGR_RSRG_liberate_slaves_RSFSTP = { #Liberates 25k slaves from region being cons
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Munich-Thuringen, take away slaves from Sachsen-Anhalt and Central Germany
-		limit = { check_variable = { SGR_RSFSTP_progress > 25 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 25 } }
 		country_event = { id = speer_railway.3 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^2 = 25 }
 
@@ -509,7 +677,7 @@ SGR_RSRG_liberate_slaves_RSFSTP = { #Liberates 25k slaves from region being cons
 		MCW = { add_manpower = var:RSFSTPrepatriationsCalc }
 	}
 	else_if = { # Frankfurt-Thuringen, take away slaves from South Germany and Sachsen-Anhalt
-		limit = { check_variable = { SGR_RSFSTP_progress > 12.5 } }
+		limit = { check_variable = { SGR_Project_Progress^RSFSTP > 12.5 } }
 		country_event = { id = speer_railway.2 days = 1 }
 		subtract_from_variable = {SGR_WWS_Regions^6 = 25 }
 
@@ -678,21 +846,28 @@ SGR_initialize_oil_crisis = {
 					tag = GER
 				}
 				set_variable = { preOC_GDP_growth = THIS.gdp_growth }
-				multiply_variable = { preOC_GDP_growth = 0.5 }
+				if = {
+					limit = {
+						check_variable = { SGR_econ_lib > SGR_econ_con }
+					}
+					multiply_variable = { preOC_GDP_growth = 0.5 }
+				}
+				else = {
+					multiply_variable = { preOC_GDP_growth = 0.3 }
+				}
 				set_temp_variable = { SGR_OC_GDP_hit = THIS.gdp_growth}
 				multiply_temp_variable = { SGR_OC_GDP_hit = -0.99 }
 				set_temp_variable = { gdp_growth_temp = SGR_OC_GDP_hit }
 				econ_gdp_growth_change = yes
-				
+				set_temp_variable = { gdp_growth_temp = -5 }
+				econ_gdp_growth_change = yes
 			}
 		}
 		log = "[GetDateText]: [Root.GetName]: gdp growth post OC: [?gdp_growth]"
-		set_variable = { preOC_GDP_growth = 0.3 }
 		if = {
 			limit = {
 				check_variable = { SGR_econ_lib > SGR_econ_con }
 			}
-			add_to_variable = { preOC_GDP_growth = 0.2 }
 			multiply_variable = { THIS.GDP_growth = 0.9 }
 			custom_effect_tooltip = SGR_liberal_econ_OC_10 
 		}
@@ -746,7 +921,7 @@ SGR_initialize_oil_crisis = {
 		set_temp_variable = { inflation_temp = 3.5 }
 		econ_inflation_change = yes
 		if = { 
-			limit = { check_variable = { SGR_RSFSTP_progress < 100 } }
+			limit = { check_variable = { SGR_Project_Progress^RSFSTP < 100 } }
 			country_event = { id = speer_railway.9 days = 1 }
 		}
 		add_dynamic_modifier = { modifier = GER_SGR_oil_crisis_spending }
@@ -758,6 +933,8 @@ SGR_initialize_oil_crisis = {
 		TNO_worsen_admin_efficiency_high = yes
 	}
 
+	set_temp_variable = { temp_econ_GDP_boost_percentage = -0.075 } # pops your economy
+	econ_GDP_boost_once_percentage = yes
 	custom_effect_tooltip = SGR_kill_admin_efficiency
 	custom_effect_tooltip = SGR_lose_a_shit_ton_of_effectiveness_holy_shit
 	custom_effect_tooltip = SGR_lose_half_PU_tt
@@ -790,6 +967,11 @@ SGR_initialize_oil_crisis = {
 	subtract_from_variable = { tno_unemployment_effectiveness = 30 }
 
 	hidden_effect = {
+		set_variable = {
+			TNO_econ_inflation_effects_multiplier = 4
+		}
+		#Update effect immediately
+		apply_inflation_effect_month = yes
 		TNO_update_policy_effectiveness = yes
 		
 		set_variable = { SGR_OC_mission_var = 200 }
@@ -1251,6 +1433,8 @@ SGR_OC_clear_all = {
 	clear_variable = SGR_OC_social_tension
 
 	clear_variable = SGR_OC_mission_var
+
+	clear_variable = TNO_econ_inflation_effects_multiplier
 	
 	clr_country_flag = SGR_OC_martial_law_declared
 
@@ -1578,6 +1762,7 @@ SGR_conclude_SAW = {
 
 	clr_country_flag = GER_SAW_intervention
 	TNO_fopo_remove_saw_tab = yes
+	TNO_fopo_remove_saw_withdrawal_tab = yes
 
 	custom_effect_tooltip = SGR_SAW_conclude_tt
 
@@ -2011,13 +2196,16 @@ divide_ostland = {
 		add_state_core = 206
 		add_state_core = 95
 		add_state_core = 204
-		add_state_core = 94
+		#add_state_core = 94
 		add_state_core = 194
 		add_state_core = 1403
 		add_state_core = 1404
 		add_state_core = 1405
 		add_state_core = 1406
 		add_state_core = 1407
+		every_owned_state = {
+			remove_core_of = OST
+		}
 		set_party_name = {
 			ideology = authoritarian_democracy
 			long_name = BLR_collab_authoritarian_democracy_long
@@ -2038,14 +2226,8 @@ divide_ostland = {
 			long_name = BLR_collab_fascism_long
 			name = BLR_collab_national_socialism
 		}
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Radasłaŭ Astroŭski" 
-			picture = "Portrait_Belarus_Radasau_Astrouski.dds"
-			desc = "POLITICS_RADASAU_ASTROUSKI_DESC"
-			expire = "1999.3.4"
-			ideology = authoritarian_democracy_national_conservatism_subtype
-		}
+		#retire_country_leader = yes
+		promote_character = BLR_Radaslau_Astrouski
 		remove_ideas = {
 			BLR_Bring_on_the_Youth
 			BLR_This_is_Our_Land
@@ -2110,18 +2292,12 @@ divide_ostland = {
 			BOR_out_of_time
 		}
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Frank Theiß"
-			picture = "Portrait_Ostland_Frank_Theiss.dds"
-			desc = "POLITICS_FRANK_THEISS_DESC"
-			expire = "1999.3.4"
-			ideology = authoritarian_democracy_national_conservatism_subtype
-		}	
+		promote_character = OST_frank_theiss
 		add_ideas = Pakt_Mitstreiter	
 		load_focus_tree = generic_focus
 	}		
 	BLR = {
-		set_capital = 1404
+		set_capital = { state = 1404 }
 		set_politics = {	
 			ruling_party = authoritarian_democracy
 			last_election = "1933.3.5"
@@ -2152,12 +2328,15 @@ collab_regime_in_poland = {
 		}
 		set_cosmetic_tag = POL_SGR
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Stanisław Wachowiak"
-			picture = "Portrait_Poland_Stanislaw_Wachowiak.dds"
-			expire = "1999.3.4"
-			ideology = authoritarian_democracy_national_conservatism_subtype
+		add_country_leader_role = {
+			character = POL_Stanislaw_Wachowiak
+			country_leader = {
+				ideology = authoritarian_democracy_national_conservatism_subtype
+				expire = "1999.3.4"
+				id = -1
+			}
 		}
+		promote_character = POL_Stanislaw_Wachowiak
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
@@ -2253,14 +2432,10 @@ collab_regime_in_ukraine = {
 	puppet = UKR
 	UKR = {
 		set_cosmetic_tag = UKR_SGR
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Volodymyr Kubiyovych"
-			picture = "Portrait_UKR_Volodymyr_Kubiyovych.dds"
-			desc = "POLITICS_VOLODYMYR_KUBIYOVYCH_DESC"
-			expire = "1999.3.4"
-			ideology = authoritarian_democracy_national_conservatism_subtype
+		GER_ewaldheinrich_von_kleistschmenzin = {
+			set_nationality = GER
 		}
+		promote_character = UKR_Volodymyr_Kubiyovych
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
@@ -2322,14 +2497,11 @@ collab_regime_in_ukraine = {
 collab_regime_in_kaukasien = {
 	CAU = {
 		set_cosmetic_tag = CAU_SGR
-		kill_country_leader = yes
-		GER = { puppet = CAU }
-		create_country_leader = {
-			name = "Irakli Bagration"
-			picture = "Portrait_Caucasus_Irakli_Bagration.dds"
-			expire = "1999.3.4"
-			ideology = authoritarian_democracy_national_conservatism_subtype
+		GER_friedrich_klausing = {
+			set_nationality = GER
 		}
+		GER = { puppet = CAU }
+		promote_character = CAU_Irakli_Bagration
 		remove_all_ministers = yes
 		remove_ideas = {
 			CAU_tiflis_three
@@ -2418,7 +2590,7 @@ divide_ostland2 = {
 	OST = {
 		add_popularity = {
 			ideology = fascism
-			popularity = 0.8
+			popularity = 80
 		}
 		transfer_state = 11
 		transfer_state = 189
@@ -2454,17 +2626,18 @@ divide_ostland2 = {
 		add_state_core = 206
 		add_state_core = 95
 		add_state_core = 204
-		add_state_core = 94
 		add_state_core = 194
 		add_state_core = 1403
 		add_state_core = 1404
 		add_state_core = 1405
 		add_state_core = 1406
 		add_state_core = 1407	
+		every_owned_state = {
+			remove_core_of = OST
+		}
 	}
 		
 	GER = {
-		puppet = OST
 		puppet = BLR
 	}
 	
@@ -2475,12 +2648,7 @@ divide_ostland2 = {
 			election_frequency = 48
 			elections_allowed = no
 		}
-		create_country_leader = {
-			name = "Harald Riipalu"
-			picture = "Portrait_Ostland_Harald_Riipalu.dds"
-			expire = "1999.3.4"
-			ideology = fascism_reformed_national_socialism_subtype
-		}
+		promote_character = OST_Harald_Riipalu
 		remove_all_ministers = yes
 		set_cosmetic_tag = OST_BLT2
 		join_zollverein = yes
@@ -2515,7 +2683,7 @@ divide_ostland2 = {
 	}
 	
 	BLR = {
-		set_capital = 1404
+		set_capital = { state = 1404 }
 		set_politics = {	
 			ruling_party = fascism
 			last_election = "1933.3.5"
@@ -2551,16 +2719,8 @@ divide_ostland2 = {
 			long_name = BLR_collab_national_socialism_long
 			name = BLR_collab_national_socialism
 		}
-		kill_country_leader = yes # bye bye vituska
-		create_country_leader = {
-			name = "Andrei Andreeovich Sawoniuk"
-			picture = "Portrait_Ostland_Anthony_Sawoniuk.dds"
-			expire = "1995.1.1"
-			ideology = fascism_reformed_national_socialism_subtype
-			traits = {	
-						
-			}
-		}
+		#kill_country_leader = yes # bye bye vituska
+		promote_character = BLR_Andrei_Andreeovich_Sawoniuk
 		remove_ideas = {
 			BLR_Bring_on_the_Youth
 			BLR_This_is_Our_Land
@@ -2575,17 +2735,19 @@ divide_ostland2 = {
 }
 
 reichsland_in_poland = {	
-	puppet = POL
 	POL = {
 		every_owned_state = {
 			add_core_of = POL
 		}
-		create_country_leader = {
-			name = "Adam Baworowski"
-			picture = "Portrait_Poland_Adam_Baworowski.dds"
-			expire = "1999.3.4"
-			ideology = fascism_reformed_national_socialism_subtype
+		add_country_leader_role = {
+			character = POL_Adam_Baworowski
+			country_leader = {
+				ideology = fascism_reformed_national_socialism_subtype
+				expire = "1999.3.4"
+				id = -1
+			}
 		}
+		promote_character = POL_Adam_Baworowski
 		set_cosmetic_tag = POL_SGR2
 		set_popularities = {
 			fascism = 60
@@ -2616,15 +2778,21 @@ reichsland_in_ukraine = {
 	puppet = UKR
 	UKR = {
 		set_cosmetic_tag = UKR_SGR2
+		GER_ewaldheinrich_von_kleistschmenzin = {
+			set_nationality = GER
+		}
 		set_politics = {
 			ruling_party = fascism
 		}
-		create_country_leader = {
-			name = "Yuryi Tys"
-			picture = "Portrait_UKR_Yuryi_Tys.dds"
-			expire = "1999.3.4"
-			ideology = fascism_reformed_national_socialism_subtype
+		add_country_leader_role = {
+			character = UKR_Yuryi_Tys
+			country_leader = {
+			 	ideology = fascism_reformed_national_socialism_subtype
+				expire = "1999.3.4"
+				id = -1
+			}
 		}
+		promote_character = UKR_Yuryi_Tys
 		set_popularities = {
 			fascism = 50
 			national_socialism = 15
@@ -2663,19 +2831,19 @@ reichsland_in_ukraine = {
 
 reichsprotektorat_in_kaukasia = {
 		
-	puppet = CAU
+	GER = {
+		set_autonomy = {
+			target = CAU
+			autonomy_state = autonomy_reichsprotektorat
+		}
+	}
 	CAU = {
+		retire_country_leader = yes
+		GER_friedrich_klausing = {
+			set_nationality = GER
+		}
 		set_cosmetic_tag = CAU_SGR2
-		set_politics = {
-			ruling_party = fascism
-		}
-		create_country_leader = {
-			name = "Karl Blessing"
-			picture = "gfx/leaders/CAU/Portrait_Caucasus_Karl_Blessing.dds"
-			expire = "1983.4.24"
-			ideology = fascism_reformed_national_socialism_subtype
-			traits = {}
-		}
+		promote_character = CAU_Karl_Blessing
 		remove_ideas = {
 			CAU_tiflis_three
 			CAU_bergbaureich
@@ -2732,6 +2900,12 @@ SGR_split_moskowien = {
 				target = MCW
 				autonomy_state = autonomy_autonomous_reichskommissariat
 			}
+			GER_alexis_von_roenne = {
+				set_nationality = MCW
+			}
+			GER_ferdinand_schorner = {
+				set_nationality = MCW
+			}
 		}
 		set_politics = { ruling_party = fascism }
 		set_popularities = {
@@ -2750,13 +2924,8 @@ SGR_split_moskowien = {
 			long_name = MCW_ultranationalism_schorner_party_long
 			name = MCW_ultranationalism_schorner_party
 		}
-		create_country_leader = {
-			name = "Alexis von Roenne"
-			# desc = "POLITICS_ALEXIS_VON_ROENNE_DESC"
-			picture = "gfx/leaders/GER/Portrait_GER_Alexis_von_Roenne.dds"
-			expire = "1983.4.24"
-			ideology = fascism_reformed_national_socialism_subtype
-		}
+		promote_character = GER_alexis_von_roenne
+		promote_character = GER_ferdinand_schorner	
 		set_cosmetic_tag = MCW_SGR
 		join_zollverein = yes
 		add_ideas = Pakt_Military_Authority
@@ -2811,7 +2980,10 @@ SGR_split_moskowien = {
 	MCW = { transfer_state = 245 }
 
 	238 = { add_core_of = MCW }
-	MCW = { 
+	MCW = {
+		MCW_Helmuth_von_Pannwitz = {
+			set_nationality = PAU
+		} 
 		transfer_state = 238
 		transfer_state = 217
 		add_state_core = 217
@@ -2833,12 +3005,8 @@ SGR_split_moskowien = {
 		transfer_state = 239
 		set_cosmetic_tag = SGR_PAU
 		inherit_technology = PREV
-		create_country_leader = {
-			name = "Helmuth von Panwitz"
-			desc = ""
-			picture = "Portrait_VLG_Helmuth_von_Pannwitz.dds"
-			expire = "1999.10.12"
-			ideology = fascism_reformed_national_socialism_subtype
+		MCW_Helmuth_von_Pannwitz = {
+			promote_character = fascism_reformed_national_socialism_subtype
 		}
 		set_politics = {
 			ruling_party = fascism
@@ -2886,16 +3054,8 @@ SGR_SR_spawn_DFK = {
 		national_socialism = 20
 		
 	}
-
-	create_country_leader = {
-		name = "Otto Weidinger"
-		desc = "POLITICS_OTTO_WEIDINGER_DESC"
-		picture = "Portrait_Deutsches_Freikorps_Otto_Weidinger.dds"
-		expire = "1995.1.1"
-		ideology = despotism_military_junta_subtype
-		traits = {
-			#
-		}
+	DFK_Otto_Weidinger = {
+		promote_character = yes
 	}
 }
 ##################
@@ -3088,7 +3248,7 @@ SGR_determine_germanys_fate = {
 			}
 			add_to_variable = {SGR_fate = 1}
 		}
-		
+
 		if = {
 			limit = {
 				has_game_rule = {
@@ -3180,16 +3340,21 @@ SGR_authdem_fate = {
 		set_politics = {
 			ruling_party = authoritarian_democracy
 		}
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Albert Speer"
-			desc = "POLITICS_AUTHDEM_SPEER_DESC"
-			picture = "Portrait_Germany_Albert_Speer_authdem.dds"
-			expire = "1973.11.9"
-			ideology = authoritarian_democracy_oligarchy_subtype
-			traits = {
-				schattenregierung
+		GER_albert_speer = {
+			set_portraits = {
+				civilian = { large = "gfx/leaders/GER/Portrait_Germany_Albert_Speer_authdem.dds" }
 			}
+			add_country_leader_role = {
+				country_leader = {
+					desc = "POLITICS_AUTHDEM_SPEER_DESC"
+					expire = "1990.1.1"
+					ideology = authoritarian_democracy_oligarchy_subtype
+					traits = {
+						schattenregierung
+					}
+				}
+			}
+			promote_character = { ideology = authoritarian_democracy_oligarchy_subtype }
 		}
 		set_country_flag = SGR_SR_authdem_outcome
 	}
@@ -3205,16 +3370,17 @@ SGR_fash_fate = {
 		set_politics = {
 			ruling_party = fascism
 		}
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Albert Speer"
-			desc = "POLITICS_FASH_SPEER_DESC"
-			picture = "Portrait_Germany_Albert_Speer_fascist.dds"
-			expire = "1981.9.1"
-			ideology = fascism_reformed_national_socialism_subtype
-			traits = {
-				in_his_footsteps
+		GER_albert_speer = {
+			swap_country_leader_traits = {
+				remove = dictator
+				add = in_his_footsteps
 			}
+			set_portraits = {
+				civilian = { large = "gfx/leaders/GER/Portrait_Germany_Albert_Speer_fascist.dds" }
+			}
+		}
+		set_country_leader_description = {
+			desc = "POLITICS_FASH_SPEER_DESC"
 		}
 		set_country_flag = SGR_SR_fash_outcome
 	}
@@ -3224,9 +3390,17 @@ SGR_fash_fate = {
 
 SGR_RSRG_conclude_SR = {
 
-	swap_ideas = {
-		remove_idea = tno_slavery_allowed
-		add_idea = tno_slavery_outlawed
+	hidden_effect = {
+		swap_ideas = {
+			remove_idea = tno_slavery_allowed
+			add_idea = tno_slavery_outlawed
+		}
+	}
+	effect_tooltip = {
+		swap_ideas = {
+			remove_idea = tno_slavery_allowed_dummy
+			add_idea = tno_slavery_outlawed_dummy
+		}
 	}
 
 	hidden_effect = {
