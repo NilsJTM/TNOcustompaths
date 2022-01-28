@@ -1,0 +1,842 @@
+﻿add_namespace = OFN
+add_namespace = OFN.membership
+
+country_event = {
+	id = OFN.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.1"}
+	title = OFN.1.t
+	desc = OFN.1.desc
+	picture = GFX_report_event_saf_negotiations
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.1.a
+		set_country_flag = will_send_troops
+#		hidden_effect = {
+#		CAN = {
+#		load_focus_tree = {
+#				tree = canada_saw
+#				keep_completed = no
+#			}	}
+#		}
+		ai_chance = {
+			BASE = 0
+			modifier = {
+				add = 100
+				has_country_flag = saf_support_rallied
+			}
+		}
+	}
+
+	option = {
+		name = OFN.1.b
+#				hidden_effect = {
+#		CAN = {
+#		load_focus_tree = {
+#				tree = canada_saw
+#				keep_completed = no
+#			}	}
+#		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				add = -200
+				has_country_flag = saf_support_rallied
+			}
+		}
+	}
+}
+
+country_event = {
+	id = OFN.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.2"}
+	title = OFN.2.t
+	desc = OFN.2.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = OFN.2.a
+
+		set_temp_variable = { target = SAF }
+		TNO_increase_volunteer_cap_2 = yes
+		custom_effect_tooltip = "TNO_increase_volunteers_SAF_2"
+	}
+}
+
+country_event = {
+	id = OFN.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.3"}
+	title = OFN.3.t
+	desc = OFN.3.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = OFN.3.a
+		SAF = {
+			add_ideas = SAF_icelandic_support_staff
+		}
+	}
+}
+
+#country_event = {#Country joined OFN, embargo UP members
+#	id = OFN.4
+# 	hidden = yes
+# 	option = {
+# 		every_country = {
+# 			limit = {
+# 				has_country_flag = OFN_embargo_target
+# 			}
+# 			country_event = {
+# 				id = OFN.5
+# 			}
+# 		}
+#	}
+#}
+
+#country_event = {#Country joined OFN, embargo UP members part 2
+# 	id = OFN.4
+# 	hidden = yes
+# 	option = {
+# 		FROM = {
+# 			add_opinion_modifier = { target = ROOT modifier = TNO_embargo }
+# 		}
+# 		clr_country_flag = OFN_embargo_target
+#	}
+#}
+
+#country_event = {#Country joined OFN, embargo UP members
+# 	id = OFN.6
+# 	hidden = yes
+# 	option = {
+# 		every_country = {
+# 			limit = {
+# 				has_country_flag = UP_embargo_target
+# 			}
+# 			country_event = {
+# 				id = OFN.7
+# 			}
+# 		}
+#	}
+#}
+#
+#country_event = {#Country joined OFN, embargo UP members part 2
+# 	id = OFN.7
+# 	hidden = yes
+# 	option = {
+# 		FROM = {
+# 			add_opinion_modifier = { target = ROOT modifier = TNO_embargo }
+# 		}
+# 		clr_country_flag = UP_embargo_target
+#	}
+#}
+
+country_event = {#West Indies help South Africa
+	id = OFN.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.8"}
+	title = OFN.8.t
+	desc = OFN.8.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.8.a
+
+		set_temp_variable = { target = SAF }
+		TNO_increase_volunteer_cap_2 = yes
+		custom_effect_tooltip = "TNO_increase_volunteers_SAF_2"
+	}
+}
+
+country_event = { #Canada must help more
+	id = OFN.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.9"}
+	title = OFN.9.t
+	desc = OFN.9.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.9.a
+
+		set_temp_variable = { target = SAF }
+		TNO_increase_volunteer_cap_2 = yes
+		custom_effect_tooltip = "TNO_increase_volunteers_SAF_2"
+	}
+}
+
+country_event = { #A moral war
+	id = OFN.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.10"}
+	title = OFN.10.t
+	desc = OFN.10.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.10.a
+		add_war_support = 0.03
+		add_political_power = 50
+	}
+}
+
+
+country_event = { #Kickstart the media
+	id = OFN.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.13"}
+	title = OFN.13.t
+	desc = OFN.13.desc
+	picture = GFX_Radio_Mic
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.13.a
+		add_political_power = 50
+		custom_effect_tooltip = USA_decrease_war_discontent_tt
+		add_to_variable = { USA_SAF_WAR_Discontent = -5 }
+	}
+}
+
+country_event = { #Man the boers are horrible aren't they?
+	id = OFN.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.14"}
+	title = OFN.14.t
+	desc = OFN.14.desc
+	picture = GFX_report_event_south_african_war_boer_soldier2
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.14.a
+		add_war_support = 0.02
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.01
+		}
+	}
+}
+
+country_event = { #Send trucks to Africa to give logistics
+	id = OFN.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.15"}
+	title = OFN.15.t
+	desc = OFN.15.desc
+	picture = GFX_report_event_lithuania_army
+	is_triggered_only = yes
+	option = {
+		name = OFN.15.a
+		hidden_effect = {
+			SAF = {
+				if = {
+					limit = { 
+						has_dlc = "No Step Back"
+					}
+					add_equipment_to_stockpile = {
+						type = IFV_chassis_1
+						amount = 200
+						producer = USA
+					}
+				}
+				else = {
+					add_equipment_to_stockpile = {
+						type = IFV_equipment_1
+						amount = 200
+						producer = USA
+					}
+				}
+				add_equipment_to_stockpile = {
+					type = motorized_equipment_0               # #  ###
+					amount = 500                               ###   #
+					producer = USA                             # #  ###
+				}
+			}
+		}
+		send_equipment = {
+			equipment = anti_tank_equipment
+			amount = 200
+			target = SAF
+		}
+		send_equipment = {
+			equipment = infantry_equipment
+			amount = 800
+			target = SAF
+		}
+	}
+}
+
+country_event = { #Australia support
+	id = OFN.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.16"}
+	title = OFN.16.t
+	desc = OFN.16.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = { #Send troops
+		name = OFN.16.a
+		add_political_power = -30
+
+		set_temp_variable = { target = SAF }
+		TNO_increase_volunteer_cap_3 = yes
+		custom_effect_tooltip = "TNO_increase_volunteers_SAF_3"
+	}
+}
+
+country_event = { #New Zealand Support
+	id = OFN.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.17"}
+	title = OFN.17.t
+	desc = OFN.17.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.17.a
+
+		set_temp_variable = { target = SAF }
+		TNO_increase_volunteer_cap_2 = yes
+		custom_effect_tooltip = "TNO_increase_volunteers_SAF_2"
+	}
+}
+
+country_event = { #Economy
+	id = OFN.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.19"}
+	title = OFN.19.t
+	desc = OFN.19.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN.19.a
+		add_political_power = -75
+		SAF = {
+		}
+	}
+
+	option = {
+		name = OFN.19.b
+		add_political_power = -25
+		SAF = {
+		}
+	}
+}
+
+country_event = { #1963 Canadian Federal Elections
+	id = OFN.20
+	hidden = yes
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.20"}	
+	is_triggered_only = yes
+	option = {
+		name = OFN.20.a
+		random_list = {
+			50 = {
+			   modifier = {
+				factor = 0
+				has_game_rule = { rule = CAN_63_ELECTION_PATH option =  CAN_63_ELECTION_PATH_CONSERVATIVE_DEMOCRACY }
+			}
+				news_event = { id = WORLD.18003 days = 1 }
+				set_politics = {
+					ruling_party = liberal_democracy
+					last_election = "1963.4.8"
+					elections_allowed = yes
+				}
+			}
+
+			50 = {
+			    modifier = {
+				factor = 0
+				has_game_rule = { rule = CAN_63_ELECTION_PATH option =  CAN_63_ELECTION_PATH_LIBERAL_DEMOCRACY }
+	        }
+	
+				news_event = { id = WORLD.18004 days = 1 }
+				set_politics = {
+					ruling_party = conservative_democracy
+					last_election = "1963.4.8"
+					elections_allowed = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = { #1967 Canadian Federal Elections
+	id = OFN.21
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.21"}
+	hidden = yes 
+	is_triggered_only = yes
+	option = {
+		name = OFN.21.a
+		random_list = {
+			35 = { #Turner Succession
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DIEFENBAKER }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_STANFIELD }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DOUGLAS }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_CAOUETTE }
+            }
+				
+				news_event = { id = WORLD.18005 days = 1 }
+				retire_country_leader = yes
+				add_country_leader_role = {
+					character = CAN_John_Turner
+					promote_leader = yes
+					country_leader = {
+						expire = "1967.4.8"
+						ideology = liberal_democracy_subtype
+						id = -1
+					}
+				}
+			}
+
+			25 = { #Diefenbaker Wins
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_TURNER }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_STANFIELD }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DOUGLAS }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_CAOUETTE }
+            }
+			
+				news_event = { id = WORLD.18212 days = 1 }
+				set_politics = {
+					ruling_party = conservative_democracy
+					last_election = "1967.4.8"
+					elections_allowed = yes
+				}
+			}
+
+			10 = { #Stanfield  Wins
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_TURNER }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_CAOUETTE }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DOUGLAS }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DIEFENBAKER }
+            }
+			
+				news_event = { id = WORLD.18213 days = 1 }
+				set_politics = {
+					ruling_party = conservative_democracy
+					last_election = "1963.4.8"
+					elections_allowed = yes
+				}
+				retire_ideology_leader = conservative_democracy
+				add_country_leader_role = {
+					character = CAN_Robert_Stanfield
+					promote_leader = yes
+					country_leader = {
+						expire = "1967.4.8"
+						ideology = conservative_democracy_liberal_conservatism_subtype
+						id = -1
+					}
+				}
+			}
+
+			20 = { #Douglas Wins
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_TURNER }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DIEFENBAKER }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_STANFIELD }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_CAOUETTE }
+            }
+			
+				news_event = { id = WORLD.18214 days = 1 }
+				set_politics = {
+					ruling_party = social_democracy
+					last_election = "1967.4.8"
+					elections_allowed = yes
+				}
+			}
+
+			10 = { #Caouette Wins
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_TURNER }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_STANFIELD }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DIEFENBAKER }
+            }
+			
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = CAN_67_ELECTION_PATH option = CAN_67_ELECTION_PATH_DOUGLAS }
+            }
+			
+				news_event = { id = WORLD.18215 days = 1 }
+				set_politics = {
+					ruling_party = authoritarian_democracy
+					last_election = "1967.4.8"
+					elections_allowed = yes
+				}
+			}
+		}
+	}
+}
+
+###Membership events
+
+#Each independent OFN member is prompted to vote on whether a candidate country can join the OFN
+country_event = {
+	id = OFN.membership.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event OFN.membership.1"
+		set_temp_variable = { cost = 200 } #Doing these calcs here to avoid code duplication
+		set_temp_variable = { discount = 3 }
+		set_temp_variable = { GDP_fraction = GDP }
+		set_temp_variable = { USA_GDP = USA.GDP }
+		divide_temp_variable = { USA_GDP = 10 } #The US overwhelmingly outclasses all economies so we need to do this in order for any comparisons to be meaningful
+		divide_temp_variable = { GDP_fraction = USA_GDP }
+		multiply_temp_variable = { cost = GDP_fraction }
+		multiply_temp_variable = { discount = USA.OFN_unity }
+		subtract_from_temp_variable = { cost = discount }
+		set_variable = { OFN_convince_cost_political = cost }
+		multiply_temp_variable = { cost = 2 }
+		set_variable = { OFN_convince_cost_money = cost }
+		log = "[THIS.GetName] GDP = [?GDP_fraction]"
+		log = "[THIS.GetName] Cost = [?OFN_convince_cost_political]"
+	}
+	title = OFN.membership.1.t
+	desc = {
+		text = OFN.membership.1.desc_brittany_delaporte
+		trigger = { USA = { has_country_flag = BRT_ofn_delaporte_membership } }
+	}
+	desc = {
+		text = OFN.membership.1.desc_brittany_mordrel
+		trigger = { USA = { has_country_flag = BRT_ofn_mordrel_membership } }
+	}
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+
+	option = { #Let them join
+		name = OFN.membership.1.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					target = USA
+					value > 70
+				}
+			}
+			modifier = {
+				factor = 1.5
+				check_variable = { USA.OFN_unity > 15 }
+			}
+			modifier = {
+				factor = 1.5
+				check_variable = { USA.OFN_unity > 19 }
+			}
+			modifier = {
+				factor = 1.5
+				OFN_voting_opinion_check_high = yes
+			}
+			modifier = {
+				factor = 0
+				check_variable = { USA.OFN_unity < 6 }
+			}
+		}
+		trigger = {
+			check_variable = { OFN_convince_cost_money > 0 }
+			check_variable = { OFN_convince_cost_political > 0 }
+		}
+		set_country_flag = OFN_supports_new_member
+		hidden_effect = { #Inform the USA of your choice
+			USA = {
+				country_event = { id = OFN.membership.2 }
+			}
+		}
+	}
+	option = { #Remain neutral
+		name = OFN.membership.1.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					target = USA
+					value < 41
+				}
+			}
+			modifier = {
+				factor = 1.5
+				OFN_voting_opinion_check_low = yes
+			}
+			modifier = {
+				factor = 1.5
+				check_variable = { USA.OFN_unity < 15 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { USA.OFN_unity < 6 }
+			}
+		}
+		trigger = {
+			check_variable = { OFN_convince_cost_money > 0 }
+			check_variable = { OFN_convince_cost_political > 0 }
+			NOT = { USA = { has_country_flag = OFN_force_memebership_through } }
+		}
+		set_country_flag = OFN_neutral_new_member
+		hidden_effect = { #Inform the USA of your choice
+			USA = {
+				country_event = { id = OFN.membership.3 }
+				activate_targeted_decision = { target = PREV decision = OFN_open_negotiations_with }
+			}
+		}
+	}
+	option = { #Oppose them
+		name = OFN.membership.1.c
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = USA
+					value < 41
+				}
+			}
+			modifier = {
+				factor = 2
+				OFN_voting_opinion_check_low = yes
+			}
+			modifier = {
+				factor = 1.5
+				check_variable = { USA.OFN_unity < 15 }
+			}
+			modifier = {
+				factor = 4
+				check_variable = { USA.OFN_unity < 6 }
+			}
+		}
+		trigger = {
+			check_variable = { OFN_convince_cost_money > 0 }
+			check_variable = { OFN_convince_cost_political > 0 }
+			NOT = { USA = { has_country_flag = OFN_force_memebership_through } }
+		}
+		multiply_variable = { OFN_convince_cost_political = 2 }
+		multiply_variable = { OFN_convince_cost_money = 2 }
+		set_country_flag = OFN_opposes_new_member
+		hidden_effect = { #Inform the USA of your choice
+			USA = {
+				country_event = { id = OFN.membership.4 }
+				activate_targeted_decision = { target = PREV decision = OFN_open_negotiations_with }
+			}
+		}
+	}
+	option = { #We are forced to accept (The US is so monstrously OP compared to you that resistance is meaningless)
+		name = OFN.membership.1.d
+		ai_chance = { factor = 100 }
+		trigger = {
+			OR = {
+				check_variable = { OFN_convince_cost_money < 1 }
+				check_variable = { OFN_convince_cost_political < 1 }
+			}
+		}
+		set_country_flag = OFN_supports_new_member
+		hidden_effect = { USA = { country_event = { id = OFN.membership.2 } } } #Inform the USA of your choice
+	}
+}
+country_event = { #FROM voted for the candidate
+	id = OFN.membership.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.membership.2"}
+	title = OFN.membership.2.t
+	desc = OFN.membership.2.desc
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+
+	option = { #Excellent
+		name = OFN.membership.2.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = { #FROM is open to accepting the candidate
+	id = OFN.membership.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.membership.3"}
+	title = OFN.membership.3.t
+	desc = OFN.membership.3.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+
+	option = { #Acceptable
+		name = OFN.membership.3.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = { #FROM opposes the candidate
+	id = OFN.membership.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.membership.4"}
+	title = OFN.membership.4.t
+	desc = OFN.membership.4.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+
+	option = { #Let's see if we can't "convince" them
+		name = OFN.membership.4.a
+		ai_chance = { factor = 1 }
+	}
+}
+country_event = { #Negotiating with FROM to change their vote
+	id = OFN.membership.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN.membership.5"}
+	title = OFN.membership.5.t
+	desc = OFN.membership.5.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+
+	option = { #Pay political power
+		name = OFN.membership.5.a
+		ai_chance = { factor = 1 }
+		trigger = { has_political_power  > USA_current_political_cost }
+		custom_effect_tooltip = OFN_membership_change_vote
+		custom_effect_tooltip = OFN_membership_political_cost_tooltip
+		hidden_effect = {
+			multiply_variable = { USA_current_political_cost = -1 }
+			add_political_power = USA_current_political_cost
+		}
+		var:USA_currently_negotiating_with = {
+			add_stability = 0.02
+			hidden_effect = { #Change flags
+				if = {
+					limit = { has_country_flag = OFN_opposes_new_member }
+					clr_country_flag = OFN_opposes_new_member
+				}
+				else_if = {
+					limit = { has_country_flag = OFN_neutral_new_member }
+					clr_country_flag = OFN_neutral_new_member
+				}
+				set_country_flag = OFN_supports_new_member
+			}
+		}
+		clear_variable = USA_currently_negotiating_with
+		clear_variable = USA_current_political_cost
+		clear_variable = USA_current_money_cost
+		clr_country_flag = OFN_currently_negotiating_with_someone
+	}
+	option = { #Pay money
+		name = OFN.membership.5.b
+		ai_chance = { factor = 1 }
+		custom_effect_tooltip = OFN_membership_change_vote
+		custom_effect_tooltip = OFN_membership_money_cost_tooltip
+		subtract_from_variable = { money_reserves = USA_current_money_cost }
+		var:USA_currently_negotiating_with = {
+			hidden_effect = { #Change flags
+				if = {
+					limit = { has_country_flag = OFN_opposes_new_member }
+					clr_country_flag = OFN_opposes_new_member
+				}
+				else_if = {
+					limit = { has_country_flag = OFN_neutral_new_member }
+					clr_country_flag = OFN_neutral_new_member
+				}
+				set_country_flag = OFN_supports_new_member
+				set_temp_variable = { OFN_stimulus = USA_current_money_cost } #Boost their economy
+				divide_temp_variable = { OFN_stimulus = 3 }
+				add_to_variable = { GDP = OFN_stimulus }
+			}
+		}
+		clear_variable = USA_currently_negotiating_with
+		clear_variable = USA_current_political_cost
+		clear_variable = USA_current_money_cost
+		clr_country_flag = OFN_currently_negotiating_with_someone
+	}
+	option = { #Forget it
+		name = OFN.membership.5.c
+		ai_chance = { factor = 1 }
+		clear_variable = USA_currently_negotiating_with
+		clr_country_flag = OFN_currently_negotiating_with_someone
+	}
+}
+country_event = { #Hidden event used to make the other event work correctly
+	id = OFN.membership.100
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event OFN.membership.100"
+		USA = { country_event = { id = OFN.membership.5 } }
+	}
+	title = OFN.membership.100.t
+	desc = OFN.membership.100.desc
+	picture = GFX_report_event_lithuania_army
+	hidden = yes
+
+	is_triggered_only = yes
+}

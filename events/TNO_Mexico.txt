@@ -1,0 +1,143 @@
+add_namespace = Mexico_Dummy
+
+
+
+country_event = { # Madrazo
+	id = Mexico_Dummy.300
+	immediate = {log = "[GetDateText]: [Root.GetName]: event Mexico_Dummy.300"}
+	title = Mexico_Dummy.300.t
+	desc = Mexico_Dummy.300.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = Mexico_Dummy.300.a
+		ai_chance = { 
+			factor = 8 
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MEX_PATH option = MEX_PATH_ORDAZ }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MEX_PATH option = MEX_PATH_LOZANO }
+            } 
+		}
+		hidden_effect = {
+			country_event = {
+						id = Mexico_Dummy.1
+			}
+		}
+	}
+	option = { # Lozano
+		name = Mexico_Dummy.300.b
+		ai_chance = { 
+			factor = 7
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MEX_PATH option = MEX_PATH_MADRAZO }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MEX_PATH option = MEX_PATH_ORDAZ }
+            } 
+		}
+		hidden_effect = {
+			country_event = {
+						id = Mexico_Dummy.2	
+			}
+		}
+	}
+	option = {	# Ordaz
+		name = Mexico_Dummy.300.c
+		ai_chance = { 
+			factor = 1 
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = MEX_PATH option = MEX_PATH_MADRAZO }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = MEX_PATH option = MEX_PATH_LOZANO }
+            } 
+		}
+		hidden_effect = {
+			country_event = {
+						id = Mexico_Dummy.3
+			}
+		}
+	}
+}
+
+country_event = { # Madrazo
+	id = Mexico_Dummy.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.3"}
+	title = USA.3.t
+	desc = USA.3.desc
+	picture = GFX_report_event_us_washington_obelisk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.3.a
+		every_country = { news_event = { id = WORLD.18002 } }
+		hidden_effect = {
+			MEX = {
+				retire_character = MEX_adolfo_mateos
+				promote_character = MEX_carlos_madrazo
+				fill_empty_minister = yes
+			}
+		}
+	}
+}
+
+country_event = { # Lozano
+	id = Mexico_Dummy.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.3"}
+	title = USA.3.t
+	desc = USA.3.desc
+	picture = GFX_report_event_us_washington_obelisk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.3.a
+		every_country = {
+			news_event = { id = WORLD.18001 }
+		}
+		hidden_effect = {
+			retire_character = MEX_adolfo_mateos
+			promote_character = MEX_Raul_Lozano
+			fill_empty_minister = yes
+		}
+	}
+}
+
+country_event = { # Ordaz
+	id = Mexico_Dummy.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event USA.3"}
+	title = USA.3.t
+	desc = USA.3.desc
+	picture = GFX_report_event_us_washington_obelisk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.3.a
+		every_country = {
+			news_event = { id = WORLD.18000 }
+		}
+		hidden_effect = {
+			MEX = {
+			
+				retire_character = MEX_adolfo_mateos
+				promote_character = MEX_gustavo_ordaz
+				fill_empty_minister = yes
+			}
+		}
+	}
+}
