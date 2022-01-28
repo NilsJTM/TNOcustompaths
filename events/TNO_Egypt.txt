@@ -1,0 +1,815 @@
+﻿#########
+# Egypt #
+#########
+
+add_namespace = egy
+
+country_event = { #farouk's death
+	id = egy.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.1"}
+	title = egy.1.t
+	desc = egy.1.d
+	picture = GFX_report_event_egypt_party_farouk
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = egy.1.a
+		news_event = { id = WORLD.509 }
+		kill_country_leader = yes
+
+		remove_ideas = egy_farouks_hedonism
+
+		add_country_leader_role = {
+			character = EGY_Regency_Council
+			promote_leader = yes
+			country_leader = {
+				expire = "2018.01.01"
+				ideology = despotism_interim_government_subtype
+				id = -1
+			}
+		}
+		set_global_flag = EGY_Farouk_Killed
+		hidden_effect = {
+			country_event = { id = egy.2 days = 120 } #originally 530
+
+			ITA = {
+				country_event = { id = empiremanagement_egypt.1 days = 60 }
+			}
+		}
+	}
+}
+
+country_event = { #regency council becomes single regent
+	id = egy.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.2"}
+	title = egy.2.t
+	desc = egy.2.d
+	picture = GFX_report_event_egypt_party_farouk
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = egy.2.a
+
+		if = { #If Italy did max investment, they choose what happens in egypt.
+			limit = {
+				check_variable = { ITA.ITA_EGY_management > 2 }
+			}
+			ITA = {
+				country_event = { id = empiremanagement_egypt.2 days = 3 }
+			}
+		}
+		else = {
+			random_list = {
+				1 = { #Moneim- most respectable regent
+				    modifier = {
+					    factor = 0
+					    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_COLONIAL }
+					}
+		
+					modifier = {
+					    factor = 0
+					    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_AD }
+					}
+					
+					modifier = {
+						factor = 2
+						check_variable = { ITA.ITA_EGY_management > 1 }
+					}
+					
+					retire_country_leader = yes
+					add_country_leader_role = {
+						character = EGY_Muhammad_Abdel_Moneim
+						promote_leader = yes
+						country_leader = {
+							expire = "2018.01.01"
+							ideology = despotism_aristocratic_conservatism_subtype
+							id = -1
+						}
+					}
+					hidden_effect = {
+						every_country = {
+							news_event = {
+								id = WORLD.912
+								days = 1
+							}
+						}
+						ITA = {
+							country_event = { id = empiremanagement_egypt.4 days = 365 }
+						}
+					}
+				}
+				1 = { #Adalberto- name the garrison commander as regent :GOOD IDEA:
+					modifier = {
+						factor = 2
+						check_variable = { ITA.ITA_EGY_management > 0 }
+					}
+					modifier = {
+					    factor = 0
+					    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_DESPOTISM }
+					}
+					
+					modifier = {
+					    factor = 0
+					    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_AD }
+					}
+					
+					retire_country_leader = yes
+					add_country_leader_role = {
+						character = EGY_Adalberto_Genova
+						promote_leader = yes
+						country_leader = {
+							expire = "2018.01.01"
+							ideology = despotism_colonial_government_subtype
+							id = -1
+						}
+					}
+					hidden_effect = {
+						every_country = {
+							news_event = {
+								id = WORLD.913
+								days = 1
+							}
+						}
+						ITA = {
+							country_event = { id = empiremanagement_egypt.3 days = 365 }
+						}
+					}
+				}
+				1 = { #Republic
+				    modifier = {
+					    factor = 0
+					    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_DESPOTISM }
+					}
+					
+					modifier = {
+					    factor = 0
+					    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_COLONIAL }
+					}
+					
+					retire_country_leader = yes
+					add_country_leader_role = {
+						character = EGY_Anwar_Sadat
+						promote_leader = yes
+						country_leader = {
+							expire = "2018.01.01"
+							ideology = authoritarian_democracy_provisional_government_subtype
+							id = -1
+						}
+					}
+					set_politics = {
+						ruling_party = authoritarian_democracy
+					}
+					set_popularities = {
+						social_democracy = 9
+						liberal_democracy = 7
+						conservative_democracy = 11
+						authoritarian_democracy = 43
+						communist = 21
+						socialist = 9
+					}
+					hidden_effect = {
+						every_country = {
+							news_event = {
+								id = WORLD.911
+								days = 1
+							}
+						}
+						ITA = {
+							country_event = { id = empiremanagement_egypt.5 days = 365 }
+						}
+					}
+				}
+			}
+		}
+
+		# ITA = {
+		# 	country_event = { id = empiremanagement_egypt.10 days = 5 }
+		# }
+	}
+}
+
+country_event = { #Egyptian Civil War- Nasser!!!!!!
+	id = egy.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.3"}
+	title = egy.3.t
+	desc = egy.3.d
+	picture = GFX_report_event_islamist_rally
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = { 
+		hidden_effect = {
+			ITA = {
+				end_puppet = EGY
+
+				country_event = { id = empiremanagement_egypt.11 }
+			}
+
+			EGY = { leave_faction = yes }
+			
+			ZZZ = {
+				country_event = {
+					id = sudan.1
+					days = 7
+				}
+			}
+		}
+	}
+	option = {
+		name = egy.3
+
+		country_event = { id = egy.4 days = 3 }
+
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.935
+					days = 1
+				}
+			}
+		}
+		EGB = {
+			add_state_core = 452
+			add_state_core = 1115
+			add_state_core = 1116
+			add_state_core = 1123
+			add_state_core = 456
+			transfer_state = 452
+			transfer_state = 1115
+			transfer_state = 1123
+			transfer_state = 456
+			set_country_flag = BaathistCountry
+			add_ideas = OIL_surrender_modifier_weak
+			load_oob = EGB_civil_war_strong
+
+			452 = {
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					instant_build = yes
+					province = 11967
+				}
+			}
+
+			#change_tag_from = EGY
+
+			declare_war_on = {
+				target = EGY
+				type = civil_war
+			}
+		}
+		set_global_flag = egyptian_civil_war_begun
+		set_global_flag = egyptian_civil_war_begun
+	}
+}
+
+country_event = { #qutb rebel
+	id = egy.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.4"}
+	title = egy.4.t
+	desc = egy.4.d
+	picture = GFX_unknown
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = egy.4.a
+		EGQ = {
+			set_country_flag = EGQ_has_spawned
+			transfer_state = 552
+			transfer_state = 1116
+			add_state_core = 552
+			add_state_core = 1116
+			add_ideas = OIL_surrender_modifier_weak
+			declare_war_on = {
+				target = EGY
+				type = civil_war
+			}
+			declare_war_on = {
+				target = EGB
+				type = civil_war
+			}
+			load_oob = EGQ_oil_crisis
+		}
+	}
+}
+
+country_event = { #EgyptCW- Kingdom(/Republic) Victory
+	id = egy.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.11"}
+	title = egy.11.t
+	desc = egy.11.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = egy.11.a
+
+		news_event = { id = WORLD.18008 days = 1 }
+
+		#Make Egypt an italian puppet again.
+		EGY = {
+			save_party_popularities = yes
+			if = {
+				limit = { has_government = authoritarian_democracy }
+				set_temp_variable = { EGY_is_republic = 1 }
+			}
+		}
+		ITA = {
+			set_autonomy = { target = EGY autonomy_state = autonomy_italy_reliant }
+		}
+		EGY = {
+			if = {
+				limit = { check_variable = { EGY_is_republic = 1 } }
+				set_politics = { ruling_party = authoritarian_democracy }
+			}
+			else = {
+				set_politics = { ruling_party = despotism }
+			}
+			apply_party_popularities = yes
+		}
+
+		#Then- if italy is in a faction- rejoin that faction.
+		if = {
+			limit = { ITA = { is_in_faction_with = USA } }
+			USA = { add_to_faction = EGY }
+			EGY = { add_ideas = OFN_Dependent_Member }
+		}
+		else_if = {
+			limit = { ITA = { is_in_faction_with = JAP } }
+			JAP = { add_to_faction = EGY }
+			EGY = { add_ideas = Sphere_Economic_Dependent }
+		}
+		else_if = {
+			limit = { ITA = { is_in_faction = yes } }
+			ITA = { add_to_faction = EGY }
+		}
+	}
+}
+
+country_event = { #EgyptCW- Nasserist Victory
+	id = egy.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.12"}
+	title = egy.12.t
+	desc = egy.12.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = egy.12.a
+
+		every_owned_state = {
+			add_core_of = EGB
+		}
+		if = {
+			limit = {  NOT = { has_country_flag = ITA_nasser_isolated } }
+			set_country_flag = UAR_can_form
+			set_country_flag = UAR_can_join
+		}
+		news_event = { id = WORLD.18007 days = 1 }
+	}
+}
+
+country_event = { #EgyptCW- Brotherhood Victory
+	id = egy.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.13"}
+	title = egy.13.t
+	desc = egy.13.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = egy.13.a
+		
+		news_event = { id = WORLD.18026 days = 1 }
+
+		every_owned_state = {
+			add_core_of = EGQ
+		}
+	}
+}
+
+add_namespace = sudan
+
+country_event = { #Egyptian Civil War spreads to Sudan
+	id = sudan.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event sudan.1"}
+	#title = sudan.1.t
+	#desc = sudan.1.d
+	#picture = GFX_report_event_islamist_rally
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	hidden = yes
+
+	immediate = {
+		set_global_flag = OC_Sudan_CW
+		RPS = {
+			add_state_core = 551
+			add_state_core = 1119
+			add_state_core = 1120
+			add_state_core = 1121
+			add_state_core = 549
+			add_state_core = 1122
+			transfer_state = 551
+			transfer_state = 1119
+			transfer_state = 1120
+			transfer_state = 1121
+			transfer_state = 549
+			transfer_state = 1122
+			load_oob = RPS_civil_war
+		}
+		SDS = {
+			add_state_core = 1123
+			add_state_core = 1124
+			add_state_core = 1125
+			add_state_core = 1136
+			add_state_core = 1135
+			transfer_state = 1123
+			transfer_state = 1124
+			transfer_state = 1125
+			transfer_state = 1136
+			transfer_state = 1135
+			load_oob = SDS_civil_war
+			add_ideas = OIL_surrender_modifier_weak
+			declare_war_on = {
+				target = RPS
+				type = civil_war
+			}
+			#Also declare on AZA/AYA maybe
+		}
+		SDF = {
+			add_state_core = 1128
+			add_state_core = 1127
+			add_state_core = 1126
+			add_state_core = 1130
+			add_state_core = 1129
+			transfer_state = 1128
+			transfer_state = 1127
+			transfer_state = 1126
+			transfer_state = 1130
+			transfer_state = 1129
+			load_oob = SDF_civil_war
+			declare_war_on = {
+				target = SDS
+				type = civil_war
+			}
+			declare_war_on = {
+				target = RPS
+				type = civil_war
+			}
+			#Also declare on AZA/AYA maybe
+		}
+		AZA = {
+			add_state_core = 1133
+			add_state_core = 1134
+			transfer_state = 1133
+			transfer_state = 1134
+			load_oob = AZA_civil_war
+		}
+		AYA = {
+			add_state_core = 1179
+			add_state_core = 1132
+			add_state_core = 1131
+			transfer_state = 1179
+			transfer_state = 1132
+			transfer_state = 1131
+			load_oob = AYA_civil_war
+			declare_war_on = {
+				target = AZA
+				type = civil_war
+			}
+		}
+	}
+	
+	option = {
+
+	}
+}
+
+country_event = { #SudanCW- Republic Victory
+	id = sudan.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event sudan.2"}
+	title = sudan.2.t
+	desc = sudan.2.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = sudan.2.a
+
+		every_owned_state = {
+			add_core_of = ROOT
+		}
+
+		set_capital = { state = 1122 }
+
+		# news_event = { id = WORLD.18007 days = 1 }
+	}
+}
+
+country_event = { #SudanCW- Nasserist Victory
+	id = sudan.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event sudan.3"}
+	title = sudan.3.t
+	desc = sudan.3.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = sudan.3.a
+
+		every_owned_state = {
+			add_core_of = ROOT
+		}
+
+		set_capital = { state = 1122 }
+
+		set_cosmetic_tag = SDS_postwar
+		set_country_flag = UAR_can_join
+	}
+}
+
+country_event = { #SudanCW- Junta Victory
+	id = sudan.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event sudan.4"}
+	title = sudan.4.t
+	desc = sudan.4.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = sudan.4.a
+
+		every_owned_state = {
+			add_core_of = ROOT
+		}
+
+		set_capital = { state = 1122 }
+	}
+}
+
+country_event = { #SouthSudanCW- Azania Victory
+	id = sudan.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event sudan.5"}
+	title = sudan.5.t
+	desc = sudan.5.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = sudan.5.a
+
+		every_owned_state = {
+			add_core_of = ROOT
+		}
+
+		# news_event = { id = WORLD.18007 days = 1 }
+	}
+}
+
+country_event = { #SouthSudanCW- Anyanya Victory
+	id = sudan.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event sudan.6"}
+	title = sudan.6.t
+	desc = sudan.6.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = sudan.6.a
+
+		every_owned_state = {
+			add_core_of = ROOT
+		}
+
+		# news_event = { id = WORLD.18007 days = 1 }
+	}
+}
+
+
+#Events down here are old and should be removed, but might screw with ITA code
+country_event = { # EGYPT OIL CRISIS ITAL COMMIT
+	id = egy.999
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.999"}
+	#title = egy.999.t
+	#desc = egy.999.d
+	#picture = GFX_unknown
+	hidden = yes
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		#name = egy.999.a
+		trigger = {
+			ITA = {
+				check_variable = {
+					var = ITA_empire_management_coins
+					value = 0
+					compare = greater_than_or_equals
+				}
+				NOT = {
+					check_variable = {
+						var = ITA_empire_management_coins
+						value = 5
+						compare = greater_than_or_equals
+					}
+				}
+			}
+		}
+		EGY = {
+			country_event = { id = egy.45 }
+		}
+		ITA = {
+			country_event = { id = empiremanagement_egypt.11 days = 5 }
+		}
+	}
+	option = {
+		name = egy.999.b
+		trigger = {
+			ITA = {
+				check_variable = {
+					var = ITA_empire_management_coins
+					value = 5
+					compare = greater_than_or_equals
+				}
+				NOT = {
+					check_variable = {
+						var = ITA_empire_management_coins
+						value = 8
+						compare = greater_than_or_equals
+					}
+				}
+			}
+		}
+		EGY = {
+			country_event = { id = egy.44 }
+		}
+	}
+	option = {
+		name = egy.999.c
+		trigger = {
+			ITA = {
+				check_variable = {
+					var = ITA_empire_management_coins
+					value = 8
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		EGY = {
+			country_event = { id = egy.43 }
+		}
+		ITA = {
+			country_event = { id = empiremanagement_egypt.12 days = 5 }
+		}
+	}
+}
+
+country_event = { #BALBO
+	id = egy.1005
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.1005"}
+	title = egy.1005.t
+	desc = egy.1005.d
+	picture = GFX_unknown
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = egy.1005.a
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Italo Balbo"
+			desc = "POLITICS_Italo_Balbo_DESC"
+			picture = "Portrait_Egypt_Italo_Balbo.dds"
+			expire = "1999.1.1"
+			ideology = despotism_subtype
+			traits = {
+
+			}
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = balbo_group
+			name = balbo_group
+		}
+		ITA = {
+			country_event = { id = empiremanagement_egypt.13 days = 5 }
+		}
+	}
+}
+
+country_event = { #Qutb joins Arab League
+	id = egy.1006
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.1006"}
+	title = egy.1006.t
+	desc = egy.1006.d
+	picture = GFX_unknown
+	# trigger = {
+	# 	tag = EGQ
+	# 	AND = {
+	# 		owns_state = 446
+	# 		owns_state = 447
+	# 		owns_state = 452
+	# 	}
+	# }
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+	option = {
+		name = egy.1006.a
+		SAU = {
+			country_event = { id = egy.1007 }
+		}
+	}
+}
+
+country_event = { #Saudi Arabia: Qutb wants to join
+	id = egy.1007
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.1007"}
+	title = egy.1007.t
+	desc = egy.1007.d
+	picture = GFX_unknown
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {
+		name = egy.1007.a
+		trigger = {
+			NOT = {
+				has_country_flag = scorza_faisal_deal
+			}
+		}
+		SAU = {
+			add_to_faction = EGQ
+		}
+	}
+	option = {
+		name = egy.1007.b
+		trigger = {
+			has_country_flag = scorza_faisal_deal
+		}
+	}
+}
+
+country_event = { #Nasser joins United Arab States
+	id = egy.1008
+	immediate = {log = "[GetDateText]: [Root.GetName]: event egy.1008"}
+	title = egy.1008.t
+	desc = egy.1008.d
+	picture = GFX_unknown
+	# trigger = {
+	# 	tag = EGB
+	# 	AND = {
+	# 		owns_state = 446
+	# 		owns_state = 447
+	# 		owns_state = 452
+	# 		owns_state = 1116
+	# 		owns_state = 552
+	# 	}
+	# 	NOT = {
+	# 		has_country_flag = ITA_nasser_isolated
+	# 	}
+	# 	SYR = {
+	# 		exists = yes
+	# 	}
+	# }
+	fire_only_once = yes
+	is_triggered_only = yes
+
+
+	option = {
+		name = egy.1008.a
+		SYR = {
+			country_event = { id = Syria.3 }
+		}
+	}
+}
