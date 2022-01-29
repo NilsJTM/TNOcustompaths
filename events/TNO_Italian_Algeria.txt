@@ -1,0 +1,335 @@
+﻿
+add_namespace = ILG
+
+country_event = { ##call castello
+	id = ILG.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.1"}
+	title = ILG.1.t
+	desc = ILG.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ILG.1.a
+	}
+}
+
+country_event = { ##give offers
+	id = ILG.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.2"}
+	title = ILG.2.t
+	desc = ILG.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ILG.2.a
+	}
+}
+
+country_event = { ## start against IBR ALG war
+	id = ILG.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.3"}
+	title = ILG.3.t
+	desc = ILG.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ILG.3.a
+		set_country_flag = ilg_WAR_IS_HAPPENING
+
+	}
+}
+
+country_event = { ## CALL PIRANIA
+	id = ILG.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.4"}
+	title = ILG.4.t
+	desc = ILG.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ILG.4.a
+	}
+}
+
+country_event = { ## IBERIAN extend olive branch (TO ILG)
+	id = ILG.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.5"}
+	title = ILG.5.t
+	desc = ILG.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ILG.5.a
+
+		hidden_effect = {
+			set_country_flag = ilg_love_from_iberia
+			if = {
+				limit = {
+					SLG = { has_country_flag = ilg_love_from_italy }
+				}
+				country_event = {
+					id = ILG.8
+					days = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = { ## ITALIAN extend olive branch (TO SLG)
+	id = ILG.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.6"}
+	title = ILG.6.t
+	desc = ILG.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ILG.6.a
+
+		hidden_effect = {
+			set_country_flag = ilg_love_from_italy
+			if = {
+				limit = {
+					ILG =  { has_country_flag = ilg_love_from_iberia }
+				}
+				country_event = {
+					id = ILG.8
+					days = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = { ## Italy wins war
+	id = ILG.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.7"}
+	title = ILG.7.t
+	desc = ILG.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { ##union
+		name = ILG.7.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ILG_FATE_OF_ITALIAN_ALGERIA_PATH option =  ILG_FATE_OF_ITALIAN_ALGERIA_PATH_REPUBLIC }
+			}
+		}
+		
+		ILG = {
+			add_state_core = 1006
+			add_state_core = 459
+			add_state_core = 1007
+			add_state_core = 513
+			add_state_core = 1151
+			add_state_core = 1154
+			add_state_core = 1147
+			1154 = { set_demilitarized_zone = no }
+			1147 = { set_demilitarized_zone = no }
+			513 = { set_demilitarized_zone = no }
+			1007 = { set_demilitarized_zone = no }
+
+			785 = { set_demilitarized_zone = no }
+			1149 = { set_demilitarized_zone = no }
+			1148 = { set_demilitarized_zone = no }
+			1146 = { set_demilitarized_zone = no }
+			1161 = { set_demilitarized_zone = no }
+		}
+		hidden_effect = {
+			ITA = {
+				puppet = ILG
+			}
+		}
+		ILG = {
+			drop_cosmetic_tag = yes
+			set_cosmetic_tag = ILG_italy_vic
+			promote_character = ILG_Said_Boualam
+			set_politics = {
+				ruling_party = despotism
+			}
+			set_popularities = {
+				authoritarian_democracy = 21
+				conservative_democracy = 11
+				liberal_democracy = 11
+				fascism = 16
+				despotism = 41
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.917
+					days = 1
+				}
+			}
+		}
+	}
+	option = { ##republic
+		name = ILG.7.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ILG_FATE_OF_ITALIAN_ALGERIA_PATH option =  ILG_FATE_OF_ITALIAN_ALGERIA_PATH_UNION }
+			}
+		}
+
+		ILG = {
+			add_state_core = 1006
+			add_state_core = 459
+			add_state_core = 1007
+			add_state_core = 513
+			add_state_core = 1151
+			add_state_core = 1154
+			add_state_core = 1147
+			1154 = { set_demilitarized_zone = no }
+			1147 = { set_demilitarized_zone = no }
+			513 = { set_demilitarized_zone = no }
+			1007 = { set_demilitarized_zone = no }
+
+			785 = { set_demilitarized_zone = no }
+			1149 = { set_demilitarized_zone = no }
+			1148 = { set_demilitarized_zone = no }
+			1146 = { set_demilitarized_zone = no }
+			1161 = { set_demilitarized_zone = no }
+		}
+		hidden_effect = {
+			ITA = {
+				set_autonomy = {
+					target = ILG
+					autonomous_state = autonomy_italy_reliant
+				}
+			}
+		}
+		ILG = {
+			drop_cosmetic_tag = yes
+			set_cosmetic_tag = ILG_italy_vic
+			set_politics = {
+				ruling_party = conservative_democracy
+			}
+			set_popularities = {
+				authoritarian_democracy = 12
+				conservative_democracy = 43
+				liberal_democracy = 27
+				fascism = 14
+				despotism = 4
+			}
+			remove_ideas = {
+				ILG_Wild_Frontier
+				ILG_Saharan_Bandits_Prevalent
+				ILG_Giuseppe_Castellano_dep
+				ILG_Giuseppe_Castellano_for
+				ILG_Giuseppe_Castellano_eco
+				ILG_Giuseppe_Castellano_sec
+				IEA_idea_colonial_government
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.916
+					days = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = { ## algerian mandate
+	id = ILG.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ILG.8"}
+	title = ILG.8.t
+	desc = ILG.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ILG.8.a
+		set_autonomy = {
+			target = ILG
+			autonomy_state = autonomy_free
+		}
+		set_autonomy = {
+			target = SLG
+			autonomy_state = autonomy_free
+		}
+		ITA = {
+			set_variable = {
+				var = ILG_ITA_Influence
+				value = 2
+			}
+			give_guarantee = ILG
+		}
+		IBR = {
+			give_guarantee = ILG
+			if = {
+				limit = {
+					has_country_flag = legislature_council
+				}
+				add_to_variable = {IBR_council_reformism = 3}
+			}
+		}
+		ILG = {
+			set_country_flag = ILG_peaceful_resolution
+			drop_cosmetic_tag = yes
+			set_cosmetic_tag = ILG_italy_vic
+			annex_country = {
+				target = SLG
+				transfer_troops = yes
+			}
+			add_state_core = 1006
+			add_state_core = 459
+			add_state_core = 1007
+			add_state_core = 513
+			add_state_core = 1151
+			add_state_core = 1154
+			add_state_core = 1147
+			1154 = { set_demilitarized_zone = no }
+			1147 = { set_demilitarized_zone = no }
+			513 = { set_demilitarized_zone = no }
+			1007 = { set_demilitarized_zone = no }
+
+			785 = { set_demilitarized_zone = no }
+			1149 = { set_demilitarized_zone = no }
+			1148 = { set_demilitarized_zone = no }
+			1146 = { set_demilitarized_zone = no }
+			1161 = { set_demilitarized_zone = no }
+			set_politics = {
+				ruling_party = authoritarian_democracy
+			}
+			set_popularities = {
+				authoritarian_democracy = 50
+				conservative_democracy = 15
+				liberal_democracy = 7
+				fascism = 14
+				despotism = 14
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.918
+					days = 1
+				}
+			}
+		}
+		clr_global_flag = algeria_crisis
+	}
+}

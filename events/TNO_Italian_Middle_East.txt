@@ -1,0 +1,422 @@
+﻿
+add_namespace = IMEskeleton
+#TT Skeleton for BGRS/PW - Targai
+
+country_event = { #Jerusalem-Conference (Italy Victory)
+	id = IMEskeleton.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event IMEskeleton.1"}
+	title = IMEskeleton.1.t
+	desc = IMEskeleton.1.d
+	picture = GFX_report_event_generic_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #yay!!! load partition
+		name = IMEskeleton.1.a
+		hidden_effect = {
+			random_list = {
+				30 = { #partition
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_KINGDON }
+				}
+				
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_FAIL }
+				}
+					country_event = { id = impurita.29 days = 25 }
+				}
+				
+				20 = { #Kingdon
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_PARTITION }
+				}
+				
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_FAIL }
+				}
+					country_event = { id = impurita.35 days = 15 }
+				}
+
+				50 = { #fail
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_KINGDON }
+				}
+				
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_PARTITION }
+				}
+				
+					country_event = { id = IMEskeleton.2 days = 25 }		
+				}
+			}
+			every_country = {
+				news_event = {
+					id = WORLD.30042
+				}
+			}
+		}
+	}
+}
+country_event = { #Conference Fails - Irgun, Kingdom, or Harakiyyin?
+	id = IMEskeleton.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event IMEskeleton.2"}
+	title = IMEskeleton.2.t
+	desc = IMEskeleton.2.d
+	picture = GFX_report_event_generic_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Irgun
+		name = IMEskeleton.2.a
+		ai_chance = {
+		    factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = IME_FAIL_PATH option =  IME_PATH_FAIL_HARAKIYYIN }
+			}
+		}
+		hidden_effect = {
+			country_event = { id = impurita.39 days = 25 }
+			every_country = {
+				news_event = {
+					id = WORLD.30043
+				}
+			}
+		}
+	}
+	option = { #Harakiyyin
+		name = IMEskeleton.2.b
+		ai_chance = {
+		    factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = IME_FAIL_PATH option =  IME_FAIL_PATH_IRGUN }
+			}
+		}
+		hidden_effect = {
+			country_event = { id = impurita.36 days = 25 }
+			every_country = {
+				news_event = {
+					id = WORLD.30043
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Italy-Less JerCon
+	id = IMEskeleton.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event IMEskeleton.3"}
+	title = IMEskeleton.3.t
+	desc = IMEskeleton.3.d
+	picture = GFX_report_event_generic_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = IMEskeleton.3.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.30042
+				}
+			}
+			random_list = {
+				10 = { #partition
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_LOSS_KINGDON }
+				}
+				
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_LOSS_FAIL }
+				}
+				
+					country_event = { id = impurita.29 days = 1 }
+				}
+				10 = { #Kingdom
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_LOSS_KINGDON }
+				}
+				
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_LOSS_FAIL }
+				}
+				
+					country_event = { id = impurita.35 days = 1 }
+				}
+				60 = { #fail
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_LOSS_KINGDON }
+				}
+				
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = IME_PATH option =  IME_PATH_LOSS_FAIL }
+				}
+					country_event = { id = IMEskeleton.2 days = 1 }
+				}
+			}
+		}
+	}
+}
+
+country_event = { #ben gurion retires - peres or golda?
+	id = IMEskeleton.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event IMEskeleton.4"}
+	title = IMEskeleton.4.t
+	desc = IMEskeleton.4.d
+	picture = GFX_report_event_generic_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #pick who
+		name = IMEskeleton.4.a
+		random_list = {
+			50 = { #peres
+				retire_country_leader = yes
+				add_to_variable = { ITA_FD_popularity = -10 }
+				promote_character = ISR_Shimon_Peres
+				every_country = {
+					news_event = {
+						id = WORLD.30045
+					}
+				}
+			}
+			50 = { #golda
+				retire_country_leader = yes
+				add_to_variable = { ITA_FD_popularity = -10 }
+				promote_character = ISR_Golda_Meir
+				every_country = {
+					news_event = {
+						id = WORLD.30044
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #habash - arab or palestinian
+	id = IMEskeleton.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event IMEskeleton.5"}
+	title = IMEskeleton.5.t
+	desc = IMEskeleton.5.d
+	picture = GFX_report_event_generic_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #pick who
+		name = IMEskeleton.5.a
+		random_list = {
+			50 = { #palestinian - no change
+				every_country = {
+					news_event = {
+						id = WORLD.30046
+					}
+				}
+				set_party_name = { 
+					ideology = communist
+					long_name = PAL_PFLP_LONG
+					name = PAL_PFLP_SHORT
+				}
+			}
+			50 = { #ARAB LIBERATION LET'S FUCKING GOOOO
+				every_country = {
+					news_event = {
+						id = WORLD.30047
+					}
+				}
+				set_cosmetic_tag = PAL_DAPR
+				set_politics = {
+					ruling_party = communist
+				}
+				set_country_flag = PAL_APR
+				if = {
+					limit = { LEB = { is_puppet_of = PAL } }
+					annex_country = { target = LEB }
+				}
+				annex_country = { target = JOR }
+				every_owned_state = {
+					add_core_of = PAL
+				}
+			}
+		}
+	}
+}
+
+country_event = { #ConDem Begin or LibDem Begin
+	id = IMEskeleton.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event IMEskeleton.6"}
+	title = IMEskeleton.6.t
+	desc = IMEskeleton.6.d
+	picture = GFX_report_event_generic_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #pick who
+		name = IMEskeleton.6.a
+		random_list = {
+			50 = { #LibDem Begin - Annex Transjordan
+				every_country = {
+					news_event = {
+						id = WORLD.30048
+					}
+				}
+
+				ISR = {
+
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						socialist = 5
+						social_democracy = 30
+						liberal_democracy = 35
+
+						conservative_democracy = 25
+						authoritarian_democracy = 5
+						despotism = 0
+						fascism = 0
+						national_socialism = 0
+						
+					}
+
+					set_politics = {
+						ruling_party = liberal_democracy
+					}
+
+					set_party_name = {
+						ideology = liberal_democracy
+						long_name = ISR_liberal_democracy_party_long3
+						name = ISR_liberal_democracy_party3
+					}
+
+					set_party_name = {
+						ideology = conservative_democracy
+						long_name = ISR_conservative_democracy_party_long3
+						name = ISR_conservative_democracy_party3
+					}
+
+				}
+			}
+			50 = { #ConDem Begin - Wholesome 100
+				every_country = {
+					news_event = {
+						id = WORLD.30049
+					}
+				}
+
+				JOR = { 
+					add_state_core = 1246
+					transfer_state = 1246
+					add_state_core = 455
+					transfer_state = 455
+					add_state_core = 1245
+					transfer_state = 1245
+					add_state_core = 1244
+					transfer_state = 1244
+					#set_cosmetic_tag = JOR_BEGIN
+
+					set_party_name = {
+						ideology = despotism
+						name = JOR_Abdullah_despotism_party
+						long_name = JOR_Abdullah_despotism_party_long
+					}
+
+					country_event = { id = IMEskeleton.7 days = 600 }
+				}
+
+				ISR = {
+					#puppet = JOR
+
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						socialist = 0
+						social_democracy = 45
+						liberal_democracy = 0
+
+						conservative_democracy = 50
+						authoritarian_democracy = 3
+						despotism = 0
+						fascism = 2
+						national_socialism = 0
+						
+					}
+					set_politics = {
+						ruling_party = conservative_democracy
+					}
+					set_party_name = {
+						ideology = social_democracy
+						long_name = ISR_social_democracy_long2
+						name = ISR_social_democracy_party2
+					}
+					set_party_name = {
+						ideology = conservative_democracy
+						long_name = ISR_conservative_democracy_party_long2
+						name = ISR_conservative_democracy_party2
+					}
+					set_party_name = {
+						ideology = authoritarian_democracy
+						long_name = ISR_authoritarian_democracy_party_long2
+						name = ISR_authoritarian_democracy_party2
+					}
+					set_party_name = {
+						ideology = fascism
+						long_name = ISR_fascism_party_long2
+						name = ISR_fascism_party2
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Abdullah Successor
+	id = IMEskeleton.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event IMEskeleton.7"}
+	title = IMEskeleton.7.t
+	desc = IMEskeleton.7.d
+	picture = GFX_report_event_generic_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #pick who
+		name = IMEskeleton.7.a
+		random_list = {
+			50 = { #Nayef
+				set_party_name = {
+					ideology = despotism
+					name = JOR_Nayef_despotism_party
+					long_name = JOR_Nayef_despotism_party_long
+				}
+				promote_character = JOR_Jordan_Prince_Nayef
+			}
+			50 = { #Hussein
+				set_party_name = {
+					ideology = despotism
+					name = JOR_Hussein_despotism_party
+					long_name = JOR_Hussein_despotism_party_long
+				}
+				promote_character = JOR_Jordan_Hussein
+			}
+		}
+	}
+}
