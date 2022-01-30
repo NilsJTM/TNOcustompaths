@@ -1,0 +1,366 @@
+﻿######################################
+## Croatia Skeleton : )  fuck you dataminer jk love you < 3 ##
+######################################
+##made by targai, i hope this is read in 6 years and no one knows who that is##
+
+######################################
+
+add_namespace = cro
+add_namespace = cropartisans
+add_namespace = bosnia
+
+country_event = { #what path
+	id = cro.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cro.1"}
+	title = cro.1.t
+	desc = cro.1.d
+	picture = GFX_error
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { # ustase
+		name = cro.1.a
+		ai_chance = {
+			factor = 50
+		    modifier = {
+		        factor = 0
+			    has_game_rule = { rule = CRO_PATH option =  CRO_PATH_TITO }
+		    }
+		
+		}
+		hidden_effect = {
+			country_event = { id = cropartisans.8 days = 587 }
+		}
+	}
+	
+	option = { # partisans
+		name = cro.1.b
+		ai_chance = {
+			factor = 50
+		    modifier = {
+		       factor = 0
+			   has_game_rule = { rule = CRO_PATH option =  CRO_PATH_USTASE }
+		    }
+
+		}
+		hidden_effect = {
+			country_event = { id = cropartisans.12 days = 5 }
+		}
+	}
+}
+
+
+country_event = { # The ustase win
+	id = cropartisans.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cropartisans.8"}
+	title = cropartisans.8.t
+	desc = cropartisans.8.d
+	picture = GFX_error
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = cropartisans.8.a
+		hidden_effect = {
+			leave_faction = yes
+			ITA = {
+				country_event = { id = cropartisans.9 days = 100 }
+			}
+			country_event = { id = bosnia.1 days = 30 }
+			every_country = { news_event = WORLD.907 }
+			set_country_flag = ustasevictory
+		}
+		set_popularities = {
+			communist = 20
+			authoritarian_democracy = 40
+			national_socialism = 40
+		}
+		set_politics = {
+			ruling_party = national_socialism
+		}
+		add_country_leader_role = {
+			character = CRO_Jure_Francetic
+			promote_leader = yes
+			country_leader = {
+				expire = "1999.1.1"
+				ideology = national_socialism_clerical_fascism_subtype
+				id = -1
+			}
+		}
+		
+		ITA = {
+			set_autonomy = {
+				target = CRO
+				autonomy_state = autonomy_free
+			}
+			set_variable = { CRO_ITA_Influence = 0 }
+		}
+		remove_ideas = {
+			CRO_the_partisan_problem
+			CRO_legacy_of_the_ustase
+		}
+	}
+}
+
+country_event = { # The ustase win in Croatia, we're invading
+	id = cropartisans.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cropartisans.9"}
+	title = cropartisans.9.t
+	desc = cropartisans.9.d
+	picture = GFX_report_event_wales_army
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = cropartisans.9.a
+		declare_war_on = {
+			target = CRO
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { # Tito takes power
+	id = cropartisans.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cropartisans.12"}
+	title = cropartisans.12.t
+	desc = cropartisans.12.d
+	picture = GFX_error
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { # More partisans come up
+		name = cropartisans.12.a
+		hidden_effect = {
+			leave_faction = yes
+			ITA = {
+				country_event = { id = cropartisans.13 days = 50 }
+			}
+			set_country_flag = titovictory
+			country_event = {id = bosnia.3 days = 30 }
+			every_country = { news_event = WORLD.908 }
+			set_popularities = {
+				communist = 60
+				socialist = 30
+				social_democracy = 10
+			}
+			set_politics = {
+				ruling_party = communist
+			}
+			set_party_name = {
+				ideology = communist
+				long_name = CRO_AUTHDEM_LONG
+				name = CRO_AUTHDEM
+			}
+			add_country_leader_role = {
+				character = CRO_Josip_Broz_Tito
+				promote_leader = yes
+				country_leader = {
+					expire = "1982.1.1"
+					ideology = communist_national_communism_subtype
+					traits = { the_last_yugoslav }
+					id = -1
+				}
+			}
+			set_temp_variable = { TNO_economy_subtype_temp = 2 }
+			econ_subtype_change = yes
+			ITA = {
+				set_autonomy = {
+					target = CRO
+					autonomy_state = autonomy_free
+				}
+				set_variable = { CRO_ITA_Influence = 0 }
+			}
+			set_cosmetic_tag = CRO_Yugoslavia
+			remove_ideas = {
+				CRO_the_partisan_problem
+				CRO_legacy_of_the_ustase
+			}
+		}
+	}
+}
+
+country_event = { # Communists in Croatia, we're invading
+	id = cropartisans.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cropartisans.13"}
+	title = cropartisans.13.t
+	desc = cropartisans.13.d
+	picture = GFX_error
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = cropartisans.13.a
+		declare_war_on = {
+			target = CRO
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { # Peace Deal :))
+	id = cro.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event cro.2"}
+	title = cro.2.t
+	desc = cro.2.d
+	picture = GFX_error
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = cro.2.a
+		ITA = {
+			white_peace = CRO
+			if = {
+				limit = {
+					NOT = {
+						country_exists = BOS
+					}
+				}
+				CRO = {
+					transfer_state = 109
+					transfer_state = 1293
+					transfer_state = 1280
+					transfer_state = 746
+					transfer_state = 104
+					transfer_state = 1278
+					transfer_state = 1279
+					transfer_state = 969
+					transfer_state = 1276
+					transfer_state = 1277
+				}
+			}
+			else_if = {
+				limit = {
+					country_exists = BOS
+				}
+				CRO = {
+					transfer_state = 109
+					transfer_state = 1293
+					transfer_state = 1280
+					transfer_state = 746
+					transfer_state = 1279
+					transfer_state = 969
+				}
+
+			}
+			set_autonomy = {
+				target = CRO
+				autonomous_state = autonomy_italy_hefty_influence
+			}
+		}
+		CRO = {
+			white_peace = ITA
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = despotism
+			}
+			set_popularities = {
+				despotism = 60
+				fascism = 20
+				authoritarian_democracy = 20
+			}
+			add_country_leader_role = {
+				character = CRO_Zvonimir_II
+				promote_leader = yes
+				country_leader = {
+					expire = "1985.1.1"
+					ideology = despotism_aristocratic_conservatism_subtype
+					id = -1
+				}
+			}
+			set_party_name = {
+				ideology = authoritarian_democracy
+				long_name = CRO_ITA_AUTH_LONG
+				name = CRO_ITA_AUTH
+			}
+			hidden_effect = {
+				set_variable = { TNO_economy_subtype = 0 }
+				if = {
+					limit = {
+						has_country_flag = ustasevictory
+					}
+					every_country = {
+						news_event = { id = WORLD.18006 days = 1 }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = titovictory
+					}
+					every_country = {
+						news_event = { id = WORLD.18027 days = 1 }
+					}
+				}
+				drop_cosmetic_tag = yes
+				if = {
+					limit = {
+						has_country_flag = ita_ciano_wins
+					}
+					complete_national_focus = cro_the_prince
+				}
+				if = {
+					limit = {
+						has_country_flag = ita_scorza_wins
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Bosnia breaks off! (Partisans)
+	id = bosnia.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bosnia.3"}
+	title = bosnia.3.t
+	desc = bosnia.3.d
+	picture = GFX_error
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = bosnia.3.a
+		remove_ideas = CRO_bosnian_autonomy
+		BOS = {
+			econ_join_sphere_ITA = yes 
+			transfer_state = 104
+			add_state_core = 104
+			transfer_state = 1278
+			add_state_core = 1278
+			transfer_state = 1277
+			add_state_core = 1277
+			transfer_state = 1276
+			add_state_core = 1276
+		}
+		hidden_effect = {
+			ITA = {
+				country_event = { id = bosnia.4 days = 1 }
+			}
+		}
+	}
+}
+
+country_event = { #Bosnia works with us (Italy, Partisans)
+	id = bosnia.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bosnia.4"}
+	title = bosnia.4.t
+	desc = bosnia.4.d
+	picture = GFX_report_event_generic_riot
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = bosnia.4.a
+		BOS = {
+			country_event = { id = ita.1002 days = 3 }
+		}
+	}
+}

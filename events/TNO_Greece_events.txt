@@ -1,0 +1,1544 @@
+﻿##################
+## Greek events ##
+##################
+
+add_namespace = gre
+
+
+country_event = { #Provisional Government Declared
+	id = gre.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gre.1"}
+	title = gre.1.t
+	desc = gre.1.d
+	picture = GFX_report_event_fascist_militia
+
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			retire_character = GRE_Antonio_Gandin
+			retire_character = GRE_Antonis_Livieratos
+			retire_character = GRE_Ioannis_Voulpiotis
+			retire_character = GRE_Phaedon_Gizikis
+			add_ideas = GRE_Generic_Vacant_hog
+			add_ideas = GRE_Generic_Vacant_eco
+			add_ideas = GRE_Generic_Vacant_for
+			add_ideas = GRE_Generic_Vacant_sec
+		}
+	}
+
+	option = { #EDES
+		name = gre.1.a
+		ai_chance = {
+			factor = 50		
+		    modifier = {
+		        factor = 0
+			    has_game_rule = { rule = GRE_PATH option =  GRE_PATH_EAM }
+            }		
+		
+		}
+		set_politics = {
+			ruling_party = despotism
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = GRE_provisional_government_long
+			name = GRE_provisional_government
+		}
+		GRE_Dimitrios_Psarros = {
+			promote_character = {
+				ideology = despotism_interim_government_subtype
+			}
+		}
+		ITA = {
+			end_puppet = GRE
+			set_variable = {
+				var = GRE_ITA_Influence
+				value = 0
+			}
+		}
+		econ_leave_sphere = yes
+		set_temp_variable = { TNO_economy_type_temp = 1 }
+		econ_type_change = yes
+		hidden_effect = {
+			set_popularities = {
+				communist = 3
+				socialist = 6
+				social_democracy = 11
+				liberal_democracy = 10
+				conservative_democracy = 8
+				authoritarian_democracy = 46
+				despotism = 12
+				fascism = 4
+			}
+
+			if = {
+				limit = {
+					ITA = {
+						has_country_flag = ita_ciano_wins
+					}
+				}
+				ITA = {
+					country_event = { id = greneg_ita_ciano.1 days = 7 }
+				}
+				GRE = {
+					country_event = { id = greneg_gre_ciano.1 days = 7 }
+				}
+			}
+			else_if = {
+				limit = {
+					ITA = {
+						has_country_flag = ita_scorza_wins
+					}
+				}
+				ITA = {
+					country_event = { id = greneg_ita_scorza.1 days = 7 }
+				}
+				GRE = {
+					country_event = { id = greneg_gre_scorza.1 days = 7 }
+				}
+			}
+		}
+	}
+
+	option = { #EAM
+		name = GRE.1.b
+		ai_chance = {
+			factor = 50
+		    modifier = {
+		        factor = 0
+			    has_game_rule = { rule = GRE_PATH option =  GRE_PATH_EDES }
+		
+            }
+
+		}
+		set_politics = {
+			ruling_party = socialist
+		}
+		GRE_Aris_Velouchiotis = {
+			promote_character = {
+				ideology = socialist_revolutionary_frontism_subtype
+			}
+		}
+		ITA = {
+			end_puppet = GRE
+			set_variable = {
+				var = GRE_ITA_Influence
+				value = 0
+			}
+		}
+		econ_leave_sphere = yes
+		set_temp_variable = { TNO_economy_type_temp = 3 }
+		econ_type_change = yes
+		hidden_effect = {
+			set_popularities = {
+				communist = 23
+				socialist = 33
+				social_democracy = 17
+				liberal_democracy = 6
+				conservative_democracy = 7
+				authoritarian_democracy = 0
+				despotism = 13
+				fascism = 1
+			}
+			set_party_name = {
+				ideology = social_democracy
+				long_name = GRE_EAM_social_democracy_long
+				name = GRE_EAM_social_democracy
+			}
+
+			ITA = {
+				country_event = { id = ita_gre_eam.1 days = 4 }
+			}
+		}
+	}
+}
+
+add_namespace = greneg_ita_ciano
+
+country_event = { # Order what in Athens?
+	id = greneg_ita_ciano.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_ciano.1"}
+	title = greneg_ita_ciano.1.t
+	desc = greneg_ita_ciano.1.d
+	picture = GFX_report_event_italy_soldier_patrol
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Surrender weapons
+		name = greneg_ita_ciano.1.a
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Only shoot if needed
+		name = greneg_ita_ciano.1.b
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # SHOOT FIRST
+		name = greneg_ita_ciano.1.c
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Where do we keep negotiations?
+	id = greneg_ita_ciano.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_ciano.2"}
+	title = greneg_ita_ciano.2.t
+	desc = greneg_ita_ciano.2.d
+	picture = GFX_report_event_italy_naval_ship
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # In Athens
+		name = greneg_ita_ciano.2.a
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # On an italian battleship in the Piraeus
+		name = greneg_ita_ciano.2.b
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # In an Italian military base in Crete
+		name = greneg_ita_ciano.2.c
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # What to do with Greek captives
+	id = greneg_ita_ciano.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_ciano.3"}
+	title = greneg_ita_ciano.3.t
+	desc = greneg_ita_ciano.3.d
+	picture = GFX_report_event_algeria_native_surrender
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Agree to release them immediately
+		name = greneg_ita_ciano.3.a
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Promise to release them after negotiations
+		name = greneg_ita_ciano.3.b
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Keep the prisoners
+		name = greneg_ita_ciano.3.c
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Investigate a EAM operation
+	id = greneg_ita_ciano.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_ciano.4"}
+	title = greneg_ita_ciano.4.t
+	desc = greneg_ita_ciano.4.d
+	#picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # LEad a thorough investigation
+		name = greneg_ita_ciano.4.a
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # we can't spare recources
+		name = greneg_ita_ciano.4.b
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Enlist IDEA officers
+		name = greneg_ita_ciano.4.c
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Italian Bases in Greece
+	id = greneg_ita_ciano.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_ciano.5"}
+	title = greneg_ita_ciano.5.t
+	desc = greneg_ita_ciano.5.d
+	picture = GFX_report_event_italy_marines
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Agree to progressively demobilize
+		name = greneg_ita_ciano.5.a
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Agree to redice the italian presence
+		name = greneg_ita_ciano.5.b
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Italian bases arent leaving
+		name = greneg_ita_ciano.5.c
+		hidden_effect = {
+			country_event = { id = greneg_ita_ciano.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # What to do with Cyprus
+	id = greneg_ita_ciano.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_ciano.6"}
+	title = greneg_ita_ciano.6.t
+	desc = greneg_ita_ciano.6.d
+	#picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Promise a democratic solution
+		name = greneg_ita_ciano.6.a
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Promise a greek solution
+		name = greneg_ita_ciano.6.b
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Promise nothing
+		name = greneg_ita_ciano.6.c
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+add_namespace = greneg_gre_ciano
+
+country_event = { # Forming a provisional government
+	id = greneg_gre_ciano.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_ciano.1"}
+	title = greneg_gre_ciano.1.t
+	desc = greneg_gre_ciano.1.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # making it democratic
+		name = greneg_gre_ciano.1.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # form an executive council
+		name = greneg_gre_ciano.1.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # concentrate power
+		name = greneg_gre_ciano.1.c
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Who do we send to lead negotiations
+	id = greneg_gre_ciano.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_ciano.2"}
+	title = greneg_gre_ciano.2.t
+	desc = greneg_gre_ciano.2.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Lela Karagianni
+		name = greneg_gre_ciano.2.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Konstantinos Kollias
+		name = greneg_gre_ciano.2.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Georgios Zoitakis
+		name = greneg_gre_ciano.2.c
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Our main demand
+	id = greneg_gre_ciano.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_ciano.3"}
+	title = greneg_gre_ciano.3.t
+	desc = greneg_gre_ciano.3.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # democracy
+		name = greneg_gre_ciano.3.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # independence
+		name = greneg_gre_ciano.3.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # national dignity
+		name = greneg_gre_ciano.3.c
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # SIM operatives in Greece
+	id = greneg_gre_ciano.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_ciano.4"}
+	title = greneg_gre_ciano.4.t
+	desc = greneg_gre_ciano.4.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # disrupt their operations
+		name = greneg_gre_ciano.4.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # keep them under close watch
+		name = greneg_gre_ciano.4.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # make them disappear
+		name = greneg_gre_ciano.4.c
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Trials for collaborators
+	id = greneg_gre_ciano.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_ciano.5"}
+	title = greneg_gre_ciano.5.t
+	desc = greneg_gre_ciano.5.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Do justice
+		name = greneg_gre_ciano.5.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Squeeze them for information
+		name = greneg_gre_ciano.5.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Reuse their skills
+		name = greneg_gre_ciano.5.c
+		hidden_effect = {
+			country_event = { id = greneg_gre_ciano.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # The return of the exiles
+	id = greneg_gre_ciano.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_ciano.6"}
+	title = greneg_gre_ciano.6.t
+	desc = greneg_gre_ciano.6.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Let them all in
+		name = greneg_gre_ciano.6.a
+		hidden_effect = {
+			country_event = { id = negotiations_end_greece.1 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # Make priorities
+		name = greneg_gre_ciano.6.b
+		hidden_effect = {
+			country_event = { id = negotiations_end_greece.1 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_meh_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # A select few
+		name = greneg_gre_ciano.6.c
+		hidden_effect = {
+			country_event = { id = negotiations_end_greece.1 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+add_namespace = greneg_ita_scorza
+
+country_event = { # Greece erupts into insurrection
+	id = greneg_ita_scorza.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_scorza.1"}
+	title = greneg_ita_scorza.1.t
+	desc = greneg_ita_scorza.1.d
+	picture = GFX_report_event_protest
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # retreat in the piraeus
+		name = greneg_ita_scorza.1.a
+		custom_effect_tooltip = ita_gre_good
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # defend the city at all costs
+		name = greneg_ita_scorza.1.b
+		custom_effect_tooltip = ita_gre_bad
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.2 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # formulate a contingency plan
+	id = greneg_ita_scorza.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_scorza.2"}
+	title = greneg_ita_scorza.2.t
+	desc = greneg_ita_scorza.2.d
+	picture = GFX_report_event_generic_riot
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # involve greek collabs
+		name = greneg_ita_scorza.2.a
+		custom_effect_tooltip = ita_gre_good
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # only italian generals
+		name = greneg_ita_scorza.2.b
+		custom_effect_tooltip = ita_gre_bad
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.3 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # issue an ultimatum
+	id = greneg_ita_scorza.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_scorza.3"}
+	title = greneg_ita_scorza.3.t
+	desc = greneg_ita_scorza.3.d
+	picture = GFX_report_event_iberia_military_parade_big
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # promise amnisty for those who surrender
+		name = greneg_ita_scorza.3.a
+		custom_effect_tooltip = ita_gre_good
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # no mercy
+		name = greneg_ita_scorza.3.b
+		custom_effect_tooltip = ita_gre_bad
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.4 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # orders to the regia marina
+	id = greneg_ita_scorza.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_scorza.4"}
+	title = greneg_ita_scorza.4.t
+	desc = greneg_ita_scorza.4.d
+	picture = GFX_report_event_iberia_ship_guns
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # keep guns silent
+		name = greneg_ita_scorza.4.a
+		custom_effect_tooltip = ita_gre_good
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # shell athens
+		name = greneg_ita_scorza.4.b
+		custom_effect_tooltip = ita_gre_bad
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.5 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # orders to regia aeronautica
+	id = greneg_ita_scorza.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_scorza.5"}
+	title = greneg_ita_scorza.5.t
+	desc = greneg_ita_scorza.5.d
+	picture = GFX_report_event_south_african_war_us_bomber
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # drop flyers
+		name = greneg_ita_scorza.5.a
+		custom_effect_tooltip = ita_gre_good
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # drop bombs
+		name = greneg_ita_scorza.5.b
+		custom_effect_tooltip = ita_gre_bad
+		hidden_effect = {
+			country_event = { id = greneg_ita_scorza.6 days = 7 }
+		}
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # orders to the regio esercito
+	id = greneg_ita_scorza.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_ita_scorza.6"}
+	title = greneg_ita_scorza.6.t
+	desc = greneg_ita_scorza.6.d
+	picture = GFX_report_event_italy_soldier_patrol
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # get ready for action
+		name = greneg_ita_scorza.6.a
+		custom_effect_tooltip = ita_gre_good
+		GRE = {
+			add_to_variable = {
+				var = GRE_good_path_power
+				value = 1
+			}
+		}
+	}
+	option = { # make examples
+		name = greneg_ita_scorza.6.b
+		custom_effect_tooltip = ita_gre_bad
+		GRE = {
+			add_to_variable = {
+				var = GRE_bad_path_power
+				value = 1
+			}
+		}
+	}
+}
+
+add_namespace = greneg_gre_scorza
+
+country_event = { # Infighting in the provisional government
+	id = greneg_gre_scorza.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_scorza.1"}
+	title = greneg_gre_scorza.1.t
+	desc = greneg_gre_scorza.1.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # have a conciliatory approach
+		name = greneg_gre_scorza.1.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.2 days = 7 }
+		}
+	}
+	option = { # establish order
+		name = greneg_gre_scorza.1.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.2 days = 7 }
+		}
+
+	}
+}
+
+country_event = { # what to do with italian hostages
+	id = greneg_gre_scorza.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_scorza.2"}
+	title = greneg_gre_scorza.2.t
+	desc = greneg_gre_scorza.2.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # keep them prisoners
+		name = greneg_gre_scorza.2.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.3 days = 7 }
+		}
+	}
+	option = { # give them trials and execute them
+		name = greneg_gre_scorza.2.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.3 days = 7 }
+		}
+	}
+}
+
+country_event = { # our stance towards italy
+	id = greneg_gre_scorza.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_scorza.3"}
+	title = greneg_gre_scorza.3.t
+	desc = greneg_gre_scorza.3.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # be open to compromise
+		name = greneg_gre_scorza.3.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.4 days = 7 }
+		}
+	}
+	option = { # freedom or death
+		name = greneg_gre_scorza.3.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.4 days = 7 }
+		}
+	}
+}
+
+country_event = { # organize the greek armed forces
+	id = greneg_gre_scorza.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_scorza.4"}
+	title = greneg_gre_scorza.4.t
+	desc = greneg_gre_scorza.4.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # let IDEA handle it
+		name = greneg_gre_scorza.4.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.5 days = 7 }
+		}
+	}
+	option = { # let EDES handle it
+		name = greneg_gre_scorza.4.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.5 days = 7 }
+		}
+	}
+}
+
+country_event = { # use AA guns
+	id = greneg_gre_scorza.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_scorza.5"}
+	title = greneg_gre_scorza.5.t
+	desc = greneg_gre_scorza.5.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # fire warning shots
+		name = greneg_gre_scorza.5.a
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.6 days = 7 }
+		}
+	}
+	option = { # shoot down as many planes as possible
+		name = greneg_gre_scorza.5.b
+		hidden_effect = {
+			country_event = { id = greneg_gre_scorza.6 days = 7 }
+		}
+	}
+}
+
+country_event = { # papadopoulos offers an agreement
+	id = greneg_gre_scorza.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greneg_gre_scorza.6"}
+	title = greneg_gre_scorza.6.t
+	desc = greneg_gre_scorza.6.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # agree
+		name = greneg_gre_scorza.6.a
+		hidden_effect = {
+			country_event = { id = negotiations_end_greece.2 days = 7 }
+		}
+	}
+	option = { # disagree
+		name = greneg_gre_scorza.6.b
+		hidden_effect = {
+			country_event = { id = negotiations_end_greece.2 days = 7 }
+		}
+	}
+}
+
+add_namespace = negotiations_end_greece
+
+country_event = { # Negotiations end # CIANO
+	id = negotiations_end_greece.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event negotiations_end_greece.1"}
+	title = negotiations_end_greece.1.t
+	desc = negotiations_end_greece.1.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = negotiations_end_greece.1.a
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						var = GRE_good_path_power
+						value = GRE_bad_path_power
+						compare = greater_than
+					}
+					check_variable = {
+						var = GRE_good_path_power
+						value = GRE_meh_path_power
+						compare = greater_than_or_equals
+					}
+				}
+				country_event = { id = greece_path.1 days = 3 }
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						var = GRE_meh_path_power
+						value = GRE_bad_path_power
+						compare = greater_than_or_equals
+					}
+					check_variable = {
+						var = GRE_meh_path_power
+						value = GRE_good_path_power
+						compare = greater_than_or_equals
+					}
+				}
+				random_list = {
+					50 = {
+						country_event = { id = greece_path.1 days = 3 }
+					}
+					50 = {
+						country_event = { id = greece_path.3 days = 3 }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						var = GRE_bad_path_power
+						value = GRE_good_path_power
+						compare = greater_than
+					}
+					check_variable = {
+						var = GRE_bad_path_power
+						value = GRE_meh_path_power
+						compare = greater_than_or_equals
+					}
+				}
+				country_event = { id = greece_path.3 days = 3 }
+			}
+		}
+	}
+}
+
+country_event = { # Negotiations end # SCORZA
+	id = negotiations_end_greece.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event negotiations_end_greece.2"}
+	title = negotiations_end_greece.2.t
+	desc = negotiations_end_greece.2.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = negotiations_end_greece.2.a
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						var = GRE_good_path_power
+						value = GRE_bad_path_power
+						compare = greater_than_or_equals
+					}
+				}
+				country_event = { id = greece_path.3 days = 7 }
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						var = GRE_bad_path_power
+						value = GRE_good_path_power
+						compare = greater_than
+					}
+				}
+				country_event = { id = greece_path.4 days = 7 }
+			}
+		}
+	}
+}
+
+add_namespace = greece_path
+
+country_event = { #Greek Republic
+	id = greece_path.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greece_path.1"}
+	title = greece_path.1.t
+	desc = greece_path.1.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = greece_path.1.a
+		hidden_effect = {
+			country_event = { id = greece_path.5 days = 3 }
+			set_party_name = {
+				ideology = communist
+				long_name = GRE_EDES_communist_long
+				name = GRE_EDES_communist
+			}
+			set_party_name = {
+				ideology = socialist
+				long_name = GRE_EDES_socialist_long
+				name = GRE_EDES_socialist
+			}
+			set_party_name = {
+				ideology = social_democracy
+				long_name = GRE_EDES_social_democracy_long
+				name = GRE_EDES_social_democracy
+			}
+			set_party_name = {
+				ideology = liberal_democracy
+				long_name = GRE_EDES_liberal_democracy_long
+				name = GRE_EDES_liberal_democracy
+			}
+			set_party_name = {
+				ideology = conservative_democracy
+				long_name = GRE_EDES_conservative_democracy_long
+				name = GRE_EDES_conservative_democracy
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = GRE_EDES_despotism_long
+				name = GRE_EDES_despotism
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = GRE_EDES_fascism_long
+				name = GRE_EDES_fascism
+			}
+		}
+	}
+}
+
+country_event = { #Papadopoulos
+	id = greece_path.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greece_path.3"}
+	title = greece_path.3.t
+	desc = greece_path.3.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = greece_path.3.a
+		GRE = {
+			set_politics = {
+				ruling_party = despotism
+			}
+			GRE_Georgios_Papadopoulos = {
+				promote_character = {
+					ideology = despotism_military_junta_subtype
+				}
+			}
+			set_party_name = {
+				ideology = communist
+				long_name = GRE_junta_communist_long
+				name = GRE_junta_communist
+			}
+			set_party_name = {
+				ideology = socialist
+				long_name = GRE_junta_socialist_long
+				name = GRE_junta_socialist
+			}
+			set_party_name = {
+				ideology = social_democracy
+				long_name = GRE_junta_social_democracy_long
+				name = GRE_junta_social_democracy
+			}
+			set_party_name = {
+				ideology = liberal_democracy
+				long_name = GRE_junta_liberal_democracy_long
+				name = GRE_junta_liberal_democracy
+			}
+			set_party_name = {
+				ideology = conservative_democracy
+				long_name = GRE_junta_conservative_democracy_long
+				name = GRE_junta_conservative_democracy
+			}
+			set_party_name = {
+				ideology = authoritarian_democracy
+				long_name = GRE_junta_authoritarian_democracy_long
+				name = GRE_junta_authoritarian_democracy
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = GRE_junta_despotism_long
+				name = GRE_junta_despotism
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = GRE_junta_fascism_long
+				name = GRE_junta_fascism
+			}
+			set_party_name = {
+				ideology = national_socialism
+				long_name = GRE_junta_national_socialism_long
+				name = GRE_junta_national_socialism
+			}
+		}
+	}
+}
+
+country_event = { #Operation Corinth
+	id = greece_path.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greece_path.4"}
+	title = greece_path.4.t
+	desc = greece_path.4.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = greece_path.4.a
+		ITA = {
+			declare_war_on = {
+				target = GRE
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { #Greek Election
+	id = greece_path.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greece_path.5"}
+	title = greece_path.5.t
+	desc = greece_path.5.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # EDA. SocDem
+		name = greece_path.5.a
+		GRE = {
+			set_politics = {
+				ruling_party = social_democracy
+			}
+			country_event = { id = gre.2 days = 1460 }
+			set_popularities = {
+				communist = 3
+				socialist = 6
+				social_democracy = 29
+				liberal_democracy = 10
+				conservative_democracy = 31
+				authoritarian_democracy = 8
+				despotism = 9
+				fascism = 4
+			}
+		}
+	}
+	option = { # ERE. ConDem
+		name = greece_path.5.b
+		GRE = {
+			set_politics = {
+				ruling_party = conservative_democracy
+			}
+			country_event = { id = gre.2 days = 1460 }
+			set_popularities = {
+				communist = 3
+				socialist = 6
+				social_democracy = 29
+				liberal_democracy = 10
+				conservative_democracy = 31
+				authoritarian_democracy = 8
+				despotism = 9
+				fascism = 4
+			}
+		}
+	}
+}
+
+country_event = { #Corinth Success
+	id = greece_path.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greece_path.6"}
+	title = greece_path.6.t
+	desc = greece_path.6.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = greece_path.6.a
+		GRE = {
+			econ_join_sphere_ITA  = yes
+			if = {
+				limit = {
+					NOT = {
+						has_country_leader = {
+							character = ITA_Carlo_Scorza
+							ruling_only = yes
+						}
+					}
+				}
+				GRE_Ioannis_Ladas = {
+					promote_character = {
+						ideology = despotism_military_junta_subtype
+					}
+				}
+				set_politics = {
+					ruling_party = despotism
+				}
+				set_popularities = {
+					communist = 3
+					socialist = 2
+					authoritarian_democracy = 15
+					despotism = 70
+					fascism = 10
+				}
+				set_party_name = {
+					ideology = despotism
+					long_name = GRE_junta_despotism_long
+					name = GRE_junta_despotism
+				}
+				hidden_effect = {
+					country_event = { id = ita.1004 }
+				}
+			}
+			
+			else = {
+				GRE_Ioannis_Ladas = {
+					promote_character = {
+						ideology = fascism_subtype
+					}
+				}
+				set_politics = {
+					ruling_party = fascism
+				}
+				set_popularities = {
+					communist = 3
+					socialist = 2
+					authoritarian_democracy = 5
+					despotism = 30
+					fascism = 60
+				}
+				hidden_effect = {
+					country_event = { id = ita.1004 }
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Corinth Fails
+	id = greece_path.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event greece_path.7"}
+	title = greece_path.7.t
+	desc = greece_path.7.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = greece_path.7.a
+		GRE = {
+			white_peace = ITA
+		}
+		ITA = {
+			white_peace = GRE
+		}
+	}
+}
+
+#### DEMOCRATIC GREECE EVENTS
+
+country_event = { #1968 elections
+	id = gre.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gre.2"}
+	title = gre.2.t
+	desc = gre.2.d
+	picture = GFX_report_event_fascist_militia
+
+	is_triggered_only = yes
+
+	option = {
+		name = gre.2.a
+		ai_chance = {
+			factor = 1
+		}
+		set_politics = {
+			ruling_party = conservative_democracy
+		}
+		GRE_Konstantinos_Karamanlis = {
+			promote_character = {
+				ideology = conservative_democracy_paternalistic_conservatism_subtype
+			}
+		}
+	}
+
+	option = {
+		name = gre.2.b
+		ai_chance = {
+			factor = 1
+		}
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		GRE_Andreas_Papandreou = {
+			promote_character = social_democracy_democratic_socialism_subtype
+		}
+	}
+}
+
+#### EAM GREECE EVENTS
+
+add_namespace = ita_gre_eam
+
+country_event = { # EAM has seized power, Italy PoV
+	id = ita_gre_eam.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ita_gre_eam.1"}
+	title = ita_gre_eam.1.t
+	desc = ita_gre_eam.1.d
+	picture = GFX_report_event_italy_soldier_patrol
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ita_gre_eam.1.a
+		custom_effect_tooltip = ITA_GRE_EAM_war_prep
+		hidden_effect = {
+			country_event = { id = ita_gre_eam.2 days = 7 }
+		}
+	}
+}
+
+country_event = { # war against EAM begins
+	id = ita_gre_eam.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ita_gre_eam.2"}
+	title = ita_gre_eam.2.t
+	desc = ita_gre_eam.2.d
+	picture = GFX_report_event_italy_soldier_patrol
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ita_gre_eam.2.a
+		ITA = {
+			declare_war_on = {
+				target = GRE
+				type = annex_everything
+			}
+		}
+	}
+}
