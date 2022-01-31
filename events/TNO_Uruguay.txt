@@ -1,0 +1,204 @@
+﻿add_namespace = URG_scripted
+
+country_event = { #1962 HOG Rotation
+	id = URG_scripted.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event URG_scripted.1"}
+	title = URG_scripted.1.t
+	desc = URG_scripted.1.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = URG_scripted.1.a
+		remove_ideas = URG_Victor_Haedo_hog
+		add_ideas = URG_Faustino_Harrison_hog
+	}
+}
+
+country_event = { #1962 General Election
+	id = URG_scripted.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event URG_scripted.2"}
+	title = URG_scripted.2.t
+	desc = URG_scripted.2.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Herrerism
+		name = URG_scripted.2.a
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_UBD }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_BATTLISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_UCD }
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.117 hours = 1  }
+			}
+		}
+	}
+
+	option = {#UBD
+		name = URG_scripted.2.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_HERRERISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_BATTLISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_UCD }
+			}
+		}
+		promote_character = {
+			character = URG_Consejo_Nacional_de_Gobierno
+			ideology = conservative_democracy_subtype
+		}
+		set_party_name = {
+			ideology = conservative_democracy
+			long_name = URG_ubd_party_long
+			name = URG_ubd_party
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.118 hours = 1  }
+			}
+		}
+	}
+	
+	option = {#UCB
+		name = URG_scripted.2.c
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_HERRERISM }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_BATTLISM }
+			}
+			
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_UBD }
+			}
+		}
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.02
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.119 hours = 1  }
+			}
+		}
+	}
+
+	option = {#Battlism
+		name = URG_scripted.2.d
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_UBD }
+			}
+			
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_HERRERISM }
+			}
+			
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = URG_62_ELECTION_PATH option =  URG_62_ELECTION_PATH_UCD }
+			}
+		}
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.02
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = { id = LATAM_news.120 hours = 1  }
+			}
+		}
+	}
+}
+
+country_event = { #1962 Governments Taking Power
+	id = URG_scripted.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event URG_scripted.3"}
+	title = URG_scripted.3.t
+	desc = URG_scripted.3.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = URG_scripted.3.a
+		remove_all_ministers = yes
+		if = {
+			limit = {
+				has_government = social_democracy
+			}
+			add_ideas = {
+				URG_Luis_Battle_Berres_hog
+				URG_Generic_Vacant_for
+				URG_Generic_Vacant_eco
+				URG_Oscar_Diego_Gestido_sec
+			}
+		}
+		else_if = {
+			limit = {
+				has_government = authoritarian_democracy
+			}
+			add_ideas = {
+				URG_Oscar_Diego_Gestido_hog
+				URG_Generic_Vacant_for
+				URG_Generic_Vacant_eco
+				URG_Generic_Vacant_sec
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					has_country_leader_ideology = conservative_democracy_liberal_conservatism_subtype
+				}
+				add_ideas = {
+					URG_Alberto_Arocena_hog
+					URG_Generic_Vacant_for
+					URG_Juan_Eduardo_Azzini_1962_eco
+					URG_Juan_Maria_Bordaberry_sec
+				}
+			}
+			else = {
+				add_ideas = {
+					URG_Daniel_Fernandez_Crespo_hog
+					URG_Generic_Vacant_for
+					URG_Generic_Vacant_eco
+					URG_Generic_Vacant_sec
+				}
+			}
+		}
+	}
+}
