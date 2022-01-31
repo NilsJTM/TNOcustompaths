@@ -296,11 +296,7 @@ country_event = {
 	desc = USA.29.desc
 	picture = GFX_report_event_star_wars_desert
 
-	trigger = {
-		date < 1973.5.25
-		date > 1975.5.25
-		country_exists = USA
-	}
+	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
@@ -316,11 +312,7 @@ country_event = {
 	desc = USA.30.desc
 	picture = GFX_report_event_star_wars_jungle
 
-	trigger = {
-		date < 1973.5.25
-		date > 1975.5.25
-		country_exists = USA
-	}
+	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
@@ -336,11 +328,7 @@ country_event = {
 	desc = USA.31.desc
 	picture = GFX_report_event_luke_on_tatooine
 
-	trigger = {
-		date < 1975.5.25
-		date > 1977.5.25
-		country_exists = USA
-	}
+	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
@@ -356,11 +344,7 @@ country_event = {
 	desc = USA.32.desc
 	picture = GFX_report_event_luke_on_yavin
 
-	trigger = {
-		date < 1975.5.25
-		date > 1977.5.25
-		country_exists = USA
-	}
+	is_triggered_only = yes
 	fire_only_once = yes
 
 	option = {
@@ -19607,7 +19591,7 @@ country_event = { #malcom X flavor choice
 	fire_only_once = yes
 
 	option = {
-		name = USA.flavor.25.a
+		name = USA.flavor.26.a
 		ai_chance = { factor = 1 }
 		if = {
 			limit = { #has shitty/no CRA
@@ -19622,6 +19606,36 @@ country_event = { #malcom X flavor choice
 		}
 		else = {
 			country_event = { id = USA.flavor.24 }
+		}
+	}
+}
+
+country_event = { #star wars (crucial events)
+	id = USA.flavor.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event USA.flavor.27" }
+	title = USA.flavor.27.t
+	desc = USA.flavor.27.desc
+	picture = GFX_report_event_civil_rights2
+
+	hidden = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = USA.flavor.27.a
+		ai_chance = { factor = 1 }
+		if = {
+			limit = { #Good american-italian relations: tunisian star wars
+				ITA = {
+					is_in_faction_with = USA
+				}
+			}
+			country_event = { id = USA.29 }
+			country_event = { id = USA.31 days = 642 }
+		}
+		else = {
+			country_event = { id = USA.30 }
+			country_event = { id = USA.32 days = 642 }
 		}
 	}
 }

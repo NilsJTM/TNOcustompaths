@@ -398,6 +398,42 @@ on_actions =  {
 	# 		}
 	# 	}
 	# }
+	#WW3 starts, japan gets some goodies (moved from triggered event) jap.202 which got purged
+	on_declare_war = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							tag = USA
+							tag = GER
+						}
+					}
+					FROM = { tag = JAP }
+				}
+				JAP = {
+					set_country_flag = JAP_WW3_tree
+					JAP_tree_swap = yes
+				}
+			}
+
+			if = {
+				limit = {
+					ROOT = { tag = JAP }
+					FROM = {
+						OR = {
+							tag = USA
+							tag = GER
+						}
+					}
+				}
+				JAP = {
+					set_country_flag = JAP_WW3_tree
+					JAP_tree_swap = yes
+				}
+			}
+		}
+	}
 
 	# on_peaceconference_ended  = {
 	# 	effect = {

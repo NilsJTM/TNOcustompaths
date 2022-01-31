@@ -1889,11 +1889,8 @@ country_event = { #Ciano gives a half hearted speech, Scorza scheduals a meeting
 	option = {
 		name = vc.20.a
 
-		create_country_leader = {
-			name = "Carlo Scorza"
-			desc = "POLITICS_CARLO_SCORZA_DESC"
-			picture = portrait_italy_carlo_scorza.dds
-			expire = 1988.12.23
+		promote_character = {
+			character = ITA_Carlo_Scorza
 			ideology = fascism_subtype
 		}
 
@@ -3079,7 +3076,7 @@ country_event = {
 		name = christdem.51.a
 		load_focus_tree = ita_cd_1970
 		set_country_flag = ITA_YOL_begun
-		custom_effect_tooltip = "You will unlock counter terror decisions."
+		custom_effect_tooltip = christdem.51.tt
 		clamp_variable = {
 			var = ITA_political
 			min = 0
@@ -17847,7 +17844,7 @@ country_event = { #Enters Gov
 	option = {
 		name = saragat.2.a
 		set_country_flag = ITA_YOL_begun
-		custom_effect_tooltip = "You will unlock counter terror decisions."
+		custom_effect_tooltip = christdem.51.tt
 		clamp_variable = {
 			var = ITA_political
 			min = 0
@@ -17944,7 +17941,7 @@ country_event = { # Compromise in the CD-FD
 			var = ITA_FD_coalition_pop
 			value = .02
 		}
-		custom_effect_tooltip = "Party unity will suffer, however popularity will rise."
+		custom_effect_tooltip = saragat.4.tt
 	}
 }
 
@@ -17973,7 +17970,7 @@ country_event = { # berlinguer's protest
 			var = ITA_FD_Strength
 			value = -.02
 		}
-		custom_effect_tooltip = "Party unity will suffer."
+		custom_effect_tooltip = saragat.6.tt
 	}
 }
 
@@ -18011,7 +18008,7 @@ country_event = { # FD ties
 			value = .02
 		}
 		add_stability = 0.03
-		custom_effect_tooltip = "Party unity will grow."
+		custom_effect_tooltip = saragat.8.tt
 	}
 }
 
@@ -18028,7 +18025,7 @@ country_event = { # parties merge
 			var = ITA_FD_Strength
 			value = .20
 		}
-		custom_effect_tooltip = "Stability in the party will recieve an uncomparable boost."
+		custom_effect_tooltip = saragat.9.tt
 	}
 }
 
@@ -18261,7 +18258,7 @@ country_event = {  ##enters the government
 	option = {
 		name = marsanich.2.a
 		set_country_flag = ITA_YOL_begun
-		custom_effect_tooltip = "You will unlock counter terror decisions."
+		custom_effect_tooltip = christdem.51.tt
 		clamp_variable = {
 			var = ITA_political
 			min = 0
@@ -18335,7 +18332,7 @@ country_event = { # Reformation and normalization of the BN
 			var = ITA_BN_coalition_pop
 			value = -.1
 		}
-		custom_effect_tooltip = "Political unity will suffer."
+		custom_effect_tooltip = marsanich.3.tt
 	}
 }
 
@@ -18428,7 +18425,7 @@ country_event = { # normalize extremes
 			ideology = authoritarian_democracy
 			popularity = 0.02
 		}
-		custom_effect_tooltip = "Political unity will strengthen."
+		custom_effect_tooltip = marsanich.7.tt
 		add_to_variable = {
 			var = ITA_faith_in_gov
 			value = -.02
@@ -18509,7 +18506,7 @@ country_event = { # the new reality of Italian politics
 			var = ITA_BN_coalition_pop
 			value = -.03
 		}
-		custom_effect_tooltip = "Political unity will suffer."
+		custom_effect_tooltip = marsanich.3.tt
 		add_to_variable = {
 			var = ITA_faith_in_gov
 			value = -.02
@@ -19800,7 +19797,7 @@ country_event = { # Prima la Democrazia
 			complete_national_focus = ita_the_red_and_white
 		}
 		set_country_flag = RAW_follow
-		custom_effect_tooltip = "Our efforts will be directed to collaborate with the Christain Democrats."
+		custom_effect_tooltip = FD.2.a.tt
 
 	}
 	option = { # Strengthen Party, high reelection, strong terror
@@ -19821,7 +19818,7 @@ country_event = { # Prima la Democrazia
 			complete_national_focus = ita_unita_socialista
 		}
 		set_country_flag = US_follow
-		custom_effect_tooltip = "Our efforts will be directed to strengthen the party."
+		custom_effect_tooltip = FD.2.b.tt
 	}
 }
 
@@ -20118,7 +20115,7 @@ country_event = { # Prima il Socialismo
 			complete_national_focus = ita_via_italiana_al_socialism
 			set_country_flag = IS_follow
 		}
-		custom_effect_tooltip = "One step at a time, socialism will first take roots in Italy."
+		custom_effect_tooltip = FD.20.a.tt
 
 	}
 	option = { # Revolution via ballot
@@ -20138,7 +20135,7 @@ country_event = { # Prima il Socialismo
 		hidden_effect = {
 			complete_national_focus = ita_revolution_by_ballot
 		}
-		custom_effect_tooltip = "Our revolution will encompass Italy."
+		custom_effect_tooltip = FD.20.b.tt
 	}
 }
 
@@ -25334,19 +25331,7 @@ country_event = { #Borghese Coup
 	picture = GFX_report_event_italy_left_wing_students
 
 	fire_only_once = yes
-	trigger = {
-		AND = {
-			has_global_flag = ITA_lost_oil_crisis
-			count_triggers = {
-				amount = 4
-				check_variable = { ITA_Borghese_RoyalArmy > ITA_Sogno_RoyalArmy }
-				check_variable = { ITA_Borghese_RoyalNavy > ITA_Sogno_RoyalNavy }
-				check_variable = { ITA_Borghese_RoyalAirforce > ITA_Sogno_RoyalAirforce }
-				check_variable = { ITA_Borghese_Blackshirts > ITA_Sogno_Blackshirts }
-				check_variable = { ITA_Borghese_Carabinieri > ITA_Borghese_Carabinieri }
-			}
-		}
-	}
+	is_triggered_only = yes #the trigger check comes from the decision/mission
 
 	option = { #
 		name = borghese.1.a
@@ -25374,20 +25359,7 @@ country_event = { #Sogno Coup
 	picture = GFX_report_event_italy_right_rally
 
 	fire_only_once = yes
-	trigger = {
-		AND = {
-			has_global_flag = ITA_lost_oil_crisis
-			has_country_leader = { character = ITA_Carlo_Scorza ruling_only = yes }
-			count_triggers = {
-				amount = 4
-				check_variable = { ITA_Borghese_RoyalArmy < ITA_Sogno_RoyalArmy }
-				check_variable = { ITA_Borghese_RoyalNavy < ITA_Sogno_RoyalNavy }
-				check_variable = { ITA_Borghese_RoyalAirforce < ITA_Sogno_RoyalAirforce }
-				check_variable = { ITA_Borghese_Blackshirts < ITA_Sogno_Blackshirts }
-				check_variable = { ITA_Borghese_Carabinieri < ITA_Borghese_Carabinieri }
-			}
-		}
-	}
+	is_triggered_only = yes #the trigger check comes from the decision/mission
 
 	option = { #
 		name = sogno.1.a
