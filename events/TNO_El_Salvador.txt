@@ -1,0 +1,340 @@
+add_namespace = ELS_scripted
+
+country_event = {#1962 Election
+	id = ELS_scripted.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.1"}
+	title = ELS_scripted.1.t
+	desc = ELS_scripted.1.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ELS_scripted.1.a
+		add_country_leader_role = {
+			character = ELS_Ruben_Alonso_Rosales
+			promote_leader = yes
+			country_leader = {
+		        ideology = authoritarian_democracy_controlled_democracy_subtype
+			    expire = "1999.1.1"
+			}
+		}
+	}
+}
+
+country_event = {#Coup Check
+	id = ELS_scripted.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ELS_scripted.2"
+		set_party_name = { 
+			ideology = conservative_democracy 
+			long_name = ELS_uno_party_long 
+			name = ELS_uno_party 
+		}
+		set_party_name = { 
+			ideology = social_democracy 
+			long_name = ELS_uno_party_long 
+			name = ELS_uno_party 
+		}
+	}
+	title = ELS_scripted.2.t
+	desc = ELS_scripted.2.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#No Coup
+		name = ELS_scripted.2.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ELS_COUP_PATH option =  ELS_COUP_PATH_YES }
+			}
+		}
+		country_event = { id = ELS_scripted.3 days = 404 }
+	}
+
+	option = {#Coup
+		name = ELS_scripted.2.a
+		ai_chance = {
+			factor = 99
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ELS_COUP_PATH option =  ELS_COUP_PATH_NO }
+			}
+		}
+		country_event = { id = ELS_scripted.4 }
+	}
+}
+
+country_event = {#1968 Election
+	id = ELS_scripted.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.3"}
+	title = ELS_scripted.3.t
+	desc = ELS_scripted.3.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ELS_scripted.3.a
+		set_politics = {
+			ruling_party = conservative_democracy
+			elections_allowed = yes
+			last_election = "1968.3.4"
+			election_frequency = 72
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = {#Military Coup
+	id = ELS_scripted.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.4"}
+	title = ELS_scripted.4.t
+	desc = ELS_scripted.4.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ELS_scripted.4.a
+		add_country_leader_role = {
+			character = ELS_Directorio_Civico_Militar
+			promote_leader = yes
+			country_leader = {
+		        ideology = despotism_military_junta_subtype
+			    expire = "1999.1.1"
+			}
+		}
+		set_politics = {
+			ruling_party = despotism
+			elections_allowed = no
+			last_election = "1962.3.4"
+			election_frequency = 72
+		}
+		set_popularities = {
+			social_democracy = 10
+			conservative_democracy = 28
+			authoritarian_democracy = 8
+			despotism = 50
+			ultranationalism = 4
+		}
+		set_party_name = { 
+			ideology = despotism 
+			long_name = ELS_dcm_party_long 
+			name = ELS_dcm_party 
+		}
+		country_event = { id = ELS_scripted.5 days = 365 }
+	}
+}
+
+country_event = {#Military Coup
+	id = ELS_scripted.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.5"}
+	title = ELS_scripted.5.t
+	desc = ELS_scripted.5.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ELS_scripted.5.a
+		add_country_leader_role = {
+			character = ELS_Rodolfo_Cordon_Cea
+			promote_leader = yes
+			country_leader = {
+		        ideology = despotism_interim_government_subtype
+			    expire = "1999.1.1"
+			}
+		}
+		set_party_name = { 
+			ideology = despotism 
+			long_name = ELS_despotism_party_long 
+			name = ELS_despotism_party 
+		}
+		country_event = { id = ELS_scripted.6 days = 158 }
+	}
+}
+
+country_event = {#1968 Election
+	id = ELS_scripted.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.6"}
+	title = ELS_scripted.6.t
+	desc = ELS_scripted.6.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ELS_scripted.6.a
+		add_country_leader_role = {
+			character = ELS_Julio_Adalberto_Rivera
+			promote_leader = yes
+			country_leader = {
+		        ideology = despotism_aristocratic_conservatism_subtype
+			    expire = "1999.1.1"
+			}
+		}
+		add_country_leader_role = {
+			character = ELS_Jose_Alberto_Medrano
+			promote_leader = yes
+			country_leader = {
+		        ideology = ultranationalism_ultramilitarism_subtype
+			    expire = "1999.1.1"
+			}
+		}
+		set_politics = {
+			ruling_party = despotism
+			elections_allowed = yes
+			last_election = "1968.5.5"
+			election_frequency = 72
+		}
+	}
+}
+
+country_event = {#Oil Crisis Hit, UNO falls apart
+	id = ELS_scripted.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.7"}
+	title = ELS_scripted.7.t
+	desc = ELS_scripted.7.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ELS_scripted.7.a
+		set_party_name = { 
+			ideology = conservative_democracy 
+			long_name = ELS_conservative_democracy_party_long 
+			name = ELS_conservative_democracy_party 
+		}
+		set_party_name = { 
+			ideology = social_democracy 
+			long_name = ELS_social_democracy_party_long 
+			name = ELS_social_democracy_party 
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.1
+		}
+	}
+}
+
+country_event = {#The Revolution
+	id = ELS_scripted.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.8"}
+	title = ELS_scripted.8.t
+	desc = ELS_scripted.8.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Success
+		name = ELS_scripted.8.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ELS_REVOLUTION_PATH option =  ELS_REVOLUTION_PATH_NO }
+			}
+		}
+		add_country_leader_role = {
+			character = ELS_Salvador_Cayetano_Carpio
+			promote_leader = yes
+			country_leader = {
+		        ideology = communist_subtype
+			    expire = "1999.1.1"
+			}
+		}
+		set_politics = {
+			ruling_party = communist
+			elections_allowed = no
+			last_election = "1968.5.5"
+			election_frequency = 72
+		}
+		set_popularities = {
+			communist = 80
+			socialist = 20
+		}
+		set_party_name = {
+			ideology = communist
+			long_name = ELS_communist_junta_party_long
+			name = ELS_communist_junta_party
+		}
+		set_party_name = {
+			ideology = socialist
+			long_name = ELS_prtc_party_long
+			name = ELS_prtc_party
+		}
+	}
+	option = {#Fail
+		name = ELS_scripted.8.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ELS_REVOLUTION_PATH option =  ELS_REVOLUTION_PATH_YES }
+			}
+		}
+		if = {
+			limit = {
+				has_country_leader = {
+					character = ELS_Julio_Adalberto_Rivera
+					ruling_only = yes
+				}
+			}
+			country_event = { id = ELS_scripted.9 days = 87 }
+		}
+	}
+}
+
+country_event = {#Rivera's successor
+	id = ELS_scripted.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ELS_scripted.9"}
+	title = ELS_scripted.9.t
+	desc = ELS_scripted.9.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Riverist Successor
+		name = ELS_scripted.9.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ELS_RIVERA_PATH option =  ELS_RIVERA_PATH_NG }
+			}
+		}
+		add_country_leader_role = {
+			character = ELS_Fidel_Sanchez_Hernandez
+			promote_leader = yes
+			country_leader = {
+		        ideology = despotism_aristocratic_conservatism_subtype
+			    expire = "1999.1.1"
+			}
+		}
+	}
+	option = {#National Guard/ORDEN triumph, D'Aubuisson TNO2 content wen
+		name = ELS_scripted.9.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ELS_RIVERA_PATH option =  ELS_RIVERA_PATH_RIVERIST }
+			}
+		}
+		add_country_leader_role = {
+			character = ELS_Carlos_Humberto_Romero
+			promote_leader = yes
+			country_leader = {
+		        ideology = despotism_aristocratic_conservatism_subtype
+			    expire = "1999.1.1"
+			}
+		}
+		add_popularity = {
+			ideology = ultranationalism
+			popularity = 0.1
+		}
+	}
+}
