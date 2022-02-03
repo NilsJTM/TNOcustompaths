@@ -1,0 +1,6301 @@
+﻿#################################################################
+### Pre-GCW Germany | Speidel Germany | General German Events ###
+#################################################################
+#The other potential german paths can be found under the following tags: SGR (Speer), GGR (Göring), BGR (Bormann), HGR (Heydrich)
+#this nation was removed from tno by debbel september 16th 2019
+
+add_namespace = reich
+add_namespace = reich_shared
+add_namespace = reich_chain
+add_namespace = reich_flavor
+add_namespace = reich_exile
+add_namespace = gcw
+add_namespace = gcw_dbg
+add_namespace = hitlerillness
+add_namespace = gcwcapture
+add_namespace = GER_WW3
+
+####################
+### DEBUG EVENTS ###
+####################
+country_event = {
+	id = gcw_dbg.0
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gcw_dbg.0" }
+	title = "GCW DEBUG; Annex Contender"
+	desc = "description"
+	picture = GFX_report_event_german_speech
+	is_triggered_only = yes
+
+	option = {
+		name = "GCW is not currently active OR you are not involved"
+		trigger = { NOT = { has_global_flag = german_civil_war } }
+	}
+
+	option = {
+		name = "Bormann"
+		trigger = {
+			has_global_flag = german_civil_war
+			NOT = { tag = BGR }
+			country_exists = BGR
+			is_in_array = { array = global.GCW_contenders value = ROOT }
+		}
+
+		BGR = { GER_GCW_off_a_fucker = yes }
+		annex_country = { target = BGR }
+
+		GER_GCW_check_victor = yes
+	}
+
+	option = {
+		name = "Göring"
+		trigger = {
+			has_global_flag = german_civil_war
+			NOT = { tag = GGR }
+			country_exists = GGR
+			is_in_array = { array = global.GCW_contenders value = ROOT }
+		}
+
+		GGR = { GER_GCW_off_a_fucker = yes }
+		annex_country = { target = GGR }
+		GER_GCW_check_victor = yes
+	}
+
+	option = {
+		name = "Speer"
+		trigger = {
+			has_global_flag = german_civil_war
+			NOT = { tag = SGR }
+			country_exists = SGR
+			is_in_array = { array = global.GCW_contenders value = ROOT }
+		}
+
+		SGR = { GER_GCW_off_a_fucker = yes }
+		annex_country = { target = SGR }
+		GER_GCW_check_victor = yes
+	}
+
+	option = {
+		name = "Heydrich"
+		trigger = {
+			has_global_flag = german_civil_war
+			NOT = { tag = HGR }
+			country_exists = HGR
+			is_in_array = { array = global.GCW_contenders value = ROOT }
+		}
+
+		HGR = { GER_GCW_off_a_fucker = yes }
+		annex_country = { target = HGR }
+		GER_GCW_check_victor = yes
+	}
+
+	option = {
+		name = "nevermind"
+		trigger = { has_global_flag = german_civil_war }
+	}
+}
+
+country_event = {
+	id = gcw_dbg.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gcw_dbg.1" }
+	title = "GCW DEBUG; End GCW"
+	desc = "description"
+	picture = GFX_report_event_german_speech
+	is_triggered_only = yes
+
+	option = {
+		name = "GCW is not currently active OR you are not involved"
+		trigger = { NOT = { has_global_flag = german_civil_war } }
+	}
+
+	option = {
+		name = "Do it; I dont care who"
+		trigger = {
+			has_global_flag = german_civil_war
+			NOT = { is_in_array = { array = global.GCW_contenders value = ROOT } }
+		}
+
+		random_scope_in_array = {
+			array = global.GCW_contenders
+
+			for_each_scope_loop = {
+				array = global.GCW_contenders
+
+				if = {
+					limit = { NOT = { tag = PREV } }
+
+					GER_GCW_off_a_fucker = yes
+					PREV = {
+						annex_country = { target = PREV }
+						GER_GCW_check_victor = yes
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "Me- I want to win!!!"
+		trigger = {
+			has_global_flag = german_civil_war
+			is_in_array = { array = global.GCW_contenders value = ROOT }
+		}
+
+		for_each_scope_loop = {
+			array = global.GCW_contenders
+
+			if = {
+				limit = { NOT = { tag = PREV } }
+
+				GER_GCW_off_a_fucker = yes
+				PREV = {
+					annex_country = { target = PREV }
+					GER_GCW_check_victor = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "nevermind"
+	}
+}
+
+country_event = {
+	id = gcw_dbg.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gcw_dbg.10" }
+	title = "GCW DEBUG; Fire 'GER_GCW_conclude'"
+	desc = "description"
+	picture = GFX_report_event_german_speech
+	is_triggered_only = yes
+
+	option = {
+		name = "Fire !!!"
+		GER_GCW_conclude = yes
+	}
+}
+
+country_event = {
+	id = gcw_dbg.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gcw_dbg.10" }
+	title = "GCW DEBUG;"
+	desc = "description"
+	picture = GFX_report_event_german_speech
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = "Fire !!!"
+	}
+}
+
+country_event = {	#Victor selector
+	id = gcw_dbg.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event gcw_dbg.20" }
+	title = "GCW Victor Selector"
+	desc = "You're not meant to see this"
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = "h"
+		if = {
+			limit = {
+				HGR = { is_ai = yes }
+				GGR = { is_ai = yes }
+				BGR = { is_ai = yes }
+				SGR = { is_ai = yes }
+			}
+			GER_GCW_select_victor = yes
+		}
+	}
+}
+
+###################
+### NEWS EVENTS ###
+###################
+
+##Assassin strikes Hitler
+country_event = {
+	id = reich.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.5" }
+	title = reich.5.t
+	desc = reich.5.desc
+	picture = GFX_report_event_german_riot
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.5.a
+		add_political_power = -100
+		set_temp_variable = { tension_WT = 20 }
+		set_temp_variable = { tension_superpower_1 = GER }
+		set_temp_variable = { tension_superpower_2 = JAP }
+		set_temp_variable = { tension_id = 39 }
+		TNO_change_tension = yes
+		hidden_effect = {
+			every_country = { #This should fire for USA as well since the unique event is a country, not news event
+				news_event = WORLD.34
+			}
+			country_event = { id = reich.6 days = 5 } # Pick a heir
+			USA = { country_event = { id = usa.12 days = 1 } } # US-unique country event
+			BRG = { country_event = { id = BRG_opening.8 days = 1 } } # Burgundy response event
+		}
+	}
+}
+
+##Pick an Heir
+country_event = {
+	id = reich.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.6" }
+	title = reich.6.t
+	desc = reich.6.desc
+	picture = GFX_report_event_televison_announcement
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Bormann
+		name = reich.6.a
+		ai_chance = { base = 40 
+		    modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_GGR }
+			}
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_SPEER }
+			}
+			
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_HGR }
+			}
+		}	
+		add_to_variable = {
+			var = GER_Bormann_Influence
+			value = 30
+		}
+		add_to_variable = {
+			var = GER_Goring_Influence
+			value = 15
+		}
+		add_to_variable = {
+			var = GER_Speer_Influence
+			value = 10
+		}
+		add_to_variable = {
+			var = GER_Heydrich_Influence
+			value = 5
+		}
+		set_country_flag = GER_Hitler_Stage1
+		set_country_flag = GER_power_struggle
+		set_country_flag = bormann_for_germany
+		unlock_decision_category_tooltip = GER_power_struggle_category
+		set_variable = { GER_Bormann_Influence_limit = 65 }
+		set_variable = { GER_Goring_Influence_limit = 45 }
+		set_variable = { GER_Speer_Influence_limit = 40 }
+		set_variable = { GER_Heydrich_Influence_limit = 30 }
+		hidden_effect = { country_event = { id = reich.7 days = 1 } }
+		hidden_effect = { country_event = { id = hitlerillness.1 days = 5 } }
+		hidden_effect = { country_event = { id = reich.606 days = 50 } }
+		hidden_effect = { country_event = { id = reich.607 days = 50 } }
+		hidden_effect = { country_event = { id = reich.608 days = 80 } }
+		hidden_effect = {
+			activate_mission = GER_GCW_goring_legitimacy
+			activate_mission = GER_GCW_speer_legitimacy
+			activate_mission = GER_GCW_heydrich_legitimacy
+		}
+	}
+
+	option = { #Göring
+		name = reich.6.b
+		ai_chance = { base = 30 
+		    modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_BORMANN }
+			}
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_SPEER }
+			}
+			
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_HGR }
+			}
+        }
+		add_to_variable = {
+			var = GER_Bormann_Influence
+			value = 25
+		}
+		add_to_variable = {
+			var = GER_Goring_Influence
+			value = 20
+		}
+		add_to_variable = {
+			var = GER_Speer_Influence
+			value = 10
+		}
+		add_to_variable = {
+			var = GER_Heydrich_Influence
+			value = 5
+		}
+		set_country_flag = GER_Hitler_Stage1
+		set_country_flag = GER_power_struggle
+		set_country_flag = goring_for_germany
+		unlock_decision_category_tooltip = GER_power_struggle_category
+		set_variable = { GER_Bormann_Influence_limit = 65 }
+		set_variable = { GER_Goring_Influence_limit = 45 }
+		set_variable = { GER_Speer_Influence_limit = 40 }
+		set_variable = { GER_Heydrich_Influence_limit = 30 }
+		hidden_effect = { country_event = { id = reich.7 days = 1 } }
+		hidden_effect = { country_event = { id = hitlerillness.11 days = 5 } }
+		hidden_effect = { country_event = { id = reich.607 days = 50 } }
+		hidden_effect = { country_event = { id = reich.608 days = 80 } }
+		hidden_effect = {
+			activate_mission = GER_GCW_bormann_legitimacy
+			activate_mission = GER_GCW_speer_legitimacy
+			activate_mission = GER_GCW_heydrich_legitimacy
+		}
+	}
+
+	option = { #Speer
+		name = reich.6.c
+		ai_chance = { base = 20 
+        modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_BORMANN }
+			}
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_GGR }
+			}
+			
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_HGR }
+			}
+        }
+		add_to_variable = {
+			var = GER_Bormann_Influence
+			value = 25
+		}
+		add_to_variable = {
+			var = GER_Goring_Influence
+			value = 15
+		}
+		add_to_variable = {
+			var = GER_Speer_Influence
+			value = 15
+		}
+		add_to_variable = {
+			var = GER_Heydrich_Influence
+			value = 5
+		}
+		set_country_flag = GER_Hitler_Stage1
+		set_country_flag = GER_power_struggle
+		set_country_flag = speer_for_germany
+		unlock_decision_category_tooltip = GER_power_struggle_category
+		set_variable = { GER_Bormann_Influence_limit = 65 }
+		set_variable = { GER_Goring_Influence_limit = 45 }
+		set_variable = { GER_Speer_Influence_limit = 40 }
+		set_variable = { GER_Heydrich_Influence_limit = 30 }
+		hidden_effect = { country_event = { id = reich.7 days = 1 } }
+		hidden_effect = { country_event = { id = hitlerillness.10 days = 5 } }
+		hidden_effect = { country_event = { id = reich.606 days = 50 } }
+		hidden_effect = { country_event = { id = reich.607 days = 80 } }
+		hidden_effect = { country_event = { id = reich.604 days = 30 } }
+		hidden_effect = {
+			activate_mission = GER_GCW_bormann_legitimacy
+			activate_mission = GER_GCW_goring_legitimacy
+			activate_mission = GER_GCW_heydrich_legitimacy
+		}
+	}
+
+	option = { #Heydrich
+		name = reich.6.e
+		ai_chance = { base = 10 
+		    modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_BORMANN }
+			}
+			
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_GGR }
+			}
+			
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_SPEER }
+			}
+		}	
+		add_to_variable = {
+			var = GER_Bormann_Influence
+			value = 25
+		}
+		add_to_variable = {
+			var = GER_Goring_Influence
+			value = 15
+		}
+		add_to_variable = {
+			var = GER_Speer_Influence
+			value = 10
+		}
+		add_to_variable = {
+			var = GER_Heydrich_Influence
+			value = 10
+		}
+		set_country_flag = GER_Hitler_Stage1
+		set_country_flag = GER_power_struggle
+		set_country_flag = heydrich_for_germany
+		unlock_decision_category_tooltip = GER_power_struggle_category
+		set_variable = { GER_Bormann_Influence_limit = 65 }
+		set_variable = { GER_Goring_Influence_limit = 45 }
+		set_variable = { GER_Speer_Influence_limit = 40 }
+		set_variable = { GER_Heydrich_Influence_limit = 30 }
+		hidden_effect = { country_event = { id = reich.7 days = 1 } }
+		hidden_effect = { country_event = { id = HGR_successor.8 hours = 12 } }
+		hidden_effect = { country_event = { id = hitlerillness.9 days = 5 } }
+		hidden_effect = { country_event = { id = reich.607 days = 50 } }
+		hidden_effect = { country_event = { id = reich.608 days = 80 } }
+		hidden_effect = {
+			activate_mission = GER_GCW_bormann_legitimacy
+			activate_mission = GER_GCW_goring_legitimacy
+			activate_mission = GER_GCW_speer_legitimacy
+		}
+	}
+}
+
+##Heir Chosen
+country_event = {
+	id = reich.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.7" }
+	picture = GFX_report_event_german_speech
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+	#Fallback
+	title = { text = "Wuh oh, something went wrong!" trigger = { always = yes } }
+	desc = { text = "Woopsie daisy, seems you don't have any of the successor flags!" trigger = { always = yes } }
+	option = {
+		trigger = {
+			NOT = {
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		name = "Please report this!"
+	}
+
+	#Bormann
+	title = { text = reich.7.t_bormann trigger = { has_country_flag = bormann_for_germany } }
+	desc = { text = reich.7.d_bormann trigger = { has_country_flag = bormann_for_germany } }
+	option = {
+		name = reich.7.o_bormann
+		trigger = { has_country_flag = bormann_for_germany }
+
+		hidden_effect = {
+			load_focus_tree = GER_bormann_successor
+			every_country = { news_event = { id = WORLD.561 days = 1 } }
+		}
+	}
+
+	#Göring
+	title = { text = reich.7.t_goring trigger = { has_country_flag = goring_for_germany } }
+	desc = { text = reich.7.d_goring trigger = { has_country_flag = goring_for_germany } }
+	option = {
+		name = reich.7.o_goring
+		trigger = { has_country_flag = goring_for_germany }
+
+		hidden_effect = {
+			load_focus_tree = GER_goring_successor
+			every_country = { news_event = { id = WORLD.562 days = 1 } }
+		}
+	}
+
+	#Speer
+	title = { text = reich.7.t_speer trigger = { has_country_flag = speer_for_germany } }
+	desc = { text = reich.7.d_speer trigger = { has_country_flag = speer_for_germany } }
+	option = {
+		name = reich.7.o_speer
+		trigger = { has_country_flag = speer_for_germany }
+
+		hidden_effect = {
+			load_focus_tree = GER_speer_successor
+			every_country = { news_event = { id = WORLD.563 days = 1 } }
+		}
+	}
+
+	#Heydrich
+	title = { text = reich.7.t_heydrich trigger = { has_country_flag = heydrich_for_germany } }
+	desc = { text = reich.7.d_heydrich trigger = { has_country_flag = heydrich_for_germany } }
+	option = {
+		name = reich.7.o_heydrich
+		trigger = { has_country_flag = heydrich_for_germany }
+
+		hidden_effect = {
+			load_focus_tree = GER_heydrich_successor
+			every_country = { news_event = { id = WORLD.564 days = 1 } }
+		}
+	}
+}
+
+#####################
+### FLAVOR EVENTS ###
+#####################
+
+##Man on the moon!
+country_event = {
+	id = reich.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.9" }
+	title = reich.9.t
+	desc = reich.9.desc
+	picture = GFX_report_event_nazi_moon
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.9.a
+		add_political_power = 30
+		add_ideas = man_on_the_moon
+		hidden_effect = {
+			USA = {
+				country_event = USA.15
+				country_event = { id = USA.early_flavor.6 days = 10 }
+			}
+			GER = {
+				set_temp_variable = { Victory_ID = 2 }
+				set_temp_variable = { Victory_Outcome = 4 }
+				set_temp_variable = { Victory_Points = 200 }
+				Cold_War_GUI_ManipulateVictory = yes
+			}
+			IBR = { country_event = IBR.1015 }
+			#VYT = { country_event = { id = VYT.58 days = 3 } }
+			CHI = { country_event = { id = chi.7 days = 1 } }
+			every_country = {
+				news_event = WORLD.11
+			}
+		}
+	}
+}
+
+## Pre-GCW Flavor
+# Event for cheaters
+country_event = {
+	id = reich.567
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.567" }
+	title = reich.567.t
+	desc = reich.567.d
+	picture = GFX_report_event_the_joker
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.567.a
+		add_political_power = -500
+	}
+}
+
+# Students Revolt
+country_event = {
+	id = reich.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.12" }
+	title = reich.12.t
+	desc = reich.12.desc
+	picture = GFX_report_event_revolt
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.12.a
+		country_event = { hours = 6 id = reich.13 }
+	}
+	option = {
+		name = reich.12.b
+		country_event = { hours = 6 id = reich.13 }
+	}
+	option = {
+		name = reich.12.c
+		country_event = { hours = 6 id = reich.13 }
+	}
+}
+
+country_event = {
+	id = reich.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.13" }
+	title = reich.13.t
+	desc = reich.13.desc
+	picture = GFX_report_event_revolt
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.13.a
+		add_political_power = -100
+	}
+}
+
+# Hitler Senile Speech
+country_event = {
+	id = reich.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.27" }
+	title = reich.27.t
+	desc = reich.27.d
+	picture = GFX_report_event_german_army2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.27.a
+		add_political_power = -10
+	}
+}
+
+# Hitler Gallery Opening
+country_event = {
+	id = reich.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.28" }
+	title = reich.28.t
+	desc = reich.28.d
+	picture = GFX_report_event_german_army2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.28.a
+	}
+}
+
+# Adler innaguration
+country_event = {
+	id = reich.72
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.72" }
+	title = reich.72.t
+	desc = reich.72.d
+	picture = GFX_report_event_germany_donitz
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.72.a
+		set_temp_variable = { temp_econ_spending_amount = 1.25 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = { #carinhall chain opening SPEER
+	id = reich.700
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.700"}
+	title = reich.700.t
+	desc = reich.700.d
+	picture = GFX_report_event_MAD_palace
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.700.a
+
+		country_event = {
+			id = reich.701 days = 5
+		}
+	}
+}
+
+country_event = { #carinhall chain opening BORMIE
+	id = reich.706
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.706"}
+	title = reich.706.t
+	desc = reich.706.d
+	picture = GFX_report_event_MAD_palace
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.706.a
+		hidden_effect = {
+			country_event = {
+				id = reich.703 days = 5
+			}
+		}
+	}
+}
+
+country_event = { #letter to speer
+	id = reich.701
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.701"}
+	title = reich.701.t
+	desc = reich.701.d
+	picture = GFX_report_event_speer_wins
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.701.a
+		hidden_effect = {
+			country_event = {
+				id = reich.702 days = 4
+			}
+		}
+	}
+}
+
+country_event = { #Speer declines
+	id = reich.702
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.702"}
+	title = reich.702.t
+	desc = reich.702.d
+	picture = GFX_report_event_sad_speer_2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.702.a
+		hidden_effect = {
+			country_event = {
+				id = reich.705 days = 5
+			}
+		}
+	}
+}
+
+country_event = { #letter to bormie
+	id = reich.703
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.702"}
+	title = reich.703.t
+	desc = reich.703.d
+	picture = GFX_report_event_bormann_wins
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.703.a
+		hidden_effect = {
+			country_event = {
+				id = reich.704 days = 4
+			}
+		}
+	}
+}
+
+country_event = { #Bormie declines
+	id = reich.704
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.704"}
+	title = reich.704.t
+	desc = reich.704.d
+	picture = GFX_report_event_bormann_wins
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.704.a
+		hidden_effect = {
+			country_event = {
+				id = reich.705 days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Göring sad
+	id = reich.705
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.705"}
+	title = reich.705.t
+	desc = reich.705.d
+	picture = GFX_report_event_goering_reading
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich.705.a
+	}
+}
+
+####################
+### EVENT CHAINS ###
+####################
+
+# Ostland requests Hitler tours the colony
+country_event = { #
+	id = reich.343
+	title = reich.343.t
+	desc = reich.343.desc
+	picture = GFX_report_event_Ernst_Kaltenbrunner
+
+	hidden = yes
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.343"}
+
+	option = { # Agree
+		name = reich.343.a
+		ai_chance = { factor = 1 }
+		add_stability = -0.02
+		OST = {
+			country_event = { id = OSTL.23 days = 1 }
+		}
+	}
+	option = { # Disagree
+		name = reich.343.b
+		ai_chance = { factor = 1000 }
+		trigger = {
+			OR = {
+				AND = {
+					OST = {
+						has_completed_focus = OST_sit_down_with_their_leaders
+					}
+					has_country_flag = bormann_for_germany
+				}
+				AND = {
+					OST = {
+						has_completed_focus = OST_the_talinn_university_massacre
+					}
+					has_country_flag = speer_for_germany
+				}
+				AND = {
+					OST = {
+						has_completed_focus = OST_investigate_the_southern_camps
+					}
+					has_country_flag = heydrich_for_germany
+				}
+				AND = {
+					OST = {
+						has_completed_focus = OST_replace_drechsler
+					}
+					has_country_flag = goring_for_germany
+				}
+			}
+		}
+		add_political_power = 50
+		OST = {
+			country_event = { id = OSTL.24 days = 1 }
+		}
+	}
+}
+########################
+### CIVIL WAR WARMUP ###
+########################
+
+##Hitler is dead
+country_event = {
+	id = reich.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.23" }
+	title = reich.23.t
+	desc = reich.23.desc
+	picture = GFX_report_event_bormann_wins
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 3
+
+	option = {
+		name = reich.23.a
+
+		set_global_flag = hitler_dead
+		add_political_power = -300
+
+		hidden_effect = {
+			FIN = {
+				country_event = {
+					id = FIN.1
+					days = 105
+					random = 20
+				}
+			}
+			country_event = { id = reich.25 days = 3 } # Hitler's Funeral
+			USA = { country_event = USA.10 } # US flavour event
+			kill_country_leader = yes
+			promote_character = GER_reichstag_emergency_council
+			remove_ideas = GER_Martin_Bormann_hog
+			add_ideas = GER_Theodor_Oberlander_hog
+			every_country = { news_event = { id = WORLD.2 days = 1 } }
+
+			GRO = { country_event = { id = GRO.7 days = 1 } }
+			COG = { country_event = { id = COG_focus.18 days = 1 } }
+			OST = { country_event = { id = OSTL.4 days = 2 } }
+
+			if = {
+				limit = { has_country_flag = bormann_for_germany }
+				hidden_effect = { country_event = { id = hitlerillness.8 } }
+			}
+
+			if = {
+				limit = { has_country_flag = goring_for_germany }
+				hidden_effect = { country_event = { id = hitlerillness.15  } }
+			}
+
+			if = {
+				limit = { has_country_flag = speer_for_germany }
+				hidden_effect = { country_event = { id = hitlerillness.16  } }
+			}
+
+			if = {
+				limit = { has_country_flag = heydrich_for_germany }
+				hidden_effect = { country_event = { id = hitlerillness.17 } }
+				hidden_effect = { country_event = { id = HGR_successor.13 hours = 8 } }
+			}
+		}
+
+		clr_country_flag = GER_expanded_draft
+		clr_country_flag = GER_overextended_airforce
+		clr_country_flag = GER_faith_in_the_fuhrer
+		clr_country_flag = GER_rampant_factionalism
+		clr_country_flag = GER_supported_the_navy
+		clr_country_flag = GER_acted_against_SS
+		clr_country_flag = GER_reduced_heer_budget
+		clr_country_flag = GER_domestic_unrest
+	}
+}
+
+### Lead Up
+##Hitler's Funeral, Civil War is looming.
+country_event = {
+	id = reich.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.25" }
+	title = reich.25.t
+	desc = reich.25.desc
+	picture = GFX_reich_funeral
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 3
+
+	option = {
+		name = reich.25.a
+		hidden_effect = { country_event = { id = reich.564 days = 1 } }
+	}
+}
+
+## The Luftwaffe Is Acting Strange
+country_event = {
+	id = reich.564
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.564" }
+	title = reich.564.t
+	desc = reich.564.d
+	picture = GFX_Luftwaffe_Acting_weird
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.564.a
+		hidden_effect = {
+			country_event = { id = reich.565 days = 1 }
+		}
+	}
+}
+
+## Who To Heil
+country_event = {
+	id = reich.565
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.565" }
+	title = reich.565.t
+	desc = reich.565.d
+	picture = GFX_who_heil
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.565.a
+		hidden_effect = {
+			country_event = {
+				id = reich.566
+				days = 1
+			}
+		}
+	}
+}
+
+## The Entire Heer Goes AWOL
+country_event = {
+	id = reich.566
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.566" }
+	title = reich.566.t
+	desc = reich.566.d
+	picture = GFX_Heer_crazy
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.566.a
+		hidden_effect = {
+			#Clear the OOB
+			if = {
+				limit = { has_template = "Infanterie-Division" }
+				delete_unit_template_and_units = { division_template = "Infanterie-Division" }
+			}
+			if = {
+				limit = { has_template = "Panzer-Division" }
+				delete_unit_template_and_units = { division_template = "Panzer-Division" }
+			}
+			if = {
+				limit = { has_template = "Waffen-SS" }
+				delete_unit_template_and_units = { division_template = "Waffen-SS" }
+			}
+			if = {
+				limit = { has_template = "Fallschirmjäger" }
+				delete_unit_template_and_units = { division_template = "Fallschirmjäger" }
+			}
+			if = {
+				limit = { has_template = "Seebataillon" }
+				delete_unit_template_and_units = { division_template = "Seebataillon" }
+			}
+			if = {
+				limit = { has_template = "Gebirgsjäger" }
+				delete_unit_template_and_units = { division_template = "Gebirgsjäger" }
+			}
+			if = {
+				limit = { has_template = "Motorisierte Infanterie-Division" }
+				delete_unit_template_and_units = { division_template = "Motorisierte Infanterie-Division" }
+			}
+
+			#Civil War Rise-Up Firing
+			if = {
+				limit = {
+					GER = {
+						NOT = {
+							OR = {
+								has_country_flag = SS_heydrich_dead
+								has_country_flag = SS_heydrich_in_prison
+							}
+						}
+					}
+				}
+				GER = { country_event = { id = reich.36 days = 1 } }
+			}
+			else = {
+				GER = { country_event = { id = reich.37 days = 1 } }
+			}
+		}
+	}
+}
+
+### Rising Up
+##Heydich Rises Up
+country_event = {
+	id = reich.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.36" }
+	title = reich.36.t
+	desc = reich.36.desc
+	picture = GFX_report_event_generic_german_arrests
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.36.a
+		ai_chance = { factor = 100 }
+
+		hidden_effect = {
+			every_owned_state = {
+				limit = { is_HGR_state = yes }
+				set_demilitarized_zone = yes
+			}
+			every_character = {
+				limit = {
+					has_character_flag = is_HGR_character
+				}
+				set_nationality = HGR
+			}
+			
+			HGR = { 
+				promote_character = GER_reinhard_heydrich
+				add_ideas = {
+					GER_Philipp_Bouhler_hog
+					GER_Gunter_dAlquen_for
+					GER_August_Frank_eco
+					GER_Herbert_Otto_Gille_sec
+				}
+			}
+
+			country_event = { id = reich.37 days = 1 }
+			country_event = { id = HGR_successor.14 hours = 12 }
+			HGR = {
+				set_variable = { tno_trade_laws_effectiveness = 80 }
+				set_variable = { tno_income_taxation_effectiveness = 10 }
+				set_variable = { tno_minimum_wage_effectiveness = 5 }
+				set_variable = { tno_max_workhours_effectiveness = 100 }
+				set_variable = { tno_child_labor_effectiveness = 35 }
+				set_variable = { tno_pensions_effectiveness = 5 }
+				set_variable = { tno_unemployment_effectiveness = 5 }
+				set_variable = { tno_safety_effectiveness = 35 }
+				set_variable = { tno_health_care_effectiveness = 45 }
+				set_variable = { tno_pollution_effectiveness = 90 }
+				set_variable = { tno_education_effectiveness = 85 }
+				set_variable = { tno_penal_system_effectiveness = 100 }
+				set_variable = { tno_lgbt_rights_effectiveness = 100 }
+				set_variable = { tno_gender_rights_effectiveness = 100 }
+				set_variable = { tno_minorities_effectiveness = 100 }
+				set_variable = { tno_security_effectiveness = 100 }
+				set_variable = { tno_political_parties_effectiveness = 85 }
+				set_variable = { tno_religious_rights_effectiveness = 95 }
+				set_variable = { tno_trade_unions_effectiveness = 100 }
+				set_variable = { tno_immigration_effectiveness = 100 }
+				set_variable = { tno_slavery_effectiveness = 100 }
+				set_variable = { tno_public_meetings_effectiveness = 95 }
+				set_variable = { tno_press_rights_effectiveness = 100 }
+				set_variable = { tno_vote_franchise_effectiveness = 95 }
+				set_variable = { tno_refugees_effectiveness = 35 }
+				set_variable = { tno_conscription_effectiveness = 55 }
+				set_variable = { tno_women_effectiveness = 100 }
+				set_variable = { tno_military_supervision_effectiveness = 100 }
+				set_variable = { tno_training_effectiveness = 80 }
+				set_variable = { tno_racial_integration_effectiveness = 95 }
+				set_variable = { tno_draft_exemptions_effectiveness = 100 }
+				TNO_update_policy_effectiveness = yes
+			}
+		}
+	}
+}
+
+##Speer Rises Up
+country_event = {
+	id = reich.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.37" }
+	title = reich.37.t
+	desc = reich.37.desc
+	picture = GFX_report_event_generic_german_arrests
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.37.a
+		ai_chance = { factor = 100 }
+
+		hidden_effect = {
+			every_owned_state = {
+				limit = { is_SGR_state = yes }
+				set_demilitarized_zone = yes
+			}
+
+			remove_ideas = GER_Albert_Speer_eco
+			set_country_flag = GER_speer_breaks_away
+
+			# Remove successor tree natspirits
+			remove_ideas = {
+				GER_speer_ss_restricted
+				GER_speer_scale_back_milproduction
+				GER_speer_opening_the_market
+			}
+			## Sends Speer characters to SGR
+			every_character = {
+				limit = {
+					has_character_flag = is_SGR_character
+				}
+				set_nationality = SGR
+			}
+
+			SGR = {
+				promote_character = GER_albert_speer
+				add_ideas = {
+					GER_Kurt_Georg_Kiesinger_hog
+					GER_Ludwig_Erhard_eco
+					GER_Helmut_Schmidt_for
+					GER_Henning_von_Tresckow_sec
+				}
+			}
+
+			if = {
+				limit = {
+					OR = {
+						has_country_flag = SS_heydrich_dead
+						has_country_flag = SS_heydrich_in_prison
+					}
+				}
+				28 = { set_demilitarized_zone = yes }
+				42 = { set_demilitarized_zone = yes }
+				8 = { set_demilitarized_zone = yes }
+				country_event = { id = reich.39 days = 1 }
+			}
+
+			country_event = { id = reich.38 days = 1 }
+		}
+	}
+}
+
+##Göring Rises Up
+country_event = {
+	id = reich.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.38" }
+	title = reich.38.t
+	desc = reich.38.desc
+	picture = GFX_report_event_generic_german_arrests
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.38.a
+		ai_chance = { factor = 100 }
+
+		clr_country_flag = GER_Goering_Militarist_Leader
+		set_country_flag = GER_Speidel_Militarist_Leader
+
+		hidden_effect = {
+			every_owned_state = {
+				limit = { is_GGR_state = yes }
+				set_demilitarized_zone = yes
+			}
+
+			every_character = {
+				limit = {
+					has_character_flag = is_GGR_character
+				}
+				set_nationality = GGR
+			}
+
+			GER = {
+				add_ideas = GER_Robert_Ritter_von_Greim_air_chief
+			}
+
+			GGR = {
+				promote_character = GER_hermann_goring
+				add_ideas = {
+					GER_Wilhelm_Stuckart_hog
+					GER_Rudolf_Diels_sec
+					GER_Artur_Axmann_for
+					GER_Paul_Korner_eco
+					GER_Ferdinand_Schorner_high_command
+					GER_Eduard_Wagner_high_command
+					GER_Otto_Ernst_Remer_army_chief
+					GER_Hermann_Goring_air_chief
+					GER_KarlJesko_von_Puttkamer_navy_chief
+					GER_Werner_Osenberg_theorist
+				}
+			}
+
+			# Remove successor tree natspirits
+			remove_ideas = {
+				goering_student_protests_3
+			}
+
+			remove_ideas = {
+				GER_Hermann_Goring_sec
+				GER_Hermann_Goring_air_chief
+			}
+
+			set_country_flag = GER_goring_breaks_away
+
+			if = {
+				limit = {
+					OR = {
+						has_country_flag = SS_heydrich_dead
+						has_country_flag = SS_heydrich_in_prison
+					}
+				}
+				5 = { set_demilitarized_zone = yes }
+				85 = { set_demilitarized_zone = yes }
+				188 = { set_demilitarized_zone = yes }
+				97 = { set_demilitarized_zone = yes }
+				98 = { set_demilitarized_zone = yes }
+			}
+
+			country_event = { id = reich.39 days = 1 }
+		}
+	}
+}
+
+##Bormann Rises Up
+country_event = {
+	id = reich.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.39" }
+	title = reich.39.t
+	desc = reich.39.desc
+	picture = GFX_report_event_generic_german_arrests
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.39.a
+		ai_chance = {
+			factor = 100
+		}
+		hidden_effect = {
+			every_owned_state = {
+				limit = { is_BGR_state = yes }
+				set_demilitarized_zone = yes
+			}
+			#Characters
+			GER_martin_bormann = {
+				set_nationality = BGR
+			}
+			every_character = {
+				limit = {
+					has_character_flag = is_BGR_character
+				}
+				set_nationality = BGR
+			}
+
+			BGR = { 
+				promote_character = GER_martin_bormann 
+    			add_ideas = {
+					GER_Baldur_von_Schirach_hog
+					GER_Wilhelm_Burgdorf_sec
+					GER_Walther_Hewel_for
+					GER_Kurt_Lange_eco
+				}
+			}
+
+			remove_ideas = GER_Martin_Bormann_hog
+			remove_ideas = GER_Walther_Hewel_for
+			remove_ideas = GER_Fedor_von_Bock_high_command
+			set_country_flag = GER_bormann_breaks_away
+
+			country_event = { id = reich.10 days = 1 }
+		}
+	}
+}
+
+##The War Starts
+country_event = {
+	id = reich.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.10" }
+	title = reich.10.t
+	desc = reich.10.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 2
+
+	option = {
+		name = reich.10.a
+		ai_chance = { factor = 100 }
+		custom_effect_tooltip = GER_gcw_begin_tooltip
+		hidden_effect = {
+			NOR = {
+				transfer_navy = { target = GER } #Gets transfered to Crimea afterwards
+			}
+			CAU = {
+				transfer_navy = { target = GER }
+			}
+			MCW = {
+				transfer_navy = { target = GER }
+			}
+			MAD = {
+				transfer_navy = { target = GER }
+			}
+			HOL = {
+				transfer_navy = { target = GER }
+			}
+			UKR = {
+				transfer_navy = { target = GER }
+			}
+			OST = {
+				transfer_navy = { target = GER }
+			}
+			GER = {
+				set_temp_variable = { SeaZone_ID = 2 } # 2; South Atlantic
+				Cold_War_GUI_PowerProjection_RemoveSeaZone = yes
+				set_temp_variable = { SeaZone_ID = 3 } # 3; North Atlantic
+				Cold_War_GUI_PowerProjection_RemoveSeaZone = yes
+				set_temp_variable = { SeaZone_ID = 4 } # 4; North Sea
+				Cold_War_GUI_PowerProjection_RemoveSeaZone = yes
+				set_temp_variable = { SeaZone_ID = 5 } # 5; Baltic Sea
+				Cold_War_GUI_PowerProjection_RemoveSeaZone = yes
+				set_temp_variable = { SeaZone_ID = 6 } # 6; Indian Ocean
+				Cold_War_GUI_PowerProjection_RemoveSeaZone = yes
+			}
+
+
+			GER_GCW_begin = yes
+
+			#Speidel Coup
+			country_event = { id = reich.11 days = 7 }
+
+			country_event = { #Pakt Collapse
+				id = reich.31
+				hours = 1
+			}
+
+			every_country = {
+				limit = {
+					OR = {
+						has_idea = RUS_terror_bombing
+						has_idea = SIB_terror_bombing
+					}
+				}
+				country_event = { id = RUS.999 days = 7 }
+			}
+
+			#Softboyanarchist
+			every_country = { news_event = { id = WORLD.9999 days = 14 } }
+
+			#Students Rise Up For Speer
+			SGR = { country_event = { id = speer.3 days = 28 } }
+
+			#Brittany Picks Who To Support
+			# BRT = { country_event = { id = BRT.7 days = 1 } }
+
+			#African Recolonisation
+			ZZZ = { country_event = { id = W_AFRICA.0 days = 10 } }
+
+			#Begining of Serbian Collapse
+			SER = {
+				remove_ideas = SRB_German_Controlled_Economy
+				country_event = { id = serbia.1 days = 15 }
+			}
+
+			#Sudwestafrikaner Economy Feels The Burn
+			# ANG = { country_event = { id = ANG.36 days = 5 } }
+
+			#Cornwall Takes Hold Of The English Leash
+			# CRN = { country_event = { id = reich.71 days = 1 } }
+
+			#Denmark Picks A Path
+			DEN = { country_event = { id = den.2 days = 14 } }
+
+			#Ostland starts it descent into madness
+			OST = { country_event = { id = OST.23 days = 10 } }
+
+			#Moskowien Collapses (Helldorff Takes Over, Then It All Collapses)
+			MCW = { country_event = { id = MCW_helldorff_takeover.1 days = 3 } }
+
+			#Ireland Braces for Impact
+			IRE = { country_event = { id = IRE_intro.11 hours = 3 } }
+
+			#Poland Does a thing
+			GGN = { country_event = { id = ggn.2 days = 3 } }
+
+			#Tiso fucking dies
+			SLO = { country_event = { id = slo.1 days = 65 } }
+
+			#ECW
+			ENG = { country_event = { id = ENG_HMMLRECW.1 days = 9 } }
+
+			#Paraguyan Bush War
+			PAR = { 
+				country_event = { id = PAR_scripted.1 days = 90 } 
+				econ_leave_sphere = yes
+			}
+
+			GER = { #losing control of Kaukasien's oil
+				remove_resource_rights = 229
+				remove_resource_rights = 1552
+				remove_resource_rights = 1553
+				remove_resource_rights = 1554
+				#add_named_threat = {
+				#	threat = 50
+				#	name = threat.18.t
+				#}
+
+				if = { # Break Heydrich's guarantee
+					limit = { has_country_flag = heydrich_for_germany }
+					diplomatic_relation = {
+						country = BRG
+						relation = guarantee
+						active = no
+					}
+					diplomatic_relation = {
+						country = BRG
+						relation = military_access
+						active = no
+					}
+					BRG = {
+						diplomatic_relation = {
+							country = GER
+							relation = guarantee
+							active = no
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#################
+### CIVIL WAR ###
+#################
+
+###Civil War Itself
+##Speidels Coup
+country_event = {
+	id = reich.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.11" }
+	title = reich.11.t
+	desc = reich.11.desc
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.11.a
+
+		set_country_flag = speidel_in_charge
+
+		drop_cosmetic_tag = yes
+		set_cosmetic_tag = GER_speidel
+		load_focus_tree = GER_blankfocus
+
+		add_political_power = 100
+		set_politics = {
+			ruling_party = despotism
+		}
+		set_popularities = {
+			despotism = 56
+			fascism = 12
+			national_socialism = 32
+		}
+
+		retire_character = GER_reichstag_emergency_council
+		promote_character = GER_hans_speidel
+
+		GER_erwin_rommel = {
+			add_field_marshal_role = {
+				traits = { war_hero armor_officer media_personality panzer_leader panzer_expert desert_fox }
+				skill = 5
+				attack_skill = 5
+				defense_skill = 4
+				planning_skill = 4
+				logistics_skill = 3
+				legacy_id = 72
+			}
+		}
+
+		load_oob = SPI
+		country_lock_all_division_template = no
+
+		remove_ideas = {
+			GER_Theodor_Oberlander_hog
+		}
+
+		add_ideas = {
+			GER_Erwin_Rommel_hog
+			GER_Fritz_Bayerlein_sec
+			GER_Sigismund_von_Braun_for
+			GER_Alfred_Muller_Armack_eco
+		}
+
+		hidden_effect = { every_country = { news_event = { id = WORLD.47 days = 1 } } }
+		hidden_effect = {
+			country_event = { id = reich.555 days = 5 }
+			GRO = { country_event = { id = GRO.2 days = 5 } }
+			COG = { country_event = { id = COG_focus.19 days = 5 } }
+		}
+
+		set_party_name = {
+			ideology = despotism
+			long_name = GER_GCW_Speidel_despot_party_long
+			name = GER_GCW_Speidel_despot_party
+		}
+	}
+}
+
+##Einheitspakt collapses
+country_event = {
+	id = reich.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.31" }
+	title = reich.31.t
+	desc = reich.31.desc
+	picture = GFX_report_event_german_army2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.31.a
+		dismantle_faction = yes
+		every_country = {
+			limit = { is_puppet_of = GER }
+
+			GER = { end_puppet = PREV }
+		}
+
+		every_country = {
+			limit = { is_subject_of = GER }
+
+			set_autonomy = {
+				target = PREV
+				autonomy_state = autonomy_free
+			}
+		}
+
+		BRG = {
+			set_country_flag = BRG_fall_ragnarchar_allowed
+			TNO_BRG_domestic_tree_swap = yes
+		}
+
+		# mfw great game factions wonky
+		BUL = { remove_ideas = Pakt_Bundnispartner }
+		FRA = { remove_ideas = Pakt_Mitstreiter }
+		SER = { remove_ideas = Pakt_Marionettenstaat }
+		FIN = { remove_ideas = Pakt_Observer }
+		PER = { remove_ideas = Pakt_Observer }
+		# CYL = { remove_ideas = Pakt_Observer }
+
+		diplomatic_relation = {
+			country = BRG
+			relation = non_aggression_pact
+			active = no
+		}
+
+		SWE = {
+			remove_ideas = Pakt_Observer
+			remove_ideas = SWE_schwedenisierung
+			remove_ideas = SWE_exports_to_germany
+		}
+
+		remove_resource_rights = 38
+		remove_resource_rights = 217
+		remove_resource_rights = 229
+		remove_resource_rights = 1552
+		remove_resource_rights = 1553
+		remove_resource_rights = 1554
+		remove_resource_rights = 232
+		remove_resource_rights = 1563
+		remove_resource_rights = 1564
+		remove_resource_rights = 234
+		remove_resource_rights = 236
+		remove_resource_rights = 539
+		remove_resource_rights = 1162
+		remove_resource_rights = 1164
+		remove_resource_rights = 718
+	}
+}
+
+##Dönitz Splits
+country_event = {
+	id = reich.555
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.555" }
+	title = reich.555.t
+	desc = reich.555.d
+	picture = GFX_report_event_germany_donitz
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.555.a
+		GER = {
+			remove_ideas = GER_Karl_Donitz_navy_chief
+			if = {
+				limit = {
+					has_template = "Seebataillon"
+				}
+				delete_unit_template_and_units = {
+					division_template = "Seebataillon"
+				}
+			}
+		}
+		CRI = {
+			transfer_state = 137
+			add_state_core = 137
+			transfer_state = 1532
+			add_state_core = 1532
+			inherit_technology = PREV
+			load_oob = CRI
+		}
+		GER_karl_donitz = {
+			set_nationality = CRI
+		}
+		CRI_wilhelm_meisel = {
+			set_nationality = CRI
+		}
+		CRI_eberhard_godt = {
+			set_nationality = CRI
+		}
+		CRI_karl_topp = {
+			set_nationality = CRI
+		}
+		CRI_fritz_krauss = {
+			set_nationality = CRI
+		}
+		CRI = {
+			promote_character = GER_karl_donitz
+			add_ideas = {
+				CRI_Wilhelm_Meisel_hog
+				CRI_Fritz_Krauss_sec
+				CRI_Karl_Topp_eco
+				CRI_Eberhard_Godt_for
+			}
+		}
+		hidden_effect = {
+			country_event = { id = reich.556 days = 3 }
+			BGR = {
+				country_event = { id = bormann.555 days = 1 }
+			}
+			SGR = {
+				country_event = { id = speer.555 days = 1 }
+			}
+			HGR = {
+				country_event = { id = HGR.555 days = 1 }
+			}
+			GGR = {
+				country_event = { id = goering.58 days = 1 }
+			}
+		}
+	}
+}
+
+##The Kriegsmarine defects to Dönitz
+country_event = {
+	id = reich.556
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.556" }
+	title = reich.556.t
+	desc = reich.556.d
+	picture = GFX_report_event_generic_german_arrests
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.556.a
+		hidden_effect = {
+			transfer_navy = {
+				target = CRI
+			}
+			BGR = {
+				country_event = { id = bormann.556 days = 1 }
+			}
+			news_event = {
+				id = WORLD.556
+				days = 2
+			}
+		}
+	}
+}
+
+##Speidel goes wild
+country_event = {
+	id = reich.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.29" }
+	title = reich.29.t
+	desc = reich.29.desc
+	picture = GFX_report_event_german_army2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.29.a
+
+		set_global_flag = GCW_Speidel_Active
+		add_to_array = { global.GCW_contenders = THIS }
+
+		if = {
+			limit = {
+				country_exists = SGR
+			}
+			declare_war_on = { target = SGR type = civil_war }
+		}
+		if = {
+			limit = {
+				country_exists = BGR
+			}
+			declare_war_on = { target = BGR type = civil_war }
+		}
+		if = {
+			limit = {
+				country_exists = GGR
+			}
+			declare_war_on = { target = GGR type = civil_war }
+		}
+		if = {
+			limit = {
+				country_exists = HGR
+			}
+			declare_war_on = { target = HGR type = civil_war }
+		}
+		## Insert a proper world event here when V&J comes
+		# every_country = {
+		# 	news_event = {
+		# 		id = WORLD.
+		# 		days = 1
+		# 	}
+		# }
+	}
+}
+
+##Speidel GCW Closing Event
+country_event = {
+	id = reich.30
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event reich.30" 
+		GER = {
+			set_temp_variable = { Victory_ID = 14 }
+			set_temp_variable = { Victory_Outcome = 2 }
+			set_temp_variable = { Victory_Points = -200 }
+			Cold_War_GUI_ManipulateVictory = yes
+		}
+	}
+
+	title = { text = reich.30.t_bormann trigger = { country_exists = BGR } }
+	title = { text = reich.30.t_goering trigger = { country_exists = GGR } }
+	title = { text = reich.30.t_speer trigger = { country_exists = SGR } }
+	title = { text = reich.30.t_heydrich trigger = { country_exists = HGR } }
+	title = { text = reich.30.t_rnw trigger = { country_exists = RNW } }
+
+	desc = { text = reich.30.desc_bormann trigger = { country_exists = BGR } }
+	desc = { text = reich.30.desc_goering trigger = { country_exists = GGR } }
+	desc = { text = reich.30.desc_speer trigger = { country_exists = SGR } }
+	desc = { text = reich.30.desc_heydrich trigger = { country_exists = HGR } }
+	desc = { text = reich.30.desc_rnw trigger = { country_exists = RNW } }
+
+	picture = GFX_report_event_generic_german_arrests
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.30.a
+		trigger = { NOT = { country_exists = HGR } }
+
+		clear_array = global.GCW_contenders
+		SGR = { country_event = { id = speer.7 days = 1 } }
+		BGR = { country_event = { id = bormann.6 days = 1 } }
+		GGR = { country_event = { id = goering.4 days = 1 } }
+		HGR = { country_event = { id = HGR.7 days = 1  } }
+	}
+
+	option = {
+		name = reich.30.b
+		trigger = { country_exists = HGR }
+
+		set_global_flag = GCW_Speidel_Active
+		add_to_array = { global.GCW_contenders = THIS }
+
+		#Speer
+		SGR = { country_event = { id = speer.8 days = 1 } }
+		declare_war_on = { target = SGR type = annex_everything }
+		#Bormann
+		BGR = { country_event = { days = 1 id = bormann.7 } }
+		declare_war_on = { target = BGR type = annex_everything }
+		#Göring
+		GGR = { country_event = { days = 1 id = goering.5 } }
+		declare_war_on = { target = GGR type = annex_everything }
+		#Heydrich
+		HGR = { country_event = { days = 1 id = HGR.8 } }
+		declare_war_on = { target = HGR type = annex_everything }
+	}
+}
+
+#############################
+## CONTENDER ASSASSINATION ##
+#############################
+### Heydrich has been killed at the end of the GCW
+country_event = {
+	id = reich.559
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.559" }
+	title = reich.559.t
+	desc = reich.559.d
+	picture = GFX_report_event_heydrich_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.559.a
+		add_stability = 0.05
+		add_political_power = 30
+		add_popularity = { ideology = esoteric_nazism popularity = -0.06 }
+	}
+}
+
+#####################
+### FLAVOR EVENTS ###
+#####################
+
+country_event = { # Goebbels Day
+	id = reich.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.41" }
+	title = reich.41.t
+	desc = reich.41.d
+	picture = GFX_report_event_joseph_goebbels
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.41.a
+	}
+}
+
+
+#country_event = { #Cornwall puppets england (NO MORE)
+#	id = reich.71
+#	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.71" }
+#	title = reich.71.t
+#	desc = reich.71.desc
+#	picture = GFX_news_event_005
+#	is_triggered_only = yes
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		name = reich.71.a
+#		hidden_effect = {
+#			CRN = { set_country_flag = CRN_Set_War_Tree_Flag }
+#			diplomatic_relation = {
+#				country = ENG
+#				relation = puppet
+#				active = yes
+#			}
+#			ENG = {
+#				set_political_party = { ideology = fascism popularity = 50 }
+#				set_politics = { ruling_party = fascism }
+#				country_event = { id = eng.80006 }
+#			}
+#		}
+#	}
+#}
+
+##Bormann chosen events##
+
+country_event = { #Bormann tries to convince the American Ambassador he is the better choice and fails miserably
+	id = reich.1000
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.1000" }
+	title = reich.1000.t
+	desc = reich.1000.desc
+	picture = GFX_report_event_bormann_wins
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = reich.1000.a
+	}
+}
+
+country_event = { #Bormann tries to gain support from the RKs but even the supportive ones have their own worries
+	id = reich.1001
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.1001" }
+	title = reich.1001.t
+	desc = reich.1001.desc
+	picture = GFX_report_event_generic_office
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = reich.1001.a
+		BGR = { add_manpower = 1000 }
+		DEN = { add_manpower = -1000 }
+	}
+}
+
+country_event = { #Bormann negotiates to bribe the Waffen-SS into joining him but the GCW starts before the deal can be finished
+	id = reich.1002
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.102" }
+	title = reich.1002.t
+	desc = reich.1002.desc
+	picture = GFX_report_event_waffen_ss_troops
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = reich.1002.a
+	}
+}
+
+###########
+## Debug ##
+###########
+
+##Göring's World
+country_event = {
+	id = reich.999
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.999" }
+	title = reich.999.t
+	desc = reich.999.d
+	picture = GFX_report_event_south_african_war_rk_soldier4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.999.a
+		every_state = {
+			set_demilitarized_zone = no
+		}
+
+		GER = {
+			puppet = ITA
+			puppet = RKM
+			puppet = RKK
+			puppet = RKS
+			puppet = RKF
+			puppet = NAF
+			puppet = WAF
+			puppet = GEA
+			puppet = SYR
+			puppet = MCW
+			puppet = SCN
+			puppet = OKZ
+			puppet = RKA
+			puppet = UKR
+			puppet = RKT
+			puppet = GKA
+			puppet = ADS
+			puppet = GBQ
+			puppet = GCN
+			puppet = GPG
+			puppet = RKG
+			puppet = GSL
+			puppet = BRI
+			puppet = BRT
+			puppet = RKB
+			puppet = GCA
+			puppet = RKP
+			puppet = GAR
+			puppet = GCO
+			puppet = RKL
+			puppet = GCR
+			puppet = GBR
+			puppet = AFG
+			puppet = RKH
+			puppet = GMB
+			puppet = GVT
+			puppet = RKO
+			puppet = GAS
+			puppet = GPP
+			puppet = USA
+			puppet = CAN
+			puppet = GLC
+			puppet = BEL
+			puppet = WST
+			puppet = GQB
+			puppet = AMK
+			puppet = GKO
+			puppet = ENA
+			puppet = BOR
+			puppet = MZB
+			puppet = KNT
+			puppet = TOH
+			puppet = SKK
+			puppet = KIN
+			puppet = RKC
+			puppet = CAU
+			end_puppet = MZB
+			end_puppet = COG
+			end_puppet = ANG
+			remove_from_faction = BRG
+			end_puppet = BRG
+			remove_from_faction = MZB
+			annex_country = { target = CZE }
+			annex_country = { target = GGN }
+			annex_country = { target = OST }
+			annex_country = { target = DEN }
+			annex_country = { target = SWI }
+			annex_country = { target = IBR }
+			annex_country = { target = ICE }
+			annex_country = { target = HOL }
+
+			transfer_state = 965
+			transfer_state = 1160
+			transfer_state = 183
+			transfer_state = 1328
+			transfer_state = 182
+			transfer_state = 784
+			transfer_state = 177
+			transfer_state = 658
+			transfer_state = 1335
+			transfer_state = 656
+			transfer_state = 685
+			transfer_state = 101
+			transfer_state = 422
+			transfer_state = 970
+			transfer_state = 124
+			transfer_state = 145
+			transfer_state = 4
+			transfer_state = 730
+
+			transfer_state = 331
+			transfer_state = 991
+			transfer_state = 366
+			transfer_state = 740
+			transfer_state = 629
+			transfer_state = 809
+			transfer_state = 650
+
+			transfer_state = 290
+			transfer_state = 118
+
+			transfer_state = 299
+			transfer_state = 720
+
+			transfer_state = 281
+
+			transfer_state = 39
+			transfer_state = 116
+		}
+		CAN = {
+			econ_join_sphere_GER = yes
+			set_cosmetic_tag = CAN_GOR
+			add_country_leader_role = {
+				character = CAN_William_John_Beattie
+				promote_leader = yes
+				country_leader = {
+					expire = "1999.4.20"
+					ideology = national_socialism_subtype
+					id = -1
+				}
+			}
+			set_politics = {
+				ruling_party = national_socialism
+				elections_allowed = no
+			}
+			set_popularities = {
+				communist = 0
+				ultranationalism = 0
+				socialist = 0
+				social_democracy = 10
+				liberal_democracy = 10
+				conservative_democracy = 35
+				authoritarian_democracy = 15
+				despotism = 10
+				fascism = 10
+				national_socialism = 10
+			}
+			add_ideas = Pakt_Marionettenstaat
+		}
+		GEA = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = IEA }
+
+			transfer_state = 1134
+			transfer_state = 1132
+			transfer_state = 1179
+			transfer_state = 1133
+			transfer_state = 1131
+			transfer_state = 1128
+			transfer_state = 1130
+			transfer_state = 1129
+			transfer_state = 1135
+			transfer_state = 1136
+			transfer_state = 1126
+			transfer_state = 1127
+			transfer_state = 1122
+			transfer_state = 1121
+			transfer_state = 1120
+			transfer_state = 549
+			transfer_state = 551
+			transfer_state = 1125
+			transfer_state = 1124
+			transfer_state = 1123
+		}
+		GRO = {
+			econ_join_sphere_GER = yes
+			transfer_state = 1186
+			transfer_state = 297
+		}
+		RKG = {
+			econ_join_sphere_GER = yes
+			transfer_state = 171
+			transfer_state = 982
+		}
+		GPG = {
+			econ_join_sphere_GER = yes
+			transfer_state = 1004
+			transfer_state = 179
+			transfer_state = 1000
+			transfer_state = 112
+			transfer_state = 181
+			transfer_state = 998
+			transfer_state = 180
+			transfer_state = 997
+		}
+		GBQ = {
+			econ_join_sphere_GER = yes
+			transfer_state = 172
+			transfer_state = 993
+			transfer_state = 984
+		}
+		GKA = {
+			econ_join_sphere_GER = yes
+			transfer_state = 167
+			transfer_state = 987
+			transfer_state = 166
+			transfer_state = 1012
+			transfer_state = 986
+			transfer_state = 165
+			transfer_state = 985
+		}
+		ADS = {
+			econ_join_sphere_GER = yes
+			transfer_state = 168
+			transfer_state = 1002
+			transfer_state = 1003
+			transfer_state = 988
+			transfer_state = 173
+			transfer_state = 169
+			transfer_state = 1001
+			transfer_state = 170
+		}
+		GCA = {
+			econ_join_sphere_GER = yes
+			transfer_state = 175
+			transfer_state = 41
+			transfer_state = 1013
+			transfer_state = 996
+			transfer_state = 999
+			transfer_state = 176
+			transfer_state = 995
+			transfer_state = 994
+			transfer_state = 174
+			transfer_state = 983
+		}
+		OKZ = {
+			econ_join_sphere_GER = yes
+			transfer_state = 19
+			transfer_state = 31
+			transfer_state = 22
+			transfer_state = 21
+			transfer_state = 735
+			transfer_state = 32
+			transfer_state = 20
+			transfer_state = 790
+			transfer_state = 26
+			transfer_state = 25
+			transfer_state = 784
+			transfer_state = 1609
+			transfer_state = 1610
+			transfer_state = 1613
+			transfer_state = 1612
+			transfer_state = 1611
+			transfer_state = 23
+		}
+		BEL = {
+			econ_join_sphere_GER = yes
+			BEL_siegfried_muller = {
+				promote_character = { ideology = national_socialism_stratocratic_nazism_subtype }
+			}
+			transfer_state = 34
+			transfer_state = 6
+			transfer_state = 29
+			set_politics = {
+				ruling_party = national_socialism
+				last_election = "1933.3.5"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_popularities = {
+				communist = 0
+				ultranationalism = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+
+				conservative_democracy = 0
+				authoritarian_democracy = 20
+				despotism = 0
+				fascism = 10
+				national_socialism = 70
+				
+			}
+			set_cosmetic_tag = BEL_GOR
+		}
+		RKT = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = TAJ }
+			annex_country = { target = UZB }
+			annex_country = { target = TRK }
+			annex_country = { target = KRK }
+			annex_country = { target = AKT }
+			annex_country = { target = NPL }
+			annex_country = { target = ARL }
+			annex_country = { target = DER }
+			annex_country = { target = KAZ }
+			annex_country = { target = KOK }
+			annex_country = { target = PAV }
+			annex_country = { target = KYR }
+			annex_country = { target = UTL }
+		}
+		GMB = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = BUR }
+		}
+		GVT = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = VIN }
+			annex_country = { target = LAO }
+			annex_country = { target = CAM }
+			annex_country = { target = THA }
+			annex_country = { target = SHO }
+			annex_country = { target = MLY }
+		}
+		RKO = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = INS }
+			annex_country = { target = NRB }
+			transfer_state = 807
+		}
+		GPP = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = PHI }
+			annex_country = { target = SPH }
+			annex_country = { target = UPH }
+		}
+		GAS = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = AST }
+			annex_country = { target = NZL }
+		}
+		AMK = {
+			econ_join_sphere_GER = yes
+			transfer_state = 376
+			transfer_state = 375
+			transfer_state = 374
+			transfer_state = 989
+			transfer_state = 372
+			transfer_state = 368
+			transfer_state = 369
+			transfer_state = 362
+			transfer_state = 363
+			transfer_state = 364
+			transfer_state = 365
+			transfer_state = 367
+			transfer_state = 370
+			transfer_state = 371
+		}
+		WST = {
+			econ_join_sphere_GER = yes
+			transfer_state = 377
+			transfer_state = 990
+			transfer_state = 380
+			transfer_state = 387
+			transfer_state = 379
+			transfer_state = 385
+			transfer_state = 386
+			transfer_state = 378
+			transfer_state = 473
+			transfer_state = 471
+			transfer_state = 463
+			transfer_state = 739
+			transfer_state = 740
+		}
+		USA = {
+			econ_join_sphere_GER = yes
+			transfer_state = 276
+			transfer_state = 465
+			transfer_state = 464
+			set_politics = {
+				ruling_party = national_socialism
+				last_election = "1933.3.5"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_popularities = {
+				communist = 0
+				ultranationalism = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+
+				conservative_democracy = 30
+				authoritarian_democracy = 10
+				despotism = 0
+				fascism = 0
+				national_socialism = 60
+			}
+			set_cosmetic_tag = USA_GER
+		}
+		ITA = {
+			econ_join_sphere_GER = yes
+			set_politics = {
+				ruling_party = national_socialism
+			}
+			set_popularities = {
+				fascism = 30
+				national_socialism = 70
+			}
+			set_cosmetic_tag = RK_Italy
+		}
+		SYR = {
+			econ_join_sphere_GER = yes
+			set_politics = {
+				ruling_party = national_socialism
+			}
+			set_popularities = {
+				fascism = 0.3
+				national_socialism = 0.7
+			}
+			SYR_otto_von_bülow = {
+				promote_character = { ideology = national_socialism_stratocratic_nazism_subtype }
+			}
+			set_cosmetic_tag = SYR_GOR
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = SYR
+						is_core_of = LEB
+					}
+				}
+				SYR = {
+					transfer_state = PREV
+				}
+			}
+		}
+		GRO = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = COG }
+			annex_country = { target = ANG }
+			drop_cosmetic_tag = yes
+			set_politics = {
+				ruling_party = esoteric_nazism
+				last_election = "1933.3.5"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_popularities = {
+				communist = 0
+				ultranationalism = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+
+				conservative_democracy = 0
+				authoritarian_democracy = 0
+				despotism = 0
+				fascism = 0
+				national_socialism = 40
+				esoteric_nazism = 60
+			}
+			add_country_leader_role = {
+				character = GRO_hans_huttig
+				country_leader = {
+					desc = "POLITICS_HANS_HUTTIG_DESC"
+					ideology = esoteric_nazism_burgundian_system_subtype
+					expire = "1999.1.23"
+					id = -1
+				}
+				promote_leader = yes
+			}
+			set_party_name = { ideology = esoteric_nazism long_name = GRO_reichsstaat_party name = GRO_reichsstaat_party }
+			set_cosmetic_tag = GRO_REICHSSTAAT
+
+			transfer_state = 884
+			transfer_state = 1049
+			transfer_state = 1048
+			transfer_state = 1050
+
+			transfer_state = 942
+			transfer_state = 542
+			transfer_state = 1045
+			transfer_state = 1047
+			transfer_state = 1046
+			transfer_state = 1044
+		}
+		BOR = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = SAF }
+		}
+		GLC = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = FRA }
+			annex_country = { target = BRG }
+			annex_country = { target = BRT }
+		}
+		RKM = {
+			econ_join_sphere_GER = yes
+			transfer_state = 1010
+			transfer_state = 1011
+			transfer_state = 1158
+			transfer_state = 1156
+			transfer_state = 1155
+			transfer_state = 1157
+			transfer_state = 1009
+			transfer_state = 699
+			transfer_state = 462
+			transfer_state = 1008
+			transfer_state = 1153
+			transfer_state = 1152
+			transfer_state = 461
+			transfer_state = 1150
+			transfer_state = 1005
+			annex_country = { target = SLG }
+		}
+		GKO = {
+			econ_join_sphere_GER = yes
+			transfer_state = 963
+			transfer_state = 655
+			transfer_state = 1018
+			transfer_state = 525
+			transfer_state = 962
+			transfer_state = 1024
+			transfer_state = 560
+			transfer_state = 527
+		}
+		SKK = {
+			econ_join_sphere_GER = yes
+			transfer_state = 530
+		}
+		KIN = {
+			econ_join_sphere_GER = yes
+			transfer_state = 529
+			transfer_state = 630
+			transfer_state = 631
+			transfer_state = 531
+		}
+		KNT = {
+			econ_join_sphere_GER = yes
+			transfer_state = 535
+			transfer_state = 532
+			transfer_state = 282
+			transfer_state = 1234
+			transfer_state = 534
+		}
+		TOH = {
+			econ_join_sphere_GER = yes
+			transfer_state = 642
+			transfer_state = 533
+		}
+		RKC = {
+			econ_join_sphere_GER = yes
+			drop_cosmetic_tag = yes
+			annex_country = { target = CHI }
+			annex_country = { target = GNG }
+			annex_country = { target = GUX }
+			annex_country = { target = YUN }
+			annex_country = { target = GUZ }
+			annex_country = { target = XIK }
+			annex_country = { target = SIC }
+			annex_country = { target = SHX }
+			annex_country = { target = GAN }
+			annex_country = { target = QIN }
+			annex_country = { target = TIB }
+			annex_country = { target = XIN }
+			annex_country = { target = MAN }
+			annex_country = { target = MEN }
+			annex_country = { target = MON }
+			annex_country = { target = PRC }
+
+			transfer_state = 591
+			transfer_state = 813
+			transfer_state = 812
+			transfer_state = 1022
+			transfer_state = 811
+			transfer_state = 810
+			transfer_state = 1464
+		}
+		ENA = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = JAP }
+		}
+		GQB = {
+			econ_join_sphere_GER = yes
+			transfer_state = 466
+			transfer_state = 332
+			transfer_state = 468
+		}
+		RKL = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = MEX }
+			annex_country = { target = GUA }
+			annex_country = { target = BLZ }
+			annex_country = { target = ELS }
+			annex_country = { target = HON }
+			annex_country = { target = NIC }
+			annex_country = { target = COS }
+			annex_country = { target = PAN }
+		}
+		GCR = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = WIN }
+			annex_country = { target = DOM }
+			annex_country = { target = HAI }
+			annex_country = { target = CUB }
+
+			transfer_state = 686
+			transfer_state = 693
+			transfer_state = 690
+		}
+		BRI = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = CRN }
+			annex_country = { target = ENG }
+			annex_country = { target = WAL }
+			annex_country = { target = SCO }
+			annex_country = { target = IRE }
+			annex_country = { target = ULS }
+			drop_cosmetic_tag = yes
+		}
+		SCN = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = NOR }
+			annex_country = { target = SWE }
+			annex_country = { target = FIN }
+		}
+		RKA = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = SAU }
+			annex_country = { target = YEM }
+			annex_country = { target = IME }
+			annex_country = { target = OMA }
+		}
+		CAU = {
+			CAU_alfred_becker = {
+				promote_character = { ideology = national_socialism_stratocratic_nazism_subtype }
+			}
+			econ_join_sphere_GER = yes
+			transfer_state = 783
+			transfer_state = 230
+		}
+		AFG = {
+			econ_join_sphere_GER = yes
+			set_politics = {
+				ruling_party = national_socialism
+			}
+			set_popularities = {
+				liberal_democracy = 0
+				national_socialism = 100
+			}
+			AFG_armin_zimmermann = {
+				promote_character = { ideology = national_socialism_stratocratic_nazism_subtype }
+			}
+			set_cosmetic_tag = AFG_GOR
+			transfer_state = 749
+			transfer_state = 1316
+			transfer_state = 1317
+			transfer_state = 1318
+			annex_country = { target = MFP }
+			annex_country = { target = KLT }
+		}
+		RKH = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = IND }
+			annex_country = { target = AZH }
+			annex_country = { target = BHU }
+			annex_country = { target = NEP }
+		}
+		RKP = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = PER }
+			annex_country = { target = IRQ }
+			transfer_state = 781
+			transfer_state = 1334
+		}
+		RKK = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = GRE }
+			annex_country = { target = TUR }
+
+			transfer_state = 1264
+			transfer_state = 164
+		}
+		MCW = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = SAM }
+			annex_country = { target = ORE }
+			annex_country = { target = BKR }
+			annex_country = { target = TAR }
+			annex_country = { target = GOR }
+			annex_country = { target = PRM }
+			annex_country = { target = GAY }
+			annex_country = { target = VYT }
+			annex_country = { target = VOL }
+			annex_country = { target = KOM }
+			annex_country = { target = PLS }
+			annex_country = { target = UKH }
+			annex_country = { target = WRS }
+			annex_country = { target = ONG }
+			annex_country = { target = VOR }
+		}
+		RKF = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = IRK }
+			annex_country = { target = CHR }
+			annex_country = { target = VIL }
+			annex_country = { target = BRY }
+			annex_country = { target = CHT }
+			annex_country = { target = ALD }
+			annex_country = { target = YAK }
+			annex_country = { target = KOL }
+			annex_country = { target = AMR }
+			annex_country = { target = MAG }
+			annex_country = { target = OMO }
+			annex_country = { target = CHK }
+			annex_country = { target = KMC }
+		}
+		RKS = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = NRL }
+			annex_country = { target = URL }
+			annex_country = { target = MGN }
+			annex_country = { target = DRL }
+			annex_country = { target = TYM }
+			annex_country = { target = OMS }
+			annex_country = { target = KRS }
+			annex_country = { target = NOV }
+			annex_country = { target = ALT }
+			annex_country = { target = SBA }
+			annex_country = { target = KEM }
+			annex_country = { target = TOM }
+			annex_country = { target = SVR }
+			annex_country = { target = ZLT }
+			annex_country = { target = FAV }
+			annex_country = { target = SKH }
+			annex_country = { target = YGR }
+		}
+		NAF = {
+			econ_join_sphere_GER = yes
+			transfer_state = 515
+			transfer_state = 1192
+			transfer_state = 1194
+			transfer_state = 1195
+			transfer_state = 1193
+
+			transfer_state = 458
+			transfer_state = 1142
+			transfer_state = 665
+			transfer_state = 448
+			transfer_state = 661
+			transfer_state = 1138
+			transfer_state = 1141
+			transfer_state = 1137
+			transfer_state = 662
+			transfer_state = 449
+			transfer_state = 1140
+			transfer_state = 273
+			transfer_state = 1139
+			transfer_state = 663
+			transfer_state = 450
+			transfer_state = 451
+			transfer_state = 552
+			transfer_state = 1115
+			transfer_state = 452
+			transfer_state = 1116
+			transfer_state = 456
+			transfer_state = 457
+			transfer_state = 1119
+			transfer_state = 446
+			transfer_state = 447
+
+			annex_country = { target = ILG }
+		}
+		WAF = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = CAO }
+			annex_country = { target = FFR }
+			annex_country = { target = YOR }
+			annex_country = { target = GBE }
+			annex_country = { target = EWE }
+			annex_country = { target = LIB }
+			annex_country = { target = MDI }
+			annex_country = { target = SUS }
+			annex_country = { target = JOL }
+			annex_country = { target = WOL }
+			annex_country = { target = TRZ }
+			annex_country = { target = AYR }
+			annex_country = { target = HAU }
+			annex_country = { target = KNM }
+			annex_country = { target = AYR }
+			annex_country = { target = BKF }
+			annex_country = { target = MLI }
+			annex_country = { target = AZW }
+			transfer_state = 296
+		}
+		GAR = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = ARG }
+			annex_country = { target = CHL }
+			annex_country = { target = BOL }
+			annex_country = { target = PAR }
+			annex_country = { target = URG }
+
+			transfer_state = 502
+		}
+		GBR = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = BRA }
+			annex_country = { target = GUY }
+		}
+		GCO = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = PRU }
+			annex_country = { target = ECU }
+			annex_country = { target = COL }
+			annex_country = { target = VEN }
+		}
+		RKB = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = BUL }
+			annex_country = { target = SER }
+			annex_country = { target = CRO }
+			annex_country = { target = ROM }
+			annex_country = { target = HUN }
+
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = ALB
+						is_core_of = MNT
+
+					}
+				}
+			}
+		}
+		GSL = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = SLO }
+		}
+	}
+}
+
+##Göring's World WPB
+country_event = {
+	id = reich.998
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.998" }
+	title = reich.998.t
+	desc = reich.998.d
+	picture = GFX_report_event_south_african_war_rk_soldier4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.998.a
+		790 = { set_demilitarized_zone = no }
+		789 = { set_demilitarized_zone = no }
+		792 = { set_demilitarized_zone = no }
+		787 = { set_demilitarized_zone = no }
+		791 = { set_demilitarized_zone = no }
+		747 = { set_demilitarized_zone = no }
+		338 = { set_demilitarized_zone = no }
+		127 = { set_demilitarized_zone = no }
+		1154 = { set_demilitarized_zone = no }
+		1147 = { set_demilitarized_zone = no }
+		513 = { set_demilitarized_zone = no }
+		1007 = { set_demilitarized_zone = no }
+		1161 = { set_demilitarized_zone = no }
+		785 = { set_demilitarized_zone = no }
+		1149 = { set_demilitarized_zone = no }
+		1148 = { set_demilitarized_zone = no }
+		1146 = { set_demilitarized_zone = no }
+		108 = { set_demilitarized_zone = no }
+		228 = { set_demilitarized_zone = no }
+		218 = { set_demilitarized_zone = no }
+		729 = { set_demilitarized_zone = no }
+		623 = { set_demilitarized_zone = no }
+		21 = { set_demilitarized_zone = no }
+		877 = { set_demilitarized_zone = no }
+
+		GER = {
+			puppet = ITA
+			puppet = RKM
+			puppet = RKK
+			puppet = RKS
+			puppet = RKF
+			puppet = NAF
+			puppet = WAF
+			puppet = GEA
+			puppet = SYR
+			puppet = MCW
+			puppet = SCN
+			puppet = OKZ
+			puppet = RKA
+			puppet = UKR
+			puppet = RKT
+			puppet = GKA
+			puppet = ADS
+			puppet = GBQ
+			puppet = GCN
+			puppet = GPG
+			puppet = RKG
+			puppet = GSL
+			puppet = BRI
+			puppet = BRT
+			puppet = RKB
+			puppet = GCA
+			puppet = CAU
+			end_puppet = GRO
+			end_puppet = COG
+			end_puppet = ANG
+			end_puppet = BRG
+			remove_from_faction = BRG
+			remove_from_faction = GRO
+			annex_country = { target = CZE }
+			annex_country = { target = GGN }
+			annex_country = { target = OST }
+			annex_country = { target = DEN }
+			annex_country = { target = SWI }
+			annex_country = { target = IBR }
+			annex_country = { target = HOL }
+
+			transfer_state = 965
+			transfer_state = 1160
+
+
+			transfer_state = 177
+			transfer_state = 658
+			transfer_state = 1335
+			transfer_state = 656
+
+
+
+			transfer_state = 124
+			transfer_state = 145
+			transfer_state = 4
+
+
+
+
+
+
+
+
+
+
+
+			transfer_state = 290
+			transfer_state = 118
+
+
+
+
+
+			transfer_state = 39
+			transfer_state = 116
+
+		}
+		GEA = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = IEA }
+
+			transfer_state = 1134
+			transfer_state = 1132
+			transfer_state = 1179
+			transfer_state = 1133
+			transfer_state = 1131
+			transfer_state = 1128
+			transfer_state = 1130
+			transfer_state = 1129
+			transfer_state = 1135
+			transfer_state = 1136
+			transfer_state = 1126
+			transfer_state = 1127
+			transfer_state = 1122
+			transfer_state = 1121
+			transfer_state = 1120
+			transfer_state = 549
+			transfer_state = 551
+			transfer_state = 1125
+			transfer_state = 1124
+			transfer_state = 1123
+		}
+		RKG = {
+			econ_join_sphere_GER = yes
+			transfer_state = 171
+			transfer_state = 982
+		}
+		GPG = {
+			econ_join_sphere_GER = yes
+			transfer_state = 1004
+			transfer_state = 179
+			transfer_state = 1000
+			transfer_state = 112
+			transfer_state = 181
+			transfer_state = 998
+			transfer_state = 180
+			transfer_state = 997
+		}
+		GBQ = {
+			econ_join_sphere_GER = yes
+			transfer_state = 172
+			transfer_state = 993
+			transfer_state = 984
+		}
+		GKA = {
+			econ_join_sphere_GER = yes
+			transfer_state = 167
+			transfer_state = 987
+			transfer_state = 166
+			transfer_state = 1012
+			transfer_state = 986
+			transfer_state = 165
+			transfer_state = 985
+		}
+		ADS = {
+			econ_join_sphere_GER = yes
+			transfer_state = 168
+			transfer_state = 1002
+			transfer_state = 1003
+			transfer_state = 988
+			transfer_state = 173
+			transfer_state = 169
+			transfer_state = 1001
+			transfer_state = 170
+		}
+		GCA = {
+			econ_join_sphere_GER = yes
+			transfer_state = 175
+			transfer_state = 41
+			transfer_state = 1013
+			transfer_state = 996
+			transfer_state = 999
+			transfer_state = 176
+			transfer_state = 995
+			transfer_state = 994
+			transfer_state = 174
+			transfer_state = 983
+		}
+		OKZ = {
+			econ_join_sphere_GER = yes
+			transfer_state = 19
+			transfer_state = 31
+			transfer_state = 22
+			transfer_state = 21
+			transfer_state = 735
+			transfer_state = 32
+			transfer_state = 20
+			transfer_state = 790
+			transfer_state = 26
+			transfer_state = 25
+			transfer_state = 784
+			transfer_state = 1609
+			transfer_state = 1610
+			transfer_state = 1613
+			transfer_state = 1612
+			transfer_state = 1611
+			transfer_state = 23
+		}
+		RKT = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = TAJ }
+			annex_country = { target = UZB }
+			annex_country = { target = TRK }
+			annex_country = { target = KRK }
+			annex_country = { target = AKT }
+			annex_country = { target = NPL }
+			annex_country = { target = ARL }
+			annex_country = { target = DER }
+			annex_country = { target = KAZ }
+			annex_country = { target = KOK }
+			annex_country = { target = PAV }
+			annex_country = { target = KYR }
+			annex_country = { target = UTL }
+		}
+		ITA = {
+			econ_join_sphere_GER = yes
+			dismantle_faction = yes
+			set_politics = {
+				ruling_party = national_socialism
+			}
+			set_popularities = {
+				fascism = 30
+				national_socialism = 70
+			}
+			set_cosmetic_tag = RK_Italy
+			load_focus_tree = GER_blankfocus
+		}
+		SYR = {
+			econ_join_sphere_GER = yes
+			set_politics = {
+				ruling_party = national_socialism
+			}
+			set_popularities = {
+				fascism = 0.3
+				national_socialism = 0.7
+			}
+			create_country_leader = {
+				name = "Otto von Bülow"
+				picture = "gfx/leaders/GER/Portrait_Germany_Otto_von_Bulow.dds"
+				expire = "1999.4.24"
+				ideology = national_socialism_subtype
+				traits = {}
+			}
+			set_cosmetic_tag = SYR_GOR
+			transfer_state = 554
+			transfer_state = 680
+			transfer_state = 1243
+			transfer_state = 677
+			transfer_state = 1242
+			transfer_state = 1241
+			transfer_state = 782
+			transfer_state = 553
+			transfer_state = 1240
+			transfer_state = 1371
+			transfer_state = 1372
+			transfer_state = 1370
+			transfer_state = 1369
+			transfer_state = 1447
+			transfer_state = 1450
+			transfer_state = 1449
+		}
+		BRG = {
+			annex_country = {
+				target = FRA
+				transfer_troops = no
+			}
+		}
+		RKM = {
+			econ_join_sphere_GER = yes
+			transfer_state = 1010
+			transfer_state = 1011
+			transfer_state = 1158
+			transfer_state = 1156
+			transfer_state = 1155
+			transfer_state = 1157
+			transfer_state = 1009
+			transfer_state = 699
+			transfer_state = 462
+			transfer_state = 1008
+			transfer_state = 1153
+			transfer_state = 1152
+			transfer_state = 461
+			transfer_state = 1150
+			transfer_state = 1005
+			transfer_state = 1159
+			transfer_state = 839
+			annex_country = { target = SLG }
+		}
+		BRI = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = CRN }
+			annex_country = { target = ENG }
+			annex_country = { target = WAL }
+			annex_country = { target = SCO }
+			annex_country = { target = IRE }
+			annex_country = { target = ULS }
+			drop_cosmetic_tag = yes
+		}
+		BRT = {
+			econ_join_sphere_GER = yes
+			transfer_state = 747
+			transfer_state = 30
+		}
+		RKA = {
+			econ_join_sphere_GER = yes
+			annex_country = {
+				target = IME
+				transfer_troops = no
+			}
+		}
+		SCN = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = NOR }
+			annex_country = { target = SWE }
+			annex_country = { target = FIN }
+		}
+		CAU = {
+			econ_join_sphere_GER = yes
+			transfer_state = 783
+			transfer_state = 230
+			transfer_state = 1565
+			transfer_state = 1567
+			transfer_state = 1568
+		}
+		RKK = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = GRE }
+			annex_country = { target = TUR }
+			annex_country = { target = BKU }
+
+			transfer_state = 1264
+			transfer_state = 164
+		}
+		MCW = {
+			econ_join_sphere_GER = yes
+			MCW_werner_mummert = {
+				promote_character = { ideology = national_socialism_stratocratic_nazism_subtype }
+			}
+			annex_country = { target = SAM }
+			annex_country = { target = ORE }
+			annex_country = { target = BKR }
+			annex_country = { target = TAR }
+			annex_country = { target = GOR }
+			annex_country = { target = PRM }
+			annex_country = { target = GAY }
+			annex_country = { target = VYT }
+			annex_country = { target = VOL }
+			annex_country = { target = KOM }
+			annex_country = { target = PLS }
+			annex_country = { target = UKH }
+			annex_country = { target = WRS }
+			annex_country = { target = ONG }
+			annex_country = { target = VOR }
+		}
+		RKF = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = IRK }
+			annex_country = { target = CHR }
+			annex_country = { target = VIL }
+			annex_country = { target = BRY }
+			annex_country = { target = CHT }
+			annex_country = { target = ALD }
+			annex_country = { target = YAK }
+			annex_country = { target = KOL }
+			annex_country = { target = AMR }
+			annex_country = { target = MAG }
+			annex_country = { target = OMO }
+			annex_country = { target = CHK }
+			annex_country = { target = KMC }
+		}
+		RKS = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = URL }
+			annex_country = { target = MGN }
+			annex_country = { target = DRL }
+			annex_country = { target = TYM }
+			annex_country = { target = OMS }
+			annex_country = { target = KRS }
+			annex_country = { target = NOV }
+			annex_country = { target = ALT }
+			annex_country = { target = SBA }
+			annex_country = { target = KEM }
+			annex_country = { target = TOM }
+			annex_country = { target = SVR }
+			annex_country = { target = ZLT }
+			annex_country = { target = FAV }
+			annex_country = { target = SKH }
+			annex_country = { target = YGR }
+			annex_country = { target = NRL }
+		}
+		NAF = {
+			econ_join_sphere_GER = yes
+
+			transfer_state = 458
+			transfer_state = 1142
+			transfer_state = 665
+			transfer_state = 448
+			transfer_state = 661
+			transfer_state = 1138
+			transfer_state = 1141
+			transfer_state = 1137
+			transfer_state = 662
+			transfer_state = 449
+			transfer_state = 1140
+			transfer_state = 273
+			transfer_state = 1139
+			transfer_state = 663
+			transfer_state = 450
+			transfer_state = 451
+			transfer_state = 552
+			transfer_state = 1115
+			transfer_state = 452
+			transfer_state = 1116
+			transfer_state = 456
+			transfer_state = 457
+			transfer_state = 1119
+			transfer_state = 446
+			transfer_state = 447
+
+			annex_country = { target = ILG }
+		}
+		WAF = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = JOL }
+			annex_country = { target = WOL }
+			transfer_state = 296
+			transfer_state = 705
+		}
+		RKB = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = BUL }
+			annex_country = { target = SER }
+			annex_country = { target = CRO }
+			annex_country = { target = ROM }
+			annex_country = { target = HUN }
+
+			transfer_state = 1294
+			transfer_state = 1295
+			transfer_state = 44
+			transfer_state = 105
+			transfer_state = 745
+			transfer_state = 1326
+			transfer_state = 1280
+			transfer_state = 746
+			transfer_state = 105
+			transfer_state = 1293
+			transfer_state = 736
+			transfer_state = 102
+			transfer_state = 106
+		}
+		GSL = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = SLO }
+		}
+	}
+}
+
+##Göring's World WPA
+country_event = {
+	id = reich.997
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.997" }
+	title = reich.997.t
+	desc = reich.997.d
+	picture = GFX_report_event_south_african_war_rk_soldier4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.997.a
+		790 = { set_demilitarized_zone = no }
+		789 = { set_demilitarized_zone = no }
+		792 = { set_demilitarized_zone = no }
+		787 = { set_demilitarized_zone = no }
+		791 = { set_demilitarized_zone = no }
+		747 = { set_demilitarized_zone = no }
+		338 = { set_demilitarized_zone = no }
+		127 = { set_demilitarized_zone = no }
+		1154 = { set_demilitarized_zone = no }
+		1147 = { set_demilitarized_zone = no }
+		513 = { set_demilitarized_zone = no }
+		1007 = { set_demilitarized_zone = no }
+		1161 = { set_demilitarized_zone = no }
+		785 = { set_demilitarized_zone = no }
+		1149 = { set_demilitarized_zone = no }
+		1148 = { set_demilitarized_zone = no }
+		1146 = { set_demilitarized_zone = no }
+		108 = { set_demilitarized_zone = no }
+		228 = { set_demilitarized_zone = no }
+		218 = { set_demilitarized_zone = no }
+		729 = { set_demilitarized_zone = no }
+		623 = { set_demilitarized_zone = no }
+		21 = { set_demilitarized_zone = no }
+		877 = { set_demilitarized_zone = no }
+
+		GER = {
+			puppet = MCW
+			puppet = SCN
+			puppet = UKR
+			puppet = GSL
+			puppet = BRI
+			puppet = RKB
+			puppet = CAU
+			end_puppet = GRO
+			end_puppet = COG
+			end_puppet = ANG
+			end_puppet = FRA
+			end_puppet = BRT
+			end_puppet = MAD
+			end_puppet = BRG
+			remove_from_faction = FRA
+			remove_from_faction = BRT
+			remove_from_faction = BRG
+			remove_from_faction = GRO
+			remove_from_faction = MAD
+			annex_country = { target = CZE }
+			annex_country = { target = GGN }
+			annex_country = { target = OST }
+			annex_country = { target = DEN }
+			annex_country = { target = SWI }
+			annex_country = { target = HOL }
+			transfer_state = 124
+			transfer_state = 145
+			transfer_state = 4
+		}
+		BRT = {
+			transfer_state = 747
+			transfer_state = 30
+			econ_join_sphere_GER = yes
+		}
+
+		BOR = {
+			annex_country = { target = SAF }
+			econ_join_sphere_GER = yes
+		}
+		BRI = {
+			annex_country = { target = CRN }
+			annex_country = { target = ENG }
+			annex_country = { target = WAL }
+			annex_country = { target = SCO }
+			annex_country = { target = IRE }
+			annex_country = { target = ULS }
+			drop_cosmetic_tag = yes
+			econ_join_sphere_GER = yes
+		}
+		SCN = {
+			annex_country = { target = NOR }
+			annex_country = { target = SWE }
+			annex_country = { target = FIN }
+			econ_join_sphere_GER = yes
+		}
+		CAU = {
+			transfer_state = 783
+			transfer_state = 230
+			econ_join_sphere_GER = yes
+		}
+		RKB = {
+			annex_country = { target = BUL }
+			annex_country = { target = SER }
+			annex_country = { target = ROM }
+			annex_country = { target = HUN }
+			econ_join_sphere_GER = yes
+		}
+		GSL = {
+			annex_country = { target = SLO }
+			econ_join_sphere_GER = yes
+		}
+		MCW = {
+			econ_join_sphere_GER = yes
+			promote_character = MCW_Wolf_Heinrich_Graf_von_Helldorff
+		}
+	}
+}
+
+##Göring's World WP0
+country_event = {
+	id = reich.996
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.996" }
+	title = reich.996.t
+	desc = reich.996.d
+	picture = GFX_report_event_south_african_war_rk_soldier4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.996.a
+		790 = { set_demilitarized_zone = no }
+		789 = { set_demilitarized_zone = no }
+		792 = { set_demilitarized_zone = no }
+		787 = { set_demilitarized_zone = no }
+		791 = { set_demilitarized_zone = no }
+		747 = { set_demilitarized_zone = no }
+		338 = { set_demilitarized_zone = no }
+		127 = { set_demilitarized_zone = no }
+		1154 = { set_demilitarized_zone = no }
+		1147 = { set_demilitarized_zone = no }
+		513 = { set_demilitarized_zone = no }
+		1007 = { set_demilitarized_zone = no }
+		1161 = { set_demilitarized_zone = no }
+		785 = { set_demilitarized_zone = no }
+		1149 = { set_demilitarized_zone = no }
+		1148 = { set_demilitarized_zone = no }
+		1146 = { set_demilitarized_zone = no }
+		108 = { set_demilitarized_zone = no }
+		228 = { set_demilitarized_zone = no }
+		218 = { set_demilitarized_zone = no }
+		729 = { set_demilitarized_zone = no }
+		623 = { set_demilitarized_zone = no }
+		21 = { set_demilitarized_zone = no }
+		877 = { set_demilitarized_zone = no }
+
+		GER = {
+			end_puppet = MCW
+			puppet = GSL
+			puppet = MDG
+			end_puppet = GRO
+			end_puppet = COG
+			end_puppet = ANG
+			end_puppet = FRA
+			end_puppet = BRT
+			end_puppet = NOR
+			end_puppet = CRN
+			end_puppet = MAD
+			end_puppet = CAU
+			end_puppet = BRG
+			end_puppet = UKR
+			end_puppet = SER
+			remove_from_faction = UKR
+			remove_from_faction = CRN
+			remove_from_faction = NOR
+			remove_from_faction = IRE
+			remove_from_faction = ENG
+			remove_from_faction = BUL
+			remove_from_faction = SER
+			remove_from_faction = MCW
+			remove_from_faction = FRA
+			remove_from_faction = BRT
+			remove_from_faction = BRG
+			remove_from_faction = GRO
+			remove_from_faction = MAD
+			remove_from_faction = CAU
+			annex_country = { target = CZE }
+			annex_country = { target = GGN }
+			annex_country = { target = OST }
+			annex_country = { target = DEN }
+			annex_country = { target = HOL }
+		}
+		GSL = {
+			econ_join_sphere_GER = yes
+			annex_country = { target = SLO }
+		}
+		MDG = {
+			annex_country = {
+				target = MAD
+				transfer_troops = yes
+			}
+			econ_join_sphere_GER = yes
+		}
+	}
+}
+
+##Debug state modifier
+country_event = {
+	id = reich.9997
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.9997" }
+	title = reich.9997.t
+	desc = reich.9997.desc
+	picture = GFX_report_event_south_african_war_rk_soldier4
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = reich.9997.a
+
+		news_event = { id = WORLD.68 }
+		every_owned_state = {
+			limit = { check_variable = { nationality = 148 } }
+			add_state_modifier = { modifier = { Local_manpower = 0.15 } }
+		}
+	}
+}
+
+#########################
+##HITLER ILLNESS EVENTS##
+#########################
+country_event = { #
+	id = hitlerillness.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.1" }
+	title = hitlerillness.1.t
+	desc = hitlerillness.1.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.1.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.05
+		custom_effect_tooltip = hitlerillness_tt
+		hidden_effect = { country_event = { id = hitlerillness.3 days = 30 } }
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.11" }
+	title = hitlerillness.11.t
+	desc = hitlerillness.11.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.11.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.05
+		custom_effect_tooltip = hitlerillness_tt
+		hidden_effect = { country_event = { id = hitlerillness.3 days = 30 } }
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.10" }
+	title = hitlerillness.10.t
+	desc = hitlerillness.10.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.10.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.05
+		custom_effect_tooltip = hitlerillness_tt
+		hidden_effect = { country_event = { id = hitlerillness.3 days = 30 } }
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.9" }
+	title = hitlerillness.9.t
+	desc = hitlerillness.9.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.9.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.05
+		custom_effect_tooltip = hitlerillness_tt
+		hidden_effect = { country_event = { id = hitlerillness.3 days = 30 } }
+
+	}
+}
+
+
+country_event = { #
+	id = hitlerillness.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.3" }
+	title = hitlerillness.3.t
+	desc = hitlerillness.3.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.3.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.05
+		custom_effect_tooltip = hitlerillness_tt
+		hidden_effect = { country_event = { id = hitlerillness.4 days = 50 } }
+
+
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.4" }
+	title = hitlerillness.4.t
+	desc = hitlerillness.4.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.4.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.05
+		custom_effect_tooltip = hitlerillness_tt
+
+		if = {
+			limit = { has_country_flag = bormann_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.5 days = 60 } }
+		}
+
+		if = {
+			limit = { has_country_flag = goring_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.12 days = 60 } }
+		}
+
+		if = {
+			limit = { has_country_flag = speer_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.13 days = 60 } }
+		}
+
+		if = {
+			limit = { has_country_flag = heydrich_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.14 days = 60 } }
+		}
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.5" }
+	title = hitlerillness.5.t
+	desc = hitlerillness.5.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.5.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.05
+		custom_effect_tooltip = hitlerillness_tt
+		hidden_effect = { country_event = { id = hitlerillness.6 days = 120 } }
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.6" }
+	title = hitlerillness.6.t
+	desc = hitlerillness.6.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.6.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.10
+		custom_effect_tooltip = hitlerillness_tt
+
+		if = {
+			limit = { has_country_flag = bormann_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.7 days = 100 } }
+		}
+
+		if = {
+			limit = { has_country_flag = goring_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.32 days = 100 } }
+		}
+
+		if = {
+			limit = { has_country_flag = speer_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.30 days = 100 } }
+		}
+
+		if = {
+			limit = { has_country_flag = heydrich_for_germany }
+			hidden_effect = { country_event = { id = hitlerillness.33 days = 100 } }
+		}
+	}
+}
+
+country_event = { #
+	id = hitlerillness.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.7" }
+	title = hitlerillness.7.t
+	desc = hitlerillness.7.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.7.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.15
+		custom_effect_tooltip = hitlerillnesscoma_tt
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.8" }
+	title = hitlerillness.8.t
+	desc = hitlerillness.8.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.8.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.20
+		custom_effect_tooltip = hitlerillnessdies_tt
+
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.12" }
+	title = hitlerillness.12.t
+	desc = hitlerillness.12.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.12.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.15
+		hidden_effect = { country_event = { id = hitlerillness.6 days = 120 } }
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.13" }
+	title = hitlerillness.13.t
+	desc = hitlerillness.13.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.13.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.15
+		hidden_effect = { country_event = { id = hitlerillness.6 days = 120 } }
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.14" }
+	title = hitlerillness.14.t
+	desc = hitlerillness.14.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.14.a
+		ai_chance = { factor = 1 }
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.15
+		hidden_effect = { country_event = { id = hitlerillness.6 days = 120 } }
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.15" }
+	title = hitlerillness.15.t
+	desc = hitlerillness.15.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.15.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.20
+		custom_effect_tooltip = hitlerillnessdies_tt
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.16" }
+	title = hitlerillness.16.t
+	desc = hitlerillness.16.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.16.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.20
+		custom_effect_tooltip = hitlerillnessdies_tt
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.17" }
+	title = hitlerillness.17.t
+	desc = hitlerillness.17.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.17.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		add_stability = -0.20
+		custom_effect_tooltip = hitlerillnessdies_tt
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.30" }
+	title = hitlerillness.30.t
+	desc = hitlerillness.30.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.30.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		custom_effect_tooltip = hitlerillnesscoma_tt
+
+	}
+}
+
+
+country_event = { #
+	id = hitlerillness.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.32" }
+	title = hitlerillness.32.t
+	desc = hitlerillness.32.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.32.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		custom_effect_tooltip = hitlerillnesscoma_tt
+
+	}
+}
+
+country_event = { #
+	id = hitlerillness.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event hitlerillness.33" }
+	title = hitlerillness.33.t
+	desc = hitlerillness.33.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = hitlerillness.33.a
+		ai_chance = { factor = 1 }
+		GER_hitler_advance = yes
+		custom_effect_tooltip = hitlerillnesscoma_tt
+
+	}
+}
+
+###############################
+## People Introduction Events##
+###############################
+
+country_event = { #Bormann Intro
+	id = reich.600
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.600" }
+	title = reich.600.t
+	desc = reich.600.desc
+	picture = GFX_martin_bormann_intro
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.600.a
+		ai_chance = { factor = 1 }
+		hidden_effect = { country_event = { id = reich.601 days = 5 } }
+
+	}
+}
+
+country_event = { #Göring Intro
+	id = reich.601
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.601" }
+	title = reich.601.t
+	desc = reich.601.desc
+	picture = GFX_Hermann_goering_intro
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.601.a
+		ai_chance = { factor = 1 }
+		hidden_effect = { country_event = { id = reich.602 days = 5 } }
+
+	}
+}
+
+country_event = { #Speer Intro
+	id = reich.602
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.602" }
+	title = reich.602.t
+	desc = reich.602.desc
+	picture = GFX_albert_speer_intro
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.602.a
+		ai_chance = { factor = 1 }
+		hidden_effect = { country_event = { id = reich.603 days = 5 } }
+
+	}
+}
+
+country_event = { #Heydrich Intro
+	id = reich.603
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.603" }
+	title = reich.603.t
+	desc = reich.603.desc
+	picture = GFX_heydrich_intro
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.603.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #gang of four intro part 1
+	id = reich.604
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.604" }
+	title = reich.604.t
+	desc = reich.604.desc
+	picture = GFX_gang_of_four_intro
+
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = { has_country_flag = speer_for_germany }
+
+	option = { #
+		name = reich.604.a
+		ai_chance = { factor = 1 }
+
+
+	}
+}
+
+
+
+country_event = { #Reinhard ghlen intro
+	id = reich.606
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.606" }
+	title = reich.606.t
+	desc = reich.606.desc
+	picture = GFX_reinhard_ghelen_intro
+
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.606.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Ferdinad Schronner Intro
+	id = reich.607
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.607" }
+	title = reich.607.t
+	desc = reich.607.desc
+	picture = GFX_schorner_intro
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = { #
+		name = reich.607.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+country_event = { #Otto Ernest Intro
+	id = reich.608
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.608" }
+	title = reich.608.t
+	desc = reich.608.desc
+	picture = GFX_otto_remer_intro
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = { #
+		name = reich.608.a
+		ai_chance = { factor = 1 }
+
+	}
+}
+
+###Legitimacy Events###
+
+country_event = { #
+	id = reich.609
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.609" }
+	title = reich.609.t
+	desc = reich.609.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.609.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		set_temp_variable = { temp_econ_GDP_boost_flat = 0.2 }
+		econ_GDP_boost_once_flat = yes
+
+	}
+	option = { #
+		name = reich.609.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+
+		add_political_power = 25
+	}
+	option = { #
+		name = reich.609.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_goring = yes
+		TNO_improve_security_policy_effectiveness_med = yes
+	}
+	option = { #
+		name = reich.609.d
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		TNO_worsen_security_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #
+	id = reich.610
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.610" }
+	title = reich.610.t
+	desc = reich.610.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.610.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		TNO_worsen_public_meetings_policy_effectiveness_med = yes
+	}
+	option = { #
+		name = reich.610.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+
+	}
+	option = { #
+		name = reich.610.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_goring = yes
+		TNO_improve_public_meetings_policy_effectiveness_low = yes
+
+	}
+	option = { #
+		name = reich.610.d
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		TNO_improve_public_meetings_policy_effectiveness_high = yes
+
+	}
+}
+
+country_event = { #
+	id = reich.611
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.611" }
+	title = reich.611.t
+	desc = reich.611.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.611.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		TNO_improve_unemployment_policy_effectiveness_med = yes
+
+	}
+	option = { #
+		name = reich.611.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+		TNO_improve_unemployment_policy_effectiveness_low = yes
+
+	}
+	option = { #
+		name = reich.611.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_goring = yes
+		TNO_improve_unemployment_policy_effectiveness_low = yes
+		army_funding_minimal_increase_low = yes
+	}
+	option = { #
+		name = reich.611.d
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		TNO_worsen_unemployment_policy_effectiveness_low = yes
+	}
+}
+
+country_event = { #
+	id = reich.612
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.612" }
+	title = reich.612.t
+	desc = reich.612.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.612.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		TNO_worsen_gender_rights_policy_effectiveness_low = yes
+
+	}
+	option = { #
+		name = reich.612.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+
+	}
+	option = { #
+		name = reich.612.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_goring = yes
+		TNO_improve_gender_rights_policy_effectiveness_low = yes
+
+	}
+	option = { #
+		name = reich.612.d
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		TNO_improve_gender_rights_policy_effectiveness_med = yes
+
+	}
+}
+
+country_event = { #
+	id = reich.613
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.613" }
+	title = reich.613.t
+	desc = reich.613.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.613.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		TNO_improve_slavery_policy_effectiveness_med = yes
+		set_temp_variable = { debt_temp = 0.2 }
+		econ_national_debt_change = yes
+
+	}
+	option = { #
+		name = reich.613.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_goring = yes
+		TNO_improve_slavery_policy_effectiveness_low = yes
+		army_funding_minimal_decrease_low = yes
+	}
+	option = { #
+		name = reich.613.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+		TNO_improve_slavery_policy_effectiveness_low = yes
+		set_temp_variable = { temp_econ_spending_amount = 0.1 }
+		econ_spend_money_once_effect_raw_money = yes
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = prisons
+				level = 1
+				instant_build = yes
+			}
+		}
+
+	}
+	option = { #
+		name = reich.613.d
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		TNO_improve_slavery_policy_effectiveness_low = yes
+
+	}
+}
+
+country_event = { #
+	id = reich.614
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.614" }
+	title = reich.614.t
+	desc = reich.614.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.614.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		set_temp_variable = { temp_econ_GDP_boost_flat = 0.25 }
+		econ_GDP_boost_once_flat = yes
+	}
+	option = { #
+		name = reich.614.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_goring = yes
+		set_temp_variable = { temp_econ_GDP_boost_flat = 0.15 }
+		econ_GDP_boost_once_flat = yes
+		TNO_improve_slavery_policy_effectiveness_med = yes
+
+	}
+	option = { #
+		name = reich.614.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+
+	}
+	option = { #
+		name = reich.614.d
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		set_temp_variable = { temp_econ_GDP_boost_flat = -0.2 }
+		econ_GDP_boost_once_flat = yes
+
+	}
+}
+
+country_event = { #
+	id = reich.615
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.615" }
+	title = reich.615.t
+	desc = reich.615.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.615.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		set_temp_variable = { temp_econ_spending_amount = 0.1 }
+		econ_spend_money_once_effect_raw_money = yes
+
+		random_owned_controlled_state = {
+			limit = {
+				infrastructure < 9
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	option = { #
+		name = reich.615.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+		GER_increase_legitimacy_small_goring = yes
+		add_manpower = -2000
+
+		random_owned_controlled_state = {
+			limit = {
+				infrastructure < 9
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+
+	}
+	option = { #
+		name = reich.615.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+
+	}
+}
+
+country_event = { #
+	id = reich.616
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.616" }
+	title = reich.616.t
+	desc = reich.616.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.616.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		set_temp_variable = { gdp_growth_temp = 0.5 }
+		econ_gdp_growth_change = yes
+		army_funding_minimal_decrease_low = yes
+		army_funding_maximal_decrease_low = yes
+
+	}
+	option = { #
+		name = reich.616.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_goring = yes
+		GER_increase_legitimacy_small_bormann = yes
+		set_temp_variable = { gdp_growth_temp = 0.25 }
+		econ_gdp_growth_change = yes
+		#army_funding_minimal_increase_low = yes
+		set_temp_variable = { temp_econ_spending_amount = 0.1 }
+		econ_spend_money_once_effect_raw_money = yes
+		random_owned_controlled_state = {
+			limit = {
+				infrastructure < 9
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+
+	}
+	option = { #
+		name = reich.616.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		set_temp_variable = { gdp_growth_temp = -0.5 }
+		econ_gdp_growth_change = yes
+		#army_funding_minimal_increase_low = yes
+	}
+}
+
+country_event = { #
+	id = reich.617
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.617" }
+	title = reich.617.t
+	desc = reich.617.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.617.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		naval_funding_minimal_decrease_low = yes
+
+	}
+	option = { #
+		name = reich.617.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = speer_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+		GER_increase_legitimacy_small_goring = yes
+		naval_funding_minimal_increase_low = yes
+
+	}
+	option = { #
+		name = reich.617.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = speer_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_heydrich = yes
+		naval_funding_minimal_increase_med = yes
+	}
+}
+
+
+
+country_event = { #
+	id = reich.618
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.618" }
+	title = reich.618.t
+	desc = reich.618.desc
+	picture = GFX_successor_desk
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = reich.618.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_flag = bormann_for_germany
+					has_country_flag = goring_for_germany
+					has_country_flag = heydrich_for_germany
+				}
+			}
+		}
+		GER_increase_legitimacy_small_speer = yes
+		army_funding_minimal_decrease_med = yes
+
+	}
+	option = { #
+		name = reich.618.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_country_flag = speer_for_germany
+			}
+		}
+		GER_increase_legitimacy_small_bormann = yes
+		GER_increase_legitimacy_small_goring = yes
+		GER_increase_legitimacy_small_heydrich = yes
+		army_funding_minimal_increase_low = yes
+
+	}
+}
+
+## Bohemia shit
+country_event = { # Who to join
+	id = reich.800
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich.800"}
+	title = "Who do we join"
+	desc = "You shouldn't be seeing this"
+	picture = GFX_event_civil_war
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = "Bormann"
+		trigger = { GER = { has_country_flag = GER_CZE_secured_bormann } }
+		save_party_popularities = yes
+		BGR = { puppet = CZE }
+		apply_party_popularities = yes
+
+		for_each_scope_loop = {
+			array = global.GCW_contenders
+			if = {
+				limit = { NOT = { tag = BGR } }
+				PREV = { declare_war_on = { target = PREV type = annex_everything } }
+			}
+			country_event = reich.801
+		}
+		set_country_flag = GER_CZE_joined_gcw
+		GER = { set_country_flag = GER_CZE_joined_bormann }
+	}
+	option = {
+		name = "Göring"
+		trigger = { GER = { has_country_flag = GER_CZE_secured_goring } }
+		save_party_popularities = yes
+		GGR = { puppet = CZE }
+		apply_party_popularities = yes
+
+		for_each_scope_loop = {
+			array = global.GCW_contenders
+			if = {
+				limit = { NOT = { tag = GGR } }
+				PREV = { declare_war_on = { target = PREV type = annex_everything } }
+			}
+			country_event = reich.802
+		}
+		set_country_flag = GER_CZE_joined_gcw
+		GER = { set_country_flag = GER_CZE_joined_goring }
+	}
+	option = {
+		name = "Speer"
+		trigger = { GER = { has_country_flag = GER_CZE_secured_speer } }
+		save_party_popularities = yes
+		SGR = { puppet = CZE }
+		apply_party_popularities = yes
+
+		for_each_scope_loop = {
+			array = global.GCW_contenders
+			if = {
+				limit = { NOT = { tag = SGR } }
+				PREV = { declare_war_on = { target = PREV type = annex_everything } }
+			}
+			country_event = reich.803
+		}
+		set_country_flag = GER_CZE_joined_gcw
+		GER = { set_country_flag = GER_CZE_joined_speer }
+	}
+	option = {
+		name = "Heydrich"
+		trigger = { GER = { has_country_flag = GER_CZE_secured_heydrich } }
+		save_party_popularities = yes
+		HGR = { puppet = CZE }
+		apply_party_popularities = yes
+
+		add_ideas = {
+			CZE_Rolf_Gunther_for
+			CZE_Horst_Bohme_sec
+		}
+
+		for_each_scope_loop = {
+			array = global.GCW_contenders
+			if = {
+				limit = { NOT = { tag = HGR } }
+				PREV = { declare_war_on = { target = PREV type = annex_everything } }
+			}
+			country_event = reich.804
+		}
+		set_country_flag = GER_CZE_joined_gcw
+		GER = { set_country_flag = GER_CZE_joined_heydrich }
+	}
+	option = {
+		name = "No One"
+		trigger = {
+			GER = {
+				NOT = {
+					has_country_flag = GER_CZE_secured_bormann
+					has_country_flag = GER_CZE_secured_goring
+					has_country_flag = GER_CZE_secured_speer
+					has_country_flag = GER_CZE_secured_heydrich
+				}
+			}
+		}
+		for_each_scope_loop = {
+			array = global.GCW_contenders
+			country_event = reich.805
+		}
+	}
+}
+
+country_event = { # Bohemia joins Bormann
+	id = reich.801
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.801" }
+	title = reich.801.t
+	desc = reich.801.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = reich.801.a
+		trigger = { tag = BGR }
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = { #
+		name = reich.801.b
+		trigger = { NOT = { tag = BGR } }
+	}
+}
+
+country_event = { # Bohemia joins Göring
+	id = reich.802
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.802" }
+	title = reich.802.t
+	desc = reich.802.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = reich.802.a
+		trigger = { tag = GGR }
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = { #
+		name = reich.802.b
+		trigger = { NOT = { tag = GGR } }
+	}
+}
+
+country_event = { # Bohemia joins Speer
+	id = reich.803
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.803" }
+	title = reich.803.t
+	desc = reich.803.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = reich.803.a
+		trigger = { tag = SGR }
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = { #
+		name = reich.803.b
+		trigger = { NOT = { tag = SGR } }
+	}
+}
+
+country_event = { # Bohemia joins Heydrich
+	id = reich.804
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.804" }
+	title = reich.804.t
+	desc = reich.804.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = reich.804.a
+		trigger = { tag = HGR }
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = { #
+		name = reich.804.b
+		trigger = { NOT = { tag = HGR } }
+	}
+}
+
+country_event = { # Bohemia stays neutral
+	id = reich.805
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.805" }
+	title = reich.805.t
+	desc = reich.805.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = reich.805.a
+	}
+}
+
+country_event = { # Event about how Bohemia sided with another contender and we conquered them and now will move to reintegrate them back
+	id = reich.806
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.806" }
+	title = reich.806.t
+	desc = reich.806.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = reich.806.a
+		if = {
+			limit = { has_global_flag = german_civil_war_bormannvic }
+			activate_mission = GER_Bohemia_Reconstruction_BGR_A
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_speervic }
+			activate_mission = GER_Bohemia_Reconstruction_SGR_A
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_goringvic }
+			activate_mission = GER_Bohemia_Reconstruction_GGR_A
+		}
+		75 = { add_compliance = 20 }
+		9 = { add_compliance = 20 }
+		set_temp_variable = { temp_econ_spending_amount = 0.5 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = { # Event about how Bohemia sided with us but fell to another contender in the war
+	id = reich.807
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.807" }
+	title = reich.807.t
+	desc = reich.807.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = reich.807.a
+		if = {
+			limit = { has_global_flag = german_civil_war_bormannvic }
+			activate_mission = GER_Bohemia_Reconstruction_BGR_A
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_speervic }
+			activate_mission = GER_Bohemia_Reconstruction_SGR_A
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_goringvic }
+			activate_mission = GER_Bohemia_Reconstruction_GGR_A
+		}
+		75 = { add_compliance = 40 }
+		9 = { add_compliance = 40 }
+		set_temp_variable = { temp_econ_spending_amount = 0.5 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = { # woowee, Bohemia suffered a lot of damage but it is now reintegrated and rebuilt, yaaay
+	id = reich.808
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.808" }
+	title = reich.808.t
+	desc = reich.808.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = reich.808.a
+		add_state_core = 9
+		add_state_core = 75
+		TNO_improve_admin_efficiency_really_low = yes
+		set_temp_variable = { gdp_growth_temp = 0.2 }
+		econ_gdp_growth_change = yes
+	}
+}
+
+country_event = { # Event about the new Führer commemorating the Bohemian garrison and government for their loyalty
+	id = reich.809
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.809" }
+	title = reich.809.t
+	desc = reich.809.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = reich.809.a
+		add_political_power = 30
+		# implement bonuses for each contender's main mechanic
+		country_event = { id = reich.811 days = 3 }
+	}
+}
+
+country_event = { # Event about reconstruction and reintegration efforts taking place
+	id = reich.810
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.810" }
+	title = reich.810.t
+	desc = reich.810.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = reich.810.a	
+		if = {
+			limit = { has_global_flag = german_civil_war_bormannvic }
+			activate_mission = GER_Bohemia_Reconstruction_BGR_B
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_speervic }
+			activate_mission = GER_Bohemia_Reconstruction_SGR_B
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_goringvic }
+			activate_mission = GER_Bohemia_Reconstruction_GGR_B
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.2 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+
+country_event = { # woowee, Bohemia suffered a little damage but it is now reintegrated and rebuilt, yaaay
+	id = reich.811
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.811" }
+	title = reich.811.t
+	desc = reich.811.desc
+	picture = GFX_event_civil_war
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = reich.811.a
+		add_state_core = 9
+		add_state_core = 75
+		CZE = { every_unit_leader = { set_nationality = GER } }
+		annex_country = { target = CZE transfer_troops = yes }
+		TNO_improve_admin_efficiency_really_low = yes
+		set_temp_variable = { gdp_growth_temp = 0.3 }
+		econ_gdp_growth_change = yes
+	}
+}
+
+################################
+##     GCW Capture Events     ##
+################################
+
+country_event = { #Leipzig captured
+	id = gcwcapture.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.1"}
+	title = gcwcapture.1.t
+	desc = gcwcapture.1.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.1.a
+		trigger = { tag = BGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.1.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Nuremberg captured
+	id = gcwcapture.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.2"}
+	title = gcwcapture.2.t
+	desc = gcwcapture.2.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.2.a
+		trigger = { tag = BGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.2.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Stuttgart captured
+	id = gcwcapture.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.3"}
+	title = gcwcapture.3.t
+	desc = gcwcapture.3.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.3.a
+		trigger = { tag = BGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.3.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { ## München captured
+	id = gcwcapture.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.4"}
+	title = gcwcapture.4.t
+	desc = gcwcapture.4.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.4.a
+		trigger = { tag = BGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.4.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { # Leipzig recaptured
+	id = gcwcapture.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.5"}
+	title = gcwcapture.5.t
+	desc = gcwcapture.5.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.5.a
+		trigger = { tag = BGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.5.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { # Nuremberg recaptured
+	id = gcwcapture.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.6"}
+	title = gcwcapture.6.t
+	desc = gcwcapture.6.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.6.a
+		trigger = { tag = BGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.6.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { # Stuttgart recaptured
+	id = gcwcapture.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.7"}
+	title = gcwcapture.7.t
+	desc = gcwcapture.7.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.7.a
+		trigger = { tag = BGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.7.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { # München recaptured
+	id = gcwcapture.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.8"}
+	title = gcwcapture.8.t
+	desc = gcwcapture.8.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.8.a
+		trigger = { tag = BGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.8.b
+		trigger = { NOT = { tag = BGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Frankfurt captured
+	id = gcwcapture.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.9"}
+	title = gcwcapture.9.t
+	desc = gcwcapture.9.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.9.a
+		trigger = { tag = SGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.9.b
+		trigger = { NOT = { tag = SGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Hannover captured
+	id = gcwcapture.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.9"}
+	title = gcwcapture.10.t
+	desc = gcwcapture.10.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.10.a
+		trigger = { tag = SGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.10.b
+		trigger = { NOT = { tag = SGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Essen captured
+	id = gcwcapture.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.11"}
+	title = gcwcapture.11.t
+	desc = gcwcapture.11.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.11.a
+		trigger = { tag = SGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.11.b
+		trigger = { NOT = { tag = SGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Frankfurt recaptured
+	id = gcwcapture.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.12"}
+	title = gcwcapture.12.t
+	desc = gcwcapture.12.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.12.a
+		trigger = { tag = SGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.12.b
+		trigger = { NOT = { tag = SGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Hannover recaptured
+	id = gcwcapture.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.13"}
+	title = gcwcapture.13.t
+	desc = gcwcapture.13.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.13.a
+		trigger = { tag = SGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.13.b
+		trigger = { NOT = { tag = SGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Essen recaptured
+	id = gcwcapture.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.14"}
+	title = gcwcapture.14.t
+	desc = gcwcapture.14.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.14.a
+		trigger = { tag = SGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.14.b
+		trigger = { NOT = { tag = SGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Kiel captured
+	id = gcwcapture.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.15"}
+	title = gcwcapture.15.t
+	desc = gcwcapture.15.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.15.a
+		trigger = { tag = GGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.15.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Rostock captured
+	id = gcwcapture.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.16"}
+	title = gcwcapture.16.t
+	desc = gcwcapture.16.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.16.a
+		trigger = { tag = GGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.16.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Posen captured
+	id = gcwcapture.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.17"}
+	title = gcwcapture.17.t
+	desc = gcwcapture.17.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.17.a
+		trigger = { tag = GGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.17.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Kattowitz captured
+	id = gcwcapture.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.18"}
+	title = gcwcapture.18.t
+	desc = gcwcapture.18.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.18.a
+		trigger = { tag = GGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.18.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Kiel recaptured
+	id = gcwcapture.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.19"}
+	title = gcwcapture.19.t
+	desc = gcwcapture.19.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.15.a
+		trigger = { tag = GGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.15.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Rostock recaptured
+	id = gcwcapture.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.20"}
+	title = gcwcapture.20.t
+	desc = gcwcapture.20.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.20.a
+		trigger = { tag = GGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.20.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Posen recaptured
+	id = gcwcapture.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.21"}
+	title = gcwcapture.21.t
+	desc = gcwcapture.21.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.21.a
+		trigger = { tag = GGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.21.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Kattowitz recaptured
+	id = gcwcapture.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.22"}
+	title = gcwcapture.22.t
+	desc = gcwcapture.22.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.22.a
+		trigger = { tag = GGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.22.b
+		trigger = { NOT = { tag = GGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Königsberg captured
+	id = gcwcapture.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.23"}
+	title = gcwcapture.23.t
+	desc = gcwcapture.23.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.23.a
+		trigger = { tag = HGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.23.b
+		trigger = { NOT = { tag = HGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Strasburg captured
+	id = gcwcapture.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.24"}
+	title = gcwcapture.24.t
+	desc = gcwcapture.24.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.23.a
+		trigger = { tag = HGR }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+	option = {
+		name = gcwcapture.23.b
+		trigger = { NOT = { tag = HGR } }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+}
+
+country_event = { #Königsberg recaptured
+	id = gcwcapture.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.25"}
+	title = gcwcapture.25.t
+	desc = gcwcapture.25.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.25.a
+		trigger = { tag = HGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.25.b
+		trigger = { NOT = { tag = HGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+country_event = { #Strasberg recaptured
+	id = gcwcapture.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gcwcapture.26"}
+	title = gcwcapture.26.t
+	desc = gcwcapture.26.desc
+	picture = GFX_event_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = gcwcapture.25.a
+		trigger = { tag = HGR }
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 15
+		GCW_increase_legitimacy_small = yes
+	}
+	option = {
+		name = gcwcapture.25.b
+		trigger = { NOT = { tag = HGR } }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -15
+	}
+}
+
+### Iran Adventure
+
+country_event = { ### Loads in the correct tree for the correct leader in Iran
+	id = reich_shared.19
+	title = reich_shared.19.t
+	desc = reich_shared.19.desc
+	picture = GFX_report_event_war_crime_2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.19"}
+
+	option = {
+		name = reich_shared.19.a
+		set_country_flag = GER_iran_intervention
+		TNO_fopo_add_iran_civil_war_tab = yes
+		custom_effect_tooltip = SGR_new_decisions
+	}
+}
+
+country_event = { ### Iran victory
+	id = reich_shared.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.20"}
+	title = reich_shared.20.t
+	desc = reich_shared.20.desc
+	picture = GFX_report_event_german_army2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = { PER = { has_war = no } }
+
+	option = {
+		name = reich_shared.20.a
+		TNO_fopo_remove_iran_civil_war_tab = yes
+		add_political_power = 100
+		add_stability = 0.03
+		add_war_support = 0.03
+		add_to_faction = PER
+		clr_country_flag = GER_iran_intervention
+		if = {
+			limit = { has_global_flag = german_civil_war_bormannvic }
+			BOR_SIG_AP_0_10 = yes
+			BOR_SIG_AL_0_3_1 = yes
+			BOR_SIG_AL_1_3_1 = yes
+			BOR_SIG_AL_4_3_1 = yes
+			add_popularity = { ideology = national_socialism popularity = 0.02 }
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_speervic }
+			if = {
+				limit = { has_government = authoritarian_democracy }
+				add_popularity = { ideology = authoritarian_democracy popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_government = fascism }
+				add_popularity = { ideology = fascism popularity = 0.02 }
+			}
+			else_if = {
+				limit = { has_government = national_socialism }
+				add_popularity = { ideology = national_socialism popularity = 0.02 }
+			}
+		}
+		set_temp_variable = { target = PER }
+		TNO_clear_num_volunteers = yes
+		PER = {
+			econ_join_sphere_GER = yes
+			remove_ideas = {
+				PER_german_military_advisers
+				PER_german_industrial_aid
+			}
+			give_resource_rights = { receiver = GER state = 411 }
+			give_resource_rights = { receiver = GER state = 412 }
+			TNO_improve_army_professionalism_low = yes
+			hidden_effect = {
+				remove_faction_status = yes
+				add_ideas = Pakt_Bundnispartner
+			}
+		}
+	}
+}
+
+country_event = { ### Iran defeat
+	id = reich_shared.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.21"}
+	title = reich_shared.21.t
+	desc = reich_shared.21.desc
+	picture = GFX_report_event_german_anarchy
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich_shared.21.a
+		TNO_fopo_remove_iran_civil_war_tab = yes
+		add_political_power = -100
+		add_stability = -0.03
+		add_war_support = -0.03
+		clr_country_flag = GER_iran_intervention
+		if = {
+			limit = { has_global_flag = german_civil_war_bormannvic }
+			BOR_SIG_SP_0_10 = yes
+			BOR_SIG_SL_0_3_1 = yes
+			BOR_SIG_SL_1_3_1 = yes
+			BOR_SIG_SL_4_3_1 = yes
+			add_popularity = { ideology = national_socialism popularity = -0.03 }
+		}
+		else_if = {
+			limit = { has_global_flag = german_civil_war_speervic }
+			if = {
+				limit = { has_government = authoritarian_democracy }
+				add_popularity = { ideology = authoritarian_democracy popularity = -0.03 }
+			}
+			else_if = {
+				limit = { has_government = fascism }
+				add_popularity = { ideology = fascism popularity = -0.03 }
+			}
+			else_if = {
+				limit = { has_government = national_socialism }
+				add_popularity = { ideology = national_socialism popularity = -0.03 }
+			}
+		}
+		set_temp_variable = { target = PER }
+		TNO_clear_num_volunteers = yes
+	}
+}
+
+country_event = { #Poland takeover flavor
+	id = reich_shared.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.22"}
+	title = reich_shared.22.t
+	desc = reich_shared.22.desc
+	picture = GFX_report_event_german_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = reich_shared.22.a
+		add_manpower = -1
+	}
+}
+
+country_event = { # Rommel retirement event
+	id = reich_shared.23
+	title = reich_shared.23.t
+	desc = reich_shared.23.desc
+	picture = GFX_report_event_generic_military_parade
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.23"}
+
+	option = {
+		name = reich_shared.23.a
+		every_unit_leader = {
+			limit = { has_id = 72 }
+			retire = yes
+		}
+	}
+}
+
+country_event = { #Frente Azul requests Pakt membership. Skeleton event, remove when their content is added back #FIXME
+	id = reich_shared.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.24"}
+	title = reich_shared.24.t
+	desc = reich_shared.24.desc
+	picture = GFX_report_event_iberia_frente_azul_flag
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # Sure
+		name = reich_shared.24.a
+		add_to_faction = FZL
+		hidden_effect = {
+			FZL = { 
+				add_ideas = Pakt_Bundnispartner
+				econ_join_sphere_GER = yes
+			}
+			GNS = { 
+				add_ideas = Pakt_Bundnispartner
+				econ_join_sphere_GER = yes
+			}
+		}
+	}
+	option = { # Nah
+		name = reich_shared.24.b
+		add_political_power = -20
+		ai_chance = { factor = 0 }
+	}
+}
+
+country_event = { # IBW Introduction
+	id = reich_shared.25
+	title = reich_shared.25.t
+	desc = reich_shared.25.d
+	picture = GFX_report_event_iberia_falange_standard_bearers
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.25"}
+
+	option = {
+		name = reich_shared.25.a
+		TNO_fopo_add_IBW_tab = yes
+	}
+}
+
+country_event = { # IBW Ending
+	id = reich_shared.26
+	title = reich_shared.26.t
+	desc = reich_shared.26.d
+	picture = GFX_report_event_iberia_falange_standard_bearers
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.26"}
+
+	option = {
+		name = reich_shared.26.a
+		TNO_fopo_remove_IBW_tab = yes
+		if = {
+			limit = { SPS = { exists = yes } }
+			SPS = { econ_join_sphere_GER = yes }
+		}
+	}
+}
+
+country_event = { # Von Hassel 'promoted' to head of Ostafrikan-Reich relations
+	id = reich_shared.27
+	title = reich_shared.27.t
+	desc = reich_shared.27.d
+	picture = GFX_report_event_iberia_falange_standard_bearers
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event reich_shared.27"}
+
+	option = {
+		name = reich_shared.27.a
+	}
+}
+
+
+##############
+##WW3 events##
+##############
+
+country_event = { # WW3 tree loader
+	id = GER_WW3.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event GER_WW3.1" }
+	title = GER_WW3.1.t
+	desc = GER_WW3.1.desc
+	picture = GFX_report_event_generic_battle
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = GER_WW3.1.a
+		custom_effect_tooltip = GER_new_options_focus_tree
+		hidden_effect = { load_focus_tree = { tree = GER_WW3_speer_bormann keep_completed = no } }
+	}
+}
+
+country_event = { # German ultimatum event
+	id = GER_WW3.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event GER_WW3.2" }
+	title = GER_WW3.2.t
+	desc = GER_WW3.2.desc
+	picture = GFX_report_event_germany_court
+
+	is_triggered_only = yes
+
+	option = { # We accept
+		name = GER_WW3.2.a
+		ai_chance = {
+			factor = 20
+			modifier = {
+				tag = SWI
+				factor = 0
+			}
+		}
+		GER = { country_event = { id = GER_WW3.3 days = 1 } }
+	}
+	option = { # We refuse
+		name = GER_WW3.2.b
+		ai_chance = { factor = 80 }
+		GER = { country_event = { id = GER_WW3.4 days = 1 } }
+	}
+}
+
+country_event = { # Ultimatum accepted
+	id = GER_WW3.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event GER_WW3.3" }
+	title = GER_WW3.3.t
+	desc = GER_WW3.3.desc
+	picture = GFX_report_event_germany_training
+
+	is_triggered_only = yes
+
+	option = { #
+		name = GER_WW3.3.a
+		add_political_power = 50
+		FROM = {
+			save_party_popularities = yes
+			get_current_government_type = yes
+		}
+		set_autonomy = {
+			target = FROM
+			autonomy_state = autonomy_collaborator_puppet_state
+		}
+		FROM = {
+			apply_party_popularities = yes
+			restore_previous_government_type = yes
+			hidden_effect = {
+				every_other_country = {
+					limit = { has_war_with = GER }
+					declare_war_on = { target = PREV type = annex_everything }
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Ultimatum refused
+	id = GER_WW3.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event GER_WW3.4" }
+	title = GER_WW3.4.t
+	desc = GER_WW3.4.desc
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { #
+		name = GER_WW3.4.a
+		add_political_power = -50
+	}
+	option = { #
+		name = GER_WW3.4.b
+		add_political_power = -25
+		declare_war_on = { target = FROM type = annex_everything }
+	}
+}
