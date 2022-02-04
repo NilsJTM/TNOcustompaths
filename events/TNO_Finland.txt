@@ -1,0 +1,2115 @@
+﻿################
+#Finland Events#
+################
+
+add_namespace = FIN
+
+add_namespace = murmansk
+
+country_event = {
+	id = FIN.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.1"}
+	title = FIN.1.t
+	desc = FIN.1.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.1.a #Stick with the military
+		ai_chance = {
+			factor = 80
+		    modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH option =  FIN_PATH_DEMOCRACY }
+			}	
+		}
+		
+		custom_effect_tooltip = PromisesCausingIssues
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.15
+		}
+		set_global_flag = FIN_junta
+	}
+	option = {
+		name = FIN.1.b #Restore democracy, we have to
+		ai_chance = {
+			factor = 100
+		
+		    modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH option =  FIN_PATH_MILITARY }
+			}	
+		}	
+		remove_ideas = FIN_Nation_of_Strength
+		remove_ideas = FIN_Uncertain_Future
+		country_event = {
+			id = FIN.2
+			days = 7
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.10
+		}
+		set_global_flag = FIN_democracy
+		every_country = {
+			news_event = {
+				id = WORLD.1922
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = FIN.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.2"}
+	title = FIN.2.t
+	desc = FIN.2.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.2.a
+		ai_chance = {
+		    factor = 1
+		    modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH_ELECTION option =  FIN_PATH_ELECTION_SD }
+			}	
+            modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH_ELECTION option =  FIN_PATH_ELECTION_CD }
+			}
+		}	
+		set_politics = {
+			ruling_party = liberal_democracy
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.07
+		}
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		add_ideas = {
+			FIN_Johannes_Virolainen_hog
+			FIN_Mauno_Jussila_eco
+			FIN_Arvo_Pentti_sec
+			FIN_Ahti_Karjalainen_for
+		}
+	}
+	option = {
+		name = FIN.2.b
+		ai_chance = {
+		    factor = 1
+		    modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH_ELECTION option =  FIN_PATH_ELECTION_SD }
+			}	
+            modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH_ELECTION option =  FIN_PATH_ELECTION_LD }
+			}	
+		}	
+		set_politics = {
+			ruling_party = conservative_democracy
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.07
+		}
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		add_ideas = {
+			FIN_Paivio_Hetemaki_hog
+			FIN_Osmo_P_Karttunen_eco
+			FIN_Kaarlo_Leinonen_sec
+			FIN_Ahti_Karjalainen_for
+		}
+	}
+	option = {
+		name = FIN.2.c
+		ai_chance = {
+		    factor = 1
+		    modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH_ELECTION option =  FIN_PATH_ELECTION_LD }
+			}	
+            modifier = {
+			    factor = 0
+			    has_game_rule = { rule = FIN_PATH_ELECTION option =  FIN_PATH_ELECTION_CD }
+			}	
+		}	
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.07
+		}
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+		add_ideas = {
+			FIN_Rafael_Paasio_hog
+			FIN_Mauno_Koivisto_eco
+			FIN_Sulo_Suorttanen_sec
+			FIN_Ahti_Karjalainen_for
+		}
+	}
+}
+#country_event = { #RUSSIA IS COMING
+#	id = FIN.3
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.3"}
+#	title = FIN.3.t
+#	desc = FIN.3.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.3.a
+#		load_focus_tree = FIN_onegawar
+#		hidden_effect = {
+#			country_event = {
+#				id = murmansk.1
+#				days = 30
+#			}
+#		}
+#		every_country = {
+#			news_event = {
+#				id = WORLD.1926
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.4
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.4"}
+#	title = FIN.4.t
+#	desc = FIN.4.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.4.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.5
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.5"}
+#	title = FIN.5.t
+#	desc = FIN.5.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.5.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.6
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.6"}
+#	title = FIN.6.t
+#	desc = FIN.6.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.6.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.7
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.7"}
+#	title = FIN.7.t
+#	desc = FIN.7.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = { #No promises but we'll do what we can
+#		name = FIN.7.a
+#		custom_effect_tooltip = NoPromisesOne
+#		add_to_variable = { FINApprovalRating = 5 }
+#		add_to_variable = { FINRadicalization = -7 }
+#		add_stability = 0.05
+#	}
+#	option = { #Oh god help us
+#		name = FIN.7.b
+#		custom_effect_tooltip = MakePromiseOne
+#		add_to_variable = { FINApprovalRating = 10 }
+#		add_to_variable = { FINRadicalization = -15 }
+#		add_to_variable = { FINPromiseValue = 1 }
+#		add_popularity = {
+#			ideology = liberal_democracy
+#			popularity = 0.05
+#		}
+#		add_stability = 0.10
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.8
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.8"}
+#	title = FIN.8.t
+#	desc = FIN.8.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.8.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.9
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.9"}
+#	title = FIN.9.t
+#	desc = FIN.9.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = { #Don't renew
+#		name = FIN.9.a
+#		add_popularity = {
+#			ideology = authoritarian_democracy
+#			popularity = 0.05
+#		}
+#		add_stability = -0.05
+#	}
+#	option = { #Renew
+#		name = FIN.9.b
+#		add_to_variable = { FINApprovalRating = 5 }
+#		add_to_variable = { FINRadicalization = -10 }
+#		add_to_variable = { FINPromiseValue = 1 }
+#		add_popularity = {
+#			ideology = liberal_democracy
+#			popularity = 0.10
+#		}
+#		add_popularity = {
+#			ideology = conservative_democracy
+#			popularity = 0.05
+#		}
+#		add_stability = 0.05
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.10
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.10"}
+#	title = FIN.10.t
+#	desc = FIN.10.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.10.a
+#		custom_effect_tooltip = ResettlementOne
+#		add_timed_idea = {
+#			idea = FIN_resettlement
+#			days = 365
+#		}
+#		ONG = {
+#			add_timed_idea = {
+#				idea = FIN_ONG_resettlement
+#				days = 365
+#			}
+#		}
+#		add_to_variable = { FINOnegaRelations = 15 }
+#		add_to_variable = { FINRussiaTensions = 20 }
+#		add_to_variable = { FINApprovalRating = -5 }
+#		add_to_variable = { FINRadicalization = 10 }
+#	}
+#	option = {
+#		name = FIN.10.a
+#		custom_effect_tooltip = NoResettlementOne
+#		add_to_variable = { FINOnegaRelations = -20 }
+#		add_to_variable = { FINRussiaTensions = -5 }
+#		add_to_variable = { FINApprovalRating = 5 }
+#		add_to_variable = { FINRadicalization = -7 }
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.11
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.11"}
+#	title = FIN.11.t
+#	desc = FIN.11.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.11.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.12
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.12"}
+#	title = FIN.12.t
+#	desc = FIN.12.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.12.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.13
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.13"}
+#	title = FIN.13.t
+#	desc = FIN.13.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.13.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.14
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.14"}
+#	title = FIN.14.t
+#	desc = FIN.14.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.14.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.15
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.15"}
+#	title = FIN.15.t
+#	desc = FIN.15.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.15.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.16
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.16"}
+#	title = FIN.16.t
+#	desc = FIN.16.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.16.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.17
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.17"}
+#	title = FIN.17.t
+#	desc = FIN.17.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.17.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.18
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.18"}
+#	title = FIN.18.t
+#	desc = FIN.18.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.18.a
+#	}
+#}
+#
+##country_event = {
+##	id = FIN.19
+##	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.19"}
+##	title = FIN.19.t
+##	desc = FIN.19.d
+##	picture = GFX_report_event_lithuania_army
+##
+##	is_triggered_only = yes
+##
+##	option = {
+##		name = FIN.19.a
+##	}
+##}
+#
+#country_event = {
+#	id = FIN.20
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.20"}
+#	title = FIN.20.t
+#	desc = FIN.20.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.20.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.21
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.21"}
+#	title = FIN.21.t
+#	desc = FIN.21.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.21.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.22
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.22"}
+#	title = FIN.22.t
+#	desc = FIN.22.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.22.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.23
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.23"}
+#	title = FIN.23.t
+#	desc = FIN.23.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.23.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.24
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.24"}
+#	title = FIN.24.t
+#	desc = FIN.24.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.24.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.25
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.25"}
+#	title = FIN.25.t
+#	desc = FIN.25.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.25.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.26
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.26"}
+#	title = FIN.26.t
+#	desc = FIN.26.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.26.a
+#	}
+#}
+#
+#country_event = { #Event to USA for expanded trade
+#	id = FIN.27
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.27"}
+#	title = FIN.27.t
+#	desc = FIN.27.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.27.a
+#	}
+#}
+#
+#country_event = { #Event to West Indies
+#	id = FIN.28
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.28"}
+#	title = FIN.28.t
+#	desc = FIN.28.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.28.a
+#	}
+#}
+#
+#country_event = { #Event to Iceland
+#	id = FIN.29
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.29"}
+#	title = FIN.29.t
+#	desc = FIN.29.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.29.a
+#	}
+#}
+#
+#country_event = { #Event to Guyana
+#	id = FIN.30
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.30"}
+#	title = FIN.30.t
+#	desc = FIN.30.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.30.a
+#	}
+#}
+#
+#country_event = { #Event to Canada
+#	id = FIN.31
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.31"}
+#	title = FIN.31.t
+#	desc = FIN.31.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.31.a
+#	}
+#}
+#
+#country_event = { #Event to Germany
+#	id = FIN.32
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.32"}
+#	title = FIN.32.t
+#	desc = FIN.32.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.32.a
+#	}
+#}
+#
+#country_event = { #Event to England
+#	id = FIN.33
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.33"}
+#	title = FIN.33.t
+#	desc = FIN.33.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.33.a
+#	}
+#}
+#
+#country_event = { #Event to France
+#	id = FIN.34
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.34"}
+#	title = FIN.34.t
+#	desc = FIN.34.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.34.a
+#	}
+#}
+#
+#country_event = { #Event to Brittany
+#	id = FIN.35
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.35"}
+#	title = FIN.35.t
+#	desc = FIN.35.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.35.a
+#	}
+#}
+#
+#country_event = { #Event to Denmark
+#	id = FIN.36
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.36"}
+#	title = FIN.36.t
+#	desc = FIN.36.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.36.a
+#	}
+#}
+#
+#country_event = { #1936 presidential election
+#	id = FIN.37
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.37"}
+#	title = FIN.37.t
+#	desc = FIN.37.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.37.a
+#	}
+#}
+#
+#country_event = { #1936 parliamentary election
+#	id = FIN.38
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.38"}
+#	title = FIN.38.t
+#	desc = FIN.38.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.38.a
+#	}
+#}
+#
+#country_event = { #Investiements in Finnish resources - USA
+#	id = FIN.39
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.39"}
+#	title = FIN.39.t
+#	desc = FIN.39.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = { #Y
+#		name = FIN.39.a
+#	}
+#	option = { #N
+#		name = FIN.39.b
+#	}
+#}
+#
+##country_event = { #Investiements in Finnish resources - Germany
+##	id = FIN.40
+##	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.40"}
+##	title = FIN.40.t
+##	desc = FIN.40.d
+##	picture = GFX_report_event_lithuania_army
+##
+##	is_triggered_only = yes
+##
+##	option = { #Y
+##		name = FIN.40.a
+##	}
+##	option = { #N
+##		name = FIN.40.b
+##	}
+##}
+#
+#country_event = { #Investiements in Finnish resources - USA Response
+#	id = FIN.41
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.41"}
+#	title = FIN.41.t
+#	desc = FIN.41.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.41.a
+#	}
+#}
+#
+#country_event = { #Investiements in Finnish resources - Germany Response
+#	id = FIN.42
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.42"}
+#	title = FIN.42.t
+#	desc = FIN.42.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.42.a
+#	}
+#}
+#
+#country_event = { #Sending a general to Onega
+#	id = FIN.43
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.43"}
+#	title = FIN.43.t
+#	desc = FIN.43.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.43.a
+#		custom_effect_tooltip = ONG_NEW_GENERAL_TT
+#		army_experience = 10
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.44
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.44"}
+#	title = FIN.44.t
+#	desc = FIN.44.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.44.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.45
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.45"}
+#	title = FIN.45.t
+#	desc = FIN.45.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.45.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.46
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.46"}
+#	title = FIN.46.t
+#	desc = FIN.46.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.46.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.47
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.47"}
+#	title = FIN.47.t
+#	desc = FIN.47.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.47.a
+#		load_OOB = FIN_SWE_volunteers
+#		load_OOB = FIN_tanks
+#		load_OOB = FIN_reserves
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.48
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.48"}
+#	title = FIN.48.t
+#	desc = FIN.48.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.48.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.49
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.49"}
+#	title = FIN.49.t
+#	desc = FIN.49.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.49.a
+#	}
+#}
+#
+#country_event = {
+#	id = FIN.50
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.50"}
+#	title = FIN.50.t
+#	desc = FIN.50.d
+#	picture = GFX_report_event_lithuania_army
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.50.a
+#	}
+#}
+#
+#country_event = { #Women on the field
+#	id = FIN.100
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.100"}
+#	title = FIN.100.t
+#	desc = FIN.100.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.100.a
+#		add_ideas = tno_women_combat_roles
+#	}
+#	option = {
+#		name = FIN.100.b
+#		add_stability = 0.05
+#		add_political_power = 25
+#	}
+#}
+#country_event = {
+#	id = FIN.101
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.101"}
+#	title = FIN.101.t
+#	desc = FIN.101.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = { #Yes
+#		name = FIN.101.a
+#	}
+#	option = { #No
+#		name = FIN.101.b
+#	}
+#}
+#country_event = {
+#	id = FIN.102
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.102"}
+#	title = FIN.102.t
+#	desc = FIN.102.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = { #Send volunteers
+#		name = FIN.102.a
+#		add_manpower = -12000
+#		FIN = {
+#			country_event = {
+#				id = FIN.103
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #Don't send volunteers
+#		name = FIN.102.b
+#		FIN = {
+#			country_event = {
+#				id = FIN.104
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#country_event = { #Sweden sends volunteers
+#	id = FIN.103
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.103"}
+#	title = FIN.103.t
+#	desc = FIN.103.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.103.a
+#		load_oob = FIN_SWE_volunteers
+#	}
+#}
+#country_event = { #Sweden doesn't send volunteers
+#	id = FIN.104
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.104"}
+#	title = FIN.104.t
+#	desc = FIN.104.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.104.a
+#		add_stability = -0.05
+#	}
+#}
+#country_event = { #Finland calls
+#	id = FIN.105
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.105"}
+#	title = FIN.105.t
+#	desc = FIN.105.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = { #Yes
+#		name = FIN.105.a
+#		add_manpower = -5000
+#		FIN = {
+#			add_manpower = 5000
+#		}
+#		send_equipment = {
+#			equipment = infantry_equipment
+#			amount = 500
+#			target = FIN
+#		}
+#	}
+#	option = { #
+#		name = FIN.105.b
+#		send_equipment = {
+#			equipment = infantry_equipment
+#			amount = 250
+#			target = FIN
+#		}
+#	}
+#	option = { #No
+#		name = FIN.105.c
+#		add_political_power = 10
+#	}
+#}
+#country_event = { #Message to Germany
+#	id = FIN.106
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.106"}
+#	title = FIN.106.t
+#	desc = FIN.106.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.106.a
+#		FIN = {
+#			country_event = {
+#				id = FIN.107
+#				days = 3
+#			}
+#		}
+#	}
+#	option = {
+#		name = FIN.106.b
+#		FIN = {
+#			country_event = {
+#				id = FIN.108
+#				days = 3
+#			}
+#		}
+#	}
+#}
+#country_event = { #Germany helps
+#	id = FIN.107
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.107"}
+#	title = FIN.107.t
+#	desc = FIN.107.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.107.a
+#		set_country_flag = GERMANY_HELPS
+#	}
+#}
+#country_event = { #Germany doesn't help
+#	id = FIN.108
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.108"}
+#	title = FIN.108.t
+#	desc = FIN.108.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.108.a
+#	}
+#}
+#country_event = { #Message to USA
+#	id = FIN.109
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.109"}
+#	title = FIN.109.t
+#	desc = FIN.109.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.109.a
+#		FIN = {
+#			country_event = {
+#				id = FIN.110
+#				days = 3
+#			}
+#		}
+#	}
+#	option = {
+#		name = FIN.109.b
+#		FIN = {
+#			country_event = {
+#				id = FIN.111
+#				days = 3
+#			}
+#		}
+#	}
+#}
+#country_event = { #USA helps
+#	id = FIN.110
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.110"}
+#	title = FIN.110.t
+#	desc = FIN.110.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.110.a
+#		set_country_flag = USA_HELPS
+#	}
+#}
+#
+#country_event = { #USA doesn't help
+#	id = FIN.111
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.111"}
+#	title = FIN.111.t
+#	desc = FIN.111.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.111.a
+#	}
+#}
+#
+#country_event = { #USA - Finland will join OFN
+#	id = FIN.112
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.111"}
+#	title = FIN.111.t
+#	desc = FIN.111.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.111.a
+#	}
+#}
+#
+#country_event = { #Germany - Finland will join Pakt
+#	id = FIN.113
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.113"}
+#	title = FIN.113.t
+#	desc = FIN.113.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.113.a
+#	}
+#}
+#
+#country_event = { #Make decision
+#	id = FIN.114
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.114"}
+#	title = FIN.114.t
+#	desc = FIN.114.desc
+#	picture = GFX_report_event_lithuania_army
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = FIN.114.a
+#		USA = {
+#			country_event = {
+#				id = FIN.112
+#				days = 3
+#			}
+#		}
+#	}
+#	option = {
+#		name = FIN.114.b
+#		GER = {
+#			country_event = {
+#				id = FIN.113
+#				days = 3
+#			}
+#		}
+#	}
+#}
+
+country_event = { #Offer conditional surrender
+	id = FIN.115
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.115"}
+	title = FIN.115.t
+	desc = FIN.115.desc
+	picture = GFX_report_event_iberia_guy_paper_meeting
+
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.115.a
+		ai_chance = {
+			factor = 120
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FIN ratio > 1.5 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FIN ratio > 3 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FIN ratio > 5 }
+			}
+		}
+		FIN = {
+			country_event = {
+				id = FIN.116
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = FIN.115.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FIN ratio < 1 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FIN ratio < 0.5 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FIN ratio < 0.2 }
+			}
+		}
+		FIN = {
+			country_event = {
+				id = FIN.117
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Yes
+	id = FIN.116
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.116"}
+	title = FIN.116.t
+	desc = FIN.116.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.116.a
+		FROM = {
+			white_peace = FIN
+			WSR = {
+				add_state_core = 1359
+				add_state_core = 213
+				transfer_state = 1359
+				transfer_state = 213
+			}
+		}
+		FIN = {
+			country_event = {
+				id = FIN.123
+				days = 1
+			}
+		}
+		every_country = {
+			news_event = {
+				id = WORLD.1929
+				days = 1
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_government = authoritarian_democracy
+				}
+				if = {
+					limit = {
+						WSR = {
+							OR = {
+								has_government = fascism
+								has_government = national_socialism
+								has_government = ultranationalism
+								has_government = despotism
+							}
+						}
+					}
+					country_event = {
+						id = release_dummy.3
+						days = 45
+					}
+				}
+				if = {
+					limit = {
+						WSR = {
+							OR = {
+								has_government = socialist
+								has_government = communist
+								has_government = social_democracy
+							}
+						}
+					}
+					country_event = {
+						id = release_dummy.2
+						days = 45
+					}
+				}
+				if = {
+					limit = {
+						WSR = {
+							OR = {
+								has_government = authoritarian_democracy
+								has_government = conservative_democracy
+								has_government = liberal_democracy
+							}
+						}
+					}
+					random_list = {
+						25 = {
+							country_event = {
+								id = release_dummy.2
+								days = 45
+							}
+						}
+						50 = {
+							country_event = {
+								id = release_dummy.4
+								days = 45
+							}
+						}
+						25 = {
+							country_event = {
+								id = release_dummy.3
+								days = 45
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #No
+	id = FIN.117
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.117"}
+	title = FIN.117.t
+	desc = FIN.117.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.117.a
+	}
+}
+
+country_event = { #Offer unconditional surrender
+	id = FIN.118
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.118"}
+	title = FIN.118.t
+	desc = FIN.118.desc
+	picture = GFX_report_event_peace_deal
+
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.118.a
+		FIN = {
+			country_event = {
+				id = FIN.119
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Unconditional Surrender
+	id = FIN.119
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.119"}
+	title = FIN.119.t
+	desc = FIN.119.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.119.a
+		FROM = {
+			white_peace = FIN
+			add_state_core = 213
+			add_state_core = 215
+			add_state_core = 216
+			add_state_core = 147
+			add_state_core = 722
+			add_state_core = 1359
+			transfer_state = 213
+			transfer_state = 215
+			transfer_state = 216
+			transfer_state = 147
+			transfer_state = 722
+			transfer_state = 1359
+			save_global_event_target_as = winning_country
+		}
+		FIN = {
+			save_global_event_target_as = losing_country
+		}
+		set_global_flag = war_won
+		set_global_flag = show_peace_popup_alert
+		add_to_variable = { global.peace_popup_dirty = 1 }
+		every_country = {
+			news_event = {
+				id = WORLD.1929
+				days = 1
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_government = authoritarian_democracy
+				}
+				if = {
+					limit = {
+						WSR = {
+							OR = {
+								has_government = fascism
+								has_government = national_socialism
+								has_government = ultranationalism
+								has_government = despotism
+							}
+						}
+					}
+					country_event = {
+						id = release_dummy.3
+						days = 45
+					}
+				}
+				if = {
+					limit = {
+						WSR = {
+							OR = {
+								has_government = socialist
+								has_government = communist
+								has_government = social_democracy
+							}
+						}
+					}
+					country_event = {
+						id = release_dummy.2
+						days = 45
+					}
+				}
+				if = {
+					limit = {
+						WSR = {
+							OR = {
+								has_government = authoritarian_democracy
+								has_government = conservative_democracy
+								has_government = liberal_democracy
+							}
+						}
+					}
+					random_list = {
+						25 = {
+							country_event = {
+								id = release_dummy.2
+								days = 45
+							}
+						}
+						50 = {
+							country_event = {
+								id = release_dummy.4
+								days = 45
+							}
+						}
+						25 = {
+							country_event = {
+								id = release_dummy.3
+								days = 45
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Offer ceasefire
+	id = FIN.120
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.120"}
+	title = FIN.120.t
+	desc = FIN.120.desc
+	picture = GFX_report_event_soviet_russian_soldiers
+
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.120.a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FIN ratio > 1.5 }
+			}
+			modifier = {
+				factor = 5
+				has_global_flag = FINLAND_CEASEFIRE_REFUSED
+			}
+			modifier = {
+				factor = 20
+				has_global_flag = FINLAND_CEASEFIRE_REFUSED_2
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FIN ratio > 3 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FIN ratio > 5 }
+			}
+		}
+		FIN = {
+			country_event = {
+				id = FIN.121
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = FIN.120.b
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 0.5
+				strength_ratio = { tag = FIN ratio < 1 }
+			}
+			modifier = {
+				factor = 0.2
+				strength_ratio = { tag = FIN ratio < 0.5 }
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = { tag = FIN ratio < 0.2 }
+			}
+		}
+		FIN = {
+			country_event = {
+				id = FIN.122
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Offer ceasefire - yes
+	id = FIN.121
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.121"}
+	title = FIN.121.t
+	desc = FIN.121.desc
+	picture = GFX_report_event_peace_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.121.a
+		diplomatic_relation = {
+			country = ONG
+			relation = guarantee
+			active = no
+		}
+		WSR = {
+			white_peace = FIN
+		}
+		if = {
+			limit = { ONG = { has_capitulated = yes } }
+			WSR = {
+				add_state_core = 859
+				add_state_core = 858
+				transfer_state = 859
+				transfer_state = 858
+				858 = {	set_demilitarized_zone = yes }
+				859 = {	set_demilitarized_zone = yes }
+			}
+			else = {
+				ONG = { country_event = FIN.125 }
+			}
+		}
+		every_country = {
+			news_event = {
+				id = WORLD.1928
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Offer ceasefire - no
+	id = FIN.122
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.122"}
+	title = FIN.122.t
+	desc = FIN.122.desc
+	picture = GFX_report_event_Machinegunner
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.122.a
+		add_stability = -0.05
+		set_global_flag = FINLAND_CEASEFIRE_REFUSED
+		if = {
+			limit = {
+				has_global_flag = FINLAND_CEASEFIRE_REFUSED
+			}
+			set_global_flag = FINLAND_CEASEFIRE_REFUSED_2
+		}
+	}
+}
+
+country_event = { #Establish Karelian Autonomy
+	id = FIN.123
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.123"}
+	title = FIN.123.t
+	desc = FIN.123.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.123.a
+		KRL = {
+			add_state_core = 215
+			add_state_core = 216
+			transfer_state = 215
+			transfer_state = 216	
+		}
+		hidden_effect = {
+			FIN = {
+				puppet = KRL
+				give_guarantee = KRL
+				diplomatic_relation = {
+					country = KRL
+					relation = military_access
+					active = yes
+				}
+			}
+			WSR = {
+				give_guarantee = KRL
+				diplomatic_relation = {
+					country = KRL
+					relation = military_access
+					active = yes
+				}
+			}
+		}
+		KRL = {
+			set_variable = { GDP_growth = 2 }
+			set_variable = { income_tax_rate = 0.15 }
+			set_variable = { business_tax_rate = 0.125 }
+			set_variable = { poverty_rate = 24.65 }
+			set_variable = { poverty_monthly_change = 0.01 }
+			set_variable = { base_inflation_rate = 1.2 }
+			
+			set_temp_variable = { temp_credit_rating = 4 }
+			set_temp_variable = { temp_credit_rating_min = 2 }
+			set_temp_variable = { temp_credit_rating_max = 5 }
+			econ_initialize_credit_rating_system = yes
+			
+			set_variable = { economic_centralization = 45 }
+			
+			initiate_display_vars = yes
+		}
+		KRL = {
+			country_event = {
+				id = FIN.124
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Fixing Karelia's government
+	id = FIN.124
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.124"}
+	title = FIN.124.t
+	desc = FIN.124.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.124.a
+		set_politics = {
+			ruling_party = authoritarian_democracy
+		}
+		set_popularities = {
+			communist = 0
+			ultranationalism = 0
+			national_socialism = 0
+			socialist = 0
+			social_democracy = 18
+			liberal_democracy = 23
+
+			conservative_democracy = 12
+			authoritarian_democracy = 47
+			despotism = 0
+			fascism = 0
+			
+		}
+	}
+}
+
+country_event = { #Onega Betrayed!
+	id = FIN.125
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.125"}
+	title = FIN.125.t
+	desc = FIN.125.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = FIN.125.a
+		WSR = {
+			add_state_core = 859
+			add_state_core = 858
+			transfer_state = 859
+			transfer_state = 858
+			858 = {	set_demilitarized_zone = yes }
+			859 = {	set_demilitarized_zone = yes }
+		}
+	}
+	option = {
+		name = FIN.125.b
+		ai_chance = { base = 0 }
+		remove_ideas = ONG_finland_dependence_high
+	}
+}
+
+
+country_event = { # Göring is sending really big ships into the baltic, what do?
+	id = FIN.150
+	title = FIN.150.t
+	desc = FIN.150.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.150"}
+
+	option = { # Send our own ships, we are not afraid
+		name = FIN.150.a
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1109 days = 2 }
+			}
+		}
+		set_country_flag = FIN_navy_ready
+	}
+	option = { # Keep our head down and wether the storm
+		name = FIN.150.b
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1113 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { # Göring is sending a small detachment of ships ahead
+	id = FIN.151
+	title = FIN.151.t
+	desc = FIN.151.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.151"}
+
+	option = { # attack it.
+		name = FIN.151.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1110 days = 2 }
+			}
+		}
+	}
+	option = { # its a trap
+		name = FIN.151.b
+		ai_chance = { factor = 5 }
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1113 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { # Göring destroyed our navy
+	id = FIN.152
+	title = FIN.152.t
+	desc = FIN.152.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.152"}
+
+	option = { # lets not commit suicide yet
+		name = FIN.152.b
+		clr_country_flag = FIN_navy_ready
+		hidden_effect = {
+			destroy_ships = {
+				type = ship_hull_very_light
+				count = all
+			}
+			destroy_ships = {
+				type = ship_hull_more_light
+				count = all
+			}
+			destroy_ships = {
+				type = ship_hull_light
+				count = all
+			}
+			destroy_ships = {
+				type = ship_hull_cruiser
+				count = all
+			}
+			destroy_ships = {
+				type = ship_hull_heavy
+				count = all
+			}
+			destroy_ships = {
+				type = ship_hull_carrier
+				count = all
+			}
+			destroy_ships = {
+				type = ship_hull_submarine
+				count = all
+			}
+		}
+	}
+}
+
+country_event = { # Adventurous Luftwaffe pilot flies close to one of our destroyers
+	id = FIN.153
+	title = FIN.153.t
+	desc = FIN.153.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.153"}
+
+	option = { # Send more ships to guard our coasts, we remain on guard
+		name = FIN.153.a
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1111 days = 2 }
+			}
+		}
+		set_country_flag = FIN_navy_ready
+	}
+	option = { # cooler heads prevail
+		name = FIN.153.b
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1112 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { # Göring seizes Aland
+	id = FIN.154
+	title = FIN.154.t
+	desc = FIN.154.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.154"}
+
+	option = { # Declare war lol
+		name = FIN.154.a
+		declare_war_on = {
+			target = GER
+			type = annex_everything
+		}
+		hidden_effect = {
+			GER = {
+				clr_country_flag = GGR_operation_lapland_preparation
+			}
+		}
+	}
+	option = { # lets not
+		name = FIN.154.b
+	}
+}
+
+country_event = { # Göring attempts to seize Aland, he fails
+	id = FIN.155
+	title = FIN.155.t
+	desc = FIN.155.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.155"}
+
+	option = { # We cant deal with this any longer
+		name = FIN.155.a
+		declare_war_on = {
+			target = GER
+			type = annex_everything
+		}
+	}
+	option = { # Oh
+		name = FIN.155.b
+	}
+}
+
+country_event = { # Göring sends us an ultimatum
+	id = FIN.156
+	title = FIN.156.t
+	desc = FIN.156.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.156"}
+
+	option = { # accept the demands
+		name = FIN.156.a
+		trigger = {
+			NOT = {
+				has_country_flag = FIN_pulled_GER_assets
+			}
+			country_exists = ONG
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0.1
+				has_country_flag = FIN_pulled_GER_assets
+			}
+			modifier = {
+				factor = 0.25
+				country_exists = ONG
+			}
+		}
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1118 days = 2 }
+			}
+		}
+	}
+	option = { # nah fam
+		name = FIN.156.a
+		ai_chance = {
+			factor = 1
+		}
+		hidden_effect = {
+			GER = {
+				country_event = { id = goering.1119 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { # The germans offer us another chance to surrender
+	id = FIN.157
+	title = FIN.157.t
+	desc = FIN.157.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event FIN.157"}
+
+	option = { # We accept
+		name = FIN.157.a
+		trigger = {
+			NOT = {
+				has_country_flag = FIN_pulled_GER_assets
+			}
+			country_exists = ONG
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0.1
+				has_country_flag = FIN_pulled_GER_assets
+			}
+			modifier = {
+				factor = 0.25
+				country_exists = ONG
+			}
+		}
+		GER = {
+			country_event = { id = goering.1120 days = 2 }
+		}
+	}
+	option = { # We decline
+		name = FIN.157.b
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = { id = goering.1121 days = 2 }
+		}
+	}
+}
+
+
+####MURMANSK UPRISING
+
+country_event = {
+	id = murmansk.1
+	title = murmansk.1.t
+	desc = murmansk.1.desc
+	picture = GFX_report_event_lithuania_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event murmansk.1"}
+
+	option = {
+		name = murmansk.1.a
+		WSR = {
+			load_oob = RUS_murmansk
+		}
+	}
+}
