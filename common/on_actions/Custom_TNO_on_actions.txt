@@ -55,7 +55,177 @@ on_actions = {
 				}
 				OMO = { apply_war_buff_with_10_divisions = yes }
 			}
-
+	        if = {
+				limit = {
+					has_game_rule = {
+						rule = west_siberia_unification_outcome
+						option = WEST_SIBERIA_UNIFICATION_OUTCOME_TYM_TYUMEN
+					}
+				}
+				TYM = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = west_siberia_unification_outcome
+						option = WEST_SIBERIA_UNIFICATION_OUTCOME_OMS_OMSK
+					}
+				}
+				OMS = { apply_war_buff_with_10_divisions = yes }
+			}
+            if = {
+				limit = {
+					has_game_rule = {
+						rule = west_siberia_unification_outcome
+						option = WEST_SIBERIA_UNIFICATION_OUTCOME_SVR_SVERDLOVSK
+					}
+				}
+				SVR = { apply_war_buff_with_10_divisions = yes }
+			}				
+		    if = {
+			    limit = {
+					has_game_rule = {
+						rule = central_siberia_unification_outcome
+						option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_PRC_TUVA
+					}
+				}
+				PRC = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = central_siberia_unification_outcome
+						option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_NOV_NOVOSIBIRSK
+					}
+				}
+				NOV = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = central_siberia_unification_outcome
+						option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_TOM_TOMSK
+					}
+				}
+				TOM = { apply_war_buff_with_10_divisions = yes }
+			}	
+		    if = {
+			    limit = {
+					has_game_rule = {
+						rule = central_siberia_unification_outcome
+						option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_KEM_KEMEROVO
+					}
+				}
+				KEM = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = central_siberia_unification_outcome
+						option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_SBA_BLACK_ARMY
+					}
+				}
+				SBA = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = west_russia_unification_outcome
+						option = WEST_RUSSIA_UNIFICATION_OUTCOME_WRS_WRRF
+					}
+				}
+				WRS = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = west_russia_unification_outcome
+						option = WEST_RUSSIA_UNIFICATION_OUTCOME_KOM_KOMI
+					}
+				}
+				KOM = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = west_russia_unification_outcome
+						option = WEST_RUSSIA_UNIFICATION_OUTCOME_VYT_VYATKA
+					}
+				}
+				VYT = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = west_russia_unification_outcome
+						option = WEST_RUSSIA_UNIFICATION_OUTCOME_PRM_PERM
+					}
+				}
+				PRM = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = west_russia_unification_outcome
+						option = WEST_RUSSIA_UNIFICATION_OUTCOME_SAM_SAMARA
+					}
+				}
+				SAM = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+			    limit = {
+					has_game_rule = {
+						rule = kazakhstan_unification_outcome
+						option = KAZAKHSTAN_UNIFICATION_OUTCOME_KAZ_KYZYLORDA
+					}
+				}
+				KAZ = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = kazakhstan_unification_outcome
+						option = KAZAKHSTAN_UNIFICATION_OUTCOME_PAV_PAVLODAR
+					}
+				}
+				PAV = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = kazakhstan_unification_outcome
+						option = KAZAKHSTAN_UNIFICATION_OUTCOME_KOK_KOKSHETAU
+					}
+				}
+				KOK = { apply_war_buff_with_10_divisions = yes }
+			}	
+		    if = {
+			    limit = {
+					has_game_rule = {
+						rule = kazakhstan_unification_outcome
+						option = KAZAKHSTAN_UNIFICATION_OUTCOME_DER_KOSTANAY
+					}
+				}
+				DER = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = kazakhstan_unification_outcome
+						option = KAZAKHSTAN_UNIFICATION_OUTCOME_ARL_AKTOBE
+					}
+				}
+				ARL = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = kazakhstan_unification_outcome
+						option = KAZAKHSTAN_UNIFICATION_OUTCOME_NPL_NOWA_POLSKA
+					}
+				}
+				NPL = { apply_war_buff_with_10_divisions = yes }
+			}
         }
 	}
 	on_declare_war = {
@@ -255,6 +425,305 @@ on_actions = {
 				    BLR = { remove_war_buff = yes }
 				}
 			}
+			if = {
+				limit = { # West Siberia Unification Ends
+					ROOT = {
+					    OR = {
+					        tag = TYM
+					        tag = OMS
+					        tag = SVR
+							tag = VOR
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = TYM
+					        tag = OMS
+					        tag = SVR
+							tag = VOR
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = TYM
+				            country_exists = OMS
+				            country_exists = SVR
+							country_exists = VOR
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_siberia_unification_outcome
+						    option = WEST_SIBERIA_UNIFICATION_OUTCOME_TYM_TYUMEN
+					    }
+				    }
+				    TYM = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_siberia_unification_outcome
+						    option = WEST_SIBERIA_UNIFICATION_OUTCOME_OMS_OMSK
+					    }
+				    }
+				    OMS = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_siberia_unification_outcome
+						    option = WEST_SIBERIA_UNIFICATION_OUTCOME_SVR_SVERDLOVSK
+					    }
+				    }
+				    SVR = { remove_war_buff = yes }
+				}
+			}
+            if = {
+				limit = { # Central Siberia Unification Ends
+					ROOT = {
+					    OR = {
+					        tag = PRC
+					        tag = NOV
+							tag = TOM
+							tag = KEM
+							tag = SBA
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = PRC
+					        tag = NOV
+							tag = TOM
+							tag = KEM
+							tag = SBA
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = PRC
+				            country_exists = NOV
+				            country_exists = TOM
+							country_exists = KEM
+							country_exists = SBA
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = central_siberia_unification_outcome
+						    option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_NOV_NOVOSIBIRSK
+					    }
+				    }
+				    NOV = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = central_siberia_unification_outcome
+						    option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_PRC_TUVA
+					    }
+				    }
+				    PRC = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = central_siberia_unification_outcome
+						    option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_TOM_TOMSK
+					    }
+				    }
+				    TOM = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = central_siberia_unification_outcome
+						    option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_KEM_KEMEROVO
+					    }
+				    }
+				    KEM = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = central_siberia_unification_outcome
+						    option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_SBA_BLACK_ARMY
+					    }
+				    }
+				    SBA = { remove_war_buff = yes }
+				}
+			}
+            if = {
+				limit = { # West Russia Unification Ends
+					ROOT = {
+					    OR = {
+					        tag = WRS
+					        tag = KOM
+							tag = VYT
+							tag = PRM
+							tag = SAM
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = WRS
+					        tag = KOM
+							tag = VYT
+							tag = PRM
+							tag = SAM
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = WRS
+				            country_exists = KOM
+				            country_exists = VYT
+							country_exists = PRM
+							country_exists = SAM
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_russia_unification_outcome
+						    option = WEST_RUSSIA_UNIFICATION_OUTCOME_WRS_WRRF
+					    }
+				    }
+				    WRS = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_russia_unification_outcome
+						    option = WEST_RUSSIA_UNIFICATION_OUTCOME_KOM_KOMI
+					    }
+				    }
+				    KOM = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_russia_unification_outcome
+						    option = WEST_RUSSIA_UNIFICATION_OUTCOME_VYT_VYATKA
+					    }
+				    }
+				    VYT = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_russia_unification_outcome
+						    option = WEST_RUSSIA_UNIFICATION_OUTCOME_PRM_PERM
+					    }
+				    }
+				    PRM = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = west_russia_unification_outcome
+						    option = WEST_RUSSIA_UNIFICATION_OUTCOME_SAM_SAMARA
+					    }
+				    }
+				    SAM = { remove_war_buff = yes }
+				}
+			}
+            if = {
+				limit = { # Kazakhstan Unification Ends
+					ROOT = {
+					    OR = {
+					        tag = KAZ
+					        tag = PAV
+							tag = KOK
+							tag = DER
+							tag = ARL
+							tag = NPL
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = KAZ
+					        tag = PAV
+							tag = KOK
+							tag = DER
+							tag = ARL
+							tag = NPL
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = KAZ
+				            country_exists = PAV
+				            country_exists = KOK
+							country_exists = DER
+							country_exists = ARL
+							country_exists = NPL
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = kazakhstan_unification_outcome
+						    option = KAZAKHSTAN_UNIFICATION_OUTCOME_KAZ_KYZYLORDA
+					    }
+				    }
+				    KAZ = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = kazakhstan_unification_outcome
+						    option = KAZAKHSTAN_UNIFICATION_OUTCOME_PAV_PAVLODAR
+					    }
+				    }
+				    PAV = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = kazakhstan_unification_outcome
+						    option = KAZAKHSTAN_UNIFICATION_OUTCOME_KOK_KOKSHETAU
+					    }
+				    }
+				    KOK = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = kazakhstan_unification_outcome
+						    option = KAZAKHSTAN_UNIFICATION_OUTCOME_DER_KOSTANAY
+					    }
+				    }
+				    DER = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = kazakhstan_unification_outcome
+						    option = KAZAKHSTAN_UNIFICATION_OUTCOME_ARL_AKTOBE
+					    }
+				    }
+				    ARL = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = kazakhstan_unification_outcome
+						    option = KAZAKHSTAN_UNIFICATION_OUTCOME_NPL_NOWA_POLSKA
+					    }
+				    }
+				    NPL = { remove_war_buff = yes }
+				}
+			}			
 			if = {
 				limit = { # Far East Unification Ends
 					ROOT = {
