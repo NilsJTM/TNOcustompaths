@@ -1,0 +1,721 @@
+################################
+#####     Peru Events     ######
+#####      ###   ###      ######
+#####      ###   ###      ######
+#####      ###   ###      ######
+#####        Feliz        ######
+#####     Bicentenario!   ######
+################################
+
+add_namespace = peru
+add_namespace = peru_skel
+
+######################
+## Skeleton Content ##
+######################
+
+#Ugarteche Assesination Attemp Part 2
+country_event = {
+    id = peru_skel.2
+    title = peru_skel.2.t
+    desc = peru_skel.2.desc
+    #picture = 
+
+    #fire_only_once = yes
+    is_triggered_only = yes
+ 
+    option = { #He lives
+        name = peru_skel.2.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_UGARTECHE_ASSASSINATION option = PRU_UGARTECHE_ASSASSINATION_YES }
+			}
+		}
+        set_country_flag = PRU_ugarteche_alive
+    }
+    option = { #Change the world! Final Message Goodbye
+        name = peru_skel.2.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_UGARTECHE_ASSASSINATION option = PRU_UGARTECHE_ASSASSINATION_NO }
+			}
+		}
+        set_country_flag = PRU_ugarteche_dead
+        	
+        kill_country_leader = yes
+
+        #Vp Assumes Power
+        add_country_leader_role = {
+            character = PRU_Gallo_Porras
+            promote_leader = yes
+            country_leader = {
+                expire = "1980.1.1"
+                ideology = conservative_democracy_subtype
+                traits = { presidente_peru_latin }
+            }
+        }
+
+        #Shocking News For Peru 
+        set_popularities = {
+			communist = 2
+            socialist = 4
+            social_democracy = 21
+            liberal_democracy = 24
+            conservative_democracy = 20
+            authoritarian_democracy = 24
+            despotism = 3
+            fascism = 2
+		}
+
+        #The World Knows Now
+        every_country = {
+			news_event = {
+				id = LATAM_news.50
+			}
+		}
+    }
+}
+
+country_event = { # empty
+    id = peru_skel.3
+    title = peru_skel.3.t
+    desc = peru_skel.3.desc
+    #picture = 
+
+    #fire_only_once = yes
+    is_triggered_only = yes
+ 
+    option = {
+        name = peru_skel.3.a
+    }
+}
+
+#1963 Elections Breaking Point
+country_event = {
+    id = peru_skel.4
+    title = peru_skel.4.t
+    desc = peru_skel.4.desc
+    #picture =
+
+    is_triggered_only = yes
+    #fire_only_once = yes
+
+    option = { #Lets See what Happens
+        name = peru_skel.4.a
+        if = {
+            limit = {
+                has_game_rule = { rule = PRU_EARLY_COUP option = DEFAULT }
+				has_country_flag = PRU_ugarteche_dead
+                has_country_flag = PRU_porrasgov_bad
+            }
+            country_event = { days = 1 id = peru_skel.5 }
+        }
+        else_if = {
+            limit = {
+                has_game_rule = { rule = PRU_EARLY_COUP option = DEFAULT }
+				has_country_flag = PRU_ugarteche_dead
+                has_country_flag = PRU_porrasgov_normal
+            }
+            set_country_flag = PRU_elections_but_noapn
+            country_event = { days = 1 id = peru_skel.6 }
+        }
+		else_if = {
+            limit = {
+                has_game_rule = { rule = PRU_EARLY_COUP option = PRU_EARLY_COUP_YES }
+				has_country_flag = PRU_ugarteche_dead
+            }
+			modify_country_flag = {
+				flag = PRU_porrasgov_normal
+				value = 0
+			}
+			modify_country_flag = {
+				flag = PRU_porrasgov_bad
+				value = 1
+			}
+            country_event = { days = 1 id = peru_skel.5 }
+        }
+		else_if = {
+            limit = {
+                has_game_rule = { rule = PRU_EARLY_COUP option = PRU_EARLY_COUP_NO }
+				has_country_flag = PRU_ugarteche_dead
+            }
+			modify_country_flag = {
+				flag = PRU_porrasgov_bad
+				value = 0
+			}
+			modify_country_flag = {
+				flag = PRU_porrasgov_normal
+				value = 1
+			}
+            set_country_flag = PRU_elections_but_noapn
+            country_event = { days = 1 id = peru_skel.6 }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = PRU_ugarteche_alive
+            }
+            country_event = { days = 1 id = peru_skel.6 }
+        }
+    }
+}
+
+#1963 Elections (Early Coup)
+country_event = {
+    id = peru_skel.5
+    title = peru_skel.5.t
+    desc = peru_skel.5.desc
+    #picture =
+
+    #fire_only_once = yes
+    is_triggered_only = yes
+
+    option = { #And i open the gates hell
+        name = peru_skel.5.a
+        set_politics = { ruling_party = despotism }
+
+        #The Death of the Dream 
+        set_popularities = {
+			communist = 3
+            socialist = 6
+            social_democracy = 22
+            liberal_democracy = 23
+            conservative_democracy = 15
+            authoritarian_democracy = 23
+            despotism = 5
+            fascism = 3
+		}
+        remove_ideas = {
+            PRU_idea_fake_democratic_dream
+        }
+        add_ideas = {
+            PRU_idea_death_of_dream
+        }
+
+        #The Junta is Here
+        add_country_leader_trait = presidente_junta_latin
+
+        #The Road to kill Hope
+        set_country_flag = PRU_military_coup
+
+        #The World Knows Now
+        every_country = {
+			news_event = {
+				id = LATAM_news.51
+			}
+		}
+    }
+}
+
+#1963 Elections (Normal)
+country_event = {
+    id = peru_skel.6
+    title = peru_skel.6.t
+    desc = peru_skel.6.desc
+    #picture =
+
+    #fire_only_once = yes
+    is_triggered_only = yes
+
+    option = { #ACDN
+        name = peru_skel.6.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_APN_BELTRAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_APN_SEOANE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_AP-UD_BELAUNDE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_UNO_ODRIA }
+			}
+		}
+        random_list = {
+            50 = {
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_CORNEJO }
+				}
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_SOLDAN }
+				}
+                retire_country_leader = yes
+                add_country_leader_role = {
+                    character = PRU_Pedro_Beltran_Espantoso
+                    promote_leader = yes
+                    country_leader = {
+                        #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                        expire = "1994.4.20"
+                        ideology = conservative_democracy_liberal_conservatism_subtype
+                        traits = { presidente_peru_latin }
+                        id = -1
+                    }
+                }
+                set_country_flag = PRU_beltran_president
+                every_country = {
+                    news_event = {
+                        id = LATAM_news.55
+                    }
+                }
+                set_party_name = {
+                    ideology = conservative_democracy
+                    name = PRU_an_party
+                    long_name = PRU_an_party_long
+                }
+                add_popularity = {
+                    ideology = conservative_democracy
+                    popularity = 0.1
+                }
+            }
+            30 = {
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_BELTRAN }
+				}
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_SOLDAN }
+				}
+                retire_country_leader = yes
+                add_country_leader_role = {
+                    character = PRU_Hector_Cornejo_Chavez
+                    promote_leader = yes
+                    country_leader = {
+                        #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                        expire = "1994.4.20"
+                        ideology = conservative_democracy_christian_democracy_subtype
+                        traits = { presidente_peru_latin }
+                        id = -1
+                    }
+                }
+                set_country_flag = PRU_cornejo_president
+                every_country = {
+                    news_event = {
+                        id = LATAM_news.56
+                    }
+                }
+                set_party_name = {
+                    ideology = conservative_democracy
+                    name = PRU_pdc_party
+                    long_name = PRU_pdc_party_long
+                }
+                add_popularity = {
+                    ideology = conservative_democracy
+                    popularity = 0.1
+                }
+            }
+            20 = {
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_BELTRAN }
+				}
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_CORNEJO }
+				}
+                if = {
+                    limit = {
+                        has_country_flag = PRU_ugarteche_alive
+                    }
+                    retire_country_leader = yes
+                    add_country_leader_role = {
+                        character = PRU_Carlos_Moreyra
+                        promote_leader = yes
+                        country_leader = {
+                            #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                            expire = "1994.4.20"
+                            ideology = conservative_democracy_subtype
+                            traits = { presidente_peru_latin }
+                            id = -1
+                        }
+                    }
+                    set_country_flag = PRU_soldan_president
+                    every_country = {
+                        news_event = {
+                            id = LATAM_news.57
+                        }
+                    }
+                    add_popularity = {
+                        ideology = conservative_democracy
+                        popularity = 0.1
+                    }
+                }
+                else_if = {
+                    limit = {
+                        has_country_flag = PRU_ugarteche_dead
+                    }
+                    retire_country_leader = yes
+                    add_country_leader_role = {
+                        character = PRU_Pedro_Beltran_Espantoso
+                        promote_leader = yes
+                        country_leader = {
+                            #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                            expire = "1994.4.20"
+                            ideology = conservative_democracy_liberal_conservatism_subtype
+                            traits = { presidente_peru_latin }
+                            id = -1
+                        }
+                    }
+                    set_country_flag = PRU_beltran_president
+                    every_country = {
+                        news_event = {
+                            id = LATAM_news.55
+                        }
+                    }
+                    set_party_name = {
+                        ideology = conservative_democracy
+                        name = PRU_an_party
+                        long_name = PRU_an_party_long
+                    }
+                    add_popularity = {
+                        ideology = conservative_democracy
+                        popularity = 0.05
+                    }
+                }
+            }
+        }
+    }
+    option = { #APN
+        name = peru_skel.6.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_BELTRAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_CORNEJO }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_SOLDAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_AP-UD_BELAUNDE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_UNO_ODRIA }
+			}
+		}
+        if = {
+            limit = {
+                has_country_flag = PRU_ugarteche_dead
+            }
+            retire_country_leader = yes
+            add_country_leader_role = {
+                character = PRU_Pedro_Beltran_Espantoso
+                promote_leader = yes
+                country_leader = {
+                    #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                    expire = "1994.4.20"
+                    ideology = conservative_democracy_liberal_conservatism_subtype
+                    traits = { presidente_peru_latin }
+                    id = -1
+                }
+            }
+            set_country_flag = PRU_beltran_president
+            every_country = {
+                news_event = {
+                    id = LATAM_news.58
+                }
+            }
+            add_popularity = {
+                ideology = conservative_democracy
+                popularity = 0.05
+            }
+            add_popularity = {
+                ideology = social_democracy
+                popularity = 0.1
+            }
+            add_popularity = {
+                ideology = socialist
+                popularity = 0.03
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = PRU_ugarteche_alive
+            }
+            set_politics = { 
+                ruling_party = social_democracy 
+                elections_allowed = yes
+            }
+            add_country_leader_trait = presidente_peru_latin
+            set_country_flag = PRU_seoane_president
+            every_country = {
+                news_event = {
+                    id = LATAM_news.54
+                }
+            }
+            add_popularity = {
+                ideology = social_democracy
+                popularity = 0.2
+            }
+        }
+    }
+    option = { #AP-UD
+        name = peru_skel.6.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_BELTRAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_CORNEJO }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_SOLDAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_APN_BELTRAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_APN_SEOANE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_UNO_ODRIA }
+			}
+		}
+        set_politics = { 
+            ruling_party = liberal_democracy 
+            elections_allowed = yes
+        }
+        add_country_leader_trait = presidente_peru_latin
+        set_country_flag = PRU_belaunde_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.52
+            }
+        }
+        set_party_name = {
+            ideology = liberal_democracy
+            name = PRU_ap_party
+            long_name = PRU_ap_party_long
+        }
+        add_popularity = {
+            ideology = liberal_democracy
+            popularity = 0.2
+        }
+    }
+    option = { #UNO
+        name = peru_skel.6.e
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_BELTRAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_CORNEJO }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_ACDN_SOLDAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_APN_BELTRAN }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_APN_SEOANE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = PRU_63_ELECTION_PATH option = PRU_63_ELECTION_PATH_AP-UD_BELAUNDE }
+			}
+		}
+        set_politics = { 
+            ruling_party = authoritarian_democracy 
+            elections_allowed = yes
+        }
+        add_country_leader_trait = presidente_peru_latin
+        set_country_flag = PRU_odria_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.53
+            }
+        }
+        add_popularity = {
+            ideology = social_democracy
+            popularity = 0.2
+        }
+    }
+}
+
+country_event = { # debug
+    id = peru_skel.7
+    title = peru_skel.7.t
+    desc = peru_skel.7.desc
+    #picture =
+
+    is_triggered_only = yes
+
+    option = { # Beltrán
+        name = peru_skel.7.beltran
+        retire_country_leader = yes
+        add_country_leader_role = {
+            character = PRU_Pedro_Beltran_Espantoso
+            promote_leader = yes
+            country_leader = {
+                #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                expire = "1994.4.20"
+                ideology = conservative_democracy_liberal_conservatism_subtype
+                traits = { presidente_peru_latin }
+                id = -1
+            }
+        }
+        set_country_flag = PRU_beltran_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.55
+            }
+        }
+        set_party_name = {
+            ideology = conservative_democracy
+            name = PRU_an_party
+            long_name = PRU_an_party_long
+        }
+    }
+    option = { # 
+        name = peru_skel.7.chavez
+        add_country_leader_role = {
+            character = PRU_Hector_Cornejo_Chavez
+            promote_leader = yes
+            country_leader = {
+                #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                expire = "1994.4.20"
+                ideology = conservative_democracy_christian_democracy_subtype
+                traits = { presidente_peru_latin }
+                id = -1
+            }
+        }
+        set_country_flag = PRU_cornejo_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.56
+            }
+        }
+        set_party_name = {
+            ideology = conservative_democracy
+            name = PRU_pdc_party
+            long_name = PRU_pdc_party_long
+        }
+    }
+    option = {
+        name = peru_skel.7.paz
+        add_country_leader_role = {
+            character = PRU_Carlos_Moreyra
+            promote_leader = yes
+            country_leader = {
+                #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                expire = "1994.4.20"
+                ideology = conservative_democracy_subtype
+                traits = { presidente_peru_latin }
+                id = -1
+            }
+        }
+        set_country_flag = PRU_soldan_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.57
+            }
+        }
+    }
+    option = {
+        name = peru_skel.7.nextpage
+        country_event = {
+            id = peru_skel.8
+        }
+    }
+}
+country_event = { # debug
+    id = peru_skel.8
+    title = peru_skel.8.t
+    desc = peru_skel.8.desc
+    #picture =
+
+    is_triggered_only = yes
+
+    option = { # Beltrán Takes Over
+        name = peru_skel.8.beltrantakeover
+        retire_country_leader = yes
+        add_country_leader_role = {
+            character = PRU_Pedro_Beltran_Espantoso
+            promote_leader = yes
+            country_leader = {
+                #desc = "POLITICS_MANUEL_PRADO_UGARTECHE_DESC"
+                expire = "1994.4.20"
+                ideology = conservative_democracy_liberal_conservatism_subtype
+                traits = { presidente_peru_latin }
+                id = -1
+            }
+        }
+        set_country_flag = PRU_beltran_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.58
+            }
+        }
+    }
+    option = { # Seoane
+        name = peru_skel.8.seoane
+        set_politics = { ruling_party = social_democracy }
+        add_country_leader_trait = presidente_peru_latin
+        set_country_flag = PRU_seoane_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.54
+            }
+        }
+    }
+    option = { # Belaúnde
+        name = peru_skel.8.belaunde
+        set_politics = { ruling_party = liberal_democracy }
+        add_country_leader_trait = presidente_peru_latin
+        set_country_flag = PRU_belaunde_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.52
+            }
+        }
+        set_party_name = {
+            ideology = liberal_democracy
+            name = PRU_ap_party
+            long_name = PRU_ap_party_long
+        }
+    }
+    option = { # Odría
+        name = peru_skel.8.odria
+        set_politics = { ruling_party = authoritarian_democracy }
+        add_country_leader_trait = presidente_peru_latin
+        set_country_flag = PRU_odria_president
+        every_country = {
+            news_event = {
+                id = LATAM_news.53
+            }
+        }
+    }
+}
