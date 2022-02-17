@@ -1,0 +1,115 @@
+add_namespace = HON_scripted
+
+country_event = {#1966 Election (Transition in 1967)
+	id = HON_scripted.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event HON_scripted.1"}
+	title = HON_scripted.1.t
+	desc = HON_scripted.1.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Nationalists
+		name = HON_scripted.1.a
+		ai_chance = {
+			factor = 35
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = HON_66_ELECTION_PATH option = HON_66_ELECTION_PATH_LIBERALS }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HON_66_ELECTION_PATH option = HON_66_ELECTION_PATH_MILITARY }
+            }
+		}
+		set_politics = {
+			ruling_party = conservative_democracy
+			elections_allowed = yes
+			last_election = "1966.10.10"
+			election_frequency = 72
+		}
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.1
+		}
+	}
+	option = {#Liberals
+		name = HON_scripted.1.b
+		ai_chance = { 
+			factor = 45
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HON_66_ELECTION_PATH option = HON_66_ELECTION_PATH_NATIONALISTS }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HON_66_ELECTION_PATH option = HON_66_ELECTION_PATH_MILITARY }
+            }
+		} 
+		set_politics = {
+			ruling_party = liberal_democracy
+			elections_allowed = yes
+			last_election = "1966.10.10"
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.15
+		}
+		country_event = { id = HON_scripted.2 days = 1460 } 
+	}
+	option = {#Military
+		name = HON_scripted.1.c
+		ai_chance = { 
+			factor = 20
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = HON_66_ELECTION_PATH option = HON_66_ELECTION_PATH_LIBERALS }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = HON_66_ELECTION_PATH option = HON_66_ELECTION_PATH_NATIONALISTS }
+            }
+		}
+		set_politics = {
+			ruling_party = despotism
+			elections_allowed = no
+			last_election = "1966.10.10"
+			election_frequency = 72
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.1
+		}
+	}
+}
+
+country_event = {#1971 Election
+	id = HON_scripted.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event HON_scripted.2"}
+	title = HON_scripted.2.t
+	desc = HON_scripted.2.desc
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = HON_scripted.2.a
+		add_country_leader_role = {
+			character = HON_Modesto_Rodas_Alvarado
+			promote_leader = yes
+			country_leader = {
+		        ideology = social_democracy_left_wing_populism_subtype
+			    expire = "1999.1.1"
+			}
+		}
+		set_politics = {
+			ruling_party = social_democracy
+			elections_allowed = yes
+			last_election = "1971.06.07"
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = social_democracy
+			popularity = 0.2
+		}
+	}
+}
