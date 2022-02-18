@@ -1,0 +1,1561 @@
+﻿############################
+#  		Turkey Events	   #
+############################
+
+add_namespace = turkey
+
+add_namespace = turkey_skeleton
+
+country_event = { #post-ITW panic (Turkey defeat)
+	id = turkey_skeleton.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.1"}
+	title = turkey_skeleton.1.t
+	desc = turkey_skeleton.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #DYP
+		name = turkey_skeleton.1.a
+
+		ai_chance = { 
+			base = 3 
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_CHP_STABLE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_CHP_REVOLT }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_STABLE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_REVOLT }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_COUP }
+			}
+		}
+
+		set_politics = { ruling_party = social_democracy }
+		TUR_Behice_Boran = { promote_character = { ideology = social_democracy_left_wing_populism_subtype } }
+		set_popularities = {
+			communist = 0
+			ultranationalism = 0
+			national_socialism = 0
+			socialist = 0
+			social_democracy = 44
+			liberal_democracy = 0
+			conservative_democracy = 28
+			authoritarian_democracy = 26
+			despotism = 0
+			fascism = 2
+		}
+		random_list = {
+			1 = { #Coup
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_DYP_NO_COUP }
+				}
+				country_event = { id = turkey_skeleton.2 days = 600 random = 600 }
+			}
+			2 = { #No coup- decolonize & CHP can't go left
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_DYP_YES_COUP }
+				}
+				country_event = { id = turkey_skeleton.5 days = 400 random = 600 }
+				set_country_flag = tur_chp_went_right
+			}
+		}
+		every_country = { news_event = WORLD.70001 }
+	}
+
+	option = { #CHP
+		name = turkey_skeleton.1.b
+
+		ai_chance = { 
+			base = 2 
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_DYP_NO_COUP }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_DYP_YES_COUP }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_STABLE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_REVOLT }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_COUP }
+			}
+		}
+
+		set_politics = { ruling_party = authoritarian_democracy }
+		TUR_Ismet_Inonu = { promote_character = { ideology = authoritarian_democracy_kemalism_subtype } }
+		set_popularities = {
+			communist = 0
+			ultranationalism = 0
+			national_socialism = 0
+			socialist = 0
+			social_democracy = 29
+			liberal_democracy = 0
+			conservative_democracy = 32
+			authoritarian_democracy = 36
+			despotism = 0
+			fascism = 3
+		}
+		country_event = { id = turkey_skeleton.4 days = 700 random = 300 }
+		random_list = {
+			2 = {
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_CHP_STABLE }
+				}
+				country_event = { id = turkey_skeleton.8 days = 800 random = 400 }
+			}
+			1 = {
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_CHP_REVOLT }
+				}
+				#no effect
+			}
+		}
+		every_country = { news_event = WORLD.70003 }
+	}
+
+	option = { #UDP
+		name = turkey_skeleton.1.c
+
+		ai_chance = { 
+			base = 4 
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_DYP_NO_COUP }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_DYP_YES_COUP }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_CHP_STABLE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_CHP_REVOLT }
+			}
+		}
+
+		set_politics = { ruling_party = conservative_democracy }
+		promote_character = TUR_Celal_Bayar
+		set_popularities = {
+			communist = 0
+			ultranationalism = 0
+			national_socialism = 0
+			socialist = 0
+			social_democracy = 14
+			liberal_democracy = 0
+			conservative_democracy = 55
+			authoritarian_democracy = 27
+			despotism = 0
+			fascism = 4
+		}
+		random_list = {
+			1 = { #Coup
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_STABLE }
+				}
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_REVOLT }
+				}
+				country_event = { id = turkey_skeleton.2 days = 600 random = 600 }
+			}
+			1 = { #Revolt
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_STABLE }
+				}
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_COUP }
+				}
+				country_event = { id = turkey_skeleton.8 days = 800 random = 400 }
+			}
+			2 = {
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_REVOLT }
+				}
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = TUR_ITW_DEFEAT_ELECTION_PATH option = TUR_ITW_DEFEAT_ELECTION_PATH_UDP_COUP }
+				}
+				#no effect
+			}
+		}
+		every_country = { news_event = WORLD.70002 }
+	}
+}
+
+country_event = { #coup
+	id = turkey_skeleton.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.2"}
+	title = turkey_skeleton.2.t
+	desc = turkey_skeleton.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey_skeleton.2.a
+		if = {
+			limit = {
+				has_government = social_democracy
+			}
+			every_country = { news_event = WORLD.70014 }
+		}
+		else_if = {
+			limit = {
+				has_government = conservative_democracy
+			}
+			every_country = { news_event = WORLD.70015 }
+		}
+		set_politics = {
+			ruling_party = despotism
+		}
+		promote_character = TUR_Cemal_Gursel
+		set_popularities = {
+			communist = 2
+			ultranationalism = 0
+			national_socialism = 0
+			socialist = 5
+			social_democracy = 0
+			liberal_democracy = 9
+			conservative_democracy = 16
+			authoritarian_democracy = 21
+			despotism = 41
+			fascism = 6
+		}
+		country_event = { id = turkey_skeleton.8 days = 200 random = 200 }
+		country_event = { id = turkey_skeleton.6 days = 200 }
+	}
+}
+
+country_event = { #1971 election
+	id = turkey_skeleton.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.3"}
+	title = turkey_skeleton.3.t
+	desc = turkey_skeleton.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey_skeleton.3.a
+		hidden_effect = {
+			set_party_name = {
+				ideology = social_democracy
+				long_name = TUR_1971_social_democracy_party_long
+				name = TUR_1971_social_democracy_party
+			}
+			TUR_Fahri_Koruturk = { promote_character = yes }
+			TUR_Cevdet_Sunay = { promote_character = { ideology = authoritarian_democracy_kemalism_subtype } }
+			TUR_Celal_Bayar = {
+				set_portraits = {
+					civilian = { large = "gfx/leaders/TUR/Portrait_Turkey_Celal_Bayar_1970s.dds" }
+				}
+			}
+		}
+
+
+		random_list = {
+			4 = { #TIP
+				modifier = {
+					factor = 4
+					has_government = social_democracy
+					NOT = { has_country_flag = tur_chp_went_left }
+				}
+				set_politics = {
+					ruling_party = socialist
+				}
+				hidden_effect = { 
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						national_socialism = 0
+						socialist = 38
+						social_democracy = 0
+						liberal_democracy = 16
+						conservative_democracy = 26
+						authoritarian_democracy = 14
+						despotism = 0
+						fascism = 6
+					}
+					every_country = { news_event = WORLD.70007 }
+				}
+			}
+			7 = { #SODEP
+				modifier = {
+					factor = 0.5
+					has_government = despotism
+				}
+				modifier = {
+					factor = 2
+					has_government = social_democracy
+					NOT = { has_country_flag = tur_chp_went_left }
+				}
+				set_politics = {
+					ruling_party = liberal_democracy
+				}
+				hidden_effect = {
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						national_socialism = 0
+						socialist = 9
+						social_democracy = 0
+						liberal_democracy = 51
+						conservative_democracy = 9
+						authoritarian_democracy = 29
+						despotism = 0
+						fascism = 2
+					}
+					every_country = { news_event = WORLD.70008 }
+				}
+			}
+			12 = { #LCHP
+				modifier = {
+					factor = 0.5
+					NOT = { has_country_flag = tur_chp_went_left }
+				}
+				modifier = {
+					factor = 1.7
+					has_country_flag = tur_won_itw
+				}
+				modifier = {
+					factor = 0
+					has_country_flag = tur_chp_went_right
+				}
+
+				set_politics = {
+					ruling_party = social_democracy
+				}
+				hidden_effect = {
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						national_socialism = 0
+						socialist = 3
+						social_democracy = 59
+						liberal_democracy = 8
+						conservative_democracy = 21
+						authoritarian_democracy = 0
+						despotism = 0
+						fascism = 9
+					}
+					every_country = { news_event = WORLD.70009 }
+				}
+			}
+			10 = { #RCHP
+				modifier = {
+					factor = 0
+					has_country_flag = tur_chp_went_left
+				}
+				modifier = {
+					factor = 1.5
+					has_government = authoritarian_democracy
+				}
+				modifier = {
+					factor = 1.7
+					has_country_flag = tur_won_itw
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+				}
+				hidden_effect = {
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						national_socialism = 0
+						socialist = 14
+						social_democracy = 0
+						liberal_democracy = 6
+						conservative_democracy = 22
+						authoritarian_democracy = 56
+						despotism = 0
+						fascism = 2
+					}
+					every_country = { news_event = WORLD.70010 }
+				}
+			}
+			8 = { #DP
+				modifier = {
+					factor = 2
+					has_government = conservative_democracy
+				}
+				set_party_name = {
+					ideology = conservative_democracy
+					long_name = TUR_1971_1_conservative_democracy_party_long
+					name = TUR_1971_1_conservative_democracy_party
+				}
+				set_politics = {
+					ruling_party = conservative_democracy
+				}
+				promote_character = TUR_Celal_Bayar
+				hidden_effect = {
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						national_socialism = 0
+						socialist = 2
+						social_democracy = 0
+						liberal_democracy = 11
+						conservative_democracy = 57
+						authoritarian_democracy = 24
+						despotism = 0
+						fascism = 6
+					}
+					every_country = { news_event = WORLD.70011 }
+				}
+			}
+			6 = { #AP
+				modifier = {
+					factor = 0.5
+					has_government = despotism
+				}
+				modifier = {
+					factor = 2
+					has_government = conservative_democracy
+				}
+				set_party_name = {
+					ideology = conservative_democracy
+					long_name = TUR_1971_2_conservative_democracy_party_long
+					name = TUR_1971_2_conservative_democracy_party
+				}
+				promote_character = TUR_Necip_Fazil
+				set_politics = {
+					ruling_party = conservative_democracy
+				}
+				hidden_effect = {
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						national_socialism = 0
+						socialist = 8
+						social_democracy = 0
+						liberal_democracy = 7
+						conservative_democracy = 51
+						authoritarian_democracy = 33
+						despotism = 0
+						fascism = 1
+					}
+					every_country = { news_event = WORLD.70012 }
+				}
+			}
+			4 = { #MHP
+				modifier = { 
+					factor = 0.5
+					has_government = despotism
+				}
+				modifier = {
+					factor = 2
+					has_government = conservative_democracy
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+				}
+				set_party_name = {
+					ideology = authoritarian_democracy
+					long_name = TUR_fascism_party_long
+					name = TUR_fascism_party
+				}
+				promote_character = {
+					character = TUR_Alparslan_Turkes
+					ideology = authoritarian_democracy_national_conservatism_subtype
+				}
+				hidden_effect = {
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						national_socialism = 0
+						socialist = 7
+						social_democracy = 34
+						liberal_democracy = 2
+						conservative_democracy = 15
+						authoritarian_democracy = 34
+						despotism = 0
+						fascism = 8
+					}
+					every_country = { news_event = WORLD.70013 }
+				}
+			}
+		}
+	}
+}
+
+country_event = { #CHP internal chicanery
+	id = turkey_skeleton.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.4"}
+	title = turkey_skeleton.4.t
+	desc = turkey_skeleton.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #L-CHP
+		name = turkey_skeleton.4.a
+
+		ai_chance = {
+			base = 7 
+			modifier = {
+				factor = 0.2
+				has_country_flag = tur_won_itw
+			}
+		}
+
+		set_country_flag = tur_chp_went_left
+
+		set_party_name = {
+			ideology = social_democracy
+			long_name = TUR_1971_social_democracy_party_long
+			name = TUR_1971_social_democracy_party
+		}
+
+		promote_character = {
+			character = TUR_Ismet_Inonu
+			ideology = social_democracy_left_kemalism_subtype
+		}
+
+		set_politics = {
+			ruling_party = social_democracy
+		}
+		set_popularities = {
+			communist = 0
+			socialist = 12
+			social_democracy = 34
+			liberal_democracy = 14
+			conservative_democracy = 32
+			authoritarian_democracy = 0
+			despotism = 0
+			fascism = 8
+			national_socialism = 0
+			ultranationalism = 0
+		}
+	}
+
+	option = { #R-CHP
+		name = turkey_skeleton.4.b
+
+		ai_chance = { base = 5 }
+		set_country_flag = tur_chp_went_right
+	}
+}
+
+country_event = { #Syria, Kurdistan and Armenia freed
+	id = turkey_skeleton.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.5"}
+	title = turkey_skeleton.5.t
+	desc = turkey_skeleton.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey_skeleton.5.a
+		every_country = { news_event = WORLD.70017 }
+		remove_ideas = TUR_inspectorate_generals
+		1241 = {
+			set_demilitarized_zone = no
+		}
+		1450 = {
+			set_demilitarized_zone = no
+		}
+		1242 = {
+			set_demilitarized_zone = no
+		}
+		1370 = {
+			set_demilitarized_zone = no
+		}
+		1371 = {
+			set_demilitarized_zone = no
+		}
+		680 = {
+			set_demilitarized_zone = no
+		}
+		1372 = {
+			set_demilitarized_zone = no
+		}
+		554 = {
+			set_demilitarized_zone = no
+		}
+		782 = {
+			set_demilitarized_zone = no
+		}
+		SYR = {
+			transfer_state = 554
+			transfer_state = 680
+			transfer_state = 782
+			transfer_state = 1241
+			transfer_state = 1242
+			transfer_state = 1370
+			transfer_state = 1371
+			transfer_state = 1372
+			transfer_state = 1447
+			transfer_state = 1450
+			random_list = {
+				4 = {
+					set_politics = {
+						ruling_party = authoritarian_democracy
+					}
+					add_popularity = {
+						ideology = authoritarian_democracy
+						popularity = 0.3
+					}
+				}
+				3 = {
+					set_politics = {
+						ruling_party = socialist
+					}
+					add_popularity = {
+						ideology = socialist
+						popularity = 0.3
+					}
+				}
+				1 = {
+					set_politics = {
+						ruling_party = communist
+					}
+					add_popularity = {
+						ideology = communist
+						popularity = 0.3
+					}
+				}
+			}
+			if = {
+				limit = { NOT = { has_government = communist } }
+				set_temp_variable = { TNO_economy_type_temp = 1}
+				econ_type_change = yes
+			}
+		}
+		
+		if = { #If the KUR tag isn't critical for the IraqCW, then free kurdistan.
+			limit = {
+				OR = {
+					TUR = { controls_state = 781 }
+					BKU = { controls_state = 781 }
+				}
+			}
+			KUR = {
+				add_state_core = 1243
+				transfer_state = 1243
+				add_state_core = 1369
+				transfer_state = 1369
+				add_state_core = 1446
+				transfer_state = 1446
+				transfer_state = 781
+				transfer_state = 1334
+				set_capital = { state = 781 }
+				set_politics = {
+					ruling_party = social_democracy
+				}
+				set_popularities = {
+					communist = 12
+					socialist = 0
+					social_democracy = 54
+					liberal_democracy = 12
+					conservative_democracy = 0
+					authoritarian_democracy = 22
+					despotism = 0
+					fascism = 0
+					national_socialism = 0
+					ultranationalism = 0
+				}
+				set_temp_variable = { TNO_economy_type_temp = 1}
+				econ_type_change = yes
+			}
+		}
+		else = { #If it is, then give syria kurdistan for free.
+			SYR = {
+				transfer_state = 1369
+				transfer_state = 1243
+				transfer_state = 1446
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = ARM
+				}
+			}
+			ARM = {
+				transfer_state = 1567
+				transfer_state = 1568
+				transfer_state = 230
+				set_politics = {
+					ruling_party = socialist
+				}
+				set_popularities = {
+					communist = 6
+					despotism = 4
+					socialist = 45
+					social_democracy = 5
+					liberal_democracy = 27
+					conservative_democracy = 13
+					authoritarian_democracy = 0
+					fascism = 0
+					national_socialism = 0
+				}
+				remove_ideas = {
+					ARM_Fedayeen_Gather
+					ARM_united_front
+					ARM_Operation_Nemesis
+				}
+				set_temp_variable = { TNO_economy_subtype_temp = 2 }
+				econ_subtype_change = yes
+				add_to_variable = { money_reserves = 0.10 }
+				set_temp_variable = { temp_credit_rating = 3 }
+				set_temp_variable = { temp_credit_rating_min = 3 }
+				set_temp_variable = { temp_credit_rating_max = 3 }
+				econ_initialize_credit_rating_system = yes
+				inherit_technology = TUR
+			}
+		}
+	}
+}
+
+country_event = { #Gursel Retires
+	id = turkey_skeleton.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.6"}
+	title = turkey_skeleton.6.t
+	desc = turkey_skeleton.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = turkey_skeleton.6.a
+		retire_character = TUR_Cemal_Gursel
+		promote_character = TUR_Cemal_Tural
+		country_event = { id = turkey_skeleton.9 days = 600 }
+	}
+}
+
+country_event = { #Inonu can't stop winning (ITW victory)
+	id = turkey_skeleton.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.7"}
+	title = turkey_skeleton.7.t
+	desc = turkey_skeleton.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = turkey_skeleton.7.a
+		set_popularities = {
+			communist = 0
+			ultranationalism = 0
+			national_socialism = 0
+			socialist = 0
+			social_democracy = 2
+			liberal_democracy = 0
+			conservative_democracy = 11
+			authoritarian_democracy = 87
+			despotism = 0
+			fascism = 0
+		}
+		country_event = { id = turkey_skeleton.4 days = 700 random = 300 }
+		random_list = {
+			2 = {
+				country_event = { id = turkey_skeleton.8 days = 800 random = 400 }
+			}
+			1 = {
+				#no effect
+			}
+		}
+		every_country = { news_event = WORLD.70004 }
+	}
+}
+
+country_event = { #Dashnak Revolt
+	id = turkey_skeleton.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.8"}
+	title = turkey_skeleton.8.t
+	desc = turkey_skeleton.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = turkey_skeleton.8.a
+		ARM = {
+			transfer_state = 1568
+			inherit_technology = TUR
+			load_oob = ARM_uprising
+			add_ideas = {
+				ARM_Fedayeen_Gather
+				ARM_united_front
+				ARM_Operation_Nemesis
+			}
+			add_to_variable = { money_reserves = 0.10 }
+			set_temp_variable = { temp_credit_rating = 3 }
+			set_temp_variable = { temp_credit_rating_min = 3 }
+			set_temp_variable = { temp_credit_rating_max = 3 }
+			econ_initialize_credit_rating_system = yes
+			random_list = {
+				1 = {
+					set_politics = {
+						ruling_party = communist
+					}
+					set_popularities = {
+						communist = 52
+						ultranationalism = 33
+						national_socialism = 0
+						socialist = 0
+						social_democracy = 0
+						liberal_democracy = 0
+						conservative_democracy = 0
+						authoritarian_democracy = 0
+						despotism = 13
+						fascism = 2
+					}
+					set_temp_variable = { TNO_economy_subtype_temp = 13 }
+					econ_subtype_change = yes
+					every_country = { news_event = WORLD.70006 }
+				}
+				1 = {
+					set_politics = {
+						ruling_party = ultranationalism
+					}
+					set_popularities = {
+						communist = 40
+						ultranationalism = 47
+						national_socialism = 0
+						socialist = 0
+						social_democracy = 0
+						liberal_democracy = 0
+						conservative_democracy = 0
+						authoritarian_democracy = 0
+						despotism = 11
+						fascism = 2
+					}
+					set_temp_variable = { TNO_economy_subtype_temp = 6 }
+					econ_subtype_change = yes
+					every_country = { news_event = WORLD.70005 }
+				}
+			}
+			declare_war_on = { type = independence_wargoal target = TUR }
+		}
+		country_event = { id = turkey_skeleton.10 days = 1000 }
+	}
+}
+
+country_event = { #Tural retires
+	id = turkey_skeleton.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.9"}
+	title = turkey_skeleton.9.t
+	desc = turkey_skeleton.9.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey_skeleton.9.a
+		retire_character = TUR_Cemal_Tural
+		promote_character = {
+			character = TUR_Cevdet_Sunay
+			ideology = despotism_military_junta_subtype
+		}
+	}
+}
+
+country_event = { #Truce with Armenia
+	id = turkey_skeleton.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.10"}
+	title = turkey_skeleton.10.t
+	desc = turkey_skeleton.10.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey_skeleton.10.a
+		if = {
+			limit = {
+				has_war_with = ARM
+			}
+			ARM = {
+				transfer_state = 230
+				transfer_state = 1567
+				if = {
+					limit = {
+						has_government = ultranationalism
+					}
+					set_politics = {
+						ruling_party = despotism
+					}
+					set_popularities = {
+						communist = 33
+						ultranationalism = 10
+						national_socialism = 0
+						socialist = 0
+						social_democracy = 0
+						liberal_democracy = 0
+						conservative_democracy = 0
+						authoritarian_democracy = 0
+						despotism = 55
+						fascism = 2
+					}
+				}
+				white_peace = TUR
+			}
+		}
+	}
+}
+
+# country_event = { #Read Akbaba
+# 	id = turkey_skeleton.11
+# 	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey_skeleton.11"}
+# 	title = turkey_skeleton.11.t
+# 	desc = turkey_skeleton.11.d
+
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+
+# 	option = {
+# 		name = turkey_skeleton.11.a
+# 		create_country_leader = {
+# 			name = "Akbaba İnönü"
+# 			picture = "READ_AKBABA.dds"
+# 			expire = "1999.1.1"
+# 			ideology = esoteric_nazism_subtype
+# 			traits = {
+# 			}
+# 		}
+# 		set_politics = {
+# 			ruling_party = esoteric_nazism
+# 		}
+# 		set_popularities = {
+# 			esoteric_nazism = 100
+# 		}
+# 	}
+# }
+
+####Syrians Rise Up https://www.youtube.com/watch?v=CcX5w-K2e-Y&
+country_event = {
+	id = turkey.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey.26"}
+	title = turkey.26.t
+	desc = turkey.26.d
+	picture = GFX_report_event_nazi_moon
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	immediate = {
+		782 = {
+			set_demilitarized_zone = no
+		}
+		554 = {
+			set_demilitarized_zone = no
+		}
+		553 = {
+			set_demilitarized_zone = no
+		}
+		677 = {
+			set_demilitarized_zone = no
+		}
+		680 = {
+			set_demilitarized_zone = no
+		}
+		1240 = {
+			set_demilitarized_zone = no
+		}
+		1241 = {
+			set_demilitarized_zone = no
+		}
+		1242 = {
+			set_demilitarized_zone = no
+		}
+		1369 = {
+			set_demilitarized_zone = no
+		}
+		1370 = {
+			set_demilitarized_zone = no
+		}
+		1371 = {
+			set_demilitarized_zone = no
+		}
+		1372 = {
+			set_demilitarized_zone = no
+		}
+		1450 = {
+			set_demilitarized_zone = no
+		}
+		TUR = {
+			hidden_effect = {
+				country_event = {
+					id = turkey.30
+					days = 30
+				}
+			}
+		}
+		ITA = {
+			country_event = {
+				id = ITAOIL.7
+				days = 8
+			}
+		}
+	}
+	option = {
+		name = turkey.26.a
+		set_global_flag = Syrian_Revolt
+		every_country = {
+			news_event = {
+				id = WORLD.937
+				days = 2
+			}
+		}
+		hidden_effect = { BRG = { country_event = { id = BRG_wolf.8 days = 4 } } }
+		SYR = {
+			if = { #Spawn Syria, if the DYP hasn't already.
+				limit = {
+					NOT = {
+						SYR = {
+							owns_state = 554
+						}
+					}
+				}
+				if = { #ITW victory territory
+					limit = {
+						OR = { 
+							TUR = { controls_state = 553 }
+							SNS = { controls_state = 1240 }
+						}
+					}
+					transfer_state = 553
+					transfer_state = 1240
+				}
+				transfer_state = 782
+				transfer_state = 554
+				transfer_state = 680
+				transfer_state = 1241
+				transfer_state = 1242
+				transfer_state = 1370
+				transfer_state = 1371
+				transfer_state = 1372
+				transfer_state = 1450
+				if = {
+					limit = {
+						IRQ = {
+							owns_state = 781
+						}
+					}
+					transfer_state = 1447
+					transfer_state = 1369
+					transfer_state = 1243
+					transfer_state = 1446
+				}
+
+				set_country_flag = BaathistCountry
+				load_oob = SYR_uprising
+				
+				if = {
+					limit = {
+						NOT = {
+							SYR = {
+								OR = {
+									has_government = authoritarian_democracy
+									has_government = socialist
+								}
+							}
+						}
+					}
+					random_list = {
+						1 = { #Shishakli
+							set_politics = {
+								ruling_party = authoritarian_democracy
+							}
+							add_popularity = {
+								ideology = authoritarian_democracy
+								popularity = 0.3
+							}
+						}
+						3 = { #Assad or Hariri
+							set_politics = {
+								ruling_party = despotism
+							}
+							add_popularity = {
+								ideology = despotism
+								popularity = 0.3
+							}
+							random_list = {
+								2 = { promote_character = SYR_Hafez_al_Assad } #Assad
+								1 = { promote_character = SYR_Ziad_al_Hariri } #Hariri
+							}
+
+						}
+						1 = { #Jadid
+							set_politics = {
+								ruling_party = communist
+							}
+							add_popularity = {
+								ideology = communist
+								popularity = 0.3
+							}
+						}
+						1 = { #Aflaq
+							set_politics = {
+								ruling_party = socialist
+							}
+							add_popularity = {
+								ideology = socialist
+								popularity = 0.3
+							}
+						}
+					}
+				}
+			}
+
+			country_event = {
+				id = OIL.5
+				days = 2
+			}
+			
+			set_country_flag = UAR_can_join
+			country_event = { id = Syria.1 days = 70 }
+		}
+		
+		if = {
+			limit = {
+				country_exists = BKU
+			}
+			TUR = {
+				annex_country = { target = BKU transfer_troops = yes }
+			}
+		}
+
+		if = { #Habash gets a jumpstart on the UAS if he's formed the pan-arab state 
+			limit = {
+				PAL = {
+					has_government = communist
+					has_country_flag = PAL_APR
+				}
+			}
+			PAL = {
+				set_country_flag = UAR_can_form
+			}
+		}
+
+		if = { #Manu Campaignn starts after OC
+			limit = {
+				OR = {
+					has_global_flag = WAC_SCENARIO_1_PALF_VICTORY
+					has_global_flag = WAC_SCENARIO_2_PALF_VICTORY
+					has_global_flag = WAC_SCENARIO_3_PALF_VICTORY
+				} 
+			}
+			CAO = {
+				country_event = { # Manu Campaign
+					id = west_african_crisis.18
+					days = 21
+				}
+			}
+		}
+
+		#if = { #Russian wall oil crisis epilogue
+		#	limit = {
+		#		has_global_flag = german_civil_war_speervic
+		#	}
+		#	GER = {
+		#		country_event = {
+		#			id = speer_russianwall.6
+		#		}
+		#	}
+		#}
+
+		hidden_effect = { #Flavor events
+			USA = {
+				country_event = { id = OILflavor.2 days = 10 }
+				country_event = { id = OILflavor.3 days = 20 }
+			}
+			JAP = {
+				country_event = { id = OILflavor.4 days = 35 }
+			}
+		}
+	}
+}
+
+country_event = { #Surrender Event 3
+	id = turkey.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey.27"}
+	title = turkey.27.t
+	desc = turkey.27.d
+	picture = GFX_report_event_nazi_moon
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey.27.a
+		white_peace = SYR
+		if = {
+			limit = {
+				has_war_with = IRQ
+			}
+			white_peace = IRQ
+		}
+		if = {
+			limit = {
+				has_war_with = JOR
+			}
+			white_peace = JOR
+		}
+		if = {
+			limit = {
+				AND = {
+					781 = {
+						is_controlled_by = IRQ
+					}
+				}
+			}
+			IRQ = {
+				transfer_state = 781
+			}
+		}
+	}
+}
+###Syria chain starts
+country_event = {
+	id = turkey.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey.28"}
+	title = turkey.28.t
+	desc = turkey.28.d
+	picture = GFX_report_event_nazi_moon
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = { NOT = { has_global_flag = TNO_world_tension_WW3 } }
+
+	option = {
+		name = turkey.28.a #ono
+		344 = {
+			damage_building = { type = infrastructure damage = 0.6}
+		}
+		350 = {
+			damage_building = { type = infrastructure damage = 0.6}
+		}
+		353 = {
+			damage_building = { type = infrastructure damage = 0.6}
+		}
+		352 = {
+			damage_building = { type = infrastructure damage = 0.6}
+		}
+		781 = {
+			damage_building = { type = infrastructure damage = 0.6}
+		}
+		hidden_effect = {
+			TUR = {
+				country_event = {
+					id = turkey.29
+					days = 10
+				}
+			}
+		}
+	}
+}
+
+###Syria chain progresses - oh fuck no
+country_event = {
+	id = turkey.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey.29"}
+	title = turkey.29.t
+	desc = turkey.29.d
+	picture = GFX_report_event_nazi_moon
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey.29.a #ono
+		if = {
+			limit = {
+				782 = {
+					is_controlled_by = SNS
+				}
+			}
+			782 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				554 = {
+					is_controlled_by = SNS
+				}
+			}
+			554 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				677 = {
+					is_controlled_by = SNS
+				}
+			}
+			677 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				680 = {
+					is_controlled_by = SNS
+				}
+			}
+			680 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				553 = {
+					is_controlled_by = TUR
+				}
+			}
+			553 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1240 = {
+					is_controlled_by = TUR
+				}
+			}
+			1240 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1241 = {
+					is_controlled_by = TUR
+				}
+			}
+			1241 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1242 = {
+					is_controlled_by = TUR
+				}
+			}
+			1242 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1243 = {
+					is_controlled_by = TUR
+				}
+			}
+			1243 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1369 = {
+					is_controlled_by = TUR
+				}
+			}
+			1369 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1370 = {
+					is_controlled_by = TUR
+				}
+			}
+			1370 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1371 = {
+					is_controlled_by = TUR
+				}
+			}
+			1371 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				1372 = {
+					is_controlled_by = TUR
+				}
+			}
+			1372 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		hidden_effect = {
+			TUR = {
+				country_event = {
+					id = turkey.26
+					days = 10
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Surrender Event
+	id = turkey.30
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey.30"}
+	title = turkey.30.t
+	desc = turkey.30.d
+	picture = GFX_report_event_nazi_moon
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey.30.a
+		add_political_power = -50
+		hidden_effect = {
+			country_event = {
+				id = turkey.31
+				days = 30
+			}
+		}
+	}
+	option = {
+		name = turkey.30.b
+		white_peace = SYR
+		if = {
+			limit = {
+				has_war_with = IRQ
+			}
+			white_peace = IRQ
+		}
+		if = {
+			limit = {
+				has_war_with = JOR
+			}
+			white_peace = JOR
+		}
+		if = {
+			limit = {
+				AND = {
+					781 = {
+						is_controlled_by = IRQ
+					}
+				}
+			}
+			IRQ = {
+				transfer_state = 781
+			}
+		}
+	}
+}
+
+country_event = { #Surrender Event 2
+	id = turkey.31
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey.31"}
+	title = turkey.31.t
+	desc = turkey.31.d
+	picture = GFX_report_event_nazi_moon
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey.31.a
+		add_political_power = -50
+		hidden_effect = {
+			country_event = {
+				id = turkey.27
+				days = 30
+			}
+		}
+	}
+	option = {
+		name = turkey.31.b
+		white_peace = SYR
+		if = {
+			limit = {
+				has_war_with = IRQ
+			}
+			white_peace = IRQ
+		}
+		if = {
+			limit = {
+				has_war_with = JOR
+			}
+			white_peace = JOR
+		}
+		if = {
+			limit = {
+				AND = {
+					781 = {
+						is_controlled_by = IRQ
+					}
+				}
+			}
+			IRQ = {
+				transfer_state = 781
+			}
+		}
+	}
+}
+
+country_event = { # Scorza's Italy propose A new Congress
+	id = turkey.32
+	immediate = {log = "[GetDateText]: [Root.GetName]: event turkey.32"}
+	title = turkey.32.t
+	desc = turkey.32.d
+	picture = GFX_unknown
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = turkey.32.a
+		ITA = { add_to_faction = TUR }
+	}
+	option = {
+		name = turkey.32.b
+		ITA = { give_guarantee = TUR }
+		give_guarantee = ITA
+	}
+
+	option = {
+		name = turkey.32.c
+		ITA = {
+			country_event = {
+				id = scorza.50
+				days = 1
+				random = 1
+			}
+		}
+	}
+}
