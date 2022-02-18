@@ -54,7 +54,13 @@ country_event = { # What should we do?
 
 	option = {#Reform
 		name = PAR_scripted.2.a
-		ai_chance = { factor = 60 }
+		ai_chance = { 
+			factor = 60
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_FDG }
+			}
+		}
 		country_event = { id = PAR_scripted.3 days = 60 } # Coup attempt
 	}
 
@@ -62,6 +68,14 @@ country_event = { # What should we do?
 		name = PAR_scripted.2.b
 		ai_chance = { 
 			factor = 40 
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_REFORM }
+			}
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_STATUS_QUO }
+			}
 		}
 		country_event = { id = PAR_scripted.6 days = 40 } # Democraticos coup attempt
 	}
@@ -79,6 +93,10 @@ country_event = { # Guión Rojo/Democraticos Coup
 		name = PAR_scripted.3.a
 		ai_chance = {
 			factor = 55
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_REFORM }
+			}
 		}
 		add_country_leader_role = {
 			character = PAR_Juan_Natalicio_Gonzalez
@@ -108,7 +126,13 @@ country_event = { # Guión Rojo/Democraticos Coup
 
 	option = { # Democráticos
 		name = PAR_scripted.3.b
-		ai_chance = { factor = 45 }
+		ai_chance = {
+			factor = 45 
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_STATUS_QUO }
+			}
+		}
 		random_list = {
 			75 = {#Democraticos in power
 				set_politics = {
@@ -146,6 +170,10 @@ country_event = { # Guión Rojo/Democraticos Coup
 				}
 			}
 			25 = {#Coup fails, change to status quo path
+				modifier = {
+					factor = 0
+					has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_REFORM }
+				}
 			    country_event = { id = PAR_scripted.7 days = 10 } # FdG coup
 			}
 		}
@@ -181,7 +209,13 @@ country_event = { # Guión Rojo Countercoup
 
 	option = { # Countercoup succeeds
 		name = PAR_scripted.5.a
-		ai_chance = { factor = 45 }	
+		ai_chance = { 
+			factor = 45 
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_REFORM }
+			}
+		}	
 		set_politics = {
 			ruling_party = fascism	
 			last_election = "1940.1.20"
@@ -218,7 +252,13 @@ country_event = { # Guión Rojo Countercoup
 	
 	option = { # Countercoup Fails
 		name = PAR_scripted.5.b
-		ai_chance = { factor = 55 }
+		ai_chance = { 
+			factor = 55
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_STATUS_QUO }
+			}
+		}
 		add_popularity = {
 			ideology = conservative_democracy
 			popularity = 0.15
@@ -249,7 +289,13 @@ country_event = { # Democráticos coup
 
 	option = { # Coup succeeds
 		name = PAR_scripted.6.a
-		ai_chance = { factor = 40 }
+		ai_chance = { 
+			factor = 40 
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_GOVERNMENT_RESPONSE option = PAR_GOVERNMENT_RESPONSE_FDG }
+			}
+		}
 		set_politics = {	
 			ruling_party = conservative_democracy	
 			last_election = "1940.1.20"
@@ -401,6 +447,13 @@ country_event = { # End of da Bush War
 					option = PAR_BUSH_WAR_FULNA_VICTORY
 				}
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_bush_war
+					option = PAR_BUSH_WAR_FDG_VICTORY
+				}
+			}
 		}
 
 		if = { # FdG
@@ -469,9 +522,23 @@ country_event = { # End of da Bush War
 			}
 			random_list = { # Stroessner coup check
 				70 = { # consolidation
+					modifier = {
+					factor = 0
+					has_game_rule = {
+						rule = PAR_democraticos
+						option = PAR_DEMOCRATICOS_STROESSNER
+							}
+						}
 					country_event = { id = PAR_bush_war_scripted.6 days = 200 }
 				}
-				30 = { # stronato
+				30 = { # stronato 
+					modifier = {
+					factor = 0
+					has_game_rule = {
+						rule = PAR_democraticos
+						option = PAR_DEMOCRATICOS_CHAVEZ
+						}
+					}
 					country_event = { id = PAR_bush_war_scripted.8 days = 60 }
 				}
 			}
@@ -479,9 +546,9 @@ country_event = { # End of da Bush War
 				limit = { is_ai = no }
 				news_event = {
 					id = LATAM_news.80
+						}
+					}
 				}
-			}
-		}
 
 		else_if = { # Guión Rojo
 			limit = {
@@ -525,6 +592,13 @@ country_event = { # End of da Bush War
 				has_game_rule = {
 					rule = PAR_bush_war
 					option = PAR_BUSH_WAR_GOVERNMENT_VICTORY
+				}
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = PAR_bush_war
+					option = PAR_BUSH_WAR_FDG_VICTORY
 				}
 			}
 		}
@@ -729,7 +803,13 @@ country_event = { # Elections
 
 	option = { # Franco
 		name = PAR_bush_war_scripted.3.b
-		ai_chance = { factor = 60 }
+		ai_chance = { 
+			factor = 60 
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_ELECTIONS option = PAR_ELECTIONS_LIBERALS }
+			}			
+		}
 		country_event = { id = PAR_bush_war_scripted.4 days = 365 }
 		every_country = {
 			limit = { is_ai = no }
@@ -741,7 +821,13 @@ country_event = { # Elections
 
 	option = { # Estigarribia
 		name = PAR_bush_war_scripted.3.c
-		ai_chance = { factor = 40 }
+		ai_chance = { 
+			factor = 40 
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_ELECTIONS option = PAR_ELECTIONS_FEBRERISTS }
+			}			
+		}
 		set_politics = {	
 			ruling_party = liberal_democracy	
 			last_election = "1940.1.20"
@@ -933,7 +1019,10 @@ country_event = { # Battle of Asunción
 		name = PAR_bush_war_scripted.9.a
 		ai_chance = {
 			factor = 65
-			# add modifiers here
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_BATTLE_ASUNCION option = PAR_BATTLE_ASUNCION_COMMUNIST_DEFEAT }
+			}			
 		}
 		set_politics = {	
 			ruling_party = communist	
@@ -982,6 +1071,10 @@ country_event = { # Battle of Asunción
 				factor = 10
 				has_country_flag = GER_PAR_help_democrats
 			}
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = PAR_BATTLE_ASUNCION option = PAR_BATTLE_ASUNCION_COMMUNIST_VICTORY }
+			}	
 		}
 		add_country_leader_role = {
 			character = PAR_Provisional_Authority
