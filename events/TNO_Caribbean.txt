@@ -1243,45 +1243,28 @@ country_event = {
 	id = wif_crisis.24
 
 	is_triggered_only = yes
-	hidden = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event wif_crisis.24"
-		}
+
 		WIN = {
 			if = {
 				limit = { NOT = { has_country_flag = Trinidad_Negotiations_Success } }
-			}
-		}
 
-	option = { # Black Power Suceeeds
-		name = wif_crisis.24.a
-		ai_chance = { factor = 50 
-		modifier = {
-			factor = 0
-			has_game_rule = {
-				rule = TRINIDAD_BPR
-				option = TRINIDAD_BPR_FAILURE
-					}
-				}
-			}
-			TNO_trinidad_bpr_succeeds = yes
-		}
+				random_list = {
 					
-	option = { # Black Power Fails
-		name = wif_crisis.24.b
-		ai_chance = { factor = 50 
-		modifier = {
-			factor = 0
-			has_game_rule = {
-				rule = TRINIDAD_BPR
-				option = TRINIDAD_BPR_SUCCESS
-						}
+					50 = {
+						TNO_trinidad_bpr_succeeds = yes
+					}
+					50 = {
+						# Nothing happen
 					}
 				}
-			#Nothing Happens
+			}
 		}
+	}
 
+	hidden = yes
 }
 
 
