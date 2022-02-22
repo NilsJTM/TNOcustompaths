@@ -1,0 +1,1212 @@
+#Acts from Estgel; please ping me if there's an error with this
+#initialize calculates amount of MPs that support the act
+#end calculates whether bill passes of fails
+#Will probably change regional later 
+
+ENG_Initialize_Act = { #should be fired whenever an act is started along with a set_variable
+	set_country_flag = act_progress #acts foci shouldn't trigger while this flag is active
+	clear_array = ActMechanic_MPs #just for safety; this should already have been cleared
+
+	multiply_temp_variable = { Null_Support = ParliamentMechanic_Party_SeatNum^0 }
+	add_to_array = { ActMechanic_MPs = Null_Support }
+
+	multiply_temp_variable = { Independent_Support = ParliamentMechanic_Party_SeatNum^1 }
+	add_to_array = { ActMechanic_MPs = Independent_Support }
+
+	multiply_temp_variable = { RP_Moderate_Support = ParliamentMechanic_Party_SeatNum^2 }
+	add_to_array = { ActMechanic_MPs = RP_Moderate_Support }
+
+	multiply_temp_variable = { RP_Reformist_Support = ParliamentMechanic_Party_SeatNum^3 }
+	add_to_array = { ActMechanic_MPs = RP_Reformist_Support }
+
+	multiply_temp_variable = { RP_Hardliner_Support = ParliamentMechanic_Party_SeatNum^4 }
+	add_to_array = { ActMechanic_MPs = RP_Hardliner_Support }
+
+	multiply_temp_variable = { UE_Macmillan_Support = ParliamentMechanic_Party_SeatNum^5 }
+	add_to_array = { ActMechanic_MPs = UE_Macmillan_Support }
+
+	multiply_temp_variable = { UE_Liberal_Support = ParliamentMechanic_Party_SeatNum^6 }
+	add_to_array = { ActMechanic_MPs = UE_Liberal_Support }
+
+	multiply_temp_variable = { RP_Support = ParliamentMechanic_Party_SeatNum^7 }
+	add_to_array = { ActMechanic_MPs = RP_Support }
+
+	multiply_temp_variable = { NF_Support = ParliamentMechanic_Party_SeatNum^8 }
+	add_to_array = { ActMechanic_MPs = NF_Support }
+
+	multiply_temp_variable = { Liberal_Support = ParliamentMechanic_Party_SeatNum^9 }
+	add_to_array = { ActMechanic_MPs = Liberal_Support }
+
+	multiply_temp_variable = { NDL_Whig_Support = ParliamentMechanic_Party_SeatNum^10 }
+	add_to_array = { ActMechanic_MPs = NDL_Whig_Support }
+
+	multiply_temp_variable = { NDL_Democrat_Support = ParliamentMechanic_Party_SeatNum^11 }
+	add_to_array = { ActMechanic_MPs = NDL_Democrat_Support }
+
+	multiply_temp_variable = { NDL_Patriot_Support = ParliamentMechanic_Party_SeatNum^12 }
+	add_to_array = { ActMechanic_MPs = NDL_Patriot_Support }
+
+	multiply_temp_variable = { SLP_Reform_Support = ParliamentMechanic_Party_SeatNum^13 }
+	add_to_array = { ActMechanic_MPs = SLP_Reform_Support }
+
+	multiply_temp_variable = { SLP_Hardliner_Support = ParliamentMechanic_Party_SeatNum^14 }
+	add_to_array = { ActMechanic_MPs = SLP_Hardliner_Support }
+
+	multiply_temp_variable = { Movement_Support = ParliamentMechanic_Party_SeatNum^15 }
+	add_to_array = { ActMechanic_MPs = Movement_Support }
+
+	multiply_temp_variable = { ILP_Support = ParliamentMechanic_Party_SeatNum^16 }
+	add_to_array = { ActMechanic_MPs = ILP_Support }
+
+	multiply_temp_variable = { SNP_Support = ParliamentMechanic_Party_SeatNum^17 }
+	add_to_array = { ActMechanic_MPs = SNP_Support }
+
+	multiply_temp_variable = { UP_Support = ParliamentMechanic_Party_SeatNum^18 }
+	add_to_array = { ActMechanic_MPs = UP_Support }
+
+	multiply_temp_variable = { Plaid_Support = ParliamentMechanic_Party_SeatNum^19 }
+	add_to_array = { ActMechanic_MPs = Plaid_Support }
+
+	multiply_temp_variable = { Goch_Support = ParliamentMechanic_Party_SeatNum^20 }
+	add_to_array = { ActMechanic_MPs = Goch_Support }
+
+	multiply_temp_variable = { BNC_Support = ParliamentMechanic_Party_SeatNum^21 }
+	add_to_array = { ActMechanic_MPs = BNC_Support }
+
+	multiply_temp_variable = { PC_Support = ParliamentMechanic_Party_SeatNum^22 }
+	add_to_array = { ActMechanic_MPs = PC_Support }
+
+	for_each_loop = {
+		array = ParliamentMechanic_Party_SeatNum
+		add_to_variable = { totalseats = v }
+	}
+
+	set_variable = { half_totalseats = totalseats }
+	add_to_variable = { half_totalseats = 1 }
+	multiply_variable = { half_totalseats = 0.5 }
+	round_variable = half_totalseats
+
+	for_each_loop = {
+		array = ActMechanic_MPs
+		randomize_temp_variable = {
+			var = Act_Randomization
+			distribution = binomial
+			min = .90
+			max = 1
+		}
+		multiply_variable = { ActMechanic_MPs^i = Act_Randomization }
+		round_variable = ActMechanic_MPs^i
+	}
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+
+	hidden_effect = {
+		activate_mission = ENG_Acts_Progress
+	}
+
+}
+
+ENG_Act_Compromise_NF = { #
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^8 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^8 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^8 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^8
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^8
+	}
+	round_variable = ActMechanic_MPs^8
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_MSA = { #
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^15 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^15 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^15 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^15
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^15
+	}
+	round_variable = ActMechanic_MPs^15
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_Moderate_Wing = { #NDL - increase moderate wing
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^11 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^11 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^11 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^11
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^11
+	}
+	round_variable = ActMechanic_MPs^11
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_Liberal_Wing = { #NDL - increase liberal wing
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^10 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^10 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^10 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^10
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^10
+	}
+	round_variable = ActMechanic_MPs^10
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_Conservative_Wing = { #NDL - increase conserv wing
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^12 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^12 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^12 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^12
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^12
+	}
+	round_variable = ActMechanic_MPs^12
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_SLP = { #NDL - increase SLP
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^13 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^13 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^13 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^13
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^13
+	}
+	round_variable = ActMechanic_MPs^13
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^14 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^14 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^14 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^14
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^14
+	}
+	round_variable = ActMechanic_MPs^14
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_Reformist = { #SLP - increase Reformist
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^13 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^13 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^13 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^13
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^13
+	}
+	round_variable = ActMechanic_MPs^13
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_Hardliner = { #SLP - increase Hardliner
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^14 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^14 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^14 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^14
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^14
+	}
+	round_variable = ActMechanic_MPs^14
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_NDL = { #SLP - increase NDL
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^10 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^10 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^10 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^10
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^10
+	}
+	round_variable = ActMechanic_MPs^10
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^11 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^11 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^11 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^11
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^11
+	}
+	round_variable = ActMechanic_MPs^11
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^12 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^12 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^12 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^12
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^12
+	}
+	round_variable = ActMechanic_MPs^12
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_Macmillan = { #UE - increase Macmillanists
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^5 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^5 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^5 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^5
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^5
+	}
+	round_variable = ActMechanic_MPs^5
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_UE_Liberals = { #UE - increase Liberals
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^6 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^6 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^6 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^6
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^6
+	}
+	round_variable = ActMechanic_MPs^6
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_RP = { #UE - increase RP
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^7 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^7 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^7 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^7
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^7
+	}
+	round_variable = ActMechanic_MPs^7
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Acts_Compromise_Old_Guard = { #RP - increase RP
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^7 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^7 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^7 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^7
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^7
+	}
+	round_variable = ActMechanic_MPs^7
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+ENG_Act_Compromise_UE = { #RP - increase UE
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^6 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^6 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^6 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^6
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^6
+	}
+	round_variable = ActMechanic_MPs^6
+	set_temp_variable = { Compromise_Increase = ParliamentMechanic_Party_SeatNum^5 }
+	subtract_from_temp_variable = { Compromise_Increase = ActMechanic_MPs^5 }
+	multiply_temp_variable = { Compromise_Increase = .40 }
+	add_to_variable = { ActMechanic_MPs^5 = Compromise_Increase }
+	clamp_variable = {
+		var = ActMechanic_MPs^5
+		min = 0
+		max = ParliamentMechanic_Party_SeatNum^5
+	}
+	round_variable = ActMechanic_MPs^5
+	set_variable = { MPs_Support = 0 }
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+}
+
+NDL_Initialize_County_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_County
+	set_temp_variable = { NDL_Whig_Support = .7 }
+	set_temp_variable = { NDL_Democrat_Support = .7 }
+	set_temp_variable = { NDL_Patriot_Support = .8 }
+	set_temp_variable = { SLP_Reform_Support = .3 }
+	set_temp_variable = { SLP_Hardliner_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_County_tt
+}
+
+NDL_Initialize_Lords_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Lords
+	set_temp_variable = { NDL_Whig_Support = .7 }
+	set_temp_variable = { NDL_Democrat_Support = .8 }
+	set_temp_variable = { NDL_Patriot_Support = .9 }
+	set_temp_variable = { SLP_Reform_Support = .1 }
+	set_temp_variable = { SLP_Hardliner_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Lords_tt
+}
+
+NDL_Initialize_National_Education_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_National_Education
+	set_temp_variable = { NDL_Whig_Support = .6 }
+	set_temp_variable = { NDL_Democrat_Support = .8 }
+	set_temp_variable = { NDL_Patriot_Support = .6 }
+	set_temp_variable = { SLP_Reform_Support = .2 }
+	set_temp_variable = { SLP_Hardliner_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_National_Education_tt
+}
+
+NDL_Initialize_Worker_Protection_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Worker_Protection
+	set_temp_variable = { NDL_Whig_Support = .8 }
+	set_temp_variable = { NDL_Democrat_Support = .8 }
+	set_temp_variable = { NDL_Patriot_Support = .5 }
+	set_temp_variable = { SLP_Reform_Support = .3 }
+	set_temp_variable = { SLP_Hardliner_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Worker_Protection_tt
+}
+
+NDL_Initialize_Children_and_Wives_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Children_and_Wives
+	set_temp_variable = { NDL_Whig_Support = .7 }
+	set_temp_variable = { NDL_Democrat_Support = .8 }
+	set_temp_variable = { NDL_Patriot_Support = .6 }
+	set_temp_variable = { SLP_Reform_Support = .2 }
+	set_temp_variable = { SLP_Hardliner_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Children_and_Wives_tt
+}
+
+NDL_Initialize_Sexual_Offenses_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Sexual_Offenses
+	set_temp_variable = { NDL_Whig_Support = .7 }
+	set_temp_variable = { NDL_Democrat_Support = .8 }
+	set_temp_variable = { NDL_Patriot_Support = .3 }
+	set_temp_variable = { SLP_Reform_Support = .2 }
+	set_temp_variable = { SLP_Hardliner_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Sexual_Offenses_tt
+}
+
+NDL_Initialize_Border_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Border
+	set_temp_variable = { NDL_Whig_Support = .5 }
+	set_temp_variable = { NDL_Democrat_Support = .7 }
+	set_temp_variable = { NDL_Patriot_Support = .8 }
+	set_temp_variable = { SLP_Reform_Support = .1 }
+	set_temp_variable = { SLP_Hardliner_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Border_tt
+}
+
+NDL_Initialize_Preservation_of_Democracy_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Preservation_of_Democracy
+	set_temp_variable = { NDL_Whig_Support = .5 }
+	set_temp_variable = { NDL_Democrat_Support = .7 }
+	set_temp_variable = { NDL_Patriot_Support = .8 }
+	set_temp_variable = { SLP_Reform_Support = .1 }
+	set_temp_variable = { SLP_Hardliner_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Preservation_of_Democracy_tt
+}
+
+NDL_Initialize_Investigations_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Investigations
+	set_temp_variable = { NDL_Whig_Support = .5 }
+	set_temp_variable = { NDL_Democrat_Support = .6 }
+	set_temp_variable = { NDL_Patriot_Support = .9 }
+	set_temp_variable = { SLP_Reform_Support = .05 }
+	set_temp_variable = { SLP_Hardliner_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Investigations_tt
+}
+
+NDL_Initialize_Housing_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Housing
+	set_temp_variable = { NDL_Whig_Support = .7 }
+	set_temp_variable = { NDL_Democrat_Support = .8 }
+	set_temp_variable = { NDL_Patriot_Support = .5 }
+	set_temp_variable = { SLP_Reform_Support = .3 }
+	set_temp_variable = { SLP_Hardliner_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Housing_tt
+}
+
+NDL_Initialize_Business_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Business
+	set_temp_variable = { NDL_Whig_Support = .6 }
+	set_temp_variable = { NDL_Democrat_Support = .7 }
+	set_temp_variable = { NDL_Patriot_Support = .6 }
+	set_temp_variable = { SLP_Reform_Support = .05 }
+	set_temp_variable = { SLP_Hardliner_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Business_tt
+}
+
+NDL_Initialize_National_Healthcare_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_National_Healthcare
+	set_temp_variable = { NDL_Whig_Support = .6 }
+	set_temp_variable = { NDL_Democrat_Support = .7 }
+	set_temp_variable = { NDL_Patriot_Support = .6 }
+	set_temp_variable = { SLP_Reform_Support = .3 }
+	set_temp_variable = { SLP_Hardliner_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_National_Healthcare_tt
+}
+
+NDL_Initialize_Affordable_Education_Act = {
+	set_country_flag = NDL_act_progress
+	set_country_flag = NDL_Act_Affordable_Education
+	set_temp_variable = { NDL_Whig_Support = .6 }
+	set_temp_variable = { NDL_Democrat_Support = .7 }
+	set_temp_variable = { NDL_Patriot_Support = .5 }
+	set_temp_variable = { SLP_Reform_Support = .3 }
+	set_temp_variable = { SLP_Hardliner_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NDL_Act_Affordable_Education_tt
+}
+
+SLP_Initialize_Lords_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Lords
+	set_temp_variable = { NDL_Whig_Support = .2 }
+	set_temp_variable = { NDL_Democrat_Support = .3 }
+	set_temp_variable = { NDL_Patriot_Support = .1 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .6 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Lords_tt
+}
+
+SLP_Initialize_Women_Pension_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Women_Pension
+	set_temp_variable = { NDL_Whig_Support = .4 }
+	set_temp_variable = { NDL_Democrat_Support = .2 }
+	set_temp_variable = { NDL_Patriot_Support = .1 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Women_Pension_tt
+}
+
+SLP_Initialize_Equality_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Equality
+	set_temp_variable = { NDL_Whig_Support = .1 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .05 }
+	set_temp_variable = { SLP_Reform_Support = .9 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Equality_tt
+}
+
+SLP_Initialize_Equal_Vote_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Equal_Vote
+	set_temp_variable = { NDL_Whig_Support = .3 }
+	set_temp_variable = { NDL_Democrat_Support = .3 }
+	set_temp_variable = { NDL_Patriot_Support = .1 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Equal_Vote_tt
+}
+
+SLP_Initialize_Nepotism_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Nepotism
+	set_temp_variable = { NDL_Whig_Support = .2 }
+	set_temp_variable = { NDL_Democrat_Support = .2 }
+	set_temp_variable = { NDL_Patriot_Support = .2 }
+	set_temp_variable = { SLP_Reform_Support = .9 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Nepotism_tt
+}
+
+SLP_Initialize_Socialist_Democracy_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Socialist_Democracy
+	set_temp_variable = { NDL_Whig_Support = .2 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .05 }
+	set_temp_variable = { SLP_Reform_Support = .9 }
+	set_temp_variable = { SLP_Hardliner_Support = .4 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Socialist_Democracy_tt
+}
+
+SLP_Initialize_Socialist_Education_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Socialist_Education
+	set_temp_variable = { NDL_Whig_Support = .2 }
+	set_temp_variable = { NDL_Democrat_Support = .2 }
+	set_temp_variable = { NDL_Patriot_Support = .1 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Socialist_Education_tt
+}
+
+SLP_Initialize_State_Security_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_State_Security
+	set_temp_variable = { NDL_Whig_Support = .05 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .2 }
+	set_temp_variable = { SLP_Reform_Support = .7 }
+	set_temp_variable = { SLP_Hardliner_Support = .9 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_State_Security_tt
+}
+
+SLP_Initialize_Anti_Fascism_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Anti_Fascism
+	set_temp_variable = { NDL_Whig_Support = .1 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .05 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .9 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Anti_Fascism_tt
+}
+
+SLP_Initialize_Land_Redistribution_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Land_Redistribution
+	set_temp_variable = { NDL_Whig_Support = .05 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .05 }
+	set_temp_variable = { SLP_Reform_Support = .7 }
+	set_temp_variable = { SLP_Hardliner_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Land_Redistribution_tt
+}
+
+SLP_Initialize_Universal_Healthcare_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Universal_Healthcare
+	set_temp_variable = { NDL_Whig_Support = .1 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .05 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Universal_Healthcare_tt
+}
+
+SLP_Initialize_Equal_Opportunity_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Equal_Opportunity
+	set_temp_variable = { NDL_Whig_Support = .2 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .1 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Equal_Opportunity_tt
+}
+
+SLP_Initialize_Peoples_Housing_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_Peoples_Housing
+	set_temp_variable = { NDL_Whig_Support = .2 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .05 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_Peoples_Housing_tt
+}
+
+SLP_Initialize_National_Wage_Act = {
+	set_country_flag = SLP_act_progress
+	set_country_flag = SLP_Act_National_Wage
+	set_temp_variable = { NDL_Whig_Support = .1 }
+	set_temp_variable = { NDL_Democrat_Support = .1 }
+	set_temp_variable = { NDL_Patriot_Support = .05 }
+	set_temp_variable = { SLP_Reform_Support = .8 }
+	set_temp_variable = { SLP_Hardliner_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = SLP_Act_National_Wage_tt
+}
+
+UE_Initialize_Anti_Bribery_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Anti_Bribery
+	set_temp_variable = { UE_Macmillan_Support = .8 }
+	set_temp_variable = { UE_Liberal_Support = .6 }
+	set_temp_variable = { RP_Support = .3 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Anti_Bribery_tt
+}
+
+UE_Initialize_Education_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Education
+	set_temp_variable = { UE_Macmillan_Support = .8 }
+	set_temp_variable = { UE_Liberal_Support = .7 }
+	set_temp_variable = { RP_Support = .4 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Education_tt
+}
+
+UE_Initialize_Anti_Fascism_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Anti_Fascism
+	set_temp_variable = { UE_Macmillan_Support = .9 }
+	set_temp_variable = { UE_Liberal_Support = .6 }
+	set_temp_variable = { RP_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Anti_Fascism_tt
+}
+
+UE_Initialize_Anti_Oppression_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Anti_Oppression
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .95 }
+	set_temp_variable = { RP_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Anti_Oppression_tt
+}
+
+UE_Initialize_Fair_Employment_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Fair_Employment
+	set_temp_variable = { UE_Macmillan_Support = .8 }
+	set_temp_variable = { UE_Liberal_Support = .7 }
+	set_temp_variable = { RP_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Fair_Employment_tt
+}
+
+UE_Initialize_Women_Workforce_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Women_Workforce
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .7 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Women_Workforce_tt
+}
+
+UE_Initialize_Labour_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Labour
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .7 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Labour_tt
+}
+
+UE_Initialize_Worker_Health_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Worker_Health
+	set_temp_variable = { UE_Macmillan_Support = .6 }
+	set_temp_variable = { UE_Liberal_Support = .6 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Worker_Health_tt
+}
+
+UE_Initialize_Free_Labour_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Free_Labour
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .7 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Free_Labour_tt
+}
+
+UE_Initialize_Anti_Corruption_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Anti_Corruption
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .5 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Anti_Corruption_tt
+}
+
+UE_Initialize_Anti_Extremism_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Anti_Extremism
+	set_temp_variable = { UE_Macmillan_Support = .8 }
+	set_temp_variable = { UE_Liberal_Support = .4 }
+	set_temp_variable = { RP_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Anti_Extremism_tt
+}
+
+UE_Initialize_Protect_Democracy_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Protect_Democracy
+	set_temp_variable = { UE_Macmillan_Support = .8 }
+	set_temp_variable = { UE_Liberal_Support = .3 }
+	set_temp_variable = { RP_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Protect_Democracy_tt
+}
+
+UE_Initialize_Patriot_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Patriot
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .3 }
+	set_temp_variable = { RP_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Patriot_tt
+}
+
+UE_Initialize_Equal_Vote_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Equal_Vote
+	set_temp_variable = { UE_Macmillan_Support = .8 }
+	set_temp_variable = { UE_Liberal_Support = .9 }
+	set_temp_variable = { RP_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Equal_Vote_tt
+}
+
+UE_Initialize_Clear_Parliament_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Clear_Parliament
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .8 }
+	set_temp_variable = { RP_Support = .2 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Clear_Parliament_tt
+}
+
+UE_Initialize_University_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_University
+	set_temp_variable = { UE_Macmillan_Support = .8 }
+	set_temp_variable = { UE_Liberal_Support = .8 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_University_tt
+}
+
+UE_Initialize_Free_Press_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Free_Press
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .8 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Free_Press_tt
+}
+
+UE_Initialize_Affordable_Education_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Affordable_Education
+	set_temp_variable = { UE_Macmillan_Support = .6 }
+	set_temp_variable = { UE_Liberal_Support = .8 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Affordable_Education_tt
+}
+
+UE_Initialize_Income_Tax_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Income_Tax
+	set_temp_variable = { UE_Macmillan_Support = .5 }
+	set_temp_variable = { UE_Liberal_Support = .8 }
+	set_temp_variable = { RP_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Income_Tax_tt
+}
+
+UE_Initialize_Open_Democracy_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Open_Democracy
+	set_temp_variable = { UE_Macmillan_Support = .6 }
+	set_temp_variable = { UE_Liberal_Support = .7 }
+	set_temp_variable = { RP_Support = .1 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Open_Democracy_tt
+}
+
+UE_Initialize_Free_Education_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Free_Education
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .7 }
+	set_temp_variable = { RP_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Free_Education_tt
+}
+
+UE_Initialize_Charter_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Charter
+	set_temp_variable = { UE_Macmillan_Support = .7 }
+	set_temp_variable = { UE_Liberal_Support = .8 }
+	set_temp_variable = { RP_Support = .05 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Charter_tt
+}
+
+UE_Initialize_Unions_Act = {
+	set_country_flag = UE_act_progress
+	set_country_flag = UE_Act_Unions
+	set_temp_variable = { UE_Macmillan_Support = .6 }
+	set_temp_variable = { UE_Liberal_Support = .95 }
+	set_temp_variable = { RP_Support = .03 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = UE_Act_Unions_tt
+}
+
+RP_Initialize_Workplace_Management_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Workplace_Management
+	set_temp_variable = { UE_Macmillan_Support = .2 }
+	set_temp_variable = { UE_Liberal_Support = .3 }
+	set_temp_variable = { RP_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Workplace_Management_tt
+}
+
+RP_Initialize_Business_Protection_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Business_Protection
+	set_temp_variable = { UE_Macmillan_Support = .3 }
+	set_temp_variable = { UE_Liberal_Support = .2 }
+	set_temp_variable = { RP_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Business_Protection_tt
+}
+
+RP_Initialize_Housing_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Housing
+	set_temp_variable = { UE_Macmillan_Support = .2 }
+	set_temp_variable = { UE_Liberal_Support = .2 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Housing_tt
+}
+
+RP_Initialize_New_Healthcare_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_New_Healthcare
+	set_temp_variable = { UE_Macmillan_Support = .1 }
+	set_temp_variable = { UE_Liberal_Support = .2 }
+	set_temp_variable = { RP_Support = .6 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_New_Healthcare_tt
+}
+
+RP_Initialize_Hunger_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Hunger
+	set_temp_variable = { UE_Macmillan_Support = .1 }
+	set_temp_variable = { UE_Liberal_Support = .3 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Hunger_tt
+}
+
+RP_Initialize_Leash_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Leash
+	set_temp_variable = { UE_Macmillan_Support = .03 }
+	set_temp_variable = { UE_Liberal_Support = .02 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Leash_tt
+}
+
+RP_Initialize_Security_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Security
+	set_temp_variable = { UE_Macmillan_Support = .2 }
+	set_temp_variable = { UE_Liberal_Support = .1 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Security_tt
+}
+
+RP_Initialize_Anti_Fascism_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Anti_Fascism
+	set_temp_variable = { UE_Macmillan_Support = .4 }
+	set_temp_variable = { UE_Liberal_Support = .1 }
+	set_temp_variable = { RP_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Anti_Fascism_tt
+}
+
+RP_Initialize_Work_Safety_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Work_Safety
+	set_temp_variable = { UE_Macmillan_Support = .2 }
+	set_temp_variable = { UE_Liberal_Support = .1 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Work_Safety_tt
+}
+
+RP_Initialize_Coal_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Coal
+	set_temp_variable = { UE_Macmillan_Support = .2 }
+	set_temp_variable = { UE_Liberal_Support = .2 }
+	set_temp_variable = { RP_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Coal_tt
+}
+
+RP_Initialize_Communications_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Communications
+	set_temp_variable = { UE_Macmillan_Support = .1 }
+	set_temp_variable = { UE_Liberal_Support = .2 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Communications_tt
+}
+
+RP_Initialize_Aviation_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Aviation
+	set_temp_variable = { UE_Macmillan_Support = .2 }
+	set_temp_variable = { UE_Liberal_Support = .2 }
+	set_temp_variable = { RP_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Aviation_tt
+}
+
+RP_Initialize_Rail_Road_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Rail_Road
+	set_temp_variable = { UE_Macmillan_Support = .2 }
+	set_temp_variable = { UE_Liberal_Support = .1 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Rail_Road_tt
+}
+
+RP_Initialize_Unions_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Union
+	set_temp_variable = { UE_Macmillan_Support = .1 }
+	set_temp_variable = { UE_Liberal_Support = .1 }
+	set_temp_variable = { RP_Support = .7 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Union_tt
+}
+
+RP_Initialize_Equality_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Equality
+	set_temp_variable = { UE_Macmillan_Support = .1 }
+	set_temp_variable = { UE_Liberal_Support = .8 }
+	set_temp_variable = { RP_Support = .75 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Equality_tt
+}
+
+RP_Initialize_Emergency_Relief_Act = {
+	set_country_flag = PreECW_act_progress
+	set_country_flag = RP_Act_ER
+	set_temp_variable = { Independent_Support = .2 }
+	set_temp_variable = { RP_Moderate_Support = .9 }
+	set_temp_variable = { RP_Reformist_Support = .8 }
+	set_temp_variable = { RP_Hardliner_Support = .6 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_ER_tt
+}
+
+RP_Initialize_Iron_And_Steel_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Iron
+	set_temp_variable = { UE_Macmillan_Support = .4 }
+	set_temp_variable = { UE_Liberal_Support = .4 }
+	set_temp_variable = { RP_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Iron_tt
+}
+
+RP_Initialize_Indirect_Taxation_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Taxation
+	set_temp_variable = { UE_Macmillan_Support = .4 }
+	set_temp_variable = { UE_Liberal_Support = .4 }
+	set_temp_variable = { RP_Support = .8 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Taxation_tt
+}
+
+RP_Initialize_Company_Investigation_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Company
+	set_temp_variable = { UE_Macmillan_Support = .5 }
+	set_temp_variable = { UE_Liberal_Support = .4 }
+	set_temp_variable = { RP_Support = .6 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Company_tt
+}
+
+RP_Initialize_Local_Power_Act = {
+	set_country_flag = RP_act_progress
+	set_country_flag = RP_Act_Local
+	set_temp_variable = { UE_Macmillan_Support = .5 }
+	set_temp_variable = { UE_Liberal_Support = .4 }
+	set_temp_variable = { RP_Support = .6 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = RP_Act_Local_tt
+}
+
+MSA_Initialize_Anti_YDL_Act = {
+	set_country_flag = MSA_act_progress
+	set_country_flag = MSA_Act_YDL
+	set_temp_variable = { NDL_Whig_Support = .6 }
+	set_temp_variable = { NDL_Democrat_Support = MSA_act_prep_NDL }
+	set_temp_variable = { NDL_Patriot_Support = .6 }
+	set_temp_variable = { SLP_Reform_Support = MSA_act_prep_SLP }
+	set_temp_variable = { SLP_Hardliner_Support = .05 }
+	set_temp_variable = { Movement_Support = MSA_act_prep_MSA }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = MSA_Act_YDL_tt
+}
+
+NF_Initialize_POBIAC_Act = {
+	set_country_flag = NF_act_progress
+	set_country_flag = NF_Act_POBIAC
+	set_temp_variable = { UE_Macmillan_Support = .1 }
+	set_temp_variable = { UE_Liberal_Support = .0 }
+	set_temp_variable = { RP_Support = .3 }
+	set_temp_variable = { NF_Support = .6 }
+	ENG_Initialize_Act = yes
+	custom_effect_tooltip = NF_Act_POBIAC_tt
+}
+
+
+ENG_End_Act = {
+	clear_variable = MPs_Support
+	for_each_loop = {
+		array = ActMechanic_MPs
+		add_to_variable = { MPs_Support = v }
+	}
+	multiply_variable = { totalseats = 0.5 }
+	if = {
+		limit = {
+			OR = {
+				has_country_flag = ENG_instant_pass
+				check_variable = { MPs_Support > totalseats }
+				has_game_rule = {
+					rule = ENG_PASS_ACT_CHEAT
+					option = ENG_PASS_ACT_CHEAT_YES
+				} 
+			}
+			NOT = { has_country_flag = ENG_instant_fail }
+		}
+		country_event = ENG_acts.1
+		else = {
+			country_event = ENG_acts.2
+		}
+	}
+
+	clear_array = ActMechanic_MPs
+	clear_variable = MPs_Support
+	clear_variable = totalseats
+}

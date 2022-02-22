@@ -7549,9 +7549,9 @@ country_event = { #the event that works out who wins
 		    modifier = {
 			    factor = 0
 				OR = {
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_PRD }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_UR }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_UN }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_PRD }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UR }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UN }
 				}
 			}	
 		}
@@ -7584,9 +7584,9 @@ country_event = { #the event that works out who wins
 		    modifier = {
 			    factor = 0
 				OR = {
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_AP }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_UR }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_UN }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_AP }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UR }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UN }
 				}
 			}	
 		}
@@ -7619,9 +7619,9 @@ country_event = { #the event that works out who wins
 		    modifier = {
 			    factor = 0
 				OR = {
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_AP }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_PRD }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_UR }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_AP }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_PRD }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UR }
 				}
 			}	
 		}
@@ -7654,9 +7654,9 @@ country_event = { #the event that works out who wins
 		    modifier = {
 			    factor = 0
 				OR = {
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_AP }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_PRD }
-					has_game_rule = { rule = FIN_PATH option =  IBR_ELECTION_ROUTE_UN }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_AP }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_PRD }
+					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UN }
 				}
 			}	
 		}
@@ -52912,7 +52912,29 @@ country_event = {
 		ai_chance = { factor = 10 }
 		trigger = { is_ai = yes }
 		
-		if = { #Franco made war more likely
+		if = {
+			limit = { 
+				has_game_rule = {
+					rule = ALGERIAN_CRISIS
+					option = ALGERIAN_CRISIS_PEACE
+				}
+			complete_national_focus = IBR_Ambassador_Moreira_Plan
+			}
+		
+		}
+		else_if = {
+			limit = { 
+				has_game_rule = {
+					rule = ALGERIAN_CRISIS
+					option = ALGERIAN_CRISIS_WAR
+				}
+			complete_national_focus = IBR_General_Kaulza_Plan 
+			set_country_flag = IBR_Algeria_War_Path
+			}
+		
+		}
+		
+		else_if = { #Franco made war more likely
 			limit = { 
 				IBR = { 
 					has_country_leader = { 

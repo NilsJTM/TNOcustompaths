@@ -1,3 +1,45 @@
+IBR_IBERIAN_LEGISLATIVE_COUNCIL_strategy_plan = {
+	name = ""
+	desc = ""
+
+	enable = {
+		original_tag = IBR
+		has_game_rule = { rule = IBR_IBERIAN_COUNCIL option = IBR_IBERIAN_LEGISLATIVE_COUNCIL }
+	}
+
+	focus_factors = {
+		IBR_Advisory_Council = 0
+	}				
+
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+IBR_IBERIAN_ADVISORY_COUNCIL_strategy_plan = {
+	name = ""
+	desc = ""
+
+	enable = {
+		original_tag = IBR
+		has_game_rule = { rule = IBR_IBERIAN_COUNCIL option = IBR_IBERIAN_ADVISORY_COUNCIL }
+	}
+
+	focus_factors = {
+		IBR_Provisional_Legislative_Council = 0
+	}				
+
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
 IBR_POLITICAL_ROUTE_LIBERAL_strategy_plan = {
 	name = ""
 	desc = ""
@@ -9,10 +51,10 @@ IBR_POLITICAL_ROUTE_LIBERAL_strategy_plan = {
 
 	focus_factors = {
 		IBR_Who_Needs_Friends = 0
-		IBR_Advisory_Council = 0
 		IBR_making_money = 0
-		IBR_choose_caetano = 0 
+		IBR_go_with_da_motta = 0
 		IBR_a_lone_caudillo = 0
+		IBR_no_need_for_haste = 0
 	}				
 
 	weight = {
@@ -28,16 +70,20 @@ IBR_POLITICAL_ROUTE_CONSERVATIVE_strategy_plan = {
 
 	enable = {
 		original_tag = IBR
-		has_game_rule = { rule = IBR_POLITICAL_ROUTE option = IBR_POLITICAL_ROUTE_CONSERVATIVE }
+		OR = {
+			has_game_rule = { rule = IBR_POLITICAL_ROUTE option = IBR_POLITICAL_ROUTE_SPINOLA }
+			has_game_rule = { rule = IBR_POLITICAL_ROUTE option = IBR_POLITICAL_ROUTE_CARNATION }
+		}
 	}
 
 	focus_factors = {
 		IBR_World_Acquaintances = 0
-		#IBR_Provisional_Legislative_Council = 0
 		IBR_Advisory_Council = 0
 		IBR_matter_of_national_security = 0
 		IBR_go_with_da_motta = 0
 		IBR_a_lone_caudillo = 0
+		IBR_call_forth_the_congress = 0
+		IBR_dissolve_the_council = 0
 	}				
 
 	weight = {
@@ -59,9 +105,107 @@ IBR_POLITICAL_ROUTE_DESPOTISM_strategy_plan = {
 
 	focus_factors = {
 		IBR_World_Acquaintances = 0
-		IBR_Provisional_Legislative_Council = 0
 		IBR_matter_of_national_security = 0
-		IBR_worthy_successor = 0
+		IBR_our_loyal_advisors = 0
+	}				
+
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+IBR_ECONOMY_OPUS_DEI_strategy_plan = {
+	name = ""
+	desc = ""
+
+	enable = {
+		original_tag = IBR
+		has_game_rule = { rule = IBR_ECONOMIC_ROUTE option = IBR_ECONOMIC_ROUTE_OPUS_DEI }
+		AND = {
+			has_country_flag = IBR_economic_tree_paths
+			OR = {
+				has_country_flag = cau_weak_franco
+				has_country_flag = cau_council
+				AND = {
+					has_country_flag = legislature_council
+					has_country_flag = cau_weak_salazar
+				}
+			}
+		}
+	}
+
+	focus_factors = {
+		IBR_trust_the_ministries = 0
+		IBR_reapply_the_old = 0
+	}				
+
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+IBR_ECONOMY_STATUS_QUO_strategy_plan = {
+	name = ""
+	desc = ""
+
+	enable = {
+		original_tag = IBR
+		has_game_rule = { rule = IBR_ECONOMIC_ROUTE option = IBR_ECONOMIC_ROUTE_STATUS_QUO }
+		AND = {
+			has_country_flag = IBR_economic_tree_paths
+			OR = {
+				has_country_flag = cau_strong_salazar
+				has_country_flag = cau_weak_salazar
+				has_country_flag = cau_council
+				AND = {
+					has_country_flag = legislature_council
+					has_country_flag = cau_weak_franco
+				}
+			}
+		}
+	}
+
+	focus_factors = {
+		IBR_reapply_the_old = 0
+		IBR_approve_stabilisation_plan = 0
+	}				
+
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+IBR_ECONOMY_TRADITION_strategy_plan = {
+	name = ""
+	desc = ""
+
+	enable = {
+		original_tag = IBR
+		has_game_rule = { rule = IBR_ECONOMIC_ROUTE option = IBR_ECONOMIC_ROUTE_RETURN_TO_TRADITION }
+		AND = {
+			has_country_flag = IBR_economic_tree_paths
+			OR = {
+				has_country_flag = cau_strong_franco
+				AND = {
+					has_country_flag = advisory_council
+					has_country_flag = cau_weak_franco
+				}
+			}
+		}
+	}
+
+	focus_factors = {
+		IBR_trust_the_ministries = 0
+		IBR_approve_stabilisation_plan = 0
 	}				
 
 	weight = {
