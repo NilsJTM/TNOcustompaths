@@ -225,6 +225,26 @@ on_actions = {
 					}
 				}
 				NPL = { apply_war_buff_with_10_divisions = yes }
+				
+			}	
+			if = {
+			    limit = { # Malaysia Civil War
+					has_game_rule = {
+						rule = malaysia_civil_war
+						option = MALAYSIA_CIVIL_WAR_MLY
+					}
+				}
+				MLY = { apply_war_buff_with_10_divisions = yes }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = malaysia_civil_war
+						option = MALAYSIA_CIVIL_WAR_SHO
+					}
+				}
+				SHO = { apply_war_buff_with_10_divisions = yes }		    
+			
 			}
         }
 	}
@@ -332,6 +352,48 @@ on_actions = {
 				    BLR = { apply_war_buff_with_10_divisions = yes }
 				}
 			}
+			if = {
+				  limit = {# Indonesia Civil War
+					ROOT = {
+					    OR = {
+					        tag = INS
+					        tag = FRI
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = INS
+					        tag = FRI
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = indonesia_civil_war_outcome
+						    option = INDONESIA_CIVIL_WAR_OUTCOME_INS
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    INS = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = indonesia_civil_war_outcome
+						    option = INDONESIA_CIVIL_WAR_OUTCOME_FRI
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    FRI = { apply_war_buff_with_10_divisions = yes }
+				}
+			}	
             if = {
 				  limit = {# Iran Civil War
 					ROOT = {
@@ -370,14 +432,14 @@ on_actions = {
 				    limit = {
 				        has_game_rule = {
 						    rule = iran_civil_war_outcome
-						    option = IRAN_CIVIL_WAR_OUTCOME_IRA
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRl
 					    }
 					    NOT = {
 					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
 					    }
 				    }
 				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
-				    IRA = { apply_war_buff_with_10_divisions = yes }				    
+				    IRL = { apply_war_buff_with_10_divisions = yes }
 				}
 				if = {
 				    limit = {
@@ -396,6 +458,19 @@ on_actions = {
 				    limit = {
 				        has_game_rule = {
 						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRA
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    IRA = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
 						    option = IRAN_CIVIL_WAR_OUTCOME_IRC
 					    }
 					    NOT = {
@@ -405,22 +480,33 @@ on_actions = {
 				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
 				    IRC = { apply_war_buff_with_10_divisions = yes }				    
 				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = iran_civil_war_outcome
-						    option = IRAN_CIVIL_WAR_OUTCOME_IRL
-					    }
-					    NOT = {
-					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
-					    }
-				    }
-				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
-				    IRL = { apply_war_buff_with_10_divisions = yes }				    
-				}
 			}	
 		}
 	}
+	on_peace = {
+		effect = {
+			if = {
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = malaysia_civil_war
+						    option = MALAYSIA_CIVIL_WAR_MLY
+					    }
+				    }
+				    MLY = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = malaysia_civil_war
+						    option = MALAYSIA_CIVIL_WAR_SHO
+					    }
+				    }
+				    SHO = { remove_war_buff = yes }
+                }			
+			}
+		}	
+	}		
 	on_annex = {
 		effect = {
 			if = {
@@ -512,6 +598,76 @@ on_actions = {
 				    BLR = { remove_war_buff = yes }
 				}
 			}
+			if = {
+				limit = { # Malay Civil War Ends Japan Victory
+					ROOT = {
+					    OR = {
+					        tag = MLY
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = MLY
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = MLY
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = malaysia_civil_war
+						    option = MALAYSIA_CIVIL_WAR_SHO
+					    }
+				    }
+				    SHO = { remove_war_buff = yes }
+				}
+			}
+            if = {
+				limit = { # Malay Civil War Ends Japan Victory
+					ROOT = {
+					    OR = {
+					        tag = INS
+							tag = FRI
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = INS
+							tag = FRI
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = INS
+							country_exists = FRI
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = indonesia_civil_war_outcome
+						    option = INDONESIA_CIVIL_WAR_OUTCOME_INS
+					    }
+				    }
+				    INS = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = indonesia_civil_war_outcome
+						    option = INDONESIA_CIVIL_WAR_OUTCOME_FRI
+					    }
+				    }
+				    FRI = { remove_war_buff = yes }
+				}
+			}				
 			if = {
 				limit = { # West Siberia Unification Ends
 					ROOT = {
