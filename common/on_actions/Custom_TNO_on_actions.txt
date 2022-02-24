@@ -329,9 +329,96 @@ on_actions = {
 					    }
 				    }
 				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
-				    BLR = { apply_war_buff_with_10_divisions = yes }				    
+				    BLR = { apply_war_buff_with_10_divisions = yes }
 				}
 			}
+            if = {
+				  limit = {# Iran Civil War
+					ROOT = {
+					    OR = {
+					        tag = PER
+					        tag = IRL
+					        tag = IRI
+					        tag = IRA
+					        tag = IRC
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = PER
+					        tag = IRL
+					        tag = IRI
+					        tag = IRA
+					        tag = IRC
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_PER
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    PER = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRA
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    IRA = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRI
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    IRI = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRC
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    IRC = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRL
+					    }
+					    NOT = {
+					        has_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OST_CIVIL_WAR_BUFF_APPLIED
+				    IRL = { apply_war_buff_with_10_divisions = yes }				    
+				}
+			}	
 		}
 	}
 	on_annex = {
@@ -479,6 +566,83 @@ on_actions = {
 					    }
 				    }
 				    SVR = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Iran Civil War ends
+					ROOT = {
+					    OR = {
+					        tag = IRA
+					        tag = IRI
+					        tag = PER
+							tag = IRL
+							tag = IRC
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = IRA
+					        tag = IRI
+					        tag = PER
+							tag = IRL
+							tag = IRC
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IRA
+				            country_exists = IRI
+				            country_exists = PER
+							country_exists = IRC
+							country_exists = IRL
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_PER
+					    }
+				    }
+				    PER = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRL
+					    }
+				    }
+				    IRL = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRA
+					    }
+				    }
+				    IRA = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRI
+					    }
+				    }
+				    IRI = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = iran_civil_war_outcome
+						    option = IRAN_CIVIL_WAR_OUTCOME_IRC
+					    }
+				    }
+				    IRC = { remove_war_buff = yes }
 				}
 			}
             if = {
