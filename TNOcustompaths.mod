@@ -4,7 +4,7 @@ tags={
 	"Utilities"
 }
 name="The New Order: Custom Country Paths Github Version"
-supported_version="1.10.*"
+supported_version="1.11.*"
 dependencies={
 	"The New Order: Last Days of Europe"
 }
