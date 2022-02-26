@@ -393,7 +393,147 @@ on_actions = {
 				    set_global_flag = INS_CIVIL_WAR_BUFF_APPLIED
 				    FRI = { apply_war_buff_with_10_divisions = yes }
 				}
-			}	
+			}
+            if = {
+				limit = {# The Philippines Civil War buffs
+					ROOT = {
+					    OR = {
+					        tag = PHI
+					        tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = PHI
+					        tag = UPH
+							tag = SPH
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_civil_war_outcome
+						    option = PHI_CIVIL_WAR_OUTCOME_PHI
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+				    PHI = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_civil_war_outcome
+						    option = PHI_CIVIL_WAR_OUTCOME_UPH
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+				    UPH = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_civil_war_outcome
+						    option = PHI_CIVIL_WAR_OUTCOME_SPH
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = INS_CIVIL_WAR_BUFF_APPLIED
+				    SPH = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+			if = {
+				limit = {# Landing in the Philippines
+					ROOT = {
+					    OR = {
+					        tag = FGB
+					        tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = FGB
+					        tag = UPH
+							tag = SPH
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_FGB
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+				    FGB = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_UPH
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+				    UPH = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_SPH
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+				    SPH = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_UNITED_FRONT
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = INS_CIVIL_WAR_BUFF_APPLIED
+				    SPH = { apply_war_buff_with_10_divisions = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_UNITED_FRONT
+					    }
+					    NOT = {
+					        has_global_flag = PHI_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = INS_CIVIL_WAR_BUFF_APPLIED
+				    UPH = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
             if = {
 				limit = {# Iran Civil War
 					ROOT = {
@@ -599,7 +739,7 @@ on_actions = {
 				}
 			}
 			if = {
-				limit = { # Malay Civil War Ends Japan Victory
+				limit = { # Malaysia Civil War Ends Japan Victory
 					ROOT = {
 					    OR = {
 					        tag = MLY
@@ -628,7 +768,7 @@ on_actions = {
 				}
 			}
             if = {
-				limit = { # Malay Civil War Ends Japan Victory
+				limit = { # Indonesia Civil War Ends
 					ROOT = {
 					    OR = {
 					        tag = INS
@@ -667,7 +807,227 @@ on_actions = {
 				    }
 				    FRI = { remove_war_buff = yes }
 				}
-			}				
+			}
+			if = {
+				limit = { # The Philippines Civil War Ends the government wins
+					ROOT = {
+					    OR = {
+							tag = PHI
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = PHI
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+							country_exists = UPH
+							country_exists = SPH
+			            }
+					}
+				}
+                if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_civil_war_outcome
+						    option = PHI_CIVIL_WAR_OUTCOME_PHI
+					    }
+				    }
+				    PHI = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # The Philippines Civil War Ends the anit-government forces win
+					ROOT = {
+					    OR = {
+							tag = PHI
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = PHI
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+							country_exists = PHI
+			            }
+					}
+				}	
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_civil_war_outcome
+						    option = PHI_CIVIL_WAR_OUTCOME_UPH
+					    }
+				    }
+				    UPH = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_civil_war_outcome
+						    option = PHI_CIVIL_WAR_OUTCOME_SPH
+					    }
+				    }
+				    SPH = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Landing in the Philippines ends Japan victory
+					ROOT = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+							country_exists = UPH
+							country_exists = SPH
+			            }
+					}
+				}
+                if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_FGB
+					    }
+				    }
+				    FGB = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Landing in the Philippines ends USFIP victory
+					ROOT = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+							country_exists = FGB
+							country_exists = SPH
+			            }
+					}
+				}
+                if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_UPH
+					    }
+				    }
+				    UPH = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Landing in the Philippines ends AFRSR victory
+					ROOT = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+							country_exists = FGB
+							country_exists = UPH
+			            }
+					}
+				}
+                if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_SPH
+					    }
+				    }
+				    SPH = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Landing in the Philippines ends United Front victory
+					ROOT = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = FGB
+							tag = UPH
+							tag = SPH
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+							country_exists = FGB
+			            }
+					}
+				}
+                if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_UNITED_FRONT
+					    }
+				    }
+				    UPH = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = phi_landing_outcome
+						    option = PHI_LANDING_OUTCOME_UNITED_FRONT
+					    }
+				    }
+				    SPH = { remove_war_buff = yes }
+				}
+			}
 			if = {
 				limit = { # West Siberia Unification Ends
 					ROOT = {
