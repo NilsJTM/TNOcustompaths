@@ -10972,6 +10972,7 @@ country_event = { # Election Season
 	}
 
 }
+
 country_event = { # Military Elections End
 	id = BRA_military_elections.4
 	title = BRA_military_elections.4.t
@@ -10985,7 +10986,8 @@ country_event = { # Military Elections End
 
 	hidden = yes
 
-	immediate = {
+	option = {
+		trigger = { is_ai = no }
 		BRA_pres_finish_election = yes
 		if = {
 			limit = { check_variable = { bra_pres_winner = 1 } } # Kubitschek
@@ -11000,7 +11002,37 @@ country_event = { # Military Elections End
 			country_event = { id = BRA_military_elections.7 }
 		}
 	}
+	#AI Weights: Country Paths determine who'll win in the election, or 50/50 for base game
+	option = { #Kubitschek wins
+		trigger = { is_ai = yes }
+		BRA_pres_finish_election = yes
+		ai_chance = { 
+			factor = 1 
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_LACERDA_FREE }
+            }
+			modifier = {
+				factor = 0
+                has_game_rule = { rule = BRA_MILITARY_ELECTION option = RULE_OPTION_BRA_MILITARY_ELECTION_LACERDA_INTERVENE }
+            }
+		}
+		country_event = { id = BRA_military_elections.5 } # Kubitschek
+	}
+	option = { # Lacerda wins
+		trigger = { is_ai = yes }
+		BRA_pres_finish_election = yes
+		ai_chance = { 
+			factor = 1 
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_KUBITSCHEK }
+            }
+		}
+		country_event = { id = BRA_military_elections.6 } # Lacerda
+	}
 }
+
 country_event = { # Kubitschek wins
 	id = BRA_military_elections.5
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BRA_military_elections.5" }
