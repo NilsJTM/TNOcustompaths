@@ -10485,7 +10485,7 @@ country_event = { #Starting Lacerda Coup event
 
 	option = { #continue
 		name = BRA_lacerda.1.a
-		ai_chance = { factor = 100 }
+		trigger = { is_ai = no }	
 		hidden_effect = {
 			set_country_flag = BRA_lacerda_attempted_coup
 			if = {
@@ -10502,9 +10502,62 @@ country_event = { #Starting Lacerda Coup event
 	}
 	option = { #abandon
 		name = BRA_lacerda.1.b
-		ai_chance = { factor = 0 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+            }
+		}
 		hidden_effect = {
 			clr_country_flag = BRA_lacerda_coup_category_allowed
+		}
+	}
+
+	# AI weights: Replacement for the first choice so that it doesn't matter whether Constitutionalists have higher/lower power than Sorbonne or Hardliners
+	option = { # Lacerda wins support, usurps presidency
+		name = brazil.37.b
+		
+		trigger = { is_ai = yes }	
+		ai_chance = { 
+			factor = 1
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_AGAINST }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+            }
+		}
+		hidden_effect = {
+			set_country_flag = BRA_lacerda_attempted_coup
+			country_event = { id = BRA_lacerda.13 days = 5 }
+		}
+	}
+	
+	option = { #Goulart thwarts coup attempt
+		name = brazil.37.c
+
+		trigger = { is_ai = yes }	
+		ai_chance = { 
+			factor = 1
+            modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_AGAINST }
+            }
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+            }
+		}
+		hidden_effect = {
+			set_country_flag = BRA_lacerda_attempted_coup
+			country_event = { id = BRA_lacerda.12 days = 1 }
 		}
 	}
 }
