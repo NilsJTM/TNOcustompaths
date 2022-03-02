@@ -470,6 +470,114 @@ on_actions = {
 				}
 			}
 			if = {
+				limit = {# Oman Civil War
+					ROOT = {
+					    OR = {
+					        tag = OMB
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = OMA
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = OMA_CIVIL_WAR_OUTCOME
+						    option = OMA_CIVIL_WAR_OUTCOME_OMA
+					    }
+					    NOT = {
+					        has_global_flag = OMA_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OMA_CIVIL_WAR_BUFF_APPLIED
+				    OMA = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = OMA_CIVIL_WAR_OUTCOME
+						    option = OMA_CIVIL_WAR_OUTCOME_OMI
+					    }
+					    NOT = {
+					        has_global_flag = OMA_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OMA_CIVIL_WAR_BUFF_APPLIED
+				    OMI = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = OMA_CIVIL_WAR_OUTCOME
+						    option = OMA_CIVIL_WAR_OUTCOME_OMB
+					    }
+					    NOT = {
+					        has_global_flag = OMA_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = OMA_CIVIL_WAR_BUFF_APPLIED
+				    OMB = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+			if = {
+				limit = {# Sudan Civil War buffs
+					ROOT = {
+					    OR = {
+					        tag = RPS
+							tag = SDS
+							tag = SDF
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = SDS
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = sud_civil_war_outcome
+						    option = SUD_CIVIL_WAR_OUTCOME_RPS
+					    }
+					    NOT = {
+					        has_global_flag = SUD_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = SUD_CIVIL_WAR_BUFF_APPLIED
+				    RPS = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = sud_civil_war_outcome
+						    option = SUD_CIVIL_WAR_OUTCOME_SDF
+					    }
+					    NOT = {
+					        has_global_flag = SUD_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = SUD_CIVIL_WAR_BUFF_APPLIED
+				    SDF = { apply_war_buff_with_10_divisions = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = sud_civil_war_outcome
+						    option = SUD_CIVIL_WAR_OUTCOME_SDS
+					    }
+					    NOT = {
+					        has_global_flag = SUD_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = SUD_CIVIL_WAR_BUFF_APPLIED
+				    SDS = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+			if = {
 				limit = {# Yemen Civil War
 					ROOT = {
 					    OR = {
@@ -640,6 +748,60 @@ on_actions = {
 				    NYM = { apply_war_buff_with_10_divisions = yes }
 				}
 			}
+			if = {
+				limit = {# Egypt Civil War buffs
+					ROOT = {
+					    OR = {
+					        tag = EGQ
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = EGY
+					        tag = EGB
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = EGY_CIVIL_WAR_OUTCOME
+						    option = EGY_CIVIL_WAR_OUTCOME_EGY
+					    }
+					    NOT = {
+					        has_global_flag = EGY_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = EGY_CIVIL_WAR_BUFF_APPLIED
+				    EGY = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = EGY_CIVIL_WAR_OUTCOME
+						    option = EGY_CIVIL_WAR_OUTCOME_EGB
+					    }
+					    NOT = {
+					        has_global_flag = EGY_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = EGY_CIVIL_WAR_BUFF_APPLIED
+				    EGB = { apply_war_buff_with_10_divisions = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = EGY_CIVIL_WAR_OUTCOME
+						    option = EGY_CIVIL_WAR_OUTCOME_EGQ
+					    }
+					    NOT = {
+					        has_global_flag = EGY_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = EGY_CIVIL_WAR_BUFF_APPLIED
+				    EGQ = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
             if = {
 				limit = {# The Philippines Civil War buffs
 					ROOT = {
@@ -771,12 +933,15 @@ on_actions = {
 				limit = {# South African War buffs
 					ROOT = {
 					    OR = {
-							tag = SAF
+							tag = BOR
+							tag = ANG 
+							tag = COG 
+							tag = GRO
 					    }
 					}
 					FROM = {
 					    OR = {
-							tag = BOR
+							tag = SAF
 					    }
 					}
 				}
@@ -818,9 +983,29 @@ on_actions = {
 				    SHO = { remove_war_buff = yes }
                 }			
 			}
-			if = {
+		    if = {
+				    limit = {# SAF ends
+					ROOT = {
+					    OR = {
+					        tag = SAF
+					        tag = BOR
+							tag = ANG
+							tag = GRO
+							tag = COG
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = SAF
+					        tag = BOR
+							tag = ANG
+							tag = GRO
+							tag = COG
+					    }
+					}
+				}	
 				if = {
-				    limit = { # SAW ends
+				    limit = {
 				        has_game_rule = {
 						    rule = saf_south_african_war_outcome
 						    option = SAF_SOUTH_AFRICAN_WAR_OUTCOME_AFRIKA_SCHILD
@@ -850,15 +1035,6 @@ on_actions = {
 				    limit = {
 				        has_game_rule = {
 						    rule = saf_south_african_war_outcome
-						    option = SAF_SOUTH_AFRICAN_WAR_OUTCOME_AFRIKA_SCHILD
-					    }
-				    }
-				    BOR = { remove_war_buff = yes }
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = saf_south_african_war_outcome
 						    option = SAF_SOUTH_AFRICAN_WAR_OUTCOME_SAF
 					    }
 				    }
@@ -866,7 +1042,7 @@ on_actions = {
                 }			
 			}
 		}	
-	}
+	}	
 	on_war = {
 		effect = {
 			if = {
@@ -1104,6 +1280,165 @@ on_actions = {
 					    }
 				    }
 				    FRI = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Oman Civil War Ends
+					ROOT = {
+					    OR = {
+					        tag = OMA
+							tag = OMB
+							tag = OMI
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = OMA
+							tag = OMB
+							tag = OMI
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = OMA
+							country_exists = OMI
+							country_exists = OMB
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = OMA_CIVIL_WAR_OUTCOME
+						    option = OMA_CIVIL_WAR_OUTCOME_OMA
+					    }
+				    }
+				    OMA = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = OMA_CIVIL_WAR_OUTCOME
+						    option = OMA_CIVIL_WAR_OUTCOME_OMI
+					    }
+				    }
+				    OMI = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = OMA_CIVIL_WAR_OUTCOME
+						    option = OMA_CIVIL_WAR_OUTCOME_OMB
+					    }
+				    }
+				    OMB = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Egypt Civil War Ends
+					ROOT = {
+					    OR = {
+					        tag = EGY
+							tag = EGB
+							tag = EGQ
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = EGY
+							tag = EGB
+							tag = EGQ
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = EGY
+							country_exists = EGB
+							country_exists = EGQ
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = EGY_CIVIL_WAR_OUTCOME
+						    option = EGY_CIVIL_WAR_OUTCOME_EGY
+					    }
+				    }
+				    EGY = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = EGY_CIVIL_WAR_OUTCOME
+						    option = EGY_CIVIL_WAR_OUTCOME_EGB
+					    }
+				    }
+				    EGB = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = OMA_CIVIL_WAR_OUTCOME
+						    option = EGY_CIVIL_WAR_OUTCOME_EGQ
+					    }
+				    }
+				    EGQ = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Sudan Civil War Ends
+					ROOT = {
+					    OR = {
+					        tag = RPS
+							tag = SDF
+							tag = SDS
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = RPS
+							tag = SDF
+							tag = SDS
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = RPS
+							country_exists = SDF
+							country_exists = SDS
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = sud_civil_war_outcome
+						    option = SUD_CIVIL_WAR_OUTCOME_RPS
+					    }
+				    }
+				    RPS = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = sud_civil_war_outcome
+						    option = SUD_CIVIL_WAR_OUTCOME_SDS
+					    }
+				    }
+				    SDS = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = sud_civil_war_outcome
+						    option = SUD_CIVIL_WAR_OUTCOME_SDF
+					    }
+				    }
+				    SDF = { remove_war_buff = yes }
 				}
 			}
 			if = {
