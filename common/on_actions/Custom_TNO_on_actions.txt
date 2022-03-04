@@ -470,10 +470,52 @@ on_actions = {
 				}
 			}
 			if = {
+				limit = {# Poland Uprising starts
+					ROOT = {
+					    OR = {
+					        tag = POL
+					        tag = GGN
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = POL
+					        tag = GGN
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = poland_uprising_outcome
+						    option = POLAND_UPRISING_OUTCOME_POL
+					    }
+					    NOT = {
+					        has_global_flag = POL_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = POL_CIVIL_WAR_BUFF_APPLIED
+				    POL = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = poland_uprising_outcome
+						    option = POLAND_UPRISING_OUTCOME_GGN
+					    }
+					    NOT = {
+					        has_global_flag = POL_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = POL_CIVIL_WAR_BUFF_APPLIED
+				    GGN = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+			if = {
 				limit = {# Oman Civil War
 					ROOT = {
 					    OR = {
-					        tag = OMB
+					        tag = OMI
 							tag = OMA
 					    }
 					}
@@ -1249,6 +1291,47 @@ on_actions = {
 					    }
 				    }
 				    SHO = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Poland Uprising ends
+					ROOT = {
+					    OR = {
+					        tag = POL
+							tag = GGN
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = POL
+							tag = GGN
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = POL
+							country_exists = GGN
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = poland_uprising_outcome
+						    option = POLAND_UPRISING_OUTCOME_POL
+					    }
+				    }
+				    POL = { remove_war_buff = yes }
+				}	
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = poland_uprising_outcome
+						    option = POLAND_UPRISING_OUTCOME_GGN
+					    }
+				    }
+				    GGN = { remove_war_buff = yes }
 				}
 			}
             if = {
