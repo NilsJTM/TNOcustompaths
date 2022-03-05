@@ -1617,20 +1617,38 @@ country_event = { #Administrative Grumbles
 	title = kemreg.33.t
 	desc = kemreg.33.desc
 	picture = GFX_report_event_iberia_advisory_council_meeting
-	
+
 	is_triggered_only = yes
 	fire_only_once = yes
-	
+
 	option = { #Yuriy
 		name = kemreg.33.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = KEM_ideology_route
+					option = KEM_IDEOLOGY_ROUTE_DESPOTISM
+				}
+			}
+		}
 		KEM_increase_yuriy_influence_1 = yes
 		TNO_improve_poverty_low = yes
 		set_country_flag = KEM_chose_admin_Y
 	}
 	option = { #Lydia
 		name = kemreg.33.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = KEM_ideology_route
+					option = KEM_IDEOLOGY_ROUTE_AUTHDEM
+				}
+			}
+		}
 		KEM_increase_lydia_influence_1 = yes
 		TNO_improve_admin_efficiency_low = yes
 		set_country_flag = KEM_chose_admin_L
