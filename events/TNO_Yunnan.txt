@@ -1,0 +1,5430 @@
+﻿#########################
+###   Yunnan Events   ###
+#########################
+
+add_namespace = yun
+add_namespace = yun_unified
+add_namespace = yun_insurgency
+add_namespace = yun_wi
+add_namespace = yun_zhengtong
+add_namespace = burinteraction
+
+country_event = {#Assessing the Situation | "In The West" followup event
+	id = yun.1
+	title = yun.1.t
+	desc = yun.1.desc
+	picture = GFX_report_event_CHI_Industry_Civ_4
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.1"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.1.a
+		country_event = { id = yun.24 days = 3 }
+	}
+}
+
+#Mineral Rights Chain
+country_event = {#A New Finding of Tin
+	id = yun.2
+	title = yun.2.t
+	desc = yun.2.desc
+
+	picture = GFX_report_event_CHI_Industry_Digging_Deeper
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.2"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.2.a
+		country_event = {id = yun.3 hours = 12}
+	}
+}
+
+country_event = {#The Bidding begins
+	id = yun.3
+	title = yun.3.t
+	desc = yun.3.desc
+
+	picture = GFX_report_event_CHI_nanjing_summit_diktat
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.3"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.3.a
+		country_event = {id = yun.4 hours = 12}
+	}
+}
+
+country_event = {#A Small nudge in the right direction?
+	id = yun.4
+	title = yun.4.t
+	desc = yun.4.desc
+
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.4"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {#no
+		ai_chance = {
+			factor = 100
+		}
+		name = yun.4.a
+		hidden_effect = {
+			country_event = {id = yun.5 hours = 12}
+		}
+	}
+
+	option = {#favour China
+		name = yun.4.b
+		hidden_effect = {
+			country_event = {id = yun.6 hours = 12}
+		}
+	}
+
+	option = {#favour Yi landowners
+		name = yun.4.c
+		hidden_effect = {
+			country_event = {id = yun.8 hours = 12}
+		}
+	}
+
+	option = {#favour Japan
+		name = yun.4.d
+		hidden_effect = {
+			country_event = {id = yun.10 hours = 12}
+		}
+	}
+}
+
+country_event = {#Japan outbids everyone without rigging
+	id = yun.5
+	title = yun.5.t
+	desc = yun.5.desc
+
+	picture = GFX_report_event_japan_yokusankai_collapse
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.5"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.5.a
+		JAP = {
+			add_timed_idea = { idea = yun_5_misc_income days = 90 }
+		}
+		YUN_improve_resource_exploitation = yes
+		custom_effect_tooltip = yun.5.a.tt
+	}
+}
+
+country_event = {#YUN favours China
+	id = yun.6
+	title = yun.6.t
+	desc = yun.6.desc
+
+	picture = GFX_report_event_CHI_nanjing
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.6"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.6.a
+		hidden_effect = {
+			country_event = {id = yun.7 hours = 6}
+		}
+		custom_effect_tooltip = yun.6.a.tt
+		reverse_add_opinion_modifier = {
+			target = CHI
+			modifier = YUN_favored_CHI
+		}
+	}
+}
+
+country_event = {#Japan gets angery over Chinese bias
+	id = yun.7
+	title = yun.7.t
+	desc = yun.7.desc
+
+	picture = GFX_report_event_japan_ww1
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.7"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.7.a
+		hidden_effect = {
+			country_event = {id = yun.12 hours = 12}
+		}
+		reverse_add_opinion_modifier = {
+			target = JAP
+			modifier = YUN_Japan_raised_bids
+		}
+	}
+}
+
+country_event = {#YUN favours Yi Landowners
+	id = yun.8
+	title = yun.8.t
+	desc = yun.8.desc
+
+	picture = GFX_report_event_CHI_Industry_Hunan
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.8"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.8.a
+		custom_effect_tooltip = yun.8.a.tt
+		hidden_effect = {
+			country_event = {id = yun.9 hours = 6}
+		}
+		add_stability = 0.01
+		add_political_power = 10
+	}
+}
+
+country_event = {#Japan gets angery over Yi bias
+	id = yun.9
+	title = yun.9.t
+	desc = yun.9.desc
+
+	picture = GFX_report_event_japan_ww1
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.9"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.9.a
+		hidden_effect = {
+			country_event = {id = yun.12 hours = 12}
+		}
+		reverse_add_opinion_modifier = {
+			target = JAP
+			modifier = YUN_Japan_raised_bids
+		}
+	}
+}
+
+country_event = {#YUN favours the Japanese
+	id = yun.10
+	title = yun.10.t
+	desc = yun.10.desc
+
+	picture = GFX_report_event_japan_yokusankai_collapse
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.10"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.10.a
+		custom_effect_tooltip = yun.10.a.tt
+		hidden_effect = {
+			country_event = {id = yun.11 hours = 6}
+		}
+		reverse_add_opinion_modifier = {
+			target = JAP
+			modifier = YUN_favored_JAP
+		}
+	}
+}
+
+country_event = {#Yi are A N G E R Y
+	id = yun.11
+	title = yun.11.t
+	desc = yun.11.desc
+
+	picture = GFX_report_event_CHI_Industry_Dachang
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.11"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.11.a
+		hidden_effect = {
+			country_event = {id = yun.12 hours = 12}
+		}
+		add_stability = -0.02
+		add_political_power = -25
+	}
+}
+
+country_event = {#Japan always wins
+	id = yun.12
+	title = yun.12.t
+	desc = yun.12.desc
+
+	picture = GFX_report_event_japan_ww1
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.12"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.12.a
+		YUN_improve_resource_exploitation = yes
+		set_temp_variable = { gdp_growth_temp = 0.3 }
+		econ_gdp_growth_change = yes
+		add_to_variable = { YUN_xinan_dev_misc_income = 0.15 } 
+		custom_effect_tooltip = yun.12.a.tt
+	}
+}
+
+country_event = {#Xinan sucks, nuff said
+	id = yun.13
+	title = yun.13.t
+	desc = yun.13.desc
+
+	picture = GFX_report_event_YUN_Lu_Han
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.13"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.13.a
+		custom_effect_tooltip = yun.13.a.tt
+	}
+}
+
+country_event = {#NPA flavour 1 - new soldiers join
+	id = yun.14
+	title = yun.14.t
+	desc = yun.14.desc
+
+	picture = GFX_report_event_YUN_NPA_soldiers
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.14"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.14.a
+	}
+}
+
+country_event = {#NPA flavour 2 - Yunnan sucks, NRA wins easily
+	id = yun.15
+	title = yun.15.t
+	desc = yun.15.desc
+
+	picture = GFX_report_event_african_rebels2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.15"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.15.a
+	}
+}
+
+country_event = {#CPC flavour 1 - jungle journey
+	id = yun.16
+	title = yun.16.t
+	desc = yun.16.desc
+
+	picture = GFX_report_event_generic_battle
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.16"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.16.a
+	}
+}
+
+country_event = {#CPC flavour 2 - another peaceful day
+	id = yun.17
+	title = yun.17.t
+	desc = yun.17.desc
+
+	picture = GFX_report_event_generic_battle
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.17"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.17.a
+	}
+}
+
+country_event = {#Bandits flavor 1 - reasons behind
+	id = yun.18
+	title = yun.18.t
+	desc = yun.18.desc
+
+	picture = GFX_report_event_iberian_wars_7
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.18"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.18.a
+	}
+}
+
+country_event = { #Bandits flavor 2 - why it doesn't work this time?
+	id = yun.19
+	title = yun.19.t
+	desc = yun.19.desc
+
+	picture = GFX_report_event_IJA_soldiers_jungle
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.19"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.19.a
+	}
+}
+
+country_event = { #NPA flavor 1 - more name lists
+	id = yun.20
+	title = yun.20.t
+	desc = yun.20.desc
+
+	picture = GFX_report_event_YUN_kunming
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.20"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.20.a
+	}
+}
+
+country_event = { #NPA flavor 2 - Lu Han feels smart
+	id = yun.21
+	title = yun.21.t
+	desc = yun.21.desc
+
+	picture = GFX_report_event_YUN_kunming
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.21"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.21.a
+	}
+}
+
+country_event = { #Yay we do our best, everything will be alright... right?
+	id = yun.22
+	title = yun.22.t
+	desc = yun.22.desc
+
+	picture = GFX_report_event_chinese_troops
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.22"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.22.a
+		custom_effect_tooltip = yun.22.a.tt
+	}
+}
+
+country_event = { #Yep everything will be alright, now fuck off and let me write letter to Guizhou
+	id = yun.23
+	title = yun.23.t
+	desc = yun.23.desc
+
+	picture = GFX_report_event_YUN_gate
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.23"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.23.a
+		hidden_effect = {
+			country_event = { id = yun.29 days = 30 }
+		}
+	}
+}
+
+country_event = { #The Yunnan protagonist
+	id = yun.24
+	title = yun.24.t
+	desc = yun.24.desc
+
+	picture = GFX_report_event_YUN_Lu_Han
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.24"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.24.a
+		country_event = { id = yun.25 days = 3 }
+	}
+}
+
+country_event = { #The TRUE Yunnan protagonist
+	id = yun.25
+	title = yun.25.t
+	desc = yun.25.desc
+
+	picture = GFX_report_event_YUN_Long_Yun
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.25"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.25.a
+	}
+}
+
+country_event = { #
+	id = yun.26
+	title = yun.26.t
+	desc = yun.26.desc
+
+	picture = GFX_report_event_CHI_Industry_Dachang
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.26"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.26.a
+	}
+}
+
+country_event = { #The Torch Festival 1/2
+	id = yun.27
+	title = yun.27.t
+	desc = yun.27.desc
+
+	picture = GFX_report_event_YUN_Lu_Han_2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.27"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.27.a
+		country_event = { id = yun.28 hours = 3 }
+	}
+}
+
+country_event = { #The Torch Festival 2/2
+	id = yun.28
+	title = yun.28.t
+	desc = yun.28.desc
+
+	picture = GFX_report_event_YUN_Long_Yun_4
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.28"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.28.a
+	}
+}
+
+
+country_event = { #Lu Han self-reflection
+	id = yun.29
+	title = yun.29.t
+	desc = yun.29.desc
+
+	picture = GFX_report_event_YUN_Lu_Han
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.29"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.29.a
+		country_event = { id = yun.30 hours = 12 }
+	}
+}
+
+country_event = { #Lu Han self-reflection 2
+	id = yun.30
+	title = yun.30.t
+	desc = yun.30.desc
+
+	picture = GFX_report_event_YUN_Lu_Han_3
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.30"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.30.a
+	}
+}
+
+country_event = { #Yunnan Army Status
+	id = yun.31
+	title = yun.31.t
+	desc = yun.31.desc
+
+	picture = GFX_report_event_YUN_NPA_soldiers
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.31"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.31.a
+	}
+}
+
+country_event = { #Long Yun laughs at Japan's pitty face
+	id = yun.32
+	title = yun.32.t
+	desc = yun.32.desc
+
+	picture = GFX_report_event_YUN_Long_Yun_3
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.32"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.32.a
+	}
+}
+
+
+country_event = { #NRA 1963
+	id = yun_insurgency.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.1" }
+	title = yun_insurgency.1.t
+	desc = yun_insurgency.1.desc
+	picture = GFX_report_event_YUN_Song_Xilian
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.1.a
+		hidden_effect = {
+			country_event = { id = yun_insurgency.2 days = 365 }
+		}
+	}
+}
+
+country_event = { #NRA 1964 1/2
+	id = yun_insurgency.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.2" }
+	title = yun_insurgency.2.t
+	desc = yun_insurgency.2.desc
+	picture = GFX_report_event_YUN_Li_Mi
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.2.a
+		hidden_effect = {
+			country_event = { id = yun_insurgency.3 days = 210 }
+		}
+	}
+}
+
+country_event = { #NRA 1964 2/2
+	id = yun_insurgency.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.3" }
+	title = yun_insurgency.3.t
+	desc = yun_insurgency.3.desc
+	picture = GFX_report_event_YUN_burma_road
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.3.a
+		hidden_effect = {
+			country_event = { id = yun_insurgency.4 days = 365 }
+		}
+	}
+}
+
+country_event = { #NRA 1965
+	id = yun_insurgency.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.4" }
+	title = yun_insurgency.4.t
+	desc = yun_insurgency.4.desc
+	picture = GFX_report_event_MAN_truck
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.4.a
+	}
+}
+
+country_event = { #NRA 1966
+	id = yun_insurgency.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.5" }
+	title = yun_insurgency.5.t
+	desc = yun_insurgency.5.desc
+	picture = GFX_report_event_chinese_troops
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.5.a
+		country_event = { id = yun_insurgency.14 days = 3 }
+	}
+}
+
+country_event = { #CPC 1963 1/2
+	id = yun_insurgency.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.6" }
+	title = yun_insurgency.6.t
+	desc = yun_insurgency.6.desc
+	picture = GFX_report_event_YUN_Yang_Chengwu
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.6.a
+		country_event = { id = yun_insurgency.7 days = 180 }
+	}
+}
+
+country_event = { #CPC 1963 1/2
+	id = yun_insurgency.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.7" }
+	title = yun_insurgency.7.t
+	desc = yun_insurgency.7.desc
+	picture = GFX_report_event_YUN_Ye_Jianying
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.7.a
+		country_event = { id = yun_insurgency.8 days = 365 }
+	}
+}
+
+country_event = { #CPC 1964
+	id = yun_insurgency.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.8" }
+	title = yun_insurgency.8.t
+	desc = yun_insurgency.8.desc
+	picture = GFX_report_event_YUN_kunming
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.8.a
+		country_event = { id = yun_insurgency.9 days = 180 }
+	}
+}
+
+country_event = { #CPC 1965 1/2
+	id = yun_insurgency.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.9" }
+	title = yun_insurgency.9.t
+	desc = yun_insurgency.9.desc
+	picture = GFX_report_event_YUN_CPC_Troops_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.9.a
+	}
+}
+
+country_event = { #CPC 1965 2/2
+	id = yun_insurgency.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.10" }
+	title = yun_insurgency.10.t
+	desc = yun_insurgency.10.desc
+	picture = GFX_report_event_YUN_CPC_Troops_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.10.a
+		country_event = { id = yun_insurgency.5 days = 1 }
+	}
+}
+
+country_event = { #Bandit 1963
+	id = yun_insurgency.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.11" }
+	title = yun_insurgency.11.t
+	desc = yun_insurgency.11.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.11.a
+		hidden_effect = {
+			country_event = { id = yun_insurgency.12 days = 365 }
+		}
+	}
+}
+
+country_event = { #Bandit 1964
+	id = yun_insurgency.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.12" }
+	title = yun_insurgency.12.t
+	desc = yun_insurgency.12.desc
+	picture = GFX_report_event_dead_soldier
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.12.a
+		hidden_effect = {
+			country_event = { id = yun_insurgency.13 days = 365 }
+		}
+	}
+}
+
+country_event = { #Bandit 1965
+	id = yun_insurgency.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.13" }
+	title = yun_insurgency.13.t
+	desc = yun_insurgency.13.desc
+	picture = GFX_report_event_YUN_Chinese_Troops
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.13.a
+	}
+}
+
+country_event = { #Bandit 1966
+	id = yun_insurgency.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.14" }
+	title = yun_insurgency.14.t
+	desc = yun_insurgency.14.desc
+	picture = GFX_report_event_YUN_NPA_soldiers
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.14.a
+	}
+}
+
+country_event = { #
+	id = yun_insurgency.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.15" }
+	title = yun_insurgency.15.t
+	desc = yun_insurgency.15.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.15.a
+		hidden_effect = {
+			country_event = { id = yun_insurgency.16 days = 210 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_insurgency.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.16" }
+	title = yun_insurgency.16.t
+	desc = yun_insurgency.16.desc
+	picture = GFX_report_event_YUN_Zeng_Zesheng
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.16.a
+		hidden_effect = {
+			country_event = { id = yun_insurgency.17 days = 210 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_insurgency.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.17" }
+	title = yun_insurgency.17.t
+	desc = yun_insurgency.17.desc
+	picture = GFX_report_event_YUN_Lu_Han_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.17.a
+	}
+}
+
+country_event = { #
+	id = yun_insurgency.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.18" }
+	title = yun_insurgency.18.t
+	desc = yun_insurgency.18.desc
+	picture = GFX_report_event_YUN_Long_Yun
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.18.a
+		country_event = { id = yun_unified.21 days = 7 }
+	}
+}
+
+country_event = { #
+	id = yun_insurgency.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.19" }
+	title = yun_insurgency.19.t
+	desc = yun_insurgency.19.desc
+	picture = GFX_report_event_YUN_Long_Yun_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_insurgency.19.a
+		country_event = { id = yun_insurgency.20 days = 4 }
+	}
+}
+
+country_event = {#
+	id = yun_insurgency.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.20" }
+	title = yun_insurgency.20.t
+	desc = yun_insurgency.20.desc
+	picture = GFX_report_event_YUN_kunming_2
+
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_insurgency.20.a
+		country_event = { id = yun_insurgency.21 hours = 12 }
+	}
+}
+
+country_event = {#
+	id = yun_insurgency.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_insurgency.21" }
+	title = yun_insurgency.21.t
+	desc = yun_insurgency.21.desc
+	picture = GFX_report_event_YUN_gate
+
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_insurgency.21.a
+		YUN_long_yun = {
+			add_country_leader_role = {
+				country_leader = {
+					desc = "POLITICS_LONG_YUN_DESC"
+					ideology = ultranationalism_ultramilitarism_subtype
+					traits = { king_of_the_southwest }
+					expire = "1999.1.1.1"
+					id = -1
+				}
+				promote_leader = yes
+			}
+		}
+		country_event = { id = yun_insurgency.22 days = 7 }
+	}
+}
+
+country_event = {#News of NRA remnants to Long Yun
+	id = yun_insurgency.22
+	title = yun_insurgency.22.t
+	desc = yun_insurgency.22.desc
+
+	picture = GFX_report_event_YUN_burma_road
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_insurgency.22"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_insurgency.22.a
+	}
+}
+
+country_event = {
+	id = yun_unified.1
+	title = yun_unified.1.t
+	desc = yun_unified.1.desc
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.1"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.1.a
+	}
+}
+
+country_event = {
+	id = yun_unified.2
+	title = yun_unified.2.t
+	desc = yun_unified.2.desc
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.2"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.2.a
+	}
+}
+
+country_event = { #
+	id = yun_unified.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.3" }
+	title = yun_unified.3.t
+	desc = yun_unified.3.desc
+	picture = GFX_report_event_cog_mines_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.3.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.4" }
+	title = yun_unified.4.t
+	desc = yun_unified.4.desc
+	picture = GFX_report_event_YUN_Lu_Han_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.4.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.5" }
+	title = yun_unified.5.t
+	desc = yun_unified.5.desc
+	picture = GFX_report_event_YUN_Chinese_Agriculture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.5.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.6" }
+	title = yun_unified.6.t
+	desc = yun_unified.6.desc
+	picture = GFX_report_event_CHI_Industry_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.6.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.7" }
+	title = yun_unified.7.t
+	desc = yun_unified.7.desc
+	picture = GFX_report_event_CHI_Industry_Bad_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.7.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.8" }
+	title = yun_unified.8.t
+	desc = yun_unified.8.desc
+	picture = GFX_report_event_CHI_Industry_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.8.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.9" }
+	title = yun_unified.9.t
+	desc = yun_unified.9.desc
+	picture = GFX_report_event_japan_pollution
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.9.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.10" }
+	title = yun_unified.10.t
+	desc = yun_unified.10.desc
+	picture = GFX_report_event_YUN_CPC_Troops_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.10.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.11" }
+	title = yun_unified.11.t
+	desc = yun_unified.11.desc
+	picture = GFX_report_event_iberia_prison_jail_cell
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.11.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.12" }
+	title = yun_unified.12.t
+	desc = yun_unified.12.desc
+	picture = GFX_report_event_CHI_Industry_Hunan
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.12.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.13" }
+	title = yun_unified.13.t
+	desc = yun_unified.13.desc
+	picture = GFX_report_event_iberia_road_work_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.13.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.14" }
+	title = yun_unified.14.t
+	desc = yun_unified.14.desc
+	picture = GFX_report_event_MAN_truck
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.14.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.15" }
+	title = yun_unified.15.t
+	desc = yun_unified.15.desc
+	picture = GFX_report_event_YUN_Lu_Han_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.15.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.16" }
+	title = yun_unified.16.t
+	desc = yun_unified.16.desc
+	picture = GFX_report_event_CHI_Gao_Zongwu
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.16.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.17" }
+	title = yun_unified.17.t
+	desc = yun_unified.17.desc
+	picture = GFX_report_event_YUN_Chinese_Agriculture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.17.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.18" }
+	title = yun_unified.18.t
+	desc = yun_unified.18.desc
+	picture = GFX_report_event_CHI_Chinese_Police
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.18.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.19" }
+	title = yun_unified.19.t
+	desc = yun_unified.19.desc
+	picture = GFX_report_event_YUN_Lu_Han_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.19.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_unified.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.20" }
+	title = yun_unified.20.t
+	desc = yun_unified.20.desc
+	picture = GFX_report_event_YUN_Lu_Han
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.20.a
+		country_event = { id = yun_insurgency.18 days = 210 }
+	}
+}
+
+country_event = { #
+	id = yun_unified.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_unified.21" }
+	title = yun_unified.21.t
+	desc = yun_unified.21.desc
+	picture = GFX_report_event_YUN_Long_Yun
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_unified.21.a
+		country_event = { id = yun_insurgency.19 days = 7 }
+	}
+}
+
+country_event = {#Autumn
+	id = yun_unified.22
+	title = yun_unified.22.t
+	desc = yun_unified.22.desc
+
+	picture = GFX_report_event_YUN_park
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.22"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.22.a
+	}
+}
+
+country_event = {
+	id = yun_unified.23
+	title = yun_unified.23.t
+	desc = yun_unified.23.desc
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.23"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.23.a
+		country_event = { id = yun_unified.24 days = 3 }
+	}
+}
+
+country_event = {#Winter
+	id = yun_unified.24
+	title = yun_unified.24.t
+	desc = yun_unified.24.desc
+
+	picture = GFX_report_event_YUN_burma_road
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.24"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.24.a
+	}
+}
+
+country_event = {#Lu Han flies to Lijiang for parties yay
+	id = yun_unified.25
+	title = yun_unified.25.t
+	desc = yun_unified.25.desc
+
+	picture = GFX_report_event_YUN_Lu_Han_2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.25"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.25.a
+		hidden_effect = {
+			country_event = {id = yun_unified.26 days = 4 }
+		}
+	}
+}
+
+country_event = {#Secret insurgencies plotting oh no
+	id = yun_unified.26
+	title = yun_unified.26.t
+	desc = yun_unified.26.desc
+
+	picture = GFX_report_generic_prisoners3
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.26"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.26.a
+		hidden_effect = {
+			country_event = {id = yun_unified.27 days = 4 }
+		}
+	}
+}
+
+country_event = {#You better watch out, You better not pout, Netter mpt Cry, I'm telling you why: Long Yun is coming to Camp
+	id = yun_unified.27
+	title = yun_unified.27.t
+	desc = yun_unified.27.desc
+
+	picture = GFX_report_event_YUN_Long_Yun_4
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.27"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#
+		name = yun_unified.27.a
+		hidden_effect = {
+			country_event = {
+				id = yun_unified.28
+				days = 4
+			}
+		}
+	}
+}
+
+country_event = {#Lu Han is kindly told to fuck off
+	id = yun_unified.28
+	title = yun_unified.28.t
+	desc = yun_unified.28.desc
+
+	picture = GFX_report_event_YUN_Long_Yun
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_unified.28"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_unified.28.a
+		YUN_Long_Yun_Coup_effects = yes
+		custom_effect_tooltip = yun_unified.28.a.tt
+		hidden_effect = {
+			country_event = { id = yun_wi.1 days = 3 }
+			country_event = { id = yun_wi.7 days = 35 }
+		}
+	}
+}
+
+#
+country_event = {#The Return of the King
+	id = yun_wi.1
+	title = yun_wi.1.t
+	desc = yun_wi.1.desc
+	picture = GFX_report_event_YUN_Long_Yun 
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.1"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.1.a
+		hidden_effect = {
+			CHI = {
+				country_event = { id = chi_wi.1 }
+			}
+			country_event = { id = yun_zhengtong.9 days = 1 }
+			country_event = { id = yun_wi.2 days = 2 }
+			country_event = { id = yun_insurgency.10 days = 3 }
+		}
+	}
+}
+#
+country_event = {#The Return of the NRA
+	id = yun_wi.2
+	title = yun_wi.2.t
+	desc = yun_wi.2.desc
+
+	picture = GFX_report_event_YUN_Song_Xilian
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.2"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.2.a
+		country_event = { id = yun_wi.3 days = 3 }
+		every_character = {
+			limit = { has_character_flag = YUN_WI_only_NRA }
+			clr_character_flag = YUN_WI_only_NRA
+		}
+		remove_ideas = {
+			YUN_Generic_Vacant_eco
+			YUN_Generic_Vacant_for
+			YUN_Generic_Vacant_sec
+		}
+		add_ideas = {
+			YUN_Song_Xilian_for
+			YUN_song_xilian_high_command
+			YUN_Li_Mi_eco
+			YUN_Zhang_Chong_sec
+			YUN_zhang_chong_army_chief
+		}
+	}
+}
+#
+country_event = {#The Return of the CPC
+	id = yun_wi.3
+	title = yun_wi.3.t
+	desc = yun_wi.3.desc
+
+	picture = GFX_report_event_YUN_Ye_Jianying
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.3"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.3.a
+		every_character = {
+			limit = { has_character_flag = YUN_WI_only_CCP }
+			clr_character_flag = YUN_WI_only_CCP
+		}
+		YUN_ye_jianying = {
+			add_country_leader_role = {
+				country_leader = {
+					#desc = ""
+					ideology = communist_mao_zedong_thought_subtype
+					traits = { }
+					expire = "1999.1.1.1"
+					id = -1
+				}
+				promote_leader = yes
+			}
+		}
+		country_event = { id = yun_zhengtong.40 days = 7 }
+	}
+}
+
+country_event = {#The grand showdown of Sichuan
+	id = yun_wi.4
+	title = yun_wi.4.t
+	desc = yun_wi.4.desc
+
+	picture = GFX_report_event_escape
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.4"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.4.a
+		hidden_effect = {
+			set_global_flag = WI_Sichuan_Struggle_begin
+			set_variable = { global.GUI_SIC_NPA_Influence = 0 }
+			set_variable = { global.GUI_SIC_RGOC_Influence = 0 }
+			set_variable = { GUI_SIC_Influence = 2 }
+			1537 = { set_demilitarized_zone = yes }
+			1538 = { set_demilitarized_zone = yes }
+		}
+		custom_effect_tooltip = yun_wi.4.a.tt
+	}
+}
+
+country_event = {#Liu Wenhui helps NPA
+	id = yun_wi.5
+	title = yun_wi.5.t
+	desc = yun_wi.5.desc
+
+	picture = GFX_report_event_YUN_Liu_Wenhui
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.5"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.5.a
+		trigger = {
+			original_tag = YUN
+		}
+	}	
+	option = {
+		name = yun_wi.5.b
+		trigger = {
+			original_tag = CHI
+		}
+	}
+}
+
+country_event = {#Liu Wenhui helps RGOC
+	id = yun_wi.6
+	title = yun_wi.6.t
+	desc = yun_wi.6.desc
+
+	picture = GFX_report_event_YUN_Liu_Wenhui
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.6"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.6.a
+		trigger = {
+			original_tag = CHI
+		}
+	}	
+	option = {
+		name = yun_wi.6.b
+		trigger = {
+			original_tag = YUN
+		}
+	}
+}
+
+country_event = {#Spring
+	id = yun_wi.7
+	title = yun_wi.7.t
+	desc = yun_wi.7.desc
+
+	picture = GFX_report_event_YUN_daguanlou
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.7"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.7.a
+		hidden_effect = { 
+			country_event = {id = yun_wi.12 days = 90 }
+		}
+	}
+}
+
+country_event = {#Wansui the Tianfuzhiguo is ours!
+	id = yun_wi.8
+	title = yun_wi.8.t
+	desc = yun_wi.8.desc
+
+	picture = GFX_report_event_YUN_WI
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.8"
+		hidden_effect = { #hopefully this works
+			YUN_Sichuan_struggle_ends = yes
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.8.a
+		custom_effect_tooltip = yun_wi.8.a.tt
+	}
+}
+
+country_event = {#Noooo Sichuan people chooses the pantu it can't be!
+	id = yun_wi.9
+	title = yun_wi.9.t
+	desc = yun_wi.9.desc
+
+	picture = GFX_report_event_iberia_AAS_raid
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.9"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.9.a
+		custom_effect_tooltip = yun_wi.9.a.tt
+	}
+}
+
+country_event = {#Long Yun tries to resonate with the Hanjian
+	id = yun_wi.10
+	title = yun_wi.10.t
+	desc = yun_wi.10.desc
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.10"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.10.a
+		country_event = { id = yun_wi.63 days = 1 }
+		hidden_effect = {
+			CHI = { country_event = { id = chi_wi.3 days = 3 } }
+		}
+	}
+}
+
+country_event = {#China sends an ultimatum to Long Yun
+	id = yun_wi.11
+	title = yun_wi.11.t
+	desc = yun_wi.11.desc
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.11"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.11.a
+		hidden_effect = {
+			CHI = {
+				country_event = {
+					id = chi_wi.4
+					days = 3
+				}
+			}
+		}
+		custom_effect_tooltip = yun_wi.11.a.tt
+	}
+}
+
+
+country_event = {#Time to go home, to answer the calls of your kins...
+	id = yun_wi.12
+	title = yun_wi.12.t
+	desc = yun_wi.12.desc
+
+	picture = GFX_report_event_chinese_troops
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.12"
+		#YUN_NPA_pulse_event_selecter = yes
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.12.a
+		hidden_effect = {
+			country_event = { id = yun_wi.13 days = 3 }
+		}
+	}
+}
+
+country_event = {#...and after two decades, we fight together as brothers once more
+	id = yun_wi.13
+	title = yun_wi.13.t
+	desc = yun_wi.13.desc
+
+	picture = GFX_report_event_chinese_troops
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.13"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.13.a
+		custom_effect_tooltip = yun_wi.13.a.tt
+		YUN_WI_e_insurgent_help = yes
+		hidden_effect = {
+			country_event = { id = yun_wi.14 days = 7 }
+		}
+	}
+}
+
+country_event = {#Hail the reborn 60th Corps of the NRA!
+	id = yun_wi.14
+	title = yun_wi.14.t
+	desc = yun_wi.14.desc
+
+	picture = GFX_report_event_YUN_NRA
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.14"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#
+		name = yun_wi.14.a
+		TNO_improve_army_professionalism_med = yes
+	}
+}
+
+country_event = { #Rise from your shackles, brave sons of China!
+	id = yun_wi.15
+	title = yun_wi.15.t
+	desc = yun_wi.15.desc
+
+	picture = GFX_report_event_YUN_WI
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.15"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.15.a
+		WI_Start_effects = yes
+		country_event = { id = yun_wi.16 days = 3 }
+	}
+}
+
+country_event = { #Now, who will join our campaign?
+	id = yun_wi.16
+	title = yun_wi.16.t
+	desc = yun_wi.16.desc
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.16"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.16.a
+		set_global_flag = WI_Warlord_Struggle_begin
+		custom_effect_tooltip = yun_wi.16.a.tt
+	}
+}
+
+country_event = {#Expect no less from the man who continues the resistance for 20 years
+	id = yun_wi.17
+	title = yun_wi.17.t
+	desc = yun_wi.17.desc
+
+	picture = GFX_report_event_YUN_Liu_Wenhui
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.17"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.17.a
+	}
+}
+
+country_event = {#An old enemy, nontheless a patriot
+	id = yun_wi.18
+	title = yun_wi.18.t
+	desc = yun_wi.18.desc
+
+	picture = GFX_report_event_YUN_Xia_Wei
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.18"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.18.a
+	}
+}
+
+country_event = {#Hard choices must be made sometimes, but always stay true to your heart
+	id = yun_wi.19
+	title = yun_wi.19.t
+	desc = yun_wi.19.desc
+
+	picture = GFX_report_event_YUN_Fu_Zuoyi
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.19"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.19.a
+	}
+}
+
+country_event = {#When the Setting Sun reaches China, so will the men of Ma
+	id = yun_wi.20
+	title = yun_wi.20.t
+	desc = yun_wi.20.desc
+
+	picture = GFX_report_event_YUN_Xining
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.20"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.20.a
+		custom_effect_tooltip = yun_wi.20.a.tt
+	}
+}
+#	
+country_event = {#valorous soldiers who never surrender shall respond to the call of liberation!
+	id = yun_wi.21
+	title = yun_wi.21.t
+	desc = yun_wi.21.desc
+
+	picture = GFX_report_event_YUN_Urumqi
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.21"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.21.a
+		custom_effect_tooltip = yun_wi.20.a.tt
+	}
+}
+
+country_event = {#Gao nearly cries - the warlords have finally come to their senses for the greater good of China
+	id = yun_wi.22
+	title = yun_wi.22.t
+	desc = yun_wi.22.desc
+
+	picture = GFX_report_event_generic_sign_treaty1
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.22"
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = yun_wi.22.a
+	}
+}
+#
+country_event = {#The evil has triumphed - and it's only a matter of time before it gets trialed by the hammer of justice
+	id = yun_wi.23
+	title = yun_wi.23.t
+	desc = yun_wi.23.desc
+
+	picture = GFX_report_event_generic_sign_treaty1
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.23"
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = yun_wi.23.a
+	}
+}
+
+country_event = {#The Lama will be left alone for now... till the revolution reaches the sacred land
+	id = yun_wi.24
+	title = yun_wi.24.t
+	desc = yun_wi.24.desc
+
+	picture = GFX_report_event_YUN_Tibet
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.24"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.24.a
+	}
+}
+
+country_event = {#
+	id = yun_wi.25
+	title = yun_wi.25.t
+	desc = yun_wi.25.desc
+
+	picture = GFX_report_event_YUN_Lu_Han_4
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.25"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.25.a
+	}
+}
+
+country_event = {#
+	id = yun_wi.26
+	title = yun_wi.26.t
+	desc = yun_wi.26.desc
+
+	picture = GFX_report_event_YUN_Chinese_Troops_3
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.26"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.26.a
+		add_timed_idea = {
+			idea = YUN_new_lands
+			days = 180
+		}
+		hidden_effect = {
+			country_event = { id = yun_wi.27 days = 30 }
+		}
+		custom_effect_tooltip = yun_wi.26.a.tt
+	}
+}
+
+country_event = {#
+	id = yun_wi.27
+	title = yun_wi.27.t
+	desc = yun_wi.27.desc
+
+	picture = GFX_report_event_CHI_nanjing
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.27"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.27.a
+	}
+}
+
+country_event = {#
+	id = yun_wi.28
+	title = yun_wi.28.t
+	desc = yun_wi.28.desc
+	picture = GFX_report_event_CHI_nationalism
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.28"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.28.a
+	}
+}
+
+country_event = {#Taking Nanjing
+	id = yun_wi.29
+	title = yun_wi.29.t
+	desc = yun_wi.29.desc
+	picture = GFX_report_event_CHI_education9
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.29"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.29.a
+	}
+}
+
+country_event = {#Gao dead
+	id = yun_wi.30
+	title = yun_wi.30.t
+	desc = yun_wi.30.desc
+	picture = GFX_report_event_CHI_nanjingmemories
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.30"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.30.a
+		hidden_effect = {
+			country_event = { id = yun_wi.31 hours = 12 }
+		}
+	}
+}
+
+country_event = {
+	id = yun_wi.31
+	title = yun_wi.31.t
+	desc = yun_wi.31.desc
+	picture = GFX_report_event_CHI_nanjing2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.31"
+		hidden_effect = {
+			YUN_NPA_reload_tree = yes
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.31.a
+		hidden_effect = {
+			country_event = { id = yun_wi.32 hours = 12 }
+		}
+	}
+}
+
+country_event = { #Short peace before the final showdown
+	id = yun_wi.32
+	title = yun_wi.32.t
+	desc = yun_wi.32.desc
+	picture = GFX_report_event_YUN_WI_victory_2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.32"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.32.a
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.49 days = 6 }
+			if = {
+				limit = { has_global_flag = SHX_joins_NPA }
+				country_event = { id = yun_zhengtong.28 days = 1 }
+			}
+			if = {
+				limit = { has_global_flag = WI_NPA_takes_Sichuan }
+				country_event = { id = yun_zhengtong.14 days = 2 }
+				country_event = { id = yun_zhengtong.21 days = 3 }
+			}
+			if = {
+				limit = { check_variable = { YUN_WI_sun = 1 } }
+				country_event = { id = yun_zhengtong.35 days = 4 }
+			}
+		}
+	}
+}
+
+country_event = { #THE THIRD SINO-JAPANESE WAR
+	id = yun_wi.33
+	title = yun_wi.33.t
+	desc = yun_wi.33.desc
+	picture = GFX_report_event_YUN_WI
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.33"
+		hidden_effect = {
+			clr_country_flag = reload_tree_yes
+			YUN_NPA_reload_tree = yes
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.33.a
+		hidden_effect = {
+			WI_GAW_Start_Effects = yes
+		}
+		custom_effect_tooltip = yun_wi.33.a.tt
+	}
+}
+
+country_event = {
+	id = yun_wi.34
+	title = yun_wi.34.t
+	desc = yun_wi.34.desc
+	picture = GFX_report_event_YUN_Ma_Jiyuan
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.34"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.34.a
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.42 days = 4 }
+		}
+	}
+}
+
+country_event = {
+	id = yun_wi.35
+	title = yun_wi.35.t
+	desc = yun_wi.35.desc
+	picture = GFX_report_event_YUN_Zhang_Zhizhong
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.35"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.35.a
+	}
+}
+
+country_event = {
+	id = yun_wi.36
+	title = yun_wi.36.t
+	desc = yun_wi.36.desc
+	picture = GFX_report_event_generic_sign_treaty1
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.36"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.36.a
+	}
+}
+
+country_event = {
+	id = yun_wi.37
+	title = yun_wi.37.t
+	desc = yun_wi.37.desc
+	picture = GFX_report_event_MAN_generic_state_council
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.37"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.37.a
+	}
+}
+
+country_event = {
+	id = yun_wi.38
+	title = yun_wi.38.t
+	desc = yun_wi.38.desc
+	picture = GFX_report_event_YUN_Tibet
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.38"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.38.a
+	}
+}
+
+country_event = {
+	id = yun_wi.39
+	title = yun_wi.39.t
+	desc = yun_wi.39.desc
+	picture = GFX_report_event_GNG_HK_port
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.39"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.39.a
+		hidden_effect = {
+			country_event = { id = yun_wi.40 days = 1 }
+		}
+	}
+}
+
+country_event = {
+	id = yun_wi.40
+	title = yun_wi.40.t
+	desc = yun_wi.40.desc
+	picture = GFX_report_event_GNG_generic_2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.40"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.40.a
+		592 = {
+			set_temp_variable = { state_value_multiplier_temp = 0.75 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
+		729 = {
+			set_temp_variable = { state_value_multiplier_temp = 0.7 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
+		326 = {
+			set_temp_variable = { state_value_multiplier_temp = 0.7 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
+	}
+}
+
+country_event = { #
+	id = yun_wi.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.41" }
+	title = yun_wi.41.t
+	desc = yun_wi.41.desc
+	picture = GFX_report_event_CHI_Nanjing_Palace
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.41.a
+		set_variable = { YUN_legitimate_regime = 1 }
+		set_politics = {
+			ruling_party = despotism
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.50
+		}
+	}
+}
+
+country_event = { #Japan wants peace(should not accept)
+	id = yun_wi.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.42" }
+	title = yun_wi.42.t
+	desc = yun_wi.42.desc
+	picture = GFX_report_event_YUN_Long_Yun_4
+	
+	is_triggered_only = yes
+	fire_only_once = no
+	
+	option = { #accept partial peace
+		name = yun_wi.42.a
+		ai_chance = { factor = 0 }
+		custom_effect_tooltip = yun_wi.42.a.tt
+		country_event = { id = yun_wi.43 days = 2 }
+	}
+	option = { #fuck off japan
+		name = yun_wi.42.b
+		ai_chance = { factor = 100 }
+		country_event = { id = yun_wi.44 days = 1 }
+	}
+}
+
+country_event = { #accept partial peace
+	id = yun_wi.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.43" }
+	title = yun_wi.43.t
+	desc = yun_wi.43.desc
+	picture = GFX_report_event_YUN_WI_treaty
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.43.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			YUN_WI_partial_victory = yes
+			every_country = {
+				limit = { 
+					OR = {
+						has_idea = NLF_Leader
+						has_idea = NLF_Member 
+					}
+				}
+				every_enemy_country = {
+					white_peace = PREV
+				}
+			}
+			country_event = { id = yun_wi.48 days = 3 }
+		}
+		custom_effect_tooltip = yun_wi.43.a.tt
+	}
+}
+
+country_event = { #Go Hell Riben Guizi
+	id = yun_wi.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.44" }
+	title = yun_wi.44.t
+	desc = yun_wi.44.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.44.a
+	}
+}
+
+country_event = { #Japan really wants peace (total victory)
+	id = yun_wi.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.45" }
+	title = yun_wi.45.t
+	desc = yun_wi.45.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_Victory
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Victory against imperialism
+		name = yun_wi.45.a
+		ai_chance = { factor = 100 }
+		country_event = { id = yun_wi.46 days = 2 }
+	}
+	
+	option = { #END OF THE WORLD
+		name = yun_wi.45.b
+		ai_chance = { factor = 0 }
+		JAP = {
+			country_event = { id = nuclearwar.6 days = 2 }
+		}
+		custom_effect_tooltip = yun_wi.45.b.tt
+	}
+}
+
+country_event = { #Yes we really love peace
+	id = yun_wi.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.46" }
+	title = yun_wi.46.t
+	desc = yun_wi.46.desc
+	picture = GFX_report_event_YUN_WI_treaty
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.46.a
+		hidden_effect = {
+			YUN_WI_Victory_Map_Effects = yes
+			every_enemy_country = {
+				white_peace = YUN
+			}
+			country_event = { id = yun_wi.47 days = 2 }
+		}
+		custom_effect_tooltip = yun_wi.46.a.tt
+	}
+}
+
+country_event = { #WE DID IT WANSUIIIIIIIIIII
+	id = yun_wi.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.47" }
+	title = yun_wi.47.t
+	desc = yun_wi.47.desc
+	picture = GFX_report_event_YUN_WI_victory
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.47.a
+		ai_chance = { factor = 100 }
+		country_event = { id = yun_wi.48 days = 2 }
+	}
+}
+
+country_event = { #Long Yun epilogue
+	id = yun_wi.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.48" }
+	title = yun_wi.48.t
+	desc = yun_wi.48.desc
+	picture = GFX_report_event_YUN_Lu_Han_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.48.a
+		country_event = { id = yun_wi.49 days = 3 }
+	}
+}
+
+country_event = { #May the Grand Marshal rest in peace
+	id = yun_wi.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.49" }
+	title = yun_wi.49.t
+	desc = yun_wi.49.desc
+	picture = GFX_report_event_YUN_Sun_Yat_Sen_Funeral
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.49.a		
+		hidden_effect = {
+			retire_character = YUN_long_yun
+			YUN_NPA_military_council = {
+				add_country_leader_role = {
+					country_leader = {
+						#desc = ""
+						ideology = ultranationalism_ultramilitarism_subtype
+						traits = {  }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+				add_country_leader_role = {
+					country_leader = {
+						#desc = ""
+						ideology = despotism_military_junta_subtype
+						traits = {  }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+			}
+			remove_dynamic_modifier = {modifier = YUN_NPA_legitimacy_dynamic_modifier}
+			remove_dynamic_modifier = {modifier = YUN_NPA_war_buff_dynamic_modifier}
+			remove_ideas = {
+				YUN_the_mad_king
+				YUN_the_mad_king_tenacity
+				YUN_legitimacy_dummy
+				YUN_npabuff_dummy
+				YUN_production_frenzy
+				YUN_new_officers
+				YUN_NBIS
+				YUN_NBIS_upgrade
+				YUN_down_with_the_traitors_idea
+				YUN_fortification_frenzy
+				YUN_mountain_people_idea
+				YUN_hit_and_run
+				YUN_anti_japanese_zeal
+				YUN_unrestrained_warfare 
+			}
+			if = {
+				limit = {
+					NOT = { 
+						has_variable = YUN_legitimate_regime 
+						has_game_rule = {
+							rule = great_asian_war_outcome
+							option = GREAT_ASIAN_WAR_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+						}
+					}
+				}
+				set_politics = {
+					ruling_party = despotism
+				}
+				add_popularity = {
+					ideology = despotism
+					popularity = 0.50
+				}
+				set_party_name = {
+					ideology = despotism
+					long_name = NPA_mil_council_long
+					name = NPA_mil_council
+				}
+				set_global_flag = YUN_NPA_partial_victory
+				country_event = { id = yun_wi.50 days = 2 }
+			}
+			else = {
+				add_popularity = {
+					ideology = authoritarian_democracy
+					popularity = 0.30
+				}
+				country_event = { id = yun_zhengtong.53 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = { #Bad ending
+	id = yun_wi.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.50" }
+	title = yun_wi.50.t
+	desc = yun_wi.50.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.50.a
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+country_event = { #NOOOOOOOOOOOO (skill issue diagonised)
+	id = yun_wi.51
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.51" }
+	title = yun_wi.51.t
+	desc = yun_wi.51.desc
+	picture = GFX_report_event_iberian_wars_7
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.51.a
+		set_country_flag = YUN_NPA_despair_branch
+		YUN_NPA_reload_tree = yes
+		complete_national_focus = YUN_the_final_offensive
+		custom_effect_tooltip = yun_wi.51.a.tt
+	}
+}
+
+country_event = { #
+	id = yun_wi.52
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.52" }
+	title = yun_wi.52.t
+	desc = yun_wi.52.desc
+	picture = GFX_report_event_YUN_Long_Yun
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.52.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_wi.53
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.53" }
+	title = yun_wi.53.t
+	desc = yun_wi.53.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_5
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.53.a
+		hidden_effect = {
+			country_event = { id = yun_wi.54 days = 1 }
+			set_country_flag = YUN_Long_Yun_last_stand_flag
+			YUN_NPA_reload_tree = yes
+			complete_national_focus = YUN_the_last_stand_of_long_yun
+		}
+	}
+}
+
+country_event = { #Fall of the King
+	id = yun_wi.54
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.54" }
+	title = yun_wi.54.t
+	desc = yun_wi.54.desc
+	picture = GFX_report_event_YUN_Long_Yun
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.54.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			retire_character = YUN_long_yun
+			YUN_collapsed_authority = {
+				add_country_leader_role = {
+					country_leader = {
+						desc = "POLITICS_NPA_COLLAPSED_AUTHORITY_DESC"
+						ideology = ultranationalism_ultramilitarism_subtype
+						traits = { utterly_abandoned }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+			}
+			add_war_support = -0.50
+			add_stability = -0.50
+			remove_ideas = {
+				YUN_the_mad_king
+				YUN_the_mad_king_tenacity
+				YUN_legitimacy_dummy
+				YUN_npabuff_dummy
+				YUN_production_frenzy
+				YUN_new_officers
+				YUN_NBIS
+				YUN_NBIS_upgrade
+				YUN_down_with_the_traitors_idea
+				YUN_fortification_frenzy
+				YUN_mountain_people_idea
+				YUN_hit_and_run
+				YUN_anti_japanese_zeal
+			}
+			remove_dynamic_modifier = {modifier = YUN_NPA_legitimacy_dynamic_modifier}
+			remove_dynamic_modifier = {modifier = YUN_NPA_war_buff_dynamic_modifier}
+			if = {
+				limit = { check_variable = { YUN_WI_zhang = 1 } }
+				country_event = { id = yun_zhengtong.31 days = 1 }
+			}
+			set_country_flag = YUN_Long_Yun_dead_flag
+			YUN_NPA_reload_tree = yes
+			complete_national_focus = YUN_call_the_bimo
+		}
+	}
+}
+
+country_event = { #
+	id = yun_wi.55
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.55" }
+	title = yun_wi.55.t
+	desc = yun_wi.55.desc
+	picture = GFX_report_event_CHI_Industry_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.55.a
+	}
+}
+
+country_event = { #
+	id = yun_wi.56
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.56" }
+	title = yun_wi.56.t
+	desc = yun_wi.56.desc
+	picture = GFX_Radio_Mic
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.56.a
+	}
+}
+
+country_event = { #
+	id = yun_wi.57
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.57" }
+	title = yun_wi.57.t
+	desc = yun_wi.57.desc
+	picture = GFX_report_event_YUN_Chinese_Troops
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.57.a
+	}
+}
+
+country_event = { #
+	id = yun_wi.58
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.58" }
+	title = yun_wi.58.t
+	desc = yun_wi.58.desc
+	picture = GFX_report_event_YUN_Long_Yun_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.58.a
+	}
+}
+
+country_event = {#Long Yun gives a motivational speech
+	id = yun_wi.59
+	title = yun_wi.59.t
+	desc = yun_wi.59.desc
+	picture = GFX_report_event_war_in_heaven
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_wi.59"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_wi.59.a
+	}
+}
+
+country_event = { #
+	id = yun_wi.60
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.60" }
+	title = yun_wi.60.t
+	desc = yun_wi.60.desc
+	picture = GFX_report_event_CHI_Industry_Bad_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.60.a
+	}
+}
+
+country_event = { #
+	id = yun_wi.61
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.61" }
+	title = yun_wi.61.t
+	desc = yun_wi.61.desc
+	picture = GFX_report_event_YUN_Chongqing_War
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.61.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_wi.62
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.62" }
+	title = yun_wi.62.t
+	desc = yun_wi.62.desc
+	picture = GFX_report_event_GNG_generic_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.62.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_wi.63
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.63" }
+	title = yun_wi.63.t
+	desc = yun_wi.63.desc
+	picture = GFX_report_event_YUN_Chinese_Agriculture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.63.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_wi.64
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.64" }
+	title = yun_wi.64.t
+	desc = yun_wi.64.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_5
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.64.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_wi.65
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.65" }
+	title = yun_wi.65.t
+	desc = yun_wi.65.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.65.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_wi.66
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.66" }
+	title = yun_wi.66.t
+	desc = yun_wi.66.desc
+	picture = GFX_report_event_YUN_Wuhan_War
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.66.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_wi.67
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_wi.67" }
+	title = yun_wi.67.t
+	desc = yun_wi.67.desc
+	picture = GFX_report_event_CHI_Beijing_Forbidden_City
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_wi.67.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+
+#country_event = {#Defeated GUX
+#	id = yun.134
+#	title = yun.134.t
+#	desc = yun.134.desc
+#	picture = GFX_report_event_iberian_wars_6
+#
+#	immediate = {
+#		log = "[GetDateText]: [Root.GetName]: event yun.134"
+#	}
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	option = {
+#		name = yun.134.a
+#	}
+#}
+#
+#country_event = {#Defeated SHX
+#	id = yun.136
+#	title = yun.136.t
+#	desc = yun.136.desc
+#	picture = GFX_report_event_iberian_wars_5
+#
+#	immediate = {
+#		log = "[GetDateText]: [Root.GetName]: event yun.136"
+#	}
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	option = {
+#		name = yun.136.a
+#	}
+#}
+#
+#country_event = {#Defeated GAN
+#	id = yun.138
+#	title = yun.138.t
+#	desc = yun.138.desc
+#	picture = GFX_report_event_algerian_war_soldiers
+#
+#	immediate = {
+#		log = "[GetDateText]: [Root.GetName]: event yun.138"
+#	}
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	option = {
+#		name = yun.138.a
+#	}
+#}
+
+country_event = {#Defeated MEN
+	id = yun.139
+	title = yun.139.t
+	desc = yun.139.desc
+	picture = GFX_report_event_algerian_war_5
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.139"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun.139.a
+	}
+}
+
+#country_event = {#Defeated MAN
+#	id = yun.140
+#	title = yun.140.t
+#	desc = yun.140.desc
+#	picture = GFX_report_event_algerian_war_4
+#
+#	immediate = {
+#		log = "[GetDateText]: [Root.GetName]: event yun.140"
+#	}
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	option = {
+#		name = yun.140.a
+#		custom_effect_tooltip = yun.140.a.tt
+#	}
+#}
+
+country_event = {#Unrestrained warfare probably isn't that great on a nation
+	id = yun.143
+	title = yun.143.t
+	desc = yun.143.desc
+	picture = GFX_report_event_russia_burning_village
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.143"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun.143.a
+	}
+}
+
+country_event = {#distributing Pro-Long Yun propaganda
+	id = yun.146
+	title = yun.146.t
+	desc = yun.146.desc
+	picture = GFX_report_event_war_in_heaven
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.146"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun.146.a
+	}
+}
+
+country_event = {#Reintroducing the March of the Volunteers
+	id = yun.147
+	title = yun.147.t
+	desc = yun.147.desc
+	picture = GFX_report_event_YUN_NPA_soldiers
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.147"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun.147.a
+	}
+}
+
+country_event = {#China asks you kindly to stop your shit
+	id = yun.148
+	title = yun.148.t
+	desc = yun.148.desc
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.148"
+	}
+
+	picture = GFX_report_event_CHI_nanjing
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun.148.a
+		hidden_effect = {
+			CHI = {
+				country_event = {id = chi.6037 hours = 3}
+			}
+		}
+	}
+}
+
+# ZHONGHUA ZHENGTONG ZONE #
+
+country_event = { #
+	id = yun_zhengtong.0
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.0" }
+	title = yun_zhengtong.0.t
+	desc = yun_zhengtong.0.desc
+	picture = GFX_report_event_YUN_NSAU
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.0.a
+		country_event = { id = yun_zhengtong.1 days = 60 }
+	}
+}
+
+country_event = { #Chain 1 - The Naive Elder
+	id = yun_zhengtong.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.1" }
+	title = yun_zhengtong.1.t
+	desc = yun_zhengtong.1.desc
+	picture = GFX_report_event_YUN_Jiang_Zemin
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.1.a
+		country_event = { id = yun_zhengtong.2 days = 60 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.2" }
+	title = yun_zhengtong.2.t
+	desc = yun_zhengtong.2.desc
+	picture = GFX_report_event_YUN_Jiang_Zemin_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.2.a
+		country_event = { id = yun_zhengtong.3 days = 365 }
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.11 days = 30 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.3" }
+	title = yun_zhengtong.3.t
+	desc = yun_zhengtong.3.desc
+	picture = GFX_report_event_YUN_Jiang_Zemin
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.3.a
+		country_event = { id = yun_zhengtong.4 days = 365 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.4" }
+	title = yun_zhengtong.4.t
+	desc = yun_zhengtong.4.desc
+	picture = GFX_report_event_YUN_NSAU
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.4.a
+		country_event = { id = yun_zhengtong.5 days = 365 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.5" }
+	title = yun_zhengtong.5.t
+	desc = yun_zhengtong.5.desc
+	picture = GFX_report_event_YUN_Jiang_Zemin_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.5.a
+		country_event = { id = yun_zhengtong.6 days = 3 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.6" }
+	title = yun_zhengtong.6.t
+	desc = yun_zhengtong.6.desc
+	picture = GFX_report_event_YUN_Jiang_Zemin_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.6.a
+		country_event = { id = yun_zhengtong.7 days = 120 }
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.12 days = 30 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.7" }
+	title = yun_zhengtong.7.t
+	desc = yun_zhengtong.7.desc
+	picture = GFX_report_event_YUN_Yang_Dezhi
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.7.a
+		ai_chance = { factor = 1 }
+		country_event = { id = yun_zhengtong.8 days = 3 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.8" }
+	title = yun_zhengtong.8.t
+	desc = yun_zhengtong.8.desc
+	picture = GFX_report_event_YUN_Ye_Jianying
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.8.a
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.9" }
+	title = yun_zhengtong.9.t
+	desc = yun_zhengtong.9.desc
+	picture = GFX_report_event_YUN_Jiang_Zemin
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.9.a
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.20 days = 7 }
+			country_event = { id = yun_zhengtong.13 days = 30 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.10" }
+	title = yun_zhengtong.10.t
+	desc = yun_zhengtong.10.desc
+	picture = GFX_report_event_YUN_Song_Qingling_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.10.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { #Chain 2 - The Revolutionary Lady
+	id = yun_zhengtong.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.11" }
+	title = yun_zhengtong.11.t
+	desc = yun_zhengtong.11.desc
+	picture = GFX_report_event_YUN_Song_Qingling
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.11.a
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.25 days = 30 }
+			country_event = { id = yun_zhengtong.18 days = 45 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.12" }
+	title = yun_zhengtong.12.t
+	desc = yun_zhengtong.12.desc
+	picture = GFX_report_event_YUN_Song_Qingling_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.12.a
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.26 days = 30 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.13" }
+	title = yun_zhengtong.13.t
+	desc = yun_zhengtong.13.desc
+	picture = GFX_report_event_YUN_Song_Qingling
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.13.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.14" }
+	title = yun_zhengtong.14.t
+	desc = yun_zhengtong.14.desc
+	picture = GFX_report_event_CHI_Nanjing_Palace
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.14.a
+		set_variable = { YUN_WI_song = 1 }
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.10 days = 3 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.15" }
+	title = yun_zhengtong.15.t
+	desc = yun_zhengtong.15.desc
+	picture = GFX_report_event_YUN_Song_Qingling_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.15.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.16" }
+	title = yun_zhengtong.16.t
+	desc = yun_zhengtong.16.desc
+	picture = GFX_report_event_YUN_Song_Qingling_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.16.a
+		hidden_effect = {
+			random_list = {
+				50 = {
+					country_event = { id = yun_zhengtong.44 days = 2 }
+				}
+				50 = {
+					country_event = { id = yun_zhengtong.51 days = 2 }
+				}
+			}
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.17" }
+	title = yun_zhengtong.17.t
+	desc = yun_zhengtong.17.desc
+	picture = GFX_report_event_YUN_Song_Qingling_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.17.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #Chain 3 - The Journalist
+	id = yun_zhengtong.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.18" }
+	title = yun_zhengtong.18.t
+	desc = yun_zhengtong.18.desc
+	picture = GFX_report_event_YUN_Liu_Yiliang
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.18.a
+		ai_chance = { factor = 1 }
+		hidden_effect = {
+			country_event = { id = yun_zhengtong.19 days = 365 }
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.19" }
+	title = yun_zhengtong.19.t
+	desc = yun_zhengtong.19.desc
+	picture = GFX_report_event_YUN_Liu_Yiliang_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.19.a
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.20
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.20" }
+	title = yun_zhengtong.20.t
+	desc = yun_zhengtong.20.desc
+	picture = GFX_report_event_russia_forest_battle
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.20.a
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.21
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.21" }
+	title = yun_zhengtong.21.t
+	desc = yun_zhengtong.21.desc
+	picture = GFX_report_event_CHI_Shanghai_Streets
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.21.a
+		set_variable = { YUN_WI_liu = 1 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.22
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.22" }
+	title = yun_zhengtong.22.t
+	desc = yun_zhengtong.22.desc
+	picture = GFX_report_event_generic_ruins
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.22.a
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.23
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.23" }
+	title = yun_zhengtong.23.t
+	desc = yun_zhengtong.23.desc
+	picture = GFX_report_event_YUN_Liu_Yiliang_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.23.a
+		country_event = { id = yun_zhengtong.16 days = 2 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.24
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.24" }
+	title = yun_zhengtong.24.t
+	desc = yun_zhengtong.24.desc
+	picture = GFX_report_event_YUN_Liu_Yiliang
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.24.a
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+country_event = { #Chain 4 - The Young Marshal
+	id = yun_zhengtong.25
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.25" }
+	title = yun_zhengtong.25.t
+	desc = yun_zhengtong.25.desc
+	picture = GFX_report_event_YUN_Zhang_Xueliang
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.25.a
+		ai_chance = { factor = 1 }
+		country_event = { id = yun_zhengtong.32 days = 30 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.26
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.26" }
+	title = yun_zhengtong.26.t
+	desc = yun_zhengtong.26.desc
+	picture = GFX_report_event_YUN_Zhang_Xueliang_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.26.a
+		country_event = { id = yun_zhengtong.33 days = 7 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.27
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.27" }
+	title = yun_zhengtong.27.t
+	desc = yun_zhengtong.27.desc
+	picture = GFX_report_event_YUN_Zhang_Xueliang_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.27.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.28
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.28" }
+	title = yun_zhengtong.28.t
+	desc = yun_zhengtong.28.desc
+	picture = GFX_report_event_YUN_Zhang_Xueliang
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.28.a
+		YUN_zhang_xueliang = {
+			add_field_marshal_role = {
+				legacy_id = 1235
+				skill = 4
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 4
+				traits = { expert_delegator politically_connected }
+			}
+		}
+		add_ideas = YUN_zhang_xueliang_theorist
+		set_variable = { YUN_WI_zhang = 1 }
+		add_to_variable = { YUN_warbuff_cap_calc = 20 }
+		custom_effect_tooltip = yun_zhengtong.28.a.tt
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.29
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.29" }
+	title = yun_zhengtong.29.t
+	desc = yun_zhengtong.29.desc
+	picture = GFX_report_event_YUN_Zhang_Xueliang_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.29.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.30
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.30" }
+	title = yun_zhengtong.30.t
+	desc = yun_zhengtong.30.desc
+	picture = GFX_report_event_YUN_Zhang_Xueliang_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.30.a
+		retire_character = YUN_zhang_xueliang
+		country_event = { id = yun_zhengtong.58 days = 2}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.31
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.31" }
+	title = yun_zhengtong.31.t
+	desc = yun_zhengtong.31.desc
+	picture = GFX_report_event_YUN_Zhang_Xueliang
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.31.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { # Chain 5 - The Rommel of the East
+	id = yun_zhengtong.32
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.32" }
+	title = yun_zhengtong.32.t
+	desc = yun_zhengtong.32.desc
+	picture = GFX_report_event_YUN_Sun_Liren
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.32.a
+		country_event = { id = yun_zhengtong.39 days = 30 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.33" }
+	title = yun_zhengtong.33.t
+	desc = yun_zhengtong.33.desc
+	picture = GFX_report_event_YUN_Sun_Liren_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.33.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.34
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.34" }
+	title = yun_zhengtong.34.t
+	desc = yun_zhengtong.34.desc
+	picture = GFX_report_event_YUN_Sun_Liren_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.34.a
+		YUN_sun_liren = {
+			add_corps_commander_role = {
+				legacy_id = 1236
+				skill = 4
+				attack_skill = 4
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 3
+				traits = { war_hero career_officer brilliant_strategist }
+			}
+		}
+		add_ideas = YUN_sun_liren_high_command
+		set_variable = { YUN_WI_sun = 1 }
+		add_to_variable = { YUN_warbuff_cap_calc = 10 }
+		custom_effect_tooltip = yun_zhengtong.34.a.tt
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.35
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.35" }
+	title = yun_zhengtong.35.t
+	desc = yun_zhengtong.35.desc
+	picture = GFX_report_event_YUN_Chinese_Troops_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.35.a
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.36
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.36" }
+	title = yun_zhengtong.36.t
+	desc = yun_zhengtong.36.desc
+	picture = GFX_report_event_YUN_Sun_Liren_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.36.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.37
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.37" }
+	title = yun_zhengtong.37.t
+	desc = yun_zhengtong.37.desc
+	picture = GFX_report_event_YUN_Sun_Liren_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.37.a
+		country_event = { id = yun_zhengtong.30 days = 2 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.38
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.38" }
+	title = yun_zhengtong.38.t
+	desc = yun_zhengtong.38.desc
+	picture = GFX_report_event_YUN_Sun_Liren_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.38.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { # Chain 6 - Son of the Generalissimo
+	id = yun_zhengtong.39
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.39" }
+	title = yun_zhengtong.39.t
+	desc = yun_zhengtong.39.desc
+	picture = GFX_report_event_YUN_Jiang_Jingguo
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.39.a
+		country_event = { id = yun_zhengtong.46 days = 30 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.40
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.40" }
+	title = yun_zhengtong.40.t
+	desc = yun_zhengtong.40.desc
+	picture = GFX_report_event_YUN_Jiang_Jingguo_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.40.a
+		country_event = { id = yun_zhengtong.48 days = 30 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.41
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.41" }
+	title = yun_zhengtong.41.t
+	desc = yun_zhengtong.41.desc
+	picture = GFX_report_event_YUN_Jiang_Jingguo_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.41.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.42
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.42" }
+	title = yun_zhengtong.42.t
+	desc = yun_zhengtong.42.desc
+	picture = GFX_report_event_YUN_Jiang_Jingguo_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.42.a
+		set_variable = { YUN_WI_cck = 1 }
+		add_to_variable = { YUN_warbuff_cap_calc = 10 }
+		custom_effect_tooltip = yun_zhengtong.34.a.tt
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.43
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.43" }
+	title = yun_zhengtong.43.t
+	desc = yun_zhengtong.43.desc
+	picture = GFX_report_event_YUN_Jiang_Jingguo_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.43.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.44
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.44" }
+	title = yun_zhengtong.44.t
+	desc = yun_zhengtong.44.desc
+	picture = GFX_report_event_YUN_Jiang_Jingguo
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.44.a
+		country_event = { id = yun_zhengtong.37 days = 2 }
+	}
+}
+
+country_event = { # 
+	id = yun_zhengtong.45
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.45" }
+	title = yun_zhengtong.45.t
+	desc = yun_zhengtong.45.desc
+	picture = GFX_report_event_YUN_Jiang_Jingguo_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.45.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # Chain 7 - 'Son' of the Generalissimo
+	id = yun_zhengtong.46
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.46" }
+	title = yun_zhengtong.46.t
+	desc = yun_zhengtong.46.desc
+	picture = GFX_report_event_YUN_Jiang_Weiguo
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.46.a
+		ai_chance = { factor = 1 }
+		country_event = { id = yun_zhengtong.47 days = 365 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.47
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.47" }
+	title = yun_zhengtong.47.t
+	desc = yun_zhengtong.47.desc
+	picture = GFX_report_event_YUN_Jiang_Weiguo
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.47.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.48
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.48" }
+	title = yun_zhengtong.48.t
+	desc = yun_zhengtong.48.desc
+	picture = GFX_report_event_YUN_Jiang_Weiguo_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.48.a
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.49
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.49" }
+	title = yun_zhengtong.49.t
+	desc = yun_zhengtong.49.desc
+	picture = GFX_report_event_YUN_Jiang_Weiguo
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.49.a
+		YUN_jiang_weiguo = {
+			add_corps_commander_role = {
+				legacy_id = 1237
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+				traits = { armor_officer trait_mountaineer }
+			}
+		}
+		set_variable = { YUN_WI_cwk = 1 }
+		add_to_variable = { YUN_warbuff_cap_calc = 10 }
+		custom_effect_tooltip = yun_zhengtong.34.a.tt
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.50
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.50" }
+	title = yun_zhengtong.50.t
+	desc = yun_zhengtong.50.desc
+	picture = GFX_report_event_YUN_Jiang_Weiguo_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.50.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.51
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.51" }
+	title = yun_zhengtong.51.t
+	desc = yun_zhengtong.51.desc
+	picture = GFX_report_event_YUN_Jiang_Weiguo_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.51.a
+		country_event = { id = yun_zhengtong.37 days = 2 }
+	}
+}
+
+country_event = { 
+	id = yun_zhengtong.52
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.52" }
+	title = yun_zhengtong.52.t
+	desc = yun_zhengtong.52.desc
+	picture = GFX_report_event_YUN_Jiang_Weiguo_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.52.a
+		ai_chance = { factor = 1 }
+		
+	}
+}
+
+#Epilogue
+country_event = { #
+	id = yun_zhengtong.53
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.53" }
+	title = yun_zhengtong.53.t
+	desc = yun_zhengtong.53.desc
+	picture = GFX_report_event_YUN_Sun_Fo_4
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.53.a
+		ai_chance = { factor = 1 }
+		country_event = { id = yun_zhengtong.54 days = 2 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.54
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.54" }
+	title = yun_zhengtong.54.t
+	desc = yun_zhengtong.54.desc
+	picture = GFX_report_event_YUN_Sun_Fo
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.54.a
+		country_event = { id = yun_zhengtong.55 days = 3 }
+		hidden_effect = {
+			YUN_sun_fo = {
+				add_country_leader_role = {
+					country_leader = {
+						desc = "POLITICS_SUN_FO_DESC"
+						ideology = authoritarian_democracy_xunzheng_subtype
+						traits = { the_son_of_the_founder }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+				add_country_leader_role = {
+					country_leader = {
+						desc = "POLITICS_SUN_FO_DESC"
+						ideology = conservative_democracy_subtype
+						traits = { the_son_of_the_founder }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+			}
+			YUN_song_qingling = {
+				add_country_leader_role = {
+					country_leader = {
+						ideology = socialist_left_wing_nationalism_subtype
+						traits = { }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+			}
+			YUN_liu_yiliang = {
+				add_country_leader_role = {
+					country_leader = {
+						ideology = liberal_democracy_national_liberal_subtype
+						traits = { }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+			}
+			YUN_sun_liren = {
+				add_country_leader_role = {
+					country_leader = {
+						ideology = despotism_military_junta_subtype
+						traits = { }
+						expire = "1999.1.1.1"
+						id = -1
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.55
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.55" }
+	title = yun_zhengtong.55.t
+	desc = yun_zhengtong.55.desc
+	picture = GFX_report_event_YUN_Sun_Fo_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.55.a
+		custom_effect_tooltip = YUN_ROC_reborn_tt
+		hidden_effect = {
+			YUN_WI_Victory_ROC = yes
+		}
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.56
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.56" }
+	title = yun_zhengtong.56.t
+	desc = yun_zhengtong.56.desc
+	picture = GFX_report_event_YUN_Sun_Fo_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.56.a
+		country_event = { id = yun_zhengtong.57 days = 2 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.57
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.57" }
+	title = yun_zhengtong.57.t
+	desc = yun_zhengtong.57.desc
+	picture = GFX_report_event_YUN_Song_Xilian
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.57.a
+		country_event = { id = yun_zhengtong.60 days = 5 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.58
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.58" }
+	title = yun_zhengtong.58.t
+	desc = yun_zhengtong.58.desc
+	picture = GFX_report_event_YUN_Sun_Liren_3
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.58.a
+		retire_character = YUN_zhang_chong
+		add_ideas = {
+			YUN_Sun_Liren_sec
+		}
+		country_event = { id = yun_zhengtong.56 days = 2 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.59
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.59" }
+	title = yun_zhengtong.59.t
+	desc = yun_zhengtong.59.desc
+	picture = GFX_report_event_YUN_Lu_Han
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.59.a
+		country_event = { id = yun_zhengtong.23 days = 2 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.60
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.60" }
+	title = yun_zhengtong.60.t
+	desc = yun_zhengtong.60.desc
+	picture = GFX_report_event_YUN_Sun_Fo_2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.60.a
+		country_event = { id = yun_zhengtong.61 days = 2 }
+	}
+}
+
+country_event = { #
+	id = yun_zhengtong.61
+	immediate = { log = "[GetDateText]: [Root.GetName]: event yun_zhengtong.61" }
+	title = yun_zhengtong.61.t
+	desc = yun_zhengtong.61.desc
+	picture = GFX_report_event_YUN_Ye_Jianying
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #
+		name = yun_zhengtong.61.a
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+add_namespace = yun_heyingqin #Seriously this bitch sucks so I refuse to TT integrate this piece of shit and he'll be segregated from the glorious Yunnan loc so it doesn't kill my eyes
+
+country_event = {#Winning over He's Friends
+	id = yun_heyingqin.1
+	title = yun_heyingqin.1.t
+	desc = yun_heyingqin.1.desc
+
+	picture = GFX_report_event_iberia_meeting_table
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.1"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {#Bribes
+		name = yun_heyingqin.1.a
+		custom_effect_tooltip = yun_heyingqin.1.a.tt
+		add_timed_idea = {
+			idea = YUN_bribe_he_friends
+			days = 360
+		}
+		hidden_effect = {
+			random_list = {
+				50 = { add_to_variable = { YUN_eviction_counter = 0 } }
+				50 = { add_to_variable = { YUN_eviction_counter = 1 } }
+			}
+		}
+	}
+	option = {#Bribes and Arrests
+		name = yun_heyingqin.1.b
+		custom_effect_tooltip = yun_heyingqin.1.b.tt
+		add_timed_idea = {
+			idea = YUN_bribe_he_friends
+			days = 180
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -100
+		}
+		hidden_effect = {
+			random_list = {
+				30 = { add_to_variable = { YUN_eviction_counter = 0 } }
+				70 = { add_to_variable = { YUN_eviction_counter = 1 } }
+			}
+		}
+	}
+	option = {#Arrest everyone
+		name = yun_heyingqin.1.c
+		custom_effect_tooltip = yun_heyingqin.1.c.tt
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		hidden_effect = {
+			random_list = {
+				70 = { add_to_variable = { YUN_eviction_counter = 0 } }
+				30 = { add_to_variable = { YUN_eviction_counter = 1 } }
+			}
+			random_list = {
+				50 = { custom_effect_tooltip = dummy_tt }
+				50 = { country_event = {id = yun_heyingqin.2 hours = 12 random = 12} }
+			}
+		}
+	}
+}
+
+country_event = {#One of He's friends dies, big pp and stab hit for YUN
+	id = yun_heyingqin.2
+	title = yun_heyingqin.2.t
+	desc = yun_heyingqin.2.desc
+
+	picture = GFX_report_event_iberia_indians_at_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.2"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun_heyingqin.2.a
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_political_power = -100
+	}
+}
+
+#Attack on He Yingqin
+country_event = {#Preparing the eviction
+	id = yun_heyingqin.3
+	title = yun_heyingqin.3.t
+	desc = yun_heyingqin.3.desc
+
+	picture = GFX_report_event_russia_war_planning
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.3"
+		hidden_effect = {
+			country_event = {id = yun.19 days = 2 random = 48}
+		}
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun_heyingqin.3.a
+		custom_effect_tooltip = yun_heyingqin.3.a.tt
+		hidden_effect = {
+			random_list = {
+				70 = { add_to_variable = { YUN_eviction_counter = 0 } }
+				30 = { add_to_variable = { YUN_eviction_counter = 1 } }
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_equipment = {infantry_equipment > 250}
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -250
+		}
+		name = yun_heyingqin.3.b
+		custom_effect_tooltip = yun_heyingqin.3.b.tt
+		hidden_effect = {
+			random_list = {
+				50 = { add_to_variable = { YUN_eviction_counter = 0 } }
+				50 = { add_to_variable = { YUN_eviction_counter = 1 } }
+			}
+		}
+	}
+	option = {
+		trigger = {
+			has_equipment = {infantry_equipment > 500}
+		}
+		name = yun_heyingqin.3.c
+		custom_effect_tooltip = yun_heyingqin.3.c.tt
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		hidden_effect = {
+			random_list = {
+				30 = { add_to_variable = { YUN_eviction_counter = 0 } }
+				70 = { add_to_variable = { YUN_eviction_counter = 1 } }
+			}
+		}
+	}
+}
+
+country_event = {#He Yingqin gets mf yeeted
+	#a = Best outcome, He is silently removed
+	#b = Intermediary outcome, He is removed, but it catches some attention
+	#c = Worst outcome, the eviction is messy and loud
+	id = yun_heyingqin.4
+	title = {
+		text = yun_heyingqin.4.t.a
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 0 }
+		}
+	}
+	title = {
+		text = yun_heyingqin.4.t.b
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 1 }
+		}
+	}
+	title = {
+		text = yun_heyingqin.4.t.c
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 2 }
+		}
+	}
+
+	desc = {
+		text = yun_heyingqin.4.desc.a
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 0 }
+		}
+	}
+	desc = {
+		text = yun_heyingqin.4.desc.b
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 1 }
+		}
+	}
+	desc = {
+		text = yun_heyingqin.4.desc.c
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 2 }
+		}
+	}
+
+	picture = GFX_report_event_iberia_basques_arrested
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.4"
+		GUZ = {
+			country_event = {id = guz.101}
+		}
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {#Worst Outcome
+		name = yun_heyingqin.4.a
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 0 }
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -1000
+		}
+		add_stability = -0.10
+		add_war_support = -0.10
+		custom_effect_tooltip = yun_heyingqin.4.options.tt
+	}
+	option = {#Intermediate Outcome
+		name = yun_heyingqin.4.b
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 1 }
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		add_stability = -0.05
+		add_war_support = -0.05
+		custom_effect_tooltip = yun_heyingqin.4.options.tt
+	}
+	option = {#Best Outcome
+		name = yun_heyingqin.4.c
+		trigger = {
+			check_variable = { YUN_Eviction_Counter = 2 }
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -100
+		}
+		add_stability = 0.025
+		add_war_support = 0.025
+		custom_effect_tooltip = yun_heyingqin.4.options.tt
+	}
+}
+
+country_event = {#Arranging a Conference
+	id = yun_heyingqin.5
+	title = yun_heyingqin.5.t
+	desc = yun_heyingqin.5.desc
+
+	picture = GFX_report_event_iberia_big_meeting
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.5"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#
+		name = yun_heyingqin.5.a
+	}
+}
+
+country_event = {#Winnin' some friends
+	id = yun_heyingqin.6
+	title = yun_heyingqin.6.t
+	desc = yun_heyingqin.6.desc
+
+	picture = GFX_report_event_generic_money
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.6"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_heyingqin.6.a
+
+	}
+}
+
+country_event = {#YUN-GUZ Unification Conference Starter
+	id = yun_heyingqin.7
+	title = yun_heyingqin.7.t
+	desc = yun_heyingqin.7.desc
+
+	picture = GFX_report_event_iberia_salazar_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.7"
+		hidden_effect = {country_event = {id = yun_heyingqin.8 days = 8 hours = 96}}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_heyingqin.7.a
+		set_variable = {YUN_centralisation_counter = 0}
+	}
+}
+
+country_event = {#Question of Economic Management
+	id = yun_heyingqin.8
+	title = yun_heyingqin.8.t
+	desc = yun_heyingqin.8.desc
+
+	picture = GFX_report_event_japan_economic_downturn
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.8"
+		hidden_effect = {country_event = {id = yun_heyingqin.9 days = 8 hours = 96}}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Decentralised
+		name = yun_heyingqin.8.a
+		set_country_flag = YUN_economics_decentralised
+
+	}
+	option = {#Centralised
+		name = yun_heyingqin.8.b
+		set_country_flag = YUN_economics_centralised
+		add_to_variable = {YUN_centralisation_counter = 1}
+	}
+}
+
+country_event = {#Question of Legal Matters
+	id = yun_heyingqin.9
+	title = yun_heyingqin.9.t
+	desc = yun_heyingqin.9.desc
+
+	picture = GFX_report_event_Paper_Bundle
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.9"
+		hidden_effect = {country_event = {id = yun_heyingqin.10 days = 8 hours = 96}}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Decentralised
+		name = yun_heyingqin.9.a
+		set_country_flag = YUN_law_decentralised
+
+	}
+	option = {#Centralised
+		name = yun_heyingqin.9.b
+		set_country_flag = YUN_law_centralised
+		add_to_variable = {YUN_centralisation_counter = 1}
+	}
+}
+
+country_event = {#Question of He Yingqin's future role
+	id = yun_heyingqin.10
+	title = yun_heyingqin.10.t
+	desc = yun_heyingqin.10.desc
+
+	picture = GFX_report_event_quislings_villa
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.10"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Decentralised
+		name = yun_heyingqin.10.a
+		set_country_flag = YUN_He_decentralised
+
+	}
+	option = {#Centralised
+		name = yun_heyingqin.10.b
+		set_country_flag = YUN_He_centralised
+		add_to_variable = {YUN_centralisation_counter = 1}
+	}
+}
+
+country_event = {#Conference Settled
+	id = yun_heyingqin.11
+	title = yun_heyingqin.11.t
+	desc = yun_heyingqin.11.desc
+
+	picture = GFX_report_event_iberia_marlib_rally
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.11"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_heyingqin.11.a
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = YUN_unite_southwest_diplo_dynamic_modifier }
+		}
+		set_temp_variable = { econ_centralization_temp = YUN_econ_centralization_conference }
+		econ_centralization_change = yes
+	}
+}
+
+country_event = {#Sphere-wide Unification Event
+	id = yun_heyingqin.12
+	title = yun_heyingqin.12.t
+	desc = yun_heyingqin.12.desc
+
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.12"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_heyingqin.12.a
+	}
+}
+
+country_event = {#A Promise
+	id = yun_heyingqin.13
+	title = yun_heyingqin.13.t
+	desc = yun_heyingqin.13.desc
+
+	picture = GFX_report_event_generic_rally
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.13"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_heyingqin.13.a
+		hidden_effect = {
+			country_event = {id = yun_heyingqin.14 days = 1 random = 24}
+		}
+	}
+}
+
+country_event = {#Small coup
+	id = yun_heyingqin.14
+	title = yun_heyingqin.14.t
+	desc = yun_heyingqin.14.desc
+
+	picture = GFX_report_event_iberia_coup_attempt
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.14"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_heyingqin.14.a
+		add_stability = -0.025
+		add_political_power = -50
+	}
+}
+
+country_event = {#Consolidation of the merger
+	id = yun_heyingqin.15
+	title = yun_heyingqin.15.t
+	desc = yun_heyingqin.15.desc
+
+	picture = GFX_report_event_iberia_meeting_small
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun_heyingqin.15"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun_heyingqin.15.a
+		add_stability = 0.025
+		add_war_support = 0.025
+	}
+}
+
+# WHO THE HELL THINKS PLACING EMPTY EVENTS (YEAH, NO LOC) IN AN EVENT CHAIN THAT AI CAN'T EVEN TRIGGER IS SMART #
+
+country_event = {
+	id = burinteraction.1
+	title = burinteraction.1.t
+	desc = burinteraction.1.desc
+	picture = GFX_report_event_iberia_salazar_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event burinteraction.1"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {#Send the delegation.
+		name = burinteraction.1.a
+		YUN = {
+			country_event = {
+				id = YUN.201
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = {
+	id = burinteraction.2
+	title = burinteraction.2.t
+	desc = burinteraction.2.desc
+	picture = GFX_report_event_iberia_salazar_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event burinteraction.2"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {#Send the delegation.
+		name = burinteraction.2.a
+		YUN = {
+			country_event = {
+				id = YUN.202
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = {
+	id = burinteraction.3
+	title = burinteraction.3.t
+	desc = burinteraction.3.desc
+	picture = GFX_report_event_iberia_salazar_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event burinteraction.3"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {#Yes
+		ai_chance = {
+			factor = 1000
+		}
+		name = burinteraction.3.a
+		YUN = {
+			country_event = {
+				id = YUN.203
+				hours = 6
+			}
+		}
+	}
+
+	option = {#No
+		ai_chance = {
+			factor = 0
+		}
+		name = burinteraction.3.b
+		YUN = {
+			country_event = {
+				id = YUN.204
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = {#Burma Road Negotiation with Burma - Start
+	id = yun.200
+	title = yun.200.t
+	desc = yun.200.desc
+	picture = GFX_report_event_iberia_salazar_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.200"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {#Send the delegation.
+		name = yun.200.a
+		hidden_effect = {
+			BUR = {
+				country_event = {
+					id = burinteraction.1
+					hours = 6
+				}
+			}
+		}
+	}
+}
+
+country_event = {#Burma wants to know about benefits
+	id = yun.201
+	title = yun.201.t
+	desc = yun.201.desc
+	picture = GFX_report_event_iberia_military_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.201"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {#Promise little
+		name = yun.201.a
+		set_country_flag = YUN_burma_road_benefits_xinan
+		custom_effect_tooltip = yun.201.a.tt
+		add_political_power = -90
+		hidden_effect = {
+			BUR = {
+				country_event = {
+					id = burinteraction.2
+					hours = 6
+				}
+			}
+			set_variable = {YUN_bur_road_bonus_congoods = -0.15}
+			set_variable = {YUN_bur_road_bonus_exc = 0.15}
+			BUR = {
+				set_variable = {BUR_bur_road_bonus_congoods = -0.02}
+				set_variable = {BUR_bur_road_bonus_output = 0.04}
+				set_variable = {BUR_bur_road_bonus_income = 100}
+			}
+		}
+	}
+	option = {#Promise balanced gains
+		name = yun.201.b
+		set_country_flag = YUN_burma_road_benefits_neutral
+		custom_effect_tooltip = yun.201.b.tt
+		add_political_power = -60
+		hidden_effect = {
+			BUR = {
+				country_event = {
+					id = burinteraction.2
+					hours = 6
+				}
+			}
+			set_variable = {YUN_bur_road_bonus_congoods = -0.10}
+			set_variable = {YUN_bur_road_bonus_exc = 0.10}
+			BUR = {
+				set_variable = {BUR_bur_road_bonus_congoods = -0.04}
+				set_variable = {BUR_bur_road_bonus_output = 0.08}
+				set_variable = {BUR_bur_road_bonus_income = 200}
+			}
+		}
+	}
+	option = {#Promise generous gains
+		name = yun.201.c
+		set_country_flag = YUN_burma_road_benefits_burma
+		custom_effect_tooltip = yun.201.c.tt
+		add_political_power = -30
+		hidden_effect = {
+			BUR = {
+				country_event = {
+					id = burinteraction.2
+					hours = 6
+				}
+			}
+			set_variable = {YUN_bur_road_bonus_congoods = -0.05}
+			set_variable = {YUN_bur_road_bonus_exc = 0.05}
+			BUR = {
+				set_variable = {BUR_bur_road_bonus_congoods = -0.06}
+				set_variable = {BUR_bur_road_bonus_output = 0.12}
+				set_variable = {BUR_bur_road_bonus_income = 300}
+			}
+		}
+	}
+}
+
+country_event = {#Burma wants to know about costs
+	id = yun.202
+	title = yun.202.t
+	desc = yun.202.desc
+	picture = GFX_report_event_iberia_meeting_table
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.202"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {#Carry the load
+		name = yun.202.a
+		set_country_flag = YUN_burma_road_costs_xinan
+		custom_effect_tooltip = yun.202.a.tt
+		add_political_power = -90
+		hidden_effect = {
+			BUR = {
+				country_event = {
+					id = burinteraction.3
+					hours = 6
+				}
+			}
+			set_variable = {YUN_bur_road_const_congoods = 0.05}
+			set_variable = {YUN_bur_road_const_output = -0.05}
+			BUR = {
+				set_variable = {BUR_bur_road_const_congoods = 0.10}
+				set_variable = {BUR_bur_road_const_costs = 500}
+			}
+		}
+	}
+	option = {#Split costs equally
+		name = yun.202.b
+		set_country_flag = YUN_burma_road_costs_neutral
+		custom_effect_tooltip = yun.202.b.tt
+		add_political_power = -60
+		hidden_effect = {
+			BUR = {
+				country_event = {
+					id = burinteraction.3
+					hours = 6
+				}
+			}
+			set_variable = {YUN_bur_road_const_congoods = 0.075}
+			set_variable = {YUN_bur_road_const_output = -0.10}
+			BUR = {
+				set_variable = {BUR_bur_road_const_congoods = 0.75}
+				set_variable = {BUR_bur_road_const_costs = 350}
+			}
+		}
+	}
+	option = {#Load the costs on them
+		name = yun.202.c
+		set_country_flag = YUN_burma_road_costs_burma
+		custom_effect_tooltip = yun.202.c.tt
+		add_political_power = -30
+		hidden_effect = {
+			BUR = {
+				country_event = {
+					id = burinteraction.3
+					hours = 6
+				}
+			}
+			set_variable = {YUN_bur_road_const_congoods = 0.10}
+			set_variable = {YUN_bur_road_const_output = -0.20}
+			BUR = {
+				set_variable = {BUR_bur_road_const_congoods = 0.05}
+				set_variable = {BUR_bur_road_const_costs = 200}
+			}
+		}
+	}
+}
+
+country_event = {#Burma agrees to project
+	id = yun.203
+	title = yun.203.t
+	desc = yun.203.desc
+	picture = GFX_report_event_iberia_guy_paper_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.203"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {
+		name = yun.203.a
+		set_country_flag = YUN_burma_road_diplo_successful
+		add_opinion_modifier = {
+			target = BUR
+			modifier = YUN_burma_road_revived_diplo
+		}
+		reverse_add_opinion_modifier = {
+			target = BUR
+			modifier = YUN_burma_road_revived_diplo
+		}
+		custom_effect_tooltip = yun.203.a.tt
+	}
+}
+
+country_event = {#Burma rejects!
+	id = yun.204
+	title = yun.204.t
+	desc = yun.204.desc
+	picture = GFX_report_event_iberia_big_meeting
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.204"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {
+		name = yun.204.a
+		set_country_flag = YUN_burma_road_diplo_failed
+	}
+}
+
+country_event = {#Planning and shit
+	id = yun.205
+	title = yun.205.t
+	desc = yun.205.desc
+	picture = GFX_report_event_russia_war_planning
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.205"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = YUN_long_yun_crusade
+		}
+	}
+
+	option = {#Fast and expensive approach
+		name = yun.205.a
+		set_country_flag = YUN_burma_road_fast
+		custom_effect_tooltip = yun.205.a.tt
+		set_country_flag = YUN_burma_road_planning_prepared
+		set_variable = {YUN_bur_road_const_duration = 360}
+		multiply_variable = {YUN_bur_road_const_congoods = 1.25}
+		multiply_variable = {YUN_bur_road_const_output = 1.25}
+		BUR = {
+			multiply_variable = {BUR_bur_road_const_congoods = 1.25}
+			multiply_variable = {BUR_bur_road_const_costs = 1.25}
+		}
+		set_temp_variable = { YUN_calc_cost = GDP }
+		multiply_temp_variable = { YUN_calc_cost = 0.02 }
+		add_to_variable = { YUN_bur_road_const_misc_costs = YUN_calc_cost }
+		custom_effect_tooltip = YUN_bur_road_const_cost_change_tt
+	}
+	option = {#Balanced approach
+		name = yun.205.b
+		set_country_flag = YUN_burma_road_balanced
+		custom_effect_tooltip = yun.205.b.tt
+		set_country_flag = YUN_burma_road_planning_prepared
+		set_variable = {YUN_bur_road_const_duration = 540}
+		set_temp_variable = { YUN_calc_cost = GDP }
+		multiply_temp_variable = { YUN_calc_cost = 0.01 }
+		add_to_variable = { YUN_bur_road_const_misc_costs = YUN_calc_cost }
+		custom_effect_tooltip = YUN_bur_road_const_cost_change_tt
+	}
+	option = {#Slow and cheap approach
+		name = yun.205.c
+		set_country_flag = YUN_burma_road_slow
+		custom_effect_tooltip = yun.205.c.tt
+		set_country_flag = YUN_burma_road_planning_prepared
+		set_variable = {YUN_bur_road_const_duration = 720}
+		multiply_variable = {YUN_bur_road_const_congoods = 0.75}
+		multiply_variable = {YUN_bur_road_const_output = 0.75}
+		BUR = {
+			multiply_variable = {BUR_bur_road_const_congoods = 0.75}
+			multiply_variable = {BUR_bur_road_const_costs = 0.75}
+		}
+		set_temp_variable = { YUN_calc_cost = GDP }
+		multiply_temp_variable = { YUN_calc_cost = 0.005 }
+		add_to_variable = { YUN_bur_road_const_misc_costs = YUN_calc_cost }
+		custom_effect_tooltip = YUN_bur_road_const_cost_change_tt
+	}
+}
+
+country_event = {#Road is Revived
+	id = yun.206
+	title = yun.206.t
+	desc = yun.206.desc
+	picture = GFX_report_event_iberia_road_work_2
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.206"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yun.206.a
+		remove_dynamic_modifier = {modifier = YUN_burma_road_construction_dynamic_modifier}
+		add_dynamic_modifier = {modifier = YUN_burma_road_reward_dynamic_modifier}
+		BUR = {
+			remove_dynamic_modifier = {modifier = BUR_burma_road_construction_dynamic_modifier}
+			add_dynamic_modifier = {modifier = BUR_burma_road_reward_dynamic_modifier}
+		}
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.10 } #already converted to billion
+		econ_GDP_boost_once_percentage = yes
+		set_temp_variable = { gdp_growth_temp = 2.0 }
+		econ_gdp_growth_change = yes
+	}
+}
+
+country_event = {#China cries for Mama, Japan being actually serious for the first time
+	id = yun.2023
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.2023"
+		YUN_testing = yes
+	}
+	hidden = yes
+	is_triggered_only = yes
+}
+
+country_event = {#
+	id = yun.2024
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event yun.2024"
+		YUN_testing_2 = yes
+	}
+	hidden = yes
+	is_triggered_only = yes
+}
+
+state_event = { #Oh no we run out of fuel
+	id = yun.2025
+	immediate = {log = "[GetDateText]: [Root.GetName]: event yun.2025"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = yun.2025.a
+		if = {
+			limit = {
+				THIS = { check_variable = { WI_map_strategy = 1 } }
+			}
+			THIS = {
+				subtract_from_variable = { YUN_WI_province_attack = WI_state_mil_level_strategy_confirmed }
+				subtract_from_variable = { YUN_WI_province_speed = WI_state_mil_level_strategy_confirmed }
+				subtract_from_variable = { YUN_WI_province_attrition = WI_state_mil_level_strategy_confirmed }
+				add_to_variable = { YUN_WI_province_defense = WI_state_mil_level_strategy_confirmed }
+			}
+			set_variable = { WI_map_strategy = 0 }
+		}
+		else_if = {
+			limit = {
+				THIS = { check_variable = { WI_map_strategy = 2 } }
+			}
+			THIS = {
+				subtract_from_variable = { YUN_WI_province_defense = WI_state_mil_level_strategy_confirmed }
+				add_to_variable = { YUN_WI_province_attrition = WI_state_mil_level_strategy_confirmed }
+				add_to_variable = { YUN_WI_province_attack = WI_state_mil_level_strategy_confirmed }
+				add_to_variable = { YUN_WI_province_speed = WI_state_mil_level_strategy_confirmed }
+			}
+			set_variable = { WI_map_strategy = 0 }
+		}
+	}
+}

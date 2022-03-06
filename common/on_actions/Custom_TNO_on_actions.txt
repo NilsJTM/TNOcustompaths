@@ -2373,5 +2373,256 @@ on_actions = {
 				}
 			}
 		}
-	}	
+	}
+	
+	
+	on_declare_war = {
+		effect = {
+			##Madagascar Civil War
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = madagaskar_civil_war_outcome
+						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MDM_REPUBLIC_OF_MADAGASCAR
+					}
+					ROOT = {
+						OR = {
+							tag = MDM
+							tag = MAD
+							tag = MDG
+						}
+					}
+					FROM = {
+						OR = {
+							tag = MDM
+							tag = MAD
+							tag = MDG
+						}
+					}
+				}
+				MDM = {
+					add_ideas = Custom_TNO_madagaskar_civil_war
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = madagaskar_civil_war_outcome
+						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MAD_MADAGASCAR_GOVERNMENT
+					}
+					ROOT = {
+						OR = {
+							tag = MDM
+							tag = MAD
+							tag = MDG
+						}
+					}
+					FROM = {
+						OR = {
+							tag = MDM
+							tag = MAD
+							tag = MDG
+						}
+					}
+				}
+				MAD = {
+					add_ideas = Custom_TNO_madagaskar_civil_war
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = madagaskar_civil_war_outcome
+						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MDG_MILITARSTAAT_MADAGASKAR
+					}
+					ROOT = {
+						OR = {
+							tag = MDM
+							tag = MAD
+							tag = MDG
+						}
+					}
+					FROM = {
+						OR = {
+							tag = MDM
+							tag = MAD
+							tag = MDG
+						}
+					}
+				}
+				MDG = {
+					add_ideas = Custom_TNO_madagaskar_civil_war
+				}
+			}
+			
+			##Algerian War
+			if = { #Iberia
+				limit = {
+					has_game_rule = {
+						rule = algerian_war_outcome
+						option = ALGERIAN_WAR_OUTCOME_SLG_COMANDO_MILITAR_ALGERINO
+					}
+					ROOT = {
+						OR = {
+							tag = SLG
+							tag = ILG
+						}
+					}
+					FROM = {
+						OR = {
+							tag = SLG
+							tag = ILG
+						}
+					}
+				}
+				SLG = {
+					add_ideas = Custom_TNO_algerian_war
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 5000
+						producer = IBR
+					}
+					add_equipment_to_stockpile = {
+						type = anti_tank_equipment
+						amount = 600
+						producer = IBR
+					}
+					add_equipment_to_stockpile = {
+						type = support_equipment
+						amount = 150
+						producer = IBR
+					}
+					add_equipment_to_stockpile = {
+						type = artillery_equipment
+						amount = 150
+						producer = IBR
+					}
+				}
+			}
+			if = { #Italy
+				limit = {
+					has_game_rule = {
+						rule = algerian_war_outcome
+						option = ALGERIAN_WAR_OUTCOME_ILG_TERRITORIO_MILITARE_ALGERINO
+					}
+					ROOT = {
+						OR = {
+							tag = SLG
+							tag = ILG
+						}
+					}
+					FROM = {
+						OR = {
+							tag = SLG
+							tag = ILG
+						}
+					}
+				}
+				ILG = {
+					add_ideas = Custom_TNO_algerian_war
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 5000
+						producer = ITA
+					}
+					add_equipment_to_stockpile = {
+						type = anti_tank_equipment
+						amount = 600
+						producer = ITA
+					}
+					add_equipment_to_stockpile = {
+						type = support_equipment
+						amount = 150
+						producer = ITA
+					}
+					add_equipment_to_stockpile = {
+						type = artillery_equipment
+						amount = 150
+						producer = ITA
+					}
+				}
+			}
+		}
+	}
+	
+	
+	on_declare_war = {
+		effect = {
+			if = { ##Warlord Insurrection
+				limit = {
+					ROOT = {
+						OR = {
+							tag = YUN
+							tag = CHI
+						}
+					}
+					FROM = {
+						OR = {
+							tag = YUN
+							tag = CHI
+						}
+					}
+					has_game_rule = {
+						rule = warlord_insurrection_outcome
+						option = WARLORD_INSURRECTION_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+					}
+				}
+				CHI = {
+					add_ideas = Custom_TNO_CHI_war_debuff
+				}
+				YUN = {
+					add_ideas = Custom_TNO_YUN_CHI_war
+				}
+			}
+			if = { ##The Great Asian War
+				limit = {
+					ROOT = {
+						OR = {
+							tag = JAP
+							tag = YUN
+						}
+					}
+					FROM = {
+						OR = {
+							tag = JAP
+							tag = YUN
+						}
+					}
+					has_game_rule = {
+						rule = great_asian_war_outcome
+						option = GREAT_ASIAN_WAR_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+					}
+				}
+				JAP = {
+					add_ideas = Custom_TNO_JAP_war_debuff
+				}
+				YUN = {
+					add_ideas = Custom_TNO_YUN_war
+					apply_100_divisions = yes
+				}
+			}
+		}
+	}
+	
+	on_peace = {
+		if = {
+			limit = {
+				has_game_rule = {
+					rule = great_asian_war_outcome
+					option = GREAT_ASIAN_WAR_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+				}
+				YUN = {
+					has_idea = {
+						Custom_TNO_YUN_war
+					}
+				}
+			}
+			YUN = {
+				delete_unit_template_and_units = {
+					division_template = "Custom TNO Division"
+					disband = no
+				}
+			}
+		}
+	}
 }
