@@ -2378,6 +2378,60 @@ on_actions = {
 	
 	on_declare_war = {
 		effect = {
+			##Mongolian Civil War
+			if = { #Mengjiang
+				limit = {
+					has_game_rule = {
+						rule = mongolian_civil_war_outcome
+						option = MONGOLIAN_CIVIL_WAR_OUTCOME_MEN_MENGJIANG
+					}
+					ROOT = {
+						OR = {
+							tag = MEN
+							tag = PRC
+						}
+					}
+					FROM = {
+						OR = {
+							tag = MEN
+							tag = PRC
+						}
+					}
+					NOT = {
+						has_idea = Custom_TNO_war_buff
+					}
+				}
+				MEN = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
+			if = { #People's Revolutionary Council
+				limit = {
+					has_game_rule = {
+						rule = mongolian_civil_war_outcome
+						option = MONGOLIAN_CIVIL_WAR_OUTCOME_PRC_PEOPLE'S_REVOLUTIONARY_COUNCIL
+					}
+					ROOT = {
+						OR = {
+							tag = MEN
+							tag = PRC
+						}
+					}
+					FROM = {
+						OR = {
+							tag = MEN
+							tag = PRC
+						}
+					}
+					NOT = {
+						has_idea = Custom_TNO_war_buff
+					}
+				}
+				PRC = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
+			
 			##Madagascar Civil War
 			if = {
 				limit = {
@@ -2588,7 +2642,7 @@ on_actions = {
 	
 	on_peace = {
 		effect = {
-			if = {
+			if = { ##Madagascar Civil War ends
 				limit = {
 					has_game_rule = {
 						rule = madagaskar_civil_war_outcome
@@ -2633,6 +2687,7 @@ on_actions = {
 					remove_war_buff = yes
 				}
 			}
+			
 			if = { ##Algerian War ends
 				limit = {
 					ROOT = {
@@ -2671,6 +2726,46 @@ on_actions = {
 					}
 				}
 			}
+			
+			if = { ##Mongolian Civil War ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = MEN
+							tag = PRC
+						}
+					}
+					FROM = {
+						OR = {
+							tag = MEN
+							tag = PRC
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = mongolian_civil_war_outcome
+							option = MONGOLIAN_CIVIL_WAR_OUTCOME_MEN_MENGJIANG
+						}
+					}
+					MEN = {
+						remove_war_buff = yes
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = mongolian_civil_war_outcome
+							option = MONGOLIAN_CIVIL_WAR_OUTCOME_PRC_PEOPLE'S_REVOLUTIONARY_COUNCIL
+						}
+					}
+					PRC = {
+						remove_war_buff = yes
+					}
+				}
+			}
+			
 			if = { ##end of the great asian war
 				limit = {
 					has_game_rule = {
