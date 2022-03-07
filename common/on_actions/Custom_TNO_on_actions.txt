@@ -2386,22 +2386,14 @@ on_actions = {
 						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MDM_REPUBLIC_OF_MADAGASCAR
 					}
 					ROOT = {
-						OR = {
-							tag = MDM
-							tag = MAD
-							tag = MDG
-						}
+						tag = MDM
 					}
 					FROM = {
-						OR = {
-							tag = MDM
-							tag = MAD
-							tag = MDG
-						}
+						tag = MAD
 					}
 				}
 				MDM = {
-					add_ideas = Custom_TNO_madagaskar_civil_war
+					apply_war_buff_with_5_divisions = yes
 				}
 			}
 			if = {
@@ -2411,22 +2403,14 @@ on_actions = {
 						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MAD_MADAGASCAR_GOVERNMENT
 					}
 					ROOT = {
-						OR = {
-							tag = MDM
-							tag = MAD
-							tag = MDG
-						}
+						tag = MDG
 					}
 					FROM = {
-						OR = {
-							tag = MDM
-							tag = MAD
-							tag = MDG
-						}
+						tag = MAD
 					}
 				}
 				MAD = {
-					add_ideas = Custom_TNO_madagaskar_civil_war
+					apply_war_buff_with_5_divisions = yes
 				}
 			}
 			if = {
@@ -2436,22 +2420,14 @@ on_actions = {
 						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MDG_MILITARSTAAT_MADAGASKAR
 					}
 					ROOT = {
-						OR = {
-							tag = MDM
-							tag = MAD
-							tag = MDG
-						}
+						tag = MDG
 					}
 					FROM = {
-						OR = {
-							tag = MDM
-							tag = MAD
-							tag = MDG
-						}
+						tag = MAD
 					}
 				}
 				MDG = {
-					add_ideas = Custom_TNO_madagaskar_civil_war
+					apply_war_buff_with_5_divisions = yes
 				}
 			}
 			
@@ -2474,9 +2450,12 @@ on_actions = {
 							tag = ILG
 						}
 					}
+					NOT = {
+						has_idea = Custom_TNO_war_buff
+					}
 				}
 				SLG = {
-					add_ideas = Custom_TNO_algerian_war
+					apply_war_buff_with_5_divisions = yes
 					add_equipment_to_stockpile = {
 						type = infantry_equipment
 						amount = 5000
@@ -2517,9 +2496,12 @@ on_actions = {
 							tag = ILG
 						}
 					}
+					NOT = {
+						has_idea = Custom_TNO_war_buff
+					}
 				}
 				ILG = {
-					add_ideas = Custom_TNO_algerian_war
+					apply_war_buff_with_5_divisions = yes
 					add_equipment_to_stockpile = {
 						type = infantry_equipment
 						amount = 5000
@@ -2607,6 +2589,89 @@ on_actions = {
 	on_peace = {
 		effect = {
 			if = {
+				limit = {
+					has_game_rule = {
+						rule = madagaskar_civil_war_outcome
+						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MDM_REPUBLIC_OF_MADAGASCAR
+					}
+					NOT = {
+						country_exists = MAD
+						country_exists = MDG
+					}
+				}
+				MDM = {
+					remove_war_buff = yes
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = madagaskar_civil_war_outcome
+						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MAD_MADAGASCAR_GOVERNMENT
+					}
+					NOT = {
+						country_exists = MDM
+						country_exists = MDG
+					}
+				}
+				MAD = {
+					remove_war_buff = yes
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = madagaskar_civil_war_outcome
+						option = MADAGASCAR_CIVIL_WAR_OUTCOME_MDG_MILITARSTAAT_MADAGASKAR
+					}
+					NOT = {
+						country_exists = MDM
+						country_exists = MAD
+					}
+				}
+				MDG = {
+					remove_war_buff = yes
+				}
+			}
+			if = { ##Algerian War ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = SLG
+							tag = ILG
+						}
+					}
+					FROM = {
+						OR = {
+							tag = SLG
+							tag = ILG
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = algerian_war_outcome
+							option = ALGERIAN_WAR_OUTCOME_SLG_COMANDO_MILITAR_ALGERINO
+						}
+					}
+					SLG = {
+						remove_war_buff = yes
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = algerian_war_outcome
+							option = ALGERIAN_WAR_OUTCOME_ILG_TERRITORIO_MILITARE_ALGERINO
+						}
+					}
+					ILG = {
+						remove_war_buff = yes
+					}
+				}
+			}
+			if = { ##end of the great asian war
 				limit = {
 					has_game_rule = {
 						rule = great_asian_war_outcome
