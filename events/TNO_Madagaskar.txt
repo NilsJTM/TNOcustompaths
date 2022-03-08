@@ -1,0 +1,1132 @@
+﻿add_namespace = MADAGASKAR
+
+
+add_namespace = MADAGASKAR_MAURICE
+
+add_namespace = MADAGASKAR_OFN 				# Post-MCW OFN faction
+add_namespace = MADAGASKAR_ERETZ_ASHKENAZ	# Post-MCW Hitnagdut faction
+
+add_namespace = MADAGASKAR_CIVIL_WAR
+
+### DEBUG EVENTS ###
+
+
+
+
+
+### MISC EVENTS ###
+
+news_event = { # Madagaskar Intro Event
+	id = MADAGASKAR.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.1.t
+	desc = MADAGASKAR.1.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.1.a
+	}
+}
+
+country_event = { # Madagaskar Intro Event
+	id = MADAGASKAR.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.2.t
+	desc = MADAGASKAR.2.desc
+	picture = GFX_report_event_MAD_madagascar
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.2.a
+		USA = {
+			country_event = {
+				id = MADAGASKAR_MAURICE.3
+			}
+		}
+		GER = {
+			country_event = {
+				id = MADAGASKAR_MAURICE.101
+			}
+		}
+		JAP = {
+			country_event = {
+				id = MADAGASKAR.3
+			}
+		}
+		USA = {
+			country_event = {
+				id = MADAGASKAR_CIVIL_WAR.1
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { # Submarine enters radio contact with the natives
+	id = MADAGASKAR.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.3.t
+	desc = MADAGASKAR.3.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.3.a
+	}
+}
+
+country_event = { # In the Chaos of the War, nobody notices a few boats landing on a distant shore...The US and GER are in for a surprise.
+	id = MADAGASKAR.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.4.t
+	desc = MADAGASKAR.4.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.4.a
+		custom_effect_tooltip = TNO_USA_We_can_intervene_MAD
+	}
+}
+
+country_event = { # US we lost boo
+	id = MADAGASKAR.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.5.t
+	desc = MADAGASKAR.5.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MADAGASKAR.5.a
+		TNO_fopo_remove_madagascar_conflict_tab = yes
+		set_temp_variable = { target = MAD }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { Victory_ID = 26 }
+		set_temp_variable = { Victory_Outcome = 2 }
+		set_temp_variable = { Victory_Points = -50 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+}
+
+country_event = { # Japan we lost boo
+	id = MADAGASKAR.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.6.t
+	desc = MADAGASKAR.6.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MADAGASKAR.6.a
+		TNO_fopo_remove_madagascar_conflict_tab = yes
+		JAP_PA_support_decrease_med = yes
+		set_temp_variable = { target = MDM }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { Victory_ID = 26 }
+		set_temp_variable = { Victory_Outcome = 2 }
+		set_temp_variable = { Victory_Points = -50 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+}
+
+country_event = { # Germany we lost boo
+	id = MADAGASKAR.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.7.t
+	desc = MADAGASKAR.7.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MADAGASKAR.7.a
+		TNO_fopo_remove_madagascar_conflict_tab = yes
+		set_temp_variable = { target = MDG }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { SeaZone_ID = 6 } # 6; Indian Ocean
+		Cold_War_GUI_PowerProjection_RemoveSeaZone = yes
+		set_temp_variable = { Victory_ID = 26 }
+		set_temp_variable = { Victory_Outcome = 2 }
+		set_temp_variable = { Victory_Points = -50 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+}
+
+
+country_event = { # Welcome to the OFN Madagascar
+	id = MADAGASKAR.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.9.t
+	desc = MADAGASKAR.9.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.9.a
+		TNO_fopo_remove_madagascar_conflict_tab = yes
+		MAD = {
+			save_party_popularities = yes
+		}
+		USA = {
+			add_to_faction = MAD
+			set_autonomy = {
+				target = MAD
+				autonomy_state = autonomy_client_state
+			}
+			set_temp_variable = { target = MAD }
+			TNO_clear_num_volunteers = yes
+			set_temp_variable = { Victory_ID = 26 }
+			set_temp_variable = { Victory_Outcome = 4 }
+			set_temp_variable = { Victory_Points = 50 }
+			Cold_War_GUI_ManipulateVictory = yes
+		}
+		clr_global_flag = madagaskar_civil_war
+		add_to_array = {
+			global.OFN_members = MAD
+		}
+		MAD = {
+			set_politics = {
+				ruling_party = authoritarian_democracy
+			}
+			econ_join_sphere_USA = yes
+			add_ideas = OFN_Dependent_Member
+			apply_party_popularities = yes
+		}
+		add_political_power = 100
+		hidden_effect = {
+			USA = { country_event = { id = USA.madagascar.7 days = 2 }  }
+		}
+	}
+}
+
+country_event = { # Welcome to the Sphere Madagascar
+	id = MADAGASKAR.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.10.t
+	desc = MADAGASKAR.10.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.10.a
+		TNO_fopo_remove_madagascar_conflict_tab = yes
+		MDM = {
+			save_party_popularities = yes
+		}
+		JAP = {
+			add_to_faction = MDM
+			#puppet = MDM
+			set_temp_variable = { target = MDM }
+			TNO_clear_num_volunteers = yes
+			set_temp_variable = { Victory_ID = 26 }
+			set_temp_variable = { Victory_Outcome = 4 }
+			set_temp_variable = { Victory_Points = 50 }
+			Cold_War_GUI_ManipulateVictory = yes
+		}
+		clr_global_flag = madagaskar_civil_war
+		MDM = {
+			set_politics = {
+				ruling_party = authoritarian_democracy
+			}
+			add_ideas = Sphere_Fully_Dependent
+			econ_join_sphere_JAP = yes
+			apply_party_popularities = yes
+		}
+		JAP_PA_support_increase_med = yes
+		add_political_power = 50
+		hidden_effect = {
+			country_event = {
+				id = MADAGASKAR.12
+				days = 15
+			}
+		}
+	}
+}
+
+country_event = { # Welcome back Madagascar
+	id = MADAGASKAR.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.11.t
+	desc = MADAGASKAR.11.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.11.a
+		TNO_fopo_remove_madagascar_conflict_tab = yes
+		MDG = {
+			save_party_popularities = yes
+		}
+		GER = {
+			if = {
+				limit = { NOT = { has_global_flag = german_civil_war } }
+				add_to_faction = MDG
+			}
+			set_temp_variable = { target = MDG }
+			TNO_clear_num_volunteers = yes
+			set_temp_variable = { Victory_ID = 26 }
+			set_temp_variable = { Victory_Outcome = 4 }
+			set_temp_variable = { Victory_Points = 50 }
+			Cold_War_GUI_ManipulateVictory = yes
+			transfer_state = 706
+			transfer_state = 707
+			set_autonomy = {
+				target = MDG
+				autonomy_state = autonomy_autonomous_reichskommissariat
+			}
+		}
+		clr_global_flag = madagaskar_civil_war
+		MDG = {
+			add_ideas = Pakt_Autonomous_Reichskommissariat
+			if = {
+				limit = { has_global_flag = german_civil_war_speervic }
+				join_zollverein = yes
+			}
+			econ_join_sphere_GER = yes
+			set_politics = {
+				ruling_party = national_socialism
+			}
+			apply_party_popularities = yes
+		}
+		add_political_power = 100
+	}
+}
+
+country_event = { # Germany we lost boo
+	id = MADAGASKAR.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.8.t
+	desc = MADAGASKAR.8.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.8.a
+		TNO_fopo_remove_madagascar_conflict_tab = yes
+	}
+}
+
+country_event = { # Japan's plans for Madagaskar
+	id = MADAGASKAR.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.12.t
+	desc = MADAGASKAR.12.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.12.a
+		add_political_power = 50
+		MDM = {
+			retire_country_leader = yes
+			every_unit_leader = {
+				limit = { has_id = 871871 }
+				retire = yes
+			}
+			promote_character = MDM_didier_ratsiraka
+		}
+	}
+}
+
+country_event = { # Speer do we really want the Goerite in Madagaskar?
+	id = MADAGASKAR.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.13.t
+	desc = MADAGASKAR.13.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+	option = {
+		name = MADAGASKAR.13.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = MAD_SPEER_PATH option =  MAD_SPEER_PATH_JOINING }
+			}
+		}
+		add_political_power = 50
+		increase_reformist_leaning_small = yes
+	}
+	option = {
+		name = MADAGASKAR.13.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = MAD_SPEER_PATH option =  MAD_SPEER_PATH_NOT_JOINING }
+			}
+		}
+		increase_conservative_leaning_small = yes
+		hidden_effect = {
+			country_event = {
+				id = MADAGASKAR.14
+				days = 60
+				random_days = 15
+			}
+		}
+	}
+}
+
+country_event = { # Schoeps in da House
+	id = MADAGASKAR.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR.1"}
+	title = MADAGASKAR.14.t
+	desc = MADAGASKAR.14.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR.14.a
+		MAD = {
+			MAD_hans_joachim_schoeps = {
+				set_nationality = MDG
+			}
+		}
+		MDG = {
+			kill_country_leader = yes
+			remove_unit_leader = 401
+			set_politics = {
+				ruling_party = fascism
+			}
+			MAD_hans_joachim_schoeps = {
+				promote_character = { ideology = fascism_corporatism_subtype }
+			}
+			hidden_effect = {
+				set_popularities = {
+					communist = 0
+					ultranationalism = 5
+					socialist = 0
+					social_democracy = 0
+					liberal_democracy = 0
+					conservative_democracy = 0
+					authoritarian_democracy = 37
+					despotism = 5
+					fascism = 43
+					national_socialism = 5
+				}
+			}
+		}
+	}
+}
+
+
+
+### MADAGASKAR CIVIL WAR EVENTS ###
+
+country_event = { # War carves the Red Island
+	id = MADAGASKAR_CIVIL_WAR.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_CIVIL_WAR.1"}
+	title = MADAGASKAR_CIVIL_WAR.1.t
+	desc = MADAGASKAR_CIVIL_WAR.1.desc
+	picture = GFX_report_event_MAD_madagascar
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_CIVIL_WAR.1.a
+		hidden_effect = {
+			#USA = { country_event = { id = USA.madagascar.2 } }
+			MAD_setup_civil_war = yes
+			country_event = {
+				id = MADAGASKAR_MAURICE.13
+				days = 2
+			}
+			country_event = {
+				id = MADAGASKAR_CIVIL_WAR.2
+				days = 20
+			}
+		}
+	}
+}
+
+country_event = { # The Madagaskar Civil War
+	id = MADAGASKAR_CIVIL_WAR.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_CIVIL_WAR.2"}
+	title = MADAGASKAR_CIVIL_WAR.2.t
+	desc = MADAGASKAR_CIVIL_WAR.2.desc
+	picture = GFX_report_event_MAD_madagascar
+	immediate = {
+		hidden_effect = {
+			GER = { country_event = MADAGASKAR_MAURICE.102 }
+			JAP = { country_event = MADAGASKAR.4 }
+			MAD_launch_civil_war = yes
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_CIVIL_WAR.2.a
+		custom_effect_tooltip = TNO_USA_We_can_intervene_MAD
+	}
+}
+
+country_event = { # The War of the Oppressed
+	id = MADAGASKAR_CIVIL_WAR.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_CIVIL_WAR.3"}
+	title = MADAGASKAR_CIVIL_WAR.3.t
+	desc = MADAGASKAR_CIVIL_WAR.3.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_CIVIL_WAR.3.a
+
+	}
+}
+
+country_event = { # Eretz Ashkenaz
+	id = MADAGASKAR_CIVIL_WAR.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_CIVIL_WAR.4"}
+	title = MADAGASKAR_CIVIL_WAR.4.t
+	desc = MADAGASKAR_CIVIL_WAR.4.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_CIVIL_WAR.4.a
+	}
+}
+
+country_event = { # Maurice's Red Island
+	id = MADAGASKAR_CIVIL_WAR.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_CIVIL_WAR.5"}
+	title = MADAGASKAR_CIVIL_WAR.5.t
+	desc = MADAGASKAR_CIVIL_WAR.5.desc
+	picture = GFX_report_event_MAD_madagascar
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_CIVIL_WAR.5.a
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+### MAURICE EVENTS ###
+
+
+
+country_event = { # A Call to Moorer
+	id = MADAGASKAR_MAURICE.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.10"}
+	title = MADAGASKAR_MAURICE.3.t
+	desc = MADAGASKAR_MAURICE.3.desc
+	picture = GFX_report_event_MAD_phone_call
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_MAURICE.3.a
+	}
+}
+
+country_event = { # A Call to Moorer - 2
+	id = MADAGASKAR_MAURICE.101
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.10"}
+	title = MADAGASKAR_MAURICE.101.t
+	desc = MADAGASKAR_MAURICE.101.desc
+	picture = GFX_report_event_MAD_milch
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_MAURICE.101.a
+		#hidden_effect = {
+			#country_event = {
+				##id = MADAGASKAR_CIVIL_WAR.1
+				#days = 2
+			#}
+		#}
+	}
+}
+
+country_event = { # Milch requests aid from Germania
+	id = MADAGASKAR_MAURICE.102
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.10"}
+	title = MADAGASKAR_MAURICE.102.t
+	desc = MADAGASKAR_MAURICE.102.desc
+	picture = GFX_report_event_MAD_milch
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_MAURICE.102.a
+		#hidden_effect = {
+			#country_event = {
+				##id = MADAGASKAR_CIVIL_WAR.1
+				#days = 2
+			#}
+		#}
+	}
+}
+
+country_event = { # Renouncing our duty
+	id = MADAGASKAR_MAURICE.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.12"}
+	title = MADAGASKAR_MAURICE.12.t
+	desc = MADAGASKAR_MAURICE.12.desc
+	picture = GFX_report_event_MAD_palace
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_MAURICE.12.a
+	}
+}
+
+country_event = { # The Call for the American backup plan
+	id = MADAGASKAR_MAURICE.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.13"}
+	title = MADAGASKAR_MAURICE.13.t
+	desc = MADAGASKAR_MAURICE.13.desc
+	picture = GFX_report_event_MAD_phone_call
+
+	is_triggered_only = yes
+
+	option = { # Let's call them
+		name = MADAGASKAR_MAURICE.13.a
+		ai_chance = { factor = 100 }
+		MAD = {
+			remove_ideas = MAD_idea_us_blockade
+		}
+		hidden_effect = {
+			random_list = {
+				1 = {
+					set_country_flag = MAD_Maurice_flee_helicopter
+				}
+				1 = {
+					set_country_flag = MAD_Maurice_flee_boat
+				}
+			}
+		}
+		USA = {
+			country_event = {
+				id = MADAGASKAR_MAURICE.16
+				days = 10
+			}
+		}
+	}
+}
+
+
+country_event = { # Maurice flees Madagaskar
+	id = MADAGASKAR_MAURICE.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.16"}
+	title = MADAGASKAR_MAURICE.16.t
+	picture = GFX_report_event_MAD_palace
+
+	is_triggered_only = yes
+
+	desc = {
+		text = MADAGASKAR_MAURICE.16.desc_boat
+		trigger = {
+			has_country_flag = MAD_Maurice_flee_boat
+		}
+	}
+	desc = {
+		text = MADAGASKAR_MAURICE.16.desc_helicopter
+		trigger = {
+			has_country_flag = MAD_Maurice_flee_helicopter
+		}
+	}
+
+	option = {
+		name = MADAGASKAR_MAURICE.16.a
+		#custom_effect_tooltip = USA_favor_rd
+		MAD = {
+			if = {
+				limit = {
+					has_country_flag = MAD_Maurice_flee_boat
+				}
+				clr_country_flag = MAD_Maurice_flee_boat
+			}
+			if = {
+				limit = {
+					has_country_flag = MAD_Maurice_flee_helicopter
+				}
+				clr_country_flag = MAD_Maurice_flee_helicopter
+			}
+			hidden_effect = {
+				USA = {
+					country_event = { 
+						id = MADAGASKAR_MAURICE.181
+						days = 100
+						random_days = 800
+					}
+					country_event = {
+						id = MADAGASKAR_OFN.1
+						days = 10
+					}
+					#hidden_effect = {
+					#	every_owned_state = {
+					#		limit = { can_have_elections_in_state = yes }
+					#		add_to_variable = { RD_popularity = 00.03 }
+					#	}
+					#}
+				}
+				remove_ideas = {
+					MAD_Hans_Joachim_Schoeps_hog
+					MAD_Albrecht_Haushofer_for
+					MAD_Hermann_Henselmann_eco
+					MAD_Horst_von_Oppenfeld_sec
+					MAD_idea_increased_rebel_activity
+					MAD_idea_presence_of_the_garrison
+				}
+				random_unit_leader = {
+					limit = {
+						has_id = 4041
+					}
+					retire = yes
+				}
+				remove_unit_leader = 4042
+				#random_unit_leader = {
+				#	limit = {
+				#		has_id = 4042
+				#	}
+				#	retire = yes
+				#}
+				random_unit_leader = {
+					limit = {
+						has_id = 4043
+					}
+					retire = yes
+				}
+				random_unit_leader = {
+					limit = {
+						has_id = 4044
+					}
+					retire = yes
+				}
+				random_unit_leader = {
+					limit = {
+						has_id = 4045
+					}
+					retire = yes
+				}
+				promote_character = MAD_power_vacuum
+			}
+		}
+	}
+
+	#option = {
+	#	name = MADAGASKAR_MAURICE.16.b
+	#	custom_effect_tooltip = USA_favor_npp
+	#	MAD = {
+	#		if = {
+	#			limit = {
+	#				has_country_flag = MAD_Maurice_flee_boat
+	#			}
+	#			clr_country_flag = MAD_Maurice_flee_boat
+	#		}
+	#		if = {
+	#			limit = {
+	#				has_country_flag = MAD_Maurice_flee_helicopter
+	#			}
+	#			clr_country_flag = MAD_Maurice_flee_helicopter
+	#		}
+	#		hidden_effect = {
+	#			USA = {
+	#				country_event = { 
+	#					id = MADAGASKAR_MAURICE.181
+	#					days = 45
+	#					random_days = 100
+	#				}
+	#				country_event = {
+	#					id = MADAGASKAR_OFN.1
+	#					days = 10
+	#				}
+	#				hidden_effect = {
+	#					every_owned_state = {
+	#						limit = { can_have_elections_in_state = yes }
+	#						add_to_variable = { NPP_popularity = 00.03 }
+	#					}
+	#				}
+	#			}
+	#			create_country_leader = {
+	#				name = "Power Vacuum"
+	#				desc = ""
+	#				picture = "Portrait_Madagascar_Power_Vacuum.dds"
+	#				expire = "1965.1.1"
+	#				ideology = national_socialism_subtype
+	#				traits = { }
+	#			}
+	#			remove_all_ministers = yes
+	#			remove_ideas = {
+	#				MAD_idea_increased_rebel_activity
+	#				MAD_idea_presence_of_the_garrison
+	#			}
+	#			random_unit_leader = {
+	#				limit = {
+	#					has_id = 4041
+	#				}
+	#				retire = yes
+	#			}
+	#			random_unit_leader = {
+	#				limit = {
+	#					has_id = 4042
+	#				}
+	#				retire = yes
+	#			}
+	#			random_unit_leader = {
+	#				limit = {
+	#					has_id = 4043
+	#				}
+	#				retire = yes
+	#			}
+	#			random_unit_leader = {
+	#				limit = {
+	#					has_id = 4044
+	#				}
+	#				retire = yes
+	#			}
+	#			random_unit_leader = {
+	#				limit = {
+	#					has_id = 4045
+	#				}
+	#				retire = yes
+	#			}
+	#		}
+	#	}
+	#}
+}
+
+
+country_event = { # Maurice's Show Trial in Australia
+	id = MADAGASKAR_MAURICE.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.19"}
+	title = MADAGASKAR_MAURICE.19.t
+	desc = MADAGASKAR_MAURICE.19.desc
+	picture = GFX_report_event_MAD_palace
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_MAURICE.19.a
+	}
+}
+
+country_event = { # Maurice's Epilogue
+	id = MADAGASKAR_MAURICE.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.18"}
+	title = MADAGASKAR_MAURICE.18.t
+	desc = MADAGASKAR_MAURICE.18.desc
+	picture = GFX_report_event_MAD_palace
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_MAURICE.18.a
+	}
+}
+
+country_event = { # US maurice flavor
+	id = MADAGASKAR_MAURICE.181
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.181"}
+	title = MADAGASKAR_MAURICE.181.t
+	desc = MADAGASKAR_MAURICE.181.desc
+	picture = GFX_report_event_MAD_palace
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_MAURICE.181.a
+		every_owned_state = {
+			limit = { can_have_elections_in_state = yes }
+			add_to_variable = { RD_popularity = 00.03 }
+			custom_effect_tooltip = USA_add_RD_popularity_low
+		}
+	}
+	option = {
+		name = MADAGASKAR_MAURICE.181.b
+		every_owned_state = {
+			limit = { can_have_elections_in_state = yes }
+			add_to_variable = { NPP_popularity = 00.03 }
+			custom_effect_tooltip = USA_NPP_popularity_grows_low
+		}
+	}
+}
+
+#country_event = { # Maurice cornered in Madagaskar as our troops leaves
+#	id = MADAGASKAR_MAURICE.19
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_MAURICE.19"}
+#	title = MADAGASKAR_MAURICE.19.t
+#	desc = MADAGASKAR_MAURICE.19.desc
+#	picture = GFX_report_event_MAD_palace
+#
+#	is_triggered_only = yes
+#
+#	immediate = {
+#		set_country_flag = MAD_outcome_1
+#	}
+#
+#	option = { # Emil Maurice is successfully evacuated
+#		name = MADAGASKAR_MAURICE.19.a
+#		trigger = {
+#			has_country_flag = MAD_outcome_1
+#		}
+#		MAD = {
+#			set_country_flag = MAD_Maurice_flee_helicopter
+#			clr_country_flag = MAD_outcome_1
+#			country_event = {
+#				id = MADAGASKAR_MAURICE.16
+#				days = 1
+#			}
+#		}
+#	}
+#}
+
+### OFN EVENTS ###
+
+country_event = { # The OFN takes over the G.M.A.
+	id = MADAGASKAR_OFN.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_OFN.1"}
+	title = MADAGASKAR_OFN.1.t
+	desc = MADAGASKAR_OFN.1.desc
+	picture = GFX_report_event_MAD_palace
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_OFN.1.a
+		custom_effect_tooltip = MAD_ofn_mandate_tt
+		MAD = {
+			hidden_effect = {
+				set_cosmetic_tag = MAD_OFN
+				set_country_flag = MAD_OFN_government
+				set_global_flag = MAD_CW_Happening
+
+				GER = { end_puppet = MAD }
+				econ_leave_sphere = yes
+				#USA = {
+					#puppet = MAD
+					#add_to_faction = MAD
+				#}
+				add_country_leader_role = {
+					character = MAD_ucg
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICS_UNITED_COALITION_GOVERNMENT_DESC"
+						expire = "1965.1.1"
+						ideology = authoritarian_democracy_provisional_government_subtype
+						traits = { }
+						id = -1
+					}
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+					elections_allowed = no
+				}
+				set_popularities = {
+					communist = 0
+					ultranationalism = 0
+					socialist = 0
+					social_democracy = 0
+					liberal_democracy = 0
+					conservative_democracy = 20
+					authoritarian_democracy = 50
+					despotism = 10
+					fascism = 15
+					national_socialism = 5
+					
+				}
+
+				set_variable = { TNO_economy_type = 1 }
+				set_variable = { TNO_economy_subtype = 0 }
+				
+				remove_ideas = {
+					Pakt_Autonomous_Reichskommissariat
+				}
+				
+			}
+		}
+	}
+}
+
+country_event = { # The Birth of the Federal Republic of Madagascar
+	id = MADAGASKAR_OFN.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_OFN.2"}
+	title = MADAGASKAR_OFN.2.t
+	desc = MADAGASKAR_OFN.2.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_OFN.2.a
+		MAD = {
+			MAD_willi_stoph = {
+				set_portraits = {
+					civilian = { large = "gfx/leaders/MAD/Portrait_Madagascar_Willi_Stoph_civilian.dds" }
+				}
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICS_WILLI_STOPH_DESC"
+						expire = "1999.1.1"
+						ideology = authoritarian_democracy_dominant_party_democracy_subtype
+						traits = { }
+						id = -1
+					}
+				}
+			}
+			set_cosmetic_tag = MAD_OFN_REPUBLIC
+		}
+	}
+}
+
+country_event = { # The Birth of Madagascar Military Administration
+	id = MADAGASKAR_OFN.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_OFN.3"}
+	title = MADAGASKAR_OFN.3.t
+	desc = MADAGASKAR_OFN.3.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_OFN.3.a
+		USA = {
+			set_autonomy = {
+				target = MAD
+				autonomy_state = autonomy_military_government
+			}
+		}
+		MAD = {
+			remove_all_ministers = yes
+			add_ideas = {
+				MAD_Thomas_H_Moorer_hog
+				MAD_Jeremy_M_Boorda_for
+				MAD_James_R_Schlesinger_eco
+				MAD_Hyman_G_Rickover_sec
+			}
+			swap_ideas = {
+				remove_idea = OFN_Dependent_Member
+				add_idea = OFN_Mandate
+			}
+
+			set_politics = {
+				ruling_party = authoritarian_democracy
+				elections_allowed = no
+			}
+			set_party_name = {
+				ideology = authoritarian_democracy
+				long_name = MAD_OFN_MILITARY_authoritarian_democracy_party
+				name = MAD_OFN_MILITARY_authoritarian_democracy_party_long
+			}
+			MAD_thomas_h_moorer = {
+				add_country_leader_role = {
+					character = MAD_thomas_h_moorer
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICS_THOMAS_MOORER_DESC"
+						expire = "1965.1.1"
+						ideology = authoritarian_democracy_military_mandate_subtype
+						traits = { }
+						id = -1
+					}
+				}
+				add_advisor_role = {
+					activate = yes
+				}
+			}
+			set_popularities = {
+				communist = 0
+				ultranationalism = 0
+				socialist = 0
+				social_democracy = 0
+				liberal_democracy = 0
+
+				conservative_democracy = 20
+				authoritarian_democracy = 50
+				despotism = 10
+				fascism = 15
+				national_socialism = 5
+				
+			}
+			set_cosmetic_tag = MAD_OFN_MILITARY
+		}
+		USA = {
+			random_unit_leader = {
+				limit = {
+					has_id = 1101
+				}
+				set_nationality = MAD
+			}
+		}
+	}
+}
+
+country_event = { # The Birth of the Federal Republic of Madagascar - Schoeps
+	id = MADAGASKAR_OFN.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_OFN.4"}
+	title = MADAGASKAR_OFN.4.t
+	desc = MADAGASKAR_OFN.4.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_OFN.4.a
+		MAD = {
+			set_politics = {
+				ruling_party = despotism
+				elections_allowed = no
+			}
+			set_cosmetic_tag = MAD_OFN_REPUBLIC
+		}
+	}
+}
+
+country_event = { # The Birth of the Federal Republic of Madagascar - Rabemanjara
+	id = MADAGASKAR_OFN.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event MADAGASKAR_OFN.4"}
+	title = MADAGASKAR_OFN.5.t
+	desc = MADAGASKAR_OFN.5.desc
+	picture = GFX_report_event_MAD_antanarivo2
+
+	is_triggered_only = yes
+
+	option = {
+		name = MADAGASKAR_OFN.5.a
+		MAD = {
+			generate_character = {
+				token_base = MDM_jacques_rabemananjara
+				country_leader = {
+					desc = "POLITICS_JACQUES_RABEMANANJARA_DESC"
+					ideology = conservative_democracy_agrarianism_subtype
+					traits = { }
+					expire = "1982.1.1.1"
+					id = -1
+				}
+			}
+			promote_character = MDM_jacques_rabemananjara
+			set_politics = {
+				ruling_party = conservative_democracy
+				elections_allowed = no
+			}
+			set_cosmetic_tag = MAD_OFN_REPUBLIC
+		}
+	}
+}
+
