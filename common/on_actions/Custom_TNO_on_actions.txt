@@ -2485,6 +2485,60 @@ on_actions = {
 				}
 			}
 			
+			##2nd Italo-Turkish War
+			if = { #Italian Middle East
+				limit = {
+					has_game_rule = {
+						rule = italo_turkish_war_outcome
+						option = ITALO_TURKISH_WAR_OUTCOME_IME_ITALIAN_MIDDLE_EAST
+					}
+					ROOT = {
+						OR = {
+							tag = IME
+							tag = TUR
+						}
+					}
+					FROM = {
+						OR = {
+							tag = IME
+							tag = TUR
+						}
+					}
+					NOT = {
+						has_idea = Custom_TNO_war_buff
+					}
+				}
+				IME = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
+			if = { #Republic of Turkey
+				limit = {
+					has_game_rule = {
+						rule = italo_turkish_war_outcome
+						option = ITALO_TURKISH_WAR_OUTCOME_TUR_REPUBLIC_OF_TURKEY
+					}
+					ROOT = {
+						OR = {
+							tag = IME
+							tag = TUR
+						}
+					}
+					FROM = {
+						OR = {
+							tag = IME
+							tag = TUR
+						}
+					}
+					NOT = {
+						has_idea = Custom_TNO_war_buff
+					}
+				}
+				TUR = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
+			
 			##Algerian War
 			if = { #Iberia
 				limit = {
@@ -2685,6 +2739,45 @@ on_actions = {
 				}
 				MDG = {
 					remove_war_buff = yes
+				}
+			}
+			
+			if = { ##2nd Italo-Turkish War ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = IME
+							tag = TUR
+						}
+					}
+					FROM = {
+						OR = {
+							tag = IME
+							tag = TUR
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = italo_turkish_war_outcome
+							option = ITALO_TURKISH_WAR_OUTCOME_IME_ITALIAN_MIDDLE_EAST
+						}
+					}
+					IME = {
+						remove_war_buff = yes
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = italo_turkish_war_outcome
+							option = ITALO_TURKISH_WAR_OUTCOME_TUR_REPUBLIC_OF_TURKEY
+						}
+					}
+					TUR = {
+						remove_war_buff = yes
+					}
 				}
 			}
 			
