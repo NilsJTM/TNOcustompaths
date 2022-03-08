@@ -2861,18 +2861,32 @@ on_actions = {
 			
 			if = { ##end of the great asian war
 				limit = {
-					has_game_rule = {
-						rule = great_asian_war_outcome
-						option = GREAT_ASIAN_WAR_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+					ROOT = {
+						OR = {
+							tag = JAP
+							tag = YUN
+						}
 					}
-					YUN = {
-						has_idea = Custom_TNO_YUN_war
+					FROM = {
+						OR = {
+							tag = JAP
+							tag = YUN
+						}
 					}
 				}
-				YUN = {
-					delete_unit_template_and_units = {
-						division_template = "Custom TNO Division"
-						disband = no
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = great_asian_war_outcome
+							option = GREAT_ASIAN_WAR_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+						}
+					}
+					YUN = {
+						delete_unit_template_and_units = {
+							division_template = "Custom TNO Division"
+							disband = no
+						}
+						remove_ideas = Custom_TNO_YUN_war
 					}
 				}
 			}
