@@ -1,0 +1,4070 @@
+YUN_Xinan_Insurgency_initialize = {
+	add_ideas = YUN_insurgency_dummy
+	add_dynamic_modifier = { modifier = YUN_xinan_insurgency_dynamic_modifier }
+	set_variable = { YunNRA_Power = 60 }
+	set_variable = { YunCCP_Power = 50 }
+	set_variable = { YunBandit_Power = 80 }
+	set_variable = { YunNPA_Power = 70 }
+	set_variable = { YUNNRA_Power_tick = 0.5 }
+	set_variable = { YUNCCP_Power_tick = 0.5 }
+	set_variable = { YUNBandit_Power_tick = 0.5 }
+	set_variable = { YUNNPA_Power_tick = 0.5 }
+	set_variable = { YUNNRA_counter_bonus = 0 }
+	set_variable = { YUNCCP_counter_bonus = 0 }
+	set_variable = { YUNBandit_counter_bonus = 0 }
+	set_variable = { YUNNPA_counter_bonus = 0 }
+	set_variable = { YUN_garrison_size_confirmed = 0 }
+	set_variable = { YUN_police_size_confirmed = 0 }
+	set_variable = { YUN_Xinan_Insurgency_garrison_size = 0 }
+	set_variable = { YUN_Xinan_Insurgency_police_size = 0 }
+	add_to_variable = { YUN.YUN_insurgency_dirty = 1 }
+	country_event = { id = yun_insurgency.1 days = 250 }
+	country_event = { id = yun_insurgency.6 days = 255 }
+	country_event = {id = yun_insurgency.11 days = 260 }
+	country_event = { id = yun_insurgency.15 days = 210 }
+	set_country_flag = YUN_Lu_Han_great_game
+}
+YUN_update_e_group_movement = {
+	random_list = {
+		25 = {
+			set_temp_variable = { YUNNRA_Power_tick_natural_calc = 0 }
+			randomize_temp_variable = {
+				var = YUNNRA_Power_tick_natural_calc
+				distribution = uniform
+				min = 0.5
+				max = 4.0
+			}
+			set_variable = { YUNNRA_Power_tick_natural = YUNNRA_Power_tick_natural_calc }
+		}
+		25 = {
+			set_temp_variable = { YUNCCP_Power_tick_natural_calc = 0 }
+			randomize_temp_variable = {
+				var = YUNCCP_Power_tick_natural_calc
+				distribution = uniform
+				min = 0.5
+				max = 4.0
+			}
+			set_variable = { YUNCCP_Power_tick_natural = YUNCCP_Power_tick_natural_calc }
+		}
+	}
+	set_temp_variable = { YUN_garrison_size_decrease_calc = 0 }
+	randomize_temp_variable = {
+		var = YUN_garrison_size_decrease_calc
+		distribution = uniform
+		min = 0
+		max = 2
+	}
+	set_variable = { YUN_garrison_size_decrease = YUN_garrison_size_decrease_calc }
+	round_variable = YUN_garrison_size_decrease
+	subtract_from_variable = { YUN_garrison_size_confirmed = YUN_garrison_size_decrease }
+	if = {
+		limit = { is_ai = yes }
+		set_temp_variable = { YUN_garrison_size_ai = 0 }
+		randomize_temp_variable = {
+			var = YUN_garrison_size_ai
+			distribution = uniform
+			min = 0
+			max = 2
+		}
+		add_to_variable = { YUN_garrison_size_confirmed = YUN_garrison_size_ai }
+	}
+	clamp_variable = {
+		var = YUN_garrison_size_confirmed
+		min = 0
+	}
+	add_to_variable = { YUN.YUN_insurgency_dirty = 1 }
+}
+
+YUN_update_i_group_movement = {
+	random_list = {
+		25 = {
+			set_temp_variable = { YUNBandit_Power_tick_natural_calc = 0 }
+			randomize_temp_variable = {
+				var = YUNBandit_Power_tick_natural_calc
+				distribution = uniform
+				min = 0.5
+				max = 4.0
+			}
+			set_variable = { YUNBandit_Power_tick_natural = YUNBandit_Power_tick_natural_calc }
+		}
+		25 = {
+			set_temp_variable = { YUNNPA_Power_tick_natural_calc = 0 }
+			randomize_temp_variable = {
+				var = YUNNPA_Power_tick_natural_calc
+				distribution = uniform
+				min = 0.5
+				max = 4.0
+			}
+			set_variable = { YUNNPA_Power_tick_natural = YUNNPA_Power_tick_natural_calc }
+		}
+	}
+	set_temp_variable = { YUN_police_size_decrease_calc = 0 }
+	randomize_temp_variable = {
+		var = YUN_police_size_decrease_calc
+		distribution = uniform
+		min = 0
+		max = 2
+	}
+	set_variable = { YUN_police_size_decrease = YUN_police_size_decrease_calc }
+	round_variable = YUN_police_size_decrease
+	subtract_from_variable = { YUN_police_size_confirmed = YUN_police_size_decrease }
+	if = {
+		limit = { is_ai = yes }
+		set_temp_variable = { YUN_police_size_ai = 0 }
+		randomize_temp_variable = {
+			var = YUN_police_size_ai
+			distribution = uniform
+			min = 0
+			max = 2
+		}
+		add_to_variable = { YUN_police_size_confirmed = YUN_police_size_ai }
+	}
+	clamp_variable = {
+		var = YUN_police_size_confirmed
+		min = 0
+	}
+	add_to_variable = { YUN.YUN_insurgency_dirty = 1 }
+}
+
+YUN_Update_Insurgency_tick = {
+	clear_variable = YUN_xinan_insurgent_misc_costs
+	clear_variable = YUN_xinan_insurgent_garrison_cost
+	clear_variable = YUN_xinan_insurgent_police_cost
+	clear_variable = YUN_Xinan_Insurgency_garrison_size
+	clear_variable = YUN_Xinan_Insurgency_police_size
+	clear_variable = YUN_garrion_cost_calc
+	clear_variable = YUN_police_cost_calc
+
+	set_temp_variable = { YUN_Insurgency_army_cost_calc = YUN.econ_army_expenditures_slider_pct }
+	set_temp_variable = { YUN_Insurgency_admin_cost_calc = YUN.econ_admin_expenditures_slider_pct }
+	set_temp_variable = { YUN_Insurgency_social_cost_calc = YUN.econ_social_expenditures_slider_pct }
+
+	set_temp_variable = { YUN_Insurgency_army_cost_calc_true = 50 }
+	set_temp_variable = { YUN_Insurgency_admin_cost_calc_true = 50 }
+	set_temp_variable = { YUN_Insurgency_social_cost_calc_true = 50 }
+
+	subtract_from_temp_variable = { YUN_Insurgency_army_cost_calc_true = YUN_Insurgency_army_cost_calc }
+	subtract_from_temp_variable = { YUN_Insurgency_admin_cost_calc_true = YUN_Insurgency_admin_cost_calc }
+	subtract_from_temp_variable = { YUN_Insurgency_social_cost_calc_true = YUN_Insurgency_social_cost_calc }
+
+	divide_temp_variable = { YUN_Insurgency_army_cost_calc_true = 100 }
+	divide_temp_variable = { YUN_Insurgency_admin_cost_calc_true = 100 }
+	divide_temp_variable = { YUN_Insurgency_social_cost_calc_true = 100 }
+
+	set_temp_variable = { YUNNRA_Power_tick_modifier_calc = 8 }
+	set_temp_variable = { YUNCCP_Power_tick_modifier_calc = 8 }
+	set_temp_variable = { YUNBandit_Power_tick_modifier_calc = 8 }
+
+	multiply_temp_variable = { YUNNRA_Power_tick_modifier_calc = YUN_Insurgency_army_cost_calc_true }
+	multiply_temp_variable = { YUNCCP_Power_tick_modifier_calc = YUN_Insurgency_admin_cost_calc_true }
+	multiply_temp_variable = { YUNBandit_Power_tick_modifier_calc = YUN_Insurgency_social_cost_calc_true }
+
+	set_variable = { YUNNRA_Power_tick_modifier = YUNNRA_Power_tick_modifier_calc }
+	set_variable = { YUNCCP_Power_tick_modifier = YUNCCP_Power_tick_modifier_calc }
+	set_variable = { YUNBandit_Power_tick_modifier = YUNBandit_Power_tick_modifier_calc }
+
+	set_variable = { YUN_e_group_counter = YUN_garrison_size_confirmed }
+	multiply_variable = { YUN_e_group_counter = -0.25 }
+	set_variable = { YUNNRA_Power_tick_counter = YUN_e_group_counter }
+	set_variable = { YUNCCP_Power_tick_counter = YUN_e_group_counter }
+	add_to_variable = { YUNNRA_Power_tick_counter = YUNNRA_counter_bonus }
+	add_to_variable = { YUNCCP_Power_tick_counter = YUNCCP_counter_bonus }
+
+	set_temp_variable = { YUN_garrison_cost_calc = YUN_garrison_size_confirmed }
+	divide_temp_variable = { YUN_garrison_cost_calc = 80 }
+	set_variable = { YUN_xinan_insurgent_garrison_cost = YUN_garrison_cost_calc }
+	set_variable = { YUN_xinan_insurgent_misc_costs = YUN_xinan_insurgent_garrison_cost }
+	add_to_variable = { YUN_xinan_insurgent_misc_costs = YUN_xinan_insurgent_police_cost }
+
+	set_variable = { YUN_i_group_counter = YUN_police_size_confirmed }
+	multiply_variable = { YUN_i_group_counter = -0.25 }
+	set_variable = { YUNBandit_Power_tick_counter = YUN_i_group_counter }
+	set_variable = { YUNNPA_Power_tick_counter = YUN_i_group_counter }
+	add_to_variable = { YUNBandit_Power_tick_counter = YUNBandit_counter_bonus }
+	add_to_variable = { YUNNPA_Power_tick_counter = YUNNPA_counter_bonus }
+
+	set_temp_variable = { YUN_police_cost_calc_2 = YUN_police_size_confirmed }
+	divide_temp_variable = { YUN_police_cost_calc_2 = 100 }
+	set_variable = { YUN_xinan_insurgent_police_cost = YUN_police_cost_calc_2 }
+	set_variable = { YUN_xinan_insurgent_misc_costs = YUN_xinan_insurgent_police_cost }
+	add_to_variable = { YUN_xinan_insurgent_misc_costs = YUN_xinan_insurgent_garrison_cost }
+
+	set_variable = { YUNNRA_Power_tick = YUNNRA_Power_tick_natural }
+	set_variable = { YUNCCP_Power_tick = YUNCCP_Power_tick_natural }
+	set_variable = { YUNBandit_Power_tick = YUNBandit_Power_tick_natural }
+	set_variable = { YUNNPA_Power_tick = YUNNPA_Power_tick_natural }
+
+	add_to_variable = { YUNNRA_Power_tick = YUNNRA_Power_tick_modifier }
+	add_to_variable = { YUNCCP_Power_tick = YUNCCP_Power_tick_modifier }
+	add_to_variable = { YUNBandit_Power_tick = YUNBandit_Power_tick_modifier }
+
+	add_to_variable = { YUNNRA_Power_tick = YUNNRA_Power_tick_counter }
+	add_to_variable = { YUNCCP_Power_tick = YUNCCP_Power_tick_counter }
+	add_to_variable = { YUNBandit_Power_tick = YUNBandit_Power_tick_counter }
+	add_to_variable = { YUNNPA_Power_tick = YUNNPA_Power_tick_counter }
+	force_update_dynamic_modifier = yes
+	add_to_variable = { YUN.YUN_insurgency_dirty = 1 }
+}
+
+YUN_Update_Insurgency_Modifier = {#Updates the dynamic modifier for Xinan Insurgency Effects
+	add_to_variable = { YUNNRA_Power = YUNNRA_Power_tick }
+	add_to_variable = { YUNCCP_Power = YUNCCP_Power_tick }
+	add_to_variable = { YUNBandit_Power = YUNBandit_Power_tick }
+	add_to_variable = { YUNNPA_Power = YUNNPA_Power_tick }
+	set_temp_variable = { YUN_KMT_threat_calc = YUNNRA_Power }
+	set_temp_variable = { YUN_CCP_threat_calc = YUNCCP_Power }
+	set_temp_variable = { YUN_Bandit_threat_calc = YUNBandit_Power }
+	set_temp_variable = { YUN_NPA_threat_calc = YUNNPA_Power }
+	divide_temp_variable = { YUN_KMT_threat_calc = 100 }
+	divide_temp_variable = { YUN_CCP_threat_calc = 100 }
+	divide_temp_variable = { YUN_Bandit_threat_calc = 100 }
+	divide_temp_variable = { YUN_NPA_threat_calc = 100 }
+	set_temp_variable = { YUN_xinan_insurgent_pu_gdp_calc = -0.1 }
+	set_temp_variable = { YUN_xinan_insurgent_stability_calc = -0.3 }
+	set_temp_variable = { YUN_xinan_insurgent_max_industry_calc = -0.25 }
+	set_temp_variable = { YUN_xinan_insurgent_pp_calc = -0.3 }
+	set_temp_variable = { YUN_xinan_insurgent_production_calc = -0.25 }
+	set_temp_variable = { YUN_xinan_insurgent_construction_calc = -0.25 }
+	set_temp_variable = { YUN_xinan_insurgent_gdp_growth_calc = -0.75 }
+
+	multiply_temp_variable = { YUN_xinan_insurgent_pu_gdp_calc = YUN_KMT_threat_calc }
+	multiply_temp_variable = { YUN_xinan_insurgent_stability_calc = YUN_KMT_threat_calc }
+	multiply_temp_variable = { YUN_xinan_insurgent_max_industry_calc = YUN_CCP_threat_calc }
+	multiply_temp_variable = { YUN_xinan_insurgent_pp_calc = YUN_NPA_threat_calc }
+	multiply_temp_variable = { YUN_xinan_insurgent_production_calc = YUN_Bandit_threat_calc }
+	multiply_temp_variable = { YUN_xinan_insurgent_construction_calc = YUN_CCP_threat_calc }
+	multiply_temp_variable = { YUN_xinan_insurgent_gdp_growth_calc = YUN_Bandit_threat_calc }
+
+	set_variable = { YUN_xinan_insurgent_pu_gdp = YUN_xinan_insurgent_pu_gdp_calc }
+	set_variable = { YUN_xinan_insurgent_stability = YUN_xinan_insurgent_stability_calc }
+	set_variable = { YUN_xinan_insurgent_max_industry = YUN_xinan_insurgent_max_industry_calc }
+	set_variable = { YUN_xinan_insurgent_pp = YUN_xinan_insurgent_pp_calc }
+	set_variable = { YUN_xinan_insurgent_production = YUN_xinan_insurgent_production_calc }
+	set_variable = { YUN_xinan_insurgent_construction = YUN_xinan_insurgent_construction_calc }
+	set_variable = { YUN_xinan_insurgent_gdp_growth = YUN_xinan_insurgent_gdp_growth_calc }
+
+	clamp_variable = {
+		var = YUNNRA_Power
+		max = 100
+		min = 0
+	}
+	clamp_variable = {
+		var = YunCCP_Power
+		max = 100
+		min = 0
+	}
+	clamp_variable = {
+		var = YunBandit_Power
+		max = 100
+		min = 0
+	}
+	clamp_variable = {
+		var = YunNPA_Power
+		max = 100
+		min = 0
+	}
+	set_temp_variable = { YUNNRA_Power_Burma_Road_debuff = YUNNRA_Power }
+	multiply_temp_variable = { YUNNRA_Power_Burma_Road_debuff = 0.2 }
+	subtract_from_temp_variable = { YUNNRA_Power_Burma_Road_debuff = 10 }
+	add_to_variable = { YUN_bur_road_const_duration = YUNNRA_Power_Burma_Road_debuff}
+	force_update_dynamic_modifier = yes
+	add_to_variable = { YUN.YUN_insurgency_dirty = 1 }
+}
+
+YUN_fate_of_xinan = {
+	if = {
+		limit = {
+			OR = {
+				check_variable = { YunNRA_Power > 90 }
+				check_variable = { YunCCP_Power > 90 }
+				check_variable = { YunBandit_Power > 90 }
+				check_variable = { YunNPA_Power > 90 }
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { YunNRA_Power > 90 } }
+				set_country_flag = WI_KMT_very_strong
+			}
+			if = {
+				limit = { check_variable = { YunCCP_Power > 90 } }
+				set_country_flag = WI_CCP_very_strong
+			}
+			if = {
+				limit = { check_variable = { YunBandit_Power > 90 } }
+				set_country_flag = WI_Bandit_very_strong
+			}
+			if = {
+				limit = { check_variable = { YunNPA_Power > 90 } }
+				set_country_flag = WI_NPA_very_strong
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				check_variable = { YunNRA_Power > 70 }
+				check_variable = { YunCCP_Power > 70 }
+				check_variable = { YunBandit_Power > 70 }
+				check_variable = { YunNPA_Power > 70 }
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { YunNRA_Power > 70 } }
+				set_country_flag = WI_KMT_strong
+			}
+			if = {
+				limit = { check_variable = { YunCCP_Power > 70 } }
+				set_country_flag = WI_CCP_strong
+			}
+			if = {
+				limit = { check_variable = { YunBandit_Power > 70 } }
+				set_country_flag = WI_Bandit_strong
+			}
+			if = {
+				limit = { check_variable = { YunNPA_Power > 70 } }
+				set_country_flag = WI_NPA_strong
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				check_variable = { YunNRA_Power > 50 }
+				check_variable = { YunCCP_Power > 50 }
+				check_variable = { YunBandit_Power > 50 }
+				check_variable = { YunNPA_Power > 50 }
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { YunNRA_Power > 50 } }
+				set_country_flag = WI_KMT_moderate
+			}
+			if = {
+				limit = { check_variable = { YunCCP_Power > 50 } }
+				set_country_flag = WI_CCP_moderate
+			}
+			if = {
+				limit = { check_variable = { YunBandit_Power > 50 } }
+				set_country_flag = WI_Bandit_moderate
+			}
+			if = {
+				limit = { check_variable = { YunNPA_Power > 50 } }
+				set_country_flag = WI_NPA_moderate
+			}
+		}
+	}
+	else = {
+		set_country_flag = WI_KMT_weak
+		set_country_flag = WI_CCP_weak
+		set_country_flag = WI_Bandit_weak
+		set_country_flag = WI_NPA_weak
+	}
+}
+
+YUN_WI_e_insurgent_help = {
+	if = {
+		limit = {
+			has_country_flag = WI_KMT_very_strong
+		}
+		capital_scope = {
+			create_unit = {
+				division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.7 start_equipment_factor = 1.0"
+				owner = YUN
+				count = 3
+			}
+		}
+		clr_country_flag = WI_KMT_very_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_KMT_strong
+		}
+		capital_scope = {
+			create_unit = {
+				division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.7 start_equipment_factor = 1.0"
+				owner = YUN
+				count = 2
+			}
+		}
+		clr_country_flag = WI_KMT_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_KMT_moderate
+		}
+		capital_scope = {
+			create_unit = {
+				division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.7 start_equipment_factor = 1.0"
+				owner = YUN
+				count = 1
+			}
+		}
+		clr_country_flag = WI_KMT_moderate
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_CCP_very_strong
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 4000
+			producer = YUN
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 1500
+			producer = YUN
+		}
+		clr_country_flag = WI_CCP_very_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_CCP_strong
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 3000
+			producer = YUN
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 1000
+			producer = YUN
+		}
+		clr_country_flag = WI_CCP_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_CCP_moderate
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 2000
+			producer = YUN
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 750
+			producer = YUN
+		}
+		clr_country_flag = WI_CCP_moderate
+	}
+}
+
+YUN_WI_i_insurgent_help = {
+	if = {
+		limit = {
+			has_country_flag = WI_Bandit_very_strong
+		}
+		add_to_variable = { YUN_legitimacy_pu = 4 }
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 2500
+		}
+		clr_country_flag = WI_Bandit_very_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_Bandit_strong
+		}
+		add_to_variable = { YUN_legitimacy_pu = 3 }
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 1500
+		}
+		clr_country_flag = WI_Bandit_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_Bandit_moderate
+		}
+		add_to_variable = { YUN_legitimacy_pu = 2 }
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 1000
+		}
+		clr_country_flag = WI_Bandit_moderate
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_NPA_very_strong
+		}
+		add_manpower = 100000
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 2000
+		}
+		clr_country_flag = WI_NPA_very_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_NPA_strong
+		}
+		add_manpower = 50000
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 1000
+		}
+		clr_country_flag = WI_NPA_strong
+	}
+	else_if = {
+		limit = {
+			has_country_flag = WI_NPA_moderate
+		}
+		add_manpower = 20000
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 600
+		}
+		clr_country_flag = WI_NPA_moderate
+	}
+}
+
+YUN_improve_resource_exploitation = {
+	if = {
+		limit = {
+			has_idea = YUN_hidden_potential_0
+		}
+		swap_ideas = {
+			remove_idea = YUN_hidden_potential_0
+			add_idea = YUN_hidden_potential_1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = YUN_hidden_potential_1
+		}
+		swap_ideas = {
+			remove_idea = YUN_hidden_potential_1
+			add_idea = YUN_hidden_potential_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = YUN_hidden_potential_2
+		}
+		swap_ideas = {
+			remove_idea = YUN_hidden_potential_2
+			add_idea = YUN_hidden_potential_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = YUN_hidden_potential_3
+		}
+		swap_ideas = {
+			remove_idea = YUN_hidden_potential_3
+			add_idea = YUN_hidden_potential_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = YUN_hidden_potential_4
+		}
+		swap_ideas = {
+			remove_idea = YUN_hidden_potential_4
+			add_idea = YUN_hidden_potential_5
+		}
+	}
+}
+
+YUN_up_exploitative_mining = {
+	if = {
+		limit = {
+			has_idea = YUN_exploit_mines_1
+		}
+		swap_ideas = {
+			remove_idea = YUN_exploit_mines_1
+			add_idea = YUN_exploit_mines_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = YUN_exploit_mines_0
+		}
+		swap_ideas = {
+			remove_idea = YUN_exploit_mines_0
+			add_idea = YUN_exploit_mines_1
+		}
+	}
+	else = {
+		add_ideas = YUN_exploit_mines_0
+	}
+}
+
+YUN_Warlord_Faction_event = {
+	if = {
+		limit = { has_country_flag = YUN_WI_integrating_XIK }
+		YUN = {
+			country_event = { id = yun_wi.17 }
+		}
+		CHI = {
+			country_event = { id = yun_wi.23 }
+		}
+		YUN_Warlord_Faction_chosen = yes
+	}
+	else_if = {
+		limit = { has_country_flag = YUN_WI_integrating_GUX }
+		YUN = {
+			country_event = { id = yun_wi.18 }
+		}
+		CHI = {
+			country_event = { id = yun_wi.23 }
+		}
+		YUN_Warlord_Faction_chosen = yes
+	}
+	else_if = {
+		limit = { has_country_flag = YUN_WI_integrating_SHX }
+		YUN = {
+			country_event = { id = yun_wi.19 }
+		}
+		CHI = {
+			country_event = { id = yun_wi.23 }
+		}
+		YUN_Warlord_Faction_chosen = yes
+	}
+	else_if = {
+		limit = { has_country_flag = YUN_WI_integrating_QIN }
+		YUN = {
+			country_event = { id = yun_wi.20 }
+		}
+		CHI = {
+			country_event = { id = yun_wi.23 }
+		}
+		YUN_Warlord_Faction_chosen = yes
+	}
+	else_if = {
+		limit = { has_country_flag = YUN_WI_integrating_XIN }
+		YUN = {
+			country_event = { id = yun_wi.21 }
+		}
+		CHI = {
+			country_event = { id = yun_wi.23 }
+		}
+		YUN_Warlord_Faction_chosen = yes
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_country_flag = CHI_WI_integrating_XIK
+				has_country_flag = CHI_WI_integrating_GUX
+				has_country_flag = CHI_WI_integrating_SHX
+			}
+		}
+		CHI = {
+			country_event = { id = yun_wi.22 }
+		}
+		YUN = {
+			country_event = { id = yun_wi.23 }
+		}
+		YUN_Warlord_Faction_chosen = yes
+	}
+}
+
+WI_Sichuan_invest_calc = {
+	set_temp_variable = { WI_Sichuan_pp = WI_Sichuan_invest_pp }
+	multiply_temp_variable = { WI_Sichuan_pp = -1 }
+	add_political_power = var:WI_Sichuan_pp
+	set_temp_variable = { WI_Sichuan_weapon = WI_Sichuan_invest_weapon }
+	multiply_temp_variable = { WI_Sichuan_weapon = -1 }
+	add_equipment_to_stockpile = {
+		type = infantry_equipment
+		amount = var:WI_Sichuan_weapon
+	}
+
+	set_temp_variable = { WI_Sichuan_support_pp = -0.2 }
+	set_temp_variable = { WI_Sichuan_support_weapon = -0.02 }
+	multiply_temp_variable = { WI_Sichuan_support_pp = WI_Sichuan_pp }
+	multiply_temp_variable = { WI_Sichuan_support_weapon = WI_Sichuan_weapon }
+	set_variable = { WI_Sichuan_pp_true = WI_Sichuan_support_pp }
+	set_variable = { WI_Sichuan_weapon_true = WI_Sichuan_support_weapon }
+	if = {
+		limit = { original_tag = YUN }
+		add_to_variable = { global.WI_Sichuan_NPA_support = WI_Sichuan_pp_true }
+		add_to_variable = { global.WI_Sichuan_NPA_support = WI_Sichuan_weapon_true }
+	}
+	else_if = {
+		limit = { original_tag = CHI }
+		add_to_variable = { global.WI_Sichuan_RGOC_support = WI_Sichuan_pp_true }
+		add_to_variable = { global.WI_Sichuan_RGOC_support = WI_Sichuan_weapon_true }
+	}
+	clear_variable = WI_Sichuan_invest_pp
+	clear_variable = WI_Sichuan_invest_weapon
+	set_country_flag = {
+		flag = WI_Sichuan_support_cooldown
+		value = 1
+		days = 7
+	}
+	add_to_variable = { global.YUN_WI_Sichuan_dirty = 1 }
+}
+
+WI_Sichuan_influence_calc = {
+	if = { # to help the AI
+		limit = { is_ai = yes }
+		if = {
+			limit = { original_tag = YUN }
+			set_temp_variable = { WI_Sichuan_NPA_support_calc = 0 }
+			randomize_temp_variable = {
+				var = WI_Sichuan_NPA_support_calc
+				distribution = uniform
+				min = 10
+				max = 20
+			}
+			add_to_variable = { global.WI_Sichuan_NPA_support = WI_Sichuan_NPA_support_calc }
+		}
+		else_if = {
+			limit = { original_tag = CHI }
+			set_temp_variable = { WI_Sichuan_RGOC_support_calc = 0 }
+			randomize_temp_variable = {
+				var = WI_Sichuan_RGOC_support_calc
+				distribution = uniform
+				min = 10
+				max = 25
+			}
+			add_to_variable = { global.WI_Sichuan_RGOC_support = WI_Sichuan_RGOC_support_calc }
+		}
+	}
+	set_temp_variable = { GUI_SIC_NPA_Influence_calc = 1 }
+	set_temp_variable = { GUI_SIC_RGOC_Influence_calc = 1 }
+	randomize_temp_variable = {
+		var = GUI_SIC_NPA_Influence_calc
+		distribution = uniform
+		min = 0.15
+		max = 0.3
+	}
+	randomize_temp_variable = {
+		var = GUI_SIC_RGOC_Influence_calc
+		distribution = uniform
+		min = 0.15
+		max = 0.3
+	}
+
+	multiply_temp_variable = { GUI_SIC_NPA_Influence_calc = global.WI_Sichuan_NPA_support }
+	multiply_temp_variable = { GUI_SIC_RGOC_Influence_calc = global.WI_Sichuan_RGOC_support }
+
+	add_to_variable = { global.GUI_SIC_NPA_Influence = GUI_SIC_NPA_Influence_calc }
+	add_to_variable = { global.GUI_SIC_RGOC_Influence = GUI_SIC_RGOC_Influence_calc }
+
+	set_temp_variable = { GUI_SIC_NPA_clash = 1 }
+	set_temp_variable = { GUI_SIC_RGOC_clash = 1 }
+	randomize_temp_variable = {
+		var = GUI_SIC_NPA_clash
+		distribution = uniform
+		min = 5
+		max = 20
+	}
+	randomize_temp_variable = {
+		var = GUI_SIC_RGOC_clash
+		distribution = uniform
+		min = 5
+		max = 20
+	}
+	subtract_from_variable = { global.WI_Sichuan_NPA_support = GUI_SIC_NPA_clash }
+	subtract_from_variable = { global.WI_Sichuan_RGOC_support = GUI_SIC_RGOC_clash }
+	multiply_temp_variable = { GUI_SIC_NPA_clash = 0.1 }
+	multiply_temp_variable = { GUI_SIC_RGOC_clash = 0.1 }
+	subtract_from_variable = { global.GUI_SIC_NPA_Influence= GUI_SIC_NPA_clash }
+	subtract_from_variable = { global.GUI_SIC_RGOC_Influence = GUI_SIC_RGOC_clash }
+
+	clamp_variable = {
+		var = global.WI_Sichuan_NPA_support
+		min = 0
+	}
+	clamp_variable = {
+		var = global.WI_Sichuan_RGOC_support
+		min = 0
+	}
+	clamp_variable = {
+		var = global.GUI_SIC_NPA_Influence
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = global.GUI_SIC_RGOC_Influence
+		min = 0
+		max = 100
+	}
+	if = {
+		limit = {
+			check_variable = { global.GUI_SIC_NPA_Influence > global.GUI_SIC_RGOC_Influence }
+		}
+		set_variable = { GUI_SIC_Influence = 1 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.GUI_SIC_NPA_Influence = global.GUI_SIC_RGOC_Influence }
+		}
+		set_variable = { GUI_SIC_Influence = 2 }
+	}
+	else = {
+		set_variable = { GUI_SIC_Influence = 3 }
+	}
+	add_to_variable = { global.YUN_WI_Sichuan_dirty = 1 }
+}
+
+YUN_Sichuan_struggle_ends = {
+	if = {
+		limit = {
+			OR = {
+				check_variable = { global.GUI_SIC_NPA_Influence > global.GUI_SIC_RGOC_Influence }
+				has_game_rule = {
+					rule = the_battle_of_sichuan
+					option = THE_BATTLE_OF_SICHUAN_YUN_NATIONAL_PROTECTION_ARMY
+				}
+			}
+		}
+		clr_global_flag = WI_Sichuan_Struggle_begin
+		set_global_flag = WI_NPA_takes_Sichuan
+		YUN = {
+			transfer_state = 605
+			transfer_state = 1537
+			transfer_state = 1538
+			605 = {
+				add_core_of = YUN
+				set_demilitarized_zone = no
+				set_variable = { WI_state_integrate_progress = 100 }
+				set_variable = { YUN_state_officer_percentage = 100 }
+				set_variable = { WI_state_mil_level_confirmed = 50 }
+				set_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+				set_state_flag = WI_core_state
+			}
+			1537 = {
+				add_core_of = YUN
+				set_demilitarized_zone = no
+				set_variable = { WI_state_integrate_progress = 100 }
+				set_variable = { YUN_state_officer_percentage = 100 }
+				set_variable = { WI_state_mil_level_confirmed = 50 }
+				set_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+				set_state_flag = WI_core_state
+			}
+			1538 = {
+				add_core_of = YUN
+				set_demilitarized_zone = no
+				set_variable = { WI_state_integrate_progress = 100 }
+				set_variable = { YUN_state_officer_percentage = 100 }
+				set_variable = { WI_state_mil_level_confirmed = 50 }
+				set_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+				set_state_flag = WI_core_state
+			}
+			if = {
+				limit = { check_variable = { global.GUI_SIC_NPA_Influence > 70 } }
+				605 = {
+					create_unit = {
+						division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = YUN
+						count = 1
+					}
+				}
+				1537 = {
+					create_unit = {
+						division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = YUN
+						count = 1
+					}
+				}
+				1538 = {
+					create_unit = {
+						division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = YUN
+						count = 1
+					}
+				}
+				add_to_variable = { YUN_legitimacy_pu = 3 }
+			}
+			else_if = {
+				limit = { check_variable = { global.GUI_SIC_NPA_Influence > 50 } }
+				605 = {
+					create_unit = {
+						division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = YUN
+						count = 1
+					}
+				}
+				1538 = {
+					create_unit = {
+						division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = YUN
+						count = 1
+					}
+				}
+				add_to_variable = { YUN_legitimacy_pu = 2 }
+			}
+			else = {
+				605 = {
+					create_unit = {
+						division = "division_template = \"Guofang Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = YUN
+						count = 1
+					}
+				}
+				add_to_variable = { YUN_legitimacy_pu = 1 }
+			}
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 2.0 }
+			YUN_WI_morale_tick_change = yes
+			add_to_variable = { YUN_legitimacy_cap_calc = 10 }
+			YUN_WI_legitimacy_change = yes
+			country_event = { id = yun_wi.10 days = 1 }
+			country_event = { id = yun_wi.61 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = global.GUI_SIC_NPA_Influence
+				value = global.GUI_SIC_RGOC_Influence
+				compare = less_than_or_equals
+			}
+		}
+		clr_global_flag = WI_Sichuan_Struggle_begin
+		set_global_flag = WI_RGOC_takes_Sichuan
+		CHI = {
+			load_oob = "CHI_YUN_Border"
+			if = {
+				limit = { check_variable = { global.GUI_SIC_RGOC_Influence > 70 } }
+				605 = {
+					create_unit = {
+						division = "division_template = \"Qianxian Bubing Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = CHI
+						count = 1
+					}
+					set_demilitarized_zone = no
+				}
+				1537 = {
+					create_unit = {
+						division = "division_template = \"Qianxian Bubing Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = CHI
+						count = 1
+					}
+					set_demilitarized_zone = no
+				}
+				1538 = {
+					create_unit = {
+						division = "division_template = \"Qianxian Bubing Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = CHI
+						count = 1
+					}
+					set_demilitarized_zone = no
+				}
+			}
+			else_if = {
+				limit = { check_variable = { global.GUI_SIC_RGOC_Influence > 50 } }
+				605 = {
+					create_unit = {
+						division = "division_template = \"Qianxian Bubing Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = CHI
+						count = 1
+					}
+					set_demilitarized_zone = no
+				}
+				1537 = {
+					create_unit = {
+						division = "division_template = \"Qianxian Bubing Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = CHI
+						count = 1
+					}
+					set_demilitarized_zone = no
+				}
+				1538 = { set_demilitarized_zone = no }
+			}
+			else = {
+				605 = {
+					create_unit = {
+						division = "division_template = \"Qianxian Bubing Juntuan\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+						owner = CHI
+						count = 1
+					}
+					set_demilitarized_zone = no
+				}
+				1537 = { set_demilitarized_zone = no }
+				1538 = { set_demilitarized_zone = no }
+			}
+		}
+		YUN = {
+			country_event = { id = yun_wi.10 days = 1 }
+			add_to_variable = { YUN_legitimacy_tick = -2.0 }
+			add_to_variable = { YUN_WI_warbuff_tick = -2.0 }
+			add_to_variable = { YUN_legitimacy_cap_calc = -10 }
+			YUN_WI_legitimacy_change = yes
+		}
+	}
+	add_to_variable = { global.YUN_WI_Sichuan_dirty = 1 }
+}
+
+YUN_Warlord_Faction_chosen = {
+	if = {
+		limit = {
+			has_country_flag = YUN_WI_integrating_XIK
+		}
+		set_global_flag = XIK_joins_NPA
+		XIK = {
+			leave_faction = yes
+			remove_faction_status = yes
+			add_ideas = NLF_Member
+			add_to_war = {
+				targeted_alliance = YUN
+				enemy = CHI
+			}
+		}
+		YUN = {
+			add_to_faction = XIK
+			clr_country_flag = YUN_WI_integrating_XIK
+			set_temp_variable = { YUN_temp_legitimacy = 5 }
+			YUN_WI_legitimacy_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 1.0 }
+			YUN_WI_morale_tick_change = yes
+		}
+		every_other_country = {
+			limit = {
+				OR = {
+					is_in_faction_with = JAP
+					original_tag = CHI
+				}
+				NOT = { original_tag = GUX }
+				NOT = { original_tag = SHX }
+			}
+			XIK = { set_embargo_PREV = yes }
+			XIK = { PREV = { set_embargo_PREV = yes } }
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_country_flag = CHI_WI_integrating_XIK
+				has_country_flag = CHI_WI_integrating_GUX
+				has_country_flag = CHI_WI_integrating_SHX
+			}
+		}
+		JAP = {
+			end_puppet = event_target:CHI_WI_Warlord
+		}
+		event_target:CHI_WI_Warlord = {
+			leave_faction = yes
+			remove_faction_status = yes
+			add_to_war = {
+				targeted_alliance = CHI
+				enemy = YUN
+			}
+		}
+		CHI = {
+			add_to_faction = event_target:CHI_WI_Warlord
+			clr_country_flag = CHI_WI_integrating_XIK
+			clr_country_flag = CHI_WI_integrating_GUX
+			clr_country_flag = CHI_WI_integrating_SHX
+		}
+		every_other_country = {
+			limit = {
+				is_in_faction_with = YUN
+			}
+			event_target:CHI_WI_Warlord = { set_embargo_PREV = yes }
+			event_target:CHI_WI_Warlord = { PREV = { set_embargo_PREV = yes } }
+		}
+		subtract_from_variable = { YUN.YUN_legitimacy_tick = 1.0 }
+		subtract_from_variable = { YUN.YUN_legitimacy_cap_calc = 10 }
+		hidden_effect = { YUN_WI_legitimacy_change = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = YUN_WI_integrating_GUX
+		}
+		set_global_flag = GUX_joins_NPA
+		JAP = {
+			end_puppet = GUX
+		}
+		GUX = {
+			leave_faction = yes
+			remove_faction_status = yes
+			add_ideas = NLF_Member
+			add_to_war = {
+				targeted_alliance = YUN
+				enemy = CHI
+			}
+		}
+		YUN = {
+			add_to_faction = GUX
+			clr_country_flag = YUN_WI_integrating_GUX
+			add_to_variable = { YUN_legitimacy_cap_calc = 10 }
+			set_temp_variable = { YUN_temp_legitimacy = 5 }
+			YUN_WI_legitimacy_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 2.0 }
+			YUN_WI_morale_tick_change = yes
+			country_event = { id = yun_zhengtong.34 days = 2 }
+		}
+		every_other_country = {
+			limit = {
+				OR = {
+					is_in_faction_with = JAP
+					original_tag = CHI
+				}
+				NOT = { original_tag = SHX }
+			}
+			GUX = { set_embargo_PREV = yes }
+			GUX = { PREV = { set_embargo_PREV = yes } }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = YUN_WI_integrating_SHX
+		}
+		set_global_flag = SHX_joins_NPA
+		JAP = {
+			end_puppet = SHX
+			if = {
+				limit = { NOT = { has_global_flag = YUN_NCPC_revived } }
+				country_event = { id = japchiinteraction.10 }
+			}
+		}
+		SHX = {
+			leave_faction = yes
+			remove_faction_status = yes
+			add_ideas = NLF_Member
+			add_to_war = {
+				targeted_alliance = YUN
+				enemy = CHI
+			}
+		}
+		YUN = {
+			add_to_faction = SHX
+			clr_country_flag = YUN_WI_integrating_SHX
+			set_temp_variable = { YUN_temp_legitimacy = 5 }
+			add_to_variable = { YUN_legitimacy_cap_calc = 10 }
+			YUN_WI_legitimacy_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.5 }
+			YUN_WI_legitimacy_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 2.5 }
+			YUN_WI_morale_tick_change = yes
+		}
+		every_other_country = {
+			limit = {
+				OR = {
+					is_in_faction_with = JAP
+					original_tag = CHI
+				}
+				NOT = { original_tag = GUX }
+			}
+			SHX = { set_embargo_PREV = yes }
+			SHX = { PREV = { set_embargo_PREV = yes } }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = YUN_WI_integrating_QIN
+		}
+		set_global_flag = QIN_helps_NPA
+		QIN = { add_ideas = NLF_Member }
+		clr_country_flag = YUN_WI_integrating_QIN
+		set_temp_variable = { YUN_WI_temp_legitimacy_tick = 3.0 }
+		YUN_WI_legitimacy_tick_change = yes
+		set_temp_variable = { YUN_WI_temp_warbuff_tick = 3.0 }
+		YUN_WI_morale_tick_change = yes
+		add_to_variable = { YUN_legitimacy_cap_calc = 10 }
+		YUN_WI_legitimacy_change = yes
+		country_event = { id = yun_zhengtong.41 days = 2 }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = YUN_WI_integrating_XIN
+		}
+		set_global_flag = XIN_helps_NPA
+		XIN = { add_ideas = NLF_Member }
+		clr_country_flag = YUN_WI_integrating_XIN
+		set_temp_variable = { YUN_WI_temp_legitimacy_tick = 3.0 }
+		YUN_WI_legitimacy_tick_change = yes
+		set_temp_variable = { YUN_WI_temp_warbuff_tick = 3.0 }
+		YUN_WI_morale_tick_change = yes
+		add_to_variable = { YUN_legitimacy_cap_calc = 10 }
+		YUN_WI_legitimacy_change = yes
+	}
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+	clear_global_event_target = CHI_WI_Warlord
+}
+
+YUN_update_legitimacy_effects = {
+	#Calculate Ratio of Current Legitimacy to Legitimacy benchmark (legitimacy = 100) (I swear this is totally original :wertroll)
+	add_to_variable = { YUN_legitimacy = YUN_WI_legitimacy_momentum_modifier }
+	add_to_variable = { YUN_legitimacy = YUN_legitimacy_tick }
+	add_to_variable = { YUN_legitimacy = YUN.YUN_legitimacy_state_modifier_total }
+
+	set_variable = { YUN_legitimacy_cap = 50 }
+	add_to_variable = { YUN_legitimacy_cap = YUN_legitimacy_cap_calc }
+	clamp_variable = {
+		var = YUN_legitimacy_cap
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = YUN_legitimacy
+		min = 0
+		max = YUN_legitimacy_cap
+	}
+
+	set_temp_variable = { YUN_legitimacy_factor_calc = YUN_legitimacy }
+
+	divide_temp_variable = { YUN_legitimacy_factor_calc = 100 }
+
+	#Calculate Modifiers based on Legitimacy Ratio
+	clear_array = YUN_legitimacy_buff
+	add_to_array = { YUN_legitimacy_buff = -0.2 }
+	add_to_array = { YUN_legitimacy_buff = 0.2 }
+	add_to_array = { YUN_legitimacy_buff = 0.2 }
+	add_to_array = { YUN_legitimacy_buff = 0.2 }
+	add_to_array = { YUN_legitimacy_buff = 0.25 }
+	add_to_array = { YUN_legitimacy_buff = 0.25 }
+	add_to_array = { YUN_legitimacy_buff = 0.25 }
+
+	add_to_variable = { YUN_legitimacy_buff^0 = YUN_legitimacy_congoods_bonus }
+	add_to_variable = { YUN_legitimacy_buff^1 = YUN_legitimacy_production_bonus }
+	add_to_variable = { YUN_legitimacy_buff^2 = YUN_legitimacy_construction_bonus }
+	add_to_variable = { YUN_legitimacy_buff^3 = YUN_legitimacy_resources_bonus }
+	add_to_variable = { YUN_legitimacy_buff^4 = YUN_legitimacy_pp_bonus }
+	add_to_variable = { YUN_legitimacy_buff^5 = YUN_legitimacy_stability_bonus }
+	add_to_variable = { YUN_legitimacy_buff^6 = YUN_legitimacy_recruits_bonus }
+
+	for_each_loop = {
+		array = YUN_legitimacy_buff
+		multiply_variable = { YUN_legitimacy_buff^i = YUN_legitimacy_factor_calc }
+	}
+
+	set_temp_variable = { YUN_country_coring_bonus_calc = YUN_legitimacy }
+	multiply_temp_variable = { YUN_country_coring_bonus_calc = 0.2 }
+	set_variable = { YUN_country_coring_bonus = YUN_country_coring_bonus_calc }
+	add_to_variable = { YUN_country_coring_bonus = YUN_country_coring_bonus_focus }
+
+	force_update_dynamic_modifier = yes
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+}
+
+YUN_update_warbuff_effects = {
+	add_to_variable = { YUN_WI_warbuff = YUN_WI_warbuff_momentum_modifier }
+	add_to_variable = { YUN_WI_warbuff = YUN_WI_warbuff_tick }
+	add_to_variable = { YUN_WI_warbuff = YUN_WI_warbuff_state_modifier_total }
+
+	set_variable = { YUN_warbuff_cap = 50 }
+	add_to_variable = { YUN_warbuff_cap = YUN_warbuff_cap_calc }
+	clamp_variable = {
+		var = YUN_warbuff_cap
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = YUN_WI_warbuff
+		min = 0
+		max = YUN_warbuff_cap
+	}
+
+	set_temp_variable = { YUN_warbuff_calc = YUN_WI_warbuff }
+	divide_temp_variable = { YUN_warbuff_calc = 100 }
+
+	clear_array = YUN_npabuff
+	add_to_array = { YUN_npabuff = 0.25 }
+	add_to_array = { YUN_npabuff = 0.15 }
+	add_to_array = { YUN_npabuff = 0.15 }
+	add_to_array = { YUN_npabuff = 0.15 }
+	add_to_array = { YUN_npabuff = 0.5 }
+	add_to_array = { YUN_npabuff = 0.5 }
+
+	add_to_variable = { YUN_npabuff^0 = YUN_npabuff_war_support_bonus }
+	add_to_variable = { YUN_npabuff^1 = YUN_npabuff_org_bonus }
+	add_to_variable = { YUN_npabuff^2 = YUN_npabuff_def_bonus }
+	add_to_variable = { YUN_npabuff^3 = YUN_npabuff_atk_bonus }
+	add_to_variable = { YUN_npabuff^4 = YUN_npabuff_command_bonus }
+	add_to_variable = { YUN_npabuff^5 = YUN_npabuff_exp_bonus }
+
+	for_each_loop = {
+		array = YUN_npabuff
+		multiply_variable = { YUN_npabuff^i = YUN_warbuff_calc }
+	}
+	force_update_dynamic_modifier = yes
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+}
+
+YUN_WI_legitimacy_change = {
+	add_to_variable = { YUN_legitimacy = YUN_WI_temp_legitimacy }
+	set_variable = { YUN_legitimacy_cap = 50 }
+	add_to_variable = { YUN_legitimacy_cap = YUN_legitimacy_cap_calc }
+	clamp_variable = {
+		var = YUN_legitimacy_cap
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = YUN_legitimacy
+		min = 0
+		max = YUN_legitimacy_cap
+	}
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+	custom_effect_tooltip = YUN_legitimacy_change_tt
+}
+
+YUN_WI_legitimacy_tick_change = {
+	add_to_variable = { YUN_legitimacy_tick = YUN_WI_temp_legitimacy_tick }
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+	custom_effect_tooltip = YUN_legitimacy_change_2_tt
+}
+
+YUN_WI_morale_change = {
+	add_to_variable = { YUN_WI_warbuff = YUN_WI_temp_warbuff }
+	clamp_variable = {
+		var = YUN_warbuff_cap
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = YUN_WI_warbuff
+		min = 0
+		max = YUN_warbuff_cap
+	}
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+	custom_effect_tooltip = YUN_morale_change_tt
+}
+
+YUN_WI_morale_tick_change = {
+	add_to_variable = { YUN_WI_warbuff_tick = YUN_WI_temp_warbuff_tick }
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+	custom_effect_tooltip = YUN_morale_change_2_tt
+}
+
+YUN_Long_Yun_Coup_effects = {
+	custom_effect_tooltip = YUN_Long_Yun_Coup_tt
+	hidden_effect = {
+		retire_character = YUN_lu_han
+		retire_character = YUN_long_zehui
+		retire_character = YUN_zeng_wanzhong
+		retire_character = YUN_wang_shaoyuan
+		retire_character = YUN_sun_du
+		set_politics = {ruling_party = ultranationalism }
+		YUN_long_yun = {
+			remove_advisor_role = { slot = head_of_government }
+			add_advisor_role = {
+				advisor = {
+					slot = head_of_government
+					idea_token = YUN_Long_Yun_hog
+					traits = { hog_old_general }
+					cost = -1
+					removal_cost = -1
+					allowed = { original_tag = YUN }
+				}
+				activate = yes
+			}
+			add_field_marshal_role = {
+				traits = {
+					harsh_leader
+					trait_reckless
+					offensive_doctrine
+					organizer
+					thorough_planner
+				}
+				skill = 5
+				attack_skill = 4
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 3
+				legacy_id = 1228
+			}
+		}
+
+		set_temp_variable = {TNO_economy_subtype_temp = 6}
+		econ_subtype_change = yes
+		add_popularity = {
+			ideology = ultranationalism
+			popularity = 0.40
+		}
+		add_popularity = {
+			ideology = authoritarian_democracy
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		set_party_name = {
+			ideology = authoritarian_democracy
+			name = YUN_authoritarian_democracy_LuHanDead_party
+			long_name = YUN_authoritarian_democracy_LuHanDead_party_long
+		}
+		set_party_name = {
+			ideology = despotism
+			name = YUN_despotism_LuHanDead_party
+			long_name = YUN_despotism_LuHanDead_party
+		}
+		set_party_name = {
+			ideology = fascism
+			name =  YUN_fascism_LuHanDead_party
+			long_name =  YUN_fascism_LuHanDead_party_long
+		}
+
+		set_country_flag = YUN_long_yun_crusade
+		clr_country_flag = YUN_Lu_Han_great_game
+		clr_country_flag = YUN_main_tree_flag
+		load_focus_tree = YUN_long_yun_crusade_tree
+
+		remove_ideas = {
+    		YUN_zeng_wanzhong_army_chief
+    		YUN_long_zehui_high_command
+    		YUN_zeng_zesheng_high_command
+    		YUN_an_enpu_high_command
+			YUN_mild_corruption
+			YUN_a_government_of_friends_0
+			YUN_econ_links_CHI
+			YUN_exploit_mines_0
+			YUN_exploit_mines_1
+			YUN_exploit_mines_2
+			YUN_hidden_potential_0
+			YUN_hidden_potential_1
+			YUN_hidden_potential_2
+			YUN_hidden_potential_3
+			YUN_hidden_potential_4
+			YUN_hidden_potential_5
+			YUN_bandit_holdouts
+			YUN_insurgency_dummy
+		}
+		#remove_dynamic_modifier = {
+		#	modifier = YUN_unite_southwest_diplo_dynamic_modifier
+		#}
+		#remove_dynamic_modifier = {
+		#	modifier = YUN_burma_road_construction_dynamic_modifier
+		#}
+		#remove_dynamic_modifier = {
+		#	modifier = YUN_burma_road_reward_dynamic_modifier
+		#}
+		remove_dynamic_modifier = {
+			modifier = YUN_xinan_insurgency_dynamic_modifier
+		}
+
+		set_variable = {YUN_fail_counter = 0}
+
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			set_variable = { YUN_legitimacy = 0 }
+			set_variable = { YUN_WI_warbuff = 0 }
+			YUN_update_legitimacy_effects = yes
+			YUN_update_warbuff_effects = yes
+
+			load_oob = "YUN_NPA_AI_start_army"
+		}
+		else = {
+			set_variable = { YUN_legitimacy = 0 }
+			set_variable = { YUN_WI_warbuff = 0 }
+			YUN_update_legitimacy_effects = yes
+			YUN_update_warbuff_effects = yes
+
+			load_oob = "YUN_NPA_player_start_army"
+			load_oob = "YUN_NPA_army"
+		}
+		leave_faction = yes
+		econ_leave_sphere = yes
+		remove_faction_status = yes
+		create_faction = National_Liberation_Front
+
+		add_dynamic_modifier = { modifier = YUN_NPA_legitimacy_dynamic_modifier }
+		add_dynamic_modifier = { modifier = YUN_NPA_war_buff_dynamic_modifier }
+		add_ideas = {
+			YUN_legitimacy_dummy
+			YUN_npabuff_dummy
+			tno_immigration_closed_borders
+			tno_refugees_banned
+			NLF_Leader
+			YUN_long_yun_high_command
+			YUN_Generic_Vacant_eco
+			YUN_Generic_Vacant_for
+			YUN_Generic_Vacant_sec
+		}
+		drop_cosmetic_tag = yes
+		set_cosmetic_tag = YUN_NPA_Long_Yun
+		set_temp_variable = { temp_econ_GDP_boost_percentage = -0.05 }
+		econ_GDP_boost_once_percentage = yes
+		set_temp_variable = { gdp_growth_temp = -3.0 }
+		econ_gdp_growth_change = yes
+		set_temp_variable = { inflation_temp = 3.0 }
+		econ_inflation_change = yes
+		econ_lower_credit_rating = yes
+		econ_lower_credit_rating = yes
+		set_temp_variable = { temp_credit_rating_min = credit_rating }
+		set_temp_variable = { temp_credit_rating_max = credit_rating }
+		econ_set_min_credit_rating = yes
+		econ_set_max_credit_rating = yes
+		every_other_country = {
+			limit = {
+				is_in_faction_with = JAP
+				NOT = { original_tag = GUX }
+				NOT = { original_tag = SHX }
+			}
+			YUN = { set_embargo_PREV = yes }
+			YUN = { PREV = { set_embargo_PREV = yes } }
+		}
+		country_event = {id = yun_wi.4 days = 7 }
+		CHI = {
+			end_puppet = YUN
+			country_event = {id = yun_wi.4 days = 7 }
+		}
+	}
+}
+
+WI_Start_effects = {
+	log = "Western Insurrection started in [GetDateText]"
+	hidden_effect = {
+		every_country = { news_event = WORLD.2062 }
+		every_country = {
+			limit = {
+				is_subject_of = CHI
+			}
+			CHI_save_pre_puppet_politics = yes
+			CHI = {
+				end_puppet = PREV
+			}
+			JAP = {
+				set_autonomy = {
+					target = PREV
+					autonomy_state = autonomy_satellite
+				}
+			}
+			CHI_apply_pre_puppet_politics = yes
+		}
+		CHI = {
+			leave_faction = yes
+			create_faction = CHI_THE_CHINESE_LEAGUE
+			country_lock_all_division_template = no
+			add_ideas = CHI_Western_Insurrection
+			clr_country_flag = CHI_Western_Insurrection_Warmup
+			CHI_reload_tree = yes
+			add_political_power = -150
+			add_stability = -0.30
+			add_war_support = 0.1
+			set_temp_variable = { gdp_growth_temp = -4 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { inflation_temp = 5 }
+			econ_inflation_change = yes
+			econ_lower_credit_rating = yes
+			add_dynamic_modifier = { modifier = YUN_NPA_momentum_dynamic_modifier }
+			country_event = { id = yun_wi.16 days = 3 }
+			#if = {
+			#	limit = { is_ai = yes }
+			#	country_event = { id = chi.9998 days = 14 }
+			#}
+		}
+		every_country = {
+			limit = {
+				is_neighbor_of = CHI
+				is_in_faction_with = JAP
+			}
+			give_military_access = CHI
+		}
+		every_country = {
+			limit = {
+				is_neighbor_of = CHI
+				is_in_faction_with = JAP
+			}
+			CHI = {
+				give_military_access = PREV
+			}
+		}
+		JAP = {
+			country_event = { id = japchiinteraction.6 }
+		}
+		YUN = {
+			greater_china_states_initialize = yes
+			WI_show_whole_map = yes
+			greater_china_states_control_change = yes
+			YUN_WI_greater_china_states_actions_initialize = yes
+			set_variable = { WI_map_section = 1 }
+			set_variable = { global.YUN_WI_war_momentum_check = 50 }
+			WI_calc_state_officer_needed = yes
+			every_controlled_state = {
+				add_dynamic_modifier = { modifier = YUN_WI_province_army_status }
+				set_variable = { YUN_WI_mil_level_speed = 0.25 }
+				YUN_WI_state_mil_level_calc = yes
+			}
+			update_YUN_WI_map = yes
+			add_dynamic_modifier = { modifier = YUN_NPA_momentum_dynamic_modifier }
+			declare_war_on = {
+				target = CHI
+				type = annex_everything
+			}
+			country_event = { id = yun_zhengtong.27 days = 7 }
+			country_event = { id = yun_wi.25 days = 5 }
+			if = {
+				limit = { is_ai = no }
+				CHI = {
+					country_event = { id = chi.9998 days = 14 }
+					country_event = { id = chi.9999 days = 540 }
+					}
+			}
+			else = {
+				CHI = { country_event = { id = chi.9999 days = 730 } }
+			}
+		}
+		set_global_flag = CHI_Western_Insurrection_Crisis
+	}
+}
+
+WI_GAW_Start_Effects = {
+	log = "Great Asian War started in [GetDateText]"
+	clr_global_flag = CHI_Western_Insurrection_Crisis
+	clr_global_flag = WI_Warlord_Struggle_begin
+	set_global_flag = YUN_NPA_GAW_Crisis
+	YUN_NPA_add_Yunnan_claims = yes
+
+	if = {
+		limit = {
+			has_global_flag = QIN_helps_NPA
+		}
+		YUN = {
+			add_to_faction = QIN
+			country_event = { id = yun_wi.34 days = 2 }
+		}
+		QIN = { add_ideas = NLF_Member }
+		every_other_country = {
+			limit = {
+				is_in_faction_with = JAP
+			}
+			QIN = { set_embargo_PREV = yes }
+			QIN = { PREV = { set_embargo_PREV = yes } }
+		}
+	}
+	if = {
+		limit = {
+			has_global_flag = XIN_helps_NPA
+		}
+		YUN = {
+			add_to_faction = XIN
+			country_event = { id = yun_wi.35 days = 3 }
+		}
+		XIN = { add_ideas = NLF_Member }
+		every_other_country = {
+			limit = {
+				is_in_faction_with = JAP
+			}
+			XIN = { set_embargo_PREV = yes }
+			XIN = { PREV = { set_embargo_PREV = yes } }
+		}
+	}
+	every_other_country = {
+		limit = { is_in_faction_with = YUN }
+		add_to_war = {
+			targeted_alliance = YUN
+			enemy = JAP
+		}
+	}
+	527 = { set_demilitarized_zone = yes }
+	1024 = { set_demilitarized_zone = yes }
+	country_event = { id = yun.2024 days = 1 }
+	every_other_country = {
+		limit = {
+			OR = {
+				original_tag = JAP
+				original_tag = MAN
+				original_tag = MEN
+				original_tag = GNG
+				original_tag = NCC
+				original_tag = GAN
+			}
+		}
+		add_ideas = JAP_hakko_ichiu
+	}
+	every_country = { news_event = WORLD.2069 }
+}
+
+YUN_WI_Victory_Map_Effects = {
+	annex_country = {
+		target = NCC
+		transfer_troops = no
+	}
+	annex_country = {
+		target = GNG
+		transfer_troops = no
+	}
+	annex_country = {
+		target = MEN
+		transfer_troops = no
+	}
+	annex_country = {
+		target = GAN
+		transfer_troops = no
+	}
+	annex_country = {
+		target = MAN
+		transfer_troops = no
+	}
+	every_country = {
+		limit = { has_idea = NLF_Member }
+		every_unit_leader = { set_nationality = YUN }
+		every_owned_state = {
+			add_core_of = YUN
+		}
+		YUN = {
+			annex_country = {
+				target = PREV
+				transfer_troops = yes
+			}
+		}
+	}
+	if = {
+		limit = {
+			country_exists = GUX
+			GUX = { NOT = { has_idea = NLF_Member } }
+		}
+		annex_country = {
+			target = GUX
+			transfer_troops = no
+		}
+	}
+	if = {
+		limit = {
+			country_exists = SHX
+			SHX = { NOT = { has_idea = NLF_Member } }
+		}
+		annex_country = {
+			target = SHX
+			transfer_troops = no
+		}
+	}
+	for_each_scope_loop = {
+		array = YUN.greater_china_states
+		if = {
+			limit = {
+				NOT = { state = 524 }
+				OR = {
+					is_controlled_by = JAP
+					is_owned_by = JAP
+				}
+			}
+			YUN = { transfer_state = PREV }
+		}
+	}
+	set_capital = { state = 613 remember_old_capital = no }
+	every_owned_state = {
+		remove_core_of = GAN
+		remove_core_of = NCC
+		remove_core_of = MEN
+		remove_core_of = MAN
+		remove_core_of = GNG
+		VP_change_chi = yes
+	}
+}
+
+YUN_WI_partial_victory = {
+	annex_country = {
+		target = NCC
+		transfer_troops = no
+	}
+	annex_country = {
+		target = GAN
+		transfer_troops = no
+	}
+	if = {
+		limit = { GNG = { has_capitulated = yes } }
+		annex_country = {
+			target = GNG
+			transfer_troops = no
+		}
+		YUN = { transfer_state = 591 }
+		YUN = { transfer_state = 1464 }
+	}
+	if = {
+		limit = { MEN = { has_capitulated = yes } }
+		annex_country = {
+			target = MEN
+			transfer_troops = no
+		}
+	}
+	if = {
+		limit = { MAN = { has_capitulated = yes } }
+		annex_country = {
+			target = MAN
+			transfer_troops = no
+		}
+		YUN = { transfer_state = 809 }
+		YUN = { transfer_state = 810 }
+	}
+	if = {
+		limit = { GUX = { is_in_faction_with = JAP } }
+		annex_country = {
+			target = GUX
+			transfer_troops = yes
+		}
+	}
+	if = {
+		limit = { SHX = { is_in_faction_with = JAP } }
+		annex_country = {
+			target = SHX
+			transfer_troops = yes
+		}
+	}
+	YUN = {
+		transfer_state = 811
+		transfer_state = 812
+	}
+	clear_variable = YUN_legitimate_regime
+	clr_global_flag = YUN_NPA_GAW_Crisis
+	set_capital = { state = 613 remember_old_capital = no }
+	every_owned_state = {
+		#add_core_of = YUN
+		VP_change_chi = yes
+	}
+	JAP = {
+		set_temp_variable = { Victory_ID = 27 }
+		set_temp_variable = { Victory_Outcome = 2 }
+		set_temp_variable = { Victory_Points = -700 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+	dismantle_faction = yes
+	every_country = {
+		limit = {
+			OR = {
+				has_idea = NLF_Leader
+				has_idea = NLF_Member
+			}
+		}
+		remove_faction_status = yes
+	}
+}
+
+YUN_WI_Victory_ROC = {
+	YUN = {
+		drop_cosmetic_tag = yes
+		set_cosmetic_tag = YUN_NPA_China
+		retire_country_leader = yes
+		set_politics = {
+			ruling_party = authoritarian_democracy
+			last_election = "1960.11.11"
+			election_frequency = 36
+			elections_allowed = no
+		}
+		promote_character = YUN_sun_liren
+		set_party_name = {
+			ideology = authoritarian_democracy
+			long_name = YUN_NPA_China_authoritarian_democracy_party_long
+			name = YUN_NPA_China_authoritarian_democracy_party
+		}
+		set_party_name = {
+			ideology = conservative_democracy
+			long_name = YUN_NPA_China_conservative_democracy_party_long
+			name = YUN_NPA_China_conservative_democracy_party
+		}
+		set_party_name = {
+			ideology = liberal_democracy
+			long_name = YUN_NPA_China_liberal_democracy_party_long
+			name = YUN_NPA_China_liberal_democracy_party
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = YUN_NPA_China_despotism_party_long
+			name = YUN_NPA_China_despotism_party
+		}
+		set_party_name = {
+			ideology = socialist
+			long_name = YUN_NPA_China_socialist_party_long
+			name = YUN_NPA_China_socialist_party
+		}
+		set_party_name = {
+			ideology = communist
+			long_name = YUN_NPA_China_communist_party_long
+			name = YUN_NPA_China_communist_party
+		}
+		set_popularities = {
+			communist = 13
+			socialist = 11
+			liberal_democracy = 7
+			conservative_democracy = 13
+			authoritarian_democracy = 42
+			despotism = 14
+		}
+		remove_faction_status = yes
+		dismantle_faction = yes
+		add_ideas = {
+			YUN_Jiang_Jingguo_hog
+		}
+		clr_country_flag = YUN_long_yun_crusade
+		clr_global_flag = YUN_NPA_GAW_Crisis
+		set_global_flag = YUN_ROC_reborn
+		tno_political_parties_improve = yes
+		set_variable = { YUN_country_coring_bonus = 20 }
+		set_temp_variable = { temp_credit_rating = 7 }
+		set_temp_variable = { temp_credit_rating_min = 3 }
+		set_temp_variable = { temp_credit_rating_max = 9 }
+		econ_set_credit_rating = yes
+		econ_set_min_credit_rating = yes
+		econ_set_max_credit_rating = yes
+		country_event = { id = yun_zhengtong.59 days = 2 }
+		load_focus_tree = generic_focus
+	}
+	JAP = {
+		set_temp_variable = { temp_credit_rating = 6 }
+		set_temp_variable = { temp_credit_rating_max = 7 }
+		econ_set_credit_rating = yes
+		econ_set_max_credit_rating = yes
+		set_temp_variable = { Victory_ID = 27 }
+		set_temp_variable = { Victory_Outcome = 1 }
+		set_temp_variable = { Victory_Points = -1500 }
+		Cold_War_GUI_ManipulateVictory = yes
+	}
+	set_global_flag = JAP_GAW_total_defeat
+	every_country = { news_event = WORLD.1911 }
+}
+
+greater_china_states_initialize = {
+	clear_array = YUN.greater_china_states
+	clear_variable = greater_china_states_X
+	clear_variable = greater_china_states_Y
+	#Group 1 - Xinan
+	325 = { ####Yunnan - 1
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 474 }
+		set_variable = { greater_china_states_Y = 512 }
+		set_variable = { WI_state_integrate_progress = 100 }
+		set_variable = { YUN_state_officer_percentage = 100 }
+		set_variable = { greater_china_states_group = 4 }
+		set_variable = { WI_state_mil_level_confirmed = 50 }
+		set_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+		set_state_flag = WI_core_state
+	}
+	960 = { ####Dali - 2
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 447 }
+		set_variable = { greater_china_states_Y = 477 }
+		set_variable = { WI_state_integrate_progress = 100 }
+		set_variable = { YUN_state_officer_percentage = 100 }
+		set_variable = { greater_china_states_group = 4 }
+		set_variable = { WI_state_mil_level_confirmed = 50 }
+		set_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+		set_state_flag = WI_core_state
+	}
+	603 = { ####Guizhou - 3
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 506 }
+		set_variable = { greater_china_states_Y = 470 }
+		set_variable = { WI_state_integrate_progress = 100 }
+		set_variable = { YUN_state_officer_percentage = 100 }
+		set_variable = { greater_china_states_group = 4 }
+		set_variable = { WI_state_mil_level_confirmed = 50 }
+		set_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+		set_state_flag = WI_core_state
+	}
+	605 = { ##Sichuan - 4
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 513 }
+		set_variable = { greater_china_states_Y = 426 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	905 = { ##Xikang - 5
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 462 }
+		set_variable = { greater_china_states_Y = 412 }
+		set_variable = { greater_china_states_group = 2 }
+	}
+	964 = { ##Chamdo - 6
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 436 }
+		set_variable = { greater_china_states_Y = 422 }
+		set_variable = { greater_china_states_group = 2 }
+	}
+	765 = { ###Lhasa - 7
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 368 }
+		set_variable = { greater_china_states_Y = 427 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	322 = { ###Tibet - 8
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 233 }
+		set_variable = { greater_china_states_Y = 389 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	601 = { ###Yushu - 9
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 358 }
+		set_variable = { greater_china_states_Y = 375 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	1537 = { ###Daxian - 10
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 532 }
+		set_variable = { greater_china_states_Y = 429 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1538 = { ###Chongqing - 11
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xinan = THIS }
+		set_variable = { greater_china_states_X = 532 }
+		set_variable = { greater_china_states_Y = 465 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	# Group 2 - Huazhong
+	602 = { #Hunan - 12
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 563 }
+		set_variable = { greater_china_states_Y = 478 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	961 = { #Changde - 13
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 554 }
+		set_variable = { greater_china_states_Y = 453 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1016 = { #Wuhan - 14
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 618 }
+		set_variable = { greater_china_states_Y = 447 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	620 = { #Hubei - 15
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 571 }
+		set_variable = { greater_china_states_Y = 424 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1015 = { #Nanyang - 16
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 594 }
+		set_variable = { greater_china_states_Y = 413 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	1014 = { #Kaifeng - 17
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 618 }
+		set_variable = { greater_china_states_Y = 393 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	607 = { #Henan - 18
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 588 }
+		set_variable = { greater_china_states_Y = 382 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	600 = { #Jiangxi - 19
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 617 }
+		set_variable = { greater_china_states_Y = 467 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1019 = { #Nanchang - 20
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huazhong = THIS }
+		set_variable = { greater_china_states_X = 630 }
+		set_variable = { greater_china_states_Y = 472 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	#Group 3 - Huadong
+	613 = { #Nanjing - 21
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 680 }
+		set_variable = { greater_china_states_Y = 431 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	813 = { #Shanhai - 22
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 697 }
+		set_variable = { greater_china_states_Y = 439 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	595 = { #Fujian - 23
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 651 }
+		set_variable = { greater_china_states_Y = 488 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	596 = { #Zhejiang - 24
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 675 }
+		set_variable = { greater_china_states_Y = 452 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	959 = { #Huangshan - 25
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 652 }
+		set_variable = { greater_china_states_Y = 443 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	606 = { #Anhui - 26
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 640 }
+		set_variable = { greater_china_states_Y = 405 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	598 = { #Jiangsu - 27
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 653 }
+		set_variable = { greater_china_states_Y = 399 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	1020 = { #Jinan - 28
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 643 }
+		set_variable = { greater_china_states_Y = 362 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	597 = { #Shandong - 29
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 664 }
+		set_variable = { greater_china_states_Y = 384 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	1021 = { #Weifang - 30
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 676 }
+		set_variable = { greater_china_states_Y = 366 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	812 = { #Chintao - 31
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 695 }
+		set_variable = { greater_china_states_Y = 377 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1022 = { #Entai - 32
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 692 }
+		set_variable = { greater_china_states_Y = 363 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	811 = { #Ikaiei - 33
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 714 }
+		set_variable = { greater_china_states_Y = 367 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	524 = { ######Taiwan - 34
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huadong = THIS }
+		set_variable = { greater_china_states_X = 696 }
+		set_variable = { greater_china_states_Y = 524 }
+		set_variable = { greater_china_states_group = 6 }
+	}
+	#Group 4 - Huanan
+	592 = { #Koshu - 35
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 616 }
+		set_variable = { greater_china_states_Y = 547 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	729 = { #Makao - 36
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 617 }
+		set_variable = { greater_china_states_Y = 555 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	326 = { #Honkon - 37
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 627 }
+		set_variable = { greater_china_states_Y = 554 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1439 = { #Shaoguan - 38
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 618 }
+		set_variable = { greater_china_states_Y = 522 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	593 = { #Chaozhou - 39
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 630 }
+		set_variable = { greater_china_states_Y = 529 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1438 = { #Zhaoqing - 40
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 601 }
+		set_variable = { greater_china_states_Y = 524 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1017 = { #Maoming - 41
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 591 }
+		set_variable = { greater_china_states_Y = 548 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	599 = { ##Guilin - 42
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 552 }
+		set_variable = { greater_china_states_Y = 512 }
+		set_variable = { greater_china_states_group = 2 }
+	}
+	594 = { ##Nanning - 43
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 526 }
+		set_variable = { greater_china_states_Y = 525 }
+		set_variable = { greater_china_states_group = 2 }
+	}
+	1464 = { #Hokkai - 44
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 560 }
+		set_variable = { greater_china_states_Y = 556 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	591 = { #Kainan To - 45
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huanan = THIS }
+		set_variable = { greater_china_states_X = 569 }
+		set_variable = { greater_china_states_Y = 566 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	#Group 5 - Huabei
+	608 = { #Beijing - 46
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 652 }
+		set_variable = { greater_china_states_Y = 331 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	614 = { #Hebei - 47
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 643 }
+		set_variable = { greater_china_states_Y = 334 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	609 = { #East Hebei - 48
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 660 }
+		set_variable = { greater_china_states_Y = 326 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	1023 = { #Shijiazhuang - 49
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 623 }
+		set_variable = { greater_china_states_Y = 338 }
+		set_variable = { greater_china_states_group = 1 }
+		set_state_flag = WI_NCPC_state
+	}
+	615 = { #Shanxi - 50
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 587 }
+		set_variable = { greater_china_states_Y = 324 }
+		set_variable = { greater_china_states_group = 2 }
+	}
+	612 = { #Qahar - 51
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 585 }
+		set_variable = { greater_china_states_Y = 248 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	621 = { #Ulanqab - 52
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 530 }
+		set_variable = { greater_china_states_Y = 293 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	955 = { #Ikh Juu - 53
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 546 }
+		set_variable = { greater_china_states_Y = 325 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	815 = { #Eastern Mongolia - 54
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 452 }
+		set_variable = { greater_china_states_Y = 195 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	330 = { #Mongolia - 55
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 414 }
+		set_variable = { greater_china_states_Y = 184 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	814 = { #####Western Mongolia - 56
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 337 }
+		set_variable = { greater_china_states_Y = 169 }
+		set_variable = { greater_china_states_group = 5 }
+	}
+	329 = { #####Tannu Tuva - 57
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_huabei = THIS }
+		set_variable = { greater_china_states_X = 351 }
+		set_variable = { greater_china_states_Y = 143 }
+		set_variable = { greater_china_states_group = 5 }
+	}
+	#Group 6 - Xibei
+	622 = { ##Shaanxi - 58
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 544 }
+		set_variable = { greater_china_states_Y = 343 }
+		set_variable = { greater_china_states_group = 2 }
+	}
+	956 = { ##Xi'an - 59
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 536 }
+		set_variable = { greater_china_states_Y = 407 }
+		set_variable = { greater_china_states_group = 2 }
+	}
+	283 = { #East Gansu - 60
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 507 }
+		set_variable = { greater_china_states_Y = 345 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1302 = { #Central Gansu - 61
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 491 }
+		set_variable = { greater_china_states_Y = 346 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	616 = { #Ningxia - 62
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 440 }
+		set_variable = { greater_china_states_Y = 302 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	764 = { #West Gansu - 63
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 400 }
+		set_variable = { greater_china_states_Y = 298 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	906 = { ###Qinghai - 64
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 403 }
+		set_variable = { greater_china_states_Y = 331 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	604 = { ###Qaidam Basin - 65
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 368 }
+		set_variable = { greater_china_states_Y = 346 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	617 = { ###Urumqi - 66
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 248 }
+		set_variable = { greater_china_states_Y = 266 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	957 = { ###Dabancheng - 67
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 360 }
+		set_variable = { greater_china_states_Y = 266 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	618 = { ###Dzungaria - 68
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 266 }
+		set_variable = { greater_china_states_Y = 211 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	958 = { ###Kunlunshan - 69
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 248 }
+		set_variable = { greater_china_states_Y = 320 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	619 = { ###Yarkand - 70
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_xibei = THIS }
+		set_variable = { greater_china_states_X = 182 }
+		set_variable = { greater_china_states_Y = 310 }
+		set_variable = { greater_china_states_group = 3 }
+	}
+	#Group 7 -  Dongbei
+	1265 = { #Mukden - 71
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 728 }
+		set_variable = { greater_china_states_Y = 307 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	328 = { #Hsinking - 72
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 755 }
+		set_variable = { greater_china_states_Y = 280 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	801 = { #Harbin - 73
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 762 }
+		set_variable = { greater_china_states_Y = 260 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	810 = { #Dairen - 74
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 711 }
+		set_variable = { greater_china_states_Y = 341 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	610 = { #Rehe - 75
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 652 }
+		set_variable = { greater_china_states_Y = 290 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	716 = { #Liaoning - 76
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 694 }
+		set_variable = { greater_china_states_Y = 254 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	715 = { #Liaobei - 77
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 646 }
+		set_variable = { greater_china_states_Y = 151 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	717 = { #Jilin - 78
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 738 }
+		set_variable = { greater_china_states_Y = 224 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	714 = { #Heilongjiang - 79
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 707 }
+		set_variable = { greater_china_states_Y = 148 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	809 = { #Urajio - 80
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 824 }
+		set_variable = { greater_china_states_Y = 287 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	408 = { #Haishenwai - 81
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 814 }
+		set_variable = { greater_china_states_Y = 245 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	657 = { #Biluobizhan - 82
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 778 }
+		set_variable = { greater_china_states_Y = 123 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	409 = { #Boli - 83
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 851 }
+		set_variable = { greater_china_states_Y = 151 }
+		set_variable = { greater_china_states_group = 1 }
+	}
+	1364 = { #####Jieya - 84
+		add_to_array = { YUN.greater_china_states = THIS }
+		add_to_array = { YUN.china_region_dongbei = THIS }
+		set_variable = { greater_china_states_X = 762 }
+		set_variable = { greater_china_states_Y = 161 }
+		set_variable = { greater_china_states_group = 5 }
+	}
+	434 = { ######Dawang - 85 (I forget to include that arghhhhhh)
+		add_to_array = { YUN.greater_china_states = THIS }
+		set_variable = { greater_china_states_group = 5 }
+	}
+	for_each_scope_loop = {
+		array = YUN.greater_china_states
+		set_temp_variable = { state_population_m_calc = state_population_k }
+		multiply_temp_variable = { state_population_m_calc = 0.001 }
+		set_variable = { state_population_m = state_population_m_calc }
+	}
+	set_variable = { WI_map_level = 1 }
+}
+
+WI_show_whole_map = {
+	clear_array = YUN.greater_china_states_map
+	clear_array = YUN.china_region_xinan_map
+	clear_array = YUN.china_region_huazhong_map
+	clear_array = YUN.china_region_huadong_map
+	clear_array = YUN.china_region_huanan_map
+	clear_array = YUN.china_region_huabei_map
+	clear_array = YUN.china_region_xibei_map
+	clear_array = YUN.china_region_dongbei_map
+	#Xinan
+	325 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	960 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	603 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	605 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	905 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	964 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	765 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	322 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	601 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1537 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1538 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	#Huazhong
+	602 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	961 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1016 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	620 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1015 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1014 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	607 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	600 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1019 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	#Huadong
+	613 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	813 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	595 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	596 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	959 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	606 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	598 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1020 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	597 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1021 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	812 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1022 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	811 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	524 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	#Huanan
+	592 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	729 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	326 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1439 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	593 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1438 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1017 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	599 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	594 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1464 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	591 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	#Huabei
+	608 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	614 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	609 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1023 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	615 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	612 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	621 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	955 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	815 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	330 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	814 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	329 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	#Xibei
+	622 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	956 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	283 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1302 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	616 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	764 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	906 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	604 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	617 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	957 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	618 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	958 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	619 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	#Dongbei
+	1265 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	328 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	801 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	810 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	610 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	716 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	715 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	717 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	714 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	809 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	408 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	657 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	409 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+	1364 = { add_to_array = { YUN.greater_china_states_map = THIS } }
+}
+
+WI_show_region_map = {
+	clear_array = YUN.greater_china_states_map
+	clear_array = YUN.china_region_xinan_map
+	clear_array = YUN.china_region_huazhong_map
+	clear_array = YUN.china_region_huadong_map
+	clear_array = YUN.china_region_huanan_map
+	clear_array = YUN.china_region_huabei_map
+	clear_array = YUN.china_region_xibei_map
+	clear_array = YUN.china_region_dongbei_map
+	if = {
+		limit = { check_variable = { WI_check_region = 1 } }
+		325 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		960 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		603 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		605 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		905 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		964 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		765 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		322 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		601 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		1537 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+		1538 = { add_to_array = { YUN.china_region_xinan_map = THIS } }
+	}
+	else_if = {
+		limit = { check_variable = { WI_check_region = 2 } }
+		602 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		961 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		1016 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		620 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		1015 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		1014 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		607 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		600 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+		1019 = { add_to_array = { YUN.china_region_huazhong_map = THIS } }
+	}
+	else_if = {
+		limit = { check_variable = { WI_check_region = 3 } }
+		613 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		813 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		595 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		596 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		959 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		606 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		598 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		1020 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		597 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		1021 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		812 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		1022 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		811 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+		524 = { add_to_array = { YUN.china_region_huadong_map = THIS } }
+	}
+	else_if = {
+		limit = { check_variable = { WI_check_region = 4 } }
+		592 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		729 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		326 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		1439 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		593 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		1438 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		1017 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		599 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		594 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		1464 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+		591 = { add_to_array = { YUN.china_region_huanan_map = THIS } }
+	}
+	else_if = {
+		limit = { check_variable = { WI_check_region = 5 } }
+		608 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		614 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		609 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		1023 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		615 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		612 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		621 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		955 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		815 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		330 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		814 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+		329 = { add_to_array = { YUN.china_region_huabei_map = THIS } }
+	}
+	else_if = {
+		limit = { check_variable = { WI_check_region = 6 } }
+		622 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		956 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		283 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		1302 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		616 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		764 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		906 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		604 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		617 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		957 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		618 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		958 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+		619 = { add_to_array = { YUN.china_region_xibei_map = THIS } }
+	}
+	else_if = {
+		limit = { check_variable = { WI_check_region = 7 } }
+		1265 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		328 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		801 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		810 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		610 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		716 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		715 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		717 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		714 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		809 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		408 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		657 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		409 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+		1364 = { add_to_array = { YUN.china_region_dongbei_map = THIS } }
+	}
+}
+
+WI_calc_state_officer_needed = {
+	if = { #First time
+		limit = {
+			NOT = { has_country_flag = YUN_WI_logunit_initialized }
+		}
+		set_variable = { WI_officers_taken_total = 0 }
+		set_variable = { YUN.YUN_WI_core_pop = 0 }
+		every_controlled_state = {
+			limit = { is_core_of = YUN }
+			add_to_variable = { YUN.YUN_WI_core_pop = state_population_m }
+		}
+		set_temp_variable = { YUN_WI_max_logunit_calc = YUN.YUN_WI_core_pop }
+		multiply_temp_variable = { YUN_WI_max_logunit_calc = 0.1 }
+		set_variable = { YUN_WI_max_logunit = YUN_WI_max_logunit_calc }
+
+		set_temp_variable = { YUN_WI_logunit_calc = YUN.YUN_WI_core_pop }
+		set_variable = { YUN_WI_old_pop = YUN_WI_logunit_calc }
+		multiply_temp_variable = { YUN_WI_logunit_calc = 0.05 }
+		set_variable = { YUN_WI_logunit = YUN_WI_logunit_calc }
+		set_variable = { YUN_WI_logunit_percent = 5.0 }
+		set_variable = { YUN_WI_logunit_confirmed = YUN_WI_logunit_percent }
+		set_variable = { YUN_WI_logunit_percent_confirmed = YUN_WI_logunit_percent }
+		set_variable = { YUN_WI_estimated_officers = YUN_WI_logunit }
+		set_country_flag = YUN_WI_logunit_initialized
+	}
+	else = { #Update
+		set_variable = { YUN.YUN_WI_core_pop = 0 }
+		every_controlled_state = {
+			limit = { is_core_of = YUN }
+			add_to_variable = { YUN.YUN_WI_core_pop = state_population_m }
+		}
+		set_temp_variable = { YUN_WI_max_logunit_update = YUN.YUN_WI_core_pop }
+		multiply_temp_variable = { YUN_WI_max_logunit_update = 0.1 }
+		set_variable = { YUN_WI_max_logunit = YUN_WI_max_logunit_update }
+
+		set_variable = { YUN_WI_update_logunit = YUN.YUN_WI_core_pop }
+		subtract_from_variable = { YUN_WI_update_logunit = YUN_WI_old_pop }
+
+		multiply_variable = { YUN_WI_update_logunit = YUN_WI_logunit_percent_confirmed }
+		multiply_variable = { YUN_WI_update_logunit = 0.01 }
+		add_to_variable = { YUN_WI_logunit = YUN_WI_update_logunit }
+		add_to_variable = { YUN_WI_estimated_officers = YUN_WI_update_logunit }
+		set_variable = { YUN_WI_old_pop = YUN.YUN_WI_core_pop }
+		if = {
+			limit = { check_variable = { YUN_WI_logunit < 0 } }
+			random_controlled_state = {
+				limit = { check_variable = { WI_current_state_officer > 0 } }
+				add_to_variable = { WI_current_state_officer = YUN.YUN_WI_logunit }
+				YUN_update_state_officers_effects = yes
+			}
+			add_to_variable = { YUN.WI_officers_taken_total = YUN.YUN_WI_logunit }
+			set_variable = { YUN_WI_logunit = 0 }
+		}
+	}
+	update_YUN_WI_map = yes
+}
+
+greater_china_states_control_change = {
+	for_each_scope_loop = {
+		array = YUN.greater_china_states
+		clear_variable = greater_china_states_i
+		if = {
+			limit = { check_variable = { greater_china_states_group = 1 } }
+			if = {
+				limit = {
+					OR = {
+						is_controlled_by = CHI
+						is_controlled_by = JAP
+						is_controlled_by = MAN
+						is_controlled_by = GNG
+						is_controlled_by = GAN
+						is_controlled_by = MEN
+						is_controlled_by = MON
+						controller = { has_war_with = YUN }
+					}
+				}
+				set_variable = { greater_china_states_i = 1 }
+			}
+			else_if = {
+				limit = {
+					AND = {
+						is_controlled_by = YUN
+						is_core_of = YUN
+					}
+				}
+				set_variable = { greater_china_states_i = 3 }
+			}
+			else_if = {
+				limit = {
+					controller = { is_in_faction_with = YUN }
+				}
+				set_variable = { greater_china_states_i = 2 }
+			}
+		}
+
+		else_if = {
+			limit = {
+				OR = {
+					check_variable = { greater_china_states_group = 2 }
+					check_variable = { greater_china_states_group = 3 }
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						is_controlled_by = YUN
+						is_core_of = YUN
+					}
+				}
+				set_variable = { greater_china_states_i = 1 }
+			}
+			else_if = {
+				limit = {
+					controller = { is_in_faction_with = YUN }
+				}
+				set_variable = { greater_china_states_i = 2 }
+			}
+			else_if = {
+				limit = {
+					controller = {
+						AND = {
+							NOT = { is_in_faction_with = CHI }
+							NOT = { original_tag = YUN }
+						}
+					}
+				}
+				set_variable = { greater_china_states_i = 3 }
+			}
+			else_if = {
+				limit = {
+					controller = {
+						AND = {
+							has_war_with = YUN
+							OR = {
+								is_in_faction_with = CHI
+								is_in_faction_with = JAP
+							}
+						}
+					}
+				}
+				set_variable = { greater_china_states_i = 4 }
+			}
+		}
+
+		else_if = {
+			limit = { check_variable = { greater_china_states_group = 4 } }
+			if = {
+				limit = {
+					is_controlled_by = YUN
+				}
+				set_variable = { greater_china_states_i = 1 }
+			}
+			else = {
+				set_variable = { greater_china_states_i = 2 }
+			}
+		}
+
+		else_if = {
+			limit = {
+				OR = {
+					check_variable = { greater_china_states_group = 5 }
+					check_variable = { greater_china_states_group = 6 }
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						is_controlled_by = YUN
+						is_core_of = YUN
+					}
+				}
+				set_variable = { greater_china_states_i = 1 }
+			}
+			else = {
+				set_variable = { greater_china_states_i = 2 }
+			}
+		}
+	}
+	update_YUN_WI_map = yes
+}
+
+update_YUN_WI_map = {
+	add_to_variable = { YUN.YUN_WI_dirty = 1 }
+}
+
+YUN_WI_greater_china_states_actions_initialize = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = WI_states_actions_initialized }
+		}
+		add_to_array = { YUN.china_states_action = 0 }
+		add_to_array = { YUN.china_states_action = 1 }
+		add_to_array = { YUN.china_states_action = 2 }
+		add_to_array = { YUN.china_states_action = 3 }
+		add_to_array = { YUN.china_states_action = 4 }
+		set_country_flag = WI_states_actions_initialized
+	}
+}
+
+YUN_WI_china_states_action_starts = {
+	if = {
+		limit = {
+			check_variable = { china_states_action_id = 0 }
+		}
+		THIS = {
+			create_unit = {
+				division = "division_template = \"Guofang Juntuan\" start_equipment_factor = 1.0"
+				owner = YUN
+				count = 1
+			}
+			set_state_flag = {
+				flag = WI_recruit_cooldown
+				days = 120
+				value = 1
+			}
+			add_manpower = -6600
+		}
+		set_temp_variable = { WI_state_mil_level_pp_cost = WI_state_mil_level_pp }
+		multiply_temp_variable = { WI_state_mil_level_pp_cost = -1 }
+		set_temp_variable = { WI_state_mil_level_infeq_final_cost = WI_state_mil_level_infeq_cost }
+		add_to_temp_variable = { WI_state_mil_level_infeq_final_cost = 1 }
+		multiply_temp_variable = { WI_state_mil_level_infeq_final_cost = -1 }
+		YUN = {
+			add_political_power = var:WI_state_mil_level_pp_cost
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = var:WI_state_mil_level_infeq_final_cost
+			}
+		}
+	}
+
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 1 }
+		}
+		THIS = {
+			set_state_flag = {
+				flag = WI_confiscate_cooldown
+				days = 90
+				value = 1
+			}
+		}
+		set_temp_variable = { WI_state_mil_level_cp_cost = WI_state_mil_level_cp }
+		multiply_temp_variable = { WI_state_mil_level_cp_cost = -1 }
+		YUN = {
+			add_command_power = var:WI_state_mil_level_cp_cost
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = var:PREV.WI_state_mil_level_infeq
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = var:PREV.WI_state_mil_level_atequ
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = var:PREV.WI_state_mil_level_artyequ
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = var:PREV.WI_state_mil_level_suppequ
+			}
+			set_temp_variable = { YUN_WI_temp_legitimacy = -5 }
+			YUN_WI_legitimacy_change = yes
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 2 }
+		}
+		THIS = {
+			set_state_flag = {
+				flag = WI_mil_build_cooldown
+				days = 180
+				value = 1
+			}
+		}
+		YUN = {
+			set_temp_variable = { temp_econ_spending_amount = PREV.temp_econ_spending_amount_WI_state }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+		if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed = 100 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = barracks
+					level = 3
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 3
+			}
+			add_to_variable = { YUN_legitimacy_pu = 2 }
+		}
+		else_if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed > 80 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = barracks
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_to_variable = { YUN_legitimacy_pu = 2 }
+		}
+		else_if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed > 60 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = barracks
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_to_variable = { YUN_legitimacy_pu = 1 }
+		}
+		else_if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed > 40 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = barracks
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = { YUN_legitimacy_pu = 1 }
+		}
+		else_if = {
+			limit = {
+				THIS = {
+					check_variable = {
+						var = WI_state_mil_level_confirmed
+						value = 40
+						compare = less_than_or_equals
+					}
+				}
+			}
+			THIS = {
+				add_building_construction = {
+					type = barracks
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 3 }
+		}
+		THIS = {
+			set_state_flag = {
+				flag = WI_power_build_cooldown
+				days = 180
+				value = 1
+			}
+			set_temp_variable = { state_value_multiplier_temp = 1.02 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
+		YUN = {
+			set_temp_variable = { temp_econ_spending_amount = PREV.temp_econ_spending_amount_WI_state }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+		if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed = 100 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = thermoelectric_plant
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed > 80 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed > 60 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				THIS = { check_variable = { WI_state_mil_level_confirmed > 40 } }
+			}
+			THIS = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 4 }
+		}
+		THIS = {
+			set_state_flag = {
+				flag = WI_propaganda_cooldown
+				days = 120
+				value = 1
+			}
+		}
+		YUN = {
+			set_temp_variable = { temp_econ_spending_amount = 0.2 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+		set_temp_variable = { WI_state_mil_level_pp_gain = 105 }
+		subtract_from_temp_variable = { WI_state_mil_level_pp_gain = WI_state_mil_level_pp }
+		multiply_temp_variable = { WI_state_mil_level_pp_gain = 0.25 }
+
+		set_temp_variable = { WI_state_mil_level_cp_gain = 22 }
+		subtract_from_temp_variable = { WI_state_mil_level_cp_gain = WI_state_mil_level_cp }
+		multiply_temp_variable = { WI_state_mil_level_cp_gain = 0.75 }
+		YUN = {
+			add_political_power = var:WI_state_mil_level_pp_gain
+			add_command_power = var:WI_state_mil_level_cp_gain
+		}
+		set_temp_variable = { YUN_WI_temp_legitimacy = 1.0 }
+		YUN_WI_legitimacy_change = yes
+	}
+	update_YUN_WI_map = yes
+}
+
+YUN_WI_china_states_action_GUI_starts = {
+	if = {
+		limit = {
+			check_variable = { china_states_action_id = 0 }
+		}
+		var:china_acted_state = {
+			create_unit = {
+				division = "division_template = \"Guofang Juntuan\" start_equipment_factor = 1.0"
+				owner = YUN
+				count = 1
+			}
+			set_state_flag = {
+				flag = WI_recruit_cooldown
+				days = 120
+				value = 1
+			}
+			add_manpower = -6600
+			set_temp_variable = { WI_state_mil_level_pp_cost = WI_state_mil_level_pp }
+			multiply_temp_variable = { WI_state_mil_level_pp_cost = -1 }
+			set_temp_variable = { WI_state_mil_level_infeq_final_cost = WI_state_mil_level_infeq_cost }
+			add_to_temp_variable = { WI_state_mil_level_infeq_final_cost = 1 }
+			multiply_temp_variable = { WI_state_mil_level_infeq_final_cost = -1 }
+		}
+		YUN = {
+			add_political_power = china_acted_state:WI_state_mil_level_pp_cost
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = china_acted_state:WI_state_mil_level_infeq_final_cost
+			}
+		}
+	}
+
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 1 }
+		}
+		var:china_acted_state = {
+			set_state_flag = {
+				flag = WI_confiscate_cooldown
+				days = 90
+				value = 1
+			}
+			set_temp_variable = { WI_state_mil_level_cp_cost = WI_state_mil_level_cp }
+			multiply_temp_variable = { WI_state_mil_level_cp_cost = -1 }
+		}
+		YUN = {
+			add_command_power = var:WI_state_mil_level_cp_cost
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = china_acted_state:WI_state_mil_level_infeq
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = china_acted_state:WI_state_mil_level_atequ
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = china_acted_state:WI_state_mil_level_artyequ
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = china_acted_state:WI_state_mil_level_suppequ
+			}
+			set_temp_variable = { YUN_WI_temp_legitimacy = -5 }
+			YUN_WI_legitimacy_change = yes
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 2 }
+		}
+		var:china_acted_state = {
+			set_state_flag = {
+				flag = WI_mil_build_cooldown
+				days = 180
+				value = 1
+			}
+		}
+		YUN = {
+			set_temp_variable = { temp_econ_spending_amount = china_acted_state:temp_econ_spending_amount_WI_state }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+		if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed = 100 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = barracks
+					level = 3
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 3
+			}
+			add_to_variable = { YUN_legitimacy_pu = 2 }
+		}
+		else_if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed > 80 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = barracks
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = { YUN_legitimacy_pu = 2 }
+		}
+		else_if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed > 60 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = barracks
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = { YUN_legitimacy_pu = 1 }
+		}
+		else_if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed > 40 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = barracks
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = { YUN_legitimacy_pu = 1 }
+		}
+		else_if = {
+			limit = {
+				var:china_acted_state = {
+					check_variable = {
+						var = WI_state_mil_level_confirmed
+						value = 40
+						compare = less_than_or_equals
+					}
+				}
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = barracks
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 3 }
+		}
+		var:china_acted_state = {
+			set_state_flag = {
+				flag = WI_power_build_cooldown
+				days = 180
+				value = 1
+			}
+			set_temp_variable = { state_value_multiplier_temp = 1.02 }
+			econ_state_value_change_multiply_specified_state = yes
+		}
+		YUN = {
+			set_temp_variable = { temp_econ_spending_amount = china_acted_state:temp_econ_spending_amount_WI_state }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+		if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed = 100 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = thermoelectric_plant
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed > 80 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed > 60 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				var:china_acted_state = { check_variable = { WI_state_mil_level_confirmed > 40 } }
+			}
+			var:china_acted_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { china_states_action_id = 4 }
+		}
+		var:china_acted_state = {
+			set_state_flag = {
+				flag = WI_propaganda_cooldown
+				days = 120
+				value = 1
+			}
+			set_temp_variable = { WI_state_mil_level_pp_gain = 105 }
+			subtract_from_temp_variable = { WI_state_mil_level_pp_gain = WI_state_mil_level_pp }
+			multiply_temp_variable = { WI_state_mil_level_pp_gain = 0.25 }
+
+			set_temp_variable = { WI_state_mil_level_cp_gain = 22 }
+			subtract_from_temp_variable = { WI_state_mil_level_cp_gain = WI_state_mil_level_cp }
+			multiply_temp_variable = { WI_state_mil_level_cp_gain = 0.75 }
+		}
+		YUN = {
+			set_temp_variable = { temp_econ_spending_amount = 0.2 }
+			econ_spend_money_once_effect_raw_money = yes
+			add_political_power = china_acted_state:WI_state_mil_level_pp_gain
+			add_command_power = china_acted_state:WI_state_mil_level_cp_gain
+		}
+		set_temp_variable = { YUN_WI_temp_legitimacy = 1.0 }
+		YUN_WI_legitimacy_change = yes
+	}
+	update_YUN_WI_map = yes
+}
+
+YUN_update_state_officers_effects = {
+	THIS = {
+		set_temp_variable = { WI_state_percent_calc = WI_current_state_officer }
+		divide_temp_variable = { WI_state_percent_calc = WI_state_officer_needed }
+		multiply_temp_variable = { WI_state_percent_calc = 100 }
+		set_variable = { YUN_state_officer_percentage = WI_state_percent_calc }
+		round_variable = YUN_state_officer_percentage
+		set_temp_variable = { YUN_state_officer_ratio_calc = 100 }
+		subtract_from_temp_variable = { YUN_state_officer_ratio_calc = YUN_state_officer_percentage }
+		divide_temp_variable = { YUN_state_officer_ratio_calc = 100 }
+
+		clear_array = YUN_WI_province_status
+		add_to_array = { YUN_WI_province_status = -0.75 }
+		add_to_array = { YUN_WI_province_status = -0.5  }
+		add_to_array = { YUN_WI_province_status = -0.5 }
+		add_to_array = { YUN_WI_province_status = 0.5 }
+		add_to_array = { YUN_WI_province_status = -0.5 }
+		add_to_array = { YUN_WI_province_status = -0.5 }
+		add_to_array = { YUN_WI_province_status = -0.25 }
+		for_each_loop = {
+			array = YUN_WI_province_status
+			multiply_variable = { YUN_WI_province_status^i = YUN_state_officer_ratio_calc }
+		}
+
+		#Buildings are cool
+		set_temp_variable = { YUN_WI_province_hospitals_calc = 0.05 }
+		set_temp_variable = { YUN_WI_province_schools_calc = 0.05 }
+		set_temp_variable = { YUN_WI_province_barracks_calc = 0.05 }
+		set_temp_variable = { YUN_WI_province_prisons_calc = -0.05 }
+		set_temp_variable = { YUN_WI_province_offices_calc = 0.05 }
+		set_temp_variable = { YUN_WI_province_infrastructure_calc = 0.02 }
+
+		multiply_temp_variable = { YUN_WI_province_hospitals_calc = non_damaged_building_level@hospitals }
+		multiply_temp_variable = { YUN_WI_province_schools_calc = non_damaged_building_level@schools }
+		multiply_temp_variable = { YUN_WI_province_barracks_calc = non_damaged_building_level@barracks }
+		multiply_temp_variable = { YUN_WI_province_prisons_calc = non_damaged_building_level@prisons }
+		multiply_temp_variable = { YUN_WI_province_offices_calc = non_damaged_building_level@offices }
+		multiply_temp_variable = { YUN_WI_province_infrastructure_calc = non_damaged_building_level@infrastructure }
+
+		set_variable = { YUN_WI_province_hospitals_loc = YUN_WI_province_hospitals_calc }
+		set_variable = { YUN_WI_province_schools_loc = YUN_WI_province_schools_calc }
+		set_variable = { YUN_WI_province_barracks_loc = YUN_WI_province_barracks_calc }
+		set_variable = { YUN_WI_province_prisons_loc = YUN_WI_province_prisons_calc }
+		set_variable = { YUN_WI_province_offices_loc = YUN_WI_province_offices_calc }
+		set_variable = { YUN_WI_province_infrastructure_loc = YUN_WI_province_infrastructure_calc }
+
+		add_to_variable = { YUN_WI_province_status^0 = YUN_WI_province_schools_calc }
+		add_to_variable = { YUN_WI_province_status^1 = YUN_WI_province_hospitals_calc }
+		add_to_variable = { YUN_WI_province_status^2 = YUN_WI_province_barracks_calc }
+		add_to_variable = { YUN_WI_province_status^4 = YUN_WI_province_prisons_calc }
+		add_to_variable = { YUN_WI_province_status^5 = YUN_WI_province_offices_calc }
+		add_to_variable = { YUN_WI_province_status^6 = YUN_WI_province_infrastructure_calc }
+
+		set_temp_variable = { YUN_officer_core_bonus_calc = YUN_state_officer_percentage }
+		multiply_temp_variable = { YUN_officer_core_bonus_calc = 0.2 }
+		set_variable = { YUN_state_coring_bonus = YUN_officer_core_bonus_calc }
+
+		set_temp_variable = { YUN_WI_mil_level_speed_calc = YUN_state_officer_percentage }
+		if = {
+			limit = {
+				check_variable = { YUN_state_officer_percentage = 0 }
+			}
+			set_temp_variable = { YUN_WI_mil_level_speed_calc = 1 }
+		}
+		multiply_temp_variable = { YUN_WI_mil_level_speed_calc = 0.25 }
+		multiply_temp_variable = { YUN_WI_mil_level_speed_calc = 0.01 }
+		set_variable = { YUN_WI_mil_level_speed = YUN_WI_mil_level_speed_calc }
+		force_update_dynamic_modifier = yes
+	}
+}
+
+YUN_WI_influence_calc = {
+	if = {
+		limit = {
+			check_variable = { global.GUI_SIC_NPA_Influence > global.GUI_SIC_RGOC_Influence }
+		}
+		set_variable = { YUN_WI_influence = 1 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.GUI_SIC_NPA_Influence = global.GUI_SIC_RGOC_Influence }
+		}
+		set_variable = { YUN_WI_influence = 2 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.GUI_SIC_NPA_Influence < global.GUI_SIC_RGOC_Influence }
+		}
+		set_variable = { YUN_WI_influence = 3 }
+	}
+}
+
+WI_calc_momentum_tick = {
+	if = {
+		limit = {
+			NOT = { has_global_flag = YUN_NPA_GAW_Crisis }
+		}
+		set_temp_variable = { WI_momentum_tick_calc = CHI.surrender_progress }
+		add_to_temp_variable = { WI_momentum_tick_calc = -0.04 }
+		set_temp_variable = { WI_momentum_tick_calc_2 = YUN.surrender_progress }
+		subtract_from_temp_variable = { WI_momentum_tick_calc = WI_momentum_tick_calc_2 }
+		multiply_temp_variable = { WI_momentum_tick_calc = 25 }
+		set_variable = { global.WI_momentum_tick = WI_momentum_tick_calc }
+	}
+	else = {
+		set_temp_variable = { WI_momentum_tick_calc = YUN.surrender_progress }
+		multiply_temp_variable = { WI_momentum_tick_calc = -50 }
+		set_temp_variable = { WI_momentum_tick_calc_2 = NCC.surrender_progress }
+		add_to_temp_variable = { WI_momentum_tick_calc_2 = GAN.surrender_progress }
+		add_to_temp_variable = { WI_momentum_tick_calc_2 = GNG.surrender_progress }
+		add_to_temp_variable = { WI_momentum_tick_calc_2 = MAN.surrender_progress }
+		add_to_temp_variable = { WI_momentum_tick_calc_2 = MEN.surrender_progress }
+		multiply_temp_variable = { WI_momentum_tick_calc_2 = 2 }
+		set_variable = { global.WI_momentum_tick = WI_momentum_tick_calc }
+		add_to_variable = { global.WI_momentum_tick = WI_momentum_tick_calc_2 }
+	}
+	add_to_variable = { global.WI_momentum_tick_bonus_true = WI_momentum_tick_bonus}
+	add_to_variable = { global.WI_momentum_tick = global.WI_momentum_tick_bonus_true }
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+}
+
+WI_calc_momentum = {
+	add_to_variable = { global.YUN_WI_war_momentum_check = global.WI_momentum_tick }
+	clamp_variable = {
+		var = global.YUN_WI_war_momentum_check
+		max = 100
+		min = 0
+	}
+	set_variable = { YUN_WI_legitimacy_momentum_modifier = global.YUN_WI_war_momentum_check }
+	set_temp_variable = { YUN_WI_legitimacy_momentum_calc = 50 }
+	subtract_from_variable = { YUN_WI_legitimacy_momentum_modifier = YUN_WI_legitimacy_momentum_calc }
+	multiply_variable = { YUN_WI_legitimacy_momentum_modifier = 0.1 }
+	set_variable = { YUN_WI_warbuff_momentum_modifier = YUN_WI_legitimacy_momentum_modifier }
+
+	if = {
+		limit = {
+			NOT = { has_global_flag = YUN_NPA_GAW_Crisis }
+		}
+		set_temp_variable = { WI_momentum_morale_calc = -0.5 }
+		set_temp_variable = { WI_momentum_attack_calc = -0.5 }
+		set_temp_variable = { YUN_WI_war_momentum_check_calc = global.YUN_WI_war_momentum_check }
+		multiply_temp_variable = { YUN_WI_war_momentum_check_calc = 0.01 }
+		set_temp_variable = { YUN_WI_war_momentum_check_calc_true = 0.5 }
+		if = {
+			limit = {
+				check_variable = { global.YUN_WI_war_momentum_check > 50 }
+			}
+			subtract_from_temp_variable = { YUN_WI_war_momentum_check_calc = YUN_WI_war_momentum_check_calc_true }
+			multiply_temp_variable = { WI_momentum_morale_calc = YUN_WI_war_momentum_check_calc }
+			multiply_temp_variable = { WI_momentum_attack_calc = YUN_WI_war_momentum_check_calc }
+			set_variable = { CHI.WI_momentum_mor = WI_momentum_morale_calc }
+			set_variable = { CHI.WI_momentum_atk = WI_momentum_attack_calc }
+		}
+		else = {
+			subtract_from_temp_variable = { YUN_WI_war_momentum_check_calc_true = YUN_WI_war_momentum_check_calc }
+			multiply_temp_variable = { WI_momentum_morale_calc = YUN_WI_war_momentum_check_calc_true }
+			multiply_temp_variable = { WI_momentum_attack_calc = YUN_WI_war_momentum_check_calc_true }
+			set_variable = { YUN.WI_momentum_mor = WI_momentum_morale_calc }
+			set_variable = { YUN.WI_momentum_atk = WI_momentum_attack_calc }
+		}
+	}
+	else = {
+		set_temp_variable = { WI_momentum_morale_calc = -1 }
+		set_temp_variable = { WI_momentum_attack_calc = -1 }
+		set_temp_variable = { YUN_WI_war_momentum_check_calc = global.YUN_WI_war_momentum_check }
+		divide_temp_variable = { YUN_WI_war_momentum_check_calc = 400 }
+		set_temp_variable = { YUN_WI_war_momentum_check_calc_true = 0.25 }
+		subtract_from_temp_variable = { YUN_WI_war_momentum_check_calc_true = YUN_WI_war_momentum_check_calc }
+		multiply_temp_variable = { WI_momentum_morale_calc = YUN_WI_war_momentum_check_calc_true }
+		multiply_temp_variable = { WI_momentum_attack_calc = YUN_WI_war_momentum_check_calc_true }
+		set_variable = { YUN.WI_momentum_mor = WI_momentum_morale_calc }
+		set_variable = { YUN.WI_momentum_atk = WI_momentum_attack_calc }
+	}
+	if = {
+		limit = {
+			check_variable = { global.YUN_WI_war_momentum_check = 0 }
+			NOT = { has_country_flag = YUN_NPA_despair_branch }
+		}
+		YUN = {
+			country_event = { id = yun_wi.51 }
+		}
+	}
+	if = {
+		limit = {
+			CHI = { num_of_controlled_states < 2 }
+			check_variable = { global.YUN_WI_war_momentum_check = 100 }
+		}
+		CHI = {
+			country_event = { id = chi.9999 days = 60 }
+		}
+	}
+	if = {
+		limit = {
+			JAP = { num_divisions < 1 }
+		}
+		JAP = {
+			country_event = { id = chi.10000 }
+		}
+	}
+	add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+}
+
+YUN_WI_update_state_integration = {
+	YUN = {
+		every_controlled_state = {
+			limit = { NOT = { is_core_of = YUN } }
+			set_temp_variable = { YUN_officer_core_bonus_calc = THIS.YUN_state_officer_percentage }
+			multiply_temp_variable = { YUN_officer_core_bonus_calc = 0.2 }
+			set_variable = { THIS.YUN_state_coring_bonus = YUN_officer_core_bonus_calc }
+			set_variable = { THIS.WI_state_integrate_bonus = YUN.YUN_country_coring_bonus }
+			add_to_variable = { THIS.WI_state_integrate_bonus = THIS.YUN_state_coring_bonus }
+			add_to_variable = { THIS.WI_state_integrate_progress = THIS.WI_state_integrate_bonus }
+			clamp_variable = {
+				var = WI_state_integrate_progress
+				min = 0
+				max = 100
+			}
+		}
+		for_each_scope_loop = {
+			array = YUN.greater_china_states
+			if = {
+				limit = { check_variable = { THIS.WI_state_integrate_progress = 100 } }
+				add_core_of = YUN
+			}
+		}
+	}
+}
+
+YUN_WI_state_mil_level_speed = {
+	set_variable = { WI_state_mil_level_reserve = WI_state_mil_level }
+	set_variable = { WI_state_mil_level_true = WI_state_mil_level }
+	add_to_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+	set_variable = { WI_state_mil_level_time = WI_state_mil_level }
+	multiply_variable = { WI_state_mil_level_time = YUN_WI_mil_level_speed }
+}
+
+YUN_WI_state_mil_level_calc = {
+	set_variable = { YUN.YUN_legitimacy_state_modifier_total = 0 }
+	set_variable = { YUN.YUN_WI_warbuff_state_modifier_total = 0 }
+	set_variable = { YUN.YUN_army_prof_state_modifier_total = 0 }
+	THIS = {
+		if = {
+			limit = {
+				NOT = { check_variable = { WI_state_mil_level_confirmed = WI_state_mil_level_true } }
+			}
+			add_to_variable = { WI_state_mil_level_confirmed = WI_state_mil_level_time }
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							check_variable = { WI_state_mil_level_confirmed < WI_state_mil_level_true }
+							check_variable = { WI_state_mil_level_reserve < 0 }
+						}
+						AND = {
+							check_variable = { WI_state_mil_level_confirmed > WI_state_mil_level_true }
+							check_variable = { WI_state_mil_level_reserve > 0 }
+						}
+					}
+				}
+				clamp_variable = {
+					var = WI_state_mil_level_confirmed
+					min = WI_state_mil_level_true
+					max = WI_state_mil_level_true
+				}
+				clear_variable = WI_state_mil_level_time
+			}
+		}
+		set_temp_variable = { WI_state_mil_level_calc_false = WI_state_mil_level_confirmed }
+		set_temp_variable = { WI_state_mil_level_calc_true = 50 }
+		subtract_from_temp_variable = { WI_state_mil_level_calc_true =  WI_state_mil_level_calc_false}
+		multiply_temp_variable = { WI_state_mil_level_calc_true = 0.02 }
+		set_variable = { YUN_legitimacy_state_modifier = WI_state_mil_level_calc_true }
+
+		set_temp_variable = { WI_state_mil_level_calc_false_2 = WI_state_mil_level_confirmed }
+		set_temp_variable = { WI_state_mil_level_calc_true_2 = 50 }
+		subtract_from_temp_variable = { WI_state_mil_level_calc_false_2 = WI_state_mil_level_calc_true_2 }
+		multiply_temp_variable = { WI_state_mil_level_calc_false_2 = 0.02 }
+		set_variable = { YUN_warbuff_state_modifier = WI_state_mil_level_calc_false_2 }
+
+		set_temp_variable = { WI_state_mil_level_calc_false_3 = WI_state_mil_level_confirmed }
+		set_temp_variable = { WI_state_mil_level_calc_true_3 = 50 }
+		subtract_from_temp_variable = { WI_state_mil_level_calc_false_3 = WI_state_mil_level_calc_true_3 }
+		divide_temp_variable = { YUN_army_prof_state_modifier = 1000 }
+		set_variable = { YUN_army_prof_state_modifier = WI_state_mil_level_calc_false_3 }
+
+		set_temp_variable = { WI_state_mil_level_infeq_temp = WI_state_mil_level_confirmed }
+		multiply_temp_variable = { WI_state_mil_level_infeq_temp = 20 }
+		set_variable = { WI_state_mil_level_infeq = WI_state_mil_level_infeq_temp }
+		set_temp_variable = { WI_state_mil_level_infeq_true = 2600 }
+		subtract_from_temp_variable = { WI_state_mil_level_infeq_true = WI_state_mil_level_infeq_temp }
+		subtract_from_temp_variable = { WI_state_mil_level_infeq_true = 1 }
+		set_variable = { WI_state_mil_level_infeq_cost = WI_state_mil_level_infeq_true }
+
+		set_temp_variable = { WI_state_mil_level_atequ_temp = WI_state_mil_level_confirmed }
+		multiply_temp_variable = { WI_state_mil_level_atequ_temp = 4.5 }
+		set_variable = { WI_state_mil_level_atequ = WI_state_mil_level_atequ_temp }
+
+		set_temp_variable = { WI_state_mil_level_artyequ_temp = WI_state_mil_level_confirmed }
+		multiply_temp_variable = { WI_state_mil_level_artyequ_temp = 2.4 }
+		round_temp_variable = WI_state_mil_level_artyequ_temp
+		set_variable = { WI_state_mil_level_artyequ = WI_state_mil_level_artyequ_temp }
+
+		set_temp_variable = { WI_state_mil_level_suppequ_temp = WI_state_mil_level_confirmed }
+		multiply_temp_variable = { WI_state_mil_level_suppequ_temp = 4.8 }
+		round_temp_variable = WI_state_mil_level_suppequ_temp
+		set_variable = { WI_state_mil_level_suppequ = WI_state_mil_level_suppequ_temp }
+
+		set_temp_variable = { WI_state_mil_level_pp_temp = WI_state_mil_level_confirmed }
+		set_temp_variable = { WI_state_mil_level_pp_true = 105 }
+		subtract_from_temp_variable = { WI_state_mil_level_pp_true = WI_state_mil_level_pp_temp }
+		set_variable = { WI_state_mil_level_pp = WI_state_mil_level_pp_true }
+
+		set_temp_variable = { WI_state_mil_level_cp_temp = WI_state_mil_level_confirmed }
+		set_temp_variable = { WI_state_mil_level_cp_true = 110 }
+		subtract_from_temp_variable = { WI_state_mil_level_cp_true = WI_state_mil_level_cp_temp }
+		divide_temp_variable = { WI_state_mil_level_cp_true = 5 }
+		set_variable = { WI_state_mil_level_cp = WI_state_mil_level_cp_true }
+
+		set_temp_variable = { WI_state_mil_level_manpower_temp = WI_state_mil_level_confirmed }
+		multiply_temp_variable = { WI_state_mil_level_manpower_temp = 500 }
+		set_variable = { WI_state_mil_level_manpower = WI_state_mil_level_manpower_temp }
+
+		set_temp_variable = { WI_state_mil_level_reserves_true = 110 }
+		set_temp_variable = { WI_state_mil_level_reserves_temp = WI_state_mil_level_confirmed }
+		subtract_from_temp_variable = { WI_state_mil_level_reserves_temp = WI_state_mil_level_reserves_true }
+		multiply_temp_variable = { WI_state_mil_level_reserves_temp = -0.005 }
+		set_variable = { temp_econ_spending_amount_WI_state = WI_state_mil_level_reserves_temp }
+
+		set_temp_variable = { WI_state_mil_level_strategy_temp = WI_state_mil_level_confirmed }
+		multiply_temp_variable = { WI_state_mil_level_strategy_temp = 0.015 }
+		multiply_temp_variable = { WI_state_mil_level_strategy_temp = 0.1 }
+		set_variable = { WI_state_mil_level_strategy = WI_state_mil_level_strategy_temp }
+		set_variable = { WI_state_mil_level_strategy_debuff = WI_state_mil_level_strategy_temp }
+		multiply_variable = { WI_state_mil_level_strategy_debuff = -1 }
+	}
+	YUN = {
+		every_controlled_state = {
+			add_to_variable = { YUN.YUN_legitimacy_state_modifier_total = YUN_legitimacy_state_modifier }
+			add_to_variable = { YUN.YUN_WI_warbuff_state_modifier_total = YUN_warbuff_state_modifier }
+			add_to_variable = { YUN.YUN_army_prof_state_modifier_total = YUN_army_prof_state_modifier }
+		}
+	}
+}
+
+YUN_province_mil_strategy_attack_calc = {
+	set_variable = { WI_state_mil_level_strategy_confirmed = WI_state_mil_level_strategy }
+	add_to_variable = { YUN_WI_state_army_attack = WI_state_mil_level_strategy_confirmed }
+	add_to_variable = { YUN_WI_state_army_speed = WI_state_mil_level_strategy_confirmed }
+	add_to_variable = { YUN_WI_province_attrition = WI_state_mil_level_strategy_confirmed }
+	subtract_from_variable = { YUN_WI_state_army_defense = WI_state_mil_level_strategy_confirmed }
+	hidden_effect = {
+		THIS = {
+			state_event = { id = yun.2025 trigger_for = controller days = 30 }
+		}
+	}
+	force_update_dynamic_modifier = yes
+}
+
+YUN_province_mil_strategy_defense_calc = {
+	set_variable = { WI_state_mil_level_strategy_confirmed = WI_state_mil_level_strategy }
+	add_to_variable = { YUN_WI_state_army_defense = WI_state_mil_level_strategy_confirmed }
+	subtract_from_variable = { YUN_WI_province_attrition = WI_state_mil_level_strategy_confirmed }
+	subtract_from_variable = { YUN_WI_state_army_attack = WI_state_mil_level_strategy_confirmed }
+	subtract_from_variable = { YUN_WI_state_army_speed = WI_state_mil_level_strategy_confirmed }
+	hidden_effect = {
+		THIS = {
+			state_event = { id = yun.2025 trigger_for = controller days = 30 }
+		}
+	}
+	force_update_dynamic_modifier = yes
+}
+
+YUN_conquered_state_calc = {
+	if = {
+		limit = {
+			is_in_array = { YUN.greater_china_states = THIS }
+			NOT = { has_state_flag = YUN_WI_prepare_state }
+			NOT = { has_dynamic_modifier = { modifier = YUN_WI_province_status_dynamic } }
+		}
+		add_dynamic_modifier = { modifier = YUN_WI_province_status_dynamic }
+		add_dynamic_modifier = { modifier = YUN_WI_province_army_status }
+		set_variable = { WI_current_state_officer = 0 }
+		set_temp_variable = { WI_state_officer_calc = state_population_k }
+		multiply_temp_variable = { WI_state_officer_calc = 0.1 }
+		multiply_temp_variable = { WI_state_officer_calc = 0.001 }
+		set_variable = { WI_state_officer_needed = WI_state_officer_calc }
+		set_variable = { YUN_WI_state_logunit_percent = 0 }
+		set_variable = { YUN_state_officer_percentage = 0 }
+		set_variable = { WI_state_integrate_progress = 0 }
+		set_variable = { WI_state_mil_level_confirmed = 50 }
+		set_variable = { WI_state_mil_level_true = WI_state_mil_level_confirmed }
+		set_state_flag = YUN_WI_prepare_state
+		YUN_update_state_officers_effects = yes
+		YUN_WI_state_mil_level_calc = yes
+	}
+}
+
+YUN_conquered_state_calc_reverse = {
+	if = {
+		limit = {
+			NOT = { is_controlled_by = YUN }
+			has_dynamic_modifier = { modifier = YUN_WI_province_army_status }
+		}
+		remove_dynamic_modifier = { modifier = YUN_WI_province_status_dynamic }
+		remove_dynamic_modifier = { modifier = YUN_WI_province_army_status }
+		clear_variable = WI_current_state_officer
+		clear_variable = YUN_state_officer_percentage
+		clear_variable = WI_state_integrate_progress
+		clear_variable = WI_state_mil_level_confirmed
+		clear_variable = WI_state_mil_level_true
+		clr_state_flag = YUN_WI_prepare_state
+	}
+}
+
+YUN_reconquered_core_state_calc = {
+	if = {
+		limit = { has_state_flag = WI_core_state }
+		set_variable = { WI_state_integrate_progress = 100 }
+		set_variable = { YUN_state_officer_percentage = 100 }
+		set_variable = { WI_state_mil_level_confirmed = 50 }
+		add_dynamic_modifier = { modifier = YUN_WI_province_army_status }
+		set_variable = { YUN_WI_mil_level_speed = 0.25 }
+		YUN_WI_state_mil_level_calc = yes
+	}
+}
+
+WI_map_state_logunit_calc = {
+	THIS = {
+		set_temp_variable = { YUN_WI_state_logunit_change = YUN_WI_state_logunit_percent }
+		add_to_temp_variable = { YUN_WI_state_logunit_change = YUN_state_officer_percentage }
+		divide_temp_variable = { YUN_WI_state_logunit_change = 100 }
+		multiply_temp_variable = { YUN_WI_state_logunit_change = WI_state_officer_needed }
+		set_temp_variable = { YUN_WI_state_logunit_estimated = YUN_WI_state_logunit_change }
+		set_variable = { YUN_WI_state_logunit_change_confirmed = YUN_WI_state_logunit_change }
+		#Calculate officer difference
+		set_temp_variable = { WI_old_state_officer = WI_current_state_officer }
+		subtract_from_temp_variable = { YUN_WI_state_logunit_estimated = WI_old_state_officer }
+		set_variable = { WI_old_state_officer_confirmed = YUN_WI_state_logunit_estimated }
+
+		set_variable = { WI_officer_change_calc = WI_old_state_officer_confirmed }
+		multiply_variable = { WI_officer_change_calc = -1 }
+
+		set_variable = { YUN_officier_percent_calc = YUN_state_officer_percentage }
+		add_to_variable = { YUN_officier_percent_calc = YUN_WI_state_logunit_percent }
+	}
+	update_YUN_WI_map = yes
+}
+
+YUN_WI_officer_spend_calc = {
+	add_to_variable = { econ_army_expenditures_maximal_pct = YUN_WI_mil_max_spend }
+	add_to_variable = { econ_army_expenditures_minimal_pct = YUN_WI_mil_min_spend }
+	add_to_variable = { econ_admin_expenditures_maximal_pct = YUN_WI_admin_max_spend }
+	add_to_variable = { econ_admin_expenditures_minimal_pct = YUN_WI_admin_min_spend }
+    update_economy_tab = yes
+}
+
+YUN_testing = {
+	if = {
+		limit = {
+			NOT = { has_global_flag = YUN_NCPC_revived }
+		}
+		every_state = {
+			limit = { has_state_flag = WI_NCPC_state }
+			add_core_of = NCC
+		}
+		set_global_flag = YUN_NCPC_revived
+	}
+
+	if = {
+		limit = {
+			YUN = { has_country_flag = YUN_long_yun_crusade }
+			NOT = { country_exists = NCC }
+			NOT = { has_global_flag = YUN_NPA_GAW_Crisis }
+			NOT = { has_global_flag = JAP_Western_Insurrection_Intervention }
+		}
+		597 = { set_demilitarized_zone = yes }
+		598 = { set_demilitarized_zone = yes }
+		606 = { set_demilitarized_zone = yes }
+		607 = { set_demilitarized_zone = yes }
+		608 = { set_demilitarized_zone = yes }
+		609 = { set_demilitarized_zone = yes }
+		614 = { set_demilitarized_zone = yes }
+		1014 = { set_demilitarized_zone = yes }
+		1015 = { set_demilitarized_zone = yes }
+		1020 = { set_demilitarized_zone = yes }
+		1021 = { set_demilitarized_zone = yes }
+		1022 = { set_demilitarized_zone = yes }
+		1023 = { set_demilitarized_zone = yes }
+		country_event = { id = yun.2023 days = 1 }
+	}
+	else = {
+		597 = { set_demilitarized_zone = no }
+		598 = { set_demilitarized_zone = no }
+		606 = { set_demilitarized_zone = no }
+		607 = { set_demilitarized_zone = no }
+		608 = { set_demilitarized_zone = no }
+		609 = { set_demilitarized_zone = no }
+		614 = { set_demilitarized_zone = no }
+		1014 = { set_demilitarized_zone = no }
+		1015 = { set_demilitarized_zone = no }
+		1020 = { set_demilitarized_zone = no }
+		1021 = { set_demilitarized_zone = no }
+		1022 = { set_demilitarized_zone = no }
+		1023 = { set_demilitarized_zone = no }
+	}
+}
+
+YUN_testing_2 = {
+	if = {
+		limit = {
+			NOT = { has_global_flag = JAP_GAW_total_defeat }
+		}
+		527 = { set_demilitarized_zone = yes }
+		1024 = { set_demilitarized_zone = yes }
+		country_event = { id = yun.2024 days = 1 }
+	}
+	else = {
+		527 = { set_demilitarized_zone = no }
+		1024 = { set_demilitarized_zone = no }
+	}
+}
+
+YUN_NPA_fails_effects = {
+	retire_character = YUN_long_yun
+	retire_character = YUN_song_xilian
+	retire_character = YUN_li_mi
+	retire_character = YUN_zhang_chong
+	retire_character = YUN_zhang_xueliang
+	retire_character = YUN_sun_liren
+	retire_character = YUN_jiang_weiguo
+	retire_character = YUN_NPA_military_council
+	retire_character = YUN_collapsed_authority
+	remove_dynamic_modifier = {modifier = YUN_NPA_legitimacy_dynamic_modifier}
+	remove_dynamic_modifier = {modifier = YUN_NPA_war_buff_dynamic_modifier}
+	remove_ideas = {
+		YUN_the_mad_king
+		YUN_the_mad_king_tenacity
+		YUN_legitimacy_dummy
+		YUN_npabuff_dummy
+		YUN_production_frenzy
+		YUN_new_officers
+		YUN_NBIS
+		YUN_NBIS_upgrade
+		YUN_down_with_the_traitors_idea
+		YUN_fortification_frenzy
+		YUN_mountain_people_idea
+		YUN_hit_and_run
+		YUN_anti_japanese_zeal
+	}
+	add_ideas = {
+		YUN_Generic_Vacant_hog
+		YUN_Generic_Vacant_for
+		YUN_Generic_Vacant_sec
+		YUN_Generic_Vacant_eco
+	}
+	remove_faction_status = yes
+	dismantle_faction = yes
+	drop_cosmetic_tag = yes
+	every_other_country = {
+		limit = {
+			OR = {
+				is_in_faction_with = CHI
+				is_in_faction_with = JAP
+			}
+		}
+		YUN = { clear_embargo_PREV = yes }
+		YUN = { PREV = { clear_embargo_PREV = yes } }
+	}
+	clr_country_flag = YUN_long_yun_crusade
+	clr_global_flag = CHI_Western_Insurection_RoC_defeated
+	set_global_flag = YUN_NPA_defeated
+	load_focus_tree = { tree = YUN_post_xinan keep_completed = yes }
+}

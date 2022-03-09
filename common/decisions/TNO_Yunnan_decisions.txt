@@ -1,0 +1,3296 @@
+YUN_insurgency = {
+	YUN_insurgency_GUI_focus_on_NRA = {
+		icon = GFX_decision_generic_independence
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_can_set_insurgent_focus
+				NOT = { has_variable = YUN_insurgency_focus }
+			}
+			has_equipment = { infantry_equipment > 199 }
+		}
+
+		fire_only_once = no
+		fixed_random_seed = no
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { YunNRA_Power > 60 }
+			}
+		}
+
+		custom_cost_trigger = { command_power > 19.99 }
+		custom_cost_text = decision_cost_20_cp
+
+		days_remove = 30
+		days_re_enable = 30
+
+		remove_effect = {
+			clear_variable = YUN_insurgency_focus
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_insurgency_GUI_focus_on_NRA taken"
+			add_command_power = -20
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+			custom_effect_tooltip = YUN_insurgency_GUI_focus_on_NRA_tt
+			hidden_effect = {
+				subtract_from_variable = { YunNRA_Power = 20 }
+				random_list = {
+					30 = { add_to_variable = { YunCCP_Power = 10 } }
+					30 = { add_to_variable = { YunBandit_Power = 10 } }
+					30 = { add_to_variable = { YunNPA_Power = 10 } }
+				}
+				set_variable = { YUN_insurgency_focus = 1 }
+				YUN_Update_Insurgency_Modifier = yes
+			}
+		}
+	}
+
+	YUN_insurgency_GUI_improve_training = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			check_variable = { command_power > 10 }
+			has_equipment = { infantry_equipment > 499 }
+		}
+
+		fire_only_once = no
+		cost = 50
+
+		days_remove = 30
+		days_re_enable = 180
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { YUNNRA_Power > 70 }
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					NOT = { has_variable = YUN_insurgency_training }
+				}
+				tno_improve_army_professionalism_med = yes
+				TNO_improve_training_policy_effectiveness_med = yes
+				custom_effect_tooltip = YUN_insurgency_GUI_improve_training_1_tt
+				add_to_variable = { YUNNRA_counter_bonus = -0.5 }
+				set_variable = { YUN_insurgency_training = 1 }
+			}
+			else = {
+				tno_improve_army_professionalism_low = yes
+				TNO_improve_training_policy_effectiveness_low = yes
+				custom_effect_tooltip = YUN_insurgency_GUI_improve_training_2_tt
+				subtract_from_variable = { YunNRA_Power = 10 }
+			}
+		}
+		complete_effect = {
+			set_temp_variable = { temp_econ_spending_amount = 0.20 }
+			econ_spend_money_once_effect_raw_money = yes
+			add_command_power = -10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -500
+			}
+		}
+	}
+
+	YUN_insurgency_GUI_focus_on_CCP = {
+		icon = GFX_decision_category_generic_communism
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_can_set_insurgent_focus
+				NOT = { has_variable = YUN_insurgency_focus }
+			}
+		}
+
+		fire_only_once = no
+		fixed_random_seed = no
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { YunCCP_Power > 60 }
+			}
+		}
+
+		custom_cost_trigger = { command_power > 19.99 }
+		custom_cost_text = decision_cost_20_cp
+
+		days_remove = 30
+		days_re_enable = 30
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			clear_variable = YUN_insurgency_focus
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_insurgency_GUI_focus_on_CCP taken"
+			add_command_power = -20
+			custom_effect_tooltip = YUN_insurgency_GUI_focus_on_CCP_tt
+			hidden_effect = {
+				subtract_from_variable = { YunCCP_Power = 20 }
+				random_list = {
+					30 = { add_to_variable = { YunNRA_Power = 10 } }
+					30 = { add_to_variable = { YunBandit_Power = 10 } }
+					30 = { add_to_variable = { YunNPA_Power = 10 } }
+				}
+				set_variable = { YUN_insurgency_focus = 2 }
+				YUN_Update_Insurgency_Modifier = yes
+			}
+		}
+	}
+
+	YUN_insurgency_GUI_improve_admin = {
+		icon = GFX_decision_generic_building_offices
+		available = {
+		}
+
+		fire_only_once = no
+		cost = 50
+
+		days_remove = 30
+		days_re_enable = 180
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { YUNCPC_Power > 70 }
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					NOT = { has_variable = YUN_insurgency_admin }
+				}
+				tno_improve_admin_efficiency_med = yes
+				TNO_improve_training_policy_effectiveness_med = yes
+				custom_effect_tooltip = YUN_insurgency_GUI_improve_admin_1_tt
+				add_to_variable = { YUNCCP_counter_bonus = -0.5 }
+				set_variable = { YUN_insurgency_admin = 1 }
+			}
+			else = {
+				tno_improve_admin_efficiency_low = yes
+				TNO_improve_training_policy_effectiveness_low = yes
+				custom_effect_tooltip = YUN_insurgency_GUI_improve_admin_2_tt
+				subtract_from_variable = { YunCCP_Power = 10 }
+			}
+		}
+		complete_effect = {
+			set_temp_variable = { temp_econ_spending_amount = 0.10 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+
+	YUN_insurgency_GUI_focus_on_bandit = {
+		icon = GFX_decision_arrest
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_can_set_insurgent_focus
+				NOT = { has_variable = YUN_insurgency_focus }
+			}
+		}
+
+		fire_only_once = no
+		fixed_random_seed = no
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { YunBandit_Power > 60 }
+			}
+		}
+
+		custom_cost_trigger = { command_power > 19.99 }
+		custom_cost_text = decision_cost_20_cp
+
+		days_remove = 30
+		days_re_enable = 30
+
+		remove_effect = {
+			clear_variable = YUN_insurgency_focus
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_insurgency_GUI_focus_on_bandit taken"
+			add_command_power = -20
+			set_temp_variable = { temp_econ_spending_amount = 0.05 }
+			econ_spend_money_once_effect_raw_money = yes
+			custom_effect_tooltip = YUN_insurgency_GUI_focus_on_bandit_tt
+			hidden_effect = {
+				subtract_from_variable = { YunBandit_Power = 20 }
+				random_list = {
+					30 = { add_to_variable = { YunNRA_Power = 10 } }
+					30 = { add_to_variable = { YunCCP_Power = 10 } }
+					30 = { add_to_variable = { YunNPA_Power = 10 } }
+				}
+				set_variable = { YUN_insurgency_focus = 3 }
+				YUN_Update_Insurgency_Modifier = yes
+			}
+		}
+	}
+
+	YUN_insurgency_GUI_carrot_and_stick = {
+		icon = GFX_decision_forced_labor
+		available = {
+		}
+
+		fire_only_once = no
+		cost = 50
+
+		days_remove = 30
+		days_re_enable = 180
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { YUNBandit_Power > 70 }
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					NOT = { has_variable = YUN_insurgency_carrot_and_stick }
+				}
+				tno_improve_penal_system_policy_effectiveness_med = yes
+				TNO_improve_education_policy_effectiveness_med = yes
+				custom_effect_tooltip = YUN_insurgency_GUI_carrot_and_stick_1_tt
+				add_to_variable = { YUNBandit_counter_bonus = -0.5 }
+				set_variable = { YUN_insurgency_carrot_and_stick = 1 }
+			}
+			else = {
+				tno_improve_penal_system_policy_effectiveness_low = yes
+				TNO_improve_education_policy_effectiveness_low = yes
+				custom_effect_tooltip = YUN_insurgency_GUI_carrot_and_stick_2_tt
+				subtract_from_variable = { YunBandit_Power = 10 }
+			}
+		}
+		complete_effect = {
+			set_temp_variable = { temp_econ_spending_amount = 0.20 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+
+	YUN_insurgency_GUI_focus_on_NPA = {
+		icon = GFX_red_KMT_deccat_decision
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_can_set_insurgent_focus
+				NOT = { has_variable = YUN_insurgency_focus }
+			}
+		}
+
+		fire_only_once = no
+		fixed_random_seed = no
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { YunBandit_Power > 60 }
+			}
+		}
+
+		custom_cost_trigger = { command_power > 19.99 }
+		custom_cost_text = decision_cost_20_cp
+
+		days_remove = 30
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.20
+		}
+
+		remove_effect = {
+			clear_variable = YUN_insurgency_focus
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_insurgency_GUI_focus_on_NPA taken"
+			add_command_power = -20
+			custom_effect_tooltip = YUN_insurgency_GUI_focus_on_NPA_tt
+			hidden_effect = {
+				subtract_from_variable = { YunNPA_Power = 20 }
+				random_list = {
+					30 = { add_to_variable = { YunNRA_Power = 10 } }
+					30 = { add_to_variable = { YunCCP_Power = 10 } }
+					30 = { add_to_variable = { YunBandit_Power = 10 } }
+				}
+				set_variable = { YUN_insurgency_focus = 4 }
+				YUN_Update_Insurgency_Modifier = yes
+			}
+		}
+	}
+
+	YUN_insurgency_GUI_tick = {
+		activation = {
+			has_completed_focus = YUN_xinan_insurgency
+			NOT = { has_completed_focus = YUN_take_a_day_off }
+		}
+		available = {
+			hidden_trigger = {
+				has_country_flag = YUN_long_yun_crusade
+			}
+		}
+		is_good = yes
+		days_mission_timeout = 14
+		fixed_random_seed = no
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_insurgency_GUI_tick mission timer elapsed"
+			hidden_effect = {
+				YUN_Update_Insurgency_Modifier = yes
+				YUN_update_e_group_movement = yes
+				YUN_update_i_group_movement = yes
+				YUN_Update_Insurgency_tick = yes
+				activate_mission = YUN_insurgency_GUI_tick
+				if = {
+					limit = { date > 1965.08.08 }
+					country_event = { id = yun_unified.22 }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_insurgency_GUI_tick"
+		}
+	}
+	YUN_revive_burma_road_talk_with_burma = {
+		visible = {
+			has_completed_focus = YUN_contact_burma_for_coop
+			NOT = {has_country_flag = YUN_burma_road_diplo_failed}
+			NOT = {
+				has_country_flag = YUN_long_yun_crusade
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_revive_burma_road_talk_with_burma decision begun"
+			country_event = {id = yun.200}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_revive_burma_road_lay_down_the_plans = {
+		visible = {
+			has_completed_focus = YUN_contact_burma_for_coop
+			NOT = {has_country_flag = YUN_burma_road_diplo_failed}
+			NOT = {
+				has_country_flag = YUN_long_yun_crusade
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_revive_burma_road_lay_down_the_plans_trigger_tt
+				has_country_flag = YUN_burma_road_diplo_successful
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_revive_burma_road_lay_down_the_plans decision begun"
+			country_event = {id = yun.205}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_revive_burma_road_start = {
+		visible = {
+			has_completed_focus = YUN_contact_burma_for_coop
+			NOT = {has_country_flag = YUN_burma_road_diplo_failed}
+			NOT = {
+				has_country_flag = YUN_long_yun_crusade
+			}
+		}
+
+		available = {
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = YUN_revive_burma_road_start_trigger_diplo_tt
+					has_country_flag = YUN_burma_road_diplo_successful
+				}
+				custom_trigger_tooltip = {
+					tooltip = YUN_revive_burma_road_start_trigger_planning_tt
+					has_country_flag = YUN_burma_road_planning_prepared
+				}
+				custom_trigger_tooltip = {
+					tooltip = YUN_revive_burma_road_start_trigger_failed_tt
+					NOT = {has_country_flag = YUN_burma_road_diplo_failed}
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		days_remove = var:YUN_bur_road_const_duration
+
+		remove_effect = {
+			country_event = {id = yun.206}
+			hidden_effect = {
+				BUR = {
+					country_event = {id = burinteraction.4}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_revive_burma_road_start decision begun"
+			add_dynamic_modifier = {modifier = YUN_burma_road_construction_dynamic_modifier}
+			BUR = {
+				add_dynamic_modifier = {modifier = BUR_burma_road_construction_dynamic_modifier}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+}
+
+YUN_resources_mining = {
+	YUN_survey_dali = {
+		available = {
+			has_equipment = {infantry_equipment > 99}
+		}
+
+		fire_only_once = yes
+		cost = 10
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+			industrial_capacity_factory = -0.05
+		}
+
+		remove_effect = {
+			960 = {
+				set_state_flag = YUN_state_survey_complete
+			}
+			custom_effect_tooltip = YUN_survey_state_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_survey_dali decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_survey_yunnan = {
+		available = {
+			has_equipment = {infantry_equipment > 99}
+		}
+
+		fire_only_once = yes
+		cost = 10
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+			industrial_capacity_factory = -0.05
+		}
+
+		remove_effect = {
+			325 = {
+				set_state_flag = YUN_state_survey_complete
+			}
+			custom_effect_tooltip = YUN_survey_state_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_survey_yunnan decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_survey_guizhou = {
+		available = {
+			has_equipment = {infantry_equipment > 99}
+		}
+
+		fire_only_once = yes
+		cost = 10
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+			industrial_capacity_factory = -0.05
+		}
+
+		remove_effect = {
+			603 = {
+				set_state_flag = YUN_state_survey_complete
+			}
+			custom_effect_tooltip = YUN_survey_state_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_survey_guizhou decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_mine_dali_tungsten = {
+		visible = {
+			has_completed_focus = YUN_open_new_mines
+			960 = {
+				has_state_flag = YUN_state_survey_complete
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.025
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 960 }
+				add_resource = {
+					type = tungsten
+					amount = 24
+				}
+				if = {
+					limit = {
+						NOT = { has_state_flag = YUN_mining_state }
+					}
+					set_state_flag = YUN_mining_state
+				}
+			}
+			custom_effect_tooltip = YUN_mine_processing_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_mine_dali_tungsten decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_mine_dali_ore = {
+		visible = {
+			has_completed_focus = YUN_open_new_mines
+			960 = {
+				has_state_flag = YUN_state_survey_complete
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 960 }
+				add_resource = {
+					type = steel
+					amount = 16
+				}
+				if = {
+					limit = {
+						NOT = { has_state_flag = YUN_mining_state }
+					}
+					set_state_flag = YUN_mining_state
+				}
+				set_state_flag = YUN_mine_ore
+			}
+			custom_effect_tooltip = YUN_mine_processing_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_mine_dali_ore decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_dali_steel_huts = {
+		visible = {
+			has_completed_focus = YUN_new_facilities
+			960 = {
+				has_state_flag = YUN_mine_ore
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 960 }
+				add_resource = {
+					type = steel
+					amount = 16
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_dali_steel_huts decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_mine_yunnan_aluminium = {
+		visible = {
+			has_completed_focus = YUN_open_new_mines
+			325 = {
+				has_state_flag = YUN_state_survey_complete
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.025
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 325 }				
+				add_resource = {
+					type = aluminium
+					amount = 8
+				}
+				if = {
+					limit = {
+						NOT = { has_state_flag = YUN_mining_state }
+					}
+					set_state_flag = YUN_mining_state
+				}
+				set_state_flag = YUN_mine_bauxite
+			}
+			custom_effect_tooltip = YUN_mine_processing_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_mine_yunnan_aluminium decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_mine_yunnan_ore = {
+		visible = {
+			has_completed_focus = YUN_open_new_mines
+			325 = {
+				has_state_flag = YUN_state_survey_complete
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		days_remove = 60
+
+		cost = 25
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 325 }
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+				if = {
+					limit = {
+						NOT = { has_state_flag = YUN_mining_state }
+					}
+					set_state_flag = YUN_mining_state
+				}
+				set_state_flag = YUN_mine_ore
+			}
+			custom_effect_tooltip = YUN_mine_processing_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_mine_yunnan_ore decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_yunnan_aluminium_processing = {
+		visible = {
+			has_completed_focus = YUN_new_facilities
+			325 = {
+				has_state_flag = YUN_mine_bauxite
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 75
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 325 }
+				add_resource = {
+					type = aluminium
+					amount = 12
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_yunnan_aluminium_processing decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_yunnan_steel_huts = {
+		visible = {
+			has_completed_focus = YUN_new_facilities
+			325 = {
+				has_state_flag = YUN_mine_ore
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 325 }
+				add_resource = {
+					type = steel
+					amount = 16
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_yunnan_steel_huts decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_mine_guizhou_ore = {
+		visible = {
+			has_completed_focus = YUN_open_new_mines
+			603 = {
+				has_state_flag = YUN_state_survey_complete
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.025
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 603 }
+				add_resource = {
+					type = steel
+					amount = 12
+				}
+				if = {
+					limit = {
+						NOT = { has_state_flag = YUN_mining_state }
+					}
+					set_state_flag = YUN_mining_state
+				}
+				set_state_flag = YUN_mine_ore
+			}
+			custom_effect_tooltip = YUN_mine_processing_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_mine_guizhou_ore decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_guizhou_steel_huts = {
+		visible = {
+			has_completed_focus = YUN_new_facilities
+			603 = {
+				has_state_flag = YUN_mine_ore
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 603 }
+				add_resource = {
+					type = steel
+					amount = 24
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_guizhou_steel_huts decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_mine_guizhou_bauxite = {
+		visible = {
+			has_completed_focus = YUN_open_new_mines
+			603 = {
+				has_state_flag = YUN_state_survey_complete
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.025
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				add_resource = {
+					type = aluminium
+					amount = 12
+				}
+				if = {
+					limit = {
+						NOT = { has_state_flag = YUN_mining_state }
+					}
+					set_state_flag = YUN_mining_state
+				}
+				set_state_flag = YUN_mine_bauxite
+			}
+			custom_effect_tooltip = YUN_mine_processing_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_mine_guizhou_ore decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_guizhou_aluminium_processing = {
+		visible = {
+			has_completed_focus = YUN_new_facilities
+			603 = {
+				has_state_flag = YUN_mine_bauxite
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 199}
+		}
+
+		fire_only_once = yes
+
+		cost = 75
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 603 }
+				add_resource = {
+					type = aluminium
+					amount = 18
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_guizhou_steel_huts decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_exploit_dali = {
+		visible = {
+			has_completed_focus = YUN_not_one_stone_left_unturned
+			960 = {
+				has_state_flag = YUN_mining_state
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 399}
+		}
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.10
+			industrial_capacity_factory = -0.20
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 960 }
+				add_resource = {
+					type = tungsten
+					amount = 16
+				}
+				add_resource = {
+					type = chromium
+					amount = 8
+				}
+			}
+			YUN_up_exploitative_mining = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_exploit_dali decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -400
+			}
+		}
+	}
+	YUN_exploit_yunnan = {
+		visible = {
+			has_completed_focus = YUN_not_one_stone_left_unturned
+			325 = {
+				has_state_flag = YUN_mining_state
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 399}
+		}
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.10
+			industrial_capacity_factory = -0.20
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 325 }
+				add_resource = {
+					type = aluminium
+					amount = 16
+				}
+			}
+			YUN_up_exploitative_mining = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_exploit_yunnan decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -400
+			}
+		}
+	}
+	YUN_exploit_guizhou = {
+		visible = {
+			has_completed_focus = YUN_not_one_stone_left_unturned
+			603 = {
+				has_state_flag = YUN_mining_state
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 399}
+		}
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.10
+			industrial_capacity_factory = -0.20
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { state = 603 }
+				add_resource = {
+					type = steel
+					amount = 12
+				}
+				add_resource = {
+					type = aluminium
+					amount = 4
+				}
+			}
+			YUN_up_exploitative_mining = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_exploit_guizhou decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -400
+			}
+		}
+	}
+}
+
+YUN_infrastructure = {
+	YUN_prepare_dali = {
+		available = {
+			has_equipment = {infantry_equipment > 49}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.025
+		}
+
+		remove_effect = {
+			960 = {
+				set_temp_variable = { state_value_multiplier_temp = 1.02 }
+				econ_state_value_change_multiply_specified_state = yes
+				set_state_flag = YUN_state_construction_ready
+			}
+			custom_effect_tooltip = YUN_infrastructure_prepare_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_prepare_dali decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -50
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_prepare_yunnan = {
+		available = {
+			has_equipment = {infantry_equipment > 49}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.025
+		}
+
+		remove_effect = {
+			325 = {
+				set_temp_variable = { state_value_multiplier_temp = 1.02 }
+				econ_state_value_change_multiply_specified_state = yes
+				set_state_flag = YUN_state_construction_ready
+			}
+			custom_effect_tooltip = YUN_infrastructure_prepare_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_prepare_yunnan decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -50
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_prepare_guizhou = {
+		available = {
+			has_equipment = {infantry_equipment > 49}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.025
+		}
+
+		remove_effect = {
+			603 = {
+				set_temp_variable = { state_value_multiplier_temp = 1.02 }
+				econ_state_value_change_multiply_specified_state = yes
+				set_state_flag = YUN_state_construction_ready
+			}
+			custom_effect_tooltip = YUN_infrastructure_prepare_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_prepare_guizhou decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -50
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_infra_dali = {
+		visible = {
+			has_completed_focus = YUN_lay_down_the_roads
+			960 = {
+				has_state_flag = YUN_state_construction_ready
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 149}
+		}
+
+		fire_only_once = yes
+
+		cost = 30
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			960 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_state_modifier = {
+					modifier = {
+						local_resources = 0.25
+					}
+				}
+				set_state_flag = YUN_infra_ready
+			}
+			custom_effect_tooltip = YUN_infra_decision_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_infra_dali decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -150
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_infra_yunnan = {
+		visible = {
+			has_completed_focus = YUN_lay_down_the_roads
+			325= {
+				has_state_flag = YUN_state_construction_ready
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 149}
+		}
+
+		fire_only_once = yes
+
+		cost = 30
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			325 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_state_modifier = {
+					modifier = {
+						local_resources = 0.25
+					}
+				}
+				set_state_flag = YUN_infra_ready
+			}
+			custom_effect_tooltip = YUN_infra_decision_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_infra_dali decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -150
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_infra_guizhou = {
+		visible = {
+			has_completed_focus = YUN_lay_down_the_roads
+			603 = {
+				has_state_flag = YUN_state_construction_ready
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 149}
+		}
+
+		fire_only_once = yes
+
+		cost = 30
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.05
+		}
+
+		remove_effect = {
+			603 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_state_modifier = {
+					modifier = {
+						local_resources = 0.25
+					}
+				}
+				set_state_flag = YUN_infra_ready
+			}
+			custom_effect_tooltip = YUN_infra_decision_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_infra_dali decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -150
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_civ_dali = {
+		visible = {
+			has_completed_focus = YUN_lay_down_the_roads
+			has_completed_focus = YUN_new_facilities
+			960 = {
+				has_state_flag = YUN_infra_ready
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 249}
+		}
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.10
+		}
+
+		remove_effect = {
+			960 = {
+				add_building_construction = {
+					type = thermoelectric_plant
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_civ_dali decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_civ_yunnan = {
+		visible = {
+			has_completed_focus = YUN_lay_down_the_roads
+			has_completed_focus = YUN_new_facilities
+			325 = {
+				has_state_flag = YUN_infra_ready
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 249}
+		}
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.10
+		}
+
+		remove_effect = {
+			325 = {
+				add_building_construction = {
+					type = thermoelectric_plant
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_civ_yunnan decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_civ_guizhou = {
+		visible = {
+			has_completed_focus = YUN_lay_down_the_roads
+			has_completed_focus = YUN_new_facilities
+			603 = {
+				has_state_flag = YUN_infra_ready
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 249}
+		}
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.10
+		}
+
+		remove_effect = {
+			603 = {
+				add_building_construction = {
+					type = thermoelectric_plant
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_inciv_guizhou decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_mil_guizhou = {
+		visible = {
+			has_completed_focus = YUN_lay_down_the_roads
+			has_completed_focus = YUN_new_facilities
+			603 = {
+				has_state_flag = YUN_infra_ready
+			}
+		}
+		available = {
+			has_equipment = {infantry_equipment > 349}
+		}
+
+		fire_only_once = yes
+
+		cost = 150
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_use_modifier = 0.10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = YUN_mil_guizhou_tt
+			add_to_variable = { YUN_xinan_dev_free_pus = 2 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_mil_guizhou decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+}
+
+YUN_WI_Sichuan = {
+	YUN_WI_Sichuan_tick = {
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		visible = {
+			has_global_flag = WI_Sichuan_Struggle_begin
+		}
+		activation = {
+			has_global_flag = WI_Sichuan_Struggle_begin
+		}
+
+		fire_only_once = yes
+		days_mission_timeout = 111 # 112 days to timeout
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_Sichuan_tick mission timer elapsed"
+			custom_effect_tooltip = YUN_WI_Sichuan_ends
+			hidden_effect = {
+				remove_mission = YUN_WI_Sichuan_movement
+				if = {
+					limit = {
+						OR = {
+							## RULE_OPTION_THE_BATTLE_OF_SICHUAN_RANDOM
+							AND = {
+								check_variable = { global.GUI_SIC_NPA_Influence > global.GUI_SIC_RGOC_Influence }
+								has_game_rule = {
+									rule = the_battle_of_sichuan
+									option = DEFAULT
+								}
+							}
+							## THE_BATTLE_OF_SICHUAN_YUN_NATIONAL_PROTECTION_ARMY
+							has_game_rule = {
+								rule = the_battle_of_sichuan
+								option = THE_BATTLE_OF_SICHUAN_YUN_NATIONAL_PROTECTION_ARMY
+							}
+						}
+					}
+					YUN = { country_event = { id = yun_wi.8 } }
+					CHI = { country_event = { id = yun_wi.9 } }
+				}
+				else = {
+					CHI = { country_event = { id = yun_wi.8 } }
+					YUN = { country_event = { id = yun_wi.9 } }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_WI_Sichuan_tick Completed"
+		}
+	}
+
+	YUN_WI_fund_partisans = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_WI_fund_partisans_tooltip
+				NOT = { has_country_flag = ECON_ONGOING_FISCAL_CRISIS }
+			}
+		}
+
+		days_re_enable = 14
+
+		cost = 20
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_fund_partisans decision taken"
+			custom_effect_tooltip = YUN_WI_fund_partisans_tt
+			add_to_variable = { global.WI_Sichuan_NPA_support = 15 }
+			clamp_variable = {
+				var = global.WI_Sichuan_NPA_support
+				min = 0
+				max = 100
+			}
+			set_temp_variable = { temp_econ_spending_amount = 0.2 }
+			econ_spend_money_once_effect_raw_money = yes
+			add_to_variable = { global.YUN_WI_Sichuan_dirty = 1 }
+		}
+	}
+	YUN_WI_send_weapons_to_partisans = {
+		available = {
+			has_equipment = { infantry_equipment > 999 }
+		}
+
+		days_re_enable = 14
+
+		cost = 20
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_send_weapons_to_partisans decision taken"
+			custom_effect_tooltip = YUN_WI_fund_partisans_tt
+			add_to_variable = { global.WI_Sichuan_NPA_support = 15 }
+			clamp_variable = {
+				var = global.WI_Sichuan_NPA_support
+				min = 0
+				max = 100
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			add_to_variable = { global.YUN_WI_Sichuan_dirty = 1 }
+		}
+	}
+	YUN_WI_ambush_RGOC_officials = {
+		available = {
+			check_variable = { command_power > 9 }
+		}
+
+		days_re_enable = 14
+
+		custom_cost_trigger = { command_power > 19.99 }
+		custom_cost_text = decision_cost_20_cp
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_ambush_RGOC_officials decision taken"
+			custom_effect_tooltip = YUN_WI_ambush_RGOC_officials_tt
+			add_to_variable = { global.GUI_SIC_RGOC_Influence = -5 }
+			clamp_variable = {
+				var = global.GUI_SIC_RGOC_Influence
+				min = 0
+				max = 100
+			}
+			add_to_variable = { global.YUN_WI_Sichuan_dirty = 1 }
+		}
+	}
+	YUN_WI_persuade_liuwenhui = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_WI_persuade_liuwenhui_tooltip
+				check_variable = { global.GUI_SIC_NPA_Influence > 70 }
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_persuade_liuwenhui decision taken"
+			custom_effect_tooltip = YUN_WI_persuade_liuwenhui_tt
+			hidden_effect = {
+				add_to_variable = { global.GUI_SIC_NPA_Influence = 25 }
+				add_to_variable = { global.GUI_SIC_RGOC_Influence = -25 }
+				clamp_variable = {
+					var = global.GUI_SIC_NPA_Influence
+					min = 0
+					max = 100
+				}
+				clamp_variable = {
+					var = global.GUI_SIC_RGOC_Influence
+					min = 0
+					max = 100
+				}
+				country_event = { id = yun_wi.5 }
+				CHI = { country_event = { id = yun_wi.5 } }
+			}
+			add_command_power = -5
+			set_temp_variable = { temp_econ_spending_amount = 0.2 }
+			econ_spend_money_once_effect_raw_money = yes
+			add_to_variable = { global.YUN_WI_Sichuan_dirty = 1 }
+		}
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	YUN_WI_Sichuan_movement = {
+		activation = {
+			has_global_flag = WI_Sichuan_Struggle_begin
+		}
+		visible = {
+			has_global_flag = WI_Sichuan_Struggle_begin
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		is_good = yes
+		days_mission_timeout = 6  # 7 days to timeout
+		fixed_random_seed = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_Sichuan_movement mission timer elapsed"
+			custom_effect_tooltip = YUN_WI_Sichuan_movement_tt
+			hidden_effect = {
+				clr_country_flag = WI_Sichuan_support_cooldown
+				WI_Sichuan_influence_calc = yes
+				if = {
+					limit = { has_global_flag = WI_Sichuan_Struggle_begin }
+					activate_mission = YUN_WI_Sichuan_movement
+				}
+				else = {
+					remove_mission = YUN_WI_Sichuan_movement
+				}
+			}
+		}
+	}
+}
+
+YUN_NPA_Crusade = {
+	YUN_WI_reminder = {
+		fire_only_once = no
+		visible = {
+			always = yes
+		}
+		available = {
+			hidden_trigger = { always = no }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_reminder decision begun"
+		}
+	}
+
+	### Warlords
+	YUN_WI_counter_RGOC_propanganda = {
+		fire_only_once = no
+		visible = {
+			has_global_flag = WI_Warlord_Struggle_begin
+		}
+
+		available = {}
+		cost = 20
+		fixed_random_seed = no
+
+		days_remove = 35
+		days_re_enable = 14
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 40
+				check_variable = { global.YUN_WI_war_momentum_check < 45 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_counter_RGOC_propanganda decision end"
+			set_temp_variable = { WI_momentum_tick_bonus = -0.5 }
+			WI_calc_momentum_tick = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_counter_RGOC_propanganda decision begun"
+			set_temp_variable = { temp_econ_spending_amount = 0.10 }
+			econ_spend_money_once_effect_raw_money = yes
+			set_temp_variable = { WI_momentum_tick_bonus = 0.5 }
+			WI_calc_momentum_tick = yes
+			custom_effect_tooltip = WI_calc_momentum_tick_tt
+		}
+	}
+
+	YUN_WI_more_counter_RGOC_propanganda = {
+		fire_only_once = no
+		visible = {
+			has_global_flag = WI_Warlord_Struggle_begin
+		}
+
+		available = {}
+		cost = 20
+		fixed_random_seed = no
+
+		days_remove = 35
+		days_re_enable = 28
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 40
+				has_equipment = { infantry_equipment > 1000 }
+				check_variable = { global.YUN_WI_war_momentum_check < 45 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_more_counter_RGOC_propanganda decision end"
+			set_temp_variable = { WI_momentum_tick_bonus = -1.0 }
+			WI_calc_momentum_tick = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_more_counter_RGOC_propanganda decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			set_temp_variable = { WI_momentum_tick_bonus = 1.0 }
+			WI_calc_momentum_tick = yes
+			custom_effect_tooltip = WI_calc_momentum_tick_tt
+			add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+		}
+	}
+
+	
+	YUN_WI_counter_JAP_propanganda = {
+		fire_only_once = no
+		visible = {
+			has_global_flag = YUN_NPA_GAW_Crisis
+		}
+
+		available = {}
+		cost = 20
+		fixed_random_seed = no
+
+		days_remove = 35
+		days_re_enable = 14
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 40
+				check_variable = { global.YUN_WI_war_momentum_check < 90 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_counter_JAP_propanganda decision end"
+			set_temp_variable = { WI_momentum_tick_bonus = -2.0 }
+			WI_calc_momentum_tick = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_counter_JAP_propanganda decision begun"
+			set_temp_variable = { temp_econ_spending_amount = 0.20 }
+			econ_spend_money_once_effect_raw_money = yes
+			set_temp_variable = { WI_momentum_tick_bonus = 2.0 }
+			WI_calc_momentum_tick = yes
+			custom_effect_tooltip = WI_calc_momentum_tick_tt
+		}
+	}
+
+	YUN_WI_more_counter_JAP_propanganda = {
+		fire_only_once = no
+		visible = {
+			has_global_flag = YUN_NPA_GAW_Crisis
+		}
+
+		available = {}
+		cost = 20
+		fixed_random_seed = no
+
+		days_remove = 35
+		days_re_enable = 28
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 40
+				has_equipment = { infantry_equipment > 1000 }
+				check_variable = { global.YUN_WI_war_momentum_check < 90 }
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_more_counter_JAP_propanganda decision end"
+			set_temp_variable = { WI_momentum_tick_bonus = -4.0 }
+			WI_calc_momentum_tick = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_more_counter_JAP_propanganda decision begun"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			set_temp_variable = { WI_momentum_tick_bonus = 4.0 }
+			WI_calc_momentum_tick = yes
+			custom_effect_tooltip = WI_calc_momentum_tick_tt
+			add_to_variable = { YUN_NPA_Crusade_dirty = 1 }
+		}
+	}
+
+	YUN_WI_integrate_warlord = {
+		fire_only_once = no
+		visible = {
+			NOT = { has_global_flag = YUN_ROC_reborn }
+			NOT = { has_global_flag = JAP_Western_Insurrection_Intervention }
+			NOT = { has_global_flag = YUN_NPA_GAW_Crisis }
+			OR = {
+				AND = {
+					check_variable = { YUN.YUN_WI_Warlord = 1 }
+					XIK = { is_in_faction = no }
+				}
+				AND = {
+					check_variable = { YUN.YUN_WI_Warlord = 2 }
+					GUX = {
+						NOT = { is_in_faction_with = CHI }
+						NOT = { is_in_faction_with = YUN }
+					}
+				}
+				AND = {
+					check_variable = { YUN.YUN_WI_Warlord = 3 }
+					SHX = {
+						NOT = { is_in_faction_with = CHI }
+						NOT = { is_in_faction_with = YUN }
+					}
+				}
+				AND = {
+					check_variable = { YUN.YUN_WI_Warlord = 4 }
+					NOT = { has_global_flag = QIN_helps_NPA }
+				}
+				AND = {
+					check_variable = { YUN.YUN_WI_Warlord = 5 }
+					NOT = { has_global_flag = XIN_helps_NPA }
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_WI_can_integrate_warlord
+				OR = {
+					AND = {
+						check_variable = { YUN.YUN_WI_Warlord = 1 }
+						check_variable = { global.YUN_WI_war_momentum_check > 60 }
+					}
+					AND = {
+						check_variable = { YUN.YUN_WI_Warlord = 2 }
+						check_variable = { global.YUN_WI_war_momentum_check > 70 }
+					}
+					AND = {
+						check_variable = { YUN.YUN_WI_Warlord = 3 }
+						check_variable = { global.YUN_WI_war_momentum_check > 80 }
+					}
+					AND = {
+						check_variable = { YUN.YUN_WI_Warlord = 4 }
+						check_variable = { global.YUN_WI_war_momentum_check > 90 }
+					}
+					AND = {
+						check_variable = { YUN.YUN_WI_Warlord = 5 }
+						check_variable = { global.YUN_WI_war_momentum_check = 100 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = 7
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		cancel_trigger = {
+			has_war_with = JAP
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_integrate_warlord decision end"
+			YUN_Warlord_Faction_event = yes
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_integrate_warlord decision begun"
+			if = {
+				limit = { check_variable = { YUN.YUN_WI_Warlord = 1 } }
+				set_country_flag = YUN_WI_integrating_XIK
+				XIK = { save_global_event_target_as = CHI_WI_Warlord }
+			}
+			else_if = {
+				limit = { check_variable = { YUN.YUN_WI_Warlord = 2 } }
+				set_country_flag = YUN_WI_integrating_GUX
+				GUX = { save_global_event_target_as = CHI_WI_Warlord }
+			}
+			else_if = {
+				limit = { check_variable = { YUN.YUN_WI_Warlord = 3 } }
+				set_country_flag = YUN_WI_integrating_SHX
+				SHX = { save_global_event_target_as = CHI_WI_Warlord }
+			}
+			else_if = {
+				limit = { check_variable = { YUN.YUN_WI_Warlord = 4 } }
+				set_country_flag = YUN_WI_integrating_QIN
+			}
+			else_if = {
+				limit = { check_variable = { YUN.YUN_WI_Warlord = 5 } }
+				set_country_flag = YUN_WI_integrating_XIN
+			}
+		}
+	}
+
+	YUN_contact_TIB = {
+		fire_only_once = yes
+		visible = {
+			check_variable = { YUN.YUN_WI_Warlord = 6 }
+			NOT = { has_country_flag = YUN_TIB_contacted }
+			NOT = { has_global_flag = YUN_ROC_reborn }
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_WI_can_contact_warlord
+				OR = {
+					has_global_flag = XIK_joins_NPA
+					has_full_control_of_state = 964
+				}
+			}
+		}
+		cost = 5
+		days_remove = 20
+
+		ai_will_do = {
+			factor = 1000
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_contact_TIB decision end"
+			clr_country_flag = YUN_TIB_contacting
+			set_country_flag = YUN_TIB_contacted
+			hidden_effect = {
+				country_event = { id = yun_wi.24 }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_contact_TIB decision begun"
+			set_country_flag = YUN_TIB_contacting
+		}
+	}
+
+	YUN_NPA_Attack_QIN = {
+		icon = GFX_decision_generic_nationalism
+		visible = {
+			OR = {
+				XIK = { is_in_faction_with = YUN }
+				is_neighbor_of = QIN
+			}
+			has_global_flag = YUN_NPA_GAW_Crisis
+			NOT = { has_global_flag = QIN_helps_NPA }
+			check_variable = { YUN.YUN_WI_Warlord = 4 }
+		}
+
+		available = {
+			NOT = {
+				has_war_with = QIN
+			}
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		complete_effect = {
+			declare_war_on = {
+				target = QIN
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 100
+				OR = {
+					NOT = {country_exists = GNG}
+					NOT = {country_exists = MAN}
+					NOT = {country_exists = MEN}
+				}
+			}
+		}
+	}
+
+	YUN_NPA_Attack_TIB = {
+		icon = GFX_decision_generic_nationalism
+		visible = {
+			OR = {
+				XIK = { is_in_faction_with = YUN }
+				QIN = { is_in_faction_with = YUN }
+				is_neighbor_of = TIB
+			}
+			has_global_flag = YUN_NPA_GAW_Crisis
+			has_country_flag = YUN_TIB_contacted
+			check_variable = { YUN.YUN_WI_Warlord = 6 }
+		}
+
+		available = {
+			NOT = {
+				has_war_with = TIB
+			}
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		complete_effect = {
+			declare_war_on = {
+				target = TIB
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 100
+				OR = {
+					GNG = { has_capitulated = yes }
+					MAN = { has_capitulated = yes }
+					MEN = { has_capitulated = yes }
+				}
+			}
+		}
+	}
+
+	YUN_NPA_Attack_XIK = {
+		icon = GFX_decision_generic_nationalism
+		visible = {
+			is_neighbor_of = XIK
+			NOT = { XIK = { is_in_faction_with = YUN } }
+			has_global_flag = YUN_NPA_GAW_Crisis
+			check_variable = { YUN.YUN_WI_Warlord = 1 }
+		}
+
+		available = {
+			NOT = {
+				has_war_with = XIK
+			}
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		complete_effect = {
+			declare_war_on = {
+				target = XIK
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 100
+				OR = {
+					NOT = {country_exists = GNG}
+					NOT = {country_exists = MAN}
+					NOT = {country_exists = MEN}
+				}
+			}
+		}
+	}
+
+	YUN_NPA_Attack_XIN = {
+		icon = GFX_decision_generic_nationalism
+		visible = {
+			OR = {
+				QIN = { is_in_faction_with = YUN}
+				is_neighbor_of = XIN
+			}
+			has_global_flag = YUN_NPA_GAW_Crisis
+			NOT = { has_global_flag = XIN_helps_NPA }
+			check_variable = { YUN.YUN_WI_Warlord = 5 }
+		}
+
+		available = {
+			NOT = {
+				has_war_with = XIN
+			}
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		complete_effect = {
+			declare_war_on = {
+				target = XIN
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 100
+				OR = {
+					NOT = {country_exists = GNG}
+					NOT = {country_exists = MAN}
+					NOT = {country_exists = MEN}
+				}
+			}
+		}
+	}
+
+	### Non-warlords
+	YUN_WI_momentum_tick = {
+		activation = {
+			has_country_flag = YUN_long_yun_crusade
+			OR = {
+				has_global_flag = YUN_NPA_GAW_Crisis
+				has_global_flag = CHI_Western_Insurrection_Crisis
+			}
+		}
+		visible = {
+			NOT = { has_global_flag = YUN_ROC_reborn }
+			NOT = { has_global_flag = YUN_NPA_partial_victory }
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		is_good = yes
+		days_mission_timeout = 7
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_momentum_tick mission timer elapsed"
+			WI_calc_momentum_tick = yes
+			WI_calc_momentum = yes
+			custom_effect_tooltip = YUN_WI_momentum_tick_tt
+			hidden_effect = {
+				if = {
+					limit = { has_country_flag = YUN_long_yun_crusade }
+					activate_mission = YUN_WI_momentum_tick
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_WI_momentum_tick"
+		}
+	}
+	YUN_WI_warbuff_tick = {
+		activation = {
+			has_country_flag = YUN_long_yun_crusade
+			OR = {
+				has_global_flag = YUN_NPA_GAW_Crisis
+				has_global_flag = CHI_Western_Insurrection_Crisis
+			}
+		}
+		visible = {
+			NOT = { has_global_flag = YUN_ROC_reborn }
+			NOT = { has_global_flag = YUN_NPA_partial_victory }
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		is_good = yes
+		days_mission_timeout = 7
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_warbuff_tick mission timer elapsed"
+			hidden_effect = {
+				every_controlled_state = {
+					#limit = { is_controlled_by = YUN }
+					YUN_WI_state_mil_level_calc = yes
+				}
+				if = {
+					limit = { has_country_flag = YUN_long_yun_crusade }
+					activate_mission = YUN_WI_warbuff_tick
+				}
+			}
+			YUN_update_warbuff_effects = yes
+			add_to_variable = { army_professionalism_counter = YUN.YUN_army_prof_state_modifier_total }
+			custom_effect_tooltip = YUN_WI_warbuff_tick_tt
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_WI_warbuff_tick"
+		}
+	}
+	YUN_WI_legitimacy_tick = {
+		activation = {
+			has_country_flag = YUN_long_yun_crusade
+			OR = {
+				has_global_flag = YUN_NPA_GAW_Crisis
+				has_global_flag = CHI_Western_Insurrection_Crisis
+			}
+		}
+		visible = {
+			NOT = { has_global_flag = YUN_ROC_reborn }
+			NOT = { has_global_flag = YUN_NPA_partial_victory }
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		is_good = yes
+		days_mission_timeout = 7
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_legitimacy_tick mission timer elapsed"
+			YUN_update_legitimacy_effects = yes
+			custom_effect_tooltip = YUN_WI_legitimacy_tick_tt
+			hidden_effect = {
+				if = {
+					limit = { has_country_flag = YUN_long_yun_crusade }
+					activate_mission = YUN_WI_legitimacy_tick
+				}
+				if = {
+					limit = { 
+						NOT = { has_variable = YUN_legitimate_regime }
+						check_variable = { YUN_WI_zhang = 1 }
+						check_variable = { YUN_WI_song = 1 }
+						check_variable = { YUN_WI_sun = 1 }
+						check_variable = { YUN_WI_liu = 1 }
+						check_variable = { YUN_WI_cck = 1 }
+						check_variable = { YUN_WI_cwk = 1 }
+						has_global_flag = XIN_helps_NPA
+						has_global_flag = XIK_joins_NPA
+					}
+					country_event = { id = yun_wi.41 }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_WI_legitimacy_tick"
+		}
+	}
+
+	YUN_WI_reintegration_tick = {
+		activation = {
+			has_country_flag = YUN_long_yun_crusade
+			OR = {
+				has_global_flag = YUN_NPA_GAW_Crisis
+				has_global_flag = CHI_Western_Insurrection_Crisis
+			}
+		}
+		visible = {
+			NOT = { has_country_flag = YUN_complete_reintegration }
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		is_good = yes
+		days_mission_timeout = 7
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: YUN_WI_reintegration_tick mission timer elapsed"
+			custom_effect_tooltip = YUN_WI_reintegration_tick_tt
+			hidden_effect = {
+				every_controlled_state = {
+					limit = {
+						is_in_array = { YUN.greater_china_states = THIS }
+						NOT = { has_dynamic_modifier = { modifier = YUN_WI_province_status_dynamic } }
+						NOT = { has_state_flag = WI_core_state }
+					}
+					YUN_conquered_state_calc = yes
+				}
+				YUN_WI_update_state_integration = yes
+				WI_calc_state_officer_needed = yes
+				every_controlled_state = {
+					YUN_update_state_officers_effects = yes
+				}
+				if = {
+					limit = { 
+						NOT = { has_country_flag = YUN_complete_reintegration }
+					}
+					activate_mission = YUN_WI_reintegration_tick
+				}
+				if = {
+					limit = {
+						all_of_scopes = {
+							array = YUN.greater_china_states
+							is_core_of = YUN
+						}
+					}
+					set_country_flag = YUN_complete_reintegration
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision YUN_WI_reintegration_tick"
+		}
+	}
+
+	YUN_NPA_capture_hunan = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		available = {
+			controls_state = 602 #Hunan
+			controls_state = 961 #Changde
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 602
+				state = 961
+			}
+		}
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_capture_hunan Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff = 2.5 }
+			YUN_WI_morale_change = yes
+			add_manpower = 30000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_seize_wuhan = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		available = {
+			controls_state = 600 #Jiangxi
+			controls_state = 1016 #Wuhan
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 600
+				state = 1016
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_capture_wuhan Completed"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5000
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = 2500
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 3000
+			}
+			set_temp_variable = { YUN_WI_temp_warbuff = 2.5 }
+			YUN_WI_morale_change = yes
+			add_manpower = 30000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_to_nanjing = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			controls_state = 602 #Hunan
+			controls_state = 961 #Changde
+			controls_state = 600 #Jiangxi
+			controls_state = 1016 #Wuhan
+		}
+
+		available = {
+			controls_state = 613 #nanjing
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 613
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_capture_nanjing Completed"
+			add_political_power = 100
+			set_temp_variable = { YUN_WI_temp_legitimacy = 5.0 }
+			YUN_WI_legitimacy_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 50000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_south_china = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			has_full_control_of_state = 602 #Hunan
+			has_full_control_of_state = 961 #Changde
+			has_full_control_of_state = 600 #Jiangxi
+			has_full_control_of_state = 1016 #Wuhan
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_NPA_secure_south_china_trigger_tt
+				controls_state = 613 #nanjing
+				controls_state = 959 #huangshan
+				controls_state = 1016 #wuhan
+				controls_state = 620 #xiangyang
+				controls_state = 961 #changde
+				controls_state = 600 #ji'an
+				controls_state = 1019 #nanchang
+				controls_state = 596 #zhejiang
+				controls_state = 595 #fujian
+				controls_state = 602 #changsha
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 613
+				state = 959
+				state = 1016
+				state = 620
+				state = 961
+				state = 600
+				state = 1019
+				state = 596
+				state = 595
+				state = 602
+			}
+		}
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_capture_south_china Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			add_manpower = 100000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_cross_yangtze = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			has_full_control_of_state = 613 #nanjing
+		}
+
+		available = {
+			controls_state = 598
+			controls_state = 606
+			controls_state = 1015
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 598
+				state = 606
+				state = 1015
+			}	
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_cross_yangtze Completed"
+			add_war_support = 0.05
+			add_stability = 0.05
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			add_manpower = 30000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_charge_yellow_river = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			controls_state = 598
+			controls_state = 606
+			controls_state = 1015
+		}
+
+		available = {
+			controls_state = 607
+			controls_state = 1014
+			controls_state = 597
+			controls_state = 1021
+			controls_state = 1020
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 607
+				state = 1014
+				state = 597
+				state = 1021
+				state = 1020
+			}
+		}
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_capture_charge_yellow_river Completed"
+			add_war_support = 0.05
+			add_stability = 0.05
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			add_manpower = 30000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_the_second_capital = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			controls_state = 607
+			controls_state = 1014
+			controls_state = 597
+			controls_state = 1021
+			controls_state = 1020
+		}
+
+		available = {
+			controls_state = 608
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 608
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_the_second_capital Completed"
+			add_political_power = 200
+			set_temp_variable = { YUN_WI_temp_legitimacy = 5.0 }
+			YUN_WI_legitimacy_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 50000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}	
+	
+	YUN_NPA_the_paradise_of_parasites = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			has_global_flag = YUN_NPA_GAW_Crisis
+		}
+
+		available = {
+			controls_state = 326
+			controls_state = 592
+			controls_state = 729
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 326
+				state = 592
+				state = 729
+			}
+		}
+
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_the_paradise_of_parasites Completed"
+			add_political_power = 100
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 50000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_the_northwest_butcher = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			has_global_flag = YUN_NPA_GAW_Crisis
+		}
+
+		available = {
+			controls_state = 283
+			controls_state = 616
+			controls_state = 764
+			controls_state = 1302
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 283
+				state = 616
+				state = 764
+				state = 1302
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_the_northwest_butcher Completed"
+			add_command_power = 20
+			set_temp_variable = { YUN_WI_temp_warbuff = 10 }
+			YUN_WI_morale_change = yes
+			add_manpower = 50000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_the_fake_golden_family = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			has_global_flag = YUN_NPA_GAW_Crisis
+			OR = {
+				SHX = { is_in_faction_with = YUN }
+				controls_state = 608
+				controls_state = 615
+				controls_state = 622
+			}
+		}
+
+		available = {
+			controls_state = 330
+			controls_state = 612
+			controls_state = 621
+			controls_state = 815
+			controls_state = 955
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 330
+				state = 612
+				state = 621
+				state = 815
+				state = 955
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_the_second_capital Completed"
+			add_political_power = 100
+			add_command_power = 20
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.5 }
+			YUN_WI_legitimacy_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			add_manpower = 50000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_cross_the_marco_polo_bridge = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			has_global_flag = YUN_NPA_GAW_Crisis
+			controls_state = 608
+		}
+
+		available = {
+			controls_state = 328
+			controls_state = 801
+			controls_state = 809
+			controls_state = 810
+			controls_state = 1265
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 328
+				state = 801
+				state = 809
+				state = 810
+				state = 1265
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_the_second_capital Completed"
+			add_political_power = 200
+			add_command_power = 20
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_warbuff = 5 }
+			YUN_WI_morale_change = yes
+			add_manpower = 50000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_xinan = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_secured_xinan
+				all_of_scopes = {
+					array = YUN.china_region_xinan
+					controller = { is_in_faction_with = YUN }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_secure_xinan Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 1.0 }
+			YUN_WI_morale_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 50000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_huazhong = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_secured_huazhong
+				all_of_scopes = {
+					array = YUN.china_region_huazhong
+					controller = { is_in_faction_with = YUN }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_secure_huazhong Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 1.0 }
+			YUN_WI_morale_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 100000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_huadong = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_secured_huadong
+				all_of_scopes = {
+					array = YUN.china_region_huadong
+					controller = { is_in_faction_with = YUN }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_secure_huadong Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 1.5 }
+			YUN_WI_morale_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.5 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 100000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_huanan = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_secured_huanan
+				all_of_scopes = {
+					array = YUN.china_region_huanan
+					controller = { is_in_faction_with = YUN }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_secure_huanan Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 1.5 }
+			YUN_WI_morale_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 1.5 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 100000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_huabei = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_secured_huabei
+				all_of_scopes = {
+					array = YUN.china_region_huabei
+					controller = { is_in_faction_with = YUN }
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_secure_huabei Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 2.0 }
+			YUN_WI_morale_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 100000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_xibei = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_secured_xibei
+				all_of_scopes = {
+					array = YUN.china_region_xibei
+					controller = {
+						OR = {
+							is_in_faction_with = YUN
+							is_russian_nation = yes
+						}
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_secure_xibei Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 2.0 }
+			YUN_WI_morale_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.0 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 100000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_secure_dongbei = {
+		icon = GFX_red_KMT_deccat_decision
+		fire_only_once = yes
+		visible = {
+			custom_trigger_tooltip = {
+				tooltip = YUN_secured_dongbei
+				all_of_scopes = {
+					array = YUN.china_region_dongbei
+					controller = {
+						OR = {
+							is_in_faction_with = YUN
+							is_russian_nation = yes
+						}
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission YUN_NPA_secure_dongbei Completed"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = 2.5 }
+			YUN_WI_morale_tick_change = yes
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 2.5 }
+			YUN_WI_legitimacy_tick_change = yes
+			add_manpower = 100000
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	YUN_NPA_Production_Boost = {
+		visible = {
+			has_completed_focus = YUN_everything_for_the_war
+		}
+
+		cost = 100
+
+		fire_only_once = no
+
+		days_remove = 30
+		days_re_enable = 90
+
+		modifier = {
+			industrial_capacity_factory = 0.15
+			production_factory_efficiency_gain_factor = 0.15
+			production_speed_buildings_factor = 0.20
+			consumer_goods_use_modifier = -0.10
+			weekly_manpower = -40000
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = YUN_NPA_Production_Boost_tt_start
+			log = "[GetDateText]: [Root.GetName]: YUN_NPA_Production_Boost start"
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = -3.0 }
+			YUN_WI_legitimacy_tick_change = yes
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = YUN_NPA_Production_Boost_tt_end
+			log = "[GetDateText]: [Root.GetName]: YUN_NPA_Production_Boost end"
+			set_temp_variable = { YUN_WI_temp_legitimacy_tick = 3.0 }
+			YUN_WI_legitimacy_tick_change = yes
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1000
+				has_equipment = {
+					infantry_equipment < 1000
+				}
+			}
+		}
+	}
+
+	YUN_NPA_Press_Recruitment = {
+		visible = {
+			has_completed_focus = YUN_stand_up_and_fight
+		}
+
+		cost = 150
+
+		fire_only_once = no
+
+		days_remove = 30
+		days_re_enable = 90
+
+		modifier = {
+			army_org_factor = -0.10
+			army_attack_factor = -0.10
+			army_defence_factor = -0.10
+			weekly_manpower = 50000
+			compliance_gain = 0.2
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = YUN_NPA_Press_Recruitment_tt_start
+			log = "[GetDateText]: [Root.GetName]: YUN_NPA_Press_Recruitment start"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = -3.0 }
+			YUN_WI_morale_tick_change = yes
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = YUN_NPA_Press_Recruitment_tt_end
+			log = "[GetDateText]: [Root.GetName]: YUN_NPA_Press_Recruitment end"
+			set_temp_variable = { YUN_WI_temp_warbuff_tick = -3.0 }
+			YUN_WI_morale_tick_change = yes
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1000
+				has_manpower < 50000
+			}
+		}
+	}
+
+	YUN_NPA_Force_Attack = {
+		visible = {
+			has_completed_focus = YUN_not_one_step_back
+		}
+
+		cost = 200
+
+		fire_only_once = no
+
+		days_remove = 20
+		days_re_enable = 90
+
+		modifier = {
+			army_org_factor = -0.10
+			army_morale_factor = -0.10
+			army_attack_factor = 0.15
+			army_speed_factor = 0.15
+			supply_consumption_factor = 0.40
+			attrition = 0.25
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = YUN_NPA_Force_Attack_tt_start
+			set_temp_variable = { YUN_WI_temp_warbuff = 15 }
+			YUN_WI_morale_change = yes
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = YUN_NPA_Force_Attack_tt_end
+			set_temp_variable = { YUN_WI_temp_warbuff = -15 }
+			YUN_WI_morale_change = yes
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1000
+				CHI = {
+					surrender_progress < 0.10
+				}
+			}
+		}
+	}
+}
