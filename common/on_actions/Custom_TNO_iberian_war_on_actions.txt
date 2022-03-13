@@ -1,0 +1,922 @@
+on_actions = {
+    on_declare_war = {
+        effect = {
+			if = {
+				limit = {# Iberian Wars - Catalonia Civil War
+					ROOT = {
+					    OR = {
+					        tag = CNT
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = CTL
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ctl_iberian_wars_outcome
+						    option = CTL_IBERIAN_WARS_OTCOME_CTL
+					    }
+					    NOT = {
+					        has_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+				    CTL = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ctl_iberian_wars_outcome
+						    option = CTL_IBERIAN_WARS_OTCOME_CNT
+					    }
+					    NOT = {
+					        has_global_flag = CTL_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = CTL_CIVIL_WAR_BUFF_APPLIED
+				    CNT = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+			if = {
+				limit = {# Iberian Wars - Portugal Civil War
+					ROOT = {
+					    OR = {
+							tag = GNS
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = GNS
+							tag = POR
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_POR
+					    }
+					    NOT = {
+					        has_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+				    POR = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+            if = {
+				limit = {# Iberian Wars - Portugal Civil War GNS
+					ROOT = {
+					    OR = {
+							tag = GNS
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = IBR
+							tag = SPS
+							tag = TBA
+							tag = FSR 
+							tag = SPR
+							tag = BSQ
+							tag = CTL
+							tag = CNT
+							tag = GAL
+							tag = PPR
+							tag = RPP
+							tag = TBA
+							tag = POR
+							tag = FZL
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_GNS
+					    }
+					    NOT = {
+					        has_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+				    GNS = { apply_war_buff_with_15_divisions = yes }				    
+				}
+			}				
+			if = {
+				limit = {# Iberian Wars - Falangist collapse
+					ROOT = {
+					    OR = {
+							tag = FSR
+							tag = POR
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = IBR 
+							tag = SPR
+							tag = SPS
+							tag = TBA
+							tag = FZL
+							tag = BSQ
+							tag = CTL
+							tag = CNT
+							tag = GAL
+							tag = PPR
+							tag = RPP
+							tag = GNS
+							tag = POR
+							
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_FSR
+					    }
+					    NOT = {
+					        has_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+				    FSR = { apply_war_buff_with_15_divisions = yes }
+				}
+			}
+			if = {
+				limit = {# Iberian Wars - Morocco Civil War
+					ROOT = {
+					    OR = {
+							tag = MOR
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = RIF
+							tag = TRZ
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = mor_iberian_wars_outcome
+						    option = MOR_IBERIAN_WARS_OTCOME_ANTI_MOROCCO
+					    }
+					    NOT = {
+					        has_global_flag = MOR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = MOR_CIVIL_WAR_BUFF_APPLIED
+				    RIF = { apply_war_buff_with_10_divisions = yes }				    
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = mor_iberian_wars_outcome
+						    option = MOR_IBERIAN_WARS_OTCOME_MOR
+					    }
+					    NOT = {
+					        has_global_flag = MOR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = MOR_CIVIL_WAR_BUFF_APPLIED
+				    MOR = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+			if = {
+				limit = {# Iberian Wars - Portugal Civil War collapse
+					ROOT = {
+					    OR = {
+							tag = RRP
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = RPP
+							tag = POR
+							tag = GNS
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_PPR
+					    }
+					    NOT = {
+					        has_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+				    RPP = { apply_war_buff_with_10_divisions = yes }
+				}
+			}
+		}
+	}
+	on_war = {
+		effect = {
+			if = {
+				limit = {# Iberian War Spain Civil War
+					ROOT = {
+					    OR = {
+							tag = SPS
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = IBR
+							tag = SPS
+							tag = SPR
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_IBR
+					    }
+					    NOT = {
+					        has_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+				    IBR = { apply_war_buff_with_10_divisions = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_SPR
+					    }
+					    NOT = {
+					        has_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+				    SPR = { apply_war_buff_with_10_divisions = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_SPS
+					    }
+					    NOT = {
+					        has_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+				    SPS = { apply_war_buff_with_10_divisions = yes }			    
+				}
+			}
+			if = {
+				limit = {# Iberian Wars - Falangist collapse
+					ROOT = {
+					    OR = {
+							tag = FZL
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = IBR
+							tag = SPS
+							tag = TBA
+							tag = FSR 
+							tag = SPR
+							tag = BSQ
+							tag = CTL
+							tag = CNT
+							tag = GAL
+							tag = PPR
+							tag = RPP
+							tag = GNS
+							tag = POR
+							tag = FZL
+							
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_FZL
+					    }
+					    NOT = {
+					        has_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = IBR_CIVIL_WAR_BUFF_APPLIED
+				    FZL = { apply_war_buff_with_15_divisions = yes }
+				}
+			}
+			if = {
+				limit = {# Iberian Wars - Portugal Civil War collapse
+					ROOT = {
+					    OR = {
+							tag = RPP
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = POR
+							tag = GNS
+							tag = RPP
+					    }
+					}
+				}
+		        if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_RPP
+					    }
+					    NOT = {
+					        has_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = POR_CIVIL_WAR_BUFF_APPLIED
+				    RPP = { apply_war_buff_with_10_divisions = yes }				    
+				}
+			}
+		}
+	}
+    on_peace = {
+		effect = {
+			if = {
+				limit = {# Iberian Wars End Frente Azul wins
+					ROOT = {
+					    OR = {
+							tag = FZL
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = GNS
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_FZL
+					    }
+				    }
+				    FZL = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = {# Iberian Wars End GNS wins
+					ROOT = {
+					    OR = {
+							tag = GNS
+							tag = SPS
+							tag = TBA
+							tag = CTL
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = SPS
+							tag = TBA
+							tag = CTL
+							tag = GNS
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_GNS
+					    }
+				    }
+				    GNS = { remove_war_buff = yes }
+				}
+			}
+		}
+	}	
+	on_annex = {
+		effect = {
+			if = {
+				limit = { # Spain Civil War Ends Falangist wins
+					ROOT = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = CTL
+							tag = BSQ
+							tag = GAL
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IBR
+				            country_exists = SPS
+				            country_exists = SPR
+				            country_exists = FSR
+				            country_exists = FZL
+							country_exists = GAL
+				            country_exists = BSQ
+							country_exists = CTL
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_SPS
+					    }
+				    }
+				    SPS = { remove_war_buff = yes }
+	            }
+			}
+			if = {
+				limit = { # Iberian Wars End Frente Azul wins
+					ROOT = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = CTL
+							tag = CNT
+							tag = BSQ
+							tag = GAL
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = POR
+							tag = RPP
+							tag = PPR
+							tag = GNS
+							tag = CTL
+							tag = CNT
+							tag = BSQ
+							tag = GAL
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IBR
+				            country_exists = SPS
+				            country_exists = SPR
+				            country_exists = FSR
+							country_exists = GAL
+				            country_exists = BSQ
+							country_exists = CTL
+							country_exists = CNT
+							country_exists = POR
+							country_exists = RPP
+							country_exists = PPR
+							country_exists = FZL
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_FZL
+					    }
+				    }
+				    FZL = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Iberian Wars End National Redemption Front wins
+					ROOT = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = CTL
+							tag = CNT
+							tag = BSQ
+							tag = GAL
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = POR
+							tag = RPP
+							tag = PPR
+							tag = GNS
+							tag = CTL
+							tag = CNT
+							tag = BSQ
+							tag = GAL
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IBR
+				            country_exists = SPS
+				            country_exists = SPR
+				            country_exists = FSR
+							country_exists = GAL
+				            country_exists = BSQ
+							country_exists = CTL
+							country_exists = CNT
+							country_exists = POR
+							country_exists = RPP
+							country_exists = PPR
+							country_exists = GNS
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_FSR
+					    }
+				    }
+				    FSR = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Iberian Wars End National Redemption Front wins
+					ROOT = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = CTL
+							tag = CNT
+							tag = BSQ
+							tag = GAL
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = POR
+							tag = RPP
+							tag = PPR
+							tag = GNS
+							tag = CTL
+							tag = CNT
+							tag = BSQ
+							tag = GAL
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IBR
+				            country_exists = SPR
+				            country_exists = FSR
+							country_exists = GAL
+				            country_exists = BSQ
+							country_exists = CNT
+							country_exists = POR
+							country_exists = RPP
+							country_exists = PPR
+							country_exists = GNS
+							country_exists = FZL
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_FSR
+					    }
+				    }
+				    FSR = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Spain Civil War Ends Spanish Republic wins
+					ROOT = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = TBA
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IBR
+				            country_exists = SPS
+				            country_exists = SPR
+				            country_exists = FSR
+				            country_exists = FZL
+							country_exists = TBA
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_SPR
+					    }
+				    }
+				    SPR = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Iberian Wars End Federal Forces win
+					ROOT = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = POR
+							tag = BSQ
+							tag = CTL 
+							tag = CNT
+							tag = GAL
+							tag = GNS
+							tag = PPR
+							tag = RPP
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = FZL
+					        tag = FSR
+							tag = SPS
+							tag = IBR
+					        tag = SPR
+							tag = POR
+							tag = BSQ
+							tag = CTL 
+							tag = CNT
+							tag = GAL
+							tag = GNS
+							tag = PPR
+							tag = RPP
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = IBR
+				            country_exists = SPS
+				            country_exists = SPR
+				            country_exists = FSR
+				            country_exists = FZL
+							country_exists = BSQ
+				            country_exists = CTL
+							country_exists = TBA
+				            country_exists = CNT
+				            country_exists = GAL
+				            country_exists = POR
+				            country_exists = PPR
+				            country_exists = RPP
+				            country_exists = GNS
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ibr_iberian_wars_outcome
+						    option = IBR_IBERIAN_WARS_OTCOME_IBR
+					    }
+				    }
+				    IBR = { remove_war_buff = yes }
+				}
+			}
+		    if = {
+				limit = { # Portugal Civil War Ends
+					ROOT = {
+					    OR = {
+							tag = RPP
+							tag = PPR
+							tag = POR
+							tag = GNS
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = POR
+							tag = GNS
+							tag = RPP
+							tag = PPR
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = POR
+							country_exists = RPP
+							country_exists = PPR
+							country_exists = GNS
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_POR
+					    }
+				    }
+				    POR = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_RPP
+					    }
+				    }
+				    RPP = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = por_iberian_wars_outcome
+						    option = POR_IBERIAN_WARS_OTCOME_PPR
+					    }
+				    }
+				    PPR = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Morocco Civil War Ends Morocco wins
+					ROOT = {
+					    OR = {
+							tag = MOR
+							tag = RIF
+							tag = TRZ
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = MOR
+							tag = RIF
+							tag = TRZ
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = MOR
+							country_exists = RIF
+							country_exists = TRZ
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = mor_iberian_wars_outcome
+						    option = MOR_IBERIAN_WARS_OTCOME_MOR
+					    }
+				    }
+				    MOR = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = mor_iberian_wars_outcome
+						    option = MOR_IBERIAN_WARS_OTCOME_ANTI_MOROCCO
+					    }
+				    }
+				    RIF = { remove_war_buff = yes }
+				}
+			}
+			if = {
+				limit = { # Morocco Civil War Ends Morocco wins
+					ROOT = {
+					    OR = {
+							tag = MOR
+							tag = RIF
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = MOR
+							tag = RIF
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = MOR
+							country_exists = RIF
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = mor_iberian_wars_outcome
+						    option = MOR_IBERIAN_WARS_OTCOME_ANTI_MOROCCO
+					    }
+				    }
+				    RIF = { remove_war_buff = yes }
+				}
+			}
+            if = {
+				limit = { # Catalonia Civil War Ends
+					ROOT = {
+					    OR = {
+					        tag = CTL
+							tag = CNT
+					    }
+					}
+					FROM = {
+					    OR = {
+					        tag = CTL
+							tag = CNT
+					    }
+					}
+					NOT = {
+			            count_triggers = {
+				            amount = 2 
+				            country_exists = CTL
+							country_exists = CNT
+			            }
+		            }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ctl_iberian_wars_outcome
+						    option = CTL_IBERIAN_WARS_OTCOME_CTL
+					    }
+				    }
+				    CTL = { remove_war_buff = yes }
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = ctl_iberian_wars_outcome
+						    option = CTL_IBERIAN_WARS_OTCOME_CNT
+					    }
+				    }
+				    CNT = { remove_war_buff = yes }
+				}
+			}				
+		}
+	}
+}	
