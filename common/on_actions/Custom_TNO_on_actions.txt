@@ -1540,13 +1540,10 @@ on_actions = {
 					ROOT = {
 					    OR = {
 							tag = PHI
-							tag = UPH
-							tag = SPH
 					    }
 					}
 					FROM = {
 					    OR = {
-							tag = PHI
 							tag = UPH
 							tag = SPH
 					    }
@@ -1729,7 +1726,6 @@ on_actions = {
 				limit = { # The Philippines Civil War Ends the anit-government forces win
 					ROOT = {
 					    OR = {
-							tag = PHI
 							tag = UPH
 							tag = SPH
 					    }
@@ -1737,8 +1733,6 @@ on_actions = {
 					FROM = {
 					    OR = {
 							tag = PHI
-							tag = UPH
-							tag = SPH
 					    }
 					}
 					NOT = {
@@ -1769,13 +1763,10 @@ on_actions = {
 					ROOT = {
 					    OR = {
 							tag = FGB
-							tag = UPH
-							tag = SPH
 					    }
 					}
 					FROM = {
 					    OR = {
-							tag = FGB
 							tag = UPH
 							tag = SPH
 					    }
@@ -1827,13 +1818,13 @@ on_actions = {
 				limit = { # Landing in the Philippines ends AFRSR victory
 					ROOT = {
 					    OR = {
-							tag = FGB
 							tag = SPH
 					    }
 					}
 					FROM = {
 					    OR = {
 							tag = UPH
+							tag = FGB
 					    }
 					}
 					NOT = {
@@ -1855,7 +1846,6 @@ on_actions = {
 				limit = { # Landing in the Philippines ends United Front victory
 					ROOT = {
 					    OR = {
-							tag = FGB
 							tag = UPH
 							tag = SPH
 					    }
@@ -1863,8 +1853,6 @@ on_actions = {
 					FROM = {
 					    OR = {
 							tag = FGB
-							tag = UPH
-							tag = SPH
 					    }
 					}
 					NOT = { 
@@ -2391,6 +2379,12 @@ on_actions = {
 						rule = mongolian_civil_war_outcome
 						option = MONGOLIAN_CIVIL_WAR_OUTCOME_PRC_PEOPLE'S_REVOLUTIONARY_COUNCIL
 					}
+					NOT = {  ### Don't apply the buff again if PRC is set to unite Siberia
+						has_game_rule = {
+							rule = central_siberia_unification_outcome
+							option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_PRC_TUVA
+						}
+					}
 					ROOT = {
 						OR = {
 							tag = MEN
@@ -2841,6 +2835,12 @@ on_actions = {
 						has_game_rule = {
 							rule = mongolian_civil_war_outcome
 							option = MONGOLIAN_CIVIL_WAR_OUTCOME_PRC_PEOPLE'S_REVOLUTIONARY_COUNCIL
+						}
+						NOT = {  ### Don't remove the buff if PRC is set to unite Siberia
+						    has_game_rule = {
+							    rule = central_siberia_unification_outcome
+							    option = CENTRAL_SIBERIA_UNIFICATION_OUTCOME_PRC_TUVA
+						    }
 						}
 					}
 					PRC = {
