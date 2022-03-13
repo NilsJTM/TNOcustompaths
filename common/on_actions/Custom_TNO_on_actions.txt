@@ -2415,7 +2415,7 @@ on_actions = {
 				}
 			}
 			
-			##Madagascar Civil War
+			## Madagascar Civil War
 			if = {
 				limit = {
 					has_game_rule = {
@@ -2468,7 +2468,7 @@ on_actions = {
 				}
 			}
 			
-			##2nd Italo-Turkish War
+			## 2nd Italo-Turkish War
 			if = { #Italian Middle East
 				limit = {
 					has_game_rule = {
@@ -2487,12 +2487,10 @@ on_actions = {
 							tag = TUR
 						}
 					}
-					NOT = {
-						has_idea = Custom_TNO_war_buff
-					}
 				}
 				IME = {
-					apply_war_buff_with_5_divisions = yes
+					add_ideas = Custom_TNO_italo_turkish_war
+					apply_5_divisions = yes
 				}
 			}
 			if = { #Republic of Turkey
@@ -2513,16 +2511,13 @@ on_actions = {
 							tag = TUR
 						}
 					}
-					NOT = {
-						has_idea = Custom_TNO_war_buff
-					}
 				}
 				TUR = {
 					apply_war_buff_with_5_divisions = yes
 				}
 			}
 			
-			##Algerian War
+			## Algerian War
 			if = { #Iberia
 				limit = {
 					has_game_rule = {
@@ -2618,7 +2613,7 @@ on_actions = {
 		}
 	}
 	
-	
+	## Chinese Wars
 	on_declare_war = {
 		effect = {
 			if = { ##Warlord Insurrection
@@ -2699,7 +2694,7 @@ on_actions = {
 	
 	on_peace = {
 		effect = {
-			if = { ##Madagascar Civil War ends
+			if = { ## Madagascar Civil War ends
 				limit = {
 					has_game_rule = {
 						rule = madagaskar_civil_war_outcome
@@ -2745,7 +2740,7 @@ on_actions = {
 				}
 			}
 			
-			if = { ##2nd Italo-Turkish War ends
+			if = { ## 2nd Italo-Turkish War ends
 				limit = {
 					ROOT = {
 						OR = {
@@ -2768,7 +2763,11 @@ on_actions = {
 						}
 					}
 					IME = {
-						remove_war_buff = yes
+						remove_ideas = Custom_TNO_italo_turkish_war
+						delete_unit_template_and_units = {
+							division_template = "Custom TNO Division"
+							disband = no
+						}
 					}
 				}
 				if = {
@@ -2784,7 +2783,7 @@ on_actions = {
 				}
 			}
 			
-			if = { ##Algerian War ends
+			if = { ## Algerian War ends
 				limit = {
 					ROOT = {
 						OR = {
@@ -2823,7 +2822,7 @@ on_actions = {
 				}
 			}
 			
-			if = { ##Mongolian Civil War ends
+			if = { ## Mongolian Civil War ends
 				limit = {
 					ROOT = {
 						OR = {
