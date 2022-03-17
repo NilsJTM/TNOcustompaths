@@ -2592,6 +2592,57 @@ on_actions = {
 					}
 				}
 			}
+			
+			## Ian Paisley war
+			if = { #Ulster
+				limit = {
+					has_game_rule = {
+						rule = paisley_IRE_war_outcome
+						option = PAISLEY_IRE_WAR_OUTCOME_ULS_ORANGE_STATE
+					}
+					ROOT = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+				}
+				ULS = {
+					add_timed_idea = {
+						idea = Custom_TNO_paisley_IRE_war
+						days = 60
+					}
+				}
+			}
+			if = { #Ireland
+				limit = {
+					has_game_rule = {
+						rule = paisley_IRE_war_outcome
+						option = PAISLEY_IRE_WAR_OUTCOME_IRE_REPUBLIC_OF_IRELAND
+					}
+					ROOT = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+				}
+				IRE = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
 		}
 	}
 	
@@ -2799,6 +2850,34 @@ on_actions = {
 						}
 					}
 					ILG = {
+						remove_war_buff = yes
+					}
+				}
+			}
+			
+			if = { ## paisley IRE war ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = paisley_IRE_war_outcome
+							option = PAISLEY_IRE_WAR_OUTCOME_IRE_REPUBLIC_OF_IRELAND
+						}
+					}
+					IRE = {
 						remove_war_buff = yes
 					}
 				}
