@@ -2644,6 +2644,31 @@ on_actions = {
 					apply_war_buff_with_5_divisions = yes
 				}
 			}
+			
+			## Welsh-English War
+			if = { #Wales
+				limit = {
+					has_game_rule = {
+						rule = ENG_WAL_WAR_OUTCOME
+						option = ENG_WAL_WAR_OUTCOME_WAL_WALES
+					}
+					ROOT = {
+						OR = {
+							tag = ENG
+							tag = WAL
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ENG
+							tag = WAL
+						}
+					}
+				}
+				WAL = {
+					apply_war_buff_with_15_divisions = yes
+				}
+			}
 		}
 	}
 	
@@ -2890,6 +2915,34 @@ on_actions = {
 						}
 					}
 					IRE = {
+						remove_war_buff = yes
+					}
+				}
+			}
+			
+			if = { ## Welsh-English War ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = ENG
+							tag = WAL
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ENG
+							tag = WAL
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = ENG_WAL_WAR_OUTCOME
+							option = ENG_WAL_WAR_OUTCOME_WAL_WALES
+						}
+					}
+					WAL = {
 						remove_war_buff = yes
 					}
 				}
