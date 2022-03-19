@@ -522,6 +522,7 @@ on_actions = {
 					FROM = {
 					    OR = {
 					        tag = OMA
+					        tag = OMI
 					    }
 					}
 				}
@@ -2666,7 +2667,55 @@ on_actions = {
 					}
 				}
 				WAL = {
-					apply_war_buff_with_15_divisions = yes
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
+			
+			## Scottish-English War
+			if = { #Scotland
+				limit = {
+					has_game_rule = {
+						rule = ENG_SCO_WAR_OUTCOME
+						option = ENG_SCO_WAR_OUTCOME_SCO_SCOTLAND
+					}
+					ROOT = {
+						OR = {
+							tag = ENG
+							tag = SCO
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ENG
+							tag = SCO
+						}
+					}
+				}
+				SCO = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
+			if = { #England
+				limit = {
+					has_game_rule = {
+						rule = ENG_SCO_WAR_OUTCOME
+						option = ENG_SCO_WAR_OUTCOME_ENG_ENGLAND
+					}
+					ROOT = {
+						OR = {
+							tag = ENG
+							tag = SCO
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ENG
+							tag = SCO
+						}
+					}
+				}
+				ENG = {
+					apply_war_buff_with_5_divisions = yes
 				}
 			}
 		}
@@ -2943,6 +2992,45 @@ on_actions = {
 						}
 					}
 					WAL = {
+						remove_war_buff = yes
+					}
+				}
+			}
+			
+			if = { ## Scottish-English War ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = ENG
+							tag = SCO
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ENG
+							tag = SCO
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = ENG_SCO_WAR_OUTCOME
+							option = ENG_SCO_WAR_OUTCOME_SCO_SCOTLAND
+						}
+					}
+					SCO = {
+						remove_war_buff = yes
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = ENG_SCO_WAR_OUTCOME
+							option = ENG_SCO_WAR_OUTCOME_ENG_ENGLAND
+						}
+					}
+					ENG = {
 						remove_war_buff = yes
 					}
 				}
