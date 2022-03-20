@@ -1,0 +1,2314 @@
+USA_OFN_mandates_formed = { #Why this freakin' mess is not scripted here seriously
+	GRO = {
+		every_owned_state = {
+			add_core_of = MZB 
+		}
+	}
+	MZB = {
+		annex_country = {
+			target = GRO
+			transfer_troops = no
+		}
+		inherit_technology = USA
+	}
+	USA = {
+		remove_ideas = {
+			USA_John_D_Lavelle_high_command
+			USA_William_Westmoreland_high_command
+			USA_Creighton_Abrams_Jr_theorist
+		}
+		set_autonomy = {
+			target = COG
+			autonomy_state = autonomy_military_government
+		}
+		if = {
+			limit = {
+				ANG = {
+					NOT = { has_country_flag = ANG_USA_guarantee }
+				}
+			}
+			set_autonomy = {
+				target = ANG
+				autonomy_state = autonomy_military_government
+			}
+		}
+		clr_country_flag = USA_show_south_africa_tree
+		USA_reload_presidential_tree = yes
+		set_autonomy = {
+			target = MZB
+			autonomy_state = autonomy_military_government
+		}
+		add_to_faction = SAF
+		SAF = {
+			add_ideas = OFN_Independent_Member 
+			econ_leave_sphere = yes
+			econ_join_sphere_USA = yes
+		}
+		remove_unit_leader_role = USA_William_Westmoreland
+		remove_unit_leader_role = USA_John_D_Lavelle
+		remove_unit_leader_role = USA_Creighton_Abrams_Jr
+		subtract_from_variable = { USA_SAF_WAR_Discontent = 40 }
+		set_country_flag = USA_SAW_Full_Vic
+	}
+	MZB = {
+		add_ideas = OFN_Mandate
+		set_variable = { GDP_growth = 8 }
+		set_variable = { base_inflation_rate = 3.8 }
+		set_variable = { income_tax_rate = 0.1 }
+		set_variable = { business_tax_rate = 0.03 }
+		set_variable = { poverty_rate = GRO.poverty_rate }
+		set_variable = { poverty_monthly_change = 0.2 }
+		set_variable = { money_reserves = 0.0 } #in billions
+		set_variable = { misc_income = 0.685 }
+		set_variable = { misc_costs = 0.159 }
+		set_variable = { economic_centralization = 65 }
+		OFN_MANDATE_set_starting_laws = yes
+		set_party_name = {
+			ideology = communist
+			long_name = OFN_MZB_com_party_long
+			name = OFN_MZB_com_party
+		}
+		set_party_name = {
+			ideology = socialist
+			long_name = OFN_MZB_soc_party_long
+			name = OFN_MZB_soc_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democracy
+			long_name = OFN_MZB_authdem_party_long
+			name = OFN_MZB_authdem_party
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = OFN_MZB_desp_party_long
+			name = OFN_MZB_desp_party
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = OFN_MZB_fasc_party_long
+			name = OFN_MZB_fasc_party
+		}
+		set_party_name = {
+			ideology = national_socialism
+			long_name = OFN_MZB_natsoc_party_long
+			name = OFN_MZB_natsoc_party
+		}
+		MZB_USA_William_Westmoreland = {
+			promote_character = yes
+		}
+		MZB_USA_vwc = {
+			add_country_leader_role = {
+				country_leader = {
+					desc = "POLITICS_EAST_AFRICA_DUMMY_DESC"
+					expire = "1999.1.23"
+					ideology = fascism_subtype
+					traits = { }
+					id = -1
+				}
+			}
+		}
+		MZB_USA_ger = {
+			add_country_leader_role = {
+				country_leader = {
+					desc = "POLITICS_EAST_AFRICA_DUMMY_DESC"
+					expire = "1999.1.23"
+					ideology = national_socialism_subtype
+					traits = { }
+					id = -1
+				}
+			}
+		}
+		set_politics = { ruling_party = authoritarian_democracy }
+		set_popularities = {
+			communist = 20
+			ultranationalism = 0
+			socialist = 10
+			social_democracy = 0
+			liberal_democracy = 0
+			conservative_democracy = 0
+			authoritarian_democracy = 30
+			despotism = 10
+			fascism = 20
+			national_socialism = 10
+		}
+		add_ideas = {
+			MZB_USA_William_R_Peers_hog
+			MZB_USA_Kenneth_Rush_for
+			MZB_USA_Paul_Nitze_eco
+			MZB_USA_Paul_D_Harkins_sec
+			MZB_USA_Legacy_Ostafrikaner_Research
+			MZB_USA_East_African_Warlordism
+			MZB_USA_Lackluster_Infrastructures
+		}
+		drop_cosmetic_tag = yes
+		set_cosmetic_tag = MZB_USA
+		load_focus_tree = ofn_mozambique
+		load_oob = OFN_MZB
+
+		MZB_USA_William_R_Peers = {
+			add_corps_commander_role = {
+				skill = 3
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 3
+				traits = { }
+			}
+		}
+		MZB_USA_Paul_D_Harkins = {
+			add_corps_commander_role = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 2
+				traits = { }
+			}
+		}
+		set_country_flag = OFN_MANDATE_not_decolonized
+		#activate_decision = OFN_AFRICA_MANDATE_test
+		econ_leave_sphere = yes
+		econ_join_sphere_USA = yes
+		set_temp_variable = { TNO_economy_subtype_temp = 1 }
+		econ_subtype_change = yes
+		TNO_startup_nation = yes
+	}
+	COG = {
+		clr_country_flag = country_has_gui
+		every_character = {
+			limit = { has_character_flag = is_GER_COG }
+			retire = yes
+		}
+		add_ideas = OFN_Mandate
+		inherit_technology = USA
+		OFN_MANDATE_set_starting_laws = yes
+		set_party_name = {
+			ideology = communist
+			long_name = OFN_COG_com_party_long
+			name = OFN_COG_com_party
+		}
+		set_party_name = {
+			ideology = socialist
+			long_name = OFN_COG_soc_party_long
+			name = OFN_COG_soc_party
+		}
+		set_party_name = {
+			ideology = social_democracy
+			long_name = OFN_COG_socdem_party_long
+			name = OFN_COG_socdem_party
+		}
+		set_party_name = {
+			ideology = liberal_democracy
+			long_name = OFN_COG_soclib_party_long
+			name = OFN_COG_soclib_party
+		}
+		set_party_name = {
+			ideology = conservative_democracy
+			long_name = OFN_COG_soccon_party_long
+			name = OFN_COG_soccon_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democracy
+			long_name = OFN_COG_authdem_party_long
+			name = OFN_COG_authdem_party
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = OFN_COG_fasc_party_long
+			name = OFN_COG_fasc_party
+		}
+		promote_character = COG_USA_Creighton_Abrams
+		COG_USA_ger = {
+			add_country_leader_role = {
+				country_leader = {
+					#desc = "POLITICS_CENTRAL_AFRICA_DUMMY_DESC"
+					expire = "1999.1.23"
+					ideology = fascism_subtype
+					traits = { }
+					id = -1
+				}
+			}
+		}
+		set_politics = { ruling_party = authoritarian_democracy }
+		set_popularities = {
+			communist = 5
+			ultranationalism = 0
+			socialist = 10
+			social_democracy = 5
+			liberal_democracy = 10
+			conservative_democracy = 15
+			authoritarian_democracy = 45
+			despotism = 0
+			fascism = 10
+			national_socialism = 0
+		}
+		remove_ideas = {
+			COG_Heart_Of_Afrika_0
+			COG_Heart_Of_Afrika_1
+			COG_Heart_Of_Afrika_2
+			COG_Heart_Of_Afrika_3
+			COG_Heart_Of_Afrika_4
+			COG_Heart_Of_Afrika_5
+			COG_Heart_Of_Afrika_6
+			COG_Heart_Of_Afrika_7
+			COG_Heart_Of_Afrika_8
+			COG_Heart_Of_Afrika_9
+			COG_Hands_Off_Administration
+			COG_Soldiers_Of_Fortune
+			COG_The_Fatherland_Arrives
+			COG_Conscripted_Natives
+			COG_Conscripted_Mercenaries
+			COG_Conscripted_Mercenaries_2
+			COG_Up_to_Date_Maps
+			COG_Cameroon_Defense_Plan
+			COG_Mullers_Army_0
+			COG_Mullers_Army_1
+			COG_Mullers_Army_2
+			COG_Zentralafrikaner_Military_Complex_0
+			COG_Zentralafrikaner_Military_Complex_1
+			COG_Air_Training_Programs
+			COG_Aerian_Logistics
+			COG_SAF_Tactical_Bombing_Campaigns
+			COG_Airfield_Developments_0
+			COG_Airfield_Developments_1
+			COG_bonus_vacation_kollner
+			COG_bonus_vacation_speer_jr
+			COG_bonus_vacation_kaselowsky
+			COG_bonus_vacation_manstein
+			COG_bonus_vacation_nordhoff
+			COG_bonus_vacation_von_heydekampf
+			COG_bonus_vacation_abs
+			COG_bonus_vacation_flick
+			COG_bonus_vacation_geilenburg
+			COG_bonus_vacation_von_siemens
+			COG_Raised_Steel_Quotas
+			COG_Raised_Rubber_Quotas
+			GER_SGR_drugs_SAW
+			Pakt_Autonomous_Reichskommissariat
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			COG_USA_Cyrille_Adoula_hog
+			COG_USA_Andrew_W_Cordier_for
+			COG_USA_Leonard_Mulumba_eco
+			COG_USA_Cyrus_Vance_sec
+			COG_OFN_Legacy_Zentralafrikaner_System_1
+			COG_OFN_Unhappy_Investors_1
+			COG_OFN_Manace_of_Cameroon_1
+		}
+		remove_dynamic_modifier = {
+			modifier = COG_mercenary_army
+		}
+		remove_dynamic_modifier = {
+			modifier = COG_the_call_of_the_wild
+		}
+		drop_cosmetic_tag = yes
+		set_cosmetic_tag = COG_USA
+		load_focus_tree = ofn_congo
+		load_oob = OFN_COG
+		delete_unit_template_and_units = {
+			division_template = "Schutztruppe"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Wehrmacht"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Waffen-SS"
+		}
+		transfer_navy = {
+		    target = GER
+		}
+		COG_USA_Leonard_Mulumba = {
+			add_corps_commander_role = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 2
+				traits = {
+					media_personality
+					infantry_leader
+					jungle_rat
+				}
+				legacy_id = 181001
+			}
+		}
+		COG_USA_Joseph_Kasa_Vubu = {
+			add_corps_commander_role = {
+				skill = 3
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 3
+				traits = { }
+				legacy_id = 181002
+			}
+		}
+		set_country_flag = OFN_MANDATE_not_decolonized
+		econ_leave_sphere = yes
+		econ_join_sphere_USA = yes
+		set_temp_variable = { TNO_economy_subtype_temp = 1 }
+		econ_subtype_change = yes
+		country_lock_all_division_template = yes
+	}
+	if = {
+		limit = {
+			ANG = {
+				NOT = { has_country_flag = ANG_Free }
+			}
+		}
+		ANG = {
+			every_character = {
+				limit = { has_character_flag = is_GER_ANG }
+				retire = yes
+			}
+			set_capital = { state = 1035 }
+			add_ideas = OFN_Mandate
+			econ_join_sphere_USA = yes
+			inherit_technology = USA
+			OFN_MANDATE_set_starting_laws = yes
+			set_party_name = {
+				ideology = communist
+				long_name = OFN_ANG_com_party_long
+				name = OFN_ANG_com_party
+			}
+			set_party_name = {
+				ideology = socialist
+				long_name = OFN_ANG_soc_party_long
+				name = OFN_ANG_soc_party
+			}
+			set_party_name = {
+				ideology = liberal_democracy
+				long_name = OFN_ANG_soclib_party_long
+				name = OFN_ANG_soclib_party
+			}
+			set_party_name = {
+				ideology = conservative_democracy
+				long_name = OFN_ANG_soccon_party_long
+				name = OFN_ANG_soccon_party
+			}
+			set_party_name = {
+				ideology = authoritarian_democracy
+				long_name = OFN_ANG_authdem_party_long
+				name = OFN_ANG_authdem_party
+			}
+			set_party_name = {
+				ideology = despotism
+				long_name = OFN_ANG_desp_party_long
+				name = OFN_ANG_desp_party
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = OFN_ANG_fasc_party_long
+				name = OFN_ANG_fasc_party
+			}
+			ANG_USA_John_D_Lavelle = {
+				promote_character = yes
+			}
+
+			# Dummy country leaders just for names.
+			add_country_leader_role = {
+				character = ANG_DUMMY_German_Remnants
+				country_leader = {
+					expire = "1999.1.23"
+					ideology = fascism_subtype
+					id = -1
+				}
+			}
+			ANG_Jonas_Savimbi = {
+				promote_character = { ideology = despotism_personalistic_dictatorship_subtype }
+			}
+			set_politics = { ruling_party = authoritarian_democracy }
+			set_popularities = {
+				communist = 10
+				ultranationalism = 0
+				socialist = 5
+				social_democracy = 0
+				liberal_democracy = 10
+				conservative_democracy = 5
+				authoritarian_democracy = 40
+				despotism = 20
+				fascism = 10
+				national_socialism = 0
+
+			}
+			remove_ideas = {
+				ANG_Afrikaner_Airstrip
+				ANG_Incoherent_Bookkeeping
+				ANG_Incoherent_Bookkeeping_2
+				ANG_Incoherent_Bookkeeping_3
+				ANG_Incoherent_Bookkeeping_4
+				ANG_Away_In_The_Clouds
+				ANG_The_Fatherland_Arrives
+				ANG_Disrupted_Comms
+				ANG_Slipping_The_Plans
+				ANG_Constant_Partisans
+				ANG_Broken_Fuel_Lines
+				ANG_Token_Troops
+				ANG_Muller_Airlift
+				ANG_No_One_In_No_One_Out
+				ANG_USA_Infiltrated_RK_Armies
+				ANG_SKL_Air_Exercises
+				ANG_SKL_RD_Expanded
+				ANG_Secure_The_Homefront
+				ANG_Boer_Help
+				ANG_In_The_Nuts
+				ANG_In_The_Nuts_2
+				ANG_In_The_Nuts_3
+				ANG_In_The_Nuts_4
+				ANG_Reprisal_Attacks
+				ANG_SS_Anti_Terror
+				ANG_SS_Anti_Terror_2
+				ANG_Using_Our_People
+				ANG_Using_Our_People_Paid_Well
+				ANG_Using_Our_People_Paid_Well_2
+				ANG_Using_Our_People_Paid_Enough
+				ANG_Using_Our_People_Paid_Enough_2
+				ANG_Roll_Them_Off_The_Line
+				GRO_Financed_Shit
+				ANG_Mutual_Assistence_Pact_1
+				ANG_Mutual_Assistence_Pact
+				ANG_Mutual_Assistence_Pact_COG
+				ANG_Mutual_Assistence_Pact_GRO
+				ANG_Road_Of_Life
+				ANG_Natives_In_The_Air_2
+				ANG_Natives_In_The_Air_1
+				ANG_RANDR
+				ANG_RANDR_2
+				ANG_Joint_Offensive_Shit
+				ANG_Lords_Of_The_Air
+				ANG_Lords_Of_The_Air_2
+				ANG_PlanesInOurHand_1
+				ANG_PlanesInOurHand_2
+				ANG_PlanesInOurHand_3
+				ANG_bomber_production
+				ANG_fighter_production
+				ANG_transport_production
+				ANG_Bomber_Plans
+				ANG_Bomber_Plans_And_Fighter_Plans
+				ANG_Fighter_Plans
+				ANG_Air_Assault_And_Fighter
+				ANG_Trifecta
+				ANG_Air_Assault
+				ANG_Air_Assault_And_Bomber
+				ANG_Safetey_is_paramount_idea
+				ANG_pit_stop_model_idea
+				ANG_pit_stop_modeland_saftey_idea
+				ANG_build_quickly_idea
+				ANG_German_Sus_idea_1
+				ANG_German_Sus_idea_2
+				ANG_German_Sus_idea_3
+				ANG_German_Sus_idea_4
+				ANG_German_Sus_idea_5
+				ANG_Huttig_Sus_idea_1
+				ANG_Huttig_Sus_idea_2
+				ANG_Huttig_Sus_idea_3
+				ANG_Huttig_Sus_idea_4
+				ANG_Muller_sus_idea_1
+				ANG_Muller_sus_idea_2
+				ANG_Muller_sus_idea_3
+				ANG_Muller_sus_idea_4
+				ANG_Native_Militancy_1
+				ANG_Native_Militancy_2
+				ANG_Native_Militancy_3
+				ANG_Native_Militancy_4
+				ANG_Native_Militancy_5
+				ANG_Sudwest_Training_Shit
+				ANG_Sudwest_Training_med
+				ANG_Sudwest_Training_high
+				ANG_constitution
+				ANG_Guerillas_Rescued
+				ANG_few_prisoners_freed
+				ANG_med_prisoners_freed
+				ANG_high_prisoners_freed
+				ANG_German_Resistance
+				ANG_Improved_Internal_Structure
+				ANG_City_Terror_Attack
+				ANG_Terror_Troop_Angst
+				ANG_American_Advisors
+				GER_SGR_drugs_SAW
+				Pakt_Autonomous_Reichskommissariat
+
+				ANG_Air_Empire_Dynmod_Dummy
+			}
+			remove_all_ministers = yes
+			add_ideas = {
+				ANG_USA_William_W_Momyer_hog
+				ANG_USA_Robert_A_Lovett_for
+				ANG_USA_Klaus_Dierks_eco
+				ANG_USA_Philip_Davidson_sec
+				ANG_USA_Lecagy_Air_Empire
+				ANG_USA_UNITA_MPLA_Infightings
+				ANG_USA_Fumes_of_the_Battlefields
+			}
+			remove_dynamic_modifier = {
+				modifier = ANG_German_support
+			}
+			drop_cosmetic_tag = yes
+			set_cosmetic_tag = ANG_USA
+			load_focus_tree = ofn_angola
+			load_oob = OFN_ANG
+			delete_unit_template_and_units = {
+				division_template = "Schutztruppe"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Ursprunglich Patroullieren"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Wehrmacht"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Waffen-SS"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Fallschirmjäger"
+			}
+			transfer_navy = {
+			    target = GER
+			}
+			ANG_USA_William_W_Momyer = {
+				add_corps_commander_role = {
+					skill = 3
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 3
+					logistics_skill = 3
+					traits = { }
+					legacy_id = 191002
+				}
+			}
+			set_country_flag = OFN_MANDATE_not_decolonized
+			#set_political_power = -50
+			econ_leave_sphere = yes
+			econ_join_sphere_USA = yes
+			set_temp_variable = { TNO_economy_subtype_temp = 1 }
+			econ_subtype_change = yes
+		}
+	}
+	else_if = {
+		limit = {
+			ANG = { has_country_flag = ANG_USA_guarantee }
+		}
+		white_peace = SAF
+		white_peace = GRO
+		white_peace = COG
+		white_peace = NAM
+		white_peace = BOR
+	}
+}
+
+TNO_ANG_Warlord_Balance_Check = {
+	if = {
+		limit = { has_country_flag = TNO_USA_ANG_Went_with_Agostinho }
+		add_to_variable = { OFN_MANDATE_ANG_MPLA_power_level = 5 }
+		add_to_variable = { OFN_MANDATE_rebel_stability = 0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_ANG_MPLA_small_increase_tt
+	}
+	if = { 
+	    limit = {
+		    has_game_rule = {
+			    rule = ANG_ROOT
+			    option = ANG_ROOT_MLPA
+		    }
+		}
+		set_variable = { OFN_MANDATE_ANG_MPLA_power_level = 100 }
+		set_variable = { OFN_MANDATE_ANG_UNITA_power_level = -999 }
+    }
+	if = { 
+	    limit = {
+		    has_game_rule = {
+			    rule = ANG_ROOT
+			    option = ANG_ROOT_UNITA
+		    }
+		}
+		set_variable = { OFN_MANDATE_ANG_MPLA_power_level = -999 }
+		set_variable = { OFN_MANDATE_ANG_UNITA_power_level = 100 }
+    }
+	else_if = {
+		limit = { has_country_flag = TNO_USA_ANG_Went_with_Savimbi }
+		add_to_variable = { OFN_MANDATE_ANG_UNITA_power_level = 5 }
+		add_to_variable = { OFN_MANDATE_rebel_stability = 0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_ANG_UNITA_small_increase_tt
+	}
+	else_if = {
+		limit = { has_country_flag = TNO_USA_ANG_Alone }
+		add_to_variable = { OFN_MANDATE_rebel_stability = -0.03 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_small_stability_decrease_tt
+		if = {
+			limit = {
+				check_variable = { OFN_MANDATE_ANG_MPLA_power_level > OFN_MANDATE_ANG_UNITA_power_level }
+			}
+			add_to_variable = { OFN_MANDATE_ANG_UNITA_power_level = 5 }
+			custom_effect_tooltip = OFN_AFRICA_MANDATE_ANG_UNITA_small_increase_tt
+			custom_effect_tooltip = OFN_AFRICA_MANDATE_ANG_PLAY_THEM_OFF
+		}
+		else_if = {
+			limit = {
+				check_variable = { OFN_MANDATE_ANG_UNITA_power_level > OFN_MANDATE_ANG_MPLA_power_level }
+			}
+			add_to_variable = { OFN_MANDATE_ANG_MPLA_power_level = 5 }
+			custom_effect_tooltip = OFN_AFRICA_MANDATE_ANG_MPLA_small_increase_tt
+			custom_effect_tooltip = OFN_AFRICA_MANDATE_ANG_PLAY_THEM_OFF
+		}
+	}
+	else = {
+		custom_effect_tooltip = TNO_ANG_No_Path_Yet
+	}
+}
+
+
+clamp_OFN_mandate_rebel_stability = {
+	clamp_variable = {
+		var = OFN_MANDATE_rebel_stability
+		max = 1
+		min = 0
+	}
+	set_variable = { OFN_MANDATE_rebel_stability_display = OFN_MANDATE_rebel_stability }
+	multiply_variable = { OFN_MANDATE_rebel_stability_display = 100 }
+	round_variable = OFN_MANDATE_rebel_stability_display
+}
+
+USA_AFRICA_set_start_stability = {
+	MZB = {
+		set_variable = { OFN_MANDATE_rebel_stability = 0.6 }
+		set_variable = { OFN_MANDATE_administrative_hold = 0.2 }
+		clamp_OFN_mandate_rebel_stability = yes
+	}
+	COG = {
+		set_variable = { OFN_MANDATE_rebel_stability = 0.85 }
+		set_variable = { OFN_MANDATE_administrative_hold = 0.6 }
+		clamp_OFN_mandate_rebel_stability = yes
+	}
+	ANG = {
+		set_variable = { OFN_MANDATE_rebel_stability = 0.75 }
+		set_variable = { OFN_MANDATE_administrative_hold = 0.3 }
+		clamp_OFN_mandate_rebel_stability = yes
+
+		set_variable = { OFN_MANDATE_ANG_UNITA_power_level = 15 }
+		set_variable = { OFN_MANDATE_ANG_MPLA_power_level = 10 }
+	}
+}
+
+USA_AFRICA_CAR_set_start_stability = {
+	USC = {
+		set_variable = { OFN_MANDATE_rebel_stability = 0.5 }
+		set_variable = { OFN_MANDATE_administrative_hold = 0.1 }
+		set_variable = { OFN_MANDATE_military_presence = 0.15 }
+		clamp_OFN_mandate_rebel_stability = yes
+	}
+}
+
+USA_AFRICA_compute_rebellions = {
+	hidden_effect = {
+		### EAST AFRICA
+		if = {
+			limit = {
+				check_variable = { OFN_MANDATE_rebel_stability < 0.2 }
+				tag = MZB
+				MZB = {
+					has_cosmetic_tag = MZB_USA
+				}
+			}
+
+			## EFFECT
+		}
+
+		### CENTRAL AFRICA
+		if = {
+			limit = {
+				check_variable = { OFN_MANDATE_rebel_stability < 0.2 }
+				tag = COG
+				COG = {
+					has_cosmetic_tag = COG_USA
+				}
+			}
+
+			## EFFECT
+		}
+
+		### SOUTH WEST AFRICA
+		if = {
+			limit = {
+				check_variable = { OFN_MANDATE_rebel_stability < 0.2 }
+				tag = ANG
+				ANG = {
+					has_cosmetic_tag = ANG_USA
+				}
+			}
+
+			## EFFECT
+		}
+	}
+}
+
+OFN_COG_Unhappy_Investors_Leveler = {
+	if = {
+		limit = {
+			has_idea = COG_OFN_Unhappy_Investors_1
+		}
+		swap_ideas = {
+			remove_idea = COG_OFN_Unhappy_Investors_1
+			add_idea = COG_OFN_Unhappy_Investors_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = COG_OFN_Unhappy_Investors_2
+		}
+		swap_ideas = {
+			remove_idea = COG_OFN_Unhappy_Investors_2
+			add_idea = COG_OFN_Unhappy_Investors_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = COG_OFN_Unhappy_Investors_3
+		}
+		swap_ideas = {
+			remove_idea = COG_OFN_Unhappy_Investors_3
+			add_idea = COG_OFN_Unhappy_Investors_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = COG_OFN_Unhappy_Investors_4
+		}
+		swap_ideas = {
+			remove_idea = COG_OFN_Unhappy_Investors_4
+			add_idea = COG_OFN_Unhappy_Investors_5
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = COG_OFN_Unhappy_Investors_5
+		}
+		swap_ideas = {
+			remove_idea = COG_OFN_Unhappy_Investors_5
+			add_idea = COG_OFN_Unhappy_Investors_6
+		}
+	}
+}
+
+USA_AFRICA_setup_african_crisis = {
+	USC = {
+		leave_faction = yes
+	}
+	USA = {
+		end_puppet = USC
+	}
+	hidden_effect = {
+		USC = {
+			country_event = {
+				id = OFN_CAR.211
+				days = 10
+			}
+		}
+		ANG = {
+			leave_faction = yes
+		}
+		USA = {
+			end_puppet = ANG
+		}
+
+		USC = {
+			Release_GAB = yes
+			Release_CAF = yes
+			Release_CFS_10 = yes
+			Release_KTG = yes
+			Release_ANG = yes
+			Release_ZAM = yes
+			Release_GAZ = yes
+			Release_BRD = yes
+			Release_UGD = yes
+			Release_TNZ_1 = yes
+			Release_LUO = yes
+		}
+
+		GAB = {
+			add_ideas = {
+				GAB_Paul_Marie_Yembit_hog
+				GAB_Jacques_Opangault_for
+				GAB_Apollinaire_Bazinga_eco
+				GAB_Ba_Oumar_sec
+			}
+			load_oob = GAB_AC
+		}
+
+		CAF = {
+			add_ideas = {
+				CAF_David_Dacko_hog
+				CAF_Barthelemy_Boganda_for
+				CAF_Ange_Felix_Patasse_eco
+				CAF_Andre_Kolingba_sec
+			}
+			load_oob = CAF_AC
+		}
+
+		CFS = {
+			load_oob = CFS_AC
+		}
+
+		KTG = {
+			load_oob = KTG_AC
+		}
+
+		ANG = {
+			add_ideas = {
+				ANG_Jeremias_Chitunda_dep
+				ANG_Demosthenes_Amos_Chilingutila_mil
+				ANG_Jorge_Sangumba_for
+				ANG_Jose_Eduardo_dos_Santos_eco
+			}
+
+			ANG = {
+				set_party_name = {
+					ideology = despotism
+					long_name = ANG_CIVIL_WAR_UNITA_long
+					name = ANG_CIVIL_WAR_UNITA
+				}
+			}
+
+			load_focus_tree = generic_focus
+			retire_country_leader = yes
+			set_capital = { state = 1035 }
+			drop_cosmetic_tag = yes
+
+			set_politics = {
+				ruling_party = despotism
+				last_election = "1933.3.5"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_popularities = {
+				communist = 0
+				ultranationalism = 0
+				socialist = 40
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 0
+				authoritarian_democracy = 0
+				despotism = 60
+				fascism = 0
+				national_socialism = 0
+			}
+			promote_character = ANG_Jonas_Savimbi
+			load_oob = ANG_AC
+			set_temp_variable = { TNO_economy_type_temp = 3 }
+			econ_type_change = yes
+		}
+
+		ZAM = {
+			remove_all_ministers = yes
+			add_ideas = {
+				ZAM_Reuben_Kamanga_hog
+				ZAM_Elijah_Mudenda_for
+				ZAM_Alexander_Grey_Zulu_eco
+				ZAM_Casimir_Michael_Grigg_sec
+			}
+			load_oob = ZAM_AC
+		}
+
+		GAZ = {
+			add_ideas = {
+				GAZ_Joaquim_Chissano_hog
+				GAZ_Alberto_Massavanhane_for
+				GAZ_Marcelino_dos_Santos_eco
+				GAZ_Samora_Machel_sec
+			}
+
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 544
+						state = 1071
+						state = 1072
+					}
+				}
+				remove_core_of = GAZ
+				USC = {
+					add_state_core = PREV
+					transfer_state = PREV
+				}
+			}
+			load_oob = GAZ_AC
+		}
+
+		RMB = {
+			add_ideas = {
+				RMB_Hastings_Kamuzu_Banda_hog
+				RMB_Orton_Chirwa_for
+				RMB_Aleke_Banda_eco
+				RMB_Katoba_Musopole_sec
+			}
+			every_owned_state = {
+				add_core_of = PREV
+			}
+
+			load_oob = RMB_AC
+		}
+
+		BRD = {
+			add_ideas = {
+				BRD_Michel_Micombero_hog
+				BRD_Alexis_Nimubona_for
+				BRD_Thomas_Ndabemeye_eco
+				BRD_Jean_Baptiste_Bagaza_sec
+			}
+			load_oob = BRD_AC
+		}
+
+		RWA = {
+			add_ideas = {
+				RWA_Dominique_Mbonyumutwa_hog
+				RWA_Sylvestre_Nsanzimana_for
+				RWA_Gregoire_Kayibanda_eco
+				RWA_Juvenal_Habyarimana_sec
+			}
+			load_oob = RWA_AC
+		}
+
+		set_province_name = {
+			id = 13383
+			name = VICTORY_POINTS_13383_nat
+		}
+
+		UGD = {
+			add_ideas = {
+				UGD_Isaac_Maliyamungu_hog
+				UGD_Idi_Amin_Dada_for
+				UGD_Juma_Butabika_eco
+				UGD_Mustafa_Adrisi_sec
+			}
+			load_oob = UGD_AC
+		}
+
+		set_province_name = {
+			id = 12989
+			name = VICTORY_POINTS_12989_nat
+		}
+
+		TNZ = {
+			add_ideas = {
+				TNZ_Rashidi_Kawawa_hog
+				TNZ_Paul_Bomani_for
+				TNZ_John_Malecela_eco
+				TNZ_Rashidi_Kawawa_sec
+			}
+			load_oob = TNZ_AC
+		}
+
+		LUO = {
+			add_ideas = {
+				LUO_Argwings_Kodhek_hog
+				LUO_Elijah_Masinde_for
+				LUO_William_Odongo_Omamo_eco
+				LUO_Hezekiah_Ochuka_sec
+			}
+			load_oob = LUO_AC
+		}
+	}
+}
+
+USA_AFRICA_start_african_crisis = {
+	hidden_effect = {
+		set_country_flag = OFN_CAR_african_crisis_has_started
+
+		every_country = {
+			news_event = {
+				id = WORLD.18106
+				days = 1
+			}
+		}
+
+		every_country = {
+			limit = {
+				OR = {
+					tag = GAB
+					tag = CAF
+					tag = CFS
+					tag = KTG
+					tag = ANG
+					tag = ZAM
+					tag = GAZ
+					tag = RMB
+					tag = BRD
+					tag = RWA
+					tag = UGD
+					tag = TNZ
+					tag = LUO
+				}
+			}
+			declare_war_on = {
+				target = USC
+				type = independence_wargoal
+			}
+		}
+	}
+}
+
+USA_AFRICA_CAR_transfer_administrative_hold = {
+
+	set_variable = { OFN_CAR_DIP_ango_negotiation = OFN_MANDATE_administrative_hold }
+	set_variable = { OFN_CAR_DIP_cent_negotiation = OFN_MANDATE_administrative_hold }
+	set_variable = { OFN_CAR_DIP_east_negotiation = OFN_MANDATE_administrative_hold }
+
+	multiply_variable = { OFN_CAR_DIP_ango_negotiation = 0.3 }
+	multiply_variable = { OFN_CAR_DIP_cent_negotiation = 0.3 }
+	multiply_variable = { OFN_CAR_DIP_east_negotiation = 0.3 }
+}
+
+USA_AFRICA_CAR_transfer_military_hold = {
+
+	set_variable = { OFN_CAR_WAR_logistics = OFN_MANDATE_military_presence }
+	set_variable = { OFN_CAR_WAR_material = OFN_MANDATE_military_presence }
+	set_variable = { OFN_CAR_WAR_training = OFN_MANDATE_military_presence }
+
+	multiply_variable = { OFN_CAR_WAR_logistics = 0.3 }
+	multiply_variable = { OFN_CAR_WAR_material = 0.3 }
+	multiply_variable = { OFN_CAR_WAR_training = 0.3 }
+}
+
+USA_AFRICA_compute_african_war_bonus = {
+	### GAMEPLAY VARIABLES
+	# OFN_CAR_WAR_logistics
+	# OFN_CAR_WAR_material
+	# OFN_CAR_WAR_training
+
+	### MODIFIER VARIABLES
+	# OFN_CAR_weighted_logistics_bonus_org
+	# OFN_CAR_weighted_logistics_bonus_speed
+	# OFN_CAR_weighted_material_bonus_morale
+	# OFN_CAR_weighted_material_bonus_attrition
+	# OFN_CAR_weighted_material_bonus_oos
+	# OFN_CAR_weighted_training_bonus
+
+	set_variable = { OFN_CAR_weighted_logistics_bonus_org = OFN_CAR_WAR_logistics }
+	set_variable = { OFN_CAR_weighted_logistics_bonus_speed = OFN_CAR_WAR_logistics }
+
+	set_variable = { OFN_CAR_weighted_material_bonus_morale = OFN_CAR_WAR_material }
+	set_variable = { OFN_CAR_weighted_material_bonus_attrition = OFN_CAR_WAR_material }
+	set_variable = { OFN_CAR_weighted_material_bonus_oos = OFN_CAR_WAR_material }
+
+	set_variable = { OFN_CAR_weighted_training_bonus = OFN_CAR_WAR_training }
+
+	multiply_variable = { OFN_CAR_weighted_logistics_bonus_org = 20 }
+	multiply_variable = { OFN_CAR_weighted_logistics_bonus_speed = 0.5 }
+
+	multiply_variable = { OFN_CAR_weighted_material_bonus_morale = 0.35 }
+	multiply_variable = { OFN_CAR_weighted_material_bonus_attrition = -0.2 }
+	multiply_variable = { OFN_CAR_weighted_material_bonus_oos = -0.2 }
+
+	multiply_variable = { OFN_CAR_weighted_training_bonus = 0.4 }
+
+	add_to_variable = { OFN_CAR_weighted_logistics_bonus_org = -10 }
+	add_to_variable = { OFN_CAR_weighted_logistics_bonus_speed = -0.25 }
+
+	add_to_variable = { OFN_CAR_weighted_material_bonus_morale = -0.175 }
+	add_to_variable = { OFN_CAR_weighted_material_bonus_attrition = 0.1 }
+	add_to_variable = { OFN_CAR_weighted_material_bonus_oos = 0.1 }
+
+	add_to_variable = { OFN_CAR_weighted_training_bonus = -0.2 }
+
+	USC = {
+		add_dynamic_modifier = { modifier = OFN_CAR_logistics_bonus }
+		add_dynamic_modifier = { modifier = OFN_CAR_material_bonus }
+		add_dynamic_modifier = { modifier = OFN_CAR_training_bonus }
+	}
+}
+
+USA_AFRICA_liberate_africa = {
+	hidden_effect = {
+		if = {
+			limit = {
+				USC_is_in_control_of_kameroon_car = yes
+				has_country_flag = OFN_CAR_cameroon_established
+			}
+			GAB = {
+				add_ideas = {
+					GAB_Paul_Marie_Yembit_hog
+					GAB_Jacques_Opangault_for
+					GAB_Apollinaire_Bazinga_eco
+					GAB_Ba_Oumar_sec
+				}
+
+				set_politics = {
+					ruling_party = conservative_democracy
+					elections_allowed = no
+				}
+			}
+			add_country_leader_role = {
+				character = GAB_Jean_Hilaire_Aubame
+				promote_leader = yes
+				country_leader = {
+					  ideology = conservative_democracy_subtype
+					 expire = "1999.1.23"
+					id = -1
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_ubangi_schari_car = yes
+				has_country_flag = OFN_CAR_beafrika_established
+			}
+			CAF = {
+				add_ideas = {
+					CAF_David_Dacko_hog
+					CAF_Barthelemy_Boganda_for
+					CAF_Ange_Felix_Patasse_eco
+					CAF_Andre_Kolingba_sec
+				}
+				add_country_leader_role = {
+					character = CAF_Ange_Felix_Patasse
+					country_leader = {
+						expire = "1999.1.23"
+						ideology = social_democracy_subtype
+						id = -1
+					}
+					promote_leader = yes
+				}
+				set_politics = {
+					ruling_party = social_democracy
+					elections_allowed = no
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_kongo_car = yes
+				has_country_flag = OFN_CAR_congo_established
+			}
+			CFS = {
+				promote_character = CFS_Cyrille_Adoula
+				set_politics = {
+					ruling_party = liberal_democracy
+					elections_allowed = no
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_angola_car = yes
+				has_country_flag = OFN_CAR_angola_established
+			}
+			ANG = {
+				add_ideas = {
+					ANG_Jeremias_Chitunda_dep
+					ANG_Demosthenes_Amos_Chilingutila_mil
+					ANG_Jorge_Sangumba_for
+					ANG_Jose_Eduardo_dos_Santos_eco
+				}
+
+				ANG = {
+					set_politics = {
+						ruling_party = despotism
+						last_election = "1933.3.5"
+						election_frequency = 48
+						elections_allowed = no
+					}
+					set_popularities = {
+						communist = 0
+						ultranationalism = 0
+						socialist = 40
+						social_democracy = 0
+						liberal_democracy = 0
+
+						conservative_democracy = 0
+						authoritarian_democracy = 0
+						despotism = 60
+						fascism = 0
+						national_socialism = 0
+
+					}
+					create_country_leader = {
+						name = "Jonas Savimbi"
+						desc = "POLITICS_JONAS_SAVIMBI_DESC"
+						picture = "Portrait_Angola_Jonas_Savimbi.dds"
+						expire = "1999.1.23"
+						ideology = despotism_personalistic_dictatorship_subtype
+						traits = {
+
+						}
+					}
+				}
+				ANG = {
+					set_party_name = {
+						ideology = despotism
+						long_name = ANG_CIVIL_WAR_UNITA_long
+						name = ANG_CIVIL_WAR_UNITA
+					}
+					set_party_name = {
+						ideology = socialist
+						long_name = OFN_ANG_soc_party_long
+						name = OFN_ANG_soc_party
+					}
+				}
+				create_field_marshal = {
+					name = "Jonas Savimbi"
+					picture = "Portrait_Angola_Jonas_Savimbi.dds"
+					traits = { commando }
+					id = 5003
+					skill = 3
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 3
+					logistics_skill = 2
+				}
+
+				create_corps_commander = {
+					name = "Agostinho Neto"
+					picture = "Portrait_Angola_Agostinho_Neto.dds"
+					traits = {  }
+					id = 5004
+					skill = 3
+					attack_skill = 2
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 3
+				}
+
+				create_corps_commander = {
+					name = "Demosthenes Amos Chilingutila"
+					picture = "Portrait_Angola_Demosthenes_Amos_Chilingutila.dds"
+					traits = {  }
+					id = 5005
+					skill = 2
+					attack_skill = 2
+					defense_skill = 1
+					planning_skill = 3
+					logistics_skill = 1
+				}
+
+				create_corps_commander = {
+					name = "Iko Carreira"
+					picture = "Portrait_Angola_Iko_Carreira.dds"
+					traits = { commando }
+					id = 5006
+					skill = 2
+					attack_skill = 2
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 3
+				}
+				set_temp_variable = { TNO_economy_type_temp = 3 }
+				econ_type_change = yes
+			}
+		}
+
+		else = {
+			ANG = {
+				create_country_leader = {
+					name = "Jonas Savimbi"
+					desc = "POLITICS_JONAS_SAVIMBI_DESC"
+					picture = "Portrait_Angola_Jonas_Savimbi.dds"
+					expire = "1999.1.23"
+					ideology = despotism_personalistic_dictatorship_subtype
+					traits = {
+					}
+				}
+				set_politics = {
+					ruling_party = despotism
+					last_election = "1933.3.5"
+					election_frequency = 48
+					elections_allowed = no
+				}
+				set_popularities = {
+					communist = 0
+					ultranationalism = 0
+					socialist = 40
+					social_democracy = 0
+					liberal_democracy = 0
+					conservative_democracy = 0
+					authoritarian_democracy = 0
+					despotism = 60
+					fascism = 0
+					national_socialism = 0
+				}
+				set_party_name = {
+					ideology = despotism
+					long_name = ANG_CIVIL_WAR_UNITA_long
+					name = ANG_CIVIL_WAR_UNITA
+				}
+				set_party_name = {
+					ideology = socialist
+					long_name = OFN_ANG_soc_party_long
+					name = OFN_ANG_soc_party
+				}
+			}
+		}
+
+
+		if = {
+			limit = {
+				USC_is_in_control_of_sambia_car = yes
+				has_country_flag = OFN_CAR_zambia_established
+			}
+			ZAM = {
+				remove_all_ministers = yes
+				add_ideas = {
+					ZAM_Reuben_Kamanga_hog
+					ZAM_Elijah_Mudenda_for
+					ZAM_Alexander_Grey_Zulu_eco
+					ZAM_Casimir_Michael_Grigg_sec
+				}
+				set_politics = {
+					ruling_party = conservative_democracy
+					elections_allowed = no
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_mosambik_car = yes
+				has_country_flag = OFN_CAR_mozambique_established
+			}
+			GAZ = {
+				add_ideas = {
+					GAZ_Joaquim_Chissano_hog
+					GAZ_Alberto_Massavanhane_for
+					GAZ_Marcelino_dos_Santos_eco
+					GAZ_Samora_Machel_sec
+				}
+				## TO ADD LEADER
+			}
+			RMB = {
+				add_ideas = {
+					RMB_Hastings_Kamuzu_Banda_hog
+					RMB_Orton_Chirwa_for
+					RMB_Aleke_Banda_eco
+					RMB_Katoba_Musopole_sec
+				}
+
+				## TO ADD LEADER
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_ruanda_burundi_car = yes
+				has_country_flag = OFN_CAR_rwanda_burundi_established
+			}
+			BRD = {
+				add_ideas = {
+					BRD_Michel_Micombero_hog
+					BRD_Alexis_Nimubona_for
+					BRD_Thomas_Ndabemeye_eco
+					BRD_Jean_Baptiste_Bagaza_sec
+				}
+				set_politics = {
+					ruling_party = liberal_democracy
+					elections_allowed = no
+				}
+				add_country_leader_role = {
+					character = BRD_Ernest_Kabushemeye
+					country_leader = {
+						ideology = liberal_democracy_subtype
+						expire = "1999.1.23.1"
+						id = -1
+					}
+					promote_leader = yes
+				}
+			}
+
+			RWA = {
+				add_ideas = {
+					RWA_Dominique_Mbonyumutwa_hog
+					RWA_Sylvestre_Nsanzimana_for
+					RWA_Gregoire_Kayibanda_eco
+					RWA_Juvenal_Habyarimana_sec
+				}
+
+				create_country_leader = {
+					name = "Dominique Mbonyumutwa"
+					desc = "POLITICS_DOMINIQUE_MBONYUMUTWA_DESC"
+					picture = "Portrait_Rwanda_Dominique_Mbonyumutwa.dds"
+					expire = "1999.1.23"
+					ideology = liberal_democracy_subtype
+					traits = { }
+				}
+				set_politics = {
+					ruling_party = liberal_democracy
+					elections_allowed = no
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_uganda_car = yes
+				has_country_flag = OFN_CAR_uganda_established
+			}
+			UGD = {
+				add_ideas = {
+					UGD_Isaac_Maliyamungu_hog
+					UGD_Idi_Amin_Dada_for
+					UGD_Juma_Butabika_eco
+					UGD_Mustafa_Adrisi_sec
+				}
+
+				## TO ADD LEADER
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_tanganika_car = yes
+				has_country_flag = OFN_CAR_tanganyika_established
+			}
+			TNZ = {
+				add_ideas = {
+					TNZ_Rashidi_Kawawa_hog
+					TNZ_Paul_Bomani_for
+					TNZ_John_Malecela_eco
+					TNZ_Rashidi_Kawawa_sec
+				}
+
+				create_country_leader = {
+					name = "Oscar Kambona"
+					desc = "POLITICS_OSCAR_KAMBONA_DESC"
+					picture = "Portrait_Tanganyika_Oscar_Kambona.dds"
+					expire = "1999.1.23"
+					ideology = liberal_democracy_subtype
+					traits = { }
+				}
+				set_politics = {
+					ruling_party = liberal_democracy
+					elections_allowed = no
+				}
+			}
+
+			ZZB = {
+				add_ideas = {
+					ZZB_Muhammad_Shamte_Hamadi_hog
+					ZZB_Ali_Muhsin_Al_Barwani_for
+					ZZB_Kighoma_Malima_eco
+					ZZB_Kanali_Ali_Mahfoudh_sec
+				}
+
+				## TO ADD LEADER
+			}
+		}
+
+		if = {
+			limit = {
+				USC_is_in_control_of_kenia = yes
+				has_country_flag = OFN_CAR_kenya_established
+			}
+			LUO = {
+				add_ideas = {
+					LUO_Argwings_Kodhek_hog
+					LUO_Elijah_Masinde_for
+					LUO_William_Odongo_Omamo_eco
+					LUO_Hezekiah_Ochuka_sec
+				}
+
+				## TO ADD LEADER
+			}
+		}
+
+		USC = {
+			Release_GAB = yes
+			Release_CAF = yes
+			Release_CFS_10 = yes
+			Release_KTG = yes
+			Release_ANG = yes
+			Release_ZAM = yes
+			Release_GAZ = yes
+			Release_BRD = yes
+			Release_UGD = yes
+			Release_TNZ_10 = yes
+			Release_ZZB = yes
+			Release_LUO = yes
+			Release_CMR = yes
+		}
+
+		ANG = {
+			load_focus_tree = generic_focus
+			set_capital = { state = 1035 }
+			drop_cosmetic_tag = yes
+		}
+	}
+}
+
+USA_AFRICA_core_africa = {
+	hidden_effect = {
+		USC = {
+			add_state_core = 1066
+			add_state_core = 1082
+			add_state_core = 1035
+			add_state_core = 295
+			add_state_core = 539
+			add_state_core = 544
+		}
+		every_state = {
+			limit = { is_core_of = COG }
+			remove_core_of = COG
+		}
+		every_state = {
+			limit = { is_core_of = ANG }
+			remove_core_of = ANG
+		}
+	}
+}
+
+USA_AFRICA_uncore_africa = {
+	hidden_effect = {
+		every_state = {
+			limit = { is_core_of = USC }
+			remove_core_of = USC
+		}
+		USC = {
+			add_state_core = 1066
+			add_state_core = 1082
+			add_state_core = 1035
+			add_state_core = 295
+			add_state_core = 539
+			add_state_core = 544
+		}
+	}
+}
+
+ANG_USA_compute_rivalry_effects = {
+	## VARIABLES TO BE USED
+
+	# OFN_MANDATE_ANG_UNITA_power_level : strength of UNITA
+	# OFN_MANDATE_ANG_MPLA_power_level  : strength of MPLA
+	# stability
+
+	# OFN_MANDATE_ANG_UNITA_power_level_weigthed
+	# OFN_MANDATE_ANG_MPLA_power_level_weigthed
+	# OFN_MANDATE_ANG_NEUTRAL_power_level_weigthed
+
+	set_temp_variable = { OFN_MANDATE_ANG_total_power = OFN_MANDATE_ANG_UNITA_power_level }
+	add_to_temp_variable = { OFN_MANDATE_ANG_total_power = OFN_MANDATE_ANG_MPLA_power_level }
+
+	if = {
+		limit = {
+			check_variable = { stability > 0 }
+		}
+		# Weight set between 1 and 1 + 0.2*stability
+		# This weight allows space for neutral outcome to happen
+
+		set_temp_variable = { OFN_MANDATE_ANG_total_power_weight = stability }
+		multiply_temp_variable = { OFN_MANDATE_ANG_total_power_weight = 0.2 }
+		add_to_temp_variable = { OFN_MANDATE_ANG_total_power_weight = 1 }
+
+		multiply_temp_variable = { OFN_MANDATE_ANG_total_power = OFN_MANDATE_ANG_total_power_weight }
+	}
+
+	set_variable = { OFN_MANDATE_ANG_UNITA_power_level_weigthed = OFN_MANDATE_ANG_UNITA_power_level }
+	divide_variable = { OFN_MANDATE_ANG_UNITA_power_level_weigthed = OFN_MANDATE_ANG_total_power }
+
+	set_variable = { OFN_MANDATE_ANG_MPLA_power_level_weigthed = OFN_MANDATE_ANG_MPLA_power_level }
+	divide_variable = { OFN_MANDATE_ANG_MPLA_power_level_weigthed = OFN_MANDATE_ANG_total_power }
+
+	set_variable = { OFN_MANDATE_ANG_NEUTRAL_power_level_weigthed = 1 }
+	subtract_from_variable = { OFN_MANDATE_ANG_NEUTRAL_power_level_weigthed = OFN_MANDATE_ANG_UNITA_power_level_weigthed }
+	subtract_from_variable = { OFN_MANDATE_ANG_NEUTRAL_power_level_weigthed = OFN_MANDATE_ANG_MPLA_power_level_weigthed }
+}
+
+ANG_USA_start_rivalry_event = {
+	set_temp_variable = { OFN_MANDATE_ANG_diceroll = random }
+
+	if = { # UNITA WIN
+		limit = {
+			check_variable = { OFN_MANDATE_ANG_diceroll < OFN_MANDATE_ANG_UNITA_power_level_weigthed }
+		}
+		hidden_effect = {
+			country_event = { id = OFN_ANG.2 }
+		}
+	}
+
+	else = {
+		set_temp_variable = { OFN_MANDATE_ANG_diceroll_number_to_compare = OFN_MANDATE_ANG_UNITA_power_level_weigthed }
+		add_to_temp_variable = { OFN_MANDATE_ANG_diceroll_number_to_compare = OFN_MANDATE_ANG_MPLA_power_level_weigthed }
+
+		if = { # MPLA WIN
+			limit = {
+				check_variable = { OFN_MANDATE_ANG_diceroll < OFN_MANDATE_ANG_diceroll_number_to_compare }
+			}
+			hidden_effect = {
+				country_event = { id = OFN_ANG.3 }
+			}
+		}
+
+		else = { # NEUTRAL WIN
+			hidden_effect = {
+				country_event = { id = OFN_ANG.4 }
+			}
+		}
+	}
+}
+
+OFN_CAR_INITIALIZE_ECONOMY = {
+	set_variable = { GDP_growth = 6 }
+	set_variable = { base_inflation_rate = 5 }
+	set_variable = { income_tax_rate = 0.25 }
+	set_variable = { business_tax_rate = 0.15 }
+	set_variable = { poverty_rate = 83 }
+	set_variable = { poverty_monthly_change = 0.1 }
+	set_variable = { money_reserves = 0.0 } #in billions
+	set_variable = { national_debt = 0.0 } #in billions
+	set_variable = { base_interest_rates = 0.0 }
+	set_variable = { misc_income = 0.750 }
+	set_variable = { misc_costs = 0.250 }
+	set_variable = { economic_centralization = 23 }
+
+	set_temp_variable = { temp_credit_rating = 4 }
+	set_temp_variable = { temp_credit_rating_min = 3 }
+	set_temp_variable = { temp_credit_rating_max = 5 }
+
+	econ_initialize_credit_rating_system = yes
+	initiate_display_vars = yes
+}
+
+OFN_MANDATE_set_starting_laws = {
+	add_ideas = {
+			#POLITICAL
+		tno_political_parties_controlled_opposition
+		tno_religious_rights_secularism
+		tno_trade_unions_nonsocialist_allowed
+		tno_immigration_quota_immigration
+		tno_slavery_outlawed
+		tno_public_meetings_allowed
+		tno_press_rights_censored_press
+		tno_vote_franchise_universal
+		tno_refugees_open
+			#MILITARY
+		tno_conscription_volunteer_only
+		tno_women_military_assistance
+		tno_military_supervision_military_policing
+		tno_training_combat_schooling
+		tno_racial_integration_integrated_military
+		tno_draft_exemptions_educational_deferment
+			#SOCIAL
+		tno_safety_minimal_regulations
+		tno_health_care_support_for_emergencies
+		tno_pollution_no_controls
+		tno_education_public_education
+		tno_penal_system_capital_punishment
+		tno_lgbt_rights_lgbt_outlawed
+		tno_gender_rights_women_in_the_workplace
+		tno_minorities_equal_rights
+		tno_security_security_service
+			#ECONOMIC
+		tno_trade_laws_free_trade
+		tno_income_taxation_tax_havens
+		tno_minimum_wage_low_minimum_wage
+		tno_max_workhours_12_hour_work_day
+		tno_child_labor_illegal
+		tno_pensions_trinket_pensions
+		tno_unemployment_trinket_subsidies
+
+			#SOCIETAL DEVELOPMENT
+		tno_army_professionalism_cronyism
+		tno_industrial_equipment_modern
+	}
+	set_variable = { tno_trade_laws_effectiveness = 74 }
+	set_variable = { tno_income_taxation_effectiveness = 52 }
+	set_variable = { tno_minimum_wage_effectiveness = 61 }
+	set_variable = { tno_max_workhours_effectiveness = 36 }
+	set_variable = { tno_child_labor_effectiveness = 41 }
+	set_variable = { tno_unemployment_effectiveness = 32 }
+	set_variable = { tno_pensions_effectiveness = 27 }
+
+	set_variable = { tno_safety_effectiveness = 32 }
+	set_variable = { tno_health_care_effectiveness = 40 }
+	set_variable = { tno_pollution_effectiveness = 71 }
+	set_variable = { tno_education_effectiveness = 43 }
+	set_variable = { tno_penal_system_effectiveness = 81 }
+	set_variable = { tno_lgbt_rights_effectiveness = 27 }
+	set_variable = { tno_gender_rights_effectiveness = 44 }
+	set_variable = { tno_minorities_effectiveness = 21 }
+	set_variable = { tno_security_effectiveness = 38 }
+
+	set_variable = { tno_political_parties_effectiveness = 76 }
+	set_variable = { tno_religious_rights_effectiveness = 38 }
+	set_variable = { tno_trade_unions_effectiveness = 69 }
+	set_variable = { tno_immigration_effectiveness = 49 }
+	set_variable = { tno_slavery_effectiveness = 52 }
+	set_variable = { tno_public_meetings_effectiveness = 81 }
+	set_variable = { tno_press_rights_effectiveness = 59 }
+	set_variable = { tno_vote_franchise_effectiveness = 52 }
+	set_variable = { tno_refugees_effectiveness = 42 }
+
+	set_variable = { tno_conscription_effectiveness = 62 }
+	set_variable = { tno_women_effectiveness = 37 }
+	set_variable = { tno_military_supervision_effectiveness = 56 }
+	set_variable = { tno_training_effectiveness = 81 }
+	set_variable = { tno_racial_integration_effectiveness = 38 }
+	set_variable = { tno_draft_exemptions_effectiveness = 74 }
+}
+
+OFN_CAR_Initialize = {
+	every_state = {
+		limit = {
+			OR = {
+				is_core_of = ANG
+				is_core_of = MZB
+				is_core_of = COG
+			}
+		}
+		remove_core_of = ANG
+		remove_core_of = MZB
+		remove_core_of = COG
+		add_core_of = USC
+	}
+	MZB = {
+		MZB_USA_William_R_Peers = { set_nationality = USC }
+		MZB_USA_Kenneth_Rush = { set_nationality = USC }
+		MZB_USA_Paul_Nitze = { set_nationality = USC }
+		MZB_USA_Paul_D_Harkins = { set_nationality = USC }
+		MZB_USA_William_Westmoreland = { set_nationality = USC }
+	}
+	ANG = {
+		ANG_USA_William_W_Momyer = { set_nationality = USC }
+		ANG_USA_John_D_Lavelle = { set_nationality = USC }
+	}
+	COG = {
+		COG_USA_Leonard_Mulumba = { set_nationality = USC }
+		COG_USA_Joseph_Kasa_Vubu = { set_nationality = USC }
+		COG_USA_Creighton_Abrams = { set_nationality = USC }
+	}
+	USC = {
+		annex_country = {
+			target = COG
+			transfer_troops = yes
+		}
+		annex_country = {
+			target = MZB
+			transfer_troops = yes
+		}
+		annex_country = {
+			target = ANG
+			transfer_troops = yes
+		}
+		generate_character = {
+			token_base = MZB_USA_William_Westmoreland
+			country_leader = {
+				desc = "POLITICS_WILLIAM_WESTMORELAND_DESC"
+				ideology = authoritarian_democracy_military_mandate_subtype
+				expire = "1999.1.23"
+				traits = { }
+				id = -1
+			}
+		}
+		promote_character = MZB_USA_William_Westmoreland
+		OFN_MANDATE_set_starting_laws = yes
+		inherit_technology = USA
+		set_party_name = { 
+			ideology = communist 
+			long_name = OFN_USC_com_party_long 
+			name = OFN_USC_com_party
+	 	}
+		set_party_name = { 
+			ideology = socialist 
+			long_name = OFN_USC_soc_party_long 
+			name = OFN_USC_soc_party
+	 	}
+		set_party_name = { 
+			ideology = authoritarian_democracy 
+			long_name = OFN_USC_authdem_party_long 
+			name = OFN_USC_authdem_party
+	 	}
+		set_party_name = { 
+			ideology = despotism 
+			long_name = OFN_USC_desp_party_long 
+			name = OFN_USC_desp_party
+	 	}
+		set_party_name = { 
+			ideology = fascism 
+			long_name = OFN_USC_fasc_party_long 
+			name = OFN_USC_fasc_party
+	 	}
+		set_party_name = { 
+			ideology = national_socialism 
+			long_name = OFN_USC_natsoc_party_long 
+			name = OFN_USC_natsoc_party
+	 	}
+		set_cosmetic_tag = USA_CAR
+		load_focus_tree = ofn_car
+		USA_AFRICA_CAR_set_start_stability = yes
+		econ_leave_sphere = yes
+		econ_join_sphere_USA = yes
+		OFN_CAR_INITIALIZE_ECONOMY = yes
+		set_temp_variable = { TNO_economy_subtype_temp = 1 }
+		econ_subtype_change = yes
+		add_ideas = {
+			MZB_USA_William_R_Peers_hog
+			MZB_USA_Kenneth_Rush_for
+			MZB_USA_Paul_Nitze_eco
+			MZB_USA_Paul_D_Harkins_sec
+		}
+	}
+}
+
+
+OFN_COG_MANDATE_CIVIL_WAR = {
+	COG = {
+		promote_character = COG_USA_collapsed_authority
+		leave_faction = yes
+	}
+	USA = {
+		end_puppet = COG
+	}
+	hidden_effect = {
+		#COG = { Release_CFS_12 = yes }
+		GAB = {
+			#Jaunde
+			transfer_state = 297
+      		add_state_core = 297
+			#Ogooué-Ivindo
+			transfer_state = 1186
+      		add_state_core = 1186
+			#Libreville
+			transfer_state = 539
+      		add_state_core = 539
+			#Franceville
+			transfer_state = 1164
+			add_state_core = 1164
+			#Pointe-Noire
+			transfer_state = 1163
+			add_state_core = 1163
+			#Kéllé
+			add_state_core = 1165
+
+			econ_join_sphere_USA = yes
+			add_ideas = OFN_Observer
+			add_to_array = {
+				global.OFN_members = GAB
+			}
+
+		}
+		CAF = {
+			#Nanga Eboko
+			transfer_state = 1184
+			add_state_core = 1184
+			#Bangui
+			transfer_state = 1171
+			add_state_core = 1171
+			#Bombari
+			transfer_state = 538
+			add_state_core = 538
+			#Hitlerstadt
+			transfer_state = 1181
+			add_state_core = 1181
+
+			econ_join_sphere_USA = yes
+			add_ideas = OFN_Observer
+			add_to_array = {
+				global.OFN_members = CAF
+			}
+		}
+		AZD = {
+			#Mobaye
+			transfer_state = 1182
+      		add_state_core = 1182
+			#Mbomou
+			transfer_state = 1183
+			add_state_core = 1183
+			#Haut-Mbomou
+			transfer_state = 1185
+      		add_state_core = 1185
+		}
+		CPR = {
+			#Bumba
+			transfer_state = 1180
+			add_state_core = 1180
+			#Stanleyville
+			transfer_state = 718
+			add_state_core = 718
+			#Bunia
+			transfer_state = 1178
+			add_state_core = 1178
+			#Beni
+			transfer_state = 1177
+			add_state_core = 1177
+			#Djolou
+			transfer_state = 1170
+			add_state_core = 1170
+			#Goma
+			transfer_state = 1176
+			add_state_core = 1176
+			#Uvira
+			transfer_state = 1175
+      		add_state_core = 1175
+		}
+		CFS = {
+			#Dekese
+			transfer_state = 1168
+			add_state_core = 1168
+			##Kindu Empain-Hafen
+			transfer_state = 1172
+			add_state_core = 1172
+			##Kalemie
+			transfer_state = 1173
+			add_state_core = 1173
+			#Bealdwinstadt
+			transfer_state = 1174
+			add_state_core = 1174
+		}
+		KTG = {
+			#Richardstadt
+			transfer_state = 1057
+			add_state_core = 1057
+			#Kamina
+			transfer_state = 1056
+			add_state_core = 1056
+		}
+		KSI = {
+			#Mwene-Ditu
+			transfer_state = 1055
+			add_state_core = 1055
+			#Kananga
+			transfer_state = 1169
+			add_state_core = 1169
+		}
+		COG = {
+			remove_state_core = 297
+			remove_state_core = 1186
+			remove_state_core = 539
+			remove_state_core = 1164
+			remove_state_core = 1163
+			remove_state_core = 1171
+			remove_state_core = 1184
+			remove_state_core = 538
+			remove_state_core = 1181
+			set_temp_variable = { TNO_economy_subtype_temp = 0 }
+			econ_subtype_change = yes
+
+		}
+		load_focus_tree = GER_blankfocus
+		CFS = {
+			set_capital = { state = 1168 }
+		}
+		AZD = {
+			inherit_technology = PREV
+		}
+		COG = {
+			every_unit_leader = {
+				limit = {
+					has_id = 181001
+				}
+				set_nationality = AZD
+			}
+			every_unit_leader = {
+				limit = {
+					has_id = 181002
+				}
+				set_nationality = CFS
+			}
+		}
+
+		country_event = {
+			id = OFN_AFR_DECOL_COG.8
+			days = 10
+		}
+		set_global_flag = congo_mandate_collapsed
+		COG = {
+			delete_unit_template_and_units = {
+				division_template = "Infantry Brigade"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Infantry Brigade 2"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Mechanized Brigade"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Marine Brigade"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Armored Brigade"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Airborne Brigade"
+			}
+			country_lock_all_division_template = no
+		}
+	}
+}
+ANG_free_from_OFN_peace = {
+	ANG = {
+		remove_ideas = OFN_Mandate
+		USA = {
+			end_puppet = ANG
+			remove_from_faction = ANG
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ANG_Jeremias_Chitunda_dep
+			ANG_Demosthenes_Amos_Chilingutila_mil
+			ANG_Jorge_Sangumba_for
+			ANG_Jose_Eduardo_dos_Santos_eco
+		}
+		set_capital = { state = 1035 }
+		drop_cosmetic_tag = yes
+		if = {
+			limit = {
+				has_country_flag = OFN_MANTADE_ANG_favored_mpla
+			}
+			set_politics = {
+				ruling_party = socialist
+				last_election = "1933.3.5"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_temp_variable = { TNO_economy_type_temp = 3 }
+			econ_type_change = yes
+			set_popularities = {
+				communist = 21
+				ultranationalism = 0
+				socialist = 42
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 0
+				authoritarian_democracy = 0
+				despotism = 35
+				fascism = 2
+				national_socialism = 0
+			}
+			promote_character = ANG_Agostinho_Neto
+			set_country_flag = ANG_African_Socialism
+			econ_join_sphere_USA = yes
+			add_ideas = OFN_Observer
+		}
+		else_if = {
+			limit = {
+				has_country_flag = OFN_MANTADE_ANG_favored_unita
+			}
+			set_politics = {
+				ruling_party = authoritarian_democracy
+				last_election = "1933.3.5"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_temp_variable = { TNO_economy_type_temp = 1 }
+			econ_type_change = yes
+			set_popularities = {
+				communist = 22
+				ultranationalism = 0
+				socialist = 11
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 0
+				authoritarian_democracy = 20
+				despotism = 45
+				fascism = 2
+				national_socialism = 0
+			}
+			promote_character = ANG_Jonas_Savimbi
+			econ_join_sphere_USA = yes
+			add_ideas = OFN_Observer
+		}
+		else_if = {
+			limit = {
+				has_country_flag = OFN_MANTADE_ANG_favored_nobody
+			}
+			set_politics = {
+				ruling_party = conservative_democracy
+				last_election = "1933.3.5"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_temp_variable = { TNO_economy_type_temp = 1 }
+			econ_type_change = yes
+			set_popularities = {
+				communist = 8
+				ultranationalism = 0
+				socialist = 20
+				social_democracy = 0
+				liberal_democracy = 0
+				conservative_democracy = 35
+				authoritarian_democracy = 20
+				despotism = 15
+				fascism = 2
+				national_socialism = 0
+			}
+			promote_character = ANG_Holden_Roberto
+			add_to_array = {
+				global.OFN_members = ANG
+			}
+			ANG = {
+				econ_join_sphere_USA = yes
+				add_ideas = OFN_Dependent_Member
+			}
+		}
+		ANG_Jonas_Savimbi = {
+			add_field_marshal_role = {
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 2
+				traits = { 
+					commando 
+				}
+				legacy_id = 5003
+			}
+			promote_leader = yes
+		}
+		ANG_Agostinho_Neto = {
+			add_corps_commander_role = {
+				skill = 3
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				traits = { }
+				legacy_id = 5004
+			}
+		}
+		ANG_Demosthenes_Amos_Chilingutila = {
+			add_corps_commander_role = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 3
+				logistics_skill = 1
+				traits = { }
+				legacy_id = 5005
+			}
+		}
+		ANG_Demosthenes_Amos_Chilingutila = {
+			add_corps_commander_role = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 3
+				traits = { 
+					commando
+				}
+				legacy_id = 5006
+			}
+		}
+		remove_unit_leader = 187
+		remove_unit_leader = 188
+		remove_unit_leader = 189
+		remove_unit_leader = 190
+		remove_unit_leader = 191
+		remove_unit_leader = 5000
+		remove_unit_leader = 5001
+		remove_unit_leader = 5002
+		drop_cosmetic_tag = yes
+		remove_all_ministers = yes
+		add_ideas = {
+			ANG_Jeremias_Chitunda_dep
+			ANG_Demosthenes_Amos_Chilingutila_mil
+			ANG_Jorge_Sangumba_for
+			ANG_Jose_Eduardo_dos_Santos_eco
+		}
+		set_country_flag = TNO_closing_screen_show
+	}
+}
+
+ANG_free_from_OFN_collapse = {
+	ANG = {
+		load_focus_tree = shattered_ambitions
+		remove_ideas = {
+			OFN_Mandate
+		}
+		USA = {
+			end_puppet = ANG
+			remove_from_faction = ANG
+		}
+		remove_all_ministers = yes
+		add_ideas = {
+			ANG_Jeremias_Chitunda_dep
+			ANG_Demosthenes_Amos_Chilingutila_mil
+			ANG_Jorge_Sangumba_for
+			ANG_Jose_Eduardo_dos_Santos_eco
+		}
+		set_politics = {
+			ruling_party = despotism
+			last_election = "1933.3.5"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_popularities = {
+			communist = 22
+			ultranationalism = 0
+			socialist = 19
+			social_democracy = 0
+			liberal_democracy = 0
+			conservative_democracy = 0
+			authoritarian_democracy = 0
+			despotism = 59
+			fascism = 0
+			national_socialism = 0
+		}
+		ANG_Jonas_Savimbi = {
+			add_field_marshal_role = {
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 2
+				traits = { 
+					commando 
+				}
+				legacy_id = 5003
+			}
+			promote_leader = yes
+		}
+		ANG_Agostinho_Neto = {
+			add_corps_commander_role = {
+				skill = 3
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				traits = { }
+				legacy_id = 5004
+			}
+		}
+		ANG_Demosthenes_Amos_Chilingutila = {
+			add_corps_commander_role = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 3
+				logistics_skill = 1
+				traits = { }
+				legacy_id = 5005
+			}
+		}
+		ANG_Demosthenes_Amos_Chilingutila = {
+			add_corps_commander_role = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 3
+				traits = { 
+					commando
+				}
+				legacy_id = 5006
+			}
+		}
+		set_temp_variable = { TNO_economy_type_temp = 3 }
+		econ_type_change = yes
+		
+		country_event = { #Angolan civil war
+			id = A_SPRING.5
+			days = 200
+		}
+		remove_unit_leader = 187
+		remove_unit_leader = 188
+		remove_unit_leader = 189
+		remove_unit_leader = 190
+		remove_unit_leader = 191
+		remove_unit_leader = 5000
+		remove_unit_leader = 5001
+		remove_unit_leader = 5002
+		drop_cosmetic_tag = yes
+	}
+}

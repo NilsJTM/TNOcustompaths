@@ -1,0 +1,1983 @@
+add_namespace = OFN_AFRICA_DEBUG
+add_namespace = OFN_AFR_MANDATE
+add_namespace = OFN_AFR_DECOL_COG
+add_namespace = OFN_AFR_DECOL_MZB
+add_namespace = OFN_AFR_DECOL_ANG
+add_namespace = OFN_AFR_DECOL_CAR
+
+country_event = {
+	id = OFN_AFRICA_DEBUG.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFRICA_DEBUG.1"}
+	title = OFN_AFRICA_DEBUG.1.t
+	desc = OFN_AFRICA_DEBUG.1.desc
+	picture = GFX_report_event_afghanistan_people
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFRICA_DEBUG.1.a
+		USA_AFRICA_set_start_stability = yes
+	}
+}
+
+country_event = {
+	id = OFN_AFRICA_DEBUG.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFRICA_DEBUG.2"}
+	title = OFN_AFRICA_DEBUG.2.t
+	desc = OFN_AFRICA_DEBUG.2.desc
+	picture = GFX_report_event_afghanistan_people
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFRICA_DEBUG.2.a
+		USC = {
+			load_focus_tree = ofn_car
+		}
+	}
+}
+
+country_event = { # Collapse Time
+	id = OFN_AFRICA_DEBUG.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFRICA_DEBUG.3"}
+	title = OFN_AFRICA_DEBUG.3.t
+	desc = OFN_AFRICA_DEBUG.3.desc
+	picture = GFX_report_event_afghanistan_people
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFRICA_DEBUG.3.a
+		USC = {
+			set_variable = { OFN_MANDATE_rebel_stability = 0.01 }
+			clamp_OFN_mandate_rebel_stability = yes
+		}
+		MZB = {
+			set_variable = { OFN_MANDATE_rebel_stability = 0.01 }
+			clamp_OFN_mandate_rebel_stability = yes
+		}
+		COG = {
+			set_variable = { OFN_MANDATE_rebel_stability = 0.01 }
+			clamp_OFN_mandate_rebel_stability = yes
+		}
+		ANG = {
+			set_variable = { OFN_MANDATE_rebel_stability = 0.01 }
+			clamp_OFN_mandate_rebel_stability = yes
+		}
+	}
+}
+
+country_event = { # Launch African Crisis
+	id = OFN_AFRICA_DEBUG.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFRICA_DEBUG.4"}
+	title = OFN_AFRICA_DEBUG.4.t
+	desc = OFN_AFRICA_DEBUG.4.desc
+	picture = GFX_report_event_afghanistan_people
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFRICA_DEBUG.4.a
+		USA_AFRICA_compute_african_war_bonus = yes
+		USA_AFRICA_setup_african_crisis = yes
+		USA_AFRICA_uncore_africa = yes
+	}
+}
+
+
+
+
+########################################################################################################
+########################################################################################################
+
+country_event = { # The Establishment of the African Mandates
+	id = OFN_AFR_MANDATE.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_MANDATE.0"}
+	title = OFN_AFR_MANDATE.0.t
+	desc = OFN_AFR_MANDATE.0.desc
+	picture = GFX_report_event_cog_drums
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_MANDATE.0.a
+		TNO_fopo_add_saf_reconstruction_conflict_tab = yes
+	}
+
+	option = { # Go to Central Africa
+		name = OFN_AFR_MANDATE.0.b
+
+		COG = {
+ 			#set_country_flag = OFN_MANDATE_country_is_chosen
+			set_variable = { national_debt = 0 }
+			update_economy_tab = yes
+			TNO_fopo_add_saf_reconstruction_conflict_tab = yes
+			hidden_effect = {
+				set_political_power = 150
+			}
+
+			change_tag_from = USA
+		}
+		trigger = {
+			is_ai = no
+		}
+	}
+
+	option = { # Go to East Africa
+		name = OFN_AFR_MANDATE.0.c
+
+		MZB = {
+ 			#set_country_flag = OFN_MANDATE_country_is_chosen
+			set_variable = { national_debt = 0 }
+			update_economy_tab = yes
+			TNO_fopo_add_saf_reconstruction_conflict_tab = yes
+			hidden_effect = {
+				set_political_power = 150
+			}
+
+			change_tag_from = USA
+		}
+		trigger = {
+			is_ai = no
+		}
+	}
+
+	option = { # Go to Angola
+		name = OFN_AFR_MANDATE.0.d
+
+		ANG = {
+ 			#set_country_flag = OFN_MANDATE_country_is_chosen
+			set_variable = { national_debt = 0 }
+			update_economy_tab = yes
+			TNO_fopo_add_saf_reconstruction_conflict_tab = yes
+			hidden_effect = {
+				set_political_power = 150
+			}
+
+			change_tag_from = USA
+		}
+		trigger = {
+			is_ai = no
+		}
+	}
+}
+
+country_event = { # The Establishment of the CAR
+	id = OFN_AFR_MANDATE.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_MANDATE.1"}
+	title = OFN_AFR_MANDATE.1.t
+	desc = OFN_AFR_MANDATE.1.desc
+	picture = GFX_report_event_cog_drums
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_MANDATE.1.a
+		hidden_effect = {
+			clr_country_flag = GRO_the_investigation_begins
+			clr_country_flag = GRO_supplying_the_boers
+			clr_country_flag = GRO_unified_holdout_program
+		}
+
+		USC = {
+ 			#set_country_flag = OFN_MANDATE_country_is_chosen
+			set_variable = { national_debt = 0 }
+			update_economy_tab = yes
+			hidden_effect = {
+				set_political_power = 150
+			}
+		}
+	}
+
+	option = { # Go to the Central African Republic
+		name = OFN_AFR_MANDATE.1.b
+		hidden_effect = {
+			clr_country_flag = GRO_the_investigation_begins
+			clr_country_flag = GRO_supplying_the_boers
+			clr_country_flag = GRO_unified_holdout_program
+		}
+
+		trigger = {
+			is_ai = no
+		}
+
+		USC = {
+ 			#set_country_flag = OFN_MANDATE_country_is_chosen
+			set_variable = { national_debt = 0 }
+			update_economy_tab = yes
+			hidden_effect = {
+				set_political_power = 150
+			}
+
+			change_tag_from = USA
+		}
+	}
+}
+
+########################################################################################################
+########################################################################################################
+#
+#  #### ##### #   # ##### ####   ###  #          ###  ##### ####  #####  ####  ###
+# #     #     ##  #   #   #   # #   # #         #   # #     #   #   #   #     #   #
+# #     ###   # # #   #   ####  ##### #         ##### ###   ####    #   #     #####
+# #     #     #  ##   #   #   # #   # #         #   # #     #   #   #   #     #   #
+#  #### ##### #   #   #   #   # #   # #####     #   # #     #   # #####  #### #   #
+#
+########################################################################################################
+########################################################################################################
+
+country_event = { # Organizing decolonization (Central Africa)
+	id = OFN_AFR_DECOL_COG.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.0"}
+	title = OFN_AFR_DECOL_COG.0.t
+	desc = OFN_AFR_DECOL_COG.0.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = OFN_AFR_DECOL_COG.0.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.1
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Léopoldville Conference
+	id = OFN_AFR_DECOL_COG.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.1"}
+	title = OFN_AFR_DECOL_COG.1.t
+	desc = OFN_AFR_DECOL_COG.1.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_COG.1.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.2
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Léopoldville Conference - The Brazzaville Issue
+	id = OFN_AFR_DECOL_COG.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.2"}
+	title = OFN_AFR_DECOL_COG.2.t
+	desc = OFN_AFR_DECOL_COG.2.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+
+	option = { # Create a greater Orungu republic
+		name = OFN_AFR_DECOL_COG.2.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ORU_DECOLONIZATION_FATE option =  ORU_DECOLONIZATION_FATE_FREE_BRZ }
+			}
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.3
+				days = 1
+			}
+		}
+	}
+
+	option = { # Split Orungu in two
+		name = OFN_AFR_DECOL_COG.2.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = ORU_DECOLONIZATION_FATE option =  ORU_DECOLONIZATION_FATE_GREAT_ORUNGU }
+			}
+		}
+		set_country_flag = OFN_COG_DECOL_orungu_split
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.3
+				days = 1
+			}
+
+			BZZ = {
+				create_country_leader = {
+					name = "Alfred Raoul"
+					desc = "POLITICS_ALFRED_RAOUL_DESC"
+					picture = "Portrait_Brazzaville_Alfred_Raoul.dds"
+					expire = "1999.1.23"
+					ideology = authoritarian_democracy_subtype
+					traits = { }
+				}
+				set_politics = {
+					ruling_party = authoritarian_democracy
+					elections_allowed = no
+				}
+				set_popularities = {
+					communist = 10
+					socialist = 5
+					social_democracy = 20
+					liberal_democracy = 15
+					conservative_democracy = 15
+					authoritarian_democracy = 35
+					despotism = 0
+					fascism = 0
+					national_socialism = 0
+					ultranationalism = 0
+					
+				}
+				hidden_effect = {
+					set_temp_variable = { TNO_economy_type_temp = 1 }
+					econ_type_change = yes
+					TNO_startup_nation = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = { # The Léopoldville Conference - The Congolese Government
+	id = OFN_AFR_DECOL_COG.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.3"}
+	title = OFN_AFR_DECOL_COG.3.t
+	desc = OFN_AFR_DECOL_COG.3.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+
+	option = { # A republican state under Ileo
+		name = OFN_AFR_DECOL_COG.3.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = CFS_DECOLONIZATION_FATE option =  CFS_DECOLONIZATION_FATE_KASA_VUBU }
+			}
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.4
+				days = 1
+			}
+
+			CFS = {
+				create_country_leader = {
+					name = "Joseph Iléo"
+					desc = "POLITICS_ALFRED_RAOUL_DESC"
+					picture = "Portrait_Congo_Joseph_Ileo.dds"
+					expire = "1999.1.23"
+					ideology = conservative_democracy_subtype
+					traits = { }
+				}
+				set_politics = {
+					ruling_party = conservative_democracy
+					elections_allowed = no
+				}
+				hidden_effect = {
+					set_temp_variable = { TNO_economy_type_temp = 1 }
+					econ_type_change = yes
+					TNO_startup_nation = yes
+				}
+			}
+		}
+	}
+
+	option = { # A loyal regime under Kasa-Vubu
+		name = OFN_AFR_DECOL_COG.3.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = CFS_DECOLONIZATION_FATE option =  CFS_DECOLONIZATION_FATE_ILEO }
+			}
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.4
+				days = 1
+			}
+
+			CFS = {
+				create_country_leader = {
+					name = "Joseph Kasa-Vubu"
+					desc = "POLITICS_JOSEPH_KASA_VUBU_DESC"
+					picture = "Portrait_Congo_Joseph_Kasa_Vubu.dds"
+					expire = "1999.1.23"
+					ideology = liberal_democracy_subtype
+					traits = { }
+				}
+				set_politics = {
+					ruling_party = liberal_democracy
+					elections_allowed = no
+				}
+				hidden_effect = {
+					set_temp_variable = { TNO_economy_type_temp = 1 }
+					econ_type_change = yes
+					TNO_startup_nation = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = { # The Léopoldville Conference - The Future of the Dam (note : does nothing in the first release)
+	id = OFN_AFR_DECOL_COG.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.4"}
+	title = OFN_AFR_DECOL_COG.4.t
+	desc = OFN_AFR_DECOL_COG.4.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+
+	option = { # It will stay under OFN protection
+		name = OFN_AFR_DECOL_COG.4.a
+		ai_chance = {
+			factor = 100
+		}
+
+		set_country_flag = OFN_COG_DECOL_ofn_dam
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.5
+				days = 1
+			}
+		}
+	}
+
+	option = { # It will have a special status
+		name = OFN_AFR_DECOL_COG.4.b
+		ai_chance = {
+			factor = 100
+		}
+
+		set_country_flag = OFN_COG_DECOL_open_dam
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.5
+				days = 1
+			}
+		}
+	}
+
+	option = { # Its future will be left to Congo's leaderhip
+		name = OFN_AFR_DECOL_COG.4.c
+		ai_chance = {
+			factor = 100
+		}
+
+		set_country_flag = OFN_COG_DECOL_nationalized_dam
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.5
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Léopoldville Conference - The Katanga Conundrum
+	id = OFN_AFR_DECOL_COG.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.5"}
+	title = OFN_AFR_DECOL_COG.5.t
+	desc = OFN_AFR_DECOL_COG.5.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+
+	option = { # Give Katanga to Congo
+		name = OFN_AFR_DECOL_COG.5.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = KAT_DECOLONIZATION_FATE option =  KAT_DECOLONIZATION_FATE_AUTONOMY }
+			}
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.6
+				days = 1
+			}
+		}
+	}
+
+	option = { # Recognize the autonomy of Katanga
+		name = OFN_AFR_DECOL_COG.5.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = KAT_DECOLONIZATION_FATE option =  KAT_DECOLONIZATION_FATE_CONGO }
+			}
+		}
+		set_country_flag = OFN_COG_DECOL_free_katanga
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_COG.6
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Léopoldville Conference - Independence Day
+	id = OFN_AFR_DECOL_COG.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.6"}
+	title = OFN_AFR_DECOL_COG.6.t
+	desc = OFN_AFR_DECOL_COG.6.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_COG.6.a
+		ai_chance = {
+			factor = 100
+		}
+
+		USA = {
+			set_country_flag = Mandates_Central_Africa_Decolonized
+			if = {
+				limit = {
+					AND = {
+						Angola_is_independent = yes
+						Mozambique_is_independent = yes
+					}
+				}
+				custom_effect_tooltip = USA_SAF_WAR_Insurgency_Pull_Out_Decision_Tooltip
+				TNO_fopo_remove_saf_reconstruction_conflict_tab = yes
+			}
+			add_ideas = USA_Creighton_Abrams_Jr_theorist
+		}
+
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18103
+					days = 1
+				}
+			}
+		}
+
+		hidden_effect = {
+			COG = {
+				Release_CAF = yes
+				Release_CFS_10 = yes
+				Release_CFS_11 = yes
+				Release_GAB = yes
+			}
+
+			CAF = {
+				add_ideas = {
+					CAF_David_Dacko_hog
+					CAF_Barthelemy_Boganda_for
+					CAF_Ange_Felix_Patasse_eco
+					CAF_Andre_Kolingba_sec
+				}
+				econ_join_sphere_USA = yes
+				add_ideas = OFN_Observer
+				add_to_array = {
+					global.OFN_members = CAF
+				}
+			}
+
+			CFS = {
+				add_ideas = OFN_Observer
+			}
+
+			GAB = {
+				add_ideas = {
+					GAB_Paul_Marie_Yembit_hog
+					GAB_Jacques_Opangault_for
+					GAB_Apollinaire_Bazinga_eco
+					GAB_Ba_Oumar_sec
+				}
+				econ_join_sphere_USA = yes
+				add_ideas = OFN_Observer
+				add_to_array = {
+					global.OFN_members = GAB
+				}
+			}
+
+			if = {
+				limit = {
+					has_country_flag = OFN_COG_DECOL_free_katanga
+				}
+
+				COG = { Release_KTG_10 = yes }
+				CFS = { Release_KTG_10 = yes }
+				KTG = {
+					econ_join_sphere_USA = yes
+					add_ideas = OFN_Observer
+				}
+			}
+
+			if = {
+				limit = {
+					has_country_flag = OFN_COG_DECOL_orungu_split
+				}
+
+				GAB = { Release_GAB_3 = yes }
+				BZZ = {
+					econ_join_sphere_USA = yes
+					add_ideas = OFN_Observer
+					set_cosmetic_tag = BZZ_authdem
+					add_to_array = {
+						global.OFN_members = BZZ
+					}
+				}
+			}
+
+			CFS = {
+				change_tag_from = COG
+				add_to_array = {
+					global.OFN_members = CFS
+				}
+				CFS = {
+					econ_join_sphere_USA = yes
+				}
+				set_country_flag = TNO_closing_screen_show
+			}
+		}
+	}
+}
+
+country_event = { # Collapse of Central Africa
+	id = OFN_AFR_DECOL_COG.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.7"}
+	title = OFN_AFR_DECOL_COG.7.t
+	desc = OFN_AFR_DECOL_COG.7.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = OFN_AFR_DECOL_COG.7.a
+		ai_chance = {
+			factor = 100
+		}
+
+		COG = {
+			random_unit_leader = {
+				limit = {
+					has_id = 999
+				}
+				set_nationality = USA
+			}
+		}
+
+		USA = {
+			set_country_flag = Mandates_Central_Africa_collapsed
+			if = {
+				limit = {
+					AND = {
+						Angola_is_independent = yes
+						Mozambique_is_independent = yes
+					}
+				} 
+				custom_effect_tooltip = USA_SAF_WAR_Insurgency_Pull_Out_Decision_Tooltip
+				TNO_fopo_remove_saf_reconstruction_conflict_tab = yes
+			}
+		}
+
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18102
+					days = 1
+				}
+			}
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_COG.16
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # A Govenment to Counter Lumumba
+	id = OFN_AFR_DECOL_COG.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_COG.8"}
+	title = OFN_AFR_DECOL_COG.8.t
+	desc = OFN_AFR_DECOL_COG.8.desc
+	picture = GFX_report_event_central_africa_lumumba
+
+	is_triggered_only = yes
+
+	option = { # Ileo
+		name = OFN_AFR_DECOL_COG.8.a
+		ai_chance = {
+			factor = 30
+		}
+
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.2
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.1
+		}
+		COG_USA_Joseph_Ileo = {
+			promote_character = yes
+		}
+		set_politics = {
+			ruling_party = conservative_democracy
+			elections_allowed = no
+		}
+
+		hidden_effect = {
+			COG = {
+				set_cosmetic_tag = COG_FED_REP
+				set_party_name = {
+					ideology = conservative_democracy
+					long_name = COG_FED_REP_conservative_democracy_party_long
+					name = COG_FED_REP_conservative_democracy_party
+				}
+				set_party_name = {
+					ideology = liberal_democracy
+					long_name = COG_FED_REP_liberal_democracy_party_long
+					name = COG_FED_REP_liberal_democracy_party
+				}
+			}
+		}
+	}
+
+	option = { # Adoula
+		name = OFN_AFR_DECOL_COG.8.b
+		ai_chance = {
+			factor = 70
+		}
+
+		add_popularity = {
+			ideology = conservative_democracy
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = liberal_democracy
+			popularity = 0.2
+		}
+		COG_USA_Cyrille_Adoula = {
+			promote_character = yes
+		}
+		set_politics = {
+			ruling_party = liberal_democracy
+			elections_allowed = no
+		}
+		
+		hidden_effect = {
+			COG = {
+				set_cosmetic_tag = COG_FED_REP
+				set_party_name = {
+					ideology = conservative_democracy
+					long_name = COG_FED_REP_conservative_democracy_party_long
+					name = COG_FED_REP_conservative_democracy_party
+				}
+				set_party_name = {
+					ideology = liberal_democracy
+					long_name = COG_FED_REP_liberal_democracy_party_long
+					name = COG_FED_REP_liberal_democracy_party
+				}
+			}
+		}
+	}
+}
+
+########################################################################################################
+########################################################################################################
+#
+# #####  ###   #### #####     ###  ##### ####  #####  ####  ###
+# #     #   # #       #      #   # #     #   #   #   #     #   #
+# ###   #####  ###    #      ##### ###   ####    #   #     #####
+# #     #   #     #   #      #   # #     #   #   #   #     #   #
+# ##### #   # ####    #      #   # #     #   # #####  #### #   #
+#
+########################################################################################################
+########################################################################################################
+
+country_event = { # Organizing decolonization (East Africa)
+	id = OFN_AFR_DECOL_MZB.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.0"}
+	title = OFN_AFR_DECOL_MZB.0.t
+	desc = OFN_AFR_DECOL_MZB.0.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_MZB.0.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.1
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Quelimane Conference
+	id = OFN_AFR_DECOL_MZB.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.1"}
+	title = OFN_AFR_DECOL_MZB.1.t
+	desc = OFN_AFR_DECOL_MZB.1.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_MZB.1.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = OFN_MZB_DECOL_socialist
+				}
+				country_event = {
+					id = OFN_AFR_DECOL_MZB.2
+					days = 1
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						has_completed_focus = OFN_MZB_cooperate_with_the_anglos
+					}
+					country_event = {
+						id = OFN_AFR_DECOL_MZB.4
+						days = 1
+					}
+				}
+				else = {
+					country_event = {
+						id = OFN_AFR_DECOL_MZB.3
+						days = 1
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { # The Quelimane Conference - The Mozambique Issue
+	id = OFN_AFR_DECOL_MZB.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.2"}
+	title = OFN_AFR_DECOL_MZB.2.t
+	desc = OFN_AFR_DECOL_MZB.2.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = { # Entrust the nation to Mondlane
+		name = OFN_AFR_DECOL_MZB.2.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.3
+				days = 1
+			}
+		}
+	}
+
+	option = { # Bet on Machel
+		name = OFN_AFR_DECOL_MZB.2.b
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			if = {
+				limit = {
+					has_completed_focus = OFN_MZB_cooperate_with_the_anglos
+				}
+				country_event = {
+					id = OFN_AFR_DECOL_MZB.4
+					days = 1
+				}
+			}
+			else = {
+				country_event = {
+					id = OFN_AFR_DECOL_MZB.3
+					days = 1
+				}
+			}
+
+			GAZ = {
+				promote_character = GAZ_Samora_Machel
+				set_politics = {
+					ruling_party = socialist
+					elections_allowed = no
+				}
+			}
+		}
+	}
+}
+
+country_event = { # The Quelimane Conference - Anglo Demands
+	id = OFN_AFR_DECOL_MZB.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.3"}
+	title = OFN_AFR_DECOL_MZB.3.t
+	desc = OFN_AFR_DECOL_MZB.3.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = { # Give them a spot in Zambia
+		name = OFN_AFR_DECOL_MZB.3.a
+		ai_chance = {
+			factor = 100
+		}
+
+		trigger = {
+			NOT = { has_completed_focus = OFN_MZB_cooperate_with_the_anglos }
+		}
+
+		set_country_flag = OFN_MZB_grigg_is_minister
+		add_political_power = -50
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.4
+				days = 1
+			}
+		}
+	}
+
+	option = { # They will have nothing
+		name = OFN_AFR_DECOL_MZB.3.b
+		ai_chance = {
+			factor = 100
+		}
+
+		trigger = {
+			NOT = { has_completed_focus = OFN_MZB_cooperate_with_the_anglos }
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.4
+				days = 1
+			}
+		}
+	}
+
+	option = { # We have given them enough
+		name = OFN_AFR_DECOL_MZB.3.c
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.4
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Quelimane Conference - Bartoseland Proposition
+	id = OFN_AFR_DECOL_MZB.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.4"}
+	title = OFN_AFR_DECOL_MZB.4.t
+	desc = OFN_AFR_DECOL_MZB.4.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = { # The more stability, the better
+		name = OFN_AFR_DECOL_MZB.4.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = UGD_FATE_PATH option =  UGD_FATE_KING }
+			}
+		}
+		set_country_flag = OFN_MZB_DECOL_barotseland
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.5
+				days = 1
+			}
+		}
+	}
+
+	option = { # No, I didn't even know it existed
+		name = OFN_AFR_DECOL_MZB.4.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = UGD_FATE_PATH option =  UGD_FATE_OKELLO }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = UGD_FATE_PATH option =  UGD_FATE_AMIN }
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = OFN_MZB_DECOL_federation
+							has_country_flag = OFN_MZB_DECOL_socialist
+							has_country_flag = OFN_MZB_DECOL_liberal
+						}
+					}
+				}
+
+				country_event = {
+					id = OFN_AFR_DECOL_MZB.5
+					days = 1
+				}
+			}
+			else = {
+				country_event = {
+					id = OFN_AFR_DECOL_MZB.6
+					days = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = { # The Quelimane Conference - Ugandan Conflicts
+	id = OFN_AFR_DECOL_MZB.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.5"}
+	title = OFN_AFR_DECOL_MZB.5.t
+	desc = OFN_AFR_DECOL_MZB.5.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = { # Idi Amin Dada is a fierce leader
+		name = OFN_AFR_DECOL_MZB.5.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = UGD_FATE_PATH option =  UGD_FATE_OKELLO }
+			}
+		}
+
+		hidden_effect = {
+			UGD = {
+				set_politics = {
+					ruling_party = ultranationalism
+					elections_allowed = no
+				}
+				set_popularities = {
+					communist = 0
+					socialist = 0
+					social_democracy = 0
+					liberal_democracy = 0
+
+					conservative_democracy = 0
+					authoritarian_democracy = 15
+					despotism = 20
+					fascism = 30
+					national_socialism = 0
+					ultranationalism = 35
+					
+				}
+			}
+
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.6
+				days = 1
+			}
+		}
+	}
+
+	option = { # Support Okello's Gamble
+		name = OFN_AFR_DECOL_MZB.5.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = UGD_FATE_PATH option =  UGD_FATE_AMIN }
+			}
+		}
+
+		hidden_effect = {
+			UGD = {
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+				set_popularities = {
+					communist = 0
+					socialist = 0
+					social_democracy = 0
+					liberal_democracy = 0
+
+					conservative_democracy = 0
+					authoritarian_democracy = 15
+					despotism = 20
+					fascism = 35
+					national_socialism = 0
+					ultranationalism = 30
+					
+				}
+			}
+
+			country_event = {
+				id = OFN_AFR_DECOL_MZB.6
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Quelimane Conference - Independence Day
+	id = OFN_AFR_DECOL_MZB.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.6"}
+	title = OFN_AFR_DECOL_MZB.6.t
+	desc = OFN_AFR_DECOL_MZB.6.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_MZB.6.a
+		ai_chance = {
+			factor = 100
+		}
+
+		USA = {
+			set_country_flag = Mandates_East_Africa_Decolonized
+			if = {
+				limit = {
+					AND = {
+						Angola_is_independent = yes
+						Congo_is_independent = yes
+					}
+				}
+				custom_effect_tooltip = USA_SAF_WAR_Insurgency_Pull_Out_Decision_Tooltip
+				TNO_fopo_remove_saf_reconstruction_conflict_tab = yes
+			}
+		}
+
+		MZB = {
+			random_unit_leader = {
+				limit = {
+					has_id = 1005
+				}
+				set_nationality = USA
+			}
+		}
+
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18105
+					days = 1
+				}
+			}
+		}
+
+		hidden_effect = {
+			MZB = {
+				Release_ZAM = yes
+			}
+			ZAM = {
+				remove_all_ministers = yes
+				add_ideas = {
+					ZAM_Reuben_Kamanga_hog
+					ZAM_Elijah_Mudenda_for
+					ZAM_Alexander_Grey_Zulu_eco
+					ZAM_Reuben_Kamanga_sec
+				}
+				if = {
+					limit = {
+						has_country_flag = OFN_MZB_grigg_is_minister
+					}
+					add_ideas = ZAM_Casimir_Michael_Grigg_sec
+				}
+			}
+
+			ZAM = {
+				if = {
+					limit = {
+						has_country_flag = OFN_MZB_DECOL_liberal
+					}
+					ZAM = {
+						set_politics = {
+							ruling_party = conservative_democracy
+							elections_allowed = no
+						}
+						add_to_array = {
+							global.OFN_members = RWA
+						}
+						ZAM = {
+							econ_join_sphere_USA = yes
+							add_ideas = OFN_Dependent_Member
+						}
+					}
+				}
+				else = {
+					set_politics = {
+						ruling_party = socialist
+						elections_allowed = no
+					}
+					econ_join_sphere_USA = yes
+					add_ideas = OFN_Observer
+				}
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = OFN_MZB_DECOL_federation
+					}
+				}
+
+				MZB = {
+					Release_GAZ_10 = yes
+					Release_UGD = yes
+					Release_BRD = yes
+					Release_TNZ_11 = yes
+				}
+
+				GAZ = {
+					add_ideas = {
+						GAZ_Joaquim_Chissano_hog
+						GAZ_Alberto_Massavanhane_for
+						GAZ_Marcelino_dos_Santos_eco
+						GAZ_Samora_Machel_sec
+					}
+					econ_join_sphere_USA = yes
+					add_ideas = OFN_Observer
+				}
+
+				UGD = {
+					add_ideas = {
+						UGD_Isaac_Maliyamungu_hog
+						UGD_Idi_Amin_Dada_for
+						UGD_Juma_Butabika_eco
+						UGD_Mustafa_Adrisi_sec
+					}
+					econ_join_sphere_USA = yes
+					add_ideas = OFN_Observer
+				}
+
+				if = {
+					limit = {
+						has_country_flag = OFN_MZB_DECOL_liberal
+					}
+					RWA = {
+						set_politics = {
+							ruling_party = liberal_democracy
+							elections_allowed = no
+						}
+						promote_character = RWA_Dominique_Mbonyumutwa
+						add_to_array = {
+							global.OFN_members = RWA
+						}
+						RWA = {
+							econ_join_sphere_USA = yes
+							add_ideas = OFN_Observer
+						}
+					}
+				}
+				else = {
+					RWA = {
+						set_politics = {
+							ruling_party = despotism
+							elections_allowed = no
+						}
+						econ_join_sphere_USA = yes
+						add_ideas = OFN_Observer
+					}
+				}
+
+				RWA = {
+					add_ideas = {
+						RWA_Dominique_Mbonyumutwa_hog
+						RWA_Sylvestre_Nsanzimana_for
+						RWA_Gregoire_Kayibanda_eco
+						RWA_Juvenal_Habyarimana_sec
+					}
+				}
+
+				if = {
+					limit = {
+						has_country_flag = OFN_MZB_DECOL_liberal
+					}
+					BRD = {
+						set_politics = {
+							ruling_party = liberal_democracy
+							elections_allowed = no
+						}
+						add_country_leader_role = {
+							character = BRD_Ernest_Kabushemeye
+							country_leader = {
+								ideology = liberal_democracy_subtype
+								expire = "1999.1.23.1"
+								id = -1
+							}
+						}
+						promote_character = BRD_Ernest_Kabushemeye
+						add_to_array = {
+							global.OFN_members = BRD
+						}
+						BRD = {
+							econ_join_sphere_USA = yes
+							add_ideas = OFN_Observer
+						}
+					}
+				}
+				else = {
+					BRD = {
+						set_politics = {
+							ruling_party = despotism
+							elections_allowed = no
+						}
+						econ_join_sphere_USA = yes
+						add_ideas = OFN_Observer
+					}
+				}
+
+				BRD = {
+					add_ideas = {
+						BRD_Michel_Micombero_hog
+						BRD_Alexis_Nimubona_for
+						BRD_Thomas_Ndabemeye_eco
+						BRD_Jean_Baptiste_Bagaza_sec
+					}
+				}
+
+				if = {
+					limit = {
+						has_country_flag = OFN_MZB_DECOL_liberal
+					}
+					TNZ = {
+						set_politics = {
+							ruling_party = liberal_democracy
+							elections_allowed = no
+						}
+						promote_character = TNZ_Oscar_Kambona
+						add_to_array = {
+							global.OFN_members = TNZ
+						}
+						TNZ = {
+							econ_join_sphere_USA = yes
+							add_ideas = OFN_Observer
+						}
+					}
+				}
+				else = {
+					TNZ = {
+						set_politics = {
+							ruling_party = socialist
+							elections_allowed = no
+						}
+						econ_join_sphere_USA = yes
+						add_ideas = OFN_Observer
+					}
+				}
+
+				TNZ = {
+					add_ideas = {
+						TNZ_Rashidi_Kawawa_hog
+						TNZ_Paul_Bomani_for
+						TNZ_John_Malecela_eco
+						TNZ_Rashidi_Kawawa_sec
+					}
+					set_cosmetic_tag = TNZ_EAF
+				}
+			}
+
+			if = {
+				limit = {
+					has_country_flag = OFN_MZB_DECOL_federation
+				}
+
+				MZB = {
+					Release_TNZ_12 = yes
+				}
+
+				TNZ = {
+					set_cosmetic_tag = TNZ_EAF
+					set_politics = {
+						ruling_party = liberal_democracy
+						elections_allowed = no
+					}
+					promote_character = TNZ_Oscar_Kambona
+					set_capital = { state = 1078 }
+					add_to_array = {
+						global.OFN_members = TNZ
+					}
+					TNZ = {
+						econ_join_sphere_USA = yes
+						add_ideas = OFN_Observer
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					has_country_flag = OFN_MZB_DECOL_barotseland
+				}
+			}
+
+			TNZ = {
+				change_tag_from = MZB
+				set_country_flag = TNO_closing_screen_show
+			}
+		}
+	}
+}
+
+country_event = { # Collapse of East Africa
+	id = OFN_AFR_DECOL_MZB.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_MZB.7"}
+	title = OFN_AFR_DECOL_MZB.7.t
+	desc = OFN_AFR_DECOL_MZB.7.desc
+	picture = GFX_report_event_cog_drums
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = OFN_AFR_DECOL_MZB.7.a
+		ai_chance = {
+			factor = 100
+		}
+
+		MZB = {
+			random_unit_leader = {
+				limit = {
+					has_id = 1005
+				}
+				set_nationality = USA
+			}
+		}
+
+		USA = {
+			set_country_flag = Mandates_East_Africa_collapsed
+			if = {
+				limit = {
+					AND = {
+						Angola_is_independent = yes
+						Congo_is_independent = yes
+					}
+				}
+				custom_effect_tooltip = USA_SAF_WAR_Insurgency_Pull_Out_Decision_Tooltip
+				TNO_fopo_remove_saf_reconstruction_conflict_tab = yes
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18104
+					days = 1
+				}
+			}
+		}
+
+		hidden_effect = {
+			MZB = {
+				load_focus_tree = shattered_ambitions
+				Release_ZAM = yes
+				Release_GAZ_10 = yes
+				Release_UGD = yes
+				Release_BRD = yes
+				Release_TNZ_11 = yes
+			}
+
+			ZAM = {
+				remove_all_ministers = yes
+				add_ideas = {
+					ZAM_Reuben_Kamanga_hog
+					ZAM_Elijah_Mudenda_for
+					ZAM_Alexander_Grey_Zulu_eco
+					ZAM_Casimir_Michael_Grigg_sec
+				}
+			}
+
+			GAZ = {
+				add_ideas = {
+					GAZ_Joaquim_Chissano_hog
+					GAZ_Alberto_Massavanhane_for
+					GAZ_Marcelino_dos_Santos_eco
+					GAZ_Samora_Machel_sec
+				}
+			}
+
+			UGD = {
+				add_ideas = {
+					UGD_Isaac_Maliyamungu_hog
+					UGD_Idi_Amin_Dada_for
+					UGD_Juma_Butabika_eco
+					UGD_Mustafa_Adrisi_sec
+				}
+			}
+
+			RWA = {
+				add_ideas = {
+					RWA_Dominique_Mbonyumutwa_hog
+					RWA_Sylvestre_Nsanzimana_for
+					RWA_Gregoire_Kayibanda_eco
+					RWA_Juvenal_Habyarimana_sec
+				}
+
+				set_politics = {
+					ruling_party = despotism
+					elections_allowed = no
+				}
+			}
+
+			BRD = {
+				add_ideas = {
+					BRD_Michel_Micombero_hog
+					BRD_Alexis_Nimubona_for
+					BRD_Thomas_Ndabemeye_eco
+					BRD_Jean_Baptiste_Bagaza_sec
+				}
+
+				set_politics = {
+					ruling_party = despotism
+					elections_allowed = no
+				}
+			}
+
+			TNZ = {
+				add_ideas = {
+					TNZ_Rashidi_Kawawa_hog
+					TNZ_Paul_Bomani_for
+					TNZ_John_Malecela_eco
+					TNZ_Rashidi_Kawawa_sec
+				}
+
+				set_politics = {
+					ruling_party = socialist
+					elections_allowed = no
+				}
+			}
+		}
+	}
+}
+
+########################################################################################################
+########################################################################################################
+#
+#  ###  #   #  ####  ###  #      ###
+# #   # ##  # #     #   # #     #   #
+# ##### # # # # ### #   # #     #####
+# #   # #  ## #   # #   # #     #   #
+# #   # #   #  ####  ###  ##### #   #
+#
+########################################################################################################
+########################################################################################################
+
+country_event = { # Organizing decolonization (Angola)
+	id = OFN_AFR_DECOL_ANG.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_ANG.0"}
+	title = OFN_AFR_DECOL_ANG.0.t
+	desc = OFN_AFR_DECOL_ANG.0.desc
+	picture = GFX_report_event_angola_lavelle_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_ANG.0.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_ANG.1
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Luanda Conference
+	id = OFN_AFR_DECOL_ANG.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_ANG.1"}
+	title = OFN_AFR_DECOL_ANG.1.t
+	desc = OFN_AFR_DECOL_ANG.1.desc
+	picture = GFX_report_event_angola_lavelle_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_ANG.1.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_ANG.2
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Luanda Conference - Government
+	id = OFN_AFR_DECOL_ANG.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_ANG.2"}
+	title = OFN_AFR_DECOL_ANG.2.t
+	desc = OFN_AFR_DECOL_ANG.2.desc
+	picture = GFX_report_event_angola_lavelle_1
+
+	is_triggered_only = yes
+
+	option = { # Favor UNITA
+		name = OFN_AFR_DECOL_ANG.2.a
+		ai_chance = {
+			factor = 100
+		}
+
+		trigger = {
+			check_variable = { OFN_MANDATE_ANG_UNITA_power_level > OFN_MANDATE_ANG_MPLA_power_level }
+			check_variable = { OFN_MANDATE_ANG_gov_strength > 0.25 }
+		}
+
+		set_country_flag = OFN_MANTADE_ANG_favored_unita
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_ANG.3
+				days = 1
+			}
+		}
+	}
+
+	option = { # Favor the MPLA
+		name = OFN_AFR_DECOL_ANG.2.b
+		ai_chance = {
+			factor = 100
+		}
+
+		trigger = {
+			check_variable = { OFN_MANDATE_ANG_UNITA_power_level < OFN_MANDATE_ANG_MPLA_power_level }
+			check_variable = { OFN_MANDATE_ANG_gov_strength > 0.25 }
+		}
+
+		set_country_flag = OFN_MANTADE_ANG_favored_mpla
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_ANG.3
+				days = 1
+			}
+		}
+	}
+
+	option = { # Create a weaker neutral government
+		name = OFN_AFR_DECOL_ANG.2.c
+		ai_chance = {
+			factor = 100
+		}
+
+		trigger = {
+			check_variable = {
+				var = OFN_MANDATE_ANG_gov_strength
+				value = 0.25
+				compare = less_than_or_equals
+			}
+		}
+
+		set_country_flag = OFN_MANTADE_ANG_favored_nobody
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_ANG.3
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Luanda Conference - Cabinda's Ressources
+	id = OFN_AFR_DECOL_ANG.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_ANG.3"}
+	title = OFN_AFR_DECOL_ANG.3.t
+	desc = OFN_AFR_DECOL_ANG.3.desc
+	picture = GFX_report_event_angola_lavelle_1
+
+	is_triggered_only = yes
+
+	option = { # It will be operated by the OFN
+		name = OFN_AFR_DECOL_ANG.3.a
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_ANG.4
+				days = 1
+			}
+		}
+	}
+
+	option = { # It will be nationalized
+		name = OFN_AFR_DECOL_ANG.3.b
+		ai_chance = {
+			factor = 100
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = OFN_AFR_DECOL_ANG.4
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { # The Luanda Conference - Independence Day
+	id = OFN_AFR_DECOL_ANG.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_ANG.4"}
+	title = OFN_AFR_DECOL_ANG.4.t
+	desc = OFN_AFR_DECOL_ANG.4.desc
+	picture = GFX_report_event_angola_lavelle_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_ANG.4.a
+		ai_chance = {
+			factor = 100
+		}
+
+		USA = {
+			set_country_flag = Mandates_Angola_Decolonized
+			if = {
+				limit = {
+					AND = {
+						Congo_is_independent = yes
+						Mozambique_is_independent = yes
+					}
+				}
+				custom_effect_tooltip = USA_SAF_WAR_Insurgency_Pull_Out_Decision_Tooltip
+				TNO_fopo_remove_saf_reconstruction_conflict_tab = yes
+			}
+		}
+
+		ANG = {
+			random_unit_leader = {
+				limit = {
+					has_id = 1016
+				}
+				set_nationality = USA
+			}
+		}
+
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18101
+					days = 1
+				}
+			}
+			ANG_free_from_OFN_peace = yes
+		}
+	}
+}
+
+country_event = { # Collapse of Angola
+	id = OFN_AFR_DECOL_ANG.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_ANG.5"}
+	title = OFN_AFR_DECOL_ANG.5.t
+	desc = OFN_AFR_DECOL_ANG.5.desc
+	picture = GFX_report_event_angola_lavelle_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = OFN_AFR_DECOL_ANG.5.a
+		ai_chance = {
+			factor = 100
+		}
+		USA = {
+			set_country_flag = Mandates_Angola_collapsed
+			if = {
+				limit = {
+					AND = {
+						Congo_is_independent = yes
+						Mozambique_is_independent = yes
+					}
+				}
+				custom_effect_tooltip = USA_SAF_WAR_Insurgency_Pull_Out_Decision_Tooltip
+				TNO_fopo_remove_saf_reconstruction_conflict_tab = yes
+			}
+		}
+
+		ANG = {
+			random_unit_leader = {
+				limit = {
+					has_id = 1016
+				}
+				set_nationality = USA
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18100
+					days = 1
+				}
+			}
+			ANG_free_from_OFN_collapse = yes
+		}
+	}
+}
+
+########################################################################################################
+########################################################################################################
+#
+#  ####      ###      ####
+# #         #   #     #   #
+# #         #####     ####
+# #         #   #     #   #
+#  ####  #  #   #  #  #   #
+#
+########################################################################################################
+########################################################################################################
+
+country_event = { # The Collapse of the Central African Republic (Diplo victory)
+	id = OFN_AFR_DECOL_CAR.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_CAR.0"}
+	title = OFN_AFR_DECOL_CAR.0.t
+	desc = OFN_AFR_DECOL_CAR.0.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_CAR.0.a
+		set_country_flag = CAR_Peaceful_Decolonization
+		load_focus_tree = ofn_car_african_crisis_victory
+	}
+}
+
+country_event = { # The Collapse of the Central African Republic (Diplo failure)
+	id = OFN_AFR_DECOL_CAR.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_CAR.1"}
+	title = OFN_AFR_DECOL_CAR.1.t
+	desc = OFN_AFR_DECOL_CAR.1.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_CAR.1.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18106
+					days = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = { # The Collapse of the Central African Republic (War failure)
+	id = OFN_AFR_DECOL_CAR.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_CAR.2"}
+	title = OFN_AFR_DECOL_CAR.2.t
+	desc = OFN_AFR_DECOL_CAR.2.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_CAR.2.a
+		hidden_effect = {
+			every_country = {
+				news_event = {
+					id = WORLD.18107
+					days = 1
+				}
+			}
+			every_country = {
+				limit = {
+					is_ai = no
+				}
+				set_temp_variable = { TNO_temp_super_event = 82 }
+				TNO_fire_super_event = yes
+			}
+		}
+		USC = {
+			every_unit_leader = {
+				limit = {
+					OR = {
+						has_id = 999
+						has_id = 1005
+						has_id = 1016
+						has_id = 191002
+					}
+				}
+				set_nationality = USA
+			}
+		}
+	}
+}
+
+country_event = { # The Crisis is Over!
+	id = OFN_AFR_DECOL_CAR.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_AFR_DECOL_CAR.3"}
+	title = OFN_AFR_DECOL_CAR.3.t
+	desc = OFN_AFR_DECOL_CAR.3.desc
+	picture = GFX_report_event_east_africa_westmoreland_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_AFR_DECOL_CAR.3.a
+		clr_country_flag = OFN_CAR_african_crisis_has_started
+		load_focus_tree = ofn_car_african_crisis_victory
+	}
+}

@@ -1,0 +1,672 @@
+add_namespace = OFN_COG
+add_namespace = OFN_COG_flavor
+
+
+country_event = {
+	id = OFN_COG.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.1"}
+	title = OFN_COG.1.t
+	desc = OFN_COG.1.desc
+	picture = GFX_report_event_central_africa_abrams_1
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.1.a
+		add_political_power = 10
+	}
+}
+
+country_event = {
+	id = OFN_COG.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.2"}
+	title = OFN_COG.2.t
+	desc = OFN_COG.2.desc
+	picture = GFX_report_event_cog_schramme_1
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.2.a
+		295 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = OFN_COG_Work_With_Germans
+			}
+			set_temp_variable = { money_reserves_temp = 0.008 }
+			econ_money_reserves_change_raw_money = yes
+		}
+		else = {
+			set_temp_variable = { money_reserves_temp = 0.004 }
+			econ_money_reserves_change_raw_money = yes
+		}
+		TNO_improve_pollution_policy_effectiveness_low = yes
+		TNO_improve_income_taxation_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = OFN_COG.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.4"}
+	title = OFN_COG.4.t
+	desc = OFN_COG.4.desc
+	picture = GFX_report_event_central_africa_kasa_vubu_1
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.4.a
+		add_to_variable = { OFN_MANDATE_rebel_stability = 0.02 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_small_stability_increase_tt
+		remove_ideas = COG_USA_Leonard_Mulumba_eco
+		add_ideas = COG_USA_Joseph_Kasa_Vubu_eco
+	}
+}
+
+country_event = {
+	id = OFN_COG.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.5"}
+	title = OFN_COG.5.t
+	desc = OFN_COG.5.desc
+	picture = GFX_report_event_central_africa_mba_1
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.5.a
+		add_to_variable = { OFN_MANDATE_rebel_stability = 0.1 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_huge_stability_increase_tt
+
+		set_temp_variable = { temp_econ_spending_amount = 0.5 }
+		econ_spend_money_once_effect_raw_money = yes
+
+		TNO_improve_political_parties_policy_effectiveness_low = yes
+		TNO_improve_minorities_policy_effectiveness_low = yes
+
+		539 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = OFN_COG.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.6"}
+	title = OFN_COG.6.t
+	desc = OFN_COG.6.desc
+	picture = GFX_report_event_cog_mobutu_army
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.6.a
+		hidden_effect = {
+			country_event = {
+				id = OFN_COG.61
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = OFN_COG.61
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.61"}
+	title = OFN_COG.61.t
+	desc = OFN_COG.61.desc
+	picture = GFX_report_event_cog_mobutu_army
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.61.a
+		add_to_variable = { OFN_MANDATE_rebel_stability = 0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_medium_stability_increase_tt
+		remove_ideas = COG_OFN_Manace_of_Cameroon_2
+		TNO_improve_racial_integration_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = OFN_COG.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.7"}
+	title = OFN_COG.7.t
+	desc = OFN_COG.7.desc
+	picture = GFX_report_event_central_africa_abrams_2
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.7.a
+		add_victory_points = { province = 10071 value = -10 }
+		add_to_variable = { OFN_MANDATE_rebel_stability = 0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_COG_rebel_stab_increase_tt
+	}
+
+	option = {
+		name = OFN_COG.7.b
+
+		set_temp_variable = { money_reserves_temp = 0.008 }
+		econ_money_reserves_change_raw_money = yes
+		1181 = { set_state_name = STATE_1181_ofn }
+		set_province_name = { id = 10071 name = VICTORY_POINTS_10071_ofn }
+	}
+}
+
+country_event = {
+	id = OFN_COG.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.3"}
+	title = OFN_COG.3.t
+	desc = OFN_COG.3.desc
+	picture = GFX_report_event_cog_schramme_1
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.3.a
+		add_ideas = COG_OFN_Employed_Mercs
+
+		set_temp_variable = { temp_econ_spending_amount = 0.001 }
+		econ_spend_money_once_effect_raw_money = yes
+		TNO_improve_security_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = OFN_COG.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.10"}
+	title = OFN_COG.10.t
+	desc = OFN_COG.10.desc
+	picture = GFX_report_event_central_africa_attack_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.10.a
+		random_owned_state = {
+			damage_building = {
+				type = infrastructure
+				damage = 0.3
+			}
+		}
+		subtract_from_variable = { OFN_MANDATE_rebel_stability = 0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_medium_stability_decrease_tt
+	}
+}
+
+country_event = {
+	id = OFN_COG.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.11"}
+	title = OFN_COG.11.t
+	desc = OFN_COG.11.desc
+	picture = GFX_report_event_central_africa_attack_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.11.a
+		subtract_from_variable = { OFN_MANDATE_rebel_stability = 0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_medium_stability_decrease_tt
+		random_owned_state = {
+			set_temp_variable = { temp_state_value_addition = -.25 }
+			econ_state_value_change_addition = yes
+		}
+	}
+}
+
+country_event = {
+	id = OFN_COG.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.12"}
+	title = OFN_COG.12.t
+	desc = OFN_COG.12.desc
+	picture = GFX_report_event_cog_native_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.12.a
+		set_country_flag = OFN_COG_rebel_flareup
+		TNO_improve_security_policy_effectiveness_low = yes
+		add_to_variable = { OFN_MANDATE_rebel_stability = -0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_medium_stability_decrease_tt
+	}
+}
+
+country_event = {
+	id = OFN_COG.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.13"}
+	title = OFN_COG.13.t
+	desc = OFN_COG.13.desc
+	picture = GFX_report_event_cog_merc_9
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.13.a
+		set_country_flag = OFN_COG_German_Mercs
+		add_to_variable = { OFN_MANDATE_rebel_stability = -0.05 }
+		clamp_OFN_mandate_rebel_stability = yes
+		custom_effect_tooltip = OFN_AFRICA_MANDATE_medium_stability_decrease_tt
+		TNO_worsen_security_policy_effectiveness_low = yes
+	}
+}
+
+country_event = {
+	id = OFN_COG.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.14"}
+	title = OFN_COG.14.t
+	desc = OFN_COG.14.desc
+	picture = GFX_report_event_cog_native_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.14.a
+		set_country_flag = OFN_COG_Lumumba_Stronger
+		set_country_flag = OFN_COG_Congo_Crisis_flag
+		TNO_worsen_security_policy_effectiveness_low = yes
+		TNO_worsen_security_policy_effectiveness_monthly_high = yes
+		
+		if = {
+            limit = {
+                has_game_rule = {
+                    rule = OFN_MANDATE_ROUTE
+                    option = OFN_MANDATE_ROUTE_STABLE
+                }
+            }
+            country_event = { 
+                id = OFN_COG.144
+                days = 2
+            }          
+		}
+	}
+}
+
+country_event = {
+	id = OFN_COG.144
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.144"}
+	title = OFN_COG.144.t
+	desc = OFN_COG.144.desc
+	picture = GFX_report_event_cog_native_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.144.a
+		add_days_mission_timeout = {
+			mission = OFN_COG_Congo_Crisis_Timer
+			days = 3000
+		}		
+	}
+}
+
+country_event = {
+	id = OFN_COG.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.15"}
+	title = OFN_COG.15.t
+	desc = OFN_COG.15.desc
+	picture = GFX_report_event_cog_native_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.15.a
+		set_country_flag = OFN_COG_Mobutu_Stronger
+		set_country_flag = OFN_COG_Congo_Crisis_flag
+		TNO_worsen_security_policy_effectiveness_low = yes
+		TNO_worsen_security_policy_effectiveness_monthly_high = yes
+	}
+}
+
+country_event = {
+	id = OFN_COG.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.16"}
+	title = OFN_COG.16.t
+	desc = OFN_COG.16.desc
+	picture = GFX_report_event_central_africa_lumumba
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = OFN_COG.16.a
+		hidden_effect = {
+			OFN_COG_MANDATE_CIVIL_WAR = yes
+			COG = {
+				load_oob = Congo_Mandate_Collapse_COG
+			}
+	
+			CFS = {
+				set_technology = {
+					##INFANTRY##
+					# infantry_equipment_0 = 1
+					infantry_weapons_1 = 1
+					infantry_weapons_2 = 1
+					infantry_weapons_improvements_1 = 1
+					infantry_weapons_improvements_2 = 1
+					infantry_weapons_improvements_3 = 1
+					infantry_weapons_improvements_4 = 1
+					
+			   
+					motorized_infantry = 1
+					
+			   
+					##SUPPORT##
+					tech_support = 1
+					tech_engineers = 1
+					tech_signal_company = 1
+			    }
+			  	add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 1000
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 500
+				}
+				load_oob = Congo_Mandate_Collapse_CFS
+			
+			}
+
+			KSI = {
+				set_technology = {
+					##INFANTRY##
+					# infantry_equipment_0 = 1
+					infantry_weapons_1 = 1
+					infantry_weapons_2 = 1
+					infantry_weapons_improvements_1 = 1
+					infantry_weapons_improvements_2 = 1
+					infantry_weapons_improvements_3 = 1
+					infantry_weapons_improvements_4 = 1
+					
+			   
+					motorized_infantry = 1
+					
+			   
+					##SUPPORT##
+					tech_support = 1
+					tech_engineers = 1
+					tech_signal_company = 1
+			    }
+			   add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 1000
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 500
+				}
+				load_oob = Congo_Mandate_Collapse_KSI
+			}
+
+			CAF = {
+				set_technology = {
+					##INFANTRY##
+					# infantry_equipment_0 = 1
+					infantry_weapons_1 = 1
+					infantry_weapons_2 = 1
+					infantry_weapons_improvements_1 = 1
+					infantry_weapons_improvements_2 = 1
+					infantry_weapons_improvements_3 = 1
+					infantry_weapons_improvements_4 = 1
+					
+			   
+					motorized_infantry = 1
+					
+			   
+					##SUPPORT##
+					tech_support = 1
+					tech_engineers = 1
+					tech_signal_company = 1
+			    }
+			   add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 1000
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 500
+				}
+				load_oob = Congo_Mandate_Collapse_CAF
+			}
+
+			AZD = {
+				set_technology = {
+					##INFANTRY##
+					# infantry_equipment_0 = 1
+					infantry_weapons_1 = 1
+					infantry_weapons_2 = 1
+					infantry_weapons_improvements_1 = 1
+					infantry_weapons_improvements_2 = 1
+					infantry_weapons_improvements_3 = 1
+					infantry_weapons_improvements_4 = 1
+					
+			   
+					motorized_infantry = 1
+					
+			   
+					##SUPPORT##
+					tech_support = 1
+					tech_engineers = 1
+					tech_signal_company = 1
+			    }
+			   add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 1000
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 500
+				}
+				load_oob = Congo_Mandate_Collapse_AZD
+			}
+
+			KTG = {
+				set_technology = {
+					##INFANTRY##
+					# infantry_equipment_0 = 1
+					infantry_weapons_1 = 1
+					infantry_weapons_2 = 1
+					infantry_weapons_improvements_1 = 1
+					infantry_weapons_improvements_2 = 1
+					infantry_weapons_improvements_3 = 1
+					infantry_weapons_improvements_4 = 1
+					
+			   
+					motorized_infantry = 1
+					
+			   
+					##SUPPORT##
+					tech_support = 1
+					tech_engineers = 1
+					tech_signal_company = 1
+			    }
+			   add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 1000
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 500
+				}
+				load_oob = Congo_Mandate_Collapse_KAT
+			}
+
+			CPR = {
+				set_technology = {
+					##INFANTRY##
+					# infantry_equipment_0 = 1
+					infantry_weapons_1 = 1
+					infantry_weapons_2 = 1
+					infantry_weapons_improvements_1 = 1
+					infantry_weapons_improvements_2 = 1
+					infantry_weapons_improvements_3 = 1
+					infantry_weapons_improvements_4 = 1
+					
+			   
+					motorized_infantry = 1
+					
+			   
+					##SUPPORT##
+					tech_support = 1
+					tech_engineers = 1
+					tech_signal_company = 1
+			    }
+			   add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 1000
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 500
+				}
+				load_oob = Congo_Mandate_Collapse_CPR
+			}
+
+			if = {
+				limit = {
+					has_country_flag = OFN_COG_Lumumba_Stronger
+				}
+				CFS = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 5000
+					}
+					load_oob = Congo_Mandate_Collapse_CFS_Extra
+					
+				}
+				CPR = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 5000
+					}
+					load_oob = Congo_Mandate_Collapse_CPR_Extras
+					
+				}
+				else_if = {
+					limit = {
+						has_country_flag = OFN_COG_Mobutu_Stronger
+					}
+					AZD = {
+						add_equipment_to_stockpile = {
+							type = infantry_equipment_1
+							amount = 5000
+						}
+						load_oob = Congo_Mandate_Collapse_AZD_Extra
+					}
+				}
+			}
+			ZZZ = {
+				country_event = {
+					id = COG_PW.1
+					days = 20
+				}
+			}
+			
+		}
+
+		
+	}
+}
+
+country_event = {
+	id = OFN_COG.50 #Germany reacts to asset seizure by OFN COG
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.50"}
+	title = OFN_COG.50.t
+	desc = OFN_COG.50.desc
+	picture = GFX_report_event_central_africa_abrams_2
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.50.a
+		add_political_power = -10
+		add_opinion_modifier = {
+			target = COG
+			modifier = OFN_COG_seized_african_assets
+		}
+	}
+}
+
+country_event = {
+	id = OFN_COG.51 #Japan reacts to asset seizure by OFN COG
+	immediate = {log = "[GetDateText]: [Root.GetName]: event OFN_COG.51"}
+	title = OFN_COG.51.t
+	desc = OFN_COG.51.desc
+	picture = GFX_report_event_central_africa_abrams_2
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG.51.a
+		add_political_power = -10
+		add_opinion_modifier = {
+			target = COG
+			modifier = OFN_COG_seized_african_assets
+		}
+	}
+}
+
+country_event = {
+	id = OFN_COG_flavor.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event OFN_COG_flavor.1" }
+	title = OFN_COG_flavor.1.t
+	desc = OFN_COG_flavor.1.desc
+	picture = GFX_report_event_usa_drinking_businessmen
+
+	trigger = {
+		country_exists = COG
+		if = {
+			limit = { country_exists = COG }
+			COG = {
+				NOT = { has_country_flag = OFN_COG_Congo_Crisis_flag }
+				is_puppet_of = USA
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = OFN_COG_flavor.1.a
+	}
+}
