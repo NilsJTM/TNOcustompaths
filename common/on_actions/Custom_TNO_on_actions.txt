@@ -2723,7 +2723,8 @@ on_actions = {
 	## Chinese Wars
 	on_declare_war = {
 		effect = {
-			if = { ##Warlord Insurrection
+			##Warlord Insurrection
+			if = { #NPA
 				limit = {
 					ROOT = {
 						OR = {
@@ -2769,6 +2770,34 @@ on_actions = {
 					}
 				}
 			}
+			if = { #RGOC
+				limit = {
+					ROOT = {
+						OR = {
+							tag = YUN
+							tag = CHI
+						}
+					}
+					FROM = {
+						OR = {
+							tag = YUN
+							tag = CHI
+						}
+					}
+					has_game_rule = {
+						rule = warlord_insurrection_outcome
+						option = WARLORD_INSURRECTION_OUTCOME_CHI_REPUBLIC_OF_CHINA
+					}
+				}
+				YUN = {
+					add_ideas = Custom_TNO_CHI_war_debuff
+				}
+				CHI = {
+					add_ideas = Custom_TNO_YUN_CHI_war
+					apply_5_divisions = yes
+				}
+			}
+			
 			if = { ##The Great Asian War
 				limit = {
 					ROOT = {
@@ -3076,6 +3105,37 @@ on_actions = {
 					}
 					PRC = {
 						remove_war_buff = yes
+					}
+				}
+			}
+			
+			if = { ## Warlord Insurrection ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = CHI
+							tag = YUN
+						}
+					}
+					FROM = {
+						OR = {
+							tag = CHI
+							tag = YUN
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = warlord_insurrection_outcome
+							option = WARLORD_INSURRECTION_OUTCOME_CHI_REPUBLIC_OF_CHINA
+						}
+					}
+					CHI = {
+						delete_unit_template_and_units = {
+							division_template = "Custom TNO Division"
+							disband = no
+						}
 					}
 				}
 			}
