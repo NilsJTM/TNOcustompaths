@@ -1,0 +1,1441 @@
+focus_tree = {
+	id = KOM_lcoup #Leftist Coup
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KOM
+		} 
+	}
+	default = no
+
+	focus = { 
+		id = KOM_lcoup_the_peoples_revolution
+		icon = GFX_TNO_generic_left_unity_revolution
+		cost = 0.8
+		x = 5
+		y = 0
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_ponomaryovs_coup"
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = KOM_lcoup_appeal_for_a_united_party
+		icon = GFX_generic_socialist_constitution
+		cost = 0.8
+		x = -3
+		y = 1
+		relative_position_id = KOM_lcoup_the_peoples_revolution
+		prerequisite = {
+			focus = KOM_lcoup_the_peoples_revolution
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_appeal_for_a_united_party"
+			KOM_decrease_coup_risk_static_med = yes
+			country_event = {
+				id = KOM.181
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_lcoup_repurpose_the_systems
+		icon = GFX_generic_elections_rigged
+		cost = 0.8
+		x = -2
+		y = 1
+		relative_position_id = KOM_lcoup_appeal_for_a_united_party
+		mutually_exclusive = {
+			focus = KOM_lcoup_promise_true_freedom
+		}
+		mutually_exclusive = {
+			focus = KOM_lcoup_the_legitimate_option
+		}
+		prerequisite = {
+			focus = KOM_lcoup_appeal_for_a_united_party
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_repurpose_the_systems"
+			set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
+			country_event = {
+				id = KOM.185
+				days = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_promise_true_freedom
+		icon = GFX_IND_India_A_Socialist_Society
+		cost = 0.8
+		x = 0
+		y = 1
+		relative_position_id = KOM_lcoup_appeal_for_a_united_party
+		mutually_exclusive = {
+			focus = KOM_lcoup_repurpose_the_systems
+		}
+		mutually_exclusive = {
+			focus = KOM_lcoup_the_legitimate_option
+		}
+		prerequisite = {
+			focus = KOM_lcoup_appeal_for_a_united_party
+		}
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = KOM_Zhdanov_Dead
+					has_country_flag = KOM_Zhdanov_Retired
+					has_country_flag = KOM_Zhdanov_Arrested
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_promise_true_freedom"
+			set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
+			KOM_increase_coup_risk_low = yes
+			KOM_decrease_coup_risk_static_med = yes
+			tno_minorities_improve = yes
+			tno_penal_system_improve = yes
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_the_legitimate_option
+		icon = GFX_ENG_socialist_spanner
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_lcoup_appeal_for_a_united_party
+		mutually_exclusive = {
+			focus = KOM_lcoup_promise_true_freedom
+		}
+		mutually_exclusive = {
+			focus = KOM_lcoup_repurpose_the_systems
+		}
+		prerequisite = {
+			focus = KOM_lcoup_appeal_for_a_united_party
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_the_legitimate_option"
+			set_temp_variable = { KOMBukharinaInfluenceTemp = 3 }
+            KOM_bukharina_influence_change = yes
+			KOM_decrease_coup_risk_static_med = yes
+			country_event = {
+				id = KOM.277
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_lcoup_on_suslovs_orders
+		icon = GFX_GER_convene_the_parties
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_lcoup_repurpose_the_systems
+		mutually_exclusive = {
+			focus = KOM_lcoup_we_are_benevolent
+		}
+		prerequisite = {
+			focus = KOM_lcoup_repurpose_the_systems
+			focus = KOM_lcoup_promise_true_freedom
+			focus = KOM_lcoup_the_legitimate_option
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_on_suslovs_orders"
+			set_temp_variable = { KOMLeftPowerTemp = 1 }
+			KOM_left_power_change = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
+			KOM_decrease_coup_risk_static_low = yes
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_we_are_benevolent
+		icon = GFX_generic_socialist_progressive_values
+		cost = 0.8
+		x = 3
+		y = 1
+		relative_position_id = KOM_lcoup_repurpose_the_systems
+		mutually_exclusive = {
+			focus = KOM_lcoup_on_suslovs_orders
+		}
+		prerequisite = {
+			focus = KOM_lcoup_repurpose_the_systems
+			focus = KOM_lcoup_promise_true_freedom
+			focus = KOM_lcoup_the_legitimate_option
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_we_are_benevolent"
+			TNO_improve_political_parties_policy_effectiveness_med = yes
+			set_temp_variable = { KOMLeftPowerTemp = 3 }
+			KOM_left_power_change = yes
+			set_temp_variable = { KOMBukharinaInfluenceTemp = 3 }
+            KOM_bukharina_influence_change = yes
+			set_temp_variable = { KOMZhdanovInfluenceTemp = 3 }
+            KOM_zhdanov_influence_change = yes
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = KOM_Gumilyov_Dead
+							has_country_flag = KOM_Gumilyov_Retired
+							has_country_flag = KOM_Gumilyov_Arrested
+						}
+					}
+					random_list = {
+						40 = {
+							country_event = {
+								id = KOM.283
+								days = 1
+							}
+						}
+						60 = {
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_lcoup_paralyze_the_army
+		icon = GFX_JAP_Crippling_the_Army
+		cost = 0.8
+		x = 3
+		y = 1
+		relative_position_id = KOM_lcoup_the_peoples_revolution
+		prerequisite = {
+			focus = KOM_lcoup_the_peoples_revolution
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_paralyze_the_army"
+			KOM_decrease_coup_risk_static_med = yes
+			TNO_improve_military_supervision_policy_effectiveness_high = yes
+			TNO_worsen_conscription_policy_effectiveness_med = yes
+			TNO_worsen_army_professionalism_low = yes
+			add_manpower = -500
+			add_war_support = -0.10 
+		}
+	}
+
+	focus = {
+		id = KOM_lcoup_lock_down_syktyvkar
+		icon = GFX_CAU_Lock_down_the_streets
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_lcoup_paralyze_the_army
+		prerequisite = {
+			focus = KOM_lcoup_paralyze_the_army
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_lock_down_syktyvkar"
+			country_event = {
+				id = KOM.189
+				days = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_silence_the_unswayed
+		icon = GFX_TNO_generic_socialist_purge
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_lcoup_lock_down_syktyvkar
+		mutually_exclusive = {
+			focus = KOM_lcoup_out_of_harms_way
+		}
+		prerequisite = {
+			focus = KOM_lcoup_lock_down_syktyvkar
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_silence_the_unswayed"
+			set_temp_variable = { KOMZhdanovInfluenceTemp = 1 }
+            KOM_zhdanov_influence_change = yes
+			set_temp_variable = { KOMSuslovInfluenceTemp = 1 }
+            KOM_suslov_influence_change = yes
+			TNO_worsen_press_rights_policy_effectiveness_high = yes
+			TNO_worsen_public_meetings_policy_effectiveness_high = yes
+			country_event = {
+				id = KOM.232
+				days = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_out_of_harms_way
+		icon = GFX_TNO_generic_liberating_camps_prisoners
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_lcoup_lock_down_syktyvkar
+		mutually_exclusive = {
+			focus = KOM_lcoup_silence_the_unswayed
+		}
+		prerequisite = {
+			focus = KOM_lcoup_lock_down_syktyvkar
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_out_of_harms_way"
+			TNO_improve_security_policy_effectiveness_low = yes
+			set_temp_variable = { KOMBukharinaInfluenceTemp = 1 }
+            KOM_bukharina_influence_change = yes
+			KOM_decrease_coup_risk_low = yes
+			add_political_power = 50
+			set_temp_variable = { KOMLeftPowerTemp = 1 }
+			KOM_left_power_change = yes
+		}
+	}
+
+	focus = {
+		id = KOM_lcoup_mobilize_suslovs_men
+		icon = GFX_Generic_Red_Army
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_lcoup_paralyze_the_army
+		mutually_exclusive = {
+			focus = KOM_lcoup_peoples_political_struggle
+		}
+		prerequisite = {
+			focus = KOM_lcoup_paralyze_the_army
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_mobilize_suslovs_men"
+			set_temp_variable = { KOMSuslovInfluenceTemp = 3 }
+            KOM_suslov_influence_change = yes
+			army_experience = 15
+			add_stability = 0.05
+			TNO_improve_army_professionalism_low = yes
+			country_event = {
+				id = KOM.191
+				days = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_peoples_political_struggle
+		icon = GFX_WAL_Talk_with_socialist_militias
+		cost = 0.8
+		x = 3
+		y = 1
+		relative_position_id = KOM_lcoup_paralyze_the_army
+		mutually_exclusive = {
+			focus = KOM_lcoup_mobilize_suslovs_men
+		}
+		prerequisite = {
+			focus = KOM_lcoup_paralyze_the_army
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_peoples_political_struggle"
+			set_temp_variable = { KOMZhdanovInfluenceTemp = 1 }
+            KOM_zhdanov_influence_change = yes
+			set_temp_variable = { KOMBukharinaInfluenceTemp = 1 }
+            KOM_bukharina_influence_change = yes
+			add_war_support = 0.05
+			add_manpower = 1200
+			country_event = {
+				id = KOM.228
+				days = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_propaganda_blackout
+		icon = GFX_IRK_propaganda
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_lcoup_mobilize_suslovs_men
+		prerequisite = {
+			focus = KOM_lcoup_mobilize_suslovs_men
+			focus = KOM_lcoup_peoples_political_struggle
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_propaganda_blackout"
+			country_event = {
+				id = KOM.278
+				days = 1
+			}
+			TNO_worsen_press_rights_policy_effectiveness_med = yes
+			add_war_support = -0.05
+			add_political_power = 50
+		}
+	}
+	
+	focus = {
+		id = KOM_lcoup_komi_belongs_to_the_soviets
+		icon = GFX_KOM_communist_flag
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_lcoup_we_are_benevolent
+		prerequisite = {
+			focus = KOM_lcoup_on_suslovs_orders
+			focus = KOM_lcoup_we_are_benevolent
+		} 
+		prerequisite = {
+			focus = KOM_lcoup_silence_the_unswayed
+			focus = KOM_lcoup_out_of_harms_way
+		}
+		prerequisite = {
+			focus = KOM_lcoup_propaganda_blackout
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_lcoup_komi_belongs_to_the_soviets"
+			add_political_power = 100
+			set_temp_variable = { KOMLeftPowerTemp = 5 }
+			KOM_left_power_change = yes
+		}
+	}
+
+}
+
+focus_tree = { #Rightist Coup
+	id = KOM_rcoup
+	country = {
+		factor = 0
+		modifier = {
+			add = 5000
+			tag = KOM
+		}
+	}
+	default = no
+
+	focus = {
+		id = KOM_rcoup_the_national_revolution
+		icon = GFX_OMO_Yet_The_Darkness_Did_Not_Overcome
+		cost = 0.8
+		x = 5
+		y = 0
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_the_national_revolution"
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_shut_down_the_stagnant
+		icon = GFX_KOM_Interlocking_Fields
+		cost = 0.8
+		x = -3
+		y = 1
+		relative_position_id = KOM_rcoup_the_national_revolution
+		prerequisite = {
+			focus = KOM_rcoup_the_national_revolution
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_shut_down_the_stagnant"
+			add_manpower = -500
+			set_temp_variable = { KOMCenterPowerTemp = -5 }
+			KOM_center_power_change = yes
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_learn_from_the_reds
+		icon = GFX_KOM_The_Ordosocialist_Revolution
+		cost = 0.8
+		x = -2
+		y = 1
+		relative_position_id = KOM_rcoup_shut_down_the_stagnant
+		mutually_exclusive = {
+			focus = KOM_rcoup_secure_the_concept
+		}
+		mutually_exclusive = {
+			focus = KOM_rcoup_a_common_cause
+		}
+		prerequisite = {
+			focus = KOM_rcoup_shut_down_the_stagnant
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_learn_from_the_reds"
+			set_temp_variable = { KOMSerovInfluenceTemp = 3 }
+        KOM_serov_influence_change = yes
+			country_event = {
+				id = KOM.321
+				days = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_rcoup_a_common_cause
+		icon = GFX_ITA_Massacare_the_Reds
+		cost = 0.8
+		x = 0
+		y = 1
+		relative_position_id = KOM_rcoup_shut_down_the_stagnant
+		mutually_exclusive = {
+			focus = KOM_rcoup_secure_the_concept
+		}
+		mutually_exclusive = {
+			focus = KOM_rcoup_learn_from_the_reds
+		}
+		prerequisite = {
+			focus = KOM_rcoup_shut_down_the_stagnant
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_a_common_cause"
+			set_temp_variable = { KOMShafarevichInfluenceTemp = 3 }
+        KOM_shafarevich_influence_change = yes
+			set_temp_variable = { KOMRightPowerTemp = 3 }
+			KOM_right_power_change = yes
+			set_temp_variable = { KOMLeftPowerTemp = -5 }
+			KOM_left_power_change = yes
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_secure_the_concept
+		icon = GFX_KOM_Cleanse_Unwanted_Axioms
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_rcoup_shut_down_the_stagnant
+		mutually_exclusive = {
+			focus = KOM_rcoup_learn_from_the_reds
+		}
+		mutually_exclusive = {
+			focus = KOM_rcoup_a_common_cause
+		}
+		prerequisite = {
+			focus = KOM_rcoup_shut_down_the_stagnant
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_secure_the_concept"
+			set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
+			KOM_decrease_coup_risk_med = yes
+			every_country = {
+				limit = {
+					is_neighbor_of = KOM
+				}
+				add_war_support = 0.05
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_rcoup_sideline_Taboritsky
+		icon = GFX_KOM_The_Elder_Sibling
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_rcoup_learn_from_the_reds
+		mutually_exclusive = {
+			focus = KOM_rcoup_align_Taboritsky
+		}
+		prerequisite = {
+			focus = KOM_rcoup_learn_from_the_reds
+			focus = KOM_rcoup_a_common_cause
+			focus = KOM_rcoup_secure_the_concept
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_sideline_Taboritsky"
+			set_temp_variable = { KOMTaboritskyInfluenceTemp = -1 }
+        KOM_taboritsky_influence_change = yes
+			set_temp_variable = { KOMShafarevichInfluenceTemp = 3 }
+        KOM_shafarevich_influence_change = yes
+			country_event = {
+				id = KOM.333
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_align_Taboritsky
+		icon = GFX_KOM_The_Grand_Regency
+		cost = 0.8
+		x = 3
+		y = 1
+		relative_position_id = KOM_rcoup_learn_from_the_reds
+		mutually_exclusive = {
+			focus = KOM_rcoup_sideline_Taboritsky
+		}
+		prerequisite = {
+			focus = KOM_rcoup_learn_from_the_reds
+			focus = KOM_rcoup_a_common_cause
+			focus = KOM_rcoup_secure_the_concept
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_align_Taboritsky"
+			set_temp_variable = { KOMTaboritskyInfluenceTemp = 5 }
+        KOM_taboritsky_influence_change = yes
+			KOM_decrease_coup_risk_static_low = yes
+			set_temp_variable = { KOMRightPowerTemp = 3 }
+			KOM_right_power_change = yes
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_flood_the_streets
+		icon = GFX_OST_Unite_the_People
+		cost = 0.8
+		x = 3
+		y = 1
+		relative_position_id = KOM_rcoup_the_national_revolution
+		prerequisite = {
+			focus = KOM_rcoup_the_national_revolution
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_flood_the_streets"
+			add_manpower = -250
+			TNO_improve_public_meetings_policy_effectiveness_med = yes
+			country_event = {
+				id = KOM.324
+				days = 1
+			}
+		}
+	}
+   
+	focus = {
+		id = KOM_rcoup_the_guns_of_the_passionariyy
+		icon = GFX_Generic_Machine_Gun
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_rcoup_flood_the_streets
+		prerequisite = {
+			focus = KOM_rcoup_flood_the_streets
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_the_guns_of_the_passionariyy"
+			add_manpower = 150
+			KOM_decrease_coup_risk_static_med = yes
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 100
+				producer = KOM
+			}
+		}
+	}
+	
+	focus = {
+		id = KOM_rcoup_none_may_contest
+		icon = GFX_KOM_Strength_in_Body
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_rcoup_the_guns_of_the_passionariyy
+		mutually_exclusive = {
+			focus = KOM_rcoup_open_the_arsenals
+		}
+		prerequisite = {
+			focus = KOM_rcoup_the_guns_of_the_passionariyy
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_none_may_contest"
+			set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
+			set_temp_variable = { KOMShafarevichInfluenceTemp = 3 }
+        KOM_shafarevich_influence_change = yes
+			set_temp_variable = { KOMRightPowerTemp = 3 }
+			KOM_right_power_change = yes
+			KOM_decrease_coup_risk_low = yes
+		}
+	}
+	
+	focus = {
+		id = KOM_rcoup_open_the_arsenals
+		icon = GFX_KOM_No_Law_But_the_Regents
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_rcoup_the_guns_of_the_passionariyy
+		mutually_exclusive = {
+			focus = KOM_rcoup_none_may_contest
+		}
+		prerequisite = {
+			focus = KOM_rcoup_the_guns_of_the_passionariyy
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_open_the_arsenals"
+			set_temp_variable = { KOMTaboritskyInfluenceTemp = 3 }
+        KOM_taboritsky_influence_change = yes
+			set_temp_variable = { KOMSerovInfluenceTemp = 3 }
+        KOM_serov_influence_change = yes
+			swap_ideas = {
+				remove_idea = RUS_syktyvkar_arsenal
+				add_idea = KOM_unrestricted_arsenal
+			}
+			KOM_decrease_coup_risk_static_med = yes
+			KOM_increase_coup_risk_low = yes
+			add_war_support = -0.05
+		}
+	}
+	focus = {
+		id = KOM_rcoup_appeal_to_the_clergy
+		icon = GFX_fatherland_lies_silent
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_rcoup_flood_the_streets
+		mutually_exclusive = {
+			focus = KOM_rcoup_no_more_unwritten_rules
+		}
+		prerequisite = {
+			focus = KOM_rcoup_flood_the_streets
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_appeal_to_the_clergy"
+			set_temp_variable = { KOMShafarevichInfluenceTemp = 5 }
+        KOM_shafarevich_influence_change = yes
+			add_political_power = 50
+			KOM_decrease_coup_risk_low = yes
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_no_more_unwritten_rules
+		icon = GFX_IBR_burning_paperwork
+		cost = 0.8
+		x = 3
+		y = 1
+		relative_position_id = KOM_rcoup_flood_the_streets
+		mutually_exclusive = {
+			focus = KOM_rcoup_appeal_to_the_clergy
+		}
+		prerequisite = {
+			focus = KOM_rcoup_flood_the_streets
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_no_more_unwritten_rules"
+			TNO_worsen_military_supervision_policy_effectiveness_med = yes
+			set_temp_variable = { KOMTaboritskyInfluenceTemp = 3 }
+        KOM_taboritsky_influence_change = yes
+			set_temp_variable = { KOMSerovInfluenceTemp = 3 }
+        KOM_serov_influence_change = yes
+			set_temp_variable = { KOMGumilyovInfluenceTemp = 3 }
+        KOM_gumilyov_influence_change = yes
+			country_event = {
+				id = KOM.326
+				days = 1
+			}
+			add_war_support = 0.10
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_nobody_enters
+		icon = GFX_CAU_Lock_down_the_streets
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_rcoup_appeal_to_the_clergy
+		prerequisite = {
+			focus = KOM_rcoup_appeal_to_the_clergy
+			focus = KOM_rcoup_no_more_unwritten_rules
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_nobody_enters"
+			KOM_decrease_coup_risk_low = yes
+			add_war_support = -0.1
+		}
+	}
+
+	focus = {
+		id = KOM_rcoup_komi_belongs_to_the_true_passionarists
+		icon = GFX_KOM_rightist_flag
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_rcoup_align_Taboritsky
+		prerequisite = {
+			focus = KOM_rcoup_sideline_Taboritsky
+			focus = KOM_rcoup_align_Taboritsky
+		}
+		prerequisite = {
+			focus = KOM_rcoup_none_may_contest
+			focus = KOM_rcoup_open_the_arsenals
+		}
+		prerequisite = {
+			focus = KOM_rcoup_nobody_enters
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_rcoup_komi_belongs_to_the_true_passionarists"
+			add_political_power = 100
+			set_temp_variable = { KOMRightPowerTemp = 5 }
+			KOM_right_power_change = yes
+			country_event = {
+				id = komi_RNP.13
+				days = 1
+			}
+		}
+	}
+}
+
+
+focus_tree = {
+	id = KOM_scoup
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KOM
+		}
+	}
+	default = no
+
+	focus = {
+		id = KOM_scoup_stalinas_coup
+		icon = GFX_KOM_Stalina
+		cost = 0.8
+		x = 5
+		y = 0
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_stalinas_coup"
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_declare_the_reconstruction_government
+		icon = GFX_generic_authoritarian_constitution
+		cost = 0.8
+		x = -2
+		y = 1
+		relative_position_id = KOM_scoup_stalinas_coup
+		prerequisite = {
+			focus = KOM_scoup_stalinas_coup
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_declare_the_reconstruction_government"
+			set_temp_variable = { KOMLeftPowerTemp = 3 }
+			KOM_left_power_change = yes
+			set_temp_variable = { KOMRightPowerTemp = -3 }
+			KOM_right_power_change = yes
+			KOM_decrease_coup_risk_low = yes
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_a_single_democratic_party
+		icon = GFX_CHI_liberate_population
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_scoup_declare_the_reconstruction_government
+		prerequisite = {
+			focus = KOM_scoup_declare_the_reconstruction_government
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_a_single_democratic_party"
+			country_event = {
+				id = KOM.300
+				days = 1
+			}
+			add_ideas = tno_political_parties_controlled_opposition
+			TNO_worsen_political_parties_policy_effectiveness_high = yes
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_a_united_armed_force
+		icon = GFX_ORE_reorganizing_the_militias
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_scoup_declare_the_reconstruction_government
+		prerequisite = {
+			focus = KOM_scoup_declare_the_reconstruction_government
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_a_united_armed_force"
+			country_event = {
+				id = KOM.301
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_shut_down_the_chaos
+		icon = GFX_ORE_call_the_council_to_order
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_scoup_a_single_democratic_party
+		prerequisite = {
+			focus = KOM_scoup_a_single_democratic_party
+		}
+		prerequisite = {
+			focus = KOM_scoup_a_united_armed_force
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_shut_down_the_chaos"
+			KOM_decrease_coup_risk_static_med = yes
+			add_manpower = -150
+			add_war_support = 0.15
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
+			add_ideas = tno_press_rights_censored_press
+			TNO_worsen_press_rights_policy_effectiveness_med = yes
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_destroy_radicalism
+		icon = GFX_CAU_The_Government_Purge
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_scoup_stalinas_coup
+		prerequisite = {
+			focus = KOM_scoup_stalinas_coup
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_destroy_radicalism"
+			country_event = {
+				id = KOM.305
+				days = 1
+			}
+			add_ideas = tno_public_meetings_regulated
+			TNO_worsen_public_meetings_policy_effectiveness_med = yes
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_tear_up_the_unwritten_rules
+		icon = GFX_generic_suspend_constitution
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_scoup_destroy_radicalism
+		prerequisite = {
+			focus = KOM_scoup_destroy_radicalism
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_tear_up_the_unwritten_rules"
+			add_war_support = 0.10
+			KOM_decrease_coup_risk_low = yes
+			KOM_increase_coup_risk_static_low = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
+			add_ideas = tno_security_security_service
+			TNO_worsen_military_supervision_policy_effectiveness_med = yes
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_hunt_their_leaders
+		icon = GFX_MAD_the_snipers_plot
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_scoup_destroy_radicalism
+		prerequisite = {
+			focus = KOM_scoup_destroy_radicalism
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_hunt_their_leaders"
+			KOM_decrease_coup_risk_med = yes	
+			TNO_worsen_army_professionalism_low = yes
+			add_manpower = -50
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_send_a_message
+		icon = GFX_BRY_broadcast_message
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_scoup_tear_up_the_unwritten_rules
+		prerequisite = {
+			focus = KOM_scoup_tear_up_the_unwritten_rules
+		}
+		prerequisite = {
+			focus = KOM_scoup_hunt_their_leaders
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_send_a_message"
+			add_manpower = -750
+			add_war_support = 0.05
+			KOM_decrease_coup_risk_static_med = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
+		}
+	}
+
+	focus = {
+		id = KOM_scoup_komi_belongs_to_the_coalition
+		icon = GFX_generic_liberty
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_scoup_shut_down_the_chaos
+		prerequisite = {
+			focus = KOM_scoup_shut_down_the_chaos
+		}
+		prerequisite = {
+			focus = KOM_scoup_send_a_message
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_scoup_komi_belongs_to_the_coalition"
+			add_political_power = 100
+			set_temp_variable = { KOMCenterPowerTemp = 5 }
+			KOM_center_power_change = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 5 }
+        KOM_stalina_influence_change = yes
+		}
+	}
+}
+
+focus_tree = {
+	id = KOM_ccoup
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KOM
+		}
+	}
+	default = no
+
+	focus = {
+		id = KOM_ccoup_democrats_coup
+		icon = GFX_KOM_democratic_foundation
+		cost = 0.8
+		x = 5
+		y = 0
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_democrats_coup"
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_defend_democracy
+		icon = GFX_USA_We_fight_for_Stability
+		cost = 0.8
+		x = -2
+		y = 1
+		relative_position_id = KOM_ccoup_democrats_coup
+		prerequisite = {
+			focus = KOM_ccoup_democrats_coup
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_defend_democracy"
+			set_temp_variable = { KOMCenterPowerTemp = 5 }
+			KOM_center_power_change = yes
+			KOM_decrease_coup_risk_static_med = yes
+			add_war_support = 0.10
+			add_manpower = 750
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_expel_the_radicals
+		icon = GFX_ITA_Massacare_the_Reds
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_ccoup_defend_democracy
+		prerequisite = {
+			focus = KOM_ccoup_defend_democracy
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_expel_the_radicals"
+			TNO_worsen_political_parties_policy_effectiveness_med = yes
+			country_event = {
+				id = KOM.293
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_every_last_resource
+		icon = GFX_URL_we_can_use_more
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_ccoup_defend_democracy
+		prerequisite = {
+			focus = KOM_ccoup_defend_democracy
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_every_last_resource"
+			add_manpower = 150
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 250
+				producer = KOM
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_emergency_rule
+		icon = GFX_JAP_Red_Alert
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_ccoup_expel_the_radicals
+		prerequisite = {
+			focus = KOM_ccoup_expel_the_radicals
+		}
+		prerequisite = {
+			focus = KOM_ccoup_every_last_resource
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_emergency_rule"
+			country_event = {
+				id = KOM.294
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_restore_order
+		icon = GFX_KOM_government_check
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_ccoup_democrats_coup
+		prerequisite = {
+			focus = KOM_ccoup_democrats_coup
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_restore_order"
+			country_event = {
+				id = KOM.295
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_our_loyal_sympathizers
+		icon = GFX_Generic_Soldiers_Red
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_ccoup_restore_order
+		prerequisite = {
+			focus = KOM_ccoup_restore_order
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_our_loyal_sympathizers"
+			country_event = {
+				id = KOM.296
+				days = 1
+			}
+			add_war_support = 0.10
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_paralyze_the_paramilitaries
+		icon = GFX_KOM_gun_control
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_ccoup_restore_order
+		prerequisite = {
+			focus = KOM_ccoup_restore_order
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_paralyze_the_paramilitaries"
+			TNO_improve_security_policy_effectiveness_med = yes
+			KOM_decrease_coup_risk_low = yes
+			set_temp_variable = { KOMCenterPowerTemp = 5 }
+			KOM_center_power_change = yes
+			set_temp_variable = { KOMStalinaInfluenceTemp = 3 }
+        KOM_stalina_influence_change = yes
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_restore_the_quiet
+		icon = GFX_fatherland_lies_silent
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_ccoup_our_loyal_sympathizers
+		prerequisite = {
+			focus = KOM_ccoup_our_loyal_sympathizers
+		}
+		prerequisite = {
+			focus = KOM_ccoup_paralyze_the_paramilitaries
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_restore_the_quiet"
+			country_event = {
+				id = KOM.298
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_ccoup_komi_belongs_to_the_citizens
+		icon = GFX_generic_liberty
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_ccoup_emergency_rule
+		prerequisite = {
+			focus = KOM_ccoup_emergency_rule
+		}
+		prerequisite = {
+			focus = KOM_ccoup_restore_the_quiet
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_ccoup_komi_belongs_to_the_citizens"
+			add_political_power = 100
+			set_temp_variable = { KOMCenterPowerTemp = 5 }
+			KOM_center_power_change = yes
+			if = {
+				limit = {
+					has_government = liberal_democracy
+				}
+				set_temp_variable = { KOMKosyginInfluenceTemp = 5 }
+           KOM_kosygin_influence_change = yes
+			}
+			if = {
+				limit = {
+					has_government = social_democracy
+				}
+				set_temp_variable = { KOMVoznesenskyInfluenceTemp = 5 }
+           KOM_voznesensky_influence_change = yes
+			}
+		}
+	}
+}
+
+focus_tree = {
+	id = KOM_unstable_victory
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KOM
+		}
+	}
+	default = no
+
+	focus = {
+		id = KOM_unstable_victory_a_victory_for_democracy
+		icon = GFX_generic_political_chaos
+		cost = 0.8
+		x = 5
+		y = 0
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_a_victory_for_democracy"
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_secure_the_republic
+		icon = GFX_KOM_government_check
+		cost = 0.8
+		x = -2
+		y = 1
+		relative_position_id = KOM_unstable_victory_a_victory_for_democracy
+		prerequisite = {
+			focus = KOM_unstable_victory_a_victory_for_democracy
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_secure_the_republic"
+			country_event = {
+				id = KOM.233
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_a_standing_coalition
+		icon = GFX_ORE_accept_their_aid
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_unstable_victory_secure_the_republic
+		prerequisite = {
+			focus = KOM_unstable_victory_secure_the_republic
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_a_standing_coalition"
+			add_political_power = 50
+			set_temp_variable = { KOMCenterPowerTemp = 3 }
+			KOM_center_power_change = yes
+			KOM_decrease_coup_risk_static_low = yes
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_the_defense_plan
+		icon = GFX_ORE_establish_the_planning_commission
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_unstable_victory_secure_the_republic
+		prerequisite = {
+			focus = KOM_unstable_victory_secure_the_republic
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_the_defense_plan"
+			TNO_improve_security_policy_effectiveness_med = yes
+			country_event = {
+				id = KOM.238
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_stalinas_speech
+		icon = GFX_KOM_Stalina
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_unstable_victory_a_standing_coalition
+		prerequisite = {
+			focus = KOM_unstable_victory_a_standing_coalition
+		}
+		prerequisite = {
+			focus = KOM_unstable_victory_the_defense_plan
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_stalinas_speech"
+			country_event = {
+				id = KOM.234
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_direct_action
+		icon = GFX_CAU_Militarize_The_Outskirts
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_unstable_victory_a_victory_for_democracy
+		prerequisite = {
+			focus = KOM_unstable_victory_a_victory_for_democracy
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_direct_action"
+			add_war_support = 0.05
+			country_event = {
+				id = KOM.239
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_acquire_the_information
+		icon = GFX_Generic_Espionage
+		cost = 0.8
+		x = -1
+		y = 1
+		relative_position_id = KOM_unstable_victory_direct_action
+		prerequisite = {
+			focus = KOM_unstable_victory_direct_action
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_acquire_the_information"
+			country_event = {
+				id = KOM.244
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_surround_the_neighborhoods
+		icon = GFX_CAU_Lock_down_the_streets
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_unstable_victory_direct_action
+		prerequisite = {
+			focus = KOM_unstable_victory_direct_action
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_surround_the_neighborhoods"
+			add_political_power = -50
+			397 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = 99
+				}
+			}
+			868 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = 3177
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_nip_it_in_the_bud
+		icon = GFX_Generic_Soldiers_Red
+		cost = 0.8
+		x = 1
+		y = 1
+		relative_position_id = KOM_unstable_victory_acquire_the_information
+		prerequisite = {
+			focus = KOM_unstable_victory_acquire_the_information
+		}
+		prerequisite = {
+			focus = KOM_unstable_victory_surround_the_neighborhoods
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_nip_it_in_the_bud"
+			country_event = {
+				id = KOM.248
+				days = 1
+			}
+		}
+	}
+
+	focus = {
+		id = KOM_unstable_victory_komi_is_strong_and_stable
+		icon = GFX_generic_conservative_constitution
+		cost = 0.8
+		x = 2
+		y = 1
+		relative_position_id = KOM_unstable_victory_stalinas_speech
+		prerequisite = {
+			focus = KOM_unstable_victory_stalinas_speech
+		}
+		prerequisite = {
+			focus = KOM_unstable_victory_nip_it_in_the_bud
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KOM_unstable_victory_komi_is_strong_and_stable"
+			set_temp_variable = { KOMCenterPowerTemp = 5 }
+			KOM_center_power_change = yes
+			add_political_power = 100
+		}
+	}
+}
