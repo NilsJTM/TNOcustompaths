@@ -772,10 +772,32 @@ focus_tree = { #Rightist Coup
 			add_political_power = 100
 			set_temp_variable = { KOMRightPowerTemp = 5 }
 			KOM_right_power_change = yes
-			country_event = {
-				id = komi_RNP.13
-				days = 1
-			}
+			if = { ### Band aid fix for right wing komi path not loading the expansion tree when picked
+                limit = {
+                    OR = {
+                        has_game_rule = {
+                            rule = KOM_leader_route
+                            option = KOM_LEADER_ROUTE_GUMILYOV
+                        }
+                        has_game_rule = {
+                            rule = KOM_leader_route
+                            option = KOM_LEADER_ROUTE_SHAFEREVICH
+                        }
+                        has_game_rule = {
+                            rule = KOM_leader_route
+                            option = KOM_LEADER_ROUTE_SEROV
+                        }
+                        has_game_rule = {
+                            rule = KOM_leader_route
+                            option = KOM_LEADER_ROUTE_TABORITSKY
+                        }
+                    }
+                }
+                country_event = { 
+                    id = komi_RNP.13
+                    days = 1
+                }
+            }
 		}
 	}
 }
