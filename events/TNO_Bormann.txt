@@ -433,7 +433,12 @@ country_event = {
 
 	option = { # We must adapt our strategies to this new age of warfare.
 		name = bormann.29.a
-		ai_chance = { factor = 1 }
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_CONSERVATOR }	
+			}
+		}	
 		custom_effect_tooltip = GER_BOR_favour_speidel
 		country_event = {
 			id = bormann.30
@@ -449,7 +454,12 @@ country_event = {
 	}
 	option = { # Our strategies won us the war, there's no need to change them.
 		name = bormann.29.b
-		ai_chance = { factor = 1 }
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_REFORMIST }	
+			}
+		}	
 		custom_effect_tooltip = GER_BOR_favour_schorner
 		country_event = {
 			id = bormann.30
@@ -473,7 +483,12 @@ country_event = {
 
 	option = { # A smaller and professional army is ideal.
 		name = bormann.30.a
-		ai_chance = { factor = 1 }
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_CONSERVATOR }	
+			}
+		}	
 		custom_effect_tooltip = GER_BOR_favour_speidel
 		country_event = {
 			id = bormann.31
@@ -485,7 +500,12 @@ country_event = {
 	}
 	option = { # All brave sons of Germany must fight.
 		name = bormann.30.b
-		ai_chance = { factor = 1 }
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_REFORMIST }	
+			}
+		}	
 		custom_effect_tooltip = GER_BOR_favour_schorner
 		country_event = {
 			id = bormann.31
@@ -510,7 +530,12 @@ country_event = {
 
 	option = { # Military interference in politics will lead to no good.
 		name = bormann.31.a
-		ai_chance = { factor = 1 }
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_CONSERVATOR }	
+			}
+		}		
 		custom_effect_tooltip = GER_BOR_favour_speidel
 		country_event = {
 			id = bormann.32
@@ -521,7 +546,12 @@ country_event = {
 	}
 	option = { # The Wehrmacht should have a political role.
 		name = bormann.31.b
-		ai_chance = { factor = 1 }
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_REFORMIST }	
+			}
+		}	
 		custom_effect_tooltip = GER_BOR_favour_schorner
 		country_event = {
 			id = bormann.32
@@ -802,7 +832,12 @@ country_event = {
 	#Pragmatic solution
 	option = {
 		name = bormann.1500.a
-		ai_chance = { factor = 80 }
+		ai_chance = { factor = 80 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_POL_NEGOTIATION option =  GER_BOR_POL_NEGOTIATION_WAR }
+			}
+		}	
 		
 		BOR_SIG_AL_7_3_0 = yes
 		BOR_SIG_AL_8_3_0 = yes
@@ -824,7 +859,12 @@ country_event = {
 	#Hardline solution
 	option = {
 		name = bormann.1500.b
-		ai_chance = { factor = 20 }
+		ai_chance = { factor = 20 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_POL_NEGOTIATION option =  GER_BOR_POL_NEGOTIATION_RP }
+			}
+		}	
 		
 		BOR_SIG_SL_7_3_0 = yes
 		BOR_SIG_SL_8_3_0 = yes
@@ -882,7 +922,12 @@ country_event = {
 	
 	option = {
 		name = bormann.1502.b
-		ai_chance = { factor = 20 }
+		ai_chance = { factor = 20 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_POL_NEGOTIATION option =  GER_BOR_POL_NEGOTIATION_RP }
+			}
+		}	
 		hidden_effect = { country_event = { id = bormann.1503 days = 3 } }
 	}
 }
@@ -906,7 +951,12 @@ country_event = {
 	
 	option = {
 		name = bormann.1503.b
-		ai_chance = { factor = 20 }
+		ai_chance = { factor = 20 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_POL_NEGOTIATION option =  GER_BOR_POL_NEGOTIATION_RP }
+			}
+		}	
 		hidden_effect = { country_event = { id = bormann.1504 days = 3 } }
 	}
 }
@@ -923,14 +973,19 @@ country_event = {
 
 	option = {
 		name = bormann.1504.a
-		ai_chance = { factor = 80 }
+		ai_chance = { factor = 80 }	
 		add_to_variable = { pol_agree = 1 } 
 		hidden_effect = { country_event = { id = bormann.1505 days = 3 } }
 	}
 	
 	option = {
 		name = bormann.1504.b
-		ai_chance = { factor = 20 }
+		ai_chance = { factor = 20 
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_POL_NEGOTIATION option =  GER_BOR_POL_NEGOTIATION_RP }
+			}
+		}
 		hidden_effect = { country_event = { id = bormann.1505 days = 3 } }
 	}
 }
@@ -1230,6 +1285,17 @@ country_event = {
     option = {
         trigger = { has_country_flag = POL_denied_submission }
 		name = bormann.154.a_declined
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_POL_NEGOTIATION option =  GER_BOR_POL_NEGOTIATION_GG }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_POL_NEGOTIATION option =  GER_BOR_POL_NEGOTIATION_RP }
+			}
+		}		
 		BOR_SIG_SP_0_10 = yes
 		hidden_effect = {
 			every_country = { news_event = bormann.155 }
@@ -1516,6 +1582,16 @@ country_event = {
 	
 	option = {
 		name = bormann.164.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_GGN_LEADER_ROOT option =  GER_BOR_GGN_LEADER_ROOT_DOLLINGER }
+		    }
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_GGN_LEADER_ROOT option =  GER_BOR_GGN_LEADER_ROOT_KOCH }
+		    }
+		}
 		if = {
 			limit = { has_global_flag = POL_victory }
 			BOR_SIG_AL_7_3_2 = yes
@@ -1536,6 +1612,16 @@ country_event = {
 	}
 	option = {
 		name = bormann.164.b
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_GGN_LEADER_ROOT option =  GER_BOR_GGN_LEADER_ROOT_DOLLINGER }
+		    }
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_GGN_LEADER_ROOT option =  GER_BOR_GGN_LEADER_ROOT_WAGNER }
+		    }
+		}
 		if = {
 			limit = { has_global_flag = POL_victory }
 			BOR_SIG_AP_7_5 = yes
@@ -1552,6 +1638,16 @@ country_event = {
 	}
 	option = {
 		name = bormann.164.c
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_GGN_LEADER_ROOT option =  GER_BOR_GGN_LEADER_ROOT_WAGNER }
+		    }
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_GGN_LEADER_ROOT option =  GER_BOR_GGN_LEADER_ROOT_KOCH }
+		    }
+		}
 		if = {
 			limit = { has_global_flag = POL_victory }
 			BOR_SIG_AL_7_3_0 = yes
@@ -6653,6 +6749,26 @@ country_event = { #Bormann slams his fist on the table and reminds Drechsler his
 	option = {
 		name = bormann.50021.a
 		set_variable = { BOR_drechsler_negotiation_chance = random }
+		if = {
+		    limit = {
+		        has_game_rule = {
+			        rule = OST_BOR_NEGOTIATION_ROOT
+			        option = OST_BOR_NEGOTIATION_ROOT_PEACE
+				  
+				}  
+			}   
+		    set_variable = { BOR_drechsler_negotiation_chance = 100 }
+		} 
+		if = {
+		    limit = {
+		        has_game_rule = {
+			        rule = OST_BOR_NEGOTIATION_ROOT
+			        option = OST_BOR_NEGOTIATION_ROOT_WAR
+				  
+				}  
+			}   
+		    set_variable = { BOR_drechsler_negotiation_chance = 0 }
+		}  
 		IF = {
 			limit = { 
 				check_variable = {
@@ -6823,7 +6939,12 @@ country_event = { # Hanneken sends his request, wants to set up an RK
 
 	option = { # Accept
 		name = bormann.1001.a
-		ai_chance = { factor = 65 }
+		ai_chance = { factor = 65 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = DEN_BOR_PATH option =  DEN_BOR_PATH_HANNEKEN_COLLAB }
+			}
+		}		
 		add_political_power = -50
 		add_stability = -0.02
 		BOR_SIG_AP_4_5 = yes
@@ -6831,7 +6952,12 @@ country_event = { # Hanneken sends his request, wants to set up an RK
 	}
 	option = { # Deny
 		name = bormann.1001.b
-		ai_chance = { factor = 35 }
+		ai_chance = { factor = 35 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = DEN_BOR_PATH option =  DEN_BOR_PATH_HANNEKEN_RK }
+			}
+		}	
 		add_stability = 0.01
 		BOR_SIG_SP_4_5 = yes
 		country_event = { id = bormann.1003 days = 6 }
@@ -6973,7 +7099,12 @@ country_event = { # Martinsen sends his request to join the Pakt as an independe
 
 	option = { # Sure
 		name = bormann.1007.a
-		ai_chance = { factor = 35 }
+		ai_chance = { factor = 35 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = DEN_BOR_PATH option =  DEN_BOR_PATH_NATSOC_NO }
+			}
+		}
 		BOR_SIG_SP_0_3 = yes
 		BOR_SIG_SL_0_2_2 = yes
 		BOR_SIG_SL_0_2_0 = yes
@@ -6981,7 +7112,12 @@ country_event = { # Martinsen sends his request to join the Pakt as an independe
 	}
 	option = { # Nope
 		name = bormann.1007.b
-		ai_chance = { factor = 65 }
+		ai_chance = { factor = 65 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = DEN_BOR_PATH option =  DEN_BOR_PATH_NATSOC_YES }
+			}
+		}
 		BOR_SIG_AP_0_3 = yes
 		custom_effect_tooltip = BOR_DEN_war_imminent
 		country_event = { id = bormann.1008 days = 7 }
@@ -7018,13 +7154,23 @@ country_event = { # Denmark is secured, what do do now?
 
 	option = { # Set up an RK
 		name = bormann.1009.a
-		ai_chance = { factor = 65 }
+		ai_chance = { factor = 65 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = DEN_FATE_PATH option =  DEN_FATE_PATH_COLLAB }
+			}
+		}	
 		country_event = { id = bormann.1010 days = 10 }
 		
 	}
 	option = { # Establish a collab government
 		name = bormann.1009.b
-		ai_chance = { factor = 35 }
+		ai_chance = { factor = 35 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = DEN_FATE_PATH option =  DEN_FATE_PATH_RK }
+			}
+		}	
 		country_event = { id = bormann.1011 days = 6 }
 	}
 }
@@ -7179,6 +7325,10 @@ country_event = { #Bormann meets with Lunde, who asks him to let Norway remain i
 				factor = 0.7
 				has_country_flag = BOR_reformists_dismantled
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_PUPPET }
+			}
 		}
 	}
 	option = { #lol no
@@ -7193,6 +7343,10 @@ country_event = { #Bormann meets with Lunde, who asks him to let Norway remain i
 			modifier = {
 				factor = 0.8
 				has_country_flag = BOR_militarists_dismantled
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_INDEPENDENT }
 			}
 		}
 	}
@@ -7278,6 +7432,22 @@ country_event = { #The Coup
 				factor = 0
 				has_country_flag = NORCoup_failure
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option = NOR_BOR_PATH_FAIL_COUP }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option = NOR_BOR_PATH_FAIL_COUP_OK }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option = NOR_BOR_PATH_MILORG_NO_COUP_FAIL }
+			}
+            modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option = NOR_BOR_PATH_MILORG_NO_COUP_OK }
+			} 			
 		}
 	}
 	option = { #Coup fails
@@ -7309,6 +7479,14 @@ country_event = { #The Coup
 			modifier = {
 				factor = 0
 				has_country_flag = NORCoup_successful
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_YES_COUP }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_COUP_SUCCESS }
 			}
 		}
 	}
@@ -7432,8 +7610,21 @@ country_event = { # Germany wants to negotiate a Norwegian return to the Einheit
 				days = 1
 			}
 		}
-		ai_chance = { factor = 100 }
-	}
+		ai_chance = { factor = 100 
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_COUP_SUCCESS }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_NO_COUP_OK }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_NO_COUP_FAIL }
+			}
+		}
+	}	
 	option = { # Fucking Germany GET OUT
 		name = bormann.1062.b
 		GER = { 
@@ -7442,7 +7633,12 @@ country_event = { # Germany wants to negotiate a Norwegian return to the Einheit
 				days = 1
 			}
 		}
-		ai_chance = { factor = 0 }
+		ai_chance = { factor = 0 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_YES }
+			}
+		}	
 	}
 }
 
@@ -7500,7 +7696,16 @@ country_event = { # Choosing the city where the conference will be held
 		BOR_SIG_AL_4_1_1 = yes
 		BOR_SIG_AL_5_1_1 = yes
 		set_country_flag = BOR_NOR_choose_kopenhagen
-		ai_chance = { factor = 45 }
+		ai_chance = { factor = 45 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_NEGOTIATION_FAIL }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_PARTICAL_MEMBER }
+			}
+		}	
 	}
 	option = { # Oslo - gains goodwil with the Norwegians, might make Bormann seem weak, helps with the coup attempt if things fail
 		name = bormann.1065.b
@@ -7509,7 +7714,16 @@ country_event = { # Choosing the city where the conference will be held
 		BOR_SIG_SL_4_1_1 = yes
 		BOR_SIG_SL_5_1_1 = yes
 		set_country_flag = BOR_NOR_choose_oslo
-		ai_chance = { factor = 20 }
+		ai_chance = { factor = 20 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_YES }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_PARTICAL_MEMBER }
+			}
+		}	
 	}
 	option = { # Göteborg - Swedes act as mediators, gains goodwil with them and the Norwegians (though less than if Oslo was picked), helps when dealing with the Swedes later. Best compromise option
 		name = bormann.1065.c
@@ -7517,7 +7731,17 @@ country_event = { # Choosing the city where the conference will be held
 		BOR_SIG_AP_2_3 = yes
 		BOR_SIG_AL_2_1_1 = yes
 		set_country_flag = BOR_NOR_choose_goteborg
-		ai_chance = { factor = 35 }
+		ai_chance = { factor = 35 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_YES }
+			}	
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_NEGOTIATION_FAIL }
+			
+			}
+		}	
 	}
 }
 
@@ -7725,6 +7949,10 @@ country_event = { # Germany demands garrison rights
 				factor = 0.8
 				has_country_flag = BOR_NOR_choose_oslo
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_YES }
+			}
 		}
 		add_political_power = 25
 		GER = { country_event = { id = bormann.1071 days = 1 } }
@@ -7778,7 +8006,7 @@ country_event = { # Norway demands fairer terms (garrison)
 	}
 	option = { # Try a loophole
 		name = bormann.1071.b
-		ai_chance = { factor = 70 }
+		ai_chance = { factor = 70 }	
 		add_political_power = -20
 		NOR = { country_event = { id = bormann.1073 days = 1 } }
 	}
@@ -7809,7 +8037,7 @@ country_event = { # Germany refuses fairer terms (garrison)
 	}
 	option = { # Refuse
 		name = bormann.1072.b
-		ai_chance = { factor = 75 }
+		ai_chance = { factor = 75 }	
 		add_political_power = 50
 		GER_BOR_NOR_fail_negotiations = yes
 	}
@@ -7886,7 +8114,12 @@ country_event = { # Germany demands that Norway join an Pakt economic program
 	option = { # Demand less harsh terms
 		name = bormann.1075.b
 		trigger = { tag = NOR }
-		ai_chance = { factor = 60 }
+		ai_chance = { factor = 60 
+		    modifier = {
+			    factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_YES }
+			}
+		}	
 		add_political_power = 30
 		GER = { country_event = { id = bormann.1077 days = 1 } }
 	}
@@ -7993,7 +8226,7 @@ country_event = { # Germany presents fairer terms (economic program)
 	}
 	option = { # Refuse
 		name = bormann.1079.b
-		ai_chance = { factor = 30 }
+		ai_chance = { factor = 30 }	
 		add_political_power = -20
 		GER_BOR_NOR_fail_negotiations = yes
 	}
@@ -8046,7 +8279,12 @@ country_event = { # Germany demands that Norway rejoin the Pakt in full
 	option = { # Demand less harsh terms
 		name = bormann.1081.b
 		trigger = { tag = NOR }
-		ai_chance = { factor = 90 }
+		ai_chance = { factor = 90
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option =  NOR_BOR_PATH_MILORG_YES }
+			}
+		}	
 		add_political_power = 25
 		GER = { country_event = { id = bormann.1083 days = 1 } }
 	}
@@ -8159,7 +8397,7 @@ country_event = { # Germany presents fairer terms (pakt membership)
 	}
 	option = { # Refuse
 		name = bormann.1085.b
-		ai_chance = { factor = 30 }
+		ai_chance = { factor = 30 }	
 		add_political_power = -20
 		GER_BOR_NOR_fail_negotiations = yes
 	}
@@ -8195,12 +8433,22 @@ country_event = { # Germany wants us back in the pakt
 
 	option = { # Fine
 		name = bormann.1087.a
-		ai_chance = { factor = 100 }
+		ai_chance = { factor = 100 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option = NOR_BOR_PATH_MODERATE_NO }
+			}
+		}	
 		hidden_effect = { GER = { country_event = { id = bormann.1088 days = 1 } } }
 	}
 	option = { # No
 		name = bormann.1087.b
-		ai_chance = { factor = 0 }
+		ai_chance = { factor = 0 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = NOR_BOR_PATH option = NOR_BOR_PATH_MODERATE_YES }
+			}
+		}	
 		hidden_effect = { GER = { country_event = { id = bormann.1089 days = 1 } } }
 	}
 }
@@ -8366,6 +8614,10 @@ country_event = { # Bormann choice to accept native bureaucrats or not
 				factor = 0
 				has_country_flag = BOR_schorner_okw
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_CONSERVATOR }
+			}
 		}
 	}
 	option = { # Nah
@@ -8373,7 +8625,12 @@ country_event = { # Bormann choice to accept native bureaucrats or not
 		BOR_SIG_SL_2_2_0 = yes
 		BOR_SIG_SP_2_3 = yes
 		UKR = { TNO_improve_political_parties_policy_effectiveness_low = yes }
-		ai_chance = { factor = 60 }
+		ai_chance = { factor = 60 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_REFORMIST }
+			}
+		}	
 	}
 }
 
@@ -8390,12 +8647,22 @@ country_event = { # Bormann offers an Ukranian collab state
 	option = { # Sure
 		name = bormann.1104.a
 		GER = { country_event = { id = bormann.1105 days = 1 } }
-		ai_chance = { factor = 70 }
+		ai_chance = { factor = 70 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = UKR_BOR_NEGOTIATION_ROOT option =  UKR_BOR_NEGOTIATION_ROOT_FREE_UKRAINE_WAR }
+			}
+		}	
 	}
 	option = { # Nah
 		name = bormann.1104.b
 		GER = { country_event = { id = bormann.1106 days = 1 } }
-		ai_chance = { factor = 30 }
+		ai_chance = { factor = 30 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = UKR_BOR_NEGOTIATION_ROOT option =  UKR_BOR_NEGOTIATION_ROOT_FREE_UKRAINE_PEACE }
+			}
+		}	
 	}
 }
 
@@ -8485,6 +8752,12 @@ country_event = { # Koch - let him stay or not
 
 	option = { # Let him stay (wonderful idea)
 		name = bormann.1107.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_UKR_LEADER option =  GER_BOR_UKR_LEADER_THEODOR }
+			}
+		}	
 		BOR_SIG_AL_6_4_2 = yes
 		BOR_SIG_SL_6_2_0 = yes
 		UKR = { 
@@ -8494,6 +8767,12 @@ country_event = { # Koch - let him stay or not
 	}
 	option = { # Replace with Oberländer (another wonderful idea)
 		name = bormann.1107.b
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_UKR_LEADER option =  GER_BOR_UKR_LEADER_STAY }
+			}
+		}	
 		add_political_power = -25
 		GER_theodor_oberlander = {
 			set_nationality = UKR
@@ -8520,6 +8799,12 @@ country_event = { # Leibbrandt - Leibbrandt sends Bormann a letter and tells him
 
 	option = { # Bormann recognizes that shit really is fucked in Ukraine and lets Leibbrandt stay and do reforms
 		name = bormann.1108.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_UKR_LEADER option =  GER_BOR_UKR_LEADER_THEODOR }
+			}
+		}	
 		UKR = {
 			add_stability = 0.05
 			add_popularity = {
@@ -8534,6 +8819,12 @@ country_event = { # Leibbrandt - Leibbrandt sends Bormann a letter and tells him
 	}
 	option = { # Bormann brushes him off and puts Oberländer in charge
 		name = bormann.1108.b
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_UKR_LEADER option =  GER_BOR_UKR_LEADER_STAY }
+			}
+		}	
 		add_political_power = -25
 		BOR_SIG_AP_0_5 = yes
 		GER_theodor_oberlander = {
@@ -8562,8 +8853,14 @@ country_event = { # Heerema - Heerema took over in a provisional basis after Koc
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	option = { # Bormann thinks that's fine and lets him stay
+	option = { # Bormann thinks that's fine and lets him stay	
 		name = bormann.1109.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_UKR_LEADER option =  GER_BOR_UKR_LEADER_THEODOR }
+			}
+		}	
 		add_political_power = 25
 		BOR_SIG_AP_7_5 = yes
 		BOR_SIG_AP_8_5 = yes
@@ -8571,6 +8868,12 @@ country_event = { # Heerema - Heerema took over in a provisional basis after Koc
 	}
 	option = { # Bormann doesn't trust him and replaces him with Oberländer
 		name = bormann.1109.b
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_UKR_LEADER option =  GER_BOR_UKR_LEADER_STAY }
+			}
+		}
 		add_political_power = -25
 		BOR_SIG_AP_0_5 = yes
 		GER_theodor_oberlander = {
@@ -8647,6 +8950,10 @@ country_event = { # Reconstruction is done, what to do with Moskowien now?
 				factor = 0
 				has_country_flag = BOR_schorner_okw
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_CONSERVATOR }
+			}
 		}
 	}
 	option = { # Keep the military administration
@@ -8662,6 +8969,10 @@ country_event = { # Reconstruction is done, what to do with Moskowien now?
 			modifier = {
 				factor = 0
 				has_country_flag = BOR_speidel_okw
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_REFORMIST }
 			}
 		}
 	}
@@ -9994,14 +10305,28 @@ country_event = { # GER - A Lavish Gathering - "So, uh, Nazi guy. Between you an
 			ITA = { country_event = { id = bormann.3911 } }
 			GER = { country_event = { id = bormann.3912 } }
 		}
-		ai_chance = { factor = 2 }
+		ai_chance = { factor = 2 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ITA_DIPLOMACY option =  GER_BOR_ITA_DIPLOMACY_FAILURE }
+			}
+		}	
 	}
 	option = { #Lazy Spaniards fucked the dam
 		name = bormann.3904.b
 		hidden_effect = {
 			ITA = { country_event = { id = bormann.3905 } }
 		}
-		ai_chance = { factor = 6 }
+		ai_chance = { factor = 6 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ITA_DIPLOMACY option =  GER_BOR_ITA_DIPLOMACY_FAILURE }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ITA_DIPLOMACY option =  GER_BOR_ITA_DIPLOMACY_SUCCESS }
+			}
+		}	
 	}
 	option = {
 		name = bormann.3904.c #Goddam jews and slavs did it, somehow
@@ -10009,7 +10334,12 @@ country_event = { # GER - A Lavish Gathering - "So, uh, Nazi guy. Between you an
 		hidden_effect = {
 			ITA = { country_event = { id = bormann.3908 } }
 		}
-		ai_chance = { factor = 2 }
+		ai_chance = { factor = 2 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ITA_DIPLOMACY option =  GER_BOR_ITA_DIPLOMACY_SUCCESS }
+			}
+		}	
 	}
 }
 
@@ -10375,6 +10705,10 @@ country_event = { # Bormann's presented with the initial choice in regards to It
 						has_government = fascism
 					}
 				}
+			}	
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_REFORMIST }	
 			}
 		}
 	}
@@ -10396,6 +10730,10 @@ country_event = { # Bormann's presented with the initial choice in regards to It
 			modifier = {
 				factor = 0
 				has_country_flag = BOR_schorner_okw
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_CONSERVATOR }
 			}
 		}
 	}
@@ -10427,6 +10765,10 @@ country_event = { # Bormann's presented with the initial choice in regards to Ja
 				factor = 0
 				has_country_flag = BOR_schorner_okw
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_CONSERVATOR }	
+			}
 		}
 	}
 	option = { # Confrontation
@@ -10439,6 +10781,11 @@ country_event = { # Bormann's presented with the initial choice in regards to Ja
 				factor = 0.5
 				has_country_flag = BOR_speidel_okw
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_ROOT option =  GER_BOR_ROOT_REFORMIST }	
+			}
+			
 		}
 	}
 }
@@ -11106,6 +11453,12 @@ country_event = { # Yanks ask for red telephone - how to respond
 
 	option = { # sure
 		name = bormann.1903.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_USA_ROOT option =  GER_BOR_USA_ROOT_FAILURE }	
+			}
+		}		
 		USA = {
 			country_event = bormann.1904
 		}
@@ -11114,11 +11467,27 @@ country_event = { # Yanks ask for red telephone - how to respond
 	}
 	option = { # well we need to make sure everything works first...
 		name = bormann.1903.b
+        ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_USA_ROOT option =  GER_BOR_USA_ROOT_FAILURE }	
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_USA_ROOT option =  GER_BOR_USA_ROOT_SUCCESS }	
+			}
+		}	
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Stalling
 		USA = { country_event = bormann.1905 }
 	}
 	option = { # nah (bad idea)
 		name = bormann.1903.c
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_BOR_USA_ROOT option =  GER_BOR_USA_ROOT_SUCCESS }	
+			}
+		}	
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Stalling
 		add_political_power = 10
 		USA = { country_event = bormann.1906 }
@@ -11166,7 +11535,7 @@ country_event = { # Germans delay
 			country_event = bormann.1907
 		}
 	}
-	option = { # fine (grumble grumble grumble)
+	option = { # fine (grumble grumble grumble) 
 		name = bormann.1905.b
 		add_political_power = -10
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Succeeding

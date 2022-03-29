@@ -2606,6 +2606,15 @@ country_event = {
 
 	option = {
 		name = speer.516.a
+		ai_chance = { factor = 0.7 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_CONSERVATIVE
+				}
+			}
+		}
 		increase_reformist_leaning_medium = yes
 		set_country_flag = ITA_Negotiations_HighPrice
 		custom_effect_tooltip = TNO_full_reparations_tt
@@ -2614,6 +2623,22 @@ country_event = {
 
 	option = {
 		name = speer.516.b
+		ai_chance = { factor = 0.7 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_CONSERVATIVE
+				}
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_REFORMER
+				}
+			}
+		}
 		decrease_regime_stab_small = yes
 		set_country_flag = ITA_Negotiations_MediumPrice
 		custom_effect_tooltip = TNO_medium_reparations_tt
@@ -2621,6 +2646,15 @@ country_event = {
 
 	option = {
 		name = speer.516.c
+		ai_chance = { factor = 0.7 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_REFORMER
+				}
+			}
+		}
 		increase_conservative_leaning_medium = yes
 		add_regime_stab_small = yes
 		set_country_flag = ITA_Negotiations_LowPrice
@@ -3614,7 +3648,15 @@ country_event = { #Status of the Home Army: Their status vis a vis the new admin
 	}
 	option = { #Push for the trial of Home Army members
 		name = speerpoland.13.b
-		ai_chance = { factor = 30 }
+		ai_chance = { factor = 30 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_REFORMER
+				}
+			}
+		}	
 		decrease_poland_approval_big = yes
 		add_regime_stab_small = yes
 		add_political_power = -25
@@ -3947,13 +3989,23 @@ country_event = { #Fate of Hans Frank
 
 	option = { #Execution
 		name = speerpoland.20.a
-		ai_chance = { factor = 65 }
+		ai_chance = { factor = 65 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_REFORMER }
+		    }
+		}
 		increase_conservative_leaning_small = yes
 		decrease_regime_stab_small = yes
 	}
 	option = { #Prison
 		name = speerpoland.20.b
-		ai_chance = { factor = 35 }
+		ai_chance = { factor = 35 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_CONSERVATIVE }
+		    }
+		}
 		increase_reformist_leaning_small = yes
 		add_regime_stab_small = yes
 	}
@@ -5119,6 +5171,12 @@ country_event = {
 
 	option = { #Agree to landrut's conditions
 		name = speer.902.a
+        ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_REFORMER }
+		    }
+		}
 		country_event = {
 			id = speer.903
 			days = 1
@@ -5126,6 +5184,12 @@ country_event = {
 	}
 	option = { #arrest him
 		name = speer.902.b
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_CONSERVATIVE }
+		    }
+		}
 		country_event = {
 			id = speer.904
 			days = 1
@@ -5332,6 +5396,15 @@ country_event = {
 
 	option = {
 		name = speerostland.6.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_CONSERVATIVE
+				}
+			}
+		}	
 		set_country_flag = ostland_negotiations_sucessful
 		OST = { save_party_popularities = yes }
 		set_autonomy = {
@@ -5366,6 +5439,16 @@ country_event = {
 	option = {
 		name = speerostland.7.a
 		set_variable = { SPR_ostland_negotiation_chance_1 = random }
+		if = {
+		    limit = {
+		        has_game_rule = {
+			        rule = GER_SPEER_PATH
+			        option = GER_SPEER_PATH_CONSERVATIVE
+				  
+				}  
+			}   
+		    set_variable = { SPR_ostland_negotiation_chance_1 = 100 }
+		}  
 		IF = {
 			limit = {
 				check_variable = {
@@ -5400,6 +5483,12 @@ country_event = {
 
 	option = {
 		name = speerostland.8.b
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_CONSERVATIVE }
+		    }
+		}
 		increase_conservative_leaning_small = yes
 		TNO_improve_admin_efficiency_low = yes
 		TNO_improve_political_parties_policy_effectiveness_low = yes
@@ -5457,6 +5546,16 @@ country_event = {
 	option = {
 		name = speerostland.10.a
 		set_variable = { SPR_ostland_negotiation_chance_2 = random }
+		if = {
+		    limit = {
+		        has_game_rule = {
+			        rule = GER_SPEER_PATH
+			        option = GER_SPEER_PATH_CONSERVATIVE
+				  
+				}  
+			}   
+		    set_variable = { SPR_ostland_negotiation_chance_1 = 100 }
+		}
 		IF = {
 			limit = {
 				check_variable = {
@@ -5493,6 +5592,12 @@ country_event = {
 
 	option = {
 		name = speerostland.11.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_CONSERVATIVE }
+		    }
+		}
 		increase_conservative_leaning_medium = yes
 		TNO_improve_admin_efficiency_med = yes
 		TNO_improve_political_parties_policy_effectiveness_med = yes
@@ -5552,6 +5657,16 @@ country_event = {
 	option = {
 		name = speerostland.13.a
 		set_variable = { SPR_ostland_negotiation_chance_3 = random }
+		if = {
+		    limit = {
+		        has_game_rule = {
+			        rule = GER_SPEER_PATH
+			        option = GER_SPEER_PATH_REFORMER
+				  
+				}  
+			}   
+		    set_variable = { SPR_ostland_negotiation_chance_1 = 100 }
+		}
 		IF = {
 			limit = {
 				check_variable = {
@@ -5639,6 +5754,12 @@ country_event = {
 
 	option = {
 		name = speerostland.16.a #negotiate
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_REFORMER }
+		    }
+		}
 		country_event = {
 			id = speerostland.6
 			days = 2
@@ -5646,6 +5767,12 @@ country_event = {
 	}
 	option = {
 		name = speerostland.16.b #Declare War
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_CONSERVATIVE }
+		    }
+		}
 		declare_war_on = { target = OST type = annex_everything }
 		increase_reformist_leaning_medium = yes
 		add_war_support = 0.2
@@ -6121,7 +6248,15 @@ country_event = { #
 
 	option = { #
 		name = speerbohemia.2.a
-		ai_chance = { factor = 0.3 }
+		ai_chance = { factor = 0.3 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_CONSERVATIVE
+				}
+			}
+		}		
 		hidden_effect = {
 			country_event = {
 				id = speerbohemia.7
@@ -6132,7 +6267,15 @@ country_event = { #
 	}
 	option = { #
 		name = speerbohemia.2.b
-		ai_chance = { factor = 0.7 }
+		ai_chance = { factor = 0.7 
+		    modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = GER_SPEER_PATH
+					option = GER_SPEER_PATH_REFORMER
+				}
+			}
+		}
 		hidden_effect = {
 			country_event = {
 				id = speerbohemia.3
@@ -17681,10 +17824,10 @@ country_event = { #SIDOS NEGOTIATIONS; second demand - No entry into the Zollver
 	option = { #Fine
 		name = speerfrance.10.a
 		ai_chance = { factor = 1 
-		        modifier = {
-				    factor = 0
-				    has_game_rule = { rule = FRA_SPEER_PATH option =  FRA_SPEER_PATH_FAIL }
-			    }
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = FRA_SPEER_PATH option =  FRA_SPEER_PATH_FAIL }
+			}
 		}		
 		add_political_power = -50
 		increase_france_approval_small = yes
@@ -17699,10 +17842,10 @@ country_event = { #SIDOS NEGOTIATIONS; second demand - No entry into the Zollver
 	option = { #No
 		name = speerfrance.10.b
 		ai_chance = { factor = 1 
-		        modifier = {
-				    factor = 0
-				    has_game_rule = { rule = FRA_SPEER_PATH option =  FRA_SPEER_PATH_SUCCESS }
-			    }
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = FRA_SPEER_PATH option =  FRA_SPEER_PATH_SUCCESS }
+			}	
 		}		
 		decrease_france_approval_big = yes
 		hidden_effect = {
@@ -22241,6 +22384,12 @@ country_event = {#Speer Sends over diplomats to sort out ukraine, explanation on
 
 	option = { #
 		name = speer_ukraine.1.a
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_CONSERVATIVE }
+		    }
+		}
 		increase_reformist_leaning_small = yes
 		set_country_flag = TNO_UKR_Speer_reforms_Rada
 		UKR = {
@@ -22252,6 +22401,12 @@ country_event = {#Speer Sends over diplomats to sort out ukraine, explanation on
 	}
 	option = { #
 		name = speer_ukraine.1.b
+		ai_chance = { factor = 1 
+		    modifier = {
+				factor = 0
+				has_game_rule = { rule = GER_SPEER_PATH option =  GER_SPEER_PATH_REFORMER }
+		    }
+		}
 		increase_conservative_leaning_small = yes
 		set_country_flag = TNO_UKR_Speer_disbands_Rada
 		UKR = {
