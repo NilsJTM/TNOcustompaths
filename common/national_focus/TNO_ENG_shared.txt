@@ -4237,6 +4237,17 @@ shared_focus = {
 		hidden_effect = {
 			country_event = { id = ENG_ElectionSeason.1 days = 105 } #1st Election
 			country_event = { id = ENG_Government_Changes.15 days = 1441 } #2nd Election
+			meta_effect = { #sets up next election date in country ui
+				text = {
+					set_politics = {
+						ruling_party = ROOT
+						last_election = "[current_election_date]"
+						elections_allowed = yes
+						election_frequency = 6
+					}
+				}
+				current_election_date = "[?global.date.GetDateStringNoHour]"
+			}
 		}
 	}
 }
@@ -5438,7 +5449,18 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_MT_thatcher_elite_army"
 		TNO_improve_army_professionalism_low = yes
 		TNO_improve_conscription_policy_effectiveness_low = yes
-		add_ideas = { tno_training_advanced_training_methods }
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_training_basic_training
+				add_idea = tno_training_advanced_training_methods
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+			    remove_idea = tno_training_basic_training_dummy
+			    add_idea = tno_training_advanced_training_methods_dummy
+	        }
+		}
 		add_to_variable = { ENG_MIL_EFF = 5 }
 		add_to_variable = { ENG_MIL_EFF_FLR = 10 }
 		ENG_MILMAN_CALC = yes
@@ -11497,7 +11519,7 @@ shared_focus = {
 
 shared_focus = {
 	id = ENG_are_these_the_people_you_voted_for
-	icon = GFX_IND_Question_Reactionaries
+	icon = GFX_Generic_Question_Reactionaries
 	cost = 3
 	available = {
 		NOT = { has_country_flag = ENG_in_crisis }
@@ -13127,7 +13149,7 @@ shared_focus = {
 
 shared_focus = {
 	id = ENG_where_was_the_RP
-	icon = GFX_IND_Question_Reactionaries
+	icon = GFX_Generic_Question_Reactionaries
 	cost = 3
 	available = {
 		NOT = { has_country_flag = ENG_in_crisis }
@@ -15359,7 +15381,7 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_PT_2_thatcher_a_police_station_in_every_town"
-		add_ideas = tno_security_security_service
+		tno_security_improve = yes
 	}
 }
 
@@ -17008,6 +17030,8 @@ shared_focus = {
 				target = ROOT
 				modifier = TNO_ties_with_canada
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 	}
 }
@@ -17197,12 +17221,16 @@ shared_focus = {
 				target = ROOT
 				modifier = TNO_ties_with_pacifica_colonies
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 		NZL = {
 			add_opinion_modifier = {
 				target = ROOT
 				modifier = TNO_ties_with_pacifica_colonies
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 	}
 }
@@ -20584,10 +20612,19 @@ shared_focus = {
 	y = 2
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FEN_NDL_econ_expansion_into_free_europe"
-		FRA = {
-			add_opinion_modifier = {
-				target = ROOT
-				modifier = TNO_trade_with_europe
+		if = {
+			limit = {
+				FRA = { 
+					NOT = { is_in_faction_with = GER }
+				}
+			}
+			FRA = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = TNO_trade_with_europe
+				}
+				set_temp_variable = { temp_modifier = 50 }
+				ROOT = { add_to_trade_modifier_PREV = yes }
 			}
 		}
 		IBR = {
@@ -20595,13 +20632,21 @@ shared_focus = {
 				target = ROOT
 				modifier = TNO_trade_with_europe
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
+		set_temp_variable = { temp_modifier = 50 }
+		IBR = { add_to_trade_modifier_PREV = yes }
 		SWE = {
 			add_opinion_modifier = {
 				target = ROOT
 				modifier = TNO_trade_with_europe
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
+		set_temp_variable = { temp_modifier = 50 }
+		SWE = { add_to_trade_modifier_PREV = yes }
 	}
 }
 
@@ -20628,6 +20673,8 @@ shared_focus = {
 				target = ROOT
 				modifier = TNO_trade_with_italy
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 	}
 }
@@ -21167,6 +21214,8 @@ shared_focus = {
 				target = ROOT
 				modifier = TNO_ties_with_canada
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 	}
 }
@@ -21379,12 +21428,16 @@ shared_focus = {
 				target = ROOT
 				modifier = TNO_ties_with_pacifica_colonies
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 		AST = {
 			add_opinion_modifier = {
 				target = ROOT
 				modifier = TNO_ties_with_pacifica_colonies
 			}
+			set_temp_variable = { temp_modifier = 50 }
+			ROOT = { add_to_trade_modifier_PREV = yes }
 		}
 	}
 }
@@ -25439,7 +25492,7 @@ shared_focus = {
 	x = 0
 	y = 2
 	completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ENG_ET_thatcher_free_market_free_people "
-		TNO_trade_laws_worsen = yes
+		tno_trade_laws_worsen = yes
 		TNO_improve_trade_laws_policy_effectiveness_high = yes
 		ENG_Thatcher_Add_Pop_Love_3 = yes
 		set_temp_variable = { econ_centralization_temp = -10 }
@@ -25865,7 +25918,7 @@ shared_focus = {
 	x = -2
 	y = 1
 	completion_reward = { log = "[GetDateText]: [Root.GetName]: Focus ENG_ET_thatcher_road_flat_taxes"
-		add_ideas = { tno_income_taxation_flat_taxes }
+		tno_income_taxation_improve = yes
 		TNO_improve_income_taxation_policy_effectiveness_high = yes
 		set_temp_variable = { inflation_temp = -0.45 }
 		econ_inflation_change = yes
@@ -28077,10 +28130,16 @@ shared_focus = {
 	y = 2
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_surrender_the_oil"
-		add_opinion_modifier = {
-			target = GER
-			modifier = ENG_economic_concessions
+		GER = {
+			add_opinion_modifier = {
+				target = ENG
+				modifier = ENG_economic_concessions
+			}
+			set_temp_variable = { temp_modifier = 50 }
+			ENG = { add_to_trade_modifier_PREV = yes }
 		}
+		set_temp_variable = { temp_modifier = 15 }
+		GER = { add_to_trade_modifier_PREV = yes }
 	}
 }
 
@@ -28219,10 +28278,16 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ENG_trade_talk"
-		add_opinion_modifier = {
-			target = GER
-			modifier = ENG_relaxed_trade_barriers
+		GER = {
+			add_opinion_modifier = {
+				target = ENG
+				modifier = ENG_relaxed_trade_barriers
+			}
+			set_temp_variable = { temp_modifier = 25 }
+			ENG = { add_to_trade_modifier_PREV = yes }
 		}
+		set_temp_variable = { temp_modifier = 25 }
+		GER = { add_to_trade_modifier_PREV = yes }
 	}
 }
 
