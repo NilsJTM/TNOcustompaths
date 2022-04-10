@@ -22,6 +22,16 @@ on_actions = {
 				country_event = { id = BRY.55 days = 304 random = 72 } #Adrift on the Tide of Memory
 				country_event = { id = BRY.56 days = 3358 random = 24 } #Farewell, Red October
 				add_timed_idea = { idea = RUS_FE_the_flight_east days = 790 }
+				if = {
+					limit = {
+						OMO_2022_aprilfools_gamerule_active = yes
+						is_ai = yes
+						IRK = {
+							is_ai = yes
+						}
+					}
+					add_ideas = OMO_aprilfools_BRY_IRK_stalemate_idea
+				}
 			}
 
 			USA = {
@@ -72,6 +82,16 @@ on_actions = {
 				country_event = { id = IRK.74 days = 5 } #A Split in the Family - BRY/IRK shared event chain
 				country_event = { id = IRK.75 days = 15 } #Two Brothers - BRY/IRK shared event
 				add_timed_idea = { idea = RUS_FE_the_flight_east days = 790 }
+				if = {
+					limit = {
+						OMO_2022_aprilfools_gamerule_active = yes
+						is_ai = yes
+						BRY = {
+							is_ai = yes
+						}
+					}
+					add_ideas = OMO_aprilfools_BRY_IRK_stalemate_idea
+				}
 			}
 
 			TYM = {
@@ -95,7 +115,91 @@ on_actions = {
 			}
 
 			OMO = {
-				country_event = { id = OMO.1 days = 1270 random = 10 }
+				if = {
+					limit = {
+						OMO_2022_aprilfools_gamerule_active = no
+					}
+					country_event = { id = OMO.1 days = 1270 random = 10 }
+				}
+				else = {
+					every_country = {
+						limit = {
+							is_ai = no
+						}
+						country_event = {
+							id = OMO_aprilfools.1
+							days = 30
+							random = 10
+						}
+					}
+					set_country_flag = OMO_2022_sunset_superevent # "Sunset" superevent variant
+					
+					### Project Ferus audio log showup events ###
+					## Do your own maths on when these fire, sorry I cant be bothered - Scars
+					
+					# Startup
+					country_event = { id = OMO_project_ferus.6 days = 371 }
+					
+					# Cpt. Faros
+					country_event = { id = OMO_project_ferus.1 days = 426 }
+					country_event = { id = OMO_project_ferus.2 days = 523 }
+					country_event = { id = OMO_project_ferus.3 days = 921 }
+					country_event = { id = OMO_project_ferus.4 days = 1313 }
+					country_event = { id = OMO_project_ferus.5 days = 1326 }
+					
+					# Dr. Hark
+					country_event = { id = OMO_project_ferus.7 days = 403 }
+					country_event = { id = OMO_project_ferus.8 days = 415 }
+					country_event = { id = OMO_project_ferus.9 days = 1319 }
+					country_event = { id = OMO_project_ferus.10 days = 1466 }
+					country_event = { id = OMO_project_ferus.11 days = 1795 }
+					country_event = { id = OMO_project_ferus.13 days = 3642 }
+					country_event = { id = OMO_project_ferus.14 days = 3659 }
+					country_event = { id = OMO_project_ferus.15 days = 3743 }
+					
+					# Dr. Solovyov
+					country_event = { id = OMO_project_ferus.16 days = 453 }
+					country_event = { id = OMO_project_ferus.17 days = 510 }
+					
+					# Dr. Stenzland
+					country_event = { id = OMO_project_ferus.19 days = 1076 }
+					
+					# Dr. Poal
+					country_event = { id = OMO_project_ferus.20 days = 568 }
+					country_event = { id = OMO_project_ferus.21 days = 1996 }
+					
+					# Agustin Chan-Gonzales
+					country_event = { id = OMO_project_ferus.22 days = 990 }
+					country_event = { id = OMO_project_ferus.23 days = 1000 }
+					country_event = { id = OMO_project_ferus.24 days = 1049 }
+					
+					# Dr. Stanford
+					country_event = { id = OMO_project_ferus.25 days = 3646 }
+					
+					# Dr. Owens
+					country_event = { id = OMO_project_ferus.27 days = 778 }
+					country_event = { id = OMO_project_ferus.28 days = 1222 }
+					
+					# Dr. Armstrong
+					country_event = { id = OMO_project_ferus.29 days = 1033 }
+					country_event = { id = OMO_project_ferus.30 days = 1150 }
+					country_event = { id = OMO_project_ferus.31 days = 3076 }
+					country_event = { id = OMO_project_ferus.32 days = 3087 }
+					
+					# Misc. Characters
+					country_event = { id = OMO_project_ferus.33 days = 380 }
+					country_event = { id = OMO_project_ferus.34 days = 2603 }
+					
+					# Greymane(s)
+					country_event = { id = OMO_project_ferus.36 days = 1568 }
+					country_event = { id = OMO_project_ferus.37 days = 1573 }
+					country_event = { id = OMO_project_ferus.38 days = 1626 }
+					country_event = { id = OMO_project_ferus.39 days = 2057 }
+					country_event = { id = OMO_project_ferus.40 days = 2712 }
+					
+					# Stenzland Straggler
+					country_event = { id = OMO_project_ferus.41 days = 1783 }
+				}
 			}
 
 			SBA = {
@@ -219,6 +323,8 @@ on_actions = {
 				country_event = { id = ORE.142 days = 182 random = 500 }
 				country_event = { id = ORE.143 days = 83 random = 500 }
 				country_event = { id = ORE.144 days = 38 random = 500 }
+				
+				country_event = { id = ORE.101 days = 489 }
 			}
 
 			DRL = {
@@ -346,13 +452,14 @@ on_actions = {
 			}
 
 			WRS = {
+				set_country_flag = WRS_reformed_flag
 				country_event = { id = tukha.86 days = 48 random = 24 } #Across the Lines - Tukha letter to Shostakovich in Tomsk
 				country_event = { id = WRS.89 days = 2555 random = 24 } #
 			}
 
 			if = { #
-			limit = {
-				has_game_rule = { rule = IRK_leader_route option = DEFAULT }
+				limit = {
+					has_game_rule = { rule = IRK_leader_route option = DEFAULT }
 				}
 			    IRK = {
 			        add_timed_idea = { idea = RUS_FE_the_flight_east days = 790 }
@@ -384,7 +491,6 @@ on_actions = {
 				    set_country_flag = IRK_AI_REFORM
 			    }
 		    }
-		    
 
 			every_country = {
 				limit = {
@@ -428,6 +534,7 @@ on_actions = {
 			}
 
 			SAM = {
+				set_country_flag = WRS_reformed_flag
 				country_event = { id = RUS.8 days = 21 }
 			}
 
@@ -602,6 +709,7 @@ on_actions = {
 			IRK = {
 				set_country_flag = RUS_OWNS_IRKUTSK_HYDRO_STATION
 				set_country_flag = IRK_TREE_ONE
+				set_country_flag = IRK_reformed_flag
 				set_variable = { IRK_state_balance = 54 }
 				set_variable = { IRK_party_balance = 46 }
 				set_variable = {
@@ -1106,6 +1214,35 @@ on_actions = {
 			}
 		}
 	}
+	
+	on_weekly_OMO = {
+		effect = {
+			if = {
+				limit = {
+					OMO_2022_aprilfools_gamerule_active = yes
+				}
+				set_variable = { OMO_pony_crystals_cap = OMO_pony_crystals_cap_base }
+				add_to_variable = { OMO_pony_crystals_cap = modifier@OMO_crystals_maximum_capacity_modifier }
+				clamp_variable = { var = OMO_pony_crystals_cap min = 0 max = 1000 }
+				clamp_variable = { var = OMO_pony_crystals min = 0 max = OMO_pony_crystals_cap }
+				OMO_2022_calculate_cap_indicator_x = yes
+			}
+		}
+	}
+	
+	on_monthly_OMO = {
+		effect = {
+			if = {
+				limit = {
+					OMO_2022_aprilfools_gamerule_active = yes
+					has_country_flag = OMO_2022_crystal_mech_active
+				}
+				set_temp_variable = { temp_crystals = OMO_pony_crystals_monthly }
+				add_to_temp_variable = { temp_crystals = modifier@OMO_crystals_monthly_gain_modifier }
+				OMO_2022_change_crystal_stockpile = yes
+			}
+		}
+	}
 
 	on_monthly_TYM = {
 		effect = {
@@ -1137,16 +1274,13 @@ on_actions = {
 						limit = {
 							PRC = { has_country_flag = PRC_destroyed_military }
 						}
-						PRC_add_mil_status_effect = yes
+						PRC_add_civ_status_effect = yes
 					}
 					else = {
 						PRC = {
 							set_temp_variable = { PRC_total = 0 }
 							set_variable = { PRC_mil_chance = 1 }
 							set_variable = { PRC_civ_chance = 1 }
-							every_owned_state = {
-								add_to_temp_variable = { PRC.PRC_total = THIS.PRC_Owner }
-							}
 							if = {
 								limit = { # More state controlled by military
 									check_variable = { PRC_total < 0 }
@@ -1172,20 +1306,6 @@ on_actions = {
 		}
 	}
 
-	on_monthly_OMO = {
-		effect = {
-			OMO = {
-				if = {
-					limit = {
-						has_dynamic_modifier = {
-							modifier = OMO_out_of_time
-						}
-					}
-					add_to_variable = { OMO_surrender_limit = -0.05 }
-				}
-			}
-		}
-	}
 
 	#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1334,6 +1454,7 @@ on_actions = {
 					}
 				}
 				OMS = {
+					country_event = { id = omsk.47 days = 36 random = 72 }
 					country_event = { id = omskexp.19 days = 2 }
 				}
 			}
@@ -1868,297 +1989,6 @@ on_actions = {
 		}
 	}
 
-	on_capitulation = {
-		effect = {
-			if = { # Please fix your code :thatchernice: - Fetti
-				limit = {
-					FROM = { tag = AMR }
-					ROOT = { tag = CHT }
-				}
-				AMR = { country_event = { id = amur.4 days = 1 }}
-			}
-			if = {
-				limit = {
-					FROM = { tag = CHT }
-					ROOT = { tag = IRK }
-				}
-				CHT = {
-					country_event = { id = CHT.24 days = 7 random = 24 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = CHT }
-					ROOT = { tag = OMO }
-				}
-				CHT = {
-					country_event = { id = CHT.25 days = 7 random = 24 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = CHT }
-					ROOT = { tag = AMR }
-				}
-				CHT = {
-					country_event = { id = CHT.37 hours = 6 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = OMS }
-					ROOT = { tag = AMR }
-				}
-				OMS = {
-					country_event = { id = omsksr.28 days = 14 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = OMS }
-					ROOT = { tag = WSR }
-				}
-				OMS = {
-					country_event = { id = omsksr.30 days = 30 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = OMS }
-					ROOT = { tag = PRM }
-				}
-				OMS = {
-					country_event = { id = omsksr.31 days = 90 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = OMS }
-					ROOT = { tag = SAM }
-				}
-				OMS = {
-					country_event = { id = omsksr.32 days = 30 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_center_government = yes
-						}
-					}
-					ROOT = { tag = VOL }
-				}
-				KOM = {
-					country_event = { id = KOM.423 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_center_government = yes
-						}
-					}
-					ROOT = { tag = VYT }
-				}
-				KOM = {
-					country_event = { id = KOM.424 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_center_government = yes
-						}
-					}
-					ROOT = { tag = BKR }
-				}
-				KOM = {
-					country_event = { id = KOM.425 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_center_government = yes
-						}
-					}
-					ROOT = { tag = TAR }
-				}
-				KOM = {
-					country_event = { id = KOM.426 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_center_government = yes
-						}
-					}
-					ROOT = { tag = ONG }
-				}
-				KOM = {
-					country_event = { id = KOM.427 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_left_government = yes
-						}
-					}
-					ROOT = { tag = WRS }
-				}
-				KOM = {
-					country_event = { id = KOM.428 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_left_government = yes
-						}
-					}
-					ROOT = { tag = GOR }
-				}
-				KOM = {
-					country_event = { id = KOM.429 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_right_government = yes
-						}
-					}
-					ROOT = { tag = VOL }
-				}
-				KOM = {
-					country_event = { id = KOM.430 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_right_government = yes
-						}
-					}
-					ROOT = { tag = VYT }
-				}
-				KOM = {
-					country_event = { id = KOM.431 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_right_government = yes
-						}
-					}
-					ROOT = { tag = SAM }
-				}
-				KOM = {
-					country_event = { id = KOM.432 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							tag = KOM
-							KOM_has_right_government = yes
-						}
-					}
-					ROOT = { tag = ONG }
-				}
-				KOM = {
-					country_event = { id = KOM.433 days = 21 random = 48 }
-				}
-			}
-			if = {
-				limit = {
-					tag = KOK
-				}
-				add_to_variable = {
-					var = khanate_war_exhaustion
-					value = -20
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = URL }
-					ROOT = { tag = MGN }
-				}
-				DRL = {
-					country_event = DRL.2500
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = TYM }
-					ROOT = { tag = ZLT }
-				}
-				TYM = {
-					country_event = { id = TYM.156 days = 5 random = 5 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = TYM }
-					ROOT = { tag = SVR }
-				}
-				TYM = {
-					country_event = { id = TYM.113 days = 7 random = 3 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = { tag = TYM }
-					ROOT = { tag = OMS
-							has_country_leader = {
-								character = OMS_Dmitry_Yazov 
-								ruling_only = yes
-						} 
-					}
-				}
-				TYM = { country_event = { id = TYM.115  days = 7 random = 3  } }
-			}
-
-			if = {
-				limit = {
-					FROM = { tag = TYM }
-					ROOT = { tag = OMS
-							has_country_leader = {
-								character = OMS_Collapsed_Authority 
-								ruling_only = yes
-						} 
-					}
-				}
-				TYM = { country_event = { id = TYM.160  days = 7 random = 3  } }
-			}
-		}
-	}
-
-
 	on_declare_war = {
 		effect = {
 			if = {
@@ -2245,7 +2075,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 397
@@ -2275,7 +2105,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 399
@@ -2305,7 +2135,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 863
@@ -2340,7 +2170,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 754
@@ -2370,7 +2200,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 573
@@ -2400,7 +2230,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 757
@@ -2430,7 +2260,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 569
@@ -2460,7 +2290,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 570
@@ -2490,7 +2320,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 562
@@ -2520,7 +2350,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 566
@@ -2550,7 +2380,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 563
@@ -2580,7 +2410,7 @@ on_actions = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					FROM.FROM = {
 						state = 403
@@ -2758,251 +2588,53 @@ on_actions = {
 		}
 	}
 
-	on_capitulation = { # Fire event for the Ural Guard if Orenburg dies
+	on_declare_war = {
 		effect = {
 			if = {
 				limit = {
-					ROOT = { tag = ORE }
-					FROM = {
-						OR = {
-							tag = DRL
-							tag = MGN
-						}
+					FROM = { is_russian_nation = yes }
+					ROOT = { is_russian_nation = yes }
+				}
+			}
+			FROM = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = RUS_war_start }
 					}
+					set_country_flag = RUS_war_start
 				}
-				URL = { country_event = { id = URL.2500	days = 2 } }
+			}
+			ROOT = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = RUS_war_start }
+					}
+					set_country_flag = RUS_war_start
+				}
 			}
 		}
 	}
 
-	on_capitulation = { #used to fire 2 flavour events one if eurasia capitulates decembrist tomsk and the other if the opposite happens
-		#ROOT is capitulated country, FROM is winner.
-		#KOM_gumilyov_in_power
-		#TOM_decembrists_in_power	
+	on_monthly = {
 		effect = {
-			if = { #tomsk capitulates eurasia
+			if = {
 				limit = {
-					ROOT = { tag = KOM }
-					FROM = { tag = TOM }
-					has_global_flag = KOM_gumilyov_in_power
-					has_global_flag = TOM_decembrists_in_power
-				}
-				TOM = {
-					country_event = { id = TOM.152 days = 1	}
-				}
-			}
-
-			if = { #tomsk capitulates eurasia
-				limit = {
-					ROOT = { tag = TOM }
-					FROM = { tag = KOM }
-					has_global_flag = KOM_gumilyov_in_power
-					has_global_flag = TOM_decembrists_in_power
-				}
-				KOM = {
-					country_event = { id = KOM_gumilyov_regional.35 days = 1 }
-				}
-			}
-		}
-	}
-	
-	on_capitulation = { # SBA Collapse Effects
-		effect = {
-			if = { # Mongush wins against Stepanov
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = PRC }
-					FROM = { tag = TAN }
-				}
-				TAN = {
-					annex_country = { target = PRC transfer_troops = no }
-				}
-				SBA = {
-					set_country_flag = SBA_Collapse_Siberian_War
+					is_russian_nation = yes
+					has_country_flag = { flag = RUS_war_start days > 60 }
 				}
 				if = {
 					limit = {
-						country_exists = BRY
-					}
-					BRY = {
-						country_event = {
-							id = SBA.110
-							days = 180
-						}
-					}
-				}
-				else_if = {
-					limit = {
-						country_exists = IRK
-					}
-					IRK = {
-						country_event = {
-							id = SBA.111
-							days = 180
-						}
-					}
-				}
-			}
-			if = { # Stepanov wins against Mongush
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = TAN }
-					FROM = { tag = PRC }
-				}
-				PRC = {
-					annex_country = { target = TAN transfer_troops = no }
-					country_event = {
-						id = SBA.117
-						days = 10
-					}
-				}
-			}
-			if = { # Siuda wins against Stepanov
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = PRC }
-					FROM = { tag = SBA }
-				}
-				SBA = {
-					set_country_flag = SBA_Collapse_Siberian_War
-				}
-			}
-			if = { # Stepanov wins against Siuda
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = SBA }
-					FROM = { tag = PRC }
-				}
-				PRC = {
-					set_country_flag = SBA_Collapse_Siberian_War
-				}
-			}
-			if = { # Novosibirsk wins against Barnaul
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = ALT }
-					FROM = { tag = NOV }
-				}
-				KEM = {
-					country_event = {
-						id = SBA.118
-						days = 10
-					}
-				}
-			}
-			if = { # Barnaul wins against Novosibirsk
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = NOV }
-					FROM = { tag = ALT }
-				}
-				KEM = {
-					country_event = {
-						id = SBA.118
-						days = 10
-					}
-				}
-			}
-			if = { # Kemerovo wins against Novosibirsk/Barnaul
-				limit = {
-					has_global_flag = SBA_collapsed
-					OR = {
-						ROOT = { tag = NOV }
-						ROOT = { tag = ALT }
-					}
-					FROM = { tag = KEM }
-				}
-				KEM = {
-					set_country_flag = SBA_Collapse_Siberian_War
-				}
-			}
-			if = { # Novosibirsk wins against Kemerovo
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = ALT }
-					FROM = { tag = NOV }
-				}
-				NOV = {
-					set_country_flag = SBA_Collapse_Siberian_War
-				}
-			}
-			if = { # Barnaul wins against Kemerovo
-				limit = {
-					has_global_flag = SBA_collapsed
-					ROOT = { tag = KEM }
-					FROM = { tag = ALT }
-				}
-				ALT = {
-					set_country_flag = SBA_Collapse_Siberian_War
-				}
-			}
-			if = { # Central Siberian War
-				limit = {
-					has_global_flag = SBA_collapsed
-					OR = {
-						NOV = { has_country_flag = SBA_Collapse_Siberian_War }
-						ALT = { has_country_flag = SBA_Collapse_Siberian_War }
-						KEM = { has_country_flag = SBA_Collapse_Siberian_War }
-					}
-					OR = {
-						SBA = { has_country_flag = SBA_Collapse_Siberian_War }
-						PRC = { has_country_flag = SBA_Collapse_Siberian_War }
-					}
-				}
-				every_country = {
-					limit = {
-						has_country_flag = SBA_Collapse_Siberian_War
-					}
-					country_event = {
-						id = SBA.119
-						days = 16
-					}
-				}
-			}
-			if = { # Central Siberia re-reunified
-				limit = {
-					has_global_flag = SBA_collapsed
-					FROM = {
-						has_country_flag = SBA_Collapse_Siberian_War
-						controls_state = 568
-						controls_state = 570
-						controls_state = 578
-						controls_state = 757
-					}
-				}
-				FROM = {
-					country_event = {
-						id = SBA.120
-					}
-				}
-			}
-		}
-	}
-
-	on_capitulation = { # checks the state changes in southern urals for race for the urals GUI
-		effect = {
-			if = {
-				limit = {
-					# FROM = {
-					# 	OR = {
-					# 		is_central_russian_nation = yes
-					# 		is_west_siberian_nation = yes
-					# 	}
-					# }
-					ROOT = {
+						is_warlord = yes
 						OR = {
-							original_tag = ORE
-							original_tag = URL
-							original_tag = MGN
-							original_tag = DRL
+							is_central_russian_nation = yes
+							is_west_siberian_nation = yes
+							is_far_eastern_nation = yes
 						}
 					}
+					add_to_variable = { RUS_surrender_limit = -0.08 }
 				}
-				WSR = {
-					country_event = { id = RUS_race_for_the_urals.105 days = 1 }
-				}
-				WSB = {
-					country_event = { id = RUS_race_for_the_urals.105 days = 1 }
+				else = {
+					add_to_variable = { RUS_surrender_limit = -0.05 }
 				}
 			}
 		}
