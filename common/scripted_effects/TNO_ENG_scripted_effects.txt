@@ -1226,26 +1226,6 @@ ENG_EnglishCivlWarOperationStock = {
 
 ####### ECW Completion Effects #######
 
-ENG_HMMLR_ECW_VictoryPostAnnex = {
-	log = "[GetDateText]: [Root.GetName]: ENG_HMMLR_ECW_VictoryPostAnnex; Executing"
-	#This SE contains effects that must be done after FEN is annexed into ENG
-	#Remove FEN cores
-	every_state = {
-		limit = {
-			is_core_of = FEN
-		}
-		remove_core_of = FEN
-	}
-	#Remove CRN cores
-	every_state = {
-		limit = {
-			is_core_of = CRN
-		}
-		remove_core_of = CRN
-	}
-	log = "[GetDateText]: [Root.GetName]: ENG_HMMLR_ECW_VictoryPostAnnex; Completed execution"
-}
-
 ENG_HMMLR_ECW_VictoryPreAnnex = {
 	log = "[GetDateText]: [Root.GetName]: ENG_HMMLR_ECW_VictoryPreAnnex; Executing"
 	#This SE contains effects that are to be done before FEN is annexed into ENG
@@ -1303,63 +1283,11 @@ ENG_HMMLR_ECW_VictoryPreAnnex = {
 				name = ENG_HMMLR_Reconstruction_Fascist
 			}
 			retire_ideology_leader = conservative_democracy		#Macmillan
-			
-			set_politics = { ruling_party = authoritarian_democracy }
+			retire_ideology_leader = liberal_democracy			#Maudling
 			retire_country_leader = yes
 
 			FEN = { #Moving all characters to ENG
-				FEN_Claude_Auchinleck = {
-					set_nationality = ENG
-				}
-				FEN_David_Stirling = {
-					set_nationality = ENG
-				}
-				FEN_Bill_Alexander = {
-					set_nationality = ENG
-				}
-				FEN_Reg_Birch = {
-					set_nationality = ENG
-				}
-				ENG_George_Jellicoe = {
-					set_nationality = ENG
-				}
-				ENG_Norman_St_John_Stevas = {
-					set_nationality = ENG
-				}
-				FEN_Harold_Wilson = {
-					set_nationality = ENG
-				}
-				ENG_Enoch_Powell = {
-					set_nationality = ENG
-				}
-				ENG_David_Eccles_hog = {
-					set_nationality = ENG
-				}
-				ENG_Alfred_Robens = {
-					set_nationality = ENG
-				}
-				ENG_Peter_Shore = {
-					set_nationality = ENG
-				}
-				ENG_Pauline_Gower = {
-					set_nationality = ENG
-				}
-				ENG_John_Woodhouse = {
-					set_nationality = ENG
-				}
-				ENG_Arthur_Harris = {
-					set_nationality = ENG
-				}
-				FEN_Philip_Toynbee = {
-					set_nationality = ENG
-				}
-				FEN_Bert_Ramelson = {
-					set_nationality = ENG
-				}
-				FEN_Kim_Philby = {
-					set_nationality = ENG
-				}
-				FEN_Richard_Hull = {
+				every_character = {
 					set_nationality = ENG
 				}
 			}
@@ -1375,11 +1303,15 @@ ENG_HMMLR_ECW_VictoryPreAnnex = {
 					ideology = socialist_subtype
 					expire = "1999.1.1"
 					id = -1
-				}		
+				}
 			}
 			promote_character = FEN_Reg_Birch
+			promote_character = FEN_Harold_Wilson
 			promote_character = FEN_Claude_Auchinleck
-
+			promote_character = FEN_David_Stirling
+			promote_character = FEN_Norman_St_John_Stevas
+			promote_character = FEN_George_Jellicoe
+			promote_character = FEN_Jeffrey_Hamm
 
 			set_popularities = {
 				authoritarian_democracy = 25

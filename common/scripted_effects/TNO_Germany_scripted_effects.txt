@@ -415,7 +415,7 @@ GER_GCW_begin = {
 				producer = GER
 			}
 		}
-
+		
 		#econtype
 		set_variable = { TNO_economy_type = 2 }
 		set_variable = { TNO_economy_subtype = 5 }
@@ -486,7 +486,7 @@ GER_GCW_begin = {
 				producer = GER
 			}
 		}
-
+		
 		#econtype
 		set_variable = { TNO_economy_type = 2 }
 		set_variable = { TNO_economy_subtype = 5 }
@@ -637,7 +637,7 @@ GER_GCW_begin = {
 					producer = GER
 				}
 			}
-
+			
 			#econtype
 			set_variable = { TNO_economy_type = 3 }
 			set_variable = { TNO_economy_subtype = 7 }
@@ -824,6 +824,19 @@ GER_GCW_begin = {
 	CAN = {
 		news_event = { id = WORLD.18218 days = 100 }
 	}
+	# Partisans take power from a weak Koch if conditions are met
+	UKR = {
+		if = {
+			limit = {
+				has_country_leader = {
+					character = UKR_erich_koch
+					ruling_only = yes
+				}
+				NOT = { has_country_flag = UKR_cossacks_pacified }
+			}
+			country_event = { id = UKR.29 days = 10 }
+		}
+	}
 	
 	log = "[GetDateText]: [This.GetName]: GER_GCW_begin; Completed execution."
 }
@@ -884,7 +897,7 @@ GER_GCW_conclude = {
 						GCW_hidden_debuff_3
 						GCW_hidden_holy_shit_win_already
 					}
-					GER_martin_bormann = {
+					every_character = { ## BGR Characters return to GER ##
 						set_nationality = GER
 					}
 				}
@@ -906,7 +919,7 @@ GER_GCW_conclude = {
 						GCW_hidden_debuff_3
 						GCW_hidden_holy_shit_win_already
 					}
-					GER_hermann_goring = {
+					every_character = { ## GGR Characters return to GER ##
 						set_nationality = GER
 					}
 				}
@@ -927,7 +940,7 @@ GER_GCW_conclude = {
 						GCW_hidden_debuff_3
 						GCW_hidden_holy_shit_win_already
 					}
-					GER_albert_speer = {
+					every_character = { ## SGR Characters return to GER ##
 						set_nationality = GER
 					}
 				}
@@ -949,7 +962,7 @@ GER_GCW_conclude = {
 						GCW_hidden_debuff_3
 						GCW_hidden_holy_shit_win_already
 					}
-					GER_reinhard_heydrich = {
+					every_character = { ## HGR Characters return to GER ##
 						set_nationality = GER
 					}
 				}
@@ -1167,16 +1180,6 @@ GER_GCW_conclude = {
 
 GER_GCW_conclude_bormann = {
 	log = "[GetDateText]: [This.GetName]: GER_GCW_conclude_bormann; Executing."
-	# BGR characters return to GER #
-	BGR = {
-		every_character = {
-			limit = {
-				has_character_flag = is_BGR_character 
-			}
-			set_nationality = GER
-		}
-	}
-
 	## Ideas
 	remove_all_ministers = yes
 	remove_ideas = GER_Hans_Speidel_army_chief
@@ -1195,13 +1198,14 @@ GER_GCW_conclude_bormann = {
 	}
 
 	## Politics
-	GER_martin_bormann = { promote_character = national_socialism }
-
-	GER_hans_filbinger = {
-		promote_character = authoritarian_democracy_subtype
-	}
-	GER_eugen_gerstenmaier = {
-		promote_character = conservative_democracy_subtype
+	GER = {
+		GER_martin_bormann = { promote_character = national_socialism }
+		GER_hans_filbinger = {
+			promote_character = authoritarian_democracy_subtype
+		}
+		GER_eugen_gerstenmaier = {
+			promote_character = conservative_democracy_subtype
+		}
 	}
 
 	# Political Popularity & Ruling Party
@@ -1349,16 +1353,6 @@ GER_GCW_conclude_bormann = {
 
 GER_GCW_conclude_goering = {
 	log = "[GetDateText]: [This.GetName]: GER_GCW_conclude_goering; Executing."
-	## GGR Characters return to GER ##
-	GGR = {	
-		every_character = {
-			limit = {
-				has_character_flag = is_GGR_character
-			}
-			set_nationality = GER
-		}
-	}
-
 	## Ideas
 	remove_all_ministers = yes
 	remove_ideas = { 
@@ -1492,15 +1486,6 @@ GER_GCW_conclude_goering = {
 
 GER_GCW_conclude_speer = {
 	log = "[GetDateText]: [This.GetName]: GER_GCW_conclude_speer; Executing."
-	## SGR Characters return to GER ##
-	SGR = {
-		every_character = {
-			limit = {
-				has_character_flag = is_SGR_character
-			}
-			set_nationality = GER
-		}
-	}
 	# Schorner and Remer survive/Steinhof is pardoned #
 	GGR = {
 		GER_ferdinand_schorner = {
@@ -1538,8 +1523,26 @@ GER_GCW_conclude_speer = {
 		add_idea = tno_religious_rights_secularism
 	}
 
-	## Politics
-	GER = { promote_character = GER_albert_speer }
+	#Political Leaders
+	GER = {
+		#Albert Speer - Fash
+		promote_character = GER_albert_speer 
+		#UNBEKANNT - AuthSoc + Libsoc
+		GER_unbekannt = {
+			promote_character = { ideology = communist_subtype }
+			promote_character = { ideology = socialist_subtype }
+		}
+		#UNBEKANNT - SocDem
+		promote_character = GER_willy_brandt
+		#Various Leaders - SocLib
+		promote_character = GER_various_leaders
+		#Helmut Schmidt - AuthDem
+		promote_character = GER_helmut_schmidt
+		#Theodor Oberländer - NatSoc
+		GER_theodor_oberlander = {
+			promote_character = { ideology = national_socialism_idiosyncratic_nazism_subtype }
+		}
+	}
 
 	# Political Popularity & Ruling Party
 	set_politics = { ruling_party = fascism }
@@ -1593,26 +1596,6 @@ GER_GCW_conclude_speer = {
 		ideology = communist
 		long_name = SGR_communist_party_long
 		name = SGR_communist_party
-	}
-
-	#Political Leaders
-	#UNBEKANNT - AuthSoc
-	GER_unbekannt = {
-		promote_character = { ideology = communist_subtype }
-	}
-	#UNBEKANNT - LibSoc
-	GER_unbekannt = {
-		promote_character = { ideology = socialist_subtype }
-	}
-	#UNBEKANNT - SocDem
-	promote_character = GER_willy_brandt
-	#Various Leaders - SocLib
-	promote_character = GER_various_leaders
-	#Helmut Schmidt - AuthDem
-	promote_character = GER_helmut_schmidt
-	#Theodor Oberländer - NatSoc
-	GER_theodor_oberlander = {
-		promote_character = { ideology = national_socialism_idiosyncratic_nazism_subtype }
 	}
 	##Content Setup
 	load_focus_tree = {
@@ -1735,16 +1718,6 @@ GER_GCW_conclude_speer = {
 
 GER_GCW_conclude_heydrich = {
 	log = "[GetDateText]: [This.GetName]: GER_GCW_conclude_heydrich; Executing."
-	## HGR characters return to GER ##
-	HGR = {
-		every_character = {
-			limit = {
-				has_character_flag = is_HGR_character
-			}
-			set_nationality = GER
-		}
-	}
-
 	clr_country_flag = country_has_gui
 	## Ideas
 	remove_all_ministers = yes

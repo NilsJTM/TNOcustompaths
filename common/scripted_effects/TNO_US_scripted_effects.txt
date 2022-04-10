@@ -6962,6 +6962,8 @@ GLN_NASA_recalculate_budget_left = {
 		add_to_variable = { USA_GLN_NASA_Mission_Investment = USA_GLN_NASA_Budget_Leftover }
 		set_variable = { USA_GLN_NASA_Budget_Leftover = 0 }
 	}
+	set_variable = { USA_GLN_NASA_Mission_Investment_Display = USA_GLN_NASA_Mission_Investment }
+	multiply_variable = { USA_GLN_NASA_Mission_Investment_Display = 1000 }
 }
 
 GLN_NASA_Unmanned_Mission = {
@@ -7759,6 +7761,18 @@ GLN_increase_nuclear_spending = {
 		}
 	}
 }
+
+GLN_trigger_nuclear_events = {
+	country_event = { id = glenn.145 days = 2 }
+	country_event = { id = glenn.146 days = 4 }
+	country_event = { id = glenn.147 days = 6 }
+	country_event = { id = glenn.148 days = 8 }
+	country_event = { id = glenn.149 days = 10 }
+	country_event = { id = glenn.150 days = 12 }
+	country_event = { id = glenn.151 days = 14 }
+}
+
+
 GLN_increase_sabotage_costs = {
 	add_to_variable = { GLN_mine_fuckery_cost = 18 }
 	add_to_variable = { GLN_fale_flag_cost = 15 }
@@ -12240,8 +12254,8 @@ US_check_debt_expectations = {
 	if = {
 		limit = {
 			OR = {
-				check_variable = { debt_to_GDP_ratio < US_debt_expectation}
-				check_variable = { debt_to_GDP_ratio = US_debt_expectation}
+				check_variable = { debt_to_GDP_ratio < US_debt_expectation }
+				check_variable = { debt_to_GDP_ratio = US_debt_expectation }
 			}
 		}
 		log = " USA -WON- -DEBT- Expectation"
