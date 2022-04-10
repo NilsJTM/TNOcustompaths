@@ -143,7 +143,12 @@ RUS_reunification_category = {
 								ruling_only = yes
 							}
 							original_tag = SBA 
-							original_tag = OMO 
+							AND = { #ponies get better credit rating, thank you very much
+								original_tag = OMO
+								NOT = { 
+									has_cosmetic_tag = OMO_Harmonious_State
+								}
+							}
 							original_tag = AMR 
 						}
 					}
@@ -154,7 +159,6 @@ RUS_reunification_category = {
 				limit = {
 					tag = RWS
 				}
-				add_ideas = RUS_siberia_plan_startscreen
 				hidden_effect = {
 					add_dynamic_modifier = { modifier = RUS_legacy_of_the_siberian_plan }
 				}
@@ -457,6 +461,18 @@ RUS_reunification_category = {
 					}
 				}
 			}
+			if = {
+				limit = {
+					original_tag = OMO
+					OMO_2022_aprilfools_gamerule_active = yes
+				}
+				hidden_effect = {
+					country_event = {
+						id = OMO_aprilfools_superreg.8
+						days = 5
+					}
+				}
+			}
 		}
 	}
 
@@ -619,6 +635,7 @@ RUS_reunification_category = {
 			if = {
 				limit = {
 					original_tag = OMO
+					OMO_2022_aprilfools_gamerule_active = no
 				}
 				has_country_flag = OMO_didnt_evade_the_judgement_of_the_LORD
 			}
@@ -651,7 +668,6 @@ RUS_reunification_category = {
 				limit = {
 					tag = FST
 				}
-				add_ideas = RUS_siberia_plan_startscreen
 				hidden_effect = {
 					add_dynamic_modifier = { modifier = RUS_legacy_of_the_siberian_plan }
 				}
@@ -673,7 +689,12 @@ RUS_reunification_category = {
 						NOT = {
 							OR = {
 								original_tag = SBA
-								original_tag = OMO
+								AND = { #ponies get better credit rating, thank you very much
+									original_tag = OMO
+									NOT = { 
+										has_cosmetic_tag = OMO_Harmonious_State
+									}
+								}
 								original_tag = AMR
 							}
 						}
@@ -883,6 +904,7 @@ RUS_reunification_category = {
 					}
 				}
 				econ_lower_max_credit_rating = yes
+				set_capital = { state = 400 remember_old_capital = no }
 				country_event = {
 					id = KOM.420
 					days = 5
@@ -1011,20 +1033,8 @@ RUS_reunification_category = {
 
 		icon = GFX_decision_generic_prepare_civil_war
 
-		available = {
-			KZK = {
-				is_neighbor_of = ROOT
-			}
-		}
-
 		visible = {
 			has_country_flag = RUS_superregional_stage
-			KZK = {
-				exists = yes
-			}
-			NOT = {
-				has_war_with = KZK
-			}
 			has_government = esoteric_nazism 
 			original_tag = KOM 
 		}
@@ -1034,22 +1044,19 @@ RUS_reunification_category = {
 		cost = 50
 
 		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 50
-				RUS_KAZ_is_compatible = no
-			}
+			factor = 50
 		}
 
 		fire_only_once = yes
 
-		days_remove = 75
+		days_remove = 30
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision RUS_intervene_in_kazakhstan"
-			set_country_flag = RUS_CANNOT_NEGOTIATE_KAZ
-			KZK = {
+			every_country = {
+				limit = {
+					is_kazakh_nation = yes
+				}
 				country_event = {
 					id = RUS_race_to_kazakhstan.18
 					hours = 1
@@ -1058,9 +1065,16 @@ RUS_reunification_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision RUS_intervene_in_kazakhstan remove"
-			declare_war_on = {
-				target = KZK
-				type = annex_everything
+			every_country = {
+				limit = {
+					is_kazakh_nation = yes
+				}
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
 			}
 		}
 	}
@@ -1730,6 +1744,18 @@ RUS_reunification_category = {
 		available = {
 			can_form_far_east = yes
 			has_war = no
+			if = {
+				limit = {
+					original_tag = OMO
+					OMO_2022_aprilfools_gamerule_active = yes
+				}
+				custom_trigger_tooltip = {
+					tooltip = OMO_2022_far_east_reunification_trigger
+					all_owned_state = {
+						check_variable = { nationality = 375 }
+					}
+				}
+			}
 		}
 		allowed = {
 			is_far_eastern_nation = yes
@@ -1809,6 +1835,46 @@ RUS_reunification_category = {
 					days = 1
 				}
 			}
+			
+			if = {
+				limit = {
+					original_tag = OMO
+					OMO_2022_aprilfools_gamerule_active = yes
+				}
+				clr_country_flag = OMO_2022_far_eastern_war_active
+				
+				if = {
+					limit = {						
+						BRY = {
+							is_subject_of = OMO
+						}
+					}
+					custom_effect_tooltip = OMO_2022_annex_baikals
+					hidden_effect = {
+						BRY = {
+							every_owned_state = {
+								OMO_2022_turn_pony_culture = yes
+							}
+						}
+						annex_country = {
+							target = BRY
+							transfer_troops = yes
+						}
+					}
+				}
+				set_capital = { state =  566 remember_old_capital = no }
+				set_country_flag = OMO_2022_crystals_warlord_decisions_hidden
+				hidden_effect = {
+					remove_mission = OMO_2022_crystal_random_buff_decrease
+					remove_ideas = OMO_2022_pony_far_east_army
+				}
+				
+				# Setup generic decision costs #
+				set_variable = { OMO_2022_crystal_generics_increase_PU_ratio_cost = 50 }
+				set_variable = { OMO_2022_crystal_generics_increase_ic_cost = 50 }
+				set_variable = { OMO_2022_crystal_generics_increase_construction_cost = 50 }
+				set_variable = { OMO_2022_crystal_generics_increase_population_cost = 50 }
+			}
 
 			hidden_effect = {
 				for_each_scope_loop = {
@@ -1868,7 +1934,7 @@ RUS_reunification_category = {
 			modifier = {
 			    factor = 0
 			    has_game_rule = { rule = CSB_FST_war_or_peace option = CSB_FST_WAR_OR_PEACE_PEACE }
-			    CSB_FST_is_compatible
+			    CSB_FST_is_compatible = yes
 			}
 		}
 
@@ -2293,13 +2359,10 @@ WSR_war_category = {
 	WSR_launch_attack_on_WSB = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			WSB = {
-				exists = yes
-			}
+			country_exists = WSB
 			NOT = {
 				has_war_with = WSB
 			}
-			NOT = { has_global_flag = OMS_BatovInsurrectionSuccess }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -2311,6 +2374,11 @@ WSR_war_category = {
 		custom_cost_text = decision_cost_25_cp
 		fire_only_once = yes
 		days_remove = 30
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = WSR }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision WSR_launch_attack_on_WSB"
 			hidden_effect = {
@@ -2349,19 +2417,7 @@ WSR_war_category = {
 	WSR_cross_the_urals = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			OR = {
-				any_other_country = {
-					AND = {
-						is_west_siberian_nation = yes
-						NOT = {
-							has_country_flag = RUS_regional_stage
-						}
-						exists = yes
-					}
-				}
-				has_global_flag = OMS_BatovInsurrectionSuccess
-				has_global_flag = TNO_RUS_west_siberia_collapse
-			}
+			NOT = { country_exists = WSB }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -2373,6 +2429,11 @@ WSR_war_category = {
 		custom_cost_text = decision_cost_25_cp
 		fire_only_once = yes
 		war_with_on_remove = ZLT
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = WSR }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision WSR_cross_the_urals"
 			hidden_effect = {
@@ -3146,12 +3207,8 @@ WSB_war_category = {
 	WSB_launch_attack_on_WSR = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			WSR = {
-				exists = yes
-			}
-			NOT = {
-				has_war_with = WSR
-			}
+			country_exists = WSR
+			NOT = { has_war_with = WSR }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -3163,6 +3220,11 @@ WSB_war_category = {
 		custom_cost_text = decision_cost_25_cp
 		fire_only_once = yes
 		days_remove = 30
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = WSB }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision WSB_launch_attack_on_WSR"
 			hidden_effect = {
@@ -3200,20 +3262,7 @@ WSB_war_category = {
 	WSB_cross_the_urals = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			OR = {
-				any_other_country = {
-					AND = {
-						is_central_russian_nation = yes
-						NOT = {
-							has_country_flag = RUS_regional_stage
-						}
-						exists = yes
-					}
-				}
-				ONG = {
-					exists = yes
-				}
-			}
+			NOT = { country_exists = WSR }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -3225,6 +3274,11 @@ WSB_war_category = {
 		custom_cost_text = decision_cost_25_cp
 		war_with_on_remove = ONG
 		fire_only_once = yes
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = WSB }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision WSB_cross_the_urals"
 			hidden_effect = {
@@ -3938,12 +3992,8 @@ CSB_war_category = {
 	CSB_launch_attack_on_FST = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			FST = {
-				exists = yes
-			}
-			NOT = {
-				has_war_with = FST
-			}
+			country_exists = FST
+			NOT = { has_war_with = FST }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -3955,6 +4005,11 @@ CSB_war_category = {
 		custom_cost_text = decision_cost_25_cp
 		fire_only_once = yes
 		days_remove = 30
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = CSB }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CSB_launch_attack_on_FST"
 			hidden_effect = {
@@ -3975,29 +4030,6 @@ CSB_war_category = {
 				target = FST
 				type = annex_everything
 			}
-			if = {
-				limit = {
-					YAK = {
-						owns_state = 889
-					}
-				}
-				declare_war_on = {
-					target = OMO
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = YAK
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = CHT
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = BRY
-					type = annex_everything
-				}
-			}
 			set_country_flag = RUS_hide_regional_war_decisions
 		}
 		ai_will_do = {
@@ -4007,18 +4039,7 @@ CSB_war_category = {
 	CSB_cross_the_border = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			OR = {
-				any_other_country = {
-					AND = {
-						is_far_eastern_nation = yes
-						NOT = {
-							has_country_flag = RUS_regional_stage
-						}
-						exists = yes
-					}
-				}
-				has_global_flag = TNO_RUS_central_siberia_collapse
-			}
+			NOT = { country_exists = FST }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -4029,6 +4050,11 @@ CSB_war_category = {
 		custom_cost_trigger = { command_power > 24.99 }
 		custom_cost_text = decision_cost_25_cp
 		fire_only_once = yes
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = CSB }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CSB_cross_the_border"
 			hidden_effect = {
@@ -4801,18 +4827,8 @@ FST_war_category = {
 	FST_launch_attack_on_CSB = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			or = {
-				AND = {
-					CSB = {
-						exists = yes
-					}
-					NOT = {
-						has_war_with = CSB
-					}
-				}
-				has_global_flag = SBA_collapsed
-				KAL = {exists = yes}
-			}
+			country_exists = CSB
+			NOT = { has_war_with = CSB }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -4824,199 +4840,24 @@ FST_war_category = {
 		custom_cost_text = decision_cost_25_cp
 		fire_only_once = yes
 		days_remove = 30
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = FST }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FST_launch_attack_on_CSB"
 			hidden_effect = {
 				add_command_power = -25
-			}
-			if = {
-				limit = {
-					KAL = {
-						NOT = {
-							exists = yes
-						}
-					}
-					NOT = {
-						has_global_flag = SBA_collapsed
-					}
-				}
-				CSB = {
-					country_event = {
-						id = russia_unification.15
-						days = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					KAL = {
-						exists = yes
-					}
-				}
-				KAL = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				KRS = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				SBA = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				ALT = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_global_flag = SBA_collapsed
-				}
-				SBA = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				KAL = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				TAN = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				PRC = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				KEM = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				KRS = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				ALT = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				NOV = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
-				TOM = {
-					country_event = {
-						id = russia_unification.16
-						days = 1
-					}
-				}
 			}
 		}
 		remove_effect = {
 			hidden_effect = {
 				if = { limit = { USA = { NOT = { has_country_flag = USA_CIA_RUS_CSBvsFST } } } USA = { country_event = USA_CIA_RUS.13 set_country_flag = USA_CIA_RUS_CSBvsFST } }
 			}
-			if = {
-				limit = {
-					KAL = {
-						exists = no
-					}
-				}
-				declare_war_on = {
-					target = CSB
-					type = annex_everything
-				}
-			}
-			else_if = {
-				limit = {
-					KAL = {
-						exists = yes
-						NOT = { has_global_flag = SBA_collapsed }
-					}
-				}
-				declare_war_on = {
-					target = KAL
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = SBA
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = KRS
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = ALT
-					type = annex_everything
-				}
-			}
-			else_if = {
-				limit = {
-					has_global_flag = SBA_collapsed
-				}
-				declare_war_on = {
-					target = SBA
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = KAL
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = KRS
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = PRC
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = ALT
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = KEM
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = TOM
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = NOV
-					type = annex_everything
-				}
-				declare_war_on = {
-					target = TAN
-					type = annex_everything
-				}
+			declare_war_on = {
+				target = CSB
+				type = annex_everything
 			}
 			set_country_flag = RUS_hide_regional_war_decisions
 		}
@@ -5027,18 +4868,7 @@ FST_war_category = {
 	FST_cross_the_border = {
 		icon = GFX_decision_generic_assault
 		visible = {
-			OR = {
-				any_other_country = {
-					AND = {
-						is_central_siberian_nation = yes
-						NOT = {
-							has_country_flag = RUS_regional_stage
-						}
-						exists = yes
-					}
-				}
-				has_global_flag = TNO_RUS_far_east_collapse
-			}
+			NOT = { country_exists = CSB }
 		}
 		available = {
 			custom_trigger_tooltip = {
@@ -5049,6 +4879,11 @@ FST_war_category = {
 		custom_cost_trigger = { command_power > 24.99 }
 		custom_cost_text = decision_cost_25_cp
 		fire_only_once = yes
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = { tag = FST }
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FST_cross_the_border"
 			hidden_effect = {

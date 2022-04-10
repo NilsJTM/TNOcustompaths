@@ -1477,22 +1477,11 @@ USA_foreign_policy_category = {
 				}
 				else = { # Scenario 3
 					every_country = {
-						limit = {
-							OR = {
-								has_war_with = FFR
-								has_war_with = WOL
-								has_war_with = SUS
-							}
-						}
-						leave_faction = yes
-						every_country = {
-							limit = { is_in_faction_with = FFR }
+						limit = { is_in_faction_with = FFR }
+						every_enemy_country = {
 							white_peace = PREV
+							leave_faction = yes
 						}
-					}
-					ZZZ = {
-						TNO_WAC_clear_decision_categories = yes
-						WAC_3_FMA_VICTORY = yes
 					}
 					if = {
 						limit = { country_exists = YOR }
@@ -1500,6 +1489,10 @@ USA_foreign_policy_category = {
 							limit = { has_war_with = YOR }
 							white_peace = YOR
 						}
+					}
+					ZZZ = {
+						TNO_WAC_clear_decision_categories = yes
+						WAC_3_FMA_VICTORY = yes
 					}
 				}
 			}
@@ -10224,18 +10217,26 @@ JAP_foreign_policy_category = {
 		visible = {
 			has_global_flag = INS_war
 			TNO_fopo_indonesia_selected = yes
+			set_temp_variable = { target = INS }
+			TNO_volunteer_cap_less_5 = yes
 		}
-		fire_only_once = yes
+		fire_only_once = no
+		days_re_enable = 21
+
 		complete_effect = {
 			set_temp_variable = { target = INS }
-			set_temp_variable = { number = 2 }
-			TNO_set_num_volunteers = yes
-			custom_effect_tooltip = TNO_increase_volunteers_INS_2
+			TNO_increase_volunteer_cap_1 = yes
+			custom_effect_tooltip = TNO_increase_volunteers_INS_1
 		}
 	}
 	JAP_send_equip_indonesia = {
 		icon = GFX_decision_generic_prepare_civil_war
-		cost = 25
+
+		custom_cost_trigger = {
+			command_power > 20
+			has_political_power > 24.99
+		}
+		custom_cost_text = decision_cost_20_cp_25_pp
 
 		ai_will_do = {
 			factor = 40
@@ -10245,15 +10246,13 @@ JAP_foreign_policy_category = {
 			has_global_flag = INS_war
 			TNO_fopo_indonesia_selected = yes
 		}
+		days_remove = 14
+		days_re_enable = 30
+		
 		fire_only_once = no
 		complete_effect = {
-			INS = {
-				add_equipment_to_stockpile = {
-					type = infantry_equipment
-					amount = 5000
-					producer = JAP
-				}
-			}
+			add_command_power = -20
+			add_political_power = -25
 			JAP = {
 				add_equipment_to_stockpile = {
 					type = infantry_equipment
@@ -10262,10 +10261,24 @@ JAP_foreign_policy_category = {
 				}
 			}
 		}
+		remove_effect = {
+			INS = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 5000
+					producer = JAP
+				}
+			}
+		}
 	}
 	JAP_send_planes_indonesia = {
 		icon = GFX_decision_generic_prepare_civil_war
-		cost = 50
+		
+		custom_cost_trigger = {
+			command_power > 25
+			has_political_power > 24.99
+		}
+		custom_cost_text = decision_cost_25_cp_25_pp
 
 		ai_will_do = {
 			factor = 40
@@ -10276,19 +10289,12 @@ JAP_foreign_policy_category = {
 			TNO_fopo_indonesia_selected = yes
 		}
 		fire_only_once = no
+		days_remove = 14
+		days_re_enable = 30
+
 		complete_effect = {
-			INS = {
-				add_equipment_to_stockpile = {
-					type = jet_fighter_equipment_2
-					amount = 50
-					producer = JAP
-				}
-				add_equipment_to_stockpile = {
-					type = jet_tac_bomber_equipment_2
-					amount = 50
-					producer = JAP
-				}
-			}
+			add_command_power = -25
+			add_political_power = -25
 			JAP = {
 				add_equipment_to_stockpile = {
 					type = jet_fighter_equipment_2
@@ -10298,6 +10304,20 @@ JAP_foreign_policy_category = {
 				add_equipment_to_stockpile = {
 					type = jet_tac_bomber_equipment_2
 					amount = -50
+					producer = JAP
+				}
+			}
+		}
+		remove_effect = {
+			INS = {
+				add_equipment_to_stockpile = {
+					type = jet_fighter_equipment_2
+					amount = 50
+					producer = JAP
+				}
+				add_equipment_to_stockpile = {
+					type = jet_tac_bomber_equipment_2
+					amount = 50
 					producer = JAP
 				}
 			}
@@ -10316,6 +10336,9 @@ JAP_foreign_policy_category = {
 			TNO_fopo_indonesia_selected = yes
 		}
 		fire_only_once = no
+
+		days_re_enable = 30
+
 		complete_effect = {
 			JAP = {
 				add_manpower = 5000
@@ -10326,7 +10349,12 @@ JAP_foreign_policy_category = {
 	}
 	JAP_send_officers = {
 		icon = GFX_decision_generic_political_discourse
-		cost = 25
+		
+		custom_cost_trigger = {
+			command_power > 10
+			has_political_power > 29.99
+		}
+		custom_cost_text = decision_cost_10_cp_30_pp
 
 		ai_will_do = {
 			factor = 40
@@ -10337,12 +10365,16 @@ JAP_foreign_policy_category = {
 			TNO_fopo_indonesia_selected = yes
 		}
 		fire_only_once = no
+		
+		days_remove = 7
+		days_re_enable = 30
+
 		complete_effect = {
-			JAP = {
-				add_command_power = 25
-			}
+			army_experience = 15
+			add_command_power = -10
+			add_political_power = -30
 		}
-		complete_effect = {
+		remove_effect = {
 			INS = {
 				add_command_power = 25
 				army_experience = 10
@@ -10351,7 +10383,9 @@ JAP_foreign_policy_category = {
 	}
 	JAP_anti_FRI_offensive = {
 		icon = GFX_decision_generic_assault
-		cost = 75
+		
+		custom_cost_trigger = { command_power > 35 }
+		custom_cost_text = decision_cost_35_cp
 
 		ai_will_do = {
 			factor = 40
@@ -10363,7 +10397,10 @@ JAP_foreign_policy_category = {
 		}
 
 		fire_only_once = no
+		days_re_enable = 21
+
 		complete_effect = {
+			add_command_power = -35
 			JAP = {
 				add_ideas = JAP_INS_war_offensive
 			}
@@ -11859,7 +11896,7 @@ BRA_foreign_policy_category = {
 					has_dlc = "No Step Back"
 				}
 				add_equipment_to_stockpile = {
-					type = MBT_chassis
+					type = MBT_chassis_1
 					amount = 100
 					producer = BRA
 				}
@@ -12022,12 +12059,15 @@ BRA_foreign_policy_category = {
 			}
 			TNO_fopo_saw_selected = yes
 		}
+		available = { 
+			has_equipment = { APC_equipment > 99 }
+		}
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision BRA_SAW_sell_APC"
 			add_equipment_to_stockpile = {
 				type = APC_equipment
-				amount = 100
+				amount = -100
 				producer = BRA
 			}
 			set_temp_variable = { debt_temp = -0.3 }
@@ -18263,7 +18303,7 @@ USA_foreign_policy_category = {
 		days_mission_timeout = 180
 		selectable_mission = no
 		timeout_effect = {
-		    if = { 
+			if = { 
 		        limit = {
 			        has_game_rule = {
 				        rule = UPH_ideology
@@ -18313,7 +18353,7 @@ USA_foreign_policy_category = {
 		days_mission_timeout = 180
 		selectable_mission = no
 		timeout_effect = {
-		    if = { 
+			if = { 
 		        limit = {
 			        has_game_rule = {
 				        rule = SPH_coalition_path
@@ -19622,7 +19662,7 @@ JAP_foreign_policy_category = {
 		days_mission_timeout = 180
 		selectable_mission = no
 		timeout_effect = {
-		    if = { 
+			if = { 
 		        limit = {
 			        has_game_rule = {
 				        rule = PHI_ideology
@@ -20334,6 +20374,127 @@ JAP_foreign_policy_category = {
 		}
 		ai_will_do = {
 			factor = 10
+		}
+	}
+
+	JAP_supply_imperialistic_fighters_RIF = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			TNO_fopo_IBW_selected = yes
+		}
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		days_re_enable = 30
+
+		cost = 55
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision JAP_supply_freedom_fighters"
+			RIF = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 500
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 100
+				}
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 100
+				}
+			}
+		}
+	}
+
+	JAP_send_military_advisors_RIF = {
+		icon = GFX_decision_generic_military_parade
+		visible = {
+			TNO_fopo_IBW_selected = yes
+		}
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		days_re_enable = 180
+
+		custom_cost_trigger = {
+			has_political_power > 24.99
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp_25_pp
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision JAP_send_military_advisors"
+			hidden_effect = {
+				add_command_power = -10
+				add_political_power = -25
+			}
+			RIF = {
+				add_timed_idea = { idea = JAP_military_advisors days = 180 }
+			}
+		}
+	}
+
+
+	JAP_technician_aid_RIF = {
+		icon = GFX_decision_generic_industry
+		visible = {
+			TNO_fopo_IBW_selected = yes
+		}
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		days_re_enable = 180
+
+		cost = 40
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision JAP_technician_aid"
+			RIF = {
+				add_timed_idea = {
+					idea = JAP_technician_aid
+					days = 180
+				}
+			}
+		}
+	}
+
+	JAP_sabotage_effort_RIF = {
+		icon = GFX_decision_generic_ignite_civil_war
+		visible = {
+			TNO_fopo_IBW_selected = yes
+		}
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		days_re_enable = 90
+
+		custom_cost_trigger = {
+			has_political_power > 24.99
+			command_power > 9.99
+		}
+		custom_cost_text = decision_cost_10_cp_25_pp
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision JAP_sabotage_effort"
+			hidden_effect = {
+				add_command_power = -10
+				add_political_power = -25
+			}
+			MOR = {
+				add_timed_idea = {
+					idea = JAP_sabotage_effort
+					days = 90
+				}
+			}
 		}
 	}
 }
@@ -22912,7 +23073,7 @@ GER_foreign_policy_category = {
 								has_dlc = "No Step Back"
 							}
 							add_equipment_to_stockpile = {
-								type = MBT_chassis
+								type = MBT_chassis_1
 								amount = 250
 							}
 						}
