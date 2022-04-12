@@ -971,7 +971,34 @@ on_actions = {
 				    SPH = { apply_war_buff_with_10_divisions = yes }
 				    UPH = { apply_war_buff_with_10_divisions = yes }
 				}
-			} 
+			}
+			if = {
+				limit = {# Guyana VS USA war buffs
+					ROOT = {
+					    OR = {
+							tag = USA
+					    }
+					}
+					FROM = {
+					    OR = {
+							tag = GUY
+					    }
+					}
+				}
+				if = {
+				    limit = {
+				        has_game_rule = {
+						    rule = GUY_VS_USA
+						    option = GUY_VS_USA_WIN
+					    }
+					    NOT = {
+					        has_global_flag = GUY_GUY_VS_USA_WAR_BUFF_APPLIED
+					    }
+				    }
+				    set_global_flag = GUY_GUY_VS_USA_WAR_BUFF_APPLIED
+				    GUY = { apply_war_buff_with_10_divisions = yes }				    
+				}
+			}
  			if = {
 				limit = {# South African War buffs
 					ROOT = {
@@ -1025,6 +1052,17 @@ on_actions = {
 				    }
 				    SHO = { remove_war_buff = yes }
                 }			
+			}
+			if = {
+				if = {
+				    limit = { # Guyana VS USA ends
+				        has_game_rule = {
+						    rule = GUY_VS_USA
+						    option = GUY_VS_USA_WIN
+					    }
+				    }
+				    GUY = { remove_war_buff = yes }
+				}
 			}
 		    if = {
 				    limit = {# SAF ends
