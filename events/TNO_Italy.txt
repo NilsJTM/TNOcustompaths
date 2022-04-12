@@ -167,12 +167,7 @@ country_event = {
 	title = ita.105.t
 	desc = ita.105.d
 
-	trigger = {
-		AND = {
-			tag = ITA
-			date > 1962.07.18
-		}
-	}
+	is_triggered_only = yes
 
 	fire_only_once = yes
 
@@ -1122,12 +1117,10 @@ country_event = {
 	desc = itaintro.25.d
 
 	picture = GFX_report_event_iberia_canarias_ship
-
+	is_triggered_only = yes
 	trigger = {
-		original_tag = ITA
 		has_country_flag = ITA_india_kiss
 		has_country_flag = ITA_japan_smooch
-		date > 1962.05.05
 	}
 
 	fire_only_once = yes
@@ -1459,7 +1452,6 @@ country_event = { #The delegates vote
                     }
                 }
 		}
-
 		add_to_variable = {
 			var = ita_ciano_clout
 			value = 1
@@ -1485,7 +1477,6 @@ country_event = { #The delegates vote
                     }
                 }
 		}
-
 		add_to_variable = {
 			var = ita_scorza_clout
 			value = 1
@@ -1560,13 +1551,12 @@ country_event = { #The delegates vote
             factor = 1
             modifier = {
                 factor = 0
-                    has_game_rule = {
-                        rule = ITA_CIANO_OR_SCORZA
-                        option = ITA_SCORZA
-                    }
+                has_game_rule = {
+                    rule = ITA_CIANO_OR_SCORZA
+                    option = ITA_SCORZA
                 }
             }
-
+        }
 		add_to_variable = {
 			var = ita_ciano_clout
 			value = 1
@@ -1584,13 +1574,12 @@ country_event = { #The delegates vote
             factor = 1
             modifier = {
                 factor = 0
-                    has_game_rule = {
-                        rule = ITA_CIANO_OR_SCORZA
-                        option = ITA_CIANO
-                    }
+                has_game_rule = {
+                    rule = ITA_CIANO_OR_SCORZA
+                    option = ITA_CIANO
                 }
             }
-
+        }
 		add_to_variable = {
 			var = ita_scorza_clout
 			value = 1
@@ -1663,13 +1652,12 @@ country_event = { #The delegates vote
             factor = 1
             modifier = {
                 factor = 0
-                    has_game_rule = {
-                        rule = ITA_CIANO_OR_SCORZA
-                        option = ITA_SCORZA
-                    }
+                has_game_rule = {
+                    rule = ITA_CIANO_OR_SCORZA
+                    option = ITA_SCORZA
                 }
             }
-
+        }
 		add_to_variable = {
 			var = ita_ciano_clout
 			value = 1
@@ -1687,13 +1675,12 @@ country_event = { #The delegates vote
             factor = 1
             modifier = {
                 factor = 0
-                    has_game_rule = {
-                        rule = ITA_CIANO_OR_SCORZA
-                        option = ITA_CIANO
-                    }
+                has_game_rule = {
+                    rule = ITA_CIANO_OR_SCORZA
+                     option = ITA_CIANO
                 }
             }
-
+        }
 		add_to_variable = {
 			var = ita_scorza_clout
 			value = 1
@@ -1766,13 +1753,12 @@ country_event = { #Ciano gives a speech
 			factor = 1
 			modifier = {
 				factor = 0
-					has_game_rule = {
-						rule = ITA_CIANO_OR_SCORZA
-                        option = ITA_SCORZA
-					}
+				has_game_rule = {
+					rule = ITA_CIANO_OR_SCORZA
+                    option = ITA_SCORZA
+				}
 			}
 		}
-
 		add_to_variable = {
 			var = ita_ciano_clout
 			value = 1
@@ -1790,13 +1776,12 @@ country_event = { #Ciano gives a speech
             factor = 1
             modifier = {
                 factor = 0
-                    has_game_rule = {
-                        rule = ITA_CIANO_OR_SCORZA
-                        option = ITA_CIANO
-                    }
+                has_game_rule = {
+                    rule = ITA_CIANO_OR_SCORZA
+                    option = ITA_CIANO
                 }
             }
-
+        }
 		add_to_variable = {
 			var = ita_scorza_clout
 			value = 1
@@ -2845,7 +2830,9 @@ country_event = { #Fanfani takes power after Moro
 
 	option = {
 		name = christdem.35.a
-		promote_character = ITA_Amintore_Fanfani
+		ITA_Amintore_Fanfani = {
+		   promote_character = { ideology = liberal_democracy_christian_progressivism_subtype }
+		}
 		set_politics = {
 			last_election = "1970.4.28"
 			election_frequency = 48
@@ -8763,7 +8750,9 @@ country_event = { #Ciano Steps Down, Umberto Takes Temporary Power#
 			elections_allowed = yes
 			ruling_party = despotism
 		}
-		promote_character = ITA_Giorgio_Almirante
+		ITA_Giorgio_Almirante = {
+			promote_character = { ideology = authoritarian_democracy_national_conservatism_subtype }
+		}
 		hidden_effect = {
 			every_country = {
 				news_event = {
@@ -13979,6 +13968,7 @@ country_event = { ## Jerusalem / Levantine Union / Jordan / Egyptian Sinai
 					days = 1
 				}
 			}
+			JOR = { country_event = { id = IMEskeleton.7 days = 600 } }
 		}
 
 		set_global_flag = ITA_Levant_Finished
@@ -14026,8 +14016,6 @@ country_event = { ## Jerusalem / Levantine Union / Jordan / Egyptian Sinai
 				name = JOR_Abdullah_despotism_party
 				long_name = JOR_Abdullah_despotism_party_long
 			}
-
-			country_event = { id = IMEskeleton.7 days = 600 }
 		}
 		ITA = {
 			set_country_flag = ITA_IME_decolonization_4
@@ -17799,7 +17787,9 @@ country_event = {
 			}
 			load_focus_tree = ita_1970_FD_goering
 		}
-		promote_character = ITA_Giuseppe_Saragat
+		ITA_Giuseppe_Saragat = {
+		   promote_character = { ideology = social_democracy_democratic_socialism_subtype }
+		}
 		set_politics = {
 			ruling_party = social_democracy
 			last_election = "1966.6.23"
@@ -17808,7 +17798,7 @@ country_event = {
 		}
 		add_popularity = {
 			ideology = social_democracy
-			popularity = .1
+			popularity = 0.1
 		}
 		if = {
 			limit = {
@@ -18208,7 +18198,7 @@ country_event = {
 		}
 		add_popularity = {
 			ideology = authoritarian_democracy
-			popularity = .1
+			popularity = 0.1
 		}
 		if = {
 			limit = {
@@ -19670,7 +19660,6 @@ country_event = { # XXV Congress, decision on SocDem or LibSoc empowering
 
 	option = { # SocDem
 		name = FD.1.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -19687,7 +19676,6 @@ country_event = { # XXV Congress, decision on SocDem or LibSoc empowering
 				}
 			}
 		}
-		
 		hidden_effect = {
 			add_popularity = {
 				ideology = socialist
@@ -19712,7 +19700,6 @@ country_event = { # XXV Congress, decision on SocDem or LibSoc empowering
 	}
 	option = { # LibSoc
 		name = FD.1.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -19729,7 +19716,6 @@ country_event = { # XXV Congress, decision on SocDem or LibSoc empowering
 				}
 			}
 		}
-		
 		hidden_effect = {
 			add_popularity = {
 				ideology = socialist
@@ -19781,7 +19767,6 @@ country_event = { # Prima la Democrazia
 
 	option = { # Empower Strength, low reelection, meh terror
 		name = FD.2.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -19792,7 +19777,6 @@ country_event = { # Prima la Democrazia
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_the_red_and_white
 		}
@@ -19802,7 +19786,6 @@ country_event = { # Prima la Democrazia
 	}
 	option = { # Strengthen Party, high reelection, strong terror
 		name = FD.2.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -19813,7 +19796,6 @@ country_event = { # Prima la Democrazia
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_unita_socialista
 		}
@@ -20099,7 +20081,6 @@ country_event = { # Prima il Socialismo
 
 	option = { # Socialismo strength
 		name = FD.20.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20110,7 +20091,6 @@ country_event = { # Prima il Socialismo
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_via_italiana_al_socialism
 			set_country_flag = IS_follow
@@ -20120,7 +20100,6 @@ country_event = { # Prima il Socialismo
 	}
 	option = { # Revolution via ballot
 		name = FD.20.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20131,7 +20110,6 @@ country_event = { # Prima il Socialismo
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_revolution_by_ballot
 		}
@@ -20341,8 +20319,6 @@ country_event = { # Post Ciano Fascism
 
 	option = { # Allign with the democratic system
 		name = BN.1.a
-
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20359,7 +20335,6 @@ country_event = { # Post Ciano Fascism
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_the_years_of_the_sheep
 		}
@@ -20373,7 +20348,6 @@ country_event = { # Post Ciano Fascism
 	}
 	option = { # Forge our own path
 		name = BN.1.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20390,7 +20364,6 @@ country_event = { # Post Ciano Fascism
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_the_days_of_the_lion
 			hidden_effect = {
@@ -20437,7 +20410,6 @@ country_event = { # Fiuggi Congress
 
 	option = { # Right Blocc
 		name = BN.2.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20448,7 +20420,6 @@ country_event = { # Fiuggi Congress
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_non_rinnegare1
 		}
@@ -20456,7 +20427,6 @@ country_event = { # Fiuggi Congress
 	}
 	option = { # New Democracy
 		name = BN.2.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20467,7 +20437,6 @@ country_event = { # Fiuggi Congress
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_non_restaurare1
 		}
@@ -20711,7 +20680,6 @@ country_event = { # Speak to Parliament
 
 	option = { # Sideline Parliament
 		name = BN.18.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20722,7 +20690,6 @@ country_event = { # Speak to Parliament
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_sideline_parliament
 		}
@@ -20730,7 +20697,6 @@ country_event = { # Speak to Parliament
 	}
 	option = { # Bolt Parliament
 		name = BN.18.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -20741,7 +20707,6 @@ country_event = { # Speak to Parliament
 				}
 			}
 		}
-		
 		hidden_effect = {
 			complete_national_focus = ita_bolt_parliament
 		}
@@ -25986,7 +25951,6 @@ country_event = { # Choose a new leader
 			    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_DESPOTISM }
 		    }
 		}
-		
 		hidden_effect = {
 			EGY = {
 				retire_character = EGY_Farouk_I
@@ -26037,7 +26001,6 @@ country_event = { # Choose a new leader
 			    has_game_rule = { rule = EGY_PATH option =  EGY_PATH_AD }
 		    }
 		}
-		
 		EGY = {
 			retire_character = EGY_Farouk_I
 			add_country_leader_role = {

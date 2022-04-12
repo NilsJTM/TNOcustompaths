@@ -973,7 +973,7 @@ country_event = {
 
 	option = {
 		name = bormann.1504.a
-		ai_chance = { factor = 80 }	
+		ai_chance = { factor = 80 }
 		add_to_variable = { pol_agree = 1 } 
 		hidden_effect = { country_event = { id = bormann.1505 days = 3 } }
 	}
@@ -4694,6 +4694,7 @@ country_event = { #Really cool event DO NOT TRIGGER OR ELSE HE WILL APPEAR IN YO
 			transfer_state = 1263
 			transfer_state = 1445
 			transfer_state = 1327
+			transfer_state = 1609
 			add_state_core = 290
 			add_state_core = 1005
 			add_state_core = 1006
@@ -4768,6 +4769,7 @@ country_event = { #Really cool event DO NOT TRIGGER OR ELSE HE WILL APPEAR IN YO
 			add_state_core = 1263
 			add_state_core = 1445
 			add_state_core = 1327
+			add_state_core = 1609
 		}
 		
 		2 = {
@@ -8002,7 +8004,7 @@ country_event = { # Norway demands fairer terms (garrison)
 	}
 	option = { # Try a loophole
 		name = bormann.1071.b
-		ai_chance = { factor = 70 }	
+		ai_chance = { factor = 70 }
 		add_political_power = -20
 		NOR = { country_event = { id = bormann.1073 days = 1 } }
 	}
@@ -8033,7 +8035,7 @@ country_event = { # Germany refuses fairer terms (garrison)
 	}
 	option = { # Refuse
 		name = bormann.1072.b
-		ai_chance = { factor = 75 }	
+		ai_chance = { factor = 75 }
 		add_political_power = 50
 		GER_BOR_NOR_fail_negotiations = yes
 	}
@@ -8222,7 +8224,7 @@ country_event = { # Germany presents fairer terms (economic program)
 	}
 	option = { # Refuse
 		name = bormann.1079.b
-		ai_chance = { factor = 30 }	
+		ai_chance = { factor = 30 }
 		add_political_power = -20
 		GER_BOR_NOR_fail_negotiations = yes
 	}
@@ -8393,7 +8395,7 @@ country_event = { # Germany presents fairer terms (pakt membership)
 	}
 	option = { # Refuse
 		name = bormann.1085.b
-		ai_chance = { factor = 30 }	
+		ai_chance = { factor = 30 }
 		add_political_power = -20
 		GER_BOR_NOR_fail_negotiations = yes
 	}
@@ -8849,7 +8851,7 @@ country_event = { # Heerema - Heerema took over in a provisional basis after Koc
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	option = { # Bormann thinks that's fine and lets him stay	
+	option = { # Bormann thinks that's fine and lets him stay
 		name = bormann.1109.a
 		ai_chance = { factor = 1 
 		    modifier = {
@@ -9752,6 +9754,7 @@ country_event = { # Bormann gets lung cancer
 		set_country_flag = TNO_closing_screen_show
 		custom_effect_tooltip = BOR_closing_tt
 		hidden_effect = {
+			country_event = { id = reich.9999 days = 90 } # Economy unfucker event
 			set_country_leader_portrait = {
 				portrait = "gfx/leaders/GER/Portrait_Germany_Martin_Bormann_Fuck.dds"
 			}
@@ -10636,16 +10639,12 @@ country_event = { # Complete the fail path of the focus tree doofus
 					}
 				}
 				GER = {
-					remove_opinion_modifier = {
-						target = ITA
-						modifier = TNO_BOR_ITA_peace_in_our_time_trade
-					}
+					set_temp_variable = { temp_modifier = -35 }
+					ITA = { add_to_trade_modifier_PREV = yes }
 				}
 				ITA = {
-					remove_opinion_modifier = {
-						target = GER
-						modifier = TNO_BOR_ITA_peace_in_our_time_trade
-					}
+					set_temp_variable = { temp_modifier = -35 }
+					GER = { add_to_trade_modifier_PREV = yes }
 				}
 				remove_opinion_modifier = {
 					target = ITA
@@ -11531,7 +11530,7 @@ country_event = { # Germans delay
 			country_event = bormann.1907
 		}
 	}
-	option = { # fine (grumble grumble grumble) 
+	option = { # fine (grumble grumble grumble)
 		name = bormann.1905.b
 		add_political_power = -10
 		custom_effect_tooltip = GER_BOR_OFN_Talks_Succeeding

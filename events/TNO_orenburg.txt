@@ -868,7 +868,22 @@ country_event = {
 		name = ORE.29.a #new varible gaming! wait and see who wins!#
 		if = {
 			limit = {
-			    OR = {
+			    has_game_rule = {
+					rule = ORE_ideology_route
+					option = ORE_IDEOLOGY_ROUTE_AUTHSOC
+				}
+			}
+			set_global_flag = OREChoseMalenkov
+			mark_focus_tree_layout_dirty = yes
+			country_event = {
+				id = ORE.20
+				days = 1
+			}
+			complete_national_focus = ORE_malenkovs_speech
+		}
+		else_if = {
+			limit = {
+				OR = {
 				    has_game_rule = {
 					    rule = ORE_ideology_route
 					    option = ORE_IDEOLOGY_ROUTE_LIBSOC_SUCCESS
@@ -886,21 +901,6 @@ country_event = {
 				days = 1
 			}
 			complete_national_focus = ORE_the_counter_proposal
-		}
-		else_if = {
-			limit = {
-			    has_game_rule = {
-					rule = ORE_ideology_route
-					option = ORE_IDEOLOGY_ROUTE_AUTHSOC
-				}
-			}
-			set_global_flag = OREChoseMalenkov
-			mark_focus_tree_layout_dirty = yes
-			country_event = {
-				id = ORE.20
-				days = 1
-			}
-			complete_national_focus = ORE_malenkovs_speech
 		}
 		else_if = {
 			limit = {
@@ -2614,16 +2614,9 @@ country_event = { #Skirmish between Village militias!
 	title = ORE.101.t
 	desc = ORE.101.d
 	picture = GFX_report_event_generic_riot
-
+	is_triggered_only = yes
 	trigger = {
-		original_tag = ORE
 		has_government = socialist
-		date > 1963.05.05
-		OR = {
-			original_tag = ORE
-			has_government = authoritarian_democracy
-			date > 1963.05.05
-		}
 	}
 
 	fire_only_once = yes
@@ -3777,27 +3770,20 @@ country_event = { #Pacifica Writes Gay Romance - Part Two
 		trigger = {
 			OR = {
 				has_political_power > 25
-				AND = {
-					has_game_rule = {
-						rule = ORE_gay_route
-						option = ORE_GAY_ROUTE_ACCEPT
-					}
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_ACCEPT
 				}
-				AND = {
-					has_game_rule = {
-						rule = ORE_gay_route
-						option = ORE_GAY_ROUTE_BETRAY
-					}
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_BETRAY
 				}
-				AND = {
-					has_game_rule = {
-						rule = ORE_gay_route
-						option = ORE_GAY_ROUTE_BETRAY_URL
-					}
+				has_game_rule = {
+					rule = ORE_gay_route
+					option = ORE_GAY_ROUTE_BETRAY_URL
 				}
 			}
 		}
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -3816,7 +3802,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Two
 	}
 	option = {
 		name = ORE.152.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -3837,7 +3822,7 @@ country_event = { #Pacifica Writes Gay Romance - Part Two
 				}
 			}
 		}
-		
+		TNO_worsen_lgbt_rights_policy_effectiveness_med = yes
 		hidden_effect = {
 			country_event = { id = ORE.154 days = 2 }
 		}
@@ -3909,7 +3894,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Six
 
 	option = {
 		name = ORE.156.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -3926,7 +3910,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Six
 				}
 			}
 		}
-		
 		add_stability = -0.02
 		ORE_decentralization_some = yes
 		TNO_worsen_admin_efficiency_med = yes
@@ -3936,7 +3919,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Six
 	}
 	option = {
 		name = ORE.156.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -3947,7 +3929,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Six
 				}
 			}
 		}
-		
 		add_political_power = 25
 		tno_lgbt_rights_worsen = yes
 		TNO_worsen_lgbt_rights_policy_effectiveness_med = yes
@@ -3984,43 +3965,33 @@ country_event = { #Pacifica Writes Gay Romance - Part Eight
 
 	option = {
 		name = ORE.1562.a
-		if = {
-			limit = {
-				has_game_rule = {
-					rule = ORE_gay_route
-					option = ORE_GAY_ROUTE_BETRAY_URL
-				}
-			}
-			hidden_effect = {
-				country_event = { id = ORE.1563 days = 41 }
-			}
-		}
-		else_if = {
-			limit = {
-				has_game_rule = {
-					rule = ORE_gay_route
-					option = ORE_GAY_ROUTE_BETRAY
-				}
-			}
-			hidden_effect = {
-				country_event = { id = ORE.1566 days = 41 }
-			}
-		}
-		else = {
-			random_list = {
-				30 = {
-					hidden_effect = {
-						country_event = { id = ORE.1563 days = 41 }
+		random_list = {
+			30 = {
+				modifier = {
+					factor = 0
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY
 					}
 				}
-				70 = {
-					hidden_effect = {
-						country_event = { id = ORE.1566 days = 41 }
+				hidden_effect = {
+					country_event = { id = ORE.1563 days = 41 }
+				}
+			}
+			70 = {
+				modifier = {
+					factor = 0
+					has_game_rule = {
+						rule = ORE_gay_route
+						option = ORE_GAY_ROUTE_BETRAY_URL
 					}
+				}
+				hidden_effect = {
+					country_event = { id = ORE.1566 days = 41 }
 				}
 			}
 		}
-	}			
+	}
 }
 
 country_event = { #Pacifica Writes Gay Romance - Part Nine
@@ -4035,7 +4006,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Nine
 
 	option = {
 		name = ORE.1563.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -4046,7 +4016,6 @@ country_event = { #Pacifica Writes Gay Romance - Part Nine
 				}
 			}
 		}
-		
 		add_equipment_to_stockpile = {
 			type = infantry_equipment_0
 			amount = -1
@@ -4058,11 +4027,9 @@ country_event = { #Pacifica Writes Gay Romance - Part Nine
 	}
 	option = {
 		name = ORE.1563.b
-		
 		ai_chance = {
 			factor = 1
 		}
-		
 		add_equipment_to_stockpile = {
 			type = infantry_equipment_0
 			amount = -1

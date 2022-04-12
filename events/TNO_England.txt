@@ -2656,9 +2656,11 @@ country_event = { #HMMLR Victory
 		# ENG_RECONSTRUCTION_initialize = yes
 		clr_global_flag = ECW_ongoing
 		set_country_flag = ENG_Reconstruction
-		country_event = {
-			id = ENG_devastation.5
-			days = 1
+		hidden_effect = {
+			country_event = {
+				id = ENG_devastation.5
+				days = 1
+			}
 		}
 	}
 }
@@ -2681,9 +2683,11 @@ country_event = { #Collab Victory
 		# ENG_RECONSTRUCTION_initialize = yes
 		clr_global_flag = ECW_ongoing
 		set_country_flag = ENG_Reconstruction
-		country_event = {
-			id = ENG_devastation.5
-			days = 1
+		hidden_effect = {
+			country_event = {
+				id = ENG_devastation.5
+				days = 1
+			}
 		}
 	}
 }
@@ -2709,7 +2713,18 @@ country_event = { # Navy Transferred
 	id = ENG_HMMLRECW.7
 	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_HMMLRECW.7" }
 	title = ENG_HMMLRECW.7.t
-	desc = ENG_HMMLRECW.7.desc
+	desc = {
+		text = ENG_HMMLRECW.7.hmmlr.desc
+		trigger = {
+			has_global_flag = FEN_GF_WonEcw
+		}
+	}	
+	desc = {
+		text = ENG_HMMLRECW.7.collab.desc
+		trigger = {
+			has_global_flag = ENG_GF_WonEcw
+		}
+	}
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -3293,6 +3308,17 @@ country_event = { #End of an Era
 		country_event = { id = ENG_ElectionSeason.5 hours = 12 }
 		hidden_effect = {
 			country_event = { id = ENG_Government_Changes.16 days = 1460 } #2nd Election
+			meta_effect = { #sets up next election date in country ui
+				text = {
+					set_politics = {
+						ruling_party = ROOT
+						last_election = "[current_election_date]"
+						elections_allowed = yes
+						election_frequency = 3
+					}
+				}
+				current_election_date = "[?global.date.GetDateStringNoHour]"
+			}
 		}
 
 	}
@@ -3312,7 +3338,7 @@ country_event = { #The Royal Divorce
 		# custom_effect_tooltip = ENG_and_now_its_on_fire_tt
 		# ENG_RECONSTRUCTION_initialize = yes
 		# set_country_flag = ENG_reconstruction_initialized_collab
-		add_ideas = { tno_political_parties_multiparty_system }
+		tno_political_parties_improve = yes
 		custom_effect_tooltip = ENG_reconstruction_3_tt
 		hidden_effect = {
 			set_party_name = {
@@ -6238,8 +6264,8 @@ country_event = { #
 	option = { #mac
 		name = ENG_mac.1003.a
 		ai_chance = {
-		    factor = 1
-            modifier = {
+			factor = 1
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = COLLAB_IDEOLOGY_ROUTE option = COLLAB_IDEOLOGY_ROUTE_LIBDEM }
             }
@@ -6259,8 +6285,8 @@ country_event = { #
 	option = { #maud
 		name = ENG_mac.1003.b
 		ai_chance = {
-		    factor = 1
-            modifier = {
+			factor = 1
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = COLLAB_IDEOLOGY_ROUTE option = COLLAB_IDEOLOGY_ROUTE_SOCCON }
             }
@@ -7514,8 +7540,16 @@ country_event = { #
 			ideology = liberal_democracy
 			popularity = 0.08
 		}
-		set_politics = {
-			ruling_party = liberal_democracy
+		effect_tooltip = {
+			set_politics = { #having 'public elections will be held' in the tt implies they weren't held before
+				ruling_party = liberal_democracy
+			}
+		}
+		hidden_effect = {
+			set_politics = {
+				ruling_party = liberal_democracy
+				elections_allowed = yes
+			}
 		}
 		set_country_flag = TNO_closing_screen_show
 	}
@@ -10556,6 +10590,9 @@ country_event = { # Maggie Cornwall Crisis - Start
 
 	option = { #fair talks
 		name = ENG_thatcher.1200.a
+		ai_chance = {
+			factor = 1
+		}
 		country_event = {
 			id = ENG_thatcher.1201
 			days = 1
@@ -10926,6 +10963,9 @@ country_event = { # Maggie Cornwall Crisis	- Germany proposes another solution
 
 	option = { #this is good
 		name = ENG_thatcher.1225.a
+		ai_chance = {
+			factor = 1
+		}
 		GER = {
 			country_event = {
 				id = ENG_thatcher.1226
@@ -11186,7 +11226,7 @@ country_event = { #Meeting with St. John-Stevas
 		hidden_effect = {
 			remove_ideas = ENG_Generic_Vacant_for
 		}
-		add_ideas = ENG_Norman_St_John_Stevas_for
+		add_ideas = FEN_Norman_St_John_Stevas_for
 	}
 }
 
@@ -11205,7 +11245,7 @@ country_event = { #Meeting with Powell
 		hidden_effect = {
 			remove_ideas = ENG_Generic_Vacant_sec
 		}
-		add_ideas = ENG_Enoch_Powell_sec
+		add_ideas = FEN_Enoch_Powell_sec
 	}
 }
 
@@ -12009,8 +12049,8 @@ country_event = { #Wilson Kicks out Birch
 		ai_chance = { factor = 1 }
 		hidden_effect = {
 			set_country_flag = Birch_Removed
-			remove_ideas = ENG_Reg_Birch_hog
-			add_ideas = ENG_Yigael_Gluckstein_hog
+			remove_ideas = FEN_Reg_Birch_hog
+			add_ideas = FEN_Yigael_Gluckstein_hog
 		}
 	}
 }
@@ -12019,24 +12059,6 @@ country_event = { #Birch Kicks out Wilson
 	id = FEN_SLP_political.9
 	immediate = { 
 		log = "[GetDateText]: [Root.GetName]: event FEN_SLP_political.9" 
-		remove_advisor_role = {
-			character = FEN_Bill_Alexander
-			slot = security_minister
-		}
-		add_advisor_role = {
-			character = ENG_Bill_Alexander
-			advisor = {
-				slot = foreign_minister
-				cost = -1
-				idea_token = ENG_Bill_Alexander_for
-				traits = {
-					for_the_cloak_n_dagger_schemer
-				}
-				allowed = {
-					original_tag = ENG
-				}
-			}
-		}
 	}
 	title = FEN_SLP_political.9.t
 	desc = FEN_SLP_political.9.desc
@@ -12048,17 +12070,9 @@ country_event = { #Birch Kicks out Wilson
 		name = FEN_SLP_political.9.a
 		ai_chance = { factor = 1 }
 		hidden_effect = {
+			promote_character = FEN_Reg_Birch
 			set_politics = {
 				ruling_party = communist
-			}
-			create_country_leader = {
-				name = "Reg Birch"
-				desc = "POLITICS_REG_BIRCH_DESC"
-				picture = "Portrait_England_Reg_Birch.dds"
-				expire = "1985.1.1"
-				ideology = communist_bukharinism_subtype
-				traits = {
-				}
 			}
 			remove_all_ministers = yes
 			load_focus_tree = ENG_blankfocus
@@ -14242,12 +14256,7 @@ country_event = { #monty python event
 	picture = GFX_report_event_iberia_military_meeting
 
 	fire_only_once = yes
-	trigger = {
-		AND = {
-			tag = ENG
-			date > 1971.01.01
-		}
-	}
+	is_triggered_only = yes
 
 	option = { #
 		name = ENG_flavor.7.a
@@ -14350,11 +14359,9 @@ country_event = { #Space Oddity
 	#picture = GFX_report_event_scottish_flag2
 
 	fire_only_once = yes
+	is_triggered_only = yes
 	trigger = {
-		AND = {
-			date > 1969.06.19
-			has_global_flag = ENG_GF_WonEcw
-		}
+		has_global_flag = ENG_GF_WonEcw
 	}
 
 	option = { #
@@ -15276,6 +15283,7 @@ country_event = { #sending message to wales asking for reunification
 				factor = 4
 				ENG = { has_government = socialist }
 			}
+
 			modifier = {
 				factor = 0
 				has_game_rule = {
@@ -15301,8 +15309,9 @@ country_event = { #sending message to wales asking for reunification
 	option = { #no
 		name = ENG_Wales_unification.2.b
 		ai_chance = {
-		    factor = 2
-		    modifier = {
+			base = 2
+
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = ENG_WALES_REUNIFICATION
@@ -15449,6 +15458,9 @@ country_event = { #england asks for demilitirisation
 
 	option = { #yes
 		name = ENG_Wales_unification.7.a
+		ai_chance = {
+		    factor = 1
+		}
 		ENG = {
 			country_event = {
 				id = ENG_Wales_unification.8
@@ -15539,7 +15551,9 @@ country_event = { #wales asks for autonomy
 
 	option = { #yes
 		name = ENG_Wales_unification.10.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+		    factor = 1
+		}
 		WAL = {
 			country_event = {
 				id = ENG_Wales_unification.11
@@ -16477,14 +16491,12 @@ country_event = { #SCO - offering pre-war solution
 			}
 		}
 		ai_chance = {
-		    factor = 0
-		    modifier = {
-				factor = 1
-				OR = {
-					has_game_rule = {
-						rule = ENG_SCOTLAND_REUNIFICATION
-						option = ENG_SCOTLAND_REUNIFICATION_STATUS_QUO
-					}
+			factor = 0
+			modifier = {
+				add = 100
+				has_game_rule = {
+					rule = ENG_SCOTLAND_REUNIFICATION
+					option = ENG_SCOTLAND_REUNIFICATION_STATUS_QUO
 				}
 			}
 		}
@@ -16492,8 +16504,8 @@ country_event = { #SCO - offering pre-war solution
 	option = { #no
 		name = ENG_Scotland_unification.17.b
 		ai_chance = {
-		    factor = 100
-		    modifier = {
+			factor = 100
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = ENG_SCOTLAND_REUNIFICATION
@@ -16564,8 +16576,8 @@ country_event = { #ENG - scotland demands union of equals
 			}
 		}
 		ai_chance = {
-		    factor = 10
-		    modifier = {
+			factor = 10
+			modifier = {
 				factor = 0
 				OR = {
 					has_game_rule = {
@@ -16590,8 +16602,8 @@ country_event = { #ENG - scotland demands union of equals
 			}
 		}
 		ai_chance = {
-		    factor = 40
-		    modifier = {
+			factor = 40
+			modifier = {
 				factor = 0
 				OR = {
 					has_game_rule = {
@@ -16615,8 +16627,8 @@ country_event = { #ENG - scotland demands union of equals
 			}
 		}
 		ai_chance = {
-		    factor = 50
-		    modifier = {
+			factor = 50
+			modifier = {
 				factor = 0
 				OR = {
 					has_game_rule = {
@@ -16723,8 +16735,8 @@ country_event = { #SCO - england proposes lots of autonomy
 	option = { #no - we want more
 		name = ENG_Scotland_unification.22.b
 		ai_chance = {
-		    factor = 30
-		    modifier = {
+			factor = 30
+			modifier = {
 				factor = 0
 				OR = {
 					has_game_rule = {
@@ -17006,8 +17018,8 @@ country_event = { #SCO - england proposes limited autonomy
 	option = { #no - we want more
 		name = ENG_Scotland_unification.29.b
 		ai_chance = {
-		    factor = 80
-		    modifier = {
+			factor = 80
+			modifier = {
 				factor = 0
 				OR = {
 					has_game_rule = {
@@ -17296,24 +17308,11 @@ country_event = { #NDL 1st Election Victory
 				long_name = ENG_HMMLR_Post_Reconstruction_Conservative
 				name = ENG_HMMLR_Post_Reconstruction_Conservative_long
 			}
-			create_country_leader = {
-				name = "Enoch Powell"
-				desc = "POLITICS_ENOCH_POWELL_DESC"
-				picture = "Portrait_Enoch_Powell.dds"
-				expire = "1990.1.1"
-				ideology = authoritarian_democracy_subtype
-			}
-			create_country_leader = {
-				name = "Harold Wilson"
-				desc = "POLITICS_HAROLD_WILSON_DESC"
-				picture = "Portrait_England_Harold_Wilson_60s.dds"
-				expire = "1990.1.1"
-				ideology = socialist_revolutionary_frontism_subtype
-				traits = { }
-			}
+			promote_character = FEN_Enoch_Powell
 
 			set_politics = {
 				ruling_party = conservative_democracy
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -17359,9 +17358,9 @@ country_event = { #NDL 1st Election Victory
 			load_focus_tree = FEN_FT_NDL_Megatree
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_David_Eccles_hog
+				FEN_David_Eccles_hog
 				ENG_Generic_Vacant_for
-				ENG_Shirley_Williams_eco
+				FEN_Shirley_Williams_eco
 				ENG_Generic_Vacant_sec
 			}
 			set_country_flag = NDL_victorious
@@ -17381,26 +17380,8 @@ country_event = { #NDL 1st Election Victory
 
 country_event = { #SLP 1st Election Victory
 	id = ENG_Government_Changes.2
-	immediate = { 
-		log = "[GetDateText]: [Root.GetName]: event ENG_Government_Changes.2" 
-		remove_advisor_role = {
-			character = FEN_Reg_Birch
-			slot = economy_minister
-		}
-		add_advisor_role = {
-			character = FEN_Reg_Birch 
-			advisor = {
-				slot = head_of_government
-				cost = 50
-				idea_token = ENG_Reg_Birch_hog
-				traits = {
-					hog_ambitious_union_boss
-				}
-				allowed = {
-					original_tag = ENG
-				}
-			}
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ENG_Government_Changes.2"
 	}
 	title = ENG_Government_Changes.2.t
 	desc = ENG_Government_Changes.2.desc
@@ -17422,23 +17403,10 @@ country_event = { #SLP 1st Election Victory
 				long_name = ENG_HMMLR_Post_Reconstruction_Conservative
 				name = ENG_HMMLR_Post_Reconstruction_Conservative_long
 			}
-			create_country_leader = {
-				name = "Harold Wilson"
-				desc = "POLITICS_HAROLD_WILSON_DESC"
-				picture = "Portrait_England_Harold_Wilson_60s.dds"
-				expire = "1990.1.1"
-				ideology = socialist_revolutionary_frontism_subtype
-				traits = { }
-			}
-			create_country_leader = {
-				name = "Enoch Powell"
-				desc = "POLITICS_ENOCH_POWELL_DESC"
-				picture = "Portrait_Enoch_Powell.dds"
-				expire = "1990.1.1"
-				ideology = authoritarian_democracy_subtype
-			}
+			promote_character = FEN_Enoch_Powell
 			set_politics = {
 				ruling_party = socialist
+				elections_allowed = yes
 			}
 			set_temp_variable = { TNO_economy_subtype_temp = 2 }
 			econ_subtype_change = yes
@@ -17487,10 +17455,10 @@ country_event = { #SLP 1st Election Victory
 			load_focus_tree = FEN_FT_SLP_Megatree
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_Reg_Birch_hog
-				ENG_Alfred_Robens_eco
-				ENG_Peter_Shore_for
-				ENG_Bill_Alexander_sec
+				FEN_Reg_Birch_hog
+				FEN_Alfred_Robens_eco
+				FEN_Peter_Shore_for
+				FEN_Bill_Alexander_sec
 			}
 			set_country_flag = SLP_victorious
 			set_country_flag = ENG_government_republic
@@ -17529,6 +17497,7 @@ country_event = { #Thatcher 1st Election Victory
 			RP_ELITE_SPLIT_CALC = yes
 			set_politics = {
 				ruling_party = authoritarian_democracy
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -17611,6 +17580,7 @@ country_event = { #Macmillan 1st Election Victory
 			}
 			set_politics = {
 				ruling_party = conservative_democracy
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -17687,16 +17657,9 @@ country_event = { #NDL 2nd Election Victory
 	option = {
 		name = ENG_Government_Changes.5.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "George Jellicoe"
-				desc = "POLITICS_GEORGE_JELLICOE_DESC"
-				picture = "Portrait_England_George_Jellicoe.dds"
-				expire = "1990.1.1"
-				ideology = conservative_democracy_subtype
-				traits = { son_of_admiralty }
-			}
 			set_politics = {
 				ruling_party = conservative_democracy
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -17719,10 +17682,10 @@ country_event = { #NDL 2nd Election Victory
 
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_David_Eccles_hog
-				ENG_Norman_St_John_Stevas_for
-				ENG_Enoch_Powell_sec
-				ENG_Shirley_Williams_eco
+				FEN_David_Eccles_hog
+				FEN_Norman_St_John_Stevas_for
+				FEN_Enoch_Powell_sec
+				FEN_Shirley_Williams_eco
 			}
 			set_country_flag = NDL_victorious2
 			mark_focus_tree_layout_dirty = yes
@@ -17755,6 +17718,7 @@ country_event = { #SLP 2nd Election Victory
 			}
 			set_politics = {
 				ruling_party = socialist
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -17777,9 +17741,9 @@ country_event = { #SLP 2nd Election Victory
 
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_Yigael_Gluckstein_hog
-				ENG_Alfred_Robens_eco
-				ENG_Peter_Shore_for
+				FEN_Yigael_Gluckstein_hog
+				FEN_Alfred_Robens_eco
+				FEN_Peter_Shore_for
 				ENG_Orde_Wingate_sec
 			}
 			set_country_flag = SLP_victorious2
@@ -17808,6 +17772,7 @@ country_event = { #Thatcher 2nd Election Victory
 		hidden_effect = {
 			set_politics = {
 				ruling_party = authoritarian_democracy
+				elections_allowed = yes
 			}
 			ENG_Margaret_Thatcher = {
 				set_portraits = {
@@ -17864,6 +17829,7 @@ country_event = { #Macmillan 2nd Election Victory
 		hidden_effect = {
 			set_politics = {
 				ruling_party = conservative_democracy
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -17915,19 +17881,11 @@ country_event = {
 	option = {
 		name = ENG_Government_Changes.9.a
 		hidden_effect = {
-			retire_ideology_leader = despotism
 			add_popularity = {
 				ideology = despotism
 				popularity = 0.4
 			}
-			create_country_leader = {
-				name = "Young Democracy Law Government"
-				desc = "POLITICS_YOUNG_DEMOCRACY_LAW_GOVERNMENT_DESC"
-				picture = "Portrait_England_Young_Democracy_Law_Government.dds"
-				expire = "1990.1.1"
-				ideology = despotism_interim_government_subtype
-				traits = { }
-			}
+			promote_character = FEN_YDL_Government
 			set_party_name = {
 				ideology = despotism
 				long_name = ENG_despotism_ydl_long
@@ -17962,16 +17920,9 @@ country_event = { #NDL Post-other Party Election Victory
 	option = {
 		name = ENG_Government_Changes.10.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "George Jellicoe"
-				desc = "POLITICS_GEORGE_JELLICOE_DESC"
-				picture = "Portrait_England_George_Jellicoe.dds"
-				expire = "1990.1.1"
-				ideology = conservative_democracy_subtype
-				traits = { son_of_admiralty }
-			}
 			set_politics = {
 				ruling_party = conservative_democracy
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -18025,10 +17976,10 @@ country_event = { #NDL Post-other Party Election Victory
 			load_focus_tree = ENG_blankfocus
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_David_Eccles_hog
-				ENG_Norman_St_John_Stevas_for
-				ENG_Enoch_Powell_sec
-				ENG_Shirley_Williams_eco
+				FEN_David_Eccles_hog
+				FEN_Norman_St_John_Stevas_for
+				FEN_Enoch_Powell_sec
+				FEN_Shirley_Williams_eco
 			}
 			set_country_flag = NDL_victorious2
 			set_country_flag = TNO_closing_screen_show
@@ -18040,42 +17991,6 @@ country_event = { #SLP Post-other Party Election Victory
 	id = ENG_Government_Changes.11
 	immediate = { 
 		log = "[GetDateText]: [Root.GetName]: event ENG_Government_Changes.11"
-		remove_advisor_role = {
-			character = FEN_Reg_Birch
-			slot = economy_minister
-		}
-		add_advisor_role = {
-			character = FEN_Reg_Birch
-			advisor = {
-				slot = head_of_government
-				cost = -1
-				idea_token = ENG_Reg_Birch_hog
-				traits = {
-					hog_ambitious_union_boss
-				}
-				allowed = {
-					original_tag = ENG
-				}
-			}
-		}
-		remove_advisor_role = {
-			character = FEN_Bill_Alexander
-			slot = foreign_minister
-		}
-		add_advisor_role = {
-			character = ENG_Bill_Alexander
-			advisor = {
-				slot = security_minister
-				cost = -1
-				idea_token = ENG_Bill_Alexander_sec
-				traits = {
-					sec_resistance_hero
-				}
-				allowed = {
-					original_tag = ENG
-				}
-			}
-		}
 	}
 	title = ENG_Government_Changes.11.t
 	desc = ENG_Government_Changes.11.desc
@@ -18087,16 +18002,9 @@ country_event = { #SLP Post-other Party Election Victory
 	option = {
 		name = ENG_Government_Changes.11.a
 		hidden_effect = {
-			create_country_leader = {
-				name = "Harold Wilson"
-				desc = "POLITICS_HAROLD_WILSON_DESC"
-				picture = "Portrait_England_Harold_Wilson_60s.dds"
-				expire = "1990.1.1"
-				ideology = socialist_revolutionary_frontism_subtype
-				traits = { }
-			}
 			set_politics = {
 				ruling_party = socialist
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -18150,9 +18058,9 @@ country_event = { #SLP Post-other Party Election Victory
 			load_focus_tree = ENG_blankfocus
 			remove_all_ministers = yes
 			add_ideas = {
-				ENG_Reg_Birch_hog
-				ENG_Alfred_Robens_eco
-				ENG_Peter_Shore_for
+				FEN_Reg_Birch_hog
+				FEN_Alfred_Robens_eco
+				FEN_Peter_Shore_for
 				ENG_Bill_Alexander_sec
 			}
 			set_country_flag = SLP_victorious2
@@ -18176,6 +18084,7 @@ country_event = { #Thatcher Post-other Party 2nd Election Victory
 		hidden_effect = {
 			set_politics = {
 				ruling_party = authoritarian_democracy
+				elections_allowed = yes
 			}
 			promote_character = ENG_Margaret_Thatcher
 			ENG_Margaret_Thatcher = {
@@ -18252,6 +18161,7 @@ country_event = { #Macmillan Post-other Party 2nd Election Victory
 		hidden_effect = {
 			set_politics = {
 				ruling_party = conservative_democracy
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -18329,6 +18239,7 @@ country_event = {
 			set_country_flag = ENG_Parliament_Disabled
 			set_politics = {
 				ruling_party = authoritarian_democracy
+				elections_allowed = yes
 			}
 			remove_all_ministers = yes
 			load_focus_tree = ENG_blankfocus
@@ -18426,33 +18337,11 @@ country_event = { #MSA 1st Election Victory
 				long_name = ENG_HMMLR_Post_Reconstruction_Conservative
 				name = ENG_HMMLR_Post_Reconstruction_Conservative_long
 			}
-			create_country_leader = {
-				name = "Harold Wilson"
-				desc = "POLITICS_HAROLD_WILSON_DESC"
-				picture = "Portrait_England_Harold_Wilson_60s.dds"
-				expire = "1990.1.1"
-				ideology = socialist_revolutionary_frontism_subtype
-				traits = { }
-			}
-			create_country_leader = {
-				name = "Enoch Powell"
-				desc = "POLITICS_ENOCH_POWELL_DESC"
-				picture = "Portrait_Enoch_Powell.dds"
-				expire = "1990.1.1"
-				ideology = authoritarian_democracy_subtype
-			}
+			promote_character = FEN_Enoch_Powell
 			set_politics = {
 				ruling_party = despotism
+				elections_allowed = yes
 			}
-			create_country_leader = {
-				name = "David Stirling"
-				desc = "POLITICS_DAVID_STIRLING_DESC"
-				picture = "Portrait_England_David_Stirling_Civ.dds"
-				expire = "1985.1.1"
-				ideology = despotism_interim_government_subtype
-				traits = { }
-			}
-			
 
 			### Paaaaarliament mechanic stuff
 				# NOTE: Because of how arrays start at zero, the ID's for each party here are one less than normal
@@ -18534,6 +18423,7 @@ country_event = { #MSA 2nd Election Victory
 		hidden_effect = {
 			set_politics = {
 				ruling_party = despotism
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -18583,6 +18473,7 @@ country_event = { #MSA post-other Party 2nd Election Victory
 		hidden_effect = {
 			set_politics = {
 				ruling_party = despotism
+				elections_allowed = yes
 			}
 
 			### Paaaaarliament mechanic stuff
@@ -18657,6 +18548,7 @@ country_event = { #NF 1st Election Victory
 		hidden_effect = {
 			set_politics = {
 				ruling_party = fascism
+				elections_allowed = yes
 			}
 			clr_country_flag = ENG_reconstruction
 
@@ -20081,10 +19973,10 @@ country_event = {
 		name = FEN_MSA.2.a
 		remove_all_ministers = yes
 		add_ideas = {
-			ENG_Pauline_Gower_hog
-			ENG_John_Woodhouse_eco
-			ENG_Arthur_Harris_for
-			ENG_Richard_Hull_sec
+			FEN_Pauline_Gower_hog
+			FEN_John_Woodhouse_eco
+			FEN_Arthur_Harris_for
+			FEN_Richard_Hull_sec
 		}
 	}
 }

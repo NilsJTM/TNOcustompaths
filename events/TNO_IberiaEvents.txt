@@ -2803,164 +2803,6 @@ country_event = {
 ####
 # #
 # #
-##########################################################Heydrich Tree Events
-
-country_event = {
-	id = IBR.76
-	immediate = {log = "[GetDateText]: [Root.GetName]: event IBR.76"}
-	picture = GFX_heydrich_intro
-	is_triggered_only = no
-	fire_only_once = yes
-	hidden = no
-	title = IBR.76.t
-	desc = IBR.76.d
-	trigger = {
-		tag = IBR
-		has_global_flag = german_civil_war_heydrichvic
-		NOT = {
-			has_country_flag = IBRShiftReactionRight
-		}
-		NOT = { 
-			OR = { 
-				has_country_flag = IBR_dissolving_the_union 
-				has_country_flag = IBR_Iberian_Wars_have_happened
-			}
-		}
-	}
-	option = {
-		name = IBR.76.a
-		ai_chance = { factor = 10 }
-		if = { 	
-			limit = { 
-			has_country_flag = IBR_supported_speer_flag
-			}
-			if = { 
-				limit = { 
-					has_country_flag = advisory_council
-				}
-				add_to_variable = {IBR_council_influence = -5}
-				custom_effect_tooltip = IBR_influence_tt_8
-			}
-			IBR_council_clamp = yes
-			clr_country_flag = IBR_supported_speer_flag
-		}
-		hidden_effect = {
-			create_field_marshal = { 
-				name = "Agustín Muñoz Grandes"
-				portrait_path = "gfx/leaders/IBR/Portrait_Iberia_Agustin_Munoz_Grandes.dds"
-				skill = 4
-				attack_skill = 3
-				defense_skill = 4
-				planning_skill = 3
-				logistics_skill = 3
-				traits = { 
-					organizer
-					thorough_planner
-					old_guard 
-				}
-				id = 1301
-			}
-			country_event = {
-				id = IBR.77
-				days = 7
-			}
-		}
-	}
-}
-
-country_event = {
-	id = IBR.77
-	immediate = {log = "[GetDateText]: [Root.GetName]: event IBR.77"}
-	picture = GFX_heydrich_intro
-	is_triggered_only = yes
-	fire_only_once = yes
-	hidden = no
-	title = IBR.77.t
-	desc = IBR.77.d
-	option = {
-		name = IBR.77.a
-		ai_chance = { factor = 10 }
-		swap_ideas = {
-			remove_idea = Disorderly_Federal_Army
-			add_idea = Disorderly_Federal_Army_Heydrich
-		}
-		hidden_effect = {
-			country_event = {
-				id = IBR.80
-				days = 14
-			}
-		}
-	}
-}
-country_event = {
-	id = IBR.80
-	immediate = {log = "[GetDateText]: [Root.GetName]: event IBR.80"}
-	picture = GFX_heydrich_intro
-	is_triggered_only = yes
-	fire_only_once = yes
-	hidden = no
-	title = IBR.80.t
-	desc = IBR.80.d
-	option = {
-		name = IBR.80.a
-		ai_chance = { factor = 10 }
-		#set_country_flag = IBRGuardingGibraltarDam
-		
-		add_political_power = -25
-		
-		hidden_effect = {
-			country_event = {
-				id = IBR.81
-				days = 26
-			}
-		}
-	}
-}
-
-country_event = {
-	id = IBR.81
-	immediate = {log = "[GetDateText]: [Root.GetName]: event IBR.81"}
-	picture = GFX_heydrich_intro
-	is_triggered_only = yes
-	fire_only_once = yes
-	hidden = no
-	title = IBR.81.t
-	desc = IBR.81.d
-	option = {
-		name = IBR.81.a
-		ai_chance = { factor = 10 }
-		
-		army_funding_maximal_increase_low = yes
-		army_funding_minimal_increase_low = yes
-		
-		hidden_effect = {
-			country_event = {
-				id = IBR.82
-				days = 5
-			}
-		}
-	}
-}
-
-country_event = {
-	id = IBR.82
-	immediate = {log = "[GetDateText]: [Root.GetName]: event IBR.82"}
-	picture = GFX_heydrich_intro
-	is_triggered_only = yes
-	fire_only_once = yes
-	hidden = no
-	title = IBR.82.t
-	desc = IBR.82.d
-	option = {
-		name = IBR.82.a
-		ai_chance = { factor = 10 }
-		add_to_variable = {
-			var = IBRIberiaStability
-			value = 1
-		}
-		custom_effect_tooltip = IBR_add_stability_small_tt
-	}
-}
 
 ############################BORMANN TREE EVENTS
 
@@ -3656,7 +3498,7 @@ country_event = { #FLASHPOINT (FALANGE CRASH)
 				    days = 1
 			}
 		 }
-		if = {
+		 if = {
 			limit = {
 				has_game_rule = {
 					rule = IBR_STABILITY_ROUTE
@@ -6181,10 +6023,8 @@ country_event = {
 		name = IBR.413.a
 		ai_chance = { factor = 10 }
 		IBR_sub_5_marklib = yes
-		IBR = {
-			add_to_variable = { national_debt = 0.05 } #already converted to billion
-		}
-		custom_effect_tooltip = econ_increase_debt
+		set_temp_variable = { debt_temp = 0.05 }
+		econ_national_debt_change = yes
 		
 		if = { 
 			limit = { 
@@ -7277,14 +7117,7 @@ country_event = { #Union Republicana Secures Victory!
 			}
 		}
 		custom_effect_tooltip = IBR_soclib_victory_tt
-		hidden_effect = {
-			IBR = {
-				remove_ideas_with_trait = head_of_government
-				remove_ideas_with_trait = economy_minister
-				remove_ideas_with_trait = security_minister
-				remove_ideas_with_trait = foreign_minister
-			}
-		}
+		remove_all_ministers = yes
 		add_ideas = IBR_Adelino_Palma_dep
 		add_ideas = IBR_Manuel_Gutierrez_mil
 		add_ideas = IBR_Joaquin_Gimenez_for
@@ -7345,14 +7178,7 @@ country_event = { #Alianza Popular Secures Victory!
 			    }
 		    }
 		}
-		hidden_effect = {
-			IBR = {
-				remove_ideas_with_trait = head_of_government
-				remove_ideas_with_trait = economy_minister
-				remove_ideas_with_trait = security_minister
-				remove_ideas_with_trait = foreign_minister
-			}
-		}
+		remove_all_ministers = yes
 		add_ideas = IBR_Diogo_Freitas_dep
 		add_ideas = IBR_Jose_Azevedo_mil
 		add_ideas = IBR_Pio_Cabanillas_for
@@ -7420,14 +7246,7 @@ country_event = { #National Union Secures Victory!
 			election_frequency = 48
 			elections_allowed = yes
 		}	
-		hidden_effect = {
-			IBR = {
-				remove_ideas_with_trait = head_of_government
-				remove_ideas_with_trait = economy_minister
-				remove_ideas_with_trait = security_minister
-				remove_ideas_with_trait = foreign_minister
-			}
-		}
+		remove_all_ministers = yes
 		add_ideas = IBR_Marcelo_Caetano_dep
 		add_ideas = IBR_Manuel_Alegria_mil
 		add_ideas = IBR_Pedro_Cortina_for
@@ -7475,18 +7294,13 @@ country_event = { #PRD Secures Victory!
 	}
 	option = {
 		name = IBR.465.a
-		ai_chance = { factor = 10 }
-		set_politics = {
-			ruling_party = liberal_democracy
-			last_election = "1970.6.6"
-			election_frequency = 48
-			elections_allowed = yes
-		} 
+		ai_chance = { factor = 10 } 
 		set_party_name = { 
 			ideology = liberal_democracy 
 			long_name = IBR_CONGRESS_PRD_liberal_democracy_party_long 
 			name = IBR_CONGRESS_PRD_liberal_democracy_party 
 		}
+		retire_ideology_leader = liberal_democracy
 		hidden_effect = { 
 			every_country = {
 		        news_event = {
@@ -7495,17 +7309,11 @@ country_event = { #PRD Secures Victory!
 			    }
 		    }
 		}
-		add_country_leader_role = {
-			character = IBR_Alberto_Ullastres_Calvo
-			promote_character = yes
-			country_leader = {
-				desc = POLITICS_ALBERTO_ULLASTRES_DESC
-				expire = "1975.10.20"
-				ideology = liberal_democracy_subtype
-				traits = {
-					# 
-				}
-			}
+		set_politics = {
+			ruling_party = liberal_democracy
+			last_election = "1970.6.6"
+			election_frequency = 48
+			elections_allowed = yes
 		}
 		if = { 
 			limit = { 
@@ -7523,14 +7331,7 @@ country_event = { #PRD Secures Victory!
 		TNO_improve_public_meetings_policy_effectiveness_monthly_low = yes
 		
 		custom_effect_tooltip = IBR_marlib_victory_tt
-		hidden_effect = {
-			IBR = {
-				remove_ideas_with_trait = head_of_government
-				remove_ideas_with_trait = economy_minister
-				remove_ideas_with_trait = security_minister
-				remove_ideas_with_trait = foreign_minister
-			}
-		}
+		remove_all_ministers = yes
 		add_ideas = IBR_Leopoldo_Sotelo_dep
 		add_ideas = IBR_Manuel_Alegria_mil
 		add_ideas = IBR_Pio_Cabanillas_for
@@ -7557,14 +7358,14 @@ country_event = { #the event that works out who wins
 		name = IBR.466.a
 		ai_chance = {
 			factor = 10
-		    modifier = {
+			modifier = {
 			    factor = 0
 				OR = {
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_PRD }
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UR }
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UN }
 				}
-			}	
+			}
 		}
 		trigger = {
 			OR = {
@@ -7592,14 +7393,14 @@ country_event = { #the event that works out who wins
 		name = IBR.466.b
 		ai_chance = {
 			factor = 10
-		    modifier = {
+			modifier = {
 			    factor = 0
 				OR = {
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_AP }
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UR }
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UN }
 				}
-			}	
+			}
 		}
 		trigger = {
 			OR = {
@@ -7627,14 +7428,14 @@ country_event = { #the event that works out who wins
 		name = IBR.466.c
 		ai_chance = {
 			factor = 10
-		    modifier = {
+			modifier = {
 			    factor = 0
 				OR = {
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_AP }
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_PRD }
 					has_game_rule = { rule = IBR_ELECTION_ROUTE option =  IBR_ELECTION_ROUTE_UR }
 				}
-			}	
+			}
 		}
 		trigger = {
 			OR = {
@@ -7717,7 +7518,7 @@ country_event = { #
 	id = IBR.467
 	immediate = {log = "[GetDateText]: [Root.GetName]: event IBR.467"}
 	picture = GFX_report_event_iberia_road_work_2
-	is_triggered_only = no
+	is_triggered_only = yes
 	fire_only_once = yes
 	hidden = yes
 	title = IBR.467.t
@@ -7726,19 +7527,18 @@ country_event = { #
 		set_country_flag = ElectionAlreadyHappened2
 	}
 	trigger = {
-		date > 1974.6.30
 		OR = { 
 			has_country_leader = {
-			character = IBR_Torcuato_Fernandez_Miranda
-			ruling_only = yes
+				character = IBR_Torcuato_Fernandez_Miranda
+				ruling_only = yes
 			} 
 			has_country_leader = {
-			character = IBR_Manuel_Guitierrez
-			ruling_only = yes
+				character = IBR_Manuel_Guitierrez
+				ruling_only = yes
 			} 
 			has_country_leader = {
-			character = IBR_Alberto_Ullastres_Calvo
-            ruling_only = yes
+				character = IBR_Alberto_Ullastres_Calvo
+				ruling_only = yes
             } 
 			has_government = conservative_democracy 
 		}
@@ -22832,7 +22632,7 @@ country_event = { #Tension Looms
 		
 		hidden_effect = {
 			country_event = {
-				id = IBR.5856
+				id = IBR.5855
 				days = 5
 			}
 		}
@@ -26771,14 +26571,7 @@ country_event = {
 			election_frequency = 48
 			elections_allowed = yes
 		}
-		hidden_effect = {
-			IBR = {
-				remove_ideas_with_trait = head_of_government
-				remove_ideas_with_trait = economy_minister
-				remove_ideas_with_trait = security_minister
-				remove_ideas_with_trait = foreign_minister
-			}
-		}
+		remove_all_ministers = yes
 		add_ideas = IBR_Diogo_Freitas_dep
 		add_ideas = IBR_Manuel_Gutierrez_mil
 		add_ideas = IBR_Pio_Cabanillas_for
@@ -32434,14 +32227,7 @@ country_event = { #The End of an Era
 				}
 			}
 		}
-		hidden_effect = {
-			IBR = {
-				remove_ideas_with_trait = head_of_government
-				remove_ideas_with_trait = economy_minister
-				remove_ideas_with_trait = security_minister
-				remove_ideas_with_trait = foreign_minister
-			}
-		}
+		remove_all_ministers = yes
 		add_ideas = IBR_Adelino_Palma_dep
 		add_ideas = IBR_Manuel_Gutierrez_mil
 		add_ideas = IBR_Joaquin_Gimenez_for
@@ -33055,10 +32841,8 @@ country_event = { #italy open borders
 	option = {
 		name = IBR.730.a
 		ai_chance = { factor = 10 }
-		add_opinion_modifier = {
-			target = IBR
-			modifier = IBR_expanded_trade
-		}
+		set_temp_variable = { temp_modifier = 100 }
+		IBR = { add_to_trade_modifier_PREV = yes }
 		give_military_access = IBR
 	}
 	option = {
@@ -33092,10 +32876,8 @@ country_event = { #turkey open borders
 	option = {
 		name = IBR.731.a
 		ai_chance = { factor = 10 }
-		add_opinion_modifier = {
-			target = IBR
-			modifier = IBR_expanded_trade
-		}
+		set_temp_variable = { temp_modifier = 100 }
+		IBR = { add_to_trade_modifier_PREV = yes }
 		give_military_access = IBR
 	}
 	option = {
@@ -33129,10 +32911,8 @@ country_event = { #greece open borders
 	option = {
 		name = IBR.732.a
 		ai_chance = { factor = 10 }
-		add_opinion_modifier = {
-			target = IBR
-			modifier = IBR_expanded_trade
-		}
+		set_temp_variable = { temp_modifier = 100 }
+		IBR = { add_to_trade_modifier_PREV = yes }
 		give_military_access = IBR
 	}
 	option = {
@@ -33166,10 +32946,8 @@ country_event = { #Egypt open borders
 	option = {
 		name = IBR.733.a
 		ai_chance = { factor = 10 }
-		add_opinion_modifier = {
-			target = IBR
-			modifier = IBR_expanded_trade
-		}
+		set_temp_variable = { temp_modifier = 100 }
+		IBR = { add_to_trade_modifier_PREV = yes }
 		give_military_access = IBR
 	}
 	option = {
@@ -41078,7 +40856,7 @@ country_event = { #Oil crisis trees trigger
 		}
 		if = {
 			limit = {
-							has_country_leader = {
+						has_country_leader = {
                         character = IBR_Alberto_Ullastres_Calvo
                         ruling_only = yes
                        }
@@ -41141,19 +40919,16 @@ country_event = { #The Gibraltar Dam Opening Ceremony (non dem iberia)
 				value = 2
 			}
 		custom_effect_tooltip = IBR_add_stability_big_tt
-		every_country = {
+		hidden_effect = { 
+			country_event = {
+				id = IBR.1005
+			}
+			every_country = {
 		        news_event = {
 				    id = WORLD.501
 				    days = 1
 			    }
 		    }
-		hidden_effect = { 
-			country_event = {
-			id = IBR.1005
-			}
-		}
-		
-		hidden_effect = { 
 			country_event = {
 				id = IBR.31480
 				days = 15
@@ -41179,16 +40954,10 @@ country_event = { #The Gibraltar Dam Opening Ceremony (dem iberia)
 		add_to_variable = {IBR_gdp_growth_dam_variable = 1.0}
 		add_to_variable = {IBR_power_dam_variable = 436}
 		add_to_variable = {
-				var = IBRIberiaStability
-				value = 2
-			}
+			var = IBRIberiaStability
+			value = 2
+		}
 		custom_effect_tooltip = IBR_add_stability_big_tt
-		every_country = {
-		        news_event = {
-				    id = WORLD.501
-				    days = 1
-			    }
-		    }
 		if = {
 			limit = { has_government = authoritarian_democracy }
 			
@@ -41202,11 +40971,11 @@ country_event = { #The Gibraltar Dam Opening Ceremony (dem iberia)
 		else_if = {
 			limit = { 			
 				has_country_leader = {
-                        character = IBR_Alberto_Ullastres_Calvo
-                        ruling_only = yes
-					   } 
-					}
-			
+                    character = IBR_Alberto_Ullastres_Calvo
+                    ruling_only = yes
+				} 
+			}
+		
 			IBR_add_10_marklib = yes
 		}
 		else_if = {
@@ -41222,10 +40991,16 @@ country_event = { #The Gibraltar Dam Opening Ceremony (dem iberia)
 					}
 				}
 			}
-			
+
 			IBR_add_10_soclib = yes
 		}
 		hidden_effect = { 
+			every_country = {
+				news_event = {
+					id = WORLD.501
+					days = 1
+				}
+			}
 			country_event = {
 				id = IBR.31480
 				days = 15
@@ -41252,18 +41027,17 @@ country_event = { #The Gibraltar Dam Opening Ceremony (non dem iberia, salazar t
 		add_to_variable = {IBR_gdp_growth_dam_variable = 1.0}
 		add_to_variable = {IBR_power_dam_variable = 436}
 		add_to_variable = {
-				var = IBRIberiaStability
-				value = 2
-			}
+			var = IBRIberiaStability
+			value = 2
+		}
 		custom_effect_tooltip = IBR_add_stability_big_tt
-		every_country = {
+		hidden_effect = { 
+			every_country = {
 		        news_event = {
 				    id = WORLD.501
 				    days = 1
 			    }
 		    }
-			
-		hidden_effect = { 
 			country_event = {
 				id = IBR.31480
 				days = 15
@@ -44364,37 +44138,6 @@ country_event = {
 			value = 1
 		}
 	}
-	option = {
-		name = IBR.1115.b
-		ai_chance = { factor = 10 }
-		# Transfer the islands and the Canarias
-		set_country_flag = IBRTransferIslands2
-		subtract_from_variable = {
-			var = IBRPortugalAnger
-			value = 1
-		}
-		subtract_from_variable = {
-			var = IBRColonialBalance
-			value = 1
-		}
-		add_to_variable = {
-			var = IBRSpainAnger
-			value = 1
-		}
-	}
-	option = {
-		name = IBR.1115.c
-		ai_chance = { factor = 10 }
-		# Spain keeps them
-		add_to_variable = {
-			var = IBRColonialBalance
-			value = 1
-		}
-		add_to_variable = {
-			var = IBRPortugalAnger
-			value = 2
-		}
-	}
 }
 
 country_event = {
@@ -44729,12 +44472,35 @@ country_event = {
 			}
 		else = { 
 			POR = { 
+				set_politics = {
+					ruling_party = despotism
+				}
+				kill_country_leader = yes
+				add_country_leader_role = {
+					character = POR_Antonio_Salazar
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICS_ANTONIO_DE_OLIVEIRA_SALAZAR_DIVORCE_DESC"
+						expire = "1981.10.20"
+						ideology = despotism_civilian_dictatorship_subtype
+						traits = {
+							#
+						}
+					}
+				}
+				hidden_effect = {
+					#add_ideas = POR_Americo_Tomas
+					add_ideas = POR_Pedro_Pereira_dep
+					add_ideas = POR_Manuel_Gomes_de_Araujo_mil
+					add_ideas = POR_Marcello_Mathias_for
+					add_ideas = POR_Ulisses_Cortes_eco
+				}
+			}
 					add_ideas = POR_Pedro_Pereira_dep
 					add_ideas = POR_Manuel_Gomes_de_Araujo_mil
 					add_ideas = POR_Marcello_Mathias_for
 					add_ideas = POR_Ulisses_Cortes_eco
 			}
-		}
 		}
 		if = {
 			limit = { 
@@ -49604,12 +49370,7 @@ country_event = { #Agustín Muñoz Grandes is Dead!
 		name = IBR.3203.a
 		ai_chance = { factor = 1 }
 		trigger = { has_country_flag = advisory_council } 
-		if = { 
-			limit = { 
-			has_unit_leader = 1301
-			} 
-			remove_unit_leader = 1301
-		} 
+		retire_character = IBR_Agustin_Munoz_Grandes
 		hidden_effect = {
 			IBR = {
 				remove_ideas_with_trait = security_minister
@@ -49621,12 +49382,7 @@ country_event = { #Agustín Muñoz Grandes is Dead!
 		name = IBR.3203.b
 		ai_chance = { factor = 1 }
 		trigger = { has_country_flag = legislature_council }
-		if = { 
-			limit = { 
-			has_unit_leader = 1301
-			} 
-			remove_unit_leader = 1301
-		} 
+		retire_character = IBR_Agustin_Munoz_Grandes 
 		hidden_effect = {
 			IBR = {
 				remove_ideas_with_trait = security_minister
@@ -52391,7 +52147,7 @@ country_event = {
 			}
 			if = { 
 				limit = { 
-					has_country_flag = advisory_council
+					has_country_flag = legislative_council
 				}
 				country_event = { 
 					id = IBR.4025 
@@ -52965,7 +52721,6 @@ country_event = {
 			set_country_flag = IBR_Algeria_War_Path
 		
 		}
-		
 		else_if = { #Franco made war more likely
 			limit = { 
 				IBR = { 

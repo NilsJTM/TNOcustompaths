@@ -138,16 +138,16 @@ country_event = {
 
 		# NDL
 	option = {
-		ai_chance = { 
+		ai_chance = {
 			base = 2
-				modifier = {
-					factor = 0
-					has_game_rule = {
-						rule = HMMLR_IDEOLOGY_ROUTE
-						option = HMMLR_IDEOLOGY_ROUTE_LIBSOC
-					}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = HMMLR_IDEOLOGY_ROUTE
+					option = HMMLR_IDEOLOGY_ROUTE_LIBSOC
 				}
 			}
+		}
 		name = ENG_ElectionSeason.1.o_ndl
 		hidden_effect = {
 			set_variable = { TNO_Britain_ElectionSeason_Running_Party = 12 }
@@ -160,7 +160,7 @@ country_event = {
 
 		# SLP
 	option = {
-		ai_chance = { 
+		ai_chance = {
 			base = 2
 			modifier = {
 				factor = 0
@@ -266,7 +266,20 @@ country_event = {
 	# Election - Close
 country_event = {
 	id = ENG_ElectionSeason.4
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.4" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.4" 
+		meta_effect = { #sets up next election date in country ui
+			text = {
+				set_politics = {
+					ruling_party = ROOT
+					last_election = "[current_election_date]"
+					elections_allowed = yes
+					election_frequency = 40
+				}
+			}
+			current_election_date = "[?global.date.GetDateStringNoHour]"
+		}
+	}
 	title = ENG_ElectionSeason.4.t
 	desc = ENG_ElectionSeason.4.desc
 	picture = GFX_report_event_generic_election
@@ -366,7 +379,7 @@ country_event = {
 
 		# UE
 	option = {
-		ai_chance = { 
+		ai_chance = {
 			base = 2
 			modifier = {
 				factor = 0
@@ -385,7 +398,7 @@ country_event = {
 
 		# RP
 	option = {
-		ai_chance = { 
+		ai_chance = {
 			base = 2
 			modifier = {
 				factor = 0
@@ -450,7 +463,20 @@ country_event = {
 	# Election - Close
 country_event = {
 	id = ENG_ElectionSeason.7
-	immediate = { log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.7" }
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ENG_ElectionSeason.7" 
+		meta_effect = { #sets up next election date in country ui
+			text = {
+				set_politics = {
+					ruling_party = ROOT
+					last_election = "[current_election_date]"
+					elections_allowed = yes
+					election_frequency = 47
+				}
+			}
+			current_election_date = "[?global.date.GetDateStringNoHour]"
+		}
+	}
 	title = ENG_ElectionSeason.7.t
 	desc = ENG_ElectionSeason.7.desc
 	picture = GFX_report_event_generic_election

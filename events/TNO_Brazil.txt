@@ -691,9 +691,9 @@ country_event = {
 
 		trigger = { is_ai = yes }	
 
-		ai_chance = { 
+		ai_chance = {
 			factor = 0.15
-            modifier = {
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_LOTT_QUADROS_STRUGGLE option = BRA_LOTT_QUADROS_STRUGGLE_LOTT_GOULART_VIC }
             }
@@ -704,7 +704,7 @@ country_event = {
             modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_LOTT_QUADROS_STRUGGLE option = BRA_LOTT_QUADROS_STRUGGLE_HUNDRED_DAYS }
-            }			
+            }
 		}
 
 		hidden_effect = {
@@ -719,9 +719,9 @@ country_event = {
 
 		trigger = { is_ai = yes }	
 
-		ai_chance = { 
-			factor = 0.85 
-            modifier = {
+		ai_chance = {
+			factor = 0.85
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_LOTT_QUADROS_STRUGGLE option = BRA_LOTT_QUADROS_STRUGGLE_LOTT_QUADROS_VIC }
             }
@@ -860,9 +860,9 @@ country_event = {
 		name = brazil.37.b
 
 		trigger = { is_ai = yes }	
-		ai_chance = { 
-			factor = 0.15 
-            modifier = {
+		ai_chance = {
+			factor = 0.15
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_LOTT_QUADROS_STRUGGLE option = BRA_LOTT_QUADROS_STRUGGLE_QUADROS_VIC }
             }
@@ -887,9 +887,9 @@ country_event = {
 		name = brazil.37.c
 
 		trigger = { is_ai = yes }	
-		ai_chance = { 
-			factor = 0.85 
-            modifier = {
+		ai_chance = {
+			factor = 0.85
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_LOTT_QUADROS_STRUGGLE option = BRA_LOTT_QUADROS_STRUGGLE_LOTT_GOULART_VIC }
             }
@@ -2161,18 +2161,18 @@ country_event = { #Toscano's Intervention
 			target = COG
 			modifier = BRA_blocking_trade
 		}
-		add_opinion_modifier = {
-			target = COG
-			modifier = BRA_blocking_trade_but_trade
+		set_temp_variable = { temp_modifier = -25 }
+		COG = { add_to_trade_modifier_PREV = yes }
+		COG = {
+			set_temp_variable = { temp_modifier = -25 }
+			BRA = { add_to_trade_modifier_PREV = yes }
 		}
 		add_opinion_modifier = {
 			target = GER
 			modifier = BRA_blocking_trade
 		}
-		add_opinion_modifier = {
-			target = GER
-			modifier = BRA_blocking_trade_but_trade
-		}
+		set_temp_variable = { temp_modifier = -25 }
+		GER = { add_to_trade_modifier_PREV = yes }
 	}
 }
 
@@ -2190,9 +2190,11 @@ country_event = { #The Seizure
 			target = COG
 			modifier = BRA_blocking_trade_2
 		}
-		add_opinion_modifier = {
-			target = COG
-			modifier = BRA_blocking_trade_but_trade_2
+		set_temp_variable = { temp_modifier = -50 }
+		COG = { add_to_trade_modifier_PREV = yes }
+		COG = {
+			set_temp_variable = { temp_modifier = -50 }
+			BRA = { add_to_trade_modifier_PREV = yes }
 		}
 	}
 }
@@ -2312,13 +2314,12 @@ country_event = {
 	option = {
 		name = brazil.105.a
 		ai_chance = {
-		factor = 1
-        modifier = {
-			factor = 0
-			has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_GOULART }
+			factor = 1
+        	modifier = {
+				factor = 0
+				has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_GOULART }
             }
         }
-
 		custom_effect_tooltip = "BRA_hd_choose_kubitschek"
 		set_country_flag = BRA_hd_conference_chose_kubitschek
 		set_country_flag = BRA_competitors_mission_active
@@ -2327,10 +2328,10 @@ country_event = {
 	option = {
 		name = brazil.105.b
 		ai_chance = {
-		factor = 1
-		modifier = {
-			factor = 0
-			has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_KUBITSCHEK }
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_KUBITSCHEK }
             }
         }
 		custom_effect_tooltip = "BRA_hd_choose_goulart"
@@ -5813,9 +5814,8 @@ country_event = { # 1965 Presidential Elections End
 
 	hidden = yes
 
-	
-	option = {
-		trigger = { is_ai = no }
+	immediate = {
+
 		if = {
 			limit = { NOT = { has_country_flag = BRA_military_coup_happened } }
 			BRA_pres_finish_election = yes
@@ -5827,31 +5827,61 @@ country_event = { # 1965 Presidential Elections End
 		}
 		else_if = {
 			limit = {
-				check_variable = { bra_pres_winner = 0 }
+				OR = {
+					AND = {
+						check_variable = { bra_pres_winner = 0 }
+						has_game_rule = { rule = BRA_1965_ELECTIONS option = DEFAULT }
+					}
+					has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_GOULART }
+				}
 			}
 			country_event = { id = brazil.232 }
 		}
 		else_if = {
 			limit = {
-				check_variable = { bra_pres_winner = 1 }
+				OR = {
+					AND = {
+						check_variable = { bra_pres_winner = 1 }
+						has_game_rule = { rule = BRA_1965_ELECTIONS option = DEFAULT }
+					}
+					has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_KUBITSCHEK }
+				}
 			}
 			country_event = { id = brazil.233 }
 		}
 		else_if = {
 			limit = {
-				check_variable = { bra_pres_winner = 2 }
+				OR = {
+					AND = {
+						check_variable = { bra_pres_winner = 2 }
+						has_game_rule = { rule = BRA_1965_ELECTIONS option = DEFAULT }
+					}
+					has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_QUADROS }
+				}
 			}
 			country_event = { id = brazil.234 }
 		}
 		else_if = {
 			limit = {
-				check_variable = { bra_pres_winner = 3 }
+				OR = {
+					AND = {
+						check_variable = { bra_pres_winner = 3 }
+						has_game_rule = { rule = BRA_1965_ELECTIONS option = DEFAULT }
+					}
+					has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_LACERDA }
+				}
 			}
 			country_event = { id = brazil.235 }
 		}
 		else_if = {
 			limit = {
-				check_variable = { bra_pres_winner = 4 }
+				OR = {
+					AND = {
+						check_variable = { bra_pres_winner = 4 }
+						has_game_rule = { rule = BRA_1965_ELECTIONS option = DEFAULT }
+					}
+					has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_ADHEMAR }
+				}
 			}
 			country_event = { id = brazil.236 }
 		}
@@ -5878,172 +5908,6 @@ country_event = { # 1965 Presidential Elections End
 			}
 		}
 	}
-##AI Weights
-	option = { #Goulart wins
-		trigger = { is_ai = yes }
-		if = {
-			limit = { NOT = { has_country_flag = BRA_military_coup_happened } }
-			BRA_pres_finish_election = yes
-		}
-		if = {
-			limit = {
-				has_country_flag = BRA_military_coup_happened
-			}
-		}
-		ai_chance = { 
-			factor = 1 
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_KUBITSCHEK }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_LACERDA }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_ADHEMAR }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_QUADROS }
-            }
-		}
-
-		country_event = { id = brazil.232 } 
-		}
-	option = { #Kubitschek wins
-		trigger = { is_ai = yes }
-		if = {
-			limit = { NOT = { has_country_flag = BRA_military_coup_happened } }
-			BRA_pres_finish_election = yes
-		}
-		if = {
-			limit = {
-				has_country_flag = BRA_military_coup_happened
-			}
-		}
-		ai_chance = { 
-			factor = 1 
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_GOULART }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_LACERDA }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_ADHEMAR }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_QUADROS }
-            }
-		}
-
-		country_event = { id = brazil.233 } 
-		}
-	option = { #Quadros wins
-		trigger = { is_ai = yes }
-		if = {
-			limit = { NOT = { has_country_flag = BRA_military_coup_happened } }
-			BRA_pres_finish_election = yes
-		}
-		if = {
-			limit = {
-				has_country_flag = BRA_military_coup_happened
-			}
-		}
-		ai_chance = { 
-			factor = 1 
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_GOULART }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_LACERDA }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_ADHEMAR }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_KUBITSCHEK }
-            }
-		}
-
-		country_event = { id = brazil.234 } 
-		}
-	option = { #Lacerda wins
-		trigger = { is_ai = yes }
-		if = {
-			limit = { NOT = { has_country_flag = BRA_military_coup_happened } }
-			BRA_pres_finish_election = yes
-		}
-		if = {
-			limit = {
-				has_country_flag = BRA_military_coup_happened
-			}
-		}
-		ai_chance = { 
-			factor = 1 
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_GOULART }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_KUBITSCHEK }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_ADHEMAR }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_QUADROS }
-            }
-		}
-
-		country_event = { id = brazil.235 } 
-		}
-	option = { #Adhemar wins
-		trigger = { is_ai = yes }
-		if = {
-			limit = { NOT = { has_country_flag = BRA_military_coup_happened } }
-			BRA_pres_finish_election = yes
-		}
-		if = {
-			limit = {
-				has_country_flag = BRA_military_coup_happened
-			}
-		}
-		ai_chance = { 
-			factor = 1 
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_GOULART }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_LACERDA }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_KUBITSCHEK }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_1965_ELECTIONS option = BRA_1965_ELECTIONS_QUADROS }
-            }
-		}
-
-		country_event = { id = brazil.236 } 
-		}
 }
 
 country_event = { # Goulart Wins 65
@@ -7172,9 +7036,9 @@ country_event = { #Quadros Letter
 		name = brazil.274.b
 
 		trigger = { is_ai = yes }	
-		ai_chance = { 
+		ai_chance = {
 			factor = 0.30
-            modifier = {
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_LOTT_QUADROS_STRUGGLE option = BRA_LOTT_QUADROS_STRUGGLE_HUNDRED_DAYS }
             }
@@ -7189,12 +7053,12 @@ country_event = { #Quadros Letter
 		name = brazil.274.c
 
 		trigger = { is_ai = yes }	
-		ai_chance = { 
+		ai_chance = {
 			factor = 0.70
-            modifier = {
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_LOTT_QUADROS_STRUGGLE option = BRA_LOTT_QUADROS_STRUGGLE_QUADROS_VIC }
-            }			
+            }
 		}
 
 		country_event = {
@@ -7487,9 +7351,9 @@ country_event = { #Lacerda Kubitschek argue
 
 	option = { #Lacerda
 		name = brazil.287.a
-		ai_chance = { 
-			factor = 1 
-            modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_ADHEMAR }
             }
@@ -7506,9 +7370,9 @@ country_event = { #Lacerda Kubitschek argue
 	}
 	option = { #Kubitschek
 		name = brazil.287.b
-		ai_chance = { 
-			factor = 1 
-            modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_ADHEMAR }
             }
@@ -7525,16 +7389,16 @@ country_event = { #Lacerda Kubitschek argue
 	}
 	option = { #Adhemar and Goulart
 		name = brazil.287.c
-		ai_chance = { 
+		ai_chance = {
 			factor = 1
-            modifier = {
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_KUBITSCHEK }
             }
             modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_HUNDRED_DAYS option = BRA_HUNDRED_DAYS_LACERDA }
-            }			
+            }
 		}
 		BRA_hd_increase_adhemar_support_med = yes
 		BRA_hd_increase_goulart_support_med = yes
@@ -10222,25 +10086,23 @@ country_event = { #Goulart Assumes Presidency
 		set_politics = {
 			ruling_party = social_democracy
 		}
-		if = {
-			limit = { NOT = { has_country_flag = BRA_lacerda_attempted_coup } }
-			every_country = {
-				limit = { is_ai = no }
-				news_event = { id = LATAM_news.25 days = 1 }
-			}
-		}
-		else = {
-			every_country = {
-				limit = { is_ai = no }
-				news_event = { id = LATAM_news.34 days = 1 }
-			}
-		}
 		custom_effect_tooltip = BRA_new_cabinet_tt
 		hidden_effect = {
+			if = {
+				limit = { NOT = { has_country_flag = BRA_lacerda_attempted_coup } }
+				every_country = {
+					limit = { is_ai = no }
+					news_event = { id = LATAM_news.25 days = 1 }
+				}
+			}
+			else = {
+				every_country = {
+					limit = { is_ai = no }
+					news_event = { id = LATAM_news.34 days = 1 }
+				}
+			}
 			remove_all_ministers = yes
 			add_ideas = { BRA_edna_lott_hog BRA_Hermes_pol BRA_Celso_eco BRA_Argemiro_de_Assis_Brasil_sec }
-		}
-		hidden_effect = {
 			country_event = {
 				id = brazil.271
 				days = 2
@@ -10279,16 +10141,14 @@ country_event = { #Kubitschek Assumes Presidency
 				}
 			}
 		}
-		every_country = {
-			limit = { is_ai = no }
-			news_event = { id = LATAM_news.26 days = 1 }
-		}
 		custom_effect_tooltip = BRA_new_cabinet_tt
 		hidden_effect = {
+			every_country = {
+				limit = { is_ai = no }
+				news_event = { id = LATAM_news.26 days = 1 }
+			}
 			remove_all_ministers = yes
 			add_ideas = { BRA_edna_lott_hog BRA_Francisco_Negrao_de_Lima_pol BRA_Roberto_Campos_eco BRA_Peri_Constant_Bevilacqua_sec }
-		}
-		hidden_effect = {
 			country_event = {
 				id = brazil.271
 				days = 2
@@ -10316,16 +10176,14 @@ country_event = { #Quadros Assumes Presidency
 			ruling_party = conservative_democracy
 		}
 		BRA_create_leader_quadros = yes
-		every_country = {
-			limit = { is_ai = no }
-			news_event = { id = LATAM_news.27 days = 1 }
-		}
 		custom_effect_tooltip = BRA_new_cabinet_tt
 		hidden_effect = {
+			every_country = {
+				limit = { is_ai = no }
+				news_event = { id = LATAM_news.27 days = 1 }
+			}
 			remove_all_ministers = yes
 			add_ideas = { BRA_Milton_hog BRA_Alfonso_Arinos_pol BRA_Arthur_da_Silva_Bernardes_Filho_eco BRA_Ernesto_Geisel_sec }
-		}
-		hidden_effect = {
 			country_event = {
 				id = brazil.271
 				days = 2
@@ -10369,16 +10227,14 @@ country_event = { #Lacerda Assumes Presidency
 			long_name = BRA_conservative_democracy_party_long
 			name = BRA_conservative_democracy_party
 		}
-		every_country = {
-			limit = { is_ai = no }
-			news_event = { id = LATAM_news.28 days = 1 }
-		}
 		custom_effect_tooltip = BRA_new_cabinet_tt
 		hidden_effect = {
+			every_country = {
+				limit = { is_ai = no }
+				news_event = { id = LATAM_news.28 days = 1 }
+			}
 			remove_all_ministers = yes
 			add_ideas = { BRA_Milton_hog BRA_Vasco_Leitao_da_Cunha_lacerda_pol BRA_Helio_Beltrao_eco BRA_Golbery_do_Couto_e_Silva_sec }
-		}
-		hidden_effect = {
 			country_event = {
 				id = brazil.271
 				days = 2
@@ -10406,16 +10262,14 @@ country_event = { #Adhemar Assumes Presidency
 			ruling_party = authoritarian_democracy
 		}
 		BRA_create_leader_adhemar = yes
-		every_country = {
-			limit = { is_ai = no }
-			news_event = { id = LATAM_news.29 days = 1 }
-		}
 		custom_effect_tooltip = BRA_new_cabinet_tt
 		hidden_effect = {
+			every_country = {
+				limit = { is_ai = no }
+				news_event = { id = LATAM_news.29 days = 1 }
+			}
 			remove_all_ministers = yes
 			add_ideas = { BRA_edna_lott_hog BRA_Vasco_Leitao_da_Cunha_adhemar_pol BRA_Benedito_Manhaes_Barreto_eco BRA_Amaury_Kruel_sec }
-		}
-		hidden_effect = {
 			country_event = {
 				id = brazil.271
 				days = 2
@@ -10515,10 +10369,9 @@ country_event = { # Communist Attack
 	title = brazil.443.t
 	desc = brazil.443.desc
 	picture = GFX_report_event_iberia_eta_bombing
-
+	is_triggered_only = yes #double trigger baybeee
 	trigger = {
 		has_country_flag = BRA_military_coup_happened
-		date > 1965.03.01
 	}
 
 	fire_only_once = yes
@@ -10656,7 +10509,7 @@ country_event = { #Starting Lacerda Coup event
 
 	option = { #continue
 		name = BRA_lacerda.1.a
-		trigger = { is_ai = no }	
+		ai_chance = { factor = 100 }
 		hidden_effect = {
 			set_country_flag = BRA_lacerda_attempted_coup
 			if = {
@@ -10674,7 +10527,7 @@ country_event = { #Starting Lacerda Coup event
 	option = { #abandon
 		name = BRA_lacerda.1.b
 		ai_chance = {
-			factor = 1
+			factor = 0
 			modifier = {
                 factor = 0
                 has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
@@ -10686,49 +10539,6 @@ country_event = { #Starting Lacerda Coup event
 		}
 		hidden_effect = {
 			clr_country_flag = BRA_lacerda_coup_category_allowed
-		}
-	}
-
-	# AI weights: Replacement for the first choice so that it doesn't matter whether Constitutionalists have higher/lower power than Sorbonne or Hardliners
-	option = { # Lacerda wins support, usurps presidency
-		name = brazil.37.b
-		
-		trigger = { is_ai = yes }	
-		ai_chance = { 
-			factor = 1
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_AGAINST }
-            }
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
-            }
-		}
-		hidden_effect = {
-			set_country_flag = BRA_lacerda_attempted_coup
-			country_event = { id = BRA_lacerda.13 days = 5 }
-		}
-	}
-	
-	option = { #Goulart thwarts coup attempt
-		name = brazil.37.c
-
-		trigger = { is_ai = yes }	
-		ai_chance = { 
-			factor = 1
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_AGAINST }
-            }
-			modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
-            }
-		}
-		hidden_effect = {
-			set_country_flag = BRA_lacerda_attempted_coup
-			country_event = { id = BRA_lacerda.12 days = 1 }
 		}
 	}
 }
@@ -10764,9 +10574,18 @@ country_event = { #military support
 
 	option = { #continue
 		name = BRA_lacerda.3.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_mil_support > 8.99 }
+			OR = {
+				check_variable = { BRA_lacerda_mil_support > 8.99 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.5 days = 1 }
@@ -10774,9 +10593,18 @@ country_event = { #military support
 	}
 	option = { #army stop coup
 		name = BRA_lacerda.3.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_mil_support < 8.98 }
+			OR = {
+				check_variable = { BRA_lacerda_mil_support < 8.98 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.4 days = 1 }
@@ -10813,9 +10641,18 @@ country_event = { #USA support
 
 	option = { #continue
 		name = BRA_lacerda.5.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_usa_support > 8.99 }
+			OR = {
+				check_variable = { BRA_lacerda_usa_support > 8.99 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.7 days = 1 }
@@ -10823,9 +10660,18 @@ country_event = { #USA support
 	}
 	option = { #not enough support
 		name = BRA_lacerda.5.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_usa_support < 8.98 }
+			OR = {
+				check_variable = { BRA_lacerda_usa_support < 8.98 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.12 days = 1 }
@@ -10862,9 +10708,18 @@ country_event = { #Government Support
 
 	option = { #continue
 		name = BRA_lacerda.7.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_govt_support > 8.99 }
+			OR = {
+				check_variable = { BRA_lacerda_govt_support > 8.99 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.9 days = 1 }
@@ -10872,9 +10727,18 @@ country_event = { #Government Support
 	}
 	option = { #not enough support
 		name = BRA_lacerda.7.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_govt_support < 8.98 }
+			OR = {
+				check_variable = { BRA_lacerda_govt_support < 8.98 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.8 days = 1 }
@@ -10911,9 +10775,18 @@ country_event = { #Public Reaction
 
 	option = { #continue
 		name = BRA_lacerda.9.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_voter_support > 8.99 }
+			OR = {
+				check_variable = { BRA_lacerda_voter_support > 8.99 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.11 days = 1 }
@@ -10921,9 +10794,18 @@ country_event = { #Public Reaction
 	}
 	option = { #not enough support
 		name = BRA_lacerda.9.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+                factor = 0
+                has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_LACERDA_COUP }
+            }
+		}
 		trigger = {
-			check_variable = { BRA_lacerda_voter_support < 8.98 }
+			OR = {
+				check_variable = { BRA_lacerda_voter_support < 8.98 }
+				has_game_rule = { rule = BRA_IMPERIAL_PRESIDENCY option = BRA_IMPERIAL_PRESIDENCY_GOULART_HOLD }
+			}
 		}
 		hidden_effect = {
 			country_event = { id = BRA_lacerda.10 days = 1 }
@@ -11143,7 +11025,6 @@ country_event = { # Election Season
 	}
 
 }
-
 country_event = { # Military Elections End
 	id = BRA_military_elections.4
 	title = BRA_military_elections.4.t
@@ -11157,53 +11038,42 @@ country_event = { # Military Elections End
 
 	hidden = yes
 
-	option = {
-		trigger = { is_ai = no }
+	immediate = {
 		BRA_pres_finish_election = yes
 		if = {
-			limit = { check_variable = { bra_pres_winner = 1 } } # Kubitschek
+			limit = {
+				OR = {
+					AND = {
+						check_variable = { bra_pres_winner = 1 }
+						has_game_rule = { rule = BRA_MILITARY_ELECTION option = DEFAULT }
+					}
+					has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_KUBITSCHEK }
+				}
+			} # Kubitschek
 			country_event = { id = BRA_military_elections.5 }
 		}
 		else_if = {
-			limit = { check_variable = { bra_pres_winner = 3 } } # Lacerda
+			limit = {
+				OR = {
+					AND = {
+						check_variable = { bra_pres_winner = 3 }
+						has_game_rule = { rule = BRA_MILITARY_ELECTION option = DEFAULT }
+					}
+					has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_LACERDA_FREE }
+					has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_LACERDA_INTERVENE }
+				}
+			} # Lacerda
 			country_event = { id = BRA_military_elections.6 }
 		}
 		else_if = {
-			limit = { check_variable = { bra_pres_winner = 4 } } # minor left candidates, which is supposed to be impossible mind you
+			limit = {
+				check_variable = { bra_pres_winner = 4 }
+				has_game_rule = { rule = BRA_MILITARY_ELECTION option = DEFAULT }
+			} # minor left candidates, which is supposed to be impossible mind you
 			country_event = { id = BRA_military_elections.7 }
 		}
 	}
-	#AI Weights: Country Paths determine who'll win in the election, or 50/50 for base game
-	option = { #Kubitschek wins
-		trigger = { is_ai = yes }
-		BRA_pres_finish_election = yes
-		ai_chance = { 
-			factor = 1 
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_LACERDA_FREE }
-            }
-			modifier = {
-				factor = 0
-                has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_LACERDA_INTERVENE }
-            }
-		}
-		country_event = { id = BRA_military_elections.5 } # Kubitschek
-	}
-	option = { # Lacerda wins
-		trigger = { is_ai = yes }
-		BRA_pres_finish_election = yes
-		ai_chance = { 
-			factor = 1 
-            modifier = {
-                factor = 0
-                has_game_rule = { rule = BRA_MILITARY_ELECTION option = BRA_MILITARY_ELECTION_KUBITSCHEK }
-            }
-		}
-		country_event = { id = BRA_military_elections.6 } # Lacerda
-	}
 }
-
 country_event = { # Kubitschek wins
 	id = BRA_military_elections.5
 	immediate = { log = "[GetDateText]: [Root.GetName]: event BRA_military_elections.5" }

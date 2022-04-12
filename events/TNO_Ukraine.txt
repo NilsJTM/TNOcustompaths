@@ -162,18 +162,24 @@ country_event = { # Try to resolve Cossacks problem
 		name = UKR.10.a
 		random_list = {
 			60 = {
-				country_event = { id = UKR.11 days = 5 }
-			    modifier = {
-				    factor = 0
-				    has_game_rule = { rule = UKR_COSSACK_PATH option =  UKR_COSSACK_WIN }
-			   	}
-			}	
-			40 = {
-				country_event = { id = UKR.12 days = 5 }
 				modifier = {
 				    factor = 0
-				    has_game_rule = { rule = UKR_COSSACK_PATH option =  UKR_COSSACK_PATH_DEFEATED }
+				    has_game_rule = {
+						rule = UKR_COSSACK_PATH
+						option =  UKR_COSSACK_WIN
+					}
 			   	}
+				country_event = { id = UKR.11 days = 5 }
+			}
+			40 = {
+				modifier = {
+				    factor = 0
+				    has_game_rule = {
+						rule = UKR_COSSACK_PATH
+						option =  UKR_COSSACK_PATH_DEFEATED
+					}
+			   	}
+				country_event = { id = UKR.12 days = 5 }
 			}
 		}
 	}
@@ -233,18 +239,24 @@ country_event = { # Koch's Assassination
 		}
 		random_list = {
 			1 = { # He is dead
+				modifier = {
+				    factor = 0
+				    has_game_rule = {
+						rule = UKR_KOCH_PATH
+						option =  UKR_KOCH_PATH_ALIVE
+					}
+			   	}
 				country_event = { id = UKR.27 days = 3 }
-				modifier = {
-				    factor = 0
-				    has_game_rule = { rule = UKR_KOCH_PATH option =  UKR_KOCH_PATH_ALIVE }
-			   	}
-			}	
+			}
 			2 = { # Miracle! He survived!
-				country_event = { id = UKR.28 days = 3 }
 				modifier = {
 				    factor = 0
-				    has_game_rule = { rule = UKR_KOCH_PATH option =  UKR_KOCH_PATH_DEAD }
+				    has_game_rule = {
+						rule = UKR_KOCH_PATH
+						option =  UKR_KOCH_PATH_DEAD
+					}
 			   	}
+				country_event = { id = UKR.28 days = 3 }
 			}
 		}
 	}
@@ -263,14 +275,17 @@ country_event = { # Choose your succesor after Koch's death
 
 	option = { # Heerema
 		name = UKR.27.a
+		set_global_flag = UKR_heerema
 		ai_chance = {
 			factor = 3
 			modifier = {
 				factor = 0
-				has_game_rule = { rule = UKR_POST_KOCH_PATH option =  UKR_POST_KOCH_PATH_LEIB }
+				has_game_rule = {
+					rule = UKR_POST_KOCH_PATH
+					option =  UKR_POST_KOCH_PATH_LEIB
+				}
 			}
 		}
-		set_global_flag = UKR_heerema
 		promote_character = UKR_Pieter_Schelte_Heerema
 		hidden_effect = {
 			remove_all_ministers = yes
@@ -288,7 +303,10 @@ country_event = { # Choose your succesor after Koch's death
 			factor = 2
 			modifier = {
 				factor = 0
-				has_game_rule = { rule = UKR_POST_KOCH_PATH option =  UKR_POST_KOCH_PATH_HEEREMA }
+				has_game_rule = {
+					rule = UKR_POST_KOCH_PATH
+					option =  UKR_POST_KOCH_PATH_HEEREMA
+				}
 			}
 		}
 		set_global_flag = UKR_leibbrandt
@@ -343,15 +361,7 @@ country_event = { # Partisans take power from a weak Koch
 	picture = GFX_report_event_MAD_palace
 
 	fire_only_once = yes
-	trigger = {
-		tag = UKR
-		has_country_leader = {
-			character = UKR_erich_koch
-			ruling_only = yes
-		}
-		NOT = { has_country_flag = UKR_cossacks_pacified }
-		has_global_flag = german_civil_war
-	}
+	is_triggered_only = yes
 
 	immediate = {log = "[GetDateText]: [Root.GetName]: event UKR.29"}
 

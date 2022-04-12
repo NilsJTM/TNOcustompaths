@@ -588,6 +588,10 @@ country_event = { #Divine Mandate of Siberia - A Sermon at the Edge of Civilizat
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	
+	trigger = {
+		OMO_2022_aprilfools_gamerule_active = no
+	}
 
 	option = { #
 		name = RUS.29.a
@@ -683,13 +687,35 @@ country_event = { # Far East Expedition
 	option = { #
 		name = RUS.33.a
 		ai_chance = { factor = 1 }
-		transfer_state  = 575
 		add_state_core = 575
-		transfer_state  = 761
 		add_state_core = 761
+		transfer_state  = 575
+		transfer_state  = 761
 		hidden_effect = {
-			575 = { remove_core_of = NRL }
-			761 = { remove_core_of = NRL }
+			575 = {
+				remove_core_of = NRL
+				if = {
+					limit = {
+						PREV = {
+							original_tag = OMO
+							OMO_2022_aprilfools_gamerule_active = yes
+						}
+					}
+					OMO_2022_turn_pony_culture = yes
+				}
+			}
+			761 = {
+				remove_core_of = NRL 
+				if = {
+					limit = {
+						PREV = {
+							original_tag = OMO
+							OMO_2022_aprilfools_gamerule_active = yes
+						}
+					}
+					OMO_2022_turn_pony_culture = yes
+				}
+			}
 			set_country_flag = far_east_sakha_enable
 		}
 	}
@@ -730,6 +756,15 @@ country_event = { # Far East Deccat Intro Megaevent
 
 	is_triggered_only = yes
 	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			AND = {
+				original_tag = OMO
+				OMO_2022_aprilfools_gamerule_active = yes
+			}
+		}
+	}
 
 	option = {
 		name = [GetEastSibDecEventEnd]
@@ -2695,9 +2730,9 @@ country_event = { #Amur
 	}
 	option = {
 		name = RUS_tourist.11.b
-		ai_chance = { 
-		    factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist
@@ -2936,9 +2971,9 @@ country_event = { #Irkutsk
 	}
 	option = {
 		name = RUS_tourist.20.b
-		ai_chance = { 
-		    factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist
@@ -3313,9 +3348,9 @@ country_event = { #Novosibirsk
 	}
 	option = {
 		name = RUS_tourist.35.b
-		ai_chance = { 
-		    factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist
@@ -3448,9 +3483,9 @@ country_event = { #Omsk
 	}
 	option = {
 		name = RUS_tourist.40.b
-		ai_chance = { 
-		    factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist
@@ -3559,9 +3594,9 @@ country_event = { #Tyumen
 	}
 	option = {
 		name = RUS_tourist.44.b
-		ai_chance = { 
-		    factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist
@@ -3694,15 +3729,15 @@ country_event = { #Yugra
 	}
 	option = {
 		name = RUS_tourist.49.b
-		ai_chance = { 
-		    factor = 1
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist
 					option = STEVE_TOURIST_ALIVE
 				}
-			} 
+			}
 		}
 		hidden_effect = {
 			country_event = {
@@ -4115,9 +4150,9 @@ country_event = { #Aryan Brotherhood
 	}
 	option = {
 		name = RUS_tourist.66.b
-		ai_chance = { 
-		    factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist
@@ -4376,9 +4411,9 @@ country_event = { #Gorky
 	}
 	option = {
 		name = RUS_tourist.76.b
-		ai_chance = { 
-		    factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = steve_tourist

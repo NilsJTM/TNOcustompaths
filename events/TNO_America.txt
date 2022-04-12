@@ -1092,12 +1092,13 @@ country_event = {#Form the CAR?
 	}
 	option = { #Keep the three administrations
 		name = USA.51.b
-		ai_chance = { factor = 60 
-		    modifier = {
+		ai_chance = {
+			factor = 60
+			modifier = {
                 factor = 0
                 has_game_rule = { rule = CAR_FATE_PATH option = CAR_FATE_PATH_YES }
             }
-		}	
+		}
 		hidden_effect = {
 			country_event = { id = USA.effects.18 days = 3 }
 			country_event = { id = OFN_AFR_MANDATE.0 days = 1 }
@@ -2874,7 +2875,7 @@ country_event = {
 
 	}
 }
-country_event = { #eco expectation 1 - set (1962, 1966, 1970)
+country_event = { #eco expectation 1 - set for the first time in 1962
 	id = USA.120
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event USA.120"
@@ -2890,6 +2891,8 @@ country_event = { #eco expectation 1 - set (1962, 1966, 1970)
 
 	option = {
 		name = USA.120.a
+		set_temp_variable = { temp_US_debt_expectation = US_economy_expectation }
+		multiply_temp_variable = { temp_US_debt_expectation = US_debt_expectation }
 		custom_effect_tooltip = USA_eco_expectations_tt
 	}
 }
@@ -3140,10 +3143,10 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 
- 	option = {
- 		name = USA.133.a #Wallace F. Bennett
- 		ai_chance = { 
-			factor = 1 
+	option = {
+		name = USA.133.a #Wallace F. Bennett
+		ai_chance = {
+			factor = 1
 			modifier = {
 				factor = 0
 				has_game_rule = {
@@ -3164,9 +3167,9 @@ country_event = {
 		}
 	}
 	option = {
- 		name = USA.133.b #Lyndon B. Johnson
- 		ai_chance = { 
-			factor = 1 
+		name = USA.133.b #Lyndon B. Johnson
+		ai_chance = {
+			factor = 1
 			modifier = {
 				factor = 0
 				has_game_rule = {
@@ -9177,7 +9180,7 @@ country_event = { #Reserved for the least FREEDOM event possible; by uncountably
 					picture = "Portrait_Haiti_Edouard_Brantome.dds"
 					desc = "POLITICS_EDOUARD_BRANTOME_DESC"
 					expire = "2000.1.1"
-					ideology = liberal_democracy_subtype
+					ideology = liberal_democracy_market_liberalism_subtype
 					traits = {
 
 					}
@@ -9950,6 +9953,8 @@ country_event = { #IBW Ending
 	option = {
 		name = USA.1917.a
 		TNO_fopo_remove_IBW_tab = yes
+		set_temp_variable = { target = SPR }
+		TNO_clear_num_volunteers = yes
 		if = {
 			limit = { SPR = { exists = yes } }
 			SPR = { econ_join_sphere_USA = yes }
@@ -11160,21 +11165,21 @@ country_event = {
 					OR = {
 						has_country_flag = USA_68_FR_NPP
 						has_country_flag = USA_68_C_NPP
-						}
 					}
-			OR = {
-				check_variable = { ROOT.party_popularity@national_socialism > 0.24 }
-				has_game_rule = {
-							rule = USA_LEADER_ROUTE_1972
-							option = USA_LEADER_ROUTE_1972_YOCKEY
 				}
-			}
-			}
+				OR = {
+					check_variable = { ROOT.party_popularity@national_socialism > 0.24 }
+					has_game_rule = {
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_YOCKEY
+					}
+				}
+			}	
 			OR = {
 				check_variable = { ROOT.party_popularity@national_socialism > 0.19 }
 				has_game_rule = {
-							rule = USA_LEADER_ROUTE_1972
-							option = USA_LEADER_ROUTE_1972_YOCKEY
+					rule = USA_LEADER_ROUTE_1972
+					option = USA_LEADER_ROUTE_1972_YOCKEY
 				}
 			}
 		}
@@ -11200,8 +11205,8 @@ country_event = {
 				USA_debate_72_effect = yes
 			}
 		}
-		ai_chance = { 
-			factor = 1  
+		ai_chance = {
+			factor = 1
 			modifier = {
 				factor = 0
 				OR = {
@@ -11219,9 +11224,7 @@ country_event = {
 					}
 				}
 			}
-		
 		}
-		
 	}
 	option = { #Gus Hall
 		trigger = {
@@ -11230,13 +11233,13 @@ country_event = {
 					OR = {
 						has_country_flag = USA_68_FR_NPP
 						has_country_flag = USA_68_C_NPP
-						}
 					}
+				}
 				OR = {
 					check_variable = { ROOT.party_popularity@communist > 0.24}
 					has_game_rule = {
-								rule = USA_LEADER_ROUTE_1972
-								option = USA_LEADER_ROUTE_1972_HALL
+						rule = USA_LEADER_ROUTE_1972
+						option = USA_LEADER_ROUTE_1972_HALL
 					}
 				}
 			}
@@ -18939,8 +18942,9 @@ country_event = { #OFN mandate made
 
 	option = { #
 		name = USA.madagascar.7.a
-		ai_chance = { factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_MILITARY }
 			}
@@ -18952,7 +18956,7 @@ country_event = { #OFN mandate made
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_RABEMANJARA }
 			}
-		}	
+		}
 		hidden_effect = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes }
@@ -18968,8 +18972,9 @@ country_event = { #OFN mandate made
 	}
 	option = { #
 		name = USA.madagascar.7.b
-		ai_chance = { factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_MILITARY }
 			}
@@ -18981,7 +18986,7 @@ country_event = { #OFN mandate made
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_RABEMANJARA }
 			}
-		}	
+		}
 		hidden_effect = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes }
@@ -18996,8 +19001,9 @@ country_event = { #OFN mandate made
 	}
 	option = { #
 		name = USA.madagascar.7.c
-		ai_chance = { factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_MILITARY }
 			}
@@ -19009,7 +19015,7 @@ country_event = { #OFN mandate made
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_SCHOEPS }
 			}
-		}	
+		}
 		hidden_effect = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes }
@@ -19024,8 +19030,9 @@ country_event = { #OFN mandate made
 	}
 	option = { #
 		name = USA.madagascar.7.d
-		ai_chance = { factor = 1 
-		    modifier = {
+		ai_chance = {
+			factor = 1
+			modifier = {
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_STOPH }
 			}
@@ -19037,7 +19044,7 @@ country_event = { #OFN mandate made
 			    factor = 0
 			    has_game_rule = { rule = MAD_POST_WAR_PATH option =  MAD_POST_WAR_PATH_RABEMANJARA }
 			}
-		}	
+		}
 		hidden_effect = {
 			every_owned_state = {
 				limit = { can_have_elections_in_state = yes }

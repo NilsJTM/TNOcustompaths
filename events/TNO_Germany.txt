@@ -211,6 +211,34 @@ country_event = {	#Victor selector
 	}
 }
 
+# Post-72 econ unfucker
+country_event = {
+	id = reich.9999
+	immediate = { log = "[GetDateText]: [Root.GetName]: event reich.9999" }
+	title = "Post-72 econ unfucker"
+	desc = "description"
+	picture = GFX_report_event_german_speech
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = "holla holla get dolla"
+		# Cut debt
+		divide_variable = { national_debt = 2 }
+
+		# Set growth & inflation
+		set_variable = { gdp_growth = 1.5 }
+		set_variable = { base_inflation_rate = 0 }
+
+		# Add income
+		add_ideas = GER_econ_unfucker
+
+		update_economy_tab = yes
+	}
+}
+
 ###################
 ### NEWS EVENTS ###
 ###################
@@ -258,21 +286,21 @@ country_event = {
 
 	option = { #Bormann
 		name = reich.6.a
-		ai_chance = { base = 40 
-		    modifier = {
+		ai_chance = {
+			base = 40
+			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_GGR }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_GGR }
 			}
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_SPEER }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_SPEER }
 			}
-			
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_HGR }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_HGR }
 			}
-		}	
+		}
 		add_to_variable = {
 			var = GER_Bormann_Influence
 			value = 30
@@ -311,21 +339,22 @@ country_event = {
 
 	option = { #Göring
 		name = reich.6.b
-		ai_chance = { base = 30 
-		    modifier = {
+		ai_chance = {
+			base = 30
+			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_BORMANN }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_BORMANN }
 			}
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_SPEER }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_SPEER }
 			}
-			
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_HGR }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_HGR }
 			}
-        }
+		}
+
 		add_to_variable = {
 			var = GER_Bormann_Influence
 			value = 25
@@ -363,21 +392,23 @@ country_event = {
 
 	option = { #Speer
 		name = reich.6.c
-		ai_chance = { base = 20 
-        modifier = {
+		ai_chance = {
+			base = 20
+			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_BORMANN }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_BORMANN }
 			}
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_GGR }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_GGR }
 			}
-			
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_HGR }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_HGR }
 			}
-        }
+		}
+
+
 		add_to_variable = {
 			var = GER_Bormann_Influence
 			value = 25
@@ -416,22 +447,21 @@ country_event = {
 
 	option = { #Heydrich
 		name = reich.6.e
-		ai_chance = { base = 10 
-		    modifier = {
-			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_BORMANN }
-			}
-			
+		ai_chance = {
+			base = 10
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_GGR }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_BORMANN }
 			}
-			
 			modifier = {
 			    factor = 0
-				has_game_rule = { rule = GER_HITLER_HEIR option =  GER_HITLER_HEIR_SPEER }
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_GGR }
 			}
-		}	
+			modifier = {
+			    factor = 0
+				has_game_rule = { rule = GER_HITLER_HEIR option = GER_HITLER_HEIR_SPEER }
+			}
+		}
 		add_to_variable = {
 			var = GER_Bormann_Influence
 			value = 25
@@ -6175,6 +6205,8 @@ country_event = { # IBW Ending
 	option = {
 		name = reich_shared.26.a
 		TNO_fopo_remove_IBW_tab = yes
+		set_temp_variable = { target = SPS }
+		TNO_clear_num_volunteers = yes
 		if = {
 			limit = { SPS = { exists = yes } }
 			SPS = { econ_join_sphere_GER = yes }

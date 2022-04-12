@@ -165,7 +165,18 @@ country_event = { #The Revolution Victorious focus - Sablin's Marriage
 		name = BRY.9.a
 		ai_chance = { factor = 1 }
 		add_stability = 0.05
-		add_ideas =	tno_conscription_two_year_draft
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = tno_conscription_service_by_requirement
+				add_idea = tno_conscription_two_year_draft
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = tno_conscription_service_by_requirement_dummy
+				add_idea = tno_conscription_two_year_draft_dummy
+	        }
+		}
 	}
 }
 
@@ -257,7 +268,6 @@ country_event = { #Trial of Genrikh Yagoda
 
 	option = { #Life in prison
 		name = BRY.14.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -268,14 +278,12 @@ country_event = { #Trial of Genrikh Yagoda
 				}
 			}
 		}
-		
 		hidden_effect = {
 			set_country_flag = BRY_yagoda_prison
 		}
 	}
 	option = { #The Egg gets shot
 		name = BRY.14.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -286,7 +294,6 @@ country_event = { #Trial of Genrikh Yagoda
 				}
 			}
 		}
-		
 		hidden_effect = {
 			set_country_flag = BRY_yagoda_shot
 		}
@@ -372,7 +379,6 @@ country_event = { #What to do with Tsar Mikhail
 
 	option = { #
 		name = BRY.21.a
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -383,11 +389,9 @@ country_event = { #What to do with Tsar Mikhail
 				}
 			}
 		}
-		
 	}
 	option = { #
 		name = BRY.21.b
-		
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -398,7 +402,6 @@ country_event = { #What to do with Tsar Mikhail
 				}
 			}
 		}
-		
 	}
 }
 
@@ -1387,6 +1390,10 @@ country_event = { #Superregional: Replace the Doubters
 	option = { #
 		name = BRY.64.a
 		ai_chance = { factor = 1 }
+		hidden_effect = {
+			remove_ideas_with_trait = head_of_government
+			remove_ideas_with_trait = economy_minister
+		}
 		add_ideas = BRY_Alexander_Vlasov_hog
 		add_ideas = BRY_Alexandra_Achkasova_eco
 	}

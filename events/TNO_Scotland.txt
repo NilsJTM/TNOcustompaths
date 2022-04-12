@@ -977,24 +977,7 @@ country_event = { #coup event
 
 
 	fire_only_once = yes
-	trigger ={
-		tag = SCO
-		AND = {
-			NOT = {
-				OR = {
-					has_country_flag = SCO_Coup_Disabled
-					has_country_flag = SCO_Paranoia_Removed
-				}
-			}
-			check_variable = {
-				SCOparanoia > 7
-			}
-			check_variable = {
-				SCOhappiness < 7
-			}
-		}
-
-	}
+	is_triggered_only = yes
 
 	option = {
 		name = SCO.1000.b
@@ -2414,8 +2397,9 @@ country_event = { #1962 Election
 		clr_country_flag = SCO_Election_Campaign_On
 		clr_country_flag = SCO_Election_Campaign_1962
 		clr_country_flag = president_campaign_already_done
-			if = {
-				limit = {
+		if = {
+			limit = {
+				OR = {
 					AND = {
 						check_variable = {
 							SCO_Election_National_SNP_Percentage > SCO_Election_National_ILP_Percentage
@@ -2423,30 +2407,27 @@ country_event = { #1962 Election
 						check_variable = {
 							SCO_Election_National_SNP_Percentage > SCO_Election_National_UP_Percentage
 						}
-						NOT = { 
-							OR = {
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_SNP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_ILP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_UP
-								}
-							}	
+						has_game_rule = { 
+							rule = SCO_ELECTIONS_1962
+							option = DEFAULT
 						}
 					}
-
+					has_game_rule = { 
+						rule = SCO_ELECTIONS_1962
+						option = SCO_ELECTIONS_1962_SNP
+					}
 				}
-				country_event = { id = SCO.2713 days = 2 }
+
 			}
-				
-				
+			country_event = { id = SCO.2713 days = 2 }
+		}
 
 
-			if = {
-				limit = {
+
+
+		if = {
+			limit = {
+				OR = {
 					AND = {
 						check_variable = {
 							SCO_Election_National_ILP_Percentage > SCO_Election_National_SNP_Percentage
@@ -2454,28 +2435,25 @@ country_event = { #1962 Election
 						check_variable = {
 							SCO_Election_National_ILP_Percentage > SCO_Election_National_UP_Percentage
 						}
-						NOT = { 
-							OR = {
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_SNP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_ILP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_UP
-								}
-							}	
+						has_game_rule = { 
+							rule = SCO_ELECTIONS_1962
+							option = DEFAULT
 						}
 					}
-
+					has_game_rule = { 
+						rule = SCO_ELECTIONS_1962
+						option = SCO_ELECTIONS_1962_ILP
+					}
 				}
-				country_event = { id = SCO.2714 days = 2 }
-			}
 
-			
-			if = {
-				limit = {
+			}
+			country_event = { id = SCO.2714 days = 2 }
+		}
+
+
+		if = {
+			limit = {
+				OR = {
 					AND = {
 						check_variable = {
 							SCO_Election_National_UP_Percentage > SCO_Election_National_ILP_Percentage
@@ -2483,48 +2461,24 @@ country_event = { #1962 Election
 						check_variable = {
 							SCO_Election_National_UP_Percentage > SCO_Election_National_SNP_Percentage
 						}
-						NOT = { 
-							OR = {
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_SNP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_ILP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_UP
-								}
-							}	
+						has_game_rule = { 
+							rule = SCO_ELECTIONS_1962
+							option = DEFAULT
 						}
 					}
+					has_game_rule = { 
+						rule = SCO_ELECTIONS_1962
+						option = SCO_ELECTIONS_1962_UP
+					}
+				}
 
-				}
-				country_event = { id = SCO.2718 days = 2 }
 			}
-			if = {
-				limit = {
-					has_game_rule = { 
-						rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_SNP 
-					}	
-				}
-				country_event = { id = SCO.2713 days = 2 }
-			}
-			if = {
-				limit = {
-					has_game_rule = { 
-						rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_ILP 
-					}	
-				}
-				country_event = { id = SCO.2714 days = 2 }
-			}
-			if = {
-				limit = {
-					has_game_rule = { 
-						rule = SCO_ELECTIONS_1962 option = SCO_ELECTIONS_1962_UP 
-					}	
-				}
-				country_event = { id = SCO.2718 days = 2 }
-			}
+			country_event = { id = SCO.2718 days = 2 }
+		}
+
+
+
+
 
 	}
 }
@@ -6807,25 +6761,22 @@ country_event = { # 1966 Election Results
 		hidden_effect = {
 			if = {
 				limit = {
-					AND = {
-						check_variable = {
-							SCO_Election_National_SNP_Percentage > SCO_Election_National_ILP_Percentage
+					OR = {
+						AND = {
+							check_variable = {
+								SCO_Election_National_SNP_Percentage > SCO_Election_National_ILP_Percentage
+							}
+							check_variable = {
+								SCO_Election_National_SNP_Percentage > SCO_Election_National_UP_Percentage
+							}
+							has_game_rule = { 
+								rule = SCO_ELECTIONS_1966
+								option = DEFAULT
+							}
 						}
-						check_variable = {
-							SCO_Election_National_SNP_Percentage > SCO_Election_National_UP_Percentage
-						}
-						NOT = { 
-							OR = {
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_SNP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_ILP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_UP
-								}
-							}	
+						has_game_rule = { 
+							rule = SCO_ELECTIONS_1966
+							option = SCO_ELECTIONS_1966_SNP
 						}
 					}
 
@@ -6838,25 +6789,22 @@ country_event = { # 1966 Election Results
 
 			if = {
 				limit = {
-					AND = {
-						check_variable = {
-							SCO_Election_National_UP_Percentage > SCO_Election_National_ILP_Percentage
+					OR = {
+						AND = {
+							check_variable = {
+								SCO_Election_National_UP_Percentage > SCO_Election_National_ILP_Percentage
+							}
+							check_variable = {
+								SCO_Election_National_UP_Percentage > SCO_Election_National_SNP_Percentage
+							}
+							has_game_rule = { 
+								rule = SCO_ELECTIONS_1966
+								option = DEFAULT
+							}
 						}
-						check_variable = {
-							SCO_Election_National_UP_Percentage > SCO_Election_National_SNP_Percentage
-						}
-						NOT = { 
-							OR = {
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_SNP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_ILP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_UP
-								}
-							}	
+						has_game_rule = { 
+							rule = SCO_ELECTIONS_1966
+							option = SCO_ELECTIONS_1966_UP
 						}
 					}
 
@@ -6870,57 +6818,31 @@ country_event = { # 1966 Election Results
 
 			if = {
 				limit = {
-					AND = {
-						check_variable = {
-							SCO_Election_National_ILP_Percentage > SCO_Election_National_UP_Percentage
+					OR = {
+						AND = {
+							check_variable = {
+								SCO_Election_National_ILP_Percentage > SCO_Election_National_UP_Percentage
+							}
+							check_variable = {
+								SCO_Election_National_ILP_Percentage > SCO_Election_National_SNP_Percentage
+							}
+							has_game_rule = { 
+								rule = SCO_ELECTIONS_1966
+								option = DEFAULT
+							}
 						}
-						check_variable = {
-							SCO_Election_National_ILP_Percentage > SCO_Election_National_SNP_Percentage
-						}
-						NOT = { 
-							OR = {
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_SNP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_ILP
-								}
-								has_game_rule = { 
-									rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_UP
-								}
-							}	
+						has_game_rule = { 
+							rule = SCO_ELECTIONS_1966
+							option = SCO_ELECTIONS_1966_ILP
 						}
 					}
 
 				}
 				country_event =  { #ILP
-				id = sco_fen.801
-				days = 5
+					id = sco_fen.801
+					days = 5
+
 				}
-			}
-			if = {
-				limit = {
-					has_game_rule = { 
-						rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_SNP 
-					}	
-				}
-				country_event = { id = sco_fen.79 days = 5 }
-			}
-			if = {
-				limit = {
-					has_game_rule = { 
-						rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_ILP 
-					}	
-				}
-				country_event = { id = sco_fen.801 days = 5 }
-			}
-			if = {
-				limit = {
-					has_game_rule = { 
-						rule = SCO_ELECTIONS_1966 option = SCO_ELECTIONS_1966_UP 
-					}	
-				}
-				country_event = { id = sco_fen.81 days = 5 }
 			}
 
 		}
@@ -11831,10 +11753,8 @@ country_event = { #1970 Election
 	picture = GFX_report_event_scottish_soldiers
 
 	immediate = { log = "[GetDateText]: [Root.GetName]: event sco_up_countercoup.3" }
-
+	is_triggered_only = yes
 	trigger = {
-		date > 1970.5.9
-		tag = SCO
 		NOT = {
 			has_government = despotism
 		}

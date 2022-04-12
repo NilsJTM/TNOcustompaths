@@ -56,8 +56,9 @@ country_event = { # AI DLC
 
 	option = { # AI Succeeeded
 		name = japdlc.1001.a
-		ai_chance = { factor = 0.85 
-            modifier = {
+		ai_chance = {
+			factor = 0.85
+			modifier = {
 				factor = 0
 				OR = {
 					has_game_rule = {
@@ -71,13 +72,15 @@ country_event = { # AI DLC
 				}
 			}
 		}
-		country_event = { id = japdlc.1002 days = 260 }			
+		country_event = { id = japdlc.1002 days = 260 }
+			
 	}
 
 	option = { # AI failed
 		name = japdlc.1001.b
-		ai_chance = { factor = 0.15 
-            modifier = {
+		ai_chance = {
+			factor = 0.15
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = JAP_dai_li
@@ -85,7 +88,8 @@ country_event = { # AI DLC
 				}
 			}
 		}
-		country_event = { id = japdlc.735 days = 220 }			
+		country_event = { id = japdlc.735 days = 220 }
+			
 	}
 }
 
@@ -420,9 +424,17 @@ country_event = { #
 	option = { #Investigation begins
 		name = japdlc.102.a
 		hidden_effect = {
-			country_event = { id = japdlc.103 days = 3 }
-			CHI = {
-				country_event = { id = chi.6669 }
+			#country_event = { id = japdlc.103 days = 3 }
+			if = {
+				limit = { NOT = { country_exists = CHI } }
+				ZZZ = {
+					country_event = { id = chi.6669 }
+				}
+			}
+			else = {
+				CHI = {
+					country_event = { id = chi.6669 }
+				}
 			}
 		}
 	}
@@ -858,10 +870,10 @@ country_event = { #SACO records in american archives
 
 	option = { #
 		name = japdlc.206.a
-		custom_effect_tooltip = JAP_purple_card_gain_tt
+		custom_effect_tooltip = JAP_brown_card_gain_tt
 		hidden_effect = {
 			set_variable = {
-				var = JAP_Purple_Card
+				var = JAP_Brown_Card
 				value = 1
 			}
 			if = {
@@ -1142,7 +1154,7 @@ country_event = { #Dai li messengers
 			if = {
 				limit = {
 					check_variable = {
-						var = JAP_Brown_Card
+						var = JAP_Purple_Card
 						value = 1
 						compare = equals
 					}
@@ -1349,7 +1361,7 @@ country_event = { #audit result: dai li decentralized juntong structure
 			if = {
 				limit = {
 					check_variable = {
-						var = JAP_Purple_Card
+						var = JAP_Brown_Card
 						value = 1
 						compare = equals
 					}
@@ -1414,6 +1426,10 @@ country_event = { #Juntong internal communication breakthrough
 	option = { #Finally!
 		name = japdlc.403.a
 		hidden_effect = {
+			set_variable = {
+				var = JAP_Purple_Card
+				value = 1
+			}
 			country_event = { id = japdlc.406 days = 2 }
 			set_variable = {
 				var = Jap_previous_Nanjing
@@ -1462,7 +1478,7 @@ country_event = { #Second audit: dai li decentralized juntong structure
 			if = {
 				limit = {
 					check_variable = {
-						var = JAP_Purple_Card
+						var = JAP_Brown_Card
 						value = 1
 						compare = equals
 					}
@@ -2145,16 +2161,7 @@ country_event = { # Unannounced Army Manuevers
 	picture = GFX_report_event_generic_read_write
 
 	fire_only_once = yes
-
-	trigger = {
-		has_country_flag = JAP_dlc_investigation_activated
-		tag = JAP
-		check_variable = {
-			var = JAP_Tension
-			value = 100
-			compare = greater_than_or_equals
-		}
-	}
+	is_triggered_only = yes
 
 	option = { # Why would they do that?
 		name = japdlc.700.a
@@ -2794,8 +2801,9 @@ country_event = { # The Privy Council Convenes
 
 	option = { # The Chrysantheum Throne Speaks
 		name = japdlc.735.a
-		ai_chance = { factor = 20 
-            modifier = {
+		ai_chance = {
+			factor = 20
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = JAP_dai_li
@@ -2807,8 +2815,9 @@ country_event = { # The Privy Council Convenes
 	}
 	option = { # The Chrysantheum Throne Rings Silent
 		name = japdlc.735.b
-		ai_chance = { factor = 80 
-            modifier = {
+		ai_chance = {
+			factor = 80
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = JAP_dai_li
@@ -2932,7 +2941,7 @@ country_event = { # Nishi Under Siege
 		hidden_effect = {
 			random_list = {
 				30 = { # Nishi Lives
-				    modifier = {
+					modifier = {
                         factor = 0
                         has_game_rule = {
                             rule = JAP_dai_li
