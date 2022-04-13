@@ -2508,40 +2508,8 @@ JAP_north_borneo_release_tags_into_sphere = {
 JAP_bill_pass_check = {
 	if = {
 		limit = {
-			OR = {
-				AND = {
-					check_variable = { JAP_total_mp_support > 232 }
-					check_variable = { JAP_Peers_support > 0.499 }
-				}
-				AND = {
-					has_country_flag = JAP_Ino_Prime_Minister
-					has_game_rule = {
-						rule = JAP_INO_BILL_PASS_CHEAT
-						option = JAP_INO_BILL_PASS_CHEAT_YES
-					}
-				}
-				AND = {
-					has_country_flag = JAP_Ikeda_Prime_Minister
-					has_game_rule = {
-						rule = JAP_IKEDA_BILL_PASS_CHEAT
-						option = JAP_IKEDA_BILL_PASS_CHEAT_YES
-					}
-				}
-				AND = {
-					has_country_flag = JAP_Kaya_Prime_Minister
-					has_game_rule = {
-						rule = JAP_KAYA_BILL_PASS_CHEAT
-						option = JAP_KAYA_BILL_PASS_CHEAT_YES
-					}
-				}
-				AND = {
-					has_country_flag = JAP_Takagi_Prime_Minister
-					has_game_rule = {
-						rule = JAP_TAKAGI_BILL_PASS_CHEAT
-						option = JAP_TAKAGI_BILL_PASS_CHEAT_YES
-					}
-				}
-			}
+			check_variable = { JAP_total_mp_support > 232 }
+			check_variable = { JAP_Peers_support > 0.499 }
 		}
 		country_event = { id = japdietbills.1 }
 	}
@@ -2802,6 +2770,68 @@ JAP_bills_calc_support_for_bill_initial = {
 		array = JAP_Diet_Seats
 		add_to_variable = { JAP_total_mp_support = JAP_mps_in_favour^i }
 	}
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					has_country_flag = JAP_Ino_Prime_Minister
+					has_game_rule = {
+						rule = JAP_INO_BILL_PASS_CHEAT
+						option = JAP_INO_BILL_PASS_CHEAT_YES
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Ikeda_Prime_Minister
+					has_game_rule = {
+						rule = JAP_IKEDA_BILL_PASS_CHEAT
+						option = JAP_IKEDA_BILL_PASS_CHEAT_YES
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Kaya_Prime_Minister
+					has_game_rule = {
+						rule = JAP_KAYA_BILL_PASS_CHEAT
+						option = JAP_KAYA_BILL_PASS_CHEAT_YES
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Kaya_Prime_Minister
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_FUKUDA
+					}
+					NOT = { check_variable = { JAP_bill_id = 519 } }
+				}
+				AND = {
+					has_country_flag = JAP_Kaya_Prime_Minister
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Takagi_Prime_Minister
+					has_game_rule = {
+						rule = JAP_TAKAGI_BILL_PASS_CHEAT
+						option = JAP_TAKAGI_BILL_PASS_CHEAT_YES
+					}
+				}
+			}
+			check_variable = { JAP_total_mp_support < 233 }
+		}
+		set_variable = { JAP_total_mp_support = 233 }
+	}
+	else_if = {
+		limit = {
+			has_game_rule = {
+				rule = JAP_KAYA_SUCCESSOR
+				option = JAP_KAYA_SUCCESSOR_FUKUDA
+			}
+			check_variable = { JAP_bill_id = 519 } 
+			check_variable = { JAP_total_mp_support > 232 }
+		}
+		set_variable = { JAP_total_mp_support = 232 }
+	}
 }
 
 JAP_update_bill_support = {
@@ -2836,6 +2866,68 @@ JAP_update_bill_support = {
 	for_each_loop = {
 		array = JAP_Diet_Seats
 		add_to_variable = { JAP_total_mp_support = JAP_mps_in_favour^i }
+	}
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					has_country_flag = JAP_Ino_Prime_Minister
+					has_game_rule = {
+						rule = JAP_INO_BILL_PASS_CHEAT
+						option = JAP_INO_BILL_PASS_CHEAT_YES
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Ikeda_Prime_Minister
+					has_game_rule = {
+						rule = JAP_IKEDA_BILL_PASS_CHEAT
+						option = JAP_IKEDA_BILL_PASS_CHEAT_YES
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Kaya_Prime_Minister
+					has_game_rule = {
+						rule = JAP_KAYA_BILL_PASS_CHEAT
+						option = JAP_KAYA_BILL_PASS_CHEAT_YES
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Kaya_Prime_Minister
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_FUKUDA
+					}
+					NOT = { check_variable = { JAP_bill_id = 519 } }
+				}
+				AND = {
+					has_country_flag = JAP_Kaya_Prime_Minister
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Takagi_Prime_Minister
+					has_game_rule = {
+						rule = JAP_TAKAGI_BILL_PASS_CHEAT
+						option = JAP_TAKAGI_BILL_PASS_CHEAT_YES
+					}
+				}
+			}
+			check_variable = { JAP_total_mp_support < 233 }
+		}
+		set_variable = { JAP_total_mp_support = 233 }
+	}
+	else_if = {
+		limit = {
+			has_game_rule = {
+				rule = JAP_KAYA_SUCCESSOR
+				option = JAP_KAYA_SUCCESSOR_FUKUDA
+			}
+			check_variable = { JAP_bill_id = 519 } 
+			check_variable = { JAP_total_mp_support > 232 }
+		}
+		set_variable = { JAP_total_mp_support = 232 }
 	}
 }
 
