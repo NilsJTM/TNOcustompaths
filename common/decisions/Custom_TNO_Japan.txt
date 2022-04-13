@@ -71,5 +71,172 @@ custom_debug_category = {
 				}
 			}
 		}
-	}	
+	}
+	JAP_custom_power_measures = {
+		available  = {
+			OR = {
+				AND = {
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_KAYA
+					}
+					JAP = {
+						NOT = {
+							check_variable = { JAP_Diet_Faction_Power^2 < JAP_Diet_Faction_Power^5 }
+						}
+						check_variable = { JAP_resigning_pm = 4 }
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_TAKAGI
+					}
+					JAP = {
+						NOT = {
+							check_variable = { JAP_Diet_Faction_Power^2 > JAP_Diet_Faction_Power^5 }
+						}
+						check_variable = { JAP_resigning_pm = 4 }
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = JAP_TAKAGI_SUCCESSOR
+						option = JAP_TAKAGI_SUCCESSOR_KAYA
+					}
+					JAP = {
+						NOT = {
+							check_variable = { JAP_Diet_Faction_Power^4 < JAP_Diet_Faction_Power^5 }
+						}
+						check_variable = { JAP_resigning_pm = 2 }
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = JAP_TAKAGI_SUCCESSOR
+						option = JAP_TAKAGI_SUCCESSOR_IKEDA
+					}
+					JAP = {
+						NOT = {
+							check_variable = { JAP_Diet_Faction_Power^4 > JAP_Diet_Faction_Power^5 }
+						}
+						check_variable = { JAP_resigning_pm = 2 }
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA
+					}
+					JAP = {
+						NOT = {
+							check_variable = { JAP_Diet_Faction_Power^4 > JAP_Diet_Faction_Power^2 }
+						}
+						check_variable = { JAP_resigning_pm = 5 }
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI
+					}
+					JAP = {
+						NOT = {
+							check_variable = { JAP_Diet_Faction_Power^4 < JAP_Diet_Faction_Power^2 }
+						}
+						check_variable = { JAP_resigning_pm = 5 }
+					}
+				}
+			}
+			JAP = { 
+				has_country_flag = CCP_JAP_new_interregnum
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		complete_effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							has_game_rule = {
+								rule = JAP_IKEDA_SUCCESSOR
+								option = JAP_IKEDA_SUCCESSOR_KAYA
+							}
+							JAP = {
+								check_variable = { JAP_resigning_pm = 4 }
+							}
+						}
+						AND = {
+							has_game_rule = {
+								rule = JAP_TAKAGI_SUCCESSOR
+								option = JAP_TAKAGI_SUCCESSOR_KAYA
+							}
+							JAP = {
+								check_variable = { JAP_resigning_pm = 2 }
+							}
+						}
+					}
+				}
+				JAP = {
+					JAP_Kaya_increase_power_overwhel = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							has_game_rule = {
+								rule = JAP_IKEDA_SUCCESSOR
+								option = JAP_IKEDA_SUCCESSOR_TAKAGI
+							}
+							JAP = {
+								check_variable = { JAP_resigning_pm = 4 }
+							}
+						}
+						AND = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI
+							}
+							JAP = {
+								check_variable = { JAP_resigning_pm = 5 }
+							}
+						}
+					}
+				}
+				JAP = {
+					JAP_Takagi_increase_power_overwhel = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							has_game_rule = {
+								rule = JAP_TAKAGI_SUCCESSOR
+								option = JAP_TAKAGI_SUCCESSOR_IKEDA
+							}
+							JAP = {
+								check_variable = { JAP_resigning_pm = 2 }
+							}
+						}
+						AND = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA
+							}
+							JAP = {
+								check_variable = { JAP_resigning_pm = 5 }
+							}
+						}
+					}
+				}
+				JAP = {
+					JAP_Ino_increase_power_overwhel = yes
+				}
+			}
+		}
+	}
 }

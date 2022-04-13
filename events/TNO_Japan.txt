@@ -1,0 +1,4591 @@
+﻿add_namespace = jap
+add_namespace = jap_fopo
+
+country_event = { # Triggers intervention in ICW
+	id = jap_fopo.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_fopo.1"}
+	title = jap_fopo.1.t
+	desc = jap_fopo.1.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap_fopo.1.a
+		TNO_fopo_add_iran_civil_war_tab = yes
+		
+	}
+}
+
+country_event = { # JAP loses the Iran civil war
+	id = jap_fopo.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_fopo.2"}
+	title = jap_fopo.2.t
+	desc = jap_fopo.2.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap_fopo.2.a
+		TNO_fopo_remove_iran_civil_war_tab = yes
+		set_temp_variable = { target = IRI }
+		TNO_clear_num_volunteers = yes
+		add_stability = -0.05
+		add_political_power = -75
+		JAP_PM_decrease_power_subst = yes
+		JAP_PA_support_decrease_med = yes
+		set_temp_variable = { temp_government_stability = -10 }
+		JAP_government_stability_change = yes
+		clr_country_flag = JAP_iran_intervention
+		clr_country_flag = JAP_IRCW_TREE
+		hidden_effect = {
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+country_event = { # JAP wins the Iran civil war
+	id = jap_fopo.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_fopo.3"}
+	title = jap_fopo.3.t
+	desc = jap_fopo.3.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap_fopo.3.a
+		TNO_fopo_remove_iran_civil_war_tab = yes
+		set_temp_variable = { target = IRI }
+		TNO_clear_num_volunteers = yes
+		add_stability = 0.025
+		add_political_power = 50
+		JAP_PM_increase_power_avg = yes
+		JAP_PA_support_increase_small = yes
+		set_temp_variable = { temp_government_stability = 5 }
+		JAP_government_stability_change = yes
+		IRI = {
+			econ_join_sphere_JAP = yes
+		}
+		clr_country_flag = JAP_iran_intervention
+		clr_country_flag = JAP_IRCW_TREE
+		hidden_effect = {
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+country_event = { # JAP wins the Indonesian Civil War
+	id = jap_fopo.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_fopo.4"}
+	title = jap_fopo.4.t
+	desc = jap_fopo.4.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap_fopo.4.a
+		add_stability = 0.03
+		add_political_power = 50
+		JAP_PM_increase_power_avg = yes
+		JAP_PA_support_increase_small = yes
+		set_temp_variable = { temp_government_stability = 5 }
+		JAP_government_stability_change = yes
+		set_temp_variable = { target = INS }
+		TNO_clear_num_volunteers = yes
+		hidden_effect = {
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+country_event = { # JAP loses the Indonesian Civil War
+	id = jap_fopo.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap_fopo.5"}
+	title = jap_fopo.5.t
+	desc = jap_fopo.5.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap_fopo.5.a
+		add_stability = 0.03
+		add_political_power = -35
+		JAP_PM_decrease_power_subst = yes
+		JAP_PA_support_decrease_med = yes
+		set_temp_variable = { temp_government_stability = -10 }
+		JAP_government_stability_change = yes
+		set_temp_variable = { target = INS }
+		TNO_clear_num_volunteers = yes
+		hidden_effect = {
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+#country_event = { #introductory event and variable setups
+#	id = jap.0
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.0"}
+#	title = jap.0.t
+#	desc = jap.0.d
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	option = {
+#		name = jap.0.a
+#		hidden_effect = {
+#			set_variable = {
+#				var = IJN_opinion
+#				value = 60
+#			}
+#			set_variable = {
+#				var = IJA_opinion
+#				value = 40
+#			}
+#			set_variable = {
+#				var = IJN_strength
+#				value = 70
+#			}
+#			set_variable = {
+#				var = IJA_strength
+#				value = 50
+#			}
+#		}
+#	}
+#}
+
+country_event = { #hawaiian missile crisis wrapper pt.1 - overview
+	id = jap.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.1"}
+	title = jap.1.t
+	desc = jap.1.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.1.a
+		country_event = { id = jap.2 days = 2 }
+	}
+}
+
+country_event = { #hawaiian missile crisis wrapper pt.2 - subduing the navy
+	id = jap.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.2"}
+	title = jap.2.t
+	desc = jap.2.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.2.a
+		country_event = { id = jap.3 days = 2 }
+	}
+}
+
+country_event = { #hawaiian missile crisis wrapper pt.3 - across the ocean
+	id = jap.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.3"}
+	title = jap.3.t
+	desc = jap.3.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.3.a
+		#country_event = { id = jap.4 days = 2 }
+	}
+}
+#country_event = { #hawaiian missile crisis wrapper pt.4 - thank fuck we're done here
+#	id = jap.4
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.4"}
+#	title = jap.4.t
+#	desc = jap.4.d
+#
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = jap.4.a
+#		hidden_effect = {
+#			subtract_from_variable = { var = IJN_opinion value = 40 }
+#			subtract_from_variable = { var = IJA_opinion value = 20 }
+#		}
+#		custom_effect_tooltip = JAP_IJN_OPINION_LOWERED_HIGH.tt
+#		custom_effect_tooltip = JAP_IJA_OPINION_LOWERED_MEDIUM.tt
+#	}
+#}
+
+country_event = { #central bank reports healthy growth
+	id = jap.50
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.50"}
+	title = jap.50.t
+	desc = jap.50.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.50.a
+		hidden_effect = {
+			country_event = { id = jap.51 months = 2 }
+		}
+	}
+}
+
+country_event = { #investigation draws worries
+	id = jap.51
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.51"}
+	title = jap.51.t
+	desc = jap.51.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.51.a
+		hidden_effect = {
+			country_event = { id = jap.52 months = 2 }
+		}
+	}
+}
+
+country_event = { #interest rates spike
+	id = jap.53
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.53"}
+	title = jap.53.t
+	desc = jap.53.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.53.a
+		set_temp_variable = { interest_rates_temp = 0.2 }
+		econ_interest_rates_change = yes
+	}
+}
+
+country_event = { #ino slide start
+	id = jap.54
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.54"}
+	title = jap.54.t
+	desc = jap.54.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.54.a
+		hidden_effect = {
+			clr_country_flag = JAP_starting_economy_tree
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+country_event = { #cutting zaibatsu subsidies again
+	id = jap.55
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.55"}
+	title = jap.55.t
+	desc = jap.55.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.55.a
+	}
+	option = { #its time to stop
+		name = jap.56.a
+	}
+}
+
+country_event = { #cutting zaibatsu subsidies once again
+	id = jap.56
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.56"}
+	title = jap.56.t
+	desc = jap.56.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.56.a
+	}
+}
+
+###FLAVOR ZONE###
+
+#skeleton events for dev diary
+#not the dev diary...
+
+add_namespace = japflavor
+
+country_event = { #Ghosts of the Past
+	id = japflavor.31
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.31"}
+	title = japflavor.31.t
+	desc = japflavor.31.d
+	is_triggered_only = yes
+	picture = GFX_report_event_india_plane
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.31.a
+	}
+}
+
+country_event = { #Accursed Soldiers
+	id = japflavor.32
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.32"}
+	title = japflavor.32.t
+	desc = japflavor.32.d
+	is_triggered_only = yes
+	picture = GFX_report_event_india_communists
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.32.a
+	}
+}
+
+country_event = { #From the Valley of the Dead
+	id = japflavor.33
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.33"}
+	title = japflavor.33.t
+	desc = japflavor.33.d
+	is_triggered_only = yes
+	picture = GFX_report_event_CHI_nanjing_summit_start
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.33.a
+	}
+}
+
+country_event = { #From the Valley of the Dead, P2
+	id = japflavor.34
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.34"}
+	title = japflavor.34.t
+	desc = japflavor.34.d
+	is_triggered_only = yes
+	picture = GFX_report_event_generic_riots
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.34.a
+	}
+}
+
+country_event = { #Aleutian tourism
+	id = japflavor.35
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.35"}
+	title = japflavor.35.t
+	desc = japflavor.35.d
+	is_triggered_only = yes
+	picture = GFX_report_event_JAP_army_2
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.35.a
+	}
+}
+
+country_event = { #meiji's 50th death day ceremony
+	id = japflavor.36
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.36"}
+	title = japflavor.36.t
+	desc = japflavor.36.d
+	is_triggered_only = yes
+	picture = GFX_report_event_japan_yokusankai_collapse
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.36.a
+	}
+}
+
+country_event = { #alaska earthquake
+	id = japflavor.37
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.37"}
+	title = japflavor.37.t
+	desc = japflavor.37.d
+	is_triggered_only = yes
+	picture = GFX_report_event_JAP_alaskan_earthquake
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.37.a
+		772 = {
+			damage_building = {
+				type = naval_base
+				damage = 1
+			}
+		}
+		add_manpower = -13
+	}
+}
+
+country_event = { #trot plot starts
+	id = japflavor.38
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.38"}
+	title = japflavor.38.t
+	desc = japflavor.38.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.38.a
+		hidden_effect = {
+			country_event = { id = japflavor.39 days = 238 }
+			country_event = { id = japflavor.40 days = 28 }
+			country_event = { id = japflavor.41 days = 58 }
+			country_event = { id = japflavor.42 days = 88 }
+			country_event = { id = japflavor.43 days = 118 }
+			country_event = { id = japflavor.44 days = 148 }
+			country_event = { id = japflavor.45 days = 178 }
+			country_event = { id = japflavor.46 days = 208 }
+		}
+	}
+}
+
+country_event = {
+	id = japflavor.39
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.39"}
+	title = japflavor.39.t
+	desc = japflavor.39.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.39.a
+	}
+}
+
+country_event = {
+	id = japflavor.40
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.40"}
+	title = japflavor.40.t
+	desc = japflavor.40.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.40.a
+	}
+}
+
+country_event = {
+	id = japflavor.41
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.41"}
+	title = japflavor.41.t
+	desc = japflavor.41.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.41.a
+		hidden_effect = {
+			country_event = { id = japflavor.44 days = 8 }
+		}
+	}
+}
+
+country_event = {
+	id = japflavor.42
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.42"}
+	title = japflavor.42.t
+	desc = japflavor.42.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.42.a
+		hidden_effect = {
+			country_event = { id = japflavor.45 days = 5 random = 2 }
+		}
+	}
+}
+
+country_event = {
+	id = japflavor.43
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.43"}
+	title = japflavor.43.t
+	desc = japflavor.43.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.43.a
+	}
+}
+
+country_event = {
+	id = japflavor.44
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.44"}
+	title = japflavor.44.t
+	desc = japflavor.44.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.44.a
+	}
+}
+
+country_event = {
+	id = japflavor.45
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.45"}
+	title = japflavor.45.t
+	desc = japflavor.45.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.45.a
+		hidden_effect = {
+			country_event = { id = japflavor.46 days = 4 random = 2 }
+		}
+	}
+}
+
+country_event = {
+	id = japflavor.46
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.46"}
+	title = japflavor.46.t
+	desc = japflavor.46.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.46.a
+		hidden_effect = {
+			country_event = { id = japflavor.43 days = 3 random = 3 }
+		}
+	}
+}
+
+country_event = {
+	id = japflavor.47
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.47"}
+	title = japflavor.47.t
+	desc = japflavor.47.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.47.a
+	}
+}
+
+country_event = {
+	id = japflavor.48
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.48"}
+	title = japflavor.48.t
+	desc = japflavor.48.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.48.a
+	}
+}
+
+country_event = {
+	id = japflavor.49
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.49"}
+	title = japflavor.49.t
+	desc = japflavor.49.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.49.a
+	}
+}
+
+country_event = {
+	id = japflavor.51
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.51"}
+	title = japflavor.51.t
+	desc = japflavor.51.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.51.a
+	}
+}
+
+country_event = {
+	id = japflavor.52
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.52"}
+	title = japflavor.52.t
+	desc = japflavor.52.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.52.a
+	}
+}
+
+country_event = {
+	id = japflavor.53
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japflavor.53"}
+	title = japflavor.53.t
+	desc = japflavor.53.d
+	is_triggered_only = yes
+	#picture = 
+	fire_only_once = yes
+
+	option = {
+		name = japflavor.53.a
+	}
+}
+
+#japan team bls fix
+#and by fix I mean use the damn on_actions file
+country_event = { #Showa B-Day
+	id = jap.100
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.100"}
+	title = jap.100.t
+	desc = jap.100.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = jap.100.a
+		ai_chance =  { factor = 100 }
+		add_political_power = 10
+		hidden_effect = {
+	  		#country_event = { days = 365 id = jap.1 }
+		}
+	}
+}
+
+country_event = { #ino slide - Reassure the military that despite recent economic news
+	id = jap.90
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.90"}
+	title = jap.90.t
+	desc = jap.90.d
+	#picture =
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.90.a
+		#increase_ija_opinion_low = yes
+		#increase_ijn_opinion_low = yes
+		custom_effect_tooltip = JAP_IJN_OPINION_RAISED_LOW_tt
+		custom_effect_tooltip = JAP_IJA_OPINION_RAISED_LOW_tt
+	}
+}
+
+country_event = { #Astro Boy
+	id = jap.102
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.102"}
+	title = jap.102.t
+	desc = jap.102.d
+	picture = GFX_news_event_generic_tv
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.102.a
+		ai_chance = { factor = 100 }
+		add_political_power = 15
+	}
+}
+
+country_event = { #hayao being a bitch
+	id = jap.103
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.103"}
+	title = jap.103.t
+	desc = jap.103.d
+	#picture = 
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.103.a
+		ai_chance = { factor = 100 }
+	}
+}
+
+country_event = { #coal mine accident
+	id = jap.106
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.106"}
+	title = jap.106.t
+	desc = jap.106.d
+	#picture = 
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.106.a
+		ai_chance = { factor = 100 }
+		add_political_power = -10
+		add_manpower = -36
+	}
+}
+
+country_event = { #TV Tokyo
+	id = jap.107
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.107"}
+	title = jap.107.t
+	desc = jap.107.d
+	#picture = 
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.107.a
+		ai_chance = { factor = 100 }
+		add_political_power = 10
+	}
+}
+
+###jap 8 CONSIGNED TO THE EMPEROR###
+
+country_event = { #Sanjuro
+	id = jap.109
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.109"}
+	title = jap.109.t
+	desc = jap.109.d
+	picture = GFX_report_event_sanjuro
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.109.a
+		ai_chance = {factor = 100}
+		add_political_power = 10
+	}
+}
+
+#country_event = { #300 million yen robbery. 5,945,082.61 dollar in todays money
+#	id = jap.110
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.110"}
+#	title = jap.110.t
+#	desc = jap.110.d
+#	#picture = 
+#	
+#	is_triggered_only = yes
+#
+#	fire_only_once = yes
+#
+#	option = { 
+#		name = jap.110.a
+#		ai_chance = { factor = 100 }
+#		add_political_power = -20
+#	}
+#}
+
+country_event = { #armistice day
+	id = jap.111
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.111"}
+	title = jap.111.t
+	desc = jap.111.d
+	picture = GFX_report_event_japan_ww1
+
+	is_triggered_only = yes
+
+	fire_only_once = no
+
+	option = {
+		name = jap.111.a
+		ai_chance = {factor = 100}
+		add_political_power = 10
+		hidden_effect = {
+  		#country_event = { days = 365 id = jap.11 }
+		}
+	}
+}
+
+#country_event = { #placeholder
+#	id = jap.112
+#	title = jap.112.t
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.112"}
+#	desc = jap.112.d
+#	#picture = 
+#	
+#	is_triggered_only = yes
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		name = jap.112.a
+#		ai_chance = { factor = 100 }
+#		add_political_power = 10
+#	}
+#}
+
+country_event = { #Ue wo Muite Arukou
+	id = jap.113
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.113"}
+	title = jap.113.t
+	desc = jap.113.d
+	#picture = GFX_report_event_sukiyaki
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.113.a
+		ai_chance = { factor = 100 }
+		add_political_power = 10
+	}
+}
+
+country_event = { #Kouhaku
+	id = jap.114
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.114"}
+	title = jap.114.t
+	desc = jap.114.d
+	#picture = GFX_report_event_kouhaku
+
+	is_triggered_only = yes
+
+	fire_only_once = no
+
+	option = {
+		name = jap.114.a
+		ai_chance = { factor = 100 }
+		add_political_power = 20
+		hidden_effect = {
+	  		#country_event = { days = 365 id = jap.14 }
+		}
+	}
+}
+
+#country_event = { #Mikawashima Train Crash
+#	id = jap.115
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.115"}
+#	title = jap.115.t
+#	desc = jap.115.d
+#	#picture = GFX_report_event_mikawashima
+#	
+#	is_triggered_only = yes
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		name = jap.115.a
+#		ai_chance = { factor = 100 }
+#		add_political_power = -20
+#	}
+#}
+
+country_event = { #Winter of '63
+	id = jap.116
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.116"}
+	title = jap.116.t
+	desc = jap.116.d
+	#picture = GFX_report_event_japblizzard
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.116.a
+		ai_chance = {factor = 80}
+		add_political_power = -20
+
+		hidden_effect = {
+			country_event = { days = 10 id = jap.117 }
+		}
+	}
+	option = {
+		name = jap.116.b
+		ai_chance =  {factor = 20 }
+
+		hidden_effect = {
+			country_event = { days = 10 id = jap.118 }
+		}
+	}
+}
+
+country_event = { #clear the winter normally
+	id = jap.117
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.117"}
+	title = jap.117.t
+	desc = jap.117.d
+	picture = GFX_report_event_JAP_snow_clearing
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.117.a
+		ai_chance = { factor = 100 }
+		add_stability = 0.02
+	}
+}
+
+country_event = { #FLAMETHROWERS
+	id = jap.118
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.118"}
+	title = jap.118.t
+	desc = jap.118.d
+	picture = GFX_report_event_JAP_flamethrower1
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.118.a
+		ai_chance = { factor = 100 }
+		hidden_effect = {
+			random_list = {
+				70 = {
+					country_event = { days = 10 id = jap.119 }
+				}
+
+				30 = {
+					country_event = { days = 10 id = jap.157 }
+
+				}
+			}
+		}
+	}
+}
+
+country_event = { #FLAMETHROWERS FUCKING WORK AROOOO
+	id = jap.119
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.119"}
+	title = jap.119.t
+	desc = jap.119.d
+	picture = GFX_report_event_JAP_flamethrower2
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.119.a
+		ai_chance = { factor = 100 }
+		add_stability = 0.02
+		army_experience = 1
+	}
+}
+
+country_event = { #Flamethrower broke sad
+	id = jap.157
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.157"}
+	title = jap.157.t
+	desc = jap.157.d
+	picture = GFX_report_event_JAP_flamethrower3
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jap.157.a
+		ai_chance = { factor = 100 }
+		add_stability = -0.02
+		army_experience = 1
+	}
+}
+
+country_event = { #motorcycle gangs bousouzoku
+	id = jap.120
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.120"}
+	title = jap.120.t
+	desc = jap.120.d
+	#picture =
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.120.a
+		ai_chance = { factor = 100 }
+		add_stability = -0.02
+	}
+}
+
+country_event = { #three sacred treasures: electronics
+	id = jap.121
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.121"}
+	title = jap.121.t
+	desc = jap.121.d
+	#picture =
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.121.a
+		ai_chance = { factor = 100 }
+		add_stability = 0.05
+	}
+}
+
+country_event = { #zaibatsu black friday
+	id = jap.122
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.122"}
+	title = jap.122.t
+	desc = jap.122.d
+	#picture =
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = jap.122.a
+		ai_chance =  {factor = 100 }
+		add_stability = -0.03
+	}
+}
+
+country_event = { #vladivostok brawl
+	id = jap.123
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.123"}
+	title = jap.123.t
+	desc = jap.123.d
+	#picture =
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.123.a
+		ai_chance = { factor = 100 }
+		add_stability = -0.01
+	}
+}
+
+country_event = { #Rumblings of a Secret War - Triads in balance.
+	id = jap.124
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.124"}
+	title = jap.124.t
+	desc = jap.124.d
+	#picture =
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	#hidden_effect = { jap.24 = { country_event = { days = 50 id = jap.25} } }
+	option = {
+		country_event = { days = 50 id = jap.125}
+		name = jap.124.a
+		ai_chance = {factor = 100}
+	}
+}
+country_event = { #corrupt officials introduce the yakuza to the area for profit
+	id = jap.125
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.125"}
+	title = jap.125.t
+	desc = jap.125.d
+	#picture =
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+	#hidden_effect = { jap.25 = { country_event = { days = 50 id = jap.26} } }
+
+	option = { #do it!
+		name = jap.125.a
+		ai_chance = {factor = 50}
+		add_stability = -0.03
+		country_event = { days = 50 id = jap.126}
+	}
+	option = { #don't!
+		name = jap.125.b
+		ai_chance = {factor = 50}
+		add_stability = 0.03
+	}
+}
+
+country_event = { #Yakuza slave trade.
+	id = jap.126
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.126"}
+	title = jap.126.t
+	desc = jap.126.d
+	#picture =
+	trigger = {
+		TAG = JAP
+	}
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+
+	#hidden_effect = { jap.26 = { country_event = { days = 50 id = jap.27} } }
+
+	option = {
+		name = jap.126.a
+		add_ideas = JAP_Yakuza_Labour
+		ai_chance = {factor = 100}
+		add_stability = 0.05
+		country_event = { days = 50 id = jap.127}
+	}
+}
+
+country_event = { #Triads strike back
+	id = jap.127
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.127"}
+	title = jap.127.t
+	desc = jap.127.d
+	#picture =
+	trigger = {
+		TAG = JAP
+	}
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	#hidden_effect = { jap.27 = { country_event = { days = 150 id = jap.28} } }
+
+	option = { #intensify!
+		name = jap.127.a
+		ai_chance = {factor = 50}
+		add_stability = 0.05
+		country_event = { days = 150 id = jap.128}
+	}
+	option = { #Cancel!
+		name = jap.127.b
+		ai_chance = {factor = 50}
+		add_stability = -0.10
+	}
+}
+
+country_event = { #Shanghai Noir
+	id = jap.128
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.128"}
+	title = jap.128.t
+	desc = jap.128.d
+	#picture =
+	trigger = {
+		TAG = JAP
+	}
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	#hidden_effect = { jap.28 = { country_event = { days = 150 id = jap.29} } }
+
+	option = { #intensify!
+		name = jap.128.a
+		ai_chance = {factor = 50}
+		add_stability = 0.05
+		country_event = { days = 150 id = jap.129}
+	}
+}
+
+country_event = { #city becomes a warzone, shanghai is fucked to shit, the bonus goes away as the Yakuza shut down operations
+	id = jap.129
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.129"}
+	title = jap.129.t
+	desc = jap.129.d
+	#picture =
+	trigger = {
+		TAG = JAP
+	}
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	#hidden_effect = { jap.29 = { country_event = { days = 300 id = jap.30} } }
+
+	option = { #Uh Oh!
+		name = jap.129.a
+		country_event = { days = 300 id = jap.130}
+		swap_ideas = {
+			remove_idea = JAP_Yakuza_Labour
+			add_idea = JAP_Yakuza_Labour2
+		}
+		ai_chance = {factor = 100}
+		add_stability = 0.05
+		813 = {set_demilitarized_zone = yes}
+		813 = {add_extra_state_shared_building_slots = -5 }
+	}
+}
+
+country_event = { #Lose Shanghai to china!
+	id = jap.130
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.130"}
+	title = jap.130.t
+	desc = jap.130.d
+	#picture =
+	trigger = {
+		TAG = JAP
+	}
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #Uh Oh!
+		name = jap.130.a
+		remove_ideas = JAP_Yakuza_Labour2
+		ai_chance = {factor = 100}
+		add_stability = 0.05
+		813 = {set_demilitarized_zone = no}
+		813 = {add_extra_state_shared_building_slots = 5 }
+		CHI = { transfer_state = 813}
+	}
+}
+
+# country_event = { #Opening of the Japan-Korea tunnel
+# 	id = jap.131
+# 	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.131"}
+# 	title = jap.131.t
+# 	desc = jap.131.d
+# 	#picture =
+# 	is_triggered_only = yes
+
+# 	fire_only_once = yes
+
+# 	option = { #
+# 		name = jap.131.a
+# 		JAP= {
+# 			remove_ideas = JAP_korea_tunnel_construction
+
+# 			963 = {
+# 				add_to_variable = { PUBLIC_APPROVAL = 3 }
+# 				add_building_construction = {
+# 					type = infrastructure
+# 					level = 1
+# 					instant_build = yes
+# 				}
+# 			}
+# 		}
+# 	}
+# }
+country_event = { #report on the economy - Manchuria - jap
+	id = jap.132
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.132"}
+	title = jap.132.t
+	desc = jap.132.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.132.a
+		hidden_effect = {
+			MAN = { country_event = { id = jap.133 days = 2}}
+		}
+	}
+}
+country_event = { #report on the economy - Manchuria
+	id = jap.133
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.133"}
+	title = jap.133.t
+	desc = jap.133.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.133.a
+		hidden_effect = {
+			JAP = { country_event = { id = jap.134 days = 3}}
+		}
+	}
+	option = { #
+		name = jap.133.b
+		hidden_effect = {
+			JAP = { country_event = { id = jap.135 days = 3}}
+		}
+	}
+}
+country_event = { #report on the economy - Manchuria . bad
+	id = jap.134
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.134"}
+	title = jap.134.t
+	desc = jap.134.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.134.a
+	}
+}
+country_event = { #report on the economy - manchuria . good
+	id = jap.135
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.135"}
+	title = jap.135.t
+	desc = jap.135.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.135.a
+	}
+}
+country_event = { #report on the economy - china -jap
+	id = jap.136
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.136"}
+	title = jap.136.t
+	desc = jap.136.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.136.a
+		hidden_effect = {
+			CHI = { country_event = { id = jap.137 days = 2}}
+		}
+	}
+}
+country_event = { #report on the economy - china .
+	id = jap.137
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.137"}
+	title = jap.137.t
+	desc = jap.137.d
+	picture = GFX_report_event_iberia_guy_paper_meeting
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.137.a
+		hidden_effect = {
+			JAP = { country_event = { id = jap.138 days = 3}}
+		}
+	}
+	option = { #
+		name = jap.137.b
+		hidden_effect = {
+			JAP = { country_event = { id = jap.139 days = 3}}
+		}
+	}
+}
+country_event = { #report on the economy - china . bad
+	id = jap.138
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.138"}
+	title = jap.138.t
+	desc = jap.138.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.138.a
+	}
+}
+country_event = { #report on the economy - china . bad
+	id = jap.139
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.139"}
+	title = jap.139.t
+	desc = jap.139.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.139.a
+	}
+}
+country_event = { #report on the economy - azad hind - jap
+	id = jap.140
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.140"}
+	title = jap.140.t
+	desc = jap.140.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.140.a
+		hidden_effect = {
+			AZH = { country_event = { id = jap.141 days = 2}}
+		}
+	}
+}
+country_event = { #report on the economy - azad hind -azad
+	id = jap.141
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.141"}
+	title = jap.141.t
+	desc = jap.141.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #wow very good
+		name = jap.141.a
+		hidden_effect = {
+			JAP = { country_event = { id = jap.142 days = 3}}
+		}
+	}
+	option = { #haha nerds, no!
+		name = jap.141.b
+		hidden_effect = {
+			JAP = { country_event = { id = jap.143 days = 3}}
+		}
+	}
+}
+country_event = { #report on the economy - azad hind . good
+	id = jap.142
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.142"}
+	title = jap.142.t
+	desc = jap.142.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #1
+		name = jap.142.a
+	}
+}
+
+country_event = { #report on the economy - azad hind . bad
+	id = jap.143
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.143"}
+	title = jap.143.t
+	desc = jap.143.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.143.a
+	}
+}
+################################################################################################
+################################################################################################
+########################			SASAKAWA PRESSURE INO TIME 					################
+################################################################################################
+################################################################################################
+country_event = { #Sasakawa wants help
+	id = jap.144
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.144"}
+	title = jap.144.t
+	desc = jap.144.d
+	picture = GFX_report_event_japan_sasakawa_2
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.144.a
+		hidden_effect = {
+			country_event = { id = jap.145 days = 1}
+		}
+	}
+	option = { #
+		name = jap.144.b
+		hidden_effect = {
+			country_event = { id = jap.156 days = 1}
+		}
+	}
+}
+country_event = { #how much money to give
+	id = jap.145
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.145"}
+	title = jap.145.t
+	desc = jap.145.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #little
+		name = jap.145.a
+		hidden_effect = {
+			country_event = { id = jap.146 days = 12}
+		}
+	}
+	option = { #plenty
+		name = jap.145.b
+		hidden_effect = {
+			country_event = { id = jap.151 days = 2}
+		}
+	}
+}
+country_event = { #Sasakawa wants more money
+	id = jap.146
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.146"}
+	title = jap.146.t
+	desc = jap.146.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #no
+		name = jap.146.a
+		hidden_effect = {
+			country_event = { id = jap.147 days = 7}
+		}
+	}
+	option = { #yes
+		name = jap.146.b
+		hidden_effect = {
+			country_event = { id = jap.150 days = 181}
+		}
+		set_temp_variable = { temp_econ_GDP_boost_flat = -0.2 }
+		econ_GDP_boost_once_flat = yes
+	}
+}
+country_event = { #Mysterious Letter
+	id = jap.147
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.147"}
+	title = jap.147.t
+	desc = jap.147.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #have this man arrested
+		name = jap.147.a
+		hidden_effect = {
+			country_event = { id = jap.148 days = 1}
+		}
+	}
+	option = { #hmmmmm
+		name = jap.147.b
+		hidden_effect = {
+			country_event = { id = jap.151 days = 2}
+		}
+	}
+}
+country_event = { #The Arrest of Sasakawa
+	id = jap.148
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.148"}
+	title = jap.148.t
+	desc = jap.148.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.148.a
+		hidden_effect = {
+			country_event = { id = jap.149 days = 20}
+		}
+	}
+}
+country_event = { #Sasakawa goes free
+	id = jap.149
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.149"}
+	title = jap.149.t
+	desc = jap.149.d
+	picture = GFX_report_event_japan_sasakawa_1
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.149.a
+	}
+}
+country_event = { #Oil well finished
+	id = jap.150
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.150"}
+	title = jap.150.t
+	desc = jap.150.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.150.a
+		add_resource = {
+			type = oil
+			amount = 6
+			state = 537
+		}
+		537 = {
+			add_to_variable = { PUBLIC_APPROVAL = 3 }
+		}
+		custom_effect_tooltip = JAP_Public_support_increase_small
+	}
+}
+country_event = { #Money for Sasakawa
+	id = jap.151
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.151"}
+	title = jap.151.t
+	desc = jap.151.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #more
+		name = jap.151.a
+		hidden_effect = {
+			country_event = { id = jap.152 days = 214}
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.5 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+	option = { #ok
+		name = jap.151.b
+		hidden_effect = {
+			country_event = { id = jap.153 days = 148}
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.3 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+country_event = { #oil well done
+	id = jap.152
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.152"}
+	title = jap.152.t
+	desc = jap.152.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.152.a
+		add_resource = {
+			type = oil
+			amount = 6
+			state = 537
+		}
+		537 = {
+			add_to_variable = { PUBLIC_APPROVAL = 6 }
+		}
+		custom_effect_tooltip = JAP_Public_support_increase_small
+	}
+}
+country_event = { #budgets are out, need more
+	id = jap.153
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.153"}
+	title = jap.153.t
+	desc = jap.153.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.153.a
+		hidden_effect = {
+			country_event = { id = jap.154 days = 6}
+		}
+		set_temp_variable = { temp_econ_spending_amount = 0.1 }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+}
+country_event = { #corruption accusations
+	id = jap.154
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.154"}
+	title = jap.154.t
+	desc = jap.154.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.154.a
+		custom_effect_tooltip = JAP_Public_support_decrease_med
+		529 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		534 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		531 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		1234 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		528 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		530 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		532 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		642 = {
+			add_to_variable = { PUBLIC_APPROVAL = -2 }
+		}
+		hidden_effect = {
+			country_event = { id = jap.155 days = 148}
+		}
+	}
+}
+country_event = { #done
+	id = jap.155
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.155"}
+	title = jap.155.t
+	desc = jap.155.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.155.a
+		add_resource = {
+			type = oil
+			amount = 5
+			state = 537
+		}
+	}
+}
+country_event = { #Kishi is busy
+	id = jap.156
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.156"}
+	title = jap.156.t
+	desc = jap.156.d
+	#picture =
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jap.156.a
+		hidden_effect = {
+			country_event = { id = jap.145 days = 2}
+		}
+	}
+}
+
+country_event = { #funny funny time
+	id = jap.1941
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jap.1941"}
+	title = jap.1941.t
+	desc = jap.1941.d
+	is_triggered_only = yes
+
+	option = {
+		name = jap.1941.a
+	}
+}
+
+##############
+#DEBUG EVENTS#
+##############
+add_namespace = japdebug
+
+country_event = { #loads kaya's recon tree
+	id = japdebug.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.1"}
+	title = japdebug.2.t
+	desc = japdebug.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = japdebug.2.a
+		hidden_effect = {
+			#load_focus_tree = { tree = JAP_kaya_reconstruction keep_completed = yes }
+			JAP_clear_PM_flags = yes
+			clr_country_flag = japan_kaya_tree_one_complete
+			clr_country_flag = japan_kaya_tree_two_complete
+			set_country_flag = JAP_Kaya_Prime_Minister
+			JAP_tree_swap = yes
+			set_country_flag = japan_kaya_tree_one_complete
+			set_country_flag = japan_kaya_tree_two_complete
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+country_event = { #kaya tree first two year trigger event
+	id = japdebug.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.11"}
+	title = japdebug.11.t
+	desc = japdebug.11.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = japdebug.11.a
+		hidden_effect = {
+			#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
+			JAP_clear_PM_flags = yes
+			clr_country_flag = japan_kaya_tree_one_complete
+			clr_country_flag = japan_kaya_tree_two_complete
+			set_country_flag = JAP_Kaya_Prime_Minister
+			JAP_Kaya_PM_initialize = yes
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+country_event = { #kaya tree last 3 years trigger event
+	id = japdebug.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.12"}
+	title = japdebug.12.t
+	desc = japdebug.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = japdebug.12.a
+		hidden_effect = {
+			#load_focus_tree = { tree = japan_kaya_second_tree keep_completed = yes }
+			JAP_clear_PM_flags = yes
+			clr_country_flag = japan_kaya_tree_one_complete
+			clr_country_flag = japan_kaya_tree_two_complete
+			set_country_flag = JAP_Kaya_Prime_Minister
+			JAP_tree_swap = yes
+			JAP_Kaya_PM_initialize = yes
+			set_country_flag = japan_kaya_tree_one_complete
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+country_event = { #takagi reconstruction
+	id = japdebug.39
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.39"}
+	title = japdebug.39.t
+	desc = japdebug.39.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = japdebug.39.a
+		hidden_effect = {
+			set_country_flag = JAP_Takagi_Recon
+			set_country_flag = JAP_Takagi_Prime_Minister
+			JAP_tree_swap = yes
+			#load_focus_tree = { tree = JAP_takagi_reconstruction keep_completed = yes }
+		}
+	}
+}
+
+country_event = { #Hello moyme here reworking the Japan GUI
+	id = japdebug.52
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.52"}
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = japdebug.52.a
+		JAP_diet_arrays_initialization = yes
+	}
+}
+
+country_event = { #Indonesia War Reaction tree
+	id = japdebug.53
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.53"}
+	title = japdebug.53.t
+	desc = japdebug.53.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = japdebug.53.a
+		hidden_effect = {
+			set_global_flag = INS_war
+			JAP = {
+				TNO_fopo_add_indonesia_tab = yes
+			}
+			JAP_tree_swap = yes
+		}
+	}
+}
+
+#country_event = { # WW3 Tree
+#	id = japdebug.54
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.54"}
+#	title = japdebug.54.t
+#	desc = japdebug.54.d
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	trigger = {
+#		TAG = JAP
+#	}
+#
+#	option = {
+#		name = japdebug.54.a
+#		hidden_effect = {
+#			set_country_flag = JAP_WW3_tree
+#			JAP_tree_swap = yes
+			#load_focus_tree = { tree = JAP_world_war_three keep_completed = yes }
+#		}
+#	}
+#}
+#
+#country_event = { # Oil Crisis Tree
+#	id = japdebug.55
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.55"}
+#	title = japdebug.55.t
+#	desc = japdebug.55.d
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	trigger = {
+#		TAG = JAP
+#	}
+#
+#	option = {
+#		name = japdebug.55.a
+#		hidden_effect = {
+#			set_country_flag = JAP_OIL_CRISIS
+#			JAP_tree_swap = yes		
+#		}
+
+country_event = { #Indonesia War Reaction tree
+	id = japdebug.56
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japdebug.56"}
+	title = japdebug.56.t
+	desc = japdebug.56.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		TAG = JAP
+	}
+
+	option = {
+		name = japdebug.56.a
+		JAP_north_borneo_release_tags_into_sphere = yes
+	}
+}
+
+### Japanese Indonesia War Reaction Events 
+
+add_namespace = japindonesiawar
+
+country_event = {#japindonesiawar.0
+	id = japindonesiawar.0
+	title = japindonesiawar.0.t
+	desc = japindonesiawar.0.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.1"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.0.a
+		JAP_tree_swap = yes
+		hidden_effect = {
+			#country_event = {
+			#	id = jpindoflavor.1
+			#	days = 40
+			#}
+		}
+	}
+}
+
+country_event = {#japindonesiawar.1
+	id = japindonesiawar.1
+	title = japindonesiawar.1.t
+	desc = japindonesiawar.1.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.1"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.1.a
+	}
+}
+
+country_event = {#japindonesiawar.2
+	id = japindonesiawar.2
+	title = japindonesiawar.2.t
+	desc = japindonesiawar.2.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.2"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.2.a
+	}
+}
+
+country_event = {#japindonesiawar.3
+	id = japindonesiawar.3
+	title = japindonesiawar.3.t
+	desc = japindonesiawar.3.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.3"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.3.a
+	}
+}
+
+country_event = {#japindonesiawar.4
+	id = japindonesiawar.4
+	title = japindonesiawar.4.t
+	desc = japindonesiawar.4.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.4"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.4.a
+	}
+}
+
+country_event = {#japindonesiawar.5
+	id = japindonesiawar.5
+	title = japindonesiawar.5.t
+	desc = japindonesiawar.5.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.5"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.5.a
+	}
+}
+
+country_event = {#japindonesiawar.6
+	id = japindonesiawar.6
+	title = japindonesiawar.6.t
+	desc = japindonesiawar.6.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.6"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.6.a
+		army_experience = 2
+	}
+}
+
+country_event = {#japindonesiawar.7
+	id = japindonesiawar.7
+	title = japindonesiawar.7.t
+	desc = japindonesiawar.7.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.7"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.7.a
+		air_experience = 20
+	}
+}
+
+country_event = {#japindonesiawar.8
+	id = japindonesiawar.8
+	title = japindonesiawar.8.t
+	desc = japindonesiawar.8.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.8"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.8.a
+		country_event = { id = japindonesiawar.9 days = 1}
+		send_equipment = {
+			equipment = infantry_equipment
+			amount = 100
+			target = INS
+		}
+	}
+}
+
+country_event = {#japindonesiawar.9
+	id = japindonesiawar.9
+	title = japindonesiawar.9.t
+	desc = japindonesiawar.9.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.9"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.9.a
+	}
+}
+
+country_event = {#japindonesiawar.10
+	id = japindonesiawar.10
+	title = japindonesiawar.10.t
+	desc = japindonesiawar.10.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.10"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.10.a
+	}
+}
+
+country_event = {#japindonesiawar.11
+	id = japindonesiawar.11
+	title = japindonesiawar.11.t
+	desc = japindonesiawar.11.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.11"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.11.a
+		country_event = { id = japindonesiawar.10 days = 1}
+	}
+}
+
+country_event = {#japindonesiawar.12
+	id = japindonesiawar.12
+	title = japindonesiawar.12.t
+	desc = japindonesiawar.12.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.12"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.12.a
+		country_event = { id = japindonesiawar.13 days = 1}
+	}
+
+	option = {
+		name = japindonesiawar.12.b
+		country_event = { id = japindonesiawar.14 days = 1}
+	}
+}
+
+country_event = {#japindonesiawar.13
+	id = japindonesiawar.13
+	title = japindonesiawar.13.t
+	desc = japindonesiawar.13.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.13"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.13.a
+		add_political_power = -10
+		add_war_support = 0.05
+	}
+}
+
+country_event = {#japindonesiawar.14
+	id = japindonesiawar.14
+	title = japindonesiawar.14.t
+	desc = japindonesiawar.14.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.14"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.14.a
+		add_political_power = 10
+		add_stability = -0.05
+	}
+}
+
+country_event = {#japindonesiawar.15
+	id = japindonesiawar.15
+	title = japindonesiawar.15.t
+	desc = japindonesiawar.15.d
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.15"}
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.15.a
+	}
+}
+
+country_event = {
+	id = japindonesiawar.16
+	title = japindonesiawar.16.t
+	desc = japindonesiawar.16.d
+	picture = GFX_event_picture
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japindonesiawar.16"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japindonesiawar.16.a
+		INS = {
+			add_political_power = 50
+			add_popularity = { ideology = fascism popularity = 0.05 }
+		}
+	}
+}
+
+############
+# Diet GUI #
+############
+
+add_namespace = japdietgui
+
+#For HoP support shrinking
+
+country_event = {
+	id = japdietgui.1
+	immediate = {
+		JAP_HoP_support_check = yes
+
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.1"}
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+
+	option = {
+		name = japdietgui.1.a
+	}
+}
+
+country_event = { # action 1 ticker
+	id = japdietgui.2
+	immediate = {
+		if = {
+			limit = { check_variable = { JAP_action_1_days_left > 0 } }
+			subtract_from_variable = { JAP_action_1_days_left = 1 }
+			country_event = { id = japdietgui.2 days = 1 }
+		}
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.2"
+	}
+	
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = japdietgui.2.a
+	}
+}
+
+country_event = { #  action 2 ticker
+	id = japdietgui.3
+	immediate = {
+		if = {
+			limit = { check_variable = { JAP_action_2_days_left > 0 } }
+			subtract_from_variable = { JAP_action_2_days_left = 1 }
+			country_event = { id = japdietgui.3 days = 1 }
+		}
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.3"
+	}
+
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = japdietgui.3.a
+	}
+}
+
+country_event = { #  action 3 ticker
+	id = japdietgui.4
+	immediate = {
+		if = {
+			limit = { check_variable = { JAP_action_3_days_left > 0 } }
+			subtract_from_variable = { JAP_action_3_days_left = 1 }
+			country_event = { id = japdietgui.4 days = 1 }
+		}
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.4"
+	}
+
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = japdietgui.4.a
+	}
+}
+
+country_event = {
+	id = japdietgui.5
+	immediate = {
+		clr_country_flag = IJA_action_1_taken
+		clr_country_flag = IJA_action_2_taken
+		clr_country_flag = IJA_action_3_taken
+		clr_country_flag = IJA_action_4_taken
+		clr_country_flag = IJN_action_1_taken
+		clr_country_flag = IJN_action_2_taken
+		clr_country_flag = IJN_action_3_taken
+		clr_country_flag = IJN_action_4_taken
+		clr_country_flag = Tension_action_1_taken
+
+		country_event = {
+			id = japdietgui.5
+			days = 30
+		}
+
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.5"}
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+
+	option = {
+		name = japdietgui.5.a
+	}
+}
+
+country_event = {
+	id = japdietgui.6
+	immediate = {
+		clr_country_flag = Tension_action_2_taken
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.6"}
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+
+	option = {
+		name = japdietgui.6.a
+	}
+}
+
+country_event = {
+	id = japdietgui.7
+	immediate = {
+		clr_country_flag = Tension_action_3_taken
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.7"}
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+
+	option = {
+		name = japdietgui.7.a
+	}
+}
+
+country_event = {
+	id = japdietgui.8
+	immediate = {
+		clr_country_flag = Tension_action_4_taken
+		log = "[GetDateText]: [Root.GetName]: event japdietgui.8"}
+	title = "Diet GUI Debug Event"
+	desc = "Something funny here. "
+
+	hidden = yes
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+
+	option = {
+		name = japdietgui.8.a
+	}
+}
+
+
+
+
+# damnit this doesn't work
+#add_namespace = japtrigger
+#
+#country_event = { #nation leave detection
+#	id = japtrigger.1
+#	
+#	add_to_array = { sphere = CHI }
+#	add_to_array = { sphere = VIN }
+#	add_to_array = { sphere = LAO }
+#	add_to_array = { sphere = CAM }
+#	add_to_array = { sphere = INS }
+#	add_to_array = { sphere = AZH }
+#	add_to_array = { sphere = MAN }
+#	add_to_array = { sphere = SHO }
+#	add_to_array = { sphere = PHI }
+#	add_to_array = { sphere = THA }
+#	add_to_array = { sphere = BUR }
+#	add_to_array = { sphere = GAN }
+#	add_to_array = { sphere = SHX }
+#	add_to_array = { sphere = SIC }
+#	add_to_array = { sphere = GUZ }
+#	add_to_array = { sphere = GUX }
+#	add_to_array = { sphere = GNG }
+#	
+#	immediate = {
+#		log = "[GetDateText]: [Root.GetName]: event japtrigger.1"
+#		
+#		current_left = {
+#			remove_opinion_modifier = {
+#				target = JAP
+#				modifier = JAP_repayment_debts
+#			}
+#		}
+#	}
+#	
+#	hidden = yes
+#
+#	trigger = {
+#		for_each_loop = {
+#			array = sphere
+#			
+#			set_variable = { current_left = v }
+#			
+#			v = {
+#				AND = {
+#					has_opinion_modifier = JAP_repayment_debts
+#				
+#					NOT = { is_in_faction_with = JAP }
+#				}
+#			}
+#		}		
+#	}
+#}
+
+
+##Sino-Japanese Interaction Invents that are full of friendship, co-operation, and pan-Asian unity
+
+add_namespace = japchiinteraction
+
+country_event = {#China begs for Excavation Equipment
+	id = japchiinteraction.1
+	title = japchiinteraction.1.t
+	desc = japchiinteraction.1.d
+	picture = GFX_report_event_CHI_Industry_New_Exc_Equip
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.1"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				factor = 10
+				check_variable = {
+					var = CHI.faction_pro_japan_opinion
+					value = 60
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		name = japchiinteraction.1.a
+		custom_effect_tooltip = JAP_CHI_excavation_good_tt
+		hidden_effect = {
+			CHI = {
+				country_event = {id = chi.158 days = 1 random = 84}
+			}
+		}
+	}
+
+	option = {
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				factor = 10
+				check_variable = {
+					var = CHI.faction_pro_japan_opinion
+					value = 40
+					compare = less_than_or_equals
+				}
+			}
+		}
+		name = japchiinteraction.1.b
+		custom_effect_tooltip = JAP_CHI_excavation_bad_tt
+		hidden_effect = {
+			CHI = {
+				country_event = {id = chi.159 days = 1 random = 84}
+			}
+		}
+	}
+}
+
+country_event = {#Shina begs the Great Yamato for permission to gobble up Xinan
+	id = japchiinteraction.2
+	title = japchiinteraction.2.t
+	desc = japchiinteraction.2.d
+
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.2"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Grant Permission
+		ai_chance = {
+			factor = 1000
+		}
+
+		name = japchiinteraction.2.a
+		custom_effect_tooltip = japchiinteraction.2.a.tt
+		hidden_effect = {
+			CHI = {
+				country_event = {
+					id = chi.6010
+				}
+			}
+		}
+	}
+	option = {#Put China in Eternal Limbo (Ends Crisis Tree for China, China never gets to fully annex Yunnan)
+		ai_chance = {
+			factor = 0
+		}
+
+		name = japchiinteraction.2.b
+		custom_effect_tooltip = japchiinteraction.2.b.tt
+		hidden_effect = {
+			CHI = {
+				country_event = {
+					id = chi.6011
+				}
+			}
+		}
+	}
+}
+
+country_event = {#How the fuck did Long Yun defeat China
+	id = japchiinteraction.3
+	title = japchiinteraction.3.t
+	desc = japchiinteraction.3.d
+	picture = GFX_report_event_china_vietnam
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.3"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#seriously how
+		name = japchiinteraction.3.a
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_faction_with = JAP
+					NOT = { tag = JAP }
+					NOT = { tag = MAN }
+					NOT = { tag = GNG }
+					NOT = { tag = MEN }
+					NOT = { tag = GAN }
+					NOT = { tag = NCC }
+					NOT = { tag = ITA }
+					NOT = { tag = AZH }
+					NOT = { tag = MDM }
+					NOT = { is_puppet_of = ITA }
+				}
+				add_ideas = YUN_SEA_NOT_YOUR_BUSINESS_STOP
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = JAP }
+					is_in_faction_with = JAP
+					OR = {
+						tag = ITA
+						tag = AZH
+						tag = MDM
+						is_puppet_of = ITA
+					}
+				}
+				add_ideas = YUN_ITALY_IS_BANNED_FROM_ASIA
+			}
+			every_country = {
+				limit = {
+					is_in_faction_with = JAP
+					tag = JAP
+					tag = MAN
+					tag = GNG
+					tag = MEN
+					tag = GAN
+					tag = NCC
+				}
+				add_ideas = YUN_JAPAN_OH_GOD_OH_FUCK
+			}
+			YUN = {
+				country_event = { id = yun_wi.33 days = 1}
+			}
+		}
+		declare_war_on = {
+			target = YUN
+			type = annex_everything
+		}
+		JAP = {
+			set_temp_variable = { Victory_ID = 27 }
+			Cold_War_GUI_AddVictory = yes
+		}
+		every_other_country = {
+			limit = {
+				OR = {
+					original_tag = GNG
+					original_tag = MAN
+					original_tag = MEN
+					original_tag = GAN
+					original_tag = NCC
+				}
+			}
+			add_to_war = {
+				targeted_alliance = JAP
+				enemy = YUN
+			}
+		}
+	}
+}
+
+country_event = {#YUN is dead
+	id = japchiinteraction.4
+	title = japchiinteraction.4.t
+	desc = japchiinteraction.4.d
+	picture = GFX_report_event_china_vietnam
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.4"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#hallelujah
+		name = japchiinteraction.4.a
+		add_stability = 0.10
+		add_war_support = 0.10
+		hidden_effect = {
+			country_event = {
+				id = japchiinteraction.5
+			}
+		}
+	}
+}
+
+country_event = {#How to partition China now
+	id = japchiinteraction.5
+	title = japchiinteraction.5.t
+	desc = japchiinteraction.5.d
+	picture = GFX_report_event_china_vietnam
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.5"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Status quo ante bellum
+		name = japchiinteraction.5.a
+		hidden_effect = {
+			WI_Japan_is_happy = yes
+		}
+	}
+
+	option = {#china is a social construct
+		name = japchiinteraction.5.b
+		hidden_effect = {
+			WI_Japan_is_angry = yes
+		}
+	}
+
+	option = {#REALLY GOOD IDEA
+		name = japchiinteraction.5.c
+		ai_chance = { factor = 0 }
+		hidden_effect = {
+			WI_Japan_is_crazy = yes
+		}
+	}
+}
+
+country_event = {#Western Insurrection Begins
+	id = japchiinteraction.6
+	title = japchiinteraction.6.t
+	desc = japchiinteraction.6.d
+	picture = GFX_report_event_china_vietnam
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.6"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.6.a
+	}
+}
+
+country_event = {#China requests material help
+	id = japchiinteraction.7
+	title = japchiinteraction.7.t
+	desc = japchiinteraction.7.d
+	picture = GFX_report_event_china_vietnam
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.7"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.7.a
+		set_country_flag = JAP_CHI_requested_material
+		custom_effect_tooltip = japchiinteraction.7.a.tt
+	}
+}
+
+country_event = {#China requests auxiliaries
+	id = japchiinteraction.8
+	title = japchiinteraction.8.t
+	desc = japchiinteraction.8.d
+	picture = GFX_report_event_china_vietnam
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.8"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.8.a
+		set_country_flag = JAP_CHI_requested_auxiliaries
+		custom_effect_tooltip = japchiinteraction.8.a.tt
+	}
+}
+
+country_event = { #allow shangai oil explorations
+	id = japchiinteraction.9
+	title = japchiinteraction.9.t
+	desc = japchiinteraction.9.d
+	picture = GFX_report_event_china_vietnam
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japchiinteraction.9"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.9.a #yes
+		ai_chance = { factor = 90 }
+		CHI = {
+			country_event = {
+				id = chi.5504
+				days = 1
+			}
+		}
+	}
+	option = {
+		name = japchiinteraction.9.b #no
+		ai_chance = { factor = 10 }
+		CHI = {
+			country_event = {
+				id = chi.5505
+				days = 1
+			}
+		}
+	}
+}
+country_event = {#China cries for Mama, Japan being actually serious for the first time
+	id = japchiinteraction.10
+	title = japchiinteraction.10.t
+	desc = japchiinteraction.10.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.10"
+		hidden_effect = {
+			YUN_testing = yes
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = japchiinteraction.10.a
+		custom_effect_tooltip = japchiinteraction.10.a.tt
+		YUN = {
+			country_event = { id = yun_wi.28 days = 2 }
+		}
+	}
+}
+
+country_event = {#
+	id = japchiinteraction.11
+	title = japchiinteraction.11.t
+	desc = japchiinteraction.11.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.11"
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = japchiinteraction.11.a
+		YUN = {
+			country_event = { id = yun_wi.42 days = 2 }
+		}
+	}
+}
+
+country_event = {#
+	id = japchiinteraction.12
+	title = japchiinteraction.12.t
+	desc = japchiinteraction.12.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japchiinteraction.12"
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = japchiinteraction.12.a
+		YUN = {
+			country_event = { id = yun_wi.45 days = 2 }
+		}
+	}
+}
+
+#200 id block for notification events
+country_event = {
+	id = japchiinteraction.200
+	title = japchiinteraction.200.t
+	desc = japchiinteraction.200.d
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japchiinteraction.200"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.200.a
+		add_timed_idea = {
+			idea = JAP_ikeda_understanding_china_infra
+			days = 720
+		}
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.01 }
+		econ_GDP_boost_once_percentage = yes
+	}
+}
+
+country_event = {
+	id = japchiinteraction.201
+	title = japchiinteraction.201.t
+	desc = japchiinteraction.201.d
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japchiinteraction.201"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.201.a
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.025 }
+		econ_GDP_boost_once_percentage = yes
+		set_temp_variable = { debt_temp = 2.5 }
+		econ_national_debt_change = yes
+		add_timed_idea = {
+			idea = JAP_ikeda_understanding_china_industry
+			days = 720
+		}
+	}
+}
+
+country_event = {
+	id = japchiinteraction.202
+	title = japchiinteraction.202.t
+	desc = japchiinteraction.202.d
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japchiinteraction.202"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.202.a
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.025 }
+		econ_GDP_boost_once_percentage = yes
+
+		set_temp_variable = { debt_temp = 2.5 }
+		econ_national_debt_change = yes
+
+		set_temp_variable = { interest_rates_temp = 0.005 }
+		econ_interest_rates_change = yes
+	}
+}
+
+country_event = {
+	id = japchiinteraction.203
+	title = japchiinteraction.203.t
+	desc = japchiinteraction.203.d
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japchiinteraction.203"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.203.a
+		set_temp_variable = { temp_econ_GDP_boost_percentage = 0.015 }
+		econ_GDP_boost_once_percentage = yes
+		every_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = city
+					has_state_category = large_city
+					has_state_category = megalopolis
+					has_state_category = metropolis
+				}
+				free_building_slots = {
+					building = infrastructure
+					size > 0
+				}
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_state_modifier = {
+				modifier = {local_manpower = 0.005}
+			}
+		}
+		add_to_variable = {industrial_expertise_counter = 60}
+	}
+}
+
+country_event = {
+	id = japchiinteraction.204
+	title = japchiinteraction.204.t
+	desc = japchiinteraction.204.d
+	picture = GFX_report_event_CHI_nanjing_summit_start
+
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japchiinteraction.204"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japchiinteraction.204.a
+		set_temp_variable = { interest_rates_temp = 0.025 }
+		econ_interest_rates_change = yes
+	}
+}
+
+###ECON WARS###
+
+add_namespace = japeconwar
+
+country_event = { #EconWars begin
+	id = japeconwar.1
+	immediate = {log = "[GetDateText]: [Root.Getname]: event japeconwar.1"}
+	title = japeconwar.1.t
+	desc = japeconwar.1.d
+
+	#picture = GFX_
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japeconwar.1.a
+		set_variable = {
+			var = Zaibatsu_size
+			value = 78
+		}
+		set_variable = {
+			var = Zaibatsu_Strength
+			value = 56
+		}
+		set_variable = {
+			var = Political_Approval_Zaibatsus
+			value = 84
+		}
+		set_variable = {
+			var = Keiretsu_size
+			value = 62
+		}
+		set_variable = {
+			var = Keiretsu_strength
+			value = 62
+		}
+		set_variable = {
+			var = Political_Approval_Keiretsus
+			value = 54
+		}
+		set_variable = {
+			var = Econ_War_Lethality
+			value = 0
+		}
+		set_variable = {
+			var = Econ_war_exhaustion
+			value = 0
+		}
+	}
+}
+
+#Ikeda Reconstruction events
+add_namespace = japikedareconstruction
+
+country_event = { # Event explaining the situation in Indonesia, in relation to focus "JAP_ikeda_reconstruction_dealing_with_indonesia"
+	id = japikedareconstruction.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.1"}
+	title = japikedareconstruction.1.t
+	desc = japikedareconstruction.1.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.1.a
+	}
+}
+
+country_event = { # Event explaining what the focus tree is about, describing each branch
+	id = japikedareconstruction.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.2"}
+	title = japikedareconstruction.2.t
+	desc = japikedareconstruction.2.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.2.a
+	}
+}
+
+country_event = { # Event urging the player to use the timed idea to its fullest by taking the chance to improve relations with nations they deem important
+	id = japikedareconstruction.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.3"}
+	title = japikedareconstruction.3.t
+	desc = japikedareconstruction.3.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.3.a
+	}
+}
+
+country_event = { # Event about negotiating with the USA about the treaty ports in SanFran and Los Angeles
+	id = japikedareconstruction.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.4"}
+	title = japikedareconstruction.4.t
+	desc = japikedareconstruction.4.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.4.a
+	}
+}
+
+country_event = { # Event about officials from the US visiting the treaty ports
+	id = japikedareconstruction.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.5"}
+	title = japikedareconstruction.5.t
+	desc = japikedareconstruction.5.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.5.a
+	}
+}
+
+country_event = { # Event discussing the choice between civilian and military investment
+	id = japikedareconstruction.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.6"}
+	title = japikedareconstruction.6.t
+	desc = japikedareconstruction.6.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.6.a
+	}
+}
+
+country_event = { # Event informing China that Japan is taking a bigger cut of the profits, China loses 2.5% gdp growth and has a new misc cost of 2.5 billion dollarydoos
+	id = japikedareconstruction.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.7"}
+	title = japikedareconstruction.7.t
+	desc = japikedareconstruction.7.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.7.a
+		set_temp_variable = { gdp_growth_temp = 0.001 }
+		econ_gdp_growth_change = yes
+		# add_to_variable = { misc_costs = 2 }
+		# econ_misc_costs_change = yes
+	}
+}
+
+country_event = { # Event informing USA that Japan has initiated negotiations on the treaty ports
+	id = japikedareconstruction.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.8"}
+	title = japikedareconstruction.8.t
+	desc = japikedareconstruction.8.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.8.a
+		hidden_effect = {
+			JAP = {
+				country_event = {
+					id = japikedareconstruction.9
+					days = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Event informing Japan that the US is open to negotiate
+	id = japikedareconstruction.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.9"}
+	title = japikedareconstruction.9.t
+	desc = japikedareconstruction.9.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.9.a
+	}
+}
+
+country_event = { # Event informing USA that Japan is pursuing a line of negotiation aiming at keeping the ports
+	id = japikedareconstruction.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.10"}
+	title = japikedareconstruction.10.t
+	desc = japikedareconstruction.10.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.10.a
+	}
+}
+
+country_event = { # Event informing USA that Japan is reinforcing their garrisons in the treaty ports
+	id = japikedareconstruction.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.11"}
+	title = japikedareconstruction.11.t
+	desc = japikedareconstruction.11.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.11.a
+	}
+}
+
+country_event = { # Event informing USA that Japan has, through nefarious means, secured their hold of the ports for now
+	id = japikedareconstruction.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.12"}
+	title = japikedareconstruction.12.t
+	desc = japikedareconstruction.12.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.12.a
+	}
+}
+
+country_event = { # Event informing USA that Japan is aiming at returning the ports
+	id = japikedareconstruction.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.13"}
+	title = japikedareconstruction.13.t
+	desc = japikedareconstruction.13.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.13.a
+	}
+}
+
+country_event = { # Event informing USA that Japan is has returned the ports
+	id = japikedareconstruction.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.14"}
+	title = japikedareconstruction.14.t
+	desc = japikedareconstruction.14.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.14.a
+	}
+}
+
+country_event = { # Event informing USA that Japan has given a gift worth 1 billion
+	id = japikedareconstruction.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.15"}
+	title = japikedareconstruction.15.t
+	desc = japikedareconstruction.15.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.15.a
+	}
+}
+
+country_event = { # Event informing either Iran or the Saudis about the oil deal with Japan
+	id = japikedareconstruction.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japikedareconstruction.16"}
+	title = japikedareconstruction.16.t
+	desc = japikedareconstruction.16.d
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = japikedareconstruction.16.a
+	}
+}
+
+
+#Econ Wars
+
+add_namespace = japeconwars
+country_event = {
+	id = japeconwars.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japeconwars.1"}
+	title = japeconwars.1.t
+	desc = japeconwars.1.d
+	picture = GFX_report_event_BRG_brutalism_3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japeconwars.1.a
+	}
+}
+
+country_event = {
+	id = japeconwars.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japeconwars.2"}
+	title = japeconwars.2.t
+	desc = japeconwars.2.d
+	picture = GFX_report_event_CHI_Industry_Dachang
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japeconwars.2.a
+	}
+}
+
+country_event = {
+	id = japeconwars.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japeconwars.3"}
+	title = japeconwars.3.t
+	desc = japeconwars.3.d
+	picture = GFX_report_event_japan_tokyo_port
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japeconwars.3.a
+	}
+}
+
+country_event = {
+	id = japeconwars.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event japeconwars.4"}
+	title = japeconwars.4.t
+	desc = japeconwars.4.d
+	picture = GFX_report_event_CHI_Industry_Made_In_China_Alt
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = japeconwars.4.a
+	}
+}
+
+add_namespace = royalsummit
+
+country_event = { #royal summit thailand
+	id = royalsummit.0
+	immediate = {log = "[GetDateText]: [Root.GetName]: event royalsummit.0"}
+	title = royalsummit.0.t
+	desc = royalsummit.0.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # low level prince
+		name = royalsummit.0.a
+		hidden_effect = {
+			JAP = {
+				add_stability = 0.025
+			}
+			THA = {
+				add_stability = 0.025
+			}
+		}
+	}
+	option = { # crown prince
+		name = royalsummit.0.b
+		hidden_effect = {
+			JAP = {
+				add_stability = 0.05
+			}
+			THA = {
+				add_stability = 0.05
+			}
+		}
+	}
+	option = { # hirohito
+		name = royalsummit.0.c
+		hidden_effect = {
+			JAP = {
+				add_stability = -0.05
+			}
+			THA = {
+				add_stability = 0.1
+			}
+		}
+	}
+}
+
+
+add_namespace = jappmtakagimil
+
+country_event = { #Event about the problems caused by wartime emergency measures and how to deal with them
+	id = jappmtakagimil.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jappmtakagimil.1"}
+	title = jappmtakagimil.1.t
+	desc = jappmtakagimil.1.d
+
+	picture = GFX_report_event_japan_economic_downturn
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = jappmtakagimil.1.a
+		add_political_power = -40
+	}
+}
+
+country_event = { #Event about the wartime privileges under National Mobilization Law and an announcement to cut them
+	id = jappmtakagimil.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jappmtakagimil.2"}
+	title = jappmtakagimil.2.t
+	desc = jappmtakagimil.2.d
+
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jappmtakagimil.2.a
+		add_war_support = -0.05
+		add_timed_idea = {
+			idea = JAP_takagi_oppose_from_cartels
+			days = 280
+		}
+	}
+}
+
+country_event = { #Event about the status of labor force under the National Mobilization Law
+	id = jappmtakagimil.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jappmtakagimil.3"}
+	title = jappmtakagimil.3.t
+	desc = jappmtakagimil.3.d
+
+	picture = GFX_report_event_generic_rally2
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { # The regulations have worked so far.
+		name = jappmtakagimil.3.a
+		complete_national_focus = JAP_keep_our_fingers_on_the_scale
+		set_temp_variable = { inflation_temp = -0.5 }
+		econ_inflation_change = yes
+	}
+
+	option = { # A market-based approach would reduce some burdens of the state.
+		name = jappmtakagimil.3.b
+		complete_national_focus = JAP_ensure_access_across_the_sphere
+		set_temp_variable = { gdp_growth_temp = 0.5 }
+		econ_gdp_growth_change = yes
+	}
+}
+
+country_event = { #Event about the Mobilization Laws and how to deal with them
+	id = jappmtakagimil.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jappmtakagimil.4"}
+	title = jappmtakagimil.4.t
+	desc = jappmtakagimil.4.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jappmtakagimil.4.a
+		add_stability = 0.04
+		add_political_power = -40
+	}
+
+	option = { #
+		name = jappmtakagimil.4.b
+		add_stability = -0.08
+		add_political_power = 100
+		JAP_Takagi_decrease_power_small = yes
+	}
+}
+
+country_event = { #Takagi's Speech - Emphasis of Stability
+	id = jappmtakagimil.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event jappmtakagimil.5"}
+	title = jappmtakagimil.5.t
+	desc = jappmtakagimil.5.d
+
+	picture = GFX_report_event_japan_takagi_1
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = { #
+		name = jappmtakagimil.5.a
+		add_stability = 0.10
+	}
+}
+country_event = { #blockade_iran
+	id = jap.199
+	title = jap.199.t
+	desc = jap.199.d
+	picture = GFX_report_generic_prisoners
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.199.a
+		set_country_flag = JAP_blockade_iran_small
+		set_country_flag = JAP_enable_blockade
+	}
+	option = {
+		name = jap.199.b
+		set_country_flag = JAP_blockade_iran_medium
+		set_country_flag = JAP_enable_blockade
+	}
+	option = {
+		name = jap.199.c
+		set_country_flag = JAP_blockade_iran_big
+		set_country_flag = JAP_enable_blockade
+	}
+}
+country_event = { #volunteer or airwing
+	id = jap.200
+	title = jap.200.t
+	desc = jap.200.d
+	picture = GFX_report_generic_prisoners
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = jap.200.a
+		send_equipment = {
+			equipment = fighter_equipment_1
+			amount = 100
+			target = IRI
+		}
+	}
+	option = {
+		name = jap.200.b
+		send_equipment = {
+			equipment = infantry_equipment_2
+			amount = 2000
+			target = IRI
+		}
+	}
+
+}
+country_event = { #hidden event for decisions iranian civil war
+	id = jap.201
+
+	hidden = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag = JAP_IRI_political_decision
+	}
+
+	immediate = {
+		clr_country_flag = JAP_IRI_political_decision
+	}
+}
+
+country_event = { # We won in Iran yaaay
+	id = jap.203
+	title = jap.203.t
+	desc = jap.203.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event jap.203" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		IRI = { has_war = no }
+		country_exists = IRI
+	}
+
+	option = {
+		name = jap.203.a
+		add_political_power = 100
+		add_stability = 0.03
+		add_war_support = 0.03
+		add_to_faction = IRI
+		IRI = {
+			TNO_improve_army_professionalism_low = yes
+			hidden_effect = {
+				remove_faction_status = yes
+				add_ideas = Sphere_Coequal
+			}
+		}
+	}
+}
+
+country_event = { # IBW Introduction
+	id = jap.204
+	title = jap.204.t
+	desc = jap.204.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event jap.204" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = jap.204.a
+		TNO_fopo_add_IBW_tab = yes
+		set_country_flag = JAP_IBW_1
+	}
+}
+
+country_event = { # IBW Flavour 1 - Taking in the Sights
+	id = jap.2041
+	title = jap.2041.t
+	desc = jap.2041.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event jap.2041" }
+
+	trigger = {
+		has_global_flag = Iberian_Wars
+		NOT = {
+			has_country_flag = Iberian_Wars_Resigned
+		}
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = jap.2041.a
+		hidden_effect = {
+			country_event = { id = jap.2042 days = 15 }
+		}
+	}
+}
+
+country_event = { # IBW Flavour 2 - The Empty Town
+	id = jap.2042
+	title = jap.2042.t
+	desc = jap.2042.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event jap.2042" }
+
+	trigger = {
+		has_global_flag = Iberian_Wars
+		NOT = {
+			has_country_flag = Iberian_Wars_Resigned
+		}
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = jap.2042.a
+		hidden_effect = {
+			country_event = { id = jap.2043 days = 25 }
+		}
+	}
+}
+
+country_event = { # IBW Flavour 3 - Working around the clock
+	id = jap.2043
+	title = jap.2043.t
+	desc = jap.2043.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event jap.2043" }
+
+	trigger = {
+		has_global_flag = Iberian_Wars
+		NOT = {
+			has_country_flag = Iberian_Wars_Resigned
+		}
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = jap.2043.a
+		hidden_effect = {
+			country_event = { id = jap.2043 days = 30 }
+		}
+	}
+}
+
+country_event = { # IBW Flavour 4 - Know Your Worth
+	id = jap.2044
+	title = jap.2044.t
+	desc = jap.2044.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event jap.2044" }
+
+	trigger = {
+		has_global_flag = Iberian_Wars
+		NOT = {
+			has_country_flag = Iberian_Wars_Resigned
+		}
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = jap.2044.a
+	}
+}
+
+country_event = { # IBW Ending
+	id = jap.205
+	title = jap.205.t
+	desc = jap.205.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event jap.205" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = jap.205.a
+		TNO_fopo_remove_IBW_tab = yes
+		set_temp_variable = { target = CTL }
+		TNO_clear_num_volunteers = yes
+		set_temp_variable = { target = BSQ }
+		TNO_clear_num_volunteers = yes
+		clr_country_flag = JAP_IBW_1
+		if = {
+			limit = { CTL = { exists = yes } }
+			CTL = { econ_join_sphere_JAP = yes }
+		}
+		if = {
+			limit = { BSQ = { exists = yes } }
+			BSQ = { econ_join_sphere_JAP = yes }
+		}
+	}
+}
+
+add_namespace = japresignation
+
+country_event = { # Ikeda Collapse Warning
+	id = japresignation.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.1" }
+	title = japresignation.1.t
+	desc = japresignation.1.desc
+	picture = GFX_report_event_japan_new_constitution
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = { #
+		name = japresignation.1.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # Takagi Collapse Warning
+	id = japresignation.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.2" }
+	title = japresignation.2.t
+	desc = japresignation.2.desc
+	picture = GFX_report_event_japan_new_constitution
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = { #
+		name = japresignation.2.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # Kaya Collapse Warning
+	id = japresignation.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.3" }
+	title = japresignation.3.t
+	desc = japresignation.3.desc
+	picture = GFX_report_event_japan_new_constitution
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = { #
+		name = japresignation.3.a
+		ai_chance = { factor = 1 }
+	}
+}
+
+country_event = { # Ikeda Collapse Mission failed
+	id = japresignation.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.4" }
+	title = japresignation.4.t
+	desc = japresignation.4.desc
+	picture = GFX_report_event_japan_ikeda_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.4.a
+		ai_chance = { factor = 1 }
+		set_variable = { JAP_resigning_pm = 4 } # 2 = takagi, 4 = ikeda, 5 = kaya. According to their arrays in TNO_JAP_Diet_scripted_effects
+		clr_country_flag = JAP_government_collapse_mission_acvtive
+		country_event = { id = japresignation.7 days = 3 }
+	}
+}
+
+country_event = { # Takagi Collapse Mission failed
+	id = japresignation.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.5" }
+	title = japresignation.5.t
+	desc = japresignation.5.desc
+	picture = GFX_report_event_japan_takagi_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.5.a
+		ai_chance = { factor = 1 }
+		set_variable = { JAP_resigning_pm = 2 } # 2 = takagi, 4 = ikeda, 5 = kaya. According to their arrays in TNO_JAP_Diet_scripted_effects
+		clr_country_flag = JAP_government_collapse_mission_acvtive
+		country_event = { id = japresignation.7 days = 3 }
+	}
+}
+
+country_event = { # Kaya Collapse Mission failed
+	id = japresignation.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.6" }
+	title = japresignation.6.t
+	desc = japresignation.6.desc
+	picture = GFX_report_event_japan_kaya_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.6.a
+		ai_chance = { factor = 1 }
+		set_variable = { JAP_resigning_pm = 5 } # 2 = takagi, 4 = ikeda, 5 = kaya. According to their arrays in TNO_JAP_Diet_scripted_effects
+		clr_country_flag = JAP_government_collapse_mission_acvtive
+		country_event = { id = japresignation.7 days = 3 }
+	}
+}
+
+country_event = { # A new interregnum
+	id = japresignation.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.7" }
+	title = japresignation.7.t
+	desc = japresignation.7.desc
+	picture = GFX_report_event_japan_diet_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.7.a
+		ai_chance = { factor = 1 }
+		if = {
+			limit = { check_variable = { JAP_resigning_pm = 4 } } # ikeda resigned
+			country_event = { id = japresignation.8 days = 7 }
+		}
+		else_if = {
+			limit = { check_variable = { JAP_resigning_pm = 2 } } # takagi resigned
+			country_event = { id = japresignation.11 days = 7 }
+		}
+		else_if = {
+			limit = { check_variable = { JAP_resigning_pm = 5 } } # kaya resigned
+			country_event = { id = japresignation.14 days = 7 }
+		}
+		promote_character = JAP_hirohito
+
+		# resets HOP and gov stab as they will be pretty low after a resignation
+		set_variable = { JAP_Peers_support = 0.5 }
+		set_variable = { JAP_government_stability_base = 35 }
+		JAP_calc_government_stability = yes
+
+		set_politics = { ruling_party = fascism }
+		JAP_clear_PM_flags = yes
+		if = {
+			limit = {
+				OR = {
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_TAKAGI_SUCCESSOR
+						option = JAP_TAKAGI_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_TAKAGI_SUCCESSOR
+						option = JAP_TAKAGI_SUCCESSOR_IKEDA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI
+					}
+				}
+			}
+			set_country_flag = CCP_JAP_new_interregnum
+		}
+	}
+}
+
+country_event = { # Takagi v Kaya 1
+	id = japresignation.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.8" }
+	title = japresignation.8.t
+	desc = japresignation.8.desc
+	picture = GFX_report_event_japan_kaya_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.8.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_KAYA
+				}
+			}
+		}
+		JAP_Takagi_increase_power_small = yes
+		country_event = { id = japresignation.9 days = 4 }
+	}
+	option = { #
+		name = japresignation.8.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_TAKAGI
+				}
+			}
+		}
+		JAP_Kaya_increase_power_small = yes
+		country_event = { id = japresignation.9 days = 4 }
+	}
+}
+
+country_event = { # Takagi v Kaya 2
+	id = japresignation.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.9" }
+	title = japresignation.9.t
+	desc = japresignation.9.desc
+	picture = GFX_report_event_japan_takagi_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.9.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_KAYA
+				}
+			}
+		}
+		JAP_Takagi_increase_power_small = yes
+		country_event = { id = japresignation.10 days = 4 }
+	}
+	option = { #
+		name = japresignation.9.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_TAKAGI
+				}
+			}
+		}
+		JAP_Kaya_increase_power_small = yes
+		country_event = { id = japresignation.10 days = 4 }
+	}
+}
+
+country_event = { # Takagi v Kaya 3
+	id = japresignation.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.10" }
+	title = japresignation.10.t
+	desc = japresignation.10.desc
+	picture = GFX_report_event_japan_kaya_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.10.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_KAYA
+				}
+			}
+		}
+		JAP_Takagi_increase_power_small = yes
+		JAP_find_new_prime_minister = yes
+	}
+	option = { #
+		name = japresignation.10.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_TAKAGI
+				}
+			}
+		}
+		JAP_Kaya_increase_power_small = yes
+		JAP_find_new_prime_minister = yes
+	}
+}
+
+country_event = { # Ikeda v Kaya
+	id = japresignation.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.11" }
+	title = japresignation.11.t
+	desc = japresignation.11.desc
+	picture = GFX_report_event_japan_diet_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.11.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_TAKAGI_SUCCESSOR
+					option = JAP_TAKAGI_SUCCESSOR_KAYA
+				}
+			}
+		}
+		JAP_Ino_increase_power_small = yes
+		country_event = { id = japresignation.12 days = 4 }
+	}
+	option = { #
+		name = japresignation.11.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_TAKAGI_SUCCESSOR
+					option = JAP_TAKAGI_SUCCESSOR_IKEDA
+				}
+			}
+		}
+		JAP_Kaya_increase_power_small = yes
+		country_event = { id = japresignation.12 days = 4 }
+	}
+}
+
+country_event = { # Ikeda v Kaya
+	id = japresignation.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.12" }
+	title = japresignation.12.t
+	desc = japresignation.12.desc
+	picture = GFX_report_event_japan_ikeda_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.12.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_TAKAGI_SUCCESSOR
+					option = JAP_TAKAGI_SUCCESSOR_KAYA
+				}
+			}
+		}
+		JAP_Ino_increase_power_small = yes
+		country_event = { id = japresignation.13 days = 4 }
+	}
+	option = { #
+		name = japresignation.12.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_TAKAGI_SUCCESSOR
+					option = JAP_TAKAGI_SUCCESSOR_IKEDA
+				}
+			}
+		}
+		JAP_Kaya_increase_power_small = yes
+		country_event = { id = japresignation.13 days = 4 }
+	}
+}
+
+country_event = { # Ikeda v Kaya
+	id = japresignation.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.13" }
+	title = japresignation.13.t
+	desc = japresignation.13.desc
+	picture = GFX_report_event_japan_kaya_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.13.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_TAKAGI_SUCCESSOR
+					option = JAP_TAKAGI_SUCCESSOR_KAYA
+				}
+			}
+		}
+		JAP_Ino_increase_power_small = yes
+		JAP_find_new_prime_minister = yes
+	}
+	option = { #
+		name = japresignation.13.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_TAKAGI_SUCCESSOR
+					option = JAP_TAKAGI_SUCCESSOR_IKEDA
+				}
+			}
+		}
+		JAP_Kaya_increase_power_small = yes
+		JAP_find_new_prime_minister = yes
+	}
+}
+
+country_event = { # Ikeda v Takagi
+	id = japresignation.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.14" }
+	title = japresignation.14.t
+	desc = japresignation.14.desc
+	picture = GFX_report_event_japan_diet_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.14.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_IKEDA
+				}
+			}
+		}
+		JAP_Takagi_increase_power_small = yes
+		country_event = { id = japresignation.15 days = 4 }
+	}
+	option = { #
+		name = japresignation.14.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_TAKAGI
+				}
+			}
+		}
+		JAP_Ino_increase_power_small = yes
+		country_event = { id = japresignation.15 days = 4 }
+	}
+}
+
+country_event = { # Ikeda v Takagi
+	id = japresignation.15
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.15" }
+	title = japresignation.15.t
+	desc = japresignation.15.desc
+	picture = GFX_report_event_japan_takagi_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.15.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_IKEDA
+				}
+			}
+		}
+		JAP_Takagi_increase_power_small = yes
+		country_event = { id = japresignation.16 days = 4 }
+	}
+	option = { #
+		name = japresignation.15.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_TAKAGI
+				}
+			}
+		}
+		JAP_Ino_increase_power_small = yes
+		country_event = { id = japresignation.16 days = 4 }
+	}
+}
+
+country_event = { # Ikeda v Takagi
+	id = japresignation.16
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.16" }
+	title = japresignation.16.t
+	desc = japresignation.16.desc
+	picture = GFX_report_event_japan_ikeda_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.16.a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_IKEDA
+				}
+			}
+		}
+		JAP_Takagi_increase_power_small = yes
+		JAP_find_new_prime_minister = yes
+	}
+	option = { #
+		name = japresignation.16.b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_TAKAGI
+				}
+			}
+		}
+		JAP_Ino_increase_power_small = yes
+		JAP_find_new_prime_minister = yes
+	}
+}
+
+country_event = { # Prime Minister Takagi
+	id = japresignation.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.17" }
+	title = japresignation.17.t
+	desc = japresignation.17.desc
+	picture = GFX_report_event_japan_takagi_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.17.a
+		ai_chance = { factor = 1 }
+		set_variable = { JAP_resigning_pm = 0 }
+		promote_character = JAP_soukichi_takagi
+		set_politics = { ruling_party = conservative_democracy }
+		JAP_clear_PM_flags = yes
+		JAP_set_base_faction_approval = yes
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Kouichi_Kido_dep
+				JAP_Kuranari_Tadashi_for
+				JAP_Nakasone_Yasuhiro_eco
+				JAP_Horikiri_Zenjiro_sec
+			}
+			hidden_effect = {
+				every_country = { news_event = WORLD.2067 }
+			}
+			set_country_flag = JAP_Takagi_Prime_Minister
+			JAP_Takagi_PM_initialize = yes
+			hidden_effect = {
+			#load_focus_tree = { tree = japan_takagi_5_years keep_completed = yes }
+				JAP_tree_swap = yes
+			}
+		}
+		set_country_flag = JAP_resignation_has_happened # used in econ bills to check if a PM has already resigned.
+	}
+}
+
+country_event = { # Prime Minister Ikeda
+	id = japresignation.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.18" }
+	title = japresignation.18.t
+	desc = japresignation.18.desc
+	picture = GFX_report_event_japan_ikeda_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.18.a
+		ai_chance = { factor = 1 }
+		set_variable = { JAP_resigning_pm = 0 }
+		promote_character = JAP_ikeda_masanosuke
+		set_politics = { ruling_party = fascism }
+		JAP_clear_PM_flags = yes
+		JAP_set_base_faction_approval = yes
+		set_country_flag = JAP_Ikeda_Prime_Minister
+		JAP_InoIkeda_PM_initialize = yes
+		set_variable = {JAP_ikeda_conservative_support = 0.30}
+		set_variable = {JAP_ikeda_liberal_support = 0.30}
+		JAP_ikeda_start_mechanic = yes
+		hidden_effect = {
+			#load_focus_tree = { tree = Japan_ikeda_main keep_completed = yes }
+			JAP_tree_swap = yes
+			complete_national_focus = JAP_prime_minister_ikeda
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Hatoyama_Ichiro_dep
+				JAP_Sakurauchi_Yoshio_for
+				JAP_Sato_Eisaku_eco
+				JAP_Ezaki_Masumi_sec
+			}
+		}
+		set_country_flag = JAP_resignation_has_happened # used in econ bills to check if a PM has already resigned.
+	}
+}
+
+country_event = { # Prime Minister Kaya
+	id = japresignation.19
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.19" }
+	title = japresignation.19.t
+	desc = japresignation.19.desc
+	picture = GFX_report_event_japan_kaya_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = japresignation.19.a
+		ai_chance = { factor = 1 }
+		set_variable = { JAP_resigning_pm = 0 }
+		promote_character = JAP_kaya_okinori
+		set_politics = { ruling_party = despotism }
+		JAP_clear_PM_flags = yes
+		JAP_set_base_faction_approval = yes
+		set_country_flag = JAP_Kaya_Prime_Minister
+		JAP_Kaya_PM_initialize = yes
+		hidden_effect = {
+			#load_focus_tree = { tree = japan_kaya_inital_tree keep_completed = yes }
+			JAP_tree_swap = yes
+			remove_all_ministers = yes
+			add_ideas = {
+				JAP_Aoki_Kazuo_hog
+			}
+			clr_country_flag = JAP_in_interregnum
+			clr_country_flag = JAP_interregnum_final_stage
+			clear_variable = candidate_knocked_out
+		}
+		set_country_flag = JAP_resignation_has_happened # used in econ bills to check if a PM has already resigned.
+	}
+}
+
+
+
+add_namespace = japdietbills
+
+country_event = { # bill pass generic
+	id = japdietbills.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japdietbills.1" }
+	title = japdietbills.1.t
+	desc = japdietbills.1.d
+	picture = GFX_report_event_JAP_diet
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = { #
+		name = japdietbills.1.a
+		ai_chance = { factor = 1 }
+		hidden_effect = { JAP_fire_bill_pass_flavour_event = yes }
+		JAP_bill_effects = yes
+		JAP_bill_government_stability_increase = yes
+		JAP_clear_bills_variables = yes
+		JAP_bills_faction_approval_effect = yes
+	}
+}
+
+country_event = { # bill fail generic
+	id = japdietbills.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japdietbills.2" }
+	title = japdietbills.2.t
+	desc = japdietbills.2.d
+	picture = GFX_report_event_JAP_diet
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = { #
+		name = japdietbills.2.a
+		ai_chance = { factor = 1 }
+		hidden_effect = { JAP_fire_bill_fail_flavour_event = yes }
+		JAP_bill_government_stability_decrease = yes
+		JAP_clear_bills_variables = yes
+	}
+}
