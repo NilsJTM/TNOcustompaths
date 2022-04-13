@@ -5557,6 +5557,42 @@ JAP_passing_bills = {
 			log = "[GetDateText]: [Root.GetName]: Decision JAP_bill_voting_mission"
 			custom_effect_tooltip = JAP_voting_on_bill_begins_tt
 			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								has_country_flag = JAP_Ino_Prime_Minister
+								has_game_rule = {
+									rule = JAP_INO_BILL_PASS_CHEAT
+									option = JAP_INO_BILL_PASS_CHEAT_YES
+								}
+							}
+							AND = {
+								has_country_flag = JAP_Ikeda_Prime_Minister
+								has_game_rule = {
+									rule = JAP_IKEDA_BILL_PASS_CHEAT
+									option = JAP_IKEDA_BILL_PASS_CHEAT_YES
+								}
+							}
+							AND = {
+								has_country_flag = JAP_Kaya_Prime_Minister
+								has_game_rule = {
+									rule = JAP_KAYA_BILL_PASS_CHEAT
+									option = JAP_KAYA_BILL_PASS_CHEAT_YES
+								}
+							}
+							AND = {
+								has_country_flag = JAP_Takagi_Prime_Minister
+								has_game_rule = {
+									rule = JAP_TAKAGI_BILL_PASS_CHEAT
+									option = JAP_TAKAGI_BILL_PASS_CHEAT_YES
+								}
+							}
+						}
+						check_variable = { JAP_Peers_support < 50 }
+					}
+					set_variable = { JAP_Peers_support = 50 }
+				}
 				JAP_bill_pass_check = yes
 			}
 			effect_tooltip = {
