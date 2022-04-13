@@ -3988,7 +3988,42 @@ country_event = { # Kaya Collapse Mission failed
 
 country_event = { # A new interregnum
 	id = japresignation.7
-	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.7" }
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japresignation.7"
+		if = {
+			limit = {
+				has_country_flag = JAP_Ikeda_Prime_Minister
+				OR = {
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_TAKAGI
+					}
+				}
+			}
+			set_country_flag = CCP_JAP_Ikeda_resignation
+		}
+		if = {
+			limit = {
+				has_country_flag = JAP_Kaya_Prime_Minister
+				check_variable = { JAP_resigning_pm = 4 }
+				OR = {
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
+					}
+				}
+			}
+			set_country_flag = CCP_JAP_Shiina_resignation
+		}
+	}
 	title = japresignation.7.t
 	desc = japresignation.7.desc
 	picture = GFX_report_event_japan_diet_1
@@ -4047,6 +4082,14 @@ country_event = { # A new interregnum
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_TAKAGI
 					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
+					}
 				}
 			}
 			set_country_flag = CCP_JAP_new_interregnum
@@ -4070,9 +4113,15 @@ country_event = { # Takagi v Kaya 1
 			factor = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_KAYA
+				OR = {
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_KAYA
+					}
 				}
 			}
 		}
@@ -4085,9 +4134,15 @@ country_event = { # Takagi v Kaya 1
 			factor = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_TAKAGI
+				OR = {
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_TAKAGI
+					}
 				}
 			}
 		}
@@ -4112,9 +4167,15 @@ country_event = { # Takagi v Kaya 2
 			factor = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_KAYA
+				OR = {
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_KAYA
+					}
 				}
 			}
 		}
@@ -4127,9 +4188,15 @@ country_event = { # Takagi v Kaya 2
 			factor = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_TAKAGI
+				OR = {
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_TAKAGI
+					}
 				}
 			}
 		}
@@ -4154,9 +4221,15 @@ country_event = { # Takagi v Kaya 3
 			factor = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_KAYA
+				OR = {
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_KAYA
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_KAYA
+					}
 				}
 			}
 		}
@@ -4169,9 +4242,15 @@ country_event = { # Takagi v Kaya 3
 			factor = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_TAKAGI
+				OR = {
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_SUCCESSOR
+						option = JAP_IKEDA_SUCCESSOR_TAKAGI
+					}
 				}
 			}
 		}
