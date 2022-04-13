@@ -1,0 +1,75 @@
+custom_debug_category = {
+	JAP_custom_stability_measures = {
+		available  = {
+			OR = {
+				AND = {
+					has_country_flag = JAP_Ikeda_Prime_Minister
+					has_game_rule = {
+						rule = JAP_IKEDA_STABILITY_CHEAT
+						option = JAP_IKEDA_STABILITY_CHEAT_STABLE
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Kaya_Prime_Minister
+					has_game_rule = {
+						rule = JAP_KAYA_STABILITY_CHEAT
+						option = JAP_KAYA_STABILITY_CHEAT_STABLE
+					}
+				}
+				AND = {
+					has_country_flag = JAP_Takagi_Prime_Minister
+					has_game_rule = {
+						rule = JAP_TAKAGI_STABILITY_CHEAT
+						option = JAP_TAKAGI_STABILITY_CHEAT_STABLE
+					}
+				}
+			}
+			JAP = { 
+				OR = {
+					check_variable = { JAP_Peers_support < 0.5 }
+					check_variable = { JAP_IJA_support < 20 }
+					check_variable = { JAP_IJN_support < 20 }
+					check_variable = { JAP_Public_support < 0.3 }
+					check_variable = { JAP_government_stability < 30 }
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		complete_effect = {
+			JAP = {
+				if = {
+					limit = {
+						check_variable = { JAP_Peers_support < 0.5 }
+					}
+					set_variable = { JAP_Peers_support = 0.5 }
+				}
+				if = {
+					limit = {
+						check_variable = { JAP_IJA_support < 20 }
+					}
+					set_variable = { JAP_IJA_support = 20 }
+				}
+				if = {
+					limit = {
+						check_variable = { JAP_IJA_support < 20 }
+					}
+					set_variable = { JAP_IJA_support = 20 }
+				}
+				if = {
+					limit = {
+						check_variable = { JAP_Public_support < 0.3 }
+					}
+					set_variable = { JAP_Public_support = 0.3 }
+				}
+				if = {
+					limit = {
+						check_variable = { JAP_government_stability < 30 }
+					}
+					set_variable = { JAP_government_stability = 30 }
+				}
+			}
+		}
+	}	
+}
