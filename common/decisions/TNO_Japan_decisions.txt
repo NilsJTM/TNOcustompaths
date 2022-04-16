@@ -5649,6 +5649,14 @@ JAP_passing_bills = {
 				add = 500
 				NOT = { check_variable = { JAP_total_mp_support > 232 } }
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+				check_variable = { JAP_bill_id = 519 }
+			}
 		}
 	}
 
@@ -5684,6 +5692,14 @@ JAP_passing_bills = {
 				add = 500
 				NOT = { check_variable = { JAP_total_mp_support > 232 } }
 			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+				check_variable = { JAP_bill_id = 519 }
+			}
 		}
 	}
 
@@ -5713,6 +5729,14 @@ JAP_passing_bills = {
 			modifier = {
 				add = 500
 				NOT = { check_variable = { JAP_total_mp_support > 232 } }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+				check_variable = { JAP_bill_id = 519 }
 			}
 		}
 	}
@@ -5753,6 +5777,14 @@ JAP_passing_bills = {
 			modifier = {
 				add = 500
 				NOT = { check_variable = { JAP_total_mp_support > 232 } }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+				check_variable = { JAP_bill_id = 519 }
 			}
 		}
 	}
@@ -5818,6 +5850,14 @@ JAP_passing_bills = {
 			modifier = {
 				add = 1000
 				NOT = { check_variable = { JAP_total_mp_support > 232 } }
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+				check_variable = { JAP_bill_id = 519 }
 			}
 		}
 	}
@@ -5989,6 +6029,28 @@ JAP_faction_relations = {
 			set_temp_variable = { temp_hl_inf_change = 0.05 }
 			JAP_change_hardliner_influence = yes
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_SHIINA
+				}
+				check_variable = { JAP_hardliner_influence < 100 }
+			}
+			modifier = {
+				add = 99
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_SHIINA
+				}
+				NOT = { 
+					check_variable = { JAP_hardliner_influence > 25 }
+				}	
+			}
+		}
 	}
 
 	JAP_sideline_hardline_MPS = {
@@ -6008,6 +6070,26 @@ JAP_faction_relations = {
 			set_temp_variable = { temp_hl_approval_change = -0.025 }
 			JAP_change_hardliner_approval = yes
 		}
+		
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+				check_variable = { JAP_hardliner_influence > 0 }
+			}
+			modifier = {
+				add = 99
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_SHIINA
+				}
+				check_variable = { JAP_hardliner_influence > 25 }
+			}
+		}
 	}
 
 	JAP_offer_concessions_to_the_hardliners = {
@@ -6024,6 +6106,38 @@ JAP_faction_relations = {
 			log = "[GetDateText]: [Root.GetName]: Decision JAP_offer_concessions_to_the_hardliners"
 			set_temp_variable = { temp_hl_approval_change = 0.05 }
 			JAP_change_hardliner_approval = yes
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_FUKUDA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+				}
+				check_variable = { JAP_hardliner_approval < 100 }
+			}
+			modifier = {
+				add = 99
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_FUKUDA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+				}
+				check_variable = { JAP_hardliner_influence < 50 }
+			}
 		}
 	}
 

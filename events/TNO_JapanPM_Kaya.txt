@@ -2017,10 +2017,32 @@ country_event = { # Purge event 10
 					rule = JAP_KAYA_SUCCESSOR
 					option = JAP_KAYA_SUCCESSOR_FUKUDA
 				}
-				check_variable = { JAP_hardliner_influence > 14 }
+				OR = {
+					NOT = {
+						check_variable = { JAP_hardliner_influence < 15 }
+					}
+					NOT = {
+						check_variable = { JAP_hardliner_approval > 75 }
+					}
+				}
 			}
-			set_variable = { JAP_hardliner_influence = 14 }
-		}
+			if = {
+				limit = {
+					NOT = {
+						check_variable = { JAP_hardliner_influence < 15 }
+					}
+				}
+				set_variable = { JAP_hardliner_influence = 14 }
+			}
+			if = {
+				limit = {
+					NOT = {
+						check_variable = { JAP_hardliner_approval > 75 }
+					}
+				}
+				set_variable = { JAP_hardliner_approval = 76 }
+			}
+		}	
 	}
 	title = japkaya_tree_two.59.t
 	desc = japkaya_tree_two.59.desc
@@ -2043,6 +2065,13 @@ country_event = { # Purge event 10
 		ai_chance = { 
 			factor = 1 
 			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+			}
+			modifier = {
 				add = 100
 				check_variable = { JAP_hardliner_influence < 15 }
 			}
@@ -2064,15 +2093,15 @@ country_event = { # Purge event 10
 		ai_chance = { 
 			factor = 1 
 			modifier = {
-				add = 100
-				check_variable = { JAP_hardliner_approval > 75 }
-			}
-			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = JAP_KAYA_SUCCESSOR
 					option = JAP_KAYA_SUCCESSOR_FUKUDA
 				}
+			}
+			modifier = {
+				add = 100
+				check_variable = { JAP_hardliner_approval > 75 }
 			}
 		}
 		hidden_effect = {
