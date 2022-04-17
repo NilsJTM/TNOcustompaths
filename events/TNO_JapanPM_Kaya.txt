@@ -1771,11 +1771,11 @@ country_event = { # Purge event 1
 			limit = {
 				has_game_rule = {
 					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_FUKUDA
+					option = JAP_KAYA_SUCCESSOR_NONE
 				}
-				check_variable = { JAP_hardliner_influence > 29 }
+				check_variable = { JAP_hardliner_influence < 30 }
 			}
-			set_variable = { JAP_hardliner_influence = 29 }
+			set_variable = { JAP_hardliner_influence = 30 }
 		}
 	}
 	title = japkaya_tree_two.50.t
@@ -1796,16 +1796,7 @@ country_event = { # Purge event 1
 
 	option = { #
 		name = japkaya_tree_two.50.b
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 0
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
-				}
-			}
-		}
+		ai_chance = { factor = 1 }
 		hidden_effect = {
 			if = {
 				limit = { check_variable = { JAP_hardliner_influence < 30 } }
@@ -1901,7 +1892,19 @@ country_event = { # Purge event 4
 
 country_event = { # Purge event 5
 	id = japkaya_tree_two.54
-	immediate = { log = "[GetDateText]: [Root.GetName]: event japkaya_tree_two.54" }
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japkaya_tree_two.54"
+		if = {
+			limit = {
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
+				}
+				check_variable = { JAP_Peers_support < 50 }
+			}
+			set_variable = { JAP_Peers_support = 50 }
+		}
+	}
 	title = japkaya_tree_two.54.t
 	desc = japkaya_tree_two.54.desc
 	picture = GFX_report_event_japan_diet_1
@@ -1911,7 +1914,16 @@ country_event = { # Purge event 5
 	
 	option = { # appeal to the peers
 		name = japkaya_tree_two.54.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_NONE
+				}
+			}
+		}
 		hidden_effect = {
 			if = {
 				limit = { check_variable = { JAP_Peers_support < 50 } }
