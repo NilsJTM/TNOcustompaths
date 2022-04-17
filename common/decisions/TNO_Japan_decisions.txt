@@ -6085,7 +6085,7 @@ JAP_faction_relations = {
 				add = 99
 				has_game_rule = {
 					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_SHIINA
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
 				}
 				check_variable = { JAP_hardliner_influence > 25 }
 			}
@@ -6112,24 +6112,16 @@ JAP_faction_relations = {
 			factor = 0
 			modifier = {
 				add = 1
-				OR = {
-					has_game_rule = {
-						rule = JAP_KAYA_SUCCESSOR
-						option = JAP_KAYA_SUCCESSOR_NONE
-					}
-					has_game_rule = {
-						rule = JAP_KAYA_SUCCESSOR
-						option = JAP_KAYA_SUCCESSOR_FUKUDA
-					}
-					has_game_rule = {
-						rule = JAP_KAYA_SUCCESSOR
-						option = JAP_KAYA_SUCCESSOR_SHIINA
-					}
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_FUKUDA
 				}
-				check_variable = { JAP_hardliner_approval < 100 }
+				NOT = {
+					check_variable = { JAP_hardliner_approval > 75 }
+				}
 			}
 			modifier = {
-				add = 99
+				add = 100
 				OR = {
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
@@ -6137,14 +6129,11 @@ JAP_faction_relations = {
 					}
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
-						option = JAP_KAYA_SUCCESSOR_FUKUDA
-					}
-					has_game_rule = {
-						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
 					}
 				}
-				check_variable = { JAP_hardliner_influence < 50 }
+				check_variable = { JAP_hardliner_approval < 50 }
+				check_variable = { JAP_hardliner_influence > 25 }
 			}
 		}
 	}
