@@ -103,8 +103,8 @@ custom_debug_category = {
 					limit = {
 						check_variable = { JAP_government_stability < 30 }
 					}
-					set_variable = { JAP_government_stability_base = 30 }
-					JAP_calc_government_stability = yes
+					set_temp_variable = { temp_government_stability = 2 }
+					JAP_government_stability_change = yes
 				}
 			}
 		}
@@ -252,6 +252,83 @@ custom_debug_category = {
 						has_country_flag = CCP_JAP_Shiina_resignation
 					}
 				}
+				AND = {
+					JAP ={
+						check_variable = { JAP_prime_minister = 4 }
+						has_country_flag = JAP_Ikeda_Prime_Minister
+						any_of = {
+							array = JAP_Diet_Faction_Power
+							check_variable = { JAP_Diet_Faction_Power^i > JAP_Diet_Faction_Power^JAP_prime_minister }
+						}
+					}
+					has_game_rule = {
+						rule = JAP_IKEDA_STABILITY_CHEAT
+						option = JAP_IKEDA_STABILITY_CHEAT_STABLE
+					}
+				}
+				AND = {
+					JAP ={
+						check_variable = { JAP_prime_minister = 1 }
+						any_of = {
+							array = JAP_Diet_Faction_Power
+							check_variable = { JAP_Diet_Faction_Power^i > JAP_Diet_Faction_Power^JAP_prime_minister }
+						}
+					}
+					has_game_rule = {
+						rule = JAP_FUKUDA_STABILITY_CHEAT
+						option = JAP_FUKUDA_STABILITY_CHEAT_STABLE
+					}
+				}
+				AND = {
+					JAP ={
+						check_variable = { JAP_prime_minister = 4 }
+						has_country_flag = JAP_Kaya_Prime_Minister
+						any_of = {
+							array = JAP_Diet_Faction_Power
+							check_variable = { JAP_Diet_Faction_Power^i > JAP_Diet_Faction_Power^JAP_prime_minister }
+						}
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_STABILITY_CHEAT
+						option = JAP_SHIINA_STABILITY_CHEAT_STABLE
+					}
+				}
+				AND = {
+					JAP ={
+						check_variable = { JAP_prime_minister = 2 }
+						any_of = {
+							array = JAP_Diet_Faction_Power
+							check_variable = { JAP_Diet_Faction_Power^i > JAP_Diet_Faction_Power^JAP_prime_minister }
+						}
+					}
+					has_game_rule = {
+						rule = JAP_TAKAGI_STABILITY_CHEAT
+						option = JAP_TAKAGI_STABILITY_CHEAT_STABLE
+					}
+				}
+				AND = (
+					JAP = {
+						check_variable = { JAP_prime_minister = 5 }
+						any_of = {
+							array = JAP_Diet_Faction_Power
+							check_variable = { JAP_Diet_Faction_Power^i > JAP_Diet_Faction_Power^JAP_prime_minister }
+						}
+					}
+					OR = {
+						has_game_rule = {
+							rule = JAP_KAYA_SUCCESSOR
+							option = JAP_KAYA_SUCCESSOR_NONE
+						}
+						has_game_rule = {
+							rule = JAP_KAYA_SUCCESSOR
+							option = JAP_KAYA_SUCCESSOR_FUKUDA
+						}
+						has_game_rule = {
+							rule = JAP_KAYA_SUCCESSOR
+							option = JAP_KAYA_SUCCESSOR_SHIINA
+						}
+					}
+				)
 			}
 		}
 		ai_will_do = {
