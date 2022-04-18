@@ -1808,12 +1808,18 @@ country_event = { # Purge event 1
 	option = { #
 		name = japkaya_tree_two.50.c
 		ai_chance = {
-			factor = 0
+			factor = 1
 			modifier = {
-				add = 1
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_FUKUDA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = DEFAULT
+					}
 				}
 			}
 		}
@@ -1899,16 +1905,7 @@ country_event = { # Purge event 5
 	
 	option = { # appeal to the peers
 		name = japkaya_tree_two.54.a
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 0
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
-				}
-			}
-		}
+		ai_chance = { factor = 1 }
 		hidden_effect = {
 			if = {
 				limit = { check_variable = { JAP_Peers_support < 50 } }
