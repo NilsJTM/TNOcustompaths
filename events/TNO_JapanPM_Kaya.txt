@@ -1775,7 +1775,22 @@ country_event = { # Purge event 1
 	
 	option = { #
 		name = japkaya_tree_two.50.a
-		ai_chance = { base = 0 }
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 1
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA
+					}
+				}
+			}
+		}
 		hidden_effect = {
 			country_event = { id = japkaya_tree_two.51 days = 6 } # fail
 		}
@@ -1788,9 +1803,19 @@ country_event = { # Purge event 1
 			base = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_NONE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA
+					}
 				}
 			}
 		}
@@ -2037,13 +2062,6 @@ country_event = { # Purge event 10
 		ai_chance = { 
 			factor = 1 
 			modifier = {
-				factor = 0
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_FUKUDA
-				}
-			}
-			modifier = {
 				add = 100
 				check_variable = { JAP_hardliner_influence < 15 }
 			}
@@ -2065,15 +2083,15 @@ country_event = { # Purge event 10
 		ai_chance = { 
 			factor = 1 
 			modifier = {
+				add = 100
+				check_variable = { JAP_hardliner_approval > 75 }
+			}
+			modifier = {
 				factor = 0
 				has_game_rule = {
 					rule = JAP_KAYA_SUCCESSOR
 					option = JAP_KAYA_SUCCESSOR_FUKUDA
 				}
-			}
-			modifier = {
-				add = 100
-				check_variable = { JAP_hardliner_approval > 75 }
 			}
 		}
 		hidden_effect = {
@@ -3009,7 +3027,22 @@ country_event = { # Purge event 2
 	
 	option = { #
 		name = japkaya_tree_two.104.a
-		ai_chance = { factor = 0 }
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 1
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA
+					}
+				}
+			}
+		}
 		hidden_effect = {
 			country_event = { id = japkaya_tree_two.105 days = 3 }
 		}	
@@ -3018,7 +3051,22 @@ country_event = { # Purge event 2
 
 	option = { #
 		name = japkaya_tree_two.104.b
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA
+					}
+				}
+			}
+		}
 		hidden_effect = {
 			country_event = { id = japkaya_tree_two.106 days = 3 }
 		}
