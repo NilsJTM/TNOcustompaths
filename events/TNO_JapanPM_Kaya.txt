@@ -664,9 +664,19 @@ country_event = { #
 			factor = 1
 			modifier = {
 				factor = 0
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_NONE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -1816,6 +1826,14 @@ country_event = { # Purge event 1
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_IKEDA
 					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -1836,9 +1854,19 @@ country_event = { # Purge event 1
 			base = 0
 			modifier = {
 				add = 1
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_NONE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -1890,6 +1918,21 @@ country_event = { # Purge event 3
 		JAP_Kaya_decrease_power_overwhel = yes
 		set_temp_variable = { temp_hl_approval_change = -0.25 }
 		JAP_change_hardliner_approval = yes
+		if = {
+			limit = {
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
+				}
+			}
+			set_country_flag = CCP_Kaya_finished
+		}
 	}
 }
 
@@ -2361,7 +2404,41 @@ country_event = { # Stability Above All
 
 country_event = { # Retirement of the Grand Old Man
 	id = japkaya_tree_two.74
-	immediate = { log = "[GetDateText]: [Root.GetName]: event japkaya_tree_two.74" }
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event japkaya_tree_two.74"
+		if = {
+			limit = {
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_FUKUDA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+				}
+				NOT = {
+					NOT = {
+						check_variable = { JAP_Peers_support > 0.49 }
+					}
+				}
+			}
+			set_variable = { JAP_Peers_support = 0.50 }
+		}
+		if = {
+			limit = {
+				has_game_rule = {
+					rule = JAP_KAYA_SUCCESSOR
+					option = JAP_KAYA_SUCCESSOR_SHIINA
+				}
+				NOT = {
+					check_variable = { JAP_IJA_support > 0.59 }
+				}
+			}
+			set_variable = { JAP_IJA_support = 0.60 }
+		}
+	}
 	title = japkaya_tree_two.74.t
 	desc = japkaya_tree_two.74.desc
 	picture = GFX_report_event_japan_kaya_1
@@ -2474,6 +2551,15 @@ country_event = { # Shiina's Ascent
 			name = JAP_despot_fukuda
 		}
 		set_country_flag = TNO_closing_screen_show
+		if = {
+			limit = {
+				has_game_rule = {
+					rule = JAP_SHIINA_STABILITY_CHEAT
+					option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+				}
+			}
+			set_country_flag = CCP_Shiina_finished
+		}
 	}
 }
 
@@ -2641,7 +2727,9 @@ country_event = { # The Mitsui Connection
 					rule = JAP_KAYA_SUCCESSOR
 					option = JAP_KAYA_SUCCESSOR_SHIINA
 				}
-				check_variable = { JAP_Peers_support < 0.66 }
+				NOT = {
+					check_variable = { JAP_Peers_support > 0.65 }
+				}
 			}
 			set_variable = { JAP_Peers_support = 0.66 }
 		}

@@ -4005,6 +4005,32 @@ JAP_government_collapse = {
 		days_re_enable = 10
 		ai_will_do = {
 			factor = 100
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = JAP_IKEDA_STABILITY_CHEAT
+						option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_STABILITY_CHEAT
+						option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_TAKAGI_STABILITY_CHEAT
+						option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
+				}
+				check_variable = { JAP_resigning_pm = 5 }
+			}
 		}
 
 		complete_effect = {
@@ -4028,6 +4054,32 @@ JAP_government_collapse = {
 		days_re_enable = 10
 		ai_will_do = {
 			factor = 100
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = JAP_IKEDA_STABILITY_CHEAT
+						option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_STABILITY_CHEAT
+						option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_TAKAGI_STABILITY_CHEAT
+						option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
+				}
+				check_variable = { JAP_resigning_pm = 5 }
+			}
 		}
 
 		complete_effect = {
@@ -4051,6 +4103,32 @@ JAP_government_collapse = {
 		days_re_enable = 10
 		ai_will_do = {
 			factor = 100
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = JAP_IKEDA_STABILITY_CHEAT
+						option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_STABILITY_CHEAT
+						option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_TAKAGI_STABILITY_CHEAT
+						option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
+				}
+				check_variable = { JAP_resigning_pm = 5 }
+			}
 		}
 
 		complete_effect = {
@@ -4207,6 +4285,62 @@ JAP_political_favors = {
 				econ_state_value_change_multiply = yes
 			}
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_consolidate_our_rural_infrastructure = {
 
@@ -4252,6 +4386,62 @@ JAP_political_favors = {
 				econ_state_value_change_multiply = yes
 			}
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_port_construction_program = {
 
@@ -4291,6 +4481,62 @@ JAP_political_favors = {
 				econ_state_value_change_multiply = yes
 			}
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_school_construction_incentives = {
 
@@ -4326,6 +4572,62 @@ JAP_political_favors = {
 			}
 			TNO_improve_education_policy_effectiveness_med = yes
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_expand_the_power_grid = {
 
@@ -4358,6 +4660,62 @@ JAP_political_favors = {
 					instant_build = yes
 				}
 				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
 			}
 		}
 	}
@@ -4394,6 +4752,62 @@ JAP_political_favors = {
 				add_extra_state_shared_building_slots = 1
 			}
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_expand_the_health_system = {
 
@@ -4425,6 +4839,62 @@ JAP_political_favors = {
 					instant_build = yes
 				}
 				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
 			}
 		}
 	}
@@ -4461,6 +4931,62 @@ JAP_political_favors = {
 				add_extra_state_shared_building_slots = 1
 			}
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_new_admin_offices = {
 
@@ -4493,6 +5019,62 @@ JAP_political_favors = {
 					instant_build = yes
 				}
 				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
 			}
 		}
 	}
@@ -4530,6 +5112,62 @@ JAP_political_favors = {
 				}
 				set_temp_variable = { state_value_multiplier_temp = 1.01 }
 				econ_state_value_change_multiply = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
 			}
 		}
 	}
@@ -4570,6 +5208,62 @@ JAP_political_favors = {
 				}
 				set_temp_variable = { state_value_multiplier_temp = 1.05 }
 				econ_state_value_change_multiply = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
 			}
 		}
 	}
@@ -4615,6 +5309,62 @@ JAP_political_favors = {
 				econ_state_value_change_multiply = yes
 			}
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_expand_the_dairen_port = {
 
@@ -4657,6 +5407,62 @@ JAP_political_favors = {
 				econ_state_value_change_multiply = yes
 			}
 		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 100
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+			}
+		}
 	}
 	JAP_korean_nuclear_reactor = {
 
@@ -4686,6 +5492,62 @@ JAP_political_favors = {
 					instant_build = yes
 				}
 				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 1000
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
 			}
 		}
 	}
@@ -4730,6 +5592,62 @@ JAP_political_favors = {
 				add_extra_state_shared_building_slots = 5
 				set_temp_variable = { state_value_multiplier_temp = 1.1 }
 				econ_state_value_change_multiply = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 10000
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = JAP_IKEDA_STABILITY_CHEAT
+							option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Ikeda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_SHIINA_STABILITY_CHEAT
+							option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+						}
+						has_country_flag = CCP_Shiina_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						has_game_rule = {
+							rule = JAP_TAKAGI_STABILITY_CHEAT
+							option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
+						}
+						OR = {
+							has_completed_focus = JAP_TakagiRecon_The_Triumph_Of_Enterprise
+							has_completed_focus = JAP_TakagiRecon_Triumph_Of_Moderation
+						}
+						has_completed_focus = JAP_TakagiRecon_Japanisation_Continues
+						has_completed_focus = JAP_TakagiRecon_A_Soft_Victory
+						has_completed_focus = JAP_TakagiRecon_The_Steel_Sun_Rises
+						has_country_flag = CCP_Takagi_finished_one
+						has_country_flag = CCP_Takagi_finished_two
+						has_country_flag = CCP_Takagi_finished_three
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+					AND = {
+						OR = {
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+							}
+							has_game_rule = {
+								rule = JAP_KAYA_SUCCESSOR
+								option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+							}
+						}
+						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
 			}
 		}
 	}
@@ -5557,42 +6475,6 @@ JAP_passing_bills = {
 			log = "[GetDateText]: [Root.GetName]: Decision JAP_bill_voting_mission"
 			custom_effect_tooltip = JAP_voting_on_bill_begins_tt
 			hidden_effect = {
-				if = {
-					limit = {
-						OR = {
-							AND = {
-								has_country_flag = JAP_Ino_Prime_Minister
-								has_game_rule = {
-									rule = JAP_INO_BILL_PASS_CHEAT
-									option = JAP_INO_BILL_PASS_CHEAT_YES
-								}
-							}
-							AND = {
-								has_country_flag = JAP_Ikeda_Prime_Minister
-								has_game_rule = {
-									rule = JAP_IKEDA_BILL_PASS_CHEAT
-									option = JAP_IKEDA_BILL_PASS_CHEAT_YES
-								}
-							}
-							AND = {
-								has_country_flag = JAP_Kaya_Prime_Minister
-								has_game_rule = {
-									rule = JAP_KAYA_BILL_PASS_CHEAT
-									option = JAP_KAYA_BILL_PASS_CHEAT_YES
-								}
-							}
-							AND = {
-								has_country_flag = JAP_Takagi_Prime_Minister
-								has_game_rule = {
-									rule = JAP_TAKAGI_BILL_PASS_CHEAT
-									option = JAP_TAKAGI_BILL_PASS_CHEAT_YES
-								}
-							}
-						}
-						check_variable = { JAP_Peers_support < 50 }
-					}
-					set_variable = { JAP_Peers_support = 50 }
-				}
 				JAP_bill_pass_check = yes
 			}
 			effect_tooltip = {
@@ -6125,6 +7007,14 @@ JAP_faction_relations = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
 					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 				check_variable = { JAP_hardliner_approval < 0.5 }
 				check_variable = { JAP_hardliner_influence > 0.25 }
@@ -6156,6 +7046,14 @@ JAP_faction_relations = {
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
 				}
 			}
@@ -6205,6 +7103,14 @@ JAP_faction_relations = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
 					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6251,6 +7157,14 @@ JAP_faction_relations = {
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
 				}
 			}
@@ -6307,6 +7221,14 @@ JAP_faction_relations = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
 					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6353,6 +7275,14 @@ JAP_faction_relations = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
 					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6398,6 +7328,14 @@ JAP_faction_relations = {
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
 				}
 			}
@@ -6446,6 +7384,14 @@ JAP_faction_relations = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
 					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6493,6 +7439,14 @@ JAP_faction_relations = {
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
 				}
 			}
@@ -6761,9 +7715,19 @@ JAP_faction_relations = {
 			factor = 0
 			modifier = {
 				add = 100
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_NONE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6802,9 +7766,19 @@ JAP_faction_relations = {
 			factor = 0
 			modifier = {
 				add = 100
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_NONE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6842,9 +7816,19 @@ JAP_faction_relations = {
 			factor = 0
 			modifier = {
 				add = 100
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_NONE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6887,9 +7871,19 @@ JAP_faction_relations = {
 			factor = 0
 			modifier = {
 				add = 100
-				has_game_rule = {
-					rule = JAP_KAYA_SUCCESSOR
-					option = JAP_KAYA_SUCCESSOR_NONE
+				OR = {
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_NONE
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
+					}
 				}
 			}
 		}
@@ -6941,6 +7935,14 @@ JAP_faction_relations = {
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
 				}
 			}
@@ -7015,6 +8017,14 @@ JAP_faction_relations = {
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_SHIINA
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_KAYA_SUCCESSOR
+						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
 				}
 			}
