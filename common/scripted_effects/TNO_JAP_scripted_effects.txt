@@ -1261,7 +1261,7 @@ JAP_find_new_prime_minister = {
 				}
 				has_game_rule = {
 					rule = JAP_SHIINA_SUCCESSOR
-					option = JAP_SHIINA_SUCCESSOR_KAYA
+					option = JAP_SHIINA_SUCCESSOR_IKEDA
 				}
 				has_game_rule = {
 					rule = JAP_SHIINA_SUCCESSOR
@@ -1272,39 +1272,6 @@ JAP_find_new_prime_minister = {
 		clr_country_flag = CCP_JAP_new_interregnum
 	}
 
-	if = {
-		limit = {
-			OR = {
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_KAYA
-				}
-				has_game_rule = {
-					rule = JAP_IKEDA_SUCCESSOR
-					option = JAP_IKEDA_SUCCESSOR_TAKAGI
-				}
-			}
-			has_country_flag = CCP_JAP_Ikeda_resignation
-		}
-		clr_country_flag = CCP_JAP_Ikeda_resignation
-	}
-	if = {
-		limit = {
-			OR = {
-				has_game_rule = {
-					rule = JAP_SHIINA_SUCCESSOR
-					option = JAP_SHIINA_SUCCESSOR_KAYA
-				}
-				has_game_rule = {
-					rule = JAP_SHIINA_SUCCESSOR
-					option = JAP_SHIINA_SUCCESSOR_TAKAGI
-				}
-			}
-			check_variable = { JAP_resigning_pm = 4 }
-			has_country_flag = CCP_JAP_Shiina_resignation
-		}
-		clr_country_flag = CCP_JAP_Shiina_resignation
-	}
 }	
 
 ### Japanese Sphere Diplomacy GUI ###
@@ -3080,23 +3047,9 @@ JAP_calc_government_stability = {
 				AND = {
 					check_variable = { JAP_prime_minister = 4 }
 					has_country_flag = JAP_Kaya_Prime_Minister
-					OR = {
-						has_game_rule = {
-							rule = JAP_SHIINA_STABILITY_CHEAT
-							option = JAP_SHIINA_STABILITY_CHEAT_STABLE
-						}
-						AND = {
-							has_game_rule = {
-								rule = JAP_SHIINA_STABILITY_CHEAT
-								option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
-							}
-							OR = {
-								NOT = {
-									has_country_flag = CCP_Shiina_finished
-								}
-								has_active_mission = JAP_bill_voting_mission
-							}
-						}
+					has_game_rule = {
+						rule = JAP_SHIINA_STABILITY_CHEAT
+						option = JAP_SHIINA_STABILITY_CHEAT_STABLE
 					}
 				}
 				AND = {

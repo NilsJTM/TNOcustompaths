@@ -3988,42 +3988,7 @@ country_event = { # Kaya Collapse Mission failed
 
 country_event = { # A new interregnum
 	id = japresignation.7
-	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event japresignation.7"
-		if = {
-			limit = {
-				has_country_flag = JAP_Ikeda_Prime_Minister
-				OR = {
-					has_game_rule = {
-						rule = JAP_IKEDA_SUCCESSOR
-						option = JAP_IKEDA_SUCCESSOR_KAYA
-					}
-					has_game_rule = {
-						rule = JAP_IKEDA_SUCCESSOR
-						option = JAP_IKEDA_SUCCESSOR_TAKAGI
-					}
-				}
-			}
-			set_country_flag = CCP_JAP_Ikeda_resignation
-		}
-		if = {
-			limit = {
-				has_country_flag = JAP_Kaya_Prime_Minister
-				check_variable = { JAP_resigning_pm = 4 }
-				OR = {
-					has_game_rule = {
-						rule = JAP_SHIINA_SUCCESSOR
-						option = JAP_SHIINA_SUCCESSOR_KAYA
-					}
-					has_game_rule = {
-						rule = JAP_SHIINA_SUCCESSOR
-						option = JAP_SHIINA_SUCCESSOR_TAKAGI
-					}
-				}
-			}
-			set_country_flag = CCP_JAP_Shiina_resignation
-		}
-	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event japresignation.7" }
 	title = japresignation.7.t
 	desc = japresignation.7.desc
 	picture = GFX_report_event_japan_diet_1
@@ -4092,7 +4057,7 @@ country_event = { # A new interregnum
 					}
 					has_game_rule = {
 						rule = JAP_SHIINA_SUCCESSOR
-						option = JAP_SHIINA_SUCCESSOR_KAYA
+						option = JAP_SHIINA_SUCCESSOR_IKEDA
 					}
 					has_game_rule = {
 						rule = JAP_SHIINA_SUCCESSOR
@@ -4114,10 +4079,6 @@ country_event = { # A new interregnum
 						option = JAP_IKEDA_STABILITY_CHEAT_COLLAPSE
 					}
 					has_game_rule = {
-						rule = JAP_SHIINA_STABILITY_CHEAT
-						option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
-					}
-					has_game_rule = {
 						rule = JAP_TAKAGI_STABILITY_CHEAT
 						option = JAP_TAKAGI_STABILITY_CHEAT_COLLAPSE
 					}
@@ -4129,6 +4090,14 @@ country_event = { # A new interregnum
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
+					has_game_rule = {
+						rule = JAP_FUKUDA_STABILITY_CHEAT
+						option = JAP_FUKUDA_STABILITY_CHEAT_COLLAPSE
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_STABILITY_CHEAT
+						option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+					}
 				}
 			}
 			if = {
@@ -4136,12 +4105,6 @@ country_event = { # A new interregnum
 					has_country_flag = CCP_Ikeda_finished
 				}
 				clr_country_flag = CCP_Ikeda_finished
-			}
-			if = {
-				limit = {
-					has_country_flag = CCP_Shiina_finished
-				}
-				clr_country_flag = CCP_Shiina_finished
 			}
 			if = {
 				limit = {
@@ -4167,6 +4130,18 @@ country_event = { # A new interregnum
 				}
 				clr_country_flag = CCP_Kaya_finished
 			}
+			if = {
+				limit = {
+					has_country_flag = CCP_Fukuda_finished
+				}
+				clr_country_flag = CCP_Fukuda_finished
+			}
+			if = {
+				limit = {
+					has_country_flag = CCP_Shiina_finished
+				}
+				clr_country_flag = CCP_Shiina_finished
+			}
 		}
 	}
 }
@@ -4187,23 +4162,9 @@ country_event = { # Takagi v Kaya 1
 			factor = 1
 			modifier = {
 				factor = 0
-				OR = {
-					AND = {
-						has_game_rule = {
-							rule = JAP_SHIINA_SUCCESSOR
-							option = JAP_SHIINA_SUCCESSOR_KAYA
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Shiina_resignation
-					}
-					AND = {
-						has_game_rule = {
-							rule = JAP_IKEDA_SUCCESSOR
-							option = JAP_IKEDA_SUCCESSOR_KAYA
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Ikeda_resignation
-					}
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_KAYA
 				}
 			}
 		}
@@ -4216,23 +4177,9 @@ country_event = { # Takagi v Kaya 1
 			factor = 1
 			modifier = {
 				factor = 0
-				OR = {
-					AND = {
-						has_game_rule = {
-							rule = JAP_SHIINA_SUCCESSOR
-							option = JAP_SHIINA_SUCCESSOR_TAKAGI
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Shiina_resignation
-					}
-					AND = {
-						has_game_rule = {
-							rule = JAP_IKEDA_SUCCESSOR
-							option = JAP_IKEDA_SUCCESSOR_TAKAGI
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Ikeda_resignation
-					}
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_TAKAGI
 				}
 			}
 		}
@@ -4257,23 +4204,9 @@ country_event = { # Takagi v Kaya 2
 			factor = 1
 			modifier = {
 				factor = 0
-				OR = {
-					AND = {
-						has_game_rule = {
-							rule = JAP_SHIINA_SUCCESSOR
-							option = JAP_SHIINA_SUCCESSOR_KAYA
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Shiina_resignation
-					}
-					AND = {
-						has_game_rule = {
-							rule = JAP_IKEDA_SUCCESSOR
-							option = JAP_IKEDA_SUCCESSOR_KAYA
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Ikeda_resignation
-					}
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_KAYA
 				}
 			}
 		}
@@ -4286,23 +4219,9 @@ country_event = { # Takagi v Kaya 2
 			factor = 1
 			modifier = {
 				factor = 0
-				OR = {
-					AND = {
-						has_game_rule = {
-							rule = JAP_SHIINA_SUCCESSOR
-							option = JAP_SHIINA_SUCCESSOR_TAKAGI
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Shiina_resignation
-					}
-					AND = {
-						has_game_rule = {
-							rule = JAP_IKEDA_SUCCESSOR
-							option = JAP_IKEDA_SUCCESSOR_TAKAGI
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Ikeda_resignation
-					}
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_TAKAGI
 				}
 			}
 		}
@@ -4327,23 +4246,9 @@ country_event = { # Takagi v Kaya 3
 			factor = 1
 			modifier = {
 				factor = 0
-				OR = {
-					AND = {
-						has_game_rule = {
-							rule = JAP_SHIINA_SUCCESSOR
-							option = JAP_SHIINA_SUCCESSOR_KAYA
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Shiina_resignation
-					}
-					AND = {
-						has_game_rule = {
-							rule = JAP_IKEDA_SUCCESSOR
-							option = JAP_IKEDA_SUCCESSOR_KAYA
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Ikeda_resignation
-					}
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_KAYA
 				}
 			}
 		}
@@ -4356,23 +4261,9 @@ country_event = { # Takagi v Kaya 3
 			factor = 1
 			modifier = {
 				factor = 0
-				OR = {
-					AND = {
-						has_game_rule = {
-							rule = JAP_SHIINA_SUCCESSOR
-							option = JAP_SHIINA_SUCCESSOR_TAKAGI
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Shiina_resignation
-					}
-					AND = {
-						has_game_rule = {
-							rule = JAP_IKEDA_SUCCESSOR
-							option = JAP_IKEDA_SUCCESSOR_TAKAGI
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_Ikeda_resignation
-					}
+				has_game_rule = {
+					rule = JAP_IKEDA_SUCCESSOR
+					option = JAP_IKEDA_SUCCESSOR_TAKAGI
 				}
 			}
 		}
@@ -4532,6 +4423,10 @@ country_event = { # Ikeda v Takagi
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_IKEDA
+					}
 				}
 			}
 		}
@@ -4552,6 +4447,10 @@ country_event = { # Ikeda v Takagi
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
 					}
 				}
 			}
@@ -4586,6 +4485,10 @@ country_event = { # Ikeda v Takagi
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_IKEDA
+					}
 				}
 			}
 		}
@@ -4606,6 +4509,10 @@ country_event = { # Ikeda v Takagi
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
 					}
 				}
 			}
@@ -4640,6 +4547,10 @@ country_event = { # Ikeda v Takagi
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_IKEDA
+					}
 				}
 			}
 		}
@@ -4660,6 +4571,10 @@ country_event = { # Ikeda v Takagi
 					has_game_rule = {
 						rule = JAP_KAYA_SUCCESSOR
 						option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+					}
+					has_game_rule = {
+						rule = JAP_SHIINA_SUCCESSOR
+						option = JAP_SHIINA_SUCCESSOR_TAKAGI
 					}
 				}
 			}

@@ -13,7 +13,6 @@ custom_debug_category = {
 						}
 						check_variable = { JAP_resigning_pm = 4 }
 						has_country_flag = CCP_JAP_new_interregnum
-						has_country_flag = CCP_JAP_Ikeda_resignation
 					}
 				}
 				AND = {
@@ -27,7 +26,6 @@ custom_debug_category = {
 						}
 						check_variable = { JAP_resigning_pm = 4 }
 						has_country_flag = CCP_JAP_new_interregnum
-						has_country_flag = CCP_JAP_Ikeda_resignation
 					}
 				}
 				AND = {
@@ -66,6 +64,10 @@ custom_debug_category = {
 							rule = JAP_KAYA_SUCCESSOR
 							option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 						}
+						has_game_rule = {
+							rule = JAP_SHIINA_SUCCESSOR
+							option = JAP_SHIINA_SUCCESSOR_IKEDA
+						}
 					}
 					JAP = {
 						NOT = {
@@ -85,6 +87,10 @@ custom_debug_category = {
 							rule = JAP_KAYA_SUCCESSOR
 							option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
 						}
+						has_game_rule = {
+							rule = JAP_SHIINA_SUCCESSOR
+							option = JAP_SHIINA_SUCCESSOR_TAKAGI
+						}
 					}
 					JAP = {
 						NOT = {
@@ -92,34 +98,6 @@ custom_debug_category = {
 						}
 						check_variable = { JAP_resigning_pm = 5 }
 						has_country_flag = CCP_JAP_new_interregnum
-					}
-				}
-				AND = {
-					has_game_rule = {
-						rule = JAP_SHIINA_SUCCESSOR
-						option = JAP_SHIINA_SUCCESSOR_KAYA
-					}
-					JAP = {
-						NOT = {
-							check_variable = { JAP_Diet_Faction_Power^2 < JAP_Diet_Faction_Power^5 }
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_new_interregnum
-						has_country_flag = CCP_JAP_Shiina_resignation
-					}
-				}
-				AND = {
-					has_game_rule = {
-						rule = JAP_SHIINA_SUCCESSOR
-						option = JAP_SHIINA_SUCCESSOR_TAKAGI
-					}
-					JAP = {
-						NOT = {
-							check_variable = { JAP_Diet_Faction_Power^2 > JAP_Diet_Faction_Power^5 }
-						}
-						check_variable = { JAP_resigning_pm = 4 }
-						has_country_flag = CCP_JAP_new_interregnum
-						has_country_flag = CCP_JAP_Shiina_resignation
 					}
 				}
 				AND = {
@@ -172,17 +150,6 @@ custom_debug_category = {
 							}
 							JAP = {
 								check_variable = { JAP_resigning_pm = 4 }
-								has_country_flag = CCP_JAP_Ikeda_resignation
-							}
-						}
-						AND = {
-							has_game_rule = {
-								rule = JAP_SHIINA_SUCCESSOR
-								option = JAP_SHIINA_SUCCESSOR_KAYA
-							}
-							JAP = {
-								check_variable = { JAP_resigning_pm = 4 }
-								has_country_flag = CCP_JAP_Shiina_resignation
 							}
 						}
 						AND = {
@@ -195,18 +162,15 @@ custom_debug_category = {
 							}
 						}
 						AND = {
-							has_game_rule = {
-								rule = JAP_KAYA_SUCCESSOR
-								option = JAP_KAYA_SUCCESSOR_FUKUDA
-							}
-							JAP = {
-								check_variable = { JAP_prime_minister = 5 }
-							}
-						}
-						AND = {
-							has_game_rule = {
-								rule = JAP_KAYA_SUCCESSOR
-								option = JAP_KAYA_SUCCESSOR_SHIINA
+							OR = {
+								has_game_rule = {
+									rule = JAP_KAYA_SUCCESSOR
+									option = JAP_KAYA_SUCCESSOR_FUKUDA
+								}
+								has_game_rule = {
+									rule = JAP_KAYA_SUCCESSOR
+									option = JAP_KAYA_SUCCESSOR_SHIINA
+								}
 							}
 							JAP = {
 								check_variable = { JAP_prime_minister = 5 }
@@ -228,17 +192,6 @@ custom_debug_category = {
 							}
 							JAP = {
 								check_variable = { JAP_resigning_pm = 4 }
-								has_country_flag = CCP_JAP_Ikeda_resignation
-							}
-						}
-						AND = {
-							has_game_rule = {
-								rule = JAP_SHIINA_SUCCESSOR
-								option = JAP_SHIINA_SUCCESSOR_TAKAGI
-							}
-							JAP = {
-								check_variable = { JAP_resigning_pm = 4 }
-								has_country_flag = CCP_JAP_Shiina_resignation
 							}
 						}
 						AND = {
@@ -250,6 +203,10 @@ custom_debug_category = {
 								has_game_rule = {
 									rule = JAP_KAYA_SUCCESSOR
 									option = JAP_KAYA_SUCCESSOR_TAKAGI_CHEAT
+								}
+								has_game_rule = {
+									rule = JAP_SHIINA_SUCCESSOR
+									option = JAP_SHIINA_SUCCESSOR_TAKAGI
 								}
 							}
 							JAP = {
@@ -284,6 +241,10 @@ custom_debug_category = {
 									rule = JAP_KAYA_SUCCESSOR
 									option = JAP_KAYA_SUCCESSOR_IKEDA_CHEAT
 								}
+								has_game_rule = {
+									rule = JAP_SHIINA_SUCCESSOR
+									option = JAP_SHIINA_SUCCESSOR_IKEDA
+								}
 							}
 							JAP = {
 								check_variable = { JAP_resigning_pm = 5 }
@@ -307,16 +268,6 @@ custom_debug_category = {
 					}
 					JAP = {
 						has_country_flag = CCP_Ikeda_finished
-						NOT = { has_active_mission = JAP_bill_voting_mission }
-					}
-				}
-				AND = {
-					has_game_rule = {
-						rule = JAP_SHIINA_STABILITY_CHEAT
-						option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
-					}
-					JAP = {
-						has_country_flag = CCP_Shiina_finished
 						NOT = { has_active_mission = JAP_bill_voting_mission }
 					}
 				}
@@ -352,6 +303,26 @@ custom_debug_category = {
 					}
 					JAP = {
 						has_country_flag = CCP_Kaya_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = JAP_FUKUDA_STABILITY_CHEAT
+						option = JAP_FUKUDA_STABILITY_CHEAT_COLLAPSE
+					}
+					JAP = {
+						has_country_flag = CCP_Fukuda_finished
+						NOT = { has_active_mission = JAP_bill_voting_mission }
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = JAP_SHIINA_STABILITY_CHEAT
+						option = JAP_SHIINA_STABILITY_CHEAT_COLLAPSE
+					}
+					JAP = {
+						has_country_flag = CCP_Shiina_finished
 						NOT = { has_active_mission = JAP_bill_voting_mission }
 					}
 				}
