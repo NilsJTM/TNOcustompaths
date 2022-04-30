@@ -1,0 +1,49 @@
+custom_debug_category = {
+	SAF_custom_referendum_cheat_monarchist = {
+	
+			available  = {
+			    has_game_rule = {
+					rule = SAF_REFERENDUM
+					option = SAF_REFERENDUM_MONARCHIST
+				}
+				SAF = { 
+					check_variable = { SAF_monarchy_support < 65 }
+				}
+			}
+
+			ai_will_do = {
+				factor = 100
+			}
+
+
+			complete_effect = {
+				SAF = {
+					add_to_variable = { var = SAF_monarchy_support value = 100}
+				}
+			}
+	}
+	SAF_custom_referendum_cheat_republic = {
+	
+		available  = {
+			    has_game_rule = {
+					rule = SAF_REFERENDUM
+					option = SAF_REFERENDUM_REPUBLIC
+				}
+				SAF = { 
+					check_variable = { SAF_monarchy_support > 1 }
+				}
+			}
+        
+
+			ai_will_do = {
+				factor = 100
+			}
+
+
+			complete_effect = {
+				SAF = {
+					set_variable = { SAF_monarchy_support = 0 }
+				}
+			}
+	}
+}
