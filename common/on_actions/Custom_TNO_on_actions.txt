@@ -427,7 +427,7 @@ on_actions = {
 				}
 			}
 			if = {
-				limit = {# Congo Civil War (OFN Mandate collapse)
+				limit = {# Congo Civil War
 					ROOT = {
 					    OR = {
 					        tag = CPR
@@ -435,6 +435,7 @@ on_actions = {
 					        tag = CFS
 					        tag = KSI
 					        tag = COG
+							tag = GRO
 					        tag = KTG
 					    }
 					}
@@ -445,6 +446,7 @@ on_actions = {
 					        tag = CFS
 					        tag = KSI
 					        tag = COG
+							tag = GRO
 					        tag = KTG
 					    }
 					}
@@ -513,95 +515,6 @@ on_actions = {
 				    }
 				    set_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
 				    COG = { apply_war_buff_with_10_divisions = yes }				    
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_INDEPENDENT
-					    }
-					    NOT = {
-					        has_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-					    }
-				    }
-				    set_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-				    KTG = { apply_war_buff_with_10_divisions = yes }
-				}
-			}
-			if = {
-				limit = {# Congo Civil War (GRO collapse)
-					ROOT = {
-					    OR = {
-					        tag = CPR
-					        tag = AZD
-					        tag = CFS
-					        tag = KSI
-					        tag = GRO
-					        tag = KTG
-					    }
-					}
-					FROM = {
-					    OR = {
-					        tag = CPR
-					        tag = AZD
-					        tag = CFS
-					        tag = KSI
-					        tag = GRO
-					        tag = KTG
-					    }
-					}
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_CPR
-					    }
-					    NOT = {
-					        has_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-					    }
-				    }
-				    set_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-				    CPR = { apply_war_buff_with_10_divisions = yes }				    
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_AZD
-					    }
-					    NOT = {
-					        has_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-					    }
-				    }
-				    set_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-				    AZD = { apply_war_buff_with_10_divisions = yes }				    
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_CFS
-					    }
-					    NOT = {
-					        has_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-					    }
-				    }
-				    set_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-				    CFS = { apply_war_buff_with_10_divisions = yes }				    
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_INDEPENDENT
-					    }
-					    NOT = {
-					        has_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-					    }
-				    }
-				    set_global_flag = COG_CIVIL_WAR_BUFF_APPLIED
-				    KSI = { apply_war_buff_with_10_divisions = yes }				    
 				}
 				if = {
 				    limit = {
@@ -1685,9 +1598,10 @@ on_actions = {
 				}
 			}
 			if = {
-				limit = { # Congo Civil War Ends (OFN Congo collapse)
+				limit = { # Congo Civil War Ends
 					ROOT = {
 					    OR = {
+							tag = GRO
 					        tag = COG
 							tag = CFS
 							tag = CPR
@@ -1698,6 +1612,7 @@ on_actions = {
 					}
 					FROM = {
 					    OR = {
+							tag = GRO
 							tag = COG
 							tag = CFS
 							tag = CPR
@@ -1708,8 +1623,11 @@ on_actions = {
 					}
 					NOT = {
 			            count_triggers = {
-				            amount = 2 
-				            country_exists = COG
+				            amount = 2
+							OR = {
+								country_exists = GRO 
+				            	country_exists = COG
+							}
 							country_exists = CFS
 							country_exists = CPR
 							country_exists = KSI
@@ -1753,86 +1671,6 @@ on_actions = {
 					    }
 				    }
 				    COG = { remove_war_buff = yes }
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_CFS
-					    }
-				    }
-				    CFS = { remove_war_buff = yes }
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_CPR
-					    }
-				    }
-				    CPR = { remove_war_buff = yes }
-				}
-			}
-			if = {
-				limit = { # Congo Civil War Ends (Großafrikanscher Reichsstaat collapse)
-					ROOT = {
-					    OR = {
-					        tag = GRO
-							tag = CFS
-							tag = CPR
-							tag = KSI
-							tag = KTG
-							tag = AZD
-					    }
-					}
-					FROM = {
-					    OR = {
-							tag = GRO
-							tag = CFS
-							tag = CPR
-							tag = KSI
-							tag = KTG
-							tag = AZD
-					    }
-					}
-					NOT = {
-			            count_triggers = {
-				            amount = 2 
-				            country_exists = GRO
-							country_exists = CFS
-							country_exists = CPR
-							country_exists = KSI
-							country_exists = KTG
-							country_exists = AZD
-			            }
-		            }
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_INDEPENDENT
-					    }
-				    }
-				    KTG = { remove_war_buff = yes }
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_INDEPENDENT
-					    }
-				    }
-				    KSI = { remove_war_buff = yes }
-				}
-				if = {
-				    limit = {
-				        has_game_rule = {
-						    rule = congo_civil_war_outcome
-						    option = CONGO_CIVIL_WAR_OUTCOME_AZD
-					    }
-				    }
-				    AZD = { remove_war_buff = yes }
 				}
 				if = {
 				    limit = {
