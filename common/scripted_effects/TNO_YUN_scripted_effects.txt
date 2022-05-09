@@ -809,7 +809,15 @@ YUN_Sichuan_struggle_ends = {
 	if = {
 		limit = {
 			OR = {
-				check_variable = { global.GUI_SIC_NPA_Influence > global.GUI_SIC_RGOC_Influence }
+				AND = {
+					check_variable = { global.GUI_SIC_NPA_Influence > global.GUI_SIC_RGOC_Influence }
+					NOT = {
+						has_game_rule = {
+							rule = the_battle_of_sichuan
+							option = THE_BATTLE_OF_SICHUAN_CHI_REPUBLIC_OF_CHINA
+						}
+					}
+				}
 				has_game_rule = {
 					rule = the_battle_of_sichuan
 					option = THE_BATTLE_OF_SICHUAN_YUN_NATIONAL_PROTECTION_ARMY
