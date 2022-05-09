@@ -2737,13 +2737,16 @@ country_event = { #May the Grand Marshal rest in peace
 			if = {
 				limit = {
 					NOT = { 
-						has_variable = YUN_legitimate_regime
-						has_game_rule = {
-							rule = great_asian_war_outcome
-							option = GREAT_ASIAN_WAR_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+						OR = {
+							has_variable = YUN_legitimate_regime
+							has_game_rule = {
+								rule = great_asian_war_outcome
+								option = GREAT_ASIAN_WAR_OUTCOME_YUN_NATIONAL_PROTECTION_ARMY
+							}
 						}
 					}
 				}
+				#partial_victory
 				set_politics = {
 					ruling_party = despotism
 				}
@@ -2759,6 +2762,7 @@ country_event = { #May the Grand Marshal rest in peace
 				set_global_flag = YUN_NPA_partial_victory
 				country_event = { id = yun_wi.50 days = 2 }
 			}
+			#totally_victoly
 			else = {
 				add_popularity = {
 					ideology = authoritarian_democracy
