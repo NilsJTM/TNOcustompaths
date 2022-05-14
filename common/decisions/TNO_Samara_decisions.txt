@@ -1,0 +1,7138 @@
+SAM_smuggling_category = {
+	SAM_expand_smuggling_network = {
+		available = {
+			check_variable = { SAM_smuggling_network_size < 3 }
+		}
+		visible = {
+			check_variable = { SAM_smuggling_network_size < 3 }
+			NOT = {
+				has_country_flag = SAM_has_expanded_smuggling_network
+			}
+		}
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+		cost = 20
+
+		fire_only_once = no
+		icon = GFX_decision_generic_supply
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_expand_smuggling_network"
+			SAM_increase_corruption_large = yes
+			SAM_bigger_smuggling_network = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.001 }
+			econ_spend_money_once_effect_raw_money = yes
+			TNO_worsen_trade_laws_policy_effectiveness_med = yes
+			set_country_flag = SAM_has_expanded_smuggling_network
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_bribe_german_officers = {
+		available = {
+			check_variable = { SAM_smuggling_network_size < 3 }
+		}
+		visible = {
+			check_variable = { SAM_smuggling_network_size < 3 }
+			NOT = {
+				has_country_flag = SAM_has_bribed_german_officers
+			}
+		}
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+		cost = 20
+
+		fire_only_once = no
+		icon = GFX_decision_corruption_generic
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_bribe_german_officers"
+			SAM_increase_corruption_large = yes
+			SAM_bigger_smuggling_network = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.001 }
+			econ_spend_money_once_effect_raw_money = yes
+			set_country_flag = SAM_has_bribed_german_officers
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_contacts_among_soldiers = {
+		available = {
+			check_variable = { SAM_smuggling_network_size < 3 }
+		}
+		visible = {
+			check_variable = { SAM_smuggling_network_size < 3 }
+			NOT = {
+				has_country_flag = SAM_has_contacts_among_soldiers
+			}
+		}
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+		cost = 20
+
+		fire_only_once = no
+		icon = GFX_decision_generic_military_parade
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_bribe_german_officers"
+			SAM_increase_corruption_large = yes
+			SAM_bigger_smuggling_network = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.001 }
+			econ_spend_money_once_effect_raw_money = yes
+			set_country_flag = SAM_has_contacts_among_soldiers
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_downsize_smuggling_network = {
+		available = {
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		visible = {
+			has_country_flag = SAM_has_expanded_smuggling_network
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		cost = 20
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_downsize_smuggling_network"
+			SAM_decrease_corruption_large = yes
+			SAM_smaller_smuggling_network = yes
+			TNO_improve_trade_laws_policy_effectiveness_low = yes
+			clr_country_flag = SAM_has_expanded_smuggling_network
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_remove_corrupt_officers = {
+		available = {
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		visible = {
+			has_country_flag = SAM_has_bribed_german_officers
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		cost = 20
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_remove_corrupt_officers"
+			SAM_decrease_corruption_large = yes
+			SAM_smaller_smuggling_network = yes
+			clr_country_flag = SAM_has_bribed_german_officers
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_discourage_fraternization = {
+		available = {
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		visible = {
+			has_country_flag = SAM_has_contacts_among_soldiers
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		cost = 20
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_bribe_german_officers"
+			SAM_decrease_corruption_large = yes
+			SAM_smaller_smuggling_network = yes
+			clr_country_flag = SAM_has_contacts_among_soldiers
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_smuggle_infantry_equipment = {
+		available = {
+			NOT = {
+				has_country_flag = SAM_no_smuggling
+			}
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		visible = {
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 20
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_arms_crate
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_smuggle_infantry_equipment"
+			SAM_increase_corruption_medium = yes
+			add_to_variable = {	SAM_smuggling_infantry_equipment = 25 }
+			custom_effect_tooltip = SAM_smuggle_infantry_equipment_tt
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_smuggle_anti_tank_equipment = {
+		available = {
+			NOT = {
+				has_country_flag = SAM_no_smuggling
+			}
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		visible = {
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 20
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_arms_crate
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_smuggle_infantry_equipment"
+			SAM_increase_corruption_medium = yes
+			add_to_variable = {	SAM_smuggling_anti_tank = 25 }
+			custom_effect_tooltip = SAM_smuggle_anti_tank_equipment_tt
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_smuggle_support_equipment = {
+		available = {
+			NOT = {
+				has_country_flag = SAM_no_smuggling
+			}
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 2 }
+				check_variable = { SAM_smuggling_network_size = 2 }
+			}
+		}
+		visible = {
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 2 }
+				check_variable = { SAM_smuggling_network_size = 2 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 20
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_black_market_infantry_purchase
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_smuggle_infantry_equipment"
+			SAM_increase_corruption_medium = yes
+			add_to_variable = {	SAM_smuggling_support = 25 }
+			custom_effect_tooltip = SAM_smuggle_support_equipment_tt
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_smuggle_motorized_equipment = {
+		available = {
+			NOT = {
+				has_country_flag = SAM_no_smuggling
+			}
+			check_variable = { SAM_smuggling_network_size = 3 }
+		}
+		visible = {
+			check_variable = { SAM_smuggling_network_size = 3 }
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 20
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_black_market_motorized_purchase
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_smuggle_motorized_equipment"
+			SAM_increase_corruption_medium = yes
+			add_to_variable = {	SAM_smuggling_motorized_equipment = 10 }
+			custom_effect_tooltip = SAM_smuggle_motorized_equipment_tt
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_import_luxury_goods_soldiers = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_military_morale < 100 }
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 2 }
+				check_variable = { SAM_smuggling_network_size = 2 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_black_market_luxury_trade_increase
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_import_luxury_goods_soldiers"
+			SAM_increase_corruption_small = yes
+			SAM_increase_military_morale_medium = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.002 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_military_spirit = yes
+			}
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_import_food_soldiers = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_military_morale < 100 }
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 2 }
+				check_variable = { SAM_smuggling_network_size = 2 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 25
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_supply
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_import_food_soldiers"
+			SAM_increase_corruption_small = yes
+			SAM_increase_military_morale_small = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.001 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_military_spirit = yes
+			}
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_import_luxury_goods_officers = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_military_morale < 100 }
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+		icon = GFX_decision_black_market_luxury_trade_increase
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_import_luxury_goods_officers"
+			SAM_increase_corruption_small = yes
+			SAM_increase_military_morale_small = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.003 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_military_spirit = yes
+			}
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_import_luxury_goods_civilians = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_civilian_morale < 100 }
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 1 }
+				check_variable = { SAM_smuggling_network_size = 1 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_black_market_luxury_trade_increase
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_import_luxury_goods"
+			SAM_increase_corruption_small = yes
+			SAM_increase_civilian_morale_medium = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.005 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_civilian_spirit = yes
+			}
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_import_medical_supplies = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_civilian_morale < 100 }
+			check_variable = { SAM_smuggling_network_size = 3 }
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 25
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_humanitarian_aid_increase
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_import_medical_supplies"
+			SAM_increase_corruption_small = yes
+			SAM_increase_civilian_morale_small = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.01 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_civilian_spirit = yes
+			}
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_import_food_supplies = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_civilian_morale < 100 }
+			OR = {
+				check_variable = { SAM_smuggling_network_size > 2 }
+				check_variable = { SAM_smuggling_network_size = 2 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+
+		cost = 25
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_supply
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_import_food_supplies"
+			SAM_increase_corruption_small = yes
+			SAM_increase_civilian_morale_small = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.001 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_civilian_spirit = yes
+			}
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_improve_oversight = {
+		available = {
+			check_variable = { SAM_smuggling_network > 0 }
+		}
+		visible = {
+			check_variable = { SAM_smuggling_network > 0 }
+		}
+		ai_will_do = {
+			factor = 2
+		}
+
+		cost = 25
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_investigate
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_investigate_corruption"
+			SAM_decrease_corruption_small = yes
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_investigate_corruption = {
+		available = {
+			check_variable = { SAM_smuggling_network > 0 }
+		}
+		visible = {
+			check_variable = { SAM_smuggling_network > 0 }
+		}
+		ai_will_do = {
+			factor = 2
+		}
+
+		cost = 40
+		days_re_enable = 150
+		fire_only_once = no
+		icon = GFX_decision_generic_investigate
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_investigate_corruption"
+			SAM_decrease_corruption_large = yes
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+	SAM_smuggling_shipment = {
+		available = {
+			has_country_flag = SAM_no_smuggling
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+
+		activation = {
+			always = yes
+		}
+		is_good = yes
+		fire_only_once = no
+		days_mission_timeout = 30
+		icon = GFX_decision_generic_arms_crate
+		timeout_effect = {
+			set_temp_variable = { IE = SAM_smuggling_infantry_equipment }
+			set_temp_variable = { AT = SAM_smuggling_anti_tank }
+			set_temp_variable = { SE = SAM_smuggling_support }
+			set_temp_variable = { ME = SAM_smuggling_motorized_equipment }
+			if = {
+				limit = {
+					has_global_flag = MCW_collapse
+					NOT = {
+						MCW = {
+							is_subject_of = GER
+						}
+					}
+				}
+				multiply_temp_variable = { IE = 0.2 }
+				multiply_temp_variable = { AT = 0.2 }
+				multiply_temp_variable = { SE = 0.2 }
+				multiply_temp_variable = { ME = 0.2 }
+			}
+			else_if = {
+				limit = {
+					SGR = { exists = yes }
+					BGR = { exists = yes }
+					GGR = { exists = yes }
+					HGR = { exists = yes }
+				}
+				multiply_temp_variable = { IE = 0.4 }
+				multiply_temp_variable = { AT = 0.4 }
+				multiply_temp_variable = { SE = 0.4 }
+				multiply_temp_variable = { ME = 0.4 }
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						MCW = {
+							is_subject_of = GER
+						}
+					}
+				}
+				multiply_temp_variable = { IE = 0.6 }
+				multiply_temp_variable = { AT = 0.6 }
+				multiply_temp_variable = { SE = 0.6 }
+				multiply_temp_variable = { ME = 0.6 }
+			}
+			else_if = {
+				limit = {
+					has_global_flag = MCW_collapse
+					has_global_flag = MCW_2SS_German_Pref
+					has_global_flag = MCW_2SS_Russian_Pref
+					has_global_flag = MCW_2SS_peace
+					has_global_flag = MCW_2SS_war
+					has_global_flag = MCW_3SS
+					MCW = {
+						is_subject_of = GER
+					}
+				}
+				multiply_temp_variable = { IE = 0.8 }
+				multiply_temp_variable = { AT = 0.8 }
+				multiply_temp_variable = { SE = 0.8 }
+				multiply_temp_variable = { ME = 0.8 }
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = IE
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = AT
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = SE
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = ME
+				producer = GER
+			}
+			hidden_effect = {
+				activate_mission = SAM_smuggling_shipment
+			}
+		}
+	}
+}
+SAM_ROA_category = {
+	SAM_higher_pay_officers = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_money
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_higher_pay_officers"
+			SAM_increase_ROA_officers_small = yes
+			SAM_increase_ROA_support_medium = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.002 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_officers_spirit = yes
+			}
+		}
+	}
+	SAM_demote_disloyal_officers = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_use_force
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_demote_disloyal_officers"
+			SAM_decrease_ROA_officers_small = yes
+			SAM_increase_ROA_support_small = yes
+			hidden_effect = {
+				SAM_change_officers_spirit = yes
+			}
+		}
+	}
+	SAM_decrease_standards = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_decrease_standards"
+			SAM_decrease_ROA_support_small = yes
+			SAM_increase_ROA_officers_medium = yes
+			hidden_effect = {
+				SAM_change_officers_spirit = yes
+			}
+		}
+	}
+	SAM_recruitment_campaign = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_generic_propaganda
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_recruitment_campaign"
+			SAM_increase_ROA_officers_small = yes
+			add_manpower = 500
+			set_temp_variable = { temp_econ_spending_amount = 0.001 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_officers_spirit = yes
+			}
+		}
+	}
+	SAM_luxuries_for_officers = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_OKTAN
+					}
+				}
+				NOT = {
+					check_variable = { SAM_civilian_morale > 75 }
+				}
+			}
+		}
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_black_market_luxury_trade_increase
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_luxuries_for_officers"
+			SAM_increase_ROA_support_small = yes
+			SAM_decrease_civilian_morale_small = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.002 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_bribe_rival_officers = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_ZYKOV
+					}
+					has_game_rule = {
+						rule = SAM_ROUTE
+						option = SAM_ROUTE_BUNYACHENKO
+					}
+				}
+				NOT = {
+					check_variable = { SAM_smuggling_network < 61 }
+				}
+			}
+		}
+		cost = 40
+		days_re_enable = 120
+		fire_only_once = no
+		icon = GFX_decision_corruption_generic
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_bribe_rival_officers"
+			SAM_increase_ROA_support_small = yes
+			SAM_increase_corruption_medium = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.007 }
+			econ_spend_money_once_effect_raw_money = yes
+			hidden_effect = {
+				SAM_change_corruption_spirit = yes
+			}
+		}
+	}
+}
+
+SAM_kombinats_category = {
+	SAM_kombinats_acquire_mines = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_resources < 0.125 }
+			check_variable = { SAM_kombinats_political_power > -0.99 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		icon = GFX_decision_oil_extraction
+		fire_only_once = no
+		days_re_enable = 90
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_more_resources"
+			SAM_bunyachenko_acquire_mines = yes
+			set_temp_variable = { gdp_growth_temp = 0.01 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_kombinats_acquire_construction = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_construction < 0.125 }
+			check_variable = { SAM_kombinats_political_power > -0.99 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		icon = GFX_decision_generic_building
+		fire_only_once = no
+		days_re_enable = 90
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_acquire_construction"
+			SAM_bunyachenko_acquire_construction = yes
+			set_temp_variable = { gdp_growth_temp = 0.01 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_kombinats_acquire_factories = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_max_efficiency < 0.125 }
+			check_variable = { SAM_kombinats_political_power > -0.99 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		icon = GFX_decision_factory_generic_blue
+		fire_only_once = no
+		days_re_enable = 90
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_acquire_factories"
+			SAM_bunyachenko_acquire_factories = yes
+			set_temp_variable = { gdp_growth_temp = 0.01 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_kombinats_acquire_scientists = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_research_speed < 0.05 }
+			check_variable = { SAM_kombinats_political_power > -0.99 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		icon = GFX_decision_research_generic
+		fire_only_once = no
+		days_re_enable = 90
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_acquire_scientists"
+			SAM_bunyachenko_acquire_scientists = yes
+			set_temp_variable = { gdp_growth_temp = 0.01 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_kombinats_prioritize_mines = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_construction > 0 }
+			check_variable = { SAM_kombinats_max_efficiency > 0 }
+			check_variable = { SAM_kombinats_resources < 0.124 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		icon = GFX_decision_oil_extraction
+		fire_only_once = no
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_prioritize_mines"
+			SAM_bunyachenko_prioritize_mines = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_kombinats_prioritize_construction = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_resources > 0 }
+			check_variable = { SAM_kombinats_max_efficiency > 0 }
+			check_variable = { SAM_kombinats_construction < 0.124 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		days_re_enable = 120
+		icon = GFX_decision_generic_building
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_prioritize_construction"
+			SAM_bunyachenko_prioritize_construction = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_kombinats_prioritize_factories = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_resources > 0 }
+			check_variable = { SAM_kombinats_construction > 0 }
+			check_variable = { SAM_kombinats_max_efficiency < 0.124 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		days_re_enable = 120
+		icon = GFX_decision_factory_generic_blue
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_prioritize_factories"
+			SAM_bunyachenko_prioritize_factories = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_kombinats_bring_under_government_control = {
+		available = {
+			always = yes
+		}
+		visible = {
+			check_variable = { SAM_kombinats_resources > 0.01 }
+			check_variable = { SAM_kombinats_construction > 0.01 }
+			check_variable = { SAM_kombinats_max_efficiency > 0.01 }
+			check_variable = { SAM_kombinats_research_speed > 0.01 }
+			check_variable = { SAM_kombinats_political_power < -0.08 }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		days_re_enable = 360
+		icon = GFX_decision_generic_political_action
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kombinats_bring_under_government_control"
+			SAM_bunyachenko_bring_under_government_control = yes
+			add_political_power = 50
+			set_temp_variable = { money_reserves_temp = 0.25 }
+			econ_money_reserves_change_raw_money = yes
+			set_temp_variable = { gdp_growth_temp = -0.1 }
+			econ_gdp_growth_change = yes
+			set_temp_variable = { econ_centralization_temp = 2.5 }
+			econ_centralization_change = yes
+		}
+	}
+}
+
+SAM_unity_party_category = {
+	SAM_appease_the_ROA = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			check_variable = { SAM_ROA_faction_strength < 33.33 }
+
+		}
+		visible = {
+			check_variable = { SAM_ROA_faction_strength < 33.33 }
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		icon = GFX_decision_generic_military_parade
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_appease_the_ROA"
+			SAM_zykov_increase_ROA_low = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 0
+
+		}
+	}
+	SAM_appease_businesses = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			check_variable = { SAM_business_faction_strength < 33.33 }
+		}
+		visible = {
+			check_variable = { SAM_business_faction_strength < 33.33 }
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		icon = GFX_decision_generic_money
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_appease_businesses"
+			SAM_zykov_increase_business_low = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 0
+
+		}
+	}
+	SAM_appease_democrats = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			check_variable = { SAM_democrat_faction_strength < 33.33 }
+		}
+		visible = {
+			check_variable = { SAM_democrat_faction_strength < 33.33 }
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		icon = GFX_decision_generic_civil_support
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_appease_democrats"
+			SAM_zykov_increase_democrat_low = yes
+			add_stability = 0.02
+		}
+		ai_will_do = {
+			factor = 0
+
+		}
+	}
+
+	SAM_persuade_others_ROA = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			check_variable = { SAM_ROA_faction_strength > 33.33 }
+
+		}
+		visible = {
+			check_variable = { SAM_ROA_faction_strength > 33.33 }
+		}
+		cost = 30
+		fire_only_once = no
+		days_re_enable = 60
+		icon = GFX_decision_generic_use_force
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_persuade_others_ROA"
+			SAM_zykov_increase_ROA_low = yes
+			add_stability = -0.03
+		}
+		ai_will_do = {
+			factor = 0
+
+		}
+	}
+	SAM_persuade_others_business = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			check_variable = { SAM_business_faction_strength > 33.33 }
+		}
+		visible = {
+			check_variable = { SAM_business_faction_strength > 33.33 }
+		}
+		cost = 30
+		fire_only_once = no
+		days_re_enable = 60
+		icon = GFX_decision_generic_consumer_goods
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_persuade_others_business"
+			SAM_zykov_increase_business_low = yes
+			add_stability = -0.03
+		}
+		ai_will_do = {
+			factor = 0
+
+		}
+	}
+	SAM_persuade_others_democrats = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			check_variable = { SAM_democrat_faction_strength > 33.33 }
+		}
+		visible = {
+			check_variable = { SAM_democrat_faction_strength > 33.33 }
+		}
+		cost = 30
+		fire_only_once = no
+		days_re_enable = 60
+		icon = GFX_decision_generic_political_action
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_persuade_others_democrats"
+			SAM_zykov_increase_democrat_low = yes
+			add_stability = -0.03
+		}
+		ai_will_do = {
+			factor = 0
+
+		}
+	}
+
+	###ROA REFORMS###
+
+	SAM_ROA_increase_training_law = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SAM_roa_influence_tt
+				check_variable = { SAM_ROA_faction_strength > 35 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				has_country_flag = {
+					flag = WRS_reformed_flag
+					days > 364
+				}
+			}
+		}
+		visible = {
+			check_variable = { SAM_ROA_faction_strength > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		icon = GFX_decision_generic_assault
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_ROA_increase_training_law"
+			custom_effect_tooltip = SAM_ROA_increase_training_law_tt
+			SAM_zykov_increase_ROA_high = yes
+			swap_ideas = {
+				remove_idea = tno_training_basic_training
+				add_idea = tno_training_combat_schooling
+			}
+			set_country_flag = WRS_reformed_flag
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
+	SAM_ROA_grant_officers_gov_positions = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SAM_roa_influence_high_tt
+				check_variable = { SAM_ROA_faction_strength > 40 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				has_country_flag = {
+					flag = WRS_reformed_flag
+					days > 364
+				}
+			}
+		}
+		visible = {
+			check_variable = { SAM_ROA_faction_strength > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		icon = GFX_decision_generic_military_parade
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_ROA_grant_officers_gov_positions"
+			custom_effect_tooltip = SAM_ROA_grant_officers_gov_positions_tt
+			SAM_zykov_increase_ROA_high = yes
+			set_country_flag = WRS_reformed_flag
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
+	###BUSINESS REFORMS###
+
+	SAM_business_trade_with_USA = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SAM_bus_influence_tt
+				check_variable = { SAM_business_faction_strength > 35 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				has_country_flag = {
+					flag = WRS_reformed_flag
+					days > 364
+				}
+			}
+		}
+		visible = {
+			check_variable = { SAM_business_faction_strength > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		icon = GFX_decision_generic_shake_hands
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_business_trade_with_USA"
+			custom_effect_tooltip = SAM_business_trade_with_USA_tt
+			SAM_zykov_increase_business_high = yes
+			set_temp_variable = { temp_modifier = 25 }
+			USA = { add_to_trade_modifier_PREV = yes }
+			USA = {
+				set_temp_variable = { temp_modifier = 25 }
+				SAM = { add_to_trade_modifier_PREV = yes }
+			}
+			set_country_flag = WRS_reformed_flag
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
+	SAM_business_increase_exports = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SAM_bus_influence_high_tt
+				check_variable = { SAM_business_faction_strength > 40 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				has_country_flag = {
+					flag = WRS_reformed_flag
+					days > 364
+				}
+			}
+		}
+		visible = {
+			check_variable = { SAM_business_faction_strength > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		icon = GFX_decision_generic_consumer_goods
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_business_increase_exports"
+			custom_effect_tooltip = SAM_business_increase_exports_tt
+			SAM_zykov_increase_business_high = yes
+			swap_ideas = {
+				remove_idea = tno_trade_laws_limited_exports
+				add_idea = tno_trade_laws_export_focus
+			}
+			set_country_flag = WRS_reformed_flag
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
+	###DEMOCRAT REFORMS###
+
+	SAM_democrat_decrease_poverty = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SAM_civ_influence_tt
+				check_variable = { SAM_democrat_faction_strength > 35 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				has_country_flag = {
+					flag = WRS_reformed_flag
+					days > 364
+				}
+			}
+		}
+		visible = {
+			check_variable = { SAM_democrat_faction_strength > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		icon = GFX_decision_generic_supply
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_democrat_decrease_poverty"
+			custom_effect_tooltip = SAM_democrat_decrease_poverty_tt
+			SAM_zykov_increase_democrat_high = yes
+			TNO_improve_poverty_low = yes
+			set_country_flag = WRS_reformed_flag
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+
+	SAM_democrat_lower_draft_law = {
+		allowed = {
+			tag = SAM
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SAM_civ_influence_high_tt
+				check_variable = { SAM_democrat_faction_strength > 40 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = WRS_reform_timer_tt
+				has_country_flag = {
+					flag = WRS_reformed_flag
+					days > 364
+				}
+			}
+		}
+		visible = {
+			check_variable = { SAM_democrat_faction_strength > 33.33 }
+		}
+		cost = 75
+		fire_only_once = yes
+		icon = GFX_decision_generic_political_action
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAM_democrat_lower_draft_law"
+			custom_effect_tooltip = SAM_democrat_lower_draft_law_tt
+			SAM_zykov_increase_democrat_high = yes
+			swap_ideas = {
+				remove_idea = tno_conscription_four_year_draft
+				add_idea = tno_conscription_two_year_draft
+			}
+			set_country_flag = WRS_reformed_flag
+		}
+		ai_will_do = {
+			factor = 25
+		}
+	}
+}
+
+SAM_web_of_tensions_category = {
+	###### Misc. Decisions #######
+	SAM_political_inner_circle = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_political_inner_circle"
+			SAM_oktan_increase_inner_circle_tension_high = yes
+			SAM_oktan_increase_inner_circle_influence_high = yes
+			add_political_power = 50
+			add_stability = 0.05
+		}
+	}
+	SAM_bribe_inner_circle = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 40
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_bribe_inner_circle"
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			SAM_oktan_increase_inner_circle_influence_low = yes
+			set_temp_variable = { temp_econ_spending_amount = 0.1 }
+			econ_spend_money_once_effect_raw_money = yes
+		}
+	}
+	SAM_grant_inner_circle = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 60
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_grant_inner_circle"
+			SAM_oktan_decrease_inner_circle_tension_high = yes
+			SAM_oktan_increase_inner_circle_influence_high = yes
+		}
+	}
+	SAM_lower_inner_circle = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 20
+		days_re_enable = 60
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_lower_inner_circle"
+			SAM_oktan_increase_inner_circle_tension_high = yes
+			SAM_oktan_decrease_inner_circle_influence_high = yes
+		}
+	}
+	SAM_manpower_military = {
+		available = {
+			always = yes
+			check_variable = { SAM_military_ruled_states > 0 }
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 40
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_manpower_military"
+			SAM_oktan_increase_military_tension_low = yes
+			SAM_oktan_increase_military_influence_low = yes
+			custom_effect_tooltip = SAM_manpower_military_tt
+			set_temp_variable = { SAM_manpower_temp = 500 }
+			multiply_temp_variable = { SAM_manpower_temp = SAM_military_ruled_states }
+			add_manpower = SAM_manpower_temp
+		}
+	}
+	SAM_experience_military = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 30
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_experience_military"
+			SAM_oktan_decrease_military_tension_low = yes
+			SAM_oktan_increase_military_influence_low = yes
+			army_experience = 15
+		}
+	}
+	SAM_grant_military = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 60
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_grant_military"
+			SAM_oktan_decrease_military_tension_high = yes
+			SAM_oktan_increase_military_influence_high = yes
+		}
+	}
+	SAM_lower_military = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 20
+		days_re_enable = 60
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_lower_military"
+			SAM_oktan_increase_military_tension_high = yes
+			SAM_oktan_decrease_military_influence_high = yes
+		}
+	}
+	SAM_money_civilian = {
+		available = {
+			always = yes
+			check_variable = { SAM_civilian_ruled_states > 0 }
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 40
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_money_civilian"
+			SAM_oktan_increase_civilian_tension_low = yes
+			SAM_oktan_increase_civilian_influence_low = yes
+			set_temp_variable = { SAM_money_temp = 0.015 }
+			multiply_temp_variable = { SAM_money_temp = SAM_civilian_ruled_states }
+			set_temp_variable = { money_reserves_temp = SAM_money_temp }
+			econ_money_reserves_change_raw_money = yes
+		}
+	}
+	SAM_building_civilian = {
+		available = {
+			always = yes
+			check_variable = { SAM_civilian_ruled_states > 0 }
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 30
+		days_re_enable = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_building_civilian"
+			SAM_oktan_decrease_civilian_tension_low = yes
+			SAM_oktan_increase_civilian_influence_low = yes
+			random_owned_controlled_state = {
+				limit = {
+					has_state_flag = SAM_civilian_ruled
+				}
+				add_extra_state_shared_building_slots = 2
+				add_state_modifier = {
+					modifier = {
+						state_GDP_growth_factor_modifier = 0.1
+					}
+				}
+			}
+		}
+	}
+	SAM_grant_civilian = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 60
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_grant_civilian"
+			SAM_oktan_decrease_civilian_tension_high = yes
+			SAM_oktan_increase_civilian_influence_high = yes
+		}
+	}
+	SAM_lower_civilian = {
+		available = {
+			always = yes
+		}
+		visible = {
+			always = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+
+		fire_only_once = no
+		cost = 20
+		days_re_enable = 60
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_lower_civilian"
+			SAM_oktan_increase_civilian_tension_high = yes
+			SAM_oktan_decrease_civilian_influence_high = yes
+		}
+	}
+	###### Arkhangelsk	#######
+	SAM_arkhangelsk_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				214 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 214
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 214
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_arkhangelsk_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 3 }
+			add_to_variable = {	SAM_inner_circle_influence = 3 }
+			214 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			862 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			262 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_arkhangelsk_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				214 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 214
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 214
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_arkhangelsk_military"
+			add_to_variable = {	SAM_military_ruled_states = 3 }
+			add_to_variable = {	SAM_military_influence = 3 }
+			214 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			862 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			262 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_arkhangelsk_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				214 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 214
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 214
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_arkhangelsk_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 3 }
+			add_to_variable = {	SAM_civilian_influence = 3 }
+			214 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			862 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			262 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_arkhangelsk_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			214 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 214
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 214
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_arkhangelsk_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					214 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 3 }
+				subtract_from_variable = { SAM_inner_circle_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					214 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 3 }
+				subtract_from_variable = { SAM_military_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					214 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 3 }
+				subtract_from_variable = { SAM_civilian_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				214 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				862 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				262 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Onega ######
+	SAM_onega_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				859 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 859
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 859
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_archalgelsk_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 2 }
+			add_to_variable = {	SAM_inner_circle_influence = 2 }
+			859 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			858 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_onega_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				859 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 859
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 859
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_onega_military"
+			add_to_variable = {	SAM_military_ruled_states = 2 }
+			add_to_variable = {	SAM_military_influence = 2 }
+			859 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			858 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_onega_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				859 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 859
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 859
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_onega_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 2 }
+			add_to_variable = {	SAM_civilian_influence = 2 }
+			859 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			858 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_onega_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			859 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 859
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 859
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_onega_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					859 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 2 }
+				subtract_from_variable = { SAM_inner_circle_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					859 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 2 }
+				subtract_from_variable = { SAM_military_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					859 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 2 }
+				subtract_from_variable = { SAM_civilian_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				859 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				858 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Plesetsk	#######
+	SAM_plesetsk_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				861 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 861
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 861
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_plesetsk_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 3 }
+			add_to_variable = {	SAM_inner_circle_influence = 3 }
+			861 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			860 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			870 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_plesetsk_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				861 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 861
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 861
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_plesetsk_military"
+			add_to_variable = {	SAM_military_ruled_states = 3 }
+			add_to_variable = {	SAM_military_influence = 3 }
+			861 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			860 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			870 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_plesetsk_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				861 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 861
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 861
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_plesetsk_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 3 }
+			add_to_variable = {	SAM_civilian_influence = 3 }
+			861 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			860 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			870 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_plesetsk_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			861 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 861
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 861
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_plesetsk_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					861 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 3 }
+				subtract_from_variable = { SAM_inner_circle_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					861 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 3 }
+				subtract_from_variable = { SAM_military_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					861 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 3 }
+				subtract_from_variable = { SAM_civilian_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				861 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				860 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				870 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Ukhta #######
+	SAM_ukhta_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				869 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 869
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 869
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ukhta_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 1 }
+			add_to_variable = {	SAM_inner_circle_influence = 1 }
+			869 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_ukhta_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				869 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 869
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 869
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ukhta_military"
+			add_to_variable = {	SAM_military_ruled_states = 1 }
+			add_to_variable = {	SAM_military_influence = 1 }
+			869 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_ukhta_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				869 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 869
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 869
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ukhta_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 1 }
+			add_to_variable = {	SAM_civilian_influence = 1 }
+			869 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_ukhta_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			869 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 869
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 869
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ukhta_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					869 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 1 }
+				subtract_from_variable = { SAM_inner_circle_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					869 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 1 }
+				subtract_from_variable = { SAM_military_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					869 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 1 }
+				subtract_from_variable = { SAM_civilian_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				869 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Vologda	#######
+	SAM_vologda_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				351 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 351
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 351
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vologda_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 4 }
+			add_to_variable = {	SAM_inner_circle_influence = 4 }
+			351 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			857 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			867 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			855 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_vologda_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				351 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 351
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 351
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vologda_military"
+			add_to_variable = {	SAM_military_ruled_states = 4 }
+			add_to_variable = {	SAM_military_influence = 4 }
+			351 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			857 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			867 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			855 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_vologda_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				351 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 351
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 351
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vologda_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 4 }
+			add_to_variable = {	SAM_civilian_influence = 4 }
+			351 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			857 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			867 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			855 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_vologda_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			351 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 351
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 351
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vologda_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					857 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 4 }
+				subtract_from_variable = { SAM_inner_circle_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					857 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 4 }
+				subtract_from_variable = { SAM_military_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					857 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 4 }
+				subtract_from_variable = { SAM_civilian_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				857 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				351 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				867 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				855 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Kostroma #######
+	SAM_kostroma_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				856 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 856
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 856
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kostroma_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 1 }
+			add_to_variable = {	SAM_inner_circle_influence = 1 }
+			856 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_kostroma_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				856 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 856
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 856
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kostroma_military"
+			add_to_variable = {	SAM_military_ruled_states = 1 }
+			add_to_variable = {	SAM_military_influence = 1 }
+			856 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_kostroma_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				856 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 856
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 856
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kostroma_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 1 }
+			add_to_variable = {	SAM_civilian_influence = 1 }
+			856 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_kostroma_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			856 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 856
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 856
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kostroma_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					856 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 1 }
+				subtract_from_variable = { SAM_inner_circle_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					856 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 1 }
+				subtract_from_variable = { SAM_military_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					856 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 1 }
+				subtract_from_variable = { SAM_civilian_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				856 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Gorky #######
+	SAM_gorky_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				252 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 252
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 252
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gorky_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 1 }
+			add_to_variable = {	SAM_inner_circle_influence = 1 }
+			252 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_gorky_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				252 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 252
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 252
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gorky_military"
+			add_to_variable = {	SAM_military_ruled_states = 1 }
+			add_to_variable = {	SAM_military_influence = 1 }
+			252 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_gorky_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				252 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 252
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 252
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gorky_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 1 }
+			add_to_variable = {	SAM_civilian_influence = 1 }
+			252 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_gorky_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			252 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 252
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 252
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gorky_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					252 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 1 }
+				subtract_from_variable = { SAM_inner_circle_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					252 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 1 }
+				subtract_from_variable = { SAM_military_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					252 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 1 }
+				subtract_from_variable = { SAM_civilian_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				252 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Gayny #######
+	SAM_gayny_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				866 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 866
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 866
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gayny_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 1 }
+			add_to_variable = {	SAM_inner_circle_influence = 1 }
+			866 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_gayny_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				866 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 866
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 866
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gayny_military"
+			add_to_variable = {	SAM_military_ruled_states = 1 }
+			add_to_variable = {	SAM_military_influence = 1 }
+			866 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_gayny_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				866 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 866
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 866
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gayny_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 1 }
+			add_to_variable = {	SAM_civilian_influence = 1 }
+			866 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_gayny_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			866 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 866
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 866
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_gayny_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					866 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 1 }
+				subtract_from_variable = { SAM_inner_circle_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					866 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 1 }
+				subtract_from_variable = { SAM_military_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					866 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 1 }
+				subtract_from_variable = { SAM_civilian_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				866 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Berezniki #######
+	SAM_berezniki_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				398 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 398
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 398
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_berezniki_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 2 }
+			add_to_variable = {	SAM_inner_circle_influence = 2 }
+			398 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			865 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_berezniki_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				398 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 398
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 398
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_berezniki_military"
+			add_to_variable = {	SAM_military_ruled_states = 2 }
+			add_to_variable = {	SAM_military_influence = 2 }
+			398 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			865 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_berezniki_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				398 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 398
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 398
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_berezniki_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 2 }
+			add_to_variable = {	SAM_civilian_influence = 2 }
+			398 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			865 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_berezniki_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			398 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 398
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 398
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_berezniki_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					398 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 2 }
+				subtract_from_variable = { SAM_inner_circle_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					398 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 2 }
+				subtract_from_variable = { SAM_military_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					398 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 2 }
+				subtract_from_variable = { SAM_civilian_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				398 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				865 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Komi #######
+	SAM_komi_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				397 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 397
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 397
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_komi_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 2 }
+			add_to_variable = {	SAM_inner_circle_influence = 2 }
+			397 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			868 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_komi_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				397 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 397
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 397
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_komi_military"
+			add_to_variable = {	SAM_military_ruled_states = 2 }
+			add_to_variable = {	SAM_military_influence = 2 }
+			397 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			868 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_komi_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				397 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 397
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 397
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_komi_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 2 }
+			add_to_variable = {	SAM_civilian_influence = 2 }
+			397 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			868 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_komi_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			397 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 397
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 397
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_komi_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					397 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 2 }
+				subtract_from_variable = { SAM_inner_circle_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					397 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 2 }
+				subtract_from_variable = { SAM_military_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					397 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 2 }
+				subtract_from_variable = { SAM_civilian_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				397 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				868 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Vyatka	#######
+	SAM_vyatka_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				400 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 400
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 400
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vyatka_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 3 }
+			add_to_variable = {	SAM_inner_circle_influence = 3 }
+			400 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			752 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			399 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_vyatka_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				400 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 400
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 400
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vyatka_military"
+			add_to_variable = {	SAM_military_ruled_states = 3 }
+			add_to_variable = {	SAM_military_influence = 3 }
+			400 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			752 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			399 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_vyatka_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				400 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 400
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 400
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vyatka_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 3 }
+			add_to_variable = {	SAM_civilian_influence = 3 }
+			400 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			752 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			399 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_vyatka_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			400 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 400
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 400
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vyatka_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					400 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 3 }
+				subtract_from_variable = { SAM_inner_circle_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					400 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 3 }
+				subtract_from_variable = { SAM_military_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					400 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 3 }
+				subtract_from_variable = { SAM_civilian_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				400 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				752 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				399 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Kazan #######
+	SAM_kazan_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				249 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 249
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 249
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kazan_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 3 }
+			add_to_variable = {	SAM_inner_circle_influence = 3 }
+			249 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			854 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			256 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_kazan_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				249 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 249
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 249
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kazan_military"
+			add_to_variable = {	SAM_military_ruled_states = 3 }
+			add_to_variable = {	SAM_military_influence = 3 }
+			249 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			854 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			256 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_kazan_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				249 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 249
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 249
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kazan_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 3 }
+			add_to_variable = {	SAM_civilian_influence = 3 }
+			249 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			854 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			256 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_kazan_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			249 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 249
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 249
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_kazan_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					249 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 3 }
+				subtract_from_variable = { SAM_inner_circle_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					249 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 3 }
+				subtract_from_variable = { SAM_military_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					249 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 3 }
+				subtract_from_variable = { SAM_civilian_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				249 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				854 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				256 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Perm #######
+	SAM_perm_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				753 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 753
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 753
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_perm_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 2 }
+			add_to_variable = {	SAM_inner_circle_influence = 2 }
+			753 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			864 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_perm_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				753 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 753
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 753
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_perm_military"
+			add_to_variable = {	SAM_military_ruled_states = 2 }
+			add_to_variable = {	SAM_military_influence = 2 }
+			753 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			864 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_perm_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				753 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 753
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 753
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_perm_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 2 }
+			add_to_variable = {	SAM_civilian_influence = 2 }
+			753 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			864 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_perm_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			753 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 753
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 753
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_perm_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					753 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 2 }
+				subtract_from_variable = { SAM_inner_circle_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					753 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 2 }
+				subtract_from_variable = { SAM_military_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					753 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 2 }
+				subtract_from_variable = { SAM_civilian_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				753 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				864 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Ufa #######
+	SAM_ufa_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				651 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 651
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 651
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ufa_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 2 }
+			add_to_variable = {	SAM_inner_circle_influence = 2 }
+			651 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			853 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_ufa_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				651 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 651
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 651
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ufa_military"
+			add_to_variable = {	SAM_military_ruled_states = 2 }
+			add_to_variable = {	SAM_military_influence = 2 }
+			651 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			853 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_ufa_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				651 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 651
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 651
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ufa_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 2 }
+			add_to_variable = {	SAM_civilian_influence = 2 }
+			651 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			853 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_ufa_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			651 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 651
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 651
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_ufa_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					651 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 2 }
+				subtract_from_variable = { SAM_inner_circle_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					651 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 2 }
+				subtract_from_variable = { SAM_military_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					651 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 2 }
+				subtract_from_variable = { SAM_civilian_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				651 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				853 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Samara	#######
+	SAM_samara_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				850 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 850
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 850
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_samara_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 5 }
+			add_to_variable = {	SAM_inner_circle_influence = 5 }
+			850 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			755 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			251 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			851 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			250 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_samara_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				850 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 850
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 850
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_samara_military"
+			add_to_variable = {	SAM_military_ruled_states = 5 }
+			add_to_variable = {	SAM_military_influence = 5 }
+			850 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			755 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			251 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			851 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			250 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_samara_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				850 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 850
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 850
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_samara_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 5 }
+			add_to_variable = {	SAM_civilian_influence = 5 }
+			850 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			755 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			251 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			851 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			250 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_samara_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			850 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 850
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 850
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_samara_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					850 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 5 }
+				subtract_from_variable = { SAM_inner_circle_influence = 5 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					850 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 5 }
+				subtract_from_variable = { SAM_military_influence = 5 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					850 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 5 }
+				subtract_from_variable = { SAM_civilian_influence = 5 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				850 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				755 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				251 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				851 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				250 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Orenburg #######
+	SAM_orenburg_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				652 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 652
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 652
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_orenburg_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 3 }
+			add_to_variable = {	SAM_inner_circle_influence = 3 }
+			652 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			849 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			852 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_orenburg_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				652 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 652
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 652
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_orenburg_military"
+			add_to_variable = {	SAM_military_ruled_states = 3 }
+			add_to_variable = {	SAM_military_influence = 3 }
+			652 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			849 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			852 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_orenburg_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				652 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 652
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 652
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_orenburg_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 3 }
+			add_to_variable = {	SAM_civilian_influence = 3 }
+			652 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			849 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			852 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_orenburg_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			652 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 652
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 652
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_orenburg_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					652 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 3 }
+				subtract_from_variable = { SAM_inner_circle_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					652 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 3 }
+				subtract_from_variable = { SAM_military_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					652 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 3 }
+				subtract_from_variable = { SAM_civilian_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				652 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				849 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				852 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Magnitogorsk	#######
+	SAM_magnitogorsk_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				582 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 582
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 582
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_magnitogorsk_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 4 }
+			add_to_variable = {	SAM_inner_circle_influence = 4 }
+			582 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			846 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			848 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			847 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_magnitogorsk_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				582 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 582
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 582
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_magnitogorsk_military"
+			add_to_variable = {	SAM_military_ruled_states = 4 }
+			add_to_variable = {	SAM_military_influence = 4 }
+			582 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			846 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			848 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			847 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_magnitogorsk_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				582 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 582
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 582
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_magnitogorsk_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 4 }
+			add_to_variable = {	SAM_civilian_influence = 4 }
+			582 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			846 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			848 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			847 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_magnitogorsk_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			582 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 582
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 582
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_magnitogorsk_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					582 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 4 }
+				subtract_from_variable = { SAM_inner_circle_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					572 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 4 }
+				subtract_from_variable = { SAM_military_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					572 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 4 }
+				subtract_from_variable = { SAM_civilian_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				582 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				846 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				848 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				847 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Yugra #######
+	SAM_yugra_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				845 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 845
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 845
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_yugra_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 4 }
+			add_to_variable = {	SAM_inner_circle_influence = 4 }
+			845 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			756 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			581 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			844 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_yugra_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				845 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 845
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 845
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_yugra_military"
+			add_to_variable = {	SAM_military_ruled_states = 4 }
+			add_to_variable = {	SAM_military_influence = 4 }
+			845 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			756 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			581 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			844 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_yugra_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				845 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 845
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 845
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_yugra_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 4 }
+			add_to_variable = {	SAM_civilian_influence = 4 }
+			845 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			756 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			581 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			844 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_yugra_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			845 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 845
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 845
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_yugra_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					845 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 4 }
+				subtract_from_variable = { SAM_inner_circle_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					845 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 4 }
+				subtract_from_variable = { SAM_military_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					845 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 4 }
+				subtract_from_variable = { SAM_civilian_influence = 4 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				845 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				756 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				581 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				844 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Vorkuta #######
+	SAM_vorkuta_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				863 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 863
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 863
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vorkuta_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 1 }
+			add_to_variable = {	SAM_inner_circle_influence = 1 }
+			863 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_vorkuta_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				863 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 863
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 863
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vorkuta_military"
+			add_to_variable = {	SAM_military_ruled_states = 1 }
+			add_to_variable = {	SAM_military_influence = 1 }
+			863 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_vorkuta_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				863 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 863
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 863
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vorkuta_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 1 }
+			add_to_variable = {	SAM_civilian_influence = 1 }
+			863 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_vorkuta_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			863 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 863
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 863
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_vorkuta_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					863 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 1 }
+				subtract_from_variable = { SAM_inner_circle_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					863 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 1 }
+				subtract_from_variable = { SAM_military_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					863 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 1 }
+				subtract_from_variable = { SAM_civilian_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				863 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Surgut #######
+	SAM_surgut_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				579 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 579
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 579
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_surgut_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 1 }
+			add_to_variable = {	SAM_inner_circle_influence = 1 }
+			579 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_surgut_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				579 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 579
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 579
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_surgut_military"
+			add_to_variable = {	SAM_military_ruled_states = 1 }
+			add_to_variable = {	SAM_military_influence = 1 }
+			579 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_surgut_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				579 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 579
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 579
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_surgut_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 1 }
+			add_to_variable = {	SAM_civilian_influence = 1 }
+			579 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_surgut_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			579 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 579
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 579
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_surgut_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					579 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 1 }
+				subtract_from_variable = { SAM_inner_circle_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					579 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 1 }
+				subtract_from_variable = { SAM_military_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					579 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 1 }
+				subtract_from_variable = { SAM_civilian_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				579 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Zlatoust #######
+	SAM_zlatoust_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				573 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 573
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 573
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_zlatoust_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 2 }
+			add_to_variable = {	SAM_inner_circle_influence = 2 }
+			573 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			871 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_zlatoust_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				573 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 573
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 573
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_zlatoust_military"
+			add_to_variable = {	SAM_military_ruled_states = 2 }
+			add_to_variable = {	SAM_military_influence = 2 }
+			573 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			871 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_zlatoust_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				573 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 573
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 573
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_zlatoust_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 2 }
+			add_to_variable = {	SAM_civilian_influence = 2 }
+			573 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			871 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_zlatoust_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			573 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 573
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 573
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_zlatoust_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					573 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 2 }
+				subtract_from_variable = { SAM_inner_circle_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					573 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 2 }
+				subtract_from_variable = { SAM_military_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					573 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 2 }
+				subtract_from_variable = { SAM_civilian_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				573 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				871 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Sverdlovsk #######
+	SAM_sverdlovsk_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				653 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 653
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 653
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_sverdlovsk_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 2 }
+			add_to_variable = {	SAM_inner_circle_influence = 2 }
+			653 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			580 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_sverdlovsk_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				653 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 653
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 653
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_sverdlovsk_military"
+			add_to_variable = {	SAM_military_ruled_states = 2 }
+			add_to_variable = {	SAM_military_influence = 2 }
+			653 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			580 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_sverdlovsk_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				653 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 653
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 653
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_sverdlovsk_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 2 }
+			add_to_variable = {	SAM_civilian_influence = 2 }
+			653 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			580 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_sverdlovsk_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			653 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 653
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 653
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_sverdlovsk_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					653 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 2 }
+				subtract_from_variable = { SAM_inner_circle_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					653 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 2 }
+				subtract_from_variable = { SAM_military_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					653 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 2 }
+				subtract_from_variable = { SAM_civilian_influence = 2 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				653 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				580 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Tyumen #######
+	SAM_tyumen_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				403 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 403
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 403
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_tyumen_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 3 }
+			add_to_variable = {	SAM_inner_circle_influence = 3 }
+			403 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			572 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			754 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_tyumen_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				403 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 403
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 403
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_tyumen_military"
+			add_to_variable = {	SAM_military_ruled_states = 3 }
+			add_to_variable = {	SAM_military_influence = 3 }
+			403 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			572 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			754 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_tyumen_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				403 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 403
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 403
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_tyumen_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 3 }
+			add_to_variable = {	SAM_civilian_influence = 3 }
+			403 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			572 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			754 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_tyumen_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			403 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 403
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 403
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_tyumen_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					403 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 3 }
+				subtract_from_variable = { SAM_inner_circle_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					403 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 3 }
+				subtract_from_variable = { SAM_military_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					403 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 3 }
+				subtract_from_variable = { SAM_civilian_influence = 3 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				403 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				572 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+				754 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+
+	###### Omsk #######
+	SAM_omsk_oktan = {
+		icon = GFX_decision_chess_king
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				571 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 571
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 571
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_omsk_oktan"
+			add_to_variable = {	SAM_oktan_ruled_states = 1 }
+			add_to_variable = {	SAM_inner_circle_influence = 1 }
+			571 = {
+				set_state_flag = SAM_oktan_ruled
+				add_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_inner_circle_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_inner_circle_influence_low_tt
+		}
+	}
+	SAM_omsk_military = {
+		icon = GFX_decision_generic_military_parade
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				571 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 571
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 571
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_omsk_military"
+			add_to_variable = {	SAM_military_ruled_states = 1 }
+			add_to_variable = {	SAM_military_influence = 1 }
+			571 = {
+				set_state_flag = SAM_military_ruled
+				add_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_military_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_military_influence_low_tt
+		}
+	}
+	SAM_omsk_civilian = {
+		icon = GFX_decision_generic_political_action
+		available = {
+			always = yes
+		}
+		visible = {
+			NOT = {
+				571 = {
+					OR = {
+						has_state_flag = SAM_oktan_ruled
+						has_state_flag = SAM_military_ruled
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+			}
+			owns_state = 571
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 571
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_omsk_civilian"
+			add_to_variable = {	SAM_civilian_ruled_states = 1 }
+			add_to_variable = {	SAM_civilian_influence = 1 }
+			571 = {
+				set_state_flag = SAM_civilian_ruled
+				add_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+			}
+			SAM_oktan_decrease_civilian_tension_low = yes
+			custom_effect_tooltip = SAM_oktan_increase_civilian_influence_low_tt
+		}
+	}
+	SAM_omsk_strip_away = {
+		icon = GFX_decision_generic_break_treaty
+		available = {
+			always = yes
+		}
+		visible = {
+			571 = {
+				OR = {
+					has_state_flag = SAM_oktan_ruled
+					has_state_flag = SAM_military_ruled
+					has_state_flag = SAM_civilian_ruled
+				}
+			}
+			owns_state = 571
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		highlight_states = {
+			state = 571
+		}
+		on_map_mode = map_only
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SAM_omsk_strip_away"
+			custom_effect_tooltip = SAM_strip_away_tt
+			if = {
+				limit = {
+					571 = {
+						has_state_flag = SAM_oktan_ruled
+					}
+				}
+				SAM_oktan_increase_inner_circle_tension_high = yes
+				subtract_from_variable = { SAM_oktan_ruled_states = 1 }
+				subtract_from_variable = { SAM_inner_circle_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_inner_circle_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					571 = {
+						has_state_flag = SAM_military_ruled
+					}
+				}
+				SAM_oktan_increase_military_tension_high = yes
+				subtract_from_variable = { SAM_military_ruled_states = 1 }
+				subtract_from_variable = { SAM_military_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_military_influence_low_tt
+			}
+			else_if = {
+				limit = {
+					571 = {
+						has_state_flag = SAM_civilian_ruled
+					}
+				}
+				SAM_oktan_increase_civilian_tension_high = yes
+				subtract_from_variable = { SAM_civilian_ruled_states = 1 }
+				subtract_from_variable = { SAM_civilian_influence = 1 }
+				custom_effect_tooltip = SAM_oktan_decrease_civilian_influence_low_tt
+			}
+			hidden_effect = {
+				571 = {
+					clr_state_flag = SAM_civilian_ruled
+					clr_state_flag = SAM_military_ruled
+					clr_state_flag = SAM_oktan_ruled
+					remove_dynamic_modifier = { modifier = SAM_civilian_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_military_ruled_dynamic_modifier }
+					remove_dynamic_modifier = { modifier = SAM_oktan_ruled_dynamic_modifier }
+				}
+			}
+		}
+	}
+}
