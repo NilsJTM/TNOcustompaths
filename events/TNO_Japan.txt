@@ -2819,6 +2819,22 @@ country_event = {#How to partition China now
 
 	option = {#Status quo ante bellum
 		name = japchiinteraction.5.a
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = FATE_OF_CHINA
+						option = FATE_OF_CHINA_NO_CHINA
+					}
+					has_game_rule = {
+						rule = FATE_OF_CHINA
+						option = FATE_OF_CHINA_GREAT_CHINA
+					}
+				}
+			}
+		}
 		hidden_effect = {
 			WI_Japan_is_happy = yes
 		}
@@ -2826,6 +2842,22 @@ country_event = {#How to partition China now
 
 	option = {#china is a social construct
 		name = japchiinteraction.5.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = FATE_OF_CHINA
+						option = FATE_OF_CHINA_SMALL_CHINA
+					}
+					has_game_rule = {
+						rule = FATE_OF_CHINA
+						option = FATE_OF_CHINA_GREAT_CHINA
+					}
+				}
+			}
+		}
 		hidden_effect = {
 			WI_Japan_is_angry = yes
 		}
@@ -2833,7 +2865,16 @@ country_event = {#How to partition China now
 
 	option = {#REALLY GOOD IDEA
 		name = japchiinteraction.5.c
-		ai_chance = { factor = 0 }
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 1
+				has_game_rule = {
+					rule = FATE_OF_CHINA
+					option = FATE_OF_CHINA_GREAT_CHINA
+				}
+			}
+		}
 		hidden_effect = {
 			WI_Japan_is_crazy = yes
 		}

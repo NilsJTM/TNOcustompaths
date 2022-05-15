@@ -12956,7 +12956,26 @@ country_event = { #Who to support (non OFN Italy)
 
 	option = { #UAR UAR UAR UAR UAR UAR
 		name = USA.oilcrisis.102.a
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				OR = {
+					country_exists = SAU
+					SAU = { has_capitulated = no }
+				}
+				OR = {
+					has_game_rule = {
+						rule = USA_OIL_PATH
+						option = USA_OIL_PATH_SAU_INTERVENTION
+					}
+					has_game_rule = {
+						rule = USA_OIL_PATH
+						option = USA_OIL_PATH_SAU_NON_INTERVENTION
+					}
+				}
+			}
+		}
 		clr_country_flag = USA_oil_crisis
 		set_country_flag = USA_back_uar
 		USA_reload_presidential_tree = yes
@@ -12969,7 +12988,22 @@ country_event = { #Who to support (non OFN Italy)
 				SAU = { has_capitulated = no }
 			}
 		}
-		ai_chance = { factor = 1 }
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = USA_OIL_PATH
+						option = USA_OIL_PATH_UAR_INTERVENTION
+					}
+					has_game_rule = {
+						rule = USA_OIL_PATH
+						option = USA_OIL_PATH_UAR_NON_INTERVENTION
+					}
+				}
+			}
+		}
 		clr_country_flag = USA_oil_crisis
 		set_country_flag = USA_back_saudi
 		USA_reload_presidential_tree = yes
