@@ -3050,6 +3050,54 @@ on_actions = {
 					apply_war_buff_with_5_divisions = yes
 				}
 			}
+
+			## Seamus Twomey war
+			if = { #Ulster
+				limit = {
+					has_game_rule = {
+						rule = twomey_IRE_war_outcome
+						option = TWOMEY_IRE_WAR_OUTCOME_ULS_IRISH_REPUBLICAN_ARMY
+					}
+					ROOT = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+				}
+				ULS = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
+			if = { #Ireland
+				limit = {
+					has_game_rule = {
+						rule = twomey_IRE_war_outcome
+						option = TWOMEY_IRE_WAR_OUTCOME_IRE_REPUBLIC_OF_IRELAND
+					}
+					ROOT = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+				}
+				IRE = {
+					apply_war_buff_with_5_divisions = yes
+				}
+			}
 			
 			## Welsh-English War
 			if = { #Wales
@@ -3395,6 +3443,45 @@ on_actions = {
 						has_game_rule = {
 							rule = paisley_IRE_war_outcome
 							option = PAISLEY_IRE_WAR_OUTCOME_IRE_REPUBLIC_OF_IRELAND
+						}
+					}
+					IRE = {
+						remove_war_buff = yes
+					}
+				}
+			}
+
+			if = { ## twomey IRE war ends
+				limit = {
+					ROOT = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+					FROM = {
+						OR = {
+							tag = ULS
+							tag = IRE
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = twomey_IRE_war_outcome
+							option = TWOMEY_IRE_WAR_OUTCOME_ULS_IRISH_REPUBLICAN_ARMY
+						}
+					}
+					ULS = {
+						remove_war_buff = yes
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = twomey_IRE_war_outcome
+							option = TWOMEY_IRE_WAR_OUTCOME_IRE_REPUBLIC_OF_IRELAND
 						}
 					}
 					IRE = {
