@@ -1,0 +1,4842 @@
+###############################################################
+########                    Tree Stuff                 ########
+###############################################################
+
+BRA_create_leader_quadros = {
+	add_country_leader_role = {
+		character = BRA_Janio_Quadros
+		promote_leader = yes
+		country_leader = {
+			desc = "POLITICS_JANIO_QUADROS_DESC"
+			expire = "1994.4.20"
+			ideology = conservative_democracy_populist_conservatism_subtype
+			traits = { man_of_the_broom_latin }
+			id = -1
+		}
+	}
+	set_party_name = {
+		ideology = conservative_democracy
+		long_name = BRA_udn_ptn_party_long
+		name = BRA_udn_ptn_party
+	}
+}
+
+BRA_create_leader_adhemar = {
+	hidden_effect = {
+		set_variable = {
+			BRA_Corruption = 0.5
+		}
+		set_party_name = {
+			ideology = authoritarian_democracy
+			long_name = BRA_authoritarian_democracy_party_long
+			name = BRA_authoritarian_democracy_party
+		}
+	}
+	add_country_leader_role = {
+		character = BRA_Adhemar_de_Barros
+		promote_leader = yes
+		country_leader = {
+			desc = "POLITICS_Adhemar_de_Barros_DESC"
+			expire = "1994.4.20"
+			ideology = authoritarian_democracy_right_wing_populism_subtype
+			traits = { playful_populist_latin }
+			id = -1
+		}
+	}
+	BRA_corruption_refresh = yes
+	add_dynamic_modifier = { modifier = BRA_corruption_level }
+}
+
+BRA_reload_tree = {
+	custom_effect_tooltip = TNO_focus_tree_reload_tt
+	mark_focus_tree_layout_dirty = yes
+}
+
+BRA_hundred_days_crisis_begins = { # a
+	if = {
+		limit = { has_idea = BRA_Quadros_hog }
+		remove_ideas = BRA_Quadros_hog
+	}
+	clr_country_flag = BRA_quadros_wins_hundred_days
+
+	set_party_name = {
+		ideology = despotism
+		long_name = BRA_despotism_party_gridlock_long
+		name = BRA_despotism_party_gridlock
+	}
+	set_politics = {
+		ruling_party = despotism
+	}
+	if = {
+		limit = {
+			NOT = {	has_country_leader = { character = BRA_Auro_de_Moura_Andrade } }
+		}
+
+		add_country_leader_role = {
+			character = BRA_Auro_de_Moura_Andrade
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_Auro_de_Moura_Andrade_DESC"
+				expire = "1994.4.20"
+				ideology = despotism_interim_government_subtype
+				traits = { cattle_king_latin }
+				id = -1
+			}
+		}
+	}
+	add_ideas = BRA_idea_hundred_days
+	custom_effect_tooltip = BRA_new_cabinet_tt
+	hidden_effect = {
+		remove_all_ministers = yes
+		add_ideas = { BRA_pascoal_ranieri_mazzilli_hog BRA_Vasco_Leitao_da_Cunha_adhemar_pol }
+	}
+	set_country_flag = BRA_hundred_days_crisis_begun
+	load_focus_tree = { tree = BRA_Hundred_Days_Crisis_tree }
+	mark_focus_tree_layout_dirty = yes
+
+	clr_country_flag = BRA_lottquadros_category_allowed
+
+	set_country_flag = BRA_hundred_days_category_allowed
+	BRA_initialize_hundred_days_mechanic = yes
+
+	hidden_effect = {
+		country_event = { id = brazil.337 days = 14 }
+	}
+
+	every_country  = {
+		news_event = {
+			id = LATAM_news.11
+		}
+	}
+}
+
+BRA_quadros_wins_hundred_days = {
+	remove_ideas = BRA_Quadros_hog
+	set_politics = {
+		ruling_party = conservative_democracy
+	}
+	if = {
+		limit = {
+			NOT = { has_country_leader = { character = BRA_Janio_Quadros } }
+		}
+		BRA_create_leader_quadros = yes
+		add_timed_idea = {
+			idea = BRA_democracy_survives
+			days = 50
+		}
+	}
+
+	load_focus_tree = { tree = BRA_Quadros_Coup_tree }
+
+	clr_country_flag = BRA_lottquadros_category_allowed
+
+	set_country_flag = BRA_quadros_wins_hundred_days
+
+	clr_country_flag = BRA_hundred_days_category_allowed
+}
+
+BRA_goulart_wins_hundred_days = {
+	clr_country_flag = BRA_hundred_days_category_allowed
+	remove_ideas = BRA_idea_hundred_days
+
+	if = {
+		limit = { check_variable = { stability < 0 } }
+		set_stability = 0
+	}
+
+	BRA_create_leader_adhemar = yes
+
+	## TODO
+	set_politics = {
+		ruling_party = social_democracy
+	}
+
+	custom_effect_tooltip = BRA_new_cabinet_tt
+	hidden_effect = {
+		remove_ideas = {
+			BRA_Odilio_Denys_army_chief
+			BRA_Odilio_Denys_high_command
+			BRA_Silvio_Heck_navy_chief
+		}
+		add_ideas = {
+			BRA_Jose_Machado_Lopes_army_chief
+			BRA_Jose_Machado_Lopes_high_command
+			BRA_Candido_da_Costa_Aragao_navy_chief
+		}
+		remove_all_ministers = yes
+		add_ideas = { BRA_Neves_hog BRA_Hermes_pol BRA_Celso_eco BRA_Argemiro_de_Assis_Brasil_sec }
+	}
+	
+
+	load_focus_tree = { tree = BRA_Goulart_Hundred_Days_tree }
+
+	set_country_flag = BRA_goulart_wins_hundred_days
+	add_timed_idea = {
+		idea = BRA_democracy_survives
+		days = 50
+	}
+}
+
+BRA_adhemar_wins_hundred_days = {
+	clr_country_flag = BRA_hundred_days_category_allowed
+	remove_ideas = BRA_idea_hundred_days
+
+	if = {
+		limit = { check_variable = { stability < 0 } }
+		set_stability = 0
+	}
+
+	BRA_create_leader_adhemar = yes
+
+	## TODO
+	set_politics = {
+		ruling_party = authoritarian_democracy
+	}
+
+	custom_effect_tooltip = BRA_new_cabinet_tt
+	hidden_effect = {
+		remove_ideas = {
+			BRA_Odilio_Denys_army_chief
+			BRA_Odilio_Denys_high_command
+		}
+		add_ideas = {
+			BRA_Amaury_Kruel_army_chief
+			BRA_Amaury_Kruel_high_command
+		}
+		remove_all_ministers = yes
+		add_ideas = { BRA_Laudol_Natel_hog BRA_Vasco_Leitao_da_Cunha_adhemar_pol BRA_Benedito_Manhaes_Barreto_eco BRA_Amaury_Kruel_sec }
+	}
+	
+
+	load_focus_tree = { tree = BRA_Adhemar_Hundred_Days_tree }
+
+	set_country_flag = BRA_adhemar_wins_hundred_days
+	add_timed_idea = {
+		idea = BRA_democracy_survives
+		days = 50
+	}
+}
+
+BRA_kubitschek_wins_hundred_days = {
+	clr_country_flag = BRA_hundred_days_category_allowed
+	remove_ideas = BRA_idea_hundred_days
+
+	if = {
+		limit = { check_variable = { stability < 0 } }
+		set_stability = 0
+	}
+
+	BRA_create_leader_adhemar = yes
+
+	## TODO
+	set_politics = {
+		ruling_party = liberal_democracy
+	}
+	if = {
+		limit = {
+			NOT = { has_country_leader = { character = BRA_Juscelino_Kubitschek } }
+		}
+
+		add_country_leader_role = {
+			character = BRA_Juscelino_Kubitschek
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_Juscelino_Kubitschek_DESC"
+				expire = "1994.4.20"
+				ideology = liberal_democracy_national_liberal_subtype
+				traits = { heir_of_vargas_latin }
+				id = -1
+			}
+		}
+	}
+
+	custom_effect_tooltip = BRA_new_cabinet_tt
+	hidden_effect = {
+		remove_ideas = {
+			BRA_Odilio_Denys_army_chief
+			BRA_Odilio_Denys_high_command
+			BRA_Silvio_Heck_navy_chief
+		}
+		add_ideas = {
+			BRA_Jose_Machado_Lopes_army_chief
+			BRA_Jose_Machado_Lopes_high_command
+			BRA_Arnoldo_Toscano_navy_chief
+		}
+		remove_all_ministers = yes
+		add_ideas = { BRA_Goulart_hog BRA_Francisco_Negrao_de_Lima_pol BRA_Roberto_Campos_eco BRA_Peri_Constant_Bevilacqua_sec }
+	}
+
+	load_focus_tree = { tree = BRA_Kubitschek_Hundred_Days_tree }
+
+	set_country_flag = BRA_kubitschek_wins_hundred_days
+	add_timed_idea = {
+		idea = BRA_democracy_survives
+		days = 50
+	}
+}
+
+BRA_lacerda_wins_hundred_days = {
+	clr_country_flag = BRA_hundred_days_category_allowed
+	remove_ideas = BRA_idea_hundred_days
+
+	if = {
+		limit = { check_variable = { stability < 0 } }
+		set_stability = 0
+	}
+
+	BRA_create_leader_adhemar = yes
+
+	## TODO
+	set_politics = {
+		ruling_party = conservative_democracy
+	}
+	if = {
+		limit = {
+			NOT = { has_country_leader = { character = BRA_Carlos_Lacerda } }
+		}
+		add_country_leader_role = {
+			character = BRA_Carlos_Lacerda
+			promote_leader = yes
+			country_leader = {
+				desc = "POLITICS_Carlos_Lacerda_DESC"
+				expire = "1994.4.20"
+				ideology = conservative_democracy_subtype
+				traits = { the_crow_latin }
+				id = -1
+			}
+		}
+		set_party_name = {
+			ideology = conservative_democracy
+			long_name = BRA_conservative_democracy_party_long
+			name = BRA_conservative_democracy_party
+		}
+	}
+
+	custom_effect_tooltip = BRA_new_cabinet_tt
+	hidden_effect = {
+		remove_all_ministers = yes
+		add_ideas = { BRA_Milton_hog BRA_Vasco_Leitao_da_Cunha_lacerda_pol BRA_Helio_Beltrao_eco BRA_Golbery_do_Couto_e_Silva_sec }
+	}
+	
+
+	load_focus_tree = { tree = BRA_Lacerda_Hundred_Days_tree }
+
+	set_country_flag = BRA_lacerda_wins_hundred_days
+	add_timed_idea = {
+		idea = BRA_democracy_survives
+		days = 50
+	}
+}
+
+
+
+BRA_lott_deal_no_fish = {
+	custom_effect_tooltip = "BRA_lott_deal_if_signed"
+	set_country_flag = BRA_this_never_happen_flag
+	if = {
+		limit = { NOT = { has_country_flag = BRA_this_never_happen_flag }}
+		BRA = {
+			add_political_power = 40
+			swap_ideas = {
+				remove_idea = BRA_idea_RK_settlement
+				add_idea = BRA_idea_RK_settlement_good_cg
+			}
+		}
+		COG = {
+			add_political_power = -40
+			swap_ideas = {
+				remove_idea = BRA_idea_RK_settlement
+				add_idea = BRA_idea_RK_settlement_bad_cg
+			}
+		}
+	}
+	clr_country_flag = BRA_this_never_happen_flag
+	custom_effect_tooltip = "BRA_lott_deal_if_signed_spacing"
+
+	BRA = { set_variable = {BRA_lott_deal_fish = 0 }}
+}
+
+BRA_lott_deal_some_fish = {
+	custom_effect_tooltip = "BRA_lott_deal_if_signed"
+	set_country_flag = BRA_this_never_happen_flag
+	if = {
+		limit = { NOT = { has_country_flag = BRA_this_never_happen_flag }}
+		BRA = {
+			add_political_power = 10
+			swap_ideas = {
+				remove_idea = BRA_idea_RK_settlement
+				add_idea = BRA_idea_RK_settlement_small_good_cg
+			}
+		}
+		COG = {
+			add_political_power = 10
+			swap_ideas = {
+				remove_idea = BRA_idea_RK_settlement
+				add_idea = BRA_idea_RK_settlement_small_bad_cg
+			}
+		}
+	}
+	clr_country_flag = BRA_this_never_happen_flag
+	custom_effect_tooltip = "BRA_lott_deal_if_signed_spacing"
+
+	BRA = { set_variable = {BRA_lott_deal_fish = 1 }}
+}
+
+
+BRA_lott_deal_many_fish = {
+	custom_effect_tooltip = "BRA_lott_deal_if_signed"
+	set_country_flag = BRA_this_never_happen_flag
+	if = {
+		limit = { NOT = { has_country_flag = BRA_this_never_happen_flag }}
+		BRA = {
+			add_political_power = -40
+			swap_ideas = {
+				remove_idea = BRA_idea_RK_settlement
+				add_idea = BRA_idea_RK_settlement_bad_cg
+			}
+		}
+		COG = {
+			add_political_power = 40
+			swap_ideas = {
+				remove_idea = BRA_idea_RK_settlement
+				add_idea = BRA_idea_RK_settlement_good_cg
+			}
+		}
+	}
+	clr_country_flag = BRA_this_never_happen_flag
+	custom_effect_tooltip = "BRA_lott_deal_if_signed_spacing"
+
+	BRA = { set_variable = {BRA_lott_deal_fish = 2 }}
+}
+
+BRA_lott_deal_naval = {
+	custom_effect_tooltip = "BRA_lott_deal_if_signed"
+	set_country_flag = BRA_this_never_happen_flag
+	if = {
+		limit = { NOT = { has_country_flag = BRA_this_never_happen_flag }}
+		BRA = {
+			add_stability = 0.05
+		}
+		COG = {
+			add_stability = 0.05
+		}
+	}
+	clr_country_flag = BRA_this_never_happen_flag
+	custom_effect_tooltip = "BRA_lott_deal_if_signed_spacing"
+}
+
+BRA_lott_deal_immediate_return = {
+	custom_effect_tooltip = "BRA_lott_deal_if_signed"
+	set_country_flag = BRA_this_never_happen_flag
+	if = {
+		limit = { NOT = { has_country_flag = BRA_this_never_happen_flag }}
+		BRA = {
+			add_political_power = -40
+		}
+		COG = {
+			add_political_power = 80
+			add_manpower = 500
+		}
+	}
+	clr_country_flag = BRA_this_never_happen_flag
+	custom_effect_tooltip = "BRA_lott_deal_if_signed_spacing"
+
+	BRA = { set_variable = {BRA_lott_deal_return = 2 }}
+}
+
+BRA_lott_deal_moderated_return = {
+	custom_effect_tooltip = "BRA_lott_deal_if_signed"
+	set_country_flag = BRA_this_never_happen_flag
+	if = {
+		limit = { NOT = { has_country_flag = BRA_this_never_happen_flag }}
+		BRA = {
+			add_political_power = 10
+		}
+		COG = {
+			add_political_power = 10
+			swap_ideas = {
+				remove_idea = BRA_idea_RK_settlement
+				add_idea = BRA_idea_RK_settlement_manpower
+			}
+		}
+	}
+	clr_country_flag = BRA_this_never_happen_flag
+	custom_effect_tooltip = "BRA_lott_deal_if_signed_spacing"
+
+	BRA = { set_variable = {BRA_lott_deal_return = 1 }  }
+}
+
+BRA_lott_deal_delayed_return = {
+	custom_effect_tooltip = "BRA_lott_deal_if_signed"
+	set_country_flag = BRA_this_never_happen_flag
+	if = {
+		limit = { NOT = { has_country_flag = BRA_this_never_happen_flag }}
+		BRA = {
+			add_political_power = 80
+		}
+		COG = {
+			add_political_power = -40
+			country_event = { id = brazil.229 days = 150 }
+		}
+	}
+	clr_country_flag = BRA_this_never_happen_flag
+	custom_effect_tooltip = "BRA_lott_deal_if_signed_spacing"
+
+	BRA = { set_variable = {BRA_lott_deal_return = 0 } }
+}
+
+###############################################################
+########            Lott Quadros Mechanic              ########
+###############################################################
+
+# Updates display for decision UI
+BRA_lottquadros_update_display = {
+	set_temp_variable = { total = BRA_lottquadros_lott_influence }
+	add_to_temp_variable = { total = BRA_lottquadros_quadros_influence }
+	divide_temp_variable = { total = 100 }
+
+	divide_variable = { BRA_lottquadros_lott_influence = total }
+	divide_variable = { BRA_lottquadros_quadros_influence = total }
+
+	set_variable = { BRA_lottquadros_display_value = BRA_lottquadros_lott_influence }
+}
+
+# +9 influence for Lott
+BRA_lottquadros_high_increase_lott_influence = {
+	custom_effect_tooltip = BRA_lottquadros_increase_influence_lott_high
+
+	add_to_variable = { BRA_lottquadros_lott_influence = 9 }
+	BRA_lottquadros_update_display = yes
+}
+
+# +5 influence for Lott
+BRA_lottquadros_regular_increase_lott_influence = {
+	custom_effect_tooltip = BRA_lottquadros_increase_influence_lott_med
+
+	add_to_variable = { BRA_lottquadros_lott_influence = 5 }
+	BRA_lottquadros_update_display = yes
+}
+
+# +9 influence for Quadros
+BRA_lottquadros_high_increase_quadros_influence = {
+	custom_effect_tooltip = BRA_lottquadros_increase_influence_quadros_high
+
+	add_to_variable = { BRA_lottquadros_quadros_influence = 9 }
+	BRA_lottquadros_update_display = yes
+}
+
+# +5 influence for Quadros
+BRA_lottquadros_regular_increase_quadros_influence = {
+	custom_effect_tooltip = BRA_lottquadros_increase_influence_quadros_med
+
+	add_to_variable = { BRA_lottquadros_quadros_influence = 5 }
+	BRA_lottquadros_update_display = yes
+}
+
+BRA_lottquadros_increase_cooperation_low = {
+	if = {
+		limit = {
+			check_variable = { BRA_lottquadros_resigned < 1 }
+		}
+		custom_effect_tooltip = BRA_lottquadros_increase_cooperation_low
+		add_to_variable = { BRA_lottquadros_cooperation = 0.5 }
+		clamp_variable = { var = BRA_lottquadros_cooperation min = 0 max = 6 }
+	}
+}
+
+BRA_lottquadros_decrease_cooperation_low = {
+	if = {
+		limit = {
+			check_variable = { BRA_lottquadros_resigned < 1 }
+		}
+		custom_effect_tooltip = BRA_lottquadros_decrease_cooperation_low
+		subtract_from_variable = { BRA_lottquadros_cooperation = 0.5 }
+		clamp_variable = { var = BRA_lottquadros_cooperation min = 0 max = 6 }
+	}
+}
+
+BRA_lottquadros_increase_cooperation_med = {
+	if = {
+		limit = {
+			check_variable = { BRA_lottquadros_resigned < 1 }
+		}
+		custom_effect_tooltip = BRA_lottquadros_increase_cooperation_med
+		add_to_variable = { BRA_lottquadros_cooperation = 1 }
+		clamp_variable = { var = BRA_lottquadros_cooperation min = 0 max = 6 }
+	}
+}
+
+BRA_lottquadros_decrease_cooperation_med = {
+	if = {
+		limit = {
+			check_variable = { BRA_lottquadros_resigned < 1 }
+		}
+		custom_effect_tooltip = BRA_lottquadros_decrease_cooperation_med
+		subtract_from_variable = { BRA_lottquadros_cooperation = 1 }
+		clamp_variable = { var = BRA_lottquadros_cooperation min = 0 max = 6 }
+	}
+}
+
+###############################################################
+########             Hundred Days Mechanic             ########
+###############################################################
+
+BRA_initialize_hundred_days_mechanic = {
+	set_variable = { BRA_hd_adhemar_support = BRA_PSP_seats }
+	set_variable = { BRA_hd_lacerda_support = BRA_UDN_seats }
+	set_variable = { BRA_hd_goulart_support = BRA_PTB_seats }
+	set_variable = { BRA_hd_kubitschek_support = BRA_PSD_seats }
+	add_to_variable = { BRA_hd_adhemar_support = 10 }
+
+	BRA_update_hundred_days = yes
+}
+
+BRA_hundred_days_randomize_competitor = {
+	set_variable = { BRA_hd_competitor = random }
+	multiply_variable = { BRA_hd_competitor = 3 }
+	subtract_from_variable = { BRA_hd_competitor = 0.5 }
+	round_variable = BRA_hd_competitor
+
+	if = {
+		limit = {
+			has_country_flag = BRA_hd_chose_adhemar
+		}
+		add_to_variable = { BRA_hd_competitor = 1 }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = BRA_hd_chose_lacerda
+			check_variable = { BRA_hd_competitor > 0 }
+		}
+		add_to_variable = { BRA_hd_competitor = 1 }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = BRA_hd_conference_chose_goulart
+			check_variable = { BRA_hd_competitor > 1 }
+		}
+		add_to_variable = { BRA_hd_competitor = 1 }
+	}
+
+	log = "[GetDateText]: [Root.GetName]: Competitor set to [?BRA_hd_competitor]"
+}
+
+BRA_update_hundred_days = {
+	clamp_variable = { var = BRA_hd_adhemar_support min = 0 max = 100 }
+	clamp_variable = { var = BRA_hd_lacerda_support min = 0 max = 100 }
+	clamp_variable = { var = BRA_hd_goulart_support min = 0 max = 100 }
+	clamp_variable = { var = BRA_hd_kubitschek_support min = 0 max = 100 }
+
+	set_temp_variable = { total = BRA_hd_adhemar_support }
+	add_to_temp_variable = { total = BRA_hd_lacerda_support }
+	add_to_temp_variable = { total = BRA_hd_goulart_support }
+	add_to_temp_variable = { total = BRA_hd_kubitschek_support }
+
+	divide_temp_variable = { total = 100 }
+	divide_variable = { BRA_hd_adhemar_support = total }
+	divide_variable = { BRA_hd_lacerda_support = total }
+	divide_variable = { BRA_hd_goulart_support = total }
+	divide_variable = { BRA_hd_kubitschek_support = total }
+
+	set_variable = { BRA_hd_pie3_progress = BRA_hd_goulart_support }
+	set_variable = { BRA_hd_pie2_progress = BRA_hd_pie3_progress }
+	add_to_variable = { BRA_hd_pie2_progress = BRA_hd_adhemar_support }
+	set_variable = { BRA_hd_pie1_progress = BRA_hd_pie2_progress }
+	add_to_variable = { BRA_hd_pie1_progress = BRA_hd_lacerda_support }
+}
+
+BRA_hd_increase_adhemar_support_low = {
+	custom_effect_tooltip = BRA_hd_increase_adhemar_support_low
+	add_to_variable = { BRA_hd_adhemar_support = 3 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_goulart_support_low = {
+	custom_effect_tooltip = BRA_hd_increase_goulart_support_low
+	add_to_variable = { BRA_hd_goulart_support = 2.5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_lacerda_support_low = {
+	custom_effect_tooltip = BRA_hd_increase_lacerda_support_low
+	add_to_variable = { BRA_hd_lacerda_support = 2.5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_kubitschek_support_low = {
+	custom_effect_tooltip = BRA_hd_increase_kubitschek_support_low
+	add_to_variable = { BRA_hd_kubitschek_support = 2.5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_adhemar_support_med = {
+	custom_effect_tooltip = BRA_hd_increase_adhemar_support_med
+	add_to_variable = { BRA_hd_adhemar_support = 6 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_goulart_support_med = {
+	custom_effect_tooltip = BRA_hd_increase_goulart_support_med
+	add_to_variable = { BRA_hd_goulart_support = 5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_lacerda_support_med = {
+	custom_effect_tooltip = BRA_hd_increase_lacerda_support_med
+	add_to_variable = { BRA_hd_lacerda_support = 5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_kubitschek_support_med = {
+	custom_effect_tooltip = BRA_hd_increase_kubitschek_support_med
+	add_to_variable = { BRA_hd_kubitschek_support = 5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_adhemar_support_high = {
+	custom_effect_tooltip = BRA_hd_increase_adhemar_support_high
+	add_to_variable = { BRA_hd_adhemar_support = 15 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_goulart_support_high = {
+	custom_effect_tooltip = BRA_hd_increase_goulart_support_high
+	add_to_variable = { BRA_hd_goulart_support = 15 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_lacerda_support_high = {
+	custom_effect_tooltip = BRA_hd_increase_lacerda_support_high
+	add_to_variable = { BRA_hd_lacerda_support = 15 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_increase_kubitschek_support_high = {
+	custom_effect_tooltip = BRA_hd_increase_kubitschek_support_high
+	add_to_variable = { BRA_hd_kubitschek_support = 15 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_adhemar_support_low = {
+	custom_effect_tooltip = BRA_hd_decrease_adhemar_support_low
+	subtract_from_variable = { BRA_hd_adhemar_support = 2.5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_goulart_support_low = {
+	custom_effect_tooltip = BRA_hd_decrease_goulart_support_low
+	subtract_from_variable = { BRA_hd_goulart_support = 2.5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_lacerda_support_low = {
+	custom_effect_tooltip = BRA_hd_decrease_lacerda_support_low
+	subtract_from_variable = { BRA_hd_lacerda_support = 2.5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_kubitschek_support_low = {
+	custom_effect_tooltip = BRA_hd_decrease_kubitschek_support_low
+	subtract_from_variable = { BRA_hd_kubitschek_support = 2.5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_adhemar_support_med = {
+	custom_effect_tooltip = BRA_hd_decrease_adhemar_support_med
+	subtract_from_variable = { BRA_hd_adhemar_support = 5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_goulart_support_med = {
+	custom_effect_tooltip = BRA_hd_decrease_goulart_support_med
+	subtract_from_variable = { BRA_hd_goulart_support = 5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_lacerda_support_med = {
+	custom_effect_tooltip = BRA_hd_decrease_lacerda_support_med
+	subtract_from_variable = { BRA_hd_lacerda_support = 5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_kubitschek_support_med = {
+	custom_effect_tooltip = BRA_hd_decrease_kubitschek_support_med
+	subtract_from_variable = { BRA_hd_kubitschek_support = 5 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_adhemar_support_high = {
+	custom_effect_tooltip = BRA_hd_decrease_adhemar_support_high
+	subtract_from_variable = { BRA_hd_adhemar_support = 15 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_goulart_support_high = {
+	custom_effect_tooltip = BRA_hd_decrease_goulart_support_high
+	subtract_from_variable = { BRA_hd_goulart_support = 15 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_lacerda_support_high = {
+	custom_effect_tooltip = BRA_hd_decrease_lacerda_support_high
+	subtract_from_variable = { BRA_hd_lacerda_support = 15 }
+	BRA_update_hundred_days = yes
+}
+BRA_hd_decrease_kubitschek_support_high = {
+	custom_effect_tooltip = BRA_hd_decrease_kubitschek_support_high
+	subtract_from_variable = { BRA_hd_kubitschek_support = 15 }
+	BRA_update_hundred_days = yes
+}
+
+###############################################################
+########                   PL Mechanic                 ########
+###############################################################
+
+BRA_pl_increase_ptb_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_increase_ptb_support_pct_low
+	add_to_variable= { BRA_pl_ptb_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_psd_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_increase_psd_support_pct_low
+	add_to_variable= { BRA_pl_psd_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_udn_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_increase_udn_support_pct_low
+	add_to_variable= { BRA_pl_udn_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_psp_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_increase_psp_support_pct_low
+	add_to_variable= { BRA_pl_psp_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_prp_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_increase_prp_support_pct_low
+	add_to_variable= { BRA_pl_prp_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_ptb_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_increase_ptb_support_pct_med
+	add_to_variable= { BRA_pl_ptb_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_psd_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_increase_psd_support_pct_med
+	add_to_variable= { BRA_pl_psd_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_udn_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_increase_udn_support_pct_med
+	add_to_variable= { BRA_pl_udn_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_psp_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_increase_psp_support_pct_med
+	add_to_variable= { BRA_pl_psp_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_prp_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_increase_prp_support_pct_med
+	add_to_variable= { BRA_pl_prp_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_ptb_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_increase_ptb_support_pct_high
+	add_to_variable= { BRA_pl_ptb_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_psd_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_increase_psd_support_pct_high
+	add_to_variable= { BRA_pl_psd_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_udn_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_increase_udn_support_pct_high
+	add_to_variable= { BRA_pl_udn_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_psp_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_increase_psp_support_pct_high
+	add_to_variable= { BRA_pl_psp_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_increase_prp_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_increase_prp_support_pct_high
+	add_to_variable= { BRA_pl_prp_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+
+BRA_pl_decrease_ptb_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_decrease_ptb_support_pct_low
+	subtract_from_variable= { BRA_pl_ptb_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_psd_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_decrease_psd_support_pct_low
+	subtract_from_variable= { BRA_pl_psd_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_udn_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_decrease_udn_support_pct_low
+	subtract_from_variable= { BRA_pl_udn_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_psp_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_decrease_psp_support_pct_low
+	subtract_from_variable= { BRA_pl_psp_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_prp_support_pct_low = {
+	custom_effect_tooltip = BRA_pl_decrease_prp_support_pct_low
+	subtract_from_variable= { BRA_pl_prp_support_pct = 0.05 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_ptb_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_decrease_ptb_support_pct_med
+	subtract_from_variable= { BRA_pl_ptb_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_psd_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_decrease_psd_support_pct_med
+	subtract_from_variable= { BRA_pl_psd_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_udn_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_decrease_udn_support_pct_med
+	subtract_from_variable= { BRA_pl_udn_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_psp_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_decrease_psp_support_pct_med
+	subtract_from_variable= { BRA_pl_psp_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_prp_support_pct_med = {
+	custom_effect_tooltip = BRA_pl_decrease_prp_support_pct_med
+	subtract_from_variable= { BRA_pl_prp_support_pct = 0.15 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_ptb_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_decrease_ptb_support_pct_high
+	subtract_from_variable= { BRA_pl_ptb_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_psd_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_decrease_psd_support_pct_high
+	subtract_from_variable= { BRA_pl_psd_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_udn_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_decrease_udn_support_pct_high
+	subtract_from_variable= { BRA_pl_udn_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_psp_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_decrease_psp_support_pct_high
+	subtract_from_variable= { BRA_pl_psp_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+BRA_pl_decrease_prp_support_pct_high = {
+	custom_effect_tooltip = BRA_pl_decrease_prp_support_pct_high
+	subtract_from_variable= { BRA_pl_prp_support_pct = 0.30 }
+	BRA_update_pl = yes
+}
+
+BRA_initialize_bill = {
+	set_country_flag = BRA_pl_visible
+
+	set_variable = { BRA_pl_ptb_supporters_modifier = 0 }
+	set_variable = { BRA_pl_psd_supporters_modifier = 0 }
+	set_variable = { BRA_pl_udn_supporters_modifier = 0 }
+	set_variable = { BRA_pl_psp_supporters_modifier = 0 }
+	set_variable = { BRA_pl_prp_supporters_modifier = 0 }
+
+	BRA_update_pl = yes
+}
+
+BRA_call_bill_vote = {
+	set_country_flag = BRA_pl_voting
+	set_country_flag = BRA_pl_voting_preview
+
+	set_temp_variable = { alert_id = 9 }
+	add_TNO_alert_unless_exists = yes
+}
+
+BRA_interrupt_bill_vote = {
+	clr_country_flag = BRA_pl_voting
+	clr_country_flag = BRA_pl_voting_preview
+
+	set_temp_variable = { alert_id = 9 }
+	remove_TNO_alert = yes
+}
+
+BRA_give_up_on_bill = {
+	clr_country_flag = BRA_pl_visible
+	clr_country_flag = BRA_pl_voting
+	clr_country_flag = BRA_pl_voting_preview
+
+	set_temp_variable = { alert_id = 9 }
+	remove_TNO_alert = yes
+}
+
+BRA_bill_complete = {
+	set_temp_variable = { alert_id = 9 }
+	remove_TNO_alert = yes
+
+	BRA_update_pl = yes
+	custom_effect_tooltip = "BRA_pl_if_succeed"
+	# SUCCEED CASE
+	if = {
+		limit = {
+			OR = {
+				check_variable = { BRA_pl_total_support > 33 }
+				has_country_flag = BRA_pl_voting_preview
+				has_game_rule = {
+					rule = BRA_BILL_PASS_CHEAT
+					option = BRA_BILL_PASS_CHEAT_YES
+				} 
+				has_game_rule = {
+					rule = BRA_LACERDA_OFN
+					option = BRA_LACERDA_OFN_YES
+				} 
+			}
+		}
+
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 0 } }
+
+		}
+		else_if = {
+			limit = { check_variable = { BRA_pl_bill_id = 1 } }
+			BRA = {
+				country_event = { id = brazil.401 }
+				add_ideas = BRA_idea_eletrobras
+			}
+		}
+		else_if = {
+			limit = { check_variable = { BRA_pl_bill_id = 2 } }
+			BRA = {
+				country_event = { id = brazil.407 }
+				add_ideas = tno_vote_franchise_promoted_voting
+				TNO_worsen_vote_franchise_policy_effectiveness_low = yes
+				BRA_boost_PTB_candidates_nationwide_med = yes
+				BRA_boost_PTB_aligned_candidates_nationwide_low = yes
+			}
+		}
+		else_if = {
+			limit = { check_variable = { BRA_pl_bill_id = 3 } }
+			# this actually does nothing since AI ofn will always accept your application
+			# but hey, make the player feel like they're accomplishing something
+			BRA = {
+				country_event = brazil.409
+				custom_effect_tooltip = BRA_lacerda_increase_ofn_acceptance
+				set_temp_variable = { target = SAF }
+				TNO_increase_volunteer_cap_2 = yes
+			}
+		}
+		else_if = {
+			limit = { check_variable = { BRA_pl_bill_id = 4 } }
+			USA = {
+				country_event = { id = brazil.127 }
+			}
+		}
+		else_if = {
+			limit = { check_variable = { BRA_pl_bill_id = 5 } }
+			BRA = {
+				country_event = { id = brazil.411 }
+				BRA_develop_increase_highway_speed_05 = yes
+				BRA_develop_increase_inflation_low = yes
+			}
+		}
+		else_if = {
+			limit = { check_variable = { BRA_pl_bill_id = 6 } }
+			BRA = {
+				country_event = { id = brazil.413 }
+				set_temp_variable = { target = SAF }
+				TNO_clear_and_recall_volunteers = yes
+
+				add_popularity = {
+					ideology = conservative_democracy
+					popularity = 0.01
+				}
+				BRA_boost_UDN_candidates_nationwide_low = yes
+				set_country_flag = BRA_withdrew_from_saw
+				clr_country_flag = BRA_volunteer_saw_send
+
+				TNO_fopo_remove_saw_tab = yes
+			}
+		}
+
+		else_if = {
+			limit = { check_variable = { BRA_pl_bill_id = 7 } }
+			BRA = {
+				set_country_flag = BRA_lott_act_success
+				add_ideas = BRA_the_lott_act
+				BRA_military_increase_power_const_high = yes
+				BRA_military_decrease_power_sorbonne_high = yes
+				BRA_military_decrease_power_hardliners_high = yes
+				hidden_effect = {
+					BRA_military_increase_power_const_high = yes
+					country_event = { id = brazil.175 }
+				}
+			}
+		}
+		## The Agrarian Reform Bill Literally needs it I'm so sorry ##
+		else_if = {
+			limit = {
+				check_variable = { BRA_pl_bill_id = 8 }
+				NOT = { has_country_flag = BRA_weaken_bill }
+				NOT = { has_country_flag = BRA_strengthen_bill }
+			}
+			BRA = {
+				country_event = { id = brazil.403 }
+				add_ideas = BRA_Agrarian_Reform
+				TNO_improve_agriculture_med = yes
+				TNO_improve_max_workhours_policy_effectiveness_med = yes
+				TNO_improve_minimum_wage_policy_effectiveness_med = yes
+				BRA_boost_PTB_candidates_nationwide_med = yes
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { BRA_pl_bill_id = 8 }
+				has_country_flag = BRA_strengthen_bill
+			}
+			BRA = {
+				country_event = { id = brazil.404 }
+				add_ideas = BRA_Agrarian_Reform_Stronger
+				TNO_improve_agriculture_high = yes
+				TNO_improve_max_workhours_policy_effectiveness_high = yes
+				TNO_improve_minimum_wage_policy_effectiveness_high = yes
+				BRA_boost_PTB_candidates_nationwide_high = yes
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { BRA_pl_bill_id = 8 }
+				has_country_flag = BRA_weaken_bill
+			}
+			BRA = {
+				country_event = { id = brazil.405 }
+				add_ideas = BRA_Agrarian_Reform_Weaker
+				TNO_improve_agriculture_low = yes
+				TNO_improve_max_workhours_policy_effectiveness_low = yes
+				TNO_improve_minimum_wage_policy_effectiveness_low = yes
+				BRA_boost_PTB_candidates_nationwide_low = yes
+			}
+		}
+		
+		else_if = { # Andean Pact
+			limit = {
+				check_variable = { BRA_pl_bill_id = 9 }
+			}
+			BRA = {
+				country_event = { id = LATAM.17 }
+			}
+		}
+	}
+	# FAIL CASE
+	else = {
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 8 } }
+			clr_country_flag = BRA_weaken_bill
+			clr_country_flag = BRA_strengthen_bill
+			set_country_flag = BRA_Agrarian_Bill_Failed
+			BRA = {
+				country_event = { id = brazil.406 }
+			}
+			add_stability = -0.05
+		}
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 4 } }
+			country_event = { id = brazil.129 }
+		}
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 2 } }
+			BRA = {
+				country_event = { id = brazil.408 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 3} }
+			BRA = {
+				country_event = { id = brazil.410 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 5} }
+			BRA = {
+				country_event = { id = brazil.412 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 6} }
+			BRA = {
+				country_event = { id = brazil.414 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 7 } }
+			BRA = {
+				country_event = { id = brazil.174 }
+			}
+		}
+		if = {
+			limit = { check_variable = { BRA_pl_bill_id = 1 } }
+			BRA = {
+				country_event = { id = brazil.402 }
+				add_stability = -0.05
+				add_popularity = {
+					ideology = conservative_democracy
+					popularity = -0.06
+				}
+				add_popularity = {
+					ideology = liberal_democracy
+					popularity = 0.03
+				}
+				add_popularity = {
+					ideology = social_democracy
+					popularity = 0.03
+				}
+			}
+		}
+
+		if = { # Andean Pact
+			limit = {
+				check_variable = { BRA_pl_bill_id = 9 }
+			}
+			BRA = {
+				country_event = { id = LATAM.18 }
+			}			
+		}
+	}
+}
+
+
+BRA_update_pl = {
+	clamp_variable = { var = BRA_pl_ptb_support_pct min = 0 max = 1 }
+	clamp_variable = { var = BRA_pl_psd_support_pct min = 0 max = 1 }
+	clamp_variable = { var = BRA_pl_udn_support_pct min = 0 max = 1 }
+	clamp_variable = { var = BRA_pl_psp_support_pct min = 0 max = 1 }
+	clamp_variable = { var = BRA_pl_prp_support_pct min = 0 max = 1 }
+
+	set_variable = { BRA_pl_PTB_supporters_derived = BRA_PTB_seats }
+	set_variable = { BRA_pl_PSD_supporters_derived = BRA_PSD_seats }
+	set_variable = { BRA_pl_UDN_supporters_derived = BRA_UDN_seats }
+	set_variable = { BRA_pl_PSP_supporters_derived = BRA_PSP_seats }
+	set_variable = { BRA_pl_PRP_supporters_derived = BRA_PRP_seats }
+
+	multiply_variable = { BRA_pl_PTB_supporters_derived = BRA_pl_ptb_support_pct }
+	multiply_variable = { BRA_pl_PSD_supporters_derived = BRA_pl_psd_support_pct }
+	multiply_variable = { BRA_pl_UDN_supporters_derived = BRA_pl_udn_support_pct }
+	multiply_variable = { BRA_pl_PSP_supporters_derived = BRA_pl_psp_support_pct }
+	multiply_variable = { BRA_pl_PRP_supporters_derived = BRA_pl_prp_support_pct }
+
+	round_variable = BRA_pl_PTB_supporters_derived
+	round_variable = BRA_pl_PSD_supporters_derived
+	round_variable = BRA_pl_UDN_supporters_derived
+	round_variable = BRA_pl_PSP_supporters_derived
+	round_variable = BRA_pl_PRP_supporters_derived
+
+	add_to_variable = { BRA_pl_PTB_supporters_derived = BRA_pl_ptb_supporters_modifier }
+	add_to_variable = { BRA_pl_PSD_supporters_derived = BRA_pl_psd_supporters_modifier }
+	add_to_variable = { BRA_pl_UDN_supporters_derived = BRA_pl_udn_supporters_modifier }
+	add_to_variable = { BRA_pl_PSP_supporters_derived = BRA_pl_psp_supporters_modifier }
+	add_to_variable = { BRA_pl_PRP_supporters_derived = BRA_pl_prp_supporters_modifier }
+
+	clamp_variable = { var = BRA_pl_PTB_supporters_derived min = 0 max = BRA_PTB_seats }
+	clamp_variable = { var = BRA_pl_PSD_supporters_derived min = 0 max = BRA_PSD_seats }
+	clamp_variable = { var = BRA_pl_UDN_supporters_derived min = 0 max = BRA_UDN_seats }
+	clamp_variable = { var = BRA_pl_PSP_supporters_derived min = 0 max = BRA_PSP_seats }
+	clamp_variable = { var = BRA_pl_PRP_supporters_derived min = 0 max = BRA_PRP_seats }
+
+	clear_array = BRA_pl_supporter_pips
+
+	set_variable = { BRA_pl_total_support = BRA_PL_PTB_supporters_derived }
+	resize_array = { array = BRA_pl_supporter_pips size = BRA_pl_total_support value = 3 }
+	add_to_variable = { BRA_pl_total_support = BRA_PL_PSD_supporters_derived }
+	resize_array = { array = BRA_pl_supporter_pips size = BRA_pl_total_support value = 1 }
+	add_to_variable = { BRA_pl_total_support = BRA_PL_UDN_supporters_derived }
+	resize_array = { array = BRA_pl_supporter_pips size = BRA_pl_total_support value = 2 }
+	add_to_variable = { BRA_pl_total_support = BRA_PL_PSP_supporters_derived }
+	resize_array = { array = BRA_pl_supporter_pips size = BRA_pl_total_support value = 4 }
+	add_to_variable = { BRA_pl_total_support = BRA_PL_PRP_supporters_derived }
+	resize_array = { array = BRA_pl_supporter_pips size = BRA_pl_total_support value = 5 }
+
+	set_variable = { BRA_pl_enough_support = 1 }
+	if = {
+		limit = { check_variable = { BRA_pl_total_support > 33 } }
+		set_variable = { BRA_pl_enough_support = 2 }
+	}
+}
+
+###############################################################
+########            Lacerda Coup Mechanic              ########
+###############################################################
+
+BRA_update_lacerda_coup = {
+	clamp_variable = { var = BRA_lacerda_mil_support min = 0 max = 10 }
+	clamp_variable = { var = BRA_lacerda_usa_support min = 0 max = 10 }
+	clamp_variable = { var = BRA_lacerda_voter_support min = 0 max = 10 }
+	clamp_variable = { var = BRA_lacerda_govt_support min = 0 max = 10 }
+
+	set_variable = { BRA_lacerda_total_support = BRA_lacerda_mil_support }
+	add_to_variable = { BRA_lacerda_total_support = BRA_lacerda_usa_support  }
+	add_to_variable = { BRA_lacerda_total_support = BRA_lacerda_voter_support  }
+	add_to_variable = { BRA_lacerda_total_support = BRA_lacerda_govt_support  }
+
+	divide_variable = { BRA_lacerda_total_support = 40 }
+	multiply_variable = { BRA_lacerda_total_support = 20 }
+	round_variable = BRA_lacerda_total_support
+}
+
+BRA_init_lacerda_mechanic = {
+	set_country_flag = BRA_lacerda_coup_category_allowed
+	activate_mission = BRA_lacerda_timeout
+	set_variable = { BRA_lacerda_mil_support = 2 }
+	set_variable = { BRA_lacerda_usa_support = 0 }
+	set_variable = { BRA_lacerda_voter_support = 3 }
+	set_variable = { BRA_lacerda_govt_support = 0 }
+	set_variable = { BRA_lacerda_mil_support_decs = 0 }
+	set_variable = { BRA_lacerda_usa_support_decs = 0 }
+	set_variable = { BRA_lacerda_voter_support_decs = 0 }
+	set_variable = { BRA_lacerda_govt_support_decs = 0 }
+	if = {
+		limit = { has_idea = OFN_Independent_Member }
+		add_to_variable = { BRA_lacerda_usa_support = 4 }
+	}
+	if = {
+		limit = { has_country_flag = BRA_petrobras }
+		add_to_variable = { BRA_lacerda_govt_support = 3 }
+	}
+	else = {
+		add_to_variable = { BRA_lacerda_usa_support = 1 }
+	}
+
+	if = {
+		limit = { has_country_flag = BRA_Lott_Econ_Sphere }
+		add_to_variable = { BRA_lacerda_usa_support = 1 }
+	}
+
+	clr_country_flag = BRA_lacerda_coup_hardliners
+	clr_country_flag = BRA_lacerda_coup_sorbonne
+	if = {
+		limit = { check_variable = { BRA_military_winning_faction = 3 } }
+		set_country_flag = BRA_lacerda_coup_hardliners
+		add_to_variable = { BRA_lacerda_mil_support = 4 }
+	}
+	else_if = {
+		limit = { check_variable = { BRA_military_winning_faction = 1 } }
+		set_country_flag = BRA_lacerda_coup_sorbonne
+		add_to_variable = { BRA_lacerda_mil_support = 2 }
+	}
+
+	clr_country_flag = BRA_lacerda_coup_close_race
+	if = {
+		limit = { check_variable = { BRA_pres_second = 3 } }
+		set_temp_variable = { difference = BRA_pres_winner_pct }
+		subtract_from_temp_variable = { difference = BRA_pres_second_pct }
+
+		if = {
+			limit = { check_variable = { difference < 2 } }
+			set_country_flag = BRA_lacerda_coup_close_race
+			add_to_variable = { BRA_lacerda_voter_support = 2 }
+		}
+	}
+
+	clr_country_flag = BRA_udn_dominance
+	set_temp_variable = { total_support_senado = BRA_UDN_seats }
+	add_to_temp_variable = { total_support_senado = BRA_PSP_seats }
+	add_to_temp_variable = { total_support_senado = BRA_PRP_seats }
+	if = {
+		limit = { check_variable = { total_support_senado > 32 } }
+		set_country_flag = BRA_udn_dominance
+		add_to_variable = { BRA_lacerda_govt_support = 3 }
+	}
+
+	BRA_update_lacerda_coup = yes
+}
+
+BRA_coalition_partners_abandon_UDN = {
+	custom_effect_tooltip = BRA_coalition_partners_abandon_UDN
+	hidden_effect = {
+		
+		set_variable = { BRA_senate_major_party_align^PARTY_PDC = PARTY_PSP }
+		set_variable = { BRA_senate_major_party_align^PARTY_PTN = PARTY_PTB }
+		set_variable = { BRA_senate_major_party_align^PARTY_PR  = PARTY_PSD }
+		set_variable = { BRA_senate_major_party_align^PARTY_PL  = PARTY_PSP }
+
+		BRA_redraw_senate_diagram = yes
+		BRA_senate_select_state = yes
+	}
+}
+
+###############################################################
+########            Armed Forces Mechanic              ########
+###############################################################
+
+BRA_trigger_military_coup = {
+	set_cosmetic_tag = BRA_military_coup
+	
+	hidden_effect = {
+		remove_ideas = BRA_idea_hundred_days
+	}
+	log = "[GetDateText]: [Root.GetName]: Coup firing"
+	set_country_flag = BRA_military_coup_happened
+	set_country_flag = BRA_military_dictatorship
+	clr_country_flag = BRA_military_coup_scheduled
+
+	clr_country_flag = BRA_lottquadros_category_allowed
+
+	add_stability = -0.3
+
+	if = {
+		limit = { check_variable = { stability < 0 } }
+		set_stability = 0
+	}
+
+	add_popularity = {
+		ideology = despotism
+		popularity = 0.3
+	}
+	add_popularity = {
+		ideology = socialist
+		popularity = -0.05
+	}
+	add_popularity = {
+		ideology = communist
+		popularity = 0.05
+	}
+	set_politics = {
+		ruling_party = despotism
+	}
+	add_country_leader_role = {
+		character = BRA_Ranieri_Mazzilli
+		promote_leader = yes
+		country_leader = {
+			desc = "POLITICS_RANIERI_MAZZILLI_DESC"
+			expire = "1994.4.20"
+			ideology = despotism_interim_government_subtype
+			traits = { }
+			id = -1
+		}
+	}
+	load_focus_tree = {
+		tree = BRA_HundredDays_MilitaryCoup_tree
+		keep_completed = no
+	}
+	add_ideas = BRA_idea_nationwide_chaos_max
+	custom_effect_tooltip = BRA_new_cabinet_tt
+	hidden_effect = {
+		remove_ideas = {
+			BRA_Humberto_Castelo_Branco_high_command
+			BRA_Silvio_Heck_navy_chief
+		}
+		add_ideas = {
+			BRA_Amaury_Kruel_high_command
+			BRA_Augusto_Rademaker_navy_chief
+		}
+		remove_all_ministers = yes
+		add_ideas = { BRA_auro_andrade_hog BRA_Juracy_Magalhaes_pol BRA_delfim_netto_eco BRA_Costa_E_Silva_sec }
+	}
+	clr_country_flag = BRA_hundred_days_category_allowed
+	BRA_dissolve_the_senate = yes
+
+}
+
+BRA_initialize_military = {
+	# 23% for Hardline, 46 % for Sorbonne, 31% for Constitutionalists
+	set_variable = { BRA_military_hardliners_power = 23 }
+	set_variable = { BRA_military_sorbonne_power = 46 }
+	set_variable = { BRA_military_const_power = 31 }
+
+	set_variable = { BRA_military_nepotism = 35 }
+	set_variable = { BRA_military_loyalty = 55 }
+	set_variable = { BRA_nepotism_variable = 0 }
+
+	BRA_military_update = yes
+}
+
+BRA_military_update = {
+	clamp_variable = { var = BRA_military_nepotism min = 0 max = 100 }
+	clamp_variable = { var = BRA_military_loyalty min = 0 max = 100 }
+	if = {
+		limit = { check_variable =  { BRA_military_nepotism > 80 } }
+		add_ideas =  { BRA_army_nepotism_5 }
+	}
+	else_if = {
+		limit = { AND = { check_variable = { BRA_military_nepotism < 80 } check_variable = { BRA_military_nepotism > 60 } } }
+		add_ideas = { BRA_army_nepotism_4 }
+	}
+	else_if = {
+		limit = { AND = { check_variable = { BRA_military_nepotism < 60 } check_variable = { BRA_military_nepotism > 40 } } }
+		add_ideas = { BRA_army_nepotism_3 }
+	}
+	else_if = {
+		limit = { AND = { check_variable = { BRA_military_nepotism < 40 } check_variable = { BRA_military_nepotism > 15 } } }
+		add_ideas = { BRA_army_nepotism_2 }
+	}
+	else_if = {
+		limit = { check_variable = { BRA_military_nepotism < 15 } }
+		add_ideas = { BRA_army_nepotism_1 }
+	}
+
+	BRA_military_normalize_power = yes
+	BRA_military_update_factions = yes
+}
+
+BRA_military_normalize_power = {
+	clamp_variable = { var = BRA_military_hardliners_power min = 0 max = 100 }
+	clamp_variable = { var = BRA_military_sorbonne_power min = 0 max = 100 }
+	clamp_variable = { var = BRA_military_const_power min = 0 max = 100 }
+
+	set_temp_variable = { total = BRA_military_hardliners_power }
+	add_to_temp_variable = { total = BRA_military_sorbonne_power }
+	add_to_temp_variable = { total = BRA_military_const_power }
+
+	set_temp_variable = { mult = 100 }
+	divide_temp_variable = { mult = total }
+	multiply_variable = { BRA_military_const_power = mult }
+	multiply_variable = { BRA_military_sorbonne_power = mult }
+	multiply_variable = { BRA_military_hardliners_power = mult }
+}
+
+BRA_military_update_factions = {
+	if = {
+		limit = {
+			AND = {
+				check_variable = { BRA_military_hardliners_power > BRA_military_sorbonne_power }
+				check_variable = { BRA_military_hardliners_power > BRA_military_const_power }
+			}
+		}
+		set_variable = { BRA_military_winning_faction = 3 }
+	}
+	else_if = {
+		limit = {
+			AND = {
+				check_variable = { BRA_military_sorbonne_power > BRA_military_hardliners_power }
+				check_variable = { BRA_military_sorbonne_power > BRA_military_const_power }
+			}
+		}
+		set_variable = { BRA_military_winning_faction = 1 }
+	}
+	else = {
+		set_variable = { BRA_military_winning_faction = 2 }
+	}
+}
+
+BRA_nepotism_check = {
+	if = {
+		limit = { has_idea = BRA_army_nepotism_5 }
+		set_variable = { BRA_nepotism_variable = 3 }
+	}
+	else_if = {
+		limit = { has_idea = BRA_army_nepotism_4 }
+		set_variable = { BRA_nepotism_variable = 2 }
+	}
+	else_if = {
+		limit = { has_idea = BRA_army_nepotism_3 }
+		set_variable = { BRA_nepotism_variable = 1 }
+	}
+	else = {
+		set_variable = { BRA_nepotism_variable = 0 }
+	}
+}
+
+BRA_loyalty_monthly = {
+	subtract_from_variable = { BRA_military_loyalty = 1 }
+}
+
+
+BRA_military_increase_nepotism_low = {
+	custom_effect_tooltip = BRA_military_increase_nepotism_low
+	hidden_effect = {
+		add_to_variable = { BRA_military_nepotism = 5 }
+		BRA_nepotism_check = yes
+		add_to_variable = { BRA_military_nepotism = BRA_nepotism_variable }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_nepotism_med = {
+	custom_effect_tooltip = BRA_military_increase_nepotism_med
+	hidden_effect = {
+		add_to_variable = { BRA_military_nepotism = 10 }
+		BRA_nepotism_check = yes
+		add_to_variable = { BRA_military_nepotism = BRA_nepotism_variable }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_nepotism_high = {
+	custom_effect_tooltip = BRA_military_increase_nepotism_high
+	hidden_effect = {
+		add_to_variable = { BRA_military_nepotism = 15 }
+		BRA_nepotism_check = yes
+		add_to_variable = { BRA_military_nepotism = BRA_nepotism_variable }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_nepotism_low = {
+	custom_effect_tooltip = BRA_military_decrease_nepotism_low
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_nepotism = 5 }
+		BRA_nepotism_check = yes
+		add_to_variable = { BRA_military_nepotism = BRA_nepotism_variable }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_nepotism_med = {
+	custom_effect_tooltip = BRA_military_decrease_nepotism_med
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_nepotism = 10 }
+		BRA_nepotism_check = yes
+		add_to_variable = { BRA_military_nepotism = BRA_nepotism_variable }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_nepotism_high = {
+	custom_effect_tooltip = BRA_military_decrease_nepotism_high
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_nepotism = 15 }
+		BRA_nepotism_check = yes
+		add_to_variable = { BRA_military_nepotism = BRA_nepotism_variable }
+		BRA_military_update = yes
+	}
+}
+
+BRA_military_increase_loyalty_low = {
+	custom_effect_tooltip = BRA_military_increase_loyalty_low
+	hidden_effect = {
+		add_to_variable = { BRA_military_loyalty = 5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_loyalty_med = {
+	custom_effect_tooltip = BRA_military_increase_loyalty_med
+	hidden_effect = {
+		add_to_variable = { BRA_military_loyalty = 10 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_loyalty_high = {
+	custom_effect_tooltip = BRA_military_increase_loyalty_high
+	hidden_effect = {
+		add_to_variable = { BRA_military_loyalty = 15 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_loyalty_low = {
+	custom_effect_tooltip = BRA_military_decrease_loyalty_low
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_loyalty = 5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_loyalty_med = {
+	custom_effect_tooltip = BRA_military_decrease_loyalty_med
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_loyalty = 10 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_loyalty_high = {
+	custom_effect_tooltip = BRA_military_decrease_loyalty_high
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_loyalty = 15 }
+		BRA_military_update = yes
+	}
+}
+
+BRA_military_increase_power_hardliners_low = {
+	custom_effect_tooltip = BRA_military_increase_power_hardliners_low
+	hidden_effect = {
+		add_to_variable = { BRA_military_hardliners_power = 2 }
+		subtract_from_variable = { BRA_military_sorbonne_power = 1 }
+		subtract_from_variable = { BRA_military_const_power = 1 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_power_hardliners_med = {
+	custom_effect_tooltip = BRA_military_increase_power_hardliners_med
+	hidden_effect = {
+		add_to_variable = { BRA_military_hardliners_power = 5 }
+		subtract_from_variable = { BRA_military_sorbonne_power = 2.5 }
+		subtract_from_variable = { BRA_military_const_power = 2.5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_power_hardliners_high = {
+	custom_effect_tooltip = BRA_military_increase_power_hardliners_high
+	hidden_effect = {
+		add_to_variable = { BRA_military_hardliners_power = 10 }
+		subtract_from_variable = { BRA_military_sorbonne_power = 5 }
+		subtract_from_variable = { BRA_military_const_power = 5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_hardliners_low = {
+	custom_effect_tooltip = BRA_military_decrease_power_hardliners_low
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_hardliners_power = 2 }
+		add_to_variable = { BRA_military_sorbonne_power = 1 }
+		add_to_variable = { BRA_military_const_power = 1 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_hardliners_med = {
+	custom_effect_tooltip = BRA_military_decrease_power_hardliners_med
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_hardliners_power = 5 }
+		add_to_variable = { BRA_military_sorbonne_power = 2.5 }
+		add_to_variable = { BRA_military_const_power = 2.5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_hardliners_high = {
+	custom_effect_tooltip = BRA_military_decrease_power_hardliners_high
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_hardliners_power = 10 }
+		add_to_variable = { BRA_military_sorbonne_power = 5 }
+		add_to_variable = { BRA_military_const_power = 5 }
+		BRA_military_update = yes
+	}
+}
+
+BRA_military_increase_power_sorbonne_low = {
+	custom_effect_tooltip = BRA_military_increase_power_sorbonne_low
+	hidden_effect = {
+		add_to_variable = { BRA_military_sorbonne_power = 2 }
+		subtract_from_variable = { BRA_military_hardliners_power = 1 }
+		subtract_from_variable = { BRA_military_const_power = 1 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_power_sorbonne_med = {
+	custom_effect_tooltip = BRA_military_increase_power_sorbonne_med
+	hidden_effect = {
+		add_to_variable = { BRA_military_sorbonne_power = 5 }
+		subtract_from_variable = { BRA_military_hardliners_power = 2.5 }
+		subtract_from_variable = { BRA_military_const_power = 2.5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_power_sorbonne_high = {
+	custom_effect_tooltip = BRA_military_increase_power_sorbonne_high
+	hidden_effect = {
+		add_to_variable = { BRA_military_sorbonne_power = 10 }
+		subtract_from_variable = { BRA_military_hardliners_power = 5 }
+		subtract_from_variable = { BRA_military_const_power = 5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_sorbonne_low = {
+	custom_effect_tooltip = BRA_military_decrease_power_sorbonne_low
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_sorbonne_power = 2 }
+		add_to_variable = { BRA_military_hardliners_power = 1 }
+		add_to_variable = { BRA_military_const_power = 1 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_sorbonne_med = {
+	custom_effect_tooltip = BRA_military_decrease_power_sorbonne_med
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_sorbonne_power = 5 }
+		add_to_variable = { BRA_military_hardliners_power = 2.5 }
+		add_to_variable = { BRA_military_const_power = 2.5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_sorbonne_high = {
+	custom_effect_tooltip = BRA_military_decrease_power_sorbonne_high
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_sorbonne_power = 10 }
+		add_to_variable = { BRA_military_hardliners_power = 5 }
+		add_to_variable = { BRA_military_const_power = 5 }
+		BRA_military_update = yes
+	}
+}
+
+BRA_military_increase_power_const_low = {
+	custom_effect_tooltip = BRA_military_increase_power_const_low
+	hidden_effect = {
+		add_to_variable = { BRA_military_const_power = 2 }
+		subtract_from_variable = { BRA_military_sorbonne_power = 1 }
+		subtract_from_variable = { BRA_military_hardliners_power = 1 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_power_const_med = {
+	custom_effect_tooltip = BRA_military_increase_power_const_med
+	hidden_effect = {
+		add_to_variable = { BRA_military_const_power = 5 }
+		subtract_from_variable = { BRA_military_sorbonne_power = 2.5 }
+		subtract_from_variable = { BRA_military_hardliners_power = 2.5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_increase_power_const_high = {
+	custom_effect_tooltip = BRA_military_increase_power_const_high
+	hidden_effect = {
+		add_to_variable = { BRA_military_const_power = 10 }
+		subtract_from_variable = { BRA_military_sorbonne_power = 5 }
+		subtract_from_variable = { BRA_military_hardliners_power = 5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_const_low = {
+	custom_effect_tooltip = BRA_military_decrease_power_const_low
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_const_power = 2 }
+		add_to_variable = { BRA_military_sorbonne_power = 1 }
+		add_to_variable = { BRA_military_hardliners_power = 1 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_const_med = {
+	custom_effect_tooltip = BRA_military_decrease_power_const_med
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_const_power = 5 }
+		add_to_variable = { BRA_military_sorbonne_power = 2.5 }
+		add_to_variable = { BRA_military_hardliners_power = 2.5 }
+		BRA_military_update = yes
+	}
+}
+BRA_military_decrease_power_const_high = {
+	custom_effect_tooltip = BRA_military_decrease_power_const_high
+	hidden_effect = {
+		subtract_from_variable = { BRA_military_const_power = 10 }
+		add_to_variable = { BRA_military_sorbonne_power = 5 }
+		add_to_variable = { BRA_military_hardliners_power = 5 }
+		BRA_military_update = yes
+	}
+}
+
+###############################################################
+########             Development Mechanic              ########
+###############################################################
+
+# Set up initial values and graph data for the development graph
+# This is all placeholder ATM
+BRA_develop_init_graph_data = {
+	set_variable = { BRA_develop_graph_selected_stat = 0 }
+
+	set_variable = { BRA_develop_graph_month = 13 }
+	set_variable = { segment_idx = -1 }
+
+	clear_array = BRA_develop_graph_months
+	add_to_array = { BRA_develop_graph_months = 0 }
+	add_to_array = { BRA_develop_graph_months = 1 }
+	add_to_array = { BRA_develop_graph_months = 2 }
+	add_to_array = { BRA_develop_graph_months = 3 }
+	add_to_array = { BRA_develop_graph_months = 4 }
+	add_to_array = { BRA_develop_graph_months = 5 }
+	add_to_array = { BRA_develop_graph_months = 6 }
+	add_to_array = { BRA_develop_graph_months = 7 }
+	add_to_array = { BRA_develop_graph_months = 8 }
+	add_to_array = { BRA_develop_graph_months = 9 }
+	add_to_array = { BRA_develop_graph_months = 10 }
+	add_to_array = { BRA_develop_graph_months = 11 }
+	add_to_array = { BRA_develop_graph_months = 12 }
+
+	clear_array = BRA_develop_region_pop
+	clear_temp_array = value_diffs
+
+	set_temp_variable = { population = 1483.state_population_k }
+	add_to_temp_variable = { population = 495.state_population_k }
+	add_to_temp_variable = { population = 1482.state_population_k }
+	add_to_temp_variable = { population = 1481.state_population_k }
+	add_to_temp_variable = { population = 1480.state_population_k }
+	add_to_temp_variable = { population = 1479.state_population_k }
+	add_to_array = { BRA_develop_region_pop = population }
+	add_to_temp_array = { value_diffs = population }
+
+	set_temp_variable = { population = 497.state_population_k }
+	add_to_temp_variable = { population = 498.state_population_k }
+	add_to_temp_variable = { population = 499.state_population_k }
+	add_to_temp_variable = { population = 1494.state_population_k }
+	add_to_temp_variable = { population = 504.state_population_k }
+	add_to_temp_variable = { population = 1492.state_population_k }
+	add_to_temp_variable = { population = 1491.state_population_k }
+	add_to_temp_variable = { population = 1490.state_population_k }
+	add_to_temp_variable = { population = 1485.state_population_k }
+	add_to_array = { BRA_develop_region_pop = population }
+	add_to_temp_array = { value_diffs = population }
+
+	set_temp_variable = { population = 505.state_population_k }
+	add_to_temp_variable = { population = 280.state_population_k }
+	add_to_temp_variable = { population = 1531.state_population_k }
+	add_to_array = { BRA_develop_region_pop = population }
+	add_to_temp_array = { value_diffs = population }
+
+	set_temp_variable = { population = 496.state_population_k }
+	add_to_temp_variable = { population = 500.state_population_k }
+	add_to_temp_variable = { population = 501.state_population_k }
+	add_to_temp_variable = { population = 1487.state_population_k }
+	add_to_temp_variable = { population = 1488.state_population_k }
+	add_to_array = { BRA_develop_region_pop = population }
+	add_to_temp_array = { value_diffs = population }
+
+	set_temp_variable = { population = 502.state_population_k }
+	add_to_temp_variable = { population = 503.state_population_k }
+	add_to_temp_variable = { population = 1486.state_population_k }
+	add_to_array = { BRA_develop_region_pop = population }
+	add_to_temp_array = { value_diffs = population }
+
+	multiply_temp_variable = { value_diffs^0 = 0.01 }
+	multiply_temp_variable = { value_diffs^1 = 0.01 }
+	multiply_temp_variable = { value_diffs^2 = 0.01 }
+	multiply_temp_variable = { value_diffs^3 = 0.01 }
+	multiply_temp_variable = { value_diffs^4 = 0.01 }
+
+	clear_array = BRA_develop_region_pop_history
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = j
+
+		set_temp_variable = { k = 4 }
+		subtract_from_temp_variable = { k = j }
+
+		set_temp_variable = { current = BRA_develop_region_pop^k }
+		set_temp_variable = { diff = value_diffs^k }
+		divide_temp_variable = { diff = 12 }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { array = BRA_develop_region_pop_history value = current index = 0 }
+
+			set_temp_variable = { r = random }
+			subtract_from_temp_variable = { r = 0.5 }
+			multiply_temp_variable = { r = 0.8 }
+			add_to_temp_variable = { r = 1.0 }
+			multiply_temp_variable = { r = diff }
+			subtract_from_temp_variable = { current = r }
+		}
+	}
+
+	clear_array = BRA_develop_region_urban_pop
+	clear_array = BRA_develop_region_urban_pop_trend
+
+	add_to_array = { BRA_develop_region_urban_pop = 24.1 } # Amazonia
+	add_to_array = { BRA_develop_region_urban_pop_trend = 3 }
+	add_to_array = { BRA_develop_region_urban_pop = 48.3 } # North East
+	add_to_array = { BRA_develop_region_urban_pop_trend = 2 }
+	add_to_array = { BRA_develop_region_urban_pop = 39.4 } # Central West
+	add_to_array = { BRA_develop_region_urban_pop_trend = 4 }
+	add_to_array = { BRA_develop_region_urban_pop = 51.9 } # South East
+	add_to_array = { BRA_develop_region_urban_pop_trend = 4 }
+	add_to_array = { BRA_develop_region_urban_pop = 37.1 } # South
+	add_to_array = { BRA_develop_region_urban_pop_trend = 3 }
+
+	divide_variable = { BRA_develop_region_urban_pop_trend^0 = 12 }
+	divide_variable = { BRA_develop_region_urban_pop_trend^1 = 12 }
+	divide_variable = { BRA_develop_region_urban_pop_trend^2 = 12 }
+	divide_variable = { BRA_develop_region_urban_pop_trend^3 = 12 }
+	divide_variable = { BRA_develop_region_urban_pop_trend^4 = 12 }
+
+	clear_array = BRA_develop_region_urban_pop_history
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = j
+
+		set_temp_variable = { k = 4 }
+		subtract_from_temp_variable = { k = j }
+
+		set_temp_variable = { current = BRA_develop_region_urban_pop^k }
+		set_temp_variable = { diff = BRA_develop_region_urban_pop_trend^k }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { array = BRA_develop_region_urban_pop_history value = current index = 0 }
+
+			set_temp_variable = { r = random }
+			subtract_from_temp_variable = { r = 0.5 }
+			multiply_temp_variable = { r = 1.1 }
+			add_to_temp_variable = { r = 1.0 }
+			multiply_temp_variable = { r = diff }
+			subtract_from_temp_variable = { current = r }
+		}
+	}
+
+	clear_array = BRA_develop_region_mech_rate
+	clear_array = BRA_develop_region_mech_rate_trend
+
+	add_to_array = { BRA_develop_region_mech_rate = 6.9 } # Amazonia
+	add_to_array = { BRA_develop_region_mech_rate_trend = 4 }
+	add_to_array = { BRA_develop_region_mech_rate = 17 } # North East
+	add_to_array = { BRA_develop_region_mech_rate_trend = 3 }
+	add_to_array = { BRA_develop_region_mech_rate = 12.1 } # Central West
+	add_to_array = { BRA_develop_region_mech_rate_trend = 4 }
+	add_to_array = { BRA_develop_region_mech_rate = 24.3 } # South East
+	add_to_array = { BRA_develop_region_mech_rate_trend = 2 }
+	add_to_array = { BRA_develop_region_mech_rate = 21.5 } # South
+	add_to_array = { BRA_develop_region_mech_rate_trend = 1 }
+
+	divide_variable = { BRA_develop_region_mech_rate_trend^0 = 12 }
+	divide_variable = { BRA_develop_region_mech_rate_trend^1 = 12 }
+	divide_variable = { BRA_develop_region_mech_rate_trend^2 = 12 }
+	divide_variable = { BRA_develop_region_mech_rate_trend^3 = 12 }
+	divide_variable = { BRA_develop_region_mech_rate_trend^4 = 12 }
+
+	clear_array = BRA_develop_region_mech_rate_history
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = j
+
+		set_temp_variable = { k = 4 }
+		subtract_from_temp_variable = { k = j }
+
+		set_temp_variable = { current = BRA_develop_region_mech_rate^k }
+		set_temp_variable = { diff = BRA_develop_region_mech_rate_trend^k }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { array = BRA_develop_region_mech_rate_history value = current index = 0 }
+
+			set_temp_variable = { r = random }
+			subtract_from_temp_variable = { r = 0.5 }
+			multiply_temp_variable = { r = 0.8 }
+			add_to_temp_variable = { r = 1.0 }
+			multiply_temp_variable = { r = diff }
+			subtract_from_temp_variable = { current = r }
+		}
+	}
+
+	clear_array = BRA_develop_region_industry
+	clear_array = BRA_develop_region_industry_trend
+
+	add_to_array = { BRA_develop_region_industry = 9.5 } # Amazonia
+	add_to_array = { BRA_develop_region_industry_trend = 3.5 }
+	add_to_array = { BRA_develop_region_industry = 31.1 } # North East
+	add_to_array = { BRA_develop_region_industry_trend = 5 }
+	add_to_array = { BRA_develop_region_industry = 16.9 } # Central West
+	add_to_array = { BRA_develop_region_industry_trend = -2 }
+	add_to_array = { BRA_develop_region_industry = 36.8 } # South East
+	add_to_array = { BRA_develop_region_industry_trend = 3 }
+	add_to_array = { BRA_develop_region_industry = 24.2 } # South
+	add_to_array = { BRA_develop_region_industry_trend = -1 }
+
+	divide_variable = { BRA_develop_region_industry_trend^0 = 12 }
+	divide_variable = { BRA_develop_region_industry_trend^1 = 12 }
+	divide_variable = { BRA_develop_region_industry_trend^2 = 12 }
+	divide_variable = { BRA_develop_region_industry_trend^3 = 12 }
+	divide_variable = { BRA_develop_region_industry_trend^4 = 12 }
+
+	clear_array = BRA_develop_region_industry_history
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = j
+
+		set_temp_variable = { k = 4 }
+		subtract_from_temp_variable = { k = j }
+
+		set_temp_variable = { current = BRA_develop_region_industry^k }
+		set_temp_variable = { diff = BRA_develop_region_industry_trend^k }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { array = BRA_develop_region_industry_history value = current index = 0 }
+
+			set_temp_variable = { r = random }
+			subtract_from_temp_variable = { r = 0.5 }
+			multiply_temp_variable = { r = 0.8 }
+			add_to_temp_variable = { r = 1.0 }
+			multiply_temp_variable = { r = diff }
+			subtract_from_temp_variable = { current = r }
+		}
+	}
+
+	clear_array = BRA_develop_GDP_history
+	set_temp_variable = { current = 24170 }
+	set_temp_variable = { diff = 0.03 }
+	multiply_temp_variable = { diff = 24170 }
+	divide_temp_variable = { diff = 12 }
+
+	for_loop_effect = {
+		start = 0
+		end = 13
+		value = i
+
+		add_to_array = { array = BRA_develop_GDP_history value = current index = 0 }
+
+		set_temp_variable = { r = random }
+		subtract_from_temp_variable = { r = 0.5 }
+		multiply_temp_variable = { r = 1.2 }
+		add_to_temp_variable = { r = 1.0 }
+		multiply_temp_variable = { r = diff }
+		subtract_from_temp_variable = { current = r }
+	}
+
+	clear_array = BRA_develop_inflation_history
+	set_temp_variable = { base_idx = 4 }
+	set_temp_variable = { current = 31.3 }
+	set_temp_variable = { diff = 0.015 }
+	multiply_temp_variable = { diff = 31.3 }
+	divide_temp_variable = { diff = 12 }
+
+	for_loop_effect = {
+		start = 0
+		end = 13
+		value = i
+
+
+		add_to_array = { array = BRA_develop_inflation_history value = current index = 0 }
+		set_temp_variable = { r = random }
+		subtract_from_temp_variable = { r = 0.5 }
+		multiply_temp_variable = { r = 1.2 }
+		add_to_temp_variable = { r = 1.0 }
+		multiply_temp_variable = { r = diff }
+		subtract_from_temp_variable = { current = r }
+	}
+
+	clear_array = BRA_develop_pop_history
+	set_temp_variable = { current = max_manpower_k }
+	set_temp_variable = { diff = max_manpower_k}
+	multiply_temp_variable = { diff = 0.01 }
+
+	for_loop_effect = {
+		start = 0
+		end = 13
+		value = i
+
+		add_to_array = { array = BRA_develop_pop_history value = current index = 0 }
+
+		set_temp_variable = { r = random }
+		subtract_from_temp_variable = { r = 0.5 }
+		multiply_temp_variable = { r = 0.8 }
+		add_to_temp_variable = { r = 1.0 }
+		multiply_temp_variable = { r = diff }
+		subtract_from_temp_variable = { current = r }
+	}
+
+	clear_array = BRA_develop_industry_pct_gdp_history
+	for_loop_effect = {
+		start = 0
+		end = 13
+		value = i
+
+		set_temp_variable = { current = 0 }
+		set_temp_variable = { divisor = 0 }
+
+		for_loop_effect = {
+			start = 0
+			end = 5
+			value = j
+
+			set_temp_variable = { base = j }
+			multiply_temp_variable = { base = 13 }
+			add_to_temp_variable = { base = i }
+
+			set_temp_variable = { to_add = BRA_develop_region_industry_history^base }
+			divide_temp_variable = { to_add = 100 }
+			multiply_temp_variable = { to_add = BRA_develop_region_pop_history^base }
+			add_to_temp_variable = { current = to_add }
+
+			set_temp_variable = { pop_to_add = BRA_develop_region_pop_history^base }
+			divide_temp_variable = { pop_to_add = 100 }
+			add_to_temp_variable = { divisor = pop_to_add }
+		}
+		divide_temp_variable = { current = divisor }
+
+		add_to_array = { array = BRA_develop_industry_pct_gdp_history value = current }
+	}
+	set_variable = { BRA_develop_industry_pct_gdp = BRA_develop_industry_pct_gdp_history^12 }
+
+
+	BRA_develop_ready_graph =yes
+}
+
+# Redraws a graph
+# Called every month when numbers update and when the player chooses to view a different stat
+BRA_develop_ready_graph = {
+	# Update frames of buttons
+	clear_array = BRA_develop_is_stat_selected
+	resize_array = {
+		array = BRA_develop_is_stat_selected
+		value = 1
+		size = 8
+	}
+	set_variable = { BRA_develop_is_stat_selected^BRA_develop_graph_selected_stat = 2 }
+
+	# Fill graph values with appropriate values, based on selected stat
+	# Here, BRA_develop_graph_base_unit is the base "unit", 0 is none, 1 is K, 2 is M, 3 is B, -1 is percentage
+	clear_array = BRA_develop_graph_values
+	if = {
+		limit = {
+			check_variable = { BRA_develop_graph_selected_stat = 0 }
+		}
+		set_variable = { BRA_develop_graph_base_unit = 2 }
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { BRA_develop_graph_values = BRA_develop_GDP_history^i }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_graph_selected_stat = 2 }
+		}
+		set_variable = { BRA_develop_graph_base_unit = -1 }
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { BRA_develop_graph_values = BRA_develop_inflation_history^i }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_graph_selected_stat = 1 }
+		}
+		set_variable = { BRA_develop_graph_base_unit = 1 }
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { BRA_develop_graph_values = BRA_develop_pop_history^i }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_graph_selected_stat = 3 }
+		}
+		set_variable = { BRA_develop_graph_base_unit = -1 }
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			add_to_array = { BRA_develop_graph_values = BRA_develop_industry_pct_gdp_history^i }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_graph_selected_stat = 4  }
+		}
+		set_variable = { BRA_develop_graph_base_unit = 1 }
+
+		set_temp_variable = { base = BRA_develop_selected_region }
+		multiply_temp_variable = { base = 13 }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			set_temp_variable = { idx = i }
+			add_to_temp_variable = { idx = base }
+			add_to_array = { BRA_develop_graph_values = BRA_develop_region_pop_history^idx }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_graph_selected_stat = 5  }
+		}
+		set_variable = { BRA_develop_graph_base_unit = -1 }
+
+		set_temp_variable = { base = BRA_develop_selected_region }
+		multiply_temp_variable = { base = 13 }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			set_temp_variable = { idx = i }
+			add_to_temp_variable = { idx = base }
+			add_to_array = { BRA_develop_graph_values = BRA_develop_region_urban_pop_history^idx }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_graph_selected_stat = 6  }
+		}
+		set_variable = { BRA_develop_graph_base_unit = -1 }
+
+		set_temp_variable = { base = BRA_develop_selected_region }
+		multiply_temp_variable = { base = 13 }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			set_temp_variable = { idx = i }
+			add_to_temp_variable = { idx = base }
+			add_to_array = { BRA_develop_graph_values = BRA_develop_region_mech_rate_history^idx }
+		}
+	}
+	else = {
+		set_variable = { BRA_develop_graph_base_unit = -1 }
+
+		set_temp_variable = { base = BRA_develop_selected_region }
+		multiply_temp_variable = { base = 13 }
+
+		for_loop_effect = {
+			start = 0
+			end = 13
+			value = i
+
+			set_temp_variable = { idx = i }
+			add_to_temp_variable = { idx = base }
+			add_to_array = { BRA_develop_graph_values = BRA_develop_region_industry_history^idx }
+		}
+	}
+
+	clear_array = BRA_develop_graph_offsets
+	clear_array = BRA_develop_graph_deltas
+	clear_array = BRA_develop_graph_vbars
+	clear_array = BRA_develop_graph_vbar_offsets
+
+	# Find minimum and maximum values visible on graph
+	set_temp_variable = { min = BRA_develop_graph_values^0 }
+	set_temp_variable = { max = BRA_develop_graph_values^0 }
+	for_loop_effect = {
+		end = 13
+		value = i
+
+		if = {
+			limit = {
+				check_variable = { BRA_develop_graph_values^i > max }
+			}
+			set_temp_variable = { max = BRA_develop_graph_values^i }
+		}
+		if = {
+			limit = {
+				check_variable = { BRA_develop_graph_values^i < min }
+			}
+			set_temp_variable = { min = BRA_develop_graph_values^i }
+		}
+	}
+	set_temp_variable = { range = max }
+	subtract_from_temp_variable = { range = min }
+
+	# Determine rounding factor based on range
+	set_temp_variable = { unit = 10000 }
+	if = {
+		limit = {
+			check_variable = { range < 3 }
+		}
+		set_temp_variable = { unit = 0.5 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 6 }
+		}
+		set_temp_variable = { unit = 1 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 12 }
+		}
+		set_temp_variable = { unit = 2 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 30 }
+		}
+		set_temp_variable = { unit = 5 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 60 }
+		}
+		set_temp_variable = { unit = 10 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 120 }
+		}
+		set_temp_variable = { unit = 20 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 300 }
+		}
+		set_temp_variable = { unit = 50 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 600 }
+		}
+		set_temp_variable = { unit = 100 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 1200 }
+		}
+		set_temp_variable = { unit = 200 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 3000 }
+		}
+		set_temp_variable = { unit = 500 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 6000 }
+		}
+		set_temp_variable = { unit = 1000 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 12000 }
+		}
+		set_temp_variable = { unit = 2000 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { range < 30000 }
+		}
+		set_temp_variable = { unit = 5000 }
+	}
+
+	divide_temp_variable = { min = unit }
+	divide_temp_variable = { max = unit }
+	subtract_from_temp_variable = { min = 0.6 }
+	add_to_temp_variable = { max = 0.6 }
+	round_temp_variable = min
+	round_temp_variable = max
+
+	multiply_temp_variable = { min = unit }
+	multiply_temp_variable = { max = unit }
+
+	set_temp_variable = { range = max }
+	subtract_from_temp_variable = { range = min }
+
+	# Find the unit we should display next to the y axis ticks (ie K, M, B etc)
+	set_variable = { BRA_develop_graph_display_unit = BRA_develop_graph_base_unit }
+	set_temp_variable = { divisor = 1000 }
+	while_loop_effect = {
+		limit = {
+			check_variable = { divisor < min }
+		}
+		multiply_temp_variable = { divisor = 1000 }
+		add_to_variable = { BRA_develop_graph_display_unit = 1 }
+	}
+	divide_temp_variable = { divisor = 1000 }
+
+	# Generate the y axis ticks for our graph
+	divide_temp_variable = { range = 100 }
+	set_temp_variable = { m2 = max }
+	add_to_temp_variable = { m2 = 0.25 }
+	set_temp_variable = { k = min }
+	while_loop_effect = {
+		limit = {
+			check_variable = { k < m2 }
+		}
+		set_temp_variable = { label = k}
+		divide_temp_variable = { label = divisor }
+		add_to_array = { BRA_develop_graph_vbars = label }
+
+		set_temp_variable = { offset = k }
+		subtract_from_temp_variable = { offset = min }
+		divide_temp_variable = { offset = range }
+		multiply_temp_variable = { offset = -1.5 }
+		add_to_array = { BRA_develop_graph_vbar_offsets = offset }
+
+		add_to_temp_variable = { k = unit }
+	}
+
+	# Actually generate the graph line segments
+	for_loop_effect = {
+		start = 0
+		end = 12
+		value = i
+
+		set_temp_variable = { j = i }
+		add_to_temp_variable = { j = 1 }
+
+		set_temp_variable = { vj = BRA_develop_graph_values^j }
+		set_temp_variable = { vi = BRA_develop_graph_values^i }
+		subtract_from_temp_variable = { vj = min }
+		subtract_from_temp_variable = { vi = min }
+		divide_temp_variable = { vj = range }
+		divide_temp_variable = { vi = range }
+
+		divide_temp_variable = { vj = 2 }
+		divide_temp_variable = { vi = 2 }
+		round_temp_variable = vi
+		round_temp_variable = vj
+		multiply_temp_variable = { vj = 2 }
+		multiply_temp_variable = { vi = 2 }
+
+		set_temp_variable = { delta = vj }
+		subtract_from_temp_variable = { delta = vi }
+		divide_temp_variable = { delta = 2 }
+		round_temp_variable = delta
+		add_to_temp_variable = { delta = 50 }
+
+		set_temp_variable = { offset = vi }
+		multiply_temp_variable = { offset = -1.5 }
+
+		add_to_array = { BRA_develop_graph_offsets = offset }
+		add_to_array = { BRA_develop_graph_deltas = delta }
+	}
+}
+
+BRA_develop_select_region = {
+	clear_array = BRA_is_region_selected
+	clr_country_flag = BRA_viewing_megaproject
+	resize_array = {
+		array = BRA_is_region_selected
+		value = 1
+		size = 5
+	}
+	add_to_array = {
+		array = BRA_is_region_selected
+		index = BRA_develop_selected_region
+		value = 2
+	}
+
+	clear_array = BRA_develop_selected_region_arr
+	add_to_array = { BRA_develop_selected_region_arr = BRA_develop_selected_region }
+
+	set_variable = { BRA_develop_frame = BRA_develop_selected_region }
+	add_to_variable = { BRA_develop_frame = 1 }
+
+	BRA_develop_ready_graph = yes
+}
+
+# Set up the initial region status
+BRA_initialize_develop = {
+	set_variable = { BRA_develop_selected_region = 1 }
+
+	set_variable = { base_inflation_rate = 36.3 }
+
+	BRA_develop_init_graph_data = yes
+	BRA_develop_update_regional_progress = yes
+
+	clr_country_flag = BRA_develop_highway_slowdown_1
+	clr_country_flag = BRA_develop_highway_milestone_1
+	clr_country_flag = BRA_develop_highway_slowdown_2
+	clr_country_flag = BRA_develop_highway_milestone_2
+
+	BRA_develop_select_region = yes
+
+	set_temp_variable = { alert_id = 10 }
+	add_TNO_alert_unless_exists = yes
+
+
+	set_variable = { TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 0 }
+	clear_array = BRA_active_megaprojects
+	add_to_array = { BRA_active_megaprojects = TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT }
+
+	# Base Values
+	clear_array = BRA_megaprojects_progress
+	resize_array = { array = BRA_megaprojects_progress value = 0 size = 10 }
+	clear_array = BRA_megaprojects_level
+	resize_array = { array = BRA_megaprojects_level value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_base_pp_cost
+	resize_array = { array = BRA_megaprojects_base_pp_cost value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_pp_cost_per_level
+	resize_array = { array = BRA_megaprojects_pp_cost_per_level value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_cost_per_level
+	resize_array = { array = BRA_megaprojects_cost_per_level value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_max_level
+	resize_array = { array = BRA_megaprojects_max_level value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_max_prog
+	resize_array = { array = BRA_megaprojects_max_prog value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_min_prog
+	resize_array = { array = BRA_megaprojects_min_prog value = 0 size = BRA_megaprojects_progress^num }
+
+	# Derived Values
+	clear_array = BRA_megaprojects_cost
+	resize_array = { array = BRA_megaprojects_cost value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_pp_cost
+	resize_array = { array = BRA_megaprojects_pp_cost value = 0 size = BRA_megaprojects_progress^num }
+	clear_array = BRA_megaprojects_pp_cost
+	resize_array = { array = BRA_megaprojects_build_speed value = 0 size = BRA_megaprojects_progress^num }
+
+	set_variable = { BRA_megaprojects_progress^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 18.1 }
+	set_variable = { BRA_megaprojects_level^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 4 }
+	set_variable = { BRA_megaprojects_base_pp_cost^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = -0.05 }
+	set_variable = { BRA_megaprojects_pp_cost_per_level^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 0.025 }
+	set_variable = { BRA_megaprojects_cost_per_level^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 0.010 }
+	set_variable = { BRA_megaprojects_max_level^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 10 }
+	set_variable = { BRA_megaprojects_max_prog^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 14.5 }
+	set_variable = { BRA_megaprojects_min_prog^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 7.5 }
+
+
+	BRA_update_active_project_display = yes
+
+	BRA_develop_update_projects = yes
+}
+
+BRA_compute_build_speed = {
+	set_temp_variable = { total = max_prog }
+	set_temp_variable = { x = level }
+	subtract_from_temp_variable = { x = max_level }
+	multiply_temp_variable = { x = x }
+
+	set_temp_variable = { irange = max_level }
+	subtract_from_temp_variable = { irange = 1 }
+	multiply_temp_variable = { irange = irange }
+
+	set_temp_variable = { orange = max_prog }
+	subtract_from_temp_variable = { orange = min_prog }
+
+	divide_temp_variable = { x = irange }
+	multiply_temp_variable = { x = orange }
+
+	subtract_from_temp_variable = { total = x }
+	set_temp_variable = { build_speed = total }
+	multiply_temp_variable = { build_speed = 2 }
+	round_temp_variable = build_speed
+	divide_temp_variable = { build_speed = 2 }
+}
+
+
+
+BRA_develop_update_projects = {
+	for_each_loop = {
+		array = BRA_active_megaprojects
+		value = project_idx
+
+		set_variable = { BRA_megaprojects_cost^project_idx = BRA_megaprojects_cost_per_level^project_idx }
+		multiply_variable = { BRA_megaprojects_cost^project_idx = BRA_megaprojects_level^project_idx }
+
+		set_variable = { BRA_megaprojects_pp_cost^project_idx = BRA_megaprojects_pp_cost_per_level^project_idx }
+		multiply_variable = { BRA_megaprojects_pp_cost^project_idx = BRA_megaprojects_level^project_idx }
+		add_to_variable = { BRA_megaprojects_pp_cost^project_idx = BRA_megaprojects_base_pp_cost^project_idx }
+
+		set_temp_variable = { max_prog = BRA_megaprojects_max_prog^project_idx }
+		set_temp_variable = { min_prog = BRA_megaprojects_min_prog^project_idx }
+		set_temp_variable = { max_level = BRA_megaprojects_max_level^project_idx }
+		set_temp_variable = { level = BRA_megaprojects_level^project_idx }
+		BRA_compute_build_speed = yes
+
+		set_variable = { BRA_megaprojects_build_speed^project_idx = build_speed }
+		
+		clamp_variable = { var = BRA_megaprojects_progress^project_idx min = 0 max = 100 }
+	}
+
+
+	# Highway-specific stuff
+	set_variable = { BRA_develop_highway_cost = BRA_megaprojects_cost^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT }
+
+	set_variable = { BRA_develop_pp_cost = BRA_megaprojects_pp_cost^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT }
+	multiply_variable = { BRA_develop_pp_cost = -1 }
+
+	set_variable = { BRA_develop_highway_pus = BRA_megaprojects_level^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT }
+	set_variable = { BRA_develop_highway_pus_display = BRA_develop_highway_pus }
+	multiply_variable = { BRA_develop_highway_pus = -1 }
+
+	# set_variable = { BRA_develop_highway_level_prev = BRA_develop_highway_level }
+
+	set_variable = { BRA_develop_highway_frame = 100 }
+	subtract_from_variable = { BRA_develop_highway_frame = BRA_megaprojects_progress^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT }
+	divide_variable = { BRA_develop_highway_frame = 100 }
+	multiply_variable = { BRA_develop_highway_frame = 9.5 }
+
+	add_to_variable = { BRA_develop_highway_frame = 1.4 }
+	round_variable = BRA_develop_highway_frame
+}
+
+BRA_develop_project_monthly = {
+
+	for_each_loop = {
+		array = BRA_active_megaprojects
+		value = project_idx
+
+		set_temp_variable = { monthly = BRA_megaprojects_build_speed^project_idx }
+		divide_temp_variable = { monthly = 12 }
+
+		add_to_variable = { BRA_megaprojects_progress^project_idx = monthly  }
+		clamp_variable = { var = BRA_megaprojects_progress^project_idx min = 0 max = 100 }
+
+		set_temp_variable = { monthly = BRA_megaprojects_cost^project_idx }
+		divide_temp_variable = { monthly = 12 }
+
+		set_temp_variable = { temp_econ_spending_amount = monthly }
+		econ_spend_money_once_effect_raw_money = yes
+	}
+
+	BRA_develop_update_projects = yes
+
+	# Highway stuff
+	set_temp_variable = { highway_progress = BRA_megaprojects_progress^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT }
+
+	if = {
+		limit = {
+			check_variable = { highway_progress > 35.0 }
+			NOT = { has_country_flag = BRA_develop_highway_slowdown_1 }
+		}
+		set_country_flag = BRA_develop_highway_slowdown_1
+		country_event = { id = brazil.13 }
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 46.0 }
+			NOT = { has_country_flag = BRA_develop_highway_milestone_1 }
+		}
+		set_country_flag = BRA_develop_highway_milestone_1
+		country_event = { id = brazil.14 }
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 60.0 }
+			NOT = { has_country_flag = BRA_develop_highway_slowdown_2 }
+		}
+		set_country_flag = BRA_develop_highway_slowdown_2
+		country_event = { id = brazil.6 }
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 78.0 }
+			NOT = { has_country_flag = BRA_develop_highway_milestone_2 }
+		}
+		set_country_flag = BRA_develop_highway_milestone_2
+		country_event = { id = brazil.15 }
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress = 100.0 }
+			AND = { has_country_flag = BRA_develop_highway_milestone_2 }
+		}
+		set_country_flag = BRA_develop_highway_complete
+		country_event = { id = brazil.170 }
+	}
+
+
+	if = {
+		limit = {
+			check_variable = { highway_progress > 26.0 }
+			NOT = { has_country_flag = BRA_hw_504_road }
+		}
+
+		504 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		set_country_flag = BRA_hw_504_road
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 36.0 }
+			NOT = { has_country_flag = BRA_hw_280_road }
+		}
+
+		280 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		set_country_flag = BRA_hw_280_road
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 57.0 }
+			NOT = { has_country_flag = BRA_hw_1397_road }
+		}
+
+		1483 = {
+			add_building_construction = {
+	    		type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		set_country_flag = BRA_hw_1397_road
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 67.0 }
+			NOT = { has_country_flag = BRA_hw_495_1_road }
+		}
+
+		495 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		set_country_flag = BRA_hw_495_1_road
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 78.0 }
+			NOT = { has_country_flag = BRA_hw_495_2_road }
+		}
+
+		495 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		set_country_flag = BRA_hw_495_2_road
+	}
+	if = {
+		limit = {
+			check_variable = { highway_progress > 89.0 }
+			NOT = { has_country_flag = BRA_hw_495_3_road }
+		}
+
+		495 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		set_country_flag = BRA_hw_495_3_road
+	}
+}
+
+
+BRA_update_active_project_display = {
+	clear_array = BRA_active_display
+
+	for_loop_effect = {
+		start = 0
+		end = BRA_active_megaprojects^num
+		value = i
+
+		add_to_array = { BRA_active_display = BRA_active_megaprojects^i }
+	}
+
+	set_temp_variable = { num_active = BRA_active_display^num }
+	modulo_temp_variable = { num_active = 3 }
+
+	if = {
+		limit = { check_variable = { num_active = 1 } }
+
+		set_temp_variable = { insert_idx = BRA_active_display^num }
+		# subtract_from_variable = { insert_idx = 2 }
+		add_to_array = { array = BRA_active_display value = -1 index = 0 }
+	}
+}
+
+
+BRA_develop_increase_highway_pp = {
+	custom_effect_tooltip = BRA_increase_highway_pp_tt
+
+	add_to_variable = { BRA_megaprojects_base_pp_cost^TRANS_AMAZONIAN_HIGHWAY_MEGAPROJECT = 0.05 }
+
+	BRA_develop_update_projects = yes
+}
+
+
+BRA_develop_update_regional_progress = {
+	clear_array = BRA_develop_regional_progress
+	add_to_array = { BRA_develop_regional_progress = 5 }
+
+	set_temp_variable = { curr = 0 }
+	set_temp_variable = { divisor = 0 }
+
+	set_variable = { BRA_development_monthly_population = 0 }
+
+	for_loop_effect = {
+		start = 1
+		end = 5
+		value = i
+
+		clamp_variable = { var = BRA_develop_region_urban_pop^i min = 0 max = 100 }
+		clamp_variable = { var = BRA_develop_region_industry^i min = 0 max = 45 }
+		clamp_variable = { var = BRA_develop_region_mech_rate^i min = 0 max = 100 }
+
+		add_to_variable = { BRA_development_monthly_population = BRA_develop_region_mech_rate^i }
+
+		set_temp_variable = { pop_pct = BRA_develop_region_urban_pop^i }
+		set_temp_variable = { industry_pct = BRA_develop_region_industry^i }
+		set_temp_variable = { mech_rate = BRA_develop_region_mech_rate^i }
+		clamp_temp_variable = { var = pop_pct min = 0 max = 70 }
+		clamp_temp_variable = { var = industry_pct min = 0 max = 50}
+		clamp_temp_variable = { var = mech_rate min = 0 max = 60}
+		divide_temp_variable = { pop_pct = 210 }
+		divide_temp_variable = { industry_pct = 150 }
+		divide_temp_variable = { mech_rate = 180 }
+
+		set_temp_variable = { progress_total = pop_pct }
+		add_to_temp_variable = { progress_total = industry_pct }
+		add_to_temp_variable = { progress_total = mech_rate }
+		multiply_temp_variable = { progress_total = 6 }
+		add_to_temp_variable = { progress_total = -1 }
+		round_temp_variable = progress_total
+		add_to_array = { BRA_develop_regional_progress = progress_total }
+
+
+		set_temp_variable = { to_add = BRA_develop_region_industry^i }
+		divide_temp_variable = { to_add = 100 }
+		multiply_temp_variable = { to_add = BRA_develop_region_pop_history^12 }
+		add_to_temp_variable = { current = to_add }
+
+		set_temp_variable = { pop_to_add = BRA_develop_region_pop_history^12 }
+		divide_temp_variable = { pop_to_add = 100 }
+		add_to_temp_variable = { divisor = pop_to_add }
+	}
+	divide_variable = { BRA_development_monthly_population = 2000 }
+	force_update_dynamic_modifier = yes
+	divide_temp_variable = { current = divisor }
+	set_variable = { BRA_develop_industry_pct_gdp = current }
+}
+
+BRA_development_subsidize_mech_state_GDP_growth = {
+	if = {
+		limit = {
+			check_variable = { BRA_develop_selected_region = 1 }
+		}
+		random_list = {
+			1 = {
+				497 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				498 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				499 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				504 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1484 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1485 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1490 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1491 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1492 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_selected_region = 2 }
+		}
+		random_list = {
+			1 = {
+				505 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1489 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				280 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1531 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_selected_region = 3 }
+		}
+		random_list = {
+			1 = {
+				501 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				496 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				500 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1487 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1488 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_develop_selected_region = 4 }
+		}
+		random_list = {
+			1 = {
+				503 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				1486 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+			1 = {
+				502 = {
+					add_state_modifier = {
+						modifier = {
+							state_GDP_growth_factor_modifier = 0.03
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+###############################################################
+########           Presidential Race Mechanic          ########
+###############################################################
+
+BRA_pres_select_region = {
+	clear_array = BRA_is_region_selected_pres
+	resize_array = {
+		array = BRA_is_region_selected_pres
+		value = 1
+		size = 5
+	}
+	add_to_array = {
+		array = BRA_is_region_selected_pres
+		index = BRA_pres_selected_region
+		value = 2
+	}
+
+	clear_array = BRA_pres_selected_pops
+	clear_array = BRA_pres_selected_momentum
+
+	set_temp_variable = { lo = BRA_pres_selected_region }
+	multiply_temp_variable = { lo = BRA_pres_candidates^num }
+	set_temp_variable = { hi = lo }
+	add_to_temp_variable = { hi = BRA_pres_candidates^num }
+	for_loop_effect = {
+		start = lo
+		end = hi
+		value = i
+
+		set_temp_variable = { support = BRA_pres_support^i }
+		divide_temp_variable = { support = 10 }
+		add_to_array = { BRA_pres_selected_pops = support }
+		add_to_array = { BRA_pres_selected_momentum = BRA_pres_momentum^i }
+	}
+
+	#BRA_develop_ready_graph = yes
+}
+
+BRA_initialize_pres = {
+	clear_array = BRA_numbers_to_hundred
+
+	for_loop_effect = {
+		start = 0
+		end = 101
+		add = 20
+		value = i
+
+		add_to_array = { BRA_numbers_to_hundred = i }
+	}
+
+
+	clear_array = BRA_pres_candidates
+	clear_array = BRA_pres_candidate_parties
+	clear_array = BRA_pres_support
+	clear_array = BRA_pres_momentum
+	clear_array = BRA_pres_infra
+
+	BRA_redraw_pres_info = yes
+	BRA_pres_select_region = yes
+
+	# BRA_pres_start_65_election = yes
+
+	clear_array = BRA_pres_campaigning_party
+	resize_array = { array = BRA_pres_campaigning_party size = 5 value = 0 }
+	clear_array = BRA_pres_campaigning_party_2
+	resize_array = { array = BRA_pres_campaigning_party_2 size = 5 value = 0 }
+}
+
+BRA_pres_weekly_tick = {
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = i
+
+		set_temp_variable = { lo = i }
+		multiply_temp_variable = { lo = BRA_pres_candidates^num }
+
+		for_loop_effect = {
+			start = 0
+			end = BRA_pres_candidates^num
+			value = j
+
+			set_temp_variable = { support_idx = j }
+			add_to_temp_variable = { support_idx = lo }
+
+			set_temp_variable = { delta = BRA_pres_momentum^support_idx }
+			multiply_temp_variable = { delta = 300 }
+			divide_temp_variable = { delta = BRA_develop_region_pop^i }
+			multiply_temp_variable = { delta = 100 }
+
+			add_to_variable = { BRA_pres_support^support_idx = delta }
+			multiply_variable = { BRA_pres_momentum^support_idx = 0.8 }
+		}
+	}
+	BRA_redraw_pres_info = yes
+	BRA_pres_select_region = yes
+}
+
+BRA_pres_others_campaign = {
+
+	log = "[GetDateText]: [Root.GetName]: Beginning campaign process"
+
+	clear_temp_array = BRA_taken_regions
+
+	for_loop_effect  = {
+		start = 0
+		end =  BRA_pres_candidates^num
+		value = k
+
+		if = {
+			limit = {
+				NOT = { check_variable = { BRA_pres_chosen_candidate = BRA_pres_candidates^k } }
+			}
+
+			set_temp_variable = { chosen_region = 5 }
+			subtract_from_temp_variable = { chosen_region = BRA_taken_regions^num }
+			multiply_temp_variable = { chosen_region = random }
+			subtract_from_temp_variable = { chosen_region = 0.5 }
+			round_temp_variable = chosen_region
+
+			while_loop_effect = {
+				limit = { is_in_array = { BRA_taken_regions = chosen_region } }
+				add_to_temp_variable = { chosen_region = 1 }
+			}
+
+
+			set_temp_variable = { what_do = random }
+			round_temp_variable = what_do
+			if = {
+				limit = { check_variable = { what_do = 0 } }
+
+				set_temp_variable = { idx = chosen_region }
+				multiply_temp_variable = { idx = BRA_pres_candidates^num }
+				add_to_temp_variable = { idx = k }
+
+				set_temp_variable = { amount = 540000 }
+				divide_temp_variable = { amount = BRA_develop_region_pop^chosen_region }
+				add_to_variable = { BRA_pres_support^idx = amount }
+
+			}
+			else = {
+				set_temp_variable = { idx = chosen_region }
+				multiply_temp_variable = { idx = BRA_pres_candidates^num }
+				add_to_temp_variable = { idx = k }
+
+				set_temp_variable = { amount = 13.5 }
+				add_to_variable = { BRA_pres_momentum^idx = amount }
+
+			}
+
+			set_variable = { BRA_pres_campaigning_party^chosen_region = BRA_pres_candidate_parties^k }
+
+			add_to_temp_array = { BRA_taken_regions = chosen_region }
+		}
+	}
+	BRA_redraw_pres_info = yes
+	BRA_pres_select_region = yes
+
+	country_event  = { id = brazil.251 days = 14 }
+}
+
+BRA_pres_start_65_election = {
+	clear_array = BRA_pres_candidates
+	clear_array = BRA_pres_candidate_parties
+	clear_array = BRA_pres_support
+	clear_array = BRA_pres_infra
+	clear_array = BRA_pres_momentum
+	resize_array = { array = BRA_pres_support size = 15 value = 0 }
+
+	if = { # goulart
+		limit = { has_country_flag = BRA_65_goulart_candidate }
+		add_to_array = { BRA_pres_candidates = 0 }
+		add_to_array = { BRA_pres_candidate_parties = 3 }
+
+		set_variable = { BRA_pres_support^0 = 50 }
+		set_variable = { BRA_pres_support^3 = 30 }
+		set_variable = { BRA_pres_support^6 = 30 }
+		set_variable = { BRA_pres_support^9 = 30 }
+		set_variable = { BRA_pres_support^12 = 50 }
+	}
+	else = { # kubitschek
+		add_to_array = { BRA_pres_candidates = 1 }
+		add_to_array = { BRA_pres_candidate_parties = 1 }
+
+		set_variable = { BRA_pres_support^0 = 53 }
+		set_variable = { BRA_pres_support^3 = 33 }
+		set_variable = { BRA_pres_support^6 = 33 }
+		set_variable = { BRA_pres_support^9 = 31 }
+		set_variable = { BRA_pres_support^12 = 53 }
+	}
+	if = { # quadros
+		limit = { has_country_flag = BRA_65_quadros_candidate }
+		add_to_array = { BRA_pres_candidates = 2 }
+		add_to_array = { BRA_pres_candidate_parties = 2 }
+
+		set_variable = { BRA_pres_support^1 = 34 }
+		set_variable = { BRA_pres_support^4 = 36 }
+		set_variable = { BRA_pres_support^7 = 44 }
+		set_variable = { BRA_pres_support^10 = 42 }
+		set_variable = { BRA_pres_support^13 = 34 }
+	}
+	else = { # lacerda
+		add_to_array = { BRA_pres_candidates = 3 }
+		add_to_array = { BRA_pres_candidate_parties = 2 }
+
+		set_variable = { BRA_pres_support^1 = 30 }
+		set_variable = { BRA_pres_support^4 = 32 }
+		set_variable = { BRA_pres_support^7 = 40 }
+		set_variable = { BRA_pres_support^10 = 40 }
+		set_variable = { BRA_pres_support^13 = 30 }
+	}
+	# de barros
+	add_to_array = { BRA_pres_candidates = 4 }
+	add_to_array = { BRA_pres_candidate_parties = 4 }
+
+	set_variable = { BRA_pres_support^2 = 15 }
+	set_variable = { BRA_pres_support^5 = 20 }
+	set_variable = { BRA_pres_support^8 = 20 }
+	set_variable = { BRA_pres_support^11 = 44 }
+	set_variable = { BRA_pres_support^14 = 15 }
+
+	resize_array = { array = BRA_pres_momentum size = 15 value = 0 }
+	resize_array = { array = BRA_pres_infra size = 15 value = 1 }
+
+	clear_array = BRA_pres_campaigning_party
+	resize_array = { array = BRA_pres_campaigning_party size = 5 value = 0 }
+	clear_array = BRA_pres_campaigning_party_2
+	resize_array = { array = BRA_pres_campaigning_party_2 size = 5 value = 0 }
+
+	set_country_flag = BRA_pres_election_active
+
+	BRA_redraw_pres_info = yes
+	BRA_pres_select_region = yes
+
+	BRA_pres_others_campaign = yes
+	 country_event  = {
+		id = brazil.252
+		days = 7
+	}
+
+	set_temp_variable = { alert_id = 8 }
+	add_TNO_alert_unless_exists = yes
+}
+
+BRA_pres_finish_election = {
+	set_variable = { BRA_map_selected_tab^0 = 1 }
+	set_variable = { BRA_map_election_type_frames^0 = 1 }
+	set_variable = { BRA_map_election_type_frames^1 = 2 }
+
+	set_temp_variable = { highest = -1 }
+	set_temp_variable = { second_highest = -1 }
+	set_variable = { BRA_pres_winner = 0 }
+	set_variable = { BRA_pres_second = 0 }
+
+	clr_country_flag = BRA_pres_election_active
+
+	for_loop_effect = {
+		start = 0
+		end = BRA_pres_candidates^num
+		value = j
+
+		if = {
+			limit = { check_variable = { BRA_pres_nationwide_pops^j > highest } }
+			set_variable = { BRA_pres_second = BRA_pres_winner }
+			set_temp_variable = { second_highest = highest }
+
+			set_temp_variable = { highest = BRA_pres_nationwide_pops^j }
+			set_variable = { BRA_pres_winner = BRA_pres_candidates^j }
+		}
+		else_if = {
+			limit = { check_variable = { BRA_pres_nationwide_pops^j > second_highest } }
+			set_temp_variable = { second_highest = BRA_pres_nationwide_pops^j }
+			set_variable = { BRA_pres_second = BRA_pres_candidates^j }
+		}
+	}
+	set_variable = { BRA_pres_winner_pct = highest }
+	set_variable = { BRA_pres_second_pct = second_highest }
+
+	set_temp_variable = { alert_id = 8 }
+	remove_TNO_alert = yes
+}
+
+
+BRA_update_leading_pres = {
+	clear_array = BRA_pres_leading_party
+	clear_array = BRA_pres_leading_amnt
+
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = i
+		break = bo
+
+		set_temp_variable = { lo = i }
+		set_temp_variable = { hi = i }
+		add_to_temp_variable = { hi = 1 }
+		multiply_temp_variable = { lo = BRA_pres_candidates^num }
+		multiply_temp_variable = { hi = BRA_pres_candidates^num }
+
+		set_temp_variable = { best = 0 }
+		set_temp_variable = { best_idx = 0 }
+		set_temp_variable = { total = 0 }
+
+		for_loop_effect = {
+			start = lo
+			end = hi
+			value = j
+			break = bi
+
+			clamp_variable = { var = BRA_pres_support^j max = 10000 min = 0 }
+			add_to_temp_variable = { total = BRA_pres_support^j }
+			if = {
+				limit = { check_variable = { BRA_pres_support^j > best } }
+				set_temp_variable = { best = BRA_pres_support^j }
+				set_temp_variable = { best_idx = j }
+			}
+		}
+		divide_temp_variable = { total = 1000 }
+		for_loop_effect = {
+			start = lo
+			end = hi
+			value = j
+			break = bi
+
+			divide_variable = { BRA_pres_support^j = total }
+		}
+
+		add_to_array = { BRA_pres_leading_amnt = BRA_pres_support^best_idx }
+		if = {
+			limit = { check_variable = { BRA_pres_candidates^num > 0.5 } }
+			modulo_temp_variable = { best_idx = BRA_pres_candidates^num }
+		}
+		add_to_array = { BRA_pres_leading_party = BRA_pres_candidate_parties^best_idx }
+	}
+}
+
+
+BRA_redraw_pres_info = {
+	BRA_update_leading_pres = yes
+
+	clear_array = BRA_pres_nationwide_pops
+	resize_array = { array = BRA_pres_nationwide_pops value = 0 size = BRA_pres_candidates^num }
+	set_temp_variable = { total_pops = 0 }
+
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = i
+
+		set_temp_variable = { pop = BRA_develop_region_pop^i }
+		divide_temp_variable = { pop = 100 }
+		add_to_temp_variable = { total_pops = pop }
+
+		set_temp_variable = { lo = i }
+		multiply_temp_variable = { lo = BRA_pres_candidates^num }
+
+		for_loop_effect = {
+			start = 0
+			end = BRA_pres_candidates^num
+			value = j
+
+			set_temp_variable = { support_idx = j }
+			add_to_temp_variable = { support_idx = lo }
+
+			set_temp_variable = { popularity_pts = BRA_pres_support^support_idx }
+			divide_temp_variable = { popularity_pts = 10 }
+			multiply_temp_variable = { popularity_pts = pop }
+			add_to_variable = { BRA_pres_nationwide_pops^j = popularity_pts }
+		}
+	}
+	log = "[GetDateText]: [Root.GetName]: Total pop [?total_pops] [?BRA_pres_nationwide_pops^0] [?BRA_pres_nationwide_pops^1] [?BRA_pres_nationwide_pops^2]"
+	for_loop_effect = {
+		start = 0
+		end = BRA_pres_candidates^num
+		value = j
+
+		divide_variable = { BRA_pres_nationwide_pops^j = total_pops }
+	}
+
+	clear_array = BRA_pres_candidate_bar_offsets
+	add_to_array = { BRA_pres_candidate_bar_offsets = 3 }
+	add_to_array = { BRA_pres_candidate_bar_offsets = 3 }
+	add_to_array = { BRA_pres_candidate_bar_offsets = 3 }
+	add_to_array = { BRA_pres_candidate_bar_offsets = 3 }
+
+	set_variable = { BRA_pres_candidate_portrait_offset = 0 }
+	set_variable = { BRA_pres_candidate_bar_offset = 3 }
+	if = {
+		limit = { check_variable = { BRA_pres_candidates^num = 3 } }
+		set_variable = { BRA_pres_candidate_portrait_offset = 41 }
+
+		clear_array = BRA_pres_candidate_bar_offsets
+		add_to_array = { BRA_pres_candidate_bar_offsets = 13 }
+		add_to_array = { BRA_pres_candidate_bar_offsets = 23 }
+		add_to_array = { BRA_pres_candidate_bar_offsets = 33 }
+	}
+}
+
+###############################################################
+########            Senado Federal Mechanic            ########
+###############################################################
+
+
+# Computes number of aligned senators to each party and
+# determines which icons to color in the senate diagram
+# See https://github.com/Ovejalz89/The-Last-Spring-submod/wiki/Brazilian-Parliament
+BRA_redraw_senate_diagram = {
+
+	clear_array = BRA_ordered_senate_parties
+
+	clear_array = BRA_num_senate_seats
+	clear_array = BRA_coalition_num_senate_seats
+
+	clear_array = BRA_diagram_senator_state_id
+	clear_array = BRA_diagram_senator_cohort_id
+	clear_array = BRA_diagram_senator_parties
+	clear_array = BRA_diagram_senator_up_for_election
+
+	resize_array = { array = BRA_num_senate_seats value = 0 size = NUM_PARTIES_CONST }
+	resize_array = { array = BRA_coalition_num_senate_seats value = 0 size = NUM_PARTIES_CONST }
+
+	# Arrange each party bloc by the ideology of the leader
+	for_each_loop = {
+		array = BRA_base_ordered_senate_parties
+		value = party_id
+
+		if = {
+			limit = { is_in_array = { BRA_senate_major_parties = party_id } }
+
+			# Arrange within the bloc by ideology of affiliated party
+			for_each_loop = {
+				array = BRA_base_ordered_senate_parties
+				value = party_id_2
+
+				if = {
+					limit = { check_variable = { BRA_senate_major_party_align^party_id_2 = party_id } }
+
+					add_to_array = { BRA_ordered_senate_parties = party_id_2 }
+				}
+			}
+		}
+	}
+
+
+	# Count number of members for each party and start to populate the parliament diagram
+	for_each_loop = {
+		array = BRA_ordered_senate_parties
+		value = color
+
+		# Iterate over every senator. If the senator's party color is equal to this party color, increase count
+		# also, add this senator to the parliament diagram
+		set_temp_variable = { count = 0 }
+		for_each_loop = {
+			array = BRA_senator_parties_1
+			value = party
+			index = j
+
+			if = {
+				limit = { check_variable = { party = color } }
+				add_to_array = { BRA_diagram_senator_cohort_id = 1 }
+				add_to_array = { BRA_diagram_senator_state_id = j }
+				add_to_array = { BRA_diagram_senator_parties = party }
+				add_to_array = { BRA_diagram_senator_up_for_election = BRA_seat_1_up_for_election }
+				add_to_temp_variable = { count = 1 }
+			}
+		}
+		for_each_loop = {
+			array = BRA_senator_parties_2
+			value = party
+			index = j
+
+			if = {
+				limit = { check_variable = { party = color } }
+				add_to_array = { BRA_diagram_senator_cohort_id = 2 }
+				add_to_array = { BRA_diagram_senator_state_id = j }
+				add_to_array = { BRA_diagram_senator_parties = party }
+				add_to_array = { BRA_diagram_senator_up_for_election = BRA_seat_2_up_for_election }
+				add_to_temp_variable = { count = 1 }
+			}
+		}
+		for_each_loop = {
+			array = BRA_senator_parties_3
+			value = party
+			index = j
+
+			if = {
+				limit = { check_variable = { party = color } }
+				add_to_array = { BRA_diagram_senator_cohort_id = 3 }
+				add_to_array = { BRA_diagram_senator_state_id = j }
+				add_to_array = { BRA_diagram_senator_parties = party }
+				add_to_array = { BRA_diagram_senator_up_for_election = BRA_seat_3_up_for_election }
+				add_to_temp_variable = { count = 1 }
+			}
+		}
+		set_variable = { BRA_num_senate_seats^color = count }
+	}
+
+
+	for_loop_effect = {
+		start = 0
+		end = BRA_num_senate_seats^num
+		value = party_id
+
+		add_to_variable = { BRA_coalition_num_senate_seats^BRA_senate_major_party_align^party_id = BRA_num_senate_seats^party_id }
+	}
+	for_loop_effect = {
+		start = 0
+		end = BRA_num_senate_seats^num
+		value = party_id
+
+		if = {
+			limit = { NOT = { check_variable = { BRA_senate_major_party_align^party_id = party_id } } }
+			set_variable = { BRA_coalition_num_senate_seats^party_id = BRA_coalition_num_senate_seats^BRA_senate_major_party_align^party_id }
+		}
+	}
+
+	
+	clear_array = BRA_menu_senate_parties
+	clear_array = BRA_menu_senate_types
+
+	# Arrange party breakdown screen
+	for_each_loop = {
+		array = BRA_base_ordered_senate_parties
+		value = party_id
+
+		if = {
+			limit = { is_in_array = { BRA_senate_major_parties = party_id } }
+
+			add_to_array = { BRA_menu_senate_parties = party_id }
+			add_to_array = { BRA_menu_senate_types = 2 }
+
+			add_to_array = { BRA_menu_senate_parties = party_id }
+			add_to_array = { BRA_menu_senate_types = 1 }
+
+			# Arrange within the bloc by ideology of affiliated party
+			for_each_loop = {
+				array = BRA_base_ordered_senate_parties
+				value = party_id_2
+
+				if = {
+					limit = { 
+						check_variable = { BRA_senate_major_party_align^party_id_2 = party_id }
+						NOT = { check_variable = { party_id_2 = party_id } }
+						check_variable = { BRA_num_senate_seats^party_id_2 > 0 }
+					}
+
+					add_to_array = { BRA_menu_senate_parties = party_id_2 }
+					add_to_array = { BRA_menu_senate_types = 1 }
+				}
+			}
+			add_to_array = { BRA_menu_senate_parties = 0 }
+			add_to_array = { BRA_menu_senate_types = 0 }
+		}
+	}
+
+
+	# Hardcoded measure to count seats for each voting bloc / major party
+	set_variable = { BRA_PTB_seats = BRA_coalition_num_senate_seats^PARTY_PTB }
+	set_variable = { BRA_PSD_seats = BRA_coalition_num_senate_seats^PARTY_PSD }
+	set_variable = { BRA_UDN_seats = BRA_coalition_num_senate_seats^PARTY_UDN }
+	set_variable = { BRA_PSP_seats = BRA_coalition_num_senate_seats^PARTY_PSP }
+	set_variable = { BRA_PRP_seats = BRA_coalition_num_senate_seats^PARTY_PRP }
+}
+
+# Requires BRA_senate_selected_state varaible to be set
+# Sets up all the variables used by sidebar GUI elements
+BRA_senate_select_state = {
+	clear_array = BRA_is_state_selected
+	resize_array = {
+		array = BRA_is_state_selected
+		value = 1
+		size = 22
+	}
+	add_to_array = {
+		array = BRA_is_state_selected
+		index = BRA_senate_selected_state
+		value = 2
+	}
+
+	# Either 1 or 2 incumbents
+	if = {
+		limit = {
+			check_variable = { BRA_seat_1_up_for_election = 2 }
+		}
+		set_variable = { BRA_num_incumbents = 1 }
+		set_variable = { BRA_incumbent_identity_1 = BRA_senator_identities_1^BRA_senate_selected_state }
+		set_variable = { BRA_incumbent_party_1 = BRA_senator_parties_1^BRA_senate_selected_state }
+	}
+	else_if = {
+		limit = {
+			check_variable = { BRA_seat_2_up_for_election = 2 }
+		}
+		set_variable = { BRA_num_incumbents = 2 }
+		set_variable = { BRA_incumbent_party_1 = BRA_senator_parties_2^BRA_senate_selected_state }
+		set_variable = { BRA_incumbent_identity_1 = BRA_senator_identities_2^BRA_senate_selected_state }
+		set_variable = { BRA_incumbent_party_2 = BRA_senator_parties_3^BRA_senate_selected_state }
+		set_variable = { BRA_incumbent_identity_2 = BRA_senator_identities_3^BRA_senate_selected_state }
+	}
+	else = {
+		set_variable = { BRA_num_incumbents = 0 }
+	}
+	BRA_senate_update_selected_state = yes
+}
+
+
+# Used for military coup
+BRA_cancel_elections = {
+	set_variable = { BRA_seat_1_up_for_election = 1 }
+	set_variable = { BRA_seat_2_up_for_election = 1 }
+	set_variable = { BRA_seat_3_up_for_election = 1 }
+
+	clear_array = BRA_candidate_parties
+	clear_array = BRA_candidate_identities
+	clear_array = BRA_candidate_popularities
+
+	BRA_redraw_senate_diagram = yes
+	BRA_senate_select_state = yes
+
+	clear_array = BRA_senate_campaigning_party
+	resize_array = { array = BRA_senate_campaigning_party size = 23 value = 0 }
+	clear_array = BRA_senate_campaigning_party_2
+	resize_array = { array = BRA_senate_campaigning_party_2 size = 23 value = 0 }
+}
+
+BRA_process_election_results = {
+
+	set_temp_variable = { alert_id = 7 }
+	remove_TNO_alert = yes
+
+	for_loop_effect = {
+		start = 0
+		end = 22
+		value = i
+		break = bo
+
+		set_temp_variable = { lo = i }
+		set_temp_variable = { hi = i }
+		add_to_temp_variable = { hi = 1 }
+		multiply_temp_variable = { lo = 8 }
+		multiply_temp_variable = { hi = 8 }
+
+		set_temp_variable = { best = 0 }
+		set_temp_variable = { second_best = 0 }
+		set_temp_variable = { best_idx = 0 }
+		set_temp_variable = { second_best_idx = 0 }
+
+		for_loop_effect = {
+			start = lo
+			end = hi
+			value = j
+			break = bi
+
+			if = {
+				limit = { check_variable = { BRA_candidate_identities^j = 0 }}
+				set_temp_variable = { break = 1 }
+			}
+			else = {
+				if = {
+					limit = { check_variable = { BRA_candidate_popularities^j > best } }
+					set_temp_variable = { second_best = best }
+					set_temp_variable = { second_best_idx = best_idx }
+					set_temp_variable = { best = BRA_candidate_popularities^j }
+					set_temp_variable = { best_idx = j }
+				}
+				else_if = {
+					limit = { check_variable = { BRA_candidate_popularities^j > second_best } }
+					set_temp_variable = { second_best = BRA_candidate_popularities^j }
+					set_temp_variable = { second_best_idx = j }
+				}
+			}
+		}
+
+		if = {
+			limit = { check_variable = { BRA_seat_1_up_for_election = 2 } }
+			set_variable = { BRA_senator_parties_1^i = BRA_candidate_parties^best_idx }
+			set_variable = { BRA_senator_identities_1^i = BRA_candidate_identities^best_idx }
+		}
+		else = {
+			set_variable = { BRA_senator_parties_2^i = BRA_candidate_parties^best_idx }
+			set_variable = { BRA_senator_identities_2^i = BRA_candidate_identities^best_idx }
+			set_variable = { BRA_senator_parties_3^i = BRA_candidate_parties^second_best_idx }
+			set_variable = { BRA_senator_identities_3^i = BRA_candidate_identities^second_best_idx }
+		}
+	}
+
+
+	if = {
+		limit = { check_variable = { BRA_seat_1_up_for_election = 2 } }
+		add_to_variable = { BRA_seat_1_election_year = 6 }
+	}
+	if = {
+		limit = { check_variable = { BRA_seat_2_up_for_election = 2 } }
+		add_to_variable = { BRA_seat_2_election_year = 6 }
+	}
+	if = {
+		limit = { check_variable = { BRA_seat_3_up_for_election = 2 } }
+		add_to_variable = { BRA_seat_3_election_year = 6 }
+	}
+
+	set_variable = { BRA_seat_1_up_for_election = 1 }
+	set_variable = { BRA_seat_2_up_for_election = 1 }
+	set_variable = { BRA_seat_3_up_for_election = 1 }
+
+	clear_array = BRA_candidate_parties
+	clear_array = BRA_candidate_identities
+	clear_array = BRA_candidate_popularities
+
+	BRA_redraw_senate_diagram = yes
+	BRA_senate_select_state = yes
+
+	clear_array = BRA_senate_campaigning_party
+	resize_array = { array = BRA_senate_campaigning_party size = 23 value = 0 }
+	clear_array = BRA_senate_campaigning_party_2
+	resize_array = { array = BRA_senate_campaigning_party_2 size = 23 value = 0 }
+}
+
+BRA_update_leading_parties = {
+	clear_array = BRA_senate_leading_party
+	clear_array = BRA_senate_leading_party_frame
+	clear_array = BRA_senate_leading_amnt
+
+	for_loop_effect = {
+		start = 0
+		end = 22
+		value = i
+		break = bo
+
+		set_temp_variable = { lo = i }
+		set_temp_variable = { hi = i }
+		add_to_temp_variable = { hi = 1 }
+		multiply_temp_variable = { lo = 8 }
+		multiply_temp_variable = { hi = 8 }
+
+		set_temp_variable = { best = 0 }
+		set_temp_variable = { best_idx = 0 }
+		set_temp_variable = { total = 0 }
+
+		for_loop_effect = {
+			start = lo
+			end = hi
+			value = j
+			break = bi
+
+			if = {
+				limit = { check_variable = { BRA_candidate_identities^j = 0 }}
+				set_temp_variable = { break = 1 }
+			}
+			else = {
+				clamp_variable = { var = BRA_candidate_popularities^j max = 10000 min = 0 }
+				add_to_temp_variable = { total = BRA_candidate_popularities^j }
+				if = {
+					limit = { check_variable = { BRA_candidate_popularities^j > best } }
+					set_temp_variable = { best = BRA_candidate_popularities^j }
+					set_temp_variable = { best_idx = j }
+				}
+			}
+		}
+		divide_temp_variable = { total = 1000 }
+		for_loop_effect = {
+			start = lo
+			end = hi
+			value = j
+			break = bi
+
+			if = {
+				limit = { check_variable = { BRA_candidate_identities^j = 0 }}
+				set_temp_variable = { break = 1 }
+			}
+			else = {
+				divide_variable = { BRA_candidate_popularities^j = total }
+			}
+		}
+
+		add_to_array = { BRA_senate_leading_amnt = BRA_candidate_popularities^best_idx }
+		add_to_array = { BRA_senate_leading_party = BRA_candidate_parties^best_idx }
+
+		set_temp_variable = { frame = BRA_senate_major_party_align^BRA_candidate_parties^best_idx }
+		multiply_temp_variable = { frame = 100 }
+		add_to_temp_variable = { frame = BRA_candidate_parties^best_idx }
+		add_to_array = { BRA_senate_leading_party_frame = frame }
+	}
+}
+
+# Updates popularities for the selected state
+BRA_senate_update_selected_state = {
+
+
+	clear_array = BRA_selected_candidate_identities
+	clear_array = BRA_selected_candidate_parties
+	clear_array = BRA_selected_candidate_indices
+
+	if = {
+		limit = { check_variable = { BRA_num_incumbents > 0 }}
+
+
+		# Candidate array is of size 8 * 22, containing all candidates for all states
+		# So we start iterating at (state_id * 8)
+		# If fewer than 8 candidates, we stop early
+		set_temp_variable = { lo = BRA_senate_selected_state }
+		set_temp_variable = { hi = BRA_senate_selected_state }
+		add_to_temp_variable = { hi = 1 }
+		multiply_temp_variable = { lo = 8 }
+		multiply_temp_variable = { hi = 8 }
+
+		for_loop_effect = {
+			start = lo
+			end = hi
+			value = i
+
+			if = {
+				limit = { check_variable = { BRA_candidate_identities^i = 0 }}
+				set_temp_variable = { break = 1 }
+			}
+			else = {
+				add_to_array = { BRA_selected_candidate_identities = BRA_candidate_identities^i }
+				add_to_array = { BRA_selected_candidate_parties = BRA_candidate_parties^i }
+				add_to_array = { BRA_selected_candidate_indices = i }
+			}
+		}
+	}
+
+
+	clear_array = BRA_selected_candidate_popularities
+	clear_array = BRA_selected_candidate_popularities_pct
+
+	if = {
+		limit = { check_variable = { BRA_num_incumbents > 0 } }
+
+		set_temp_variable = { lo = BRA_senate_selected_state }
+		set_temp_variable = { hi = BRA_senate_selected_state }
+		add_to_temp_variable = { hi = 1 }
+		multiply_temp_variable = { lo = 8 }
+		multiply_temp_variable = { hi = 8 }
+
+		set_temp_variable = { total = 0 }
+		for_loop_effect = {
+			start = lo
+			end = hi
+			value = i
+
+			if = {
+				limit = { check_variable = { BRA_candidate_identities^i = 0 }}
+				set_temp_variable = { break = 1 }
+			}
+			else = {
+				add_to_array = { BRA_selected_candidate_popularities = BRA_candidate_popularities^i }
+				add_to_temp_variable = { total = BRA_candidate_popularities^i }
+			}
+		}
+
+		for_loop_effect = {
+			start = 0
+			end = 8
+			value = i
+
+			if = {
+				limit = { check_variable = { BRA_selected_candidate_identities^i = 0 }}
+				set_temp_variable = { break = 1 }
+			}
+			else = {
+				set_temp_variable = { pct_pop = BRA_selected_candidate_popularities^i }
+				multiply_temp_variable = { pct_pop = 100 }
+				divide_temp_variable = { pct_pop = total }
+				add_to_array = { BRA_selected_candidate_popularities_pct = pct_pop }
+			}
+		}
+
+
+
+		# Sort candidates to display in winning order
+
+		for_loop_effect = {
+			start = 0
+			end = 8
+			value = base
+			break = break_outer
+
+			set_temp_variable = { lowest = 999999 }
+			set_temp_variable = { tgt = -1 }
+
+			for_loop_effect = {
+				start = base
+				end = 8
+				value = i
+
+				if = {
+					limit = { check_variable = { BRA_selected_candidate_identities^i = 0 }}
+					set_temp_variable = { break = 1 }
+				}
+				else_if = {
+					limit = { check_variable = { BRA_selected_candidate_popularities^i < lowest } }
+
+					set_temp_variable = { lowest = BRA_selected_candidate_popularities^i }
+					set_temp_variable = { tgt = i }
+				}
+			}
+
+			if = {
+				limit = { check_variable = { tgt > -1 } }
+
+				set_temp_variable = { tmp_ident = BRA_selected_candidate_identities^tgt }
+				set_temp_variable = { tmp_party = BRA_selected_candidate_parties^tgt }
+				set_temp_variable = { tmp_pop = BRA_selected_candidate_popularities^tgt }
+				set_temp_variable = { tmp_pct = BRA_selected_candidate_popularities_pct^tgt }
+				set_temp_variable = { tmp_idx = BRA_selected_candidate_indices^tgt }
+
+				remove_from_array = { array = BRA_selected_candidate_identities index = tgt }
+				remove_from_array = { array = BRA_selected_candidate_parties index = tgt }
+				remove_from_array = { array = BRA_selected_candidate_popularities_pct index = tgt }
+				remove_from_array = { array = BRA_selected_candidate_popularities index = tgt }
+				remove_from_array = { array = BRA_selected_candidate_indices index = tgt }
+
+				add_to_array = { array = BRA_selected_candidate_identities value = tmp_ident index = 0 }
+				add_to_array = { array = BRA_selected_candidate_parties value = tmp_party index = 0 }
+				add_to_array = { array = BRA_selected_candidate_popularities_pct value = tmp_pct index = 0 }
+				add_to_array = { array = BRA_selected_candidate_popularities value = tmp_pop index = 0 }
+				add_to_array = { array = BRA_selected_candidate_indices value = tmp_idx index = 0 }
+
+			}
+		}
+	}
+}
+
+# Set up the initial senate seats 
+BRA_initialize_senado = {
+	BRA_setup_senate_positions = yes
+	
+	## Set party helper vars
+
+	set_variable = { NUM_PARTIES_CONST = 20 }
+
+	# Game Start Major Parties
+	set_variable = { PARTY_PSD = 1 }
+	set_variable = { PARTY_UDN = 2 }
+	set_variable = { PARTY_PTB = 3 }
+	set_variable = { PARTY_PSP = 4 }
+	set_variable = { PARTY_PRP = 5 }
+
+	# Game Start Minor Parties
+	set_variable = { PARTY_PDC = 6 }
+	set_variable = { PARTY_PTN = 7 }
+	set_variable = { PARTY_PST = 8 }
+	set_variable = { PARTY_PSB = 9 }
+	set_variable = { PARTY_PR  = 10 }
+	set_variable = { PARTY_PNB = 11 }
+	set_variable = { PARTY_PL  = 12 }
+	set_variable = { PARTY_PCB = 13 }
+
+	# Dictatorship Senado Parties
+	set_variable = { PARTY_ARENA = 14 }
+	set_variable = { PARTY_MDB   = 15 }
+
+	set_variable = { PARTY_PCDOB = 17 }
+	set_variable = { PARTY_PDT = 18 }
+
+	## Set up parties left-to-right
+	clear_array = BRA_base_ordered_senate_parties
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PCDOB }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PCB }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PDT }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PSB }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PTB }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PSD }
+
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_MDB }
+
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PTN }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PL  }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PDC }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PR }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_UDN }
+
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PST }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PSP }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PRP }
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_PNB }
+
+	add_to_array = { BRA_base_ordered_senate_parties = PARTY_ARENA }
+	
+	## Set up party alignments
+	clear_array = BRA_senate_major_party_align
+	for_loop_effect = {
+		start = 0
+		end = NUM_PARTIES_CONST
+		value = i
+
+		add_to_array = { BRA_senate_major_party_align = i }
+	}
+	
+	# Initial UDN-aligned bloc
+	set_variable = { BRA_senate_major_party_align^PARTY_PDC = PARTY_UDN }
+	set_variable = { BRA_senate_major_party_align^PARTY_PTN = PARTY_UDN }
+	set_variable = { BRA_senate_major_party_align^PARTY_PR  = PARTY_UDN }
+	set_variable = { BRA_senate_major_party_align^PARTY_PL  = PARTY_UDN }
+
+	# Initial PTB-aligned bloc
+	set_variable = { BRA_senate_major_party_align^PARTY_PSB = PARTY_PTB }
+	set_variable = { BRA_senate_major_party_align^PARTY_PCB = PARTY_PTB }
+	set_variable = { BRA_senate_major_party_align^PARTY_PCDOB = PARTY_PTB }
+	set_variable = { BRA_senate_major_party_align^PARTY_PDT = PARTY_PTB }
+
+	# Initial PSP-aligned bloc
+	set_variable = { BRA_senate_major_party_align^PARTY_PST = PARTY_PSP }
+
+	# Initial PRP-aligned bloc (lol)
+	set_variable = { BRA_senate_major_party_align^PARTY_PNB = PARTY_PSP }
+
+	## Set up major parties
+
+	clear_array = BRA_senate_major_parties
+	add_to_array = { BRA_senate_major_parties = PARTY_PTB }
+	add_to_array = { BRA_senate_major_parties = PARTY_PSD }
+	add_to_array = { BRA_senate_major_parties = PARTY_UDN }
+	add_to_array = { BRA_senate_major_parties = PARTY_PSP }
+	add_to_array = { BRA_senate_major_parties = PARTY_PRP }
+
+
+	BRA_setup_62_incumbents = yes
+
+	set_variable = { BRA_seat_1_election_year = 1962 }
+	set_variable = { BRA_seat_2_election_year = 1965 }
+	set_variable = { BRA_seat_3_election_year = 1965 }
+
+	BRA_redraw_senate_diagram = yes
+
+	set_variable = { BRA_seat_1_up_for_election = 1 }
+	set_variable = { BRA_seat_2_up_for_election = 1 }
+	set_variable = { BRA_seat_3_up_for_election = 1 }
+
+	set_variable = { BRA_senate_selected_state = 0 }
+	BRA_senate_select_state = yes
+
+	clear_array = BRA_senate_campaigning_party
+	resize_array = { array = BRA_senate_campaigning_party size = 23 value = 0 }
+	clear_array = BRA_senate_campaigning_party_2
+	resize_array = { array = BRA_senate_campaigning_party_2 size = 23 value = 0 }
+}
+
+
+
+BRA_adhemar_de_barros_gaming = {
+
+	clear_array = BRA_senate_major_parties
+	add_to_array = { BRA_senate_major_parties = PARTY_PSP }
+
+	set_variable = { BRA_senate_major_party_align^PARTY_PDC = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PTN = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PR  = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PL  = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PSB = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PCB = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PCDOB = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PST = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PNB = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PDT = PARTY_PSP }
+
+	set_variable = { BRA_senate_major_party_align^PARTY_PSD = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PTB = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_UDN = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_PRP = PARTY_PSP }
+
+	set_variable = { BRA_senate_major_party_align^PARTY_ARENA = PARTY_PSP }
+	set_variable = { BRA_senate_major_party_align^PARTY_MDB = PARTY_PSP }
+
+	BRA_redraw_senate_diagram = yes
+}
+
+
+BRA_crazy_independence = {
+	clear_array = BRA_senate_major_party_align
+	clear_array = BRA_senate_major_parties
+	for_loop_effect = {
+		start = 0
+		end = NUM_PARTIES_CONST
+		value = i
+
+		add_to_array = { BRA_senate_major_party_align = i }
+		if = {
+			limit = {
+				check_variable = { BRA_num_senate_seats^i > 0 }
+			}
+			add_to_array = { BRA_senate_major_parties = i }
+		}
+	}
+
+	BRA_redraw_senate_diagram = yes
+}
+
+BRA_start_1962_election_preseason = {
+	BRA_setup_62_candidates = yes
+	BRA_redraw_senate_diagram = yes
+
+	BRA_update_leading_parties = yes
+	BRA_senate_select_state = yes
+}
+
+# Set up the 1962 election season, marking seat 1 as up for election and setting up the candidates
+BRA_start_1962_election_season = {
+	set_country_flag = BRA_senate_election_season #Use for CIA missions
+	set_variable = { BRA_seat_1_up_for_election = 2 }
+	set_variable = { BRA_seat_2_up_for_election = 1 }
+	set_variable = { BRA_seat_3_up_for_election = 1 }
+	BRA_redraw_senate_diagram = yes
+
+	BRA_update_leading_parties = yes
+	BRA_senate_select_state = yes
+
+	clear_array = BRA_senate_campaigning_party
+	resize_array = { array = BRA_senate_campaigning_party size = 23 value = 0 }
+	clear_array = BRA_senate_campaigning_party_2
+	resize_array = { array = BRA_senate_campaigning_party_2 size = 23 value = 0 }
+
+	BRA_other_parties_campaign = yes
+
+	set_temp_variable = { alert_id = 7 }
+	add_TNO_alert_unless_exists = yes
+
+}
+
+BRA_other_parties_campaign = {
+	clear_array = BRA_senate_campaigning_party
+	resize_array = { array = BRA_senate_campaigning_party size = 23 value = 0 }
+	clear_array = BRA_senate_campaigning_party_2
+	resize_array = { array = BRA_senate_campaigning_party_2 size = 23 value = 0 }
+	set_variable = { BRA_senate_campaign_cooldown = 0 }
+
+	clear_temp_array = BRA_parties_to_campaign
+	add_to_temp_array = { BRA_parties_to_campaign = PARTY_PSD }
+	add_to_temp_array = { BRA_parties_to_campaign = PARTY_UDN }
+	add_to_temp_array = { BRA_parties_to_campaign = PARTY_UDN }
+	add_to_temp_array = { BRA_parties_to_campaign = PARTY_PTB }
+	add_to_temp_array = { BRA_parties_to_campaign = PARTY_PSP }
+
+	clear_temp_array = BRA_taken_states
+	resize_temp_array = { array = BRA_taken_states size = 23 value = 0 }
+
+	log = "[GetDateText]: [Root.GetName]: Beginning campaign process"
+
+	set_temp_variable = { r = random }
+	multiply_temp_variable = { r = BRA_parties_to_campaign^num }
+	round_temp_variable = r
+
+	for_loop_effect  = {
+		start = 0
+		end = BRA_parties_to_campaign^num
+		value = k
+
+		# Randomize party order
+		set_temp_variable = { l = r }
+		add_to_temp_variable = { l = k }
+		modulo_temp_variable = { l = BRA_parties_to_campaign^num }
+		set_variable = { campaigning_party = BRA_parties_to_campaign^l }
+
+		if = {
+			# Don't run AI campaigns for the player's party
+			limit = {
+				NOT = { check_variable = { campaigning_party = BRA_senate_selected_party } }
+				#NOT = { AND = {
+				#    check_variable = { BRA_senate_selected_party = 1 }
+				#    check_variable = { campaigning_party = 3 }
+				#}}
+				#NOT = { AND = {
+				#    check_variable = { BRA_senate_selected_party = 3 }
+				#    check_variable = { campaigning_party = 1 }
+				#}}
+			}
+
+			set_temp_variable = { best_state = 0 }
+			set_temp_variable = { best_candidate = 0 }
+			set_temp_variable = { closest_difference = 10000 }
+
+			# Loop through every state to find the state + candidate who would be a good choice
+			for_loop_effect = {
+				start = 0
+				end = 22
+				value = i
+				break = bo
+
+				# Skip states already taken or states where this party is winning
+				if = {
+					limit = {
+						NOT = { check_variable = { BRA_taken_states^i = 1 }}
+						NOT = { check_variable = { BRA_senate_major_party_align^BRA_senate_leading_party^i = campaigning_party } }
+					}
+
+					set_temp_variable = { lo = i }
+					set_temp_variable = { hi = i }
+					add_to_temp_variable = { hi = 1 }
+					multiply_temp_variable = { lo = 8 }
+					multiply_temp_variable = { hi = 8 }
+
+					set_temp_variable = { best = 0 }
+					set_temp_variable = { best_idx = 0 }
+					set_temp_variable = { total = 0 }
+
+					for_loop_effect = {
+						start = lo
+						end = hi
+						value = j
+						break = bi
+
+						if = {
+							limit = { check_variable = { BRA_candidate_identities^j = 0 }}
+							set_temp_variable = { bi = 1 }
+						}
+						else_if = {
+							limit = { check_variable = { BRA_senate_major_party_align^BRA_candidate_parties^j = campaigning_party } }
+
+							set_temp_variable = { difference = BRA_senate_leading_amnt^i }
+							subtract_from_temp_variable = { difference = BRA_candidate_popularities^j }
+
+							# Find the % that the candidate is behind the leader
+
+							if = {
+								limit = { check_variable = { difference > 0 } }
+
+								# Add 0-3% randomly
+								set_temp_variable = { added = random }
+								multiply_temp_variable = { added = 300 }
+								add_to_temp_variable = { difference = added }
+
+								# If this candidate is the closest to the leader (w/ the random 0-3%), choose them
+								if = {
+									limit = {  check_variable = { difference < closest_difference } }
+
+									set_temp_variable = { closest_difference = difference }
+									set_temp_variable = { best_state = i }
+									set_temp_variable = { best_candidate = j }
+								}
+							}
+						}
+					}
+				}
+			}
+
+			set_variable = { state_id = best_state }
+			set_variable = { senator_id = BRA_candidate_identities^best_candidate }
+
+			set_temp_variable = { party_id = campaigning_party }
+			log = "[GetDateText]: [Root.GetName]: [BRA_party_name_dynamic]: [BRA_state_name_dynamic] ([?best_state]) for [BRA_senator_name_dynamic]"
+			set_temp_variable = { BRA_taken_states^best_state = 1 }
+			if = {
+				limit = {
+					check_variable = { BRA_senate_campaigning_party^best_state = 0 }
+				}
+				set_variable = { BRA_senate_campaigning_party^best_state = campaigning_party }
+			}
+			else = {
+				set_variable = { BRA_senate_campaigning_party_2^best_state = campaigning_party }
+			}
+			add_to_variable = { BRA_candidate_popularities^best_candidate = 15 }
+		}
+	}
+	BRA_update_leading_parties = yes
+	BRA_senate_update_selected_state = yes
+
+	hidden_effect = {
+		country_event  = {
+			id = brazil.250
+			days = 14
+		}
+	}
+}
+
+BRA_start_1965_election_preseason = {
+	BRA_setup_65_candidates = yes
+	BRA_redraw_senate_diagram = yes
+
+	BRA_update_leading_parties = yes
+	BRA_senate_select_state = yes
+}
+
+# Set up the 1965 election season, marking seat 2 & 3 as up for election and setting up the candidates
+BRA_start_1965_election_season = {
+	set_country_flag = BRA_senate_election_season #Use for CIA missions
+	set_variable = { BRA_seat_1_up_for_election = 1 }
+	set_variable = { BRA_seat_2_up_for_election = 2 }
+	set_variable = { BRA_seat_3_up_for_election = 2 }
+	BRA_redraw_senate_diagram = yes
+
+	BRA_update_leading_parties = yes
+	BRA_senate_select_state = yes
+
+	clear_array = BRA_senate_campaigning_party
+	resize_array = { array = BRA_senate_campaigning_party size = 23 value = 0 }
+	clear_array = BRA_senate_campaigning_party_2
+	resize_array = { array = BRA_senate_campaigning_party_2 size = 23 value = 0 }
+
+	BRA_other_parties_campaign = yes
+
+	set_temp_variable = { alert_id = 7 }
+	add_TNO_alert_unless_exists = yes
+}
+
+BRA_set_faction_PSD = {
+	set_variable = { BRA_senate_selected_party = PARTY_PSD }
+}
+
+BRA_set_faction_PTB = {
+	set_variable = { BRA_senate_selected_party = PARTY_PTB }
+}
+
+BRA_set_faction_UDN = {
+	set_variable = { BRA_senate_selected_party = PARTY_UDN }
+}
+
+BRA_set_faction_PSP = {
+	set_variable = { BRA_senate_selected_party = PARTY_PSP }
+}
+
+#Why do I have to code a function I'll only use twice
+
+BRA_check_nation_chaos = {
+	if = {
+		limit = {
+			has_idea = BRA_idea_nationwide_chaos_high
+		}
+		swap_ideas = {
+			remove_idea = BRA_idea_nationwide_chaos_high
+			add_idea = BRA_idea_nationwide_chaos_medhigh
+		}
+	}
+	else_if = {
+		limit = { has_idea =  BRA_idea_nationwide_chaos_medhigh }
+		swap_ideas = {
+			remove_idea = BRA_idea_nationwide_chaos_medhigh
+			add_idea = BRA_idea_nationwide_chaos_med
+		}
+	}
+	else_if = {
+		limit = { has_idea = BRA_idea_nationwide_chaos_med }
+		swap_ideas = {
+			remove_idea = BRA_idea_nationwide_chaos_med
+			add_idea = BRA_idea_nationwide_chaos_lowmed
+		}
+	}
+	else_if = {
+		limit = { has_idea = BRA_idea_nationwide_chaos_lowmed  }
+		swap_ideas = {
+			remove_idea = BRA_idea_nationwide_chaos_lowmed
+			add_idea = BRA_idea_nationwide_chaos_low
+		}
+	}
+	else_if = {
+		limit = { has_idea = BRA_idea_nationwide_chaos_low  }
+		remove_ideas = BRA_idea_nationwide_chaos_low
+	}
+	else_if = {
+		limit = { has_idea = BRA_idea_nationwide_chaos_max  }
+		swap_ideas = {
+			remove_idea = BRA_idea_nationwide_chaos_max
+			add_idea = BRA_idea_nationwide_chaos_high
+		}
+	}
+}
+
+BRA_corruption_refresh = {
+	set_variable = { BRA_consumer_goods = BRA_Corruption }
+	multiply_variable = { BRA_consumer_goods = 0.015 }
+	subtract_from_variable = { BRA_consumer_goods = 0.05 }
+
+	set_variable = { BRA_research_factor = BRA_Corruption }
+	multiply_variable = { BRA_research_factor = -0.017 }
+	subtract_from_variable = { BRA_research_factor= 0.03 }
+
+	set_variable = { BRA_pp_gain = BRA_Corruption }
+	multiply_variable = { BRA_pp_gain = -0.03 }
+	subtract_from_variable = { BRA_pp_gain = 0.10 }
+}
+
+BRA_dissolve_the_senate = {
+	custom_effect_tooltip = BRA_dissolve_the_senate_tt
+	hidden_effect = {
+		BRA_cancel_elections = yes
+		
+		set_country_flag = BRA_senate_dissolved
+
+		#clear_array = BRA_is_state_selected
+		#resize_array = {
+		#	array = BRA_is_state_selected
+		#	value = 1
+		#	size = 22
+		#}
+
+		for_loop_effect = {
+			start = 0
+			end = 22
+			value = i
+
+			set_variable = { BRA_senator_parties_1^i = 16 }
+			set_variable = { BRA_senator_parties_2^i = 16 }
+			set_variable = { BRA_senator_parties_3^i = 16 }
+		}
+
+		for_loop_effect = {
+			start = 0
+			end = 66
+			value = i
+
+			set_variable = { BRA_diagram_senator_parties^i = 16 }
+		}
+	}
+
+}
+BRA_pres_start_military_election = {
+	custom_effect_tooltip = BRA_pres_start_military_election_tt
+	hidden_effect = {
+		country_event = { id = BRA_military_elections.4 days = 287 }
+	}
+
+	clear_array = BRA_pres_candidates
+	clear_array = BRA_pres_candidate_parties
+	clear_array = BRA_pres_support
+	clear_array = BRA_pres_infra
+	clear_array = BRA_pres_momentum
+	resize_array = { array = BRA_pres_support size = 15 value = 0 }
+
+	# Kubitschek
+	add_to_array = { BRA_pres_candidates = 1 }
+	add_to_array = { BRA_pres_candidate_parties = 1 }
+
+	set_variable = { BRA_pres_support^0 = 30 }#Amazonia
+	set_variable = { BRA_pres_support^3 = 18 }#Northeast
+	set_variable = { BRA_pres_support^6 = 23 }#Central West
+	set_variable = { BRA_pres_support^9 = 25 }#South East
+	set_variable = { BRA_pres_support^12 = 40 }#South
+
+	# Lacerda
+	add_to_array = { BRA_pres_candidates = 3 }
+	add_to_array = { BRA_pres_candidate_parties = 2 }
+
+	set_variable = { BRA_pres_support^1 = 63 }
+	set_variable = { BRA_pres_support^4 = 54 }
+	set_variable = { BRA_pres_support^7 = 46 }
+	set_variable = { BRA_pres_support^10 = 44 }
+	set_variable = { BRA_pres_support^13 = 50 }
+
+	# Minor Left Candidates
+	add_to_array = { BRA_pres_candidates = 5 }
+	add_to_array = { BRA_pres_candidate_parties = 3 }
+
+	set_variable = { BRA_pres_support^2 = 9 } # values should be higher but i couldn't figure out how to reduce them through a mission lol
+	set_variable = { BRA_pres_support^5 = 7 }
+	set_variable = { BRA_pres_support^8 = 7 }
+	set_variable = { BRA_pres_support^11 = 8 }
+	set_variable = { BRA_pres_support^14 = 9 }
+
+	resize_array = { array = BRA_pres_momentum size = 15 value = 0 }
+	resize_array = { array = BRA_pres_infra size = 15 value = 1 }
+
+	clear_array = BRA_pres_campaigning_party
+	resize_array = { array = BRA_pres_campaigning_party size = 5 value = 0 }
+	clear_array = BRA_pres_campaigning_party_2
+	resize_array = { array = BRA_pres_campaigning_party_2 size = 5 value = 0 }
+
+	set_country_flag = BRA_pres_election_active
+
+	BRA_redraw_pres_info = yes
+	BRA_pres_select_region = yes
+
+	BRA_pres_others_campaign = yes
+	 country_event  = {
+		id = brazil.252
+		days = 7
+	}
+
+	set_temp_variable = { alert_id = 8 }
+	add_TNO_alert_unless_exists = yes
+}
+
+BRA_run_year_on_action = {
+	BRA = {
+		set_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^12 }
+		subtract_from_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^0 }
+		random_owned_state = {
+			limit = {
+				OR = { state = 495 state = 1483 }
+			}
+			if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 3 } }
+				add_extra_state_shared_building_slots = 2
+			}
+			else_if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 2.5 } }
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		set_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^13 }
+		subtract_from_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^25 }
+		random_owned_state = {
+			limit = {
+				OR = { state = 497 state = 498 state = 499 }
+			}
+			if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 3 } }
+				add_extra_state_shared_building_slots = 2
+			}
+			else_if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 2.5 } }
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		set_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^26 }
+		subtract_from_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^38 }
+		random_owned_state = {
+			limit = {
+				OR = { state = 505 state = 280 state = 504 }
+			}
+			if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 3 } }
+				add_extra_state_shared_building_slots = 2
+			}
+			else_if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 2.5 } }
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		set_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^39 }
+		subtract_from_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^51 }
+		random_owned_state = {
+			limit = {
+				OR = { state = 496 state = 500 state = 501 state = 1487 }
+			}
+			if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 3 } }
+				add_extra_state_shared_building_slots = 2
+			}
+			else_if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 2.5 } }
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+
+		set_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^52 }
+		subtract_from_temp_variable = { BRA_temp_urban_history = BRA_develop_region_urban_pop_history^64 }
+		random_owned_state = {
+			limit = {
+				OR = { state = 502 state = 503 state = 1486 }
+			}
+			if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 3 } }
+				add_extra_state_shared_building_slots = 2
+			}
+			else_if = {
+				limit = { check_variable = { BRA.BRA_temp_urban_history > 2.5 } }
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+}
+
+BRA_monthly_on_action_effect = {
+	remove_from_array = { array = BRA_develop_GDP_history index = 0 }
+	remove_from_array = { array = BRA_develop_graph_months index = 0 }
+	remove_from_array = { array = BRA_develop_pop_history index = 0 }
+	remove_from_array = { array = BRA_develop_inflation_history index = 0 }
+	remove_from_array = { array = BRA_develop_industry_pct_gdp_history index = 0 }
+
+	set_temp_variable = { temp_BRA_gdp = BRA.GDP }
+	multiply_temp_variable = { temp_BRA_gdp = 1000 }
+	add_to_array = { BRA_develop_GDP_history = temp_BRA_gdp }
+	add_to_array = { BRA_develop_inflation_history = clamped_inflation_rate }
+	add_to_array = { BRA_develop_pop_history = max_manpower_k }
+
+	add_to_array = { BRA_develop_graph_months = BRA_develop_graph_month }
+
+	add_to_variable = { BRA_develop_graph_month = 1 }
+
+	if = {
+		limit = {
+			check_variable = {
+				var = money_reserves
+				value = monthly
+				compare = greater_than_or_equals
+			}
+		}
+		subtract_from_variable = { money_reserves = monthly }
+	}
+	else = {
+		add_to_variable = { national_debt = monthly }
+	}
+
+
+	clear_temp_array = current_values
+
+	set_temp_variable = { population = 1483.state_population_k }
+	add_to_temp_variable = { population = 495.state_population_k }
+	add_to_temp_variable = { population = 1482.state_population_k }
+	add_to_temp_variable = { population = 1481.state_population_k }
+	add_to_temp_variable = { population = 1480.state_population_k }
+	add_to_temp_variable = { population = 1479.state_population_k }
+	add_to_temp_array = { current_values = population }
+
+	set_temp_variable = { population = 497.state_population_k }
+	add_to_temp_variable = { population = 498.state_population_k }
+	add_to_temp_variable = { population = 499.state_population_k }
+	add_to_temp_variable = { population = 1494.state_population_k }
+	add_to_temp_variable = { population = 504.state_population_k }
+	add_to_temp_variable = { population = 1492.state_population_k }
+	add_to_temp_variable = { population = 1491.state_population_k }
+	add_to_temp_variable = { population = 1490.state_population_k }
+	add_to_temp_variable = { population = 1485.state_population_k }
+	add_to_temp_array = { current_values = population }
+
+	set_temp_variable = { population = 505.state_population_k }
+	add_to_temp_variable = { population = 280.state_population_k }
+	add_to_temp_variable = { population = 1531.state_population_k }
+	add_to_temp_array = { current_values = population }
+
+	set_temp_variable = { population = 496.state_population_k }
+	add_to_temp_variable = { population = 500.state_population_k }
+	add_to_temp_variable = { population = 501.state_population_k }
+	add_to_temp_variable = { population = 1487.state_population_k }
+	add_to_temp_variable = { population = 1488.state_population_k }
+	add_to_temp_array = { current_values = population }
+
+	set_temp_variable = { population = 502.state_population_k }
+	add_to_temp_variable = { population = 503.state_population_k }
+	add_to_temp_variable = { population = 1486.state_population_k }
+	add_to_temp_array = { current_values = population }
+
+	for_loop_effect = {
+		end = 5
+		value = j
+
+		set_temp_variable = { base = j }
+		multiply_temp_variable = { base = 13 }
+
+		set_temp_variable = { end = base }
+		add_to_temp_variable = { end = 13 }
+
+		add_to_array = { array = BRA_develop_region_pop_history index = end value = current_values^j }
+
+		remove_from_array = { array = BRA_develop_region_pop_history index = base }
+	}
+
+	for_loop_effect = {
+		end = 5
+		value = j
+
+		set_temp_variable = { base = j }
+		multiply_temp_variable = { base = 13 }
+
+		set_temp_variable = { end = base }
+		add_to_temp_variable = { end = 13 }
+
+		add_to_variable = { BRA_develop_region_urban_pop^j = BRA_develop_region_urban_pop_trend^j }
+		if = {
+			limit = { check_variable = { BRA_develop_region_urban_pop^j > 80 }}
+			set_temp_variable = { r = random }
+			add_to_variable = { r = 0.6 }
+			multiply_temp_variable = { r =  BRA_develop_region_urban_pop_trend^j }
+			subtract_from_variable = { BRA_develop_region_urban_pop^j = r }
+			set_variable = { BRA_develop_region_urban_pop_trend^j = 0.5 }
+		}
+		add_to_array = { array = BRA_develop_region_urban_pop_history index = end value = BRA_develop_region_urban_pop^j }
+
+		remove_from_array = { array = BRA_develop_region_urban_pop_history index = base }
+	}
+	for_loop_effect = {
+		end = 5
+		value = j
+
+		set_temp_variable = { base = j }
+		multiply_temp_variable = { base = 13 }
+
+		set_temp_variable = { end = base }
+		add_to_temp_variable = { end = 13 }
+
+		add_to_variable = { BRA_develop_region_mech_rate^j = BRA_develop_region_mech_rate_trend^j }
+		add_to_array = { array = BRA_develop_region_mech_rate_history index = end value = BRA_develop_region_mech_rate^j }
+
+		remove_from_array = { array = BRA_develop_region_mech_rate_history index = base }
+	}
+
+	set_temp_variable = { current = 0 }
+	set_temp_variable = { divisor = 0 }
+	for_loop_effect = {
+		end = 5
+		value = j
+		if = {
+			limit = { check_variable = { j > 0.5 } }
+			add_to_variable = { BRA_develop_region_industry^j = -0.05 }
+		}
+		
+		set_temp_variable = { base = j }
+		multiply_temp_variable = { base = 13 }
+
+		set_temp_variable = { end = base }
+		add_to_temp_variable = { end = 13 }
+
+		add_to_variable = { BRA_develop_region_industry^j = BRA_develop_region_industry_trend^j }
+		add_to_array = { array = BRA_develop_region_industry_history index = end value = BRA_develop_region_industry^j }
+
+		remove_from_array = { array = BRA_develop_region_industry_history index = base }
+
+		set_temp_variable = { to_add = BRA_develop_region_industry^j }
+		divide_temp_variable = { to_add = 100 }
+		multiply_temp_variable = { to_add = current_values^j }
+		add_to_temp_variable = { current = to_add }
+
+		set_temp_variable = { pop_to_add = current_values^j }
+		divide_temp_variable = { pop_to_add = 100 }
+		add_to_temp_variable = { divisor = pop_to_add }
+	}
+
+	divide_temp_variable = { current = divisor }
+
+	add_to_array = { array = BRA_develop_industry_pct_gdp_history value = current }
+	set_variable = { BRA_develop_industry_pct_gdp = current }
+
+
+	BRA_develop_ready_graph = yes
+	BRA_develop_update_regional_progress = yes
+	 
+	BRA_develop_project_monthly = yes
+
+	BRA_corruption_refresh = yes
+	#BRA_loyalty_monthly = yes
+}
+
+Remove_brazil_SAW_decisions = {
+    remove_decision = BRA_SAW_begin_blockade
+    remove_decision = BRA_SAW_reassign_hardliners
+    remove_decision = BRA_SAW_reassign_sorbonne
+    remove_decision = BRA_SAW_reassign_const
+    remove_decision = BRA_SAW_brazilian_tech_assistance
+    remove_decision = BRA_SAW_operation_search_destroy
+    remove_decision = BRA_SAW_buy_guns
+    remove_decision = BRA_SAW_buy_motorized_equipments
+    remove_decision = BRA_SAW_buy_tanks
+    remove_decision = BRA_SAW_buy_APC
+    remove_decision = BRA_SAW_sell_guns
+    remove_decision = BRA_SAW_sell_motorized_equipments
+    remove_decision = BRA_SAW_sell_tanks
+    remove_decision = BRA_SAW_sell_APC
+}
